@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		8DBD562D47470962F400716D /* libPods-WildWestTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 102E20EA2AD38505FB9CFBD5 /* libPods-WildWestTests.a */; };
+		AD8540A523A44A4100568FE9 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540A423A44A4100568FE9 /* GameEngine.swift */; };
+		AD8540A923A44F5600568FE9 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540A823A44F5600568FE9 /* Action.swift */; };
+		AD8540AB23A45ACA00568FE9 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540AA23A45ACA00568FE9 /* GameState.swift */; };
+		AD8540AD23A45B5C00568FE9 /* GameRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540AC23A45B5C00568FE9 /* GameRules.swift */; };
+		AD8540AF23A45BB400568FE9 /* GameAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540AE23A45BB400568FE9 /* GameAI.swift */; };
+		AD8540B123A45BF300568FE9 /* GameRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540B023A45BF300568FE9 /* GameRenderer.swift */; };
 		ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D2EB239EE03800653905 /* AppDelegate.swift */; };
 		ADB7D2F0239EE03800653905 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D2EF239EE03800653905 /* ViewController.swift */; };
 		ADB7D2F3239EE03800653905 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F1239EE03800653905 /* Main.storyboard */; };
@@ -40,6 +46,12 @@
 		6D17AD4368D4F158C313A85D /* Pods-WildWestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.release.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.release.xcconfig"; sourceTree = "<group>"; };
 		873275DE3D79FFF36F6D066E /* Pods-WildWest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.release.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.release.xcconfig"; sourceTree = "<group>"; };
 		8C300D3666EB3B530B73C9D4 /* Pods_WildWest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD8540A423A44A4100568FE9 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
+		AD8540A823A44F5600568FE9 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		AD8540AA23A45ACA00568FE9 /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
+		AD8540AC23A45B5C00568FE9 /* GameRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRules.swift; sourceTree = "<group>"; };
+		AD8540AE23A45BB400568FE9 /* GameAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAI.swift; sourceTree = "<group>"; };
+		AD8540B023A45BF300568FE9 /* GameRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRenderer.swift; sourceTree = "<group>"; };
 		ADB7D2E8239EE03800653905 /* WildWest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WildWest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB7D2EB239EE03800653905 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADB7D2EF239EE03800653905 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +98,19 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		AD8540A323A44A3200568FE9 /* engine */ = {
+			isa = PBXGroup;
+			children = (
+				AD8540A423A44A4100568FE9 /* GameEngine.swift */,
+				AD8540A823A44F5600568FE9 /* Action.swift */,
+				AD8540AA23A45ACA00568FE9 /* GameState.swift */,
+				AD8540AC23A45B5C00568FE9 /* GameRules.swift */,
+				AD8540AE23A45BB400568FE9 /* GameAI.swift */,
+				AD8540B023A45BF300568FE9 /* GameRenderer.swift */,
+			);
+			path = engine;
+			sourceTree = "<group>";
+		};
 		ADB7D2DF239EE03800653905 = {
 			isa = PBXGroup;
 			children = (
@@ -109,7 +134,8 @@
 		ADB7D2EA239EE03800653905 /* WildWest */ = {
 			isa = PBXGroup;
 			children = (
-				ADB7D30D239EE3C300653905 /* core */,
+				AD8540A323A44A3200568FE9 /* engine */,
+				ADB7D30D239EE3C300653905 /* state */,
 				ADB7D2EB239EE03800653905 /* AppDelegate.swift */,
 				ADB7D2EF239EE03800653905 /* ViewController.swift */,
 				ADB7D2F1239EE03800653905 /* Main.storyboard */,
@@ -129,14 +155,14 @@
 			path = WildWestTests;
 			sourceTree = "<group>";
 		};
-		ADB7D30D239EE3C300653905 /* core */ = {
+		ADB7D30D239EE3C300653905 /* state */ = {
 			isa = PBXGroup;
 			children = (
 				ADB7D30E239EE3E300653905 /* Game.swift */,
 				ADB7D311239EE40100653905 /* Player.swift */,
 				ADB7D314239EE40E00653905 /* Card.swift */,
 			);
-			path = core;
+			path = state;
 			sourceTree = "<group>";
 		};
 		C261B90D4E9953E24737D8E2 /* Frameworks */ = {
@@ -317,8 +343,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADB7D2F0239EE03800653905 /* ViewController.swift in Sources */,
+				AD8540A523A44A4100568FE9 /* GameEngine.swift in Sources */,
 				ADB7D315239EE40E00653905 /* Card.swift in Sources */,
+				AD8540AF23A45BB400568FE9 /* GameAI.swift in Sources */,
+				AD8540B123A45BF300568FE9 /* GameRenderer.swift in Sources */,
 				ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */,
+				AD8540A923A44F5600568FE9 /* Action.swift in Sources */,
+				AD8540AD23A45B5C00568FE9 /* GameRules.swift in Sources */,
+				AD8540AB23A45ACA00568FE9 /* GameState.swift in Sources */,
 				ADB7D312239EE40100653905 /* Player.swift in Sources */,
 				ADB7D30F239EE3E300653905 /* Game.swift in Sources */,
 			);

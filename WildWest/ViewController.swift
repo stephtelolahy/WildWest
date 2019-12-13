@@ -9,9 +9,11 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        let game = Game(players: [], deck: [], discard: [])
+        GameEngine(state: SimpleGameState(game), rules: BangRules(), aiPlayer: BasicAI(), renderer: ConsoleRenderer())
+            .run()
     }
 }

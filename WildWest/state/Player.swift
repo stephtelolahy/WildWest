@@ -15,14 +15,14 @@ struct Player {
     let inPlay: [Card]
 }
 
-enum Role: String {
+enum Role {
     case sheriff,
     outlaw,
     renegade,
     deputy
 }
 
-enum Ability: String {
+enum Ability {
     case bartCassidy,
     blackJack,
     calamityJanet,
