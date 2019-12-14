@@ -11,9 +11,11 @@ protocol PlayerProtocol {
     var role: Role { get }
     var ability: Ability { get }
     var maxHealth: Int { get }
-    var health: Int { get set }
-    var hand: [Card] { get set }
-    var inPlay: [Card] { get set }
+    var health: Int { get }
+    var hand: CardListProtocol { get }
+    var inPlay: CardListProtocol { get }
+    
+    func setHealth(_ health: Int)
 }
 
 enum Role {

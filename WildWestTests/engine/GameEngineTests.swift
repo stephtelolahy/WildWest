@@ -15,18 +15,12 @@ class GameEngineTests: XCTestCase {
     
     private var mockState: MockGameStateProtocol!
     private var mockRules: MockGameRulesProtocol!
-    private var mockAI: MockGameAIProtocol!
-    private var mockRenderer: MockGameRendererProtocol!
     
     override func setUp() {
         mockState = MockGameStateProtocol()
         mockRules = MockGameRulesProtocol()
-        mockAI = MockGameAIProtocol()
-        mockRenderer = MockGameRendererProtocol()
         engine = GameEngine(state: mockState,
-                            rules: mockRules,
-                            aiPlayer: mockAI,
-                            renderer: mockRenderer)
+                            rules: mockRules)
     }
     
     func test_DoNothing_IfGameIsOver() {
@@ -35,8 +29,6 @@ class GameEngineTests: XCTestCase {
         engine.run()
         
         verifyNoMoreInteractions(mockRules)
-        verifyNoMoreInteractions(mockRenderer)
-        verifyNoMoreInteractions(mockAI)
     }
     
     func test_LoopUntilGameIsOver() {
@@ -44,8 +36,6 @@ class GameEngineTests: XCTestCase {
         let mockUpdate = MockGameUpdateProtocol()
         Cuckoo.stub(mockState) { mock in when(mock.outcome.get).thenReturn(nil, .outlawWin) }
         Cuckoo.stub(mockRules) { mock in when(mock.possibleActions(any())).thenReturn([mockAction]) }
-        Cuckoo.stub(mockAI) { mock in when(mock.choose(any())).thenReturn(mockAction) }
-        Cuckoo.stub(mockRenderer) { mock in when(mock.render(any())).thenDoNothing() }
         Cuckoo.stub(mockAction) { mock in when(mock.execute()).thenReturn([mockUpdate]) }
         Cuckoo.stub(mockUpdate) { mock in when(mock.apply(to: any())).thenDoNothing() }
         
@@ -54,7 +44,6 @@ class GameEngineTests: XCTestCase {
         verify(mockRules).possibleActions(any())
         verify(mockAction).execute()
         verify(mockUpdate).apply(to: any())
-        verify(mockRenderer).render(any())
     }
     
 }

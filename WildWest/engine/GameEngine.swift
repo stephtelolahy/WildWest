@@ -14,23 +14,19 @@ class GameEngine: GameEngineProtocol {
     
     private var state: GameStateProtocol
     private let rules: GameRulesProtocol
-    private let aiPlayer: GameAIProtocol
-    private let renderer: GameRendererProtocol
     
-    init(state: GameStateProtocol, rules: GameRulesProtocol, aiPlayer: GameAIProtocol, renderer: GameRendererProtocol) {
+    init(state: GameStateProtocol, rules: GameRulesProtocol) {
         self.state = state
         self.rules = rules
-        self.aiPlayer = aiPlayer
-        self.renderer = renderer
     }
     
     func run() {
         while state.outcome == nil {
             let actions = rules.possibleActions(state)
-            let action = aiPlayer.choose(actions)
+            let action = actions[0]
             let updates = action.execute()
             updates.forEach { $0.apply(to: state) }
-            renderer.render(state)
+            print(state)
         }
     }
 }

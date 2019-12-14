@@ -7,10 +7,10 @@
 //
 
 protocol GameStateProtocol {
-    var players: [PlayerProtocol] { get set }
-    var deck: [Card] { get set }
-    var discard: [Card] { get set }
-    var outcome: GameOutcome? { get set }
+    var players: [PlayerProtocol] { get }
+    var deck: CardListProtocol { get }
+    var discard: CardListProtocol { get }
+    var outcome: GameOutcome? { get }
 }
 
 enum GameOutcome {
