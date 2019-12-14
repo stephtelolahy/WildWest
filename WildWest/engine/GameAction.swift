@@ -1,5 +1,5 @@
 //
-//  Action.swift
+//  GameAction.swift
 //  WildWest
 //
 //  Created by Hugues Stéphano TELOLAHY on 12/13/19.
@@ -7,7 +7,7 @@
 //
 
 /// An action choosen by the player
-protocol Action {
+protocol GameAction {
     func isAllowed() -> Bool
     func execute(_ game: Game) -> Game
     func undo(_ game: Game) -> Game

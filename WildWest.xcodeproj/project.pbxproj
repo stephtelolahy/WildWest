@@ -13,13 +13,14 @@
 		AD186BE123A462BD00ABF3E7 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D311239EE40100653905 /* Player.swift */; };
 		AD186BE223A462BD00ABF3E7 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D314239EE40E00653905 /* Card.swift */; };
 		AD186BE323A462C100ABF3E7 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540A423A44A4100568FE9 /* GameEngine.swift */; };
-		AD186BE423A462C100ABF3E7 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540A823A44F5600568FE9 /* Action.swift */; };
+		AD186BE423A462C100ABF3E7 /* GameAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540A823A44F5600568FE9 /* GameAction.swift */; };
 		AD186BE523A462C100ABF3E7 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540AA23A45ACA00568FE9 /* GameState.swift */; };
 		AD186BE623A462C100ABF3E7 /* GameRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540AC23A45B5C00568FE9 /* GameRules.swift */; };
 		AD186BE723A462C100ABF3E7 /* GameAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540AE23A45BB400568FE9 /* GameAI.swift */; };
 		AD186BE823A462C100ABF3E7 /* GameRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540B023A45BF300568FE9 /* GameRenderer.swift */; };
+		AD186BEB23A4630900ABF3E7 /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD186BEA23A4630900ABF3E7 /* GameEngineTests.swift */; };
 		AD8540A523A44A4100568FE9 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540A423A44A4100568FE9 /* GameEngine.swift */; };
-		AD8540A923A44F5600568FE9 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540A823A44F5600568FE9 /* Action.swift */; };
+		AD8540A923A44F5600568FE9 /* GameAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540A823A44F5600568FE9 /* GameAction.swift */; };
 		AD8540AB23A45ACA00568FE9 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540AA23A45ACA00568FE9 /* GameState.swift */; };
 		AD8540AD23A45B5C00568FE9 /* GameRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540AC23A45B5C00568FE9 /* GameRules.swift */; };
 		AD8540AF23A45BB400568FE9 /* GameAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540AE23A45BB400568FE9 /* GameAI.swift */; };
@@ -29,7 +30,6 @@
 		ADB7D2F3239EE03800653905 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F1239EE03800653905 /* Main.storyboard */; };
 		ADB7D2F5239EE03900653905 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F4239EE03900653905 /* Assets.xcassets */; };
 		ADB7D2F8239EE03900653905 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F6239EE03900653905 /* LaunchScreen.storyboard */; };
-		ADB7D303239EE03900653905 /* WildWestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D302239EE03900653905 /* WildWestTests.swift */; };
 		ADB7D30F239EE3E300653905 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D30E239EE3E300653905 /* Game.swift */; };
 		ADB7D312239EE40100653905 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D311239EE40100653905 /* Player.swift */; };
 		ADB7D315239EE40E00653905 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D314239EE40E00653905 /* Card.swift */; };
@@ -54,8 +54,9 @@
 		873275DE3D79FFF36F6D066E /* Pods-WildWest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.release.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.release.xcconfig"; sourceTree = "<group>"; };
 		8C300D3666EB3B530B73C9D4 /* Pods_WildWest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
+		AD186BEA23A4630900ABF3E7 /* GameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
 		AD8540A423A44A4100568FE9 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
-		AD8540A823A44F5600568FE9 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		AD8540A823A44F5600568FE9 /* GameAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAction.swift; sourceTree = "<group>"; };
 		AD8540AA23A45ACA00568FE9 /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		AD8540AC23A45B5C00568FE9 /* GameRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRules.swift; sourceTree = "<group>"; };
 		AD8540AE23A45BB400568FE9 /* GameAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAI.swift; sourceTree = "<group>"; };
@@ -68,7 +69,6 @@
 		ADB7D2F7239EE03900653905 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ADB7D2F9239EE03900653905 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADB7D2FE239EE03900653905 /* WildWestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WildWestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		ADB7D302239EE03900653905 /* WildWestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WildWestTests.swift; sourceTree = "<group>"; };
 		ADB7D304239EE03900653905 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADB7D30E239EE3E300653905 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		ADB7D311239EE40100653905 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -106,11 +106,19 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		AD186BE923A462EB00ABF3E7 /* engine */ = {
+			isa = PBXGroup;
+			children = (
+				AD186BEA23A4630900ABF3E7 /* GameEngineTests.swift */,
+			);
+			path = engine;
+			sourceTree = "<group>";
+		};
 		AD8540A323A44A3200568FE9 /* engine */ = {
 			isa = PBXGroup;
 			children = (
 				AD8540A423A44A4100568FE9 /* GameEngine.swift */,
-				AD8540A823A44F5600568FE9 /* Action.swift */,
+				AD8540A823A44F5600568FE9 /* GameAction.swift */,
 				AD8540AA23A45ACA00568FE9 /* GameState.swift */,
 				AD8540AC23A45B5C00568FE9 /* GameRules.swift */,
 				AD8540AE23A45BB400568FE9 /* GameAI.swift */,
@@ -158,7 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */,
-				ADB7D302239EE03900653905 /* WildWestTests.swift */,
+				AD186BE923A462EB00ABF3E7 /* engine */,
 				ADB7D304239EE03900653905 /* Info.plist */,
 			);
 			path = WildWestTests;
@@ -321,7 +329,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/engine/GameEngine.swift\" \\\n\"${INPUT_DIR}/engine/GameRules.swift\" \\\n\"${INPUT_DIR}/engine/GameState.swift\" \\\n\"${INPUT_DIR}/engine/GameAI.swift\" \\\n\"${INPUT_DIR}/engine/GameRenderer.swift\"\n";
+			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/engine/GameEngine.swift\" \\\n\"${INPUT_DIR}/engine/GameRules.swift\" \\\n\"${INPUT_DIR}/engine/GameState.swift\" \\\n\"${INPUT_DIR}/engine/GameAI.swift\" \\\n\"${INPUT_DIR}/engine/GameRenderer.swift\" \\\n\"${INPUT_DIR}/engine/GameAction.swift\"\n";
 		};
 		AD8540A223A4291100568FE9 /* Run Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -376,7 +384,7 @@
 				AD8540AF23A45BB400568FE9 /* GameAI.swift in Sources */,
 				AD8540B123A45BF300568FE9 /* GameRenderer.swift in Sources */,
 				ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */,
-				AD8540A923A44F5600568FE9 /* Action.swift in Sources */,
+				AD8540A923A44F5600568FE9 /* GameAction.swift in Sources */,
 				AD8540AD23A45B5C00568FE9 /* GameRules.swift in Sources */,
 				AD8540AB23A45ACA00568FE9 /* GameState.swift in Sources */,
 				ADB7D312239EE40100653905 /* Player.swift in Sources */,
@@ -390,15 +398,15 @@
 			files = (
 				AD186BE123A462BD00ABF3E7 /* Player.swift in Sources */,
 				AD186BE323A462C100ABF3E7 /* GameEngine.swift in Sources */,
-				ADB7D303239EE03900653905 /* WildWestTests.swift in Sources */,
 				AD186BE723A462C100ABF3E7 /* GameAI.swift in Sources */,
 				AD186BE823A462C100ABF3E7 /* GameRenderer.swift in Sources */,
 				AD186BE223A462BD00ABF3E7 /* Card.swift in Sources */,
-				AD186BE423A462C100ABF3E7 /* Action.swift in Sources */,
+				AD186BE423A462C100ABF3E7 /* GameAction.swift in Sources */,
 				AD186BE623A462C100ABF3E7 /* GameRules.swift in Sources */,
 				AD186BE523A462C100ABF3E7 /* GameState.swift in Sources */,
 				AD186BE023A462BD00ABF3E7 /* Game.swift in Sources */,
 				AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */,
+				AD186BEB23A4630900ABF3E7 /* GameEngineTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

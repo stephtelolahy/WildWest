@@ -27,9 +27,9 @@ import Cuckoo
     
     
     
-     func choose(_ actions: [Action]) -> Action {
+     func choose(_ actions: [GameAction]) -> GameAction {
         
-    return cuckoo_manager.call("choose(_: [Action]) -> Action",
+    return cuckoo_manager.call("choose(_: [GameAction]) -> GameAction",
             parameters: (actions),
             escapingParameters: (actions),
             superclassCall:
@@ -49,9 +49,9 @@ import Cuckoo
 	    }
 	    
 	    
-	    func choose<M1: Cuckoo.Matchable>(_ actions: M1) -> Cuckoo.ProtocolStubFunction<([Action]), Action> where M1.MatchedType == [Action] {
-	        let matchers: [Cuckoo.ParameterMatcher<([Action])>] = [wrap(matchable: actions) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameAIProtocol.self, method: "choose(_: [Action]) -> Action", parameterMatchers: matchers))
+	    func choose<M1: Cuckoo.Matchable>(_ actions: M1) -> Cuckoo.ProtocolStubFunction<([GameAction]), GameAction> where M1.MatchedType == [GameAction] {
+	        let matchers: [Cuckoo.ParameterMatcher<([GameAction])>] = [wrap(matchable: actions) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameAIProtocol.self, method: "choose(_: [GameAction]) -> GameAction", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -71,9 +71,9 @@ import Cuckoo
 	
 	    
 	    @discardableResult
-	    func choose<M1: Cuckoo.Matchable>(_ actions: M1) -> Cuckoo.__DoNotUse<([Action]), Action> where M1.MatchedType == [Action] {
-	        let matchers: [Cuckoo.ParameterMatcher<([Action])>] = [wrap(matchable: actions) { $0 }]
-	        return cuckoo_manager.verify("choose(_: [Action]) -> Action", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    func choose<M1: Cuckoo.Matchable>(_ actions: M1) -> Cuckoo.__DoNotUse<([GameAction]), GameAction> where M1.MatchedType == [GameAction] {
+	        let matchers: [Cuckoo.ParameterMatcher<([GameAction])>] = [wrap(matchable: actions) { $0 }]
+	        return cuckoo_manager.verify("choose(_: [GameAction]) -> GameAction", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -85,8 +85,162 @@ import Cuckoo
     
 
     
-     func choose(_ actions: [Action]) -> Action  {
-        return DefaultValueRegistry.defaultValue(for: (Action).self)
+     func choose(_ actions: [GameAction]) -> GameAction  {
+        return DefaultValueRegistry.defaultValue(for: (GameAction).self)
+    }
+    
+}
+
+
+import Cuckoo
+@testable import WildWest
+
+
+ class MockGameAction: GameAction, Cuckoo.ProtocolMock {
+    
+     typealias MocksType = GameAction
+    
+     typealias Stubbing = __StubbingProxy_GameAction
+     typealias Verification = __VerificationProxy_GameAction
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: GameAction?
+
+     func enableDefaultImplementation(_ stub: GameAction) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+
+    
+
+    
+    
+    
+     func isAllowed() -> Bool {
+        
+    return cuckoo_manager.call("isAllowed() -> Bool",
+            parameters: (),
+            escapingParameters: (),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.isAllowed())
+        
+    }
+    
+    
+    
+     func execute(_ game: Game) -> Game {
+        
+    return cuckoo_manager.call("execute(_: Game) -> Game",
+            parameters: (game),
+            escapingParameters: (game),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.execute(game))
+        
+    }
+    
+    
+    
+     func undo(_ game: Game) -> Game {
+        
+    return cuckoo_manager.call("undo(_: Game) -> Game",
+            parameters: (game),
+            escapingParameters: (game),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.undo(game))
+        
+    }
+    
+
+	 struct __StubbingProxy_GameAction: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    func isAllowed() -> Cuckoo.ProtocolStubFunction<(), Bool> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameAction.self, method: "isAllowed() -> Bool", parameterMatchers: matchers))
+	    }
+	    
+	    func execute<M1: Cuckoo.Matchable>(_ game: M1) -> Cuckoo.ProtocolStubFunction<(Game), Game> where M1.MatchedType == Game {
+	        let matchers: [Cuckoo.ParameterMatcher<(Game)>] = [wrap(matchable: game) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameAction.self, method: "execute(_: Game) -> Game", parameterMatchers: matchers))
+	    }
+	    
+	    func undo<M1: Cuckoo.Matchable>(_ game: M1) -> Cuckoo.ProtocolStubFunction<(Game), Game> where M1.MatchedType == Game {
+	        let matchers: [Cuckoo.ParameterMatcher<(Game)>] = [wrap(matchable: game) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameAction.self, method: "undo(_: Game) -> Game", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	 struct __VerificationProxy_GameAction: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	
+	    
+	    @discardableResult
+	    func isAllowed() -> Cuckoo.__DoNotUse<(), Bool> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return cuckoo_manager.verify("isAllowed() -> Bool", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func execute<M1: Cuckoo.Matchable>(_ game: M1) -> Cuckoo.__DoNotUse<(Game), Game> where M1.MatchedType == Game {
+	        let matchers: [Cuckoo.ParameterMatcher<(Game)>] = [wrap(matchable: game) { $0 }]
+	        return cuckoo_manager.verify("execute(_: Game) -> Game", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func undo<M1: Cuckoo.Matchable>(_ game: M1) -> Cuckoo.__DoNotUse<(Game), Game> where M1.MatchedType == Game {
+	        let matchers: [Cuckoo.ParameterMatcher<(Game)>] = [wrap(matchable: game) { $0 }]
+	        return cuckoo_manager.verify("undo(_: Game) -> Game", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+ class GameActionStub: GameAction {
+    
+
+    
+
+    
+     func isAllowed() -> Bool  {
+        return DefaultValueRegistry.defaultValue(for: (Bool).self)
+    }
+    
+     func execute(_ game: Game) -> Game  {
+        return DefaultValueRegistry.defaultValue(for: (Game).self)
+    }
+    
+     func undo(_ game: Game) -> Game  {
+        return DefaultValueRegistry.defaultValue(for: (Game).self)
     }
     
 }
@@ -324,9 +478,9 @@ import Cuckoo
     
     
     
-     func possibleActions(_ game: Game) -> [Action] {
+     func possibleActions(_ game: Game) -> [GameAction] {
         
-    return cuckoo_manager.call("possibleActions(_: Game) -> [Action]",
+    return cuckoo_manager.call("possibleActions(_: Game) -> [GameAction]",
             parameters: (game),
             escapingParameters: (game),
             superclassCall:
@@ -351,9 +505,9 @@ import Cuckoo
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameRulesProtocol.self, method: "isOver(_: Game) -> Bool", parameterMatchers: matchers))
 	    }
 	    
-	    func possibleActions<M1: Cuckoo.Matchable>(_ game: M1) -> Cuckoo.ProtocolStubFunction<(Game), [Action]> where M1.MatchedType == Game {
+	    func possibleActions<M1: Cuckoo.Matchable>(_ game: M1) -> Cuckoo.ProtocolStubFunction<(Game), [GameAction]> where M1.MatchedType == Game {
 	        let matchers: [Cuckoo.ParameterMatcher<(Game)>] = [wrap(matchable: game) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameRulesProtocol.self, method: "possibleActions(_: Game) -> [Action]", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameRulesProtocol.self, method: "possibleActions(_: Game) -> [GameAction]", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -379,9 +533,9 @@ import Cuckoo
 	    }
 	    
 	    @discardableResult
-	    func possibleActions<M1: Cuckoo.Matchable>(_ game: M1) -> Cuckoo.__DoNotUse<(Game), [Action]> where M1.MatchedType == Game {
+	    func possibleActions<M1: Cuckoo.Matchable>(_ game: M1) -> Cuckoo.__DoNotUse<(Game), [GameAction]> where M1.MatchedType == Game {
 	        let matchers: [Cuckoo.ParameterMatcher<(Game)>] = [wrap(matchable: game) { $0 }]
-	        return cuckoo_manager.verify("possibleActions(_: Game) -> [Action]", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("possibleActions(_: Game) -> [GameAction]", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -397,8 +551,8 @@ import Cuckoo
         return DefaultValueRegistry.defaultValue(for: (Bool).self)
     }
     
-     func possibleActions(_ game: Game) -> [Action]  {
-        return DefaultValueRegistry.defaultValue(for: ([Action]).self)
+     func possibleActions(_ game: Game) -> [GameAction]  {
+        return DefaultValueRegistry.defaultValue(for: ([GameAction]).self)
     }
     
 }

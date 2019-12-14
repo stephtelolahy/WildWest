@@ -10,7 +10,7 @@ protocol GameEngineProtocol {
     func run()
 }
 
-class GameEngine {
+class GameEngine: GameEngineProtocol {
     
     private let state: GameStateProtocol
     private let rules: GameRulesProtocol
