@@ -17,6 +17,7 @@
 		AD186BEB23A4630900ABF3E7 /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD186BEA23A4630900ABF3E7 /* GameEngineTests.swift */; };
 		AD5F8C3823A538C900C286AA /* CardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5F8C3723A538C900C286AA /* CardList.swift */; };
 		AD5F8C3923A538C900C286AA /* CardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5F8C3723A538C900C286AA /* CardList.swift */; };
+		AD5F8C3B23A545C700C286AA /* CuckooExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5F8C3A23A545C700C286AA /* CuckooExtension.swift */; };
 		AD8540A523A44A4100568FE9 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540A423A44A4100568FE9 /* GameEngine.swift */; };
 		AD8540A923A44F5600568FE9 /* GameAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540A823A44F5600568FE9 /* GameAction.swift */; };
 		AD8540AD23A45B5C00568FE9 /* GameRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540AC23A45B5C00568FE9 /* GameRules.swift */; };
@@ -61,6 +62,7 @@
 		AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
 		AD186BEA23A4630900ABF3E7 /* GameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
 		AD5F8C3723A538C900C286AA /* CardList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardList.swift; sourceTree = "<group>"; };
+		AD5F8C3A23A545C700C286AA /* CuckooExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuckooExtension.swift; sourceTree = "<group>"; };
 		AD8540A423A44A4100568FE9 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		AD8540A823A44F5600568FE9 /* GameAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAction.swift; sourceTree = "<group>"; };
 		AD8540AC23A45B5C00568FE9 /* GameRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRules.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */,
 				AD186BE923A462EB00ABF3E7 /* engine */,
 				ADB7D304239EE03900653905 /* Info.plist */,
+				AD5F8C3A23A545C700C286AA /* CuckooExtension.swift */,
 			);
 			path = WildWestTests;
 			sourceTree = "<group>";
@@ -364,7 +367,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/engine/GameEngine.swift\" \\\n\"${INPUT_DIR}/engine/GameRules.swift\" \\\n\"${INPUT_DIR}/engine/state/GameState.swift\" \\\n\"${INPUT_DIR}/engine/state/Player.swift\" \\\n\"${INPUT_DIR}/engine/state/CardList.swift\" \\\n\"${INPUT_DIR}/engine/action/GameAction.swift\" \\\n\"${INPUT_DIR}/engine/update/GameUpdate.swift\"\n";
+			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/engine/GameEngine.swift\" \\\n\"${INPUT_DIR}/engine/GameRules.swift\" \\\n\"${INPUT_DIR}/engine/state/GameState.swift\" \\\n\"${INPUT_DIR}/engine/state/Player.swift\" \\\n\"${INPUT_DIR}/engine/state/CardList.swift\" \\\n\"${INPUT_DIR}/engine/state/Card.swift\" \\\n\"${INPUT_DIR}/engine/action/GameAction.swift\" \\\n\"${INPUT_DIR}/engine/update/GameUpdate.swift\"\n";
 		};
 		AD8540A223A4291100568FE9 /* Run Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -445,6 +448,7 @@
 				ADD5644023A4E2CA00C1BD01 /* Discard.swift in Sources */,
 				ADD5644323A4E38100C1BD01 /* GainLifePoints.swift in Sources */,
 				AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */,
+				AD5F8C3B23A545C700C286AA /* CuckooExtension.swift in Sources */,
 				AD186BEB23A4630900ABF3E7 /* GameEngineTests.swift in Sources */,
 				AD5F8C3923A538C900C286AA /* CardList.swift in Sources */,
 			);

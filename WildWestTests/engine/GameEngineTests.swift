@@ -19,8 +19,7 @@ class GameEngineTests: XCTestCase {
     override func setUp() {
         mockState = MockGameStateProtocol()
         mockRules = MockGameRulesProtocol()
-        engine = GameEngine(state: mockState,
-                            rules: mockRules)
+        engine = GameEngine(state: mockState, rules: mockRules)
     }
     
     func test_DoNothing_IfGameIsOver() {

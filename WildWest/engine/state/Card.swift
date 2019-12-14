@@ -6,12 +6,12 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct Card: Equatable {
-    let identifier: String
-    let name: CardName
-    let type: CardType
-    let suits: CardSuit
-    let value: String
+protocol Card {
+    var identifier: String { get }
+    var name: CardName { get }
+    var type: CardType { get }
+    var suits: CardSuit { get }
+    var value: String { get }
 }
 
 enum CardName {

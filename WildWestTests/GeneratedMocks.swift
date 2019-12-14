@@ -284,6 +284,230 @@ import Cuckoo
 @testable import WildWest
 
 
+ class MockCard: Card, Cuckoo.ProtocolMock {
+    
+     typealias MocksType = Card
+    
+     typealias Stubbing = __StubbingProxy_Card
+     typealias Verification = __VerificationProxy_Card
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: Card?
+
+     func enableDefaultImplementation(_ stub: Card) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+    
+    
+     var identifier: String {
+        get {
+            return cuckoo_manager.getter("identifier",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.identifier)
+        }
+        
+    }
+    
+    
+    
+     var name: CardName {
+        get {
+            return cuckoo_manager.getter("name",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.name)
+        }
+        
+    }
+    
+    
+    
+     var type: CardType {
+        get {
+            return cuckoo_manager.getter("type",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.type)
+        }
+        
+    }
+    
+    
+    
+     var suits: CardSuit {
+        get {
+            return cuckoo_manager.getter("suits",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.suits)
+        }
+        
+    }
+    
+    
+    
+     var value: String {
+        get {
+            return cuckoo_manager.getter("value",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.value)
+        }
+        
+    }
+    
+
+    
+
+    
+
+	 struct __StubbingProxy_Card: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    var identifier: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCard, String> {
+	        return .init(manager: cuckoo_manager, name: "identifier")
+	    }
+	    
+	    
+	    var name: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCard, CardName> {
+	        return .init(manager: cuckoo_manager, name: "name")
+	    }
+	    
+	    
+	    var type: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCard, CardType> {
+	        return .init(manager: cuckoo_manager, name: "type")
+	    }
+	    
+	    
+	    var suits: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCard, CardSuit> {
+	        return .init(manager: cuckoo_manager, name: "suits")
+	    }
+	    
+	    
+	    var value: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCard, String> {
+	        return .init(manager: cuckoo_manager, name: "value")
+	    }
+	    
+	    
+	}
+
+	 struct __VerificationProxy_Card: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	    
+	    var identifier: Cuckoo.VerifyReadOnlyProperty<String> {
+	        return .init(manager: cuckoo_manager, name: "identifier", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var name: Cuckoo.VerifyReadOnlyProperty<CardName> {
+	        return .init(manager: cuckoo_manager, name: "name", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var type: Cuckoo.VerifyReadOnlyProperty<CardType> {
+	        return .init(manager: cuckoo_manager, name: "type", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var suits: Cuckoo.VerifyReadOnlyProperty<CardSuit> {
+	        return .init(manager: cuckoo_manager, name: "suits", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var value: Cuckoo.VerifyReadOnlyProperty<String> {
+	        return .init(manager: cuckoo_manager, name: "value", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	
+	    
+	}
+}
+
+ class CardStub: Card {
+    
+    
+     var identifier: String {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (String).self)
+        }
+        
+    }
+    
+    
+     var name: CardName {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (CardName).self)
+        }
+        
+    }
+    
+    
+     var type: CardType {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (CardType).self)
+        }
+        
+    }
+    
+    
+     var suits: CardSuit {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (CardSuit).self)
+        }
+        
+    }
+    
+    
+     var value: String {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (String).self)
+        }
+        
+    }
+    
+
+    
+
+    
+}
+
+
+import Cuckoo
+@testable import WildWest
+
+
  class MockCardListProtocol: CardListProtocol, Cuckoo.ProtocolMock {
     
      typealias MocksType = CardListProtocol

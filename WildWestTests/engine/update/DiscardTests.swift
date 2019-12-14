@@ -11,26 +11,29 @@ import Cuckoo
 
 class DiscardTests: XCTestCase {
     
-    func test_Discard() {
-        /*
-        let card = Card(identifier: "c1", name: .beer, type: .play, suits: .clubs, value: "5")
-        
+    func test_MoveCardFromHandToDeck_OnDiscard() {
         let mockState = MockGameStateProtocol()
         let mockPlayer = MockPlayerProtocol()
-        Cuckoo.stub(mockState) { mock in when(mock.discard.cards.get).thenReturn([]) }
-        Cuckoo.stub(mockState) { mock in when(mock.players.get).thenReturn([mockPlayer]) }
-        Cuckoo.stub(mockPlayer) { mock in
-            when(mock.hand.get).thenReturn([card])
-            when(mock.identifier.get).thenReturn("p1")
+        let mockHand = MockCardListProtocol().withEnabledDefaultImplementation(CardListProtocolStub())
+        let mockDeck = MockCardListProtocol().withEnabledDefaultImplementation(CardListProtocolStub())
+        let mockCard = MockCard()
+        
+        Cuckoo.stub(mockState) { mock in
+            when(mock.players.get).thenReturn([mockPlayer])
+            when(mock.deck.get).thenReturn(mockDeck)
         }
+        Cuckoo.stub(mockPlayer) { mock in
+            when(mock.identifier.get).thenReturn("p1")
+            when(mock.hand.get).thenReturn(mockHand)
+        }
+        Cuckoo.stub(mockHand) { mock in when(mock.cards.get).thenReturn([mockCard]) }
+        Cuckoo.stub(mockCard) { mock in when(mock.identifier.get).thenReturn("c1") }
         
-        let action = Discard(playerIdentifier: "p1", cardIdentifier: "c1")
+        let update = Discard(playerIdentifier: "p1", cardIdentifier: "c1")
+        update.apply(to: mockState)
         
-        action.apply(to: mockState)
-        
-        verify(mockState).discard.set(equal(to: [card]))
-        verify(mockPlayer).hand.set(equal(to: []))
- */
+        verify(mockHand).removeCard(identified(by: "c1"))
+        verify(mockDeck).addCard(identified(by: "c1"))
     }
-
+    
 }
