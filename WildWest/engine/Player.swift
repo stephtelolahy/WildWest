@@ -6,13 +6,14 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct Player {
-    let role: Role
-    let ability: Ability
-    let health: Int
-    let maxHealth: Int
-    let hand: [Card]
-    let inPlay: [Card]
+protocol PlayerProtocol {
+    var identifier: String { get }
+    var role: Role { get }
+    var ability: Ability { get }
+    var maxHealth: Int { get }
+    var health: Int { get set }
+    var hand: [Card] { get set }
+    var inPlay: [Card] { get set }
 }
 
 enum Role {

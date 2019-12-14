@@ -25,19 +25,12 @@ class GameEngine: GameEngineProtocol {
     }
     
     func run() {
-        while true {
-            guard !rules.isOver(state.game) else {
-                break
-            }
-            
-            let actions = rules.possibleActions(state.game)
+        while state.outcome == nil {
+            let actions = rules.possibleActions(state)
             let action = aiPlayer.choose(actions)
-            let updates = action.execute(state.game)
-            for update in updates {
-                state.game = update.apply(to: state.game)
-            }
-            
-            renderer.render(state.game)
+            let updates = action.execute()
+            updates.forEach { $0.apply(to: state) }
+            renderer.render(state)
         }
     }
 }

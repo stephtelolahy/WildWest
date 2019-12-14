@@ -7,14 +7,14 @@
 //
 
 protocol GameStateProtocol {
-    var game: Game { get set }
+    var players: [PlayerProtocol] { get set }
+    var deck: [Card] { get set }
+    var discard: [Card] { get set }
+    var outcome: GameOutcome? { get set }
 }
 
-class SimpleGameState: GameStateProtocol {
-    
-    var game: Game
-    
-    init(_ game: Game) {
-        self.game = game
-    }
+enum GameOutcome {
+    case sheriffWins,
+    outlawWin,
+    renegadeWins
 }

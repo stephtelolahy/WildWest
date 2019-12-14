@@ -7,17 +7,5 @@
 //
 
 protocol GameRulesProtocol {
-    func isOver(_ game: Game) -> Bool
-    func possibleActions(_ game: Game) -> [GameAction]
-}
-
-class BangRules: GameRulesProtocol {
-    
-    func isOver(_ game: Game) -> Bool {
-        return true
-    }
-    
-    func possibleActions(_ game: Game) -> [GameAction] {
-        return []
-    }
+    func possibleActions(_ game: GameStateProtocol) -> [GameActionProtocol]
 }

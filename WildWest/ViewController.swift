@@ -12,11 +12,5 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let game = Game(players: [], deck: [], discard: [])
-        GameEngine(state: SimpleGameState(game),
-                   rules: BangRules(),
-                   aiPlayer: BasicAI(),
-                   renderer: ConsoleRenderer())
-            .run()
     }
 }

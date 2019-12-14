@@ -7,11 +7,5 @@
 //
 
 protocol GameRendererProtocol {
-    func render(_ game: Game)
-}
-
-class ConsoleRenderer: GameRendererProtocol {
-    func render(_ game: Game) {
-        print(game)
-    }
+    func render(_ game: GameStateProtocol)
 }

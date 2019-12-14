@@ -7,11 +7,5 @@
 //
 
 protocol GameAIProtocol {
-    func choose(_ actions: [GameAction]) -> GameAction
-}
-
-class BasicAI: GameAIProtocol {
-    func choose(_ actions: [GameAction]) -> GameAction {
-        return actions[0]
-    }
+    func choose(_ actions: [GameActionProtocol]) -> GameActionProtocol
 }

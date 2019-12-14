@@ -6,7 +6,8 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct Card {
+struct Card: Equatable {
+    let identifier: String
     let name: CardName
     let type: CardType
     let suits: CardSuit

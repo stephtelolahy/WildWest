@@ -12,10 +12,11 @@ import Cuckoo
 class GameEngineTests: XCTestCase {
     
     private var engine: GameEngineProtocol!
+    
     private var mockState: MockGameStateProtocol!
-    private var mockRenderer: MockGameRendererProtocol!
     private var mockRules: MockGameRulesProtocol!
     private var mockAI: MockGameAIProtocol!
+    private var mockRenderer: MockGameRendererProtocol!
     
     override func setUp() {
         mockState = MockGameStateProtocol()
@@ -29,36 +30,30 @@ class GameEngineTests: XCTestCase {
     }
     
     func test_DoNothing_IfGameIsOver() {
-        let game = Game(players: [], deck: [], discard: [])
-        Cuckoo.stub(mockState) { mock in when(mock.game.get).thenReturn(game) }
-        Cuckoo.stub(mockRules) { mock in when(mock.isOver(any())).thenReturn(true) }
+        Cuckoo.stub(mockState) { mock in when(mock.outcome.get).thenReturn(.outlawWin) }
         
         engine.run()
         
+        verifyNoMoreInteractions(mockRules)
         verifyNoMoreInteractions(mockRenderer)
         verifyNoMoreInteractions(mockAI)
     }
     
     func test_LoopUntilGameIsOver() {
-        let game = Game(players: [], deck: [], discard: [])
-        let mockAction = MockGameAction()
-        let mockUpdate = MockGameUpdate()
-        Cuckoo.stub(mockState) { mock in
-            when(mock.game.get).thenReturn(game)
-            when(mock.game.set(any())).thenDoNothing()
-        }
-        Cuckoo.stub(mockRules) { mock in
-            when(mock.isOver(any())).thenReturn(false, true)
-            when(mock.possibleActions(any())).thenReturn([mockAction])
-        }
+        let mockAction = MockGameActionProtocol()
+        let mockUpdate = MockGameUpdateProtocol()
+        Cuckoo.stub(mockState) { mock in when(mock.outcome.get).thenReturn(nil, .outlawWin) }
+        Cuckoo.stub(mockRules) { mock in when(mock.possibleActions(any())).thenReturn([mockAction]) }
         Cuckoo.stub(mockAI) { mock in when(mock.choose(any())).thenReturn(mockAction) }
         Cuckoo.stub(mockRenderer) { mock in when(mock.render(any())).thenDoNothing() }
-        Cuckoo.stub(mockAction) { mock in when(mock.execute(any())).thenReturn([mockUpdate]) }
-        Cuckoo.stub(mockUpdate) { mock in when(mock.apply(to: any())).thenReturn(game) }
+        Cuckoo.stub(mockAction) { mock in when(mock.execute()).thenReturn([mockUpdate]) }
+        Cuckoo.stub(mockUpdate) { mock in when(mock.apply(to: any())).thenDoNothing() }
         
         engine.run()
         
-        verify(mockState).game.set(any())
+        verify(mockRules).possibleActions(any())
+        verify(mockAction).execute()
+        verify(mockUpdate).apply(to: any())
         verify(mockRenderer).render(any())
     }
     
