@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		8DBD562D47470962F400716D /* libPods-WildWestTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 102E20EA2AD38505FB9CFBD5 /* libPods-WildWestTests.a */; };
+		AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */; };
+		AD186BE023A462BD00ABF3E7 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D30E239EE3E300653905 /* Game.swift */; };
+		AD186BE123A462BD00ABF3E7 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D311239EE40100653905 /* Player.swift */; };
+		AD186BE223A462BD00ABF3E7 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D314239EE40E00653905 /* Card.swift */; };
+		AD186BE323A462C100ABF3E7 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540A423A44A4100568FE9 /* GameEngine.swift */; };
+		AD186BE423A462C100ABF3E7 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540A823A44F5600568FE9 /* Action.swift */; };
+		AD186BE523A462C100ABF3E7 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540AA23A45ACA00568FE9 /* GameState.swift */; };
+		AD186BE623A462C100ABF3E7 /* GameRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540AC23A45B5C00568FE9 /* GameRules.swift */; };
+		AD186BE723A462C100ABF3E7 /* GameAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540AE23A45BB400568FE9 /* GameAI.swift */; };
+		AD186BE823A462C100ABF3E7 /* GameRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540B023A45BF300568FE9 /* GameRenderer.swift */; };
 		AD8540A523A44A4100568FE9 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540A423A44A4100568FE9 /* GameEngine.swift */; };
 		AD8540A923A44F5600568FE9 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540A823A44F5600568FE9 /* Action.swift */; };
 		AD8540AB23A45ACA00568FE9 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540AA23A45ACA00568FE9 /* GameState.swift */; };
@@ -21,11 +31,8 @@
 		ADB7D2F8239EE03900653905 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F6239EE03900653905 /* LaunchScreen.storyboard */; };
 		ADB7D303239EE03900653905 /* WildWestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D302239EE03900653905 /* WildWestTests.swift */; };
 		ADB7D30F239EE3E300653905 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D30E239EE3E300653905 /* Game.swift */; };
-		ADB7D310239EE3E300653905 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D30E239EE3E300653905 /* Game.swift */; };
 		ADB7D312239EE40100653905 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D311239EE40100653905 /* Player.swift */; };
-		ADB7D313239EE40100653905 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D311239EE40100653905 /* Player.swift */; };
 		ADB7D315239EE40E00653905 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D314239EE40E00653905 /* Card.swift */; };
-		ADB7D316239EE40E00653905 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D314239EE40E00653905 /* Card.swift */; };
 		D42ED72C28166C49D2A60FC9 /* Pods_WildWest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C300D3666EB3B530B73C9D4 /* Pods_WildWest.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +53,7 @@
 		6D17AD4368D4F158C313A85D /* Pods-WildWestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.release.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.release.xcconfig"; sourceTree = "<group>"; };
 		873275DE3D79FFF36F6D066E /* Pods-WildWest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.release.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.release.xcconfig"; sourceTree = "<group>"; };
 		8C300D3666EB3B530B73C9D4 /* Pods_WildWest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
 		AD8540A423A44A4100568FE9 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		AD8540A823A44F5600568FE9 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		AD8540AA23A45ACA00568FE9 /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
@@ -149,6 +157,7 @@
 		ADB7D301239EE03900653905 /* WildWestTests */ = {
 			isa = PBXGroup;
 			children = (
+				AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */,
 				ADB7D302239EE03900653905 /* WildWestTests.swift */,
 				ADB7D304239EE03900653905 /* Info.plist */,
 			);
@@ -201,6 +210,7 @@
 			buildConfigurationList = ADB7D30A239EE03900653905 /* Build configuration list for PBXNativeTarget "WildWestTests" */;
 			buildPhases = (
 				EB6EE4491E93C5577B29AB62 /* [CP] Check Pods Manifest.lock */,
+				AD186BDD23A4618500ABF3E7 /* Run Cuckoo */,
 				ADB7D2FA239EE03900653905 /* Sources */,
 				ADB7D2FB239EE03900653905 /* Frameworks */,
 				ADB7D2FC239EE03900653905 /* Resources */,
@@ -295,6 +305,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		AD186BDD23A4618500ABF3E7 /* Run Cuckoo */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Cuckoo";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/engine/GameEngine.swift\" \\\n\"${INPUT_DIR}/engine/GameRules.swift\" \\\n\"${INPUT_DIR}/engine/GameState.swift\" \\\n\"${INPUT_DIR}/engine/GameAI.swift\" \\\n\"${INPUT_DIR}/engine/GameRenderer.swift\"\n";
+		};
 		AD8540A223A4291100568FE9 /* Run Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -360,10 +388,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD186BE123A462BD00ABF3E7 /* Player.swift in Sources */,
+				AD186BE323A462C100ABF3E7 /* GameEngine.swift in Sources */,
 				ADB7D303239EE03900653905 /* WildWestTests.swift in Sources */,
-				ADB7D313239EE40100653905 /* Player.swift in Sources */,
-				ADB7D310239EE3E300653905 /* Game.swift in Sources */,
-				ADB7D316239EE40E00653905 /* Card.swift in Sources */,
+				AD186BE723A462C100ABF3E7 /* GameAI.swift in Sources */,
+				AD186BE823A462C100ABF3E7 /* GameRenderer.swift in Sources */,
+				AD186BE223A462BD00ABF3E7 /* Card.swift in Sources */,
+				AD186BE423A462C100ABF3E7 /* Action.swift in Sources */,
+				AD186BE623A462C100ABF3E7 /* GameRules.swift in Sources */,
+				AD186BE523A462C100ABF3E7 /* GameState.swift in Sources */,
+				AD186BE023A462BD00ABF3E7 /* Game.swift in Sources */,
+				AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,7 +582,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 15EFD4A90888EB671B9B5CF5 /* Pods-WildWestTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = WildWestTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -563,7 +597,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6D17AD4368D4F158C313A85D /* Pods-WildWestTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = WildWestTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

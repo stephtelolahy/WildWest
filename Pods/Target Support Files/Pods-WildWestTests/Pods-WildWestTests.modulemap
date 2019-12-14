@@ -1,4 +1,4 @@
-framework module Pods_WildWestTests {
+module Pods_WildWestTests {
   umbrella header "Pods-WildWestTests-umbrella.h"
 
   export *

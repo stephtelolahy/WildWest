@@ -15,18 +15,67 @@
 			dependencies = (
 			);
 			name = SwiftLint;
-			productName = SwiftLint;
 		};
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		0A01370D6C987A23A1EBA4B80EF2DF30 /* Pods-WildWestTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 02317F8104AB60AC8A4676BCC1DAC977 /* Pods-WildWestTests-dummy.m */; };
-		2933EDAF09BB45A6A63A7423387B6BA9 /* Pods-WildWest-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F4B1B4F3A1ED019C6F9CFE42775B72EB /* Pods-WildWest-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		007CB68E15EBE08B1660FEFE2EF688BA /* StubCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44E4AAB5025ECAD9CEB834A4E68AEA4 /* StubCall.swift */; };
+		01F0AF7C1E0FFB82920A8742D3BD02B6 /* StubFunctionThenCallRealImplementationTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712DCF4E5A1BBA2A6DD97EF8AF599154 /* StubFunctionThenCallRealImplementationTrait.swift */; };
+		05E58CE73CA61D32A80B490366863C37 /* ArgumentCaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4851104CB39A64A7E509F8243714C19C /* ArgumentCaptor.swift */; };
+		07E8A4A243267731B48162C45A38F647 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51EF7A0E8CFCB167492C74346AFDD04 /* Mock.swift */; };
+		0F51D1347C8AF7B3805AE1074B2DE985 /* ToBeStubbedReadOnlyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887E7513A70ED91F1BCC5A23646E7DBC /* ToBeStubbedReadOnlyProperty.swift */; };
+		113351A8BEC3B57AACC4AC5493A1025A /* Cuckoo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAB656379485D7430E78828DADF219 /* Cuckoo-dummy.m */; };
+		13B4985507EAACF299C56FC2C5B34169 /* Array+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A810468B1D84F1D06B7514507486A0 /* Array+matchers.swift */; };
+		1423E740F6B74D3103E8A731F3BEF10B /* StubFunctionThenThrowTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C760E97CEE8808FF7E71E8A494DBBD /* StubFunctionThenThrowTrait.swift */; };
+		20FDC1D108E244015C2C196CAB1B8EAA /* VerifyReadOnlyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DAE0A1631CFBE615CCEEB7AEDB5E43 /* VerifyReadOnlyProperty.swift */; };
+		23F98788E579AFE20F8B7E5CF248277E /* CallMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2908C77DE801C353D3995A5DFF1B8F1 /* CallMatcher.swift */; };
+		25E6664BA63E0CA37428BE22C07D196B /* StubFunctionThenTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59ED0A7390E30F27EA5889E56959A02 /* StubFunctionThenTrait.swift */; };
+		2933EDAF09BB45A6A63A7423387B6BA9 /* Pods-WildWest-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F2B46F9E79F833F17EA0A2950030147 /* Pods-WildWest-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2E1EBDF006390B4EA54758DF2D1D34D7 /* StubNoReturnFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4218926D306EFB4F82375DA2B9BE24 /* StubNoReturnFunction.swift */; };
+		302A6F87575E8DB2E52EB0DD299C3A39 /* MockBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C8381C9339F003C35554FED2E58777 /* MockBuilder.swift */; };
+		307D42BFAD79089DD3471E8284C75515 /* CallMatcherFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32C49B9A1D4C9888D01FDB0C3EFDCB8 /* CallMatcherFunctions.swift */; };
+		317AD8447925DDC3C090F73738260EC5 /* BaseStubFunctionTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86CC63CA0BAD7A682E0E9F8E42B1778 /* BaseStubFunctionTrait.swift */; };
+		3B709ABC36E36C5801E31F5C78C310D5 /* VerificationProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E6CA60B804DC062C72AAFF572BEBDF /* VerificationProxy.swift */; };
+		3D275D0E9B2D4713B4C8845F2316427D /* Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE77220C3FCBE00D1A1DFCDAD77E72F /* Stub.swift */; };
+		3E45D41C28E15EABD5AF8FE54AA0BAB2 /* ThreadLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC390A586D98773151F66A1153F54416 /* ThreadLocal.swift */; };
+		3EE5B72BFCE2851BD545065F9149C530 /* StubFunctionThenReturnTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C421BDC00352B444F2FFBE5E4D8F3A /* StubFunctionThenReturnTrait.swift */; };
+		41BEBED4D49775011B3A2DE50D13E7DC /* Mocked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABAAF4571850E2ADA24E58738436707 /* Mocked.swift */; };
+		44381E0E43B904AC2C7184977997D243 /* ToBeStubbedProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3D01678A840F20A9A455A27A87EE23 /* ToBeStubbedProperty.swift */; };
 		450F4B1381F590FEF3108D84D02929DD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		AED9472B70C7C752B078B8249602C5AC /* Pods-WildWest-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D83B0B904DC0BCAE41FCC613517ED4E /* Pods-WildWest-dummy.m */; };
+		452D9E07985DF47BFCA2991A79E7B580 /* StubNoReturnThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B33BFAB0B179D234D54F2760799684 /* StubNoReturnThrowingFunction.swift */; };
+		498EA2B4F1116EEB5E545B7C88210264 /* MockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8512238A1A83B8816BC85F73CF860A92 /* MockManager.swift */; };
+		55CF6F9B2FD14190AC0F8E9C2B72DD7F /* StubbingProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6A69C64F5E9A2F7BD1EF39A6277189 /* StubbingProxy.swift */; };
+		5BAF042654E1ED08A49093BC997FBA71 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C7E271C449D9E57E639E89C0AE9575 /* Utils.swift */; };
+		5FB3E004722E03F129073A1A61A2EBA0 /* __DoNotUse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191C885B5FF6C86F8B8EE6682E932BD /* __DoNotUse.swift */; };
+		66A4CE113D9412019D9DE8055E4CB792 /* Matchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA82E40656241817E21A5DD33B8C7347 /* Matchable.swift */; };
+		6941C83364730E76B8465E5B02B0C77B /* CreateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC0DAA9B0EE847887EBEBA6A4F125A7 /* CreateMock.swift */; };
+		6AA3255E751A04C65E63931098DE4BC9 /* Pods-WildWestTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EE81026C7969ADCAF39B934DF158BBD1 /* Pods-WildWestTests-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		8E1DEE46EE6AE940C9BCFEC34DA0E20E /* StubFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A7635ECD1E747E477710767B70BD7A /* StubFunction.swift */; };
+		931CD4E55E94746FD19BBE3D92B71F66 /* DefaultValueRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C3FDCEB45F4AB7933CD70C2102E8EC /* DefaultValueRegistry.swift */; };
+		95A288E13B4934B502F701F078A20F09 /* CuckooFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D84D137CFC04C0A1F2843836A573DE /* CuckooFunctions.swift */; };
+		9A315B11EDC2F0E1210CD1DAB7E3108F /* ParameterMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA4188B1F9C0F42128112CAE3C90323 /* ParameterMatcher.swift */; };
+		9B52F561AA4A2C92DB7C680BD57C457F /* StubFunctionThenDoNothingTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA0F7ECBF08DE55790C04E64A0C782C /* StubFunctionThenDoNothingTrait.swift */; };
+		A128937F30AE0DD9C131E03D1F430922 /* ParameterMatcherFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C1E4F11C00AA26413D70F42AB644A3 /* ParameterMatcherFunctions.swift */; };
+		AED9472B70C7C752B078B8249602C5AC /* Pods-WildWest-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C1668B1C613DDA1142C28E8C359FCF95 /* Pods-WildWest-dummy.m */; };
+		B0F48E546D4A4240DBC3DC2CF4F35119 /* StubFunctionThenThrowingTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFF6156BBF306C7C124BB797FEC58D7 /* StubFunctionThenThrowingTrait.swift */; };
+		C57E3A97BE7F208C1E096BE11A956A7C /* Dictionary+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CADCE49B1DD8FFD6F4A27AB44E4C905 /* Dictionary+matchers.swift */; };
+		C6BA69FD11865AD0B7C3607C3E067B48 /* StubAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0398768B56607ADAE0091DE93AFDC31 /* StubAction.swift */; };
+		CD431F527822B600D52323D16FB99200 /* Set+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70AFB2BFB9FEC536EC0093EF62F7226 /* Set+matchers.swift */; };
+		DCD63D58C965D56501AE01D66E308EBC /* Cuckoo-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 02EE34169849E9406D5CB2321210E244 /* Cuckoo-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		E5201B18519C0811E735B26F587696C2 /* StubThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E31D029CCDBDEF3B298B4F28F2408D /* StubThrowingFunction.swift */; };
+		EB61B497A155198267031EFA781EB326 /* Pods-WildWestTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2DFBA76FE8DA61E1BFDB7BBC37710F /* Pods-WildWestTests-dummy.m */; };
+		F27F03D74D4219ADA3EDE114CC8B5C7F /* MockManager+preconfigured.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7E7D6B63178BAC0E3752E75084D4B7 /* MockManager+preconfigured.swift */; };
+		FF734102ED62C8C6FA3480A3D1865E1F /* VerifyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9010D8F66C9A1A8782ECCA87EC0236B /* VerifyProperty.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D95F1E976D3369F2D2ED3C53871A2EB4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFCA8CA494372A14108299CE150648B8;
+			remoteInfo = Cuckoo;
+		};
 		EC67C9C62DA782DD2852CE7CBBD675D0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
@@ -37,28 +86,83 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		02317F8104AB60AC8A4676BCC1DAC977 /* Pods-WildWestTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-WildWestTests-dummy.m"; sourceTree = "<group>"; };
-		25DF5A89D5696DA8169EE8948B8D1531 /* Pods-WildWest-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WildWest-Info.plist"; sourceTree = "<group>"; };
+		01B33BFAB0B179D234D54F2760799684 /* StubNoReturnThrowingFunction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StubNoReturnThrowingFunction.swift; path = Source/Stubbing/StubFunction/StubNoReturnThrowingFunction.swift; sourceTree = "<group>"; };
+		02E31D029CCDBDEF3B298B4F28F2408D /* StubThrowingFunction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StubThrowingFunction.swift; path = Source/Stubbing/StubFunction/StubThrowingFunction.swift; sourceTree = "<group>"; };
+		02EE34169849E9406D5CB2321210E244 /* Cuckoo-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Cuckoo-umbrella.h"; sourceTree = "<group>"; };
+		06BBD3298EFC08D95EEFE526BDDCDBD1 /* libCuckoo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libCuckoo.a; path = libCuckoo.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		0BC0DAA9B0EE847887EBEBA6A4F125A7 /* CreateMock.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CreateMock.swift; path = Source/Initialization/CreateMock.swift; sourceTree = "<group>"; };
+		14C3FDCEB45F4AB7933CD70C2102E8EC /* DefaultValueRegistry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultValueRegistry.swift; path = Source/DefaultValueRegistry.swift; sourceTree = "<group>"; };
+		1ADAB656379485D7430E78828DADF219 /* Cuckoo-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Cuckoo-dummy.m"; sourceTree = "<group>"; };
+		2CADCE49B1DD8FFD6F4A27AB44E4C905 /* Dictionary+matchers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Dictionary+matchers.swift"; path = "Source/Matching/Dictionary+matchers.swift"; sourceTree = "<group>"; };
 		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		3C9DE17061AF1971F918C8D68496E153 /* Pods-WildWest-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-WildWest-acknowledgements.markdown"; sourceTree = "<group>"; };
-		3DF5A69D079FEA62A07D3D66B271C482 /* Pods-WildWest-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WildWest-acknowledgements.plist"; sourceTree = "<group>"; };
-		4FFB6A803000C78717E5DDCD9FB482AA /* Pods-WildWest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WildWest.debug.xcconfig"; sourceTree = "<group>"; };
-		6EAE554C40E2F6BE2F969DAA2465980A /* Pods-WildWestTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-WildWestTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		89F85ACF3D78B39506B75103B4694B36 /* SwiftLint.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftLint.xcconfig; sourceTree = "<group>"; };
-		8F1BA1466105454BBA202F1FFDEF2F10 /* Pods-WildWest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WildWest.release.xcconfig"; sourceTree = "<group>"; };
-		95E2917DF15EEDF99B9811FC800BC7E8 /* Pods-WildWest.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-WildWest.modulemap"; sourceTree = "<group>"; };
-		9D83B0B904DC0BCAE41FCC613517ED4E /* Pods-WildWest-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-WildWest-dummy.m"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		AD2BF735A772B0C780228C7D65775EFC /* Pods-WildWestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WildWestTests.debug.xcconfig"; sourceTree = "<group>"; };
-		C1CBE99BFA089B6502BF5DE9D479A1B4 /* libPods-WildWestTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WildWestTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CD193F23596DD7C2E5EE3FD19D15A1AD /* Pods_WildWest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E64BA4A95C7FE8693B25B9B3942C3645 /* Pods-WildWestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WildWestTests.release.xcconfig"; sourceTree = "<group>"; };
-		F4B1B4F3A1ED019C6F9CFE42775B72EB /* Pods-WildWest-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-WildWest-umbrella.h"; sourceTree = "<group>"; };
-		F4EB0020CF0367E3E38B4C27E7F4B3A9 /* Pods-WildWestTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WildWestTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		3A1FD142464674E0D4BA9670924D7333 /* Pods-WildWest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WildWest.release.xcconfig"; sourceTree = "<group>"; };
+		3D1498C0E06314194129BA7B2749786A /* Pods-WildWestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WildWestTests.release.xcconfig"; sourceTree = "<group>"; };
+		3EE77220C3FCBE00D1A1DFCDAD77E72F /* Stub.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Stub.swift; path = Source/Stubbing/Stub.swift; sourceTree = "<group>"; };
+		459B97EFC6738AEC44CDECB33CAA9EBC /* Pods-WildWest-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WildWest-Info.plist"; sourceTree = "<group>"; };
+		4851104CB39A64A7E509F8243714C19C /* ArgumentCaptor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ArgumentCaptor.swift; path = Source/Verification/ArgumentCaptor.swift; sourceTree = "<group>"; };
+		4ABAAF4571850E2ADA24E58738436707 /* Mocked.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Mocked.swift; path = Source/Mock/Mocked.swift; sourceTree = "<group>"; };
+		5191C885B5FF6C86F8B8EE6682E932BD /* __DoNotUse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = __DoNotUse.swift; path = Source/Verification/__DoNotUse.swift; sourceTree = "<group>"; };
+		56D84D137CFC04C0A1F2843836A573DE /* CuckooFunctions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CuckooFunctions.swift; path = Source/CuckooFunctions.swift; sourceTree = "<group>"; };
+		571F266DA8C6A62779FA15D6A0811DA8 /* Pods-WildWest-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WildWest-acknowledgements.plist"; sourceTree = "<group>"; };
+		5BA4188B1F9C0F42128112CAE3C90323 /* ParameterMatcher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ParameterMatcher.swift; path = Source/Matching/ParameterMatcher.swift; sourceTree = "<group>"; };
+		5C4218926D306EFB4F82375DA2B9BE24 /* StubNoReturnFunction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StubNoReturnFunction.swift; path = Source/Stubbing/StubFunction/StubNoReturnFunction.swift; sourceTree = "<group>"; };
+		5D7E7D6B63178BAC0E3752E75084D4B7 /* MockManager+preconfigured.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "MockManager+preconfigured.swift"; path = "Source/Initialization/MockManager+preconfigured.swift"; sourceTree = "<group>"; };
+		5F2B46F9E79F833F17EA0A2950030147 /* Pods-WildWest-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-WildWest-umbrella.h"; sourceTree = "<group>"; };
+		5FA0F7ECBF08DE55790C04E64A0C782C /* StubFunctionThenDoNothingTrait.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StubFunctionThenDoNothingTrait.swift; path = Source/Stubbing/StubFunction/Trait/StubFunctionThenDoNothingTrait.swift; sourceTree = "<group>"; };
+		69C760E97CEE8808FF7E71E8A494DBBD /* StubFunctionThenThrowTrait.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StubFunctionThenThrowTrait.swift; path = Source/Stubbing/StubFunction/Trait/StubFunctionThenThrowTrait.swift; sourceTree = "<group>"; };
+		70EE2AE638F3CA0ECAAB93859D5616F3 /* Pods-WildWest-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-WildWest-acknowledgements.markdown"; sourceTree = "<group>"; };
+		712DCF4E5A1BBA2A6DD97EF8AF599154 /* StubFunctionThenCallRealImplementationTrait.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StubFunctionThenCallRealImplementationTrait.swift; path = Source/Stubbing/StubFunction/Trait/StubFunctionThenCallRealImplementationTrait.swift; sourceTree = "<group>"; };
+		71A810468B1D84F1D06B7514507486A0 /* Array+matchers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Array+matchers.swift"; path = "Source/Matching/Array+matchers.swift"; sourceTree = "<group>"; };
+		73C1E4F11C00AA26413D70F42AB644A3 /* ParameterMatcherFunctions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ParameterMatcherFunctions.swift; path = Source/Matching/ParameterMatcherFunctions.swift; sourceTree = "<group>"; };
+		7C803D800CD016ADE972EA1F0E569059 /* Cuckoo-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Cuckoo-prefix.pch"; sourceTree = "<group>"; };
+		7CB721E06908F55275B9D53A245AAFF2 /* SwiftLint.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftLint.xcconfig; sourceTree = "<group>"; };
+		7E271ABB01FF180A3BC909FBD1E09514 /* Pods-WildWestTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-WildWestTests.modulemap"; sourceTree = "<group>"; };
+		8282A9A51B05D5AC44FD94DFE57B3E2B /* Cuckoo.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Cuckoo.xcconfig; sourceTree = "<group>"; };
+		8512238A1A83B8816BC85F73CF860A92 /* MockManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MockManager.swift; path = Source/MockManager.swift; sourceTree = "<group>"; };
+		8587ED46E661B8EC960BF8CF3E94CACC /* Pods-WildWestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WildWestTests.debug.xcconfig"; sourceTree = "<group>"; };
+		887E7513A70ED91F1BCC5A23646E7DBC /* ToBeStubbedReadOnlyProperty.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToBeStubbedReadOnlyProperty.swift; path = Source/Stubbing/ToBeStubbedProperty/ToBeStubbedReadOnlyProperty.swift; sourceTree = "<group>"; };
+		8B3D01678A840F20A9A455A27A87EE23 /* ToBeStubbedProperty.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToBeStubbedProperty.swift; path = Source/Stubbing/ToBeStubbedProperty/ToBeStubbedProperty.swift; sourceTree = "<group>"; };
+		8EBD51BDCFEDC6DB53889F8C6E98297A /* Pods-WildWestTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WildWestTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		90C7E271C449D9E57E639E89C0AE9575 /* Utils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Source/Utils.swift; sourceTree = "<group>"; };
+		93A7635ECD1E747E477710767B70BD7A /* StubFunction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StubFunction.swift; path = Source/Stubbing/StubFunction/StubFunction.swift; sourceTree = "<group>"; };
+		97E6CA60B804DC062C72AAFF572BEBDF /* VerificationProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VerificationProxy.swift; path = Source/Mock/VerificationProxy.swift; sourceTree = "<group>"; };
+		9879AD59BDE3058793DB4A422C4F4B0C /* Pods-WildWestTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-WildWestTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		990416DE046240E7743DDFF8231BDE70 /* Pods-WildWest.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-WildWest.modulemap"; sourceTree = "<group>"; };
+		9A6A69C64F5E9A2F7BD1EF39A6277189 /* StubbingProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StubbingProxy.swift; path = Source/Mock/StubbingProxy.swift; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A44E4AAB5025ECAD9CEB834A4E68AEA4 /* StubCall.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StubCall.swift; path = Source/Stubbing/StubCall.swift; sourceTree = "<group>"; };
+		A4C8381C9339F003C35554FED2E58777 /* MockBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MockBuilder.swift; path = Source/Initialization/MockBuilder.swift; sourceTree = "<group>"; };
+		B2908C77DE801C353D3995A5DFF1B8F1 /* CallMatcher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CallMatcher.swift; path = Source/Matching/CallMatcher.swift; sourceTree = "<group>"; };
+		B70AFB2BFB9FEC536EC0093EF62F7226 /* Set+matchers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Set+matchers.swift"; path = "Source/Matching/Set+matchers.swift"; sourceTree = "<group>"; };
+		BC390A586D98773151F66A1153F54416 /* ThreadLocal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThreadLocal.swift; path = Source/Initialization/ThreadLocal.swift; sourceTree = "<group>"; };
+		C0398768B56607ADAE0091DE93AFDC31 /* StubAction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StubAction.swift; path = Source/Stubbing/StubAction.swift; sourceTree = "<group>"; };
+		C1668B1C613DDA1142C28E8C359FCF95 /* Pods-WildWest-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-WildWest-dummy.m"; sourceTree = "<group>"; };
+		C1CBE99BFA089B6502BF5DE9D479A1B4 /* libPods-WildWestTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-WildWestTests.a"; path = "libPods-WildWestTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6454D0457C210BE8699B1810E27E158 /* Cuckoo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Cuckoo.modulemap; sourceTree = "<group>"; };
+		C9010D8F66C9A1A8782ECCA87EC0236B /* VerifyProperty.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VerifyProperty.swift; path = Source/Verification/VerifyProperty/VerifyProperty.swift; sourceTree = "<group>"; };
+		CD193F23596DD7C2E5EE3FD19D15A1AD /* Pods_WildWest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_WildWest.framework; path = "Pods-WildWest.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D32C49B9A1D4C9888D01FDB0C3EFDCB8 /* CallMatcherFunctions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CallMatcherFunctions.swift; path = Source/Matching/CallMatcherFunctions.swift; sourceTree = "<group>"; };
+		D59ED0A7390E30F27EA5889E56959A02 /* StubFunctionThenTrait.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StubFunctionThenTrait.swift; path = Source/Stubbing/StubFunction/Trait/StubFunctionThenTrait.swift; sourceTree = "<group>"; };
+		D5DAE0A1631CFBE615CCEEB7AEDB5E43 /* VerifyReadOnlyProperty.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VerifyReadOnlyProperty.swift; path = Source/Verification/VerifyProperty/VerifyReadOnlyProperty.swift; sourceTree = "<group>"; };
+		DA82E40656241817E21A5DD33B8C7347 /* Matchable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Matchable.swift; path = Source/Matching/Matchable.swift; sourceTree = "<group>"; };
+		DB2DFBA76FE8DA61E1BFDB7BBC37710F /* Pods-WildWestTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-WildWestTests-dummy.m"; sourceTree = "<group>"; };
+		DEFF6156BBF306C7C124BB797FEC58D7 /* StubFunctionThenThrowingTrait.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StubFunctionThenThrowingTrait.swift; path = Source/Stubbing/StubFunction/Trait/StubFunctionThenThrowingTrait.swift; sourceTree = "<group>"; };
+		E9C421BDC00352B444F2FFBE5E4D8F3A /* StubFunctionThenReturnTrait.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StubFunctionThenReturnTrait.swift; path = Source/Stubbing/StubFunction/Trait/StubFunctionThenReturnTrait.swift; sourceTree = "<group>"; };
+		EC9AD814BB49504CC6BC6C144CC699C8 /* Pods-WildWest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WildWest.debug.xcconfig"; sourceTree = "<group>"; };
+		EE81026C7969ADCAF39B934DF158BBD1 /* Pods-WildWestTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-WildWestTests-umbrella.h"; sourceTree = "<group>"; };
+		F51EF7A0E8CFCB167492C74346AFDD04 /* Mock.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Mock.swift; path = Source/Mock/Mock.swift; sourceTree = "<group>"; };
+		F86CC63CA0BAD7A682E0E9F8E42B1778 /* BaseStubFunctionTrait.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseStubFunctionTrait.swift; path = Source/Stubbing/StubFunction/Trait/BaseStubFunctionTrait.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		883298A9F28A37B9EDE4BCD8D22AC337 /* Frameworks */ = {
+		052790A39388999CFDD82A590EE09D99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		494EB64401A2BA2A0C50063442F593B7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -76,67 +180,118 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		02A7AA741983F5FB2698BF0BC915F0B0 /* Targets Support Files */ = {
+		24AC95E521AEF2B9E361A1DDA8C232D6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6DBAC48114CFF4E1F45C05CAB095F726 /* Pods-WildWest */,
-				1B96643B5A083B9B7EE208D76CDCBF0D /* Pods-WildWestTests */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		1B96643B5A083B9B7EE208D76CDCBF0D /* Pods-WildWestTests */ = {
-			isa = PBXGroup;
-			children = (
-				6EAE554C40E2F6BE2F969DAA2465980A /* Pods-WildWestTests-acknowledgements.markdown */,
-				F4EB0020CF0367E3E38B4C27E7F4B3A9 /* Pods-WildWestTests-acknowledgements.plist */,
-				02317F8104AB60AC8A4676BCC1DAC977 /* Pods-WildWestTests-dummy.m */,
-				AD2BF735A772B0C780228C7D65775EFC /* Pods-WildWestTests.debug.xcconfig */,
-				E64BA4A95C7FE8693B25B9B3942C3645 /* Pods-WildWestTests.release.xcconfig */,
-			);
-			name = "Pods-WildWestTests";
-			path = "Target Support Files/Pods-WildWestTests";
-			sourceTree = "<group>";
-		};
-		6DBAC48114CFF4E1F45C05CAB095F726 /* Pods-WildWest */ = {
-			isa = PBXGroup;
-			children = (
-				95E2917DF15EEDF99B9811FC800BC7E8 /* Pods-WildWest.modulemap */,
-				3C9DE17061AF1971F918C8D68496E153 /* Pods-WildWest-acknowledgements.markdown */,
-				3DF5A69D079FEA62A07D3D66B271C482 /* Pods-WildWest-acknowledgements.plist */,
-				9D83B0B904DC0BCAE41FCC613517ED4E /* Pods-WildWest-dummy.m */,
-				25DF5A89D5696DA8169EE8948B8D1531 /* Pods-WildWest-Info.plist */,
-				F4B1B4F3A1ED019C6F9CFE42775B72EB /* Pods-WildWest-umbrella.h */,
-				4FFB6A803000C78717E5DDCD9FB482AA /* Pods-WildWest.debug.xcconfig */,
-				8F1BA1466105454BBA202F1FFDEF2F10 /* Pods-WildWest.release.xcconfig */,
-			);
-			name = "Pods-WildWest";
-			path = "Target Support Files/Pods-WildWest";
-			sourceTree = "<group>";
-		};
-		7251D675B081DA68A4E2259C685E9D4A /* Products */ = {
-			isa = PBXGroup;
-			children = (
+				06BBD3298EFC08D95EEFE526BDDCDBD1 /* libCuckoo.a */,
 				C1CBE99BFA089B6502BF5DE9D479A1B4 /* libPods-WildWestTests.a */,
 				CD193F23596DD7C2E5EE3FD19D15A1AD /* Pods_WildWest.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		965877409E01FB3D85D85E90E6B30185 /* Pods */ = {
+		2E610591269A711CFCB0D7E91D59B92B /* Cuckoo */ = {
 			isa = PBXGroup;
 			children = (
-				9AED61B9A1CFA211C061344F741DBA07 /* SwiftLint */,
+				609A4D348BE666446DA00581A71597A1 /* Support Files */,
+				3D3C1BF263BF1033A4B355F9780C8619 /* Swift */,
+			);
+			name = Cuckoo;
+			path = Cuckoo;
+			sourceTree = "<group>";
+		};
+		39EE362470AECC91B8F79073C0BA2F3B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2E610591269A711CFCB0D7E91D59B92B /* Cuckoo */,
+				3E3CEA4A397C2EFAA63F30A97F094ACA /* SwiftLint */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		9AED61B9A1CFA211C061344F741DBA07 /* SwiftLint */ = {
+		3D3C1BF263BF1033A4B355F9780C8619 /* Swift */ = {
 			isa = PBXGroup;
 			children = (
-				EEA599FE5C15138FF0981CCFB01E55AA /* Support Files */,
+				5191C885B5FF6C86F8B8EE6682E932BD /* __DoNotUse.swift */,
+				4851104CB39A64A7E509F8243714C19C /* ArgumentCaptor.swift */,
+				71A810468B1D84F1D06B7514507486A0 /* Array+matchers.swift */,
+				F86CC63CA0BAD7A682E0E9F8E42B1778 /* BaseStubFunctionTrait.swift */,
+				B2908C77DE801C353D3995A5DFF1B8F1 /* CallMatcher.swift */,
+				D32C49B9A1D4C9888D01FDB0C3EFDCB8 /* CallMatcherFunctions.swift */,
+				0BC0DAA9B0EE847887EBEBA6A4F125A7 /* CreateMock.swift */,
+				56D84D137CFC04C0A1F2843836A573DE /* CuckooFunctions.swift */,
+				14C3FDCEB45F4AB7933CD70C2102E8EC /* DefaultValueRegistry.swift */,
+				2CADCE49B1DD8FFD6F4A27AB44E4C905 /* Dictionary+matchers.swift */,
+				DA82E40656241817E21A5DD33B8C7347 /* Matchable.swift */,
+				F51EF7A0E8CFCB167492C74346AFDD04 /* Mock.swift */,
+				A4C8381C9339F003C35554FED2E58777 /* MockBuilder.swift */,
+				4ABAAF4571850E2ADA24E58738436707 /* Mocked.swift */,
+				8512238A1A83B8816BC85F73CF860A92 /* MockManager.swift */,
+				5D7E7D6B63178BAC0E3752E75084D4B7 /* MockManager+preconfigured.swift */,
+				5BA4188B1F9C0F42128112CAE3C90323 /* ParameterMatcher.swift */,
+				73C1E4F11C00AA26413D70F42AB644A3 /* ParameterMatcherFunctions.swift */,
+				B70AFB2BFB9FEC536EC0093EF62F7226 /* Set+matchers.swift */,
+				3EE77220C3FCBE00D1A1DFCDAD77E72F /* Stub.swift */,
+				C0398768B56607ADAE0091DE93AFDC31 /* StubAction.swift */,
+				9A6A69C64F5E9A2F7BD1EF39A6277189 /* StubbingProxy.swift */,
+				A44E4AAB5025ECAD9CEB834A4E68AEA4 /* StubCall.swift */,
+				93A7635ECD1E747E477710767B70BD7A /* StubFunction.swift */,
+				712DCF4E5A1BBA2A6DD97EF8AF599154 /* StubFunctionThenCallRealImplementationTrait.swift */,
+				5FA0F7ECBF08DE55790C04E64A0C782C /* StubFunctionThenDoNothingTrait.swift */,
+				E9C421BDC00352B444F2FFBE5E4D8F3A /* StubFunctionThenReturnTrait.swift */,
+				DEFF6156BBF306C7C124BB797FEC58D7 /* StubFunctionThenThrowingTrait.swift */,
+				69C760E97CEE8808FF7E71E8A494DBBD /* StubFunctionThenThrowTrait.swift */,
+				D59ED0A7390E30F27EA5889E56959A02 /* StubFunctionThenTrait.swift */,
+				5C4218926D306EFB4F82375DA2B9BE24 /* StubNoReturnFunction.swift */,
+				01B33BFAB0B179D234D54F2760799684 /* StubNoReturnThrowingFunction.swift */,
+				02E31D029CCDBDEF3B298B4F28F2408D /* StubThrowingFunction.swift */,
+				BC390A586D98773151F66A1153F54416 /* ThreadLocal.swift */,
+				8B3D01678A840F20A9A455A27A87EE23 /* ToBeStubbedProperty.swift */,
+				887E7513A70ED91F1BCC5A23646E7DBC /* ToBeStubbedReadOnlyProperty.swift */,
+				90C7E271C449D9E57E639E89C0AE9575 /* Utils.swift */,
+				97E6CA60B804DC062C72AAFF572BEBDF /* VerificationProxy.swift */,
+				C9010D8F66C9A1A8782ECCA87EC0236B /* VerifyProperty.swift */,
+				D5DAE0A1631CFBE615CCEEB7AEDB5E43 /* VerifyReadOnlyProperty.swift */,
 			);
+			name = Swift;
+			sourceTree = "<group>";
+		};
+		3E3CEA4A397C2EFAA63F30A97F094ACA /* SwiftLint */ = {
+			isa = PBXGroup;
+			children = (
+				F80181E1D7B47BE1212909AD2F2F7DE7 /* Support Files */,
+			);
+			name = SwiftLint;
 			path = SwiftLint;
+			sourceTree = "<group>";
+		};
+		5A7E4C91F5BFF652058355F410F95CD2 /* Pods-WildWest */ = {
+			isa = PBXGroup;
+			children = (
+				990416DE046240E7743DDFF8231BDE70 /* Pods-WildWest.modulemap */,
+				70EE2AE638F3CA0ECAAB93859D5616F3 /* Pods-WildWest-acknowledgements.markdown */,
+				571F266DA8C6A62779FA15D6A0811DA8 /* Pods-WildWest-acknowledgements.plist */,
+				C1668B1C613DDA1142C28E8C359FCF95 /* Pods-WildWest-dummy.m */,
+				459B97EFC6738AEC44CDECB33CAA9EBC /* Pods-WildWest-Info.plist */,
+				5F2B46F9E79F833F17EA0A2950030147 /* Pods-WildWest-umbrella.h */,
+				EC9AD814BB49504CC6BC6C144CC699C8 /* Pods-WildWest.debug.xcconfig */,
+				3A1FD142464674E0D4BA9670924D7333 /* Pods-WildWest.release.xcconfig */,
+			);
+			name = "Pods-WildWest";
+			path = "Target Support Files/Pods-WildWest";
+			sourceTree = "<group>";
+		};
+		609A4D348BE666446DA00581A71597A1 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				C6454D0457C210BE8699B1810E27E158 /* Cuckoo.modulemap */,
+				8282A9A51B05D5AC44FD94DFE57B3E2B /* Cuckoo.xcconfig */,
+				1ADAB656379485D7430E78828DADF219 /* Cuckoo-dummy.m */,
+				7C803D800CD016ADE972EA1F0E569059 /* Cuckoo-prefix.pch */,
+				02EE34169849E9406D5CB2321210E244 /* Cuckoo-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Cuckoo";
 			sourceTree = "<group>";
 		};
 		C0834CEBB1379A84116EF29F93051C60 /* iOS */ = {
@@ -152,9 +307,9 @@
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				965877409E01FB3D85D85E90E6B30185 /* Pods */,
-				7251D675B081DA68A4E2259C685E9D4A /* Products */,
-				02A7AA741983F5FB2698BF0BC915F0B0 /* Targets Support Files */,
+				39EE362470AECC91B8F79073C0BA2F3B /* Pods */,
+				24AC95E521AEF2B9E361A1DDA8C232D6 /* Products */,
+				DE2EF64855EAF734B33B7AAEB69F51C2 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -166,10 +321,34 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		EEA599FE5C15138FF0981CCFB01E55AA /* Support Files */ = {
+		DE2EF64855EAF734B33B7AAEB69F51C2 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				89F85ACF3D78B39506B75103B4694B36 /* SwiftLint.xcconfig */,
+				5A7E4C91F5BFF652058355F410F95CD2 /* Pods-WildWest */,
+				F02ECE18251FD1953B99D14081813781 /* Pods-WildWestTests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		F02ECE18251FD1953B99D14081813781 /* Pods-WildWestTests */ = {
+			isa = PBXGroup;
+			children = (
+				7E271ABB01FF180A3BC909FBD1E09514 /* Pods-WildWestTests.modulemap */,
+				9879AD59BDE3058793DB4A422C4F4B0C /* Pods-WildWestTests-acknowledgements.markdown */,
+				8EBD51BDCFEDC6DB53889F8C6E98297A /* Pods-WildWestTests-acknowledgements.plist */,
+				DB2DFBA76FE8DA61E1BFDB7BBC37710F /* Pods-WildWestTests-dummy.m */,
+				EE81026C7969ADCAF39B934DF158BBD1 /* Pods-WildWestTests-umbrella.h */,
+				8587ED46E661B8EC960BF8CF3E94CACC /* Pods-WildWestTests.debug.xcconfig */,
+				3D1498C0E06314194129BA7B2749786A /* Pods-WildWestTests.release.xcconfig */,
+			);
+			name = "Pods-WildWestTests";
+			path = "Target Support Files/Pods-WildWestTests";
+			sourceTree = "<group>";
+		};
+		F80181E1D7B47BE1212909AD2F2F7DE7 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				7CB721E06908F55275B9D53A245AAFF2 /* SwiftLint.xcconfig */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/SwiftLint";
@@ -186,10 +365,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FDEEAEDD47AD64BE45F0A576C4FED478 /* Headers */ = {
+		7D78512A1459BD1F7C8F6A4EC00F00A7 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AA3255E751A04C65E63931098DE4BC9 /* Pods-WildWestTests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A24C960C5B542973F14BD4B0DF45ED6A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCD63D58C965D56501AE01D66E308EBC /* Cuckoo-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,15 +386,16 @@
 /* Begin PBXNativeTarget section */
 		47B128FFAA00A5D43EBB5DAF209E0B8D /* Pods-WildWestTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CA59E718941EBEC5F5198357275B36FE /* Build configuration list for PBXNativeTarget "Pods-WildWestTests" */;
+			buildConfigurationList = 5937B2AA7C7E5B0E935DEE8949DA1B89 /* Build configuration list for PBXNativeTarget "Pods-WildWestTests" */;
 			buildPhases = (
-				FDEEAEDD47AD64BE45F0A576C4FED478 /* Headers */,
-				EB6C1D90EFCC16E1C15FD3F7B79F9738 /* Sources */,
-				883298A9F28A37B9EDE4BCD8D22AC337 /* Frameworks */,
+				7D78512A1459BD1F7C8F6A4EC00F00A7 /* Headers */,
+				9A25665E0F84532B21AF9D8B532664FB /* Sources */,
+				494EB64401A2BA2A0C50063442F593B7 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				068655E677892604C7BA65E762520788 /* PBXTargetDependency */,
 			);
 			name = "Pods-WildWestTests";
 			productName = "Pods-WildWestTests";
@@ -232,6 +421,24 @@
 			productReference = CD193F23596DD7C2E5EE3FD19D15A1AD /* Pods_WildWest.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		CFCA8CA494372A14108299CE150648B8 /* Cuckoo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 20AD94827FEF3BC55DAB0A5EA2D7A958 /* Build configuration list for PBXNativeTarget "Cuckoo" */;
+			buildPhases = (
+				A24C960C5B542973F14BD4B0DF45ED6A /* Headers */,
+				C0FF46546FAB7B40D6589938EDD71C0E /* Sources */,
+				052790A39388999CFDD82A590EE09D99 /* Frameworks */,
+				DCF6C164CE333D3300CFA2D3D247A6EB /* Copy generated compatibility header */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Cuckoo;
+			productName = Cuckoo;
+			productReference = 06BBD3298EFC08D95EEFE526BDDCDBD1 /* libCuckoo.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -247,13 +454,13 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 7251D675B081DA68A4E2259C685E9D4A /* Products */;
+			productRefGroup = 24AC95E521AEF2B9E361A1DDA8C232D6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				CFCA8CA494372A14108299CE150648B8 /* Cuckoo */,
 				500BA486009DEADD38B4A1CE31CFA6D8 /* Pods-WildWest */,
 				47B128FFAA00A5D43EBB5DAF209E0B8D /* Pods-WildWestTests */,
 				52B60EC2A583F24ACBB69C113F5488B9 /* SwiftLint */,
@@ -271,6 +478,33 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		DCF6C164CE333D3300CFA2D3D247A6EB /* Copy generated compatibility header */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DERIVED_SOURCES_DIR}/${PRODUCT_MODULE_NAME}-Swift.h",
+				"${PODS_ROOT}/Headers/Public/Cuckoo/Cuckoo.modulemap",
+				"${PODS_ROOT}/Headers/Public/Cuckoo/Cuckoo-umbrella.h",
+			);
+			name = "Copy generated compatibility header";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${BUILT_PRODUCTS_DIR}/${PRODUCT_MODULE_NAME}.modulemap",
+				"${BUILT_PRODUCTS_DIR}/Cuckoo-umbrella.h",
+				"${BUILT_PRODUCTS_DIR}/Swift Compatibility Header/${PRODUCT_MODULE_NAME}-Swift.h",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "COMPATIBILITY_HEADER_PATH=\"${BUILT_PRODUCTS_DIR}/Swift Compatibility Header/${PRODUCT_MODULE_NAME}-Swift.h\"\nMODULE_MAP_PATH=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_MODULE_NAME}.modulemap\"\n\nditto \"${DERIVED_SOURCES_DIR}/${PRODUCT_MODULE_NAME}-Swift.h\" \"${COMPATIBILITY_HEADER_PATH}\"\nditto \"${PODS_ROOT}/Headers/Public/Cuckoo/Cuckoo.modulemap\" \"${MODULE_MAP_PATH}\"\nditto \"${PODS_ROOT}/Headers/Public/Cuckoo/Cuckoo-umbrella.h\" \"${BUILT_PRODUCTS_DIR}\"\nprintf \"\\n\\nmodule ${PRODUCT_MODULE_NAME}.Swift {\\n  header \\\"${COMPATIBILITY_HEADER_PATH}\\\"\\n  requires objc\\n}\\n\" >> \"${MODULE_MAP_PATH}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6EEFCBDFD5A629D2D5464AF9D4469EF6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -280,17 +514,71 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EB6C1D90EFCC16E1C15FD3F7B79F9738 /* Sources */ = {
+		9A25665E0F84532B21AF9D8B532664FB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A01370D6C987A23A1EBA4B80EF2DF30 /* Pods-WildWestTests-dummy.m in Sources */,
+				EB61B497A155198267031EFA781EB326 /* Pods-WildWestTests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C0FF46546FAB7B40D6589938EDD71C0E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5FB3E004722E03F129073A1A61A2EBA0 /* __DoNotUse.swift in Sources */,
+				05E58CE73CA61D32A80B490366863C37 /* ArgumentCaptor.swift in Sources */,
+				13B4985507EAACF299C56FC2C5B34169 /* Array+matchers.swift in Sources */,
+				317AD8447925DDC3C090F73738260EC5 /* BaseStubFunctionTrait.swift in Sources */,
+				23F98788E579AFE20F8B7E5CF248277E /* CallMatcher.swift in Sources */,
+				307D42BFAD79089DD3471E8284C75515 /* CallMatcherFunctions.swift in Sources */,
+				6941C83364730E76B8465E5B02B0C77B /* CreateMock.swift in Sources */,
+				113351A8BEC3B57AACC4AC5493A1025A /* Cuckoo-dummy.m in Sources */,
+				95A288E13B4934B502F701F078A20F09 /* CuckooFunctions.swift in Sources */,
+				931CD4E55E94746FD19BBE3D92B71F66 /* DefaultValueRegistry.swift in Sources */,
+				C57E3A97BE7F208C1E096BE11A956A7C /* Dictionary+matchers.swift in Sources */,
+				66A4CE113D9412019D9DE8055E4CB792 /* Matchable.swift in Sources */,
+				07E8A4A243267731B48162C45A38F647 /* Mock.swift in Sources */,
+				302A6F87575E8DB2E52EB0DD299C3A39 /* MockBuilder.swift in Sources */,
+				41BEBED4D49775011B3A2DE50D13E7DC /* Mocked.swift in Sources */,
+				F27F03D74D4219ADA3EDE114CC8B5C7F /* MockManager+preconfigured.swift in Sources */,
+				498EA2B4F1116EEB5E545B7C88210264 /* MockManager.swift in Sources */,
+				9A315B11EDC2F0E1210CD1DAB7E3108F /* ParameterMatcher.swift in Sources */,
+				A128937F30AE0DD9C131E03D1F430922 /* ParameterMatcherFunctions.swift in Sources */,
+				CD431F527822B600D52323D16FB99200 /* Set+matchers.swift in Sources */,
+				3D275D0E9B2D4713B4C8845F2316427D /* Stub.swift in Sources */,
+				C6BA69FD11865AD0B7C3607C3E067B48 /* StubAction.swift in Sources */,
+				55CF6F9B2FD14190AC0F8E9C2B72DD7F /* StubbingProxy.swift in Sources */,
+				007CB68E15EBE08B1660FEFE2EF688BA /* StubCall.swift in Sources */,
+				8E1DEE46EE6AE940C9BCFEC34DA0E20E /* StubFunction.swift in Sources */,
+				01F0AF7C1E0FFB82920A8742D3BD02B6 /* StubFunctionThenCallRealImplementationTrait.swift in Sources */,
+				9B52F561AA4A2C92DB7C680BD57C457F /* StubFunctionThenDoNothingTrait.swift in Sources */,
+				3EE5B72BFCE2851BD545065F9149C530 /* StubFunctionThenReturnTrait.swift in Sources */,
+				B0F48E546D4A4240DBC3DC2CF4F35119 /* StubFunctionThenThrowingTrait.swift in Sources */,
+				1423E740F6B74D3103E8A731F3BEF10B /* StubFunctionThenThrowTrait.swift in Sources */,
+				25E6664BA63E0CA37428BE22C07D196B /* StubFunctionThenTrait.swift in Sources */,
+				2E1EBDF006390B4EA54758DF2D1D34D7 /* StubNoReturnFunction.swift in Sources */,
+				452D9E07985DF47BFCA2991A79E7B580 /* StubNoReturnThrowingFunction.swift in Sources */,
+				E5201B18519C0811E735B26F587696C2 /* StubThrowingFunction.swift in Sources */,
+				3E45D41C28E15EABD5AF8FE54AA0BAB2 /* ThreadLocal.swift in Sources */,
+				44381E0E43B904AC2C7184977997D243 /* ToBeStubbedProperty.swift in Sources */,
+				0F51D1347C8AF7B3805AE1074B2DE985 /* ToBeStubbedReadOnlyProperty.swift in Sources */,
+				5BAF042654E1ED08A49093BC997FBA71 /* Utils.swift in Sources */,
+				3B709ABC36E36C5801E31F5C78C310D5 /* VerificationProxy.swift in Sources */,
+				FF734102ED62C8C6FA3480A3D1865E1F /* VerifyProperty.swift in Sources */,
+				20FDC1D108E244015C2C196CAB1B8EAA /* VerifyReadOnlyProperty.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		068655E677892604C7BA65E762520788 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Cuckoo;
+			target = CFCA8CA494372A14108299CE150648B8 /* Cuckoo */;
+			targetProxy = D95F1E976D3369F2D2ED3C53871A2EB4 /* PBXContainerItemProxy */;
+		};
 		5DEC8317D7CCA2E813E5A4CC98ED5D7D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SwiftLint;
@@ -300,9 +588,9 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		13B8140B5271A28A4CF934F1494C3B19 /* Release */ = {
+		14187805893287B8A1396FF09971383B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E64BA4A95C7FE8693B25B9B3942C3645 /* Pods-WildWestTests.release.xcconfig */;
+			baseConfigurationReference = 8587ED46E661B8EC960BF8CF3E94CACC /* Pods-WildWestTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -311,6 +599,7 @@
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -318,13 +607,12 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 			};
-			name = Release;
+			name = Debug;
 		};
 		84D7C4574E8F0F3095623F0E06F5B402 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89F85ACF3D78B39506B75103B4694B36 /* SwiftLint.xcconfig */;
+			baseConfigurationReference = 7CB721E06908F55275B9D53A245AAFF2 /* SwiftLint.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -338,27 +626,6 @@
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
-		};
-		A5FB11402CDD2EE5097EAC370EC7ECE1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = AD2BF735A772B0C780228C7D65775EFC /* Pods-WildWestTests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				MACH_O_TYPE = staticlib;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
 		};
 		B0087CB4594321EF41619F3181FE120E /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -417,6 +684,29 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		B5A602A70F2BB3E40CC22B23DE136228 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D1498C0E06314194129BA7B2749786A /* Pods-WildWestTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -484,9 +774,34 @@
 			};
 			name = Debug;
 		};
+		B9E69C04EB7B89A66BFC4EFEF775EF3F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8282A9A51B05D5AC44FD94DFE57B3E2B /* Cuckoo.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/Cuckoo/Cuckoo-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MODULEMAP_FILE = Headers/Public/Cuckoo/Cuckoo.modulemap;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = Cuckoo;
+				PRODUCT_NAME = Cuckoo;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 		D033BC96560A4A32681657CBD02C8E76 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4FFB6A803000C78717E5DDCD9FB482AA /* Pods-WildWest.debug.xcconfig */;
+			baseConfigurationReference = EC9AD814BB49504CC6BC6C144CC699C8 /* Pods-WildWest.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -521,9 +836,35 @@
 			};
 			name = Debug;
 		};
+		DDA987411886CB70ED12E3DB3D9E40CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8282A9A51B05D5AC44FD94DFE57B3E2B /* Cuckoo.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/Cuckoo/Cuckoo-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MODULEMAP_FILE = Headers/Public/Cuckoo/Cuckoo.modulemap;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = Cuckoo;
+				PRODUCT_NAME = Cuckoo;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		DEED47E09AF743F48544C1C4FEADEF47 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89F85ACF3D78B39506B75103B4694B36 /* SwiftLint.xcconfig */;
+			baseConfigurationReference = 7CB721E06908F55275B9D53A245AAFF2 /* SwiftLint.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -539,7 +880,7 @@
 		};
 		F568794CE8CF1B382F191ED4AE293D68 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8F1BA1466105454BBA202F1FFDEF2F10 /* Pods-WildWest.release.xcconfig */;
+			baseConfigurationReference = 3A1FD142464674E0D4BA9670924D7333 /* Pods-WildWest.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -578,6 +919,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		20AD94827FEF3BC55DAB0A5EA2D7A958 /* Build configuration list for PBXNativeTarget "Cuckoo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B9E69C04EB7B89A66BFC4EFEF775EF3F /* Debug */,
+				DDA987411886CB70ED12E3DB3D9E40CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -587,20 +937,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		5937B2AA7C7E5B0E935DEE8949DA1B89 /* Build configuration list for PBXNativeTarget "Pods-WildWestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14187805893287B8A1396FF09971383B /* Debug */,
+				B5A602A70F2BB3E40CC22B23DE136228 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		AE7B4FB01588B9E6DF09CB79FC7CE7BD /* Build configuration list for PBXAggregateTarget "SwiftLint" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DEED47E09AF743F48544C1C4FEADEF47 /* Debug */,
 				84D7C4574E8F0F3095623F0E06F5B402 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		CA59E718941EBEC5F5198357275B36FE /* Build configuration list for PBXNativeTarget "Pods-WildWestTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A5FB11402CDD2EE5097EAC370EC7ECE1 /* Debug */,
-				13B8140B5271A28A4CF934F1494C3B19 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
