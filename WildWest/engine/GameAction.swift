@@ -8,7 +8,5 @@
 
 /// An action choosen by the player
 protocol GameAction {
-    func isAllowed() -> Bool
-    func execute(_ game: Game) -> Game
-    func undo(_ game: Game) -> Game
+    func execute(_ game: Game) -> [GameUpdate]
 }

@@ -7,22 +7,14 @@
 //
 
 protocol GameStateProtocol {
-    func state() -> Game
-    func update(_ game: Game)
+    var game: Game { get set }
 }
 
 class SimpleGameState: GameStateProtocol {
-    private var game: Game
+    
+    var game: Game
     
     init(_ game: Game) {
-        self.game = game
-    }
-    
-    func state() -> Game {
-        return game
-    }
-    
-    func update(_ game: Game) {
         self.game = game
     }
 }

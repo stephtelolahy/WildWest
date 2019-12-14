@@ -33,6 +33,8 @@
 		ADB7D30F239EE3E300653905 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D30E239EE3E300653905 /* Game.swift */; };
 		ADB7D312239EE40100653905 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D311239EE40100653905 /* Player.swift */; };
 		ADB7D315239EE40E00653905 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D314239EE40E00653905 /* Card.swift */; };
+		ADD5642C23A4D1E000C1BD01 /* GameUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5642B23A4D1E000C1BD01 /* GameUpdate.swift */; };
+		ADD5642D23A4D1E000C1BD01 /* GameUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5642B23A4D1E000C1BD01 /* GameUpdate.swift */; };
 		D42ED72C28166C49D2A60FC9 /* Pods_WildWest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C300D3666EB3B530B73C9D4 /* Pods_WildWest.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +75,7 @@
 		ADB7D30E239EE3E300653905 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		ADB7D311239EE40100653905 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		ADB7D314239EE40E00653905 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		ADD5642B23A4D1E000C1BD01 /* GameUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUpdate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,11 +121,12 @@
 			isa = PBXGroup;
 			children = (
 				AD8540A423A44A4100568FE9 /* GameEngine.swift */,
-				AD8540A823A44F5600568FE9 /* GameAction.swift */,
 				AD8540AA23A45ACA00568FE9 /* GameState.swift */,
 				AD8540AC23A45B5C00568FE9 /* GameRules.swift */,
 				AD8540AE23A45BB400568FE9 /* GameAI.swift */,
 				AD8540B023A45BF300568FE9 /* GameRenderer.swift */,
+				AD8540A823A44F5600568FE9 /* GameAction.swift */,
+				ADD5642B23A4D1E000C1BD01 /* GameUpdate.swift */,
 			);
 			path = engine;
 			sourceTree = "<group>";
@@ -329,7 +333,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/engine/GameEngine.swift\" \\\n\"${INPUT_DIR}/engine/GameRules.swift\" \\\n\"${INPUT_DIR}/engine/GameState.swift\" \\\n\"${INPUT_DIR}/engine/GameAI.swift\" \\\n\"${INPUT_DIR}/engine/GameRenderer.swift\" \\\n\"${INPUT_DIR}/engine/GameAction.swift\"\n";
+			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/engine/GameEngine.swift\" \\\n\"${INPUT_DIR}/engine/GameRules.swift\" \\\n\"${INPUT_DIR}/engine/GameState.swift\" \\\n\"${INPUT_DIR}/engine/GameAI.swift\" \\\n\"${INPUT_DIR}/engine/GameRenderer.swift\" \\\n\"${INPUT_DIR}/engine/GameAction.swift\" \\\n\"${INPUT_DIR}/engine/GameUpdate.swift\"\n";
 		};
 		AD8540A223A4291100568FE9 /* Run Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -382,6 +386,7 @@
 				AD8540A523A44A4100568FE9 /* GameEngine.swift in Sources */,
 				ADB7D315239EE40E00653905 /* Card.swift in Sources */,
 				AD8540AF23A45BB400568FE9 /* GameAI.swift in Sources */,
+				ADD5642C23A4D1E000C1BD01 /* GameUpdate.swift in Sources */,
 				AD8540B123A45BF300568FE9 /* GameRenderer.swift in Sources */,
 				ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */,
 				AD8540A923A44F5600568FE9 /* GameAction.swift in Sources */,
@@ -400,6 +405,7 @@
 				AD186BE323A462C100ABF3E7 /* GameEngine.swift in Sources */,
 				AD186BE723A462C100ABF3E7 /* GameAI.swift in Sources */,
 				AD186BE823A462C100ABF3E7 /* GameRenderer.swift in Sources */,
+				ADD5642D23A4D1E000C1BD01 /* GameUpdate.swift in Sources */,
 				AD186BE223A462BD00ABF3E7 /* Card.swift in Sources */,
 				AD186BE423A462C100ABF3E7 /* GameAction.swift in Sources */,
 				AD186BE623A462C100ABF3E7 /* GameRules.swift in Sources */,

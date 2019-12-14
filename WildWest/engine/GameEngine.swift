@@ -12,7 +12,7 @@ protocol GameEngineProtocol {
 
 class GameEngine: GameEngineProtocol {
     
-    private let state: GameStateProtocol
+    private var state: GameStateProtocol
     private let rules: GameRulesProtocol
     private let aiPlayer: GameAIProtocol
     private let renderer: GameRendererProtocol
@@ -26,17 +26,18 @@ class GameEngine: GameEngineProtocol {
     
     func run() {
         while true {
-            let game = state.state()
-            guard !rules.isOver(game) else {
+            guard !rules.isOver(state.game) else {
                 break
             }
             
-            let actions = rules.possibleActions(game)
+            let actions = rules.possibleActions(state.game)
             let action = aiPlayer.choose(actions)
-            // TODO: perform game update sequentially
-            let result = action.execute(game)
-            state.update(result)
-            renderer.render(result)
+            let updates = action.execute(state.game)
+            for update in updates {
+                state.game = update.apply(to: state.game)
+            }
+            
+            renderer.render(state.game)
         }
     }
 }

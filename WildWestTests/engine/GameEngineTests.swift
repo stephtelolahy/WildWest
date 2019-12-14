@@ -30,7 +30,7 @@ class GameEngineTests: XCTestCase {
     
     func test_DoNothing_IfGameIsOver() {
         let game = Game(players: [], deck: [], discard: [])
-        Cuckoo.stub(mockState) { mock in when(mock.state()).thenReturn(game) }
+        Cuckoo.stub(mockState) { mock in when(mock.game.get).thenReturn(game) }
         Cuckoo.stub(mockRules) { mock in when(mock.isOver(any())).thenReturn(true) }
         
         engine.run()
@@ -42,9 +42,10 @@ class GameEngineTests: XCTestCase {
     func test_LoopUntilGameIsOver() {
         let game = Game(players: [], deck: [], discard: [])
         let mockAction = MockGameAction()
+        let mockUpdate = MockGameUpdate()
         Cuckoo.stub(mockState) { mock in
-            when(mock.state()).thenReturn(game)
-            when(mock.update(any())).thenDoNothing()
+            when(mock.game.get).thenReturn(game)
+            when(mock.game.set(any())).thenDoNothing()
         }
         Cuckoo.stub(mockRules) { mock in
             when(mock.isOver(any())).thenReturn(false, true)
@@ -52,12 +53,13 @@ class GameEngineTests: XCTestCase {
         }
         Cuckoo.stub(mockAI) { mock in when(mock.choose(any())).thenReturn(mockAction) }
         Cuckoo.stub(mockRenderer) { mock in when(mock.render(any())).thenDoNothing() }
-        Cuckoo.stub(mockAction) { mock in when(mock.execute(any())).thenReturn(game) }
+        Cuckoo.stub(mockAction) { mock in when(mock.execute(any())).thenReturn([mockUpdate]) }
+        Cuckoo.stub(mockUpdate) { mock in when(mock.apply(to: any())).thenReturn(game) }
         
         engine.run()
         
+        verify(mockState).game.set(any())
         verify(mockRenderer).render(any())
-        verify(mockState).update(any())
     }
     
 }
