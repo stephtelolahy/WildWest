@@ -769,9 +769,38 @@ import Cuckoo
         
     }
     
+    
+    
+     var messages: [String] {
+        get {
+            return cuckoo_manager.getter("messages",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.messages)
+        }
+        
+    }
+    
 
     
 
+    
+    
+    
+     func addMessage(_ message: String)  {
+        
+    return cuckoo_manager.call("addMessage(_: String)",
+            parameters: (message),
+            escapingParameters: (message),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.addMessage(message))
+        
+    }
     
 
 	 struct __StubbingProxy_GameStateProtocol: Cuckoo.StubbingProxy {
@@ -801,6 +830,16 @@ import Cuckoo
 	        return .init(manager: cuckoo_manager, name: "outcome")
 	    }
 	    
+	    
+	    var messages: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [String]> {
+	        return .init(manager: cuckoo_manager, name: "messages")
+	    }
+	    
+	    
+	    func addMessage<M1: Cuckoo.Matchable>(_ message: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(String)> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: message) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "addMessage(_: String)", parameterMatchers: matchers))
+	    }
 	    
 	}
 
@@ -836,7 +875,18 @@ import Cuckoo
 	        return .init(manager: cuckoo_manager, name: "outcome", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
+	    
+	    var messages: Cuckoo.VerifyReadOnlyProperty<[String]> {
+	        return .init(manager: cuckoo_manager, name: "messages", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
 	
+	    
+	    @discardableResult
+	    func addMessage<M1: Cuckoo.Matchable>(_ message: M1) -> Cuckoo.__DoNotUse<(String), Void> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: message) { $0 }]
+	        return cuckoo_manager.verify("addMessage(_: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
 	    
 	}
 }
@@ -875,9 +925,21 @@ import Cuckoo
         
     }
     
+    
+     var messages: [String] {
+        get {
+            return DefaultValueRegistry.defaultValue(for: ([String]).self)
+        }
+        
+    }
+    
 
     
 
+    
+     func addMessage(_ message: String)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
     
 }
 

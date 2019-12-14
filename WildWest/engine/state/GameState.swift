@@ -11,6 +11,9 @@ protocol GameStateProtocol {
     var deck: CardListProtocol { get }
     var discard: CardListProtocol { get }
     var outcome: GameOutcome? { get }
+    var messages: [String] { get }
+    
+    func addMessage(_ message: String)
 }
 
 enum GameOutcome {

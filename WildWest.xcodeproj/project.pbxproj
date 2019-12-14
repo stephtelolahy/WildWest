@@ -18,6 +18,7 @@
 		AD5F8C3823A538C900C286AA /* CardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5F8C3723A538C900C286AA /* CardList.swift */; };
 		AD5F8C3923A538C900C286AA /* CardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5F8C3723A538C900C286AA /* CardList.swift */; };
 		AD5F8C3B23A545C700C286AA /* CuckooExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5F8C3A23A545C700C286AA /* CuckooExtension.swift */; };
+		AD5F8C3D23A5478000C286AA /* GainLifePointsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5F8C3C23A5478000C286AA /* GainLifePointsTests.swift */; };
 		AD8540A523A44A4100568FE9 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540A423A44A4100568FE9 /* GameEngine.swift */; };
 		AD8540A923A44F5600568FE9 /* GameAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540A823A44F5600568FE9 /* GameAction.swift */; };
 		AD8540AD23A45B5C00568FE9 /* GameRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540AC23A45B5C00568FE9 /* GameRules.swift */; };
@@ -63,6 +64,7 @@
 		AD186BEA23A4630900ABF3E7 /* GameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
 		AD5F8C3723A538C900C286AA /* CardList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardList.swift; sourceTree = "<group>"; };
 		AD5F8C3A23A545C700C286AA /* CuckooExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuckooExtension.swift; sourceTree = "<group>"; };
+		AD5F8C3C23A5478000C286AA /* GainLifePointsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainLifePointsTests.swift; sourceTree = "<group>"; };
 		AD8540A423A44A4100568FE9 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		AD8540A823A44F5600568FE9 /* GameAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAction.swift; sourceTree = "<group>"; };
 		AD8540AC23A45B5C00568FE9 /* GameRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRules.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				ADD5644523A4E45600C1BD01 /* DiscardTests.swift */,
+				AD5F8C3C23A5478000C286AA /* GainLifePointsTests.swift */,
 			);
 			path = update;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 				AD186BE123A462BD00ABF3E7 /* Player.swift in Sources */,
 				AD186BE323A462C100ABF3E7 /* GameEngine.swift in Sources */,
 				ADD5642D23A4D1E000C1BD01 /* GameUpdate.swift in Sources */,
+				AD5F8C3D23A5478000C286AA /* GainLifePointsTests.swift in Sources */,
 				AD186BE223A462BD00ABF3E7 /* Card.swift in Sources */,
 				AD186BE423A462C100ABF3E7 /* GameAction.swift in Sources */,
 				ADD5644623A4E45600C1BD01 /* DiscardTests.swift in Sources */,

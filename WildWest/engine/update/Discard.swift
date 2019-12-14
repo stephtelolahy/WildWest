@@ -19,5 +19,6 @@ struct Discard: GameUpdateProtocol {
         
         player.hand.removeCard(card)
         game.deck.addCard(card)
+        game.addMessage("\(playerIdentifier) discard \(cardIdentifier)")
     }
 }

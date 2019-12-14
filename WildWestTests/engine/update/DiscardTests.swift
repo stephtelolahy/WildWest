@@ -12,12 +12,12 @@ import Cuckoo
 class DiscardTests: XCTestCase {
     
     func test_MoveCardFromHandToDeck_OnDiscard() {
-        let mockState = MockGameStateProtocol()
+        // Given
+        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
         let mockPlayer = MockPlayerProtocol()
         let mockHand = MockCardListProtocol().withEnabledDefaultImplementation(CardListProtocolStub())
         let mockDeck = MockCardListProtocol().withEnabledDefaultImplementation(CardListProtocolStub())
         let mockCard = MockCard()
-        
         Cuckoo.stub(mockState) { mock in
             when(mock.players.get).thenReturn([mockPlayer])
             when(mock.deck.get).thenReturn(mockDeck)
@@ -29,11 +29,14 @@ class DiscardTests: XCTestCase {
         Cuckoo.stub(mockHand) { mock in when(mock.cards.get).thenReturn([mockCard]) }
         Cuckoo.stub(mockCard) { mock in when(mock.identifier.get).thenReturn("c1") }
         
+        // When
         let update = Discard(playerIdentifier: "p1", cardIdentifier: "c1")
         update.apply(to: mockState)
         
+        // Assert
         verify(mockHand).removeCard(identified(by: "c1"))
         verify(mockDeck).addCard(identified(by: "c1"))
+        verify(mockState).addMessage("p1 discard c1")
     }
     
 }
