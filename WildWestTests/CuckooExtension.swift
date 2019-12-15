@@ -8,7 +8,7 @@
 
 import Cuckoo
 
-func identified(by identifier: String) -> ParameterMatcher<Card> {
+func identified(by identifier: String) -> ParameterMatcher<CardProtocol> {
     return ParameterMatcher { tested in
         return tested.identifier == identifier
     }

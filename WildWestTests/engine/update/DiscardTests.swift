@@ -17,7 +17,7 @@ class DiscardTests: XCTestCase {
         let mockPlayer = MockPlayerProtocol()
         let mockHand = MockCardListProtocol().withEnabledDefaultImplementation(CardListProtocolStub())
         let mockDeck = MockCardListProtocol().withEnabledDefaultImplementation(CardListProtocolStub())
-        let mockCard = MockCard()
+        let mockCard = MockCardProtocol()
         Cuckoo.stub(mockState) { mock in
             when(mock.players.get).thenReturn([mockPlayer])
             when(mock.deck.get).thenReturn(mockDeck)

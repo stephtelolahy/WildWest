@@ -13,7 +13,7 @@ struct GainLifePoints: GameUpdateProtocol {
     
     func apply(to game: GameStateProtocol) {
         guard let player = game.players.first(where: { $0.identifier == playerIdentifier }) else {
-            fatalError("Invalid update")
+            return
         }
         
         player.setHealth(player.health + points)

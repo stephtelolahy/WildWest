@@ -7,9 +7,9 @@
 //
 
 protocol CardListProtocol {
-    var cards: [Card] { get }
+    var cards: [CardProtocol] { get }
     
-    func addCard(_ card: Card)
-    func removeCard(_ identifier: Card)
-    func pull() -> Card
+    func addCard(_ card: CardProtocol)
+    func removeCard(_ identifier: CardProtocol)
+    func pull() -> CardProtocol
 }

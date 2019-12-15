@@ -8,7 +8,13 @@
 
 struct Beer: GameActionProtocol {
     
+    let playerIdentifier: String
+    let cardIdentifier: String
+    
     func execute() -> [GameUpdateProtocol] {
-        return []
+        return [
+            Discard(playerIdentifier: playerIdentifier, cardIdentifier: cardIdentifier),
+            GainLifePoints(playerIdentifier: playerIdentifier, points: 1)
+        ]
     }
 }

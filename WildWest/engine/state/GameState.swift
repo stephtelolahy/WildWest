@@ -12,7 +12,9 @@ protocol GameStateProtocol {
     var discard: CardListProtocol { get }
     var outcome: GameOutcome? { get }
     var messages: [String] { get }
+    var turn: Int { get } // current player index
     
+    func endTurn()
     func addMessage(_ message: String)
 }
 

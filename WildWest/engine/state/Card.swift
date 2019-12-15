@@ -6,7 +6,7 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-protocol Card {
+protocol CardProtocol {
     var identifier: String { get }
     var name: CardName { get }
     var type: CardType { get }

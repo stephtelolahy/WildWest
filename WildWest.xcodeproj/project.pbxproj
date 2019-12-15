@@ -13,7 +13,6 @@
 		AD186BE223A462BD00ABF3E7 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D314239EE40E00653905 /* Card.swift */; };
 		AD186BE323A462C100ABF3E7 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540A423A44A4100568FE9 /* GameEngine.swift */; };
 		AD186BE423A462C100ABF3E7 /* GameAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540A823A44F5600568FE9 /* GameAction.swift */; };
-		AD186BE623A462C100ABF3E7 /* GameRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540AC23A45B5C00568FE9 /* GameRules.swift */; };
 		AD186BEB23A4630900ABF3E7 /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD186BEA23A4630900ABF3E7 /* GameEngineTests.swift */; };
 		AD5F8C3823A538C900C286AA /* CardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5F8C3723A538C900C286AA /* CardList.swift */; };
 		AD5F8C3923A538C900C286AA /* CardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5F8C3723A538C900C286AA /* CardList.swift */; };
@@ -21,7 +20,6 @@
 		AD5F8C3D23A5478000C286AA /* GainLifePointsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5F8C3C23A5478000C286AA /* GainLifePointsTests.swift */; };
 		AD8540A523A44A4100568FE9 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540A423A44A4100568FE9 /* GameEngine.swift */; };
 		AD8540A923A44F5600568FE9 /* GameAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540A823A44F5600568FE9 /* GameAction.swift */; };
-		AD8540AD23A45B5C00568FE9 /* GameRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540AC23A45B5C00568FE9 /* GameRules.swift */; };
 		ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D2EB239EE03800653905 /* AppDelegate.swift */; };
 		ADB7D2F0239EE03800653905 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D2EF239EE03800653905 /* ViewController.swift */; };
 		ADB7D2F3239EE03800653905 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F1239EE03800653905 /* Main.storyboard */; };
@@ -67,7 +65,6 @@
 		AD5F8C3C23A5478000C286AA /* GainLifePointsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainLifePointsTests.swift; sourceTree = "<group>"; };
 		AD8540A423A44A4100568FE9 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		AD8540A823A44F5600568FE9 /* GameAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAction.swift; sourceTree = "<group>"; };
-		AD8540AC23A45B5C00568FE9 /* GameRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRules.swift; sourceTree = "<group>"; };
 		ADB7D2E8239EE03800653905 /* WildWest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WildWest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB7D2EB239EE03800653905 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADB7D2EF239EE03800653905 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -142,7 +139,6 @@
 			isa = PBXGroup;
 			children = (
 				AD8540A423A44A4100568FE9 /* GameEngine.swift */,
-				AD8540AC23A45B5C00568FE9 /* GameRules.swift */,
 				AD5F8C3623A536AE00C286AA /* state */,
 				ADD5643323A4E06100C1BD01 /* action */,
 				ADD5643723A4E26000C1BD01 /* update */,
@@ -370,7 +366,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/engine/GameEngine.swift\" \\\n\"${INPUT_DIR}/engine/GameRules.swift\" \\\n\"${INPUT_DIR}/engine/state/GameState.swift\" \\\n\"${INPUT_DIR}/engine/state/Player.swift\" \\\n\"${INPUT_DIR}/engine/state/CardList.swift\" \\\n\"${INPUT_DIR}/engine/state/Card.swift\" \\\n\"${INPUT_DIR}/engine/action/GameAction.swift\" \\\n\"${INPUT_DIR}/engine/update/GameUpdate.swift\"\n";
+			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/engine/GameEngine.swift\" \\\n\"${INPUT_DIR}/engine/state/GameState.swift\" \\\n\"${INPUT_DIR}/engine/state/Player.swift\" \\\n\"${INPUT_DIR}/engine/state/CardList.swift\" \\\n\"${INPUT_DIR}/engine/state/Card.swift\" \\\n\"${INPUT_DIR}/engine/action/GameAction.swift\" \\\n\"${INPUT_DIR}/engine/update/GameUpdate.swift\"\n";
 		};
 		AD8540A223A4291100568FE9 /* Run Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -427,7 +423,6 @@
 				AD5F8C3823A538C900C286AA /* CardList.swift in Sources */,
 				ADD5643523A4E09C00C1BD01 /* Beer.swift in Sources */,
 				AD8540A923A44F5600568FE9 /* GameAction.swift in Sources */,
-				AD8540AD23A45B5C00568FE9 /* GameRules.swift in Sources */,
 				ADD5643F23A4E2CA00C1BD01 /* Discard.swift in Sources */,
 				ADD5644223A4E38100C1BD01 /* GainLifePoints.swift in Sources */,
 				ADD5643123A4DD0000C1BD01 /* GameState.swift in Sources */,
@@ -447,7 +442,6 @@
 				AD186BE423A462C100ABF3E7 /* GameAction.swift in Sources */,
 				ADD5644623A4E45600C1BD01 /* DiscardTests.swift in Sources */,
 				ADD5643623A4E09C00C1BD01 /* Beer.swift in Sources */,
-				AD186BE623A462C100ABF3E7 /* GameRules.swift in Sources */,
 				ADD5643223A4DD0000C1BD01 /* GameState.swift in Sources */,
 				ADD5644023A4E2CA00C1BD01 /* Discard.swift in Sources */,
 				ADD5644323A4E38100C1BD01 /* GainLifePoints.swift in Sources */,

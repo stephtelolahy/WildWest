@@ -7,26 +7,33 @@
 //
 
 protocol GameEngineProtocol {
-    func run()
+    func run(state: GameStateProtocol)
+    func possibleActions(_ game: GameStateProtocol) -> [GameActionProtocol]
 }
 
 class GameEngine: GameEngineProtocol {
     
-    private var state: GameStateProtocol
-    private let rules: GameRulesProtocol
-    
-    init(state: GameStateProtocol, rules: GameRulesProtocol) {
-        self.state = state
-        self.rules = rules
-    }
-    
-    func run() {
+    func run(state: GameStateProtocol) {
         while state.outcome == nil {
-            let actions = rules.possibleActions(state)
+            let actions = possibleActions(state)
             let action = actions[0]
             let updates = action.execute()
             updates.forEach { $0.apply(to: state) }
             print(state)
         }
+    }
+    
+    func possibleActions(_ game: GameStateProtocol) -> [GameActionProtocol] {
+        let player = game.players[game.turn]
+        var actions: [GameActionProtocol] = []
+        for card in player.hand.cards {
+            switch card.name {
+            case .beer:
+                actions.append(Beer(playerIdentifier: player.identifier, cardIdentifier: card.identifier))
+            default:
+                break
+            }
+        }
+        return actions
     }
 }
