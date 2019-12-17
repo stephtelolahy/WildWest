@@ -15,14 +15,13 @@ class GainLifePointsTests: XCTestCase {
         // Given
         let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
         let mockPlayer = MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub())
-        Cuckoo.stub(mockState) { mock in when(mock.players.get).thenReturn([mockPlayer]) }
         Cuckoo.stub(mockPlayer) { mock in
             when(mock.identifier.get).thenReturn("p1")
             when(mock.health.get).thenReturn(3)
         }
         
         // When
-        let update = GainLifePoints(playerIdentifier: "p1", points: 1)
+        let update = GainLifePoints(player: mockPlayer, points: 1)
         update.apply(to: mockState)
         
         // Assert
@@ -34,14 +33,13 @@ class GainLifePointsTests: XCTestCase {
         // Given
         let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
         let mockPlayer = MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub())
-        Cuckoo.stub(mockState) { mock in when(mock.players.get).thenReturn([mockPlayer]) }
         Cuckoo.stub(mockPlayer) { mock in
             when(mock.identifier.get).thenReturn("p1")
             when(mock.health.get).thenReturn(1)
         }
         
         // When
-        let update = GainLifePoints(playerIdentifier: "p1", points: 2)
+        let update = GainLifePoints(player: mockPlayer, points: 2)
         update.apply(to: mockState)
         
         // Assert

@@ -6,19 +6,14 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct Discard: GameUpdateProtocol {
+struct Discard: StateUpdateProtocol {
     
-    let playerIdentifier: String
-    let cardIdentifier: String
+    let player: PlayerProtocol
+    let card: CardProtocol
     
-    func apply(to game: GameStateProtocol) {
-        guard let player = game.players.first(where: { $0.identifier == playerIdentifier }),
-            let card = player.hand.cards.first(where: { $0.identifier == cardIdentifier }) else {
-                return
-        }
-        
-        player.hand.removeCard(card)
-        game.deck.addCard(card)
-        game.addMessage("\(playerIdentifier) discard \(cardIdentifier)")
+    func apply(to state: GameStateProtocol) {
+        player.hand.remove(card)
+        state.deck.add(card)
+        state.addMessage("\(player.identifier) discard \(card.identifier)")
     }
 }

@@ -6,17 +6,13 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct GainLifePoints: GameUpdateProtocol {
+struct GainLifePoints: StateUpdateProtocol {
     
-    let playerIdentifier: String
+    let player: PlayerProtocol
     let points: Int
     
-    func apply(to game: GameStateProtocol) {
-        guard let player = game.players.first(where: { $0.identifier == playerIdentifier }) else {
-            return
-        }
-        
+    func apply(to state: GameStateProtocol) {
         player.setHealth(player.health + points)
-        game.addMessage("\(playerIdentifier) gain \(points) life points")
+        state.addMessage("\(player.identifier) gain \(points) life points")
     }
 }

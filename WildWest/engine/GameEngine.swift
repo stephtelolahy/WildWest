@@ -6,34 +6,17 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-protocol GameEngineProtocol {
-    func run(state: GameStateProtocol)
-    func possibleActions(_ game: GameStateProtocol) -> [GameActionProtocol]
-}
-
-class GameEngine: GameEngineProtocol {
+class GameEngine {
     
     func run(state: GameStateProtocol) {
+        let rules = [Beer.self]
         while state.outcome == nil {
-            let actions = possibleActions(state)
-            let action = actions[0]
-            let updates = action.execute()
+            let playerId = state.players[state.turn].identifier
+            let posssibleActions = rules.map { $0.match(playerId: playerId, state: state) }.flatMap { $0 }
+            let action = posssibleActions[0]
+            let updates = action.execute(state: state)
             updates.forEach { $0.apply(to: state) }
             print(state)
         }
-    }
-    
-    func possibleActions(_ game: GameStateProtocol) -> [GameActionProtocol] {
-        let player = game.players[game.turn]
-        var actions: [GameActionProtocol] = []
-        for card in player.hand.cards {
-            switch card.name {
-            case .beer:
-                actions.append(Beer(playerIdentifier: player.identifier, cardIdentifier: card.identifier))
-            default:
-                break
-            }
-        }
-        return actions
     }
 }

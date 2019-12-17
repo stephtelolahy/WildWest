@@ -30,12 +30,12 @@ class DiscardTests: XCTestCase {
         Cuckoo.stub(mockCard) { mock in when(mock.identifier.get).thenReturn("c1") }
         
         // When
-        let update = Discard(playerIdentifier: "p1", cardIdentifier: "c1")
+        let update = Discard(player: mockPlayer, card: mockCard)
         update.apply(to: mockState)
         
         // Assert
-        verify(mockHand).removeCard(identified(by: "c1"))
-        verify(mockDeck).addCard(identified(by: "c1"))
+        verify(mockHand).remove(identified(by: "c1"))
+        verify(mockDeck).add(identified(by: "c1"))
         verify(mockState).addMessage("p1 discard c1")
     }
     

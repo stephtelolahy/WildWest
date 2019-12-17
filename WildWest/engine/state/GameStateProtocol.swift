@@ -1,8 +1,8 @@
 //
-//  GameState.swift
+//  GameStateProtocol.swift
 //  WildWest
 //
-//  Created by Hugues Stéphano TELOLAHY on 12/14/19.
+//  Created by Hugues Stéphano TELOLAHY on 12/17/19.
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
@@ -14,7 +14,6 @@ protocol GameStateProtocol {
     var messages: [String] { get }
     var turn: Int { get } // current player index
     
-    func endTurn()
     func addMessage(_ message: String)
 }
 
