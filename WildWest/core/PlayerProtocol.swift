@@ -15,17 +15,17 @@ protocol PlayerProtocol {
     var hand: CardListProtocol { get }
     var inPlay: CardListProtocol { get }
     
-    func setHealth(_ health: Int)
+    func gainLifePoint()
 }
 
-enum Role {
+enum Role: String {
     case sheriff,
     outlaw,
     renegade,
     deputy
 }
 
-enum Ability {
+enum Ability: String {
     case bartCassidy,
     blackJack,
     calamityJanet,

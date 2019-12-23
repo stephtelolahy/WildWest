@@ -14,7 +14,7 @@ protocol CardProtocol {
     var value: String { get }
 }
 
-enum CardName {
+enum CardName: String {
     case colt45,
     volcanic,
     schofield,
@@ -40,13 +40,13 @@ enum CardName {
     generalStore
 }
 
-enum CardType {
+enum CardType: String {
     case gun,
     item,
     play
 }
 
-enum CardSuit {
+enum CardSuit: String {
     case spades,
     hearts,
     diamonds,

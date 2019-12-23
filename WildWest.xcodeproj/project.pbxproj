@@ -9,17 +9,21 @@
 /* Begin PBXBuildFile section */
 		8DBD562D47470962F400716D /* libPods-WildWestTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 102E20EA2AD38505FB9CFBD5 /* libPods-WildWestTests.a */; };
 		AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */; };
-		AD186BE323A462C100ABF3E7 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540A423A44A4100568FE9 /* GameEngine.swift */; };
+		AD52B99323B175110013240B /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD52B99223B175110013240B /* Card.swift */; };
+		AD52B99423B175110013240B /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD52B99223B175110013240B /* Card.swift */; };
+		AD52B99623B1771E0013240B /* CardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD52B99523B1771E0013240B /* CardList.swift */; };
+		AD52B99723B1771E0013240B /* CardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD52B99523B1771E0013240B /* CardList.swift */; };
+		AD52B99923B178CC0013240B /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD52B99823B178CC0013240B /* Player.swift */; };
+		AD52B99A23B178CC0013240B /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD52B99823B178CC0013240B /* Player.swift */; };
+		AD52B99C23B17A310013240B /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD52B99B23B17A310013240B /* GameState.swift */; };
+		AD52B99D23B17A310013240B /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD52B99B23B17A310013240B /* GameState.swift */; };
 		AD5F8C3B23A545C700C286AA /* CuckooExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5F8C3A23A545C700C286AA /* CuckooExtension.swift */; };
-		AD5F8C3D23A5478000C286AA /* GainLifePointsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5F8C3C23A5478000C286AA /* GainLifePointsTests.swift */; };
-		AD8540A523A44A4100568FE9 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8540A423A44A4100568FE9 /* GameEngine.swift */; };
 		ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D2EB239EE03800653905 /* AppDelegate.swift */; };
 		ADB7D2F0239EE03800653905 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D2EF239EE03800653905 /* ViewController.swift */; };
 		ADB7D2F3239EE03800653905 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F1239EE03800653905 /* Main.storyboard */; };
 		ADB7D2F5239EE03900653905 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F4239EE03900653905 /* Assets.xcassets */; };
 		ADB7D2F8239EE03900653905 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F6239EE03900653905 /* LaunchScreen.storyboard */; };
-		ADD035C623A95EAB003B2576 /* StateUpdateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD035C523A95EAB003B2576 /* StateUpdateProtocol.swift */; };
-		ADD035C723A95EAB003B2576 /* StateUpdateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD035C523A95EAB003B2576 /* StateUpdateProtocol.swift */; };
+		ADC2B47123B183DF00A03B13 /* GameLoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC2B47023B183DF00A03B13 /* GameLoop.swift */; };
 		ADD035C923A95EEB003B2576 /* ActionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD035C823A95EEB003B2576 /* ActionProtocol.swift */; };
 		ADD035CA23A95EEB003B2576 /* ActionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD035C823A95EEB003B2576 /* ActionProtocol.swift */; };
 		ADD035CC23A95F37003B2576 /* RuleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD035CB23A95F37003B2576 /* RuleProtocol.swift */; };
@@ -34,11 +38,6 @@
 		ADD035D923A9604F003B2576 /* GameStateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD035D723A9604F003B2576 /* GameStateProtocol.swift */; };
 		ADD5643523A4E09C00C1BD01 /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5643423A4E09C00C1BD01 /* Beer.swift */; };
 		ADD5643623A4E09C00C1BD01 /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5643423A4E09C00C1BD01 /* Beer.swift */; };
-		ADD5643F23A4E2CA00C1BD01 /* Discard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5643E23A4E2CA00C1BD01 /* Discard.swift */; };
-		ADD5644023A4E2CA00C1BD01 /* Discard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5643E23A4E2CA00C1BD01 /* Discard.swift */; };
-		ADD5644223A4E38100C1BD01 /* GainLifePoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5644123A4E38100C1BD01 /* GainLifePoints.swift */; };
-		ADD5644323A4E38100C1BD01 /* GainLifePoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5644123A4E38100C1BD01 /* GainLifePoints.swift */; };
-		ADD5644623A4E45600C1BD01 /* DiscardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5644523A4E45600C1BD01 /* DiscardTests.swift */; };
 		D42ED72C28166C49D2A60FC9 /* Pods_WildWest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C300D3666EB3B530B73C9D4 /* Pods_WildWest.framework */; };
 /* End PBXBuildFile section */
 
@@ -60,9 +59,11 @@
 		873275DE3D79FFF36F6D066E /* Pods-WildWest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.release.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.release.xcconfig"; sourceTree = "<group>"; };
 		8C300D3666EB3B530B73C9D4 /* Pods_WildWest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
+		AD52B99223B175110013240B /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		AD52B99523B1771E0013240B /* CardList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardList.swift; sourceTree = "<group>"; };
+		AD52B99823B178CC0013240B /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		AD52B99B23B17A310013240B /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		AD5F8C3A23A545C700C286AA /* CuckooExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuckooExtension.swift; sourceTree = "<group>"; };
-		AD5F8C3C23A5478000C286AA /* GainLifePointsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainLifePointsTests.swift; sourceTree = "<group>"; };
-		AD8540A423A44A4100568FE9 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		ADB7D2E8239EE03800653905 /* WildWest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WildWest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB7D2EB239EE03800653905 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADB7D2EF239EE03800653905 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -72,7 +73,7 @@
 		ADB7D2F9239EE03900653905 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADB7D2FE239EE03900653905 /* WildWestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WildWestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB7D304239EE03900653905 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ADD035C523A95EAB003B2576 /* StateUpdateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateUpdateProtocol.swift; sourceTree = "<group>"; };
+		ADC2B47023B183DF00A03B13 /* GameLoop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLoop.swift; sourceTree = "<group>"; };
 		ADD035C823A95EEB003B2576 /* ActionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionProtocol.swift; sourceTree = "<group>"; };
 		ADD035CB23A95F37003B2576 /* RuleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleProtocol.swift; sourceTree = "<group>"; };
 		ADD035CE23A96002003B2576 /* CardProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardProtocol.swift; sourceTree = "<group>"; };
@@ -80,9 +81,6 @@
 		ADD035D423A96034003B2576 /* PlayerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerProtocol.swift; sourceTree = "<group>"; };
 		ADD035D723A9604F003B2576 /* GameStateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateProtocol.swift; sourceTree = "<group>"; };
 		ADD5643423A4E09C00C1BD01 /* Beer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beer.swift; sourceTree = "<group>"; };
-		ADD5643E23A4E2CA00C1BD01 /* Discard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discard.swift; sourceTree = "<group>"; };
-		ADD5644123A4E38100C1BD01 /* GainLifePoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GainLifePoints.swift; sourceTree = "<group>"; };
-		ADD5644523A4E45600C1BD01 /* DiscardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,34 +114,38 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		AD186BE923A462EB00ABF3E7 /* engine */ = {
+		AD52B99123B174F40013240B /* implementation */ = {
 			isa = PBXGroup;
 			children = (
-				ADD5644423A4E44500C1BD01 /* update */,
+				ADC2B47023B183DF00A03B13 /* GameLoop.swift */,
+				AD52B99B23B17A310013240B /* GameState.swift */,
+				AD52B99823B178CC0013240B /* Player.swift */,
+				AD52B99523B1771E0013240B /* CardList.swift */,
+				AD52B99223B175110013240B /* Card.swift */,
+				AD52B99E23B17C8B0013240B /* cards */,
 			);
-			path = engine;
+			path = implementation;
 			sourceTree = "<group>";
 		};
-		AD5F8C3623A536AE00C286AA /* state */ = {
+		AD52B99E23B17C8B0013240B /* cards */ = {
+			isa = PBXGroup;
+			children = (
+				ADD5643423A4E09C00C1BD01 /* Beer.swift */,
+			);
+			path = cards;
+			sourceTree = "<group>";
+		};
+		AD8540A323A44A3200568FE9 /* core */ = {
 			isa = PBXGroup;
 			children = (
 				ADD035D723A9604F003B2576 /* GameStateProtocol.swift */,
+				ADD035D423A96034003B2576 /* PlayerProtocol.swift */,
 				ADD035D123A9601B003B2576 /* CardListProtocol.swift */,
 				ADD035CE23A96002003B2576 /* CardProtocol.swift */,
-				ADD035D423A96034003B2576 /* PlayerProtocol.swift */,
+				ADD035C823A95EEB003B2576 /* ActionProtocol.swift */,
+				ADD035CB23A95F37003B2576 /* RuleProtocol.swift */,
 			);
-			path = state;
-			sourceTree = "<group>";
-		};
-		AD8540A323A44A3200568FE9 /* engine */ = {
-			isa = PBXGroup;
-			children = (
-				AD8540A423A44A4100568FE9 /* GameEngine.swift */,
-				AD5F8C3623A536AE00C286AA /* state */,
-				ADD5643323A4E06100C1BD01 /* action */,
-				ADD5643723A4E26000C1BD01 /* update */,
-			);
-			path = engine;
+			path = core;
 			sourceTree = "<group>";
 		};
 		ADB7D2DF239EE03800653905 = {
@@ -169,7 +171,8 @@
 		ADB7D2EA239EE03800653905 /* WildWest */ = {
 			isa = PBXGroup;
 			children = (
-				AD8540A323A44A3200568FE9 /* engine */,
+				AD8540A323A44A3200568FE9 /* core */,
+				AD52B99123B174F40013240B /* implementation */,
 				ADB7D2EB239EE03800653905 /* AppDelegate.swift */,
 				ADB7D2EF239EE03800653905 /* ViewController.swift */,
 				ADB7D2F1239EE03800653905 /* Main.storyboard */,
@@ -184,40 +187,10 @@
 			isa = PBXGroup;
 			children = (
 				AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */,
-				AD186BE923A462EB00ABF3E7 /* engine */,
 				ADB7D304239EE03900653905 /* Info.plist */,
 				AD5F8C3A23A545C700C286AA /* CuckooExtension.swift */,
 			);
 			path = WildWestTests;
-			sourceTree = "<group>";
-		};
-		ADD5643323A4E06100C1BD01 /* action */ = {
-			isa = PBXGroup;
-			children = (
-				ADD035C823A95EEB003B2576 /* ActionProtocol.swift */,
-				ADD035CB23A95F37003B2576 /* RuleProtocol.swift */,
-				ADD5643423A4E09C00C1BD01 /* Beer.swift */,
-			);
-			path = action;
-			sourceTree = "<group>";
-		};
-		ADD5643723A4E26000C1BD01 /* update */ = {
-			isa = PBXGroup;
-			children = (
-				ADD035C523A95EAB003B2576 /* StateUpdateProtocol.swift */,
-				ADD5643E23A4E2CA00C1BD01 /* Discard.swift */,
-				ADD5644123A4E38100C1BD01 /* GainLifePoints.swift */,
-			);
-			path = update;
-			sourceTree = "<group>";
-		};
-		ADD5644423A4E44500C1BD01 /* update */ = {
-			isa = PBXGroup;
-			children = (
-				ADD5644523A4E45600C1BD01 /* DiscardTests.swift */,
-				AD5F8C3C23A5478000C286AA /* GainLifePointsTests.swift */,
-			);
-			path = update;
 			sourceTree = "<group>";
 		};
 		C261B90D4E9953E24737D8E2 /* Frameworks */ = {
@@ -367,7 +340,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/engine/state/GameStateProtocol.swift\" \\\n\"${INPUT_DIR}/engine/state/PlayerProtocol.swift\" \\\n\"${INPUT_DIR}/engine/state/CardListProtocol.swift\" \\\n\"${INPUT_DIR}/engine/state/CardProtocol.swift\" \\\n\"${INPUT_DIR}/engine/action/ActionProtocol.swift\" \\\n\"${INPUT_DIR}/engine/update/StateUpdateProtocol.swift\"\n";
+			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/core/GameStateProtocol.swift\" \\\n\"${INPUT_DIR}/core/PlayerProtocol.swift\" \\\n\"${INPUT_DIR}/core/CardListProtocol.swift\" \\\n\"${INPUT_DIR}/core/CardProtocol.swift\" \\\n\"${INPUT_DIR}/core/ActionProtocol.swift\"\n";
 		};
 		AD8540A223A4291100568FE9 /* Run Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -418,15 +391,16 @@
 			files = (
 				ADD035D523A96034003B2576 /* PlayerProtocol.swift in Sources */,
 				ADB7D2F0239EE03800653905 /* ViewController.swift in Sources */,
-				AD8540A523A44A4100568FE9 /* GameEngine.swift in Sources */,
+				ADC2B47123B183DF00A03B13 /* GameLoop.swift in Sources */,
 				ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */,
+				AD52B99923B178CC0013240B /* Player.swift in Sources */,
 				ADD5643523A4E09C00C1BD01 /* Beer.swift in Sources */,
 				ADD035D823A9604F003B2576 /* GameStateProtocol.swift in Sources */,
-				ADD5643F23A4E2CA00C1BD01 /* Discard.swift in Sources */,
+				AD52B99C23B17A310013240B /* GameState.swift in Sources */,
+				AD52B99623B1771E0013240B /* CardList.swift in Sources */,
 				ADD035C923A95EEB003B2576 /* ActionProtocol.swift in Sources */,
 				ADD035D223A9601B003B2576 /* CardListProtocol.swift in Sources */,
-				ADD5644223A4E38100C1BD01 /* GainLifePoints.swift in Sources */,
-				ADD035C623A95EAB003B2576 /* StateUpdateProtocol.swift in Sources */,
+				AD52B99323B175110013240B /* Card.swift in Sources */,
 				ADD035CC23A95F37003B2576 /* RuleProtocol.swift in Sources */,
 				ADD035CF23A96002003B2576 /* CardProtocol.swift in Sources */,
 			);
@@ -436,14 +410,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD186BE323A462C100ABF3E7 /* GameEngine.swift in Sources */,
-				AD5F8C3D23A5478000C286AA /* GainLifePointsTests.swift in Sources */,
-				ADD5644623A4E45600C1BD01 /* DiscardTests.swift in Sources */,
+				AD52B99723B1771E0013240B /* CardList.swift in Sources */,
 				ADD5643623A4E09C00C1BD01 /* Beer.swift in Sources */,
 				ADD035CD23A95F37003B2576 /* RuleProtocol.swift in Sources */,
-				ADD5644023A4E2CA00C1BD01 /* Discard.swift in Sources */,
-				ADD035C723A95EAB003B2576 /* StateUpdateProtocol.swift in Sources */,
-				ADD5644323A4E38100C1BD01 /* GainLifePoints.swift in Sources */,
+				AD52B99D23B17A310013240B /* GameState.swift in Sources */,
 				ADD035D923A9604F003B2576 /* GameStateProtocol.swift in Sources */,
 				AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */,
 				AD5F8C3B23A545C700C286AA /* CuckooExtension.swift in Sources */,
@@ -451,6 +421,8 @@
 				ADD035CA23A95EEB003B2576 /* ActionProtocol.swift in Sources */,
 				ADD035D323A9601B003B2576 /* CardListProtocol.swift in Sources */,
 				ADD035D023A96002003B2576 /* CardProtocol.swift in Sources */,
+				AD52B99A23B178CC0013240B /* Player.swift in Sources */,
+				AD52B99423B175110013240B /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

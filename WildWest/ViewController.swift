@@ -12,5 +12,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let state = GameState(players: [],
+                              deck: CardList(cards: []),
+                              discard: CardList(cards: []))
+        GameLoop().run(state: state)
     }
 }

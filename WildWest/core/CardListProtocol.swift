@@ -10,6 +10,6 @@ protocol CardListProtocol {
     var cards: [CardProtocol] { get }
     
     func add(_ card: CardProtocol)
-    func remove(_ identifier: CardProtocol)
     func pull() -> CardProtocol
+    func remove(_ card: CardProtocol)
 }
