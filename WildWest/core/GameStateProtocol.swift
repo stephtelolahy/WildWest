@@ -18,7 +18,9 @@ protocol GameStateProtocol {
     func discard(playerId: String, cardId: String)
     func gainLifePoint(playerId: String)
     func pull(playerId: String)
-    func matchingCards(playerId: String, cardName: CardName) -> [CardProtocol]
+    func equip(playerId: String, cardId: String)
+    
+    func matchingCards(playerId: String, names: [CardName]) -> [CardProtocol]
 }
 
 enum GameOutcome {

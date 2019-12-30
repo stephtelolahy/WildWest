@@ -43,7 +43,7 @@ class GameState: GameStateProtocol {
         guard let player = players.first(where: { $0.identifier == playerId }) else {
             return
         }
-        
+        // TODO: handle deck empty
         let card = deck.pull()
         player.hand.add(card)
         addMessage("\(player.identifier) pull \(card.identifier) from deck")
@@ -57,11 +57,22 @@ class GameState: GameStateProtocol {
         addMessage("\(player.identifier) gain life point")
     }
     
-    func matchingCards(playerId: String, cardName: CardName) -> [CardProtocol] {
+    func equip(playerId: String, cardId: String) {
+        guard let player = players.first(where: { $0.identifier == playerId }),
+            let card = player.hand.cards.first(where: { $0.identifier == cardId }) else {
+                return
+        }
+        
+        player.hand.remove(card)
+        player.inPlay.add(card)
+        addMessage("\(player.identifier) equip with \(card.identifier)")
+    }
+    
+    func matchingCards(playerId: String, names: [CardName]) -> [CardProtocol] {
         guard let player = players.first(where: { $0.identifier == playerId }) else {
             return []
         }
         
-        return player.hand.cards.filter({ $0.name == cardName })
+        return player.hand.cards.filter({ names.contains($0.name) })
     }
 }

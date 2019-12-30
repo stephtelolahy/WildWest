@@ -31,7 +31,7 @@ extension Beer: RuleProtocol {
     
     static func match(state: GameStateProtocol) -> [ActionProtocol] {
         let playerId = state.players[state.turn].identifier
-        let cards = state.matchingCards(playerId: playerId, cardName: .beer)
+        let cards = state.matchingCards(playerId: playerId, names: [.beer])
         
         // TODO: You cannot gain more life points than your starting amount!
         // TODO: Beer has no effect if there are only 2 players left in the game

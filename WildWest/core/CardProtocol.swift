@@ -9,7 +9,6 @@
 protocol CardProtocol {
     var identifier: String { get }
     var name: CardName { get }
-    var type: CardType { get }
     var suit: CardSuit { get }
     var value: String { get }
 }
@@ -38,12 +37,6 @@ enum CardName: String, Decodable {
     stagecoach,
     wellsFargo,
     generalStore
-}
-
-enum CardType: String {
-    case gun,
-    item,
-    play
 }
 
 enum CardSuit: String, Decodable {

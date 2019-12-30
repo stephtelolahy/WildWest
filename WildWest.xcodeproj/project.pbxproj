@@ -25,6 +25,8 @@
 		AD52B99C23B17A310013240B /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD52B99B23B17A310013240B /* GameState.swift */; };
 		AD52B99D23B17A310013240B /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD52B99B23B17A310013240B /* GameState.swift */; };
 		AD5F8C3B23A545C700C286AA /* CuckooExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5F8C3A23A545C700C286AA /* CuckooExtension.swift */; };
+		ADB5A0F523BAB29C0050E173 /* Equip.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A0F423BAB29C0050E173 /* Equip.swift */; };
+		ADB5A0F623BAB29C0050E173 /* Equip.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A0F423BAB29C0050E173 /* Equip.swift */; };
 		ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D2EB239EE03800653905 /* AppDelegate.swift */; };
 		ADB7D2F0239EE03800653905 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D2EF239EE03800653905 /* ViewController.swift */; };
 		ADB7D2F3239EE03800653905 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F1239EE03800653905 /* Main.storyboard */; };
@@ -86,6 +88,7 @@
 		AD52B99823B178CC0013240B /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		AD52B99B23B17A310013240B /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		AD5F8C3A23A545C700C286AA /* CuckooExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuckooExtension.swift; sourceTree = "<group>"; };
+		ADB5A0F423BAB29C0050E173 /* Equip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equip.swift; sourceTree = "<group>"; };
 		ADB7D2E8239EE03800653905 /* WildWest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WildWest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB7D2EB239EE03800653905 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADB7D2EF239EE03800653905 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -163,6 +166,7 @@
 				ADE91AC523B9F84200F7316B /* Saloon.swift */,
 				AD49F86B23BA0C4600543F59 /* Stagecoach.swift */,
 				AD49F86E23BA0E3E00543F59 /* WellsFargo.swift */,
+				ADB5A0F423BAB29C0050E173 /* Equip.swift */,
 			);
 			path = actions;
 			sourceTree = "<group>";
@@ -448,6 +452,7 @@
 				ADE91AD423BA00DC00F7316B /* GameSetup.swift in Sources */,
 				ADD035D523A96034003B2576 /* PlayerProtocol.swift in Sources */,
 				AD49F86723BA054400543F59 /* Figure.swift in Sources */,
+				ADB5A0F523BAB29C0050E173 /* Equip.swift in Sources */,
 				ADB7D2F0239EE03800653905 /* ViewController.swift in Sources */,
 				ADC2B47123B183DF00A03B13 /* GameLoop.swift in Sources */,
 				AD49F86F23BA0E3E00543F59 /* WellsFargo.swift in Sources */,
@@ -476,6 +481,7 @@
 				ADD5643623A4E09C00C1BD01 /* Beer.swift in Sources */,
 				ADD035CD23A95F37003B2576 /* RuleProtocol.swift in Sources */,
 				AD49F86823BA054D00543F59 /* Figure.swift in Sources */,
+				ADB5A0F623BAB29C0050E173 /* Equip.swift in Sources */,
 				AD52B99D23B17A310013240B /* GameState.swift in Sources */,
 				ADD035D923A9604F003B2576 /* GameStateProtocol.swift in Sources */,
 				AD49F87023BA0E3E00543F59 /* WellsFargo.swift in Sources */,

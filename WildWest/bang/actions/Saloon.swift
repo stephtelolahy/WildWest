@@ -31,7 +31,7 @@ extension Saloon: RuleProtocol {
     static func match(state: GameStateProtocol) -> [ActionProtocol] {
         let playerId = state.players[state.turn].identifier
         let otherPlayerIds = state.players.filter({ $0.identifier != playerId }).map { $0.identifier }
-        let cards = state.matchingCards(playerId: playerId, cardName: .saloon)
+        let cards = state.matchingCards(playerId: playerId, names: [.saloon])
         return cards.map { Saloon(actorId: playerId, cardId: $0.identifier, otherPlayerIds: otherPlayerIds) }
     }
 }

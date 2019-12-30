@@ -24,7 +24,7 @@ extension Stagecoach: RuleProtocol {
     
     static func match(state: GameStateProtocol) -> [ActionProtocol] {
         let playerId = state.players[state.turn].identifier
-        let cards = state.matchingCards(playerId: playerId, cardName: .stagecoach)
+        let cards = state.matchingCards(playerId: playerId, names: [.stagecoach])
         return cards.map { Stagecoach(actorId: playerId, cardId: $0.identifier) }
     }
 }

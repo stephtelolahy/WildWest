@@ -25,7 +25,7 @@ extension WellsFargo: RuleProtocol {
     
     static func match(state: GameStateProtocol) -> [ActionProtocol] {
         let playerId = state.players[state.turn].identifier
-        let cards = state.matchingCards(playerId: playerId, cardName: .wellsFargo)
+        let cards = state.matchingCards(playerId: playerId, names: [.wellsFargo])
         return cards.map { Stagecoach(actorId: playerId, cardId: $0.identifier) }
     }
 }

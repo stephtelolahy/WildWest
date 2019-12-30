@@ -16,7 +16,8 @@ class GameLoop: GameLoopProtocol {
         let rules: [RuleProtocol.Type] = [Beer.self,
                                           Saloon.self,
                                           Stagecoach.self,
-                                          WellsFargo.self]
+                                          WellsFargo.self,
+                                          Equip.self]
         while state.outcome == nil {
             let posssibleActions = rules.map { $0.match(state: state) }.flatMap { $0 }
             let action = posssibleActions[0]
