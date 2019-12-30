@@ -17,7 +17,17 @@ class GameLoop: GameLoopProtocol {
                                           Saloon.self,
                                           Stagecoach.self,
                                           WellsFargo.self,
-                                          Equip.self]
+                                          Equip.self,
+                                          Jail.self,
+                                          Shoot.self,
+                                          Missed.self,
+                                          Gatling.self,
+                                          Duel.self,
+                                          Indians.self,
+                                          Panic.self,
+                                          CatBalou.self,
+                                          GeneralStore.self,
+                                          EndTurn.self]
         while state.outcome == nil {
             let posssibleActions = rules.map { $0.match(state: state) }.flatMap { $0 }
             let action = posssibleActions[0]

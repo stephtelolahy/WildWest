@@ -32,7 +32,7 @@ extension Equip: RuleProtocol {
         let playerId = state.players[state.turn].identifier
         let items: [CardName] = [.volcanic, .schofield, .remington, .winchester, .revCarbine, .barrel, .mustang, .scope, .dynamite]
         let cards = state.matchingCards(playerId: playerId, names: items)
-        // TODO: avoid duplicate inPlay cards
+        // TODO: cards in front of you should not share the same name
         return cards.map { Equip(actorId: playerId, cardId: $0.identifier) }
     }
 }

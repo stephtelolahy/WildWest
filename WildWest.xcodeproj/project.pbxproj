@@ -27,6 +27,26 @@
 		AD5F8C3B23A545C700C286AA /* CuckooExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5F8C3A23A545C700C286AA /* CuckooExtension.swift */; };
 		ADB5A0F523BAB29C0050E173 /* Equip.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A0F423BAB29C0050E173 /* Equip.swift */; };
 		ADB5A0F623BAB29C0050E173 /* Equip.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A0F423BAB29C0050E173 /* Equip.swift */; };
+		ADB5A0FB23BAB7DD0050E173 /* Jail.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A0FA23BAB7DD0050E173 /* Jail.swift */; };
+		ADB5A0FC23BAB7DD0050E173 /* Jail.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A0FA23BAB7DD0050E173 /* Jail.swift */; };
+		ADB5A0FE23BAB8070050E173 /* Shoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A0FD23BAB8070050E173 /* Shoot.swift */; };
+		ADB5A0FF23BAB8070050E173 /* Shoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A0FD23BAB8070050E173 /* Shoot.swift */; };
+		ADB5A10123BAB81E0050E173 /* Missed.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10023BAB81E0050E173 /* Missed.swift */; };
+		ADB5A10223BAB81E0050E173 /* Missed.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10023BAB81E0050E173 /* Missed.swift */; };
+		ADB5A10423BAB8370050E173 /* Duel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10323BAB8370050E173 /* Duel.swift */; };
+		ADB5A10523BAB8370050E173 /* Duel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10323BAB8370050E173 /* Duel.swift */; };
+		ADB5A10723BAB84E0050E173 /* Gatling.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10623BAB84E0050E173 /* Gatling.swift */; };
+		ADB5A10823BAB84E0050E173 /* Gatling.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10623BAB84E0050E173 /* Gatling.swift */; };
+		ADB5A10A23BAB8630050E173 /* Indians.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10923BAB8630050E173 /* Indians.swift */; };
+		ADB5A10B23BAB8630050E173 /* Indians.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10923BAB8630050E173 /* Indians.swift */; };
+		ADB5A10D23BAB8780050E173 /* Panic.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10C23BAB8780050E173 /* Panic.swift */; };
+		ADB5A10E23BAB8780050E173 /* Panic.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10C23BAB8780050E173 /* Panic.swift */; };
+		ADB5A11023BAB89C0050E173 /* CatBalou.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10F23BAB89C0050E173 /* CatBalou.swift */; };
+		ADB5A11123BAB89C0050E173 /* CatBalou.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10F23BAB89C0050E173 /* CatBalou.swift */; };
+		ADB5A11323BAB9330050E173 /* GeneralStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A11223BAB9330050E173 /* GeneralStore.swift */; };
+		ADB5A11423BAB9330050E173 /* GeneralStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A11223BAB9330050E173 /* GeneralStore.swift */; };
+		ADB5A11623BABBE80050E173 /* EndTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A11523BABBE80050E173 /* EndTurn.swift */; };
+		ADB5A11723BABBE80050E173 /* EndTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A11523BABBE80050E173 /* EndTurn.swift */; };
 		ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D2EB239EE03800653905 /* AppDelegate.swift */; };
 		ADB7D2F0239EE03800653905 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D2EF239EE03800653905 /* ViewController.swift */; };
 		ADB7D2F3239EE03800653905 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F1239EE03800653905 /* Main.storyboard */; };
@@ -89,6 +109,16 @@
 		AD52B99B23B17A310013240B /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		AD5F8C3A23A545C700C286AA /* CuckooExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuckooExtension.swift; sourceTree = "<group>"; };
 		ADB5A0F423BAB29C0050E173 /* Equip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equip.swift; sourceTree = "<group>"; };
+		ADB5A0FA23BAB7DD0050E173 /* Jail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jail.swift; sourceTree = "<group>"; };
+		ADB5A0FD23BAB8070050E173 /* Shoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shoot.swift; sourceTree = "<group>"; };
+		ADB5A10023BAB81E0050E173 /* Missed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Missed.swift; sourceTree = "<group>"; };
+		ADB5A10323BAB8370050E173 /* Duel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Duel.swift; sourceTree = "<group>"; };
+		ADB5A10623BAB84E0050E173 /* Gatling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gatling.swift; sourceTree = "<group>"; };
+		ADB5A10923BAB8630050E173 /* Indians.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Indians.swift; sourceTree = "<group>"; };
+		ADB5A10C23BAB8780050E173 /* Panic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Panic.swift; sourceTree = "<group>"; };
+		ADB5A10F23BAB89C0050E173 /* CatBalou.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBalou.swift; sourceTree = "<group>"; };
+		ADB5A11223BAB9330050E173 /* GeneralStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralStore.swift; sourceTree = "<group>"; };
+		ADB5A11523BABBE80050E173 /* EndTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTurn.swift; sourceTree = "<group>"; };
 		ADB7D2E8239EE03800653905 /* WildWest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WildWest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB7D2EB239EE03800653905 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADB7D2EF239EE03800653905 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -167,6 +197,16 @@
 				AD49F86B23BA0C4600543F59 /* Stagecoach.swift */,
 				AD49F86E23BA0E3E00543F59 /* WellsFargo.swift */,
 				ADB5A0F423BAB29C0050E173 /* Equip.swift */,
+				ADB5A0FA23BAB7DD0050E173 /* Jail.swift */,
+				ADB5A0FD23BAB8070050E173 /* Shoot.swift */,
+				ADB5A10023BAB81E0050E173 /* Missed.swift */,
+				ADB5A10323BAB8370050E173 /* Duel.swift */,
+				ADB5A10623BAB84E0050E173 /* Gatling.swift */,
+				ADB5A10923BAB8630050E173 /* Indians.swift */,
+				ADB5A10C23BAB8780050E173 /* Panic.swift */,
+				ADB5A10F23BAB89C0050E173 /* CatBalou.swift */,
+				ADB5A11223BAB9330050E173 /* GeneralStore.swift */,
+				ADB5A11523BABBE80050E173 /* EndTurn.swift */,
 			);
 			path = actions;
 			sourceTree = "<group>";
@@ -448,23 +488,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADB5A11023BAB89C0050E173 /* CatBalou.swift in Sources */,
 				ADE91AC623B9F84200F7316B /* Saloon.swift in Sources */,
 				ADE91AD423BA00DC00F7316B /* GameSetup.swift in Sources */,
 				ADD035D523A96034003B2576 /* PlayerProtocol.swift in Sources */,
 				AD49F86723BA054400543F59 /* Figure.swift in Sources */,
 				ADB5A0F523BAB29C0050E173 /* Equip.swift in Sources */,
+				ADB5A0FB23BAB7DD0050E173 /* Jail.swift in Sources */,
 				ADB7D2F0239EE03800653905 /* ViewController.swift in Sources */,
+				ADB5A11623BABBE80050E173 /* EndTurn.swift in Sources */,
+				ADB5A10123BAB81E0050E173 /* Missed.swift in Sources */,
 				ADC2B47123B183DF00A03B13 /* GameLoop.swift in Sources */,
 				AD49F86F23BA0E3E00543F59 /* WellsFargo.swift in Sources */,
 				ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */,
+				ADB5A10723BAB84E0050E173 /* Gatling.swift in Sources */,
 				AD52B99923B178CC0013240B /* Player.swift in Sources */,
+				ADB5A11323BAB9330050E173 /* GeneralStore.swift in Sources */,
+				ADB5A0FE23BAB8070050E173 /* Shoot.swift in Sources */,
+				ADB5A10423BAB8370050E173 /* Duel.swift in Sources */,
 				ADD5643523A4E09C00C1BD01 /* Beer.swift in Sources */,
+				ADB5A10D23BAB8780050E173 /* Panic.swift in Sources */,
 				AD49F86C23BA0C4600543F59 /* Stagecoach.swift in Sources */,
 				ADE91ACA23B9FE0300F7316B /* ResourcesManager.swift in Sources */,
 				ADD035D823A9604F003B2576 /* GameStateProtocol.swift in Sources */,
 				ADE91ACD23B9FE2300F7316B /* JsonReader.swift in Sources */,
 				AD52B99C23B17A310013240B /* GameState.swift in Sources */,
 				AD52B99623B1771E0013240B /* CardList.swift in Sources */,
+				ADB5A10A23BAB8630050E173 /* Indians.swift in Sources */,
 				ADD035C923A95EEB003B2576 /* ActionProtocol.swift in Sources */,
 				ADD035D223A9601B003B2576 /* CardListProtocol.swift in Sources */,
 				AD52B99323B175110013240B /* Card.swift in Sources */,
@@ -477,23 +527,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADB5A11123BAB89C0050E173 /* CatBalou.swift in Sources */,
 				AD52B99723B1771E0013240B /* CardList.swift in Sources */,
 				ADD5643623A4E09C00C1BD01 /* Beer.swift in Sources */,
 				ADD035CD23A95F37003B2576 /* RuleProtocol.swift in Sources */,
 				AD49F86823BA054D00543F59 /* Figure.swift in Sources */,
 				ADB5A0F623BAB29C0050E173 /* Equip.swift in Sources */,
+				ADB5A0FC23BAB7DD0050E173 /* Jail.swift in Sources */,
 				AD52B99D23B17A310013240B /* GameState.swift in Sources */,
+				ADB5A11723BABBE80050E173 /* EndTurn.swift in Sources */,
+				ADB5A10223BAB81E0050E173 /* Missed.swift in Sources */,
 				ADD035D923A9604F003B2576 /* GameStateProtocol.swift in Sources */,
 				AD49F87023BA0E3E00543F59 /* WellsFargo.swift in Sources */,
 				ADE91AD623BA03A500F7316B /* GameLoop.swift in Sources */,
+				ADB5A10823BAB84E0050E173 /* Gatling.swift in Sources */,
 				AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */,
+				ADB5A11423BAB9330050E173 /* GeneralStore.swift in Sources */,
+				ADB5A0FF23BAB8070050E173 /* Shoot.swift in Sources */,
+				ADB5A10523BAB8370050E173 /* Duel.swift in Sources */,
 				AD5F8C3B23A545C700C286AA /* CuckooExtension.swift in Sources */,
+				ADB5A10E23BAB8780050E173 /* Panic.swift in Sources */,
 				AD49F86D23BA0C4600543F59 /* Stagecoach.swift in Sources */,
 				ADD035D623A96034003B2576 /* PlayerProtocol.swift in Sources */,
 				ADE91ACE23B9FE2300F7316B /* JsonReader.swift in Sources */,
 				ADD035CA23A95EEB003B2576 /* ActionProtocol.swift in Sources */,
 				ADE91AC723B9F84200F7316B /* Saloon.swift in Sources */,
 				ADD035D323A9601B003B2576 /* CardListProtocol.swift in Sources */,
+				ADB5A10B23BAB8630050E173 /* Indians.swift in Sources */,
 				ADE91ACB23B9FE0300F7316B /* ResourcesManager.swift in Sources */,
 				ADD035D023A96002003B2576 /* CardProtocol.swift in Sources */,
 				AD52B99A23B178CC0013240B /* Player.swift in Sources */,
