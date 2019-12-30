@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		8DBD562D47470962F400716D /* libPods-WildWestTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 102E20EA2AD38505FB9CFBD5 /* libPods-WildWestTests.a */; };
 		AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */; };
+		AD49F86723BA054400543F59 /* Figure.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49F86623BA054400543F59 /* Figure.swift */; };
+		AD49F86823BA054D00543F59 /* Figure.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49F86623BA054400543F59 /* Figure.swift */; };
+		AD49F86A23BA074100543F59 /* figures.json in Resources */ = {isa = PBXBuildFile; fileRef = AD49F86923BA074100543F59 /* figures.json */; };
 		AD52B99323B175110013240B /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD52B99223B175110013240B /* Card.swift */; };
 		AD52B99423B175110013240B /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD52B99223B175110013240B /* Card.swift */; };
 		AD52B99623B1771E0013240B /* CardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD52B99523B1771E0013240B /* CardList.swift */; };
@@ -70,6 +73,8 @@
 		873275DE3D79FFF36F6D066E /* Pods-WildWest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.release.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.release.xcconfig"; sourceTree = "<group>"; };
 		8C300D3666EB3B530B73C9D4 /* Pods_WildWest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
+		AD49F86623BA054400543F59 /* Figure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Figure.swift; sourceTree = "<group>"; };
+		AD49F86923BA074100543F59 /* figures.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = figures.json; sourceTree = "<group>"; };
 		AD52B99223B175110013240B /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		AD52B99523B1771E0013240B /* CardList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardList.swift; sourceTree = "<group>"; };
 		AD52B99823B178CC0013240B /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -137,6 +142,7 @@
 				ADC2B47023B183DF00A03B13 /* GameLoop.swift */,
 				AD52B99B23B17A310013240B /* GameState.swift */,
 				AD52B99823B178CC0013240B /* Player.swift */,
+				AD49F86623BA054400543F59 /* Figure.swift */,
 				AD52B99523B1771E0013240B /* CardList.swift */,
 				AD52B99223B175110013240B /* Card.swift */,
 				AD52B99E23B17C8B0013240B /* actions */,
@@ -197,6 +203,7 @@
 				ADB7D2F4239EE03900653905 /* Assets.xcassets */,
 				ADB7D2F9239EE03900653905 /* Info.plist */,
 				ADE91ACF23B9FF0700F7316B /* cards.json */,
+				AD49F86923BA074100543F59 /* figures.json */,
 			);
 			path = WildWest;
 			sourceTree = "<group>";
@@ -327,6 +334,7 @@
 				ADB7D2F5239EE03900653905 /* Assets.xcassets in Resources */,
 				ADB7D2F3239EE03800653905 /* Main.storyboard in Resources */,
 				ADE91AD023B9FF0700F7316B /* cards.json in Resources */,
+				AD49F86A23BA074100543F59 /* figures.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,6 +439,7 @@
 				ADE91AC623B9F84200F7316B /* Saloon.swift in Sources */,
 				ADE91AD423BA00DC00F7316B /* GameSetup.swift in Sources */,
 				ADD035D523A96034003B2576 /* PlayerProtocol.swift in Sources */,
+				AD49F86723BA054400543F59 /* Figure.swift in Sources */,
 				ADB7D2F0239EE03800653905 /* ViewController.swift in Sources */,
 				ADC2B47123B183DF00A03B13 /* GameLoop.swift in Sources */,
 				ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */,
@@ -456,6 +465,7 @@
 				AD52B99723B1771E0013240B /* CardList.swift in Sources */,
 				ADD5643623A4E09C00C1BD01 /* Beer.swift in Sources */,
 				ADD035CD23A95F37003B2576 /* RuleProtocol.swift in Sources */,
+				AD49F86823BA054D00543F59 /* Figure.swift in Sources */,
 				AD52B99D23B17A310013240B /* GameState.swift in Sources */,
 				ADD035D923A9604F003B2576 /* GameStateProtocol.swift in Sources */,
 				ADE91AD623BA03A500F7316B /* GameLoop.swift in Sources */,

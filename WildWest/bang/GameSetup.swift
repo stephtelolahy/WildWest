@@ -7,35 +7,39 @@
 //
 
 protocol GameSetupProtocol {
-    func setupGame(playersCount: Int, cards: [CardProtocol]) -> GameStateProtocol
+    func setupGame(roles: [Role], figures: [Figure], cards: [CardProtocol]) -> GameStateProtocol
 }
 
 class GameSetup: GameSetupProtocol {
     
-    func setupGame(playersCount: Int, cards: [CardProtocol]) -> GameStateProtocol {
-//        let shuffledRoles = gameRules.roles(for: playersCount).shuffled()
-//        let shuffledFigures = resourcesManager.allFigures().shuffled()
-//        var deck = resourcesManager.allCards().shuffled()
-//        let players: [Player] = shuffledRoles.enumerated().map { index, role in
-//            let figure = shuffledFigures[index]
-//            let health = gameRules.initialHealth(for: figure, role: role)
-//            let revealed = gameRules.initialReveal(for: role)
-//            var hand: [Card] = []
-//            while hand.count < health {
-//                hand.append(deck.removeFirst())
-//            }
-//            return Player(role: role,
-//                          revealed: revealed,
-//                          figure: figure,
-//                          maxHealth: health,
-//                          health: health,
-//                          gun: .colt45,
-//                          hand: hand,
-//                          inPlay: [],
-//                          turn: gameRules.initialTurn(for: role))
-//        }
-//        return GameState(players: players, deck: deck, discard: [])
-        
-        return GameState(players: [], deck: CardList(cards: cards), discard: CardList(cards: []))
+    func setupGame(roles: [Role], figures: [Figure], cards: [CardProtocol]) -> GameStateProtocol {
+        let shuffledFigures = figures.shuffled()
+        var deck = cards.shuffled()
+        let players: [Player] = roles.enumerated().map { index, role in
+            let figure = shuffledFigures[index]
+            var health = figure.bullets
+            if role == .sheriff {
+                health += 1
+            }
+            var hand: [CardProtocol] = []
+            while hand.count < health {
+                hand.append(deck.removeFirst())
+            }
+            return Player(role: role,
+                          ability: figure.ability,
+                          maxHealth: health,
+                          health: health,
+                          hand: CardList(cards: hand),
+                          inPlay: CardList(cards: []))
+        }
+        return GameState(players: players, deck: CardList(cards: deck), discard: CardList(cards: []))
+    }
+    
+    private func initialHealth(for figure: Figure, role: Role) -> Int {
+        var health = figure.bullets
+        if role == .sheriff {
+            health += 1
+        }
+        return health
     }
 }

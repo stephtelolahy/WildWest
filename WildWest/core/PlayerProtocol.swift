@@ -25,7 +25,7 @@ enum Role: String {
     deputy
 }
 
-enum Ability: String {
+enum Ability: String, Decodable {
     case bartCassidy,
     blackJack,
     calamityJanet,

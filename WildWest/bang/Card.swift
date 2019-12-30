@@ -6,8 +6,6 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-import Foundation
-
 struct Card: CardProtocol, Decodable {
     
     let name: CardName
