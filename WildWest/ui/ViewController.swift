@@ -12,9 +12,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let state = GameState(players: [],
-                              deck: CardList(cards: []),
-                              discard: CardList(cards: []))
+        
+        let resourcesManager = ResourcesManager(jsonReader: JsonReader(bundle: Bundle.main))
+        let cards = resourcesManager.allCards()
+        let state = GameSetup().setupGame(playersCount: 7, cards: cards)
         GameLoop().run(state: state)
     }
 }

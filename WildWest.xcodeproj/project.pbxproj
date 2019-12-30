@@ -38,6 +38,17 @@
 		ADD035D923A9604F003B2576 /* GameStateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD035D723A9604F003B2576 /* GameStateProtocol.swift */; };
 		ADD5643523A4E09C00C1BD01 /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5643423A4E09C00C1BD01 /* Beer.swift */; };
 		ADD5643623A4E09C00C1BD01 /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5643423A4E09C00C1BD01 /* Beer.swift */; };
+		ADE91AC623B9F84200F7316B /* Saloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE91AC523B9F84200F7316B /* Saloon.swift */; };
+		ADE91AC723B9F84200F7316B /* Saloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE91AC523B9F84200F7316B /* Saloon.swift */; };
+		ADE91ACA23B9FE0300F7316B /* ResourcesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE91AC923B9FE0300F7316B /* ResourcesManager.swift */; };
+		ADE91ACB23B9FE0300F7316B /* ResourcesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE91AC923B9FE0300F7316B /* ResourcesManager.swift */; };
+		ADE91ACD23B9FE2300F7316B /* JsonReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE91ACC23B9FE2300F7316B /* JsonReader.swift */; };
+		ADE91ACE23B9FE2300F7316B /* JsonReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE91ACC23B9FE2300F7316B /* JsonReader.swift */; };
+		ADE91AD023B9FF0700F7316B /* cards.json in Resources */ = {isa = PBXBuildFile; fileRef = ADE91ACF23B9FF0700F7316B /* cards.json */; };
+		ADE91AD123B9FF0700F7316B /* cards.json in Resources */ = {isa = PBXBuildFile; fileRef = ADE91ACF23B9FF0700F7316B /* cards.json */; };
+		ADE91AD423BA00DC00F7316B /* GameSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE91AD323BA00DC00F7316B /* GameSetup.swift */; };
+		ADE91AD523BA00DC00F7316B /* GameSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE91AD323BA00DC00F7316B /* GameSetup.swift */; };
+		ADE91AD623BA03A500F7316B /* GameLoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC2B47023B183DF00A03B13 /* GameLoop.swift */; };
 		D42ED72C28166C49D2A60FC9 /* Pods_WildWest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C300D3666EB3B530B73C9D4 /* Pods_WildWest.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +92,11 @@
 		ADD035D423A96034003B2576 /* PlayerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerProtocol.swift; sourceTree = "<group>"; };
 		ADD035D723A9604F003B2576 /* GameStateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateProtocol.swift; sourceTree = "<group>"; };
 		ADD5643423A4E09C00C1BD01 /* Beer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beer.swift; sourceTree = "<group>"; };
+		ADE91AC523B9F84200F7316B /* Saloon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Saloon.swift; sourceTree = "<group>"; };
+		ADE91AC923B9FE0300F7316B /* ResourcesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesManager.swift; sourceTree = "<group>"; };
+		ADE91ACC23B9FE2300F7316B /* JsonReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonReader.swift; sourceTree = "<group>"; };
+		ADE91ACF23B9FF0700F7316B /* cards.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cards.json; sourceTree = "<group>"; };
+		ADE91AD323BA00DC00F7316B /* GameSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,25 +130,27 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		AD52B99123B174F40013240B /* implementation */ = {
+		AD52B99123B174F40013240B /* bang */ = {
 			isa = PBXGroup;
 			children = (
+				ADE91AD323BA00DC00F7316B /* GameSetup.swift */,
 				ADC2B47023B183DF00A03B13 /* GameLoop.swift */,
 				AD52B99B23B17A310013240B /* GameState.swift */,
 				AD52B99823B178CC0013240B /* Player.swift */,
 				AD52B99523B1771E0013240B /* CardList.swift */,
 				AD52B99223B175110013240B /* Card.swift */,
-				AD52B99E23B17C8B0013240B /* cards */,
+				AD52B99E23B17C8B0013240B /* actions */,
 			);
-			path = implementation;
+			path = bang;
 			sourceTree = "<group>";
 		};
-		AD52B99E23B17C8B0013240B /* cards */ = {
+		AD52B99E23B17C8B0013240B /* actions */ = {
 			isa = PBXGroup;
 			children = (
 				ADD5643423A4E09C00C1BD01 /* Beer.swift */,
+				ADE91AC523B9F84200F7316B /* Saloon.swift */,
 			);
-			path = cards;
+			path = actions;
 			sourceTree = "<group>";
 		};
 		AD8540A323A44A3200568FE9 /* core */ = {
@@ -171,14 +189,14 @@
 		ADB7D2EA239EE03800653905 /* WildWest */ = {
 			isa = PBXGroup;
 			children = (
+				ADE91AD223BA005000F7316B /* ui */,
 				AD8540A323A44A3200568FE9 /* core */,
-				AD52B99123B174F40013240B /* implementation */,
+				AD52B99123B174F40013240B /* bang */,
+				ADE91AC823B9FD8100F7316B /* resources */,
 				ADB7D2EB239EE03800653905 /* AppDelegate.swift */,
-				ADB7D2EF239EE03800653905 /* ViewController.swift */,
-				ADB7D2F1239EE03800653905 /* Main.storyboard */,
 				ADB7D2F4239EE03900653905 /* Assets.xcassets */,
-				ADB7D2F6239EE03900653905 /* LaunchScreen.storyboard */,
 				ADB7D2F9239EE03900653905 /* Info.plist */,
+				ADE91ACF23B9FF0700F7316B /* cards.json */,
 			);
 			path = WildWest;
 			sourceTree = "<group>";
@@ -191,6 +209,25 @@
 				AD5F8C3A23A545C700C286AA /* CuckooExtension.swift */,
 			);
 			path = WildWestTests;
+			sourceTree = "<group>";
+		};
+		ADE91AC823B9FD8100F7316B /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				ADE91AC923B9FE0300F7316B /* ResourcesManager.swift */,
+				ADE91ACC23B9FE2300F7316B /* JsonReader.swift */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		ADE91AD223BA005000F7316B /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				ADB7D2F6239EE03900653905 /* LaunchScreen.storyboard */,
+				ADB7D2F1239EE03800653905 /* Main.storyboard */,
+				ADB7D2EF239EE03800653905 /* ViewController.swift */,
+			);
+			path = ui;
 			sourceTree = "<group>";
 		};
 		C261B90D4E9953E24737D8E2 /* Frameworks */ = {
@@ -289,6 +326,7 @@
 				ADB7D2F8239EE03900653905 /* LaunchScreen.storyboard in Resources */,
 				ADB7D2F5239EE03900653905 /* Assets.xcassets in Resources */,
 				ADB7D2F3239EE03800653905 /* Main.storyboard in Resources */,
+				ADE91AD023B9FF0700F7316B /* cards.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +334,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADE91AD123B9FF0700F7316B /* cards.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,13 +428,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADE91AC623B9F84200F7316B /* Saloon.swift in Sources */,
+				ADE91AD423BA00DC00F7316B /* GameSetup.swift in Sources */,
 				ADD035D523A96034003B2576 /* PlayerProtocol.swift in Sources */,
 				ADB7D2F0239EE03800653905 /* ViewController.swift in Sources */,
 				ADC2B47123B183DF00A03B13 /* GameLoop.swift in Sources */,
 				ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */,
 				AD52B99923B178CC0013240B /* Player.swift in Sources */,
 				ADD5643523A4E09C00C1BD01 /* Beer.swift in Sources */,
+				ADE91ACA23B9FE0300F7316B /* ResourcesManager.swift in Sources */,
 				ADD035D823A9604F003B2576 /* GameStateProtocol.swift in Sources */,
+				ADE91ACD23B9FE2300F7316B /* JsonReader.swift in Sources */,
 				AD52B99C23B17A310013240B /* GameState.swift in Sources */,
 				AD52B99623B1771E0013240B /* CardList.swift in Sources */,
 				ADD035C923A95EEB003B2576 /* ActionProtocol.swift in Sources */,
@@ -415,13 +458,18 @@
 				ADD035CD23A95F37003B2576 /* RuleProtocol.swift in Sources */,
 				AD52B99D23B17A310013240B /* GameState.swift in Sources */,
 				ADD035D923A9604F003B2576 /* GameStateProtocol.swift in Sources */,
+				ADE91AD623BA03A500F7316B /* GameLoop.swift in Sources */,
 				AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */,
 				AD5F8C3B23A545C700C286AA /* CuckooExtension.swift in Sources */,
 				ADD035D623A96034003B2576 /* PlayerProtocol.swift in Sources */,
+				ADE91ACE23B9FE2300F7316B /* JsonReader.swift in Sources */,
 				ADD035CA23A95EEB003B2576 /* ActionProtocol.swift in Sources */,
+				ADE91AC723B9F84200F7316B /* Saloon.swift in Sources */,
 				ADD035D323A9601B003B2576 /* CardListProtocol.swift in Sources */,
+				ADE91ACB23B9FE0300F7316B /* ResourcesManager.swift in Sources */,
 				ADD035D023A96002003B2576 /* CardProtocol.swift in Sources */,
 				AD52B99A23B178CC0013240B /* Player.swift in Sources */,
+				ADE91AD523BA00DC00F7316B /* GameSetup.swift in Sources */,
 				AD52B99423B175110013240B /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

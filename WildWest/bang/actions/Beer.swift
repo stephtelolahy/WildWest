@@ -18,7 +18,6 @@
 /// in other words, if you play a Beer you do not gain any life point.
 ///
 struct Beer: ActionProtocol {
-    
     let playerId: String
     let cardId: String
     
@@ -34,6 +33,7 @@ extension Beer: RuleProtocol {
         guard let player = state.players.first(where: { $0.identifier == playerId }) else {
             return []
         }
+        // TODO: You cannot gain more life points than your starting amount!
         // TODO: Beer has no effect if there are only 2 players left in the game
         let beerCards = player.hand.cards.filter { $0.name == .beer }
         return beerCards.map { Beer(playerId: playerId, cardId: $0.identifier) }

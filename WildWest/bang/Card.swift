@@ -6,20 +6,16 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-class Card: CardProtocol {
+import Foundation
+
+struct Card: CardProtocol, Decodable {
     
     let name: CardName
-    let suits: CardSuit
+    let suit: CardSuit
     let value: String
     
-    init(name: CardName, suits: CardSuit, value: String) {
-        self.name = name
-        self.suits = suits
-        self.value = value
-    }
-    
     var identifier: String {
-        return "\(name.rawValue)-\(value)-\(suits.rawValue)"
+        return "\(name.rawValue)-\(value)-\(suit.rawValue)"
     }
     
     var type: CardType {

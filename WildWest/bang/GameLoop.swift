@@ -6,7 +6,11 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-class GameLoop {
+protocol GameLoopProtocol {
+    func run(state: GameStateProtocol)
+}
+
+class GameLoop: GameLoopProtocol {
     
     func run(state: GameStateProtocol) {
         let rules = [Beer.self]

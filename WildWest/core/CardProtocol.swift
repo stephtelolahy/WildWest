@@ -10,11 +10,11 @@ protocol CardProtocol {
     var identifier: String { get }
     var name: CardName { get }
     var type: CardType { get }
-    var suits: CardSuit { get }
+    var suit: CardSuit { get }
     var value: String { get }
 }
 
-enum CardName: String {
+enum CardName: String, Decodable {
     case colt45,
     volcanic,
     schofield,
@@ -46,7 +46,7 @@ enum CardType: String {
     play
 }
 
-enum CardSuit: String {
+enum CardSuit: String, Decodable {
     case spades,
     hearts,
     diamonds,
