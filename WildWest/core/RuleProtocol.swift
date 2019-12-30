@@ -7,5 +7,5 @@
 //
 
 protocol RuleProtocol {
-    static func match(playerId: String, state: GameStateProtocol) -> [ActionProtocol]
+    static func match(state: GameStateProtocol) -> [ActionProtocol]
 }

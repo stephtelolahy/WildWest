@@ -31,7 +31,7 @@ class GameState: GameStateProtocol {
     func discard(playerId: String, cardId: String) {
         guard let player = players.first(where: { $0.identifier == playerId }),
             let card = player.hand.cards.first(where: { $0.identifier == cardId }) else {
-            return
+                return
         }
         
         player.hand.remove(card)
@@ -55,5 +55,13 @@ class GameState: GameStateProtocol {
         }
         player.gainLifePoint()
         addMessage("\(player.identifier) gain life point")
+    }
+    
+    func matchingCards(playerId: String, cardName: CardName) -> [CardProtocol] {
+        guard let player = players.first(where: { $0.identifier == playerId }) else {
+            return []
+        }
+        
+        return player.hand.cards.filter({ $0.name == cardName })
     }
 }

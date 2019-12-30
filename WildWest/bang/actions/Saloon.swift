@@ -15,24 +15,23 @@
 /// your last life point: the Saloon is not a Beer!
 ///
 struct Saloon: ActionProtocol {
-    let playerId: String
+    let actorId: String
     let cardId: String
     let otherPlayerIds: [String]
     
     func execute(state: GameStateProtocol) {
-        state.discard(playerId: playerId, cardId: cardId)
-        state.gainLifePoint(playerId: playerId)
+        state.discard(playerId: actorId, cardId: cardId)
+        state.gainLifePoint(playerId: actorId)
         otherPlayerIds.forEach { state.gainLifePoint(playerId: $0) }
     }
 }
 
 extension Saloon: RuleProtocol {
-    static func match(playerId: String, state: GameStateProtocol) -> [ActionProtocol] {
-        guard let player = state.players.first(where: { $0.identifier == playerId }) else {
-            return []
-        }
+    
+    static func match(state: GameStateProtocol) -> [ActionProtocol] {
+        let playerId = state.players[state.turn].identifier
         let otherPlayerIds = state.players.filter({ $0.identifier != playerId }).map { $0.identifier }
-        let sallonCards = player.hand.cards.filter { $0.name == .saloon }
-        return sallonCards.map { Saloon(playerId: playerId, cardId: $0.identifier, otherPlayerIds: otherPlayerIds) }
+        let cards = state.matchingCards(playerId: playerId, cardName: .saloon)
+        return cards.map { Saloon(actorId: playerId, cardId: $0.identifier, otherPlayerIds: otherPlayerIds) }
     }
 }

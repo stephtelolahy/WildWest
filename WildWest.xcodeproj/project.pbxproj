@@ -144,8 +144,8 @@
 		AD52B99123B174F40013240B /* bang */ = {
 			isa = PBXGroup;
 			children = (
-				ADE91AD323BA00DC00F7316B /* GameSetup.swift */,
 				ADC2B47023B183DF00A03B13 /* GameLoop.swift */,
+				ADE91AD323BA00DC00F7316B /* GameSetup.swift */,
 				AD52B99B23B17A310013240B /* GameState.swift */,
 				AD52B99823B178CC0013240B /* Player.swift */,
 				AD49F86623BA054400543F59 /* Figure.swift */,

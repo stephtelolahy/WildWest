@@ -13,10 +13,12 @@ protocol GameLoopProtocol {
 class GameLoop: GameLoopProtocol {
     
     func run(state: GameStateProtocol) {
-        let rules: [RuleProtocol.Type] = [Beer.self, Saloon.self, Stagecoach.self, WellsFargo.self]
+        let rules: [RuleProtocol.Type] = [Beer.self,
+                                          Saloon.self,
+                                          Stagecoach.self,
+                                          WellsFargo.self]
         while state.outcome == nil {
-            let playerId = state.players[state.turn].identifier
-            let posssibleActions = rules.map { $0.match(playerId: playerId, state: state) }.flatMap { $0 }
+            let posssibleActions = rules.map { $0.match(state: state) }.flatMap { $0 }
             let action = posssibleActions[0]
             action.execute(state: state)
             print(state)

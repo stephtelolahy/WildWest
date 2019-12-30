@@ -18,24 +18,23 @@
 /// in other words, if you play a Beer you do not gain any life point.
 ///
 struct Beer: ActionProtocol {
-    let playerId: String
+    let actorId: String
     let cardId: String
     
     func execute(state: GameStateProtocol) {
-        state.discard(playerId: playerId, cardId: cardId)
-        state.gainLifePoint(playerId: playerId)
+        state.discard(playerId: actorId, cardId: cardId)
+        state.gainLifePoint(playerId: actorId)
     }
 }
 
 extension Beer: RuleProtocol {
     
-    static func match(playerId: String, state: GameStateProtocol) -> [ActionProtocol] {
-        guard let player = state.players.first(where: { $0.identifier == playerId }) else {
-            return []
-        }
+    static func match(state: GameStateProtocol) -> [ActionProtocol] {
+        let playerId = state.players[state.turn].identifier
+        let cards = state.matchingCards(playerId: playerId, cardName: .beer)
+        
         // TODO: You cannot gain more life points than your starting amount!
         // TODO: Beer has no effect if there are only 2 players left in the game
-        let beerCards = player.hand.cards.filter { $0.name == .beer }
-        return beerCards.map { Beer(playerId: playerId, cardId: $0.identifier) }
+        return cards.map { Beer(actorId: playerId, cardId: $0.identifier) }
     }
 }

@@ -10,24 +10,22 @@
 /// “Draw three cards” from the top of the deck.
 ///
 struct WellsFargo: ActionProtocol {
-    let playerId: String
+    let actorId: String
     let cardId: String
     
     func execute(state: GameStateProtocol) {
-        state.discard(playerId: playerId, cardId: cardId)
-        state.pull(playerId: playerId)
-        state.pull(playerId: playerId)
-        state.pull(playerId: playerId)
+        state.discard(playerId: actorId, cardId: cardId)
+        state.pull(playerId: actorId)
+        state.pull(playerId: actorId)
+        state.pull(playerId: actorId)
     }
 }
 
 extension WellsFargo: RuleProtocol {
     
-    static func match(playerId: String, state: GameStateProtocol) -> [ActionProtocol] {
-        guard let player = state.players.first(where: { $0.identifier == playerId }) else {
-            return []
-        }
-        let wellsFargoCards = player.hand.cards.filter { $0.name == .wellsFargo }
-        return wellsFargoCards.map { Stagecoach(playerId: playerId, cardId: $0.identifier) }
+    static func match(state: GameStateProtocol) -> [ActionProtocol] {
+        let playerId = state.players[state.turn].identifier
+        let cards = state.matchingCards(playerId: playerId, cardName: .wellsFargo)
+        return cards.map { Stagecoach(actorId: playerId, cardId: $0.identifier) }
     }
 }
