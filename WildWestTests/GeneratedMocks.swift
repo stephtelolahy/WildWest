@@ -345,14 +345,14 @@ import Cuckoo
     
     
     
-     var suits: CardSuit {
+     var suit: CardSuit {
         get {
-            return cuckoo_manager.getter("suits",
+            return cuckoo_manager.getter("suit",
                 superclassCall:
                     
                     Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                     ,
-                defaultCall: __defaultImplStub!.suits)
+                defaultCall: __defaultImplStub!.suit)
         }
         
     }
@@ -399,8 +399,8 @@ import Cuckoo
 	    }
 	    
 	    
-	    var suits: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardProtocol, CardSuit> {
-	        return .init(manager: cuckoo_manager, name: "suits")
+	    var suit: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardProtocol, CardSuit> {
+	        return .init(manager: cuckoo_manager, name: "suit")
 	    }
 	    
 	    
@@ -439,8 +439,8 @@ import Cuckoo
 	    }
 	    
 	    
-	    var suits: Cuckoo.VerifyReadOnlyProperty<CardSuit> {
-	        return .init(manager: cuckoo_manager, name: "suits", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var suit: Cuckoo.VerifyReadOnlyProperty<CardSuit> {
+	        return .init(manager: cuckoo_manager, name: "suit", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	    
@@ -480,7 +480,7 @@ import Cuckoo
     }
     
     
-     var suits: CardSuit {
+     var suit: CardSuit {
         get {
             return DefaultValueRegistry.defaultValue(for: (CardSuit).self)
         }
@@ -658,6 +658,21 @@ import Cuckoo
         
     }
     
+    
+    
+     func pull(playerId: String)  {
+        
+    return cuckoo_manager.call("pull(playerId: String)",
+            parameters: (playerId),
+            escapingParameters: (playerId),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.pull(playerId: playerId))
+        
+    }
+    
 
 	 struct __StubbingProxy_GameStateProtocol: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
@@ -710,6 +725,11 @@ import Cuckoo
 	    func gainLifePoint<M1: Cuckoo.Matchable>(playerId: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(String)> where M1.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: playerId) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "gainLifePoint(playerId: String)", parameterMatchers: matchers))
+	    }
+	    
+	    func pull<M1: Cuckoo.Matchable>(playerId: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(String)> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: playerId) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "pull(playerId: String)", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -774,6 +794,12 @@ import Cuckoo
 	    func gainLifePoint<M1: Cuckoo.Matchable>(playerId: M1) -> Cuckoo.__DoNotUse<(String), Void> where M1.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: playerId) { $0 }]
 	        return cuckoo_manager.verify("gainLifePoint(playerId: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func pull<M1: Cuckoo.Matchable>(playerId: M1) -> Cuckoo.__DoNotUse<(String), Void> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: playerId) { $0 }]
+	        return cuckoo_manager.verify("pull(playerId: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -842,6 +868,10 @@ import Cuckoo
     }
     
      func gainLifePoint(playerId: String)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func pull(playerId: String)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     

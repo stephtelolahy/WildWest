@@ -39,6 +39,16 @@ class GameState: GameStateProtocol {
         addMessage("\(player.identifier) discard \(card.identifier)")
     }
     
+    func pull(playerId: String) {
+        guard let player = players.first(where: { $0.identifier == playerId }) else {
+            return
+        }
+        
+        let card = deck.pull()
+        player.hand.add(card)
+        addMessage("\(player.identifier) pull \(card.identifier) from deck")
+    }
+    
     func gainLifePoint(playerId: String) {
         guard let player = players.first(where: { $0.identifier == playerId }) else {
             return
