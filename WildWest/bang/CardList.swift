@@ -18,8 +18,16 @@ class CardList: CardListProtocol {
         cards.append(card)
     }
     
-    func pull() -> CardProtocol {
-        return cards.remove(at: 0)
+    func addAll(_ elements: [CardProtocol]) {
+        cards += elements
+    }
+    
+    func removeAll() {
+        cards.removeAll()
+    }
+    
+    func removeFirst() -> CardProtocol {
+        return cards.removeFirst()
     }
     
     func remove(_ card: CardProtocol) {

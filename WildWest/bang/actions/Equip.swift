@@ -20,19 +20,25 @@ struct Equip: ActionProtocol {
     let actorId: String
     let cardId: String
     
-    func execute(state: GameStateProtocol) {
+    func execute(state: MutableGameStateProtocol) {
         state.equip(playerId: actorId, cardId: cardId)
     }
 }
 
 extension Equip: RuleProtocol {
     
-    // swiftlint:disable line_length
     static func match(state: GameStateProtocol) -> [ActionProtocol] {
-        let playerId = state.players[state.turn].identifier
-        let items: [CardName] = [.volcanic, .schofield, .remington, .winchester, .revCarbine, .barrel, .mustang, .scope, .dynamite]
-        let cards = state.matchingCards(playerId: playerId, names: items)
+        let player = state.players[state.turn]
+        let cards = player.handCards(named: .volcanic,
+                                     .schofield,
+                                     .remington,
+                                     .winchester,
+                                     .revCarbine,
+                                     .barrel,
+                                     .mustang,
+                                     .scope,
+                                     .dynamite)
         // TODO: cards in front of you should not share the same name
-        return cards.map { Equip(actorId: playerId, cardId: $0.identifier) }
+        return cards.map { Equip(actorId: player.identifier, cardId: $0.identifier) }
     }
 }

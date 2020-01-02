@@ -10,7 +10,7 @@ struct EndTurn: ActionProtocol {
     let actorId: String
     let cardId: String
     
-    func execute(state: GameStateProtocol) {
+    func execute(state: MutableGameStateProtocol) {
         // TODO:
     }
 }
@@ -22,4 +22,3 @@ extension EndTurn: RuleProtocol {
         return []
     }
 }
-

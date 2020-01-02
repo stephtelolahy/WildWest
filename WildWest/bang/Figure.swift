@@ -7,6 +7,7 @@
 //
 
 struct Figure: Decodable {
+    
     let ability: Ability
     let bullets: Int
     let imageName: String

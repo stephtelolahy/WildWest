@@ -9,5 +9,5 @@
 protocol ActionProtocol {
     var actorId: String { get }
     
-    func execute(state: GameStateProtocol)
+    func execute(state: MutableGameStateProtocol)
 }

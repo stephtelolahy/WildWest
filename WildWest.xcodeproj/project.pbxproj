@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		8DBD562D47470962F400716D /* libPods-WildWestTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 102E20EA2AD38505FB9CFBD5 /* libPods-WildWestTests.a */; };
 		AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */; };
+		AD46810E23BEA2B0000B42C7 /* PlayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD46810D23BEA2B0000B42C7 /* PlayerExtension.swift */; };
+		AD46810F23BEA2B0000B42C7 /* PlayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD46810D23BEA2B0000B42C7 /* PlayerExtension.swift */; };
 		AD49F86723BA054400543F59 /* Figure.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49F86623BA054400543F59 /* Figure.swift */; };
 		AD49F86823BA054D00543F59 /* Figure.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49F86623BA054400543F59 /* Figure.swift */; };
 		AD49F86A23BA074100543F59 /* figures.json in Resources */ = {isa = PBXBuildFile; fileRef = AD49F86923BA074100543F59 /* figures.json */; };
@@ -99,6 +101,7 @@
 		873275DE3D79FFF36F6D066E /* Pods-WildWest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.release.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.release.xcconfig"; sourceTree = "<group>"; };
 		8C300D3666EB3B530B73C9D4 /* Pods_WildWest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
+		AD46810D23BEA2B0000B42C7 /* PlayerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerExtension.swift; sourceTree = "<group>"; };
 		AD49F86623BA054400543F59 /* Figure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Figure.swift; sourceTree = "<group>"; };
 		AD49F86923BA074100543F59 /* figures.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = figures.json; sourceTree = "<group>"; };
 		AD49F86B23BA0C4600543F59 /* Stagecoach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stagecoach.swift; sourceTree = "<group>"; };
@@ -174,6 +177,21 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		AD46810C23BEA27F000B42C7 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AD46810D23BEA2B0000B42C7 /* PlayerExtension.swift */,
+			);
+			path = extensions;
+			sourceTree = "<group>";
+		};
+		AD48DD2823BEABD100E5B552 /* bang */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = bang;
+			sourceTree = "<group>";
+		};
 		AD52B99123B174F40013240B /* bang */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,10 +199,11 @@
 				ADE91AD323BA00DC00F7316B /* GameSetup.swift */,
 				AD52B99B23B17A310013240B /* GameState.swift */,
 				AD52B99823B178CC0013240B /* Player.swift */,
-				AD49F86623BA054400543F59 /* Figure.swift */,
 				AD52B99523B1771E0013240B /* CardList.swift */,
+				AD49F86623BA054400543F59 /* Figure.swift */,
 				AD52B99223B175110013240B /* Card.swift */,
 				AD52B99E23B17C8B0013240B /* actions */,
+				AD46810C23BEA27F000B42C7 /* extensions */,
 			);
 			path = bang;
 			sourceTree = "<group>";
@@ -200,9 +219,9 @@
 				ADB5A0FA23BAB7DD0050E173 /* Jail.swift */,
 				ADB5A0FD23BAB8070050E173 /* Shoot.swift */,
 				ADB5A10023BAB81E0050E173 /* Missed.swift */,
-				ADB5A10323BAB8370050E173 /* Duel.swift */,
 				ADB5A10623BAB84E0050E173 /* Gatling.swift */,
 				ADB5A10923BAB8630050E173 /* Indians.swift */,
+				ADB5A10323BAB8370050E173 /* Duel.swift */,
 				ADB5A10C23BAB8780050E173 /* Panic.swift */,
 				ADB5A10F23BAB89C0050E173 /* CatBalou.swift */,
 				ADB5A11223BAB9330050E173 /* GeneralStore.swift */,
@@ -263,6 +282,7 @@
 		ADB7D301239EE03900653905 /* WildWestTests */ = {
 			isa = PBXGroup;
 			children = (
+				AD48DD2823BEABD100E5B552 /* bang */,
 				AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */,
 				ADB7D304239EE03900653905 /* Info.plist */,
 				AD5F8C3A23A545C700C286AA /* CuckooExtension.swift */,
@@ -497,6 +517,7 @@
 				ADB5A0FB23BAB7DD0050E173 /* Jail.swift in Sources */,
 				ADB7D2F0239EE03800653905 /* ViewController.swift in Sources */,
 				ADB5A11623BABBE80050E173 /* EndTurn.swift in Sources */,
+				AD46810E23BEA2B0000B42C7 /* PlayerExtension.swift in Sources */,
 				ADB5A10123BAB81E0050E173 /* Missed.swift in Sources */,
 				ADC2B47123B183DF00A03B13 /* GameLoop.swift in Sources */,
 				AD49F86F23BA0E3E00543F59 /* WellsFargo.swift in Sources */,
@@ -536,6 +557,7 @@
 				ADB5A0FC23BAB7DD0050E173 /* Jail.swift in Sources */,
 				AD52B99D23B17A310013240B /* GameState.swift in Sources */,
 				ADB5A11723BABBE80050E173 /* EndTurn.swift in Sources */,
+				AD46810F23BEA2B0000B42C7 /* PlayerExtension.swift in Sources */,
 				ADB5A10223BAB81E0050E173 /* Missed.swift in Sources */,
 				ADD035D923A9604F003B2576 /* GameStateProtocol.swift in Sources */,
 				AD49F87023BA0E3E00543F59 /* WellsFargo.swift in Sources */,

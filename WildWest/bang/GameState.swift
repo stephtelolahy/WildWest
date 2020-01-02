@@ -6,7 +6,7 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-class GameState: GameStateProtocol {
+class GameState: MutableGameStateProtocol {
     
     let players: [PlayerProtocol]
     let deck: CardListProtocol
@@ -43,8 +43,14 @@ class GameState: GameStateProtocol {
         guard let player = players.first(where: { $0.identifier == playerId }) else {
             return
         }
-        // TODO: handle deck empty
-        let card = deck.pull()
+        
+        if deck.cards.isEmpty {
+            let cards = discard.cards.shuffled()
+            discard.removeAll()
+            deck.addAll(cards)
+        }
+        
+        let card = deck.removeFirst()
         player.hand.add(card)
         addMessage("\(player.identifier) pull \(card.identifier) from deck")
     }
@@ -53,7 +59,12 @@ class GameState: GameStateProtocol {
         guard let player = players.first(where: { $0.identifier == playerId }) else {
             return
         }
-        player.gainLifePoint()
+        
+        guard player.health < player.maxHealth else {
+            return
+        }
+        
+        player.setHealth(player.health + 1)
         addMessage("\(player.identifier) gain life point")
     }
     
@@ -66,13 +77,5 @@ class GameState: GameStateProtocol {
         player.hand.remove(card)
         player.inPlay.add(card)
         addMessage("\(player.identifier) equip with \(card.identifier)")
-    }
-    
-    func matchingCards(playerId: String, names: [CardName]) -> [CardProtocol] {
-        guard let player = players.first(where: { $0.identifier == playerId }) else {
-            return []
-        }
-        
-        return player.hand.cards.filter({ names.contains($0.name) })
     }
 }

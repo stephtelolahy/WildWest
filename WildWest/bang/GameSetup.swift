@@ -7,12 +7,12 @@
 //
 
 protocol GameSetupProtocol {
-    func setupGame(roles: [Role], figures: [Figure], cards: [CardProtocol]) -> GameStateProtocol
+    func setupGame(roles: [Role], figures: [Figure], cards: [CardProtocol]) -> MutableGameStateProtocol
 }
 
 class GameSetup: GameSetupProtocol {
     
-    func setupGame(roles: [Role], figures: [Figure], cards: [CardProtocol]) -> GameStateProtocol {
+    func setupGame(roles: [Role], figures: [Figure], cards: [CardProtocol]) -> MutableGameStateProtocol {
         let shuffledFigures = figures.shuffled()
         var deck = cards.shuffled()
         let players: [Player] = roles.enumerated().map { index, role in
@@ -33,13 +33,5 @@ class GameSetup: GameSetupProtocol {
                           inPlay: CardList(cards: []))
         }
         return GameState(players: players, deck: CardList(cards: deck), discard: CardList(cards: []))
-    }
-    
-    private func initialHealth(for figure: Figure, role: Role) -> Int {
-        var health = figure.bullets
-        if role == .sheriff {
-            health += 1
-        }
-        return health
     }
 }

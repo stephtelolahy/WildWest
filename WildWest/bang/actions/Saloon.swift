@@ -19,7 +19,7 @@ struct Saloon: ActionProtocol {
     let cardId: String
     let otherPlayerIds: [String]
     
-    func execute(state: GameStateProtocol) {
+    func execute(state: MutableGameStateProtocol) {
         state.discard(playerId: actorId, cardId: cardId)
         state.gainLifePoint(playerId: actorId)
         otherPlayerIds.forEach { state.gainLifePoint(playerId: $0) }
@@ -29,9 +29,9 @@ struct Saloon: ActionProtocol {
 extension Saloon: RuleProtocol {
     
     static func match(state: GameStateProtocol) -> [ActionProtocol] {
-        let playerId = state.players[state.turn].identifier
-        let otherPlayerIds = state.players.filter({ $0.identifier != playerId }).map { $0.identifier }
-        let cards = state.matchingCards(playerId: playerId, names: [.saloon])
-        return cards.map { Saloon(actorId: playerId, cardId: $0.identifier, otherPlayerIds: otherPlayerIds) }
+        let player = state.players[state.turn]
+        let cards = player.handCards(named: .saloon)
+        let otherPlayerIds = state.players.filter({ $0.identifier != player.identifier }).map { $0.identifier }
+        return cards.map { Saloon(actorId: player.identifier, cardId: $0.identifier, otherPlayerIds: otherPlayerIds) }
     }
 }

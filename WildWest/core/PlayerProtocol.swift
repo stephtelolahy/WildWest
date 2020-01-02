@@ -15,7 +15,7 @@ protocol PlayerProtocol {
     var hand: CardListProtocol { get }
     var inPlay: CardListProtocol { get }
     
-    func gainLifePoint()
+    func setHealth(_ value: Int)
 }
 
 enum Role: String {

@@ -7,12 +7,12 @@
 //
 
 protocol GameLoopProtocol {
-    func run(state: GameStateProtocol)
+    func run(state: MutableGameStateProtocol)
 }
 
 class GameLoop: GameLoopProtocol {
     
-    func run(state: GameStateProtocol) {
+    func run(state: MutableGameStateProtocol) {
         let rules: [RuleProtocol.Type] = [Beer.self,
                                           Saloon.self,
                                           Stagecoach.self,
@@ -22,8 +22,8 @@ class GameLoop: GameLoopProtocol {
                                           Shoot.self,
                                           Missed.self,
                                           Gatling.self,
-                                          Duel.self,
                                           Indians.self,
+                                          Duel.self,
                                           Panic.self,
                                           CatBalou.self,
                                           GeneralStore.self,

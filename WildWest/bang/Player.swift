@@ -28,8 +28,8 @@ class Player: PlayerProtocol {
         return "\(ability)-\(role)"
     }
     
-    func gainLifePoint() {
-        health += 1
+    func setHealth(_ value: Int) {
+        health = value
     }
     
 }
