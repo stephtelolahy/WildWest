@@ -844,21 +844,6 @@ import Cuckoo
     
     
     
-     func addMessage(_ message: String)  {
-        
-    return cuckoo_manager.call("addMessage(_: String)",
-            parameters: (message),
-            escapingParameters: (message),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.addMessage(message))
-        
-    }
-    
-    
-    
      func discard(playerId: String, cardId: String)  {
         
     return cuckoo_manager.call("discard(playerId: String, cardId: String)",
@@ -926,11 +911,6 @@ import Cuckoo
 	    }
 	    
 	    
-	    func addMessage<M1: Cuckoo.Matchable>(_ message: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(String)> where M1.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: message) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameUpdateProtocol.self, method: "addMessage(_: String)", parameterMatchers: matchers))
-	    }
-	    
 	    func discard<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(playerId: M1, cardId: M2) -> Cuckoo.ProtocolStubNoReturnFunction<(String, String)> where M1.MatchedType == String, M2.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: cardId) { $0.1 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameUpdateProtocol.self, method: "discard(playerId: String, cardId: String)", parameterMatchers: matchers))
@@ -968,12 +948,6 @@ import Cuckoo
 	
 	    
 	    @discardableResult
-	    func addMessage<M1: Cuckoo.Matchable>(_ message: M1) -> Cuckoo.__DoNotUse<(String), Void> where M1.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: message) { $0 }]
-	        return cuckoo_manager.verify("addMessage(_: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
 	    func discard<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(playerId: M1, cardId: M2) -> Cuckoo.__DoNotUse<(String, String), Void> where M1.MatchedType == String, M2.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: cardId) { $0.1 }]
 	        return cuckoo_manager.verify("discard(playerId: String, cardId: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
@@ -1005,10 +979,6 @@ import Cuckoo
 
     
 
-    
-     func addMessage(_ message: String)   {
-        return DefaultValueRegistry.defaultValue(for: (Void).self)
-    }
     
      func discard(playerId: String, cardId: String)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
@@ -1139,21 +1109,6 @@ import Cuckoo
     
     
     
-     func addMessage(_ message: String)  {
-        
-    return cuckoo_manager.call("addMessage(_: String)",
-            parameters: (message),
-            escapingParameters: (message),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.addMessage(message))
-        
-    }
-    
-    
-    
      func discard(playerId: String, cardId: String)  {
         
     return cuckoo_manager.call("discard(playerId: String, cardId: String)",
@@ -1251,11 +1206,6 @@ import Cuckoo
 	    }
 	    
 	    
-	    func addMessage<M1: Cuckoo.Matchable>(_ message: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(String)> where M1.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: message) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockMutableGameStateProtocol.self, method: "addMessage(_: String)", parameterMatchers: matchers))
-	    }
-	    
 	    func discard<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(playerId: M1, cardId: M2) -> Cuckoo.ProtocolStubNoReturnFunction<(String, String)> where M1.MatchedType == String, M2.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: cardId) { $0.1 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockMutableGameStateProtocol.self, method: "discard(playerId: String, cardId: String)", parameterMatchers: matchers))
@@ -1321,12 +1271,6 @@ import Cuckoo
 	    }
 	    
 	
-	    
-	    @discardableResult
-	    func addMessage<M1: Cuckoo.Matchable>(_ message: M1) -> Cuckoo.__DoNotUse<(String), Void> where M1.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: message) { $0 }]
-	        return cuckoo_manager.verify("addMessage(_: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
 	    
 	    @discardableResult
 	    func discard<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(playerId: M1, cardId: M2) -> Cuckoo.__DoNotUse<(String, String), Void> where M1.MatchedType == String, M2.MatchedType == String {
@@ -1408,10 +1352,6 @@ import Cuckoo
 
     
 
-    
-     func addMessage(_ message: String)   {
-        return DefaultValueRegistry.defaultValue(for: (Void).self)
-    }
     
      func discard(playerId: String, cardId: String)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)

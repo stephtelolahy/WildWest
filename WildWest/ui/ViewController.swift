@@ -14,10 +14,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let resourcesManager = ResourcesManager(jsonReader: JsonReader(bundle: Bundle.main))
-        let roles = resourcesManager.roles(for: 7)
         let figures = resourcesManager.allFigures()
         let cards = resourcesManager.allCards()
-        let state = GameSetup().setupGame(roles: roles, figures: figures, cards: cards)
+        let gameSetup = GameSetup()
+        let roles = gameSetup.roles(for: 7)
+        let state = gameSetup.setupGame(roles: roles, figures: figures, cards: cards)
         GameLoop().run(state: state)
     }
 }

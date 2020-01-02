@@ -7,10 +7,20 @@
 //
 
 protocol GameSetupProtocol {
+    func roles(for playersCount: Int) -> [Role]
     func setupGame(roles: [Role], figures: [Figure], cards: [CardProtocol]) -> MutableGameStateProtocol
 }
 
 class GameSetup: GameSetupProtocol {
+    
+    func roles(for playersCount: Int) -> [Role] {
+        guard playersCount >= 4 && playersCount <= 7 else {
+            return []
+        }
+        
+        let order: [Role] = [.sheriff, .outlaw, .outlaw, .renegade, .deputy, .outlaw, .deputy]
+        return Array(order.prefix(playersCount))
+    }
     
     func setupGame(roles: [Role], figures: [Figure], cards: [CardProtocol]) -> MutableGameStateProtocol {
         let shuffledFigures = figures.shuffled()

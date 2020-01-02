@@ -38,7 +38,6 @@ extension Equip: RuleProtocol {
                                      .mustang,
                                      .scope,
                                      .dynamite)
-        // TODO: cards in front of you should not share the same name
         return cards.map { Equip(actorId: player.identifier, cardId: $0.identifier) }
     }
 }

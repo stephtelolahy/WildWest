@@ -19,14 +19,12 @@ struct Jail: ActionProtocol {
     let cardId: String
     
     func execute(state: MutableGameStateProtocol) {
-        // TODO: 
     }
 }
 
 extension Jail: RuleProtocol {
     
     static func match(state: GameStateProtocol) -> [ActionProtocol] {
-        // TODO:
         return []
     }
 }

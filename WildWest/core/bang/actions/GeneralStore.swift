@@ -1,24 +1,22 @@
 //
-//  Panic.swift
+//  GeneralStore.swift
 //  WildWest
 //
-//  Created by Hugues Stéphano TELOLAHY on 12/30/19.
+//  Created by Hugues Stéphano TELOLAHY on 12/31/19.
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct Panic: ActionProtocol {
+struct GeneralStore: ActionProtocol {
     let actorId: String
     let cardId: String
     
     func execute(state: MutableGameStateProtocol) {
-        // TODO:
     }
 }
 
-extension Panic: RuleProtocol {
+extension GeneralStore: RuleProtocol {
     
     static func match(state: GameStateProtocol) -> [ActionProtocol] {
-        // TODO:
         return []
     }
 }

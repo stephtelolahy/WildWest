@@ -16,7 +16,6 @@ protocol GameStateProtocol {
 }
 
 protocol GameUpdateProtocol {
-    func addMessage(_ message: String)
     func discard(playerId: String, cardId: String)
     func gainLifePoint(playerId: String)
     func pull(playerId: String)

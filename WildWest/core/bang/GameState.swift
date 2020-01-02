@@ -24,10 +24,6 @@ class GameState: MutableGameStateProtocol {
         messages = []
     }
     
-    func addMessage(_ message: String) {
-        messages.append(message)
-    }
-    
     func discard(playerId: String, cardId: String) {
         guard let player = players.first(where: { $0.identifier == playerId }),
             let card = player.hand.cards.first(where: { $0.identifier == cardId }) else {
@@ -77,5 +73,11 @@ class GameState: MutableGameStateProtocol {
         player.hand.remove(card)
         player.inPlay.add(card)
         addMessage("\(player.identifier) equip with \(card.identifier)")
+    }
+}
+
+private extension GameState {
+    func addMessage(_ message: String) {
+        messages.append(message)
     }
 }

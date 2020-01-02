@@ -11,14 +11,12 @@ struct Duel: ActionProtocol {
     let cardId: String
     
     func execute(state: MutableGameStateProtocol) {
-        // TODO:
     }
 }
 
 extension Duel: RuleProtocol {
     
     static func match(state: GameStateProtocol) -> [ActionProtocol] {
-        // TODO:
         return []
     }
 }

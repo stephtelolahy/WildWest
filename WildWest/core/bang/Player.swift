@@ -31,5 +31,4 @@ class Player: PlayerProtocol {
     func setHealth(_ value: Int) {
         health = value
     }
-    
 }

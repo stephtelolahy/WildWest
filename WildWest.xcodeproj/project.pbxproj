@@ -11,6 +11,11 @@
 		AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */; };
 		AD46810E23BEA2B0000B42C7 /* PlayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD46810D23BEA2B0000B42C7 /* PlayerExtension.swift */; };
 		AD46810F23BEA2B0000B42C7 /* PlayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD46810D23BEA2B0000B42C7 /* PlayerExtension.swift */; };
+		AD48DD2A23BEAE1300E5B552 /* StagecoachTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD48DD2923BEAE1300E5B552 /* StagecoachTests.swift */; };
+		AD48DD2C23BEAFAF00E5B552 /* WellsFargoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD48DD2B23BEAFAF00E5B552 /* WellsFargoTests.swift */; };
+		AD48DD2E23BEB06600E5B552 /* EquipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD48DD2D23BEB06600E5B552 /* EquipTests.swift */; };
+		AD48DD3023BEB11800E5B552 /* BeerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD48DD2F23BEB11800E5B552 /* BeerTests.swift */; };
+		AD48DD3223BEB12800E5B552 /* SaloonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD48DD3123BEB12800E5B552 /* SaloonTests.swift */; };
 		AD49F86723BA054400543F59 /* Figure.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49F86623BA054400543F59 /* Figure.swift */; };
 		AD49F86823BA054D00543F59 /* Figure.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49F86623BA054400543F59 /* Figure.swift */; };
 		AD49F86A23BA074100543F59 /* figures.json in Resources */ = {isa = PBXBuildFile; fileRef = AD49F86923BA074100543F59 /* figures.json */; };
@@ -102,6 +107,11 @@
 		8C300D3666EB3B530B73C9D4 /* Pods_WildWest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
 		AD46810D23BEA2B0000B42C7 /* PlayerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerExtension.swift; sourceTree = "<group>"; };
+		AD48DD2923BEAE1300E5B552 /* StagecoachTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagecoachTests.swift; sourceTree = "<group>"; };
+		AD48DD2B23BEAFAF00E5B552 /* WellsFargoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WellsFargoTests.swift; sourceTree = "<group>"; };
+		AD48DD2D23BEB06600E5B552 /* EquipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipTests.swift; sourceTree = "<group>"; };
+		AD48DD2F23BEB11800E5B552 /* BeerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerTests.swift; sourceTree = "<group>"; };
+		AD48DD3123BEB12800E5B552 /* SaloonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaloonTests.swift; sourceTree = "<group>"; };
 		AD49F86623BA054400543F59 /* Figure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Figure.swift; sourceTree = "<group>"; };
 		AD49F86923BA074100543F59 /* figures.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = figures.json; sourceTree = "<group>"; };
 		AD49F86B23BA0C4600543F59 /* Stagecoach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stagecoach.swift; sourceTree = "<group>"; };
@@ -188,6 +198,11 @@
 		AD48DD2823BEABD100E5B552 /* bang */ = {
 			isa = PBXGroup;
 			children = (
+				AD48DD2F23BEB11800E5B552 /* BeerTests.swift */,
+				AD48DD3123BEB12800E5B552 /* SaloonTests.swift */,
+				AD48DD2923BEAE1300E5B552 /* StagecoachTests.swift */,
+				AD48DD2B23BEAFAF00E5B552 /* WellsFargoTests.swift */,
+				AD48DD2D23BEB06600E5B552 /* EquipTests.swift */,
 			);
 			path = bang;
 			sourceTree = "<group>";
@@ -239,6 +254,7 @@
 				ADD035CE23A96002003B2576 /* CardProtocol.swift */,
 				ADD035C823A95EEB003B2576 /* ActionProtocol.swift */,
 				ADD035CB23A95F37003B2576 /* RuleProtocol.swift */,
+				AD52B99123B174F40013240B /* bang */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -268,7 +284,6 @@
 			children = (
 				ADE91AD223BA005000F7316B /* ui */,
 				AD8540A323A44A3200568FE9 /* core */,
-				AD52B99123B174F40013240B /* bang */,
 				ADE91AC823B9FD8100F7316B /* resources */,
 				ADB7D2EB239EE03800653905 /* AppDelegate.swift */,
 				ADB7D2F4239EE03900653905 /* Assets.xcassets */,
@@ -558,20 +573,25 @@
 				AD52B99D23B17A310013240B /* GameState.swift in Sources */,
 				ADB5A11723BABBE80050E173 /* EndTurn.swift in Sources */,
 				AD46810F23BEA2B0000B42C7 /* PlayerExtension.swift in Sources */,
+				AD48DD3023BEB11800E5B552 /* BeerTests.swift in Sources */,
 				ADB5A10223BAB81E0050E173 /* Missed.swift in Sources */,
 				ADD035D923A9604F003B2576 /* GameStateProtocol.swift in Sources */,
 				AD49F87023BA0E3E00543F59 /* WellsFargo.swift in Sources */,
 				ADE91AD623BA03A500F7316B /* GameLoop.swift in Sources */,
 				ADB5A10823BAB84E0050E173 /* Gatling.swift in Sources */,
+				AD48DD2C23BEAFAF00E5B552 /* WellsFargoTests.swift in Sources */,
 				AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */,
 				ADB5A11423BAB9330050E173 /* GeneralStore.swift in Sources */,
+				AD48DD3223BEB12800E5B552 /* SaloonTests.swift in Sources */,
 				ADB5A0FF23BAB8070050E173 /* Shoot.swift in Sources */,
 				ADB5A10523BAB8370050E173 /* Duel.swift in Sources */,
+				AD48DD2A23BEAE1300E5B552 /* StagecoachTests.swift in Sources */,
 				AD5F8C3B23A545C700C286AA /* CuckooExtension.swift in Sources */,
 				ADB5A10E23BAB8780050E173 /* Panic.swift in Sources */,
 				AD49F86D23BA0C4600543F59 /* Stagecoach.swift in Sources */,
 				ADD035D623A96034003B2576 /* PlayerProtocol.swift in Sources */,
 				ADE91ACE23B9FE2300F7316B /* JsonReader.swift in Sources */,
+				AD48DD2E23BEB06600E5B552 /* EquipTests.swift in Sources */,
 				ADD035CA23A95EEB003B2576 /* ActionProtocol.swift in Sources */,
 				ADE91AC723B9F84200F7316B /* Saloon.swift in Sources */,
 				ADD035D323A9601B003B2576 /* CardListProtocol.swift in Sources */,

@@ -9,7 +9,6 @@
 protocol ResourcesManagerProtocol {
     func allCards() -> [Card]
     func allFigures() -> [Figure]
-    func roles(for playersCount: Int) -> [Role]
 }
 
 class ResourcesManager: ResourcesManagerProtocol {
@@ -26,14 +25,5 @@ class ResourcesManager: ResourcesManagerProtocol {
     
     func allFigures() -> [Figure] {
         return jsonReader.load([Figure].self, file: "figures")
-    }
-    
-    func roles(for playersCount: Int) -> [Role] {
-        guard playersCount >= 4 && playersCount <= 7 else {
-            return []
-        }
-        
-        let order: [Role] = [.sheriff, .outlaw, .outlaw, .renegade, .deputy, .outlaw, .deputy]
-        return Array(order.prefix(playersCount))
     }
 }
