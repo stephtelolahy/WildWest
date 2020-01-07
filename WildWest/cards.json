@@ -1,0 +1,483 @@
+[
+    {
+        "name": "barrel",
+        "imageName": "01_barile",
+        "value": "Q",
+        "suit": "spades"
+    },
+    {
+        "name": "barrel",
+        "imageName": "01_barile",
+        "value": "K",
+        "suit": "spades"
+    },
+    {
+        "name": "scope",
+        "imageName": "01_mirino",
+        "value": "A",
+        "suit": "spades"
+    },
+    {
+        "name": "mustang",
+        "imageName": "01_mustang",
+        "value": "8",
+        "suit": "hearts"
+    },
+    {
+        "name": "mustang",
+        "imageName": "01_mustang",
+        "value": "9",
+        "suit": "hearts"
+    },
+    {
+        "name": "jail",
+        "imageName": "01_prigione",
+        "value": "J",
+        "suit": "spades"
+    },
+    {
+        "name": "jail",
+        "imageName": "01_prigione",
+        "value": "10",
+        "suit": "spades"
+    },
+    {
+        "name": "jail",
+        "imageName": "01_prigione",
+        "value": "4",
+        "suit": "hearts"
+    },
+    {
+        "name": "dynamite",
+        "imageName": "01_dinamite",
+        "value": "2",
+        "suit": "hearts"
+    },
+    {
+        "name": "schofield",
+        "imageName": "01_schofield",
+        "value": "K",
+        "suit": "spades"
+    },
+    {
+        "name": "schofield",
+        "imageName": "01_schofield",
+        "value": "J",
+        "suit": "clubs"
+    },
+    {
+        "name": "schofield",
+        "imageName": "01_schofield",
+        "value": "Q",
+        "suit": "clubs"
+    },
+    {
+        "name": "volcanic",
+        "imageName": "01_volcanic",
+        "value": "10",
+        "suit": "spades"
+    },
+    {
+        "name": "volcanic",
+        "imageName": "01_volcanic",
+        "value": "10",
+        "suit": "clubs"
+    },
+    {
+        "name": "remington",
+        "imageName": "01_remington",
+        "value": "K",
+        "suit": "clubs"
+    },
+    {
+        "name": "winchester",
+        "imageName": "01_winchester",
+        "value": "8",
+        "suit": "spades"
+    },
+    {
+        "name": "revCarbine",
+        "imageName": "01_carabine",
+        "value": "A",
+        "suit": "clubs"
+    },
+    {
+        "name": "shoot",
+        "imageName": "01_bang",
+        "value": "A",
+        "suit": "spades"
+    },
+    {
+        "name": "shoot",
+        "imageName": "01_bang",
+        "value": "2",
+        "suit": "diamonds"
+    },
+    {
+        "name": "shoot",
+        "imageName": "01_bang",
+        "value": "3",
+        "suit": "diamonds"
+    },
+    {
+        "name": "shoot",
+        "imageName": "01_bang",
+        "value": "4",
+        "suit": "diamonds"
+    },
+    {
+        "name": "shoot",
+        "imageName": "01_bang",
+        "value": "5",
+        "suit": "diamonds"
+    },
+    {
+        "name": "shoot",
+        "imageName": "01_bang",
+        "value": "6",
+        "suit": "diamonds"
+    },
+    {
+        "name": "shoot",
+        "imageName": "01_bang",
+        "value": "7",
+        "suit": "diamonds"
+    },
+    {
+        "name": "shoot",
+        "imageName": "01_bang",
+        "value": "8",
+        "suit": "diamonds"
+    },
+    {
+        "name": "shoot",
+        "imageName": "01_bang",
+        "value": "9",
+        "suit": "diamonds"
+    },
+    {
+        "name": "shoot",
+        "imageName": "01_bang",
+        "value": "10",
+        "suit": "diamonds"
+    },
+    {
+        "name": "shoot",
+        "imageName": "01_bang",
+        "value": "J",
+        "suit": "diamonds"
+    },
+    {
+        "name": "shoot",
+        "imageName": "01_bang",
+        "value": "Q",
+        "suit": "diamonds"
+    },
+    {
+        "name": "shoot",
+        "imageName": "01_bang",
+        "value": "K",
+        "suit": "diamonds"
+    },
+    {
+        "name": "shoot",
+        "imageName": "01_bang",
+        "value": "A",
+        "suit": "diamonds"
+    },
+    {
+        "name": "shoot",
+        "imageName": "01_bang",
+        "value": "2",
+        "suit": "clubs"
+    },
+    {
+        "name": "shoot",
+        "imageName": "01_bang",
+        "value": "3",
+        "suit": "clubs"
+    },
+    {
+        "name": "shoot",
+        "imageName": "01_bang",
+        "value": "4",
+        "suit": "clubs"
+    },
+    {
+        "name": "shoot",
+        "imageName": "01_bang",
+        "value": "5",
+        "suit": "clubs"
+    },
+    {
+        "name": "shoot",
+        "imageName": "01_bang",
+        "value": "6",
+        "suit": "clubs"
+    },
+    {
+        "name": "shoot",
+        "imageName": "01_bang",
+        "value": "7",
+        "suit": "clubs"
+    },
+    {
+        "name": "shoot",
+        "imageName": "01_bang",
+        "value": "8",
+        "suit": "clubs"
+    },
+    {
+        "name": "shoot",
+        "imageName": "01_bang",
+        "value": "9",
+        "suit": "clubs"
+    },
+    {
+        "name": "shoot",
+        "imageName": "01_bang",
+        "value": "Q",
+        "suit": "hearts"
+    },
+    {
+        "name": "shoot",
+        "imageName": "01_bang",
+        "value": "K",
+        "suit": "hearts"
+    },
+    {
+        "name": "shoot",
+        "imageName": "01_bang",
+        "value": "A",
+        "suit": "hearts"
+    },
+    {
+        "name": "missed",
+        "imageName": "01_mancato",
+        "value": "10",
+        "suit": "clubs"
+    },
+    {
+        "name": "missed",
+        "imageName": "01_mancato",
+        "value": "J",
+        "suit": "clubs"
+    },
+    {
+        "name": "missed",
+        "imageName": "01_mancato",
+        "value": "Q",
+        "suit": "clubs"
+    },
+    {
+        "name": "missed",
+        "imageName": "01_mancato",
+        "value": "K",
+        "suit": "clubs"
+    },
+    {
+        "name": "missed",
+        "imageName": "01_mancato",
+        "value": "A",
+        "suit": "clubs"
+    },
+    {
+        "name": "missed",
+        "imageName": "01_mancato",
+        "value": "2",
+        "suit": "spades"
+    },
+    {
+        "name": "missed",
+        "imageName": "01_mancato",
+        "value": "3",
+        "suit": "spades"
+    },
+    {
+        "name": "missed",
+        "imageName": "01_mancato",
+        "value": "4",
+        "suit": "spades"
+    },
+    {
+        "name": "missed",
+        "imageName": "01_mancato",
+        "value": "5",
+        "suit": "spades"
+    },
+    {
+        "name": "missed",
+        "imageName": "01_mancato",
+        "value": "6",
+        "suit": "spades"
+    },
+    {
+        "name": "missed",
+        "imageName": "01_mancato",
+        "value": "7",
+        "suit": "spades"
+    },
+    {
+        "name": "missed",
+        "imageName": "01_mancato",
+        "value": "8",
+        "suit": "spades"
+    },
+    {
+        "name": "beer",
+        "imageName": "01_birra",
+        "value": "6",
+        "suit": "hearts"
+    },
+    {
+        "name": "beer",
+        "imageName": "01_birra",
+        "value": "7",
+        "suit": "hearts"
+    },
+    {
+        "name": "beer",
+        "imageName": "01_birra",
+        "value": "8",
+        "suit": "hearts"
+    },
+    {
+        "name": "beer",
+        "imageName": "01_birra",
+        "value": "9",
+        "suit": "hearts"
+    },
+    {
+        "name": "beer",
+        "imageName": "01_birra",
+        "value": "10",
+        "suit": "hearts"
+    },
+    {
+        "name": "beer",
+        "imageName": "01_birra",
+        "value": "J",
+        "suit": "hearts"
+    },
+    {
+        "name": "catBalou",
+        "imageName": "01_catbalou",
+        "value": "K",
+        "suit": "hearts"
+    },
+    {
+        "name": "catBalou",
+        "imageName": "01_catbalou",
+        "value": "9",
+        "suit": "diamonds"
+    },
+    {
+        "name": "catBalou",
+        "imageName": "01_catbalou",
+        "value": "10",
+        "suit": "diamonds"
+    },
+    {
+        "name": "catBalou",
+        "imageName": "01_catbalou",
+        "value": "J",
+        "suit": "diamonds"
+    },
+    {
+        "name": "duel",
+        "imageName": "01_duello",
+        "value": "Q",
+        "suit": "diamonds"
+    },
+    {
+        "name": "duel",
+        "imageName": "01_duello",
+        "value": "J",
+        "suit": "spades"
+    },
+    {
+        "name": "duel",
+        "imageName": "01_duello",
+        "value": "8",
+        "suit": "clubs"
+    },
+    {
+        "name": "gatling",
+        "imageName": "01_gatling",
+        "value": "10",
+        "suit": "hearts"
+    },
+    {
+        "name": "generalStore",
+        "imageName": "01_emporio",
+        "value": "9",
+        "suit": "clubs"
+    },
+    {
+        "name": "generalStore",
+        "imageName": "01_emporio",
+        "value": "Q",
+        "suit": "spades"
+    },
+    {
+        "name": "indians",
+        "imageName": "01_indiani",
+        "value": "K",
+        "suit": "diamonds"
+    },
+    {
+        "name": "indians",
+        "imageName": "01_indiani",
+        "value": "A",
+        "suit": "diamonds"
+    },
+    {
+        "name": "panic",
+        "imageName": "01_panico",
+        "value": "J",
+        "suit": "hearts"
+    },
+    {
+        "name": "panic",
+        "imageName": "01_panico",
+        "value": "Q",
+        "suit": "hearts"
+    },
+    {
+        "name": "panic",
+        "imageName": "01_panico",
+        "value": "A",
+        "suit": "hearts"
+    },
+    {
+        "name": "panic",
+        "imageName": "01_panico",
+        "value": "8",
+        "suit": "diamonds"
+    },
+    {
+        "name": "saloon",
+        "imageName": "01_saloon",
+        "value": "5",
+        "suit": "hearts"
+    },
+    {
+        "name": "stagecoach",
+        "imageName": "01_diligenza",
+        "value": "9",
+        "suit": "spades"
+    },
+    {
+        "name": "stagecoach",
+        "imageName": "01_diligenza",
+        "value": "9",
+        "suit": "spades"
+    },
+    {
+        "name": "wellsFargo",
+        "imageName": "01_wellsfargo",
+        "value": "3",
+        "suit": "hearts"
+    }
+]
+
