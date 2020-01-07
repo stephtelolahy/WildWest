@@ -212,16 +212,16 @@ import Cuckoo
     
     
     
-     func remove(_ card: CardProtocol)  {
+     func removeById(_ identifier: String)  {
         
-    return cuckoo_manager.call("remove(_: CardProtocol)",
-            parameters: (card),
-            escapingParameters: (card),
+    return cuckoo_manager.call("removeById(_: String)",
+            parameters: (identifier),
+            escapingParameters: (identifier),
             superclassCall:
                 
                 Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
-            defaultCall: __defaultImplStub!.remove(card))
+            defaultCall: __defaultImplStub!.removeById(identifier))
         
     }
     
@@ -269,9 +269,9 @@ import Cuckoo
 	        return .init(stub: cuckoo_manager.createStub(for: MockCardListProtocol.self, method: "removeFirst() -> CardProtocol", parameterMatchers: matchers))
 	    }
 	    
-	    func remove<M1: Cuckoo.Matchable>(_ card: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(CardProtocol)> where M1.MatchedType == CardProtocol {
-	        let matchers: [Cuckoo.ParameterMatcher<(CardProtocol)>] = [wrap(matchable: card) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockCardListProtocol.self, method: "remove(_: CardProtocol)", parameterMatchers: matchers))
+	    func removeById<M1: Cuckoo.Matchable>(_ identifier: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(String)> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: identifier) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockCardListProtocol.self, method: "removeById(_: String)", parameterMatchers: matchers))
 	    }
 	    
 	    func removeAll() -> Cuckoo.ProtocolStubNoReturnFunction<()> {
@@ -319,9 +319,9 @@ import Cuckoo
 	    }
 	    
 	    @discardableResult
-	    func remove<M1: Cuckoo.Matchable>(_ card: M1) -> Cuckoo.__DoNotUse<(CardProtocol), Void> where M1.MatchedType == CardProtocol {
-	        let matchers: [Cuckoo.ParameterMatcher<(CardProtocol)>] = [wrap(matchable: card) { $0 }]
-	        return cuckoo_manager.verify("remove(_: CardProtocol)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    func removeById<M1: Cuckoo.Matchable>(_ identifier: M1) -> Cuckoo.__DoNotUse<(String), Void> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: identifier) { $0 }]
+	        return cuckoo_manager.verify("removeById(_: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
@@ -359,7 +359,7 @@ import Cuckoo
         return DefaultValueRegistry.defaultValue(for: (CardProtocol).self)
     }
     
-     func remove(_ card: CardProtocol)   {
+     func removeById(_ identifier: String)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     

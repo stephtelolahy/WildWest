@@ -6,11 +6,11 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct Card: CardProtocol, Decodable {
+struct Card: CardProtocol, Decodable, Equatable {
     
     let name: CardName
-    let suit: CardSuit
     let value: String
+    let suit: CardSuit
     
     var identifier: String {
         return "\(name.rawValue)-\(value)-\(suit.rawValue)"

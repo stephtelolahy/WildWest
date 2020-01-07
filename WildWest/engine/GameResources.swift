@@ -1,17 +1,12 @@
 //
-//  ResourcesManager.swift
+//  GameResources.swift
 //  WildWest
 //
-//  Created by Hugues Stéphano TELOLAHY on 12/30/19.
-//  Copyright © 2019 creativeGames. All rights reserved.
+//  Created by Hugues Stéphano TELOLAHY on 1/7/20.
+//  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-protocol ResourcesManagerProtocol {
-    func allCards() -> [Card]
-    func allFigures() -> [Figure]
-}
-
-class ResourcesManager: ResourcesManagerProtocol {
+class GameResources: GameResourcesProtocol {
     
     private let jsonReader: JsonReaderProtocol
     
@@ -19,7 +14,7 @@ class ResourcesManager: ResourcesManagerProtocol {
         self.jsonReader = jsonReader
     }
     
-    func allCards() -> [Card] {
+    func allCards() -> [CardProtocol] {
         return jsonReader.load([Card].self, file: "cards")
     }
     

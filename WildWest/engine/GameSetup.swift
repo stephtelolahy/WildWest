@@ -6,11 +6,6 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-protocol GameSetupProtocol {
-    func roles(for playersCount: Int) -> [Role]
-    func setupGame(roles: [Role], figures: [Figure], cards: [CardProtocol]) -> MutableGameStateProtocol
-}
-
 class GameSetup: GameSetupProtocol {
     
     func roles(for playersCount: Int) -> [Role] {

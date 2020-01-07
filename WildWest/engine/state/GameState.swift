@@ -30,7 +30,7 @@ class GameState: MutableGameStateProtocol {
                 return
         }
         
-        player.hand.remove(card)
+        player.hand.removeById(cardId)
         deck.add(card)
         addMessage("\(player.identifier) discard \(card.identifier)")
     }
@@ -70,14 +70,8 @@ class GameState: MutableGameStateProtocol {
                 return
         }
         
-        player.hand.remove(card)
+        player.hand.removeById(cardId)
         player.inPlay.add(card)
         addMessage("\(player.identifier) equip with \(card.identifier)")
-    }
-}
-
-private extension GameState {
-    func addMessage(_ message: String) {
-        messages.append(message)
     }
 }

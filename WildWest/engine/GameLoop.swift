@@ -6,10 +6,6 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-protocol GameLoopProtocol {
-    func run(state: MutableGameStateProtocol)
-}
-
 class GameLoop: GameLoopProtocol {
     
     func run(state: MutableGameStateProtocol) {

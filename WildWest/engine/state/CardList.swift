@@ -30,7 +30,7 @@ class CardList: CardListProtocol {
         return cards.removeFirst()
     }
     
-    func remove(_ card: CardProtocol) {
-        return cards.removeAll { $0.identifier == card.identifier }
+    func removeById(_ identifier: String) {
+        return cards.removeAll { $0.identifier == identifier }
     }
 }
