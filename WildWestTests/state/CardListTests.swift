@@ -7,91 +7,95 @@
 //
 
 import XCTest
+import Cuckoo
 
 class CardListTests: XCTestCase {
     
-    // TODO: inject mock cards, so then when card properties changed, these instances won't be obsolete
-
     func test_GetCards() {
         // Given
-        let card1 = Card(name: .barrel, value: "2", suit: .diamonds)
-        let card2 = Card(name: .scope, value: "8", suit: .clubs)
+        let card1 = MockCardProtocol().identified(by: "c1")
+        let card2 = MockCardProtocol().identified(by: "c2")
         let sut = CardList(cards: [card1, card2])
         
         // When
         // Assert
-        XCTAssertEqual(sut.cards as? [Card], [card1, card2])
+        XCTAssertEqual(sut.cards.map { $0.identifier }, ["c1", "c2"])
     }
     
     func test_AddCard() {
         // Given
-        let card1 = Card(name: .barrel, value: "2", suit: .diamonds)
-        let card2 = Card(name: .scope, value: "8", suit: .clubs)
-        let card3 = Card(name: .barrel, value: "J", suit: .hearts)
+        let card1 = MockCardProtocol().identified(by: "c1")
+        let card2 = MockCardProtocol().identified(by: "c2")
+        let card3 = MockCardProtocol().identified(by: "c3")
         let sut = CardList(cards: [card1, card2])
         
         // When
         sut.add(card3)
         
         // Assert
-        XCTAssertEqual(sut.cards as? [Card], [card1, card2, card3])
+        XCTAssertEqual(sut.cards.map { $0.identifier }, ["c1", "c2", "c3"])
     }
     
     func test_AddAll() {
         // Given
-        let card1 = Card(name: .barrel, value: "2", suit: .diamonds)
-        let card2 = Card(name: .scope, value: "8", suit: .clubs)
-        let card3 = Card(name: .barrel, value: "J", suit: .hearts)
+        let card1 = MockCardProtocol().identified(by: "c1")
+        let card2 = MockCardProtocol().identified(by: "c2")
+        let card3 = MockCardProtocol().identified(by: "c3")
         let sut = CardList(cards: [card1])
         
         // When
         sut.addAll([card2, card3])
         
         // Assert
-        XCTAssertEqual(sut.cards as? [Card], [card1, card2, card3])
+        XCTAssertEqual(sut.cards.map { $0.identifier }, ["c1", "c2", "c3"])
     }
     
     func test_RemoveFirst() {
         // Given
-        let card1 = Card(name: .barrel, value: "2", suit: .diamonds)
-        let card2 = Card(name: .scope, value: "8", suit: .clubs)
-        let card3 = Card(name: .barrel, value: "J", suit: .hearts)
+        let card1 = MockCardProtocol().identified(by: "c1")
+        let card2 = MockCardProtocol().identified(by: "c2")
+        let card3 = MockCardProtocol().identified(by: "c3")
         let sut = CardList(cards: [card1, card2, card3])
         
         // When
         let surprise = sut.removeFirst()
         
         // Assert
-        XCTAssertEqual(surprise as? Card, card1)
-        XCTAssertEqual(sut.cards as? [Card], [card2, card3])
-    }
-    
-    func test_RemoveFirstThrowsError_IfEmpty() {
-        XCTFail()
+        XCTAssertEqual(surprise.identifier, "c1")
+        XCTAssertEqual(sut.cards.map { $0.identifier }, ["c2", "c3"])
     }
     
     func test_RemoveCard() {
         // Given
-        let card1 = Card(name: .barrel, value: "2", suit: .diamonds)
-        let card2 = Card(name: .scope, value: "8", suit: .clubs)
-        let card3 = Card(name: .barrel, value: "J", suit: .hearts)
+        let card1 = MockCardProtocol().identified(by: "c1")
+        let card2 = MockCardProtocol().identified(by: "c2")
+        let card3 = MockCardProtocol().identified(by: "c3")
         let sut = CardList(cards: [card1, card2, card3])
         
         // When
-        sut.removeById("barrel-2-diamonds")
+        sut.removeById("c2")
         
         // Assert
-        XCTAssertEqual(sut.cards as? [Card], [card2, card3])
+        XCTAssertEqual(sut.cards.map { $0.identifier }, ["c1", "c3"])
     }
     
-    func test_RemoveCardThrowsError_IfNotFound() {
-        XCTFail()
+    func test_RemoveCardDoesNothing_IfNotFound() {
+        // Given
+        let card1 = MockCardProtocol().identified(by: "c1")
+        let card2 = MockCardProtocol().identified(by: "c2")
+        let sut = CardList(cards: [card1, card2])
+        
+        // When
+        sut.removeById("c3")
+        
+        // Assert
+        XCTAssertEqual(sut.cards.map { $0.identifier }, ["c1", "c2"])
     }
     
     func test_RemoveAll() {
         // Given
-        let card1 = Card(name: .barrel, value: "2", suit: .diamonds)
-        let card2 = Card(name: .scope, value: "8", suit: .clubs)
+        let card1 = MockCardProtocol().identified(by: "c1")
+        let card2 = MockCardProtocol().identified(by: "c2")
         let sut = CardList(cards: [card1, card2])
         
         // When
@@ -99,5 +103,15 @@ class CardListTests: XCTestCase {
         
         // Assert
         XCTAssertTrue(sut.cards.isEmpty)
+    }
+}
+
+
+extension MockCardProtocol {
+    func identified(by identifier: String) -> MockCardProtocol {
+        Cuckoo.stub(self) { mock in
+            when(mock.identifier.get).thenReturn(identifier)
+        }
+        return self
     }
 }
