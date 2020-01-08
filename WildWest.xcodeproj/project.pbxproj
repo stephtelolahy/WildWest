@@ -84,6 +84,7 @@
 		ADD035D623A96034003B2576 /* PlayerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD035D423A96034003B2576 /* PlayerProtocol.swift */; };
 		ADD035D823A9604F003B2576 /* GameStateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD035D723A9604F003B2576 /* GameStateProtocol.swift */; };
 		ADD035D923A9604F003B2576 /* GameStateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD035D723A9604F003B2576 /* GameStateProtocol.swift */; };
+		ADD0825E23C67C96001BC18F /* PlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0825D23C67C96001BC18F /* PlayerTests.swift */; };
 		ADD5643523A4E09C00C1BD01 /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5643423A4E09C00C1BD01 /* Beer.swift */; };
 		ADD5643623A4E09C00C1BD01 /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5643423A4E09C00C1BD01 /* Beer.swift */; };
 		ADE91AC623B9F84200F7316B /* Saloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE91AC523B9F84200F7316B /* Saloon.swift */; };
@@ -165,6 +166,7 @@
 		ADD035D123A9601B003B2576 /* CardListProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListProtocol.swift; sourceTree = "<group>"; };
 		ADD035D423A96034003B2576 /* PlayerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerProtocol.swift; sourceTree = "<group>"; };
 		ADD035D723A9604F003B2576 /* GameStateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateProtocol.swift; sourceTree = "<group>"; };
+		ADD0825D23C67C96001BC18F /* PlayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTests.swift; sourceTree = "<group>"; };
 		ADD5643423A4E09C00C1BD01 /* Beer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beer.swift; sourceTree = "<group>"; };
 		ADE91AC523B9F84200F7316B /* Saloon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Saloon.swift; sourceTree = "<group>"; };
 		ADE91ACC23B9FE2300F7316B /* JsonReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonReader.swift; sourceTree = "<group>"; };
@@ -201,6 +203,14 @@
 				6D17AD4368D4F158C313A85D /* Pods-WildWestTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		AD208A6623C6809B0082AC98 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AD5F8C3A23A545C700C286AA /* CuckooExtension.swift */,
+			);
+			path = extensions;
 			sourceTree = "<group>";
 		};
 		AD36CDD723C51C27008D4EDB /* engine */ = {
@@ -281,6 +291,7 @@
 			children = (
 				AD36CDEE23C52306008D4EDB /* CardTests.swift */,
 				AD36CDF023C523BD008D4EDB /* CardListTests.swift */,
+				ADD0825D23C67C96001BC18F /* PlayerTests.swift */,
 			);
 			path = state;
 			sourceTree = "<group>";
@@ -345,9 +356,9 @@
 			children = (
 				AD36CDED23C522EE008D4EDB /* state */,
 				AD48DD2823BEABD100E5B552 /* action */,
+				AD208A6623C6809B0082AC98 /* extensions */,
 				AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */,
 				ADB7D304239EE03900653905 /* Info.plist */,
-				AD5F8C3A23A545C700C286AA /* CuckooExtension.swift */,
 			);
 			path = WildWestTests;
 			sourceTree = "<group>";
@@ -645,6 +656,7 @@
 				ADE91AC723B9F84200F7316B /* Saloon.swift in Sources */,
 				ADD035D323A9601B003B2576 /* CardListProtocol.swift in Sources */,
 				ADB5A10B23BAB8630050E173 /* Indians.swift in Sources */,
+				ADD0825E23C67C96001BC18F /* PlayerTests.swift in Sources */,
 				ADD035D023A96002003B2576 /* CardProtocol.swift in Sources */,
 				AD52B99A23B178CC0013240B /* Player.swift in Sources */,
 				ADE91AD523BA00DC00F7316B /* GameSetup.swift in Sources */,

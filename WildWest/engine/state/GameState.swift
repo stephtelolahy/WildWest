@@ -15,13 +15,18 @@ class GameState: MutableGameStateProtocol {
     var outcome: GameOutcome?
     var messages: [String]
     
-    init(players: [PlayerProtocol], deck: CardListProtocol, discard: CardListProtocol) {
+    init(players: [PlayerProtocol],
+         deck: CardListProtocol,
+         discard: CardListProtocol,
+         turn: Int,
+         outcome: GameOutcome?,
+         messages: [String]) {
         self.players = players
         self.deck = deck
         self.discard = discard
-        turn = 0
-        outcome = nil
-        messages = []
+        self.turn = turn
+        self.outcome = outcome
+        self.messages = messages
     }
     
     func discard(playerId: String, cardId: String) {

@@ -11,7 +11,11 @@ import XCTest
 class CardTests: XCTestCase {
 
     func test_CardIdentifier_IsTheConcatenationOf_Name_Value_Suit() {
-        XCTAssertEqual(Card(name: .barrel, value: "9", suit: .clubs).identifier, "barrel-9-clubs")
-        XCTAssertEqual(Card(name: .dynamite, value: "K", suit: .spades).identifier, "dynamite-K-spades")
+        // Given
+        let sut = Card(name: .barrel, value: "9", suit: .clubs)
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.identifier, "barrel-9-clubs")
     }
 }

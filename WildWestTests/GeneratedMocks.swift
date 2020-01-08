@@ -423,20 +423,6 @@ import Cuckoo
     
     
     
-     var suit: CardSuit {
-        get {
-            return cuckoo_manager.getter("suit",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.suit)
-        }
-        
-    }
-    
-    
-    
      var value: String {
         get {
             return cuckoo_manager.getter("value",
@@ -445,6 +431,20 @@ import Cuckoo
                     Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                     ,
                 defaultCall: __defaultImplStub!.value)
+        }
+        
+    }
+    
+    
+    
+     var suit: CardSuit {
+        get {
+            return cuckoo_manager.getter("suit",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.suit)
         }
         
     }
@@ -472,13 +472,13 @@ import Cuckoo
 	    }
 	    
 	    
-	    var suit: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardProtocol, CardSuit> {
-	        return .init(manager: cuckoo_manager, name: "suit")
+	    var value: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardProtocol, String> {
+	        return .init(manager: cuckoo_manager, name: "value")
 	    }
 	    
 	    
-	    var value: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardProtocol, String> {
-	        return .init(manager: cuckoo_manager, name: "value")
+	    var suit: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardProtocol, CardSuit> {
+	        return .init(manager: cuckoo_manager, name: "suit")
 	    }
 	    
 	    
@@ -507,13 +507,13 @@ import Cuckoo
 	    }
 	    
 	    
-	    var suit: Cuckoo.VerifyReadOnlyProperty<CardSuit> {
-	        return .init(manager: cuckoo_manager, name: "suit", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var value: Cuckoo.VerifyReadOnlyProperty<String> {
+	        return .init(manager: cuckoo_manager, name: "value", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	    
-	    var value: Cuckoo.VerifyReadOnlyProperty<String> {
-	        return .init(manager: cuckoo_manager, name: "value", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var suit: Cuckoo.VerifyReadOnlyProperty<CardSuit> {
+	        return .init(manager: cuckoo_manager, name: "suit", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	
@@ -540,17 +540,17 @@ import Cuckoo
     }
     
     
-     var suit: CardSuit {
+     var value: String {
         get {
-            return DefaultValueRegistry.defaultValue(for: (CardSuit).self)
+            return DefaultValueRegistry.defaultValue(for: (String).self)
         }
         
     }
     
     
-     var value: String {
+     var suit: CardSuit {
         get {
-            return DefaultValueRegistry.defaultValue(for: (String).self)
+            return DefaultValueRegistry.defaultValue(for: (CardSuit).self)
         }
         
     }

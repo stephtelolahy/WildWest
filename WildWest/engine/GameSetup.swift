@@ -37,6 +37,11 @@ class GameSetup: GameSetupProtocol {
                           hand: CardList(cards: hand),
                           inPlay: CardList(cards: []))
         }
-        return GameState(players: players, deck: CardList(cards: deck), discard: CardList(cards: []))
+        return GameState(players: players,
+                         deck: CardList(cards: deck),
+                         discard: CardList(cards: []),
+                         turn: 0,
+                         outcome: nil,
+                         messages: [])
     }
 }

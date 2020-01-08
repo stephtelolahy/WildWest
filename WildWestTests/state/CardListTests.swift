@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import Cuckoo
 
 class CardListTests: XCTestCase {
     
@@ -58,10 +57,10 @@ class CardListTests: XCTestCase {
         let sut = CardList(cards: [card1, card2, card3])
         
         // When
-        let surprise = sut.removeFirst()
+        let card = sut.removeFirst()
         
         // Assert
-        XCTAssertEqual(surprise.identifier, "c1")
+        XCTAssertEqual(card.identifier, "c1")
         XCTAssertEqual(sut.cards.map { $0.identifier }, ["c2", "c3"])
     }
     
@@ -103,15 +102,5 @@ class CardListTests: XCTestCase {
         
         // Assert
         XCTAssertTrue(sut.cards.isEmpty)
-    }
-}
-
-
-extension MockCardProtocol {
-    func identified(by identifier: String) -> MockCardProtocol {
-        Cuckoo.stub(self) { mock in
-            when(mock.identifier.get).thenReturn(identifier)
-        }
-        return self
     }
 }

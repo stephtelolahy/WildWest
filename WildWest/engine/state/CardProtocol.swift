@@ -9,8 +9,8 @@
 protocol CardProtocol {
     var identifier: String { get }
     var name: CardName { get }
-    var suit: CardSuit { get }
     var value: String { get }
+    var suit: CardSuit { get }
 }
 
 enum CardName: String, Decodable {
