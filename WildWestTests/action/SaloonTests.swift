@@ -21,8 +21,23 @@ class SaloonTests: XCTestCase {
     
     func test_EachPlayerGainLifePoint_IfPlayingSaloon() {
         // Given
-        let mockState = MockMutableGameStateProtocol().withEnabledDefaultImplementation(MutableGameStateProtocolStub())
-        let saloon = Saloon(actorId: "p1", cardId: "c1", otherPlayerIds: ["p2", "p3"])
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .health(is: 2)
+            .maxHealth(is: 4)
+        let mockPlayer2 = MockPlayerProtocol()
+            .identified(by: "p2")
+            .health(is: 3)
+            .maxHealth(is: 4)
+        let mockPlayer3 = MockPlayerProtocol()
+            .identified(by: "p3")
+            .health(is: 1)
+            .maxHealth(is: 3)
+        let mockState = MockGameStateProtocol()
+            .withEnabledDefaultImplementation(GameStateProtocolStub())
+            .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
+        
+        let saloon = Saloon(actorId: "p1", cardId: "c1")
         
         // When
         saloon.execute(state: mockState)
@@ -32,5 +47,48 @@ class SaloonTests: XCTestCase {
         verify(mockState).gainLifePoint(playerId: "p1")
         verify(mockState).gainLifePoint(playerId: "p2")
         verify(mockState).gainLifePoint(playerId: "p3")
+    }
+    
+    func test_OnlyNotMaxHealthPlayerGainLifePoints_IfPlayingSaloon() {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .health(is: 4)
+            .maxHealth(is: 4)
+        let mockPlayer2 = MockPlayerProtocol()
+            .identified(by: "p2")
+            .health(is: 3)
+            .maxHealth(is: 4)
+        let mockState = MockGameStateProtocol()
+            .withEnabledDefaultImplementation(GameStateProtocolStub())
+            .players(are: mockPlayer1, mockPlayer2)
+        
+        let saloon = Saloon(actorId: "p1", cardId: "c1")
+        
+        // When
+        saloon.execute(state: mockState)
+        
+        // Assert
+        verify(mockState).discard(playerId: "p1", cardId: "c1")
+        verify(mockState).gainLifePoint(playerId: "p2")
+    }
+    
+    func test_CanPlaySaloon_IfYourTurnAndOwnSaloonCard() {
+        // Given
+        let mockCard = MockCardProtocol()
+            .named(.saloon)
+            .identified(by: "c1")
+        let mockPlayer = MockPlayerProtocol()
+            .holding(mockCard)
+            .identified(by: "p1")
+        let mockState = MockGameStateProtocol()
+            .currentTurn(is: 0)
+            .players(are: mockPlayer)
+        
+        // When
+        let actions = Saloon.match(state: mockState)
+        
+        // Assert
+        XCTAssertEqual(actions as? [Saloon], [Saloon(actorId: "p1", cardId: "c1")])
     }
 }

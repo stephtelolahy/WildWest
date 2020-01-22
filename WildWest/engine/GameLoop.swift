@@ -8,7 +8,7 @@
 
 class GameLoop: GameLoopProtocol {
     
-    func run(state: MutableGameStateProtocol) {
+    func run(state: GameStateProtocol) {
         let rules: [RuleProtocol.Type] = [Beer.self,
                                           Saloon.self,
                                           Stagecoach.self,

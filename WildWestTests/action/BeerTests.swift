@@ -24,7 +24,7 @@ class BeerTests: XCTestCase {
     
     func test_GainLifePoint_IfPlayingBeer() {
         // Given
-        let mockState = MockMutableGameStateProtocol().withEnabledDefaultImplementation(MutableGameStateProtocolStub())
+        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
         let beer = Beer(actorId: "p1", cardId: "c1")
         
         // When
@@ -36,7 +36,7 @@ class BeerTests: XCTestCase {
         verifyNoMoreInteractions(mockState)
     }
     
-    func test_CanPlayBeer_IfOwnBeerCard() {
+    func test_CanPlayBeer_IfYourTurnAndOwnBeerCard() {
         // Given
         let mockCard = MockCardProtocol()
             .named(.beer)

@@ -13,16 +13,11 @@ protocol GameStateProtocol {
     var outcome: GameOutcome? { get }
     var messages: [String] { get }
     var turn: Int { get }
-}
-
-protocol GameUpdateProtocol {
+    
     func discard(playerId: String, cardId: String)
     func gainLifePoint(playerId: String)
     func pull(playerId: String)
     func equip(playerId: String, cardId: String)
-}
-
-protocol MutableGameStateProtocol: GameStateProtocol, GameUpdateProtocol {
 }
 
 enum GameOutcome {

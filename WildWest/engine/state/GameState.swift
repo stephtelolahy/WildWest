@@ -6,7 +6,7 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-class GameState: MutableGameStateProtocol {
+class GameState: GameStateProtocol {
     
     let players: [PlayerProtocol]
     let deck: CardListProtocol

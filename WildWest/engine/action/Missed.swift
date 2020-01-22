@@ -10,7 +10,7 @@ struct Missed: ActionProtocol {
     let actorId: String
     let cardId: String
     
-    func execute(state: MutableGameStateProtocol) {
+    func execute(state: GameStateProtocol) {
     }
 }
 

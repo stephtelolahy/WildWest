@@ -7,5 +7,5 @@
 //
 
 protocol GameLoopProtocol {
-    func run(state: MutableGameStateProtocol)
+    func run(state: GameStateProtocol)
 }

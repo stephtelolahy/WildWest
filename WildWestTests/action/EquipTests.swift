@@ -22,7 +22,7 @@ class EquipTests: XCTestCase {
     
     func test_PutCardInPlay_IfArming() {
         // Given
-        let mockState = MockMutableGameStateProtocol().withEnabledDefaultImplementation(MutableGameStateProtocolStub())
+        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
         let equip = Equip(actorId: "p1", cardId: "c1")
         
         // When

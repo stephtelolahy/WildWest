@@ -10,7 +10,7 @@ struct Stagecoach: ActionProtocol {
     let actorId: String
     let cardId: String
     
-    func execute(state: MutableGameStateProtocol) {
+    func execute(state: GameStateProtocol) {
         state.discard(playerId: actorId, cardId: cardId)
         state.pull(playerId: actorId)
         state.pull(playerId: actorId)

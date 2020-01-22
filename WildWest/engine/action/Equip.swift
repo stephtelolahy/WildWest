@@ -11,7 +11,7 @@ struct Equip: ActionProtocol {
     let actorId: String
     let cardId: String
     
-    func execute(state: MutableGameStateProtocol) {
+    func execute(state: GameStateProtocol) {
         state.equip(playerId: actorId, cardId: cardId)
     }
 }

@@ -16,7 +16,7 @@ class StagecoachTests: XCTestCase {
     
     func test_Pull2Cards_IfPlayingStagecoach() {
         // Given
-        let mockState = MockMutableGameStateProtocol().withEnabledDefaultImplementation(MutableGameStateProtocolStub())
+        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
         let stagecoach = Stagecoach(actorId: "p1", cardId: "c1")
         
         // When

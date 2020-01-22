@@ -16,7 +16,7 @@ class WellsFargoTests: XCTestCase {
     
     func test_Pull3Cards_IfPlayingWellsFargo() {
         // Given
-        let mockState = MockMutableGameStateProtocol().withEnabledDefaultImplementation(MutableGameStateProtocolStub())
+        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
         let wellsFargo = WellsFargo(actorId: "p1", cardId: "c1")
         
         // When
