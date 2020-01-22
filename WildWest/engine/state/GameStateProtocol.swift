@@ -14,10 +14,11 @@ protocol GameStateProtocol {
     var messages: [String] { get }
     var turn: Int { get }
     
-    func discard(playerId: String, cardId: String)
+    func discardHand(playerId: String, cardId: String)
+    func discardInPlay(playerId: String, cardId: String)
     func gainLifePoint(playerId: String)
     func pull(playerId: String)
-    func equip(playerId: String, cardId: String)
+    func putInPlay(playerId: String, cardId: String)
 }
 
 enum GameOutcome {

@@ -16,7 +16,7 @@ struct GeneralStore: ActionProtocol {
 
 extension GeneralStore: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [GeneralStore]? {
-        return nil
+    static func match(state: GameStateProtocol) -> [GeneralStore] {
+        return []
     }
 }

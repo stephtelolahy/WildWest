@@ -43,7 +43,7 @@ class SaloonTests: XCTestCase {
         saloon.execute(state: mockState)
         
         // Assert
-        verify(mockState).discard(playerId: "p1", cardId: "c1")
+        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
         verify(mockState).gainLifePoint(playerId: "p1")
         verify(mockState).gainLifePoint(playerId: "p2")
         verify(mockState).gainLifePoint(playerId: "p3")
@@ -69,7 +69,7 @@ class SaloonTests: XCTestCase {
         saloon.execute(state: mockState)
         
         // Assert
-        verify(mockState).discard(playerId: "p1", cardId: "c1")
+        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
         verify(mockState).gainLifePoint(playerId: "p2")
     }
     

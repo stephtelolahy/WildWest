@@ -16,7 +16,7 @@ struct Jail: ActionProtocol {
 
 extension Jail: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [Jail]? {
-        return nil
+    static func match(state: GameStateProtocol) -> [Jail] {
+        return []
     }
 }

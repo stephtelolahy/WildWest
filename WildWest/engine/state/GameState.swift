@@ -29,7 +29,7 @@ class GameState: GameStateProtocol {
         self.messages = messages
     }
     
-    func discard(playerId: String, cardId: String) {
+    func discardHand(playerId: String, cardId: String) {
         guard let player = players.first(where: { $0.identifier == playerId }),
             let card = player.hand.cards.first(where: { $0.identifier == cardId }) else {
                 return
@@ -37,7 +37,10 @@ class GameState: GameStateProtocol {
         
         player.hand.removeById(cardId)
         deck.add(card)
-        addMessage("\(player.identifier) discard \(card.identifier)")
+        messages.append("\(player.identifier) discard \(card.identifier)")
+    }
+    
+    func discardInPlay(playerId: String, cardId: String) {
     }
     
     func pull(playerId: String) {
@@ -53,7 +56,7 @@ class GameState: GameStateProtocol {
         
         let card = deck.removeFirst()
         player.hand.add(card)
-        addMessage("\(player.identifier) pull \(card.identifier) from deck")
+        messages.append("\(player.identifier) pull \(card.identifier)")
     }
     
     func gainLifePoint(playerId: String) {
@@ -66,10 +69,10 @@ class GameState: GameStateProtocol {
         }
         
         player.setHealth(player.health + 1)
-        addMessage("\(player.identifier) gain life point")
+        messages.append("\(player.identifier) gain life point")
     }
     
-    func equip(playerId: String, cardId: String) {
+    func putInPlay(playerId: String, cardId: String) {
         guard let player = players.first(where: { $0.identifier == playerId }),
             let card = player.hand.cards.first(where: { $0.identifier == cardId }) else {
                 return
@@ -77,6 +80,6 @@ class GameState: GameStateProtocol {
         
         player.hand.removeById(cardId)
         player.inPlay.add(card)
-        addMessage("\(player.identifier) equip with \(card.identifier)")
+        messages.append("\(player.identifier) put in play \(card.identifier)")
     }
 }

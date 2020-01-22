@@ -9,20 +9,4 @@
 import XCTest
 
 class GameStateTests: XCTestCase {
-    
-    func test_Discard() {
-        XCTFail()
-    }
-    
-    func test_Pull() {
-        XCTFail()
-    }
-    
-    func test_GainLifePoint() {
-        XCTFail()
-    }
-    
-    func test_Equip() {
-        XCTFail()
-    }
 }

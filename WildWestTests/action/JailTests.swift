@@ -17,5 +17,4 @@ import XCTest
 /// Jail cannot be played on the Sheriff.
 ///
 class JailTests: XCTestCase {
-
 }

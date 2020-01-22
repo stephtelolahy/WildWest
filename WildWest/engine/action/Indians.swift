@@ -16,7 +16,7 @@ struct Indians: ActionProtocol {
 
 extension Indians: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [Indians]? {
-        return nil
+    static func match(state: GameStateProtocol) -> [Indians] {
+        return []
     }
 }

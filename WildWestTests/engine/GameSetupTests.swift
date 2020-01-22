@@ -9,5 +9,4 @@
 import XCTest
 
 class GameSetupTests: XCTestCase {
-
 }

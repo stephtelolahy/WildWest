@@ -16,7 +16,7 @@ struct Missed: ActionProtocol {
 
 extension Missed: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [Missed]? {
-        return nil
+    static func match(state: GameStateProtocol) -> [Missed] {
+        return []
     }
 }

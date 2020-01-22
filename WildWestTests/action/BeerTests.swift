@@ -31,7 +31,7 @@ class BeerTests: XCTestCase {
         beer.execute(state: mockState)
         
         // Assert
-        verify(mockState).discard(playerId: "p1", cardId: "c1")
+        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
         verify(mockState).gainLifePoint(playerId: "p1")
         verifyNoMoreInteractions(mockState)
     }
@@ -73,7 +73,7 @@ class BeerTests: XCTestCase {
         let actions = Beer.match(state: mockState)
         
         // Assert
-        XCTAssertNil(actions)
+        XCTAssertEqual(actions, [])
     }
     
     func test_CannotPlayBeer_IfThereAreOnly2PlayersLeft() {
@@ -90,6 +90,6 @@ class BeerTests: XCTestCase {
         let actions = Beer.match(state: mockState)
         
         // Assert
-        XCTAssertNil(actions)
+        XCTAssertEqual(actions, [])
     }
 }

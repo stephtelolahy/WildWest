@@ -11,8 +11,6 @@
 		AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */; };
 		AD36CDDD23C51EFA008D4EDB /* GameResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD36CDDC23C51EFA008D4EDB /* GameResources.swift */; };
 		AD36CDDE23C51EFA008D4EDB /* GameResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD36CDDC23C51EFA008D4EDB /* GameResources.swift */; };
-		AD36CDE223C52157008D4EDB /* GameStateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD36CDE123C52157008D4EDB /* GameStateExtension.swift */; };
-		AD36CDE323C52157008D4EDB /* GameStateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD36CDE123C52157008D4EDB /* GameStateExtension.swift */; };
 		AD36CDE523C521FE008D4EDB /* GameResourcesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD36CDE423C521FE008D4EDB /* GameResourcesProtocol.swift */; };
 		AD36CDE623C521FE008D4EDB /* GameResourcesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD36CDE423C521FE008D4EDB /* GameResourcesProtocol.swift */; };
 		AD36CDE823C52218008D4EDB /* GameSetupProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD36CDE723C52218008D4EDB /* GameSetupProtocol.swift */; };
@@ -45,6 +43,8 @@
 		AD52B99D23B17A310013240B /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD52B99B23B17A310013240B /* GameState.swift */; };
 		AD671A1923D8DCE000F0AA4A /* BeerLastLifePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD671A1823D8DCE000F0AA4A /* BeerLastLifePoint.swift */; };
 		AD671A1A23D8DCE000F0AA4A /* BeerLastLifePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD671A1823D8DCE000F0AA4A /* BeerLastLifePoint.swift */; };
+		AD671A1C23D8F9D600F0AA4A /* CardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD671A1B23D8F9D600F0AA4A /* CardExtension.swift */; };
+		AD671A1D23D8F9D600F0AA4A /* CardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD671A1B23D8F9D600F0AA4A /* CardExtension.swift */; };
 		AD7EAFBA23D7817E00FE23D5 /* JailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7EAFB923D7817E00FE23D5 /* JailTests.swift */; };
 		AD7EAFBC23D7825800FE23D5 /* GameStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7EAFBB23D7825800FE23D5 /* GameStateTests.swift */; };
 		AD7EAFBF23D7846D00FE23D5 /* GameSetupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7EAFBE23D7846D00FE23D5 /* GameSetupTests.swift */; };
@@ -126,7 +126,6 @@
 		8C300D3666EB3B530B73C9D4 /* Pods_WildWest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
 		AD36CDDC23C51EFA008D4EDB /* GameResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameResources.swift; sourceTree = "<group>"; };
-		AD36CDE123C52157008D4EDB /* GameStateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateExtension.swift; sourceTree = "<group>"; };
 		AD36CDE423C521FE008D4EDB /* GameResourcesProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameResourcesProtocol.swift; sourceTree = "<group>"; };
 		AD36CDE723C52218008D4EDB /* GameSetupProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetupProtocol.swift; sourceTree = "<group>"; };
 		AD36CDEA23C5227D008D4EDB /* GameLoopProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLoopProtocol.swift; sourceTree = "<group>"; };
@@ -147,6 +146,7 @@
 		AD52B99823B178CC0013240B /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		AD52B99B23B17A310013240B /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		AD671A1823D8DCE000F0AA4A /* BeerLastLifePoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerLastLifePoint.swift; sourceTree = "<group>"; };
+		AD671A1B23D8F9D600F0AA4A /* CardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardExtension.swift; sourceTree = "<group>"; };
 		AD7EAFB923D7817E00FE23D5 /* JailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JailTests.swift; sourceTree = "<group>"; };
 		AD7EAFBB23D7825800FE23D5 /* GameStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateTests.swift; sourceTree = "<group>"; };
 		AD7EAFBE23D7846D00FE23D5 /* GameSetupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetupTests.swift; sourceTree = "<group>"; };
@@ -320,7 +320,7 @@
 			isa = PBXGroup;
 			children = (
 				AD46810D23BEA2B0000B42C7 /* PlayerExtension.swift */,
-				AD36CDE123C52157008D4EDB /* GameStateExtension.swift */,
+				AD671A1B23D8F9D600F0AA4A /* CardExtension.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -605,7 +605,6 @@
 				ADB5A11023BAB89C0050E173 /* CatBalou.swift in Sources */,
 				ADE91AC623B9F84200F7316B /* Saloon.swift in Sources */,
 				ADE91AD423BA00DC00F7316B /* GameSetup.swift in Sources */,
-				AD36CDE223C52157008D4EDB /* GameStateExtension.swift in Sources */,
 				ADD035D523A96034003B2576 /* PlayerProtocol.swift in Sources */,
 				AD49F86723BA054400543F59 /* Figure.swift in Sources */,
 				ADB5A0F523BAB29C0050E173 /* Equip.swift in Sources */,
@@ -630,6 +629,7 @@
 				AD36CDDD23C51EFA008D4EDB /* GameResources.swift in Sources */,
 				ADD035D823A9604F003B2576 /* GameStateProtocol.swift in Sources */,
 				ADE91ACD23B9FE2300F7316B /* JsonReader.swift in Sources */,
+				AD671A1C23D8F9D600F0AA4A /* CardExtension.swift in Sources */,
 				AD52B99C23B17A310013240B /* GameState.swift in Sources */,
 				AD52B99623B1771E0013240B /* CardList.swift in Sources */,
 				AD671A1923D8DCE000F0AA4A /* BeerLastLifePoint.swift in Sources */,
@@ -665,7 +665,6 @@
 				AD36CDEC23C5227D008D4EDB /* GameLoopProtocol.swift in Sources */,
 				ADD035D923A9604F003B2576 /* GameStateProtocol.swift in Sources */,
 				AD49F87023BA0E3E00543F59 /* WellsFargo.swift in Sources */,
-				AD36CDE323C52157008D4EDB /* GameStateExtension.swift in Sources */,
 				AD36CDDE23C51EFA008D4EDB /* GameResources.swift in Sources */,
 				ADE91AD623BA03A500F7316B /* GameLoop.swift in Sources */,
 				ADB5A10823BAB84E0050E173 /* Gatling.swift in Sources */,
@@ -699,6 +698,7 @@
 				ADE91AD523BA00DC00F7316B /* GameSetup.swift in Sources */,
 				AD671A1A23D8DCE000F0AA4A /* BeerLastLifePoint.swift in Sources */,
 				AD52B99423B175110013240B /* Card.swift in Sources */,
+				AD671A1D23D8F9D600F0AA4A /* CardExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

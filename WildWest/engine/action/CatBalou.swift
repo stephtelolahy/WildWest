@@ -16,7 +16,7 @@ struct CatBalou: ActionProtocol {
 
 extension CatBalou: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [CatBalou]? {
-        return nil
+    static func match(state: GameStateProtocol) -> [CatBalou] {
+        return []
     }
 }

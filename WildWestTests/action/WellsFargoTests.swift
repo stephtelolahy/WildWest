@@ -23,7 +23,7 @@ class WellsFargoTests: XCTestCase {
         wellsFargo.execute(state: mockState)
         
         // Assert
-        verify(mockState).discard(playerId: "p1", cardId: "c1")
+        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
         verify(mockState, times(3)).pull(playerId: "p1")
         verifyNoMoreInteractions(mockState)
     }

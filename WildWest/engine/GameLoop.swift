@@ -9,31 +9,30 @@
 class GameLoop: GameLoopProtocol {
     
     func posssibleActions(state: GameStateProtocol) -> [ActionProtocol] {
-        var result: [ActionProtocol] = []
-        result.append(contentsOf: Beer.match(state: state) ?? [])
-        result.append(contentsOf: Saloon.match(state: state) ?? [])
-        result.append(contentsOf: Stagecoach.match(state: state) ?? [])
-        result.append(contentsOf: WellsFargo.match(state: state) ?? [])
-        result.append(contentsOf: Equip.match(state: state) ?? [])
-        result.append(contentsOf: Jail.match(state: state) ?? [])
-        result.append(contentsOf: Shoot.match(state: state) ?? [])
-        result.append(contentsOf: Missed.match(state: state) ?? [])
-        result.append(contentsOf: Gatling.match(state: state) ?? [])
-        result.append(contentsOf: Indians.match(state: state) ?? [])
-        result.append(contentsOf: Duel.match(state: state) ?? [])
-        result.append(contentsOf: Panic.match(state: state) ?? [])
-        result.append(contentsOf: CatBalou.match(state: state) ?? [])
-        result.append(contentsOf: GeneralStore.match(state: state) ?? [])
-        result.append(contentsOf: EndTurn.match(state: state) ?? [])
-        return result
+        return ([
+            Beer.match(state: state),
+            Saloon.match(state: state),
+            Stagecoach.match(state: state),
+            WellsFargo.match(state: state),
+            Equip.match(state: state),
+            Jail.match(state: state),
+            Shoot.match(state: state),
+            Missed.match(state: state),
+            Gatling.match(state: state),
+            Indians.match(state: state),
+            Duel.match(state: state),
+            Panic.match(state: state),
+            CatBalou.match(state: state),
+            GeneralStore.match(state: state),
+            EndTurn.match(state: state),
+            BeerLastLifePoint.match(state: state)
+        ] as [[ActionProtocol]])
+            .flatMap { $0 }
     }
     
     func run(state: GameStateProtocol) {
         while state.outcome == nil {
-            guard let action = posssibleActions(state: state).first else {
-                break
-            }
-            
+            let action = posssibleActions(state: state)[0]
             action.execute(state: state)
             print(state)
         }

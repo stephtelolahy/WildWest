@@ -20,25 +20,106 @@ import Cuckoo
 ///
 class EquipTests: XCTestCase {
     
-    func test_PutCardInPlay_IfArming() {
+    func test_PutCardInPlay_IfEquipping() {
         // Given
-        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
+        let mockPlayer = MockPlayerProtocol()
+            .identified(by: "p1")
+            .holding(MockCardProtocol().identified(by: "c1").named(.schofield))
+            .noCardsInPlay()
+        let mockState = MockGameStateProtocol()
+            .withEnabledDefaultImplementation(GameStateProtocolStub())
+            .players(are: mockPlayer)
         let equip = Equip(actorId: "p1", cardId: "c1")
         
         // When
         equip.execute(state: mockState)
         
         // Assert
-        verify(mockState).equip(playerId: "p1", cardId: "c1")
-        verifyNoMoreInteractions(mockState)
+        verify(mockState).putInPlay(playerId: "p1", cardId: "c1")
     }
     
     func test_DiscardPreviousGun_IfArmingNewGun() {
-        XCTFail()
+        // Given
+        let mockPlayer = MockPlayerProtocol()
+            .identified(by: "p1")
+            .holding(MockCardProtocol().identified(by: "c1").named(.schofield))
+            .playing(MockCardProtocol().identified(by: "c2").named(.volcanic))
+        let mockState = MockGameStateProtocol()
+            .withEnabledDefaultImplementation(GameStateProtocolStub())
+            .players(are: mockPlayer)
+        let equip = Equip(actorId: "p1", cardId: "c1")
+        
+        // When
+        equip.execute(state: mockState)
+        
+        // Assert
+        verify(mockState).putInPlay(playerId: "p1", cardId: "c1")
+        verify(mockState).discardInPlay(playerId: "p1", cardId: "c2")
     }
     
-    func test_CardsInFrontOfYouShouldNotShareTheSameName() {
-        // cards in front of you should not share the same name
-        XCTFail()
+    func test_CannotEquipCard_IfAlreadyPlayingCardWithTheSameName() {
+        // Given
+        let mockCard1 = MockCardProtocol()
+            .named(.mustang)
+        let mockCard2 = MockCardProtocol()
+            .named(.mustang)
+        let mockPlayer = MockPlayerProtocol()
+            .holding(mockCard1)
+            .playing(mockCard2)
+        let mockState = MockGameStateProtocol()
+            .currentTurn(is: 0)
+            .players(are: mockPlayer)
+        
+        // When
+        let actions = Equip.match(state: mockState)
+        
+        // Assert
+        XCTAssertEqual(actions, [])
+    }
+    
+    func test_CanEquip_IfYourTurnAndOwnCard() {
+        // Given
+        let mockCard1 = MockCardProtocol()
+            .named(.schofield)
+            .identified(by: "c1")
+        let mockCard2 = MockCardProtocol()
+            .named(.scope)
+            .identified(by: "c2")
+        let mockCard3 = MockCardProtocol()
+            .named(.dynamite)
+            .identified(by: "c3")
+        let mockPlayer = MockPlayerProtocol()
+            .identified(by: "p1")
+            .holding(mockCard1, mockCard2, mockCard3)
+            .noCardsInPlay()
+        let mockState = MockGameStateProtocol()
+            .currentTurn(is: 0)
+            .players(are: mockPlayer)
+        
+        // When
+        let actions = Equip.match(state: mockState)
+        
+        // Assert
+        let expected = [Equip(actorId: "p1", cardId: "c1"),
+                        Equip(actorId: "p1", cardId: "c2"),
+                        Equip(actorId: "p1", cardId: "c3")]
+        XCTAssertEqual(actions, expected)
+    }
+    
+    func test_CannotEquipJail() {
+        // Given
+        let mockCard = MockCardProtocol()
+            .named(.jail)
+        let mockPlayer = MockPlayerProtocol()
+            .holding(mockCard)
+        let mockState = MockGameStateProtocol()
+            .currentTurn(is: 0)
+            .players(are: mockPlayer)
+        
+        // When
+        let actions = Equip.match(state: mockState)
+        
+        // Assert
+        XCTAssertEqual(actions, [])
     }
 }

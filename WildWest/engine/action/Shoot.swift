@@ -16,7 +16,7 @@ struct Shoot: ActionProtocol {
 
 extension Shoot: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [Shoot]? {
-        return nil
+    static func match(state: GameStateProtocol) -> [Shoot] {
+        return []
     }
 }

@@ -6,19 +6,29 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct Equip: ActionProtocol {
+struct Equip: ActionProtocol, Equatable {
     
     let actorId: String
     let cardId: String
     
     func execute(state: GameStateProtocol) {
-        state.equip(playerId: actorId, cardId: cardId)
+        guard let player = state.players.first(where: { $0.identifier == actorId }),
+            let card = player.hand.cards.first(where: { $0.identifier == cardId }) else {
+                return
+        }
+        
+        if card.isGun,
+            let currentGun = player.inPlay.cards.first(where: { $0.isGun }) {
+            state.discardInPlay(playerId: actorId, cardId: currentGun.identifier)
+        }
+        
+        state.putInPlay(playerId: actorId, cardId: cardId)
     }
 }
 
 extension Equip: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [Equip]? {
+    static func match(state: GameStateProtocol) -> [Equip] {
         let player = state.players[state.turn]
         let cards = player.handCards(named: .volcanic,
                                      .schofield,
@@ -29,6 +39,8 @@ extension Equip: RuleProtocol {
                                      .mustang,
                                      .scope,
                                      .dynamite)
-        return cards.map { Equip(actorId: player.identifier, cardId: $0.identifier) }
+        return cards
+            .filter { player.inPlayCards(named: $0.name).isEmpty }
+            .map { Equip(actorId: player.identifier, cardId: $0.identifier) }
     }
 }

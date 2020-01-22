@@ -11,7 +11,7 @@ struct Saloon: ActionProtocol, Equatable {
     let cardId: String
     
     func execute(state: GameStateProtocol) {
-        state.discard(playerId: actorId, cardId: cardId)
+        state.discardHand(playerId: actorId, cardId: cardId)
         for player in state.players where player.health < player.maxHealth {
             state.gainLifePoint(playerId: player.identifier)
         }
@@ -20,7 +20,7 @@ struct Saloon: ActionProtocol, Equatable {
 
 extension Saloon: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [Saloon]? {
+    static func match(state: GameStateProtocol) -> [Saloon] {
         let player = state.players[state.turn]
         let cards = player.handCards(named: .saloon)
         return cards.map { Saloon(actorId: player.identifier, cardId: $0.identifier) }
