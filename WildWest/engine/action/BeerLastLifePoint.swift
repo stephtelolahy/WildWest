@@ -16,7 +16,7 @@ struct BeerLastLifePoint: ActionProtocol, Equatable {
 
 extension BeerLastLifePoint: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [ActionProtocol]? {
+    static func match(state: GameStateProtocol) -> [BeerLastLifePoint]? {
         return nil
     }
 }

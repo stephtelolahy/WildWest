@@ -27,4 +27,23 @@ class StagecoachTests: XCTestCase {
         verify(mockState, times(2)).pull(playerId: "p1")
         verifyNoMoreInteractions(mockState)
     }
+    
+    func test_CanPlayStagecoach_IfYourTurnAndOwnCard() {
+        // Given
+        let mockCard = MockCardProtocol()
+            .named(.stagecoach)
+            .identified(by: "c1")
+        let mockPlayer = MockPlayerProtocol()
+            .holding(mockCard)
+            .identified(by: "p1")
+        let mockState = MockGameStateProtocol()
+            .currentTurn(is: 0)
+            .players(are: mockPlayer)
+        
+        // When
+        let actions = Stagecoach.match(state: mockState)
+        
+        // Assert
+        XCTAssertEqual(actions, [Stagecoach(actorId: "p1", cardId: "c1")])
+    }
 }

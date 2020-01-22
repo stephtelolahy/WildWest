@@ -36,7 +36,7 @@ class BeerTests: XCTestCase {
         verifyNoMoreInteractions(mockState)
     }
     
-    func test_CanPlayBeer_IfYourTurnAndOwnBeerCard() {
+    func test_CanPlayBeer_IfYourTurnAndOwnCard() {
         // Given
         let mockCard = MockCardProtocol()
             .named(.beer)
@@ -54,7 +54,7 @@ class BeerTests: XCTestCase {
         let actions = Beer.match(state: mockState)
         
         // Assert
-        XCTAssertEqual(actions as? [Beer], [Beer(actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(actions, [Beer(actorId: "p1", cardId: "c1")])
     }
     
     func test_CannotPlayBeer_ToGainMoreLifePointsThanYourStartingAmount() {

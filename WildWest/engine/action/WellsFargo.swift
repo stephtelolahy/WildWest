@@ -20,9 +20,9 @@ struct WellsFargo: ActionProtocol {
 
 extension WellsFargo: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [ActionProtocol]? {
+    static func match(state: GameStateProtocol) -> [WellsFargo]? {
         let player = state.players[state.turn]
         let cards = player.handCards(named: .wellsFargo)
-        return cards.map { Stagecoach(actorId: player.identifier, cardId: $0.identifier) }
+        return cards.map { WellsFargo(actorId: player.identifier, cardId: $0.identifier) }
     }
 }

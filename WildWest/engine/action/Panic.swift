@@ -16,7 +16,7 @@ struct Panic: ActionProtocol {
 
 extension Panic: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [ActionProtocol]? {
+    static func match(state: GameStateProtocol) -> [Panic]? {
         return nil
     }
 }

@@ -73,7 +73,7 @@ class SaloonTests: XCTestCase {
         verify(mockState).gainLifePoint(playerId: "p2")
     }
     
-    func test_CanPlaySaloon_IfYourTurnAndOwnSaloonCard() {
+    func test_CanPlaySaloon_IfYourTurnAndOwnCard() {
         // Given
         let mockCard = MockCardProtocol()
             .named(.saloon)
@@ -89,6 +89,6 @@ class SaloonTests: XCTestCase {
         let actions = Saloon.match(state: mockState)
         
         // Assert
-        XCTAssertEqual(actions as? [Saloon], [Saloon(actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(actions, [Saloon(actorId: "p1", cardId: "c1")])
     }
 }

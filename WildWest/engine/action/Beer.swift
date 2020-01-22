@@ -18,7 +18,7 @@ struct Beer: ActionProtocol, Equatable {
 
 extension Beer: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [ActionProtocol]? {
+    static func match(state: GameStateProtocol) -> [Beer]? {
         let player = state.players[state.turn]
         let cards = player.handCards(named: .beer)
         guard !cards.isEmpty,

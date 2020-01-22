@@ -18,7 +18,7 @@ struct Equip: ActionProtocol {
 
 extension Equip: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [ActionProtocol]? {
+    static func match(state: GameStateProtocol) -> [Equip]? {
         let player = state.players[state.turn]
         let cards = player.handCards(named: .volcanic,
                                      .schofield,

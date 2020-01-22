@@ -8,25 +8,32 @@
 
 class GameLoop: GameLoopProtocol {
     
+    func posssibleActions(state: GameStateProtocol) -> [ActionProtocol] {
+        var result: [ActionProtocol] = []
+        result.append(contentsOf: Beer.match(state: state) ?? [])
+        result.append(contentsOf: Saloon.match(state: state) ?? [])
+        result.append(contentsOf: Stagecoach.match(state: state) ?? [])
+        result.append(contentsOf: WellsFargo.match(state: state) ?? [])
+        result.append(contentsOf: Equip.match(state: state) ?? [])
+        result.append(contentsOf: Jail.match(state: state) ?? [])
+        result.append(contentsOf: Shoot.match(state: state) ?? [])
+        result.append(contentsOf: Missed.match(state: state) ?? [])
+        result.append(contentsOf: Gatling.match(state: state) ?? [])
+        result.append(contentsOf: Indians.match(state: state) ?? [])
+        result.append(contentsOf: Duel.match(state: state) ?? [])
+        result.append(contentsOf: Panic.match(state: state) ?? [])
+        result.append(contentsOf: CatBalou.match(state: state) ?? [])
+        result.append(contentsOf: GeneralStore.match(state: state) ?? [])
+        result.append(contentsOf: EndTurn.match(state: state) ?? [])
+        return result
+    }
+    
     func run(state: GameStateProtocol) {
-        let rules: [RuleProtocol.Type] = [Beer.self,
-                                          Saloon.self,
-                                          Stagecoach.self,
-                                          WellsFargo.self,
-                                          Equip.self,
-                                          Jail.self,
-                                          Shoot.self,
-                                          Missed.self,
-                                          Gatling.self,
-                                          Indians.self,
-                                          Duel.self,
-                                          Panic.self,
-                                          CatBalou.self,
-                                          GeneralStore.self,
-                                          EndTurn.self]
         while state.outcome == nil {
-            let posssibleActions = rules.compactMap { $0.match(state: state) }.flatMap { $0 }
-            let action = posssibleActions[0]
+            guard let action = posssibleActions(state: state).first else {
+                break
+            }
+            
             action.execute(state: state)
             print(state)
         }

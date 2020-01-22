@@ -6,7 +6,7 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct Stagecoach: ActionProtocol {
+struct Stagecoach: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
     
@@ -19,7 +19,7 @@ struct Stagecoach: ActionProtocol {
 
 extension Stagecoach: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [ActionProtocol]? {
+    static func match(state: GameStateProtocol) -> [Stagecoach]? {
         let player = state.players[state.turn]
         let cards = player.handCards(named: .stagecoach)
         return cards.map { Stagecoach(actorId: player.identifier, cardId: $0.identifier) }

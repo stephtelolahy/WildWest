@@ -8,4 +8,5 @@
 
 protocol GameLoopProtocol {
     func run(state: GameStateProtocol)
+    func posssibleActions(state: GameStateProtocol) -> [ActionProtocol]
 }

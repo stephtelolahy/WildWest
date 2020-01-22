@@ -16,7 +16,7 @@ struct Duel: ActionProtocol {
 
 extension Duel: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [ActionProtocol]? {
+    static func match(state: GameStateProtocol) -> [Duel]? {
         return nil
     }
 }

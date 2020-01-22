@@ -235,10 +235,10 @@
 			isa = PBXGroup;
 			children = (
 				AD36CDEA23C5227D008D4EDB /* GameLoopProtocol.swift */,
-				ADC2B47023B183DF00A03B13 /* GameLoop.swift */,
 				AD36CDE723C52218008D4EDB /* GameSetupProtocol.swift */,
-				ADE91AD323BA00DC00F7316B /* GameSetup.swift */,
 				AD36CDE423C521FE008D4EDB /* GameResourcesProtocol.swift */,
+				ADC2B47023B183DF00A03B13 /* GameLoop.swift */,
+				ADE91AD323BA00DC00F7316B /* GameSetup.swift */,
 				AD36CDDC23C51EFA008D4EDB /* GameResources.swift */,
 				AD36CDD823C51C34008D4EDB /* state */,
 				AD36CDDA23C51DA6008D4EDB /* action */,
@@ -250,12 +250,12 @@
 			isa = PBXGroup;
 			children = (
 				ADD035D723A9604F003B2576 /* GameStateProtocol.swift */,
-				AD52B99B23B17A310013240B /* GameState.swift */,
 				ADD035D423A96034003B2576 /* PlayerProtocol.swift */,
-				AD52B99823B178CC0013240B /* Player.swift */,
 				ADD035D123A9601B003B2576 /* CardListProtocol.swift */,
-				AD52B99523B1771E0013240B /* CardList.swift */,
 				ADD035CE23A96002003B2576 /* CardProtocol.swift */,
+				AD52B99B23B17A310013240B /* GameState.swift */,
+				AD52B99823B178CC0013240B /* Player.swift */,
+				AD52B99523B1771E0013240B /* CardList.swift */,
 				AD52B99223B175110013240B /* Card.swift */,
 				AD49F86623BA054400543F59 /* Figure.swift */,
 				AD46810C23BEA27F000B42C7 /* extensions */,

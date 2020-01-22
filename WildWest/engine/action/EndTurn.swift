@@ -16,7 +16,7 @@ struct EndTurn: ActionProtocol {
 
 extension EndTurn: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [ActionProtocol]? {
+    static func match(state: GameStateProtocol) -> [EndTurn]? {
         return nil
     }
 }

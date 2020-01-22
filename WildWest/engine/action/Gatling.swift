@@ -16,7 +16,7 @@ struct Gatling: ActionProtocol {
 
 extension Gatling: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [ActionProtocol]? {
+    static func match(state: GameStateProtocol) -> [Gatling]? {
         return nil
     }
 }
