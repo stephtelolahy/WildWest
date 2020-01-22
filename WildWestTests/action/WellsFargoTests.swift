@@ -9,6 +9,9 @@
 import XCTest
 import Cuckoo
 
+/// WellsFargo
+/// “Draw three cards” from the top of the deck.
+///
 class WellsFargoTests: XCTestCase {
     
     func test_Pull3Cards_IfPlayingWellsFargo() {

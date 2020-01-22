@@ -10,7 +10,7 @@ import XCTest
 
 class CardTests: XCTestCase {
 
-    func test_CardIdentifier_IsTheConcatenationOf_Name_Value_Suit() {
+    func test_CardIdentifier_IsAppending_Name_Value_Suit() {
         // Given
         let sut = Card(name: .barrel, value: "9", suit: .clubs)
         

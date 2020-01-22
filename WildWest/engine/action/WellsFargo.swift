@@ -6,9 +6,6 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-/// WellsFargo
-/// “Draw three cards” from the top of the deck.
-///
 struct WellsFargo: ActionProtocol {
     let actorId: String
     let cardId: String
@@ -23,7 +20,7 @@ struct WellsFargo: ActionProtocol {
 
 extension WellsFargo: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [ActionProtocol] {
+    static func match(state: GameStateProtocol) -> [ActionProtocol]? {
         let player = state.players[state.turn]
         let cards = player.handCards(named: .wellsFargo)
         return cards.map { Stagecoach(actorId: player.identifier, cardId: $0.identifier) }

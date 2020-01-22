@@ -15,11 +15,16 @@ class PlayerTests: XCTestCase {
         let card1 = MockCardProtocol().identified(by: "c1")
         let card2 = MockCardProtocol().identified(by: "c2")
         let card3 = MockCardProtocol().identified(by: "c3")
-        let mockHand = MockCardListProtocol().containing([card1, card2])
-        let mockInPlay = MockCardListProtocol().containing([card3])
+        let mockHand = MockCardListProtocol().containing(card1, card2)
+        let mockInPlay = MockCardListProtocol().containing(card3)
         
         // When
-        let sut = Player(role: .deputy, ability: .willyTheKid, maxHealth: 4, health: 2, hand: mockHand, inPlay: mockInPlay)
+        let sut = Player(role: .deputy,
+                         ability: .willyTheKid,
+                         maxHealth: 4,
+                         health: 2,
+                         hand: mockHand,
+                         inPlay: mockInPlay)
         
         // Assert
         XCTAssertEqual(sut.role, .deputy)
@@ -32,7 +37,12 @@ class PlayerTests: XCTestCase {
     
     func test_SetHealth() {
         // Given
-        let sut = Player(role: .deputy, ability: .willyTheKid, maxHealth: 4, health: 2, hand: MockCardListProtocol(), inPlay: MockCardListProtocol())
+        let sut = Player(role: .deputy,
+                         ability: .willyTheKid,
+                         maxHealth: 4,
+                         health: 2,
+                         hand: MockCardListProtocol(),
+                         inPlay: MockCardListProtocol())
         
         // When
         sut.setHealth(3)
@@ -43,7 +53,12 @@ class PlayerTests: XCTestCase {
     
     func test_PlayerIdentifier_IsTheConcatenationOf_Ability_Role() {
         // Given
-        let sut = Player(role: .deputy, ability: .willyTheKid, maxHealth: 4, health: 2, hand: MockCardListProtocol(), inPlay: MockCardListProtocol())
+        let sut = Player(role: .deputy,
+                         ability: .willyTheKid,
+                         maxHealth: 4,
+                         health: 2,
+                         hand: MockCardListProtocol(),
+                         inPlay: MockCardListProtocol())
         
         // When
         // Assert

@@ -26,7 +26,7 @@ protocol MutableGameStateProtocol: GameStateProtocol, GameUpdateProtocol {
 }
 
 enum GameOutcome {
-    case sheriffWins,
+    case sheriffWin,
     outlawWin,
-    renegadeWins
+    renegadeWin
 }

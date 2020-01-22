@@ -9,6 +9,9 @@
 import XCTest
 import Cuckoo
 
+/// Stagecoach
+/// “Draw two cards” from the top of the deck.
+///
 class StagecoachTests: XCTestCase {
     
     func test_Pull2Cards_IfPlayingStagecoach() {

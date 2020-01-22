@@ -6,9 +6,6 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-/// Stagecoach
-/// “Draw two cards” from the top of the deck.
-///
 struct Stagecoach: ActionProtocol {
     let actorId: String
     let cardId: String
@@ -22,7 +19,7 @@ struct Stagecoach: ActionProtocol {
 
 extension Stagecoach: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [ActionProtocol] {
+    static func match(state: GameStateProtocol) -> [ActionProtocol]? {
         let player = state.players[state.turn]
         let cards = player.handCards(named: .stagecoach)
         return cards.map { Stagecoach(actorId: player.identifier, cardId: $0.identifier) }

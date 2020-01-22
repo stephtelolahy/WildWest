@@ -9,6 +9,17 @@
 import XCTest
 import Cuckoo
 
+/// Beer
+/// This card lets you regain one life point – take a bullet from the pile.
+/// You cannot gain more life points than your starting amount! The Beer cannot be used to help other players.
+/// The Beer can be played in two ways:
+/// - as usual, during your turn;
+/// - out of turn, but only if you have just
+/// received a hit that is lethal (i.e. a hit that takes away your last life point),
+/// and not if you are simply hit.
+/// Beer has no effect if there are only 2 players left in the game;
+/// in other words, if you play a Beer you do not gain any life point.
+///
 class BeerTests: XCTestCase {
     
     func test_GainLifePoint_IfPlayingBeer() {
@@ -27,25 +38,17 @@ class BeerTests: XCTestCase {
     
     func test_CanPlayBeer_IfOwnBeerCard() {
         // Given
-        let mockState = MockGameStateProtocol()
-        let mockPlayer = MockPlayerProtocol()
-        let mockHand = MockCardListProtocol()
         let mockCard = MockCardProtocol()
-        Cuckoo.stub(mockState) { mock in
-            when(mock.turn.get).thenReturn(0)
-            when(mock.players.get).thenReturn([mockPlayer])
-        }
-        Cuckoo.stub(mockPlayer) { mock in
-            when(mock.identifier.get).thenReturn("p1")
-            when(mock.hand.get).thenReturn(mockHand)
-        }
-        Cuckoo.stub(mockHand) { mock in
-            when(mock.cards.get).thenReturn([mockCard])
-        }
-        Cuckoo.stub(mockCard) { mock in
-            when(mock.identifier.get).thenReturn("c1")
-            when(mock.name.get).thenReturn(.beer)
-        }
+            .named(.beer)
+            .identified(by: "c1")
+        let mockPlayer = MockPlayerProtocol()
+            .holding(mockCard)
+            .identified(by: "p1")
+            .health(is: 3)
+            .maxHealth(is: 4)
+        let mockState = MockGameStateProtocol()
+            .currentTurn(is: 0)
+            .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
         let actions = Beer.match(state: mockState)
@@ -54,19 +57,39 @@ class BeerTests: XCTestCase {
         XCTAssertEqual(actions as? [Beer], [Beer(actorId: "p1", cardId: "c1")])
     }
     
-    func test_CannotGainMoreLifePointsThanYourStartingAmount() {
+    func test_CannotPlayBeer_ToGainMoreLifePointsThanYourStartingAmount() {
         // Given
+        let mockCard = MockCardProtocol()
+            .named(.beer)
+        let mockPlayer = MockPlayerProtocol()
+            .holding(mockCard)
+            .health(is: 4)
+            .maxHealth(is: 4)
+        let mockState = MockGameStateProtocol()
+            .currentTurn(is: 0)
+            .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
-        //let actions = Beer.match(state: mockState)
+        let actions = Beer.match(state: mockState)
         
         // Assert
-        // You cannot gain more life points than your starting amount!
-        XCTFail()
+        XCTAssertNil(actions)
     }
     
-    func test_BeerHasNoEffect_IfThereAreOnly2PlayersLeft() {
-        // Beer has no effect if there are only 2 players left in the game
-        XCTFail()
+    func test_CannotPlayBeer_IfThereAreOnly2PlayersLeft() {
+        // Given
+        let mockCard = MockCardProtocol()
+            .named(.beer)
+        let mockPlayer = MockPlayerProtocol()
+            .holding(mockCard)
+        let mockState = MockGameStateProtocol()
+            .currentTurn(is: 0)
+            .players(are: mockPlayer, MockPlayerProtocol())
+        
+        // When
+        let actions = Beer.match(state: mockState)
+        
+        // Assert
+        XCTAssertNil(actions)
     }
 }

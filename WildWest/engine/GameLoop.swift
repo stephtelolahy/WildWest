@@ -25,7 +25,7 @@ class GameLoop: GameLoopProtocol {
                                           GeneralStore.self,
                                           EndTurn.self]
         while state.outcome == nil {
-            let posssibleActions = rules.map { $0.match(state: state) }.flatMap { $0 }
+            let posssibleActions = rules.compactMap { $0.match(state: state) }.flatMap { $0 }
             let action = posssibleActions[0]
             action.execute(state: state)
             print(state)
