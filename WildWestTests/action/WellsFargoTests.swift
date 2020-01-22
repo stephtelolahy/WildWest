@@ -27,4 +27,23 @@ class WellsFargoTests: XCTestCase {
         verify(mockState, times(3)).pull(playerId: "p1")
         verifyNoMoreInteractions(mockState)
     }
+    
+    func test_CanPlayWellsFargo_IfYourTurnAndOwnCard() {
+        // Given
+        let mockCard = MockCardProtocol()
+            .named(.wellsFargo)
+            .identified(by: "c1")
+        let mockPlayer = MockPlayerProtocol()
+            .holding(mockCard)
+            .identified(by: "p1")
+        let mockState = MockGameStateProtocol()
+            .currentTurn(is: 0)
+            .players(are: mockPlayer)
+        
+        // When
+        let actions = WellsFargo.match(state: mockState)
+        
+        // Assert
+        XCTAssertEqual(actions, [WellsFargo(actorId: "p1", cardId: "c1")])
+    }
 }
