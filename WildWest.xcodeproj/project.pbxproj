@@ -33,6 +33,7 @@
 		AD49F86D23BA0C4600543F59 /* Stagecoach.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49F86B23BA0C4600543F59 /* Stagecoach.swift */; };
 		AD49F86F23BA0E3E00543F59 /* WellsFargo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49F86E23BA0E3E00543F59 /* WellsFargo.swift */; };
 		AD49F87023BA0E3E00543F59 /* WellsFargo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49F86E23BA0E3E00543F59 /* WellsFargo.swift */; };
+		AD4BE6AA23DA4B12003A610A /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4BE6A923DA4B12003A610A /* CollectionExtension.swift */; };
 		AD52B99323B175110013240B /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD52B99223B175110013240B /* Card.swift */; };
 		AD52B99423B175110013240B /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD52B99223B175110013240B /* Card.swift */; };
 		AD52B99623B1771E0013240B /* CardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD52B99523B1771E0013240B /* CardList.swift */; };
@@ -141,6 +142,7 @@
 		AD49F86923BA074100543F59 /* figures.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = figures.json; sourceTree = "<group>"; };
 		AD49F86B23BA0C4600543F59 /* Stagecoach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stagecoach.swift; sourceTree = "<group>"; };
 		AD49F86E23BA0E3E00543F59 /* WellsFargo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WellsFargo.swift; sourceTree = "<group>"; };
+		AD4BE6A923DA4B12003A610A /* CollectionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
 		AD52B99223B175110013240B /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		AD52B99523B1771E0013240B /* CardList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardList.swift; sourceTree = "<group>"; };
 		AD52B99823B178CC0013240B /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				AD7F34BA23D7985C001B4072 /* MockCardListProtocolExtension.swift */,
 				AD7F34BC23D79879001B4072 /* MockPlayerProtocolExtension.swift */,
 				AD7F34BE23D79893001B4072 /* MockGameStateProtocolExtension.swift */,
+				AD4BE6A923DA4B12003A610A /* CollectionExtension.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -687,6 +690,7 @@
 				AD36CDF123C523BD008D4EDB /* CardListTests.swift in Sources */,
 				ADD035CA23A95EEB003B2576 /* ActionProtocol.swift in Sources */,
 				ADE91AC723B9F84200F7316B /* Saloon.swift in Sources */,
+				AD4BE6AA23DA4B12003A610A /* CollectionExtension.swift in Sources */,
 				ADD035D323A9601B003B2576 /* CardListProtocol.swift in Sources */,
 				AD7F34BF23D79893001B4072 /* MockGameStateProtocolExtension.swift in Sources */,
 				AD7F34BD23D79879001B4072 /* MockPlayerProtocolExtension.swift in Sources */,

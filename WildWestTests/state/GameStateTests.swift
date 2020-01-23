@@ -9,4 +9,11 @@
 import XCTest
 
 class GameStateTests: XCTestCase {
+    
+    func test_PullMovesCardFromDeckToActorsHand() {
+    }
+    
+    func test_ResetTheDeckBeforePull_IfEmpty() {
+    }
+    
 }
