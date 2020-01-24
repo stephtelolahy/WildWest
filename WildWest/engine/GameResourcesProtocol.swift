@@ -7,6 +7,6 @@
 //
 
 protocol GameResourcesProtocol {
-    func allCards() -> [CardProtocol]
+    func allCards() -> [Card]
     func allFigures() -> [Figure]
 }

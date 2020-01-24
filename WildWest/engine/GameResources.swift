@@ -14,7 +14,7 @@ class GameResources: GameResourcesProtocol {
         self.jsonReader = jsonReader
     }
     
-    func allCards() -> [CardProtocol] {
+    func allCards() -> [Card] {
         return jsonReader.load([Card].self, file: "cards")
     }
     

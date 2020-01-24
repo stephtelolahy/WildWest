@@ -12,7 +12,7 @@ class CardTests: XCTestCase {
 
     func test_CardIdentifier_IsAppending_Name_Value_Suit() {
         // Given
-        let sut = Card(name: .barrel, value: "9", suit: .clubs)
+        let sut = Card(name: .barrel, value: "9", suit: .clubs, imageName: "image_name")
         
         // When
         // Assert
