@@ -11,6 +11,11 @@
 		33A815E823DB51BE0081A055 /* GameResourcesFiguresTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A815E723DB51BE0081A055 /* GameResourcesFiguresTests.swift */; };
 		33A815EA23DB51D40081A055 /* GameResourcesCardsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A815E923DB51D40081A055 /* GameResourcesCardsTests.swift */; };
 		33A815EB23DB525A0081A055 /* figures.json in Resources */ = {isa = PBXBuildFile; fileRef = AD49F86923BA074100543F59 /* figures.json */; };
+		33A815ED23DB54350081A055 /* roles.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A815EC23DB54350081A055 /* roles.json */; };
+		33A815EE23DB54350081A055 /* roles.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A815EC23DB54350081A055 /* roles.json */; };
+		33A815F023DB547D0081A055 /* RoleCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A815EF23DB547D0081A055 /* RoleCard.swift */; };
+		33A815F123DB547D0081A055 /* RoleCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A815EF23DB547D0081A055 /* RoleCard.swift */; };
+		33A815F323DB55350081A055 /* GameResourcesRolesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A815F223DB55350081A055 /* GameResourcesRolesTests.swift */; };
 		8DBD562D47470962F400716D /* libPods-WildWestTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 102E20EA2AD38505FB9CFBD5 /* libPods-WildWestTests.a */; };
 		AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */; };
 		AD36CDDD23C51EFA008D4EDB /* GameResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD36CDDC23C51EFA008D4EDB /* GameResources.swift */; };
@@ -127,6 +132,9 @@
 		15EFD4A90888EB671B9B5CF5 /* Pods-WildWestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.debug.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.debug.xcconfig"; sourceTree = "<group>"; };
 		33A815E723DB51BE0081A055 /* GameResourcesFiguresTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameResourcesFiguresTests.swift; sourceTree = "<group>"; };
 		33A815E923DB51D40081A055 /* GameResourcesCardsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameResourcesCardsTests.swift; sourceTree = "<group>"; };
+		33A815EC23DB54350081A055 /* roles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = roles.json; sourceTree = "<group>"; };
+		33A815EF23DB547D0081A055 /* RoleCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleCard.swift; sourceTree = "<group>"; };
+		33A815F223DB55350081A055 /* GameResourcesRolesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameResourcesRolesTests.swift; sourceTree = "<group>"; };
 		51195E55CF3E86BE639C2405 /* Pods-WildWest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.debug.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.debug.xcconfig"; sourceTree = "<group>"; };
 		6D17AD4368D4F158C313A85D /* Pods-WildWestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.release.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.release.xcconfig"; sourceTree = "<group>"; };
 		873275DE3D79FFF36F6D066E /* Pods-WildWest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.release.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.release.xcconfig"; sourceTree = "<group>"; };
@@ -267,6 +275,7 @@
 				AD52B99523B1771E0013240B /* CardList.swift */,
 				AD52B99223B175110013240B /* Card.swift */,
 				AD49F86623BA054400543F59 /* Figure.swift */,
+				33A815EF23DB547D0081A055 /* RoleCard.swift */,
 				AD46810C23BEA27F000B42C7 /* extensions */,
 			);
 			path = state;
@@ -310,6 +319,7 @@
 			children = (
 				ADE91ACF23B9FF0700F7316B /* cards.json */,
 				AD49F86923BA074100543F59 /* figures.json */,
+				33A815EC23DB54350081A055 /* roles.json */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -353,6 +363,7 @@
 				AD7EAFBE23D7846D00FE23D5 /* GameSetupTests.swift */,
 				33A815E923DB51D40081A055 /* GameResourcesCardsTests.swift */,
 				33A815E723DB51BE0081A055 /* GameResourcesFiguresTests.swift */,
+				33A815F223DB55350081A055 /* GameResourcesRolesTests.swift */,
 			);
 			path = engine;
 			sourceTree = "<group>";
@@ -510,6 +521,7 @@
 				ADB7D2F8239EE03900653905 /* LaunchScreen.storyboard in Resources */,
 				ADB7D2F5239EE03900653905 /* Assets.xcassets in Resources */,
 				ADB7D2F3239EE03800653905 /* Main.storyboard in Resources */,
+				33A815ED23DB54350081A055 /* roles.json in Resources */,
 				ADE91AD023B9FF0700F7316B /* cards.json in Resources */,
 				AD49F86A23BA074100543F59 /* figures.json in Resources */,
 			);
@@ -522,6 +534,7 @@
 				33A815EB23DB525A0081A055 /* figures.json in Resources */,
 				33A815E623DB507D0081A055 /* Assets.xcassets in Resources */,
 				ADE91AD123B9FF0700F7316B /* cards.json in Resources */,
+				33A815EE23DB54350081A055 /* roles.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -641,6 +654,7 @@
 				AD36CDE823C52218008D4EDB /* GameSetupProtocol.swift in Sources */,
 				AD36CDDD23C51EFA008D4EDB /* GameResources.swift in Sources */,
 				ADD035D823A9604F003B2576 /* GameStateProtocol.swift in Sources */,
+				33A815F023DB547D0081A055 /* RoleCard.swift in Sources */,
 				ADE91ACD23B9FE2300F7316B /* JsonReader.swift in Sources */,
 				AD671A1C23D8F9D600F0AA4A /* CardExtension.swift in Sources */,
 				AD52B99C23B17A310013240B /* GameState.swift in Sources */,
@@ -680,6 +694,7 @@
 				ADD035D923A9604F003B2576 /* GameStateProtocol.swift in Sources */,
 				AD49F87023BA0E3E00543F59 /* WellsFargo.swift in Sources */,
 				AD36CDDE23C51EFA008D4EDB /* GameResources.swift in Sources */,
+				33A815F323DB55350081A055 /* GameResourcesRolesTests.swift in Sources */,
 				ADE91AD623BA03A500F7316B /* GameLoop.swift in Sources */,
 				ADB5A10823BAB84E0050E173 /* Gatling.swift in Sources */,
 				AD48DD2C23BEAFAF00E5B552 /* WellsFargoTests.swift in Sources */,
@@ -689,6 +704,7 @@
 				AD36CDEF23C52306008D4EDB /* CardTests.swift in Sources */,
 				ADB5A0FF23BAB8070050E173 /* Shoot.swift in Sources */,
 				ADB5A10523BAB8370050E173 /* Duel.swift in Sources */,
+				33A815F123DB547D0081A055 /* RoleCard.swift in Sources */,
 				AD48DD2A23BEAE1300E5B552 /* StagecoachTests.swift in Sources */,
 				ADB5A10E23BAB8780050E173 /* Panic.swift in Sources */,
 				AD49F86D23BA0C4600543F59 /* Stagecoach.swift in Sources */,

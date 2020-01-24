@@ -9,4 +9,5 @@
 protocol GameResourcesProtocol {
     func allCards() -> [Card]
     func allFigures() -> [Figure]
+    func allRoles() -> [RoleCard]
 }

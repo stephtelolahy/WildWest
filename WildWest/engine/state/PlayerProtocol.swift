@@ -18,7 +18,7 @@ protocol PlayerProtocol {
     func setHealth(_ value: Int)
 }
 
-enum Role: String {
+enum Role: String, Decodable {
     case sheriff,
     outlaw,
     renegade,

@@ -21,4 +21,8 @@ class GameResources: GameResourcesProtocol {
     func allFigures() -> [Figure] {
         return jsonReader.load([Figure].self, file: "figures")
     }
+    
+    func allRoles() -> [RoleCard] {
+        return jsonReader.load([RoleCard].self, file: "roles")
+    }
 }
