@@ -449,6 +449,20 @@ import Cuckoo
         
     }
     
+    
+    
+     var imageName: String {
+        get {
+            return cuckoo_manager.getter("imageName",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.imageName)
+        }
+        
+    }
+    
 
     
 
@@ -479,6 +493,11 @@ import Cuckoo
 	    
 	    var suit: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardProtocol, CardSuit> {
 	        return .init(manager: cuckoo_manager, name: "suit")
+	    }
+	    
+	    
+	    var imageName: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardProtocol, String> {
+	        return .init(manager: cuckoo_manager, name: "imageName")
 	    }
 	    
 	    
@@ -516,6 +535,11 @@ import Cuckoo
 	        return .init(manager: cuckoo_manager, name: "suit", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
+	    
+	    var imageName: Cuckoo.VerifyReadOnlyProperty<String> {
+	        return .init(manager: cuckoo_manager, name: "imageName", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
 	
 	    
 	}
@@ -551,6 +575,14 @@ import Cuckoo
      var suit: CardSuit {
         get {
             return DefaultValueRegistry.defaultValue(for: (CardSuit).self)
+        }
+        
+    }
+    
+    
+     var imageName: String {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (String).self)
         }
         
     }
@@ -1089,6 +1121,20 @@ import Cuckoo
         
     }
     
+    
+    
+     var imageName: String {
+        get {
+            return cuckoo_manager.getter("imageName",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.imageName)
+        }
+        
+    }
+    
 
     
 
@@ -1152,6 +1198,11 @@ import Cuckoo
 	    }
 	    
 	    
+	    var imageName: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, String> {
+	        return .init(manager: cuckoo_manager, name: "imageName")
+	    }
+	    
+	    
 	    func setHealth<M1: Cuckoo.Matchable>(_ value: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(Int)> where M1.MatchedType == Int {
 	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: value) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockPlayerProtocol.self, method: "setHealth(_: Int)", parameterMatchers: matchers))
@@ -1204,6 +1255,11 @@ import Cuckoo
 	    
 	    var inPlay: Cuckoo.VerifyReadOnlyProperty<CardListProtocol> {
 	        return .init(manager: cuckoo_manager, name: "inPlay", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var imageName: Cuckoo.VerifyReadOnlyProperty<String> {
+	        return .init(manager: cuckoo_manager, name: "imageName", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	
@@ -1271,6 +1327,14 @@ import Cuckoo
      var inPlay: CardListProtocol {
         get {
             return DefaultValueRegistry.defaultValue(for: (CardListProtocol).self)
+        }
+        
+    }
+    
+    
+     var imageName: String {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (String).self)
         }
         
     }

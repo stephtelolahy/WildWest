@@ -11,6 +11,7 @@ protocol CardProtocol {
     var name: CardName { get }
     var value: String { get }
     var suit: CardSuit { get }
+    var imageName: String { get }
 }
 
 enum CardName: String, Decodable {

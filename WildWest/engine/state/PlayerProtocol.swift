@@ -14,6 +14,7 @@ protocol PlayerProtocol {
     var health: Int { get }
     var hand: CardListProtocol { get }
     var inPlay: CardListProtocol { get }
+    var imageName: String { get }
     
     func setHealth(_ value: Int)
 }

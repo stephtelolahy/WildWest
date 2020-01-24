@@ -32,7 +32,9 @@ class GameLoop: GameLoopProtocol {
     
     func run(state: GameStateProtocol) {
         while state.outcome == nil {
-            let action = posssibleActions(state: state)[0]
+            guard let action = posssibleActions(state: state).first else {
+                break
+            }
             action.execute(state: state)
             print(state)
         }

@@ -31,7 +31,7 @@ class GameSetup: GameSetupProtocol {
                 hand.append(deck.removeFirst())
             }
             return Player(role: role,
-                          ability: figure.ability,
+                          figure: figure,
                           maxHealth: health,
                           health: health,
                           hand: CardList(cards: hand),
