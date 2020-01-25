@@ -12,25 +12,35 @@ class PlayerCell: UICollectionViewCell {
     
     @IBOutlet private weak var figureImageView: UIImageView!
     @IBOutlet private weak var infoLabel: UILabel!
-    @IBOutlet private weak var activeView: UIView!
     
-    func update(with player: PlayerProtocol) {
+    private var isTurn: Bool = false
+    
+    func update(with player: PlayerProtocol, isTurn: Bool) {
         figureImageView.image = UIImage(named: player.imageName)
         infoLabel.text = player.string
-        activeView.isHidden = true
+        self.isTurn = isTurn
+        updateBackground()
     }
     
     func clear() {
         figureImageView.image = nil
         infoLabel.text = nil
-        activeView.isHidden = true
         backgroundColor = .clear
     }
     
     override var isSelected: Bool {
         didSet {
+            updateBackground()
+        }
+    }
+    
+    private func updateBackground() {
+        if isTurn {
+            backgroundColor = isSelected ? .systemGreen : .systemOrange
+        } else {
             backgroundColor = isSelected ? .systemGreen : .clear
         }
+        
     }
 }
 
@@ -40,7 +50,7 @@ private extension PlayerProtocol {
         \(health)/\(maxHealth)
         \(role == .sheriff ? role.rawValue : "?")
         x\(hand.cards.count)
-        \(inPlay.cards.map { $0.name.rawValue }.joined())
+        \(inPlay.cards.map { $0.name.rawValue }.joined(separator: "\n"))
         """
     }
 }

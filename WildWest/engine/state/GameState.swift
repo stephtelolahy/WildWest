@@ -14,23 +14,30 @@ class GameState: GameStateProtocol {
     var turn: Int
     var outcome: GameOutcome?
     var history: [ActionProtocol]
+    var actions: [ActionProtocol]
     
     init(players: [PlayerProtocol],
          deck: CardListProtocol,
          discard: CardListProtocol,
          turn: Int,
          outcome: GameOutcome?,
-         history: [ActionProtocol]) {
+         history: [ActionProtocol],
+         actions: [ActionProtocol]) {
         self.players = players
         self.deck = deck
         self.discard = discard
         self.turn = turn
         self.outcome = outcome
         self.history = history
+        self.actions = actions
     }
     
     func addHistory(_ action: ActionProtocol) {
         history.append(action)
+    }
+    
+    func setAction(_ actions: [ActionProtocol]) {
+        self.actions = actions
     }
     
     func discardHand(playerId: String, cardId: String) {

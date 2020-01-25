@@ -12,8 +12,8 @@ protocol GameStateProtocol {
     var discard: CardListProtocol { get }
     var turn: Int { get }
     var outcome: GameOutcome? { get }
-//    var actions: [ActionProtocol] { get } // possible actions
-    var history: [ActionProtocol] { get } // actions history
+    var actions: [ActionProtocol] { get }
+    var history: [ActionProtocol] { get }
     
     func discardHand(playerId: String, cardId: String)
     func discardInPlay(playerId: String, cardId: String)
@@ -21,6 +21,7 @@ protocol GameStateProtocol {
     func pull(playerId: String)
     func putInPlay(playerId: String, cardId: String)
     func addHistory(_ action: ActionProtocol)
+    func setAction(_ actions: [ActionProtocol])
 }
 
 enum GameOutcome {

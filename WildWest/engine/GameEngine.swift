@@ -19,6 +19,7 @@ class GameEngine: GameEngineProtocol {
     let stateSubject: BehaviorSubject<GameStateProtocol>
     
     init(state: GameStateProtocol) {
+        state.setAction(GameEngine.generateActions(from: state))
         stateSubject = BehaviorSubject(value: state)
     }
     
@@ -29,6 +30,31 @@ class GameEngine: GameEngineProtocol {
         
         action.execute(state: state)
         state.addHistory(action)
+        state.setAction(GameEngine.generateActions(from: state))
         stateSubject.onNext(state)
+    }
+}
+
+private extension GameEngine {
+    static func generateActions(from state: GameStateProtocol) -> [ActionProtocol] {
+        return ([
+            Beer.match(state: state),
+            Saloon.match(state: state),
+            Stagecoach.match(state: state),
+            WellsFargo.match(state: state),
+            Equip.match(state: state),
+            Jail.match(state: state),
+            Shoot.match(state: state),
+            Missed.match(state: state),
+            Gatling.match(state: state),
+            Indians.match(state: state),
+            Duel.match(state: state),
+            Panic.match(state: state),
+            CatBalou.match(state: state),
+            GeneralStore.match(state: state),
+            EndTurn.match(state: state),
+            BeerLastLifePoint.match(state: state)
+        ] as [[ActionProtocol]])
+            .flatMap { $0 }
     }
 }

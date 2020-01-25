@@ -27,7 +27,7 @@ class Player: PlayerProtocol {
     }
     
     var identifier: String {
-        return "\(ability)-\(role)"
+        return ability.rawValue
     }
     
     func setHealth(_ value: Int) {

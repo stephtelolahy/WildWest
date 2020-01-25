@@ -51,7 +51,7 @@ class GameViewController: UIViewController, Subscribable {
     
     @IBAction private func actionButtonTapped(_ sender: Any) {
         let actionsViewController = ActionsViewController()
-        actionsViewController.actions = GameAI().generateActions(from: state)
+        actionsViewController.actions = state.actions
         actionsViewController.delegate = self
         present(actionsViewController, animated: true)
     }
@@ -136,7 +136,8 @@ extension GameViewController: UICollectionViewDataSource {
                                      cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(with: PlayerCell.self, for: indexPath)
         if let player = player(at: indexPath) {
-            cell.update(with: player)
+            let playerIndex = playerIndexes[state.players.count][indexPath.row] - 1
+            cell.update(with: player, isTurn: playerIndex == state.turn)
         } else {
             cell.clear()
         }

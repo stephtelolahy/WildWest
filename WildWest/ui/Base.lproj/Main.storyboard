@@ -62,19 +62,6 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jqw-zS-ERh" userLabel="activeView">
-                                                    <rect key="frame" x="129" y="130" width="8" height="8"/>
-                                                    <color key="backgroundColor" red="0.12549019610000001" green="0.74901960779999999" blue="0.23137254900000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="8" id="ERn-sJ-aFw"/>
-                                                        <constraint firstAttribute="width" secondItem="jqw-zS-ERh" secondAttribute="height" multiplier="1:1" id="cbF-33-aOG"/>
-                                                    </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="4"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </view>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -83,11 +70,9 @@
                                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="RyI-Pr-kap" secondAttribute="bottom" id="7ou-Cx-nBb"/>
                                             <constraint firstItem="BGV-60-VS0" firstAttribute="top" secondItem="YdZ-er-2Pm" secondAttribute="topMargin" constant="4" id="FeG-yT-vxJ"/>
                                             <constraint firstItem="RyI-Pr-kap" firstAttribute="top" secondItem="YdZ-er-2Pm" secondAttribute="top" id="JJr-BF-w40"/>
-                                            <constraint firstAttribute="bottom" secondItem="jqw-zS-ERh" secondAttribute="bottom" constant="8" id="L6U-aT-Zds"/>
                                             <constraint firstAttribute="trailing" secondItem="RyI-Pr-kap" secondAttribute="trailing" id="M5v-cv-K8F"/>
                                             <constraint firstItem="RyI-Pr-kap" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YdZ-er-2Pm" secondAttribute="leading" constant="10" id="UE6-r8-yA1"/>
                                             <constraint firstItem="BGV-60-VS0" firstAttribute="centerX" secondItem="YdZ-er-2Pm" secondAttribute="centerX" id="hRu-uO-5ov"/>
-                                            <constraint firstAttribute="trailing" secondItem="jqw-zS-ERh" secondAttribute="trailing" constant="8" id="pwx-IQ-265"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -95,7 +80,6 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <outlet property="activeView" destination="jqw-zS-ERh" id="Q1q-eo-pMs"/>
                                             <outlet property="figureImageView" destination="BGV-60-VS0" id="dao-57-zAT"/>
                                             <outlet property="infoLabel" destination="RyI-Pr-kap" id="zg7-Wi-vz7"/>
                                         </connections>
