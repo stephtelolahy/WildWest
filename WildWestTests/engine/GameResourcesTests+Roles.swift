@@ -1,14 +1,14 @@
 //
-//  GameResourcesRolesTests.swift
+//  GameResourcesTests+Roles.swift
 //  WildWestTests
 //
-//  Created by Hugues Stephano Telolahy on 24/01/2020.
+//  Created by Hugues Stephano Telolahy on 26/01/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
 import XCTest
 
-class GameResourcesRolesTests: XCTestCase {
+class GameResourcesTests_Roles: XCTestCase {
 
     private lazy var roles: [RoleCard] = {
         let jsonReader = JsonReader(bundle: Bundle(for: type(of: self)))
@@ -27,4 +27,5 @@ class GameResourcesRolesTests: XCTestCase {
         let bundle = Bundle(for: type(of: self))
         XCTAssertTrue(roles.allSatisfy { UIImage(named: $0.imageName, in: bundle, compatibleWith: nil) != nil })
     }
+
 }

@@ -11,7 +11,7 @@ protocol CardListProtocol {
     
     func add(_ card: CardProtocol)
     func addAll(_ cards: [CardProtocol])
-    func removeFirst() -> CardProtocol
-    func removeById(_ identifier: String)
-    func removeAll()
+    func removeFirst() -> CardProtocol?
+    func removeById(_ identifier: String) -> CardProtocol?
+    func removeAll() -> [CardProtocol]
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-struct BeerLastLifePoint: ActionProtocol, Equatable {
+struct BeerLastLifePoint: ActionProtocol {
     let actorId: String
     let cardId: String
     

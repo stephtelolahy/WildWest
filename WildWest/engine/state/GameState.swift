@@ -40,32 +40,39 @@ class GameState: GameStateProtocol {
         self.actions = actions
     }
     
-    func discardHand(playerId: String, cardId: String) {
-        guard let player = players.first(where: { $0.identifier == playerId }),
-            let card = player.hand.cards.first(where: { $0.identifier == cardId }) else {
-                return
-        }
-        
-        player.hand.removeById(cardId)
-        deck.add(card)
-    }
-    
-    func discardInPlay(playerId: String, cardId: String) {
-    }
-    
     func pullFromDeck(playerId: String) {
         guard let player = players.first(where: { $0.identifier == playerId }) else {
             return
         }
         
-        if deck.cards.isEmpty {
-            let cards = discard.cards.shuffled()
-            discard.removeAll()
-            deck.addAll(cards)
+        if let card = deck.removeFirst() {
+            player.hand.add(card)
+        } else {
+            deck.addAll(discard.removeAll())
+            if let card = deck.removeFirst() {
+                player.hand.add(card)
+            }
+        }
+    }
+    
+    func discardHand(playerId: String, cardId: String) {
+        guard let player = players.first(where: { $0.identifier == playerId }) else {
+            return
         }
         
-        let card = deck.removeFirst()
-        player.hand.add(card)
+        if let card = player.hand.removeById(cardId) {
+            discard.add(card)
+        }
+    }
+    
+    func discardInPlay(playerId: String, cardId: String) {
+        guard let player = players.first(where: { $0.identifier == playerId }),
+            let card = player.inPlay.cards.first(where: { $0.identifier == cardId }) else {
+                return
+        }
+        
+        player.inPlay.removeById(cardId)
+        deck.add(card)
     }
     
     func gainLifePoint(playerId: String) {

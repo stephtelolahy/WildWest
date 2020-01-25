@@ -22,15 +22,26 @@ class CardList: CardListProtocol {
         cards += elements
     }
     
-    func removeAll() {
+    func removeAll() -> [CardProtocol] {
+        let array = cards
         cards.removeAll()
+        return array
     }
     
-    func removeFirst() -> CardProtocol {
+    func removeFirst() -> CardProtocol? {
+        guard !cards.isEmpty else {
+            return nil
+        }
+        
         return cards.removeFirst()
     }
     
-    func removeById(_ identifier: String) {
-        return cards.removeAll { $0.identifier == identifier }
+    func removeById(_ identifier: String) -> CardProtocol? {
+        guard let index = cards.firstIndex(where: { $0.identifier == identifier }) else {
+            return nil
+        }
+        let shouldBeRemoved = cards[index]
+        cards.remove(at: index)
+        return shouldBeRemoved
     }
 }
