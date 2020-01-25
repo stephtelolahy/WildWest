@@ -12,6 +12,10 @@ struct Shoot: ActionProtocol {
     
     func execute(state: GameStateProtocol) {
     }
+    
+    var message: String {
+        "\(actorId) play \(cardId)"
+    }
 }
 
 extension Shoot: RuleProtocol {

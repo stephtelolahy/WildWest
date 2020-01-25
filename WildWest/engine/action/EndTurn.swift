@@ -12,6 +12,10 @@ struct EndTurn: ActionProtocol {
     
     func execute(state: GameStateProtocol) {
     }
+    
+    var message: String {
+        "\(actorId) end turn"
+    }
 }
 
 extension EndTurn: RuleProtocol {

@@ -12,6 +12,10 @@ struct BeerLastLifePoint: ActionProtocol, Equatable {
     
     func execute(state: GameStateProtocol) {
     }
+    
+    var message: String {
+        "\(actorId) play \(cardId)"
+    }
 }
 
 extension BeerLastLifePoint: RuleProtocol {

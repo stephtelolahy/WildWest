@@ -8,6 +8,7 @@
 
 protocol ActionProtocol {
     var actorId: String { get }
+    var message: String { get }
     
     func execute(state: GameStateProtocol)
 }

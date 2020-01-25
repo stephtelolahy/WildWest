@@ -35,6 +35,20 @@ import Cuckoo
         
     }
     
+    
+    
+     var message: String {
+        get {
+            return cuckoo_manager.getter("message",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.message)
+        }
+        
+    }
+    
 
     
 
@@ -68,6 +82,11 @@ import Cuckoo
 	    }
 	    
 	    
+	    var message: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockActionProtocol, String> {
+	        return .init(manager: cuckoo_manager, name: "message")
+	    }
+	    
+	    
 	    func execute<M1: Cuckoo.Matchable>(state: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(GameStateProtocol)> where M1.MatchedType == GameStateProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockActionProtocol.self, method: "execute(state: GameStateProtocol)", parameterMatchers: matchers))
@@ -92,6 +111,11 @@ import Cuckoo
 	        return .init(manager: cuckoo_manager, name: "actorId", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
+	    
+	    var message: Cuckoo.VerifyReadOnlyProperty<String> {
+	        return .init(manager: cuckoo_manager, name: "message", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
 	
 	    
 	    @discardableResult
@@ -107,6 +131,14 @@ import Cuckoo
     
     
      var actorId: String {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (String).self)
+        }
+        
+    }
+    
+    
+     var message: String {
         get {
             return DefaultValueRegistry.defaultValue(for: (String).self)
         }
@@ -661,6 +693,20 @@ import Cuckoo
     
     
     
+     var turn: Int {
+        get {
+            return cuckoo_manager.getter("turn",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.turn)
+        }
+        
+    }
+    
+    
+    
      var outcome: GameOutcome? {
         get {
             return cuckoo_manager.getter("outcome",
@@ -675,28 +721,14 @@ import Cuckoo
     
     
     
-     var messages: [String] {
+     var history: [ActionProtocol] {
         get {
-            return cuckoo_manager.getter("messages",
+            return cuckoo_manager.getter("history",
                 superclassCall:
                     
                     Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                     ,
-                defaultCall: __defaultImplStub!.messages)
-        }
-        
-    }
-    
-    
-    
-     var turn: Int {
-        get {
-            return cuckoo_manager.getter("turn",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.turn)
+                defaultCall: __defaultImplStub!.history)
         }
         
     }
@@ -780,6 +812,21 @@ import Cuckoo
         
     }
     
+    
+    
+     func addHistory(_ action: ActionProtocol)  {
+        
+    return cuckoo_manager.call("addHistory(_: ActionProtocol)",
+            parameters: (action),
+            escapingParameters: (action),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.addHistory(action))
+        
+    }
+    
 
 	 struct __StubbingProxy_GameStateProtocol: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
@@ -804,18 +851,18 @@ import Cuckoo
 	    }
 	    
 	    
+	    var turn: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, Int> {
+	        return .init(manager: cuckoo_manager, name: "turn")
+	    }
+	    
+	    
 	    var outcome: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, GameOutcome?> {
 	        return .init(manager: cuckoo_manager, name: "outcome")
 	    }
 	    
 	    
-	    var messages: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [String]> {
-	        return .init(manager: cuckoo_manager, name: "messages")
-	    }
-	    
-	    
-	    var turn: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, Int> {
-	        return .init(manager: cuckoo_manager, name: "turn")
+	    var history: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [ActionProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "history")
 	    }
 	    
 	    
@@ -842,6 +889,11 @@ import Cuckoo
 	    func putInPlay<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(playerId: M1, cardId: M2) -> Cuckoo.ProtocolStubNoReturnFunction<(String, String)> where M1.MatchedType == String, M2.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: cardId) { $0.1 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "putInPlay(playerId: String, cardId: String)", parameterMatchers: matchers))
+	    }
+	    
+	    func addHistory<M1: Cuckoo.Matchable>(_ action: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(ActionProtocol)> where M1.MatchedType == ActionProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(ActionProtocol)>] = [wrap(matchable: action) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "addHistory(_: ActionProtocol)", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -874,18 +926,18 @@ import Cuckoo
 	    }
 	    
 	    
+	    var turn: Cuckoo.VerifyReadOnlyProperty<Int> {
+	        return .init(manager: cuckoo_manager, name: "turn", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
 	    var outcome: Cuckoo.VerifyReadOnlyProperty<GameOutcome?> {
 	        return .init(manager: cuckoo_manager, name: "outcome", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	    
-	    var messages: Cuckoo.VerifyReadOnlyProperty<[String]> {
-	        return .init(manager: cuckoo_manager, name: "messages", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
-	    var turn: Cuckoo.VerifyReadOnlyProperty<Int> {
-	        return .init(manager: cuckoo_manager, name: "turn", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var history: Cuckoo.VerifyReadOnlyProperty<[ActionProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "history", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	
@@ -920,6 +972,12 @@ import Cuckoo
 	        return cuckoo_manager.verify("putInPlay(playerId: String, cardId: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
+	    @discardableResult
+	    func addHistory<M1: Cuckoo.Matchable>(_ action: M1) -> Cuckoo.__DoNotUse<(ActionProtocol), Void> where M1.MatchedType == ActionProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(ActionProtocol)>] = [wrap(matchable: action) { $0 }]
+	        return cuckoo_manager.verify("addHistory(_: ActionProtocol)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
 	}
 }
 
@@ -950,6 +1008,14 @@ import Cuckoo
     }
     
     
+     var turn: Int {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (Int).self)
+        }
+        
+    }
+    
+    
      var outcome: GameOutcome? {
         get {
             return DefaultValueRegistry.defaultValue(for: (GameOutcome?).self)
@@ -958,17 +1024,9 @@ import Cuckoo
     }
     
     
-     var messages: [String] {
+     var history: [ActionProtocol] {
         get {
-            return DefaultValueRegistry.defaultValue(for: ([String]).self)
-        }
-        
-    }
-    
-    
-     var turn: Int {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (Int).self)
+            return DefaultValueRegistry.defaultValue(for: ([ActionProtocol]).self)
         }
         
     }
@@ -994,6 +1052,10 @@ import Cuckoo
     }
     
      func putInPlay(playerId: String, cardId: String)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func addHistory(_ action: ActionProtocol)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     

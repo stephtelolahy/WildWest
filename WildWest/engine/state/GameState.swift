@@ -13,20 +13,24 @@ class GameState: GameStateProtocol {
     let discard: CardListProtocol
     var turn: Int
     var outcome: GameOutcome?
-    var messages: [String]
+    var history: [ActionProtocol]
     
     init(players: [PlayerProtocol],
          deck: CardListProtocol,
          discard: CardListProtocol,
          turn: Int,
          outcome: GameOutcome?,
-         messages: [String]) {
+         history: [ActionProtocol]) {
         self.players = players
         self.deck = deck
         self.discard = discard
         self.turn = turn
         self.outcome = outcome
-        self.messages = messages
+        self.history = history
+    }
+    
+    func addHistory(_ action: ActionProtocol) {
+        history.append(action)
     }
     
     func discardHand(playerId: String, cardId: String) {
@@ -37,7 +41,6 @@ class GameState: GameStateProtocol {
         
         player.hand.removeById(cardId)
         deck.add(card)
-        messages.append("\(player.identifier) discard \(card.identifier)")
     }
     
     func discardInPlay(playerId: String, cardId: String) {
@@ -56,7 +59,6 @@ class GameState: GameStateProtocol {
         
         let card = deck.removeFirst()
         player.hand.add(card)
-        messages.append("\(player.identifier) pull \(card.identifier)")
     }
     
     func gainLifePoint(playerId: String) {
@@ -69,7 +71,6 @@ class GameState: GameStateProtocol {
         }
         
         player.setHealth(player.health + 1)
-        messages.append("\(player.identifier) gain life point")
     }
     
     func putInPlay(playerId: String, cardId: String) {
@@ -80,6 +81,5 @@ class GameState: GameStateProtocol {
         
         player.hand.removeById(cardId)
         player.inPlay.add(card)
-        messages.append("\(player.identifier) put in play \(card.identifier)")
     }
 }

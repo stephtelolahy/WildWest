@@ -14,6 +14,10 @@ struct Beer: ActionProtocol, Equatable {
         state.discardHand(playerId: actorId, cardId: cardId)
         state.gainLifePoint(playerId: actorId)
     }
+    
+    var message: String {
+        "\(actorId) play \(cardId)"
+    }
 }
 
 extension Beer: RuleProtocol {

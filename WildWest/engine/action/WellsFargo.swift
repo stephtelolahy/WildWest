@@ -16,6 +16,10 @@ struct WellsFargo: ActionProtocol, Equatable {
         state.pull(playerId: actorId)
         state.pull(playerId: actorId)
     }
+    
+    var message: String {
+        "\(actorId) play \(cardId)"
+    }
 }
 
 extension WellsFargo: RuleProtocol {

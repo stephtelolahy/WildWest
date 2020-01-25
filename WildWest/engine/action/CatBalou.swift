@@ -12,6 +12,10 @@ struct CatBalou: ActionProtocol {
     
     func execute(state: GameStateProtocol) {
     }
+    
+    var message: String {
+        "\(actorId) play \(cardId)"
+    }
 }
 
 extension CatBalou: RuleProtocol {

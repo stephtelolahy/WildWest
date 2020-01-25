@@ -12,6 +12,10 @@ struct Duel: ActionProtocol {
     
     func execute(state: GameStateProtocol) {
     }
+    
+    var message: String {
+        "\(actorId) play \(cardId)"
+    }
 }
 
 extension Duel: RuleProtocol {

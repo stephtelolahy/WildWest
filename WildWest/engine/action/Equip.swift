@@ -24,6 +24,10 @@ struct Equip: ActionProtocol, Equatable {
         
         state.putInPlay(playerId: actorId, cardId: cardId)
     }
+    
+    var message: String {
+        "\(actorId) equip with \(cardId)"
+    }
 }
 
 extension Equip: RuleProtocol {

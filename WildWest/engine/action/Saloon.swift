@@ -16,6 +16,10 @@ struct Saloon: ActionProtocol, Equatable {
             state.gainLifePoint(playerId: player.identifier)
         }
     }
+    
+    var message: String {
+        "\(actorId) play \(cardId)"
+    }
 }
 
 extension Saloon: RuleProtocol {

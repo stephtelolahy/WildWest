@@ -191,7 +191,7 @@
                             </barButtonItem>
                             <barButtonItem systemItem="reply" id="ueO-1J-Lps">
                                 <connections>
-                                    <action selector="messageButtonTapped:" destination="Yy6-0k-mhK" id="CLz-Zu-edF"/>
+                                    <action selector="historyButtonTapped:" destination="Yy6-0k-mhK" id="CLz-Zu-edF"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>

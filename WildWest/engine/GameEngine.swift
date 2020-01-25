@@ -1,5 +1,5 @@
 //
-//  GameViewModel.swift
+//  GameEngine.swift
 //  WildWest
 //
 //  Created by Hugues Stephano Telolahy on 25/01/2020.
@@ -8,13 +8,13 @@
 
 import RxSwift
 
-protocol GameViewModelProtocol {
+protocol GameEngineProtocol {
     var stateSubject: BehaviorSubject<GameStateProtocol> { get }
     
     func execute(_ action: ActionProtocol)
 }
 
-class GameViewModel: GameViewModelProtocol {
+class GameEngine: GameEngineProtocol {
     
     let stateSubject: BehaviorSubject<GameStateProtocol>
     
@@ -28,6 +28,7 @@ class GameViewModel: GameViewModelProtocol {
         }
         
         action.execute(state: state)
+        state.addHistory(action)
         stateSubject.onNext(state)
     }
 }
