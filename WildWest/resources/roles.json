@@ -1,0 +1,22 @@
+[
+    {
+        "role": "sheriff",
+        "imageName": "01_sceriffo",
+        "goal": "Sheriff: must eliminate all the Outlaws and the Renegade, to protect law and order"
+    },
+    {
+        "role": "outlaw",
+        "imageName": "01_fuorilegge",
+        "goal": "Outlaws: they would like to kill the Sheriff, but they have no scruples about eliminating each other to gain rewards!"
+    },
+    {
+        "role": "renegade",
+        "imageName": "01_rinnegato",
+        "goal": "Renegade: he wants to be the new Sheriff; his goal is to be the last character in play."
+    },
+    {
+        "role": "deputy",
+        "imageName": "01_vice",
+        "goal": "Deputies: they help and protect the Sheriff, and share his same goal, at all costs!"
+    }
+]
