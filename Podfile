@@ -5,6 +5,7 @@ target 'WildWest' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
   pod 'SwiftLint'
+  pod 'RxSwift'
 end
 
 target 'WildWestTests' do

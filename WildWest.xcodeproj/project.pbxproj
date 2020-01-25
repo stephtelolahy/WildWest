@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,8 @@
 		332499AF23DB9EFE0082EF09 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332499AE23DB9EFE0082EF09 /* CardCell.swift */; };
 		332499B123DB9F140082EF09 /* PlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332499B023DB9F140082EF09 /* PlayerCell.swift */; };
 		332499B323DB9F650082EF09 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332499B223DB9F650082EF09 /* GameViewController.swift */; };
+		33A733EC23DC472A00E9B2AD /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A733EB23DC472900E9B2AD /* GameViewModel.swift */; };
+		33A733EE23DC4A5300E9B2AD /* Subscribable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A733ED23DC4A5300E9B2AD /* Subscribable.swift */; };
 		33A815E623DB507D0081A055 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F4239EE03900653905 /* Assets.xcassets */; };
 		33A815E823DB51BE0081A055 /* GameResourcesFiguresTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A815E723DB51BE0081A055 /* GameResourcesFiguresTests.swift */; };
 		33A815EA23DB51D40081A055 /* GameResourcesCardsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A815E923DB51D40081A055 /* GameResourcesCardsTests.swift */; };
@@ -30,8 +32,6 @@
 		AD36CDE623C521FE008D4EDB /* GameResourcesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD36CDE423C521FE008D4EDB /* GameResourcesProtocol.swift */; };
 		AD36CDE823C52218008D4EDB /* GameSetupProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD36CDE723C52218008D4EDB /* GameSetupProtocol.swift */; };
 		AD36CDE923C52218008D4EDB /* GameSetupProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD36CDE723C52218008D4EDB /* GameSetupProtocol.swift */; };
-		AD36CDEB23C5227D008D4EDB /* GameLoopProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD36CDEA23C5227D008D4EDB /* GameLoopProtocol.swift */; };
-		AD36CDEC23C5227D008D4EDB /* GameLoopProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD36CDEA23C5227D008D4EDB /* GameLoopProtocol.swift */; };
 		AD36CDEF23C52306008D4EDB /* CardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD36CDEE23C52306008D4EDB /* CardTests.swift */; };
 		AD36CDF123C523BD008D4EDB /* CardListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD36CDF023C523BD008D4EDB /* CardListTests.swift */; };
 		AD46810E23BEA2B0000B42C7 /* PlayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD46810D23BEA2B0000B42C7 /* PlayerExtension.swift */; };
@@ -94,7 +94,6 @@
 		ADB7D2F3239EE03800653905 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F1239EE03800653905 /* Main.storyboard */; };
 		ADB7D2F5239EE03900653905 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F4239EE03900653905 /* Assets.xcassets */; };
 		ADB7D2F8239EE03900653905 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F6239EE03900653905 /* LaunchScreen.storyboard */; };
-		ADC2B47123B183DF00A03B13 /* GameLoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC2B47023B183DF00A03B13 /* GameLoop.swift */; };
 		ADD035C923A95EEB003B2576 /* ActionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD035C823A95EEB003B2576 /* ActionProtocol.swift */; };
 		ADD035CA23A95EEB003B2576 /* ActionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD035C823A95EEB003B2576 /* ActionProtocol.swift */; };
 		ADD035CC23A95F37003B2576 /* RuleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD035CB23A95F37003B2576 /* RuleProtocol.swift */; };
@@ -118,7 +117,6 @@
 		ADE91AD123B9FF0700F7316B /* cards.json in Resources */ = {isa = PBXBuildFile; fileRef = ADE91ACF23B9FF0700F7316B /* cards.json */; };
 		ADE91AD423BA00DC00F7316B /* GameSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE91AD323BA00DC00F7316B /* GameSetup.swift */; };
 		ADE91AD523BA00DC00F7316B /* GameSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE91AD323BA00DC00F7316B /* GameSetup.swift */; };
-		ADE91AD623BA03A500F7316B /* GameLoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC2B47023B183DF00A03B13 /* GameLoop.swift */; };
 		D42ED72C28166C49D2A60FC9 /* Pods_WildWest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C300D3666EB3B530B73C9D4 /* Pods_WildWest.framework */; };
 /* End PBXBuildFile section */
 
@@ -140,6 +138,8 @@
 		332499AE23DB9EFE0082EF09 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		332499B023DB9F140082EF09 /* PlayerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCell.swift; sourceTree = "<group>"; };
 		332499B223DB9F650082EF09 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		33A733EB23DC472900E9B2AD /* GameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		33A733ED23DC4A5300E9B2AD /* Subscribable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subscribable.swift; sourceTree = "<group>"; };
 		33A815E723DB51BE0081A055 /* GameResourcesFiguresTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameResourcesFiguresTests.swift; sourceTree = "<group>"; };
 		33A815E923DB51D40081A055 /* GameResourcesCardsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameResourcesCardsTests.swift; sourceTree = "<group>"; };
 		33A815EC23DB54350081A055 /* roles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = roles.json; sourceTree = "<group>"; };
@@ -154,7 +154,6 @@
 		AD36CDDC23C51EFA008D4EDB /* GameResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameResources.swift; sourceTree = "<group>"; };
 		AD36CDE423C521FE008D4EDB /* GameResourcesProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameResourcesProtocol.swift; sourceTree = "<group>"; };
 		AD36CDE723C52218008D4EDB /* GameSetupProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetupProtocol.swift; sourceTree = "<group>"; };
-		AD36CDEA23C5227D008D4EDB /* GameLoopProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLoopProtocol.swift; sourceTree = "<group>"; };
 		AD36CDEE23C52306008D4EDB /* CardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTests.swift; sourceTree = "<group>"; };
 		AD36CDF023C523BD008D4EDB /* CardListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListTests.swift; sourceTree = "<group>"; };
 		AD46810D23BEA2B0000B42C7 /* PlayerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerExtension.swift; sourceTree = "<group>"; };
@@ -200,7 +199,6 @@
 		ADB7D2F9239EE03900653905 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADB7D2FE239EE03900653905 /* WildWestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WildWestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB7D304239EE03900653905 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ADC2B47023B183DF00A03B13 /* GameLoop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLoop.swift; sourceTree = "<group>"; };
 		ADD035C823A95EEB003B2576 /* ActionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionProtocol.swift; sourceTree = "<group>"; };
 		ADD035CB23A95F37003B2576 /* RuleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleProtocol.swift; sourceTree = "<group>"; };
 		ADD035CE23A96002003B2576 /* CardProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardProtocol.swift; sourceTree = "<group>"; };
@@ -261,10 +259,8 @@
 		AD36CDD723C51C27008D4EDB /* engine */ = {
 			isa = PBXGroup;
 			children = (
-				AD36CDEA23C5227D008D4EDB /* GameLoopProtocol.swift */,
 				AD36CDE723C52218008D4EDB /* GameSetupProtocol.swift */,
 				AD36CDE423C521FE008D4EDB /* GameResourcesProtocol.swift */,
-				ADC2B47023B183DF00A03B13 /* GameLoop.swift */,
 				ADE91AD323BA00DC00F7316B /* GameSetup.swift */,
 				AD36CDDC23C51EFA008D4EDB /* GameResources.swift */,
 				AD36CDD823C51C34008D4EDB /* state */,
@@ -323,6 +319,7 @@
 				3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */,
 				3324018F23DBAA7500B92439 /* UIViewExtension.swift */,
 				33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */,
+				33A733ED23DC4A5300E9B2AD /* Subscribable.swift */,
 			);
 			path = misc;
 			sourceTree = "<group>";
@@ -434,6 +431,7 @@
 				ADB7D2F6239EE03900653905 /* LaunchScreen.storyboard */,
 				ADB7D2F1239EE03800653905 /* Main.storyboard */,
 				332499B223DB9F650082EF09 /* GameViewController.swift */,
+				33A733EB23DC472900E9B2AD /* GameViewModel.swift */,
 				332499B023DB9F140082EF09 /* PlayerCell.swift */,
 				332499AE23DB9EFE0082EF09 /* CardCell.swift */,
 			);
@@ -461,6 +459,7 @@
 				ADB7D2E5239EE03800653905 /* Frameworks */,
 				ADB7D2E6239EE03800653905 /* Resources */,
 				AD8540A223A4291100568FE9 /* Run Swiftlint */,
+				EDBCE575E9629DBC63D5C556 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -636,6 +635,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		EDBCE575E9629DBC63D5C556 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -653,7 +669,6 @@
 				ADB5A11623BABBE80050E173 /* EndTurn.swift in Sources */,
 				AD46810E23BEA2B0000B42C7 /* PlayerExtension.swift in Sources */,
 				ADB5A10123BAB81E0050E173 /* Missed.swift in Sources */,
-				ADC2B47123B183DF00A03B13 /* GameLoop.swift in Sources */,
 				AD49F86F23BA0E3E00543F59 /* WellsFargo.swift in Sources */,
 				ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */,
 				ADB5A10723BAB84E0050E173 /* Gatling.swift in Sources */,
@@ -664,7 +679,6 @@
 				ADB5A0FE23BAB8070050E173 /* Shoot.swift in Sources */,
 				33AFA25323DC201A00425BEB /* ClassNameProtocol.swift in Sources */,
 				ADB5A10423BAB8370050E173 /* Duel.swift in Sources */,
-				AD36CDEB23C5227D008D4EDB /* GameLoopProtocol.swift in Sources */,
 				ADD5643523A4E09C00C1BD01 /* Beer.swift in Sources */,
 				ADB5A10D23BAB8780050E173 /* Panic.swift in Sources */,
 				AD49F86C23BA0C4600543F59 /* Stagecoach.swift in Sources */,
@@ -680,12 +694,14 @@
 				332499B123DB9F140082EF09 /* PlayerCell.swift in Sources */,
 				AD671A1923D8DCE000F0AA4A /* BeerLastLifePoint.swift in Sources */,
 				ADB5A10A23BAB8630050E173 /* Indians.swift in Sources */,
+				33A733EC23DC472A00E9B2AD /* GameViewModel.swift in Sources */,
 				ADD035C923A95EEB003B2576 /* ActionProtocol.swift in Sources */,
 				ADD035D223A9601B003B2576 /* CardListProtocol.swift in Sources */,
 				332499AF23DB9EFE0082EF09 /* CardCell.swift in Sources */,
 				AD52B99323B175110013240B /* Card.swift in Sources */,
 				ADD035CC23A95F37003B2576 /* RuleProtocol.swift in Sources */,
 				ADD035CF23A96002003B2576 /* CardProtocol.swift in Sources */,
+				33A733EE23DC4A5300E9B2AD /* Subscribable.swift in Sources */,
 				AD36CDE523C521FE008D4EDB /* GameResourcesProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -710,12 +726,10 @@
 				AD48DD3023BEB11800E5B552 /* BeerTests.swift in Sources */,
 				ADB5A10223BAB81E0050E173 /* Missed.swift in Sources */,
 				AD7EAFBF23D7846D00FE23D5 /* GameSetupTests.swift in Sources */,
-				AD36CDEC23C5227D008D4EDB /* GameLoopProtocol.swift in Sources */,
 				ADD035D923A9604F003B2576 /* GameStateProtocol.swift in Sources */,
 				AD49F87023BA0E3E00543F59 /* WellsFargo.swift in Sources */,
 				AD36CDDE23C51EFA008D4EDB /* GameResources.swift in Sources */,
 				33A815F323DB55350081A055 /* GameResourcesRolesTests.swift in Sources */,
-				ADE91AD623BA03A500F7316B /* GameLoop.swift in Sources */,
 				ADB5A10823BAB84E0050E173 /* Gatling.swift in Sources */,
 				AD48DD2C23BEAFAF00E5B552 /* WellsFargoTests.swift in Sources */,
 				AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */,

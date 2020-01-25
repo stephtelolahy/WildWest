@@ -2,21 +2,25 @@ PODS:
   - Cuckoo (1.3.0):
     - Cuckoo/Swift (= 1.3.0)
   - Cuckoo/Swift (1.3.0)
+  - RxSwift (5.0.1)
   - SwiftLint (0.38.0)
 
 DEPENDENCIES:
   - Cuckoo
+  - RxSwift
   - SwiftLint
 
 SPEC REPOS:
   trunk:
     - Cuckoo
+    - RxSwift
     - SwiftLint
 
 SPEC CHECKSUMS:
   Cuckoo: 4045c5a8ce378c919c20c5ff3d6dd11ded0ec699
+  RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
   SwiftLint: 4105f061f9812b214568b736dab580ab2c73a582
 
-PODFILE CHECKSUM: df2a8a56d1e1736e2d171fa21635ff01e4324b68
+PODFILE CHECKSUM: 9aaad6bcd620907d04ff832f8cbf902c86d40530
 
 COCOAPODS: 1.8.4

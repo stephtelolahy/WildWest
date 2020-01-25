@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import RxSwift
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, Subscribable {
     
     // MARK: Constants
     private let spacing: CGFloat = 4.0
@@ -21,28 +22,64 @@ class GameViewController: UIViewController {
     
     // MARK: Properties
     
-    private lazy var state: GameStateProtocol = {
+    private lazy var viewModel: GameViewModelProtocol = {
         let resources = GameResources(jsonReader: JsonReader(bundle: Bundle.main))
         let figures = resources.allFigures()
         let cards = resources.allCards()
         let gameSetup = GameSetup()
         let roles = gameSetup.roles(for: 7)
-        return gameSetup.setupGame(roles: roles, figures: figures, cards: cards)
+        let state = gameSetup.setupGame(roles: roles, figures: figures, cards: cards)
+        return GameViewModel(state: state)
     }()
     
-    private var cards: [CardProtocol] = []
+    // swiftlint:disable implicitly_unwrapped_optional
+    private var state: GameStateProtocol!
     
     // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
         stateCollectionView.setItemSpacing(spacing)
         handCollectionView.setItemSpacing(spacing)
+        sub(viewModel.stateSubject.subscribe(onNext: { [weak self] state in
+            self?.state = state
+            self?.stateCollectionView.reloadData()
+        }))
+    }
+}
+
+/// Convenience
+private extension GameViewController {
+    
+    var cards: [CardProtocol] {
+        guard let indexPath = stateCollectionView.indexPathsForSelectedItems?.first,
+            let player = player(at: indexPath) else {
+                return []
+        }
+        
+        return player.hand.cards
+    }
+    
+    var playerIndexes: [[Int]] {
+        return [
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 1, 0, 0, 0, 0, 0],
+            [0, 0, 0, 1, 0, 2, 0, 0, 0],
+            [1, 0, 2, 0, 0, 0, 0, 3, 0],
+            [1, 0, 2, 0, 0, 0, 4, 0, 3],
+            [1, 2, 3, 0, 0, 0, 5, 0, 4],
+            [1, 0, 2, 6, 0, 3, 5, 0, 4],
+            [1, 2, 3, 7, 0, 4, 6, 0, 5]
+        ]
+    }
+    
+    func player(at indexPath: IndexPath) -> PlayerProtocol? {
+        let playerIndex = playerIndexes[state.players.count][indexPath.row] - 1
+        guard playerIndex >= 0 else {
+            return nil
+        }
+        
+        return state.players[playerIndex]
     }
 }
 
@@ -91,7 +128,6 @@ extension GameViewController: UICollectionViewDataSource {
         cell.update(with: cards[indexPath.row])
         return cell
     }
-    
 }
 
 extension GameViewController: UICollectionViewDelegate {
@@ -105,11 +141,6 @@ extension GameViewController: UICollectionViewDelegate {
     }
     
     private func stateCollectionViewDidSelectItem(at indexPath: IndexPath) {
-        if let player = player(at: indexPath) {
-            cards = player.hand.cards
-        } else {
-            cards = []
-        }
         handCollectionView.reloadData()
     }
     
@@ -141,29 +172,5 @@ extension GameViewController: UICollectionViewDelegateFlowLayout {
         let height: CGFloat = collectionView.bounds.height - 2 * spacing
         let width: CGFloat = height * ratio
         return CGSize(width: width, height: height)
-    }
-}
-
-private extension GameViewController {
-    
-    var playerIndexes: [[Int]] {
-        return [
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 1, 0, 0, 0, 0, 0],
-            [0, 0, 0, 1, 0, 2, 0, 0, 0],
-            [1, 0, 2, 0, 0, 0, 0, 3, 0],
-            [1, 0, 2, 0, 0, 0, 4, 0, 3],
-            [1, 2, 3, 0, 0, 0, 5, 0, 4],
-            [1, 0, 2, 6, 0, 3, 5, 0, 4],
-            [1, 2, 3, 7, 0, 4, 6, 0, 5]
-        ]
-    }
-    
-    func player(at indexPath: IndexPath) -> PlayerProtocol? {
-        let playerIndex = playerIndexes[state.players.count][indexPath.row] - 1
-        guard playerIndex >= 0 else {
-            return nil
-        }
-        return state.players[playerIndex]
     }
 }

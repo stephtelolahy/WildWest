@@ -8,53 +8,29 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 		<key>Pods-WildWest.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 		<key>Pods-WildWestTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
+		</dict>
+		<key>RxSwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>SwiftLint.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>47B128FFAA00A5D43EBB5DAF209E0B8D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>500BA486009DEADD38B4A1CE31CFA6D8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>52B60EC2A583F24ACBB69C113F5488B9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CFCA8CA494372A14108299CE150648B8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-	</dict>
+	<dict/>
 </dict>
 </plist>
