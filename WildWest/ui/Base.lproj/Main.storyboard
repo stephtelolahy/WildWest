@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ciu-s2-AvL">
-    <device id="retina4_7" orientation="portrait" appearance="dark"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
@@ -182,7 +182,20 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cXD-5P-evL"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Your turn" id="CGv-Ba-0dC"/>
+                    <navigationItem key="navigationItem" title="Your turn" id="CGv-Ba-0dC">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="action" id="p66-uP-jgS">
+                                <connections>
+                                    <action selector="actionButtonTapped:" destination="Yy6-0k-mhK" id="jf3-7e-Xcv"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="reply" id="ueO-1J-Lps">
+                                <connections>
+                                    <action selector="messageButtonTapped:" destination="Yy6-0k-mhK" id="CLz-Zu-edF"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
                         <outlet property="handCollectionView" destination="YnA-A3-EaS" id="HoZ-WM-M1l"/>
                         <outlet property="stateCollectionView" destination="Cuo-aq-X8E" id="Ffa-eb-FVY"/>

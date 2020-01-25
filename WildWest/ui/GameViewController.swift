@@ -46,6 +46,28 @@ class GameViewController: UIViewController, Subscribable {
             self?.stateCollectionView.reloadData()
         }))
     }
+    
+    // MARK: IBAction
+    
+    @IBAction private func actionButtonTapped(_ sender: Any) {
+        let actionsViewController = ActionsViewController()
+        actionsViewController.actions = GameAI().generateActions(from: state)
+        actionsViewController.delegate = self
+        present(actionsViewController, animated: true)
+    }
+    
+    @IBAction func messageButtonTapped(_ sender: Any) {
+        let messagesViewController = MessagesViewController()
+        messagesViewController.messages = state.messages
+        present(messagesViewController, animated: true)
+    }
+}
+
+extension GameViewController: ActionsViewControllerDelegate {
+    func actionsViewController(_ controller: ActionsViewController, didSelect action: ActionProtocol) {
+        viewModel.execute(action)
+        controller.dismiss(animated: true)
+    }
 }
 
 /// Convenience

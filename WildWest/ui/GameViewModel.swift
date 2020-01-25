@@ -28,33 +28,6 @@ class GameViewModel: GameViewModelProtocol {
         }
         
         action.execute(state: state)
-        
-        // TODO: generate possible actions if needed
-        
         stateSubject.onNext(state)
-    }
-}
-
-class GameAI {
-    func generateActions(from state: GameStateProtocol) -> [ActionProtocol] {
-        return ([
-            Beer.match(state: state),
-            Saloon.match(state: state),
-            Stagecoach.match(state: state),
-            WellsFargo.match(state: state),
-            Equip.match(state: state),
-            Jail.match(state: state),
-            Shoot.match(state: state),
-            Missed.match(state: state),
-            Gatling.match(state: state),
-            Indians.match(state: state),
-            Duel.match(state: state),
-            Panic.match(state: state),
-            CatBalou.match(state: state),
-            GeneralStore.match(state: state),
-            EndTurn.match(state: state),
-            BeerLastLifePoint.match(state: state)
-        ] as [[ActionProtocol]])
-            .flatMap { $0 }
     }
 }

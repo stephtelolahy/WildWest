@@ -14,6 +14,9 @@
 		332499B323DB9F650082EF09 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332499B223DB9F650082EF09 /* GameViewController.swift */; };
 		33A733EC23DC472A00E9B2AD /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A733EB23DC472900E9B2AD /* GameViewModel.swift */; };
 		33A733EE23DC4A5300E9B2AD /* Subscribable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A733ED23DC4A5300E9B2AD /* Subscribable.swift */; };
+		33A733F223DC514500E9B2AD /* ActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A733F123DC514500E9B2AD /* ActionsViewController.swift */; };
+		33A733F423DC54C000E9B2AD /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A733F323DC54C000E9B2AD /* MessagesViewController.swift */; };
+		33A733F623DC553900E9B2AD /* GameAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A733F523DC553900E9B2AD /* GameAI.swift */; };
 		33A815E623DB507D0081A055 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F4239EE03900653905 /* Assets.xcassets */; };
 		33A815E823DB51BE0081A055 /* GameResourcesFiguresTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A815E723DB51BE0081A055 /* GameResourcesFiguresTests.swift */; };
 		33A815EA23DB51D40081A055 /* GameResourcesCardsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A815E923DB51D40081A055 /* GameResourcesCardsTests.swift */; };
@@ -140,6 +143,9 @@
 		332499B223DB9F650082EF09 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		33A733EB23DC472900E9B2AD /* GameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		33A733ED23DC4A5300E9B2AD /* Subscribable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subscribable.swift; sourceTree = "<group>"; };
+		33A733F123DC514500E9B2AD /* ActionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsViewController.swift; sourceTree = "<group>"; };
+		33A733F323DC54C000E9B2AD /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
+		33A733F523DC553900E9B2AD /* GameAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAI.swift; sourceTree = "<group>"; };
 		33A815E723DB51BE0081A055 /* GameResourcesFiguresTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameResourcesFiguresTests.swift; sourceTree = "<group>"; };
 		33A815E923DB51D40081A055 /* GameResourcesCardsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameResourcesCardsTests.swift; sourceTree = "<group>"; };
 		33A815EC23DB54350081A055 /* roles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = roles.json; sourceTree = "<group>"; };
@@ -262,6 +268,7 @@
 				AD36CDE723C52218008D4EDB /* GameSetupProtocol.swift */,
 				AD36CDE423C521FE008D4EDB /* GameResourcesProtocol.swift */,
 				ADE91AD323BA00DC00F7316B /* GameSetup.swift */,
+				33A733F523DC553900E9B2AD /* GameAI.swift */,
 				AD36CDDC23C51EFA008D4EDB /* GameResources.swift */,
 				AD36CDD823C51C34008D4EDB /* state */,
 				AD36CDDA23C51DA6008D4EDB /* action */,
@@ -434,6 +441,8 @@
 				33A733EB23DC472900E9B2AD /* GameViewModel.swift */,
 				332499B023DB9F140082EF09 /* PlayerCell.swift */,
 				332499AE23DB9EFE0082EF09 /* CardCell.swift */,
+				33A733F123DC514500E9B2AD /* ActionsViewController.swift */,
+				33A733F323DC54C000E9B2AD /* MessagesViewController.swift */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -669,6 +678,7 @@
 				ADB5A11623BABBE80050E173 /* EndTurn.swift in Sources */,
 				AD46810E23BEA2B0000B42C7 /* PlayerExtension.swift in Sources */,
 				ADB5A10123BAB81E0050E173 /* Missed.swift in Sources */,
+				33A733F623DC553900E9B2AD /* GameAI.swift in Sources */,
 				AD49F86F23BA0E3E00543F59 /* WellsFargo.swift in Sources */,
 				ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */,
 				ADB5A10723BAB84E0050E173 /* Gatling.swift in Sources */,
@@ -681,6 +691,7 @@
 				ADB5A10423BAB8370050E173 /* Duel.swift in Sources */,
 				ADD5643523A4E09C00C1BD01 /* Beer.swift in Sources */,
 				ADB5A10D23BAB8780050E173 /* Panic.swift in Sources */,
+				33A733F423DC54C000E9B2AD /* MessagesViewController.swift in Sources */,
 				AD49F86C23BA0C4600543F59 /* Stagecoach.swift in Sources */,
 				AD36CDE823C52218008D4EDB /* GameSetupProtocol.swift in Sources */,
 				AD36CDDD23C51EFA008D4EDB /* GameResources.swift in Sources */,
@@ -692,6 +703,7 @@
 				AD52B99C23B17A310013240B /* GameState.swift in Sources */,
 				AD52B99623B1771E0013240B /* CardList.swift in Sources */,
 				332499B123DB9F140082EF09 /* PlayerCell.swift in Sources */,
+				33A733F223DC514500E9B2AD /* ActionsViewController.swift in Sources */,
 				AD671A1923D8DCE000F0AA4A /* BeerLastLifePoint.swift in Sources */,
 				ADB5A10A23BAB8630050E173 /* Indians.swift in Sources */,
 				33A733EC23DC472A00E9B2AD /* GameViewModel.swift in Sources */,
