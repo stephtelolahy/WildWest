@@ -12,9 +12,9 @@ struct WellsFargo: ActionProtocol, Equatable {
     
     func execute(state: GameStateProtocol) {
         state.discardHand(playerId: actorId, cardId: cardId)
-        state.pull(playerId: actorId)
-        state.pull(playerId: actorId)
-        state.pull(playerId: actorId)
+        state.pullFromDeck(playerId: actorId)
+        state.pullFromDeck(playerId: actorId)
+        state.pullFromDeck(playerId: actorId)
     }
     
     var message: String {

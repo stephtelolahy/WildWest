@@ -36,7 +36,7 @@ class GameState: GameStateProtocol {
         history.append(action)
     }
     
-    func setAction(_ actions: [ActionProtocol]) {
+    func setActions(_ actions: [ActionProtocol]) {
         self.actions = actions
     }
     
@@ -53,7 +53,7 @@ class GameState: GameStateProtocol {
     func discardInPlay(playerId: String, cardId: String) {
     }
     
-    func pull(playerId: String) {
+    func pullFromDeck(playerId: String) {
         guard let player = players.first(where: { $0.identifier == playerId }) else {
             return
         }

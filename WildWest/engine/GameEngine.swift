@@ -19,7 +19,6 @@ class GameEngine: GameEngineProtocol {
     let stateSubject: BehaviorSubject<GameStateProtocol>
     
     init(state: GameStateProtocol) {
-        state.setAction(GameEngine.generateActions(from: state))
         stateSubject = BehaviorSubject(value: state)
     }
     
@@ -30,7 +29,7 @@ class GameEngine: GameEngineProtocol {
         
         action.execute(state: state)
         state.addHistory(action)
-        state.setAction(GameEngine.generateActions(from: state))
+        state.setActions(GameEngine.generateActions(from: state))
         stateSubject.onNext(state)
     }
 }

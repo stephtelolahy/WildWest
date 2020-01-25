@@ -18,10 +18,10 @@ protocol GameStateProtocol {
     func discardHand(playerId: String, cardId: String)
     func discardInPlay(playerId: String, cardId: String)
     func gainLifePoint(playerId: String)
-    func pull(playerId: String)
+    func pullFromDeck(playerId: String)
     func putInPlay(playerId: String, cardId: String)
     func addHistory(_ action: ActionProtocol)
-    func setAction(_ actions: [ActionProtocol])
+    func setActions(_ actions: [ActionProtocol])
 }
 
 enum GameOutcome {

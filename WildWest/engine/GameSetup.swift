@@ -42,12 +42,18 @@ class GameSetup: GameSetupProtocol {
                           hand: CardList(cards: hand),
                           inPlay: CardList(cards: []))
         }
+        
+        var actions: [ActionProtocol] = []
+        if let sheriff = players.first(where: { $0.role == .sheriff }) {
+            actions.append(StartTurn(actorId: sheriff.identifier))
+        }
+        
         return GameState(players: players,
                          deck: CardList(cards: deck),
                          discard: CardList(cards: []),
                          turn: 0,
                          outcome: nil,
                          history: [],
-                         actions: [])
+                         actions: actions)
     }
 }
