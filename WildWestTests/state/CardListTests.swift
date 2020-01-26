@@ -49,7 +49,7 @@ class CardListTests: XCTestCase {
         XCTAssertEqual(sut.cards.map { $0.identifier }, ["c1", "c2", "c3"])
     }
     
-    func test_ReturnsFirstCard_IfRemovingFirst() {
+    func test_ReturnFirstCard_IfRemovingFirst() {
         // Given
         let card1 = MockCardProtocol().identified(by: "c1")
         let card2 = MockCardProtocol().identified(by: "c2")
@@ -64,7 +64,7 @@ class CardListTests: XCTestCase {
         XCTAssertEqual(sut.cards.map { $0.identifier }, ["c2", "c3"])
     }
     
-    func test_ReturnsNil_IfRemovingFirstOnEmptyList() {
+    func test_ReturnNil_IfRemovingFirstOnEmptyList() {
         // Given
         let sut = CardList(cards: [])
         
@@ -75,7 +75,7 @@ class CardListTests: XCTestCase {
         XCTAssertNil(card)
     }
     
-    func test_ReturnsCardwithPassedIdentifier_IfRemovingCardByIdentifier() {
+    func test_ReturnCardwithPassedIdentifier_IfRemovingCardByIdentifier() {
         // Given
         let card1 = MockCardProtocol().identified(by: "c1")
         let card2 = MockCardProtocol().identified(by: "c2")
@@ -90,7 +90,7 @@ class CardListTests: XCTestCase {
         XCTAssertEqual(sut.cards.map { $0.identifier }, ["c1", "c3"])
     }
     
-    func test_ReturnsNil_IfCardToRemoveIsNotFound() {
+    func test_ReturnNil_IfCardToRemoveIsNotFound() {
         // Given
         let card1 = MockCardProtocol().identified(by: "c1")
         let card2 = MockCardProtocol().identified(by: "c2")
@@ -104,7 +104,7 @@ class CardListTests: XCTestCase {
         XCTAssertEqual(sut.cards.map { $0.identifier }, ["c1", "c2"])
     }
     
-    func test_ReturnsAllCards_IfRemovingAll() {
+    func test_ReturnAllCards_IfRemovingAll() {
         // Given
         let card1 = MockCardProtocol().identified(by: "c1")
         let card2 = MockCardProtocol().identified(by: "c2")

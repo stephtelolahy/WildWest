@@ -66,13 +66,13 @@ class GameState: GameStateProtocol {
     }
     
     func discardInPlay(playerId: String, cardId: String) {
-        guard let player = players.first(where: { $0.identifier == playerId }),
-            let card = player.inPlay.cards.first(where: { $0.identifier == cardId }) else {
-                return
+        guard let player = players.first(where: { $0.identifier == playerId }) else {
+            return
         }
         
-        player.inPlay.removeById(cardId)
-        deck.add(card)
+        if let card = player.inPlay.removeById(cardId) {
+            discard.add(card)
+        }
     }
     
     func gainLifePoint(playerId: String) {
@@ -80,20 +80,16 @@ class GameState: GameStateProtocol {
             return
         }
         
-        guard player.health < player.maxHealth else {
-            return
-        }
-        
         player.setHealth(player.health + 1)
     }
     
     func putInPlay(playerId: String, cardId: String) {
-        guard let player = players.first(where: { $0.identifier == playerId }),
-            let card = player.hand.cards.first(where: { $0.identifier == cardId }) else {
-                return
+        guard let player = players.first(where: { $0.identifier == playerId }) else {
+            return
         }
         
-        player.hand.removeById(cardId)
-        player.inPlay.add(card)
+        if let card = player.hand.removeById(cardId) {
+            player.inPlay.add(card)
+        }
     }
 }

@@ -71,7 +71,7 @@ class GameStateTests: XCTestCase {
         verifyNoMoreInteractions(mockPlayer1.mockHand)
     }
     
-    func test_MoveCardFromHandToDiscard_IfDiscarding() {
+    func test_MoveCardFromHandToDiscard_IfDiscardingHand() {
         // Given
         let card1 = MockCardProtocol().identified(by: "c1")
         Cuckoo.stub(mockPlayer1.mockHand) { mock in
@@ -84,28 +84,65 @@ class GameStateTests: XCTestCase {
         // Assert
         verify(mockPlayer1.mockHand).removeById("c1")
         verify(mockDiscard).add(identified(by: "c1"))
-        verifyNoMoreInteractions(mockDiscard)
         verifyNoMoreInteractions(mockPlayer1.mockHand)
-        
+        verifyNoMoreInteractions(mockDiscard)
     }
     
-    /*
-     func discardHand(playerId: String, cardId: String)
-     func discardInPlay(playerId: String, cardId: String)
-     func gainLifePoint(playerId: String)
-     func pull(playerId: String)
-     func putInPlay(playerId: String, cardId: String)
-     */
+    func test_MoveCardFromInPlayToDiscard_IfDiscardingInPlay() {
+        // Given
+        let card1 = MockCardProtocol().identified(by: "c1")
+        Cuckoo.stub(mockPlayer1.mockInPlay) { mock in
+            when(mock.removeById("c1")).thenReturn(card1)
+        }
+        
+        // When
+        sut.discardInPlay(playerId: "p1", cardId: "c1")
+        
+        // Assert
+        verify(mockPlayer1.mockInPlay).removeById("c1")
+        verify(mockDiscard).add(identified(by: "c1"))
+        verifyNoMoreInteractions(mockPlayer1.mockInPlay)
+        verifyNoMoreInteractions(mockDiscard)
+    }
     
+    func test_IncrementHealth_IfGainingLifePoint() {
+        // Given
+        Cuckoo.stub(mockPlayer1) { mock in
+            when(mock.health.get).thenReturn(2)
+        }
+        
+        // When
+        sut.gainLifePoint(playerId: "p1")
+        
+        // Assert
+        verify(mockPlayer1).setHealth(3)
+    }
+    
+    func test_MoveCardFromHandToInPlay_ifPuttingInPlay() {
+        // Given
+        let card1 = MockCardProtocol().identified(by: "c1")
+        Cuckoo.stub(mockPlayer1.mockHand) { mock in
+            when(mock.removeById("c1")).thenReturn(card1)
+        }
+        
+        // When
+        sut.putInPlay(playerId: "p1", cardId: "c1")
+        
+        // Assert
+        verify(mockPlayer1.mockHand).removeById("c1")
+        verify(mockPlayer1.mockInPlay).add(identified(by: "c1"))
+        verifyNoMoreInteractions(mockPlayer1.mockHand)
+        verifyNoMoreInteractions(mockPlayer1.mockInPlay)
+    }
 }
 
-class FullMockPlayerProtocol: MockPlayerProtocol {
+private class FullMockPlayerProtocol: MockPlayerProtocol {
     
     var mockHand: MockCardListProtocol!
     var mockInPlay: MockCardListProtocol!
     
     static func create(identifier: String) -> FullMockPlayerProtocol {
-        let mockPlayer = FullMockPlayerProtocol()
+        let mockPlayer = FullMockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub())
         let mockHand = MockCardListProtocol().withEnabledDefaultImplementation(CardListProtocolStub())
         let mockInPlay = MockCardListProtocol().withEnabledDefaultImplementation(CardListProtocolStub())
         Cuckoo.stub(mockPlayer) { mock in

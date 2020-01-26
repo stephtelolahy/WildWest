@@ -63,3 +63,5 @@ lint/tmp/
 \.idea/caches/build_file_checksums\.ser
 
 \.idea/
+
+*.xcuserstate

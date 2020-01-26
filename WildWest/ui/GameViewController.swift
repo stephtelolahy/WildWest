@@ -44,6 +44,7 @@ class GameViewController: UIViewController, Subscribable {
         sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
             self?.state = state
             self?.stateCollectionView.reloadData()
+            self?.handCollectionView.reloadData()
         }))
     }
     
