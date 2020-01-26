@@ -29,7 +29,7 @@ class GameViewController: UIViewController, Subscribable {
         let gameSetup = GameSetup()
         let roles = gameSetup.roles(for: 7)
         let state = gameSetup.setupGame(roles: roles, figures: figures, cards: cards)
-        return GameEngine(state: state)
+        return GameEngine(state: state, rules: GameRules())
     }()
     
     // swiftlint:disable implicitly_unwrapped_optional

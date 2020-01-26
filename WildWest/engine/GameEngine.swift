@@ -17,9 +17,11 @@ protocol GameEngineProtocol {
 class GameEngine: GameEngineProtocol {
     
     let stateSubject: BehaviorSubject<GameStateProtocol>
+    private let rules: GameRulesProtocol
     
-    init(state: GameStateProtocol) {
+    init(state: GameStateProtocol, rules: GameRulesProtocol) {
         stateSubject = BehaviorSubject(value: state)
+        self.rules = rules
     }
     
     func execute(_ action: ActionProtocol) {
@@ -29,31 +31,7 @@ class GameEngine: GameEngineProtocol {
         
         action.execute(state: state)
         state.addHistory(action)
-        state.setActions(GameEngine.generateActions(from: state))
+        state.setActions(rules.generateActions(for: state))
         stateSubject.onNext(state)
-    }
-}
-
-private extension GameEngine {
-    static func generateActions(from state: GameStateProtocol) -> [ActionProtocol] {
-        return ([
-            Beer.match(state: state),
-            Saloon.match(state: state),
-            Stagecoach.match(state: state),
-            WellsFargo.match(state: state),
-            Equip.match(state: state),
-            Jail.match(state: state),
-            Shoot.match(state: state),
-            Missed.match(state: state),
-            Gatling.match(state: state),
-            Indians.match(state: state),
-            Duel.match(state: state),
-            Panic.match(state: state),
-            CatBalou.match(state: state),
-            GeneralStore.match(state: state),
-            EndTurn.match(state: state),
-            BeerLastLifePoint.match(state: state)
-        ] as [[ActionProtocol]])
-            .flatMap { $0 }
     }
 }

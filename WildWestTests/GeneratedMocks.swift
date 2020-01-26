@@ -2,6 +2,100 @@ import Cuckoo
 @testable import WildWest
 
 
+ class MockGameRulesProtocol: GameRulesProtocol, Cuckoo.ProtocolMock {
+    
+     typealias MocksType = GameRulesProtocol
+    
+     typealias Stubbing = __StubbingProxy_GameRulesProtocol
+     typealias Verification = __VerificationProxy_GameRulesProtocol
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: GameRulesProtocol?
+
+     func enableDefaultImplementation(_ stub: GameRulesProtocol) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+
+    
+
+    
+    
+    
+     func generateActions(for state: GameStateProtocol) -> [ActionProtocol] {
+        
+    return cuckoo_manager.call("generateActions(for: GameStateProtocol) -> [ActionProtocol]",
+            parameters: (state),
+            escapingParameters: (state),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.generateActions(for: state))
+        
+    }
+    
+
+	 struct __StubbingProxy_GameRulesProtocol: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    func generateActions<M1: Cuckoo.Matchable>(for state: M1) -> Cuckoo.ProtocolStubFunction<(GameStateProtocol), [ActionProtocol]> where M1.MatchedType == GameStateProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameRulesProtocol.self, method: "generateActions(for: GameStateProtocol) -> [ActionProtocol]", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	 struct __VerificationProxy_GameRulesProtocol: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	
+	    
+	    @discardableResult
+	    func generateActions<M1: Cuckoo.Matchable>(for state: M1) -> Cuckoo.__DoNotUse<(GameStateProtocol), [ActionProtocol]> where M1.MatchedType == GameStateProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
+	        return cuckoo_manager.verify("generateActions(for: GameStateProtocol) -> [ActionProtocol]", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+ class GameRulesProtocolStub: GameRulesProtocol {
+    
+
+    
+
+    
+     func generateActions(for state: GameStateProtocol) -> [ActionProtocol]  {
+        return DefaultValueRegistry.defaultValue(for: ([ActionProtocol]).self)
+    }
+    
+}
+
+
+import Cuckoo
+@testable import WildWest
+
+
  class MockActionProtocol: ActionProtocol, Cuckoo.ProtocolMock {
     
      typealias MocksType = ActionProtocol

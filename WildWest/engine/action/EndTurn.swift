@@ -8,7 +8,7 @@
 
 struct EndTurn: ActionProtocol {
     let actorId: String
-    let cardId: String
+    let cardIds: [String]
     
     func execute(state: GameStateProtocol) {
     }
