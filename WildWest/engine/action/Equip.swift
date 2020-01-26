@@ -25,7 +25,7 @@ struct Equip: ActionProtocol, Equatable {
         state.putInPlay(playerId: actorId, cardId: cardId)
     }
     
-    var message: String {
+    var description: String {
         "\(actorId) equip with \(cardId)"
     }
 }

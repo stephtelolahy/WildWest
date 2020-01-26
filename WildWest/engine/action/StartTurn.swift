@@ -9,7 +9,7 @@
 struct StartTurn: ActionProtocol, Equatable {
     var actorId: String
     
-    var message: String {
+    var description: String {
         "\(actorId) start turn"
     }
     

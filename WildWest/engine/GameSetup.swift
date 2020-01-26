@@ -54,6 +54,7 @@ class GameSetup: GameSetupProtocol {
                          turn: 0,
                          outcome: nil,
                          history: [],
-                         actions: actions)
+                         actions: actions,
+                         challenge: nil)
     }
 }

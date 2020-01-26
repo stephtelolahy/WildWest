@@ -16,7 +16,7 @@ struct Stagecoach: ActionProtocol, Equatable {
         state.pullFromDeck(playerId: actorId)
     }
     
-    var message: String {
+    var description: String {
         "\(actorId) play \(cardId)"
     }
 }

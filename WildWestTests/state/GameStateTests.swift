@@ -27,7 +27,8 @@ class GameStateTests: XCTestCase {
                         turn: 0,
                         outcome: nil,
                         history: [],
-                        actions: [])
+                        actions: [],
+                        challenge: nil)
     }
     
     func test_MoveCardFromDeckToActorsHand_IfPulling() {
@@ -42,7 +43,7 @@ class GameStateTests: XCTestCase {
         
         // Assert
         verify(mockDeck).removeFirst()
-        verify(mockPlayer1.mockHand).add(identified(by: "c1"))
+        verify(mockPlayer1.mockHand).add(card(identifiedBy: "c1"))
         verifyNoMoreInteractions(mockDeck)
         verifyNoMoreInteractions(mockPlayer1.mockHand)
     }
@@ -63,9 +64,9 @@ class GameStateTests: XCTestCase {
         
         // Assert
         verify(mockDiscard).removeAll()
-        verify(mockDeck).addAll(identified(by: ["c1", "c2"]))
+        verify(mockDeck).addAll(cards(identifiedBy: ["c1", "c2"]))
         verify(mockDeck, times(2)).removeFirst()
-        verify(mockPlayer1.mockHand).add(identified(by: "c1"))
+        verify(mockPlayer1.mockHand).add(card(identifiedBy: "c1"))
         verifyNoMoreInteractions(mockDiscard)
         verifyNoMoreInteractions(mockDeck)
         verifyNoMoreInteractions(mockPlayer1.mockHand)
@@ -83,7 +84,7 @@ class GameStateTests: XCTestCase {
         
         // Assert
         verify(mockPlayer1.mockHand).removeById("c1")
-        verify(mockDiscard).add(identified(by: "c1"))
+        verify(mockDiscard).add(card(identifiedBy: "c1"))
         verifyNoMoreInteractions(mockPlayer1.mockHand)
         verifyNoMoreInteractions(mockDiscard)
     }
@@ -100,7 +101,7 @@ class GameStateTests: XCTestCase {
         
         // Assert
         verify(mockPlayer1.mockInPlay).removeById("c1")
-        verify(mockDiscard).add(identified(by: "c1"))
+        verify(mockDiscard).add(card(identifiedBy: "c1"))
         verifyNoMoreInteractions(mockPlayer1.mockInPlay)
         verifyNoMoreInteractions(mockDiscard)
     }
@@ -130,7 +131,7 @@ class GameStateTests: XCTestCase {
         
         // Assert
         verify(mockPlayer1.mockHand).removeById("c1")
-        verify(mockPlayer1.mockInPlay).add(identified(by: "c1"))
+        verify(mockPlayer1.mockInPlay).add(card(identifiedBy: "c1"))
         verifyNoMoreInteractions(mockPlayer1.mockHand)
         verifyNoMoreInteractions(mockPlayer1.mockInPlay)
     }

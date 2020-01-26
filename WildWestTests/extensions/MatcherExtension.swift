@@ -8,14 +8,32 @@
 
 import Cuckoo
 
-func identified(by identifier: String) -> ParameterMatcher<CardProtocol> {
+func card(identifiedBy identifier: String) -> ParameterMatcher<CardProtocol> {
     return ParameterMatcher(matchesFunction: { card -> Bool in
         return card.identifier == identifier
     })
 }
 
-func identified(by identifiers: [String]) -> ParameterMatcher<[CardProtocol]> {
+func cards(identifiedBy identifiers: [String]) -> ParameterMatcher<[CardProtocol]> {
     return ParameterMatcher(matchesFunction: { cards -> Bool in
         return cards.map { $0.identifier } == identifiers
+    })
+}
+
+func actions(describedBy descriptions: [String]) -> ParameterMatcher<[ActionProtocol]> {
+    return ParameterMatcher(matchesFunction: { actions -> Bool in
+        return actions.map { $0.description } == descriptions
+    })
+}
+
+func action(describedBy description: String) -> ParameterMatcher<ActionProtocol> {
+    return ParameterMatcher(matchesFunction: { action -> Bool in
+        return action.description == description
+    })
+}
+
+func state(equalTo mock: MockGameStateProtocol) -> ParameterMatcher<GameStateProtocol> {
+    return ParameterMatcher(matchesFunction: { state -> Bool in
+        return state as? MockGameStateProtocol === mock
     })
 }

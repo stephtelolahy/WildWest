@@ -12,8 +12,9 @@ protocol GameStateProtocol {
     var discard: CardListProtocol { get }
     var turn: Int { get }
     var outcome: GameOutcome? { get }
-    var actions: [ActionProtocol] { get }
     var history: [ActionProtocol] { get }
+    var actions: [ActionProtocol] { get }
+    var challenge: Challenge? { get }
     
     func discardHand(playerId: String, cardId: String)
     func discardInPlay(playerId: String, cardId: String)
@@ -22,10 +23,20 @@ protocol GameStateProtocol {
     func putInPlay(playerId: String, cardId: String)
     func addHistory(_ action: ActionProtocol)
     func setActions(_ actions: [ActionProtocol])
+    func setChallenge(_ challenge: Challenge?)
 }
 
 enum GameOutcome {
     case sheriffWin,
     outlawWin,
     renegadeWin
+}
+
+enum Challenge {
+    case next(actorId: String)
+    case bang(actorId: String, targetId: String)
+    case duel(actorId: String)
+    case gatling(actorId: String)
+    case indians(actorId: String)
+    case generalStore(actorId: String)
 }

@@ -10,7 +10,7 @@ import XCTest
 import Cuckoo
 
 class GameEngineTests: XCTestCase {
-
+    
     private var sut: GameEngineProtocol!
     private var mockState: MockGameStateProtocol!
     private var mockRules: MockGameRulesProtocol!
@@ -29,31 +29,43 @@ class GameEngineTests: XCTestCase {
         XCTAssertNotNil(state)
     }
     
-    func test_AddActionToHistory_IfExecuting() {
+    func test_AddActionToHistoryAfterExecuting() {
         // Given
-        let mockAction = MockActionProtocol().withEnabledDefaultImplementation(ActionProtocolStub())
+        let mockAction = MockActionProtocol()
+            .withEnabledDefaultImplementation(ActionProtocolStub())
+            .described(by: "ac")
         
         // When
         sut.execute(mockAction)
         
         // Assert
-        verify(mockAction).execute(state: any())
-        verify(mockState).addHistory(any())
+        verify(mockAction).execute(state: state(equalTo: mockState))
+        verify(mockState).addHistory(action(describedBy: "ac"))
     }
     
-    func test_SetGeneratedActions_IfRequiredActionsEmpty() {
+    func test_SetMatchingActionsAfterExecuting_IfNotChallenge() {
         // Given
         let mockAction = MockActionProtocol().withEnabledDefaultImplementation(ActionProtocolStub())
+        let action1 = MockActionProtocol().described(by: "a1")
+        let action2 = MockActionProtocol().described(by: "a2")
+        Cuckoo.stub(mockRules) { mock in
+            when(mock.matchingActions(for: any())).thenReturn([action1, action2])
+        }
+        Cuckoo.stub(mockState) { mock in
+            when(mock.challenge.get).thenReturn(nil)
+        }
         
         // When
         sut.execute(mockAction)
         
         // Assert
-        verify(mockRules).generateActions(for: any())
-        verify(mockState).setActions(any())
+        verify(mockRules).matchingActions(for: state(equalTo: mockState))
+        verify(mockState).setActions(actions(describedBy: ["a1", "a2"]))
     }
     
-    func test_SetRequiredActionsToActions_IfRequiredActionsNotEmpty() {
-        XCTFail()
+    func test_SetRequiredActionsAfterExecuting_IfChallengeIsSet() {
+        // Given
+        // When
+        // Assert
     }
 }

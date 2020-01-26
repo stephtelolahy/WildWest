@@ -29,7 +29,7 @@ class ActionsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ActionCell", for: indexPath)
-        cell.textLabel?.text = actions[indexPath.row].message
+        cell.textLabel?.text = actions[indexPath.row].description
         return cell
     }
     

@@ -13,7 +13,7 @@ struct Shoot: ActionProtocol {
     func execute(state: GameStateProtocol) {
     }
     
-    var message: String {
+    var description: String {
         "\(actorId) play \(cardId)"
     }
 }

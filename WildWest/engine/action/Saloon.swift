@@ -17,7 +17,7 @@ struct Saloon: ActionProtocol, Equatable {
         }
     }
     
-    var message: String {
+    var description: String {
         "\(actorId) play \(cardId)"
     }
 }

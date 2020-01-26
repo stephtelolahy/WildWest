@@ -15,7 +15,7 @@ struct Beer: ActionProtocol, Equatable {
         state.gainLifePoint(playerId: actorId)
     }
     
-    var message: String {
+    var description: String {
         "\(actorId) play \(cardId)"
     }
 }

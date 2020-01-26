@@ -7,11 +7,12 @@
 //
 
 protocol GameRulesProtocol {
-    func generateActions(for state: GameStateProtocol) -> [ActionProtocol]
+    func matchingActions(for state: GameStateProtocol) -> [ActionProtocol]
 }
 
 class GameRules: GameRulesProtocol {
-    func generateActions(for state: GameStateProtocol) -> [ActionProtocol] {
+    
+    func matchingActions(for state: GameStateProtocol) -> [ActionProtocol] {
         return ([
             Beer.match(state: state),
             Saloon.match(state: state),
@@ -27,8 +28,7 @@ class GameRules: GameRulesProtocol {
             Panic.match(state: state),
             CatBalou.match(state: state),
             GeneralStore.match(state: state),
-            EndTurn.match(state: state),
-            BeerLastLifePoint.match(state: state)
+            EndTurn.match(state: state)
         ] as [[ActionProtocol]])
             .flatMap { $0 }
     }
