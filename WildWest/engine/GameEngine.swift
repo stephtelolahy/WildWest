@@ -31,7 +31,7 @@ class GameEngine: GameEngineProtocol {
         
         action.execute(state: state)
         state.addHistory(action)
-        state.setActions(rules.matchingActions(for: state))
+        state.setActions(rules.actions(matching: state))
         stateSubject.onNext(state)
     }
 }

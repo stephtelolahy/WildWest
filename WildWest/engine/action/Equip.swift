@@ -33,6 +33,10 @@ struct Equip: ActionProtocol, Equatable {
 extension Equip: RuleProtocol {
     
     static func match(state: GameStateProtocol) -> [Equip] {
+        guard state.challenge == nil else {
+            return []
+        }
+        
         let player = state.players[state.turn]
         let cards = player.handCards(named: .volcanic,
                                      .schofield,

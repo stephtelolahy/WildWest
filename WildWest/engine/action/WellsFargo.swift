@@ -25,6 +25,10 @@ struct WellsFargo: ActionProtocol, Equatable {
 extension WellsFargo: RuleProtocol {
     
     static func match(state: GameStateProtocol) -> [WellsFargo] {
+        guard state.challenge == nil else {
+            return []
+        }
+        
         let player = state.players[state.turn]
         let cards = player.handCards(named: .wellsFargo)
         return cards.map { WellsFargo(actorId: player.identifier, cardId: $0.identifier) }

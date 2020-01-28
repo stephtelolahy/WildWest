@@ -35,6 +35,7 @@ class GameStateTests: XCTestCase {
         // Given
         let card1 = MockCardProtocol().identified(by: "c1")
         Cuckoo.stub(mockDeck) { mock in
+            when(mock.cards.get).thenReturn([card1])
             when(mock.removeFirst()).thenReturn(card1)
         }
         
@@ -42,6 +43,7 @@ class GameStateTests: XCTestCase {
         sut.pullFromDeck(playerId: "p1")
         
         // Assert
+        verify(mockDeck).cards.get()
         verify(mockDeck).removeFirst()
         verify(mockPlayer1.mockHand).add(card(identifiedBy: "c1"))
         verifyNoMoreInteractions(mockDeck)
@@ -51,12 +53,12 @@ class GameStateTests: XCTestCase {
     func test_ResetDeck_IfEmptyWhilePulling() {
         // Given
         let card1 = MockCardProtocol().identified(by: "c1")
-        let card2 = MockCardProtocol().identified(by: "c2")
         Cuckoo.stub(mockDeck) { mock in
-            when(mock.removeFirst()).thenReturn(nil, card1)
+            when(mock.cards.get).thenReturn([])
+            when(mock.removeFirst()).thenReturn(card1)
         }
         Cuckoo.stub(mockDiscard) { mock in
-            when(mock.removeAll()).thenReturn([card1, card2])
+            when(mock.removeAll()).thenReturn([card1])
         }
         
         // When
@@ -64,8 +66,9 @@ class GameStateTests: XCTestCase {
         
         // Assert
         verify(mockDiscard).removeAll()
-        verify(mockDeck).addAll(cards(identifiedBy: ["c1", "c2"]))
-        verify(mockDeck, times(2)).removeFirst()
+        verify(mockDeck).cards.get()
+        verify(mockDeck).addAll(cards(identifiedBy: ["c1"]))
+        verify(mockDeck).removeFirst()
         verify(mockPlayer1.mockHand).add(card(identifiedBy: "c1"))
         verifyNoMoreInteractions(mockDiscard)
         verifyNoMoreInteractions(mockDeck)
@@ -134,6 +137,15 @@ class GameStateTests: XCTestCase {
         verify(mockPlayer1.mockInPlay).add(card(identifiedBy: "c1"))
         verifyNoMoreInteractions(mockPlayer1.mockHand)
         verifyNoMoreInteractions(mockPlayer1.mockInPlay)
+    }
+    
+    func test_SetTurn() {
+        // Given
+        // When
+        sut.setTurn(1)
+        
+        // Assert
+        XCTAssertEqual(sut.turn, 1)
     }
 }
 

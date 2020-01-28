@@ -11,6 +11,10 @@ import Cuckoo
 
 class StartTurnTests: XCTestCase {
     
+    func test_ShouldStartTurn_IfLastActionWasEndTurn() {
+        XCTFail()
+    }
+    
     func test_Pull2CardsFromDeck_IfStartingTurn() {
         // Given
         let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())

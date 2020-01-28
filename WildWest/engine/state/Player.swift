@@ -30,7 +30,7 @@ class Player: PlayerProtocol {
         return ability.rawValue
     }
     
-    func setHealth(_ value: Int) {
-        health = value
+    func setHealth(_ health: Int) {
+        self.health = health
     }
 }

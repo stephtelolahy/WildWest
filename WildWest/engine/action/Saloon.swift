@@ -25,6 +25,10 @@ struct Saloon: ActionProtocol, Equatable {
 extension Saloon: RuleProtocol {
     
     static func match(state: GameStateProtocol) -> [Saloon] {
+        guard state.challenge == nil else {
+            return []
+        }
+        
         let player = state.players[state.turn]
         let cards = player.handCards(named: .saloon)
         return cards.map { Saloon(actorId: player.identifier, cardId: $0.identifier) }

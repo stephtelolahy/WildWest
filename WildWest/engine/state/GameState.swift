@@ -47,18 +47,21 @@ class GameState: GameStateProtocol {
         self.challenge = challenge
     }
     
+    func setTurn(_ turn: Int) {
+        self.turn = turn
+    }
+    
     func pullFromDeck(playerId: String) {
         guard let player = players.first(where: { $0.identifier == playerId }) else {
             return
         }
         
+        if deck.cards.isEmpty {
+            deck.addAll(discard.removeAll().shuffled())
+        }
+        
         if let card = deck.removeFirst() {
             player.hand.add(card)
-        } else {
-            deck.addAll(discard.removeAll())
-            if let card = deck.removeFirst() {
-                player.hand.add(card)
-            }
         }
     }
     

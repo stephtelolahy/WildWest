@@ -18,3 +18,10 @@ struct StartTurn: ActionProtocol, Equatable {
         state.pullFromDeck(playerId: actorId)
     }
 }
+
+extension StartTurn: RuleProtocol {
+    
+    static func match(state: GameStateProtocol) -> [StartTurn] {
+        return []
+    }
+}

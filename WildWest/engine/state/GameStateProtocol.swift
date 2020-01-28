@@ -24,6 +24,7 @@ protocol GameStateProtocol {
     func addHistory(_ action: ActionProtocol)
     func setActions(_ actions: [ActionProtocol])
     func setChallenge(_ challenge: Challenge?)
+    func setTurn(_ turn: Int)
 }
 
 enum GameOutcome {
@@ -33,7 +34,6 @@ enum GameOutcome {
 }
 
 enum Challenge {
-    case next(actorId: String)
     case bang(actorId: String, targetId: String)
     case duel(actorId: String)
     case gatling(actorId: String)

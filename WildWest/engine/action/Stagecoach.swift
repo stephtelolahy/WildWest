@@ -24,6 +24,10 @@ struct Stagecoach: ActionProtocol, Equatable {
 extension Stagecoach: RuleProtocol {
     
     static func match(state: GameStateProtocol) -> [Stagecoach] {
+        guard state.challenge == nil else {
+            return []
+        }
+        
         let player = state.players[state.turn]
         let cards = player.handCards(named: .stagecoach)
         return cards.map { Stagecoach(actorId: player.identifier, cardId: $0.identifier) }

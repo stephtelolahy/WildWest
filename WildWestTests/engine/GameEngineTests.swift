@@ -29,7 +29,7 @@ class GameEngineTests: XCTestCase {
         XCTAssertNotNil(state)
     }
     
-    func test_AddActionToHistoryAfterExecuting() {
+    func test_AddActionToHistory_IfExecuting() {
         // Given
         let mockAction = MockActionProtocol()
             .withEnabledDefaultImplementation(ActionProtocolStub())
@@ -43,29 +43,20 @@ class GameEngineTests: XCTestCase {
         verify(mockState).addHistory(action(describedBy: "ac"))
     }
     
-    func test_SetMatchingActionsAfterExecuting_IfNotChallenge() {
+    func test_SetMatchingActions_IfExecuting() {
         // Given
         let mockAction = MockActionProtocol().withEnabledDefaultImplementation(ActionProtocolStub())
         let action1 = MockActionProtocol().described(by: "a1")
         let action2 = MockActionProtocol().described(by: "a2")
         Cuckoo.stub(mockRules) { mock in
-            when(mock.matchingActions(for: any())).thenReturn([action1, action2])
-        }
-        Cuckoo.stub(mockState) { mock in
-            when(mock.challenge.get).thenReturn(nil)
+            when(mock.actions(matching: state(equalTo: mockState))).thenReturn([action1, action2])
         }
         
         // When
         sut.execute(mockAction)
         
         // Assert
-        verify(mockRules).matchingActions(for: state(equalTo: mockState))
+        verify(mockRules).actions(matching: state(equalTo: mockState))
         verify(mockState).setActions(actions(describedBy: ["a1", "a2"]))
-    }
-    
-    func test_SetRequiredActionsAfterExecuting_IfChallengeIsSet() {
-        // Given
-        // When
-        // Assert
     }
 }

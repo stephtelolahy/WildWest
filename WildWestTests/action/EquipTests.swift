@@ -67,6 +67,7 @@ class EquipTests: XCTestCase {
             .holding(mockCard1)
             .playing(mockCard2)
         let mockState = MockGameStateProtocol()
+            .challenge(is: nil)
             .currentTurn(is: 0)
             .players(are: mockPlayer)
         
@@ -93,6 +94,7 @@ class EquipTests: XCTestCase {
             .holding(mockCard1, mockCard2, mockCard3)
             .noCardsInPlay()
         let mockState = MockGameStateProtocol()
+            .challenge(is: nil)
             .currentTurn(is: 0)
             .players(are: mockPlayer)
         
@@ -113,6 +115,7 @@ class EquipTests: XCTestCase {
         let mockPlayer = MockPlayerProtocol()
             .holding(mockCard)
         let mockState = MockGameStateProtocol()
+            .challenge(is: nil)
             .currentTurn(is: 0)
             .players(are: mockPlayer)
         
