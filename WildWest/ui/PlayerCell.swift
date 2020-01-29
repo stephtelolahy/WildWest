@@ -36,7 +36,7 @@ class PlayerCell: UICollectionViewCell {
     
     private func updateBackground() {
         if isTurn {
-            backgroundColor = isSelected ? .systemGreen : .systemOrange
+            backgroundColor = isSelected ? .systemGreen : .systemYellow
         } else {
             backgroundColor = isSelected ? .systemGreen : .clear
         }

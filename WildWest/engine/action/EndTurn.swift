@@ -14,10 +14,15 @@ struct EndTurn: ActionProtocol, Equatable {
         cardsToDiscardIds.forEach { state.discardHand(playerId: actorId, cardId: $0) }
         let nextIndex = (state.turn + 1) % state.players.count
         state.setTurn(nextIndex)
+        state.setChallenge(.startTurn)
     }
     
     var description: String {
-        "\(actorId) end turn dropping \( cardsToDiscardIds.joined(separator: ","))"
+        var text = "\(actorId) end turn"
+        if !cardsToDiscardIds.isEmpty {
+            text += "dropping \( cardsToDiscardIds.joined(separator: ","))"
+        }
+        return text
     }
 }
 

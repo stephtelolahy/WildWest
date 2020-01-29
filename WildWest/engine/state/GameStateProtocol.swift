@@ -33,7 +33,8 @@ enum GameOutcome {
     renegadeWin
 }
 
-enum Challenge {
+enum Challenge: Equatable {
+    case startTurn
     case bang(actorId: String, targetId: String)
     case duel(actorId: String)
     case gatling(actorId: String)

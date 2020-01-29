@@ -88,4 +88,22 @@ class EndTurnTests: XCTestCase {
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")
         verify(mockState).discardHand(playerId: "p1", cardId: "c2")
     }
+    
+    func test_TriggerStartTurnChallenge_IfEndingTurn() {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+        let mockState = MockGameStateProtocol()
+            .withEnabledDefaultImplementation(GameStateProtocolStub())
+            .currentTurn(is: 0)
+            .players(are: mockPlayer1, MockPlayerProtocol())
+        
+        let endTurn = EndTurn(actorId: "p1", cardsToDiscardIds: [])
+        
+        // When
+        endTurn.execute(state: mockState)
+        
+        // Assert
+        verify(mockState).setChallenge(equal(to: .startTurn))
+    }
 }
