@@ -1,13 +1,18 @@
 //
-//  GameAI.swift
+//  GameRules.swift
 //  WildWest
 //
-//  Created by Hugues Stephano Telolahy on 25/01/2020.
+//  Created by Hugues Stephano Telolahy on 26/01/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-class GameAI {
-    func generateActions(from state: GameStateProtocol) -> [ActionProtocol] {
+protocol GameRulesProtocol {
+    func actions(matching state: GameStateProtocol) -> [ActionProtocol]
+}
+
+class GameRules: GameRulesProtocol {
+    
+    func actions(matching state: GameStateProtocol) -> [ActionProtocol] {
         return ([
             Beer.match(state: state),
             Saloon.match(state: state),
@@ -24,7 +29,7 @@ class GameAI {
             CatBalou.match(state: state),
             GeneralStore.match(state: state),
             EndTurn.match(state: state),
-            BeerLastLifePoint.match(state: state)
+            StartTurn.match(state: state)
         ] as [[ActionProtocol]])
             .flatMap { $0 }
     }

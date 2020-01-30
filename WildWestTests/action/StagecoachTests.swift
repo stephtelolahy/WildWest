@@ -24,7 +24,7 @@ class StagecoachTests: XCTestCase {
         
         // Assert
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")
-        verify(mockState, times(2)).pull(playerId: "p1")
+        verify(mockState, times(2)).pullFromDeck(playerId: "p1")
         verifyNoMoreInteractions(mockState)
     }
     
@@ -37,6 +37,7 @@ class StagecoachTests: XCTestCase {
             .holding(mockCard)
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
+            .challenge(is: nil)
             .currentTurn(is: 0)
             .players(are: mockPlayer)
         

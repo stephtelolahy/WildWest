@@ -50,10 +50,10 @@ class PlayerTests: XCTestCase {
         XCTAssertEqual(sut.health, 3)
     }
     
-    func test_PlayerIdentifier_IsTheConcatenationOf_Ability_Role() {
+    func test_PlayerIdentifier_IsAbility() {
         // Given
         // When
         // Assert
-        XCTAssertEqual(sut.identifier, "willyTheKid-deputy")
+        XCTAssertEqual(sut.identifier, "willyTheKid")
     }
 }

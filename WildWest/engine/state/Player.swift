@@ -27,10 +27,10 @@ class Player: PlayerProtocol {
     }
     
     var identifier: String {
-        return "\(ability)-\(role)"
+        return ability.rawValue
     }
     
-    func setHealth(_ value: Int) {
-        health = value
+    func setHealth(_ health: Int) {
+        self.health = health
     }
 }

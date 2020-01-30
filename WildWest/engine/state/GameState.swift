@@ -13,50 +13,76 @@ class GameState: GameStateProtocol {
     let discard: CardListProtocol
     var turn: Int
     var outcome: GameOutcome?
-    var messages: [String]
+    var history: [ActionProtocol]
+    var actions: [ActionProtocol]
+    var challenge: Challenge?
     
     init(players: [PlayerProtocol],
          deck: CardListProtocol,
          discard: CardListProtocol,
          turn: Int,
          outcome: GameOutcome?,
-         messages: [String]) {
+         history: [ActionProtocol],
+         actions: [ActionProtocol],
+         challenge: Challenge?) {
         self.players = players
         self.deck = deck
         self.discard = discard
         self.turn = turn
         self.outcome = outcome
-        self.messages = messages
+        self.history = history
+        self.actions = actions
+        self.challenge = challenge
     }
     
-    func discardHand(playerId: String, cardId: String) {
-        guard let player = players.first(where: { $0.identifier == playerId }),
-            let card = player.hand.cards.first(where: { $0.identifier == cardId }) else {
-                return
-        }
-        
-        player.hand.removeById(cardId)
-        deck.add(card)
-        messages.append("\(player.identifier) discard \(card.identifier)")
+    func addHistory(_ action: ActionProtocol) {
+        history.append(action)
     }
     
-    func discardInPlay(playerId: String, cardId: String) {
+    func setActions(_ actions: [ActionProtocol]) {
+        self.actions = actions
     }
     
-    func pull(playerId: String) {
+    func setChallenge(_ challenge: Challenge?) {
+        self.challenge = challenge
+    }
+    
+    func setTurn(_ turn: Int) {
+        self.turn = turn
+    }
+    
+    func pullFromDeck(playerId: String) {
         guard let player = players.first(where: { $0.identifier == playerId }) else {
             return
         }
         
         if deck.cards.isEmpty {
-            let cards = discard.cards.shuffled()
-            discard.removeAll()
-            deck.addAll(cards)
+            deck.addAll(discard.removeAll().shuffled())
         }
         
-        let card = deck.removeFirst()
-        player.hand.add(card)
-        messages.append("\(player.identifier) pull \(card.identifier)")
+        if let card = deck.removeFirst() {
+            player.hand.add(card)
+        }
+    }
+    
+    func discardHand(playerId: String, cardId: String) {
+        guard let player = players.first(where: { $0.identifier == playerId }) else {
+            return
+        }
+        
+        if let card = player.hand.removeById(cardId) {
+            discard.add(card)
+        }
+    }
+    
+    func discardInPlay(playerId: String, cardId: String) {
+        guard let player = players.first(where: { $0.identifier == playerId }) else {
+            return
+        }
+        
+        if let card = player.inPlay.removeById(cardId) {
+            discard.add(card)
+        }
     }
     
     func gainLifePoint(playerId: String) {
@@ -64,22 +90,16 @@ class GameState: GameStateProtocol {
             return
         }
         
-        guard player.health < player.maxHealth else {
-            return
-        }
-        
         player.setHealth(player.health + 1)
-        messages.append("\(player.identifier) gain life point")
     }
     
     func putInPlay(playerId: String, cardId: String) {
-        guard let player = players.first(where: { $0.identifier == playerId }),
-            let card = player.hand.cards.first(where: { $0.identifier == cardId }) else {
-                return
+        guard let player = players.first(where: { $0.identifier == playerId }) else {
+            return
         }
         
-        player.hand.removeById(cardId)
-        player.inPlay.add(card)
-        messages.append("\(player.identifier) put in play \(card.identifier)")
+        if let card = player.hand.removeById(cardId) {
+            player.inPlay.add(card)
+        }
     }
 }

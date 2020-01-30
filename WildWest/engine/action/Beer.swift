@@ -14,11 +14,19 @@ struct Beer: ActionProtocol, Equatable {
         state.discardHand(playerId: actorId, cardId: cardId)
         state.gainLifePoint(playerId: actorId)
     }
+    
+    var description: String {
+        "\(actorId) play \(cardId)"
+    }
 }
 
 extension Beer: RuleProtocol {
     
     static func match(state: GameStateProtocol) -> [Beer] {
+        guard state.challenge == nil else {
+            return []
+        }
+        
         let player = state.players[state.turn]
         let cards = player.handCards(named: .beer)
         guard !cards.isEmpty,

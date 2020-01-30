@@ -22,14 +22,14 @@ class GameViewController: UIViewController, Subscribable {
     
     // MARK: Properties
     
-    private lazy var viewModel: GameViewModelProtocol = {
+    private lazy var engine: GameEngineProtocol = {
         let resources = GameResources(jsonReader: JsonReader(bundle: Bundle.main))
         let figures = resources.allFigures()
         let cards = resources.allCards()
         let gameSetup = GameSetup()
         let roles = gameSetup.roles(for: 7)
         let state = gameSetup.setupGame(roles: roles, figures: figures, cards: cards)
-        return GameViewModel(state: state)
+        return GameEngine(state: state, rules: GameRules())
     }()
     
     // swiftlint:disable implicitly_unwrapped_optional
@@ -41,9 +41,10 @@ class GameViewController: UIViewController, Subscribable {
         super.viewDidLoad()
         stateCollectionView.setItemSpacing(spacing)
         handCollectionView.setItemSpacing(spacing)
-        sub(viewModel.stateSubject.subscribe(onNext: { [weak self] state in
+        sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
             self?.state = state
             self?.stateCollectionView.reloadData()
+            self?.handCollectionView.reloadData()
         }))
     }
     
@@ -51,22 +52,21 @@ class GameViewController: UIViewController, Subscribable {
     
     @IBAction private func actionButtonTapped(_ sender: Any) {
         let actionsViewController = ActionsViewController()
-        actionsViewController.actions = GameAI().generateActions(from: state)
+        actionsViewController.actions = state.actions
         actionsViewController.delegate = self
         present(actionsViewController, animated: true)
     }
     
-    @IBAction func messageButtonTapped(_ sender: Any) {
-        let messagesViewController = MessagesViewController()
-        messagesViewController.messages = state.messages
-        present(messagesViewController, animated: true)
+    @IBAction private func historyButtonTapped(_ sender: Any) {
+        let actionsViewController = ActionsViewController()
+        actionsViewController.actions = state.history
+        present(actionsViewController, animated: true)
     }
 }
 
 extension GameViewController: ActionsViewControllerDelegate {
     func actionsViewController(_ controller: ActionsViewController, didSelect action: ActionProtocol) {
-        viewModel.execute(action)
-        controller.dismiss(animated: true)
+        engine.execute(action)
     }
 }
 
@@ -137,7 +137,8 @@ extension GameViewController: UICollectionViewDataSource {
                                      cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(with: PlayerCell.self, for: indexPath)
         if let player = player(at: indexPath) {
-            cell.update(with: player)
+            let playerIndex = playerIndexes[state.players.count][indexPath.row] - 1
+            cell.update(with: player, isTurn: playerIndex == state.turn)
         } else {
             cell.clear()
         }

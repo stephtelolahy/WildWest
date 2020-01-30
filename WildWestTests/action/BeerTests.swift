@@ -47,6 +47,7 @@ class BeerTests: XCTestCase {
             .health(is: 3)
             .maxHealth(is: 4)
         let mockState = MockGameStateProtocol()
+            .challenge(is: nil)
             .currentTurn(is: 0)
             .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
         
@@ -66,6 +67,7 @@ class BeerTests: XCTestCase {
             .health(is: 4)
             .maxHealth(is: 4)
         let mockState = MockGameStateProtocol()
+            .challenge(is: nil)
             .currentTurn(is: 0)
             .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
         
@@ -83,6 +85,7 @@ class BeerTests: XCTestCase {
         let mockPlayer = MockPlayerProtocol()
             .holding(mockCard)
         let mockState = MockGameStateProtocol()
+            .challenge(is: nil)
             .currentTurn(is: 0)
             .players(are: mockPlayer, MockPlayerProtocol())
         

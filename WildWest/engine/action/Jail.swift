@@ -12,6 +12,10 @@ struct Jail: ActionProtocol {
     
     func execute(state: GameStateProtocol) {
     }
+    
+    var description: String {
+        "\(actorId) play \(cardId)"
+    }
 }
 
 extension Jail: RuleProtocol {

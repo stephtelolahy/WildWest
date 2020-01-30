@@ -12,14 +12,22 @@ struct Stagecoach: ActionProtocol, Equatable {
     
     func execute(state: GameStateProtocol) {
         state.discardHand(playerId: actorId, cardId: cardId)
-        state.pull(playerId: actorId)
-        state.pull(playerId: actorId)
+        state.pullFromDeck(playerId: actorId)
+        state.pullFromDeck(playerId: actorId)
+    }
+    
+    var description: String {
+        "\(actorId) play \(cardId)"
     }
 }
 
 extension Stagecoach: RuleProtocol {
     
     static func match(state: GameStateProtocol) -> [Stagecoach] {
+        guard state.challenge == nil else {
+            return []
+        }
+        
         let player = state.players[state.turn]
         let cards = player.handCards(named: .stagecoach)
         return cards.map { Stagecoach(actorId: player.identifier, cardId: $0.identifier) }

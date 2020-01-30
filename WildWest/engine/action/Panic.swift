@@ -12,6 +12,10 @@ struct Panic: ActionProtocol {
     
     func execute(state: GameStateProtocol) {
     }
+    
+    var description: String {
+        "\(actorId) play \(cardId)"
+    }
 }
 
 extension Panic: RuleProtocol {

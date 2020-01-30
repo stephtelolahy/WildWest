@@ -82,6 +82,7 @@ class SaloonTests: XCTestCase {
             .holding(mockCard)
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
+            .challenge(is: nil)
             .currentTurn(is: 0)
             .players(are: mockPlayer)
         

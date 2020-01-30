@@ -1,18 +1,15 @@
+
 //
-//  GameResourcesCardsTests.swift
+//  GameResourcesTests+Cards.swift
 //  WildWestTests
 //
-//  Created by Hugues Stephano Telolahy on 24/01/2020.
+//  Created by Hugues Stephano Telolahy on 26/01/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
 import XCTest
 
-class GameResourcesCardsTests: XCTestCase {
-    
-    /// TODO: define unique image for each card
-    /// http://www.dvgiochi.net/bang/BANG!%20Card%20List.pdf
-    
+class GameResourcesTests_Cards: XCTestCase {
 
     private lazy var cards: [Card] = {
         let jsonReader = JsonReader(bundle: Bundle(for: type(of: self)))

@@ -24,7 +24,7 @@ class WellsFargoTests: XCTestCase {
         
         // Assert
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")
-        verify(mockState, times(3)).pull(playerId: "p1")
+        verify(mockState, times(3)).pullFromDeck(playerId: "p1")
         verifyNoMoreInteractions(mockState)
     }
     
@@ -37,6 +37,7 @@ class WellsFargoTests: XCTestCase {
             .holding(mockCard)
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
+            .challenge(is: nil)
             .currentTurn(is: 0)
             .players(are: mockPlayer)
         

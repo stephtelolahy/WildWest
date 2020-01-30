@@ -22,4 +22,18 @@ extension MockGameStateProtocol {
         }
         return self
     }
+    
+    func challenge(is challenge: Challenge?) -> MockGameStateProtocol {
+        Cuckoo.stub(self) { mock in
+            when(mock.challenge.get).thenReturn(challenge)
+        }
+        return self
+    }
+    
+    func history(is history: ActionProtocol...) -> MockGameStateProtocol {
+        Cuckoo.stub(self) { mock in
+            when(mock.history.get).thenReturn(history)
+        }
+        return self
+    }
 }
