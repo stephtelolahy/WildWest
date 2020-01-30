@@ -8,12 +8,6 @@
 
 import RxSwift
 
-protocol GameEngineProtocol {
-    var stateSubject: BehaviorSubject<GameStateProtocol> { get }
-    
-    func execute(_ action: ActionProtocol)
-}
-
 class GameEngine: GameEngineProtocol {
     
     let stateSubject: BehaviorSubject<GameStateProtocol>

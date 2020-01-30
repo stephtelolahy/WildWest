@@ -6,10 +6,6 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-protocol GameRulesProtocol {
-    func actions(matching state: GameStateProtocol) -> [ActionProtocol]
-}
-
 class GameRules: GameRulesProtocol {
     
     func actions(matching state: GameStateProtocol) -> [ActionProtocol] {
