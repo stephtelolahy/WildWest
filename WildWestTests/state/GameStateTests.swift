@@ -26,7 +26,7 @@ class GameStateTests: XCTestCase {
                         discard: mockDiscard,
                         turn: 0,
                         outcome: nil,
-                        history: [],
+                        commands: [],
                         challenge: nil)
     }
     

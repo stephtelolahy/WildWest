@@ -48,7 +48,7 @@ class GameSetup: GameSetupProtocol {
                          discard: CardList(cards: []),
                          turn: 0,
                          outcome: nil,
-                         history: [],
+                         commands: [],
                          challenge: nil)
     }
 }

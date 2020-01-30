@@ -11,16 +11,16 @@ protocol GameStateProtocol {
     var deck: CardListProtocol { get }
     var discard: CardListProtocol { get }
     var turn: Int { get }
-    var outcome: GameOutcome? { get }
-    var history: [ActionProtocol] { get }
     var challenge: Challenge? { get }
+    var outcome: GameOutcome? { get }
+    var commands: [ActionProtocol] { get }
     
     func discardHand(playerId: String, cardId: String)
     func discardInPlay(playerId: String, cardId: String)
     func gainLifePoint(playerId: String)
     func pullFromDeck(playerId: String)
     func putInPlay(playerId: String, cardId: String)
-    func addHistory(_ action: ActionProtocol)
+    func addCommand(_ action: ActionProtocol)
     func setChallenge(_ challenge: Challenge?)
     func setTurn(_ turn: Int)
 }

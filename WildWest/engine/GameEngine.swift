@@ -24,7 +24,7 @@ class GameEngine: GameEngineProtocol {
         }
         
         action.execute(state: state)
-        state.addHistory(action)
+        state.addCommand(action)
         
         let actions = rules.actions(matching: state)
         state.players.forEach { player in

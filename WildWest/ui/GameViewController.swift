@@ -53,7 +53,7 @@ class GameViewController: UIViewController, Subscribable {
     
     @IBAction private func historyButtonTapped(_ sender: Any) {
         let actionsViewController = ActionsViewController()
-        actionsViewController.actions = state.history
+        actionsViewController.actions = state.commands
         present(actionsViewController, animated: true)
     }
 }

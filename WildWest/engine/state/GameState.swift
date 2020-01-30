@@ -13,7 +13,7 @@ class GameState: GameStateProtocol {
     let discard: CardListProtocol
     var turn: Int
     var outcome: GameOutcome?
-    var history: [ActionProtocol]
+    var commands: [ActionProtocol]
     var challenge: Challenge?
     
     init(players: [PlayerProtocol],
@@ -21,19 +21,19 @@ class GameState: GameStateProtocol {
          discard: CardListProtocol,
          turn: Int,
          outcome: GameOutcome?,
-         history: [ActionProtocol],
+         commands: [ActionProtocol],
          challenge: Challenge?) {
         self.players = players
         self.deck = deck
         self.discard = discard
         self.turn = turn
         self.outcome = outcome
-        self.history = history
+        self.commands = commands
         self.challenge = challenge
     }
     
-    func addHistory(_ action: ActionProtocol) {
-        history.append(action)
+    func addCommand(_ action: ActionProtocol) {
+        commands.append(action)
     }
     
     func setChallenge(_ challenge: Challenge?) {

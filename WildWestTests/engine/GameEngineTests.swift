@@ -40,7 +40,7 @@ class GameEngineTests: XCTestCase {
         XCTAssertNotNil(state)
     }
     
-    func test_AddActionToHistory_IfExecuting() {
+    func test_AddActionToCommands_IfExecuting() {
         // Given
         let mockAction = MockActionProtocol()
             .withEnabledDefaultImplementation(ActionProtocolStub())
@@ -51,7 +51,7 @@ class GameEngineTests: XCTestCase {
         
         // Assert
         verify(mockAction).execute(state: state(equalTo: mockState))
-        verify(mockState).addHistory(action(describedBy: "ac"))
+        verify(mockState).addCommand(action(describedBy: "ac"))
     }
     
     func test_SetMatchingActions_IfExecuting() {
