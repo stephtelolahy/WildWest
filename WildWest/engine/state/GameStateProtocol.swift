@@ -13,7 +13,6 @@ protocol GameStateProtocol {
     var turn: Int { get }
     var outcome: GameOutcome? { get }
     var history: [ActionProtocol] { get }
-    var actions: [ActionProtocol] { get }
     var challenge: Challenge? { get }
     
     func discardHand(playerId: String, cardId: String)
@@ -22,7 +21,6 @@ protocol GameStateProtocol {
     func pullFromDeck(playerId: String)
     func putInPlay(playerId: String, cardId: String)
     func addHistory(_ action: ActionProtocol)
-    func setActions(_ actions: [ActionProtocol])
     func setChallenge(_ challenge: Challenge?)
     func setTurn(_ turn: Int)
 }

@@ -14,7 +14,6 @@ class GameState: GameStateProtocol {
     var turn: Int
     var outcome: GameOutcome?
     var history: [ActionProtocol]
-    var actions: [ActionProtocol]
     var challenge: Challenge?
     
     init(players: [PlayerProtocol],
@@ -23,7 +22,6 @@ class GameState: GameStateProtocol {
          turn: Int,
          outcome: GameOutcome?,
          history: [ActionProtocol],
-         actions: [ActionProtocol],
          challenge: Challenge?) {
         self.players = players
         self.deck = deck
@@ -31,16 +29,11 @@ class GameState: GameStateProtocol {
         self.turn = turn
         self.outcome = outcome
         self.history = history
-        self.actions = actions
         self.challenge = challenge
     }
     
     func addHistory(_ action: ActionProtocol) {
         history.append(action)
-    }
-    
-    func setActions(_ actions: [ActionProtocol]) {
-        self.actions = actions
     }
     
     func setChallenge(_ challenge: Challenge?) {

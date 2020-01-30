@@ -15,8 +15,10 @@ protocol PlayerProtocol {
     var hand: CardListProtocol { get }
     var inPlay: CardListProtocol { get }
     var imageName: String { get }
+    var actions: [ActionProtocol] { get }
     
     func setHealth(_ value: Int)
+    func setActions(_ actions: [ActionProtocol])
 }
 
 enum Role: String, Decodable {

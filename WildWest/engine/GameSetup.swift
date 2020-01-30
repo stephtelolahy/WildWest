@@ -40,12 +40,12 @@ class GameSetup: GameSetupProtocol {
                           maxHealth: health,
                           health: health,
                           hand: CardList(cards: hand),
-                          inPlay: CardList(cards: []))
+                          inPlay: CardList(cards: []),
+                          actions: [])
         }
         
-        var actions: [ActionProtocol] = []
         if let sheriff = players.first(where: { $0.role == .sheriff }) {
-            actions.append(StartTurn(actorId: sheriff.identifier))
+            sheriff.setActions([StartTurn(actorId: sheriff.identifier)])
         }
         
         return GameState(players: players,
@@ -54,7 +54,6 @@ class GameSetup: GameSetupProtocol {
                          turn: 0,
                          outcome: nil,
                          history: [],
-                         actions: actions,
                          challenge: nil)
     }
 }

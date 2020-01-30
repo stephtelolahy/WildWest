@@ -31,7 +31,12 @@ class GameEngine: GameEngineProtocol {
         
         action.execute(state: state)
         state.addHistory(action)
-        state.setActions(rules.actions(matching: state))
+        
+        let actions = rules.actions(matching: state)
+        state.players.forEach { player in
+            player.setActions(actions.filter { $0.actorId == player.identifier })
+        }
+        
         stateSubject.onNext(state)
     }
 }

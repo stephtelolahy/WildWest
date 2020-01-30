@@ -15,4 +15,11 @@ extension MockActionProtocol {
         }
         return self
     }
+    
+    func actorId(is actorId: String) -> MockActionProtocol {
+        Cuckoo.stub(self) { mock in
+            when(mock.actorId.get).thenReturn(actorId)
+        }
+        return self
+    }
 }

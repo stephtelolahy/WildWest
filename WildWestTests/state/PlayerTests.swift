@@ -25,7 +25,8 @@ class PlayerTests: XCTestCase {
                      maxHealth: 4,
                      health: 2,
                      hand: mockHand,
-                     inPlay: mockInPlay)
+                     inPlay: mockInPlay,
+                     actions: [])
     }
     
     func test_InitialProperties() {

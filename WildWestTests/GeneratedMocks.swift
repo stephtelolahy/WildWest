@@ -829,20 +829,6 @@ import Cuckoo
     
     
     
-     var actions: [ActionProtocol] {
-        get {
-            return cuckoo_manager.getter("actions",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.actions)
-        }
-        
-    }
-    
-    
-    
      var challenge: Challenge? {
         get {
             return cuckoo_manager.getter("challenge",
@@ -951,21 +937,6 @@ import Cuckoo
     
     
     
-     func setActions(_ actions: [ActionProtocol])  {
-        
-    return cuckoo_manager.call("setActions(_: [ActionProtocol])",
-            parameters: (actions),
-            escapingParameters: (actions),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.setActions(actions))
-        
-    }
-    
-    
-    
      func setChallenge(_ challenge: Challenge?)  {
         
     return cuckoo_manager.call("setChallenge(_: Challenge?)",
@@ -1033,11 +1004,6 @@ import Cuckoo
 	    }
 	    
 	    
-	    var actions: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [ActionProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "actions")
-	    }
-	    
-	    
 	    var challenge: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, Challenge?> {
 	        return .init(manager: cuckoo_manager, name: "challenge")
 	    }
@@ -1071,11 +1037,6 @@ import Cuckoo
 	    func addHistory<M1: Cuckoo.Matchable>(_ action: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(ActionProtocol)> where M1.MatchedType == ActionProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(ActionProtocol)>] = [wrap(matchable: action) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "addHistory(_: ActionProtocol)", parameterMatchers: matchers))
-	    }
-	    
-	    func setActions<M1: Cuckoo.Matchable>(_ actions: M1) -> Cuckoo.ProtocolStubNoReturnFunction<([ActionProtocol])> where M1.MatchedType == [ActionProtocol] {
-	        let matchers: [Cuckoo.ParameterMatcher<([ActionProtocol])>] = [wrap(matchable: actions) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "setActions(_: [ActionProtocol])", parameterMatchers: matchers))
 	    }
 	    
 	    func setChallenge<M1: Cuckoo.OptionalMatchable>(_ challenge: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(Challenge?)> where M1.OptionalMatchedType == Challenge {
@@ -1133,11 +1094,6 @@ import Cuckoo
 	    }
 	    
 	    
-	    var actions: Cuckoo.VerifyReadOnlyProperty<[ActionProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "actions", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
 	    var challenge: Cuckoo.VerifyReadOnlyProperty<Challenge?> {
 	        return .init(manager: cuckoo_manager, name: "challenge", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
@@ -1178,12 +1134,6 @@ import Cuckoo
 	    func addHistory<M1: Cuckoo.Matchable>(_ action: M1) -> Cuckoo.__DoNotUse<(ActionProtocol), Void> where M1.MatchedType == ActionProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(ActionProtocol)>] = [wrap(matchable: action) { $0 }]
 	        return cuckoo_manager.verify("addHistory(_: ActionProtocol)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
-	    func setActions<M1: Cuckoo.Matchable>(_ actions: M1) -> Cuckoo.__DoNotUse<([ActionProtocol]), Void> where M1.MatchedType == [ActionProtocol] {
-	        let matchers: [Cuckoo.ParameterMatcher<([ActionProtocol])>] = [wrap(matchable: actions) { $0 }]
-	        return cuckoo_manager.verify("setActions(_: [ActionProtocol])", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
@@ -1252,14 +1202,6 @@ import Cuckoo
     }
     
     
-     var actions: [ActionProtocol] {
-        get {
-            return DefaultValueRegistry.defaultValue(for: ([ActionProtocol]).self)
-        }
-        
-    }
-    
-    
      var challenge: Challenge? {
         get {
             return DefaultValueRegistry.defaultValue(for: (Challenge?).self)
@@ -1292,10 +1234,6 @@ import Cuckoo
     }
     
      func addHistory(_ action: ActionProtocol)   {
-        return DefaultValueRegistry.defaultValue(for: (Void).self)
-    }
-    
-     func setActions(_ actions: [ActionProtocol])   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
@@ -1445,6 +1383,20 @@ import Cuckoo
         
     }
     
+    
+    
+     var actions: [ActionProtocol] {
+        get {
+            return cuckoo_manager.getter("actions",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.actions)
+        }
+        
+    }
+    
 
     
 
@@ -1461,6 +1413,21 @@ import Cuckoo
                 Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
             defaultCall: __defaultImplStub!.setHealth(value))
+        
+    }
+    
+    
+    
+     func setActions(_ actions: [ActionProtocol])  {
+        
+    return cuckoo_manager.call("setActions(_: [ActionProtocol])",
+            parameters: (actions),
+            escapingParameters: (actions),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.setActions(actions))
         
     }
     
@@ -1513,9 +1480,19 @@ import Cuckoo
 	    }
 	    
 	    
+	    var actions: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, [ActionProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "actions")
+	    }
+	    
+	    
 	    func setHealth<M1: Cuckoo.Matchable>(_ value: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(Int)> where M1.MatchedType == Int {
 	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: value) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockPlayerProtocol.self, method: "setHealth(_: Int)", parameterMatchers: matchers))
+	    }
+	    
+	    func setActions<M1: Cuckoo.Matchable>(_ actions: M1) -> Cuckoo.ProtocolStubNoReturnFunction<([ActionProtocol])> where M1.MatchedType == [ActionProtocol] {
+	        let matchers: [Cuckoo.ParameterMatcher<([ActionProtocol])>] = [wrap(matchable: actions) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockPlayerProtocol.self, method: "setActions(_: [ActionProtocol])", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -1572,12 +1549,23 @@ import Cuckoo
 	        return .init(manager: cuckoo_manager, name: "imageName", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
+	    
+	    var actions: Cuckoo.VerifyReadOnlyProperty<[ActionProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "actions", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
 	
 	    
 	    @discardableResult
 	    func setHealth<M1: Cuckoo.Matchable>(_ value: M1) -> Cuckoo.__DoNotUse<(Int), Void> where M1.MatchedType == Int {
 	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: value) { $0 }]
 	        return cuckoo_manager.verify("setHealth(_: Int)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func setActions<M1: Cuckoo.Matchable>(_ actions: M1) -> Cuckoo.__DoNotUse<([ActionProtocol]), Void> where M1.MatchedType == [ActionProtocol] {
+	        let matchers: [Cuckoo.ParameterMatcher<([ActionProtocol])>] = [wrap(matchable: actions) { $0 }]
+	        return cuckoo_manager.verify("setActions(_: [ActionProtocol])", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -1649,11 +1637,23 @@ import Cuckoo
         
     }
     
+    
+     var actions: [ActionProtocol] {
+        get {
+            return DefaultValueRegistry.defaultValue(for: ([ActionProtocol]).self)
+        }
+        
+    }
+    
 
     
 
     
      func setHealth(_ value: Int)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func setActions(_ actions: [ActionProtocol])   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     

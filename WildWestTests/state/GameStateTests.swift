@@ -27,7 +27,6 @@ class GameStateTests: XCTestCase {
                         turn: 0,
                         outcome: nil,
                         history: [],
-                        actions: [],
                         challenge: nil)
     }
     

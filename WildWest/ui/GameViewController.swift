@@ -99,16 +99,16 @@ private extension GameViewController {
     }
     
     func showActionsForPlayer(at indexPath: IndexPath) {
-        guard let player = player(at: indexPath) else {
-            return
+        guard let player = player(at: indexPath),
+            !player.actions.isEmpty else {
+                return
         }
         
         let alertController = UIAlertController(title: player.ability.rawValue,
                                                 message: nil,
                                                 preferredStyle: .actionSheet)
         
-        let actions = state.actions.filter { $0.actorId == player.identifier }
-        actions.forEach { action in
+        player.actions.forEach { action in
             alertController.addAction(UIAlertAction(title: action.description,
                                                     style: .default,
                                                     handler: { [weak self] _ in
