@@ -19,12 +19,6 @@ class CardCell: UICollectionViewCell {
         cardImageView.addCardShadow()
     }
     
-    override var isSelected: Bool {
-        didSet {
-            backgroundColor = isSelected ? .systemGreen : .clear
-        }
-    }
-    
     // MARK: Setup
     
     func update(with card: CardProtocol) {

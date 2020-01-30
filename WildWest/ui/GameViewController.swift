@@ -43,19 +43,13 @@ class GameViewController: UIViewController, Subscribable {
         handCollectionView.setItemSpacing(spacing)
         sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
             self?.state = state
-            self?.stateCollectionView.reloadData()
-            self?.handCollectionView.reloadData()
+            self?.stateCollectionView.reloadDataKeepingSelection { [weak self] in
+                self?.handCollectionView.reloadData()
+            }
         }))
     }
     
     // MARK: IBAction
-    
-    @IBAction private func actionButtonTapped(_ sender: Any) {
-        let actionsViewController = ActionsViewController()
-        actionsViewController.actions = state.actions
-        actionsViewController.delegate = self
-        present(actionsViewController, animated: true)
-    }
     
     @IBAction private func historyButtonTapped(_ sender: Any) {
         let actionsViewController = ActionsViewController()
@@ -102,6 +96,31 @@ private extension GameViewController {
         }
         
         return state.players[playerIndex]
+    }
+    
+    func showActionsForPlayer(at indexPath: IndexPath) {
+        guard let player = player(at: indexPath) else {
+            return
+        }
+        
+        let alertController = UIAlertController(title: player.ability.rawValue,
+                                                message: nil,
+                                                preferredStyle: .actionSheet)
+        
+        let actions = state.actions.filter { $0.actorId == player.identifier }
+        actions.forEach { action in
+            alertController.addAction(UIAlertAction(title: action.description,
+                                                    style: .default,
+                                                    handler: { [weak self] _ in
+                                                        self?.engine.execute(action)
+            }))
+        }
+        
+        alertController.addAction(UIAlertAction(title: "Cancel",
+                                                style: .cancel,
+                                                handler: nil))
+        
+        present(alertController, animated: true)
     }
 }
 
@@ -165,6 +184,7 @@ extension GameViewController: UICollectionViewDelegate {
     
     private func stateCollectionViewDidSelectItem(at indexPath: IndexPath) {
         handCollectionView.reloadData()
+        showActionsForPlayer(at: indexPath)
     }
     
     private func handCollectionViewDidSelectItem(at indexPath: IndexPath) {
