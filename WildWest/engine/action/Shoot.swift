@@ -17,10 +17,3 @@ struct Shoot: ActionProtocol {
         "\(actorId) play \(cardId)"
     }
 }
-
-extension Shoot: RuleProtocol {
-    
-    static func match(state: GameStateProtocol) -> [Shoot] {
-        return []
-    }
-}

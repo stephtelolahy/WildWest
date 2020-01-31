@@ -17,10 +17,10 @@ class StagecoachTests: XCTestCase {
     func test_Pull2Cards_IfPlayingStagecoach() {
         // Given
         let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
-        let stagecoach = Stagecoach(actorId: "p1", cardId: "c1")
+        let sut = Stagecoach(actorId: "p1", cardId: "c1")
         
         // When
-        stagecoach.execute(state: mockState)
+        sut.execute(state: mockState)
         
         // Assert
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")
@@ -30,6 +30,7 @@ class StagecoachTests: XCTestCase {
     
     func test_CanPlayStagecoach_IfYourTurnAndOwnCard() {
         // Given
+        let sut = StagecoachRule()
         let mockCard = MockCardProtocol()
             .named(.stagecoach)
             .identified(by: "c1")
@@ -42,9 +43,9 @@ class StagecoachTests: XCTestCase {
             .players(are: mockPlayer)
         
         // When
-        let actions = Stagecoach.match(state: mockState)
+        let actions = sut.match(state: mockState)
         
         // Assert
-        XCTAssertEqual(actions, [Stagecoach(actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(actions as? [Stagecoach], [Stagecoach(actorId: "p1", cardId: "c1")])
     }
 }

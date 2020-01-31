@@ -2,19 +2,19 @@ import Cuckoo
 @testable import WildWest
 
 
- class MockGameRulesProtocol: GameRulesProtocol, Cuckoo.ProtocolMock {
+ class MockActionSuggestorProtocol: ActionSuggestorProtocol, Cuckoo.ProtocolMock {
     
-     typealias MocksType = GameRulesProtocol
+     typealias MocksType = ActionSuggestorProtocol
     
-     typealias Stubbing = __StubbingProxy_GameRulesProtocol
-     typealias Verification = __VerificationProxy_GameRulesProtocol
+     typealias Stubbing = __StubbingProxy_ActionSuggestorProtocol
+     typealias Verification = __VerificationProxy_ActionSuggestorProtocol
 
      let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
 
     
-    private var __defaultImplStub: GameRulesProtocol?
+    private var __defaultImplStub: ActionSuggestorProtocol?
 
-     func enableDefaultImplementation(_ stub: GameRulesProtocol) {
+     func enableDefaultImplementation(_ stub: ActionSuggestorProtocol) {
         __defaultImplStub = stub
         cuckoo_manager.enableDefaultStubImplementation()
     }
@@ -41,7 +41,7 @@ import Cuckoo
     }
     
 
-	 struct __StubbingProxy_GameRulesProtocol: Cuckoo.StubbingProxy {
+	 struct __StubbingProxy_ActionSuggestorProtocol: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
 	
 	     init(manager: Cuckoo.MockManager) {
@@ -51,12 +51,12 @@ import Cuckoo
 	    
 	    func actions<M1: Cuckoo.Matchable>(matching state: M1) -> Cuckoo.ProtocolStubFunction<(GameStateProtocol), [ActionProtocol]> where M1.MatchedType == GameStateProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameRulesProtocol.self, method: "actions(matching: GameStateProtocol) -> [ActionProtocol]", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockActionSuggestorProtocol.self, method: "actions(matching: GameStateProtocol) -> [ActionProtocol]", parameterMatchers: matchers))
 	    }
 	    
 	}
 
-	 struct __VerificationProxy_GameRulesProtocol: Cuckoo.VerificationProxy {
+	 struct __VerificationProxy_ActionSuggestorProtocol: Cuckoo.VerificationProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
 	    private let callMatcher: Cuckoo.CallMatcher
 	    private let sourceLocation: Cuckoo.SourceLocation
@@ -79,7 +79,7 @@ import Cuckoo
 	}
 }
 
- class GameRulesProtocolStub: GameRulesProtocol {
+ class ActionSuggestorProtocolStub: ActionSuggestorProtocol {
     
 
     
@@ -87,6 +87,100 @@ import Cuckoo
     
      func actions(matching state: GameStateProtocol) -> [ActionProtocol]  {
         return DefaultValueRegistry.defaultValue(for: ([ActionProtocol]).self)
+    }
+    
+}
+
+
+import Cuckoo
+@testable import WildWest
+
+
+ class MockRangeCalculatorProtocol: RangeCalculatorProtocol, Cuckoo.ProtocolMock {
+    
+     typealias MocksType = RangeCalculatorProtocol
+    
+     typealias Stubbing = __StubbingProxy_RangeCalculatorProtocol
+     typealias Verification = __VerificationProxy_RangeCalculatorProtocol
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: RangeCalculatorProtocol?
+
+     func enableDefaultImplementation(_ stub: RangeCalculatorProtocol) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+
+    
+
+    
+    
+    
+     func distance(from playerId: String, to otherId: String, in state: GameStateProtocol) -> Int {
+        
+    return cuckoo_manager.call("distance(from: String, to: String, in: GameStateProtocol) -> Int",
+            parameters: (playerId, otherId, state),
+            escapingParameters: (playerId, otherId, state),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.distance(from: playerId, to: otherId, in: state))
+        
+    }
+    
+
+	 struct __StubbingProxy_RangeCalculatorProtocol: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    func distance<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable>(from playerId: M1, to otherId: M2, in state: M3) -> Cuckoo.ProtocolStubFunction<(String, String, GameStateProtocol), Int> where M1.MatchedType == String, M2.MatchedType == String, M3.MatchedType == GameStateProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, String, GameStateProtocol)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: otherId) { $0.1 }, wrap(matchable: state) { $0.2 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockRangeCalculatorProtocol.self, method: "distance(from: String, to: String, in: GameStateProtocol) -> Int", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	 struct __VerificationProxy_RangeCalculatorProtocol: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	
+	    
+	    @discardableResult
+	    func distance<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable>(from playerId: M1, to otherId: M2, in state: M3) -> Cuckoo.__DoNotUse<(String, String, GameStateProtocol), Int> where M1.MatchedType == String, M2.MatchedType == String, M3.MatchedType == GameStateProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, String, GameStateProtocol)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: otherId) { $0.1 }, wrap(matchable: state) { $0.2 }]
+	        return cuckoo_manager.verify("distance(from: String, to: String, in: GameStateProtocol) -> Int", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+ class RangeCalculatorProtocolStub: RangeCalculatorProtocol {
+    
+
+    
+
+    
+     func distance(from playerId: String, to otherId: String, in state: GameStateProtocol) -> Int  {
+        return DefaultValueRegistry.defaultValue(for: (Int).self)
     }
     
 }
@@ -245,6 +339,100 @@ import Cuckoo
     
      func execute(state: GameStateProtocol)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+}
+
+
+import Cuckoo
+@testable import WildWest
+
+
+ class MockRuleProtocol: RuleProtocol, Cuckoo.ProtocolMock {
+    
+     typealias MocksType = RuleProtocol
+    
+     typealias Stubbing = __StubbingProxy_RuleProtocol
+     typealias Verification = __VerificationProxy_RuleProtocol
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: RuleProtocol?
+
+     func enableDefaultImplementation(_ stub: RuleProtocol) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+
+    
+
+    
+    
+    
+     func match(state: GameStateProtocol) -> [ActionProtocol] {
+        
+    return cuckoo_manager.call("match(state: GameStateProtocol) -> [ActionProtocol]",
+            parameters: (state),
+            escapingParameters: (state),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.match(state: state))
+        
+    }
+    
+
+	 struct __StubbingProxy_RuleProtocol: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    func match<M1: Cuckoo.Matchable>(state: M1) -> Cuckoo.ProtocolStubFunction<(GameStateProtocol), [ActionProtocol]> where M1.MatchedType == GameStateProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockRuleProtocol.self, method: "match(state: GameStateProtocol) -> [ActionProtocol]", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	 struct __VerificationProxy_RuleProtocol: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	
+	    
+	    @discardableResult
+	    func match<M1: Cuckoo.Matchable>(state: M1) -> Cuckoo.__DoNotUse<(GameStateProtocol), [ActionProtocol]> where M1.MatchedType == GameStateProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
+	        return cuckoo_manager.verify("match(state: GameStateProtocol) -> [ActionProtocol]", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+ class RuleProtocolStub: RuleProtocol {
+    
+
+    
+
+    
+     func match(state: GameStateProtocol) -> [ActionProtocol]  {
+        return DefaultValueRegistry.defaultValue(for: ([ActionProtocol]).self)
     }
     
 }
@@ -923,21 +1111,6 @@ import Cuckoo
         
     }
     
-    
-    
-     func distance(from playerId: String, to otherId: String) -> Int {
-        
-    return cuckoo_manager.call("distance(from: String, to: String) -> Int",
-            parameters: (playerId, otherId),
-            escapingParameters: (playerId, otherId),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.distance(from: playerId, to: otherId))
-        
-    }
-    
 
 	 struct __StubbingProxy_GameStateProtocol: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
@@ -1025,11 +1198,6 @@ import Cuckoo
 	    func pullInPlay<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable>(playerId: M1, otherId: M2, cardId: M3) -> Cuckoo.ProtocolStubNoReturnFunction<(String, String, String)> where M1.MatchedType == String, M2.MatchedType == String, M3.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: otherId) { $0.1 }, wrap(matchable: cardId) { $0.2 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "pullInPlay(playerId: String, otherId: String, cardId: String)", parameterMatchers: matchers))
-	    }
-	    
-	    func distance<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(from playerId: M1, to otherId: M2) -> Cuckoo.ProtocolStubFunction<(String, String), Int> where M1.MatchedType == String, M2.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: otherId) { $0.1 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "distance(from: String, to: String) -> Int", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -1138,12 +1306,6 @@ import Cuckoo
 	        return cuckoo_manager.verify("pullInPlay(playerId: String, otherId: String, cardId: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
-	    @discardableResult
-	    func distance<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(from playerId: M1, to otherId: M2) -> Cuckoo.__DoNotUse<(String, String), Int> where M1.MatchedType == String, M2.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: otherId) { $0.1 }]
-	        return cuckoo_manager.verify("distance(from: String, to: String) -> Int", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
 	}
 }
 
@@ -1239,10 +1401,6 @@ import Cuckoo
     
      func pullInPlay(playerId: String, otherId: String, cardId: String)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
-    }
-    
-     func distance(from playerId: String, to otherId: String) -> Int  {
-        return DefaultValueRegistry.defaultValue(for: (Int).self)
     }
     
 }

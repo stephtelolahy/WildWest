@@ -13,6 +13,7 @@ class CatBalouTests: XCTestCase {
     
     func test_CanPlayCatBalou_IfYourTurnAndOwnCard() {
         // Given
+        let sut = CatBalouRule()
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
             .holding(MockCardProtocol().named(.catBalou).identified(by: "c1"))
@@ -33,10 +34,10 @@ class CatBalouTests: XCTestCase {
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
         
         // When
-        let actions = CatBalou.match(state: mockState)
+        let actions = sut.match(state: mockState)
         
         // Assert
-        XCTAssertEqual(actions, [
+        XCTAssertEqual(actions as? [CatBalou], [
             CatBalou(actorId: "p1", cardId: "c1", targetPlayerId: "p2", targetCardId: "c2", targetCardSource: .hand),
             CatBalou(actorId: "p1", cardId: "c1", targetPlayerId: "p3", targetCardId: "c3", targetCardSource: .inPlay)
         ])
@@ -45,10 +46,10 @@ class CatBalouTests: XCTestCase {
     func test_DiscardOtherPlayerHandCard_IfPlayingCatBalou() {
         // Given
         let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
-        let catBalou = CatBalou(actorId: "p1", cardId: "c1", targetPlayerId: "p2", targetCardId: "c2", targetCardSource: .hand)
+        let sut = CatBalou(actorId: "p1", cardId: "c1", targetPlayerId: "p2", targetCardId: "c2", targetCardSource: .hand)
         
         // When
-        catBalou.execute(state: mockState)
+        sut.execute(state: mockState)
         
         // Assert
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")
@@ -58,10 +59,10 @@ class CatBalouTests: XCTestCase {
     func test_DiscardOtherPlayerInPlayCard_IfPlayingCatBalou() {
         // Given
         let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
-        let catBalou = CatBalou(actorId: "p1", cardId: "c1", targetPlayerId: "p2", targetCardId: "c2", targetCardSource: .inPlay)
+        let sut = CatBalou(actorId: "p1", cardId: "c1", targetPlayerId: "p2", targetCardId: "c2", targetCardSource: .inPlay)
         
         // When
-        catBalou.execute(state: mockState)
+        sut.execute(state: mockState)
         
         // Assert
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")

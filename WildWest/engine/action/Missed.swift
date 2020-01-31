@@ -17,10 +17,3 @@ struct Missed: ActionProtocol {
         "\(actorId) play \(cardId)"
     }
 }
-
-extension Missed: RuleProtocol {
-    
-    static func match(state: GameStateProtocol) -> [Missed] {
-        return []
-    }
-}

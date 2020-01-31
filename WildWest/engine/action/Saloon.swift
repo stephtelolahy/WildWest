@@ -22,9 +22,9 @@ struct Saloon: ActionProtocol, Equatable {
     }
 }
 
-extension Saloon: RuleProtocol {
+struct SaloonRule: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [Saloon] {
+    func match(state: GameStateProtocol) -> [ActionProtocol] {
         guard state.challenge == nil else {
             return []
         }

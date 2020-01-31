@@ -20,15 +20,15 @@ struct EndTurn: ActionProtocol, Equatable {
     var description: String {
         var text = "\(actorId) end turn"
         if !cardsToDiscardIds.isEmpty {
-            text += "dropping \( cardsToDiscardIds.joined(separator: ","))"
+            text += " dropping \( cardsToDiscardIds.joined(separator: ","))"
         }
         return text
     }
 }
 
-extension EndTurn: RuleProtocol {
+struct EndTurnRule: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [EndTurn] {
+    func match(state: GameStateProtocol) -> [ActionProtocol] {
         guard state.challenge == nil else {
             return []
         }

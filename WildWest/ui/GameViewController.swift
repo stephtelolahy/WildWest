@@ -23,13 +23,13 @@ class GameViewController: UIViewController, Subscribable {
     // MARK: Properties
     
     private lazy var engine: GameEngineProtocol = {
-        let resources = GameResources(jsonReader: JsonReader(bundle: Bundle.main))
+        let resources = ResourcesProvider(jsonReader: JsonReader(bundle: Bundle.main))
         let figures = resources.allFigures()
         let cards = resources.allCards()
         let gameSetup = GameSetup()
         let roles = gameSetup.roles(for: 7)
         let state = gameSetup.setupGame(roles: roles, figures: figures, cards: cards)
-        return GameEngine(state: state, rules: GameRules())
+        return GameEngine(state: state, suggestor: ActionSuggestor())
     }()
     
     // swiftlint:disable implicitly_unwrapped_optional

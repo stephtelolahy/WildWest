@@ -17,10 +17,3 @@ struct Duel: ActionProtocol {
         "\(actorId) play \(cardId)"
     }
 }
-
-extension Duel: RuleProtocol {
-    
-    static func match(state: GameStateProtocol) -> [Duel] {
-        return []
-    }
-}

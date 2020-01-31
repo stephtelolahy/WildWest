@@ -17,10 +17,3 @@ struct Gatling: ActionProtocol {
         "\(actorId) play \(cardId)"
     }
 }
-
-extension Gatling: RuleProtocol {
-    
-    static func match(state: GameStateProtocol) -> [Gatling] {
-        return []
-    }
-}

@@ -22,9 +22,9 @@ struct WellsFargo: ActionProtocol, Equatable {
     }
 }
 
-extension WellsFargo: RuleProtocol {
+struct WellsFargoRule: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [WellsFargo] {
+    func match(state: GameStateProtocol) -> [ActionProtocol] {
         guard state.challenge == nil else {
             return []
         }

@@ -17,10 +17,10 @@ class WellsFargoTests: XCTestCase {
     func test_Pull3Cards_IfPlayingWellsFargo() {
         // Given
         let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
-        let wellsFargo = WellsFargo(actorId: "p1", cardId: "c1")
+        let sut = WellsFargo(actorId: "p1", cardId: "c1")
         
         // When
-        wellsFargo.execute(state: mockState)
+        sut.execute(state: mockState)
         
         // Assert
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")
@@ -30,6 +30,7 @@ class WellsFargoTests: XCTestCase {
     
     func test_CanPlayWellsFargo_IfYourTurnAndOwnCard() {
         // Given
+        let sut = WellsFargoRule()
         let mockCard = MockCardProtocol()
             .named(.wellsFargo)
             .identified(by: "c1")
@@ -42,9 +43,9 @@ class WellsFargoTests: XCTestCase {
             .players(are: mockPlayer)
         
         // When
-        let actions = WellsFargo.match(state: mockState)
+        let actions = sut.match(state: mockState)
         
         // Assert
-        XCTAssertEqual(actions, [WellsFargo(actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(actions as? [WellsFargo], [WellsFargo(actorId: "p1", cardId: "c1")])
     }
 }

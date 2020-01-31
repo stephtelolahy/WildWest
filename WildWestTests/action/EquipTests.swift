@@ -29,10 +29,10 @@ class EquipTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .withEnabledDefaultImplementation(GameStateProtocolStub())
             .players(are: mockPlayer)
-        let equip = Equip(actorId: "p1", cardId: "c1")
+        let sut = Equip(actorId: "p1", cardId: "c1")
         
         // When
-        equip.execute(state: mockState)
+        sut.execute(state: mockState)
         
         // Assert
         verify(mockState).putInPlay(playerId: "p1", cardId: "c1")
@@ -47,10 +47,10 @@ class EquipTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .withEnabledDefaultImplementation(GameStateProtocolStub())
             .players(are: mockPlayer)
-        let equip = Equip(actorId: "p1", cardId: "c1")
+        let sut = Equip(actorId: "p1", cardId: "c1")
         
         // When
-        equip.execute(state: mockState)
+        sut.execute(state: mockState)
         
         // Assert
         verify(mockState).putInPlay(playerId: "p1", cardId: "c1")
@@ -59,6 +59,7 @@ class EquipTests: XCTestCase {
     
     func test_CannotEquipCard_IfAlreadyPlayingCardWithTheSameName() {
         // Given
+        let sut = EquipRule()
         let mockCard1 = MockCardProtocol()
             .named(.mustang)
         let mockCard2 = MockCardProtocol()
@@ -72,14 +73,15 @@ class EquipTests: XCTestCase {
             .players(are: mockPlayer)
         
         // When
-        let actions = Equip.match(state: mockState)
+        let actions = sut.match(state: mockState)
         
         // Assert
-        XCTAssertEqual(actions, [])
+        XCTAssertTrue(actions.isEmpty)
     }
     
     func test_CanEquip_IfYourTurnAndOwnCard() {
         // Given
+        let sut = EquipRule()
         let mockCard1 = MockCardProtocol()
             .named(.schofield)
             .identified(by: "c1")
@@ -99,17 +101,19 @@ class EquipTests: XCTestCase {
             .players(are: mockPlayer)
         
         // When
-        let actions = Equip.match(state: mockState)
+        let actions = sut.match(state: mockState)
         
         // Assert
-        let expected = [Equip(actorId: "p1", cardId: "c1"),
-                        Equip(actorId: "p1", cardId: "c2"),
-                        Equip(actorId: "p1", cardId: "c3")]
-        XCTAssertEqual(actions, expected)
+        XCTAssertEqual(actions as? [Equip], [
+            Equip(actorId: "p1", cardId: "c1"),
+            Equip(actorId: "p1", cardId: "c2"),
+            Equip(actorId: "p1", cardId: "c3")
+        ])
     }
     
     func test_CannotEquipJail() {
         // Given
+        let sut = EquipRule()
         let mockCard = MockCardProtocol()
             .named(.jail)
         let mockPlayer = MockPlayerProtocol()
@@ -120,9 +124,9 @@ class EquipTests: XCTestCase {
             .players(are: mockPlayer)
         
         // When
-        let actions = Equip.match(state: mockState)
+        let actions = sut.match(state: mockState)
         
         // Assert
-        XCTAssertEqual(actions, [])
+        XCTAssertTrue(actions.isEmpty)
     }
 }

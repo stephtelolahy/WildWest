@@ -10,8 +10,14 @@ import XCTest
 
 class GameSetupTests: XCTestCase {
     
+    private let sut: GameSetupProtocol = GameSetup()
+    
     func test_Roles_For4Players() {
-        let roles = GameSetup().roles(for: 4)
+        // Given
+        // When
+        let roles = sut.roles(for: 4)
+        
+        // Assert
         XCTAssertEqual(roles.count, 4)
         XCTAssertEqual(roles.count(of: .sheriff), 1)
         XCTAssertEqual(roles.count(of: .outlaw), 2)
@@ -19,7 +25,11 @@ class GameSetupTests: XCTestCase {
     }
     
     func test_Roles_For5Players() {
-        let roles = GameSetup().roles(for: 5)
+        // Given
+        // When
+        let roles = sut.roles(for: 5)
+        
+        // Assert
         XCTAssertEqual(roles.count, 5)
         XCTAssertEqual(roles.count(of: .sheriff), 1)
         XCTAssertEqual(roles.count(of: .outlaw), 2)
@@ -28,7 +38,11 @@ class GameSetupTests: XCTestCase {
     }
     
     func test_Roles_For6Players() {
-        let roles = GameSetup().roles(for: 6)
+        // Given
+        // When
+        let roles = sut.roles(for: 6)
+        
+        // Assert
         XCTAssertEqual(roles.count, 6)
         XCTAssertEqual(roles.count(of: .sheriff), 1)
         XCTAssertEqual(roles.count(of: .outlaw), 3)
@@ -37,7 +51,11 @@ class GameSetupTests: XCTestCase {
     }
     
     func test_Roles_For7Players() {
-        let roles = GameSetup().roles(for: 7)
+        // Given
+        // When
+        let roles = sut.roles(for: 7)
+        
+        // Assert
         XCTAssertEqual(roles.count, 7)
         XCTAssertEqual(roles.count(of: .sheriff), 1)
         XCTAssertEqual(roles.count(of: .outlaw), 3)
@@ -56,7 +74,7 @@ class GameSetupTests: XCTestCase {
                                  Figure(ability: .suzyLafayette, bullets: 4, imageName: "", description: "")]
         
         // When
-        let state = GameSetup().setupGame(roles: roles, figures: figures, cards: cards)
+        let state = sut.setupGame(roles: roles, figures: figures, cards: cards)
         
         // Assert
         // Verify expected number of players

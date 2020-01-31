@@ -12,7 +12,7 @@ class GameResourcesTests_Figures: XCTestCase {
 
     private lazy var figures: [Figure] = {
         let jsonReader = JsonReader(bundle: Bundle(for: type(of: self)))
-        let sut: GameResources = GameResources(jsonReader: jsonReader)
+        let sut: ResourcesProviderProtocol = ResourcesProvider(jsonReader: jsonReader)
         return sut.allFigures()
     }()
     

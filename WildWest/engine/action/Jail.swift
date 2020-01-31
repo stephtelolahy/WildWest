@@ -17,10 +17,3 @@ struct Jail: ActionProtocol {
         "\(actorId) play \(cardId)"
     }
 }
-
-extension Jail: RuleProtocol {
-    
-    static func match(state: GameStateProtocol) -> [Jail] {
-        return []
-    }
-}

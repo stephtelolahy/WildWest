@@ -30,9 +30,9 @@ struct Equip: ActionProtocol, Equatable {
     }
 }
 
-extension Equip: RuleProtocol {
+struct EquipRule: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [Equip] {
+    func match(state: GameStateProtocol) -> [ActionProtocol] {
         guard state.challenge == nil else {
             return []
         }

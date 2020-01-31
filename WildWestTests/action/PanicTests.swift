@@ -32,16 +32,19 @@ class PanicTests: XCTestCase {
             .currentTurn(is: 0)
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
         
-        Cuckoo.stub(mockState) { mock in
-            when(mock.distance(from: "p1", to: "p2")).thenReturn(1)
-            when(mock.distance(from: "p1", to: "p3")).thenReturn(0)
+        let mockRangeCalculator = MockRangeCalculatorProtocol()
+        Cuckoo.stub(mockRangeCalculator) { mock in
+            when(mock.distance(from: "p1", to: "p2", in: any())).thenReturn(1)
+            when(mock.distance(from: "p1", to: "p3", in: any())).thenReturn(0)
         }
         
+        let sut = PanicRule(rangeCalculator: mockRangeCalculator)
+        
         // When
-        let actions = Panic.match(state: mockState)
+        let actions = sut.match(state: mockState)
         
         // Assert
-        XCTAssertEqual(actions, [
+        XCTAssertEqual(actions as? [Panic], [
             Panic(actorId: "p1", cardId: "c1", targetPlayerId: "p2", targetCardId: "c2", targetCardSource: .hand),
             Panic(actorId: "p1", cardId: "c1", targetPlayerId: "p3", targetCardId: "c3", targetCardSource: .inPlay)
         ])
@@ -68,13 +71,16 @@ class PanicTests: XCTestCase {
             .currentTurn(is: 0)
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
         
-        Cuckoo.stub(mockState) { mock in
-            when(mock.distance(from: "p1", to: "p2")).thenReturn(2)
-            when(mock.distance(from: "p1", to: "p3")).thenReturn(3)
+        let mockRangeCalculator = MockRangeCalculatorProtocol()
+        Cuckoo.stub(mockRangeCalculator) { mock in
+            when(mock.distance(from: "p1", to: "p2", in: any())).thenReturn(2)
+            when(mock.distance(from: "p1", to: "p3", in: any())).thenReturn(3)
         }
         
+        let sut = PanicRule(rangeCalculator: mockRangeCalculator)
+        
         // When
-        let actions = Panic.match(state: mockState)
+        let actions = sut.match(state: mockState)
         
         // Assert
         XCTAssertTrue(actions.isEmpty)
@@ -83,10 +89,10 @@ class PanicTests: XCTestCase {
     func test_PullOtherPlayerHandCard_IfPlayingPanic() {
         // Given
         let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
-        let panic = Panic(actorId: "p1", cardId: "c1", targetPlayerId: "p2", targetCardId: "c2", targetCardSource: .hand)
+        let sut = Panic(actorId: "p1", cardId: "c1", targetPlayerId: "p2", targetCardId: "c2", targetCardSource: .hand)
         
         // When
-        panic.execute(state: mockState)
+        sut.execute(state: mockState)
         
         // Assert
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")
@@ -96,10 +102,10 @@ class PanicTests: XCTestCase {
     func test_PullOtherPlayerInPlayCard_IfPlayingPanic() {
         // Given
         let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
-        let panic = Panic(actorId: "p1", cardId: "c1", targetPlayerId: "p2", targetCardId: "c2", targetCardSource: .inPlay)
+        let sut = Panic(actorId: "p1", cardId: "c1", targetPlayerId: "p2", targetCardId: "c2", targetCardSource: .inPlay)
         
         // When
-        panic.execute(state: mockState)
+        sut.execute(state: mockState)
         
         // Assert
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")

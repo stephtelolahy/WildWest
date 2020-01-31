@@ -13,6 +13,7 @@ class StartTurnTests: XCTestCase {
     
     func test_ShouldStartTurn_IfChallengeIsStartTurn() {
         // Given
+        let sut = StartTurnRule()
         let player1 = MockPlayerProtocol().identified(by: "p1")
         let player2 = MockPlayerProtocol().identified(by: "p2")
         let mockState = MockGameStateProtocol()
@@ -21,10 +22,10 @@ class StartTurnTests: XCTestCase {
             .challenge(is: .startTurn)
         
         // When
-        let actions = StartTurn.match(state: mockState)
+        let actions = sut.match(state: mockState)
         
         // Assert
-        XCTAssertEqual(actions, [StartTurn(actorId: "p2")])
+        XCTAssertEqual(actions as? [StartTurn], [StartTurn(actorId: "p2")])
     }
     
     func test_Pull2CardsFromDeck_IfStartingTurn() {

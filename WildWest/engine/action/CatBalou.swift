@@ -32,9 +32,9 @@ struct CatBalou: ActionProtocol, Equatable {
     }
 }
 
-extension CatBalou: RuleProtocol {
+struct CatBalouRule: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [CatBalou] {
+    func match(state: GameStateProtocol) -> [ActionProtocol] {
         guard state.challenge == nil else {
             return []
         }

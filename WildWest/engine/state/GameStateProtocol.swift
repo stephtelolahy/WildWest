@@ -24,8 +24,6 @@ protocol GameStateProtocol {
     func setTurn(_ turn: Int)
     func pullHand(playerId: String, otherId: String, cardId: String)
     func pullInPlay(playerId: String, otherId: String, cardId: String)
-    
-    func distance(from playerId: String, to otherId: String) -> Int
 }
 
 enum GameOutcome {

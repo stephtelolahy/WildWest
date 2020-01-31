@@ -20,9 +20,9 @@ struct Beer: ActionProtocol, Equatable {
     }
 }
 
-extension Beer: RuleProtocol {
+struct BeerRule: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [Beer] {
+    func match(state: GameStateProtocol) -> [ActionProtocol] {
         guard state.challenge == nil else {
             return []
         }

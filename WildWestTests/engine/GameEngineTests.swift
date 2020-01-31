@@ -13,7 +13,7 @@ class GameEngineTests: XCTestCase {
     
     private var sut: GameEngineProtocol!
     private var mockState: MockGameStateProtocol!
-    private var mockRules: MockGameRulesProtocol!
+    private var mockSuggestor: MockActionSuggestorProtocol!
     private var mockPlayer1: MockPlayerProtocol!
     private var mockPlayer2: MockPlayerProtocol!
     
@@ -28,8 +28,8 @@ class GameEngineTests: XCTestCase {
         mockState = MockGameStateProtocol()
             .withEnabledDefaultImplementation(GameStateProtocolStub())
             .players(are: mockPlayer1, mockPlayer2)
-        mockRules = MockGameRulesProtocol().withEnabledDefaultImplementation(GameRulesProtocolStub())
-        sut = GameEngine(state: mockState, rules: mockRules)
+        mockSuggestor = MockActionSuggestorProtocol().withEnabledDefaultImplementation(ActionSuggestorProtocolStub())
+        sut = GameEngine(state: mockState, suggestor: mockSuggestor)
     }
     
     func test_ExposePassedStateInConstructor() {
@@ -63,7 +63,7 @@ class GameEngineTests: XCTestCase {
         let action2 = MockActionProtocol()
             .described(by: "a2")
             .actorId(is: "p1")
-        Cuckoo.stub(mockRules) { mock in
+        Cuckoo.stub(mockSuggestor) { mock in
             when(mock.actions(matching: state(equalTo: mockState))).thenReturn([action1, action2])
         }
         
@@ -71,7 +71,7 @@ class GameEngineTests: XCTestCase {
         sut.execute(mockAction)
         
         // Assert
-        verify(mockRules).actions(matching: state(equalTo: mockState))
+        verify(mockSuggestor).actions(matching: state(equalTo: mockState))
         verify(mockPlayer1).setActions(actions(describedBy: ["a1", "a2"]))
         verify(mockPlayer2).setActions(isEmpty())
     }

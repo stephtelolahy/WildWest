@@ -20,9 +20,9 @@ struct StartTurn: ActionProtocol, Equatable {
     }
 }
 
-extension StartTurn: RuleProtocol {
+struct StartTurnRule: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [StartTurn] {
+    func match(state: GameStateProtocol) -> [ActionProtocol] {
         guard case .startTurn = state.challenge else {
             return []
         }

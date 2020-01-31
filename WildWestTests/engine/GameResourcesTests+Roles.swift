@@ -12,7 +12,7 @@ class GameResourcesTests_Roles: XCTestCase {
 
     private lazy var roles: [RoleCard] = {
         let jsonReader = JsonReader(bundle: Bundle(for: type(of: self)))
-        let sut: GameResources = GameResources(jsonReader: jsonReader)
+        let sut: ResourcesProviderProtocol = ResourcesProvider(jsonReader: jsonReader)
         return sut.allRoles()
     }()
     

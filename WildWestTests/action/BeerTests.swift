@@ -25,10 +25,10 @@ class BeerTests: XCTestCase {
     func test_GainLifePoint_IfPlayingBeer() {
         // Given
         let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
-        let beer = Beer(actorId: "p1", cardId: "c1")
+        let sut = Beer(actorId: "p1", cardId: "c1")
         
         // When
-        beer.execute(state: mockState)
+        sut.execute(state: mockState)
         
         // Assert
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")
@@ -38,6 +38,7 @@ class BeerTests: XCTestCase {
     
     func test_CanPlayBeer_IfYourTurnAndOwnCard() {
         // Given
+        let sut = BeerRule()
         let mockCard = MockCardProtocol()
             .named(.beer)
             .identified(by: "c1")
@@ -52,14 +53,15 @@ class BeerTests: XCTestCase {
             .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
-        let actions = Beer.match(state: mockState)
+        let actions = sut.match(state: mockState)
         
         // Assert
-        XCTAssertEqual(actions, [Beer(actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(actions as? [Beer], [Beer(actorId: "p1", cardId: "c1")])
     }
     
     func test_CannotPlayBeer_ToGainMoreLifePointsThanYourStartingAmount() {
         // Given
+        let sut = BeerRule()
         let mockCard = MockCardProtocol()
             .named(.beer)
         let mockPlayer = MockPlayerProtocol()
@@ -72,14 +74,15 @@ class BeerTests: XCTestCase {
             .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
-        let actions = Beer.match(state: mockState)
+        let actions = sut.match(state: mockState)
         
         // Assert
-        XCTAssertEqual(actions, [])
+        XCTAssertTrue(actions.isEmpty)
     }
     
     func test_CannotPlayBeer_IfThereAreOnly2PlayersLeft() {
         // Given
+        let sut = BeerRule()
         let mockCard = MockCardProtocol()
             .named(.beer)
         let mockPlayer = MockPlayerProtocol()
@@ -90,9 +93,9 @@ class BeerTests: XCTestCase {
             .players(are: mockPlayer, MockPlayerProtocol())
         
         // When
-        let actions = Beer.match(state: mockState)
+        let actions = sut.match(state: mockState)
         
         // Assert
-        XCTAssertEqual(actions, [])
+        XCTAssertTrue(actions.isEmpty)
     }
 }

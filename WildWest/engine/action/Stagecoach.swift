@@ -21,9 +21,9 @@ struct Stagecoach: ActionProtocol, Equatable {
     }
 }
 
-extension Stagecoach: RuleProtocol {
+struct StagecoachRule: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [Stagecoach] {
+    func match(state: GameStateProtocol) -> [ActionProtocol] {
         guard state.challenge == nil else {
             return []
         }

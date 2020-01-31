@@ -88,14 +88,24 @@ class GameState: GameStateProtocol {
     }
     
     func pullHand(playerId: String, otherId: String, cardId: String) {
-        fatalError()
+        guard let player = players.first(where: { $0.identifier == playerId }),
+            let other = players.first(where: { $0.identifier == otherId }) else {
+                return
+        }
+        
+        if let card = other.removeHandById(cardId) {
+            player.addHand(card)
+        }
     }
     
     func pullInPlay(playerId: String, otherId: String, cardId: String) {
-        fatalError()
-    }
-    
-    func distance(from playerId: String, to otherId: String) -> Int {
-        fatalError()
+        guard let player = players.first(where: { $0.identifier == playerId }),
+            let other = players.first(where: { $0.identifier == otherId }) else {
+                return
+        }
+        
+        if let card = other.removeInPlayById(cardId) {
+            player.addHand(card)
+        }
     }
 }
