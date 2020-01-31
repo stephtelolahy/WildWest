@@ -29,6 +29,9 @@
 		3395259123E38F49003DE948 /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3395258F23E38F49003DE948 /* Deck.swift */; };
 		3395259323E38FAC003DE948 /* DeckTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3395259223E38FAC003DE948 /* DeckTests.swift */; };
 		33A4381023E496FF00C39DD6 /* CatBalouTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A4380F23E496FF00C39DD6 /* CatBalouTests.swift */; };
+		33A4381223E4BD3200C39DD6 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A4381123E4BD3200C39DD6 /* ArrayExtension.swift */; };
+		33A4381323E4BD3200C39DD6 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A4381123E4BD3200C39DD6 /* ArrayExtension.swift */; };
+		33A4381523E4BE8200C39DD6 /* ArrayExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A4381423E4BE8200C39DD6 /* ArrayExtensionTests.swift */; };
 		33A733EE23DC4A5300E9B2AD /* Subscribable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A733ED23DC4A5300E9B2AD /* Subscribable.swift */; };
 		33A733F223DC514500E9B2AD /* ActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A733F123DC514500E9B2AD /* ActionsViewController.swift */; };
 		33A733F823DC5AC300E9B2AD /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A733F723DC5AC300E9B2AD /* GameEngine.swift */; };
@@ -161,6 +164,8 @@
 		3395258F23E38F49003DE948 /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
 		3395259223E38FAC003DE948 /* DeckTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckTests.swift; sourceTree = "<group>"; };
 		33A4380F23E496FF00C39DD6 /* CatBalouTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBalouTests.swift; sourceTree = "<group>"; };
+		33A4381123E4BD3200C39DD6 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
+		33A4381423E4BE8200C39DD6 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
 		33A733ED23DC4A5300E9B2AD /* Subscribable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subscribable.swift; sourceTree = "<group>"; };
 		33A733F123DC514500E9B2AD /* ActionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsViewController.swift; sourceTree = "<group>"; };
 		33A733F723DC5AC300E9B2AD /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
@@ -275,6 +280,7 @@
 				AD4BE6A923DA4B12003A610A /* CollectionExtension.swift */,
 				33D964B123DD9119007295E7 /* MatcherExtension.swift */,
 				331BBE7123DE4E800099046C /* MockActionProtocolExtension.swift */,
+				33A4381423E4BE8200C39DD6 /* ArrayExtensionTests.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -347,6 +353,7 @@
 				3324018F23DBAA7500B92439 /* UIViewExtension.swift */,
 				33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */,
 				33A733ED23DC4A5300E9B2AD /* Subscribable.swift */,
+				33A4381123E4BD3200C39DD6 /* ArrayExtension.swift */,
 			);
 			path = misc;
 			sourceTree = "<group>";
@@ -708,6 +715,7 @@
 				ADB5A11323BAB9330050E173 /* GeneralStore.swift in Sources */,
 				3324019023DBAA7500B92439 /* UIViewExtension.swift in Sources */,
 				3324018E23DBA6C800B92439 /* UICollectionViewExtension.swift in Sources */,
+				33A4381223E4BD3200C39DD6 /* ArrayExtension.swift in Sources */,
 				ADB5A0FE23BAB8070050E173 /* Shoot.swift in Sources */,
 				33A733F823DC5AC300E9B2AD /* GameEngine.swift in Sources */,
 				33AFA25323DC201A00425BEB /* ClassNameProtocol.swift in Sources */,
@@ -768,8 +776,10 @@
 				3395259323E38FAC003DE948 /* DeckTests.swift in Sources */,
 				331BBE7223DE4E800099046C /* MockActionProtocolExtension.swift in Sources */,
 				AD36CDDE23C51EFA008D4EDB /* GameResources.swift in Sources */,
+				33A4381523E4BE8200C39DD6 /* ArrayExtensionTests.swift in Sources */,
 				ADB5A10823BAB84E0050E173 /* Gatling.swift in Sources */,
 				331BBE7023DE0B4F0099046C /* GameRules.swift in Sources */,
+				33A4381323E4BD3200C39DD6 /* ArrayExtension.swift in Sources */,
 				AD48DD2C23BEAFAF00E5B552 /* WellsFargoTests.swift in Sources */,
 				AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */,
 				ADB5A11423BAB9330050E173 /* GeneralStore.swift in Sources */,
