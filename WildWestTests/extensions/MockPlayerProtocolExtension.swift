@@ -17,13 +17,8 @@ extension MockPlayerProtocol {
     }
     
     func holding(_ cards: CardProtocol...) -> MockPlayerProtocol {
-        let mockHand = MockCardListProtocol()
-        Cuckoo.stub(mockHand) { mock in
-            when(mock.cards.get).thenReturn(cards)
-        }
-        
         Cuckoo.stub(self) { mock in
-            when(mock.hand.get).thenReturn(mockHand)
+            when(mock.hand.get).thenReturn(cards)
         }
         return self
     }
@@ -43,25 +38,15 @@ extension MockPlayerProtocol {
     }
     
     func playing(_ cards: CardProtocol...) -> MockPlayerProtocol {
-        let mockInPlay = MockCardListProtocol()
-        Cuckoo.stub(mockInPlay) { mock in
-            when(mock.cards.get).thenReturn(cards)
-        }
-        
         Cuckoo.stub(self) { mock in
-            when(mock.inPlay.get).thenReturn(mockInPlay)
+            when(mock.inPlay.get).thenReturn(cards)
         }
         return self
     }
     
     func noCardsInPlay() -> MockPlayerProtocol {
-        let mockInPlay = MockCardListProtocol()
-        Cuckoo.stub(mockInPlay) { mock in
-            when(mock.cards.get).thenReturn([])
-        }
-        
         Cuckoo.stub(self) { mock in
-            when(mock.inPlay.get).thenReturn(mockInPlay)
+            when(mock.inPlay.get).thenReturn([])
         }
         return self
     }

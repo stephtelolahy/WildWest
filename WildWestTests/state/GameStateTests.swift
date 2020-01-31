@@ -11,101 +11,87 @@ import Cuckoo
 
 class GameStateTests: XCTestCase {
     
-    private var sut: GameState!
+    private var sut: GameStateProtocol!
     
-    private var mockPlayer1: FullMockPlayerProtocol!
-    private var mockDeck: MockCardListProtocol!
-    private var mockDiscard: MockCardListProtocol!
+    private var mockPlayer1: MockPlayerProtocol!
+    private var mockDeck: MockDeckProtocol!
     
     override func setUp() {
-        mockDeck = MockCardListProtocol().withEnabledDefaultImplementation(CardListProtocolStub())
-        mockDiscard = MockCardListProtocol().withEnabledDefaultImplementation(CardListProtocolStub())
-        mockPlayer1 = FullMockPlayerProtocol.create(identifier: "p1")
+        mockDeck = MockDeckProtocol().withEnabledDefaultImplementation(DeckProtocolStub())
+        mockPlayer1 = MockPlayerProtocol()
+            .withEnabledDefaultImplementation(PlayerProtocolStub())
+            .identified(by: "p1")
         sut = GameState(players: [mockPlayer1],
                         deck: mockDeck,
-                        discard: mockDiscard,
                         turn: 0,
+                        challenge: nil,
                         outcome: nil,
-                        commands: [],
-                        challenge: nil)
+                        commands: [])
+    }
+    
+    func test_InitialProperties() {
+        // Given
+        // When
+        // Assert
+        XCTAssertTrue(sut.players[0] as? MockPlayerProtocol === mockPlayer1)
+        XCTAssertTrue(sut.deck as? MockDeckProtocol === mockDeck)
+        XCTAssertNil(sut.challenge)
+        XCTAssertTrue(sut.commands.isEmpty)
+        XCTAssertNil(sut.outcome)
     }
     
     func test_MoveCardFromDeckToActorsHand_IfPulling() {
         // Given
         let card1 = MockCardProtocol().identified(by: "c1")
         Cuckoo.stub(mockDeck) { mock in
-            when(mock.cards.get).thenReturn([card1])
-            when(mock.removeFirst()).thenReturn(card1)
+            when(mock.pull()).thenReturn(card1)
         }
         
         // When
         sut.pullFromDeck(playerId: "p1")
         
         // Assert
-        verify(mockDeck).cards.get()
-        verify(mockDeck).removeFirst()
-        verify(mockPlayer1.mockHand).add(card(identifiedBy: "c1"))
+        verify(mockDeck).pull()
         verifyNoMoreInteractions(mockDeck)
-        verifyNoMoreInteractions(mockPlayer1.mockHand)
-    }
-    
-    func test_ResetDeck_IfEmptyWhilePulling() {
-        // Given
-        let card1 = MockCardProtocol().identified(by: "c1")
-        Cuckoo.stub(mockDeck) { mock in
-            when(mock.cards.get).thenReturn([])
-            when(mock.removeFirst()).thenReturn(card1)
-        }
-        Cuckoo.stub(mockDiscard) { mock in
-            when(mock.removeAll()).thenReturn([card1])
-        }
-        
-        // When
-        sut.pullFromDeck(playerId: "p1")
-        
-        // Assert
-        verify(mockDiscard).removeAll()
-        verify(mockDeck).cards.get()
-        verify(mockDeck).addAll(cards(identifiedBy: ["c1"]))
-        verify(mockDeck).removeFirst()
-        verify(mockPlayer1.mockHand).add(card(identifiedBy: "c1"))
-        verifyNoMoreInteractions(mockDiscard)
-        verifyNoMoreInteractions(mockDeck)
-        verifyNoMoreInteractions(mockPlayer1.mockHand)
+        verify(mockPlayer1).identifier.get()
+        verify(mockPlayer1).addHand(card(identifiedBy: "c1"))
+        verifyNoMoreInteractions(mockPlayer1)
     }
     
     func test_MoveCardFromHandToDiscard_IfDiscardingHand() {
         // Given
         let card1 = MockCardProtocol().identified(by: "c1")
-        Cuckoo.stub(mockPlayer1.mockHand) { mock in
-            when(mock.removeById("c1")).thenReturn(card1)
+        Cuckoo.stub(mockPlayer1) { mock in
+            when(mock.removeHandById("c1")).thenReturn(card1)
         }
         
         // When
         sut.discardHand(playerId: "p1", cardId: "c1")
         
         // Assert
-        verify(mockPlayer1.mockHand).removeById("c1")
-        verify(mockDiscard).add(card(identifiedBy: "c1"))
-        verifyNoMoreInteractions(mockPlayer1.mockHand)
-        verifyNoMoreInteractions(mockDiscard)
+        verify(mockPlayer1).identifier.get()
+        verify(mockPlayer1).removeHandById("c1")
+        verifyNoMoreInteractions(mockPlayer1)
+        verify(mockDeck).addToDiscard(card(identifiedBy: "c1"))
+        verifyNoMoreInteractions(mockDeck)
     }
     
     func test_MoveCardFromInPlayToDiscard_IfDiscardingInPlay() {
         // Given
         let card1 = MockCardProtocol().identified(by: "c1")
-        Cuckoo.stub(mockPlayer1.mockInPlay) { mock in
-            when(mock.removeById("c1")).thenReturn(card1)
+        Cuckoo.stub(mockPlayer1) { mock in
+            when(mock.removeInPlayById("c1")).thenReturn(card1)
         }
         
         // When
         sut.discardInPlay(playerId: "p1", cardId: "c1")
         
         // Assert
-        verify(mockPlayer1.mockInPlay).removeById("c1")
-        verify(mockDiscard).add(card(identifiedBy: "c1"))
-        verifyNoMoreInteractions(mockPlayer1.mockInPlay)
-        verifyNoMoreInteractions(mockDiscard)
+        verify(mockPlayer1).identifier.get()
+        verify(mockPlayer1).removeInPlayById("c1")
+        verifyNoMoreInteractions(mockPlayer1)
+        verify(mockDeck).addToDiscard(card(identifiedBy: "c1"))
+        verifyNoMoreInteractions(mockDeck)
     }
     
     func test_IncrementHealth_IfGainingLifePoint() {
@@ -118,24 +104,27 @@ class GameStateTests: XCTestCase {
         sut.gainLifePoint(playerId: "p1")
         
         // Assert
+        verify(mockPlayer1).identifier.get()
+        verify(mockPlayer1).health.get()
         verify(mockPlayer1).setHealth(3)
+        verifyNoMoreInteractions(mockPlayer1)
     }
     
     func test_MoveCardFromHandToInPlay_ifPuttingInPlay() {
         // Given
         let card1 = MockCardProtocol().identified(by: "c1")
-        Cuckoo.stub(mockPlayer1.mockHand) { mock in
-            when(mock.removeById("c1")).thenReturn(card1)
+        Cuckoo.stub(mockPlayer1) { mock in
+            when(mock.removeHandById("c1")).thenReturn(card1)
         }
         
         // When
         sut.putInPlay(playerId: "p1", cardId: "c1")
         
         // Assert
-        verify(mockPlayer1.mockHand).removeById("c1")
-        verify(mockPlayer1.mockInPlay).add(card(identifiedBy: "c1"))
-        verifyNoMoreInteractions(mockPlayer1.mockHand)
-        verifyNoMoreInteractions(mockPlayer1.mockInPlay)
+        verify(mockPlayer1).identifier.get()
+        verify(mockPlayer1).removeHandById("c1")
+        verify(mockPlayer1).addInPlay(card(identifiedBy: "c1"))
+        verifyNoMoreInteractions(mockPlayer1)
     }
     
     func test_SetTurn() {
@@ -146,24 +135,33 @@ class GameStateTests: XCTestCase {
         // Assert
         XCTAssertEqual(sut.turn, 1)
     }
-}
-
-private class FullMockPlayerProtocol: MockPlayerProtocol {
     
-    var mockHand: MockCardListProtocol!
-    var mockInPlay: MockCardListProtocol!
+    func test_AddCommand() {
+        // Given
+        let mockAction = MockActionProtocol().described(by: "ac")
+        
+        // When
+        sut.addCommand(mockAction)
+        
+        // Assert
+        XCTAssertEqual(sut.commands.last?.description, "ac")
+    }
     
-    static func create(identifier: String) -> FullMockPlayerProtocol {
-        let mockPlayer = FullMockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub())
-        let mockHand = MockCardListProtocol().withEnabledDefaultImplementation(CardListProtocolStub())
-        let mockInPlay = MockCardListProtocol().withEnabledDefaultImplementation(CardListProtocolStub())
-        Cuckoo.stub(mockPlayer) { mock in
-            when(mock.identifier.get).thenReturn(identifier)
-            when(mock.hand.get).thenReturn(mockHand)
-            when(mock.inPlay.get).thenReturn(mockInPlay)
-        }
-        mockPlayer.mockHand = mockHand
-        mockPlayer.mockInPlay = mockInPlay
-        return mockPlayer
+    func test_SetSomeChallenge() {
+        // Given
+        // When
+        sut.setChallenge(.startTurn)
+        
+        // Assert
+        XCTAssertEqual(sut.challenge, .startTurn)
+    }
+    
+    func test_RemoveChallenge() {
+        // Given
+        // When
+        sut.setChallenge(nil)
+        
+        // Assert
+        XCTAssertNil(sut.challenge)
     }
 }

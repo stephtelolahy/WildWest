@@ -49,8 +49,8 @@ private extension PlayerProtocol {
         return """
         \(health)/\(maxHealth)
         \(role == .sheriff ? role.rawValue : "?")
-        x\(hand.cards.count)
-        \(inPlay.cards.map { $0.name.rawValue }.joined(separator: "\n"))
+        x\(hand.count)
+        \(inPlay.map { $0.name.rawValue }.joined(separator: "\n"))
         """
     }
 }

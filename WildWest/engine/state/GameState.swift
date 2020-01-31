@@ -9,27 +9,24 @@
 class GameState: GameStateProtocol {
     
     let players: [PlayerProtocol]
-    let deck: CardListProtocol
-    let discard: CardListProtocol
+    let deck: DeckProtocol
     var turn: Int
+    var challenge: Challenge?
     var outcome: GameOutcome?
     var commands: [ActionProtocol]
-    var challenge: Challenge?
     
     init(players: [PlayerProtocol],
-         deck: CardListProtocol,
-         discard: CardListProtocol,
+         deck: DeckProtocol,
          turn: Int,
+         challenge: Challenge?,
          outcome: GameOutcome?,
-         commands: [ActionProtocol],
-         challenge: Challenge?) {
+         commands: [ActionProtocol]) {
         self.players = players
         self.deck = deck
-        self.discard = discard
         self.turn = turn
+        self.challenge = challenge
         self.outcome = outcome
         self.commands = commands
-        self.challenge = challenge
     }
     
     func addCommand(_ action: ActionProtocol) {
@@ -49,13 +46,7 @@ class GameState: GameStateProtocol {
             return
         }
         
-        if deck.cards.isEmpty {
-            deck.addAll(discard.removeAll().shuffled())
-        }
-        
-        if let card = deck.removeFirst() {
-            player.hand.add(card)
-        }
+        player.addHand(deck.pull())
     }
     
     func discardHand(playerId: String, cardId: String) {
@@ -63,8 +54,8 @@ class GameState: GameStateProtocol {
             return
         }
         
-        if let card = player.hand.removeById(cardId) {
-            discard.add(card)
+        if let card = player.removeHandById(cardId) {
+            deck.addToDiscard(card)
         }
     }
     
@@ -73,8 +64,8 @@ class GameState: GameStateProtocol {
             return
         }
         
-        if let card = player.inPlay.removeById(cardId) {
-            discard.add(card)
+        if let card = player.removeInPlayById(cardId) {
+            deck.addToDiscard(card)
         }
     }
     
@@ -91,8 +82,8 @@ class GameState: GameStateProtocol {
             return
         }
         
-        if let card = player.hand.removeById(cardId) {
-            player.inPlay.add(card)
+        if let card = player.removeHandById(cardId) {
+            player.addInPlay(card)
         }
     }
 }

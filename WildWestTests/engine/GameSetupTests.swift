@@ -66,13 +66,13 @@ class GameSetupTests: XCTestCase {
         // ShuffleCharactersBetweenPlayers
         XCTAssertTrue(state.players.allSatisfy { figures.map { $0.ability }.contains($0.ability) })
         // PlayerInitialInPlayIsEmpty
-        XCTAssertTrue(state.players.allSatisfy { $0.inPlay.cards.isEmpty })
+        XCTAssertTrue(state.players.allSatisfy { $0.inPlay.isEmpty })
         // PlayerHandCardsEqualsToHealthPoints
-        XCTAssertTrue(state.players.allSatisfy { $0.hand.cards.count == $0.health })
+        XCTAssertTrue(state.players.allSatisfy { $0.hand.count == $0.health })
         // Each player has maximal health
         XCTAssertTrue(state.players.allSatisfy { $0.health == $0.maxHealth })
         // InitialDeckContainsShuffleCards
-        let distributedCardIds = state.players.map { $0.hand.cards }.flatMap { $0 }.map { $0.identifier }
+        let distributedCardIds = state.players.map { $0.hand }.flatMap { $0 }.map { $0.identifier }
         let remainingCardIds = cards.map { $0.identifier }.filter { !distributedCardIds.contains($0) }
         let deckCardIds = state.deck.cards.map { $0.identifier }
         XCTAssertTrue(deckCardIds.isShuffed(from: remainingCardIds))

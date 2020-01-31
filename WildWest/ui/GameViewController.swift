@@ -73,7 +73,7 @@ private extension GameViewController {
                 return []
         }
         
-        return player.hand.cards
+        return player.hand
     }
     
     var playerIndexes: [[Int]] {

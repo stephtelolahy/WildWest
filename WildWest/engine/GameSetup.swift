@@ -31,11 +31,12 @@ class GameSetup: GameSetupProtocol {
                 hand.append(deck.removeFirst())
             }
             return Player(role: role,
-                          figure: figure,
+                          ability: figure.ability,
                           maxHealth: health,
+                          imageName: figure.imageName,
                           health: health,
-                          hand: CardList(cards: hand),
-                          inPlay: CardList(cards: []),
+                          hand: hand,
+                          inPlay: [],
                           actions: [])
         }
         
@@ -44,11 +45,10 @@ class GameSetup: GameSetupProtocol {
         }
         
         return GameState(players: players,
-                         deck: CardList(cards: deck),
-                         discard: CardList(cards: []),
+                         deck: Deck(cards: deck, discardPile: []),
                          turn: 0,
+                         challenge: nil,
                          outcome: nil,
-                         commands: [],
-                         challenge: nil)
+                         commands: [])
     }
 }

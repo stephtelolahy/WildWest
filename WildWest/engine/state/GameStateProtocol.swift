@@ -8,8 +8,7 @@
 
 protocol GameStateProtocol {
     var players: [PlayerProtocol] { get }
-    var deck: CardListProtocol { get }
-    var discard: CardListProtocol { get }
+    var deck: DeckProtocol { get }
     var turn: Int { get }
     var challenge: Challenge? { get }
     var outcome: GameOutcome? { get }

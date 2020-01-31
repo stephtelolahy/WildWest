@@ -12,13 +12,17 @@ protocol PlayerProtocol {
     var ability: Ability { get }
     var maxHealth: Int { get }
     var health: Int { get }
-    var hand: CardListProtocol { get }
-    var inPlay: CardListProtocol { get }
+    var hand: [CardProtocol] { get }
+    var inPlay: [CardProtocol] { get }
     var imageName: String { get }
     var actions: [ActionProtocol] { get }
     
     func setHealth(_ value: Int)
     func setActions(_ actions: [ActionProtocol])
+    func addHand(_ card: CardProtocol)
+    func removeHandById(_ cardId: String) -> CardProtocol?
+    func addInPlay(_ card: CardProtocol)
+    func removeInPlayById(_ cardId: String) -> CardProtocol?
 }
 
 enum Role: String, Decodable {

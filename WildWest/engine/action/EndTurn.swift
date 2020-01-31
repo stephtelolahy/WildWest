@@ -34,7 +34,7 @@ extension EndTurn: RuleProtocol {
         }
         
         let player = state.players[state.turn]
-        let cardsToDiscardIds = player.hand.cards.dropFirst(player.health).map { $0.identifier }
+        let cardsToDiscardIds = player.hand.dropFirst(player.health).map { $0.identifier }
         return [EndTurn(actorId: player.identifier, cardsToDiscardIds: cardsToDiscardIds)]
     }
 }
