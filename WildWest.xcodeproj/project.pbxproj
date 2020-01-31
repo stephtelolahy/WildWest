@@ -32,6 +32,7 @@
 		33A4381223E4BD3200C39DD6 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A4381123E4BD3200C39DD6 /* ArrayExtension.swift */; };
 		33A4381323E4BD3200C39DD6 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A4381123E4BD3200C39DD6 /* ArrayExtension.swift */; };
 		33A4381523E4BE8200C39DD6 /* ArrayExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A4381423E4BE8200C39DD6 /* ArrayExtensionTests.swift */; };
+		33A4381723E4C1FD00C39DD6 /* PanicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A4381623E4C1FD00C39DD6 /* PanicTests.swift */; };
 		33A733EE23DC4A5300E9B2AD /* Subscribable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A733ED23DC4A5300E9B2AD /* Subscribable.swift */; };
 		33A733F223DC514500E9B2AD /* ActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A733F123DC514500E9B2AD /* ActionsViewController.swift */; };
 		33A733F823DC5AC300E9B2AD /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A733F723DC5AC300E9B2AD /* GameEngine.swift */; };
@@ -166,6 +167,7 @@
 		33A4380F23E496FF00C39DD6 /* CatBalouTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBalouTests.swift; sourceTree = "<group>"; };
 		33A4381123E4BD3200C39DD6 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		33A4381423E4BE8200C39DD6 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
+		33A4381623E4C1FD00C39DD6 /* PanicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanicTests.swift; sourceTree = "<group>"; };
 		33A733ED23DC4A5300E9B2AD /* Subscribable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subscribable.swift; sourceTree = "<group>"; };
 		33A733F123DC514500E9B2AD /* ActionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsViewController.swift; sourceTree = "<group>"; };
 		33A733F723DC5AC300E9B2AD /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 				331BBE6E23DE0B4F0099046C /* GameRules.swift */,
 				AD36CDD823C51C34008D4EDB /* state */,
 				AD36CDDA23C51DA6008D4EDB /* action */,
+				AD46810C23BEA27F000B42C7 /* convenience */,
 			);
 			path = engine;
 			sourceTree = "<group>";
@@ -315,7 +318,6 @@
 				AD52B99223B175110013240B /* Card.swift */,
 				AD49F86623BA054400543F59 /* Figure.swift */,
 				33A815EF23DB547D0081A055 /* RoleCard.swift */,
-				AD46810C23BEA27F000B42C7 /* extensions */,
 			);
 			path = state;
 			sourceTree = "<group>";
@@ -379,13 +381,13 @@
 			path = state;
 			sourceTree = "<group>";
 		};
-		AD46810C23BEA27F000B42C7 /* extensions */ = {
+		AD46810C23BEA27F000B42C7 /* convenience */ = {
 			isa = PBXGroup;
 			children = (
 				AD46810D23BEA2B0000B42C7 /* PlayerExtension.swift */,
 				AD671A1B23D8F9D600F0AA4A /* CardExtension.swift */,
 			);
-			path = extensions;
+			path = convenience;
 			sourceTree = "<group>";
 		};
 		AD48DD2823BEABD100E5B552 /* action */ = {
@@ -400,6 +402,7 @@
 				33AFB62823DCAD1800C96CED /* StartTurnTests.swift */,
 				33B7DFA523E20BDD0051718E /* EndTurnTests.swift */,
 				33A4380F23E496FF00C39DD6 /* CatBalouTests.swift */,
+				33A4381623E4C1FD00C39DD6 /* PanicTests.swift */,
 			);
 			path = action;
 			sourceTree = "<group>";
@@ -769,6 +772,7 @@
 				AD7F34B923D79841001B4072 /* MockCardProtocolExtension.swift in Sources */,
 				AD48DD3023BEB11800E5B552 /* BeerTests.swift in Sources */,
 				ADB5A10223BAB81E0050E173 /* Missed.swift in Sources */,
+				33A4381723E4C1FD00C39DD6 /* PanicTests.swift in Sources */,
 				AD7EAFBF23D7846D00FE23D5 /* GameSetupTests.swift in Sources */,
 				ADD035D923A9604F003B2576 /* GameStateProtocol.swift in Sources */,
 				3395258E23E38EAF003DE948 /* DeckProtocol.swift in Sources */,

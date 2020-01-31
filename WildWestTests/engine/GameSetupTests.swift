@@ -13,36 +13,36 @@ class GameSetupTests: XCTestCase {
     func test_Roles_For4Players() {
         let roles = GameSetup().roles(for: 4)
         XCTAssertEqual(roles.count, 4)
-        XCTAssertEqual(roles.count(.sheriff), 1)
-        XCTAssertEqual(roles.count(.outlaw), 2)
-        XCTAssertEqual(roles.count(.renegade), 1)
+        XCTAssertEqual(roles.count(of: .sheriff), 1)
+        XCTAssertEqual(roles.count(of: .outlaw), 2)
+        XCTAssertEqual(roles.count(of: .renegade), 1)
     }
     
     func test_Roles_For5Players() {
         let roles = GameSetup().roles(for: 5)
         XCTAssertEqual(roles.count, 5)
-        XCTAssertEqual(roles.count(.sheriff), 1)
-        XCTAssertEqual(roles.count(.outlaw), 2)
-        XCTAssertEqual(roles.count(.renegade), 1)
-        XCTAssertEqual(roles.count(.deputy), 1)
+        XCTAssertEqual(roles.count(of: .sheriff), 1)
+        XCTAssertEqual(roles.count(of: .outlaw), 2)
+        XCTAssertEqual(roles.count(of: .renegade), 1)
+        XCTAssertEqual(roles.count(of: .deputy), 1)
     }
     
     func test_Roles_For6Players() {
         let roles = GameSetup().roles(for: 6)
         XCTAssertEqual(roles.count, 6)
-        XCTAssertEqual(roles.count(.sheriff), 1)
-        XCTAssertEqual(roles.count(.outlaw), 3)
-        XCTAssertEqual(roles.count(.renegade), 1)
-        XCTAssertEqual(roles.count(.deputy), 1)
+        XCTAssertEqual(roles.count(of: .sheriff), 1)
+        XCTAssertEqual(roles.count(of: .outlaw), 3)
+        XCTAssertEqual(roles.count(of: .renegade), 1)
+        XCTAssertEqual(roles.count(of: .deputy), 1)
     }
     
     func test_Roles_For7Players() {
         let roles = GameSetup().roles(for: 7)
         XCTAssertEqual(roles.count, 7)
-        XCTAssertEqual(roles.count(.sheriff), 1)
-        XCTAssertEqual(roles.count(.outlaw), 3)
-        XCTAssertEqual(roles.count(.renegade), 1)
-        XCTAssertEqual(roles.count(.deputy), 2)
+        XCTAssertEqual(roles.count(of: .sheriff), 1)
+        XCTAssertEqual(roles.count(of: .outlaw), 3)
+        XCTAssertEqual(roles.count(of: .renegade), 1)
+        XCTAssertEqual(roles.count(of: .deputy), 2)
     }
     
     func test_SetupGameWith4Players() {

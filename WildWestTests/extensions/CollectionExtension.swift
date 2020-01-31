@@ -10,7 +10,7 @@ import Foundation
 
 extension Collection where Element:  Equatable {
     
-    func count(_ element: Element) -> Int {
+    func count(of element: Element) -> Int {
         filter { $0 == element }.count
     }
     

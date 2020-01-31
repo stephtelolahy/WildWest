@@ -893,6 +893,51 @@ import Cuckoo
         
     }
     
+    
+    
+     func pullHand(playerId: String, otherId: String, cardId: String)  {
+        
+    return cuckoo_manager.call("pullHand(playerId: String, otherId: String, cardId: String)",
+            parameters: (playerId, otherId, cardId),
+            escapingParameters: (playerId, otherId, cardId),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.pullHand(playerId: playerId, otherId: otherId, cardId: cardId))
+        
+    }
+    
+    
+    
+     func pullInPlay(playerId: String, otherId: String, cardId: String)  {
+        
+    return cuckoo_manager.call("pullInPlay(playerId: String, otherId: String, cardId: String)",
+            parameters: (playerId, otherId, cardId),
+            escapingParameters: (playerId, otherId, cardId),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.pullInPlay(playerId: playerId, otherId: otherId, cardId: cardId))
+        
+    }
+    
+    
+    
+     func distance(from playerId: String, to otherId: String) -> Int {
+        
+    return cuckoo_manager.call("distance(from: String, to: String) -> Int",
+            parameters: (playerId, otherId),
+            escapingParameters: (playerId, otherId),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.distance(from: playerId, to: otherId))
+        
+    }
+    
 
 	 struct __StubbingProxy_GameStateProtocol: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
@@ -970,6 +1015,21 @@ import Cuckoo
 	    func setTurn<M1: Cuckoo.Matchable>(_ turn: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(Int)> where M1.MatchedType == Int {
 	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: turn) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "setTurn(_: Int)", parameterMatchers: matchers))
+	    }
+	    
+	    func pullHand<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable>(playerId: M1, otherId: M2, cardId: M3) -> Cuckoo.ProtocolStubNoReturnFunction<(String, String, String)> where M1.MatchedType == String, M2.MatchedType == String, M3.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: otherId) { $0.1 }, wrap(matchable: cardId) { $0.2 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "pullHand(playerId: String, otherId: String, cardId: String)", parameterMatchers: matchers))
+	    }
+	    
+	    func pullInPlay<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable>(playerId: M1, otherId: M2, cardId: M3) -> Cuckoo.ProtocolStubNoReturnFunction<(String, String, String)> where M1.MatchedType == String, M2.MatchedType == String, M3.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: otherId) { $0.1 }, wrap(matchable: cardId) { $0.2 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "pullInPlay(playerId: String, otherId: String, cardId: String)", parameterMatchers: matchers))
+	    }
+	    
+	    func distance<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(from playerId: M1, to otherId: M2) -> Cuckoo.ProtocolStubFunction<(String, String), Int> where M1.MatchedType == String, M2.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: otherId) { $0.1 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "distance(from: String, to: String) -> Int", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -1066,6 +1126,24 @@ import Cuckoo
 	        return cuckoo_manager.verify("setTurn(_: Int)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
+	    @discardableResult
+	    func pullHand<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable>(playerId: M1, otherId: M2, cardId: M3) -> Cuckoo.__DoNotUse<(String, String, String), Void> where M1.MatchedType == String, M2.MatchedType == String, M3.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: otherId) { $0.1 }, wrap(matchable: cardId) { $0.2 }]
+	        return cuckoo_manager.verify("pullHand(playerId: String, otherId: String, cardId: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func pullInPlay<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable>(playerId: M1, otherId: M2, cardId: M3) -> Cuckoo.__DoNotUse<(String, String, String), Void> where M1.MatchedType == String, M2.MatchedType == String, M3.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: otherId) { $0.1 }, wrap(matchable: cardId) { $0.2 }]
+	        return cuckoo_manager.verify("pullInPlay(playerId: String, otherId: String, cardId: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func distance<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(from playerId: M1, to otherId: M2) -> Cuckoo.__DoNotUse<(String, String), Int> where M1.MatchedType == String, M2.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: otherId) { $0.1 }]
+	        return cuckoo_manager.verify("distance(from: String, to: String) -> Int", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
 	}
 }
 
@@ -1153,6 +1231,18 @@ import Cuckoo
     
      func setTurn(_ turn: Int)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func pullHand(playerId: String, otherId: String, cardId: String)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func pullInPlay(playerId: String, otherId: String, cardId: String)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func distance(from playerId: String, to otherId: String) -> Int  {
+        return DefaultValueRegistry.defaultValue(for: (Int).self)
     }
     
 }

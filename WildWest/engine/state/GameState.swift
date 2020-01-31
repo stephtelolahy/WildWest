@@ -86,4 +86,16 @@ class GameState: GameStateProtocol {
             player.addInPlay(card)
         }
     }
+    
+    func pullHand(playerId: String, otherId: String, cardId: String) {
+        fatalError()
+    }
+    
+    func pullInPlay(playerId: String, otherId: String, cardId: String) {
+        fatalError()
+    }
+    
+    func distance(from playerId: String, to otherId: String) -> Int {
+        fatalError()
+    }
 }

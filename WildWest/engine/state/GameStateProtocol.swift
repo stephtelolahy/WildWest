@@ -22,6 +22,10 @@ protocol GameStateProtocol {
     func addCommand(_ action: ActionProtocol)
     func setChallenge(_ challenge: Challenge?)
     func setTurn(_ turn: Int)
+    func pullHand(playerId: String, otherId: String, cardId: String)
+    func pullInPlay(playerId: String, otherId: String, cardId: String)
+    
+    func distance(from playerId: String, to otherId: String) -> Int
 }
 
 enum GameOutcome {

@@ -164,4 +164,16 @@ class GameStateTests: XCTestCase {
         // Assert
         XCTAssertNil(sut.challenge)
     }
+    
+    func test_DistanceFromTo() {
+        XCTFail()
+    }
+    
+    func test_PullHandFromTo() {
+        XCTFail()
+    }
+    
+    func test_PullInPlayFromTo() {
+        XCTFail()
+    }
 }
