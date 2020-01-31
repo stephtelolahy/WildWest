@@ -16,13 +16,6 @@ extension MockPlayerProtocol {
         return self
     }
     
-    func holding(_ cards: CardProtocol...) -> MockPlayerProtocol {
-        Cuckoo.stub(self) { mock in
-            when(mock.hand.get).thenReturn(cards)
-        }
-        return self
-    }
-    
     func health(is health: Int) -> MockPlayerProtocol {
         Cuckoo.stub(self) { mock in
             when(mock.health.get).thenReturn(health)
@@ -33,6 +26,20 @@ extension MockPlayerProtocol {
     func maxHealth(is maxHealth: Int) -> MockPlayerProtocol {
         Cuckoo.stub(self) { mock in
             when(mock.maxHealth.get).thenReturn(maxHealth)
+        }
+        return self
+    }
+    
+    func holding(_ cards: CardProtocol...) -> MockPlayerProtocol {
+        Cuckoo.stub(self) { mock in
+            when(mock.hand.get).thenReturn(cards)
+        }
+        return self
+    }
+    
+    func noCardsInHand() -> MockPlayerProtocol {
+        Cuckoo.stub(self) { mock in
+            when(mock.hand.get).thenReturn([])
         }
         return self
     }
