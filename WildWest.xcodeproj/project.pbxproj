@@ -24,6 +24,7 @@
 		3395259023E38F49003DE948 /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3395258F23E38F49003DE948 /* Deck.swift */; };
 		3395259123E38F49003DE948 /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3395258F23E38F49003DE948 /* Deck.swift */; };
 		3395259323E38FAC003DE948 /* DeckTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3395259223E38FAC003DE948 /* DeckTests.swift */; };
+		33A1410D23E5CFE800E40AA8 /* ShootTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A1410C23E5CFE800E40AA8 /* ShootTest.swift */; };
 		33A4381023E496FF00C39DD6 /* CatBalouTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A4380F23E496FF00C39DD6 /* CatBalouTests.swift */; };
 		33A4381223E4BD3200C39DD6 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A4381123E4BD3200C39DD6 /* ArrayExtension.swift */; };
 		33A4381323E4BD3200C39DD6 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A4381123E4BD3200C39DD6 /* ArrayExtension.swift */; };
@@ -163,6 +164,7 @@
 		3395258C23E38EAF003DE948 /* DeckProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckProtocol.swift; sourceTree = "<group>"; };
 		3395258F23E38F49003DE948 /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
 		3395259223E38FAC003DE948 /* DeckTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckTests.swift; sourceTree = "<group>"; };
+		33A1410C23E5CFE800E40AA8 /* ShootTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootTest.swift; sourceTree = "<group>"; };
 		33A4380F23E496FF00C39DD6 /* CatBalouTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBalouTests.swift; sourceTree = "<group>"; };
 		33A4381123E4BD3200C39DD6 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		33A4381423E4BE8200C39DD6 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
@@ -414,6 +416,7 @@
 				33B7DFA523E20BDD0051718E /* EndTurnTests.swift */,
 				33A4380F23E496FF00C39DD6 /* CatBalouTests.swift */,
 				33A4381623E4C1FD00C39DD6 /* PanicTests.swift */,
+				33A1410C23E5CFE800E40AA8 /* ShootTest.swift */,
 			);
 			path = action;
 			sourceTree = "<group>";
@@ -832,6 +835,7 @@
 				ADD035D023A96002003B2576 /* CardProtocol.swift in Sources */,
 				AD52B99A23B178CC0013240B /* Player.swift in Sources */,
 				ADE91AD523BA00DC00F7316B /* GameSetup.swift in Sources */,
+				33A1410D23E5CFE800E40AA8 /* ShootTest.swift in Sources */,
 				AD52B99423B175110013240B /* Card.swift in Sources */,
 				AD671A1D23D8F9D600F0AA4A /* CardExtension.swift in Sources */,
 				3395258723E37D3E003DE948 /* ResourcesProviderProtocol.swift in Sources */,

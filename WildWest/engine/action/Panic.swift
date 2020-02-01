@@ -32,10 +32,10 @@ struct PanicRule: RuleProtocol {
     
     let actionName: String = "Panic"
     
-    private let rangeCalculator: RangeCalculatorProtocol
+    private let calculator: RangeCalculatorProtocol
     
-    init(rangeCalculator: RangeCalculatorProtocol) {
-        self.rangeCalculator = rangeCalculator
+    init(calculator: RangeCalculatorProtocol) {
+        self.calculator = calculator
     }
     
     func match(with state: GameStateProtocol) -> [ActionProtocol] {
@@ -52,7 +52,7 @@ struct PanicRule: RuleProtocol {
         var result: [Panic] = []
         let otherPlayers = state.players.filter {
             $0.identifier != player.identifier
-            && rangeCalculator.distance(from: player.identifier, to: $0.identifier, in: state) <= 1
+            && calculator.distance(from: player.identifier, to: $0.identifier, in: state) <= 1
         }
         
         for card in cards {

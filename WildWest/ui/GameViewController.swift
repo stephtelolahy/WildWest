@@ -29,6 +29,7 @@ class GameViewController: UIViewController, Subscribable {
         let gameSetup = GameSetup()
         let roles = gameSetup.roles(for: 7)
         let state = gameSetup.setupGame(roles: roles, figures: figures, cards: cards)
+        let calculator = RangeCalculator()
         let rules: [RuleProtocol] = [
             BeerRule(),
             SaloonRule(),
@@ -36,9 +37,10 @@ class GameViewController: UIViewController, Subscribable {
             WellsFargoRule(),
             EquipRule(),
             CatBalouRule(),
-            PanicRule(rangeCalculator: RangeCalculator()),
+            PanicRule(calculator: calculator),
             StartTurnRule(),
-            EndTurnRule()
+            EndTurnRule(),
+            ShootRule(calculator: calculator)
         ]
         return GameEngine(state: state, rules: rules)
     }()
