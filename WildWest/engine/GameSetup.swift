@@ -50,6 +50,7 @@ class GameSetup: GameSetupProtocol {
                          deck: Deck(cards: deck, discardPile: []),
                          turn: 0,
                          challenge: nil,
+                         turnShoots: 0,
                          outcome: nil,
                          commands: [])
     }

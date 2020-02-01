@@ -15,6 +15,7 @@ struct StartTurn: ActionProtocol, Equatable {
     
     func execute(in state: GameStateProtocol) {
         state.setChallenge(nil)
+        state.setTurnShoots(0)
         state.pullFromDeck(playerId: actorId)
         state.pullFromDeck(playerId: actorId)
     }

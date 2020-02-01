@@ -38,4 +38,12 @@ struct RangeCalculator: RangeCalculatorProtocol {
         
         return weapon.reachableDistance
     }
+    
+    func maximumNumberOfShoots(of player: PlayerProtocol) -> Int {
+        if player.inPlay.contains(where: { $0.name == .volcanic }) {
+            return 0
+        } else {
+            return 1
+        }
+    }
 }

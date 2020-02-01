@@ -30,6 +30,7 @@ class GameStateTests: XCTestCase {
                         deck: mockDeck,
                         turn: 0,
                         challenge: nil,
+                        turnShoots: 0,
                         outcome: nil,
                         commands: [])
     }

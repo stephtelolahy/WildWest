@@ -12,6 +12,7 @@ class GameState: GameStateProtocol {
     let deck: DeckProtocol
     var turn: Int
     var challenge: Challenge?
+    var turnShoots: Int
     var outcome: GameOutcome?
     var commands: [ActionProtocol]
     
@@ -19,12 +20,14 @@ class GameState: GameStateProtocol {
          deck: DeckProtocol,
          turn: Int,
          challenge: Challenge?,
+         turnShoots: Int,
          outcome: GameOutcome?,
          commands: [ActionProtocol]) {
         self.players = players
         self.deck = deck
         self.turn = turn
         self.challenge = challenge
+        self.turnShoots = turnShoots
         self.outcome = outcome
         self.commands = commands
     }
@@ -39,6 +42,10 @@ class GameState: GameStateProtocol {
     
     func setTurn(_ turn: Int) {
         self.turn = turn
+    }
+    
+    func setTurnShoots(_ shoots: Int) {
+        self.turnShoots = shoots
     }
     
     func pullFromDeck(playerId: String) {

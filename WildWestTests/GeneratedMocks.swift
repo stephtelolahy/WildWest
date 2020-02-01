@@ -213,6 +213,21 @@ import Cuckoo
         
     }
     
+    
+    
+     func maximumNumberOfShoots(of player: PlayerProtocol) -> Int {
+        
+    return cuckoo_manager.call("maximumNumberOfShoots(of: PlayerProtocol) -> Int",
+            parameters: (player),
+            escapingParameters: (player),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.maximumNumberOfShoots(of: player))
+        
+    }
+    
 
 	 struct __StubbingProxy_RangeCalculatorProtocol: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
@@ -230,6 +245,11 @@ import Cuckoo
 	    func reachableDistance<M1: Cuckoo.Matchable>(of player: M1) -> Cuckoo.ProtocolStubFunction<(PlayerProtocol), Int> where M1.MatchedType == PlayerProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(PlayerProtocol)>] = [wrap(matchable: player) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockRangeCalculatorProtocol.self, method: "reachableDistance(of: PlayerProtocol) -> Int", parameterMatchers: matchers))
+	    }
+	    
+	    func maximumNumberOfShoots<M1: Cuckoo.Matchable>(of player: M1) -> Cuckoo.ProtocolStubFunction<(PlayerProtocol), Int> where M1.MatchedType == PlayerProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(PlayerProtocol)>] = [wrap(matchable: player) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockRangeCalculatorProtocol.self, method: "maximumNumberOfShoots(of: PlayerProtocol) -> Int", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -260,6 +280,12 @@ import Cuckoo
 	        return cuckoo_manager.verify("reachableDistance(of: PlayerProtocol) -> Int", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
+	    @discardableResult
+	    func maximumNumberOfShoots<M1: Cuckoo.Matchable>(of player: M1) -> Cuckoo.__DoNotUse<(PlayerProtocol), Int> where M1.MatchedType == PlayerProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(PlayerProtocol)>] = [wrap(matchable: player) { $0 }]
+	        return cuckoo_manager.verify("maximumNumberOfShoots(of: PlayerProtocol) -> Int", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
 	}
 }
 
@@ -274,6 +300,10 @@ import Cuckoo
     }
     
      func reachableDistance(of player: PlayerProtocol) -> Int  {
+        return DefaultValueRegistry.defaultValue(for: (Int).self)
+    }
+    
+     func maximumNumberOfShoots(of player: PlayerProtocol) -> Int  {
         return DefaultValueRegistry.defaultValue(for: (Int).self)
     }
     
@@ -1059,6 +1089,20 @@ import Cuckoo
     
     
     
+     var turnShoots: Int {
+        get {
+            return cuckoo_manager.getter("turnShoots",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.turnShoots)
+        }
+        
+    }
+    
+    
+    
      var outcome: GameOutcome? {
         get {
             return cuckoo_manager.getter("outcome",
@@ -1211,6 +1255,21 @@ import Cuckoo
     
     
     
+     func setTurnShoots(_ shoots: Int)  {
+        
+    return cuckoo_manager.call("setTurnShoots(_: Int)",
+            parameters: (shoots),
+            escapingParameters: (shoots),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.setTurnShoots(shoots))
+        
+    }
+    
+    
+    
      func pullHand(playerId: String, otherId: String, cardId: String)  {
         
     return cuckoo_manager.call("pullHand(playerId: String, otherId: String, cardId: String)",
@@ -1268,6 +1327,11 @@ import Cuckoo
 	    }
 	    
 	    
+	    var turnShoots: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, Int> {
+	        return .init(manager: cuckoo_manager, name: "turnShoots")
+	    }
+	    
+	    
 	    var outcome: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, GameOutcome?> {
 	        return .init(manager: cuckoo_manager, name: "outcome")
 	    }
@@ -1318,6 +1382,11 @@ import Cuckoo
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "setTurn(_: Int)", parameterMatchers: matchers))
 	    }
 	    
+	    func setTurnShoots<M1: Cuckoo.Matchable>(_ shoots: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(Int)> where M1.MatchedType == Int {
+	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: shoots) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "setTurnShoots(_: Int)", parameterMatchers: matchers))
+	    }
+	    
 	    func pullHand<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable>(playerId: M1, otherId: M2, cardId: M3) -> Cuckoo.ProtocolStubNoReturnFunction<(String, String, String)> where M1.MatchedType == String, M2.MatchedType == String, M3.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: otherId) { $0.1 }, wrap(matchable: cardId) { $0.2 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "pullHand(playerId: String, otherId: String, cardId: String)", parameterMatchers: matchers))
@@ -1360,6 +1429,11 @@ import Cuckoo
 	    
 	    var challenge: Cuckoo.VerifyReadOnlyProperty<Challenge?> {
 	        return .init(manager: cuckoo_manager, name: "challenge", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var turnShoots: Cuckoo.VerifyReadOnlyProperty<Int> {
+	        return .init(manager: cuckoo_manager, name: "turnShoots", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	    
@@ -1423,6 +1497,12 @@ import Cuckoo
 	    }
 	    
 	    @discardableResult
+	    func setTurnShoots<M1: Cuckoo.Matchable>(_ shoots: M1) -> Cuckoo.__DoNotUse<(Int), Void> where M1.MatchedType == Int {
+	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: shoots) { $0 }]
+	        return cuckoo_manager.verify("setTurnShoots(_: Int)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
 	    func pullHand<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable>(playerId: M1, otherId: M2, cardId: M3) -> Cuckoo.__DoNotUse<(String, String, String), Void> where M1.MatchedType == String, M2.MatchedType == String, M3.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: otherId) { $0.1 }, wrap(matchable: cardId) { $0.2 }]
 	        return cuckoo_manager.verify("pullHand(playerId: String, otherId: String, cardId: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
@@ -1467,6 +1547,14 @@ import Cuckoo
      var challenge: Challenge? {
         get {
             return DefaultValueRegistry.defaultValue(for: (Challenge?).self)
+        }
+        
+    }
+    
+    
+     var turnShoots: Int {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (Int).self)
         }
         
     }
@@ -1520,6 +1608,10 @@ import Cuckoo
     }
     
      func setTurn(_ turn: Int)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func setTurnShoots(_ shoots: Int)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     

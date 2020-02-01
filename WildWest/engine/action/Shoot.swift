@@ -14,6 +14,7 @@ struct Shoot: ActionProtocol, Equatable {
     func execute(in state: GameStateProtocol) {
         state.discardHand(playerId: actorId, cardId: cardId)
         state.setChallenge(.bang(actorId: actorId, targetId: targetId))
+        state.setTurnShoots(state.turnShoots + 1)
     }
     
     var description: String {
@@ -39,6 +40,11 @@ struct ShootRule: RuleProtocol {
         let player = state.players[state.turn]
         let cards = player.handCards(named: .shoot)
         guard !cards.isEmpty else {
+            return []
+        }
+        
+        let maxShoots = calculator.maximumNumberOfShoots(of: player)
+        guard maxShoots == 0 || state.turnShoots < maxShoots  else {
             return []
         }
         

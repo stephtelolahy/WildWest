@@ -58,6 +58,21 @@ class ShootTest: XCTestCase {
         // Assert
         verify(mockState).setChallenge(equal(to: .bang(actorId: "p1", targetId: "p2")))
     }
+    
+    func test_IncrementShootsCount_IfShooting() {
+        // Given
+        let mockState = MockGameStateProtocol()
+            .withEnabledDefaultImplementation(GameStateProtocolStub())
+            .turnShoots(is: 1)
+        
+        let sut = Shoot(actorId: "p1", cardId: "c1", targetId: "p2")
+        
+        // When
+        sut.execute(in: mockState)
+        
+        // Assert
+        verify(mockState).setTurnShoots(2)
+    }
 }
 
 class ShootRuleTest: XCTestCase {
@@ -73,11 +88,13 @@ class ShootRuleTest: XCTestCase {
             .challenge(is: nil)
             .currentTurn(is: 0)
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
+            .turnShoots(is: 0)
         let mockCalculator = MockRangeCalculatorProtocol()
         Cuckoo.stub(mockCalculator) { mock in
             when(mock.distance(from: "p1", to: "p2", in: state(equalTo: mockState))).thenReturn(1)
             when(mock.distance(from: "p1", to: "p3", in: state(equalTo: mockState))).thenReturn(0)
             when(mock.reachableDistance(of: player(equalTo: mockPlayer1))).thenReturn(5)
+            when(mock.maximumNumberOfShoots(of: player(equalTo: mockPlayer1))).thenReturn(1)
         }
         
         let sut = ShootRule(calculator: mockCalculator)
@@ -103,11 +120,13 @@ class ShootRuleTest: XCTestCase {
             .challenge(is: nil)
             .currentTurn(is: 0)
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
+            .turnShoots(is: 0)
         let mockCalculator = MockRangeCalculatorProtocol()
         Cuckoo.stub(mockCalculator) { mock in
             when(mock.distance(from: "p1", to: "p2", in: state(equalTo: mockState))).thenReturn(2)
             when(mock.distance(from: "p1", to: "p3", in: state(equalTo: mockState))).thenReturn(3)
             when(mock.reachableDistance(of: player(equalTo: mockPlayer1))).thenReturn(1)
+            when(mock.maximumNumberOfShoots(of: player(equalTo: mockPlayer1))).thenReturn(0)
         }
         
         let sut = ShootRule(calculator: mockCalculator)
@@ -135,6 +154,7 @@ class ShootRuleTest: XCTestCase {
             when(mock.distance(from: "p1", to: "p2", in: state(equalTo: mockState))).thenReturn(4)
             when(mock.distance(from: "p1", to: "p3", in: state(equalTo: mockState))).thenReturn(3)
             when(mock.reachableDistance(of: player(equalTo: mockPlayer1))).thenReturn(5)
+            when(mock.maximumNumberOfShoots(of: player(equalTo: mockPlayer1))).thenReturn(0)
         }
         
         let sut = ShootRule(calculator: mockCalculator)
@@ -150,7 +170,30 @@ class ShootRuleTest: XCTestCase {
     }
     
     func test_CannotPlayShoot_IfReachedLimitPerTurn() {
-        XCTFail()
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .holding(MockCardProtocol().named(.shoot).identified(by: "c1"))
+        let mockPlayer2 = MockPlayerProtocol().identified(by: "p2")
+        let mockState = MockGameStateProtocol()
+            .challenge(is: nil)
+            .currentTurn(is: 0)
+            .players(are: mockPlayer1, mockPlayer2)
+            .turnShoots(is: 1)
+        let mockCalculator = MockRangeCalculatorProtocol()
+        Cuckoo.stub(mockCalculator) { mock in
+            when(mock.distance(from: "p1", to: "p2", in: state(equalTo: mockState))).thenReturn(1)
+            when(mock.reachableDistance(of: player(equalTo: mockPlayer1))).thenReturn(1)
+            when(mock.maximumNumberOfShoots(of: player(equalTo: mockPlayer1))).thenReturn(1)
+        }
+        
+        let sut = ShootRule(calculator: mockCalculator)
+        
+        // When
+        let actions = sut.match(with: mockState)
+        
+        // Assert
+        XCTAssertTrue(actions.isEmpty)
     }
     
 }
