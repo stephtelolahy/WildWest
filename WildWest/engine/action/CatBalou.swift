@@ -34,6 +34,8 @@ struct CatBalou: ActionProtocol, Equatable {
 
 struct CatBalouRule: RuleProtocol {
     
+    let actionName: String = "CatBalou"
+    
     func match(with state: GameStateProtocol) -> [ActionProtocol] {
         guard state.challenge == nil else {
             return []

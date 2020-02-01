@@ -30,6 +30,8 @@ struct Panic: ActionProtocol, Equatable {
 
 struct PanicRule: RuleProtocol {
     
+    let actionName: String = "Panic"
+    
     private let rangeCalculator: RangeCalculatorProtocol
     
     init(rangeCalculator: RangeCalculatorProtocol) {

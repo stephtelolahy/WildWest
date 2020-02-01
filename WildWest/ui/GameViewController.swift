@@ -119,11 +119,36 @@ private extension GameViewController {
                                                 message: nil,
                                                 preferredStyle: .actionSheet)
         
-        player.actions.forEach { action in
-            alertController.addAction(UIAlertAction(title: action.description,
+        player.actions.forEach { genericAction in
+            alertController.addAction(UIAlertAction(title: "\(genericAction.name) (\(genericAction.options.count))",
                                                     style: .default,
                                                     handler: { [weak self] _ in
-                                                        self?.engine.execute(action)
+                                                        if genericAction.options.count == 1 {
+                                                            self?.engine.execute(genericAction.options[0])
+                                                        } else {
+                                                            self?.showOptions(of: genericAction)
+                                                        }
+                    
+                                                    }))
+        }
+        
+        alertController.addAction(UIAlertAction(title: "Cancel",
+                                                style: .cancel,
+                                                handler: nil))
+        
+        present(alertController, animated: true)
+    }
+    
+    func showOptions(of genericAction: GenericAction) {
+        let alertController = UIAlertController(title: genericAction.name,
+                                                message: nil,
+                                                preferredStyle: .actionSheet)
+        
+        genericAction.options.forEach { option in
+            alertController.addAction(UIAlertAction(title: option.description,
+                                                    style: .default,
+                                                    handler: { [weak self] _ in
+                                                        self?.engine.execute(option)
             }))
         }
         

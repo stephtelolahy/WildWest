@@ -24,6 +24,8 @@ struct Saloon: ActionProtocol, Equatable {
 
 struct SaloonRule: RuleProtocol {
     
+    let actionName: String = "Saloon"
+    
     func match(with state: GameStateProtocol) -> [ActionProtocol] {
         guard state.challenge == nil else {
             return []

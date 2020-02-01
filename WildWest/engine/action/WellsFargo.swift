@@ -24,6 +24,8 @@ struct WellsFargo: ActionProtocol, Equatable {
 
 struct WellsFargoRule: RuleProtocol {
     
+    let actionName: String = "WellsFargo"
+    
     func match(with state: GameStateProtocol) -> [ActionProtocol] {
         guard state.challenge == nil else {
             return []

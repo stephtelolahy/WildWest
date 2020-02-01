@@ -22,6 +22,8 @@ struct StartTurn: ActionProtocol, Equatable {
 
 struct StartTurnRule: RuleProtocol {
     
+    let actionName: String = "StartTurn"
+    
     func match(with state: GameStateProtocol) -> [ActionProtocol] {
         guard case .startTurn = state.challenge else {
             return []

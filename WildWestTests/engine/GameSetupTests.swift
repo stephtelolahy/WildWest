@@ -98,7 +98,8 @@ class GameSetupTests: XCTestCase {
         XCTAssertTrue(state.players.filter { $0.role != .sheriff }.allSatisfy { $0.health == 4 })
         // Available actions should be only sherif's start turn
         let sheriff = state.players.first { $0.role == .sheriff }!
-        XCTAssertEqual(sheriff.actions as? [StartTurn], [StartTurn(actorId: sheriff.identifier)])
+        XCTAssertEqual(sheriff.actions.count, 1)
+        XCTAssertEqual(sheriff.actions.first?.options as? [StartTurn], [StartTurn(actorId: sheriff.identifier)])
         // Commands is empty
         XCTAssertTrue(state.commands.isEmpty)
     }

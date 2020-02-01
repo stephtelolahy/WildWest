@@ -23,6 +23,8 @@ struct Stagecoach: ActionProtocol, Equatable {
 
 struct StagecoachRule: RuleProtocol {
     
+    let actionName: String = "Stagecoach"
+    
     func match(with state: GameStateProtocol) -> [ActionProtocol] {
         guard state.challenge == nil else {
             return []

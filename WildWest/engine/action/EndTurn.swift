@@ -28,6 +28,8 @@ struct EndTurn: ActionProtocol, Equatable {
 
 struct EndTurnRule: RuleProtocol {
     
+    let actionName: String = "EndTurn"
+    
     func match(with state: GameStateProtocol) -> [ActionProtocol] {
         guard state.challenge == nil else {
             return []

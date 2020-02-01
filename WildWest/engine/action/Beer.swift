@@ -22,6 +22,8 @@ struct Beer: ActionProtocol, Equatable {
 
 struct BeerRule: RuleProtocol {
     
+    let actionName: String = "Beer"
+    
     func match(with state: GameStateProtocol) -> [ActionProtocol] {
         guard state.challenge == nil else {
             return []

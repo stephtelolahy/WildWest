@@ -273,6 +273,20 @@ import Cuckoo
     
 
     
+    
+    
+     var actionName: String {
+        get {
+            return cuckoo_manager.getter("actionName",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.actionName)
+        }
+        
+    }
+    
 
     
 
@@ -301,6 +315,11 @@ import Cuckoo
 	    }
 	    
 	    
+	    var actionName: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockRuleProtocol, String> {
+	        return .init(manager: cuckoo_manager, name: "actionName")
+	    }
+	    
+	    
 	    func match<M1: Cuckoo.Matchable>(with state: M1) -> Cuckoo.ProtocolStubFunction<(GameStateProtocol), [ActionProtocol]> where M1.MatchedType == GameStateProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockRuleProtocol.self, method: "match(with: GameStateProtocol) -> [ActionProtocol]", parameterMatchers: matchers))
@@ -320,6 +339,11 @@ import Cuckoo
 	    }
 	
 	    
+	    
+	    var actionName: Cuckoo.VerifyReadOnlyProperty<String> {
+	        return .init(manager: cuckoo_manager, name: "actionName", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
 	
 	    
 	    @discardableResult
@@ -332,6 +356,14 @@ import Cuckoo
 }
 
  class RuleProtocolStub: RuleProtocol {
+    
+    
+     var actionName: String {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (String).self)
+        }
+        
+    }
     
 
     
@@ -1609,7 +1641,7 @@ import Cuckoo
     
     
     
-     var actions: [ActionProtocol] {
+     var actions: [GenericAction] {
         get {
             return cuckoo_manager.getter("actions",
                 superclassCall:
@@ -1642,9 +1674,9 @@ import Cuckoo
     
     
     
-     func setActions(_ actions: [ActionProtocol])  {
+     func setActions(_ actions: [GenericAction])  {
         
-    return cuckoo_manager.call("setActions(_: [ActionProtocol])",
+    return cuckoo_manager.call("setActions(_: [GenericAction])",
             parameters: (actions),
             escapingParameters: (actions),
             superclassCall:
@@ -1764,7 +1796,7 @@ import Cuckoo
 	    }
 	    
 	    
-	    var actions: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, [ActionProtocol]> {
+	    var actions: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, [GenericAction]> {
 	        return .init(manager: cuckoo_manager, name: "actions")
 	    }
 	    
@@ -1774,9 +1806,9 @@ import Cuckoo
 	        return .init(stub: cuckoo_manager.createStub(for: MockPlayerProtocol.self, method: "setHealth(_: Int)", parameterMatchers: matchers))
 	    }
 	    
-	    func setActions<M1: Cuckoo.Matchable>(_ actions: M1) -> Cuckoo.ProtocolStubNoReturnFunction<([ActionProtocol])> where M1.MatchedType == [ActionProtocol] {
-	        let matchers: [Cuckoo.ParameterMatcher<([ActionProtocol])>] = [wrap(matchable: actions) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockPlayerProtocol.self, method: "setActions(_: [ActionProtocol])", parameterMatchers: matchers))
+	    func setActions<M1: Cuckoo.Matchable>(_ actions: M1) -> Cuckoo.ProtocolStubNoReturnFunction<([GenericAction])> where M1.MatchedType == [GenericAction] {
+	        let matchers: [Cuckoo.ParameterMatcher<([GenericAction])>] = [wrap(matchable: actions) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockPlayerProtocol.self, method: "setActions(_: [GenericAction])", parameterMatchers: matchers))
 	    }
 	    
 	    func addHand<M1: Cuckoo.Matchable>(_ card: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(CardProtocol)> where M1.MatchedType == CardProtocol {
@@ -1854,7 +1886,7 @@ import Cuckoo
 	    }
 	    
 	    
-	    var actions: Cuckoo.VerifyReadOnlyProperty<[ActionProtocol]> {
+	    var actions: Cuckoo.VerifyReadOnlyProperty<[GenericAction]> {
 	        return .init(manager: cuckoo_manager, name: "actions", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
@@ -1867,9 +1899,9 @@ import Cuckoo
 	    }
 	    
 	    @discardableResult
-	    func setActions<M1: Cuckoo.Matchable>(_ actions: M1) -> Cuckoo.__DoNotUse<([ActionProtocol]), Void> where M1.MatchedType == [ActionProtocol] {
-	        let matchers: [Cuckoo.ParameterMatcher<([ActionProtocol])>] = [wrap(matchable: actions) { $0 }]
-	        return cuckoo_manager.verify("setActions(_: [ActionProtocol])", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    func setActions<M1: Cuckoo.Matchable>(_ actions: M1) -> Cuckoo.__DoNotUse<([GenericAction]), Void> where M1.MatchedType == [GenericAction] {
+	        let matchers: [Cuckoo.ParameterMatcher<([GenericAction])>] = [wrap(matchable: actions) { $0 }]
+	        return cuckoo_manager.verify("setActions(_: [GenericAction])", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
@@ -1966,9 +1998,9 @@ import Cuckoo
     }
     
     
-     var actions: [ActionProtocol] {
+     var actions: [GenericAction] {
         get {
-            return DefaultValueRegistry.defaultValue(for: ([ActionProtocol]).self)
+            return DefaultValueRegistry.defaultValue(for: ([GenericAction]).self)
         }
         
     }
@@ -1981,7 +2013,7 @@ import Cuckoo
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
-     func setActions(_ actions: [ActionProtocol])   {
+     func setActions(_ actions: [GenericAction])   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     

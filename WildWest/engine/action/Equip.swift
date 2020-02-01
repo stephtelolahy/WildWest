@@ -32,6 +32,8 @@ struct Equip: ActionProtocol, Equatable {
 
 struct EquipRule: RuleProtocol {
     
+    let actionName: String = "Equip"
+    
     func match(with state: GameStateProtocol) -> [ActionProtocol] {
         guard state.challenge == nil else {
             return []
