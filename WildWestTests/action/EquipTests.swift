@@ -56,28 +56,9 @@ class EquipTests: XCTestCase {
         verify(mockState).putInPlay(playerId: "p1", cardId: "c1")
         verify(mockState).discardInPlay(playerId: "p1", cardId: "c2")
     }
-    
-    func test_CannotEquipCard_IfAlreadyPlayingCardWithTheSameName() {
-        // Given
-        let sut = EquipRule()
-        let mockCard1 = MockCardProtocol()
-            .named(.mustang)
-        let mockCard2 = MockCardProtocol()
-            .named(.mustang)
-        let mockPlayer = MockPlayerProtocol()
-            .holding(mockCard1)
-            .playing(mockCard2)
-        let mockState = MockGameStateProtocol()
-            .challenge(is: nil)
-            .currentTurn(is: 0)
-            .players(are: mockPlayer)
-        
-        // When
-        let actions = sut.match(with: mockState)
-        
-        // Assert
-        XCTAssertTrue(actions.isEmpty)
-    }
+}
+
+class EquipRuleTests: XCTestCase {
     
     func test_CanEquip_IfYourTurnAndOwnCard() {
         // Given
@@ -109,6 +90,28 @@ class EquipTests: XCTestCase {
             Equip(actorId: "p1", cardId: "c2"),
             Equip(actorId: "p1", cardId: "c3")
         ])
+    }
+    
+    func test_CannotEquip_IfAlreadyPlayingCardWithTheSameName() {
+        // Given
+        let sut = EquipRule()
+        let mockCard1 = MockCardProtocol()
+            .named(.mustang)
+        let mockCard2 = MockCardProtocol()
+            .named(.mustang)
+        let mockPlayer = MockPlayerProtocol()
+            .holding(mockCard1)
+            .playing(mockCard2)
+        let mockState = MockGameStateProtocol()
+            .challenge(is: nil)
+            .currentTurn(is: 0)
+            .players(are: mockPlayer)
+        
+        // When
+        let actions = sut.match(with: mockState)
+        
+        // Assert
+        XCTAssertTrue(actions.isEmpty)
     }
     
     func test_CannotEquipJail() {

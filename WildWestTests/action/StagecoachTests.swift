@@ -26,7 +26,10 @@ class StagecoachTests: XCTestCase {
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")
         verify(mockState, times(2)).pullFromDeck(playerId: "p1")
         verifyNoMoreInteractions(mockState)
-    }
+    }   
+}
+
+class StagecoachRuleTests: XCTestCase {
     
     func test_CanPlayStagecoach_IfYourTurnAndOwnCard() {
         // Given

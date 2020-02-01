@@ -27,6 +27,9 @@ class WellsFargoTests: XCTestCase {
         verify(mockState, times(3)).pullFromDeck(playerId: "p1")
         verifyNoMoreInteractions(mockState)
     }
+}
+
+class WellsFargoRuleTests: XCTestCase {
     
     func test_CanPlayWellsFargo_IfYourTurnAndOwnCard() {
         // Given

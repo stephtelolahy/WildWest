@@ -35,6 +35,9 @@ class BeerTests: XCTestCase {
         verify(mockState).gainLifePoint(playerId: "p1")
         verifyNoMoreInteractions(mockState)
     }
+}
+
+class BeerRuleTests: XCTestCase {
     
     func test_CanPlayBeer_IfYourTurnAndOwnCard() {
         // Given

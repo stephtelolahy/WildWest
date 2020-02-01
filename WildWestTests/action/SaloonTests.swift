@@ -72,6 +72,9 @@ class SaloonTests: XCTestCase {
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")
         verify(mockState).gainLifePoint(playerId: "p2")
     }
+}
+
+class SaloonRuleTests: XCTestCase {
     
     func test_CanPlaySaloon_IfYourTurnAndOwnCard() {
         // Given

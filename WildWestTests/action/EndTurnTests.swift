@@ -11,80 +11,6 @@ import Cuckoo
 
 class EndTurnTests: XCTestCase {
     
-    func test_CanEndTurnWithoutDicardingExcessCards_IfPlayingNoChallenge() {
-        // Given
-        let sut = EndTurnRule()
-        let card1 = MockCardProtocol().identified(by: "c1")
-        let card2 = MockCardProtocol().identified(by: "c2")
-        let card3 = MockCardProtocol().identified(by: "c3")
-        let mockPlayer = MockPlayerProtocol()
-            .identified(by: "p1")
-            .health(is: 3)
-            .holding(card1, card2, card3)
-        let mockState = MockGameStateProtocol()
-            .challenge(is: nil)
-            .currentTurn(is: 0)
-            .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
-        
-        // When
-        let actions = sut.match(with: mockState)
-        
-        // Assert
-        XCTAssertEqual(actions as? [EndTurn], [EndTurn(actorId: "p1", cardsToDiscardIds: [])])
-    }
-    
-    func test_CanEndTurnWithDicardingOneExcessCard_IfPlayingNoChallenge() {
-        // Given
-        let sut = EndTurnRule()
-        let card1 = MockCardProtocol().identified(by: "c1")
-        let card2 = MockCardProtocol().identified(by: "c2")
-        let card3 = MockCardProtocol().identified(by: "c3")
-        let mockPlayer = MockPlayerProtocol()
-            .identified(by: "p1")
-            .health(is: 2)
-            .holding(card1, card2, card3)
-        let mockState = MockGameStateProtocol()
-            .challenge(is: nil)
-            .currentTurn(is: 0)
-            .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
-        
-        // When
-        let actions = sut.match(with: mockState)
-        
-        // Assert
-        XCTAssertEqual(actions as? [EndTurn], [
-            EndTurn(actorId: "p1", cardsToDiscardIds: ["c1"]),
-            EndTurn(actorId: "p1", cardsToDiscardIds: ["c2"]),
-            EndTurn(actorId: "p1", cardsToDiscardIds: ["c3"])
-        ])
-    }
-    
-    func test_CanEndTurnWithDicardingAllCombinationsOfExcessCards_IfPlayingNoChallenge() {
-        // Given
-        let sut = EndTurnRule()
-        let card1 = MockCardProtocol().identified(by: "c1")
-        let card2 = MockCardProtocol().identified(by: "c2")
-        let card3 = MockCardProtocol().identified(by: "c3")
-        let mockPlayer = MockPlayerProtocol()
-            .identified(by: "p1")
-            .health(is: 1)
-            .holding(card1, card2, card3)
-        let mockState = MockGameStateProtocol()
-            .challenge(is: nil)
-            .currentTurn(is: 0)
-            .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
-        
-        // When
-        let actions = sut.match(with: mockState)
-        
-        // Assert
-        XCTAssertEqual(actions as? [EndTurn], [
-            EndTurn(actorId: "p1", cardsToDiscardIds: ["c1", "c2"]),
-            EndTurn(actorId: "p1", cardsToDiscardIds: ["c1", "c3"]),
-            EndTurn(actorId: "p1", cardsToDiscardIds: ["c2", "c3"])
-        ])
-    }
-    
     func test_ChangeTurnToNextPlayer_IfAPlayerJustEndedTurn() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
@@ -157,5 +83,82 @@ class EndTurnTests: XCTestCase {
         
         // Assert
         verify(mockState).setChallenge(equal(to: .startTurn))
+    }
+}
+
+class EndTurnRuleTests: XCTestCase {
+    
+    func test_CanEndTurnWithoutDicardingExcessCards_IfPlayingNoChallenge() {
+        // Given
+        let sut = EndTurnRule()
+        let card1 = MockCardProtocol().identified(by: "c1")
+        let card2 = MockCardProtocol().identified(by: "c2")
+        let card3 = MockCardProtocol().identified(by: "c3")
+        let mockPlayer = MockPlayerProtocol()
+            .identified(by: "p1")
+            .health(is: 3)
+            .holding(card1, card2, card3)
+        let mockState = MockGameStateProtocol()
+            .challenge(is: nil)
+            .currentTurn(is: 0)
+            .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
+        
+        // When
+        let actions = sut.match(with: mockState)
+        
+        // Assert
+        XCTAssertEqual(actions as? [EndTurn], [EndTurn(actorId: "p1", cardsToDiscardIds: [])])
+    }
+    
+    func test_CanEndTurnWithDicardingOneExcessCard_IfPlayingNoChallenge() {
+        // Given
+        let sut = EndTurnRule()
+        let card1 = MockCardProtocol().identified(by: "c1")
+        let card2 = MockCardProtocol().identified(by: "c2")
+        let card3 = MockCardProtocol().identified(by: "c3")
+        let mockPlayer = MockPlayerProtocol()
+            .identified(by: "p1")
+            .health(is: 2)
+            .holding(card1, card2, card3)
+        let mockState = MockGameStateProtocol()
+            .challenge(is: nil)
+            .currentTurn(is: 0)
+            .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
+        
+        // When
+        let actions = sut.match(with: mockState)
+        
+        // Assert
+        XCTAssertEqual(actions as? [EndTurn], [
+            EndTurn(actorId: "p1", cardsToDiscardIds: ["c1"]),
+            EndTurn(actorId: "p1", cardsToDiscardIds: ["c2"]),
+            EndTurn(actorId: "p1", cardsToDiscardIds: ["c3"])
+        ])
+    }
+    
+    func test_CanEndTurnWithDicardingAllCombinationsOfExcessCards_IfPlayingNoChallenge() {
+        // Given
+        let sut = EndTurnRule()
+        let card1 = MockCardProtocol().identified(by: "c1")
+        let card2 = MockCardProtocol().identified(by: "c2")
+        let card3 = MockCardProtocol().identified(by: "c3")
+        let mockPlayer = MockPlayerProtocol()
+            .identified(by: "p1")
+            .health(is: 1)
+            .holding(card1, card2, card3)
+        let mockState = MockGameStateProtocol()
+            .challenge(is: nil)
+            .currentTurn(is: 0)
+            .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
+        
+        // When
+        let actions = sut.match(with: mockState)
+        
+        // Assert
+        XCTAssertEqual(actions as? [EndTurn], [
+            EndTurn(actorId: "p1", cardsToDiscardIds: ["c1", "c2"]),
+            EndTurn(actorId: "p1", cardsToDiscardIds: ["c1", "c3"]),
+            EndTurn(actorId: "p1", cardsToDiscardIds: ["c2", "c3"])
+        ])
     }
 }

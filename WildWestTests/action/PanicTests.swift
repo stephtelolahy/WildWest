@@ -11,6 +11,35 @@ import Cuckoo
 
 class PanicTests: XCTestCase {
     
+    func test_PullOtherPlayerHandCard_IfPlayingPanic() {
+        // Given
+        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
+        let sut = Panic(actorId: "p1", cardId: "c1", targetPlayerId: "p2", targetCardId: "c2", targetCardSource: .hand)
+        
+        // When
+        sut.execute(in: mockState)
+        
+        // Assert
+        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
+        verify(mockState).pullHand(playerId: "p1", otherId: "p2", cardId: "c2")
+    }
+    
+    func test_PullOtherPlayerInPlayCard_IfPlayingPanic() {
+        // Given
+        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
+        let sut = Panic(actorId: "p1", cardId: "c1", targetPlayerId: "p2", targetCardId: "c2", targetCardSource: .inPlay)
+        
+        // When
+        sut.execute(in: mockState)
+        
+        // Assert
+        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
+        verify(mockState).pullInPlay(playerId: "p1", otherId: "p2", cardId: "c2")
+    }
+}
+
+class PanicRuleTests: XCTestCase {
+    
     func test_CanPlayPanic_IfYourTurnAndOwnCardAndDistanceIs1() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
@@ -86,29 +115,4 @@ class PanicTests: XCTestCase {
         XCTAssertTrue(actions.isEmpty)
     }
     
-    func test_PullOtherPlayerHandCard_IfPlayingPanic() {
-        // Given
-        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
-        let sut = Panic(actorId: "p1", cardId: "c1", targetPlayerId: "p2", targetCardId: "c2", targetCardSource: .hand)
-        
-        // When
-        sut.execute(in: mockState)
-        
-        // Assert
-        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
-        verify(mockState).pullHand(playerId: "p1", otherId: "p2", cardId: "c2")
-    }
-    
-    func test_PullOtherPlayerInPlayCard_IfPlayingPanic() {
-        // Given
-        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
-        let sut = Panic(actorId: "p1", cardId: "c1", targetPlayerId: "p2", targetCardId: "c2", targetCardSource: .inPlay)
-        
-        // When
-        sut.execute(in: mockState)
-        
-        // Assert
-        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
-        verify(mockState).pullInPlay(playerId: "p1", otherId: "p2", cardId: "c2")
-    }
 }
