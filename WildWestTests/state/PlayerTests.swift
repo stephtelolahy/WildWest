@@ -10,22 +10,21 @@ import XCTest
 
 class PlayerTests: XCTestCase {
     
-    var sut: Player!
+    var sut: PlayerProtocol!
     
     override func setUp() {
         // Given
         let card1 = MockCardProtocol().identified(by: "c1")
         let card2 = MockCardProtocol().identified(by: "c2")
         let card3 = MockCardProtocol().identified(by: "c3")
-        let mockHand = MockCardListProtocol().containing(card1, card2)
-        let mockInPlay = MockCardListProtocol().containing(card3)
-        let figure = Figure(ability: .willyTheKid, bullets: 4, imageName: "willy_image", description: "willy_description")
         sut = Player(role: .deputy,
-                     figure: figure,
+                     ability: .blackJack,
                      maxHealth: 4,
+                     imageName: "image",
                      health: 2,
-                     hand: mockHand,
-                     inPlay: mockInPlay)
+                     hand: [card1, card2],
+                     inPlay: [card3],
+                     actions: [])
     }
     
     func test_InitialProperties() {
@@ -33,12 +32,12 @@ class PlayerTests: XCTestCase {
         // When
         // Assert
         XCTAssertEqual(sut.role, .deputy)
-        XCTAssertEqual(sut.ability, .willyTheKid)
-        XCTAssertEqual(sut.imageName, "willy_image")
+        XCTAssertEqual(sut.ability, .blackJack)
+        XCTAssertEqual(sut.imageName, "image")
         XCTAssertEqual(sut.maxHealth, 4)
         XCTAssertEqual(sut.health, 2)
-        XCTAssertEqual(sut.hand.cards.map { $0.identifier }, ["c1", "c2"])
-        XCTAssertEqual(sut.inPlay.cards.map { $0.identifier }, ["c3"])
+        XCTAssertEqual(sut.hand.map { $0.identifier }, ["c1", "c2"])
+        XCTAssertEqual(sut.inPlay.map { $0.identifier }, ["c3"])
     }
     
     func test_SetHealth() {
@@ -54,6 +53,140 @@ class PlayerTests: XCTestCase {
         // Given
         // When
         // Assert
-        XCTAssertEqual(sut.identifier, "willyTheKid")
+        XCTAssertEqual(sut.identifier, "blackJack")
+    }
+    
+    func test_UpdateHand_IfAddingCard() {
+        // Given
+        let card1 = MockCardProtocol().identified(by: "c1")
+        let card2 = MockCardProtocol().identified(by: "c2")
+        let card3 = MockCardProtocol().identified(by: "c3")
+        sut = Player(role: .renegade,
+                     ability: .willyTheKid,
+                     maxHealth: 4,
+                     imageName: "",
+                     health: 1,
+                     hand: [card1, card2],
+                     inPlay: [],
+                     actions: [])
+        
+        // When
+        sut.addHand(card3)
+        
+        // Assert
+        XCTAssertEqual(sut.hand.map { $0.identifier }, ["c1", "c2", "c3"])
+        XCTAssertTrue(sut.inPlay.isEmpty)
+    }
+    
+    func test_ReturnCard_IfRemovingHandById() {
+        // Given
+        let card1 = MockCardProtocol().identified(by: "c1")
+        let card2 = MockCardProtocol().identified(by: "c2")
+        let card3 = MockCardProtocol().identified(by: "c3")
+        sut = Player(role: .renegade,
+                     ability: .willyTheKid,
+                     maxHealth: 4,
+                     imageName: "",
+                     health: 1,
+                     hand: [card1, card2, card3],
+                     inPlay: [],
+                     actions: [])
+        
+        // When
+        let card = sut.removeHandById("c2")
+        
+        // Assert
+        XCTAssertEqual(card?.identifier, "c2")
+        XCTAssertEqual(sut.hand.map { $0.identifier }, ["c1", "c3"])
+        XCTAssertTrue(sut.inPlay.isEmpty)
+    }
+    
+    func test_ReturnNil_IfHandCardToRemoveIsNotFound() {
+        // Given
+        let card1 = MockCardProtocol().identified(by: "c1")
+        let card2 = MockCardProtocol().identified(by: "c2")
+        sut = Player(role: .renegade,
+                     ability: .willyTheKid,
+                     maxHealth: 4,
+                     imageName: "",
+                     health: 1,
+                     hand: [card1, card2],
+                     inPlay: [],
+                     actions: [])
+        
+        // When
+        let card = sut.removeHandById("c3")
+        
+        // Assert
+        XCTAssertNil(card)
+        XCTAssertEqual(sut.hand.map { $0.identifier }, ["c1", "c2"])
+        XCTAssertTrue(sut.inPlay.isEmpty)
+    }
+    
+    func test_UpdateInPlay_ifAddingCard() {
+        // Given
+        let card1 = MockCardProtocol().identified(by: "c1")
+        let card2 = MockCardProtocol().identified(by: "c2")
+        let card3 = MockCardProtocol().identified(by: "c3")
+        sut = Player(role: .renegade,
+                     ability: .willyTheKid,
+                     maxHealth: 4,
+                     imageName: "",
+                     health: 1,
+                     hand: [],
+                     inPlay: [card1, card2],
+                     actions: [])
+        
+        // When
+        sut.addInPlay(card3)
+        
+        // Assert
+        XCTAssertEqual(sut.inPlay.map { $0.identifier }, ["c1", "c2", "c3"])
+        XCTAssertTrue(sut.hand.isEmpty)
+    }
+    
+    func test_ReturnCard_IfRemovingInPlayById() {
+        // Given
+        let card1 = MockCardProtocol().identified(by: "c1")
+        let card2 = MockCardProtocol().identified(by: "c2")
+        let card3 = MockCardProtocol().identified(by: "c3")
+        sut = Player(role: .renegade,
+                     ability: .willyTheKid,
+                     maxHealth: 4,
+                     imageName: "",
+                     health: 1,
+                     hand: [],
+                     inPlay: [card1, card2, card3],
+                     actions: [])
+        
+        // When
+        let card = sut.removeInPlayById("c2")
+        
+        // Assert
+        XCTAssertEqual(card?.identifier, "c2")
+        XCTAssertEqual(sut.inPlay.map { $0.identifier }, ["c1", "c3"])
+        XCTAssertTrue(sut.hand.isEmpty)
+    }
+    
+    func test_ReturnNil_IfInPlayCardToRemoveIsNotFound() {
+        // Given
+        let card1 = MockCardProtocol().identified(by: "c1")
+        let card2 = MockCardProtocol().identified(by: "c2")
+        sut = Player(role: .renegade,
+                     ability: .willyTheKid,
+                     maxHealth: 4,
+                     imageName: "",
+                     health: 1,
+                     hand: [],
+                     inPlay: [card1, card2],
+                     actions: [])
+        
+        // When
+        let card = sut.removeInPlayById("c3")
+        
+        // Assert
+        XCTAssertNil(card)
+        XCTAssertEqual(sut.inPlay.map { $0.identifier }, ["c1", "c2"])
+        XCTAssertTrue(sut.hand.isEmpty)
     }
 }

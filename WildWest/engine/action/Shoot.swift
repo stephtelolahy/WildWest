@@ -10,17 +10,10 @@ struct Shoot: ActionProtocol {
     let actorId: String
     let cardId: String
     
-    func execute(state: GameStateProtocol) {
+    func execute(in state: GameStateProtocol) {
     }
     
     var description: String {
         "\(actorId) play \(cardId)"
-    }
-}
-
-extension Shoot: RuleProtocol {
-    
-    static func match(state: GameStateProtocol) -> [Shoot] {
-        return []
     }
 }

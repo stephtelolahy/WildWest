@@ -6,11 +6,6 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-protocol GameSetupProtocol {
-    func roles(for playersCount: Int) -> [Role]
-    func setupGame(roles: [Role], figures: [Figure], cards: [CardProtocol]) -> GameStateProtocol
-}
-
 class GameSetup: GameSetupProtocol {
     
     func roles(for playersCount: Int) -> [Role] {
@@ -22,7 +17,7 @@ class GameSetup: GameSetupProtocol {
         return Array(order.prefix(playersCount))
     }
     
-    func setupGame(roles: [Role], figures: [Figure], cards: [CardProtocol]) -> GameStateProtocol {
+    func setupGame(roles: [Role], figures: [FigureProtocol], cards: [CardProtocol]) -> GameStateProtocol {
         let shuffledFigures = figures.shuffled()
         var deck = cards.shuffled()
         let players: [Player] = roles.enumerated().map { index, role in
@@ -36,25 +31,24 @@ class GameSetup: GameSetupProtocol {
                 hand.append(deck.removeFirst())
             }
             return Player(role: role,
-                          figure: figure,
+                          ability: figure.ability,
                           maxHealth: health,
+                          imageName: figure.imageName,
                           health: health,
-                          hand: CardList(cards: hand),
-                          inPlay: CardList(cards: []))
+                          hand: hand,
+                          inPlay: [],
+                          actions: [])
         }
         
-        var actions: [ActionProtocol] = []
         if let sheriff = players.first(where: { $0.role == .sheriff }) {
-            actions.append(StartTurn(actorId: sheriff.identifier))
+            sheriff.setActions([StartTurn(actorId: sheriff.identifier)])
         }
         
         return GameState(players: players,
-                         deck: CardList(cards: deck),
-                         discard: CardList(cards: []),
+                         deck: Deck(cards: deck, discardPile: []),
                          turn: 0,
+                         challenge: nil,
                          outcome: nil,
-                         history: [],
-                         actions: actions,
-                         challenge: nil)
+                         commands: [])
     }
 }

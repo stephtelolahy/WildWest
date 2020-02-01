@@ -2,100 +2,6 @@ import Cuckoo
 @testable import WildWest
 
 
- class MockGameRulesProtocol: GameRulesProtocol, Cuckoo.ProtocolMock {
-    
-     typealias MocksType = GameRulesProtocol
-    
-     typealias Stubbing = __StubbingProxy_GameRulesProtocol
-     typealias Verification = __VerificationProxy_GameRulesProtocol
-
-     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
-
-    
-    private var __defaultImplStub: GameRulesProtocol?
-
-     func enableDefaultImplementation(_ stub: GameRulesProtocol) {
-        __defaultImplStub = stub
-        cuckoo_manager.enableDefaultStubImplementation()
-    }
-    
-
-    
-
-    
-
-    
-    
-    
-     func actions(matching state: GameStateProtocol) -> [ActionProtocol] {
-        
-    return cuckoo_manager.call("actions(matching: GameStateProtocol) -> [ActionProtocol]",
-            parameters: (state),
-            escapingParameters: (state),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.actions(matching: state))
-        
-    }
-    
-
-	 struct __StubbingProxy_GameRulesProtocol: Cuckoo.StubbingProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	
-	     init(manager: Cuckoo.MockManager) {
-	        self.cuckoo_manager = manager
-	    }
-	    
-	    
-	    func actions<M1: Cuckoo.Matchable>(matching state: M1) -> Cuckoo.ProtocolStubFunction<(GameStateProtocol), [ActionProtocol]> where M1.MatchedType == GameStateProtocol {
-	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameRulesProtocol.self, method: "actions(matching: GameStateProtocol) -> [ActionProtocol]", parameterMatchers: matchers))
-	    }
-	    
-	}
-
-	 struct __VerificationProxy_GameRulesProtocol: Cuckoo.VerificationProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	    private let callMatcher: Cuckoo.CallMatcher
-	    private let sourceLocation: Cuckoo.SourceLocation
-	
-	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
-	        self.cuckoo_manager = manager
-	        self.callMatcher = callMatcher
-	        self.sourceLocation = sourceLocation
-	    }
-	
-	    
-	
-	    
-	    @discardableResult
-	    func actions<M1: Cuckoo.Matchable>(matching state: M1) -> Cuckoo.__DoNotUse<(GameStateProtocol), [ActionProtocol]> where M1.MatchedType == GameStateProtocol {
-	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
-	        return cuckoo_manager.verify("actions(matching: GameStateProtocol) -> [ActionProtocol]", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	}
-}
-
- class GameRulesProtocolStub: GameRulesProtocol {
-    
-
-    
-
-    
-     func actions(matching state: GameStateProtocol) -> [ActionProtocol]  {
-        return DefaultValueRegistry.defaultValue(for: ([ActionProtocol]).self)
-    }
-    
-}
-
-
-import Cuckoo
-@testable import WildWest
-
-
  class MockActionProtocol: ActionProtocol, Cuckoo.ProtocolMock {
     
      typealias MocksType = ActionProtocol
@@ -149,16 +55,16 @@ import Cuckoo
     
     
     
-     func execute(state: GameStateProtocol)  {
+     func execute(in state: GameStateProtocol)  {
         
-    return cuckoo_manager.call("execute(state: GameStateProtocol)",
+    return cuckoo_manager.call("execute(in: GameStateProtocol)",
             parameters: (state),
             escapingParameters: (state),
             superclassCall:
                 
                 Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
-            defaultCall: __defaultImplStub!.execute(state: state))
+            defaultCall: __defaultImplStub!.execute(in: state))
         
     }
     
@@ -181,9 +87,9 @@ import Cuckoo
 	    }
 	    
 	    
-	    func execute<M1: Cuckoo.Matchable>(state: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(GameStateProtocol)> where M1.MatchedType == GameStateProtocol {
+	    func execute<M1: Cuckoo.Matchable>(in state: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(GameStateProtocol)> where M1.MatchedType == GameStateProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockActionProtocol.self, method: "execute(state: GameStateProtocol)", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockActionProtocol.self, method: "execute(in: GameStateProtocol)", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -213,9 +119,9 @@ import Cuckoo
 	
 	    
 	    @discardableResult
-	    func execute<M1: Cuckoo.Matchable>(state: M1) -> Cuckoo.__DoNotUse<(GameStateProtocol), Void> where M1.MatchedType == GameStateProtocol {
+	    func execute<M1: Cuckoo.Matchable>(in state: M1) -> Cuckoo.__DoNotUse<(GameStateProtocol), Void> where M1.MatchedType == GameStateProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
-	        return cuckoo_manager.verify("execute(state: GameStateProtocol)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("execute(in: GameStateProtocol)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -243,7 +149,7 @@ import Cuckoo
     
 
     
-     func execute(state: GameStateProtocol)   {
+     func execute(in state: GameStateProtocol)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
@@ -254,120 +160,46 @@ import Cuckoo
 @testable import WildWest
 
 
- class MockCardListProtocol: CardListProtocol, Cuckoo.ProtocolMock {
+ class MockRangeCalculatorProtocol: RangeCalculatorProtocol, Cuckoo.ProtocolMock {
     
-     typealias MocksType = CardListProtocol
+     typealias MocksType = RangeCalculatorProtocol
     
-     typealias Stubbing = __StubbingProxy_CardListProtocol
-     typealias Verification = __VerificationProxy_CardListProtocol
+     typealias Stubbing = __StubbingProxy_RangeCalculatorProtocol
+     typealias Verification = __VerificationProxy_RangeCalculatorProtocol
 
      let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
 
     
-    private var __defaultImplStub: CardListProtocol?
+    private var __defaultImplStub: RangeCalculatorProtocol?
 
-     func enableDefaultImplementation(_ stub: CardListProtocol) {
+     func enableDefaultImplementation(_ stub: RangeCalculatorProtocol) {
         __defaultImplStub = stub
         cuckoo_manager.enableDefaultStubImplementation()
     }
     
 
     
-    
-    
-     var cards: [CardProtocol] {
-        get {
-            return cuckoo_manager.getter("cards",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.cards)
-        }
-        
-    }
-    
 
     
 
     
     
     
-     func add(_ card: CardProtocol)  {
+     func distance(from playerId: String, to otherId: String, in state: GameStateProtocol) -> Int {
         
-    return cuckoo_manager.call("add(_: CardProtocol)",
-            parameters: (card),
-            escapingParameters: (card),
+    return cuckoo_manager.call("distance(from: String, to: String, in: GameStateProtocol) -> Int",
+            parameters: (playerId, otherId, state),
+            escapingParameters: (playerId, otherId, state),
             superclassCall:
                 
                 Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
-            defaultCall: __defaultImplStub!.add(card))
-        
-    }
-    
-    
-    
-     func addAll(_ cards: [CardProtocol])  {
-        
-    return cuckoo_manager.call("addAll(_: [CardProtocol])",
-            parameters: (cards),
-            escapingParameters: (cards),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.addAll(cards))
-        
-    }
-    
-    
-    
-     func removeFirst() -> CardProtocol? {
-        
-    return cuckoo_manager.call("removeFirst() -> CardProtocol?",
-            parameters: (),
-            escapingParameters: (),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.removeFirst())
-        
-    }
-    
-    
-    
-     func removeById(_ identifier: String) -> CardProtocol? {
-        
-    return cuckoo_manager.call("removeById(_: String) -> CardProtocol?",
-            parameters: (identifier),
-            escapingParameters: (identifier),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.removeById(identifier))
-        
-    }
-    
-    
-    
-     func removeAll() -> [CardProtocol] {
-        
-    return cuckoo_manager.call("removeAll() -> [CardProtocol]",
-            parameters: (),
-            escapingParameters: (),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.removeAll())
+            defaultCall: __defaultImplStub!.distance(from: playerId, to: otherId, in: state))
         
     }
     
 
-	 struct __StubbingProxy_CardListProtocol: Cuckoo.StubbingProxy {
+	 struct __StubbingProxy_RangeCalculatorProtocol: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
 	
 	     init(manager: Cuckoo.MockManager) {
@@ -375,39 +207,14 @@ import Cuckoo
 	    }
 	    
 	    
-	    var cards: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardListProtocol, [CardProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "cards")
-	    }
-	    
-	    
-	    func add<M1: Cuckoo.Matchable>(_ card: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(CardProtocol)> where M1.MatchedType == CardProtocol {
-	        let matchers: [Cuckoo.ParameterMatcher<(CardProtocol)>] = [wrap(matchable: card) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockCardListProtocol.self, method: "add(_: CardProtocol)", parameterMatchers: matchers))
-	    }
-	    
-	    func addAll<M1: Cuckoo.Matchable>(_ cards: M1) -> Cuckoo.ProtocolStubNoReturnFunction<([CardProtocol])> where M1.MatchedType == [CardProtocol] {
-	        let matchers: [Cuckoo.ParameterMatcher<([CardProtocol])>] = [wrap(matchable: cards) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockCardListProtocol.self, method: "addAll(_: [CardProtocol])", parameterMatchers: matchers))
-	    }
-	    
-	    func removeFirst() -> Cuckoo.ProtocolStubFunction<(), CardProtocol?> {
-	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return .init(stub: cuckoo_manager.createStub(for: MockCardListProtocol.self, method: "removeFirst() -> CardProtocol?", parameterMatchers: matchers))
-	    }
-	    
-	    func removeById<M1: Cuckoo.Matchable>(_ identifier: M1) -> Cuckoo.ProtocolStubFunction<(String), CardProtocol?> where M1.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: identifier) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockCardListProtocol.self, method: "removeById(_: String) -> CardProtocol?", parameterMatchers: matchers))
-	    }
-	    
-	    func removeAll() -> Cuckoo.ProtocolStubFunction<(), [CardProtocol]> {
-	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return .init(stub: cuckoo_manager.createStub(for: MockCardListProtocol.self, method: "removeAll() -> [CardProtocol]", parameterMatchers: matchers))
+	    func distance<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable>(from playerId: M1, to otherId: M2, in state: M3) -> Cuckoo.ProtocolStubFunction<(String, String, GameStateProtocol), Int> where M1.MatchedType == String, M2.MatchedType == String, M3.MatchedType == GameStateProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, String, GameStateProtocol)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: otherId) { $0.1 }, wrap(matchable: state) { $0.2 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockRangeCalculatorProtocol.self, method: "distance(from: String, to: String, in: GameStateProtocol) -> Int", parameterMatchers: matchers))
 	    }
 	    
 	}
 
-	 struct __VerificationProxy_CardListProtocol: Cuckoo.VerificationProxy {
+	 struct __VerificationProxy_RangeCalculatorProtocol: Cuckoo.VerificationProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
 	    private let callMatcher: Cuckoo.CallMatcher
 	    private let sourceLocation: Cuckoo.SourceLocation
@@ -419,78 +226,119 @@ import Cuckoo
 	    }
 	
 	    
-	    
-	    var cards: Cuckoo.VerifyReadOnlyProperty<[CardProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "cards", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
 	
 	    
 	    @discardableResult
-	    func add<M1: Cuckoo.Matchable>(_ card: M1) -> Cuckoo.__DoNotUse<(CardProtocol), Void> where M1.MatchedType == CardProtocol {
-	        let matchers: [Cuckoo.ParameterMatcher<(CardProtocol)>] = [wrap(matchable: card) { $0 }]
-	        return cuckoo_manager.verify("add(_: CardProtocol)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
-	    func addAll<M1: Cuckoo.Matchable>(_ cards: M1) -> Cuckoo.__DoNotUse<([CardProtocol]), Void> where M1.MatchedType == [CardProtocol] {
-	        let matchers: [Cuckoo.ParameterMatcher<([CardProtocol])>] = [wrap(matchable: cards) { $0 }]
-	        return cuckoo_manager.verify("addAll(_: [CardProtocol])", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
-	    func removeFirst() -> Cuckoo.__DoNotUse<(), CardProtocol?> {
-	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return cuckoo_manager.verify("removeFirst() -> CardProtocol?", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
-	    func removeById<M1: Cuckoo.Matchable>(_ identifier: M1) -> Cuckoo.__DoNotUse<(String), CardProtocol?> where M1.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: identifier) { $0 }]
-	        return cuckoo_manager.verify("removeById(_: String) -> CardProtocol?", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
-	    func removeAll() -> Cuckoo.__DoNotUse<(), [CardProtocol]> {
-	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return cuckoo_manager.verify("removeAll() -> [CardProtocol]", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    func distance<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable>(from playerId: M1, to otherId: M2, in state: M3) -> Cuckoo.__DoNotUse<(String, String, GameStateProtocol), Int> where M1.MatchedType == String, M2.MatchedType == String, M3.MatchedType == GameStateProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, String, GameStateProtocol)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: otherId) { $0.1 }, wrap(matchable: state) { $0.2 }]
+	        return cuckoo_manager.verify("distance(from: String, to: String, in: GameStateProtocol) -> Int", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
 }
 
- class CardListProtocolStub: CardListProtocol {
+ class RangeCalculatorProtocolStub: RangeCalculatorProtocol {
+    
+
+    
+
+    
+     func distance(from playerId: String, to otherId: String, in state: GameStateProtocol) -> Int  {
+        return DefaultValueRegistry.defaultValue(for: (Int).self)
+    }
+    
+}
+
+
+import Cuckoo
+@testable import WildWest
+
+
+ class MockRuleProtocol: RuleProtocol, Cuckoo.ProtocolMock {
+    
+     typealias MocksType = RuleProtocol
+    
+     typealias Stubbing = __StubbingProxy_RuleProtocol
+     typealias Verification = __VerificationProxy_RuleProtocol
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: RuleProtocol?
+
+     func enableDefaultImplementation(_ stub: RuleProtocol) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+
+    
+
     
     
-     var cards: [CardProtocol] {
-        get {
-            return DefaultValueRegistry.defaultValue(for: ([CardProtocol]).self)
-        }
+    
+     func match(with state: GameStateProtocol) -> [ActionProtocol] {
+        
+    return cuckoo_manager.call("match(with: GameStateProtocol) -> [ActionProtocol]",
+            parameters: (state),
+            escapingParameters: (state),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.match(with: state))
         
     }
     
 
+	 struct __StubbingProxy_RuleProtocol: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    func match<M1: Cuckoo.Matchable>(with state: M1) -> Cuckoo.ProtocolStubFunction<(GameStateProtocol), [ActionProtocol]> where M1.MatchedType == GameStateProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockRuleProtocol.self, method: "match(with: GameStateProtocol) -> [ActionProtocol]", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	 struct __VerificationProxy_RuleProtocol: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	
+	    
+	    @discardableResult
+	    func match<M1: Cuckoo.Matchable>(with state: M1) -> Cuckoo.__DoNotUse<(GameStateProtocol), [ActionProtocol]> where M1.MatchedType == GameStateProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
+	        return cuckoo_manager.verify("match(with: GameStateProtocol) -> [ActionProtocol]", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+ class RuleProtocolStub: RuleProtocol {
     
 
     
-     func add(_ card: CardProtocol)   {
-        return DefaultValueRegistry.defaultValue(for: (Void).self)
-    }
+
     
-     func addAll(_ cards: [CardProtocol])   {
-        return DefaultValueRegistry.defaultValue(for: (Void).self)
-    }
-    
-     func removeFirst() -> CardProtocol?  {
-        return DefaultValueRegistry.defaultValue(for: (CardProtocol?).self)
-    }
-    
-     func removeById(_ identifier: String) -> CardProtocol?  {
-        return DefaultValueRegistry.defaultValue(for: (CardProtocol?).self)
-    }
-    
-     func removeAll() -> [CardProtocol]  {
-        return DefaultValueRegistry.defaultValue(for: ([CardProtocol]).self)
+     func match(with state: GameStateProtocol) -> [ActionProtocol]  {
+        return DefaultValueRegistry.defaultValue(for: ([ActionProtocol]).self)
     }
     
 }
@@ -724,6 +572,354 @@ import Cuckoo
 @testable import WildWest
 
 
+ class MockDeckProtocol: DeckProtocol, Cuckoo.ProtocolMock {
+    
+     typealias MocksType = DeckProtocol
+    
+     typealias Stubbing = __StubbingProxy_DeckProtocol
+     typealias Verification = __VerificationProxy_DeckProtocol
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: DeckProtocol?
+
+     func enableDefaultImplementation(_ stub: DeckProtocol) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+    
+    
+     var cards: [CardProtocol] {
+        get {
+            return cuckoo_manager.getter("cards",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.cards)
+        }
+        
+    }
+    
+    
+    
+     var discardPile: [CardProtocol] {
+        get {
+            return cuckoo_manager.getter("discardPile",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.discardPile)
+        }
+        
+    }
+    
+
+    
+
+    
+    
+    
+     func pull() -> CardProtocol {
+        
+    return cuckoo_manager.call("pull() -> CardProtocol",
+            parameters: (),
+            escapingParameters: (),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.pull())
+        
+    }
+    
+    
+    
+     func addToDiscard(_ card: CardProtocol)  {
+        
+    return cuckoo_manager.call("addToDiscard(_: CardProtocol)",
+            parameters: (card),
+            escapingParameters: (card),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.addToDiscard(card))
+        
+    }
+    
+
+	 struct __StubbingProxy_DeckProtocol: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    var cards: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockDeckProtocol, [CardProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "cards")
+	    }
+	    
+	    
+	    var discardPile: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockDeckProtocol, [CardProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "discardPile")
+	    }
+	    
+	    
+	    func pull() -> Cuckoo.ProtocolStubFunction<(), CardProtocol> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return .init(stub: cuckoo_manager.createStub(for: MockDeckProtocol.self, method: "pull() -> CardProtocol", parameterMatchers: matchers))
+	    }
+	    
+	    func addToDiscard<M1: Cuckoo.Matchable>(_ card: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(CardProtocol)> where M1.MatchedType == CardProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(CardProtocol)>] = [wrap(matchable: card) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockDeckProtocol.self, method: "addToDiscard(_: CardProtocol)", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	 struct __VerificationProxy_DeckProtocol: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	    
+	    var cards: Cuckoo.VerifyReadOnlyProperty<[CardProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "cards", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var discardPile: Cuckoo.VerifyReadOnlyProperty<[CardProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "discardPile", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	
+	    
+	    @discardableResult
+	    func pull() -> Cuckoo.__DoNotUse<(), CardProtocol> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return cuckoo_manager.verify("pull() -> CardProtocol", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func addToDiscard<M1: Cuckoo.Matchable>(_ card: M1) -> Cuckoo.__DoNotUse<(CardProtocol), Void> where M1.MatchedType == CardProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(CardProtocol)>] = [wrap(matchable: card) { $0 }]
+	        return cuckoo_manager.verify("addToDiscard(_: CardProtocol)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+ class DeckProtocolStub: DeckProtocol {
+    
+    
+     var cards: [CardProtocol] {
+        get {
+            return DefaultValueRegistry.defaultValue(for: ([CardProtocol]).self)
+        }
+        
+    }
+    
+    
+     var discardPile: [CardProtocol] {
+        get {
+            return DefaultValueRegistry.defaultValue(for: ([CardProtocol]).self)
+        }
+        
+    }
+    
+
+    
+
+    
+     func pull() -> CardProtocol  {
+        return DefaultValueRegistry.defaultValue(for: (CardProtocol).self)
+    }
+    
+     func addToDiscard(_ card: CardProtocol)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+}
+
+
+import Cuckoo
+@testable import WildWest
+
+
+ class MockFigureProtocol: FigureProtocol, Cuckoo.ProtocolMock {
+    
+     typealias MocksType = FigureProtocol
+    
+     typealias Stubbing = __StubbingProxy_FigureProtocol
+     typealias Verification = __VerificationProxy_FigureProtocol
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: FigureProtocol?
+
+     func enableDefaultImplementation(_ stub: FigureProtocol) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+    
+    
+     var ability: Ability {
+        get {
+            return cuckoo_manager.getter("ability",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.ability)
+        }
+        
+    }
+    
+    
+    
+     var bullets: Int {
+        get {
+            return cuckoo_manager.getter("bullets",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.bullets)
+        }
+        
+    }
+    
+    
+    
+     var imageName: String {
+        get {
+            return cuckoo_manager.getter("imageName",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.imageName)
+        }
+        
+    }
+    
+
+    
+
+    
+
+	 struct __StubbingProxy_FigureProtocol: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    var ability: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockFigureProtocol, Ability> {
+	        return .init(manager: cuckoo_manager, name: "ability")
+	    }
+	    
+	    
+	    var bullets: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockFigureProtocol, Int> {
+	        return .init(manager: cuckoo_manager, name: "bullets")
+	    }
+	    
+	    
+	    var imageName: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockFigureProtocol, String> {
+	        return .init(manager: cuckoo_manager, name: "imageName")
+	    }
+	    
+	    
+	}
+
+	 struct __VerificationProxy_FigureProtocol: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	    
+	    var ability: Cuckoo.VerifyReadOnlyProperty<Ability> {
+	        return .init(manager: cuckoo_manager, name: "ability", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var bullets: Cuckoo.VerifyReadOnlyProperty<Int> {
+	        return .init(manager: cuckoo_manager, name: "bullets", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var imageName: Cuckoo.VerifyReadOnlyProperty<String> {
+	        return .init(manager: cuckoo_manager, name: "imageName", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	
+	    
+	}
+}
+
+ class FigureProtocolStub: FigureProtocol {
+    
+    
+     var ability: Ability {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (Ability).self)
+        }
+        
+    }
+    
+    
+     var bullets: Int {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (Int).self)
+        }
+        
+    }
+    
+    
+     var imageName: String {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (String).self)
+        }
+        
+    }
+    
+
+    
+
+    
+}
+
+
+import Cuckoo
+@testable import WildWest
+
+
  class MockGameStateProtocol: GameStateProtocol, Cuckoo.ProtocolMock {
     
      typealias MocksType = GameStateProtocol
@@ -759,7 +955,7 @@ import Cuckoo
     
     
     
-     var deck: CardListProtocol {
+     var deck: DeckProtocol {
         get {
             return cuckoo_manager.getter("deck",
                 superclassCall:
@@ -767,20 +963,6 @@ import Cuckoo
                     Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                     ,
                 defaultCall: __defaultImplStub!.deck)
-        }
-        
-    }
-    
-    
-    
-     var discard: CardListProtocol {
-        get {
-            return cuckoo_manager.getter("discard",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.discard)
         }
         
     }
@@ -801,6 +983,20 @@ import Cuckoo
     
     
     
+     var challenge: Challenge? {
+        get {
+            return cuckoo_manager.getter("challenge",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.challenge)
+        }
+        
+    }
+    
+    
+    
      var outcome: GameOutcome? {
         get {
             return cuckoo_manager.getter("outcome",
@@ -815,42 +1011,14 @@ import Cuckoo
     
     
     
-     var history: [ActionProtocol] {
+     var commands: [ActionProtocol] {
         get {
-            return cuckoo_manager.getter("history",
+            return cuckoo_manager.getter("commands",
                 superclassCall:
                     
                     Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                     ,
-                defaultCall: __defaultImplStub!.history)
-        }
-        
-    }
-    
-    
-    
-     var actions: [ActionProtocol] {
-        get {
-            return cuckoo_manager.getter("actions",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.actions)
-        }
-        
-    }
-    
-    
-    
-     var challenge: Challenge? {
-        get {
-            return cuckoo_manager.getter("challenge",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.challenge)
+                defaultCall: __defaultImplStub!.commands)
         }
         
     }
@@ -936,31 +1104,16 @@ import Cuckoo
     
     
     
-     func addHistory(_ action: ActionProtocol)  {
+     func addCommand(_ action: ActionProtocol)  {
         
-    return cuckoo_manager.call("addHistory(_: ActionProtocol)",
+    return cuckoo_manager.call("addCommand(_: ActionProtocol)",
             parameters: (action),
             escapingParameters: (action),
             superclassCall:
                 
                 Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
-            defaultCall: __defaultImplStub!.addHistory(action))
-        
-    }
-    
-    
-    
-     func setActions(_ actions: [ActionProtocol])  {
-        
-    return cuckoo_manager.call("setActions(_: [ActionProtocol])",
-            parameters: (actions),
-            escapingParameters: (actions),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.setActions(actions))
+            defaultCall: __defaultImplStub!.addCommand(action))
         
     }
     
@@ -994,6 +1147,36 @@ import Cuckoo
         
     }
     
+    
+    
+     func pullHand(playerId: String, otherId: String, cardId: String)  {
+        
+    return cuckoo_manager.call("pullHand(playerId: String, otherId: String, cardId: String)",
+            parameters: (playerId, otherId, cardId),
+            escapingParameters: (playerId, otherId, cardId),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.pullHand(playerId: playerId, otherId: otherId, cardId: cardId))
+        
+    }
+    
+    
+    
+     func pullInPlay(playerId: String, otherId: String, cardId: String)  {
+        
+    return cuckoo_manager.call("pullInPlay(playerId: String, otherId: String, cardId: String)",
+            parameters: (playerId, otherId, cardId),
+            escapingParameters: (playerId, otherId, cardId),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.pullInPlay(playerId: playerId, otherId: otherId, cardId: cardId))
+        
+    }
+    
 
 	 struct __StubbingProxy_GameStateProtocol: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
@@ -1008,13 +1191,8 @@ import Cuckoo
 	    }
 	    
 	    
-	    var deck: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, CardListProtocol> {
+	    var deck: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, DeckProtocol> {
 	        return .init(manager: cuckoo_manager, name: "deck")
-	    }
-	    
-	    
-	    var discard: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, CardListProtocol> {
-	        return .init(manager: cuckoo_manager, name: "discard")
 	    }
 	    
 	    
@@ -1023,23 +1201,18 @@ import Cuckoo
 	    }
 	    
 	    
+	    var challenge: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, Challenge?> {
+	        return .init(manager: cuckoo_manager, name: "challenge")
+	    }
+	    
+	    
 	    var outcome: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, GameOutcome?> {
 	        return .init(manager: cuckoo_manager, name: "outcome")
 	    }
 	    
 	    
-	    var history: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [ActionProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "history")
-	    }
-	    
-	    
-	    var actions: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [ActionProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "actions")
-	    }
-	    
-	    
-	    var challenge: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, Challenge?> {
-	        return .init(manager: cuckoo_manager, name: "challenge")
+	    var commands: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [ActionProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "commands")
 	    }
 	    
 	    
@@ -1068,14 +1241,9 @@ import Cuckoo
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "putInPlay(playerId: String, cardId: String)", parameterMatchers: matchers))
 	    }
 	    
-	    func addHistory<M1: Cuckoo.Matchable>(_ action: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(ActionProtocol)> where M1.MatchedType == ActionProtocol {
+	    func addCommand<M1: Cuckoo.Matchable>(_ action: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(ActionProtocol)> where M1.MatchedType == ActionProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(ActionProtocol)>] = [wrap(matchable: action) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "addHistory(_: ActionProtocol)", parameterMatchers: matchers))
-	    }
-	    
-	    func setActions<M1: Cuckoo.Matchable>(_ actions: M1) -> Cuckoo.ProtocolStubNoReturnFunction<([ActionProtocol])> where M1.MatchedType == [ActionProtocol] {
-	        let matchers: [Cuckoo.ParameterMatcher<([ActionProtocol])>] = [wrap(matchable: actions) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "setActions(_: [ActionProtocol])", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "addCommand(_: ActionProtocol)", parameterMatchers: matchers))
 	    }
 	    
 	    func setChallenge<M1: Cuckoo.OptionalMatchable>(_ challenge: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(Challenge?)> where M1.OptionalMatchedType == Challenge {
@@ -1086,6 +1254,16 @@ import Cuckoo
 	    func setTurn<M1: Cuckoo.Matchable>(_ turn: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(Int)> where M1.MatchedType == Int {
 	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: turn) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "setTurn(_: Int)", parameterMatchers: matchers))
+	    }
+	    
+	    func pullHand<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable>(playerId: M1, otherId: M2, cardId: M3) -> Cuckoo.ProtocolStubNoReturnFunction<(String, String, String)> where M1.MatchedType == String, M2.MatchedType == String, M3.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: otherId) { $0.1 }, wrap(matchable: cardId) { $0.2 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "pullHand(playerId: String, otherId: String, cardId: String)", parameterMatchers: matchers))
+	    }
+	    
+	    func pullInPlay<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable>(playerId: M1, otherId: M2, cardId: M3) -> Cuckoo.ProtocolStubNoReturnFunction<(String, String, String)> where M1.MatchedType == String, M2.MatchedType == String, M3.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: otherId) { $0.1 }, wrap(matchable: cardId) { $0.2 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "pullInPlay(playerId: String, otherId: String, cardId: String)", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -1108,13 +1286,8 @@ import Cuckoo
 	    }
 	    
 	    
-	    var deck: Cuckoo.VerifyReadOnlyProperty<CardListProtocol> {
+	    var deck: Cuckoo.VerifyReadOnlyProperty<DeckProtocol> {
 	        return .init(manager: cuckoo_manager, name: "deck", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
-	    var discard: Cuckoo.VerifyReadOnlyProperty<CardListProtocol> {
-	        return .init(manager: cuckoo_manager, name: "discard", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	    
@@ -1123,23 +1296,18 @@ import Cuckoo
 	    }
 	    
 	    
+	    var challenge: Cuckoo.VerifyReadOnlyProperty<Challenge?> {
+	        return .init(manager: cuckoo_manager, name: "challenge", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
 	    var outcome: Cuckoo.VerifyReadOnlyProperty<GameOutcome?> {
 	        return .init(manager: cuckoo_manager, name: "outcome", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	    
-	    var history: Cuckoo.VerifyReadOnlyProperty<[ActionProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "history", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
-	    var actions: Cuckoo.VerifyReadOnlyProperty<[ActionProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "actions", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
-	    var challenge: Cuckoo.VerifyReadOnlyProperty<Challenge?> {
-	        return .init(manager: cuckoo_manager, name: "challenge", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var commands: Cuckoo.VerifyReadOnlyProperty<[ActionProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "commands", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	
@@ -1175,15 +1343,9 @@ import Cuckoo
 	    }
 	    
 	    @discardableResult
-	    func addHistory<M1: Cuckoo.Matchable>(_ action: M1) -> Cuckoo.__DoNotUse<(ActionProtocol), Void> where M1.MatchedType == ActionProtocol {
+	    func addCommand<M1: Cuckoo.Matchable>(_ action: M1) -> Cuckoo.__DoNotUse<(ActionProtocol), Void> where M1.MatchedType == ActionProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(ActionProtocol)>] = [wrap(matchable: action) { $0 }]
-	        return cuckoo_manager.verify("addHistory(_: ActionProtocol)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
-	    func setActions<M1: Cuckoo.Matchable>(_ actions: M1) -> Cuckoo.__DoNotUse<([ActionProtocol]), Void> where M1.MatchedType == [ActionProtocol] {
-	        let matchers: [Cuckoo.ParameterMatcher<([ActionProtocol])>] = [wrap(matchable: actions) { $0 }]
-	        return cuckoo_manager.verify("setActions(_: [ActionProtocol])", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("addCommand(_: ActionProtocol)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
@@ -1196,6 +1358,18 @@ import Cuckoo
 	    func setTurn<M1: Cuckoo.Matchable>(_ turn: M1) -> Cuckoo.__DoNotUse<(Int), Void> where M1.MatchedType == Int {
 	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: turn) { $0 }]
 	        return cuckoo_manager.verify("setTurn(_: Int)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func pullHand<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable>(playerId: M1, otherId: M2, cardId: M3) -> Cuckoo.__DoNotUse<(String, String, String), Void> where M1.MatchedType == String, M2.MatchedType == String, M3.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: otherId) { $0.1 }, wrap(matchable: cardId) { $0.2 }]
+	        return cuckoo_manager.verify("pullHand(playerId: String, otherId: String, cardId: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func pullInPlay<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable>(playerId: M1, otherId: M2, cardId: M3) -> Cuckoo.__DoNotUse<(String, String, String), Void> where M1.MatchedType == String, M2.MatchedType == String, M3.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: otherId) { $0.1 }, wrap(matchable: cardId) { $0.2 }]
+	        return cuckoo_manager.verify("pullInPlay(playerId: String, otherId: String, cardId: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -1212,17 +1386,9 @@ import Cuckoo
     }
     
     
-     var deck: CardListProtocol {
+     var deck: DeckProtocol {
         get {
-            return DefaultValueRegistry.defaultValue(for: (CardListProtocol).self)
-        }
-        
-    }
-    
-    
-     var discard: CardListProtocol {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (CardListProtocol).self)
+            return DefaultValueRegistry.defaultValue(for: (DeckProtocol).self)
         }
         
     }
@@ -1236,6 +1402,14 @@ import Cuckoo
     }
     
     
+     var challenge: Challenge? {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (Challenge?).self)
+        }
+        
+    }
+    
+    
      var outcome: GameOutcome? {
         get {
             return DefaultValueRegistry.defaultValue(for: (GameOutcome?).self)
@@ -1244,25 +1418,9 @@ import Cuckoo
     }
     
     
-     var history: [ActionProtocol] {
+     var commands: [ActionProtocol] {
         get {
             return DefaultValueRegistry.defaultValue(for: ([ActionProtocol]).self)
-        }
-        
-    }
-    
-    
-     var actions: [ActionProtocol] {
-        get {
-            return DefaultValueRegistry.defaultValue(for: ([ActionProtocol]).self)
-        }
-        
-    }
-    
-    
-     var challenge: Challenge? {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (Challenge?).self)
         }
         
     }
@@ -1291,11 +1449,7 @@ import Cuckoo
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
-     func addHistory(_ action: ActionProtocol)   {
-        return DefaultValueRegistry.defaultValue(for: (Void).self)
-    }
-    
-     func setActions(_ actions: [ActionProtocol])   {
+     func addCommand(_ action: ActionProtocol)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
@@ -1304,6 +1458,14 @@ import Cuckoo
     }
     
      func setTurn(_ turn: Int)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func pullHand(playerId: String, otherId: String, cardId: String)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func pullInPlay(playerId: String, otherId: String, cardId: String)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
@@ -1405,7 +1567,7 @@ import Cuckoo
     
     
     
-     var hand: CardListProtocol {
+     var hand: [CardProtocol] {
         get {
             return cuckoo_manager.getter("hand",
                 superclassCall:
@@ -1419,7 +1581,7 @@ import Cuckoo
     
     
     
-     var inPlay: CardListProtocol {
+     var inPlay: [CardProtocol] {
         get {
             return cuckoo_manager.getter("inPlay",
                 superclassCall:
@@ -1445,6 +1607,20 @@ import Cuckoo
         
     }
     
+    
+    
+     var actions: [ActionProtocol] {
+        get {
+            return cuckoo_manager.getter("actions",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.actions)
+        }
+        
+    }
+    
 
     
 
@@ -1461,6 +1637,81 @@ import Cuckoo
                 Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
             defaultCall: __defaultImplStub!.setHealth(value))
+        
+    }
+    
+    
+    
+     func setActions(_ actions: [ActionProtocol])  {
+        
+    return cuckoo_manager.call("setActions(_: [ActionProtocol])",
+            parameters: (actions),
+            escapingParameters: (actions),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.setActions(actions))
+        
+    }
+    
+    
+    
+     func addHand(_ card: CardProtocol)  {
+        
+    return cuckoo_manager.call("addHand(_: CardProtocol)",
+            parameters: (card),
+            escapingParameters: (card),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.addHand(card))
+        
+    }
+    
+    
+    
+     func removeHandById(_ cardId: String) -> CardProtocol? {
+        
+    return cuckoo_manager.call("removeHandById(_: String) -> CardProtocol?",
+            parameters: (cardId),
+            escapingParameters: (cardId),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.removeHandById(cardId))
+        
+    }
+    
+    
+    
+     func addInPlay(_ card: CardProtocol)  {
+        
+    return cuckoo_manager.call("addInPlay(_: CardProtocol)",
+            parameters: (card),
+            escapingParameters: (card),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.addInPlay(card))
+        
+    }
+    
+    
+    
+     func removeInPlayById(_ cardId: String) -> CardProtocol? {
+        
+    return cuckoo_manager.call("removeInPlayById(_: String) -> CardProtocol?",
+            parameters: (cardId),
+            escapingParameters: (cardId),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.removeInPlayById(cardId))
         
     }
     
@@ -1498,12 +1749,12 @@ import Cuckoo
 	    }
 	    
 	    
-	    var hand: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, CardListProtocol> {
+	    var hand: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, [CardProtocol]> {
 	        return .init(manager: cuckoo_manager, name: "hand")
 	    }
 	    
 	    
-	    var inPlay: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, CardListProtocol> {
+	    var inPlay: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, [CardProtocol]> {
 	        return .init(manager: cuckoo_manager, name: "inPlay")
 	    }
 	    
@@ -1513,9 +1764,39 @@ import Cuckoo
 	    }
 	    
 	    
+	    var actions: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, [ActionProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "actions")
+	    }
+	    
+	    
 	    func setHealth<M1: Cuckoo.Matchable>(_ value: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(Int)> where M1.MatchedType == Int {
 	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: value) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockPlayerProtocol.self, method: "setHealth(_: Int)", parameterMatchers: matchers))
+	    }
+	    
+	    func setActions<M1: Cuckoo.Matchable>(_ actions: M1) -> Cuckoo.ProtocolStubNoReturnFunction<([ActionProtocol])> where M1.MatchedType == [ActionProtocol] {
+	        let matchers: [Cuckoo.ParameterMatcher<([ActionProtocol])>] = [wrap(matchable: actions) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockPlayerProtocol.self, method: "setActions(_: [ActionProtocol])", parameterMatchers: matchers))
+	    }
+	    
+	    func addHand<M1: Cuckoo.Matchable>(_ card: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(CardProtocol)> where M1.MatchedType == CardProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(CardProtocol)>] = [wrap(matchable: card) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockPlayerProtocol.self, method: "addHand(_: CardProtocol)", parameterMatchers: matchers))
+	    }
+	    
+	    func removeHandById<M1: Cuckoo.Matchable>(_ cardId: M1) -> Cuckoo.ProtocolStubFunction<(String), CardProtocol?> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: cardId) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockPlayerProtocol.self, method: "removeHandById(_: String) -> CardProtocol?", parameterMatchers: matchers))
+	    }
+	    
+	    func addInPlay<M1: Cuckoo.Matchable>(_ card: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(CardProtocol)> where M1.MatchedType == CardProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(CardProtocol)>] = [wrap(matchable: card) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockPlayerProtocol.self, method: "addInPlay(_: CardProtocol)", parameterMatchers: matchers))
+	    }
+	    
+	    func removeInPlayById<M1: Cuckoo.Matchable>(_ cardId: M1) -> Cuckoo.ProtocolStubFunction<(String), CardProtocol?> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: cardId) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockPlayerProtocol.self, method: "removeInPlayById(_: String) -> CardProtocol?", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -1558,12 +1839,12 @@ import Cuckoo
 	    }
 	    
 	    
-	    var hand: Cuckoo.VerifyReadOnlyProperty<CardListProtocol> {
+	    var hand: Cuckoo.VerifyReadOnlyProperty<[CardProtocol]> {
 	        return .init(manager: cuckoo_manager, name: "hand", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	    
-	    var inPlay: Cuckoo.VerifyReadOnlyProperty<CardListProtocol> {
+	    var inPlay: Cuckoo.VerifyReadOnlyProperty<[CardProtocol]> {
 	        return .init(manager: cuckoo_manager, name: "inPlay", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
@@ -1572,12 +1853,47 @@ import Cuckoo
 	        return .init(manager: cuckoo_manager, name: "imageName", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
+	    
+	    var actions: Cuckoo.VerifyReadOnlyProperty<[ActionProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "actions", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
 	
 	    
 	    @discardableResult
 	    func setHealth<M1: Cuckoo.Matchable>(_ value: M1) -> Cuckoo.__DoNotUse<(Int), Void> where M1.MatchedType == Int {
 	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: value) { $0 }]
 	        return cuckoo_manager.verify("setHealth(_: Int)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func setActions<M1: Cuckoo.Matchable>(_ actions: M1) -> Cuckoo.__DoNotUse<([ActionProtocol]), Void> where M1.MatchedType == [ActionProtocol] {
+	        let matchers: [Cuckoo.ParameterMatcher<([ActionProtocol])>] = [wrap(matchable: actions) { $0 }]
+	        return cuckoo_manager.verify("setActions(_: [ActionProtocol])", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func addHand<M1: Cuckoo.Matchable>(_ card: M1) -> Cuckoo.__DoNotUse<(CardProtocol), Void> where M1.MatchedType == CardProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(CardProtocol)>] = [wrap(matchable: card) { $0 }]
+	        return cuckoo_manager.verify("addHand(_: CardProtocol)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func removeHandById<M1: Cuckoo.Matchable>(_ cardId: M1) -> Cuckoo.__DoNotUse<(String), CardProtocol?> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: cardId) { $0 }]
+	        return cuckoo_manager.verify("removeHandById(_: String) -> CardProtocol?", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func addInPlay<M1: Cuckoo.Matchable>(_ card: M1) -> Cuckoo.__DoNotUse<(CardProtocol), Void> where M1.MatchedType == CardProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(CardProtocol)>] = [wrap(matchable: card) { $0 }]
+	        return cuckoo_manager.verify("addInPlay(_: CardProtocol)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func removeInPlayById<M1: Cuckoo.Matchable>(_ cardId: M1) -> Cuckoo.__DoNotUse<(String), CardProtocol?> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: cardId) { $0 }]
+	        return cuckoo_manager.verify("removeInPlayById(_: String) -> CardProtocol?", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -1626,17 +1942,17 @@ import Cuckoo
     }
     
     
-     var hand: CardListProtocol {
+     var hand: [CardProtocol] {
         get {
-            return DefaultValueRegistry.defaultValue(for: (CardListProtocol).self)
+            return DefaultValueRegistry.defaultValue(for: ([CardProtocol]).self)
         }
         
     }
     
     
-     var inPlay: CardListProtocol {
+     var inPlay: [CardProtocol] {
         get {
-            return DefaultValueRegistry.defaultValue(for: (CardListProtocol).self)
+            return DefaultValueRegistry.defaultValue(for: ([CardProtocol]).self)
         }
         
     }
@@ -1649,12 +1965,40 @@ import Cuckoo
         
     }
     
+    
+     var actions: [ActionProtocol] {
+        get {
+            return DefaultValueRegistry.defaultValue(for: ([ActionProtocol]).self)
+        }
+        
+    }
+    
 
     
 
     
      func setHealth(_ value: Int)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func setActions(_ actions: [ActionProtocol])   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func addHand(_ card: CardProtocol)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func removeHandById(_ cardId: String) -> CardProtocol?  {
+        return DefaultValueRegistry.defaultValue(for: (CardProtocol?).self)
+    }
+    
+     func addInPlay(_ card: CardProtocol)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func removeInPlayById(_ cardId: String) -> CardProtocol?  {
+        return DefaultValueRegistry.defaultValue(for: (CardProtocol?).self)
     }
     
 }

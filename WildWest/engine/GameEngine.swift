@@ -8,18 +8,13 @@
 
 import RxSwift
 
-protocol GameEngineProtocol {
-    var stateSubject: BehaviorSubject<GameStateProtocol> { get }
-    
-    func execute(_ action: ActionProtocol)
-}
-
 class GameEngine: GameEngineProtocol {
     
     let stateSubject: BehaviorSubject<GameStateProtocol>
-    private let rules: GameRulesProtocol
     
-    init(state: GameStateProtocol, rules: GameRulesProtocol) {
+    private let rules: [RuleProtocol]
+    
+    init(state: GameStateProtocol, rules: [RuleProtocol]) {
         stateSubject = BehaviorSubject(value: state)
         self.rules = rules
     }
@@ -29,9 +24,14 @@ class GameEngine: GameEngineProtocol {
             return
         }
         
-        action.execute(state: state)
-        state.addHistory(action)
-        state.setActions(rules.actions(matching: state))
+        action.execute(in: state)
+        state.addCommand(action)
+        
+        let actions = rules.map { $0.match(with: state) }.flatMap { $0 }
+        state.players.forEach { player in
+            player.setActions(actions.filter { $0.actorId == player.identifier })
+        }
+        
         stateSubject.onNext(state)
     }
 }

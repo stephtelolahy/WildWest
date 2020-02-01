@@ -13,17 +13,26 @@ class Player: PlayerProtocol {
     let maxHealth: Int
     let imageName: String
     var health: Int
-    let hand: CardListProtocol
-    let inPlay: CardListProtocol
+    var hand: [CardProtocol]
+    var inPlay: [CardProtocol]
+    var actions: [ActionProtocol]
     
-    init(role: Role, figure: Figure, maxHealth: Int, health: Int, hand: CardListProtocol, inPlay: CardListProtocol) {
+    init(role: Role,
+         ability: Ability,
+         maxHealth: Int,
+         imageName: String,
+         health: Int,
+         hand: [CardProtocol],
+         inPlay: [CardProtocol],
+         actions: [ActionProtocol]) {
         self.role = role
-        self.ability = figure.ability
-        self.imageName = figure.imageName
+        self.ability = ability
+        self.imageName = imageName
         self.maxHealth = maxHealth
         self.health = health
         self.hand = hand
         self.inPlay = inPlay
+        self.actions = actions
     }
     
     var identifier: String {
@@ -32,5 +41,37 @@ class Player: PlayerProtocol {
     
     func setHealth(_ health: Int) {
         self.health = health
+    }
+    
+    func setActions(_ actions: [ActionProtocol]) {
+        self.actions = actions
+    }
+    
+    func addHand(_ card: CardProtocol) {
+        hand.append(card)
+    }
+    
+    func removeHandById(_ cardId: String) -> CardProtocol? {
+        guard let index = hand.firstIndex(where: { $0.identifier == cardId }) else {
+            return nil
+        }
+        
+        let card = hand[index]
+        hand.remove(at: index)
+        return card
+    }
+    
+    func addInPlay(_ card: CardProtocol) {
+        inPlay.append(card)
+    }
+    
+    func removeInPlayById(_ cardId: String) -> CardProtocol? {
+        guard let index = inPlay.firstIndex(where: { $0.identifier == cardId }) else {
+            return nil
+        }
+        
+        let card = inPlay[index]
+        inPlay.remove(at: index)
+        return card
     }
 }

@@ -10,7 +10,7 @@ struct Beer: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
     
-    func execute(state: GameStateProtocol) {
+    func execute(in state: GameStateProtocol) {
         state.discardHand(playerId: actorId, cardId: cardId)
         state.gainLifePoint(playerId: actorId)
     }
@@ -20,9 +20,9 @@ struct Beer: ActionProtocol, Equatable {
     }
 }
 
-extension Beer: RuleProtocol {
+struct BeerRule: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [Beer] {
+    func match(with state: GameStateProtocol) -> [ActionProtocol] {
         guard state.challenge == nil else {
             return []
         }

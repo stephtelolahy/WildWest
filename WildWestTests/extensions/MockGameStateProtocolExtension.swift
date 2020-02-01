@@ -30,9 +30,9 @@ extension MockGameStateProtocol {
         return self
     }
     
-    func history(is history: ActionProtocol...) -> MockGameStateProtocol {
+    func commands(are commands: ActionProtocol...) -> MockGameStateProtocol {
         Cuckoo.stub(self) { mock in
-            when(mock.history.get).thenReturn(history)
+            when(mock.commands.get).thenReturn(commands)
         }
         return self
     }

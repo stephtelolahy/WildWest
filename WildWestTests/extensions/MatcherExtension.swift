@@ -37,3 +37,9 @@ func state(equalTo mock: MockGameStateProtocol) -> ParameterMatcher<GameStatePro
         return state as? MockGameStateProtocol === mock
     })
 }
+
+func isEmpty<T>() -> ParameterMatcher<[T]> {
+    return ParameterMatcher(matchesFunction: { value -> Bool in
+        return value.isEmpty
+    })
+}

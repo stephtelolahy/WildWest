@@ -23,13 +23,24 @@ class GameViewController: UIViewController, Subscribable {
     // MARK: Properties
     
     private lazy var engine: GameEngineProtocol = {
-        let resources = GameResources(jsonReader: JsonReader(bundle: Bundle.main))
-        let figures = resources.allFigures()
-        let cards = resources.allCards()
+        let provider = ResourcesProvider(jsonReader: JsonReader(bundle: Bundle.main))
+        let figures = provider.allFigures()
+        let cards = provider.allCards()
         let gameSetup = GameSetup()
         let roles = gameSetup.roles(for: 7)
         let state = gameSetup.setupGame(roles: roles, figures: figures, cards: cards)
-        return GameEngine(state: state, rules: GameRules())
+        let rules: [RuleProtocol] = [
+            BeerRule(),
+            SaloonRule(),
+            StagecoachRule(),
+            WellsFargoRule(),
+            EquipRule(),
+            CatBalouRule(),
+            PanicRule(rangeCalculator: RangeCalculator()),
+            StartTurnRule(),
+            EndTurnRule()
+        ]
+        return GameEngine(state: state, rules: rules)
     }()
     
     // swiftlint:disable implicitly_unwrapped_optional
@@ -43,23 +54,17 @@ class GameViewController: UIViewController, Subscribable {
         handCollectionView.setItemSpacing(spacing)
         sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
             self?.state = state
-            self?.stateCollectionView.reloadData()
-            self?.handCollectionView.reloadData()
+            self?.stateCollectionView.reloadDataKeepingSelection { [weak self] in
+                self?.handCollectionView.reloadData()
+            }
         }))
     }
     
     // MARK: IBAction
     
-    @IBAction private func actionButtonTapped(_ sender: Any) {
-        let actionsViewController = ActionsViewController()
-        actionsViewController.actions = state.actions
-        actionsViewController.delegate = self
-        present(actionsViewController, animated: true)
-    }
-    
     @IBAction private func historyButtonTapped(_ sender: Any) {
         let actionsViewController = ActionsViewController()
-        actionsViewController.actions = state.history
+        actionsViewController.actions = state.commands
         present(actionsViewController, animated: true)
     }
 }
@@ -79,7 +84,7 @@ private extension GameViewController {
                 return []
         }
         
-        return player.hand.cards
+        return player.hand
     }
     
     var playerIndexes: [[Int]] {
@@ -102,6 +107,31 @@ private extension GameViewController {
         }
         
         return state.players[playerIndex]
+    }
+    
+    func showActionsForPlayer(at indexPath: IndexPath) {
+        guard let player = player(at: indexPath),
+            !player.actions.isEmpty else {
+                return
+        }
+        
+        let alertController = UIAlertController(title: player.ability.rawValue,
+                                                message: nil,
+                                                preferredStyle: .actionSheet)
+        
+        player.actions.forEach { action in
+            alertController.addAction(UIAlertAction(title: action.description,
+                                                    style: .default,
+                                                    handler: { [weak self] _ in
+                                                        self?.engine.execute(action)
+            }))
+        }
+        
+        alertController.addAction(UIAlertAction(title: "Cancel",
+                                                style: .cancel,
+                                                handler: nil))
+        
+        present(alertController, animated: true)
     }
 }
 
@@ -165,6 +195,7 @@ extension GameViewController: UICollectionViewDelegate {
     
     private func stateCollectionViewDidSelectItem(at indexPath: IndexPath) {
         handCollectionView.reloadData()
+        showActionsForPlayer(at: indexPath)
     }
     
     private func handCollectionViewDidSelectItem(at indexPath: IndexPath) {

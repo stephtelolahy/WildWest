@@ -10,17 +10,10 @@ struct Indians: ActionProtocol {
     let actorId: String
     let cardId: String
     
-    func execute(state: GameStateProtocol) {
+    func execute(in state: GameStateProtocol) {
     }
     
     var description: String {
         "\(actorId) play \(cardId)"
-    }
-}
-
-extension Indians: RuleProtocol {
-    
-    static func match(state: GameStateProtocol) -> [Indians] {
-        return []
     }
 }

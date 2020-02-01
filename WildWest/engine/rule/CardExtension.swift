@@ -16,5 +16,4 @@ extension CardProtocol {
                                 .revCarbine]
         return guns.contains(name)
     }
-    
 }

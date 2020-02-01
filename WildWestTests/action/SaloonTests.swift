@@ -37,10 +37,10 @@ class SaloonTests: XCTestCase {
             .withEnabledDefaultImplementation(GameStateProtocolStub())
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
         
-        let saloon = Saloon(actorId: "p1", cardId: "c1")
+        let sut = Saloon(actorId: "p1", cardId: "c1")
         
         // When
-        saloon.execute(state: mockState)
+        sut.execute(in: mockState)
         
         // Assert
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")
@@ -63,18 +63,22 @@ class SaloonTests: XCTestCase {
             .withEnabledDefaultImplementation(GameStateProtocolStub())
             .players(are: mockPlayer1, mockPlayer2)
         
-        let saloon = Saloon(actorId: "p1", cardId: "c1")
+        let sut = Saloon(actorId: "p1", cardId: "c1")
         
         // When
-        saloon.execute(state: mockState)
+        sut.execute(in: mockState)
         
         // Assert
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")
         verify(mockState).gainLifePoint(playerId: "p2")
     }
+}
+
+class SaloonRuleTests: XCTestCase {
     
     func test_CanPlaySaloon_IfYourTurnAndOwnCard() {
         // Given
+        let sut = SaloonRule()
         let mockCard = MockCardProtocol()
             .named(.saloon)
             .identified(by: "c1")
@@ -87,9 +91,9 @@ class SaloonTests: XCTestCase {
             .players(are: mockPlayer)
         
         // When
-        let actions = Saloon.match(state: mockState)
+        let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions, [Saloon(actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(actions as? [Saloon], [Saloon(actorId: "p1", cardId: "c1")])
     }
 }

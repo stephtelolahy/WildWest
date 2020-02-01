@@ -10,7 +10,7 @@ struct Stagecoach: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
     
-    func execute(state: GameStateProtocol) {
+    func execute(in state: GameStateProtocol) {
         state.discardHand(playerId: actorId, cardId: cardId)
         state.pullFromDeck(playerId: actorId)
         state.pullFromDeck(playerId: actorId)
@@ -21,9 +21,9 @@ struct Stagecoach: ActionProtocol, Equatable {
     }
 }
 
-extension Stagecoach: RuleProtocol {
+struct StagecoachRule: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [Stagecoach] {
+    func match(with state: GameStateProtocol) -> [ActionProtocol] {
         guard state.challenge == nil else {
             return []
         }

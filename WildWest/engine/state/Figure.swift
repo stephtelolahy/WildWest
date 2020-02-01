@@ -6,7 +6,7 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct Figure: Decodable {
+struct Figure: FigureProtocol, Decodable {
     
     let ability: Ability
     let bullets: Int

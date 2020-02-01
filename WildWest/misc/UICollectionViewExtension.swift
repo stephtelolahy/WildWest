@@ -22,4 +22,18 @@ extension UICollectionView {
     func dequeueReusableCell<T: UICollectionViewCell>(with type: T.Type, for indexPath: IndexPath) -> T {
         return dequeueReusableCell(withReuseIdentifier: type.className, for: indexPath) as! T
     }
+    
+    func reloadDataKeepingSelection(completion: @escaping () -> Void) {
+        let indexPathsForSelectedItems = self.indexPathsForSelectedItems
+        reloadData()
+        
+        guard let indexPath = indexPathsForSelectedItems?.first else {
+            return
+        }
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.selectItem(at: indexPath, animated: false, scrollPosition: .top)
+            completion()
+        }
+    }
 }

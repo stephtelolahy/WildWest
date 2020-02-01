@@ -11,14 +11,14 @@ struct Equip: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
     
-    func execute(state: GameStateProtocol) {
+    func execute(in state: GameStateProtocol) {
         guard let player = state.players.first(where: { $0.identifier == actorId }),
-            let card = player.hand.cards.first(where: { $0.identifier == cardId }) else {
+            let card = player.hand.first(where: { $0.identifier == cardId }) else {
                 return
         }
         
         if card.isGun,
-            let currentGun = player.inPlay.cards.first(where: { $0.isGun }) {
+            let currentGun = player.inPlay.first(where: { $0.isGun }) {
             state.discardInPlay(playerId: actorId, cardId: currentGun.identifier)
         }
         
@@ -30,9 +30,9 @@ struct Equip: ActionProtocol, Equatable {
     }
 }
 
-extension Equip: RuleProtocol {
+struct EquipRule: RuleProtocol {
     
-    static func match(state: GameStateProtocol) -> [Equip] {
+    func match(with state: GameStateProtocol) -> [ActionProtocol] {
         guard state.challenge == nil else {
             return []
         }
