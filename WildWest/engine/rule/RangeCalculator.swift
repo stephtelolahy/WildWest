@@ -30,4 +30,12 @@ struct RangeCalculator: RangeCalculatorProtocol {
         
         return distance
     }
+    
+    func reachableDistance(of player: PlayerProtocol) -> Int {
+        guard let weapon = player.inPlay.first(where: { $0.isGun }) else {
+            return 1
+        }
+        
+        return weapon.reachableDistance
+    }
 }

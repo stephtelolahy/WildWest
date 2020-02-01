@@ -198,6 +198,21 @@ import Cuckoo
         
     }
     
+    
+    
+     func reachableDistance(of player: PlayerProtocol) -> Int {
+        
+    return cuckoo_manager.call("reachableDistance(of: PlayerProtocol) -> Int",
+            parameters: (player),
+            escapingParameters: (player),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.reachableDistance(of: player))
+        
+    }
+    
 
 	 struct __StubbingProxy_RangeCalculatorProtocol: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
@@ -210,6 +225,11 @@ import Cuckoo
 	    func distance<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable>(from playerId: M1, to otherId: M2, in state: M3) -> Cuckoo.ProtocolStubFunction<(String, String, GameStateProtocol), Int> where M1.MatchedType == String, M2.MatchedType == String, M3.MatchedType == GameStateProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String, GameStateProtocol)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: otherId) { $0.1 }, wrap(matchable: state) { $0.2 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockRangeCalculatorProtocol.self, method: "distance(from: String, to: String, in: GameStateProtocol) -> Int", parameterMatchers: matchers))
+	    }
+	    
+	    func reachableDistance<M1: Cuckoo.Matchable>(of player: M1) -> Cuckoo.ProtocolStubFunction<(PlayerProtocol), Int> where M1.MatchedType == PlayerProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(PlayerProtocol)>] = [wrap(matchable: player) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockRangeCalculatorProtocol.self, method: "reachableDistance(of: PlayerProtocol) -> Int", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -234,6 +254,12 @@ import Cuckoo
 	        return cuckoo_manager.verify("distance(from: String, to: String, in: GameStateProtocol) -> Int", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
+	    @discardableResult
+	    func reachableDistance<M1: Cuckoo.Matchable>(of player: M1) -> Cuckoo.__DoNotUse<(PlayerProtocol), Int> where M1.MatchedType == PlayerProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(PlayerProtocol)>] = [wrap(matchable: player) { $0 }]
+	        return cuckoo_manager.verify("reachableDistance(of: PlayerProtocol) -> Int", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
 	}
 }
 
@@ -244,6 +270,10 @@ import Cuckoo
 
     
      func distance(from playerId: String, to otherId: String, in state: GameStateProtocol) -> Int  {
+        return DefaultValueRegistry.defaultValue(for: (Int).self)
+    }
+    
+     func reachableDistance(of player: PlayerProtocol) -> Int  {
         return DefaultValueRegistry.defaultValue(for: (Int).self)
     }
     

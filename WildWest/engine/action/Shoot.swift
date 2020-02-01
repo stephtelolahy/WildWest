@@ -42,9 +42,14 @@ struct ShootRule: RuleProtocol {
             return []
         }
         
-        let otherPlayers = state.players.filter {
-            $0.identifier != player.identifier
-                && calculator.distance(from: player.identifier, to: $0.identifier, in: state) <= 1
+        let otherPlayers = state.players.filter { aPlayer -> Bool in
+            guard aPlayer.identifier != player.identifier else {
+                return false
+            }
+            
+            let distance = calculator.distance(from: player.identifier, to: aPlayer.identifier, in: state)
+            let reachableDistance = calculator.reachableDistance(of: player)
+            return distance <= reachableDistance
         }
         
         var result: [Shoot] = []

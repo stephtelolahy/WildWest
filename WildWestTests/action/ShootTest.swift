@@ -77,6 +77,7 @@ class ShootRuleTest: XCTestCase {
         Cuckoo.stub(mockCalculator) { mock in
             when(mock.distance(from: "p1", to: "p2", in: state(equalTo: mockState))).thenReturn(1)
             when(mock.distance(from: "p1", to: "p3", in: state(equalTo: mockState))).thenReturn(0)
+            when(mock.reachableDistance(of: player(equalTo: mockPlayer1))).thenReturn(5)
         }
         
         let sut = ShootRule(calculator: mockCalculator)
@@ -91,7 +92,7 @@ class ShootRuleTest: XCTestCase {
         ])
     }
     
-    func test_CannotPlayShoot_IfYourTurnAndOwnCardAndOtherIsNotReachable() {
+    func test_CannotPlayShoot_IfYourTurnAndOwnCardAndOtherIsUnreachable() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
@@ -106,6 +107,7 @@ class ShootRuleTest: XCTestCase {
         Cuckoo.stub(mockCalculator) { mock in
             when(mock.distance(from: "p1", to: "p2", in: state(equalTo: mockState))).thenReturn(2)
             when(mock.distance(from: "p1", to: "p3", in: state(equalTo: mockState))).thenReturn(3)
+            when(mock.reachableDistance(of: player(equalTo: mockPlayer1))).thenReturn(1)
         }
         
         let sut = ShootRule(calculator: mockCalculator)
@@ -118,7 +120,33 @@ class ShootRuleTest: XCTestCase {
     }
     
     func test_CanPlayShoot_IfOtherIsReachableUsingGunRange() {
-        XCTFail()
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .holding(MockCardProtocol().named(.shoot).identified(by: "c1"))
+        let mockPlayer2 = MockPlayerProtocol().identified(by: "p2")
+        let mockPlayer3 = MockPlayerProtocol().identified(by: "p3")
+        let mockState = MockGameStateProtocol()
+            .challenge(is: nil)
+            .currentTurn(is: 0)
+            .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
+        let mockCalculator = MockRangeCalculatorProtocol()
+        Cuckoo.stub(mockCalculator) { mock in
+            when(mock.distance(from: "p1", to: "p2", in: state(equalTo: mockState))).thenReturn(4)
+            when(mock.distance(from: "p1", to: "p3", in: state(equalTo: mockState))).thenReturn(3)
+            when(mock.reachableDistance(of: player(equalTo: mockPlayer1))).thenReturn(5)
+        }
+        
+        let sut = ShootRule(calculator: mockCalculator)
+        
+        // When
+        let actions = sut.match(with: mockState)
+        
+        // Assert
+        XCTAssertEqual(actions as? [Shoot], [
+            Shoot(actorId: "p1", cardId: "c1", targetId: "p2"),
+            Shoot(actorId: "p1", cardId: "c1", targetId: "p3")
+        ])
     }
     
     func test_CannotPlayShoot_IfReachedLimitPerTurn() {
