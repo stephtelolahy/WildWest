@@ -20,7 +20,7 @@ class StagecoachTests: XCTestCase {
         let sut = Stagecoach(actorId: "p1", cardId: "c1")
         
         // When
-        sut.execute(state: mockState)
+        sut.execute(in: mockState)
         
         // Assert
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")
@@ -43,7 +43,7 @@ class StagecoachTests: XCTestCase {
             .players(are: mockPlayer)
         
         // When
-        let actions = sut.match(state: mockState)
+        let actions = sut.match(with: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [Stagecoach], [Stagecoach(actorId: "p1", cardId: "c1")])

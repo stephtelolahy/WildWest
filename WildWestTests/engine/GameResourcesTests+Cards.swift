@@ -11,7 +11,7 @@ import XCTest
 
 class GameResourcesTests_Cards: XCTestCase {
 
-    private lazy var cards: [Card] = {
+    private lazy var cards: [CardProtocol] = {
         let jsonReader = JsonReader(bundle: Bundle(for: type(of: self)))
         let sut: ResourcesProviderProtocol = ResourcesProvider(jsonReader: jsonReader)
         return sut.allCards()

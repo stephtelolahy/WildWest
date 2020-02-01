@@ -28,7 +28,7 @@ class BeerTests: XCTestCase {
         let sut = Beer(actorId: "p1", cardId: "c1")
         
         // When
-        sut.execute(state: mockState)
+        sut.execute(in: mockState)
         
         // Assert
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")
@@ -53,7 +53,7 @@ class BeerTests: XCTestCase {
             .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
-        let actions = sut.match(state: mockState)
+        let actions = sut.match(with: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [Beer], [Beer(actorId: "p1", cardId: "c1")])
@@ -74,7 +74,7 @@ class BeerTests: XCTestCase {
             .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
-        let actions = sut.match(state: mockState)
+        let actions = sut.match(with: mockState)
         
         // Assert
         XCTAssertTrue(actions.isEmpty)
@@ -93,7 +93,7 @@ class BeerTests: XCTestCase {
             .players(are: mockPlayer, MockPlayerProtocol())
         
         // When
-        let actions = sut.match(state: mockState)
+        let actions = sut.match(with: mockState)
         
         // Assert
         XCTAssertTrue(actions.isEmpty)

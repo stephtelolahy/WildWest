@@ -41,7 +41,7 @@ class PanicTests: XCTestCase {
         let sut = PanicRule(rangeCalculator: mockRangeCalculator)
         
         // When
-        let actions = sut.match(state: mockState)
+        let actions = sut.match(with: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [Panic], [
@@ -80,7 +80,7 @@ class PanicTests: XCTestCase {
         let sut = PanicRule(rangeCalculator: mockRangeCalculator)
         
         // When
-        let actions = sut.match(state: mockState)
+        let actions = sut.match(with: mockState)
         
         // Assert
         XCTAssertTrue(actions.isEmpty)
@@ -92,7 +92,7 @@ class PanicTests: XCTestCase {
         let sut = Panic(actorId: "p1", cardId: "c1", targetPlayerId: "p2", targetCardId: "c2", targetCardSource: .hand)
         
         // When
-        sut.execute(state: mockState)
+        sut.execute(in: mockState)
         
         // Assert
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")
@@ -105,7 +105,7 @@ class PanicTests: XCTestCase {
         let sut = Panic(actorId: "p1", cardId: "c1", targetPlayerId: "p2", targetCardId: "c2", targetCardSource: .inPlay)
         
         // When
-        sut.execute(state: mockState)
+        sut.execute(in: mockState)
         
         // Assert
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")

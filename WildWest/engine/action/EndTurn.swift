@@ -10,7 +10,7 @@ struct EndTurn: ActionProtocol, Equatable {
     let actorId: String
     let cardsToDiscardIds: [String]
     
-    func execute(state: GameStateProtocol) {
+    func execute(in state: GameStateProtocol) {
         cardsToDiscardIds.forEach { state.discardHand(playerId: actorId, cardId: $0) }
         let nextIndex = (state.turn + 1) % state.players.count
         state.setTurn(nextIndex)
@@ -28,7 +28,7 @@ struct EndTurn: ActionProtocol, Equatable {
 
 struct EndTurnRule: RuleProtocol {
     
-    func match(state: GameStateProtocol) -> [ActionProtocol] {
+    func match(with state: GameStateProtocol) -> [ActionProtocol] {
         guard state.challenge == nil else {
             return []
         }

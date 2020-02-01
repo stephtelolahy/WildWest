@@ -2,46 +2,74 @@ import Cuckoo
 @testable import WildWest
 
 
- class MockActionSuggestorProtocol: ActionSuggestorProtocol, Cuckoo.ProtocolMock {
+ class MockActionProtocol: ActionProtocol, Cuckoo.ProtocolMock {
     
-     typealias MocksType = ActionSuggestorProtocol
+     typealias MocksType = ActionProtocol
     
-     typealias Stubbing = __StubbingProxy_ActionSuggestorProtocol
-     typealias Verification = __VerificationProxy_ActionSuggestorProtocol
+     typealias Stubbing = __StubbingProxy_ActionProtocol
+     typealias Verification = __VerificationProxy_ActionProtocol
 
      let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
 
     
-    private var __defaultImplStub: ActionSuggestorProtocol?
+    private var __defaultImplStub: ActionProtocol?
 
-     func enableDefaultImplementation(_ stub: ActionSuggestorProtocol) {
+     func enableDefaultImplementation(_ stub: ActionProtocol) {
         __defaultImplStub = stub
         cuckoo_manager.enableDefaultStubImplementation()
     }
     
 
     
-
-    
-
     
     
-    
-     func actions(matching state: GameStateProtocol) -> [ActionProtocol] {
+     var actorId: String {
+        get {
+            return cuckoo_manager.getter("actorId",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.actorId)
+        }
         
-    return cuckoo_manager.call("actions(matching: GameStateProtocol) -> [ActionProtocol]",
+    }
+    
+    
+    
+     var description: String {
+        get {
+            return cuckoo_manager.getter("description",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.description)
+        }
+        
+    }
+    
+
+    
+
+    
+    
+    
+     func execute(in state: GameStateProtocol)  {
+        
+    return cuckoo_manager.call("execute(in: GameStateProtocol)",
             parameters: (state),
             escapingParameters: (state),
             superclassCall:
                 
                 Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
-            defaultCall: __defaultImplStub!.actions(matching: state))
+            defaultCall: __defaultImplStub!.execute(in: state))
         
     }
     
 
-	 struct __StubbingProxy_ActionSuggestorProtocol: Cuckoo.StubbingProxy {
+	 struct __StubbingProxy_ActionProtocol: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
 	
 	     init(manager: Cuckoo.MockManager) {
@@ -49,14 +77,24 @@ import Cuckoo
 	    }
 	    
 	    
-	    func actions<M1: Cuckoo.Matchable>(matching state: M1) -> Cuckoo.ProtocolStubFunction<(GameStateProtocol), [ActionProtocol]> where M1.MatchedType == GameStateProtocol {
+	    var actorId: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockActionProtocol, String> {
+	        return .init(manager: cuckoo_manager, name: "actorId")
+	    }
+	    
+	    
+	    var description: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockActionProtocol, String> {
+	        return .init(manager: cuckoo_manager, name: "description")
+	    }
+	    
+	    
+	    func execute<M1: Cuckoo.Matchable>(in state: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(GameStateProtocol)> where M1.MatchedType == GameStateProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockActionSuggestorProtocol.self, method: "actions(matching: GameStateProtocol) -> [ActionProtocol]", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockActionProtocol.self, method: "execute(in: GameStateProtocol)", parameterMatchers: matchers))
 	    }
 	    
 	}
 
-	 struct __VerificationProxy_ActionSuggestorProtocol: Cuckoo.VerificationProxy {
+	 struct __VerificationProxy_ActionProtocol: Cuckoo.VerificationProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
 	    private let callMatcher: Cuckoo.CallMatcher
 	    private let sourceLocation: Cuckoo.SourceLocation
@@ -68,25 +106,51 @@ import Cuckoo
 	    }
 	
 	    
+	    
+	    var actorId: Cuckoo.VerifyReadOnlyProperty<String> {
+	        return .init(manager: cuckoo_manager, name: "actorId", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var description: Cuckoo.VerifyReadOnlyProperty<String> {
+	        return .init(manager: cuckoo_manager, name: "description", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
 	
 	    
 	    @discardableResult
-	    func actions<M1: Cuckoo.Matchable>(matching state: M1) -> Cuckoo.__DoNotUse<(GameStateProtocol), [ActionProtocol]> where M1.MatchedType == GameStateProtocol {
+	    func execute<M1: Cuckoo.Matchable>(in state: M1) -> Cuckoo.__DoNotUse<(GameStateProtocol), Void> where M1.MatchedType == GameStateProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
-	        return cuckoo_manager.verify("actions(matching: GameStateProtocol) -> [ActionProtocol]", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("execute(in: GameStateProtocol)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
 }
 
- class ActionSuggestorProtocolStub: ActionSuggestorProtocol {
+ class ActionProtocolStub: ActionProtocol {
+    
+    
+     var actorId: String {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (String).self)
+        }
+        
+    }
+    
+    
+     var description: String {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (String).self)
+        }
+        
+    }
     
 
     
 
     
-     func actions(matching state: GameStateProtocol) -> [ActionProtocol]  {
-        return DefaultValueRegistry.defaultValue(for: ([ActionProtocol]).self)
+     func execute(in state: GameStateProtocol)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
 }
@@ -190,164 +254,6 @@ import Cuckoo
 @testable import WildWest
 
 
- class MockActionProtocol: ActionProtocol, Cuckoo.ProtocolMock {
-    
-     typealias MocksType = ActionProtocol
-    
-     typealias Stubbing = __StubbingProxy_ActionProtocol
-     typealias Verification = __VerificationProxy_ActionProtocol
-
-     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
-
-    
-    private var __defaultImplStub: ActionProtocol?
-
-     func enableDefaultImplementation(_ stub: ActionProtocol) {
-        __defaultImplStub = stub
-        cuckoo_manager.enableDefaultStubImplementation()
-    }
-    
-
-    
-    
-    
-     var actorId: String {
-        get {
-            return cuckoo_manager.getter("actorId",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.actorId)
-        }
-        
-    }
-    
-    
-    
-     var description: String {
-        get {
-            return cuckoo_manager.getter("description",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.description)
-        }
-        
-    }
-    
-
-    
-
-    
-    
-    
-     func execute(state: GameStateProtocol)  {
-        
-    return cuckoo_manager.call("execute(state: GameStateProtocol)",
-            parameters: (state),
-            escapingParameters: (state),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.execute(state: state))
-        
-    }
-    
-
-	 struct __StubbingProxy_ActionProtocol: Cuckoo.StubbingProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	
-	     init(manager: Cuckoo.MockManager) {
-	        self.cuckoo_manager = manager
-	    }
-	    
-	    
-	    var actorId: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockActionProtocol, String> {
-	        return .init(manager: cuckoo_manager, name: "actorId")
-	    }
-	    
-	    
-	    var description: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockActionProtocol, String> {
-	        return .init(manager: cuckoo_manager, name: "description")
-	    }
-	    
-	    
-	    func execute<M1: Cuckoo.Matchable>(state: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(GameStateProtocol)> where M1.MatchedType == GameStateProtocol {
-	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockActionProtocol.self, method: "execute(state: GameStateProtocol)", parameterMatchers: matchers))
-	    }
-	    
-	}
-
-	 struct __VerificationProxy_ActionProtocol: Cuckoo.VerificationProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	    private let callMatcher: Cuckoo.CallMatcher
-	    private let sourceLocation: Cuckoo.SourceLocation
-	
-	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
-	        self.cuckoo_manager = manager
-	        self.callMatcher = callMatcher
-	        self.sourceLocation = sourceLocation
-	    }
-	
-	    
-	    
-	    var actorId: Cuckoo.VerifyReadOnlyProperty<String> {
-	        return .init(manager: cuckoo_manager, name: "actorId", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
-	    var description: Cuckoo.VerifyReadOnlyProperty<String> {
-	        return .init(manager: cuckoo_manager, name: "description", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	
-	    
-	    @discardableResult
-	    func execute<M1: Cuckoo.Matchable>(state: M1) -> Cuckoo.__DoNotUse<(GameStateProtocol), Void> where M1.MatchedType == GameStateProtocol {
-	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
-	        return cuckoo_manager.verify("execute(state: GameStateProtocol)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	}
-}
-
- class ActionProtocolStub: ActionProtocol {
-    
-    
-     var actorId: String {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (String).self)
-        }
-        
-    }
-    
-    
-     var description: String {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (String).self)
-        }
-        
-    }
-    
-
-    
-
-    
-     func execute(state: GameStateProtocol)   {
-        return DefaultValueRegistry.defaultValue(for: (Void).self)
-    }
-    
-}
-
-
-import Cuckoo
-@testable import WildWest
-
-
  class MockRuleProtocol: RuleProtocol, Cuckoo.ProtocolMock {
     
      typealias MocksType = RuleProtocol
@@ -373,16 +279,16 @@ import Cuckoo
     
     
     
-     func match(state: GameStateProtocol) -> [ActionProtocol] {
+     func match(with state: GameStateProtocol) -> [ActionProtocol] {
         
-    return cuckoo_manager.call("match(state: GameStateProtocol) -> [ActionProtocol]",
+    return cuckoo_manager.call("match(with: GameStateProtocol) -> [ActionProtocol]",
             parameters: (state),
             escapingParameters: (state),
             superclassCall:
                 
                 Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
-            defaultCall: __defaultImplStub!.match(state: state))
+            defaultCall: __defaultImplStub!.match(with: state))
         
     }
     
@@ -395,9 +301,9 @@ import Cuckoo
 	    }
 	    
 	    
-	    func match<M1: Cuckoo.Matchable>(state: M1) -> Cuckoo.ProtocolStubFunction<(GameStateProtocol), [ActionProtocol]> where M1.MatchedType == GameStateProtocol {
+	    func match<M1: Cuckoo.Matchable>(with state: M1) -> Cuckoo.ProtocolStubFunction<(GameStateProtocol), [ActionProtocol]> where M1.MatchedType == GameStateProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockRuleProtocol.self, method: "match(state: GameStateProtocol) -> [ActionProtocol]", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockRuleProtocol.self, method: "match(with: GameStateProtocol) -> [ActionProtocol]", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -417,9 +323,9 @@ import Cuckoo
 	
 	    
 	    @discardableResult
-	    func match<M1: Cuckoo.Matchable>(state: M1) -> Cuckoo.__DoNotUse<(GameStateProtocol), [ActionProtocol]> where M1.MatchedType == GameStateProtocol {
+	    func match<M1: Cuckoo.Matchable>(with state: M1) -> Cuckoo.__DoNotUse<(GameStateProtocol), [ActionProtocol]> where M1.MatchedType == GameStateProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
-	        return cuckoo_manager.verify("match(state: GameStateProtocol) -> [ActionProtocol]", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("match(with: GameStateProtocol) -> [ActionProtocol]", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -431,7 +337,7 @@ import Cuckoo
     
 
     
-     func match(state: GameStateProtocol) -> [ActionProtocol]  {
+     func match(with state: GameStateProtocol) -> [ActionProtocol]  {
         return DefaultValueRegistry.defaultValue(for: ([ActionProtocol]).self)
     }
     
@@ -846,6 +752,166 @@ import Cuckoo
      func addToDiscard(_ card: CardProtocol)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
+    
+}
+
+
+import Cuckoo
+@testable import WildWest
+
+
+ class MockFigureProtocol: FigureProtocol, Cuckoo.ProtocolMock {
+    
+     typealias MocksType = FigureProtocol
+    
+     typealias Stubbing = __StubbingProxy_FigureProtocol
+     typealias Verification = __VerificationProxy_FigureProtocol
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: FigureProtocol?
+
+     func enableDefaultImplementation(_ stub: FigureProtocol) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+    
+    
+     var ability: Ability {
+        get {
+            return cuckoo_manager.getter("ability",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.ability)
+        }
+        
+    }
+    
+    
+    
+     var bullets: Int {
+        get {
+            return cuckoo_manager.getter("bullets",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.bullets)
+        }
+        
+    }
+    
+    
+    
+     var imageName: String {
+        get {
+            return cuckoo_manager.getter("imageName",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.imageName)
+        }
+        
+    }
+    
+
+    
+
+    
+
+	 struct __StubbingProxy_FigureProtocol: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    var ability: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockFigureProtocol, Ability> {
+	        return .init(manager: cuckoo_manager, name: "ability")
+	    }
+	    
+	    
+	    var bullets: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockFigureProtocol, Int> {
+	        return .init(manager: cuckoo_manager, name: "bullets")
+	    }
+	    
+	    
+	    var imageName: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockFigureProtocol, String> {
+	        return .init(manager: cuckoo_manager, name: "imageName")
+	    }
+	    
+	    
+	}
+
+	 struct __VerificationProxy_FigureProtocol: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	    
+	    var ability: Cuckoo.VerifyReadOnlyProperty<Ability> {
+	        return .init(manager: cuckoo_manager, name: "ability", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var bullets: Cuckoo.VerifyReadOnlyProperty<Int> {
+	        return .init(manager: cuckoo_manager, name: "bullets", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var imageName: Cuckoo.VerifyReadOnlyProperty<String> {
+	        return .init(manager: cuckoo_manager, name: "imageName", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	
+	    
+	}
+}
+
+ class FigureProtocolStub: FigureProtocol {
+    
+    
+     var ability: Ability {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (Ability).self)
+        }
+        
+    }
+    
+    
+     var bullets: Int {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (Int).self)
+        }
+        
+    }
+    
+    
+     var imageName: String {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (String).self)
+        }
+        
+    }
+    
+
+    
+
     
 }
 

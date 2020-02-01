@@ -10,7 +10,7 @@ import XCTest
 
 class GameResourcesTests_Figures: XCTestCase {
 
-    private lazy var figures: [Figure] = {
+    private lazy var figures: [FigureProtocol] = {
         let jsonReader = JsonReader(bundle: Bundle(for: type(of: self)))
         let sut: ResourcesProviderProtocol = ResourcesProvider(jsonReader: jsonReader)
         return sut.allFigures()

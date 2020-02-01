@@ -11,7 +11,7 @@ struct Equip: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
     
-    func execute(state: GameStateProtocol) {
+    func execute(in state: GameStateProtocol) {
         guard let player = state.players.first(where: { $0.identifier == actorId }),
             let card = player.hand.first(where: { $0.identifier == cardId }) else {
                 return
@@ -32,7 +32,7 @@ struct Equip: ActionProtocol, Equatable {
 
 struct EquipRule: RuleProtocol {
     
-    func match(state: GameStateProtocol) -> [ActionProtocol] {
+    func match(with state: GameStateProtocol) -> [ActionProtocol] {
         guard state.challenge == nil else {
             return []
         }

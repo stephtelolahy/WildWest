@@ -11,16 +11,39 @@ import Cuckoo
 
 class CatBalouTests: XCTestCase {
     
-    func test_CanPlayCatBalou_IfYourTurnAndOwnCard() {
+    func test_CanPlayCatBalouToDiscardOtherHand_IfYourTurnAndOwnCard() {
         // Given
         let sut = CatBalouRule()
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
             .holding(MockCardProtocol().named(.catBalou).identified(by: "c1"))
+            .noCardsInPlay()
         
         let mockPlayer2 = MockPlayerProtocol()
             .identified(by: "p2")
             .holding(MockCardProtocol().identified(by: "c2"))
+            .noCardsInPlay()
+        
+        let mockState = MockGameStateProtocol()
+            .challenge(is: nil)
+            .currentTurn(is: 0)
+            .players(are: mockPlayer1, mockPlayer2)
+        
+        // When
+        let actions = sut.match(with: mockState)
+        
+        // Assert
+        XCTAssertEqual(actions as? [CatBalou], [
+            CatBalou(actorId: "p1", cardId: "c1", targetPlayerId: "p2", targetCardId: "c2", targetCardSource: .hand)
+        ])
+    }
+    
+    func test_CanPlayCatBalouToDiscardOtherInPlay_IfYourTurnAndOwnCard() {
+        // Given
+        let sut = CatBalouRule()
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .holding(MockCardProtocol().named(.catBalou).identified(by: "c1"))
             .noCardsInPlay()
         
         let mockPlayer3 = MockPlayerProtocol()
@@ -31,15 +54,36 @@ class CatBalouTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
             .currentTurn(is: 0)
-            .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
+            .players(are: mockPlayer1, mockPlayer3)
         
         // When
-        let actions = sut.match(state: mockState)
+        let actions = sut.match(with: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [CatBalou], [
-            CatBalou(actorId: "p1", cardId: "c1", targetPlayerId: "p2", targetCardId: "c2", targetCardSource: .hand),
             CatBalou(actorId: "p1", cardId: "c1", targetPlayerId: "p3", targetCardId: "c3", targetCardSource: .inPlay)
+        ])
+    }
+    
+    func test_CanPlayCatBalouToDiscardSelfInPlayCard_IfYourTurnAndOwnCard() {
+        // Given
+        let sut = CatBalouRule()
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .holding(MockCardProtocol().named(.catBalou).identified(by: "c1"))
+            .playing(MockCardProtocol().identified(by: "c2"))
+        
+        let mockState = MockGameStateProtocol()
+            .challenge(is: nil)
+            .currentTurn(is: 0)
+            .players(are: mockPlayer1)
+        
+        // When
+        let actions = sut.match(with: mockState)
+        
+        // Assert
+        XCTAssertEqual(actions as? [CatBalou], [
+            CatBalou(actorId: "p1", cardId: "c1", targetPlayerId: "p1", targetCardId: "c2", targetCardSource: .inPlay)
         ])
     }
     
@@ -49,7 +93,7 @@ class CatBalouTests: XCTestCase {
         let sut = CatBalou(actorId: "p1", cardId: "c1", targetPlayerId: "p2", targetCardId: "c2", targetCardSource: .hand)
         
         // When
-        sut.execute(state: mockState)
+        sut.execute(in: mockState)
         
         // Assert
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")
@@ -62,7 +106,7 @@ class CatBalouTests: XCTestCase {
         let sut = CatBalou(actorId: "p1", cardId: "c1", targetPlayerId: "p2", targetCardId: "c2", targetCardSource: .inPlay)
         
         // When
-        sut.execute(state: mockState)
+        sut.execute(in: mockState)
         
         // Assert
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")

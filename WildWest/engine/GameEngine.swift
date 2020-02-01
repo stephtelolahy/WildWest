@@ -12,11 +12,11 @@ class GameEngine: GameEngineProtocol {
     
     let stateSubject: BehaviorSubject<GameStateProtocol>
     
-    private let suggestor: ActionSuggestorProtocol
+    private let rules: [RuleProtocol]
     
-    init(state: GameStateProtocol, suggestor: ActionSuggestorProtocol) {
+    init(state: GameStateProtocol, rules: [RuleProtocol]) {
         stateSubject = BehaviorSubject(value: state)
-        self.suggestor = suggestor
+        self.rules = rules
     }
     
     func execute(_ action: ActionProtocol) {
@@ -24,10 +24,10 @@ class GameEngine: GameEngineProtocol {
             return
         }
         
-        action.execute(state: state)
+        action.execute(in: state)
         state.addCommand(action)
         
-        let actions = suggestor.actions(matching: state)
+        let actions = rules.map { $0.match(with: state) }.flatMap { $0 }
         state.players.forEach { player in
             player.setActions(actions.filter { $0.actorId == player.identifier })
         }

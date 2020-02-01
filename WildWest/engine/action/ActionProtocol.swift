@@ -10,5 +10,5 @@ protocol ActionProtocol {
     var actorId: String { get }
     var description: String { get }
     
-    func execute(state: GameStateProtocol)
+    func execute(in state: GameStateProtocol)
 }

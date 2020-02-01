@@ -17,7 +17,7 @@ class GameSetup: GameSetupProtocol {
         return Array(order.prefix(playersCount))
     }
     
-    func setupGame(roles: [Role], figures: [Figure], cards: [CardProtocol]) -> GameStateProtocol {
+    func setupGame(roles: [Role], figures: [FigureProtocol], cards: [CardProtocol]) -> GameStateProtocol {
         let shuffledFigures = figures.shuffled()
         var deck = cards.shuffled()
         let players: [Player] = roles.enumerated().map { index, role in

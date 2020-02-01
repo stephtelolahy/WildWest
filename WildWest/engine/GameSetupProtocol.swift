@@ -8,5 +8,5 @@
 
 protocol GameSetupProtocol {
     func roles(for playersCount: Int) -> [Role]
-    func setupGame(roles: [Role], figures: [Figure], cards: [CardProtocol]) -> GameStateProtocol
+    func setupGame(roles: [Role], figures: [FigureProtocol], cards: [CardProtocol]) -> GameStateProtocol
 }

@@ -67,11 +67,7 @@ class GameSetupTests: XCTestCase {
         // Given
         let roles: [Role] = [.sheriff, .outlaw, .outlaw, .renegade]
         let cards: [CardProtocol] = Array(1...80).map { MockCardProtocol().identified(by: "c\($0)") }
-        let figures: [Figure] = [Figure(ability: .bartCassidy, bullets: 4, imageName: "", description: ""),
-                                 Figure(ability: .calamityJanet, bullets: 4, imageName: "", description: ""),
-                                 Figure(ability: .joudonais, bullets: 4, imageName: "", description: ""),
-                                 Figure(ability: .paulRegret, bullets: 4, imageName: "", description: ""),
-                                 Figure(ability: .suzyLafayette, bullets: 4, imageName: "", description: "")]
+        let figures: [FigureProtocol] = Array(1...4).map { _ in MockFigureProtocol().named(.bartCassidy).bullets(is: 4).imageName(is: "") }
         
         // When
         let state = sut.setupGame(roles: roles, figures: figures, cards: cards)

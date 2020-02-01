@@ -27,7 +27,7 @@ class EndTurnTests: XCTestCase {
             .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
-        let actions = sut.match(state: mockState)
+        let actions = sut.match(with: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [EndTurn], [EndTurn(actorId: "p1", cardsToDiscardIds: [])])
@@ -49,7 +49,7 @@ class EndTurnTests: XCTestCase {
             .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
-        let actions = sut.match(state: mockState)
+        let actions = sut.match(with: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [EndTurn], [
@@ -75,7 +75,7 @@ class EndTurnTests: XCTestCase {
             .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
-        let actions = sut.match(state: mockState)
+        let actions = sut.match(with: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [EndTurn], [
@@ -99,7 +99,7 @@ class EndTurnTests: XCTestCase {
         let sut = EndTurn(actorId: "p1", cardsToDiscardIds: [])
         
         // When
-        sut.execute(state: mockState)
+        sut.execute(in: mockState)
         
         // Assert
         verify(mockState).setTurn(1)
@@ -119,7 +119,7 @@ class EndTurnTests: XCTestCase {
         let sut = EndTurn(actorId: "p2", cardsToDiscardIds: [])
         
         // When
-        sut.execute(state: mockState)
+        sut.execute(in: mockState)
         
         // Assert
         verify(mockState).setTurn(0)
@@ -134,7 +134,7 @@ class EndTurnTests: XCTestCase {
         let sut = EndTurn(actorId: "p1", cardsToDiscardIds: ["c1", "c2"])
         
         // When
-        sut.execute(state: mockState)
+        sut.execute(in: mockState)
         
         // Assert
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")
@@ -153,7 +153,7 @@ class EndTurnTests: XCTestCase {
         let sut = EndTurn(actorId: "p1", cardsToDiscardIds: [])
         
         // When
-        sut.execute(state: mockState)
+        sut.execute(in: mockState)
         
         // Assert
         verify(mockState).setChallenge(equal(to: .startTurn))

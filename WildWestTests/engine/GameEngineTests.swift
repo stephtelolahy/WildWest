@@ -13,7 +13,8 @@ class GameEngineTests: XCTestCase {
     
     private var sut: GameEngineProtocol!
     private var mockState: MockGameStateProtocol!
-    private var mockSuggestor: MockActionSuggestorProtocol!
+    private var mockRule1: MockRuleProtocol!
+    private var mockRule2: MockRuleProtocol!
     private var mockPlayer1: MockPlayerProtocol!
     private var mockPlayer2: MockPlayerProtocol!
     
@@ -28,8 +29,9 @@ class GameEngineTests: XCTestCase {
         mockState = MockGameStateProtocol()
             .withEnabledDefaultImplementation(GameStateProtocolStub())
             .players(are: mockPlayer1, mockPlayer2)
-        mockSuggestor = MockActionSuggestorProtocol().withEnabledDefaultImplementation(ActionSuggestorProtocolStub())
-        sut = GameEngine(state: mockState, suggestor: mockSuggestor)
+        mockRule1 = MockRuleProtocol().withEnabledDefaultImplementation(RuleProtocolStub())
+        mockRule2 = MockRuleProtocol().withEnabledDefaultImplementation(RuleProtocolStub())
+        sut = GameEngine(state: mockState, rules: [mockRule1, mockRule2])
     }
     
     func test_ExposePassedStateInConstructor() {
@@ -50,7 +52,7 @@ class GameEngineTests: XCTestCase {
         sut.execute(mockAction)
         
         // Assert
-        verify(mockAction).execute(state: state(equalTo: mockState))
+        verify(mockAction).execute(in: state(equalTo: mockState))
         verify(mockState).addCommand(action(describedBy: "ac"))
     }
     
@@ -63,15 +65,19 @@ class GameEngineTests: XCTestCase {
         let action2 = MockActionProtocol()
             .described(by: "a2")
             .actorId(is: "p1")
-        Cuckoo.stub(mockSuggestor) { mock in
-            when(mock.actions(matching: state(equalTo: mockState))).thenReturn([action1, action2])
+        Cuckoo.stub(mockRule1) { mock in
+            when(mock.match(with: state(equalTo: mockState))).thenReturn([action1])
+        }
+        Cuckoo.stub(mockRule2) { mock in
+            when(mock.match(with: state(equalTo: mockState))).thenReturn([action2])
         }
         
         // When
         sut.execute(mockAction)
         
         // Assert
-        verify(mockSuggestor).actions(matching: state(equalTo: mockState))
+        verify(mockRule1).match(with: state(equalTo: mockState))
+        verify(mockRule2).match(with: state(equalTo: mockState))
         verify(mockPlayer1).setActions(actions(describedBy: ["a1", "a2"]))
         verify(mockPlayer2).setActions(isEmpty())
     }

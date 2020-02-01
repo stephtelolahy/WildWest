@@ -7,7 +7,6 @@
 //
 
 protocol ResourcesProviderProtocol {
-    func allCards() -> [Card]
-    func allFigures() -> [Figure]
-    func allRoles() -> [RoleCard]
+    func allCards() -> [CardProtocol]
+    func allFigures() -> [FigureProtocol]
 }

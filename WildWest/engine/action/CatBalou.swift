@@ -17,7 +17,7 @@ struct CatBalou: ActionProtocol, Equatable {
     let targetCardId: String
     let targetCardSource: CardSource
     
-    func execute(state: GameStateProtocol) {
+    func execute(in state: GameStateProtocol) {
         state.discardHand(playerId: actorId, cardId: cardId)
         switch targetCardSource {
         case .hand:
@@ -34,7 +34,7 @@ struct CatBalou: ActionProtocol, Equatable {
 
 struct CatBalouRule: RuleProtocol {
     
-    func match(state: GameStateProtocol) -> [ActionProtocol] {
+    func match(with state: GameStateProtocol) -> [ActionProtocol] {
         guard state.challenge == nil else {
             return []
         }
@@ -48,6 +48,14 @@ struct CatBalouRule: RuleProtocol {
         var result: [CatBalou] = []
         let otherPlayers = state.players.filter { $0.identifier != player.identifier }
         for card in cards {
+            for inPlayCard in player.inPlay {
+                result.append(CatBalou(actorId: player.identifier,
+                                       cardId: card.identifier,
+                                       targetPlayerId: player.identifier,
+                                       targetCardId: inPlayCard.identifier,
+                                       targetCardSource: .inPlay))
+            }
+            
             for otherPlayer in otherPlayers {
                 for handCard in otherPlayer.hand {
                     result.append(CatBalou(actorId: player.identifier,

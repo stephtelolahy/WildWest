@@ -22,7 +22,7 @@ class StartTurnTests: XCTestCase {
             .challenge(is: .startTurn)
         
         // When
-        let actions = sut.match(state: mockState)
+        let actions = sut.match(with: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [StartTurn], [StartTurn(actorId: "p2")])
@@ -34,7 +34,7 @@ class StartTurnTests: XCTestCase {
         let sut = StartTurn(actorId: "p1")
         
         // When
-        sut.execute(state: mockState)
+        sut.execute(in: mockState)
         
         // Assert
         verify(mockState).setChallenge(isNil())

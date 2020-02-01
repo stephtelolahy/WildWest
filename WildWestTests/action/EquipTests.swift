@@ -32,7 +32,7 @@ class EquipTests: XCTestCase {
         let sut = Equip(actorId: "p1", cardId: "c1")
         
         // When
-        sut.execute(state: mockState)
+        sut.execute(in: mockState)
         
         // Assert
         verify(mockState).putInPlay(playerId: "p1", cardId: "c1")
@@ -50,7 +50,7 @@ class EquipTests: XCTestCase {
         let sut = Equip(actorId: "p1", cardId: "c1")
         
         // When
-        sut.execute(state: mockState)
+        sut.execute(in: mockState)
         
         // Assert
         verify(mockState).putInPlay(playerId: "p1", cardId: "c1")
@@ -73,7 +73,7 @@ class EquipTests: XCTestCase {
             .players(are: mockPlayer)
         
         // When
-        let actions = sut.match(state: mockState)
+        let actions = sut.match(with: mockState)
         
         // Assert
         XCTAssertTrue(actions.isEmpty)
@@ -101,7 +101,7 @@ class EquipTests: XCTestCase {
             .players(are: mockPlayer)
         
         // When
-        let actions = sut.match(state: mockState)
+        let actions = sut.match(with: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [Equip], [
@@ -124,7 +124,7 @@ class EquipTests: XCTestCase {
             .players(are: mockPlayer)
         
         // When
-        let actions = sut.match(state: mockState)
+        let actions = sut.match(with: mockState)
         
         // Assert
         XCTAssertTrue(actions.isEmpty)

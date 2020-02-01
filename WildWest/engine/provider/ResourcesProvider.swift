@@ -14,15 +14,11 @@ class ResourcesProvider: ResourcesProviderProtocol {
         self.jsonReader = jsonReader
     }
     
-    func allCards() -> [Card] {
+    func allCards() -> [CardProtocol] {
         return jsonReader.load([Card].self, file: "cards")
     }
     
-    func allFigures() -> [Figure] {
+    func allFigures() -> [FigureProtocol] {
         return jsonReader.load([Figure].self, file: "figures")
-    }
-    
-    func allRoles() -> [RoleCard] {
-        return jsonReader.load([RoleCard].self, file: "roles")
     }
 }

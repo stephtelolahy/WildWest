@@ -13,7 +13,7 @@ struct Panic: ActionProtocol, Equatable {
     let targetCardId: String
     let targetCardSource: CardSource
     
-    func execute(state: GameStateProtocol) {
+    func execute(in state: GameStateProtocol) {
         state.discardHand(playerId: actorId, cardId: cardId)
         switch targetCardSource {
         case .hand:
@@ -36,7 +36,7 @@ struct PanicRule: RuleProtocol {
         self.rangeCalculator = rangeCalculator
     }
     
-    func match(state: GameStateProtocol) -> [ActionProtocol] {
+    func match(with state: GameStateProtocol) -> [ActionProtocol] {
         guard state.challenge == nil else {
             return []
         }
