@@ -40,7 +40,8 @@ class GameViewController: UIViewController, Subscribable {
             PanicRule(calculator: calculator),
             StartTurnRule(),
             EndTurnRule(),
-            ShootRule(calculator: calculator)
+            ShootRule(calculator: calculator),
+            MissedRule()
         ]
         return GameEngine(state: state, rules: rules)
     }()

@@ -128,6 +128,15 @@ class GameStateTests: XCTestCase {
         XCTAssertEqual(sut.turn, 1)
     }
     
+    func test_SetTurnShoots() {
+        // Given
+        // When
+        sut.setTurnShoots(1)
+        
+        // Assert
+        XCTAssertEqual(sut.turnShoots, 1)
+    }
+    
     func test_AddCommand() {
         // Given
         let mockAction = MockActionProtocol().described(by: "ac")
