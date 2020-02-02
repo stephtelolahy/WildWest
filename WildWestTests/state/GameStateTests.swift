@@ -15,6 +15,7 @@ class GameStateTests: XCTestCase {
     
     private var mockPlayer1: MockPlayerProtocol!
     private var mockPlayer2: MockPlayerProtocol!
+    private var mockPlayer3: MockPlayerProtocol!
     private var mockDeck: MockDeckProtocol!
     
     override func setUp() {
@@ -26,7 +27,10 @@ class GameStateTests: XCTestCase {
         mockPlayer2 = MockPlayerProtocol()
             .withEnabledDefaultImplementation(PlayerProtocolStub())
             .identified(by: "p2")
-        sut = GameState(players: [mockPlayer1, mockPlayer2],
+        mockPlayer3 = MockPlayerProtocol()
+            .withEnabledDefaultImplementation(PlayerProtocolStub())
+            .identified(by: "p3")
+        sut = GameState(players: [mockPlayer1, mockPlayer2, mockPlayer3],
                         deck: mockDeck,
                         turn: 0,
                         challenge: nil,
@@ -40,7 +44,7 @@ class GameStateTests: XCTestCase {
         // Given
         // When
         // Assert
-        XCTAssertTrue(sut.players[0] as? MockPlayerProtocol === mockPlayer1)
+        XCTAssertEqual(sut.players.map { $0.identifier }, ["p1", "p2", "p3"])
         XCTAssertTrue(sut.deck as? MockDeckProtocol === mockDeck)
         XCTAssertNil(sut.challenge)
         XCTAssertTrue(sut.commands.isEmpty)
@@ -203,5 +207,48 @@ class GameStateTests: XCTestCase {
         // Assert
         verify(mockPlayer2).removeInPlayById("c2")
         verify(mockPlayer1).addHand(card(identifiedBy: "c2"))
+    }
+    
+    func test_DecrementHealth_IfLoosingLifePoint() {
+        // Given
+        Cuckoo.stub(mockPlayer1) { mock in
+            when(mock.health.get).thenReturn(2)
+        }
+        
+        // When
+        sut.looseLifePoint(playerId: "p1")
+        
+        // Assert
+        verify(mockPlayer1).setHealth(1)
+    }
+    
+    func test_RemovePlayer_IfEliminated() {
+        // Given
+        // When
+        sut.eliminate(playerId: "p1")
+        
+        // Assert
+        XCTAssertEqual(sut.players.map { $0.identifier }, ["p2", "p3"])
+        verifyNoMoreInteractions(mockDeck)
+    }
+    
+    func test_EndTurn_IfTurnPlayerIsEliminated() {
+        #warning("TODO")
+    }
+    
+    func test_RevealRoleAndDiscardAllCards_IfPlayerEliminated() {
+        #warning("TODO")
+    }
+    
+    func test_EndGame_IfSheriffIsEliminated() {
+        #warning("TODO")
+    }
+    
+    func test_EndGame_IfAllOutlawsAreEliminated() {
+        #warning("TODO")
+    }
+    
+    func test_Reward_IfOutlaweliminated() {
+        #warning("TODO")
     }
 }

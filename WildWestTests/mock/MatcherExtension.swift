@@ -26,15 +26,15 @@ func action(describedBy description: String) -> ParameterMatcher<ActionProtocol>
     })
 }
 
-func state(equalTo mock: MockGameStateProtocol) -> ParameterMatcher<GameStateProtocol> {
+func state(equalTo object: AnyObject) -> ParameterMatcher<GameStateProtocol> {
     return ParameterMatcher(matchesFunction: { state -> Bool in
-        return state as? MockGameStateProtocol === mock
+        return state as AnyObject === object
     })
 }
 
-func player(equalTo mock: MockPlayerProtocol) -> ParameterMatcher<PlayerProtocol> {
+func player(equalTo object: AnyObject) -> ParameterMatcher<PlayerProtocol> {
     return ParameterMatcher(matchesFunction: { player -> Bool in
-        return player as? MockPlayerProtocol === mock
+        return player as AnyObject === object
     })
 }
 

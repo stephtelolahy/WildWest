@@ -15,6 +15,26 @@ struct LooseLife: ActionProtocol, Equatable {
     }
     
     func execute(in state: GameStateProtocol) {
+        guard let player = state.players.first(where: { $0.identifier == actorId }) else {
+            return
+        }
+        
+        if player.health >= 2 {
+            state.looseLifePoint(playerId: actorId)
+        } else {
+            state.eliminate(playerId: actorId)
+        }
+        
+        guard case let .shoot(targetIds) = state.challenge else {
+            return
+        }
+        
+        let remainingTargetIds = targetIds.filter { $0 != actorId }
+        if remainingTargetIds.isEmpty {
+            state.setChallenge(nil)
+        } else {
+            state.setChallenge(.shoot(remainingTargetIds))
+        }
     }
 }
 

@@ -1327,6 +1327,36 @@ import Cuckoo
         
     }
     
+    
+    
+     func looseLifePoint(playerId: String)  {
+        
+    return cuckoo_manager.call("looseLifePoint(playerId: String)",
+            parameters: (playerId),
+            escapingParameters: (playerId),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.looseLifePoint(playerId: playerId))
+        
+    }
+    
+    
+    
+     func eliminate(playerId: String)  {
+        
+    return cuckoo_manager.call("eliminate(playerId: String)",
+            parameters: (playerId),
+            escapingParameters: (playerId),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.eliminate(playerId: playerId))
+        
+    }
+    
 
 	 struct __StubbingProxy_GameStateProtocol: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
@@ -1434,6 +1464,16 @@ import Cuckoo
 	    func pullInPlay<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable>(playerId: M1, otherId: M2, cardId: M3) -> Cuckoo.ProtocolStubNoReturnFunction<(String, String, String)> where M1.MatchedType == String, M2.MatchedType == String, M3.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: otherId) { $0.1 }, wrap(matchable: cardId) { $0.2 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "pullInPlay(playerId: String, otherId: String, cardId: String)", parameterMatchers: matchers))
+	    }
+	    
+	    func looseLifePoint<M1: Cuckoo.Matchable>(playerId: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(String)> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: playerId) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "looseLifePoint(playerId: String)", parameterMatchers: matchers))
+	    }
+	    
+	    func eliminate<M1: Cuckoo.Matchable>(playerId: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(String)> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: playerId) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "eliminate(playerId: String)", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -1564,6 +1604,18 @@ import Cuckoo
 	        return cuckoo_manager.verify("pullInPlay(playerId: String, otherId: String, cardId: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
+	    @discardableResult
+	    func looseLifePoint<M1: Cuckoo.Matchable>(playerId: M1) -> Cuckoo.__DoNotUse<(String), Void> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: playerId) { $0 }]
+	        return cuckoo_manager.verify("looseLifePoint(playerId: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func eliminate<M1: Cuckoo.Matchable>(playerId: M1) -> Cuckoo.__DoNotUse<(String), Void> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: playerId) { $0 }]
+	        return cuckoo_manager.verify("eliminate(playerId: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
 	}
 }
 
@@ -1682,6 +1734,14 @@ import Cuckoo
     }
     
      func pullInPlay(playerId: String, otherId: String, cardId: String)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func looseLifePoint(playerId: String)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func eliminate(playerId: String)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     

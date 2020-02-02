@@ -11,15 +11,76 @@ import Cuckoo
 
 class LooseLifeTests: XCTestCase {
     
-    func test_DecrementLifePoint_IfLoosingLifePoint() {
+    func test_LooseLifePoint_IfLoosingLifePoint() {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .health(is: 3)
+        let mockState = MockGameStateProtocol()
+            .withEnabledDefaultImplementation(GameStateProtocolStub())
+            .challenge(is: .shoot(["p1"]))
+            .players(are: mockPlayer1, MockPlayerProtocol())
+        let sut = LooseLife(actorId: "p1")
         
-    }
-    
-    func test_RemoveActorFromShootChallenge_IfLoosingLifePoint() {
+        // When
+        sut.execute(in: mockState)
+        
+        // Assert
+        verify(mockState).looseLifePoint(playerId: "p1")
     }
     
     func test_EliminateActor_IfLoosingLastLife() {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .health(is: 1)
+        let mockState = MockGameStateProtocol()
+            .withEnabledDefaultImplementation(GameStateProtocolStub())
+            .challenge(is: .shoot(["p1"]))
+            .players(are: mockPlayer1, MockPlayerProtocol())
+        let sut = LooseLife(actorId: "p1")
         
+        // When
+        sut.execute(in: mockState)
+        
+        // Assert
+        verify(mockState).eliminate(playerId: "p1")
+    }
+    
+    func test_RemoveChallenge_IfLoosingLidePoint() {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .health(is: 4)
+        let mockState = MockGameStateProtocol()
+            .withEnabledDefaultImplementation(GameStateProtocolStub())
+            .challenge(is: .shoot(["p1"]))
+            .players(are: mockPlayer1, MockPlayerProtocol())
+        let sut = LooseLife(actorId: "p1")
+        
+        // When
+        sut.execute(in: mockState)
+        
+        // Assert
+        verify(mockState).setChallenge(isNil())
+    }
+    
+    func test_RemoveActorFromChallenge_IfLoosingLifePoint() {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .health(is: 3)
+        let mockState = MockGameStateProtocol()
+            .withEnabledDefaultImplementation(GameStateProtocolStub())
+            .challenge(is: .shoot(["p1", "p2", "p3"]))
+            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
+        let sut = LooseLife(actorId: "p1")
+        
+        // When
+        sut.execute(in: mockState)
+        
+        // Assert
+        verify(mockState).setChallenge(equal(to: .shoot(["p2", "p3"])))
     }
 }
 

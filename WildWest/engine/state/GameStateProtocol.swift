@@ -28,6 +28,8 @@ protocol GameStateProtocol {
     func setTurnShoots(_ shoots: Int)
     func pullHand(playerId: String, otherId: String, cardId: String)
     func pullInPlay(playerId: String, otherId: String, cardId: String)
+    func looseLifePoint(playerId: String)
+    func eliminate(playerId: String)
 }
 
 enum GameOutcome {

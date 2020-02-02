@@ -8,7 +8,7 @@
 
 class GameState: GameStateProtocol {
     
-    let players: [PlayerProtocol]
+    var players: [PlayerProtocol]
     let deck: DeckProtocol
     var turn: Int
     var challenge: Challenge?
@@ -91,6 +91,14 @@ class GameState: GameStateProtocol {
         player.setHealth(player.health + 1)
     }
     
+    func looseLifePoint(playerId: String) {
+        guard let player = players.first(where: { $0.identifier == playerId }) else {
+            return
+        }
+        
+        player.setHealth(player.health - 1)
+    }
+    
     func putInPlay(playerId: String, cardId: String) {
         guard let player = players.first(where: { $0.identifier == playerId }) else {
             return
@@ -121,5 +129,9 @@ class GameState: GameStateProtocol {
         if let card = other.removeInPlayById(cardId) {
             player.addHand(card)
         }
+    }
+    
+    func eliminate(playerId: String) {
+        players.removeAll(where: { $0.identifier == playerId })
     }
 }
