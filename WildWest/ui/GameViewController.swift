@@ -45,7 +45,8 @@ class GameViewController: UIViewController, Subscribable {
             GatlingRule(),
             LooseLifeRule(),
             IndiansRule(),
-            DiscardBangRule()
+            DiscardBangRule(),
+            DuelRule()
         ]
         return GameEngine(state: state, rules: rules)
     }()

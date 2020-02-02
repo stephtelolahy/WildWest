@@ -43,6 +43,6 @@ enum Challenge: Equatable {
     case startTurn
     case shoot([String])
     case indians([String])
-    case duel
+    case duel([String])
     case generalStore
 }
