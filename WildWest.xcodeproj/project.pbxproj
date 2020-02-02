@@ -42,6 +42,7 @@
 		33AFB62623DCAC9E00C96CED /* StartTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFB62523DCAC9E00C96CED /* StartTurn.swift */; };
 		33AFB62723DCACA100C96CED /* StartTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFB62523DCAC9E00C96CED /* StartTurn.swift */; };
 		33AFB62923DCAD1800C96CED /* StartTurnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFB62823DCAD1800C96CED /* StartTurnTests.swift */; };
+		33B04DC023E6ED7C006636F5 /* GatlingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B04DBF23E6ED7C006636F5 /* GatlingTests.swift */; };
 		33B7DFA623E20BDD0051718E /* EndTurnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B7DFA523E20BDD0051718E /* EndTurnTests.swift */; };
 		33D477E723E4F9E300E232D9 /* RangeCalculatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D477E623E4F9E200E232D9 /* RangeCalculatorProtocol.swift */; };
 		33D477E823E4F9E300E232D9 /* RangeCalculatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D477E623E4F9E200E232D9 /* RangeCalculatorProtocol.swift */; };
@@ -178,6 +179,7 @@
 		33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameProtocol.swift; sourceTree = "<group>"; };
 		33AFB62523DCAC9E00C96CED /* StartTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTurn.swift; sourceTree = "<group>"; };
 		33AFB62823DCAD1800C96CED /* StartTurnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTurnTests.swift; sourceTree = "<group>"; };
+		33B04DBF23E6ED7C006636F5 /* GatlingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatlingTests.swift; sourceTree = "<group>"; };
 		33B7DFA523E20BDD0051718E /* EndTurnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTurnTests.swift; sourceTree = "<group>"; };
 		33D477E623E4F9E200E232D9 /* RangeCalculatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeCalculatorProtocol.swift; sourceTree = "<group>"; };
 		33D477E923E4FA0F00E232D9 /* RangeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeCalculator.swift; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 				33A4381623E4C1FD00C39DD6 /* PanicTests.swift */,
 				33A1410C23E5CFE800E40AA8 /* ShootTest.swift */,
 				33AE8F5823E6303B00DC2A41 /* MissedTests.swift */,
+				33B04DBF23E6ED7C006636F5 /* GatlingTests.swift */,
 			);
 			path = action;
 			sourceTree = "<group>";
@@ -785,6 +788,7 @@
 				AD46810F23BEA2B0000B42C7 /* PlayerExtension.swift in Sources */,
 				33D964B523DDDB1E007295E7 /* GameEngine.swift in Sources */,
 				33A4381023E496FF00C39DD6 /* CatBalouTests.swift in Sources */,
+				33B04DC023E6ED7C006636F5 /* GatlingTests.swift in Sources */,
 				AD7F34B923D79841001B4072 /* MockCardProtocolExtension.swift in Sources */,
 				AD48DD3023BEB11800E5B552 /* BeerTests.swift in Sources */,
 				ADB5A10223BAB81E0050E173 /* Missed.swift in Sources */,
