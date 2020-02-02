@@ -13,15 +13,21 @@ struct DiscardBang: ActionProtocol, Equatable {
     func execute(in state: GameStateProtocol) {
         state.discardHand(playerId: actorId, cardId: cardId)
         
-        guard case let .indians(targetIds) = state.challenge else {
-            return
-        }
-        
-        let remainingTargetIds = targetIds.filter { $0 != actorId }
-        if remainingTargetIds.isEmpty {
-            state.setChallenge(nil)
-        } else {
-            state.setChallenge(.indians(remainingTargetIds))
+        switch state.challenge {
+        case let .indians(targetIds):
+            let remainingTargetIds = targetIds.filter { $0 != actorId }
+            if remainingTargetIds.isEmpty {
+                state.setChallenge(nil)
+            } else {
+                state.setChallenge(.indians(remainingTargetIds))
+            }
+            
+        case let .duel(playerIds):
+            let permutedPlayerIds = [playerIds[1], playerIds[0]]
+            state.setChallenge(.duel(permutedPlayerIds))
+            
+        default:
+            break
         }
     }
     
@@ -35,11 +41,20 @@ struct DiscardBangRule: RuleProtocol {
     let actionName: String = "DiscardBang"
     
     func match(with state: GameStateProtocol) -> [ActionProtocol] {
-        guard case let .indians(targetIds) = state.challenge else {
-            return  []
+        var actorId: String?
+        
+        switch state.challenge {
+        case let .indians(targetIds):
+            actorId = targetIds.first
+            
+        case let .duel(playerIds):
+            actorId = playerIds.first
+            
+        default:
+            break
         }
         
-        guard let actor = state.players.first(where: { $0.identifier == targetIds.first }) else {
+        guard let actor = state.players.first(where: { $0.identifier == actorId }) else {
             return []
         }
         
