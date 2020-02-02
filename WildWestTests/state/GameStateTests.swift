@@ -149,13 +149,23 @@ class GameStateTests: XCTestCase {
         XCTAssertEqual(sut.commands.last?.description, "ac")
     }
     
-    func test_SetSomeChallenge() {
+    func test_SetChallenge() {
         // Given
         // When
         sut.setChallenge(.startTurn)
         
         // Assert
         XCTAssertEqual(sut.challenge, .startTurn)
+    }
+    
+    func test_SetActions() {
+        // Given
+        // When
+        sut.setActions([GenericAction(name: "ac", options: [])])
+        
+        // Assert
+        XCTAssertEqual(sut.actions.count, 1)
+        XCTAssertEqual(sut.actions.first?.name, "ac")
     }
     
     func test_RemoveChallenge() {

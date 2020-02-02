@@ -85,7 +85,6 @@
 		AD52B99D23B17A310013240B /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD52B99B23B17A310013240B /* GameState.swift */; };
 		AD671A1C23D8F9D600F0AA4A /* CardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD671A1B23D8F9D600F0AA4A /* CardExtension.swift */; };
 		AD671A1D23D8F9D600F0AA4A /* CardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD671A1B23D8F9D600F0AA4A /* CardExtension.swift */; };
-		AD7EAFBA23D7817E00FE23D5 /* JailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7EAFB923D7817E00FE23D5 /* JailTests.swift */; };
 		AD7EAFBC23D7825800FE23D5 /* GameStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7EAFBB23D7825800FE23D5 /* GameStateTests.swift */; };
 		AD7EAFBF23D7846D00FE23D5 /* GameSetupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7EAFBE23D7846D00FE23D5 /* GameSetupTests.swift */; };
 		AD7F34B923D79841001B4072 /* MockCardProtocolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7F34B823D79841001B4072 /* MockCardProtocolExtension.swift */; };
@@ -212,7 +211,6 @@
 		AD52B99823B178CC0013240B /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		AD52B99B23B17A310013240B /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		AD671A1B23D8F9D600F0AA4A /* CardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardExtension.swift; sourceTree = "<group>"; };
-		AD7EAFB923D7817E00FE23D5 /* JailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JailTests.swift; sourceTree = "<group>"; };
 		AD7EAFBB23D7825800FE23D5 /* GameStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateTests.swift; sourceTree = "<group>"; };
 		AD7EAFBE23D7846D00FE23D5 /* GameSetupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetupTests.swift; sourceTree = "<group>"; };
 		AD7F34B823D79841001B4072 /* MockCardProtocolExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCardProtocolExtension.swift; sourceTree = "<group>"; };
@@ -290,16 +288,23 @@
 			path = provider;
 			sourceTree = "<group>";
 		};
-		AD208A6623C6809B0082AC98 /* extensions */ = {
+		33EC5D3223E6F93F00E14890 /* mock */ = {
 			isa = PBXGroup;
 			children = (
 				AD7F34B823D79841001B4072 /* MockCardProtocolExtension.swift */,
 				33D477F323E57FDD00E232D9 /* MockFigureProtocolExtension.swift */,
 				AD7F34BC23D79879001B4072 /* MockPlayerProtocolExtension.swift */,
 				AD7F34BE23D79893001B4072 /* MockGameStateProtocolExtension.swift */,
-				AD4BE6A923DA4B12003A610A /* CollectionExtension.swift */,
-				33D964B123DD9119007295E7 /* MatcherExtension.swift */,
 				331BBE7123DE4E800099046C /* MockActionProtocolExtension.swift */,
+				33D964B123DD9119007295E7 /* MatcherExtension.swift */,
+			);
+			path = mock;
+			sourceTree = "<group>";
+		};
+		AD208A6623C6809B0082AC98 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AD4BE6A923DA4B12003A610A /* CollectionExtension.swift */,
 				33A4381423E4BE8200C39DD6 /* ArrayExtensionTests.swift */,
 			);
 			path = extensions;
@@ -415,7 +420,6 @@
 				AD48DD2923BEAE1300E5B552 /* StagecoachTests.swift */,
 				AD48DD2B23BEAFAF00E5B552 /* WellsFargoTests.swift */,
 				AD48DD2D23BEB06600E5B552 /* EquipTests.swift */,
-				AD7EAFB923D7817E00FE23D5 /* JailTests.swift */,
 				33AFB62823DCAD1800C96CED /* StartTurnTests.swift */,
 				33B7DFA523E20BDD0051718E /* EndTurnTests.swift */,
 				33A4380F23E496FF00C39DD6 /* CatBalouTests.swift */,
@@ -479,6 +483,7 @@
 				AD7EAFBD23D7846000FE23D5 /* engine */,
 				AD36CDED23C522EE008D4EDB /* state */,
 				AD48DD2823BEABD100E5B552 /* action */,
+				33EC5D3223E6F93F00E14890 /* mock */,
 				AD208A6623C6809B0082AC98 /* extensions */,
 				AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */,
 				ADB7D304239EE03900653905 /* Info.plist */,
@@ -827,7 +832,6 @@
 				ADE91ACE23B9FE2300F7316B /* JsonReader.swift in Sources */,
 				33F2505D23DDDBCC00A0FDD1 /* GameEngineTests.swift in Sources */,
 				AD48DD2E23BEB06600E5B552 /* EquipTests.swift in Sources */,
-				AD7EAFBA23D7817E00FE23D5 /* JailTests.swift in Sources */,
 				ADD035CA23A95EEB003B2576 /* ActionProtocol.swift in Sources */,
 				33D477EB23E4FA0F00E232D9 /* RangeCalculator.swift in Sources */,
 				ADE91AC723B9F84200F7316B /* Saloon.swift in Sources */,

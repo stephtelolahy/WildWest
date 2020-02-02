@@ -62,7 +62,7 @@ class BeerRuleTests: XCTestCase {
         XCTAssertEqual(actions as? [Beer], [Beer(actorId: "p1", cardId: "c1")])
     }
     
-    func test_CannotPlayBeer_ToGainMoreLifePointsThanYourStartingAmount() {
+    func test_CannotPlayBeer_IfMaxHealth() {
         // Given
         let sut = BeerRule()
         let mockCard = MockCardProtocol()
