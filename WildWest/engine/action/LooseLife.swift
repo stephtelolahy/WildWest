@@ -42,6 +42,9 @@ struct LooseLife: ActionProtocol, Equatable {
                 state.setChallenge(.indians(remainingTargetIds))
             }
             
+        case .duel:
+            state.setChallenge(nil)
+            
         default:
             break
         }
@@ -62,6 +65,8 @@ struct LooseLifeRule: RuleProtocol {
         case let .indians(targetIds):
             actorId = targetIds.first
             
+        case let .duel(playerIds):
+            actorId = playerIds.first
         default:
             break
         }
