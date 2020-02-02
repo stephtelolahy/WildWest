@@ -15,6 +15,7 @@ protocol GameStateProtocol {
     var outcome: GameOutcome? { get }
     var actions: [GenericAction] { get }
     var commands: [ActionProtocol] { get }
+    var eliminated: [PlayerProtocol] { get }
     
     func setActions(_ actions: [GenericAction])
     func discardHand(playerId: String, cardId: String)

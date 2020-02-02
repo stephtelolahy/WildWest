@@ -16,6 +16,7 @@ class GameState: GameStateProtocol {
     var outcome: GameOutcome?
     var commands: [ActionProtocol]
     var actions: [GenericAction]
+    var eliminated: [PlayerProtocol]
     
     init(players: [PlayerProtocol],
          deck: DeckProtocol,
@@ -24,7 +25,8 @@ class GameState: GameStateProtocol {
          turnShoots: Int,
          outcome: GameOutcome?,
          actions: [GenericAction],
-         commands: [ActionProtocol]) {
+         commands: [ActionProtocol],
+         eliminated: [PlayerProtocol]) {
         self.players = players
         self.deck = deck
         self.turn = turn
@@ -33,6 +35,7 @@ class GameState: GameStateProtocol {
         self.outcome = outcome
         self.commands = commands
         self.actions = actions
+        self.eliminated = eliminated
     }
     
     func setActions(_ actions: [GenericAction]) {
@@ -132,6 +135,13 @@ class GameState: GameStateProtocol {
     }
     
     func eliminate(playerId: String) {
+        guard let player = players.first(where: { $0.identifier == playerId }) else {
+            return
+        }
+        
+        player.hand.forEach { discardHand(playerId: playerId, cardId: $0.identifier) }
+        player.inPlay.forEach { discardInPlay(playerId: playerId, cardId: $0.identifier) }
         players.removeAll(where: { $0.identifier == playerId })
+        eliminated.append(player)
     }
 }

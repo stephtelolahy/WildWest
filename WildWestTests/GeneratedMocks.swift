@@ -1143,6 +1143,20 @@ import Cuckoo
         
     }
     
+    
+    
+     var eliminated: [PlayerProtocol] {
+        get {
+            return cuckoo_manager.getter("eliminated",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.eliminated)
+        }
+        
+    }
+    
 
     
 
@@ -1406,6 +1420,11 @@ import Cuckoo
 	    }
 	    
 	    
+	    var eliminated: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [PlayerProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "eliminated")
+	    }
+	    
+	    
 	    func setActions<M1: Cuckoo.Matchable>(_ actions: M1) -> Cuckoo.ProtocolStubNoReturnFunction<([GenericAction])> where M1.MatchedType == [GenericAction] {
 	        let matchers: [Cuckoo.ParameterMatcher<([GenericAction])>] = [wrap(matchable: actions) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "setActions(_: [GenericAction])", parameterMatchers: matchers))
@@ -1528,6 +1547,11 @@ import Cuckoo
 	    
 	    var commands: Cuckoo.VerifyReadOnlyProperty<[ActionProtocol]> {
 	        return .init(manager: cuckoo_manager, name: "commands", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var eliminated: Cuckoo.VerifyReadOnlyProperty<[PlayerProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "eliminated", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	
@@ -1681,6 +1705,14 @@ import Cuckoo
      var commands: [ActionProtocol] {
         get {
             return DefaultValueRegistry.defaultValue(for: ([ActionProtocol]).self)
+        }
+        
+    }
+    
+    
+     var eliminated: [PlayerProtocol] {
+        get {
+            return DefaultValueRegistry.defaultValue(for: ([PlayerProtocol]).self)
         }
         
     }

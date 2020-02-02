@@ -37,7 +37,8 @@ class GameStateTests: XCTestCase {
                         turnShoots: 0,
                         outcome: nil,
                         actions: [],
-                        commands: [])
+                        commands: [],
+                        eliminated: [])
     }
     
     func test_InitialProperties() {
@@ -232,11 +233,37 @@ class GameStateTests: XCTestCase {
         verifyNoMoreInteractions(mockDeck)
     }
     
-    func test_EndTurn_IfTurnPlayerIsEliminated() {
-        #warning("TODO")
+    func test_RevealRoleAndDiscardAllCards_IfPlayerEliminated() {
+        // Given
+        let card1 = MockCardProtocol().identified(by: "c1")
+        let card2 = MockCardProtocol().identified(by: "c2")
+        let card3 = MockCardProtocol().identified(by: "c3")
+        let card4 = MockCardProtocol().identified(by: "c4")
+        Cuckoo.stub(mockPlayer1) { mock in
+            when(mock.hand.get).thenReturn([card1, card2])
+            when(mock.inPlay.get).thenReturn([card3, card4])
+            when(mock.removeHandById("c1")).thenReturn(card1)
+            when(mock.removeHandById("c2")).thenReturn(card2)
+            when(mock.removeInPlayById("c3")).thenReturn(card3)
+            when(mock.removeInPlayById("c4")).thenReturn(card4)
+        }
+        
+        // When
+        sut.eliminate(playerId: "p1")
+        
+        // Assert
+        verify(mockPlayer1).removeHandById("c1")
+        verify(mockPlayer1).removeHandById("c2")
+        verify(mockPlayer1).removeInPlayById("c3")
+        verify(mockPlayer1).removeInPlayById("c4")
+        verify(mockDeck).addToDiscard(card(identifiedBy: "c1"))
+        verify(mockDeck).addToDiscard(card(identifiedBy: "c2"))
+        verify(mockDeck).addToDiscard(card(identifiedBy: "c3"))
+        verify(mockDeck).addToDiscard(card(identifiedBy: "c4"))
+        XCTAssertEqual(sut.eliminated.map { $0.identifier }, ["p1"])
     }
     
-    func test_RevealRoleAndDiscardAllCards_IfPlayerEliminated() {
+    func test_EndTurn_IfTurnPlayerIsEliminated() {
         #warning("TODO")
     }
     
