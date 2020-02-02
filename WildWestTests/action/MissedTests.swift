@@ -11,9 +11,11 @@ import Cuckoo
 
 class MissedTests: XCTestCase {
     
-    func test_DiscardMissedCardAndRemoveChallenge_IfPlayingMissed() {
+    func test_DiscardCard_IfPlayingMissed() {
         // Given
-        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
+        let mockState = MockGameStateProtocol()
+            .withEnabledDefaultImplementation(GameStateProtocolStub())
+            .challenge(is: .shoot(["p1"]))
         let sut = Missed(actorId: "p1", cardId: "c1")
         
         // When
@@ -21,7 +23,34 @@ class MissedTests: XCTestCase {
         
         // Assert
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")
+    }
+    
+    func test_RemoveChallenge_IfPlayingMissed() {
+        // Given
+        let mockState = MockGameStateProtocol()
+            .withEnabledDefaultImplementation(GameStateProtocolStub())
+            .challenge(is: .shoot(["p1"]))
+        let sut = Missed(actorId: "p1", cardId: "c1")
+        
+        // When
+        sut.execute(in: mockState)
+        
+        // Assert
         verify(mockState).setChallenge(isNil())
+    }
+    
+    func test_RemoveActorFromChallenge_IfPlayingMissed() {
+        // Given
+        let mockState = MockGameStateProtocol()
+            .withEnabledDefaultImplementation(GameStateProtocolStub())
+            .challenge(is: .shoot(["p1", "p2", "p3"]))
+        let sut = Missed(actorId: "p1", cardId: "c1")
+        
+        // When
+        sut.execute(in: mockState)
+        
+        // Assert
+        verify(mockState).setChallenge(equal(to: .shoot(["p2", "p3"])))
     }
 }
 
