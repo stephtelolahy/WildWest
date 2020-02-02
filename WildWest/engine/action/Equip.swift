@@ -32,23 +32,25 @@ struct Equip: ActionProtocol, Equatable {
 
 struct EquipRule: RuleProtocol {
     
+    let actionName: String = "Equip"
+    
     func match(with state: GameStateProtocol) -> [ActionProtocol] {
         guard state.challenge == nil else {
             return []
         }
         
-        let player = state.players[state.turn]
-        let cards = player.handCards(named: .volcanic,
-                                     .schofield,
-                                     .remington,
-                                     .winchester,
-                                     .revCarbine,
-                                     .barrel,
-                                     .mustang,
-                                     .scope,
-                                     .dynamite)
+        let actor = state.players[state.turn]
+        let cards = actor.handCards(named: .volcanic,
+                                    .schofield,
+                                    .remington,
+                                    .winchester,
+                                    .revCarbine,
+                                    .barrel,
+                                    .mustang,
+                                    .scope,
+                                    .dynamite)
         return cards
-            .filter { player.inPlayCards(named: $0.name).isEmpty }
-            .map { Equip(actorId: player.identifier, cardId: $0.identifier) }
+            .filter { actor.inPlayCards(named: $0.name).isEmpty }
+            .map { Equip(actorId: actor.identifier, cardId: $0.identifier) }
     }
 }

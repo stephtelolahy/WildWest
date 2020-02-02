@@ -11,6 +11,8 @@ import Cuckoo
 
 class RangeCalculatorTests: XCTestCase {
     
+    private let sut = RangeCalculator()
+    
     override func setUp() {
         DefaultValueRegistry.register(value: [CardProtocol](), forType: [CardProtocol].self)
     }
@@ -19,7 +21,6 @@ class RangeCalculatorTests: XCTestCase {
         // Given
         let mockPlayer1 = MockPlayerProtocol().identified(by: "p1")
         let mockState = MockGameStateProtocol().players(are: mockPlayer1)
-        let sut = RangeCalculator()
         
         // When
         // Assert
@@ -34,7 +35,6 @@ class RangeCalculatorTests: XCTestCase {
         let mockPlayer4 = MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p4")
         let mockPlayer5 = MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p5")
         let mockState = MockGameStateProtocol().players(are: mockPlayer1, mockPlayer2, mockPlayer3, mockPlayer4, mockPlayer5)
-        let sut = RangeCalculator()
         
         // When
         // Assert
@@ -75,7 +75,6 @@ class RangeCalculatorTests: XCTestCase {
         let mockPlayer4 = MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p4")
         let mockPlayer5 = MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p5")
         let mockState = MockGameStateProtocol().players(are: mockPlayer1, mockPlayer2, mockPlayer3, mockPlayer4, mockPlayer5)
-        let sut = RangeCalculator()
         
         // When
         // Assert
@@ -101,7 +100,6 @@ class RangeCalculatorTests: XCTestCase {
         let mockPlayer4 = MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p4")
         let mockPlayer5 = MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p5")
         let mockState = MockGameStateProtocol().players(are: mockPlayer1, mockPlayer2, mockPlayer3, mockPlayer4, mockPlayer5)
-        let sut = RangeCalculator()
         
         // When
         // Assert
@@ -114,5 +112,77 @@ class RangeCalculatorTests: XCTestCase {
         XCTAssertEqual(sut.distance(from: "p1", to: "p3", in: mockState), 2)
         XCTAssertEqual(sut.distance(from: "p1", to: "p4", in: mockState), 2)
         XCTAssertEqual(sut.distance(from: "p1", to: "p5", in: mockState), 1)
+    }
+    
+    func test_ReachableDistanceOfDefaultGunIs1() {
+        // Given
+        let mockPlayer = MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub())
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.reachableDistance(of: mockPlayer), 1)
+    }
+    
+    func test_ReachableDistanceOfVolcanicIs1() {
+        // Given
+        let mockPlayer = MockPlayerProtocol().playing(MockCardProtocol().named(.volcanic))
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.reachableDistance(of: mockPlayer), 1)
+    }
+    
+    func test_ReachableDistanceOfSchofieldIs2() {
+        // Given
+        let mockPlayer = MockPlayerProtocol().playing(MockCardProtocol().named(.schofield))
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.reachableDistance(of: mockPlayer), 2)
+    }
+    
+    func test_ReachableDistanceOfRemingtonIs3() {
+        // Given
+        let mockPlayer = MockPlayerProtocol().playing(MockCardProtocol().named(.remington))
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.reachableDistance(of: mockPlayer), 3)
+    }
+    
+    func test_ReachableDistanceOfCarabineIs4() {
+        // Given
+        let mockPlayer = MockPlayerProtocol().playing(MockCardProtocol().named(.revCarbine))
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.reachableDistance(of: mockPlayer), 4)
+    }
+    
+    func test_ReachableDistanceOfWinchesterIs5() {
+        // Given
+        let mockPlayer = MockPlayerProtocol().playing(MockCardProtocol().named(.winchester))
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.reachableDistance(of: mockPlayer), 5)
+    }
+    
+    func test_DefaultMaxNumberOfShootsIs1() {
+        // Given
+        let mockPlayer = MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub())
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.maximumNumberOfShoots(of: mockPlayer), 1)
+    }
+    
+    func test_IllimitedNumberOfShoots_IfPlayingVolcanic() {
+        // Given
+        let mockPlayer = MockPlayerProtocol().playing(MockCardProtocol().named(.volcanic))
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.maximumNumberOfShoots(of: mockPlayer), 0)
     }
 }

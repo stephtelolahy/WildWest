@@ -15,10 +15,8 @@ protocol PlayerProtocol {
     var hand: [CardProtocol] { get }
     var inPlay: [CardProtocol] { get }
     var imageName: String { get }
-    var actions: [ActionProtocol] { get }
     
     func setHealth(_ value: Int)
-    func setActions(_ actions: [ActionProtocol])
     func addHand(_ card: CardProtocol)
     func removeHandById(_ cardId: String) -> CardProtocol?
     func addInPlay(_ card: CardProtocol)

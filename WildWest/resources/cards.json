@@ -468,12 +468,6 @@
         "suit": "spades"
     },
     {
-        "name": "stagecoach",
-        "imageName": "01_diligenza",
-        "value": "9",
-        "suit": "spades"
-    },
-    {
         "name": "wellsFargo",
         "imageName": "01_wellsfargo",
         "value": "3",

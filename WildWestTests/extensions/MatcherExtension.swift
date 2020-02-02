@@ -20,12 +20,6 @@ func cards(identifiedBy identifiers: [String]) -> ParameterMatcher<[CardProtocol
     })
 }
 
-func actions(describedBy descriptions: [String]) -> ParameterMatcher<[ActionProtocol]> {
-    return ParameterMatcher(matchesFunction: { actions -> Bool in
-        return actions.map { $0.description } == descriptions
-    })
-}
-
 func action(describedBy description: String) -> ParameterMatcher<ActionProtocol> {
     return ParameterMatcher(matchesFunction: { action -> Bool in
         return action.description == description
@@ -35,6 +29,12 @@ func action(describedBy description: String) -> ParameterMatcher<ActionProtocol>
 func state(equalTo mock: MockGameStateProtocol) -> ParameterMatcher<GameStateProtocol> {
     return ParameterMatcher(matchesFunction: { state -> Bool in
         return state as? MockGameStateProtocol === mock
+    })
+}
+
+func player(equalTo mock: MockPlayerProtocol) -> ParameterMatcher<PlayerProtocol> {
+    return ParameterMatcher(matchesFunction: { player -> Bool in
+        return player as? MockPlayerProtocol === mock
     })
 }
 

@@ -11,6 +11,24 @@ import Cuckoo
 
 class StartTurnTests: XCTestCase {
     
+    func test_Pull2CardsFromDeck_IfStartingTurn() {
+        // Given
+        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
+        let sut = StartTurn(actorId: "p1")
+        
+        // When
+        sut.execute(in: mockState)
+        
+        // Assert
+        verify(mockState).setChallenge(isNil())
+        verify(mockState, times(2)).pullFromDeck(playerId: "p1")
+        verify(mockState).setTurnShoots(0)
+        verifyNoMoreInteractions(mockState)
+    }
+}
+
+class StartTurnRuleTests: XCTestCase {
+    
     func test_ShouldStartTurn_IfChallengeIsStartTurn() {
         // Given
         let sut = StartTurnRule()
@@ -26,19 +44,5 @@ class StartTurnTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(actions as? [StartTurn], [StartTurn(actorId: "p2")])
-    }
-    
-    func test_Pull2CardsFromDeck_IfStartingTurn() {
-        // Given
-        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
-        let sut = StartTurn(actorId: "p1")
-        
-        // When
-        sut.execute(in: mockState)
-        
-        // Assert
-        verify(mockState).setChallenge(isNil())
-        verify(mockState, times(2)).pullFromDeck(playerId: "p1")
-        verifyNoMoreInteractions(mockState)
     }
 }

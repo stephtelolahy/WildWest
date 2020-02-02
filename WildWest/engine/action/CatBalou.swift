@@ -34,38 +34,40 @@ struct CatBalou: ActionProtocol, Equatable {
 
 struct CatBalouRule: RuleProtocol {
     
+    let actionName: String = "CatBalou"
+    
     func match(with state: GameStateProtocol) -> [ActionProtocol] {
         guard state.challenge == nil else {
             return []
         }
         
-        let player = state.players[state.turn]
-        let cards = player.handCards(named: .catBalou)
+        let actor = state.players[state.turn]
+        let cards = actor.handCards(named: .catBalou)
         guard !cards.isEmpty else {
             return []
         }
         
         var result: [CatBalou] = []
-        let otherPlayers = state.players.filter { $0.identifier != player.identifier }
+        let otherPlayers = state.players.filter { $0.identifier != actor.identifier }
         for card in cards {
-            for inPlayCard in player.inPlay {
-                result.append(CatBalou(actorId: player.identifier,
+            for inPlayCard in actor.inPlay {
+                result.append(CatBalou(actorId: actor.identifier,
                                        cardId: card.identifier,
-                                       targetPlayerId: player.identifier,
+                                       targetPlayerId: actor.identifier,
                                        targetCardId: inPlayCard.identifier,
                                        targetCardSource: .inPlay))
             }
             
             for otherPlayer in otherPlayers {
                 for handCard in otherPlayer.hand {
-                    result.append(CatBalou(actorId: player.identifier,
+                    result.append(CatBalou(actorId: actor.identifier,
                                            cardId: card.identifier,
                                            targetPlayerId: otherPlayer.identifier,
                                            targetCardId: handCard.identifier,
                                            targetCardSource: .hand))
                 }
                 for inPlayCard in otherPlayer.inPlay {
-                    result.append(CatBalou(actorId: player.identifier,
+                    result.append(CatBalou(actorId: actor.identifier,
                                            cardId: card.identifier,
                                            targetPlayerId: otherPlayer.identifier,
                                            targetCardId: inPlayCard.identifier,

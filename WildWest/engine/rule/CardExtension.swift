@@ -16,4 +16,23 @@ extension CardProtocol {
                                 .revCarbine]
         return guns.contains(name)
     }
+    
+    var reachableDistance: Int {
+        switch name {
+        case .schofield:
+            return 2
+            
+        case .remington:
+            return 3
+            
+        case .revCarbine:
+            return 4
+            
+        case .winchester:
+            return 5
+            
+        default:
+            return 1
+        }
+    }
 }

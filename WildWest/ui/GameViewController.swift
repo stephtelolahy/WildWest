@@ -29,6 +29,7 @@ class GameViewController: UIViewController, Subscribable {
         let gameSetup = GameSetup()
         let roles = gameSetup.roles(for: 7)
         let state = gameSetup.setupGame(roles: roles, figures: figures, cards: cards)
+        let calculator = RangeCalculator()
         let rules: [RuleProtocol] = [
             BeerRule(),
             SaloonRule(),
@@ -36,9 +37,11 @@ class GameViewController: UIViewController, Subscribable {
             WellsFargoRule(),
             EquipRule(),
             CatBalouRule(),
-            PanicRule(rangeCalculator: RangeCalculator()),
+            PanicRule(calculator: calculator),
             StartTurnRule(),
-            EndTurnRule()
+            EndTurnRule(),
+            ShootRule(calculator: calculator),
+            MissedRule()
         ]
         return GameEngine(state: state, rules: rules)
     }()
@@ -110,20 +113,48 @@ private extension GameViewController {
     }
     
     func showActionsForPlayer(at indexPath: IndexPath) {
-        guard let player = player(at: indexPath),
-            !player.actions.isEmpty else {
-                return
+        guard let player = player(at: indexPath) else {
+            return
+        }
+        
+        let genericActions = state.actions.filter({ $0.options.first?.actorId == player.identifier })
+        guard !genericActions.isEmpty else {
+            return
         }
         
         let alertController = UIAlertController(title: player.ability.rawValue,
                                                 message: nil,
                                                 preferredStyle: .actionSheet)
         
-        player.actions.forEach { action in
-            alertController.addAction(UIAlertAction(title: action.description,
+        genericActions.forEach { genericAction in
+            let title = "\(genericAction.name) (\(genericAction.options.count))"
+            alertController.addAction(UIAlertAction(title: title, style: .default, handler: { [weak self] _ in
+                if genericAction.options.count == 1 {
+                    self?.engine.execute(genericAction.options[0])
+                } else {
+                    self?.showOptions(of: genericAction)
+                }
+                
+            }))
+        }
+        
+        alertController.addAction(UIAlertAction(title: "Cancel",
+                                                style: .cancel,
+                                                handler: nil))
+        
+        present(alertController, animated: true)
+    }
+    
+    func showOptions(of genericAction: GenericAction) {
+        let alertController = UIAlertController(title: genericAction.name,
+                                                message: nil,
+                                                preferredStyle: .actionSheet)
+        
+        genericAction.options.forEach { option in
+            alertController.addAction(UIAlertAction(title: option.description,
                                                     style: .default,
                                                     handler: { [weak self] _ in
-                                                        self?.engine.execute(action)
+                                                        self?.engine.execute(option)
             }))
         }
         
@@ -167,8 +198,8 @@ extension GameViewController: UICollectionViewDataSource {
                                      cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(with: PlayerCell.self, for: indexPath)
         if let player = player(at: indexPath) {
-            let playerIndex = playerIndexes[state.players.count][indexPath.row] - 1
-            cell.update(with: player, isTurn: playerIndex == state.turn)
+            let isActive = state.actions.contains(where: { $0.options.first?.actorId == player.identifier })
+            cell.update(with: player, isActive: isActive)
         } else {
             cell.clear()
         }

@@ -66,9 +66,11 @@ class GameEngineTests: XCTestCase {
             .described(by: "a2")
             .actorId(is: "p1")
         Cuckoo.stub(mockRule1) { mock in
+            when(mock.actionName.get).thenReturn("n1")
             when(mock.match(with: state(equalTo: mockState))).thenReturn([action1])
         }
         Cuckoo.stub(mockRule2) { mock in
+            when(mock.actionName.get).thenReturn("n2")
             when(mock.match(with: state(equalTo: mockState))).thenReturn([action2])
         }
         
@@ -78,7 +80,12 @@ class GameEngineTests: XCTestCase {
         // Assert
         verify(mockRule1).match(with: state(equalTo: mockState))
         verify(mockRule2).match(with: state(equalTo: mockState))
-        verify(mockPlayer1).setActions(actions(describedBy: ["a1", "a2"]))
-        verify(mockPlayer2).setActions(isEmpty())
+        let argumentCaptor = ArgumentCaptor<[GenericAction]>()
+        verify(mockState).setActions(argumentCaptor.capture())
+        XCTAssertEqual(argumentCaptor.value?.count, 2)
+        XCTAssertEqual(argumentCaptor.value?[0].name, "n1")
+        XCTAssertEqual(argumentCaptor.value?[0].options.map { $0.description }, ["a1"])
+        XCTAssertEqual(argumentCaptor.value?[1].name, "n2")
+        XCTAssertEqual(argumentCaptor.value?[1].options.map { $0.description }, ["a2"])
     }
 }

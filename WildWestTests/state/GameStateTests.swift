@@ -30,7 +30,9 @@ class GameStateTests: XCTestCase {
                         deck: mockDeck,
                         turn: 0,
                         challenge: nil,
+                        turnShoots: 0,
                         outcome: nil,
+                        actions: [],
                         commands: [])
     }
     
@@ -125,6 +127,15 @@ class GameStateTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(sut.turn, 1)
+    }
+    
+    func test_SetTurnShoots() {
+        // Given
+        // When
+        sut.setTurnShoots(1)
+        
+        // Assert
+        XCTAssertEqual(sut.turnShoots, 1)
     }
     
     func test_AddCommand() {

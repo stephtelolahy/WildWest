@@ -11,9 +11,12 @@ protocol GameStateProtocol {
     var deck: DeckProtocol { get }
     var turn: Int { get }
     var challenge: Challenge? { get }
+    var turnShoots: Int { get }
     var outcome: GameOutcome? { get }
+    var actions: [GenericAction] { get }
     var commands: [ActionProtocol] { get }
     
+    func setActions(_ actions: [GenericAction])
     func discardHand(playerId: String, cardId: String)
     func discardInPlay(playerId: String, cardId: String)
     func gainLifePoint(playerId: String)
@@ -22,6 +25,7 @@ protocol GameStateProtocol {
     func addCommand(_ action: ActionProtocol)
     func setChallenge(_ challenge: Challenge?)
     func setTurn(_ turn: Int)
+    func setTurnShoots(_ shoots: Int)
     func pullHand(playerId: String, otherId: String, cardId: String)
     func pullInPlay(playerId: String, otherId: String, cardId: String)
 }
@@ -34,9 +38,8 @@ enum GameOutcome {
 
 enum Challenge: Equatable {
     case startTurn
-    case bang(actorId: String, targetId: String)
-    case duel(actorId: String)
-    case gatling(actorId: String)
-    case indians(actorId: String)
-    case generalStore(actorId: String)
+    case shoot([String])
+    case duel
+    case indians
+    case generalStore
 }

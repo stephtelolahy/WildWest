@@ -67,7 +67,7 @@ class PanicRuleTests: XCTestCase {
             when(mock.distance(from: "p1", to: "p3", in: any())).thenReturn(0)
         }
         
-        let sut = PanicRule(rangeCalculator: mockRangeCalculator)
+        let sut = PanicRule(calculator: mockRangeCalculator)
         
         // When
         let actions = sut.match(with: mockState)
@@ -106,7 +106,7 @@ class PanicRuleTests: XCTestCase {
             when(mock.distance(from: "p1", to: "p3", in: any())).thenReturn(3)
         }
         
-        let sut = PanicRule(rangeCalculator: mockRangeCalculator)
+        let sut = PanicRule(calculator: mockRangeCalculator)
         
         // When
         let actions = sut.match(with: mockState)
