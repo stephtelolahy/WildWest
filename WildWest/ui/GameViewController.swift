@@ -43,7 +43,8 @@ class GameViewController: UIViewController, Subscribable {
             ShootRule(calculator: calculator),
             MissedRule(),
             GatlingRule(),
-            LooseLifeRule()
+            LooseLifeRule(),
+            IndiansRule()
         ]
         return GameEngine(state: state, rules: rules)
     }()

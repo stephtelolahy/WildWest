@@ -38,7 +38,7 @@ struct LooseLife: ActionProtocol, Equatable {
     }
 }
 
-struct LooseLifeRule: RuleProtocol, Equatable {
+struct LooseLifeRule: RuleProtocol {
     
     let actionName: String = "Loose life point"
     
