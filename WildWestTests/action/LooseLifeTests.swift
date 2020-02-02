@@ -47,7 +47,7 @@ class LooseLifeTests: XCTestCase {
         verify(mockState).eliminate(playerId: "p1")
     }
     
-    func test_RemoveChallenge_IfLoosingLidePoint() {
+    func test_RemoveShootChallenge_IfLoosingLidePoint() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
@@ -65,7 +65,7 @@ class LooseLifeTests: XCTestCase {
         verify(mockState).setChallenge(isNil())
     }
     
-    func test_RemoveActorFromChallenge_IfLoosingLifePoint() {
+    func test_RemoveActorFromShootChallenge_IfLoosingLifePoint() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
@@ -82,6 +82,24 @@ class LooseLifeTests: XCTestCase {
         // Assert
         verify(mockState).setChallenge(equal(to: .shoot(["p2", "p3"])))
     }
+    
+    func test_RemoveActorFromIndiansChallenge_IfLoosingLifePoint() {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .health(is: 3)
+        let mockState = MockGameStateProtocol()
+            .withEnabledDefaultImplementation(GameStateProtocolStub())
+            .challenge(is: .indians(["p1", "p2", "p3"]))
+            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
+        let sut = LooseLife(actorId: "p1")
+        
+        // When
+        sut.execute(in: mockState)
+        
+        // Assert
+        verify(mockState).setChallenge(equal(to: .indians(["p2", "p3"])))
+    }
 }
 
 class LooseLifeRuleTests: XCTestCase {
@@ -92,6 +110,21 @@ class LooseLifeRuleTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol().identified(by: "p1")
         let mockState = MockGameStateProtocol()
             .challenge(is: .shoot(["p1", "p2"]))
+            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
+        
+        // When
+        let actions = sut.match(with: mockState)
+        
+        // Assert
+        XCTAssertEqual(actions as? [LooseLife], [LooseLife(actorId: "p1")])
+    }
+    
+    func test_CanLooseLife_IfChallengedByIndians() {
+        // Given
+        let sut = LooseLifeRule()
+        let mockPlayer1 = MockPlayerProtocol().identified(by: "p1")
+        let mockState = MockGameStateProtocol()
+            .challenge(is: .indians(["p1", "p2"]))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
