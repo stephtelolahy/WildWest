@@ -36,14 +36,14 @@ class GameSetup: GameSetupProtocol {
                           imageName: figure.imageName,
                           health: health,
                           hand: hand,
-                          inPlay: [],
-                          actions: [])
+                          inPlay: [])
         }
         
+        var genericActions: [GenericAction] = []
         if let sheriff = players.first(where: { $0.role == .sheriff }) {
             let action = StartTurn(actorId: sheriff.identifier)
             let genericAction = GenericAction(name: StartTurnRule().actionName, options: [action])
-            sheriff.setActions([genericAction])
+            genericActions.append(genericAction)
         }
         
         return GameState(players: players,
@@ -52,6 +52,7 @@ class GameSetup: GameSetupProtocol {
                          challenge: nil,
                          turnShoots: 0,
                          outcome: nil,
+                         actions: genericActions,
                          commands: [])
     }
 }

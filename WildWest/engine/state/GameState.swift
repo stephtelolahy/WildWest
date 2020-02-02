@@ -15,6 +15,7 @@ class GameState: GameStateProtocol {
     var turnShoots: Int
     var outcome: GameOutcome?
     var commands: [ActionProtocol]
+    var actions: [GenericAction]
     
     init(players: [PlayerProtocol],
          deck: DeckProtocol,
@@ -22,6 +23,7 @@ class GameState: GameStateProtocol {
          challenge: Challenge?,
          turnShoots: Int,
          outcome: GameOutcome?,
+         actions: [GenericAction],
          commands: [ActionProtocol]) {
         self.players = players
         self.deck = deck
@@ -30,6 +32,11 @@ class GameState: GameStateProtocol {
         self.turnShoots = turnShoots
         self.outcome = outcome
         self.commands = commands
+        self.actions = actions
+    }
+    
+    func setActions(_ actions: [GenericAction]) {
+        self.actions = actions
     }
     
     func addCommand(_ action: ActionProtocol) {

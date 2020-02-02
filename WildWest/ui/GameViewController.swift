@@ -113,26 +113,28 @@ private extension GameViewController {
     }
     
     func showActionsForPlayer(at indexPath: IndexPath) {
-        guard let player = player(at: indexPath),
-            !player.actions.isEmpty else {
-                return
+        guard let player = player(at: indexPath) else {
+            return
+        }
+        
+        let genericActions = state.actions.filter({ $0.options.first?.actorId == player.identifier })
+        guard !genericActions.isEmpty else {
+            return
         }
         
         let alertController = UIAlertController(title: player.ability.rawValue,
                                                 message: nil,
                                                 preferredStyle: .actionSheet)
         
-        player.actions.forEach { genericAction in
-            alertController.addAction(UIAlertAction(title: "\(genericAction.name) (\(genericAction.options.count))",
-                                                    style: .default,
-                                                    handler: { [weak self] _ in
-                                                        if genericAction.options.count == 1 {
-                                                            self?.engine.execute(genericAction.options[0])
-                                                        } else {
-                                                            self?.showOptions(of: genericAction)
-                                                        }
-                    
-                                                    }))
+        genericActions.forEach { genericAction in
+            alertController.addAction(UIAlertAction(title: "\(genericAction.name) (\(genericAction.options.count))", style: .default, handler: { [weak self] _ in
+                if genericAction.options.count == 1 {
+                    self?.engine.execute(genericAction.options[0])
+                } else {
+                    self?.showOptions(of: genericAction)
+                }
+                
+            }))
         }
         
         alertController.addAction(UIAlertAction(title: "Cancel",
@@ -195,8 +197,8 @@ extension GameViewController: UICollectionViewDataSource {
                                      cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(with: PlayerCell.self, for: indexPath)
         if let player = player(at: indexPath) {
-            let playerIndex = playerIndexes[state.players.count][indexPath.row] - 1
-            cell.update(with: player, isTurn: playerIndex == state.turn)
+            let isActive = state.actions.contains(where: { $0.options.first?.actorId == player.identifier })
+            cell.update(with: player, isActive: isActive)
         } else {
             cell.clear()
         }

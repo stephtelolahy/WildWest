@@ -13,8 +13,10 @@ protocol GameStateProtocol {
     var challenge: Challenge? { get }
     var turnShoots: Int { get }
     var outcome: GameOutcome? { get }
+    var actions: [GenericAction] { get }
     var commands: [ActionProtocol] { get }
     
+    func setActions(_ actions: [GenericAction])
     func discardHand(playerId: String, cardId: String)
     func discardInPlay(playerId: String, cardId: String)
     func gainLifePoint(playerId: String)

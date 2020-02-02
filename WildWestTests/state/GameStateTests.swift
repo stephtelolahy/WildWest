@@ -32,6 +32,7 @@ class GameStateTests: XCTestCase {
                         challenge: nil,
                         turnShoots: 0,
                         outcome: nil,
+                        actions: [],
                         commands: [])
     }
     

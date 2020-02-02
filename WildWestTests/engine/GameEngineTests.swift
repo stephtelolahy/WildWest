@@ -80,14 +80,12 @@ class GameEngineTests: XCTestCase {
         // Assert
         verify(mockRule1).match(with: state(equalTo: mockState))
         verify(mockRule2).match(with: state(equalTo: mockState))
-        
         let argumentCaptor = ArgumentCaptor<[GenericAction]>()
-        verify(mockPlayer1).setActions(argumentCaptor.capture())
+        verify(mockState).setActions(argumentCaptor.capture())
         XCTAssertEqual(argumentCaptor.value?.count, 2)
         XCTAssertEqual(argumentCaptor.value?[0].name, "n1")
         XCTAssertEqual(argumentCaptor.value?[0].options.map { $0.description }, ["a1"])
         XCTAssertEqual(argumentCaptor.value?[1].name, "n2")
         XCTAssertEqual(argumentCaptor.value?[1].options.map { $0.description }, ["a2"])
-        verify(mockPlayer2).setActions(isEmpty())
     }
 }

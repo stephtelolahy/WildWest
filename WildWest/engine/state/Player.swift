@@ -15,7 +15,6 @@ class Player: PlayerProtocol {
     var health: Int
     var hand: [CardProtocol]
     var inPlay: [CardProtocol]
-    var actions: [GenericAction]
     
     init(role: Role,
          ability: Ability,
@@ -23,8 +22,7 @@ class Player: PlayerProtocol {
          imageName: String,
          health: Int,
          hand: [CardProtocol],
-         inPlay: [CardProtocol],
-         actions: [GenericAction]) {
+         inPlay: [CardProtocol]) {
         self.role = role
         self.ability = ability
         self.imageName = imageName
@@ -32,7 +30,6 @@ class Player: PlayerProtocol {
         self.health = health
         self.hand = hand
         self.inPlay = inPlay
-        self.actions = actions
     }
     
     var identifier: String {
@@ -41,10 +38,6 @@ class Player: PlayerProtocol {
     
     func setHealth(_ health: Int) {
         self.health = health
-    }
-    
-    func setActions(_ actions: [GenericAction]) {
-        self.actions = actions
     }
     
     func addHand(_ card: CardProtocol) {

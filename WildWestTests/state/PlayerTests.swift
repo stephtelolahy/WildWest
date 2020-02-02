@@ -23,8 +23,7 @@ class PlayerTests: XCTestCase {
                      imageName: "image",
                      health: 2,
                      hand: [card1, card2],
-                     inPlay: [card3],
-                     actions: [])
+                     inPlay: [card3])
     }
     
     func test_InitialProperties() {
@@ -67,8 +66,7 @@ class PlayerTests: XCTestCase {
                      imageName: "",
                      health: 1,
                      hand: [card1, card2],
-                     inPlay: [],
-                     actions: [])
+                     inPlay: [])
         
         // When
         sut.addHand(card3)
@@ -89,8 +87,7 @@ class PlayerTests: XCTestCase {
                      imageName: "",
                      health: 1,
                      hand: [card1, card2, card3],
-                     inPlay: [],
-                     actions: [])
+                     inPlay: [])
         
         // When
         let card = sut.removeHandById("c2")
@@ -111,8 +108,7 @@ class PlayerTests: XCTestCase {
                      imageName: "",
                      health: 1,
                      hand: [card1, card2],
-                     inPlay: [],
-                     actions: [])
+                     inPlay: [])
         
         // When
         let card = sut.removeHandById("c3")
@@ -134,8 +130,7 @@ class PlayerTests: XCTestCase {
                      imageName: "",
                      health: 1,
                      hand: [],
-                     inPlay: [card1, card2],
-                     actions: [])
+                     inPlay: [card1, card2])
         
         // When
         sut.addInPlay(card3)
@@ -156,8 +151,7 @@ class PlayerTests: XCTestCase {
                      imageName: "",
                      health: 1,
                      hand: [],
-                     inPlay: [card1, card2, card3],
-                     actions: [])
+                     inPlay: [card1, card2, card3])
         
         // When
         let card = sut.removeInPlayById("c2")
@@ -178,8 +172,7 @@ class PlayerTests: XCTestCase {
                      imageName: "",
                      health: 1,
                      hand: [],
-                     inPlay: [card1, card2],
-                     actions: [])
+                     inPlay: [card1, card2])
         
         // When
         let card = sut.removeInPlayById("c3")

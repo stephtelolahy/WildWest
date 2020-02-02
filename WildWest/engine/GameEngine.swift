@@ -26,12 +26,7 @@ class GameEngine: GameEngineProtocol {
         
         action.execute(in: state)
         state.addCommand(action)
-        
-        let actions = rules.compactMap { $0.matchGeneric(with: state) }
-        state.players.forEach { player in
-            player.setActions(actions.filter { $0.options.first?.actorId == player.identifier })
-        }
-        
+        state.setActions(rules.compactMap { $0.matchGeneric(with: state) })
         stateSubject.onNext(state)
     }
 }

@@ -13,12 +13,12 @@ class PlayerCell: UICollectionViewCell {
     @IBOutlet private weak var figureImageView: UIImageView!
     @IBOutlet private weak var infoLabel: UILabel!
     
-    private var isTurn: Bool = false
+    private var isActive: Bool = false
     
-    func update(with player: PlayerProtocol, isTurn: Bool) {
+    func update(with player: PlayerProtocol, isActive: Bool) {
         figureImageView.image = UIImage(named: player.imageName)
         infoLabel.text = player.string
-        self.isTurn = isTurn
+        self.isActive = isActive
         updateBackground()
     }
     
@@ -35,10 +35,10 @@ class PlayerCell: UICollectionViewCell {
     }
     
     private func updateBackground() {
-        if isTurn {
-            backgroundColor = isSelected ? .systemGreen : .systemYellow
+        if isActive {
+            backgroundColor = isSelected ?  .systemYellow : .systemGreen
         } else {
-            backgroundColor = isSelected ? .systemGreen : .clear
+            backgroundColor = isSelected ? .systemYellow : .clear
         }
         
     }
