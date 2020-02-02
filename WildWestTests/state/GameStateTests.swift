@@ -15,7 +15,6 @@ class GameStateTests: XCTestCase {
     
     private var mockPlayer1: MockPlayerProtocol!
     private var mockPlayer2: MockPlayerProtocol!
-    private var mockPlayer3: MockPlayerProtocol!
     private var mockDeck: MockDeckProtocol!
     
     override func setUp() {
@@ -27,10 +26,7 @@ class GameStateTests: XCTestCase {
         mockPlayer2 = MockPlayerProtocol()
             .withEnabledDefaultImplementation(PlayerProtocolStub())
             .identified(by: "p2")
-        mockPlayer3 = MockPlayerProtocol()
-            .withEnabledDefaultImplementation(PlayerProtocolStub())
-            .identified(by: "p3")
-        sut = GameState(players: [mockPlayer1, mockPlayer2, mockPlayer3],
+        sut = GameState(players: [mockPlayer1, mockPlayer2],
                         deck: mockDeck,
                         turn: 0,
                         challenge: nil,
@@ -45,7 +41,7 @@ class GameStateTests: XCTestCase {
         // Given
         // When
         // Assert
-        XCTAssertEqual(sut.players.map { $0.identifier }, ["p1", "p2", "p3"])
+        XCTAssertEqual(sut.players.map { $0.identifier }, ["p1", "p2"])
         XCTAssertTrue(sut.deck as? MockDeckProtocol === mockDeck)
         XCTAssertNil(sut.challenge)
         XCTAssertTrue(sut.commands.isEmpty)
@@ -223,16 +219,6 @@ class GameStateTests: XCTestCase {
         verify(mockPlayer1).setHealth(1)
     }
     
-    func test_RemovePlayer_IfEliminated() {
-        // Given
-        // When
-        sut.eliminate(playerId: "p1")
-        
-        // Assert
-        XCTAssertEqual(sut.players.map { $0.identifier }, ["p2", "p3"])
-        verifyNoMoreInteractions(mockDeck)
-    }
-    
     func test_RevealRoleAndDiscardAllCards_IfPlayerEliminated() {
         // Given
         let card1 = MockCardProtocol().identified(by: "c1")
@@ -261,21 +247,48 @@ class GameStateTests: XCTestCase {
         verify(mockDeck).addToDiscard(card(identifiedBy: "c3"))
         verify(mockDeck).addToDiscard(card(identifiedBy: "c4"))
         XCTAssertEqual(sut.eliminated.map { $0.identifier }, ["p1"])
+        XCTAssertEqual(sut.players.map { $0.identifier }, ["p2"])
+    }
+    
+    func test_KeepTurnPlayer_IfAnotherIsEliminated() {
+        // Given
+        let players: [PlayerProtocol] = [
+            MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p1"),
+            MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p2"),
+            MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p3"),
+            MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p4")
+        ]
+        sut = GameState(players: players,
+                        deck: mockDeck,
+                        turn: 3, // turn player is "p4"
+                        challenge: nil,
+                        turnShoots: 0,
+                        outcome: nil,
+                        actions: [],
+                        commands: [],
+                        eliminated: [])
+        
+        // When
+        sut.eliminate(playerId: "p2")
+        
+        // Assert
+        XCTAssertEqual(sut.players.map { $0.identifier }, ["p1", "p3", "p4"])
+        XCTAssertEqual(sut.turn, 2) // turn player is still "p4"
     }
     
     func test_EndTurn_IfTurnPlayerIsEliminated() {
-        #warning("TODO")
+        #warning("TODO: implement after integrating Duel, Dynamite")
     }
     
     func test_EndGame_IfSheriffIsEliminated() {
-        #warning("TODO")
+        #warning("TODO: implement after completing rules")
     }
     
     func test_EndGame_IfAllOutlawsAreEliminated() {
-        #warning("TODO")
+        #warning("TODO: implement after completing rules")
     }
     
     func test_Reward_IfOutlaweliminated() {
-        #warning("TODO")
+        #warning("TODO: implement after completing rules")
     }
 }

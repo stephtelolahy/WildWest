@@ -141,7 +141,14 @@ class GameState: GameStateProtocol {
         
         player.hand.forEach { discardHand(playerId: playerId, cardId: $0.identifier) }
         player.inPlay.forEach { discardInPlay(playerId: playerId, cardId: $0.identifier) }
-        players.removeAll(where: { $0.identifier == playerId })
         eliminated.append(player)
+        
+        let turnPlayerId = players[turn].identifier
+        players.removeAll(where: { $0.identifier == playerId })
+        guard let turnPlayerIndex = players.firstIndex(where: { $0.identifier == turnPlayerId }) else {
+            return
+        }
+        
+        turn = turnPlayerIndex
     }
 }
