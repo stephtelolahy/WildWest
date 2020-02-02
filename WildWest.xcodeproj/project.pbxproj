@@ -56,6 +56,9 @@
 		33D964AE23DD907E007295E7 /* GameResourcesTests+Figures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D964AD23DD907E007295E7 /* GameResourcesTests+Figures.swift */; };
 		33D964B223DD9119007295E7 /* MatcherExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D964B123DD9119007295E7 /* MatcherExtension.swift */; };
 		33D964B523DDDB1E007295E7 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A733F723DC5AC300E9B2AD /* GameEngine.swift */; };
+		33EC5D3423E71C1400E14890 /* LooseLife.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EC5D3323E71C1400E14890 /* LooseLife.swift */; };
+		33EC5D3523E71C1400E14890 /* LooseLife.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EC5D3323E71C1400E14890 /* LooseLife.swift */; };
+		33EC5D3723E71C9D00E14890 /* LooseLifeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EC5D3623E71C9D00E14890 /* LooseLifeTests.swift */; };
 		33F2505D23DDDBCC00A0FDD1 /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F2505C23DDDBCC00A0FDD1 /* GameEngineTests.swift */; };
 		8DBD562D47470962F400716D /* libPods-WildWestTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 102E20EA2AD38505FB9CFBD5 /* libPods-WildWestTests.a */; };
 		AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */; };
@@ -188,6 +191,8 @@
 		33D964AB23DD9049007295E7 /* GameResourcesTests+Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameResourcesTests+Cards.swift"; sourceTree = "<group>"; };
 		33D964AD23DD907E007295E7 /* GameResourcesTests+Figures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameResourcesTests+Figures.swift"; sourceTree = "<group>"; };
 		33D964B123DD9119007295E7 /* MatcherExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatcherExtension.swift; sourceTree = "<group>"; };
+		33EC5D3323E71C1400E14890 /* LooseLife.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LooseLife.swift; sourceTree = "<group>"; };
+		33EC5D3623E71C9D00E14890 /* LooseLifeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LooseLifeTests.swift; sourceTree = "<group>"; };
 		33F2505C23DDDBCC00A0FDD1 /* GameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
 		51195E55CF3E86BE639C2405 /* Pods-WildWest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.debug.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.debug.xcconfig"; sourceTree = "<group>"; };
 		6D17AD4368D4F158C313A85D /* Pods-WildWestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.release.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -362,6 +367,7 @@
 				ADB5A11223BAB9330050E173 /* GeneralStore.swift */,
 				33AFB62523DCAC9E00C96CED /* StartTurn.swift */,
 				ADB5A11523BABBE80050E173 /* EndTurn.swift */,
+				33EC5D3323E71C1400E14890 /* LooseLife.swift */,
 			);
 			path = action;
 			sourceTree = "<group>";
@@ -427,6 +433,7 @@
 				33A1410C23E5CFE800E40AA8 /* ShootTest.swift */,
 				33AE8F5823E6303B00DC2A41 /* MissedTests.swift */,
 				33B04DBF23E6ED7C006636F5 /* GatlingTests.swift */,
+				33EC5D3623E71C9D00E14890 /* LooseLifeTests.swift */,
 			);
 			path = action;
 			sourceTree = "<group>";
@@ -773,6 +780,7 @@
 				ADD035CC23A95F37003B2576 /* RuleProtocol.swift in Sources */,
 				3395259023E38F49003DE948 /* Deck.swift in Sources */,
 				ADD035CF23A96002003B2576 /* CardProtocol.swift in Sources */,
+				33EC5D3423E71C1400E14890 /* LooseLife.swift in Sources */,
 				33A733EE23DC4A5300E9B2AD /* Subscribable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -786,12 +794,14 @@
 				3395258423E37D07003DE948 /* GameSetupProtocol.swift in Sources */,
 				ADD035CD23A95F37003B2576 /* RuleProtocol.swift in Sources */,
 				AD49F86823BA054D00543F59 /* Figure.swift in Sources */,
+				33EC5D3523E71C1400E14890 /* LooseLife.swift in Sources */,
 				ADB5A0F623BAB29C0050E173 /* Equip.swift in Sources */,
 				ADB5A0FC23BAB7DD0050E173 /* Jail.swift in Sources */,
 				AD52B99D23B17A310013240B /* GameState.swift in Sources */,
 				ADB5A11723BABBE80050E173 /* EndTurn.swift in Sources */,
 				AD46810F23BEA2B0000B42C7 /* PlayerExtension.swift in Sources */,
 				33D964B523DDDB1E007295E7 /* GameEngine.swift in Sources */,
+				33EC5D3723E71C9D00E14890 /* LooseLifeTests.swift in Sources */,
 				33A4381023E496FF00C39DD6 /* CatBalouTests.swift in Sources */,
 				33B04DC023E6ED7C006636F5 /* GatlingTests.swift in Sources */,
 				AD7F34B923D79841001B4072 /* MockCardProtocolExtension.swift in Sources */,
@@ -1042,6 +1052,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 15EFD4A90888EB671B9B5CF5 /* Pods-WildWestTests.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = WildWestTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1050,6 +1062,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.WildWestTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 			};
 			name = Debug;
 		};
@@ -1057,6 +1071,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6D17AD4368D4F158C313A85D /* Pods-WildWestTests.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = WildWestTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1065,6 +1081,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.WildWestTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 			};
 			name = Release;
 		};

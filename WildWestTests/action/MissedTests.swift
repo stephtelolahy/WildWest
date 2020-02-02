@@ -65,11 +65,9 @@ class MissedRuleTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .holding(mockCard)
             .identified(by: "p1")
-        let mockPlayer2 = MockPlayerProtocol()
-            .identified(by: "p2")
         let mockState = MockGameStateProtocol()
-            .challenge(is: .shoot(["p1"]))
-            .players(are: mockPlayer1, mockPlayer2)
+            .challenge(is: .shoot(["p1", "p2"]))
+            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
         let actions = sut.match(with: mockState)

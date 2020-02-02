@@ -42,7 +42,8 @@ class GameViewController: UIViewController, Subscribable {
             EndTurnRule(),
             ShootRule(calculator: calculator),
             MissedRule(),
-            GatlingRule()
+            GatlingRule(),
+            LooseLifeRule()
         ]
         return GameEngine(state: state, rules: rules)
     }()
