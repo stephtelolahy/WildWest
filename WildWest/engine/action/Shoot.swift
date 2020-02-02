@@ -38,7 +38,7 @@ struct ShootRule: RuleProtocol {
         }
         
         let actor = state.players[state.turn]
-        let cards = actor.handCards(named: .shoot)
+        let cards = actor.handCards(named: .bang)
         guard !cards.isEmpty else {
             return []
         }

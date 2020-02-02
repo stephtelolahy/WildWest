@@ -60,6 +60,9 @@
 		33EC5D3523E71C1400E14890 /* LooseLife.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EC5D3323E71C1400E14890 /* LooseLife.swift */; };
 		33EC5D3723E71C9D00E14890 /* LooseLifeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EC5D3623E71C9D00E14890 /* LooseLifeTests.swift */; };
 		33EC5D3923E7362C00E14890 /* IndiansTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EC5D3823E7362C00E14890 /* IndiansTests.swift */; };
+		33EC5D3B23E737E500E14890 /* DiscardBang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EC5D3A23E737E500E14890 /* DiscardBang.swift */; };
+		33EC5D3C23E737E500E14890 /* DiscardBang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EC5D3A23E737E500E14890 /* DiscardBang.swift */; };
+		33EC5D3E23E7387F00E14890 /* DiscardBangTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EC5D3D23E7387F00E14890 /* DiscardBangTests.swift */; };
 		33F2505D23DDDBCC00A0FDD1 /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F2505C23DDDBCC00A0FDD1 /* GameEngineTests.swift */; };
 		8DBD562D47470962F400716D /* libPods-WildWestTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 102E20EA2AD38505FB9CFBD5 /* libPods-WildWestTests.a */; };
 		AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */; };
@@ -195,6 +198,8 @@
 		33EC5D3323E71C1400E14890 /* LooseLife.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LooseLife.swift; sourceTree = "<group>"; };
 		33EC5D3623E71C9D00E14890 /* LooseLifeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LooseLifeTests.swift; sourceTree = "<group>"; };
 		33EC5D3823E7362C00E14890 /* IndiansTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndiansTests.swift; sourceTree = "<group>"; };
+		33EC5D3A23E737E500E14890 /* DiscardBang.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardBang.swift; sourceTree = "<group>"; };
+		33EC5D3D23E7387F00E14890 /* DiscardBangTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardBangTests.swift; sourceTree = "<group>"; };
 		33F2505C23DDDBCC00A0FDD1 /* GameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
 		51195E55CF3E86BE639C2405 /* Pods-WildWest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.debug.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.debug.xcconfig"; sourceTree = "<group>"; };
 		6D17AD4368D4F158C313A85D /* Pods-WildWestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.release.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -370,6 +375,7 @@
 				33AFB62523DCAC9E00C96CED /* StartTurn.swift */,
 				ADB5A11523BABBE80050E173 /* EndTurn.swift */,
 				33EC5D3323E71C1400E14890 /* LooseLife.swift */,
+				33EC5D3A23E737E500E14890 /* DiscardBang.swift */,
 			);
 			path = action;
 			sourceTree = "<group>";
@@ -437,6 +443,7 @@
 				33B04DBF23E6ED7C006636F5 /* GatlingTests.swift */,
 				33EC5D3623E71C9D00E14890 /* LooseLifeTests.swift */,
 				33EC5D3823E7362C00E14890 /* IndiansTests.swift */,
+				33EC5D3D23E7387F00E14890 /* DiscardBangTests.swift */,
 			);
 			path = action;
 			sourceTree = "<group>";
@@ -740,6 +747,7 @@
 				ADE91AD423BA00DC00F7316B /* GameSetup.swift in Sources */,
 				33D477EA23E4FA0F00E232D9 /* RangeCalculator.swift in Sources */,
 				ADD035D523A96034003B2576 /* PlayerProtocol.swift in Sources */,
+				33EC5D3B23E737E500E14890 /* DiscardBang.swift in Sources */,
 				33D477F123E57DE500E232D9 /* FigureProtocol.swift in Sources */,
 				3395258323E37D07003DE948 /* GameSetupProtocol.swift in Sources */,
 				AD49F86723BA054400543F59 /* Figure.swift in Sources */,
@@ -824,6 +832,7 @@
 				AD48DD2C23BEAFAF00E5B552 /* WellsFargoTests.swift in Sources */,
 				AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */,
 				33D477ED23E55AFA00E232D9 /* RangeCalculatorTests.swift in Sources */,
+				33EC5D3E23E7387F00E14890 /* DiscardBangTests.swift in Sources */,
 				ADB5A11423BAB9330050E173 /* GeneralStore.swift in Sources */,
 				33D964AC23DD9049007295E7 /* GameResourcesTests+Cards.swift in Sources */,
 				33D964AE23DD907E007295E7 /* GameResourcesTests+Figures.swift in Sources */,
@@ -836,6 +845,7 @@
 				ADB5A10523BAB8370050E173 /* Duel.swift in Sources */,
 				3395259123E38F49003DE948 /* Deck.swift in Sources */,
 				AD48DD2A23BEAE1300E5B552 /* StagecoachTests.swift in Sources */,
+				33EC5D3C23E737E500E14890 /* DiscardBang.swift in Sources */,
 				33AFB62723DCACA100C96CED /* StartTurn.swift in Sources */,
 				ADB5A10E23BAB8780050E173 /* Panic.swift in Sources */,
 				AD49F86D23BA0C4600543F59 /* Stagecoach.swift in Sources */,

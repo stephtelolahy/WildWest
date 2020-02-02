@@ -81,7 +81,7 @@ class ShootRuleTest: XCTestCase {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
-            .holding(MockCardProtocol().named(.shoot).identified(by: "c1"))
+            .holding(MockCardProtocol().named(.bang).identified(by: "c1"))
         let mockPlayer2 = MockPlayerProtocol().identified(by: "p2")
         let mockPlayer3 = MockPlayerProtocol().identified(by: "p3")
         let mockState = MockGameStateProtocol()
@@ -113,7 +113,7 @@ class ShootRuleTest: XCTestCase {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
-            .holding(MockCardProtocol().named(.shoot).identified(by: "c1"))
+            .holding(MockCardProtocol().named(.bang).identified(by: "c1"))
         let mockPlayer2 = MockPlayerProtocol().identified(by: "p2")
         let mockPlayer3 = MockPlayerProtocol().identified(by: "p3")
         let mockState = MockGameStateProtocol()
@@ -142,7 +142,7 @@ class ShootRuleTest: XCTestCase {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
-            .holding(MockCardProtocol().named(.shoot).identified(by: "c1"))
+            .holding(MockCardProtocol().named(.bang).identified(by: "c1"))
         let mockPlayer2 = MockPlayerProtocol().identified(by: "p2")
         let mockPlayer3 = MockPlayerProtocol().identified(by: "p3")
         let mockState = MockGameStateProtocol()
@@ -173,7 +173,7 @@ class ShootRuleTest: XCTestCase {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
-            .holding(MockCardProtocol().named(.shoot).identified(by: "c1"))
+            .holding(MockCardProtocol().named(.bang).identified(by: "c1"))
         let mockPlayer2 = MockPlayerProtocol().identified(by: "p2")
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)

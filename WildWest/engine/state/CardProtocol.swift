@@ -26,7 +26,7 @@ enum CardName: String, Decodable {
     scope,
     dynamite,
     jail,
-    shoot,
+    bang,
     missed,
     duel,
     gatling,
