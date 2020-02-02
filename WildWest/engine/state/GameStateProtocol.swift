@@ -37,8 +37,7 @@ enum GameOutcome {
 enum Challenge: Equatable {
     case startTurn
     case bang(actorId: String, targetId: String)
-    case duel(actorId: String)
-    case gatling(actorId: String)
-    case indians(actorId: String)
-    case generalStore(actorId: String)
+    case duel
+    case indians
+    case generalStore
 }

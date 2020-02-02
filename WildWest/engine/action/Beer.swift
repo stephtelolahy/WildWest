@@ -29,14 +29,14 @@ struct BeerRule: RuleProtocol {
             return []
         }
         
-        let player = state.players[state.turn]
-        let cards = player.handCards(named: .beer)
+        let actor = state.players[state.turn]
+        let cards = actor.handCards(named: .beer)
         guard !cards.isEmpty,
             state.players.count > 2,
-            player.health < player.maxHealth else {
+            actor.health < actor.maxHealth else {
                 return []
         }
         
-        return cards.map { Beer(actorId: player.identifier, cardId: $0.identifier) }
+        return cards.map { Beer(actorId: actor.identifier, cardId: $0.identifier) }
     }
 }

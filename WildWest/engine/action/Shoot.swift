@@ -37,31 +37,31 @@ struct ShootRule: RuleProtocol {
             return []
         }
         
-        let player = state.players[state.turn]
-        let cards = player.handCards(named: .shoot)
+        let actor = state.players[state.turn]
+        let cards = actor.handCards(named: .shoot)
         guard !cards.isEmpty else {
             return []
         }
         
-        let maxShoots = calculator.maximumNumberOfShoots(of: player)
+        let maxShoots = calculator.maximumNumberOfShoots(of: actor)
         guard maxShoots == 0 || state.turnShoots < maxShoots  else {
             return []
         }
         
         let otherPlayers = state.players.filter { aPlayer -> Bool in
-            guard aPlayer.identifier != player.identifier else {
+            guard aPlayer.identifier != actor.identifier else {
                 return false
             }
             
-            let distance = calculator.distance(from: player.identifier, to: aPlayer.identifier, in: state)
-            let reachableDistance = calculator.reachableDistance(of: player)
+            let distance = calculator.distance(from: actor.identifier, to: aPlayer.identifier, in: state)
+            let reachableDistance = calculator.reachableDistance(of: actor)
             return distance <= reachableDistance
         }
         
         var result: [Shoot] = []
         for card in cards {
             for otherPlayer in otherPlayers {
-                result.append(Shoot(actorId: player.identifier,
+                result.append(Shoot(actorId: actor.identifier,
                                     cardId: card.identifier,
                                     targetId: otherPlayer.identifier))
             }

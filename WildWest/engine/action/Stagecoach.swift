@@ -30,8 +30,8 @@ struct StagecoachRule: RuleProtocol {
             return []
         }
         
-        let player = state.players[state.turn]
-        let cards = player.handCards(named: .stagecoach)
-        return cards.map { Stagecoach(actorId: player.identifier, cardId: $0.identifier) }
+        let actor = state.players[state.turn]
+        let cards = actor.handCards(named: .stagecoach)
+        return cards.map { Stagecoach(actorId: actor.identifier, cardId: $0.identifier) }
     }
 }

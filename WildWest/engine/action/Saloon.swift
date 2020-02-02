@@ -31,8 +31,8 @@ struct SaloonRule: RuleProtocol {
             return []
         }
         
-        let player = state.players[state.turn]
-        let cards = player.handCards(named: .saloon)
-        return cards.map { Saloon(actorId: player.identifier, cardId: $0.identifier) }
+        let actor = state.players[state.turn]
+        let cards = actor.handCards(named: .saloon)
+        return cards.map { Saloon(actorId: actor.identifier, cardId: $0.identifier) }
     }
 }

@@ -35,15 +35,15 @@ struct EndTurnRule: RuleProtocol {
             return []
         }
         
-        let player = state.players[state.turn]
+        let actor = state.players[state.turn]
         
-        if player.hand.count <= player.health {
-            return [EndTurn(actorId: player.identifier, cardsToDiscardIds: [])]
+        if actor.hand.count <= actor.health {
+            return [EndTurn(actorId: actor.identifier, cardsToDiscardIds: [])]
         }
         
-        let cardsToDiscardCount = player.hand.count - player.health
-        let handCardIds = player.hand.map { $0.identifier }
+        let cardsToDiscardCount = actor.hand.count - actor.health
+        let handCardIds = actor.hand.map { $0.identifier }
         let cardsCombinations = handCardIds.combine(by: cardsToDiscardCount)
-        return cardsCombinations.map { EndTurn(actorId: player.identifier, cardsToDiscardIds: $0) }
+        return cardsCombinations.map { EndTurn(actorId: actor.identifier, cardsToDiscardIds: $0) }
     }
 }

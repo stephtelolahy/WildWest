@@ -30,7 +30,7 @@ struct StartTurnRule: RuleProtocol {
             return []
         }
         
-        let player = state.players[state.turn]
-        return [StartTurn(actorId: player.identifier)]
+        let actor = state.players[state.turn]
+        return [StartTurn(actorId: actor.identifier)]
     }
 }

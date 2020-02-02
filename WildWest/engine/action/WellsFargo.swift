@@ -31,8 +31,8 @@ struct WellsFargoRule: RuleProtocol {
             return []
         }
         
-        let player = state.players[state.turn]
-        let cards = player.handCards(named: .wellsFargo)
-        return cards.map { WellsFargo(actorId: player.identifier, cardId: $0.identifier) }
+        let actor = state.players[state.turn]
+        let cards = actor.handCards(named: .wellsFargo)
+        return cards.map { WellsFargo(actorId: actor.identifier, cardId: $0.identifier) }
     }
 }

@@ -43,29 +43,29 @@ struct PanicRule: RuleProtocol {
             return []
         }
         
-        let player = state.players[state.turn]
-        let cards = player.handCards(named: .panic)
+        let actor = state.players[state.turn]
+        let cards = actor.handCards(named: .panic)
         guard !cards.isEmpty else {
             return []
         }
         
         var result: [Panic] = []
         let otherPlayers = state.players.filter {
-            $0.identifier != player.identifier
-            && calculator.distance(from: player.identifier, to: $0.identifier, in: state) <= 1
+            $0.identifier != actor.identifier
+            && calculator.distance(from: actor.identifier, to: $0.identifier, in: state) <= 1
         }
         
         for card in cards {
             for otherPlayer in otherPlayers {
                 for handCard in otherPlayer.hand {
-                    result.append(Panic(actorId: player.identifier,
+                    result.append(Panic(actorId: actor.identifier,
                                         cardId: card.identifier,
                                         targetPlayerId: otherPlayer.identifier,
                                         targetCardId: handCard.identifier,
                                         targetCardSource: .hand))
                 }
                 for inPlayCard in otherPlayer.inPlay {
-                    result.append(Panic(actorId: player.identifier,
+                    result.append(Panic(actorId: actor.identifier,
                                         cardId: card.identifier,
                                         targetPlayerId: otherPlayer.identifier,
                                         targetCardId: inPlayCard.identifier,
