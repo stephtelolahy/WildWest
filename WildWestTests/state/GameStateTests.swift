@@ -33,14 +33,15 @@ class GameStateTests: XCTestCase {
                         turnShoots: 0,
                         outcome: nil,
                         actions: [],
-                        commands: [])
+                        commands: [],
+                        eliminated: [])
     }
     
     func test_InitialProperties() {
         // Given
         // When
         // Assert
-        XCTAssertTrue(sut.players[0] as? MockPlayerProtocol === mockPlayer1)
+        XCTAssertEqual(sut.players.map { $0.identifier }, ["p1", "p2"])
         XCTAssertTrue(sut.deck as? MockDeckProtocol === mockDeck)
         XCTAssertNil(sut.challenge)
         XCTAssertTrue(sut.commands.isEmpty)
@@ -149,13 +150,23 @@ class GameStateTests: XCTestCase {
         XCTAssertEqual(sut.commands.last?.description, "ac")
     }
     
-    func test_SetSomeChallenge() {
+    func test_SetChallenge() {
         // Given
         // When
         sut.setChallenge(.startTurn)
         
         // Assert
         XCTAssertEqual(sut.challenge, .startTurn)
+    }
+    
+    func test_SetActions() {
+        // Given
+        // When
+        sut.setActions([GenericAction(name: "ac", options: [])])
+        
+        // Assert
+        XCTAssertEqual(sut.actions.count, 1)
+        XCTAssertEqual(sut.actions.first?.name, "ac")
     }
     
     func test_RemoveChallenge() {
@@ -193,5 +204,91 @@ class GameStateTests: XCTestCase {
         // Assert
         verify(mockPlayer2).removeInPlayById("c2")
         verify(mockPlayer1).addHand(card(identifiedBy: "c2"))
+    }
+    
+    func test_DecrementHealth_IfLoosingLifePoint() {
+        // Given
+        Cuckoo.stub(mockPlayer1) { mock in
+            when(mock.health.get).thenReturn(2)
+        }
+        
+        // When
+        sut.looseLifePoint(playerId: "p1")
+        
+        // Assert
+        verify(mockPlayer1).setHealth(1)
+    }
+    
+    func test_RevealRoleAndDiscardAllCards_IfPlayerEliminated() {
+        // Given
+        let card1 = MockCardProtocol().identified(by: "c1")
+        let card2 = MockCardProtocol().identified(by: "c2")
+        let card3 = MockCardProtocol().identified(by: "c3")
+        let card4 = MockCardProtocol().identified(by: "c4")
+        Cuckoo.stub(mockPlayer1) { mock in
+            when(mock.hand.get).thenReturn([card1, card2])
+            when(mock.inPlay.get).thenReturn([card3, card4])
+            when(mock.removeHandById("c1")).thenReturn(card1)
+            when(mock.removeHandById("c2")).thenReturn(card2)
+            when(mock.removeInPlayById("c3")).thenReturn(card3)
+            when(mock.removeInPlayById("c4")).thenReturn(card4)
+        }
+        
+        // When
+        sut.eliminate(playerId: "p1")
+        
+        // Assert
+        verify(mockPlayer1).removeHandById("c1")
+        verify(mockPlayer1).removeHandById("c2")
+        verify(mockPlayer1).removeInPlayById("c3")
+        verify(mockPlayer1).removeInPlayById("c4")
+        verify(mockDeck).addToDiscard(card(identifiedBy: "c1"))
+        verify(mockDeck).addToDiscard(card(identifiedBy: "c2"))
+        verify(mockDeck).addToDiscard(card(identifiedBy: "c3"))
+        verify(mockDeck).addToDiscard(card(identifiedBy: "c4"))
+        XCTAssertEqual(sut.eliminated.map { $0.identifier }, ["p1"])
+        XCTAssertEqual(sut.players.map { $0.identifier }, ["p2"])
+    }
+    
+    func test_KeepTurnPlayer_IfAnotherIsEliminated() {
+        // Given
+        let players: [PlayerProtocol] = [
+            MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p1"),
+            MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p2"),
+            MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p3"),
+            MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p4")
+        ]
+        sut = GameState(players: players,
+                        deck: mockDeck,
+                        turn: 3, // turn player is "p4"
+                        challenge: nil,
+                        turnShoots: 0,
+                        outcome: nil,
+                        actions: [],
+                        commands: [],
+                        eliminated: [])
+        
+        // When
+        sut.eliminate(playerId: "p2")
+        
+        // Assert
+        XCTAssertEqual(sut.players.map { $0.identifier }, ["p1", "p3", "p4"])
+        XCTAssertEqual(sut.turn, 2) // turn player is still "p4"
+    }
+    
+    func test_EndTurn_IfTurnPlayerIsEliminated() {
+        #warning("TODO: implement after integrating Duel, Dynamite")
+    }
+    
+    func test_EndGame_IfSheriffIsEliminated() {
+        #warning("TODO: implement after completing rules")
+    }
+    
+    func test_EndGame_IfAllOutlawsAreEliminated() {
+        #warning("TODO: implement after completing rules")
+    }
+    
+    func test_Reward_IfOutlaweliminated() {
+        #warning("TODO: implement after completing rules")
     }
 }

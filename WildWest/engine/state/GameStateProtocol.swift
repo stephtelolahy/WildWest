@@ -15,6 +15,7 @@ protocol GameStateProtocol {
     var outcome: GameOutcome? { get }
     var actions: [GenericAction] { get }
     var commands: [ActionProtocol] { get }
+    var eliminated: [PlayerProtocol] { get }
     
     func setActions(_ actions: [GenericAction])
     func discardHand(playerId: String, cardId: String)
@@ -28,6 +29,8 @@ protocol GameStateProtocol {
     func setTurnShoots(_ shoots: Int)
     func pullHand(playerId: String, otherId: String, cardId: String)
     func pullInPlay(playerId: String, otherId: String, cardId: String)
+    func looseLifePoint(playerId: String)
+    func eliminate(playerId: String)
 }
 
 enum GameOutcome {
@@ -39,7 +42,7 @@ enum GameOutcome {
 enum Challenge: Equatable {
     case startTurn
     case shoot([String])
-    case duel
-    case indians
+    case indians([String])
+    case duel([String])
     case generalStore
 }

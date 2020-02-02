@@ -8,7 +8,7 @@
 
 class GameState: GameStateProtocol {
     
-    let players: [PlayerProtocol]
+    var players: [PlayerProtocol]
     let deck: DeckProtocol
     var turn: Int
     var challenge: Challenge?
@@ -16,6 +16,7 @@ class GameState: GameStateProtocol {
     var outcome: GameOutcome?
     var commands: [ActionProtocol]
     var actions: [GenericAction]
+    var eliminated: [PlayerProtocol]
     
     init(players: [PlayerProtocol],
          deck: DeckProtocol,
@@ -24,7 +25,8 @@ class GameState: GameStateProtocol {
          turnShoots: Int,
          outcome: GameOutcome?,
          actions: [GenericAction],
-         commands: [ActionProtocol]) {
+         commands: [ActionProtocol],
+         eliminated: [PlayerProtocol]) {
         self.players = players
         self.deck = deck
         self.turn = turn
@@ -33,6 +35,7 @@ class GameState: GameStateProtocol {
         self.outcome = outcome
         self.commands = commands
         self.actions = actions
+        self.eliminated = eliminated
     }
     
     func setActions(_ actions: [GenericAction]) {
@@ -91,6 +94,14 @@ class GameState: GameStateProtocol {
         player.setHealth(player.health + 1)
     }
     
+    func looseLifePoint(playerId: String) {
+        guard let player = players.first(where: { $0.identifier == playerId }) else {
+            return
+        }
+        
+        player.setHealth(player.health - 1)
+    }
+    
     func putInPlay(playerId: String, cardId: String) {
         guard let player = players.first(where: { $0.identifier == playerId }) else {
             return
@@ -121,5 +132,23 @@ class GameState: GameStateProtocol {
         if let card = other.removeInPlayById(cardId) {
             player.addHand(card)
         }
+    }
+    
+    func eliminate(playerId: String) {
+        guard let player = players.first(where: { $0.identifier == playerId }) else {
+            return
+        }
+        
+        player.hand.forEach { discardHand(playerId: playerId, cardId: $0.identifier) }
+        player.inPlay.forEach { discardInPlay(playerId: playerId, cardId: $0.identifier) }
+        eliminated.append(player)
+        
+        let turnPlayerId = players[turn].identifier
+        players.removeAll(where: { $0.identifier == playerId })
+        guard let turnPlayerIndex = players.firstIndex(where: { $0.identifier == turnPlayerId }) else {
+            return
+        }
+        
+        turn = turnPlayerIndex
     }
 }

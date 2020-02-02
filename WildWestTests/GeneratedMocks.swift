@@ -1143,6 +1143,20 @@ import Cuckoo
         
     }
     
+    
+    
+     var eliminated: [PlayerProtocol] {
+        get {
+            return cuckoo_manager.getter("eliminated",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.eliminated)
+        }
+        
+    }
+    
 
     
 
@@ -1327,6 +1341,36 @@ import Cuckoo
         
     }
     
+    
+    
+     func looseLifePoint(playerId: String)  {
+        
+    return cuckoo_manager.call("looseLifePoint(playerId: String)",
+            parameters: (playerId),
+            escapingParameters: (playerId),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.looseLifePoint(playerId: playerId))
+        
+    }
+    
+    
+    
+     func eliminate(playerId: String)  {
+        
+    return cuckoo_manager.call("eliminate(playerId: String)",
+            parameters: (playerId),
+            escapingParameters: (playerId),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.eliminate(playerId: playerId))
+        
+    }
+    
 
 	 struct __StubbingProxy_GameStateProtocol: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
@@ -1373,6 +1417,11 @@ import Cuckoo
 	    
 	    var commands: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [ActionProtocol]> {
 	        return .init(manager: cuckoo_manager, name: "commands")
+	    }
+	    
+	    
+	    var eliminated: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [PlayerProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "eliminated")
 	    }
 	    
 	    
@@ -1436,6 +1485,16 @@ import Cuckoo
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "pullInPlay(playerId: String, otherId: String, cardId: String)", parameterMatchers: matchers))
 	    }
 	    
+	    func looseLifePoint<M1: Cuckoo.Matchable>(playerId: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(String)> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: playerId) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "looseLifePoint(playerId: String)", parameterMatchers: matchers))
+	    }
+	    
+	    func eliminate<M1: Cuckoo.Matchable>(playerId: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(String)> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: playerId) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "eliminate(playerId: String)", parameterMatchers: matchers))
+	    }
+	    
 	}
 
 	 struct __VerificationProxy_GameStateProtocol: Cuckoo.VerificationProxy {
@@ -1488,6 +1547,11 @@ import Cuckoo
 	    
 	    var commands: Cuckoo.VerifyReadOnlyProperty<[ActionProtocol]> {
 	        return .init(manager: cuckoo_manager, name: "commands", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var eliminated: Cuckoo.VerifyReadOnlyProperty<[PlayerProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "eliminated", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	
@@ -1564,6 +1628,18 @@ import Cuckoo
 	        return cuckoo_manager.verify("pullInPlay(playerId: String, otherId: String, cardId: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
+	    @discardableResult
+	    func looseLifePoint<M1: Cuckoo.Matchable>(playerId: M1) -> Cuckoo.__DoNotUse<(String), Void> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: playerId) { $0 }]
+	        return cuckoo_manager.verify("looseLifePoint(playerId: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func eliminate<M1: Cuckoo.Matchable>(playerId: M1) -> Cuckoo.__DoNotUse<(String), Void> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: playerId) { $0 }]
+	        return cuckoo_manager.verify("eliminate(playerId: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
 	}
 }
 
@@ -1633,6 +1709,14 @@ import Cuckoo
         
     }
     
+    
+     var eliminated: [PlayerProtocol] {
+        get {
+            return DefaultValueRegistry.defaultValue(for: ([PlayerProtocol]).self)
+        }
+        
+    }
+    
 
     
 
@@ -1682,6 +1766,14 @@ import Cuckoo
     }
     
      func pullInPlay(playerId: String, otherId: String, cardId: String)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func looseLifePoint(playerId: String)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func eliminate(playerId: String)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
