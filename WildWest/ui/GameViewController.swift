@@ -127,7 +127,8 @@ private extension GameViewController {
                                                 preferredStyle: .actionSheet)
         
         genericActions.forEach { genericAction in
-            alertController.addAction(UIAlertAction(title: "\(genericAction.name) (\(genericAction.options.count))", style: .default, handler: { [weak self] _ in
+            let title = "\(genericAction.name) (\(genericAction.options.count))"
+            alertController.addAction(UIAlertAction(title: title, style: .default, handler: { [weak self] _ in
                 if genericAction.options.count == 1 {
                     self?.engine.execute(genericAction.options[0])
                 } else {

@@ -56,7 +56,7 @@ class ShootTest: XCTestCase {
         sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).setChallenge(equal(to: .bang(actorId: "p1", targetId: "p2")))
+        verify(mockState).setChallenge(equal(to: .shoot(["p2"])))
     }
     
     func test_IncrementShootsCount_IfShooting() {

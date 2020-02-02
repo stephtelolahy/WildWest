@@ -13,7 +13,7 @@ struct Shoot: ActionProtocol, Equatable {
     
     func execute(in state: GameStateProtocol) {
         state.discardHand(playerId: actorId, cardId: cardId)
-        state.setChallenge(.bang(actorId: actorId, targetId: targetId))
+        state.setChallenge(.shoot([targetId]))
         state.setTurnShoots(state.turnShoots + 1)
     }
     

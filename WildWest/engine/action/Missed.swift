@@ -25,11 +25,11 @@ struct MissedRule: RuleProtocol {
     let actionName: String = "Missed"
     
     func match(with state: GameStateProtocol) -> [ActionProtocol] {
-        guard case let .bang(_, targetId) = state.challenge else {
+        guard case let .shoot(targetIds) = state.challenge else {
             return  []
         }
         
-        guard let actor = state.players.first(where: { $0.identifier == targetId }) else {
+        guard let actor = state.players.first(where: { $0.identifier == targetIds.first }) else {
             return []
         }
         

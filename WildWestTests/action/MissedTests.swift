@@ -39,7 +39,7 @@ class MissedRuleTests: XCTestCase {
         let mockPlayer2 = MockPlayerProtocol()
             .identified(by: "p2")
         let mockState = MockGameStateProtocol()
-            .challenge(is: .bang(actorId: "p2", targetId: "p1"))
+            .challenge(is: .shoot(["p1"]))
             .players(are: mockPlayer1, mockPlayer2)
         
         // When
