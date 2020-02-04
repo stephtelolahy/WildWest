@@ -1,5 +1,5 @@
 //
-//  GenericActionCell.swift
+//  ActionCell.swift
 //  WildWest
 //
 //  Created by Hugues Stephano Telolahy on 04/02/2020.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GenericActionCell: UICollectionViewCell {
+class ActionCell: UICollectionViewCell {
     
     // MARK: Outlets
     
@@ -17,16 +17,16 @@ class GenericActionCell: UICollectionViewCell {
     
     // MARK: Setup
     
-    func update(with action: GenericAction) {
-        guard let cardId = action.cardId else {
+    func update(with item: ActionItem) {
+        if let card = item.card {
+            cardImageView.image = UIImage(named: card.imageName)
+            infoLabel.text = "\(card.value) \(card.suit.string)"
+        } else {
             cardImageView.image = nil
-            infoLabel.text = action.name
-            return
+            infoLabel.text = item.action?.name
         }
         
-        //cardImageView.image = UIImage(named: card.imageName)
-        //infoLabel.text = "\(card.value) \(card.suit.string)"
-        infoLabel.text = cardId
+        cardImageView.alpha = item.action != nil ? 1.0 : 0.4
     }
 }
 

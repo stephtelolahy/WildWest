@@ -54,6 +54,10 @@ class GameViewController: UIViewController, Subscribable {
     // swiftlint:disable implicitly_unwrapped_optional
     private var state: GameStateProtocol!
     
+    private lazy var actionsAdapter: ActionsAdapterProtocol  = {
+        ActionsAdapter()
+    }()
+    
     // MARK: Lifecycle
     
     override func viewDidLoad() {
@@ -62,6 +66,7 @@ class GameViewController: UIViewController, Subscribable {
         actionsCollectionView.setItemSpacing(spacing)
         sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
             self?.state = state
+            self?.actionsAdapter.setState(state)
             self?.playersCollectionView.reloadDataKeepingSelection { [weak self] in
                 self?.actionsCollectionView.reloadData()
             }
@@ -79,15 +84,6 @@ class GameViewController: UIViewController, Subscribable {
 
 /// Convenience
 private extension GameViewController {
-    
-    var actions: [GenericAction] {
-        guard let indexPath = playersCollectionView.indexPathsForSelectedItems?.first,
-            let player = player(at: indexPath) else {
-                return []
-        }
-        
-        return state.actions.filter { $0.actorId == player.identifier }
-    }
     
     var playerIndexes: [[Int]] {
         return [
@@ -157,7 +153,7 @@ extension GameViewController: UICollectionViewDataSource {
     }
     
     private func actionsCollectionViewNumberOfItems() -> Int {
-        return actions.count
+        return actionsAdapter.items.count
     }
     
     private func playersCollectionView(_ collectionView: UICollectionView,
@@ -174,8 +170,8 @@ extension GameViewController: UICollectionViewDataSource {
     
     private func actionsCollectionView(_ collectionView: UICollectionView,
                                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(with: GenericActionCell.self, for: indexPath)
-        cell.update(with: actions[indexPath.row])
+        let cell = collectionView.dequeueReusableCell(with: ActionCell.self, for: indexPath)
+        cell.update(with: actionsAdapter.items[indexPath.row])
         return cell
     }
 }
@@ -191,11 +187,16 @@ extension GameViewController: UICollectionViewDelegate {
     }
     
     private func playersCollectionViewDidSelectItem(at indexPath: IndexPath) {
+        actionsAdapter.setPlayerIdentifier(player(at: indexPath)?.identifier)
         actionsCollectionView.reloadData()
     }
     
     private func actionsCollectionViewDidSelectItem(at indexPath: IndexPath) {
-        showOptions(of: actions[indexPath.row])
+        guard let action = actionsAdapter.items[indexPath.row].action else {
+            return
+        }
+        
+        showOptions(of: action)
     }
 }
 
