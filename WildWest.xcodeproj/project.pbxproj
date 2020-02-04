@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		331BBE7223DE4E800099046C /* MockActionProtocolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331BBE7123DE4E800099046C /* MockActionProtocolExtension.swift */; };
 		3324018E23DBA6C800B92439 /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */; };
-		3324019023DBAA7500B92439 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3324018F23DBAA7500B92439 /* UIViewExtension.swift */; };
-		332499AF23DB9EFE0082EF09 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332499AE23DB9EFE0082EF09 /* CardCell.swift */; };
 		332499B123DB9F140082EF09 /* PlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332499B023DB9F140082EF09 /* PlayerCell.swift */; };
 		332499B323DB9F650082EF09 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332499B223DB9F650082EF09 /* GameViewController.swift */; };
 		3352338623E8B94900F1DC62 /* DiscardableCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3352338523E8B94900F1DC62 /* DiscardableCard.swift */; };
@@ -55,6 +53,7 @@
 		33A815EB23DB525A0081A055 /* figures.json in Resources */ = {isa = PBXBuildFile; fileRef = AD49F86923BA074100543F59 /* figures.json */; };
 		33A815ED23DB54350081A055 /* roles.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A815EC23DB54350081A055 /* roles.json */; };
 		33A815EE23DB54350081A055 /* roles.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A815EC23DB54350081A055 /* roles.json */; };
+		33ABE07023E9DA5B009A54E4 /* GenericActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33ABE06F23E9DA5B009A54E4 /* GenericActionCell.swift */; };
 		33AFA25323DC201A00425BEB /* ClassNameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */; };
 		33AFB62623DCAC9E00C96CED /* StartTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFB62523DCAC9E00C96CED /* StartTurn.swift */; };
 		33AFB62723DCACA100C96CED /* StartTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFB62523DCAC9E00C96CED /* StartTurn.swift */; };
@@ -167,8 +166,6 @@
 		15EFD4A90888EB671B9B5CF5 /* Pods-WildWestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.debug.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.debug.xcconfig"; sourceTree = "<group>"; };
 		331BBE7123DE4E800099046C /* MockActionProtocolExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockActionProtocolExtension.swift; sourceTree = "<group>"; };
 		3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
-		3324018F23DBAA7500B92439 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
-		332499AE23DB9EFE0082EF09 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		332499B023DB9F140082EF09 /* PlayerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCell.swift; sourceTree = "<group>"; };
 		332499B223DB9F650082EF09 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		3352338523E8B94900F1DC62 /* DiscardableCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardableCard.swift; sourceTree = "<group>"; };
@@ -188,6 +185,7 @@
 		33A733F123DC514500E9B2AD /* ActionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsViewController.swift; sourceTree = "<group>"; };
 		33A733F723DC5AC300E9B2AD /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		33A815EC23DB54350081A055 /* roles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = roles.json; sourceTree = "<group>"; };
+		33ABE06F23E9DA5B009A54E4 /* GenericActionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericActionCell.swift; sourceTree = "<group>"; };
 		33AE8F5823E6303B00DC2A41 /* MissedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissedTests.swift; sourceTree = "<group>"; };
 		33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameProtocol.swift; sourceTree = "<group>"; };
 		33AFB62523DCAC9E00C96CED /* StartTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTurn.swift; sourceTree = "<group>"; };
@@ -410,7 +408,6 @@
 			children = (
 				ADE91ACC23B9FE2300F7316B /* JsonReader.swift */,
 				3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */,
-				3324018F23DBAA7500B92439 /* UIViewExtension.swift */,
 				33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */,
 				33A733ED23DC4A5300E9B2AD /* Subscribable.swift */,
 				33A4381123E4BD3200C39DD6 /* ArrayExtension.swift */,
@@ -542,7 +539,7 @@
 				ADB7D2F1239EE03800653905 /* Main.storyboard */,
 				332499B223DB9F650082EF09 /* GameViewController.swift */,
 				332499B023DB9F140082EF09 /* PlayerCell.swift */,
-				332499AE23DB9EFE0082EF09 /* CardCell.swift */,
+				33ABE06F23E9DA5B009A54E4 /* GenericActionCell.swift */,
 				33A733F123DC514500E9B2AD /* ActionsViewController.swift */,
 			);
 			path = ui;
@@ -790,7 +787,6 @@
 				ADB5A10723BAB84E0050E173 /* Gatling.swift in Sources */,
 				AD52B99923B178CC0013240B /* Player.swift in Sources */,
 				ADB5A11323BAB9330050E173 /* GeneralStore.swift in Sources */,
-				3324019023DBAA7500B92439 /* UIViewExtension.swift in Sources */,
 				3324018E23DBA6C800B92439 /* UICollectionViewExtension.swift in Sources */,
 				33A4381223E4BD3200C39DD6 /* ArrayExtension.swift in Sources */,
 				ADB5A0FE23BAB8070050E173 /* Shoot.swift in Sources */,
@@ -810,12 +806,12 @@
 				AD52B99C23B17A310013240B /* GameState.swift in Sources */,
 				332499B123DB9F140082EF09 /* PlayerCell.swift in Sources */,
 				33D477E723E4F9E300E232D9 /* RangeCalculatorProtocol.swift in Sources */,
+				33ABE07023E9DA5B009A54E4 /* GenericActionCell.swift in Sources */,
 				33AFB62623DCAC9E00C96CED /* StartTurn.swift in Sources */,
 				3395258023E37CCE003DE948 /* GameEngineProtocol.swift in Sources */,
 				33A733F223DC514500E9B2AD /* ActionsViewController.swift in Sources */,
 				ADB5A10A23BAB8630050E173 /* Indians.swift in Sources */,
 				ADD035C923A95EEB003B2576 /* ActionProtocol.swift in Sources */,
-				332499AF23DB9EFE0082EF09 /* CardCell.swift in Sources */,
 				AD52B99323B175110013240B /* Card.swift in Sources */,
 				ADD035CC23A95F37003B2576 /* RuleProtocol.swift in Sources */,
 				3395259023E38F49003DE948 /* Deck.swift in Sources */,

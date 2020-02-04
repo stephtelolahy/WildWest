@@ -1,29 +1,32 @@
 //
-//  CardCell.swift
+//  GenericActionCell.swift
 //  WildWest
 //
-//  Created by Hugues Stephano Telolahy on 24/01/2020.
+//  Created by Hugues Stephano Telolahy on 04/02/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
 import UIKit
 
-class CardCell: UICollectionViewCell {
+class GenericActionCell: UICollectionViewCell {
     
     // MARK: Outlets
     
     @IBOutlet private weak var cardImageView: UIImageView!
     @IBOutlet private weak var infoLabel: UILabel!
     
-    override func awakeFromNib() {
-        cardImageView.addCardShadow()
-    }
-    
     // MARK: Setup
     
-    func update(with card: CardProtocol) {
-        cardImageView.image = UIImage(named: card.imageName)
-        infoLabel.text = "\(card.value) \(card.suit.string)"
+    func update(with action: GenericAction) {
+        guard let cardId = action.cardId else {
+            cardImageView.image = nil
+            infoLabel.text = action.name
+            return
+        }
+        
+        //cardImageView.image = UIImage(named: card.imageName)
+        //infoLabel.text = "\(card.value) \(card.suit.string)"
+        infoLabel.text = cardId
     }
 }
 
