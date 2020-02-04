@@ -48,8 +48,8 @@ class ActionsAdapter: ActionsAdapterProtocol {
         let cards = player.hand
         let actions = state.actions.filter { $0.actorId == playerIdentifier }
         var result: [ActionItem] = []
-        let noCardsActions = actions.filter { $0.cardId == nil }
-        noCardsActions.forEach { result.append(ActionItem(action: $0, card: nil)) }
+        let cardLessActions = actions.filter { $0.cardId == nil }
+        cardLessActions.forEach { result.append(ActionItem(action: $0, card: nil)) }
         
         cards.forEach { card in
             let action = actions.first(where: { $0.cardId == card.identifier })

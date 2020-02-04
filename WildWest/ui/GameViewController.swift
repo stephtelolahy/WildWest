@@ -63,12 +63,7 @@ class GameViewController: UIViewController, Subscribable {
         playersCollectionView.setItemSpacing(spacing)
         actionsCollectionView.setItemSpacing(spacing)
         sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
-            self?.state = state
-            self?.playersAdapter.setState(state)
-            self?.actionsAdapter.setState(state)
-            self?.playersCollectionView.reloadDataKeepingSelection { [weak self] in
-                self?.actionsCollectionView.reloadData()
-            }
+            self?.update(with: state)
         }))
     }
     
@@ -80,12 +75,32 @@ class GameViewController: UIViewController, Subscribable {
         }
         
         let actionsViewController = ActionsViewController()
-        actionsViewController.actions = actions
+        actionsViewController.actions = actions.reversed()
         present(actionsViewController, animated: true)
     }
 }
 
 private extension GameViewController {
+    
+    func update(with state: GameStateProtocol) {
+        self.state = state
+        playersAdapter.setState(state)
+        actionsAdapter.setState(state)
+        playersCollectionView.reloadData()
+        DispatchQueue.main.async { [weak self] in
+            self?.selectActivePlayer()
+        }
+    }
+    
+    func selectActivePlayer() {
+        guard let activePlayerIndex = playersAdapter.items.firstIndex(where: { $0.isActive }) else {
+            return
+        }
+        
+        let indexPath = IndexPath(row: activePlayerIndex, section: 0)
+        playersCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .top)
+        playersCollectionViewDidSelectItem(at: indexPath)
+    }
     
     func showOptions(of genericAction: GenericAction) {
         let alertController = UIAlertController(title: genericAction.name,
