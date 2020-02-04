@@ -15,17 +15,18 @@ class PlayerCell: UICollectionViewCell {
     
     private var isActive: Bool = false
     
-    func update(with player: PlayerProtocol, isActive: Bool) {
+    func update(with item: PlayerItem) {
+        guard let player = item.player else {
+            figureImageView.image = nil
+            infoLabel.text = nil
+            backgroundColor = .clear
+            return
+        }
+        
         figureImageView.image = UIImage(named: player.imageName)
         infoLabel.text = player.string
-        self.isActive = isActive
+        isActive = item.isActive
         updateBackground()
-    }
-    
-    func clear() {
-        figureImageView.image = nil
-        infoLabel.text = nil
-        backgroundColor = .clear
     }
     
     override var isSelected: Bool {

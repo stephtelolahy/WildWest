@@ -12,6 +12,7 @@ import RxSwift
 class GameViewController: UIViewController, Subscribable {
     
     // MARK: Constants
+    
     private let spacing: CGFloat = 4.0
     private let ratio: CGFloat = 250.0 / 389.0
     
@@ -51,12 +52,9 @@ class GameViewController: UIViewController, Subscribable {
         return GameEngine(state: state, rules: rules)
     }()
     
-    // swiftlint:disable implicitly_unwrapped_optional
-    private var state: GameStateProtocol!
-    
-    private lazy var actionsAdapter: ActionsAdapterProtocol  = {
-        ActionsAdapter()
-    }()
+    private var state: GameStateProtocol?
+    private let playersAdapter: PlayersAdapterProtocol = PlayersAdapter()
+    private let actionsAdapter: ActionsAdapterProtocol = ActionsAdapter()
     
     // MARK: Lifecycle
     
@@ -66,6 +64,7 @@ class GameViewController: UIViewController, Subscribable {
         actionsCollectionView.setItemSpacing(spacing)
         sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
             self?.state = state
+            self?.playersAdapter.setState(state)
             self?.actionsAdapter.setState(state)
             self?.playersCollectionView.reloadDataKeepingSelection { [weak self] in
                 self?.actionsCollectionView.reloadData()
@@ -76,36 +75,17 @@ class GameViewController: UIViewController, Subscribable {
     // MARK: IBAction
     
     @IBAction private func historyButtonTapped(_ sender: Any) {
+        guard let actions = state?.commands else {
+            return
+        }
+        
         let actionsViewController = ActionsViewController()
-        actionsViewController.actions = state.commands
+        actionsViewController.actions = actions
         present(actionsViewController, animated: true)
     }
 }
 
-/// Convenience
 private extension GameViewController {
-    
-    var playerIndexes: [[Int]] {
-        return [
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 1, 0, 0, 0, 0, 0],
-            [0, 0, 0, 1, 0, 2, 0, 0, 0],
-            [1, 0, 2, 0, 0, 0, 0, 3, 0],
-            [1, 0, 2, 0, 0, 0, 4, 0, 3],
-            [1, 2, 3, 0, 0, 0, 5, 0, 4],
-            [1, 0, 2, 6, 0, 3, 5, 0, 4],
-            [1, 2, 3, 7, 0, 4, 6, 0, 5]
-        ]
-    }
-    
-    func player(at indexPath: IndexPath) -> PlayerProtocol? {
-        let playerIndex = playerIndexes[state.players.count][indexPath.row] - 1
-        guard playerIndex >= 0 else {
-            return nil
-        }
-        
-        return state.players[playerIndex]
-    }
     
     func showOptions(of genericAction: GenericAction) {
         let alertController = UIAlertController(title: genericAction.name,
@@ -149,7 +129,7 @@ extension GameViewController: UICollectionViewDataSource {
     }
     
     private func playersCollectionViewNumberOfItems() -> Int {
-        return 9
+        return playersAdapter.items.count
     }
     
     private func actionsCollectionViewNumberOfItems() -> Int {
@@ -159,12 +139,7 @@ extension GameViewController: UICollectionViewDataSource {
     private func playersCollectionView(_ collectionView: UICollectionView,
                                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(with: PlayerCell.self, for: indexPath)
-        if let player = player(at: indexPath) {
-            let isActive = state.actions.contains(where: { $0.actorId == player.identifier })
-            cell.update(with: player, isActive: isActive)
-        } else {
-            cell.clear()
-        }
+        cell.update(with: playersAdapter.items[indexPath.row])
         return cell
     }
     
@@ -187,7 +162,7 @@ extension GameViewController: UICollectionViewDelegate {
     }
     
     private func playersCollectionViewDidSelectItem(at indexPath: IndexPath) {
-        actionsAdapter.setPlayerIdentifier(player(at: indexPath)?.identifier)
+        actionsAdapter.setPlayerIdentifier(playersAdapter.items[indexPath.row].player?.identifier)
         actionsCollectionView.reloadData()
     }
     

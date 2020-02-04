@@ -56,6 +56,8 @@
 		33ABE07023E9DA5B009A54E4 /* ActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33ABE06F23E9DA5B009A54E4 /* ActionCell.swift */; };
 		33ABE07223EA097A009A54E4 /* ActionsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33ABE07123EA097A009A54E4 /* ActionsAdapter.swift */; };
 		33ABE07323EA097A009A54E4 /* ActionsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33ABE07123EA097A009A54E4 /* ActionsAdapter.swift */; };
+		33ABE07523EA21AC009A54E4 /* PlayersAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33ABE07423EA21AC009A54E4 /* PlayersAdapter.swift */; };
+		33ABE07623EA21AC009A54E4 /* PlayersAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33ABE07423EA21AC009A54E4 /* PlayersAdapter.swift */; };
 		33AFA25323DC201A00425BEB /* ClassNameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */; };
 		33AFB62623DCAC9E00C96CED /* StartTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFB62523DCAC9E00C96CED /* StartTurn.swift */; };
 		33AFB62723DCACA100C96CED /* StartTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFB62523DCAC9E00C96CED /* StartTurn.swift */; };
@@ -189,6 +191,7 @@
 		33A815EC23DB54350081A055 /* roles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = roles.json; sourceTree = "<group>"; };
 		33ABE06F23E9DA5B009A54E4 /* ActionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCell.swift; sourceTree = "<group>"; };
 		33ABE07123EA097A009A54E4 /* ActionsAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsAdapter.swift; sourceTree = "<group>"; };
+		33ABE07423EA21AC009A54E4 /* PlayersAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersAdapter.swift; sourceTree = "<group>"; };
 		33AE8F5823E6303B00DC2A41 /* MissedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissedTests.swift; sourceTree = "<group>"; };
 		33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameProtocol.swift; sourceTree = "<group>"; };
 		33AFB62523DCAC9E00C96CED /* StartTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTurn.swift; sourceTree = "<group>"; };
@@ -541,6 +544,7 @@
 				ADB7D2F6239EE03900653905 /* LaunchScreen.storyboard */,
 				ADB7D2F1239EE03800653905 /* Main.storyboard */,
 				332499B223DB9F650082EF09 /* GameViewController.swift */,
+				33ABE07423EA21AC009A54E4 /* PlayersAdapter.swift */,
 				33ABE07123EA097A009A54E4 /* ActionsAdapter.swift */,
 				332499B023DB9F140082EF09 /* PlayerCell.swift */,
 				33ABE06F23E9DA5B009A54E4 /* ActionCell.swift */,
@@ -820,6 +824,7 @@
 				AD52B99323B175110013240B /* Card.swift in Sources */,
 				ADD035CC23A95F37003B2576 /* RuleProtocol.swift in Sources */,
 				3395259023E38F49003DE948 /* Deck.swift in Sources */,
+				33ABE07523EA21AC009A54E4 /* PlayersAdapter.swift in Sources */,
 				ADD035CF23A96002003B2576 /* CardProtocol.swift in Sources */,
 				33EC5D3423E71C1400E14890 /* LooseLife.swift in Sources */,
 				33A733EE23DC4A5300E9B2AD /* Subscribable.swift in Sources */,
@@ -862,6 +867,7 @@
 				3371B90023E95B7B00341D8D /* DuelTests.swift in Sources */,
 				33ABE07323EA097A009A54E4 /* ActionsAdapter.swift in Sources */,
 				33A34E7923E9549C00C63649 /* MissedTests.swift in Sources */,
+				33ABE07623EA21AC009A54E4 /* PlayersAdapter.swift in Sources */,
 				33A4381523E4BE8200C39DD6 /* ArrayExtensionTests.swift in Sources */,
 				ADB5A10823BAB84E0050E173 /* Gatling.swift in Sources */,
 				33A4381323E4BD3200C39DD6 /* ArrayExtension.swift in Sources */,
