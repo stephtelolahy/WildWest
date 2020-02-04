@@ -23,14 +23,15 @@ struct StartTurn: ActionProtocol, Equatable {
 
 struct StartTurnRule: RuleProtocol {
     
-    let actionName: String = "StartTurn"
-    
-    func match(with state: GameStateProtocol) -> [ActionProtocol] {
+    func match(with state: GameStateProtocol) -> [GenericAction]? {
         guard case .startTurn = state.challenge else {
-            return []
+            return nil
         }
         
         let actor = state.players[state.turn]
-        return [StartTurn(actorId: actor.identifier)]
+        return [GenericAction(name: "startTurn",
+                              actorId: actor.identifier,
+                              cardId: nil,
+                              options: [StartTurn(actorId: actor.identifier)])]
     }
 }

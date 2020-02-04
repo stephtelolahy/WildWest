@@ -11,7 +11,7 @@ import Cuckoo
 
 class MissedTests: XCTestCase {
     
-    func test_DiscardCard_IfPlayingMissed() {
+    func test_DiscardCardAndRemoveChallenge_IfPlayingMissed() {
         // Given
         let mockState = MockGameStateProtocol()
             .withEnabledDefaultImplementation(GameStateProtocolStub())
@@ -23,23 +23,12 @@ class MissedTests: XCTestCase {
         
         // Assert
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")
-    }
-    
-    func test_RemoveChallenge_IfPlayingMissed() {
-        // Given
-        let mockState = MockGameStateProtocol()
-            .withEnabledDefaultImplementation(GameStateProtocolStub())
-            .challenge(is: .shoot(["p1"]))
-        let sut = Missed(actorId: "p1", cardId: "c1")
-        
-        // When
-        sut.execute(in: mockState)
-        
-        // Assert
+        verify(mockState).challenge.get()
         verify(mockState).setChallenge(isNil())
+        verifyNoMoreInteractions(mockState)
     }
     
-    func test_RemoveActorFromChallenge_IfPlayingMissed() {
+    func test_DiscardCardAndRemoveActorFromChallenge_IfPlayingMissed() {
         // Given
         let mockState = MockGameStateProtocol()
             .withEnabledDefaultImplementation(GameStateProtocolStub())
@@ -50,7 +39,10 @@ class MissedTests: XCTestCase {
         sut.execute(in: mockState)
         
         // Assert
+        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
+        verify(mockState).challenge.get()
         verify(mockState).setChallenge(equal(to: .shoot(["p2", "p3"])))
+        verifyNoMoreInteractions(mockState)
     }
 }
 
@@ -73,6 +65,11 @@ class MissedRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions as? [Missed], [Missed(actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(actions?.count, 1)
+        XCTAssertEqual(actions?[0].name, "missed")
+        XCTAssertEqual(actions?[0].actorId, "p1")
+        XCTAssertEqual(actions?[0].cardId, "c1")
+        XCTAssertEqual(actions?[0].options as? [Missed], [Missed(actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(actions?[0].options[0].description, "p1 plays c1")
     }
 }

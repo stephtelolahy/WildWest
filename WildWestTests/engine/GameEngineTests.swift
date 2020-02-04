@@ -65,13 +65,16 @@ class GameEngineTests: XCTestCase {
         let action2 = MockActionProtocol()
             .described(by: "a2")
             .actorId(is: "p1")
+        let genericAction = GenericAction(name: "ac",
+                                          actorId: "p1",
+                                          cardId: nil,
+                                          options: [action1, action2])
         Cuckoo.stub(mockRule1) { mock in
-            when(mock.actionName.get).thenReturn("n1")
-            when(mock.match(with: state(equalTo: mockState))).thenReturn([action1])
+            when(mock.match(with: state(equalTo: mockState))).thenReturn(nil)
         }
+        
         Cuckoo.stub(mockRule2) { mock in
-            when(mock.actionName.get).thenReturn("n2")
-            when(mock.match(with: state(equalTo: mockState))).thenReturn([action2])
+            when(mock.match(with: state(equalTo: mockState))).thenReturn([genericAction])
         }
         
         // When
@@ -82,10 +85,9 @@ class GameEngineTests: XCTestCase {
         verify(mockRule2).match(with: state(equalTo: mockState))
         let argumentCaptor = ArgumentCaptor<[GenericAction]>()
         verify(mockState).setActions(argumentCaptor.capture())
-        XCTAssertEqual(argumentCaptor.value?.count, 2)
-        XCTAssertEqual(argumentCaptor.value?[0].name, "n1")
-        XCTAssertEqual(argumentCaptor.value?[0].options.map { $0.description }, ["a1"])
-        XCTAssertEqual(argumentCaptor.value?[1].name, "n2")
-        XCTAssertEqual(argumentCaptor.value?[1].options.map { $0.description }, ["a2"])
+        XCTAssertEqual(argumentCaptor.value?.count, 1)
+        XCTAssertEqual(argumentCaptor.value?[0].actorId, "p1")
+        XCTAssertEqual(argumentCaptor.value?[0].name, "ac")
+        XCTAssertEqual(argumentCaptor.value?[0].options.map { $0.description }, ["a1", "a2"])
     }
 }

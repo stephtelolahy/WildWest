@@ -26,28 +26,30 @@ struct Missed: ActionProtocol, Equatable {
     }
     
     var description: String {
-        "\(actorId) play \(cardId)"
+        "\(actorId) plays \(cardId)"
     }
 }
 
 struct MissedRule: RuleProtocol {
     
-    let actionName: String = "Missed"
-    
-    func match(with state: GameStateProtocol) -> [ActionProtocol] {
+    func match(with state: GameStateProtocol) -> [GenericAction]? {
         guard case let .shoot(targetIds) = state.challenge else {
-            return  []
+            return nil
         }
         
         guard let actor = state.players.first(where: { $0.identifier == targetIds.first }) else {
-            return []
+            return nil
         }
         
         let cards = actor.handCards(named: .missed)
         guard !cards.isEmpty else {
-            return []
+            return nil
         }
         
-        return cards.map { Missed(actorId: actor.identifier, cardId: $0.identifier) }
+        return cards.map { GenericAction(name: $0.name.rawValue,
+                                         actorId: actor.identifier,
+                                         cardId: $0.identifier,
+                                         options: [Missed(actorId: actor.identifier, cardId: $0.identifier)])
+        }
     }
 }

@@ -26,17 +26,15 @@ struct Equip: ActionProtocol, Equatable {
     }
     
     var description: String {
-        "\(actorId) equip with \(cardId)"
+        "\(actorId) plays \(cardId)"
     }
 }
 
 struct EquipRule: RuleProtocol {
     
-    let actionName: String = "Equip"
-    
-    func match(with state: GameStateProtocol) -> [ActionProtocol] {
+    func match(with state: GameStateProtocol) -> [GenericAction]? {
         guard state.challenge == nil else {
-            return []
+            return nil
         }
         
         let actor = state.players[state.turn]
@@ -49,8 +47,16 @@ struct EquipRule: RuleProtocol {
                                     .mustang,
                                     .scope,
                                     .dynamite)
-        return cards
             .filter { actor.inPlayCards(named: $0.name).isEmpty }
-            .map { Equip(actorId: actor.identifier, cardId: $0.identifier) }
+        
+        guard !cards.isEmpty else {
+            return nil
+        }
+        
+        return cards.map { GenericAction(name: $0.name.rawValue,
+                                         actorId: actor.identifier,
+                                         cardId: $0.identifier,
+                                         options: [Equip(actorId: actor.identifier, cardId: $0.identifier)])
+        }
     }
 }

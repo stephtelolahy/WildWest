@@ -17,21 +17,27 @@ struct Stagecoach: ActionProtocol, Equatable {
     }
     
     var description: String {
-        "\(actorId) play \(cardId)"
+        "\(actorId) plays \(cardId)"
     }
 }
 
 struct StagecoachRule: RuleProtocol {
     
-    let actionName: String = "Stagecoach"
-    
-    func match(with state: GameStateProtocol) -> [ActionProtocol] {
+    func match(with state: GameStateProtocol) -> [GenericAction]? {
         guard state.challenge == nil else {
-            return []
+            return nil
         }
         
         let actor = state.players[state.turn]
         let cards = actor.handCards(named: .stagecoach)
-        return cards.map { Stagecoach(actorId: actor.identifier, cardId: $0.identifier) }
+        guard !cards.isEmpty else {
+            return nil
+        }
+        
+        return cards.map { GenericAction(name: $0.name.rawValue,
+                                         actorId: actor.identifier,
+                                         cardId: $0.identifier,
+                                         options: [Stagecoach(actorId: actor.identifier, cardId: $0.identifier)])
+        }
     }
 }

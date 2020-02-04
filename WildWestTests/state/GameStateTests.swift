@@ -43,9 +43,12 @@ class GameStateTests: XCTestCase {
         // Assert
         XCTAssertEqual(sut.players.map { $0.identifier }, ["p1", "p2"])
         XCTAssertTrue(sut.deck as? MockDeckProtocol === mockDeck)
+        XCTAssertEqual(sut.turn, 0)
         XCTAssertNil(sut.challenge)
-        XCTAssertTrue(sut.commands.isEmpty)
+        XCTAssertEqual(sut.turnShoots, 0)
         XCTAssertNil(sut.outcome)
+        XCTAssertTrue(sut.commands.isEmpty)
+        XCTAssertTrue(sut.eliminated.isEmpty)
     }
     
     func test_MoveCardFromDeckToActorsHand_IfPulling() {
@@ -60,7 +63,10 @@ class GameStateTests: XCTestCase {
         
         // Assert
         verify(mockDeck).pull()
+        verify(mockPlayer1).identifier.get()
         verify(mockPlayer1).addHand(card(identifiedBy: "c1"))
+        verifyNoMoreInteractions(mockDeck)
+        verifyNoMoreInteractions(mockPlayer1)
     }
     
     func test_MoveCardFromHandToDiscard_IfDiscardingHand() {
@@ -74,8 +80,11 @@ class GameStateTests: XCTestCase {
         sut.discardHand(playerId: "p1", cardId: "c1")
         
         // Assert
+        verify(mockPlayer1).identifier.get()
         verify(mockPlayer1).removeHandById("c1")
         verify(mockDeck).addToDiscard(card(identifiedBy: "c1"))
+        verifyNoMoreInteractions(mockDeck)
+        verifyNoMoreInteractions(mockPlayer1)
     }
     
     func test_MoveCardFromInPlayToDiscard_IfDiscardingInPlay() {
@@ -89,8 +98,11 @@ class GameStateTests: XCTestCase {
         sut.discardInPlay(playerId: "p1", cardId: "c1")
         
         // Assert
+        verify(mockPlayer1).identifier.get()
         verify(mockPlayer1).removeInPlayById("c1")
         verify(mockDeck).addToDiscard(card(identifiedBy: "c1"))
+        verifyNoMoreInteractions(mockDeck)
+        verifyNoMoreInteractions(mockPlayer1)
     }
     
     func test_IncrementHealth_IfGainingLifePoint() {
@@ -103,7 +115,10 @@ class GameStateTests: XCTestCase {
         sut.gainLifePoint(playerId: "p1")
         
         // Assert
+        verify(mockPlayer1).identifier.get()
+        verify(mockPlayer1).health.get()
         verify(mockPlayer1).setHealth(3)
+        verifyNoMoreInteractions(mockPlayer1)
     }
     
     func test_MoveCardFromHandToInPlay_ifPuttingInPlay() {
@@ -117,8 +132,10 @@ class GameStateTests: XCTestCase {
         sut.putInPlay(playerId: "p1", cardId: "c1")
         
         // Assert
+        verify(mockPlayer1).identifier.get()
         verify(mockPlayer1).removeHandById("c1")
         verify(mockPlayer1).addInPlay(card(identifiedBy: "c1"))
+        verifyNoMoreInteractions(mockPlayer1)
     }
     
     func test_SetTurn() {
@@ -141,13 +158,15 @@ class GameStateTests: XCTestCase {
     
     func test_AddCommand() {
         // Given
-        let mockAction = MockActionProtocol().described(by: "ac")
+        let action1 = MockActionProtocol().described(by: "a1")
+        let action2 = MockActionProtocol().described(by: "a2")
         
         // When
-        sut.addCommand(mockAction)
+        sut.addCommand(action1)
+        sut.addCommand(action2)
         
         // Assert
-        XCTAssertEqual(sut.commands.last?.description, "ac")
+        XCTAssertEqual(sut.commands.map { $0.description }, ["a1", "a2"])
     }
     
     func test_SetChallenge() {
@@ -159,16 +178,6 @@ class GameStateTests: XCTestCase {
         XCTAssertEqual(sut.challenge, .startTurn)
     }
     
-    func test_SetActions() {
-        // Given
-        // When
-        sut.setActions([GenericAction(name: "ac", options: [])])
-        
-        // Assert
-        XCTAssertEqual(sut.actions.count, 1)
-        XCTAssertEqual(sut.actions.first?.name, "ac")
-    }
-    
     func test_RemoveChallenge() {
         // Given
         // When
@@ -176,6 +185,19 @@ class GameStateTests: XCTestCase {
         
         // Assert
         XCTAssertNil(sut.challenge)
+    }
+    
+    func test_SetActions() {
+        // Given
+        // When
+        sut.setActions([GenericAction(name: "ac", actorId: "p1", cardId: "c1", options: [])])
+        
+        // Assert
+        XCTAssertEqual(sut.actions.count, 1)
+        XCTAssertEqual(sut.actions[0].name, "ac")
+        XCTAssertEqual(sut.actions[0].cardId, "c1")
+        XCTAssertEqual(sut.actions[0].actorId, "p1")
+        XCTAssertTrue(sut.actions[0].options.isEmpty)
     }
     
     func test_AddCardToHand_IfPullingOtherHand() {
@@ -188,8 +210,12 @@ class GameStateTests: XCTestCase {
         sut.pullHand(playerId: "p1", otherId: "p2", cardId: "c2")
         
         // Assert
+        verify(mockPlayer1, atLeastOnce()).identifier.get()
+        verify(mockPlayer2, atLeastOnce()).identifier.get()
         verify(mockPlayer2).removeHandById("c2")
         verify(mockPlayer1).addHand(card(identifiedBy: "c2"))
+        verifyNoMoreInteractions(mockPlayer1)
+        verifyNoMoreInteractions(mockPlayer2)
     }
     
     func test_AddCardToHand_IfPullingOtherInPlay() {
@@ -202,8 +228,12 @@ class GameStateTests: XCTestCase {
         sut.pullInPlay(playerId: "p1", otherId: "p2", cardId: "c2")
         
         // Assert
+        verify(mockPlayer1, atLeastOnce()).identifier.get()
+        verify(mockPlayer2, atLeastOnce()).identifier.get()
         verify(mockPlayer2).removeInPlayById("c2")
         verify(mockPlayer1).addHand(card(identifiedBy: "c2"))
+        verifyNoMoreInteractions(mockPlayer1)
+        verifyNoMoreInteractions(mockPlayer2)
     }
     
     func test_DecrementHealth_IfLoosingLifePoint() {
@@ -216,7 +246,10 @@ class GameStateTests: XCTestCase {
         sut.looseLifePoint(playerId: "p1")
         
         // Assert
+        verify(mockPlayer1).identifier.get()
+        verify(mockPlayer1).health.get()
         verify(mockPlayer1).setHealth(1)
+        verifyNoMoreInteractions(mockPlayer1)
     }
     
     func test_RevealRoleAndDiscardAllCards_IfPlayerEliminated() {
@@ -246,6 +279,7 @@ class GameStateTests: XCTestCase {
         verify(mockDeck).addToDiscard(card(identifiedBy: "c2"))
         verify(mockDeck).addToDiscard(card(identifiedBy: "c3"))
         verify(mockDeck).addToDiscard(card(identifiedBy: "c4"))
+        verifyNoMoreInteractions(mockDeck)
         XCTAssertEqual(sut.eliminated.map { $0.identifier }, ["p1"])
         XCTAssertEqual(sut.players.map { $0.identifier }, ["p2"])
     }

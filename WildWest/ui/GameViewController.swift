@@ -122,7 +122,7 @@ private extension GameViewController {
             return
         }
         
-        let genericActions = state.actions.filter({ $0.options.first?.actorId == player.identifier })
+        let genericActions = state.actions.filter({ $0.actorId == player.identifier })
         guard !genericActions.isEmpty else {
             return
         }
@@ -203,7 +203,7 @@ extension GameViewController: UICollectionViewDataSource {
                                      cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(with: PlayerCell.self, for: indexPath)
         if let player = player(at: indexPath) {
-            let isActive = state.actions.contains(where: { $0.options.first?.actorId == player.identifier })
+            let isActive = state.actions.contains(where: { $0.actorId == player.identifier })
             cell.update(with: player, isActive: isActive)
         } else {
             cell.clear()

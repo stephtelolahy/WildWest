@@ -61,11 +61,17 @@ class DuelRuleTests: XCTestCase {
         // When
         let actions = sut.match(with: mockState)
         
-        // Assert
-        XCTAssertEqual(actions as? [Duel], [
+        // AssertXCTAssertEqual(actions?.count, 1)
+        XCTAssertEqual(actions?[0].name, "duel")
+        XCTAssertEqual(actions?[0].actorId, "p1")
+        XCTAssertEqual(actions?[0].cardId, "c1")
+        XCTAssertEqual(actions?[0].options as? [Duel], [
             Duel(actorId: "p1", cardId: "c1", targetId: "p2"),
             Duel(actorId: "p1", cardId: "c1", targetId: "p3")
         ])
+        XCTAssertEqual(actions?[0].options.map { $0.description }, [
+            "p1 plays c1 against p2",
+            "p1 plays c1 against p3"])
     }
     
 }

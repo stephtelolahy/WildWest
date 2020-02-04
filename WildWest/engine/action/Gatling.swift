@@ -22,22 +22,28 @@ struct Gatling: ActionProtocol, Equatable {
     }
     
     var description: String {
-        "\(actorId) play \(cardId)"
+        "\(actorId) plays \(cardId)"
     }
 }
 
 struct GatlingRule: RuleProtocol {
     
-    let actionName: String = "Gatling"
-    
-    func match(with state: GameStateProtocol) -> [ActionProtocol] {
+    func match(with state: GameStateProtocol) -> [GenericAction]? {
         guard state.challenge == nil else {
-            return []
+            return nil
         }
         
         let actor = state.players[state.turn]
         let cards = actor.handCards(named: .gatling)
-        return cards.map { Gatling(actorId: actor.identifier, cardId: $0.identifier) }
+        guard !cards.isEmpty else {
+            return nil
+        }
+        
+        return cards.map { GenericAction(name: $0.name.rawValue,
+                                         actorId: actor.identifier,
+                                         cardId: $0.identifier,
+                                         options: [Gatling(actorId: actor.identifier, cardId: $0.identifier)])
+        }
     }
     
 }

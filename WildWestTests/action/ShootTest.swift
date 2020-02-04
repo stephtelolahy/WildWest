@@ -31,35 +31,7 @@ import Cuckoo
 
 class ShootTest: XCTestCase {
     
-    func test_DiscardBangCard_IfPlayingShoot() {
-        // Given
-        let mockState = MockGameStateProtocol()
-            .withEnabledDefaultImplementation(GameStateProtocolStub())
-        
-        let sut = Shoot(actorId: "p1", cardId: "c1", targetId: "p2")
-        
-        // When
-        sut.execute(in: mockState)
-        
-        // Assert
-        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
-    }
-    
-    func test_TriggerBangChallenge_IfShooting() {
-        // Given
-        let mockState = MockGameStateProtocol()
-            .withEnabledDefaultImplementation(GameStateProtocolStub())
-        
-        let sut = Shoot(actorId: "p1", cardId: "c1", targetId: "p2")
-        
-        // When
-        sut.execute(in: mockState)
-        
-        // Assert
-        verify(mockState).setChallenge(equal(to: .shoot(["p2"])))
-    }
-    
-    func test_IncrementShootsCount_IfShooting() {
+    func test_DiscardCardAndTriggerBangChallengeAndIncrementShootsCount_IfPlayingShoot() {
         // Given
         let mockState = MockGameStateProtocol()
             .withEnabledDefaultImplementation(GameStateProtocolStub())
@@ -71,7 +43,11 @@ class ShootTest: XCTestCase {
         sut.execute(in: mockState)
         
         // Assert
+        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
+        verify(mockState).setChallenge(equal(to: .shoot(["p2"])))
+        verify(mockState).turnShoots.get()
         verify(mockState).setTurnShoots(2)
+        verifyNoMoreInteractions(mockState)
     }
 }
 
@@ -103,9 +79,17 @@ class ShootRuleTest: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions as? [Shoot], [
+        XCTAssertEqual(actions?.count, 1)
+        XCTAssertEqual(actions?[0].name, "bang")
+        XCTAssertEqual(actions?[0].actorId, "p1")
+        XCTAssertEqual(actions?[0].cardId, "c1")
+        XCTAssertEqual(actions?[0].options as? [Shoot], [
             Shoot(actorId: "p1", cardId: "c1", targetId: "p2"),
             Shoot(actorId: "p1", cardId: "c1", targetId: "p3")
+        ])
+        XCTAssertEqual(actions?[0].options.map { $0.description }, [
+            "p1 plays c1 against p2",
+            "p1 plays c1 against p3"
         ])
     }
     
@@ -135,7 +119,7 @@ class ShootRuleTest: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertTrue(actions.isEmpty)
+        XCTAssertNil(actions)
     }
     
     func test_CanPlayShoot_IfOtherIsReachableUsingGunRange() {
@@ -163,9 +147,17 @@ class ShootRuleTest: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions as? [Shoot], [
+        XCTAssertEqual(actions?.count, 1)
+        XCTAssertEqual(actions?[0].name, "bang")
+        XCTAssertEqual(actions?[0].actorId, "p1")
+        XCTAssertEqual(actions?[0].cardId, "c1")
+        XCTAssertEqual(actions?[0].options as? [Shoot], [
             Shoot(actorId: "p1", cardId: "c1", targetId: "p2"),
             Shoot(actorId: "p1", cardId: "c1", targetId: "p3")
+        ])
+        XCTAssertEqual(actions?[0].options.map { $0.description }, [
+            "p1 plays c1 against p2",
+            "p1 plays c1 against p3"
         ])
     }
     
@@ -193,7 +185,6 @@ class ShootRuleTest: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertTrue(actions.isEmpty)
+        XCTAssertNil(actions)
     }
-    
 }

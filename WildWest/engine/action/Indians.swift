@@ -22,21 +22,27 @@ struct Indians: ActionProtocol, Equatable {
     }
     
     var description: String {
-        "\(actorId) play \(cardId)"
+        "\(actorId) plays \(cardId)"
     }
 }
 
 struct IndiansRule: RuleProtocol {
     
-    var actionName: String = "Indians"
-    
-    func match(with state: GameStateProtocol) -> [ActionProtocol] {
+    func match(with state: GameStateProtocol) -> [GenericAction]? {
         guard state.challenge == nil else {
-            return []
+            return nil
         }
         
         let actor = state.players[state.turn]
         let cards = actor.handCards(named: .indians)
-        return cards.map { Indians(actorId: actor.identifier, cardId: $0.identifier) }
+        guard !cards.isEmpty else {
+            return nil
+        }
+        
+        return cards.map { GenericAction(name: $0.name.rawValue,
+                                         actorId: actor.identifier,
+                                         cardId: $0.identifier,
+                                         options: [Indians(actorId: actor.identifier, cardId: $0.identifier)])
+        }
     }
 }

@@ -6,10 +6,6 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-enum CardSource: Equatable {
-    case hand, inPlay
-}
-
 struct CatBalou: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
@@ -28,54 +24,60 @@ struct CatBalou: ActionProtocol, Equatable {
     }
     
     var description: String {
-        "\(actorId) play \(cardId) to discard \(targetPlayerId)'s \(targetCardId) from \(targetCardSource)"
+        "\(actorId) plays \(cardId) to discard \(targetCardId) from \(targetPlayerId)'s \(targetCardSource)"
     }
 }
 
 struct CatBalouRule: RuleProtocol {
     
-    let actionName: String = "CatBalou"
-    
-    func match(with state: GameStateProtocol) -> [ActionProtocol] {
+    func match(with state: GameStateProtocol) -> [GenericAction]? {
         guard state.challenge == nil else {
-            return []
+            return nil
         }
         
         let actor = state.players[state.turn]
         let cards = actor.handCards(named: .catBalou)
         guard !cards.isEmpty else {
-            return []
+            return nil
         }
         
-        var result: [CatBalou] = []
+        var discardableCards: [DiscardableCard] = []
+        discardableCards += actor.inPlay.map { DiscardableCard(identifier: $0.identifier,
+                                                               ownerId: actor.identifier,
+                                                               source: .inPlay)
+        }
+        
         let otherPlayers = state.players.filter { $0.identifier != actor.identifier }
-        for card in cards {
-            for inPlayCard in actor.inPlay {
-                result.append(CatBalou(actorId: actor.identifier,
-                                       cardId: card.identifier,
-                                       targetPlayerId: actor.identifier,
-                                       targetCardId: inPlayCard.identifier,
-                                       targetCardSource: .inPlay))
+        for player in otherPlayers {
+            discardableCards += player.hand.map { DiscardableCard(identifier: $0.identifier,
+                                                                  ownerId: player.identifier,
+                                                                  source: .hand)
+                
             }
             
-            for otherPlayer in otherPlayers {
-                for handCard in otherPlayer.hand {
-                    result.append(CatBalou(actorId: actor.identifier,
-                                           cardId: card.identifier,
-                                           targetPlayerId: otherPlayer.identifier,
-                                           targetCardId: handCard.identifier,
-                                           targetCardSource: .hand))
-                }
-                for inPlayCard in otherPlayer.inPlay {
-                    result.append(CatBalou(actorId: actor.identifier,
-                                           cardId: card.identifier,
-                                           targetPlayerId: otherPlayer.identifier,
-                                           targetCardId: inPlayCard.identifier,
-                                           targetCardSource: .inPlay))
-                }
+            discardableCards += player.inPlay.map { DiscardableCard(identifier: $0.identifier,
+                                                                    ownerId: player.identifier,
+                                                                    source: .inPlay)
+                
             }
         }
         
-        return result
+        guard !discardableCards.isEmpty else {
+            return nil
+        }
+        
+        return cards.map { card in
+            let options = discardableCards.map { CatBalou(actorId: actor.identifier,
+                                                          cardId: card.identifier,
+                                                          targetPlayerId: $0.ownerId,
+                                                          targetCardId: $0.identifier,
+                                                          targetCardSource: $0.source)
+            }
+            
+            return GenericAction(name: card.name.rawValue,
+                                 actorId: actor.identifier,
+                                 cardId: card.identifier,
+                                 options: options)
+        }
     }
 }
