@@ -12,6 +12,7 @@ protocol GameStateProtocol {
     var turn: Int { get }
     var challenge: Challenge? { get }
     var turnShoots: Int { get }
+    var generalStoreCards: [CardProtocol] { get }
     var outcome: GameOutcome? { get }
     var actions: [GenericAction] { get }
     var commands: [ActionProtocol] { get }
@@ -27,6 +28,7 @@ protocol GameStateProtocol {
     func setChallenge(_ challenge: Challenge?)
     func setTurn(_ turn: Int)
     func setTurnShoots(_ shoots: Int)
+    func setGeneralStoreCards(count: Int)
     func pullHand(playerId: String, otherId: String, cardId: String)
     func pullInPlay(playerId: String, otherId: String, cardId: String)
     func looseLifePoint(playerId: String)

@@ -52,6 +52,7 @@ class GameSetup: GameSetupProtocol {
                          turn: 0,
                          challenge: nil,
                          turnShoots: 0,
+                         generalStoreCards: [],
                          outcome: nil,
                          actions: actions,
                          commands: [],

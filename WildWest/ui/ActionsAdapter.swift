@@ -33,7 +33,6 @@ class ActionsAdapter: ActionsAdapterProtocol {
         self.playerIdentifier = identifier
         items = buildItems()
     }
-    
 
     private func buildItems() -> [ActionItem] {
         guard let playerIdentifier = self.playerIdentifier,

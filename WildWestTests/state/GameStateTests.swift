@@ -31,6 +31,7 @@ class GameStateTests: XCTestCase {
                         turn: 0,
                         challenge: nil,
                         turnShoots: 0,
+                        generalStoreCards: [],
                         outcome: nil,
                         actions: [],
                         commands: [],
@@ -46,6 +47,7 @@ class GameStateTests: XCTestCase {
         XCTAssertEqual(sut.turn, 0)
         XCTAssertNil(sut.challenge)
         XCTAssertEqual(sut.turnShoots, 0)
+        XCTAssertTrue(sut.generalStoreCards.isEmpty)
         XCTAssertNil(sut.outcome)
         XCTAssertTrue(sut.commands.isEmpty)
         XCTAssertTrue(sut.eliminated.isEmpty)
@@ -295,12 +297,13 @@ class GameStateTests: XCTestCase {
         sut = GameState(players: players,
                         deck: mockDeck,
                         turn: 3, // turn player is "p4"
-                        challenge: nil,
-                        turnShoots: 0,
-                        outcome: nil,
-                        actions: [],
-                        commands: [],
-                        eliminated: [])
+            challenge: nil,
+            turnShoots: 0,
+            generalStoreCards: [],
+            outcome: nil,
+            actions: [],
+            commands: [],
+            eliminated: [])
         
         // When
         sut.eliminate(playerId: "p2")
@@ -308,6 +311,20 @@ class GameStateTests: XCTestCase {
         // Assert
         XCTAssertEqual(sut.players.map { $0.identifier }, ["p1", "p3", "p4"])
         XCTAssertEqual(sut.turn, 2) // turn player is still "p4"
+    }
+    
+    func test_SetGeneralStoreCards() {
+        // Given
+        Cuckoo.stub(mockDeck) { mock in
+            when(mock.pull()).thenReturn(MockCardProtocol().identified(by: "c1"),
+                                         MockCardProtocol().identified(by: "c2"),
+                                         MockCardProtocol().identified(by: "c3"))
+        }
+        // When
+        sut.setGeneralStoreCards(count: 3)
+        
+        // Assert
+        XCTAssertEqual(sut.generalStoreCards.map { $0.identifier }, ["c1", "c2", "c3"])
     }
     
     func test_EndTurn_IfTurnPlayerIsEliminated() {

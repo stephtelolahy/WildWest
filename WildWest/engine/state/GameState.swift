@@ -13,6 +13,7 @@ class GameState: GameStateProtocol {
     var turn: Int
     var challenge: Challenge?
     var turnShoots: Int
+    var generalStoreCards: [CardProtocol]
     var outcome: GameOutcome?
     var commands: [ActionProtocol]
     var actions: [GenericAction]
@@ -23,6 +24,7 @@ class GameState: GameStateProtocol {
          turn: Int,
          challenge: Challenge?,
          turnShoots: Int,
+         generalStoreCards: [CardProtocol],
          outcome: GameOutcome?,
          actions: [GenericAction],
          commands: [ActionProtocol],
@@ -32,6 +34,7 @@ class GameState: GameStateProtocol {
         self.turn = turn
         self.challenge = challenge
         self.turnShoots = turnShoots
+        self.generalStoreCards = generalStoreCards
         self.outcome = outcome
         self.commands = commands
         self.actions = actions
@@ -56,6 +59,10 @@ class GameState: GameStateProtocol {
     
     func setTurnShoots(_ shoots: Int) {
         self.turnShoots = shoots
+    }
+    
+    func setGeneralStoreCards(count: Int) {
+        generalStoreCards = Array(1...count).map { _ in deck.pull() }
     }
     
     func pullFromDeck(playerId: String) {
