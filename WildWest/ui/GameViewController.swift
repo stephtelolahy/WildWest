@@ -83,7 +83,7 @@ class GameViewController: UIViewController, Subscribable {
         
         let actionsViewController = ActionsViewController()
         actionsViewController.actions = actions.reversed()
-        present(actionsViewController, animated: true)
+        navigationController?.pushViewController(actionsViewController, animated: true)
     }
 }
 
@@ -94,9 +94,34 @@ private extension GameViewController {
         playersAdapter.setState(state)
         actionsAdapter.setState(state)
         playersCollectionView.reloadData()
+        title = displayTitle(for: state)
         DispatchQueue.main.async { [weak self] in
             self?.selectActivePlayer()
         }
+    }
+    
+    func displayTitle(for state: GameStateProtocol) -> String {
+        if let challenge = state.challenge {
+            switch challenge {
+            case .startTurn:
+                return "startTurn"
+            case .duel:
+                return "duel"
+            case .shoot:
+                return "shoot"
+            case .indians:
+                return "indians"
+            case .generalStore:
+                return "generalStore"
+            }
+        }
+        
+        if state.actions.count == 1,
+            let uniqueAction = state.actions.first {
+            return uniqueAction.name
+        }
+        
+        return "play any card"
     }
     
     func selectActivePlayer() {
