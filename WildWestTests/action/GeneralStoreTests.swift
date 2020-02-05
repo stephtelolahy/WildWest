@@ -37,7 +37,7 @@ class GeneralStoreTests: XCTestCase {
         sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).setGeneralStoreCards(count: 4)
+        verify(mockState).setupGeneralStore(count: 4)
         verify(mockState).setChallenge(equal(to: .generalStore(["p1", "p2", "p3", "p4"])))
     }
 }

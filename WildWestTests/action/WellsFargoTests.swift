@@ -24,7 +24,7 @@ class WellsFargoTests: XCTestCase {
         
         // Assert
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")
-        verify(mockState, times(3)).pullFromDeck(playerId: "p1")
+        verify(mockState, times(3)).pullDeck(playerId: "p1")
         verifyNoMoreInteractions(mockState)
     }
 }

@@ -18,7 +18,7 @@ struct GeneralStore: ActionProtocol, Equatable {
         let playersCount = state.players.count
         let playerIds = Array(0..<playersCount).map { state.players[(actorIndex + $0) % playersCount].identifier }
         state.setChallenge(.generalStore(playerIds))
-        state.setGeneralStoreCards(count: playersCount)
+        state.setupGeneralStore(count: playersCount)
     }
     
     var description: String {

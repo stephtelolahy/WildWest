@@ -61,11 +61,22 @@ class GameState: GameStateProtocol {
         self.turnShoots = shoots
     }
     
-    func setGeneralStoreCards(count: Int) {
+    func setupGeneralStore(count: Int) {
         generalStoreCards = Array(1...count).map { _ in deck.pull() }
     }
     
-    func pullFromDeck(playerId: String) {
+    func pullGeneralStore(playerId: String, cardId: String) {
+        guard let player = players.first(where: { $0.identifier == playerId }),
+            let cardIndex = generalStoreCards.firstIndex(where: { $0.identifier == cardId }) else {
+                return
+        }
+        
+        let card = generalStoreCards[cardIndex]
+        generalStoreCards.remove(at: cardIndex)
+        player.addHand(card)
+    }
+    
+    func pullDeck(playerId: String) {
         guard let player = players.first(where: { $0.identifier == playerId }) else {
             return
         }
@@ -142,16 +153,17 @@ class GameState: GameStateProtocol {
     }
     
     func eliminate(playerId: String) {
-        guard let player = players.first(where: { $0.identifier == playerId }) else {
+        guard let playerIndex = players.firstIndex(where: { $0.identifier == playerId }) else {
             return
         }
         
+        let player = players[playerIndex]
         player.hand.forEach { discardHand(playerId: playerId, cardId: $0.identifier) }
         player.inPlay.forEach { discardInPlay(playerId: playerId, cardId: $0.identifier) }
         eliminated.append(player)
         
         let turnPlayerId = players[turn].identifier
-        players.removeAll(where: { $0.identifier == playerId })
+        players.remove(at: playerIndex)
         guard let turnPlayerIndex = players.firstIndex(where: { $0.identifier == turnPlayerId }) else {
             return
         }

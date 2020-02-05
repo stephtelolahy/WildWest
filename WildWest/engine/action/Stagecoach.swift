@@ -12,8 +12,8 @@ struct Stagecoach: ActionProtocol, Equatable {
     
     func execute(in state: GameStateProtocol) {
         state.discardHand(playerId: actorId, cardId: cardId)
-        state.pullFromDeck(playerId: actorId)
-        state.pullFromDeck(playerId: actorId)
+        state.pullDeck(playerId: actorId)
+        state.pullDeck(playerId: actorId)
     }
     
     var description: String {

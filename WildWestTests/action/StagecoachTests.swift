@@ -24,7 +24,7 @@ class StagecoachTests: XCTestCase {
         
         // Assert
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")
-        verify(mockState, times(2)).pullFromDeck(playerId: "p1")
+        verify(mockState, times(2)).pullDeck(playerId: "p1")
         verifyNoMoreInteractions(mockState)
     }   
 }

@@ -61,7 +61,7 @@ class GameStateTests: XCTestCase {
         }
         
         // When
-        sut.pullFromDeck(playerId: "p1")
+        sut.pullDeck(playerId: "p1")
         
         // Assert
         verify(mockDeck).pull()
@@ -321,10 +321,33 @@ class GameStateTests: XCTestCase {
                                          MockCardProtocol().identified(by: "c3"))
         }
         // When
-        sut.setGeneralStoreCards(count: 3)
+        sut.setupGeneralStore(count: 3)
         
         // Assert
         XCTAssertEqual(sut.generalStoreCards.map { $0.identifier }, ["c1", "c2", "c3"])
+    }
+    
+    func test_PullCardFromGeneralStore() {
+        // Given
+        let card1 = MockCardProtocol().identified(by: "c1")
+        let card2 = MockCardProtocol().identified(by: "c2")
+        sut = GameState(players: [mockPlayer1, mockPlayer2],
+                    deck: mockDeck,
+                    turn: 0,
+                    challenge: .generalStore(["p1", "p2"]),
+                    turnShoots: 0,
+                    generalStoreCards: [card1, card2],
+                    outcome: nil,
+                    actions: [],
+                    commands: [],
+                    eliminated: [])
+        
+        // When
+        sut.pullGeneralStore(playerId: "p1", cardId: "c1")
+        
+        // Aseert
+        XCTAssertEqual(sut.generalStoreCards.map { $0.identifier }, ["c2"])
+        verify(mockPlayer1).addHand(card(identifiedBy: "c1"))
     }
     
     func test_EndTurn_IfTurnPlayerIsEliminated() {
@@ -339,7 +362,7 @@ class GameStateTests: XCTestCase {
         #warning("TODO: implement after completing rules")
     }
     
-    func test_Reward_IfOutlaweliminated() {
+    func test_RewardActor_IfAnOutlawIsEliminated() {
         #warning("TODO: implement after completing rules")
     }
 }
