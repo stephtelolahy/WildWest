@@ -30,10 +30,6 @@ class PlayersAdapter: PlayersAdapterProtocol {
         }
         
         self.state = state
-        updateItems()
-    }
-    
-    private func updateItems() {
         items = buildItems()
     }
     

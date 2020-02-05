@@ -9,6 +9,12 @@
 import XCTest
 import Cuckoo
 
+/**
+ Indians!
+ Each player, excluding the one who played this card, may
+ discard a BANG! card, or lose one life point. Neither Missed!
+ nor Barrel have effect in this case.
+ */
 class IndiansTests: XCTestCase {
     
     func test_DiscardCardAndSetChallengeToIndiansAllOtherPlayersRightDirection_IfPlayingIndians() {

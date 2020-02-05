@@ -6,7 +6,7 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct Jail: ActionProtocol {
+struct Jail: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
     
@@ -15,5 +15,11 @@ struct Jail: ActionProtocol {
     
     var description: String {
         "\(actorId) plays \(cardId)"
+    }
+}
+
+struct JailRule: RuleProtocol {
+    func match(with state: GameStateProtocol) -> [GenericAction]? {
+        nil
     }
 }

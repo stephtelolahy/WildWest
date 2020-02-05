@@ -9,6 +9,11 @@
 import XCTest
 import Cuckoo
 
+/**
+ Cat Balou
+ Force “any one player” to “discard a card”, regardless of
+ the distance
+ */
 class CatBalouTests: XCTestCase {
     
     func test_DiscardOtherPlayerHandCard_IfPlayingCatBalou() {

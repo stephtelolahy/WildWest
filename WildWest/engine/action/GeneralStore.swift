@@ -17,3 +17,10 @@ struct GeneralStore: ActionProtocol {
         "\(actorId) plays \(cardId)"
     }
 }
+
+struct GeneralStoreRule: RuleProtocol {
+    
+    func match(with state: GameStateProtocol) -> [GenericAction]? {
+        nil
+    }
+}

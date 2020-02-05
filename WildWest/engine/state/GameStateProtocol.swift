@@ -44,5 +44,5 @@ enum Challenge: Equatable {
     case shoot([String])
     case indians([String])
     case duel([String])
-    case generalStore
+    case generalStore([String])
 }

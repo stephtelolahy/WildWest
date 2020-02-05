@@ -9,6 +9,14 @@
 import XCTest
 import Cuckoo
 
+/**
+  Discard excess cards
+ Once the second phase is over (you do not want to or cannot play any more
+ cards), then you must discard from your hand any cards exceeding your
+ hand-size limit. Remember that your hand size limit, at the end of your
+ turn, is equal to the number of bullets (i.e. life points) you currently have.
+ Then it is the next player’s turn, in clockwise order.
+ */
 class EndTurnTests: XCTestCase {
     
     func test_ChangeTurnToNextPlayer_IfAPlayerJustEndedTurn() {

@@ -9,6 +9,13 @@
 import XCTest
 import Cuckoo
 
+/**
+ Panic!
+ The symbols state: “Draw
+ a card” from “a player at
+ distance 1”. Remember that this distance is not modified by
+ weapons, but only by cards such as Mustang and/or Scope.
+ */
 class PanicTests: XCTestCase {
     
     func test_PullOtherPlayerHandCard_IfPlayingPanic() {
