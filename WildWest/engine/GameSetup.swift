@@ -41,7 +41,9 @@ class GameSetup: GameSetupProtocol {
         
         var actions: [GenericAction] = []
         if let sheriff = players.first(where: { $0.role == .sheriff }) {
-            actions.append(GenericAction(name: StartTurnRule().actionName,
+            actions.append(GenericAction(name: "startTurn",
+                                         actorId: sheriff.identifier,
+                                         cardId: nil,
                                          options: [StartTurn(actorId: sheriff.identifier)]))
         }
         

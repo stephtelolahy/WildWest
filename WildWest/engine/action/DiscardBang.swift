@@ -32,17 +32,14 @@ struct DiscardBang: ActionProtocol, Equatable {
     }
     
     var description: String {
-        "\(actorId) discard \(cardId)"
+        "\(actorId) discards \(cardId)"
     }
 }
 
 struct DiscardBangRule: RuleProtocol {
     
-    let actionName: String = "DiscardBang"
-    
-    func match(with state: GameStateProtocol) -> [ActionProtocol] {
+    func match(with state: GameStateProtocol) -> [GenericAction]? {
         var actorId: String?
-        
         switch state.challenge {
         case let .indians(targetIds):
             actorId = targetIds.first
@@ -55,14 +52,18 @@ struct DiscardBangRule: RuleProtocol {
         }
         
         guard let actor = state.players.first(where: { $0.identifier == actorId }) else {
-            return []
+            return nil
         }
         
         let cards = actor.handCards(named: .bang)
         guard !cards.isEmpty else {
-            return []
+            return nil
         }
         
-        return cards.map { DiscardBang(actorId: actor.identifier, cardId: $0.identifier) }
+        return cards.map { GenericAction(name: "discardBang",
+                                         actorId: actor.identifier,
+                                         cardId: $0.identifier,
+                                         options: [DiscardBang(actorId: actor.identifier, cardId: $0.identifier)])
+        }
     }
 }

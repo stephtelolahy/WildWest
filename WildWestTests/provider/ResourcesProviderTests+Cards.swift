@@ -1,6 +1,6 @@
 
 //
-//  GameResourcesTests+Cards.swift
+//  ResourcesProviderTests+Cards.swift
 //  WildWestTests
 //
 //  Created by Hugues Stephano Telolahy on 26/01/2020.
@@ -9,13 +9,17 @@
 
 import XCTest
 
-class GameResourcesTests_Cards: XCTestCase {
+class ResourcesProviderTests_Cards: XCTestCase {
 
     private lazy var cards: [CardProtocol] = {
         let jsonReader = JsonReader(bundle: Bundle(for: type(of: self)))
         let sut: ResourcesProviderProtocol = ResourcesProvider(jsonReader: jsonReader)
         return sut.allCards()
     }()
+    
+    func test_Load80PlayingCards() {
+        XCTAssertEqual(cards.count, 80)
+    }
     
     func test_Barrel() {
         XCTAssertTrue(cards.contains { $0.name == .barrel && $0.value == "Q" && $0.suit == .spades })
@@ -156,6 +160,7 @@ class GameResourcesTests_Cards: XCTestCase {
     
     func test_Stagecoach() {
         XCTAssertTrue(cards.contains { $0.name == .stagecoach && $0.value == "9" && $0.suit == .spades })
+        XCTAssertTrue(cards.filter { $0.name == .stagecoach }.count == 2)
     }
     
     func test_WellsFargo() {

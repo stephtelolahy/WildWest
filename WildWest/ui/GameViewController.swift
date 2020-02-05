@@ -12,13 +12,14 @@ import RxSwift
 class GameViewController: UIViewController, Subscribable {
     
     // MARK: Constants
+    
     private let spacing: CGFloat = 4.0
     private let ratio: CGFloat = 250.0 / 389.0
     
     // MARK: IBOutlets
     
-    @IBOutlet private weak var stateCollectionView: UICollectionView!
-    @IBOutlet private weak var handCollectionView: UICollectionView!
+    @IBOutlet private weak var playersCollectionView: UICollectionView!
+    @IBOutlet private weak var actionsCollectionView: UICollectionView!
     
     // MARK: Properties
     
@@ -38,116 +39,67 @@ class GameViewController: UIViewController, Subscribable {
             EquipRule(),
             CatBalouRule(),
             PanicRule(calculator: calculator),
-            StartTurnRule(),
-            EndTurnRule(),
             ShootRule(calculator: calculator),
             MissedRule(),
             GatlingRule(),
-            LooseLifeRule(),
             IndiansRule(),
             DiscardBangRule(),
-            DuelRule()
+            DuelRule(),
+            LooseLifeRule(),
+            StartTurnRule(),
+            EndTurnRule()
         ]
         return GameEngine(state: state, rules: rules)
     }()
     
-    // swiftlint:disable implicitly_unwrapped_optional
-    private var state: GameStateProtocol!
+    private var state: GameStateProtocol?
+    private let playersAdapter: PlayersAdapterProtocol = PlayersAdapter()
+    private let actionsAdapter: ActionsAdapterProtocol = ActionsAdapter()
     
     // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        stateCollectionView.setItemSpacing(spacing)
-        handCollectionView.setItemSpacing(spacing)
+        playersCollectionView.setItemSpacing(spacing)
+        actionsCollectionView.setItemSpacing(spacing)
         sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
-            self?.state = state
-            self?.stateCollectionView.reloadDataKeepingSelection { [weak self] in
-                self?.handCollectionView.reloadData()
-            }
+            self?.update(with: state)
         }))
     }
     
     // MARK: IBAction
     
     @IBAction private func historyButtonTapped(_ sender: Any) {
+        guard let actions = state?.commands else {
+            return
+        }
+        
         let actionsViewController = ActionsViewController()
-        actionsViewController.actions = state.commands
+        actionsViewController.actions = actions.reversed()
         present(actionsViewController, animated: true)
     }
 }
 
-extension GameViewController: ActionsViewControllerDelegate {
-    func actionsViewController(_ controller: ActionsViewController, didSelect action: ActionProtocol) {
-        engine.execute(action)
-    }
-}
-
-/// Convenience
 private extension GameViewController {
     
-    var cards: [CardProtocol] {
-        guard let indexPath = stateCollectionView.indexPathsForSelectedItems?.first,
-            let player = player(at: indexPath) else {
-                return []
+    func update(with state: GameStateProtocol) {
+        self.state = state
+        playersAdapter.setState(state)
+        actionsAdapter.setState(state)
+        playersCollectionView.reloadData()
+        DispatchQueue.main.async { [weak self] in
+            self?.selectActivePlayer()
         }
-        
-        return player.hand
     }
     
-    var playerIndexes: [[Int]] {
-        return [
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 1, 0, 0, 0, 0, 0],
-            [0, 0, 0, 1, 0, 2, 0, 0, 0],
-            [1, 0, 2, 0, 0, 0, 0, 3, 0],
-            [1, 0, 2, 0, 0, 0, 4, 0, 3],
-            [1, 2, 3, 0, 0, 0, 5, 0, 4],
-            [1, 0, 2, 6, 0, 3, 5, 0, 4],
-            [1, 2, 3, 7, 0, 4, 6, 0, 5]
-        ]
-    }
-    
-    func player(at indexPath: IndexPath) -> PlayerProtocol? {
-        let playerIndex = playerIndexes[state.players.count][indexPath.row] - 1
-        guard playerIndex >= 0 else {
-            return nil
-        }
-        
-        return state.players[playerIndex]
-    }
-    
-    func showActionsForPlayer(at indexPath: IndexPath) {
-        guard let player = player(at: indexPath) else {
+    func selectActivePlayer() {
+        guard let activePlayerIndex = playersAdapter.items.firstIndex(where: { $0.isActive }) else {
             return
         }
         
-        let genericActions = state.actions.filter({ $0.options.first?.actorId == player.identifier })
-        guard !genericActions.isEmpty else {
-            return
-        }
-        
-        let alertController = UIAlertController(title: player.ability.rawValue,
-                                                message: nil,
-                                                preferredStyle: .actionSheet)
-        
-        genericActions.forEach { genericAction in
-            let title = "\(genericAction.name) (\(genericAction.options.count))"
-            alertController.addAction(UIAlertAction(title: title, style: .default, handler: { [weak self] _ in
-                if genericAction.options.count == 1 {
-                    self?.engine.execute(genericAction.options[0])
-                } else {
-                    self?.showOptions(of: genericAction)
-                }
-                
-            }))
-        }
-        
-        alertController.addAction(UIAlertAction(title: "Cancel",
-                                                style: .cancel,
-                                                handler: nil))
-        
-        present(alertController, animated: true)
+        let indexPath = IndexPath(row: activePlayerIndex, section: 0)
+        playersCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .top)
+        playersCollectionViewDidSelectItem(at: indexPath)
     }
     
     func showOptions(of genericAction: GenericAction) {
@@ -175,46 +127,41 @@ extension GameViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        if collectionView == stateCollectionView {
-            return stateCollectionViewNumberOfItems()
+        if collectionView == playersCollectionView {
+            return playersCollectionViewNumberOfItems()
         } else {
-            return handCollectionViewNumberOfItems()
+            return actionsCollectionViewNumberOfItems()
         }
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == stateCollectionView {
-            return stateCollectionView(collectionView, cellForItemAt: indexPath)
+        if collectionView == playersCollectionView {
+            return playersCollectionView(collectionView, cellForItemAt: indexPath)
         } else {
-            return handCollectionView(collectionView, cellForItemAt: indexPath)
+            return actionsCollectionView(collectionView, cellForItemAt: indexPath)
         }
     }
     
-    private func stateCollectionViewNumberOfItems() -> Int {
-        return 9
+    private func playersCollectionViewNumberOfItems() -> Int {
+        return playersAdapter.items.count
     }
     
-    private func handCollectionViewNumberOfItems() -> Int {
-        return cards.count
+    private func actionsCollectionViewNumberOfItems() -> Int {
+        return actionsAdapter.items.count
     }
     
-    private func stateCollectionView(_ collectionView: UICollectionView,
-                                     cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    private func playersCollectionView(_ collectionView: UICollectionView,
+                                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(with: PlayerCell.self, for: indexPath)
-        if let player = player(at: indexPath) {
-            let isActive = state.actions.contains(where: { $0.options.first?.actorId == player.identifier })
-            cell.update(with: player, isActive: isActive)
-        } else {
-            cell.clear()
-        }
+        cell.update(with: playersAdapter.items[indexPath.row])
         return cell
     }
     
-    private func handCollectionView(_ collectionView: UICollectionView,
-                                    cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(with: CardCell.self, for: indexPath)
-        cell.update(with: cards[indexPath.row])
+    private func actionsCollectionView(_ collectionView: UICollectionView,
+                                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(with: ActionCell.self, for: indexPath)
+        cell.update(with: actionsAdapter.items[indexPath.row])
         return cell
     }
 }
@@ -222,19 +169,24 @@ extension GameViewController: UICollectionViewDataSource {
 extension GameViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == stateCollectionView {
-            stateCollectionViewDidSelectItem(at: indexPath)
+        if collectionView == playersCollectionView {
+            playersCollectionViewDidSelectItem(at: indexPath)
         } else {
-            handCollectionViewDidSelectItem(at: indexPath)
+            actionsCollectionViewDidSelectItem(at: indexPath)
         }
     }
     
-    private func stateCollectionViewDidSelectItem(at indexPath: IndexPath) {
-        handCollectionView.reloadData()
-        showActionsForPlayer(at: indexPath)
+    private func playersCollectionViewDidSelectItem(at indexPath: IndexPath) {
+        actionsAdapter.setPlayerIdentifier(playersAdapter.items[indexPath.row].player?.identifier)
+        actionsCollectionView.reloadData()
     }
     
-    private func handCollectionViewDidSelectItem(at indexPath: IndexPath) {
+    private func actionsCollectionViewDidSelectItem(at indexPath: IndexPath) {
+        guard let action = actionsAdapter.items[indexPath.row].action else {
+            return
+        }
+        
+        showOptions(of: action)
     }
 }
 
@@ -243,14 +195,14 @@ extension GameViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == stateCollectionView {
-            return stateCellSize(collectionView)
+        if collectionView == playersCollectionView {
+            return playerCellSize(collectionView)
         } else {
-            return handCellSize(collectionView)
+            return actionCellSize(collectionView)
         }
     }
     
-    private func stateCellSize(_ collectionView: UICollectionView) -> CGSize {
+    private func playerCellSize(_ collectionView: UICollectionView) -> CGSize {
         let totalHeight = collectionView.bounds.height - 4 * spacing
         let height = totalHeight / 3
         let totalWidth = collectionView.bounds.width - 4 * spacing
@@ -258,7 +210,7 @@ extension GameViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: width, height: height)
     }
     
-    private func handCellSize(_ collectionView: UICollectionView) -> CGSize {
+    private func actionCellSize(_ collectionView: UICollectionView) -> CGSize {
         let height: CGFloat = collectionView.bounds.height - 2 * spacing
         let width: CGFloat = height * ratio
         return CGSize(width: width, height: height)

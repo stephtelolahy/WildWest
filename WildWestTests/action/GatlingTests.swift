@@ -19,15 +19,17 @@ class GatlingTests: XCTestCase {
         let mockPlayer4 = MockPlayerProtocol().identified(by: "p4")
         let mockState = MockGameStateProtocol()
             .withEnabledDefaultImplementation(GameStateProtocolStub())
-            .players(are: mockPlayer4, mockPlayer1, mockPlayer2, mockPlayer3)
-        let sut = Gatling(actorId: "p1", cardId: "c1")
+            .players(are: mockPlayer1, mockPlayer2, mockPlayer3, mockPlayer4)
+        let sut = Gatling(actorId: "p2", cardId: "c2")
         
         // When
         sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
-        verify(mockState).setChallenge(equal(to: .shoot(["p2", "p3", "p4"])))
+        verify(mockState).discardHand(playerId: "p2", cardId: "c2")
+        verify(mockState, atLeastOnce()).players.get()
+        verify(mockState).setChallenge(equal(to: .shoot(["p3", "p4", "p1"])))
+        verifyNoMoreInteractions(mockState)
     }
 }
 
@@ -51,6 +53,11 @@ class GatlingRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions as? [Gatling], [Gatling(actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(actions?.count, 1)
+        XCTAssertEqual(actions?[0].name, "gatling")
+        XCTAssertEqual(actions?[0].actorId, "p1")
+        XCTAssertEqual(actions?[0].cardId, "c1")
+        XCTAssertEqual(actions?[0].options as? [Gatling], [Gatling(actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(actions?[0].options[0].description, "p1 plays c1")
     }
 }

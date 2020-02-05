@@ -134,7 +134,12 @@ class LooseLifeRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions as? [LooseLife], [LooseLife(actorId: "p1")])
+        XCTAssertEqual(actions?.count, 1)
+        XCTAssertEqual(actions?[0].name, "looseLifePoint")
+        XCTAssertEqual(actions?[0].actorId, "p1")
+        XCTAssertNil(actions?[0].cardId)
+        XCTAssertEqual(actions?[0].options as? [LooseLife], [LooseLife(actorId: "p1")])
+        XCTAssertEqual(actions?[0].options[0].description, "p1 looses life point")
     }
     
     func test_CanLooseLife_IfChallengedByIndians() {
@@ -149,7 +154,12 @@ class LooseLifeRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions as? [LooseLife], [LooseLife(actorId: "p1")])
+        XCTAssertEqual(actions?.count, 1)
+        XCTAssertEqual(actions?[0].name, "looseLifePoint")
+        XCTAssertEqual(actions?[0].actorId, "p1")
+        XCTAssertNil(actions?[0].cardId)
+        XCTAssertEqual(actions?[0].options as? [LooseLife], [LooseLife(actorId: "p1")])
+        XCTAssertEqual(actions?[0].options[0].description, "p1 looses life point")
     }
     
     func test_CanLooseLife_IfChallengedByDuel() {
@@ -164,6 +174,11 @@ class LooseLifeRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions as? [LooseLife], [LooseLife(actorId: "p1")])
+        XCTAssertEqual(actions?.count, 1)
+        XCTAssertEqual(actions?[0].name, "looseLifePoint")
+        XCTAssertEqual(actions?[0].actorId, "p1")
+        XCTAssertNil(actions?[0].cardId)
+        XCTAssertEqual(actions?[0].options as? [LooseLife], [LooseLife(actorId: "p1")])
+        XCTAssertEqual(actions?[0].options[0].description, "p1 looses life point")
     }
 }

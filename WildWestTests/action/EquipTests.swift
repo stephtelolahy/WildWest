@@ -35,7 +35,9 @@ class EquipTests: XCTestCase {
         sut.execute(in: mockState)
         
         // Assert
+        verify(mockState).players.get()
         verify(mockState).putInPlay(playerId: "p1", cardId: "c1")
+        verifyNoMoreInteractions(mockState)
     }
     
     func test_DiscardPreviousGun_IfArmingNewGun() {
@@ -53,8 +55,10 @@ class EquipTests: XCTestCase {
         sut.execute(in: mockState)
         
         // Assert
+        verify(mockState).players.get()
         verify(mockState).putInPlay(playerId: "p1", cardId: "c1")
         verify(mockState).discardInPlay(playerId: "p1", cardId: "c2")
+        verifyNoMoreInteractions(mockState)
     }
 }
 
@@ -85,11 +89,25 @@ class EquipRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions as? [Equip], [
-            Equip(actorId: "p1", cardId: "c1"),
-            Equip(actorId: "p1", cardId: "c2"),
-            Equip(actorId: "p1", cardId: "c3")
-        ])
+        XCTAssertEqual(actions?.count, 3)
+        
+        XCTAssertEqual(actions?[0].name, "schofield")
+        XCTAssertEqual(actions?[0].actorId, "p1")
+        XCTAssertEqual(actions?[0].cardId, "c1")
+        XCTAssertEqual(actions?[0].options as? [Equip], [Equip(actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(actions?[0].options[0].description, "p1 plays c1")
+        
+        XCTAssertEqual(actions?[1].name, "scope")
+        XCTAssertEqual(actions?[1].actorId, "p1")
+        XCTAssertEqual(actions?[1].cardId, "c2")
+        XCTAssertEqual(actions?[1].options as? [Equip], [Equip(actorId: "p1", cardId: "c2")])
+        XCTAssertEqual(actions?[1].options[0].description, "p1 plays c2")
+        
+        XCTAssertEqual(actions?[2].name, "dynamite")
+        XCTAssertEqual(actions?[2].actorId, "p1")
+        XCTAssertEqual(actions?[2].cardId, "c3")
+        XCTAssertEqual(actions?[2].options as? [Equip], [Equip(actorId: "p1", cardId: "c3")])
+        XCTAssertEqual(actions?[2].options[0].description, "p1 plays c3")
     }
     
     func test_CannotEquip_IfAlreadyPlayingCardWithTheSameName() {
@@ -111,7 +129,7 @@ class EquipRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertTrue(actions.isEmpty)
+        XCTAssertNil(actions)
     }
     
     func test_CannotEquipJail() {
@@ -130,6 +148,6 @@ class EquipRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertTrue(actions.isEmpty)
+        XCTAssertNil(actions)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  GameResourcesTests+Figures.swift
+//  ResourcesProviderTests+Figures.swift
 //  WildWestTests
 //
 //  Created by Hugues Stephano Telolahy on 26/01/2020.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-class GameResourcesTests_Figures: XCTestCase {
+class ResourcesProviderTests_Figures: XCTestCase {
 
     private lazy var figures: [FigureProtocol] = {
         let jsonReader = JsonReader(bundle: Bundle(for: type(of: self)))
@@ -16,7 +16,11 @@ class GameResourcesTests_Figures: XCTestCase {
         return sut.allFigures()
     }()
     
-    func test_16FiguresAreAvailable() {
+    func test_Load16PFigures() {
+        XCTAssertEqual(figures.count, 16)
+    }
+    
+    func test_AllFiguresAreAvailable() {
         XCTAssertTrue(figures.contains { $0.ability == .bartCassidy && $0.bullets == 4 })
         XCTAssertTrue(figures.contains { $0.ability == .blackJack && $0.bullets == 4 })
         XCTAssertTrue(figures.contains { $0.ability == .calamityJanet && $0.bullets == 4 })

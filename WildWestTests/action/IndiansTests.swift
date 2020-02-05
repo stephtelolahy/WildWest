@@ -27,7 +27,9 @@ class IndiansTests: XCTestCase {
         
         // Assert
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")
+        verify(mockState, atLeastOnce()).players.get()
         verify(mockState).setChallenge(equal(to: .indians(["p2", "p3", "p4"])))
+        verifyNoMoreInteractions(mockState)
     }
 }
 
@@ -51,6 +53,11 @@ class IndiansRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions as? [Indians], [Indians(actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(actions?.count, 1)
+        XCTAssertEqual(actions?[0].name, "indians")
+        XCTAssertEqual(actions?[0].actorId, "p1")
+        XCTAssertEqual(actions?[0].cardId, "c1")
+        XCTAssertEqual(actions?[0].options as? [Indians], [Indians(actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(actions?[0].options[0].description, "p1 plays c1")
     }
 }

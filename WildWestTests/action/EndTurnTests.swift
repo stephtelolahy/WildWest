@@ -107,7 +107,12 @@ class EndTurnRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions as? [EndTurn], [EndTurn(actorId: "p1", cardsToDiscardIds: [])])
+        XCTAssertEqual(actions?.count, 1)
+        XCTAssertEqual(actions?[0].name, "endTurn")
+        XCTAssertEqual(actions?[0].actorId, "p1")
+        XCTAssertNil(actions?[0].cardId)
+        XCTAssertEqual(actions?[0].options as? [EndTurn], [EndTurn(actorId: "p1", cardsToDiscardIds: [])])
+        XCTAssertEqual(actions?[0].options[0].description, "p1 end turn")
     }
     
     func test_CanEndTurnWithDicardingOneExcessCard_IfPlayingNoChallenge() {
@@ -129,11 +134,19 @@ class EndTurnRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions as? [EndTurn], [
+        XCTAssertEqual(actions?.count, 1)
+        XCTAssertEqual(actions?[0].name, "endTurn")
+        XCTAssertEqual(actions?[0].actorId, "p1")
+        XCTAssertNil(actions?[0].cardId)
+        XCTAssertEqual(actions?[0].options as? [EndTurn], [
             EndTurn(actorId: "p1", cardsToDiscardIds: ["c1"]),
             EndTurn(actorId: "p1", cardsToDiscardIds: ["c2"]),
             EndTurn(actorId: "p1", cardsToDiscardIds: ["c3"])
         ])
+        XCTAssertEqual(actions?[0].options.map { $0.description }, [
+            "p1 end turn discarding c1",
+            "p1 end turn discarding c2",
+            "p1 end turn discarding c3"])
     }
     
     func test_CanEndTurnWithDicardingAllCombinationsOfExcessCards_IfPlayingNoChallenge() {
@@ -155,10 +168,18 @@ class EndTurnRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions as? [EndTurn], [
+        XCTAssertEqual(actions?.count, 1)
+        XCTAssertEqual(actions?[0].name, "endTurn")
+        XCTAssertEqual(actions?[0].actorId, "p1")
+        XCTAssertNil(actions?[0].cardId)
+        XCTAssertEqual(actions?[0].options as? [EndTurn], [
             EndTurn(actorId: "p1", cardsToDiscardIds: ["c1", "c2"]),
             EndTurn(actorId: "p1", cardsToDiscardIds: ["c1", "c3"]),
             EndTurn(actorId: "p1", cardsToDiscardIds: ["c2", "c3"])
         ])
+        XCTAssertEqual(actions?[0].options.map { $0.description }, [
+            "p1 end turn discarding c1, c2",
+            "p1 end turn discarding c1, c3",
+            "p1 end turn discarding c2, c3"])
     }
 }

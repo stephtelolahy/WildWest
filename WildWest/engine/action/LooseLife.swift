@@ -53,9 +53,7 @@ struct LooseLife: ActionProtocol, Equatable {
 
 struct LooseLifeRule: RuleProtocol {
     
-    let actionName: String = "Loose life point"
-    
-    func match(with state: GameStateProtocol) -> [ActionProtocol] {
+    func match(with state: GameStateProtocol) -> [GenericAction]? {
         var actorId: String?
         
         switch state.challenge {
@@ -72,9 +70,12 @@ struct LooseLifeRule: RuleProtocol {
         }
         
         guard let actor = state.players.first(where: { $0.identifier == actorId }) else {
-            return []
+            return nil
         }
         
-        return [LooseLife(actorId: actor.identifier)]
+        return [GenericAction(name: "looseLifePoint",
+                              actorId: actor.identifier,
+                              cardId: nil,
+                              options: [LooseLife(actorId: actor.identifier)])]
     }
 }

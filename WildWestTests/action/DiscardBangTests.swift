@@ -73,7 +73,12 @@ class DiscardBangRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions as? [DiscardBang], [DiscardBang(actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(actions?.count, 1)
+        XCTAssertEqual(actions?[0].name, "discardBang")
+        XCTAssertEqual(actions?[0].actorId, "p1")
+        XCTAssertEqual(actions?[0].cardId, "c1")
+        XCTAssertEqual(actions?[0].options as? [DiscardBang], [DiscardBang(actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(actions?[0].options[0].description, "p1 discards c1")
     }
     
     func test_CanDiscardBang_IfIsTargetOfDuelAndHoldingBangCard() {
@@ -93,6 +98,11 @@ class DiscardBangRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions as? [DiscardBang], [DiscardBang(actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(actions?.count, 1)
+        XCTAssertEqual(actions?[0].name, "discardBang")
+        XCTAssertEqual(actions?[0].actorId, "p1")
+        XCTAssertEqual(actions?[0].cardId, "c1")
+        XCTAssertEqual(actions?[0].options as? [DiscardBang], [DiscardBang(actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(actions?[0].options[0].description, "p1 discards c1")
     }
 }

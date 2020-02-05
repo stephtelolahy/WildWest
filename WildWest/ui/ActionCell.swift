@@ -1,29 +1,32 @@
 //
-//  CardCell.swift
+//  ActionCell.swift
 //  WildWest
 //
-//  Created by Hugues Stephano Telolahy on 24/01/2020.
+//  Created by Hugues Stephano Telolahy on 04/02/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
 import UIKit
 
-class CardCell: UICollectionViewCell {
+class ActionCell: UICollectionViewCell {
     
     // MARK: Outlets
     
     @IBOutlet private weak var cardImageView: UIImageView!
     @IBOutlet private weak var infoLabel: UILabel!
     
-    override func awakeFromNib() {
-        cardImageView.addCardShadow()
-    }
-    
     // MARK: Setup
     
-    func update(with card: CardProtocol) {
-        cardImageView.image = UIImage(named: card.imageName)
-        infoLabel.text = "\(card.value) \(card.suit.string)"
+    func update(with item: ActionItem) {
+        if let card = item.card {
+            cardImageView.image = UIImage(named: card.imageName)
+            infoLabel.text = "\(card.value) \(card.suit.string)"
+        } else {
+            cardImageView.image = nil
+            infoLabel.text = item.action?.name
+        }
+        
+        cardImageView.alpha = item.action != nil ? 1.0 : 0.4
     }
 }
 

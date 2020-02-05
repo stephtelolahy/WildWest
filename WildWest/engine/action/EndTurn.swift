@@ -20,7 +20,7 @@ struct EndTurn: ActionProtocol, Equatable {
     var description: String {
         var text = "\(actorId) end turn"
         if !cardsToDiscardIds.isEmpty {
-            text += " dropping \( cardsToDiscardIds.joined(separator: ","))"
+            text += " discarding \( cardsToDiscardIds.joined(separator: ", "))"
         }
         return text
     }
@@ -28,22 +28,27 @@ struct EndTurn: ActionProtocol, Equatable {
 
 struct EndTurnRule: RuleProtocol {
     
-    let actionName: String = "EndTurn"
-    
-    func match(with state: GameStateProtocol) -> [ActionProtocol] {
+    func match(with state: GameStateProtocol) -> [GenericAction]? {
         guard state.challenge == nil else {
-            return []
+            return nil
         }
         
         let actor = state.players[state.turn]
         
+        var options: [EndTurn] = []
+        
         if actor.hand.count <= actor.health {
-            return [EndTurn(actorId: actor.identifier, cardsToDiscardIds: [])]
+            options = [EndTurn(actorId: actor.identifier, cardsToDiscardIds: [])]
+        } else {
+            let cardsToDiscardCount = actor.hand.count - actor.health
+            let handCardIds = actor.hand.map { $0.identifier }
+            let cardsCombinations = handCardIds.combine(by: cardsToDiscardCount)
+            options = cardsCombinations.map { EndTurn(actorId: actor.identifier, cardsToDiscardIds: $0) }
         }
         
-        let cardsToDiscardCount = actor.hand.count - actor.health
-        let handCardIds = actor.hand.map { $0.identifier }
-        let cardsCombinations = handCardIds.combine(by: cardsToDiscardCount)
-        return cardsCombinations.map { EndTurn(actorId: actor.identifier, cardsToDiscardIds: $0) }
+        return [GenericAction(name: "endTurn",
+                              actorId: actor.identifier,
+                              cardId: nil,
+                              options: options)]
     }
 }

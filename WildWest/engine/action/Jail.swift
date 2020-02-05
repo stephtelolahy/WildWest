@@ -14,6 +14,6 @@ struct Jail: ActionProtocol {
     }
     
     var description: String {
-        "\(actorId) play \(cardId)"
+        "\(actorId) plays \(cardId)"
     }
 }

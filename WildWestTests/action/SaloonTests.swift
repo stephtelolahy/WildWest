@@ -19,7 +19,7 @@ import Cuckoo
 ///
 class SaloonTests: XCTestCase {
     
-    func test_EachPlayerGainLifePoint_IfPlayingSaloon() {
+    func test_OnlyNotMaxHealthPlayerGainLifePoints_IfPlayingSaloon() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
@@ -31,7 +31,7 @@ class SaloonTests: XCTestCase {
             .maxHealth(is: 4)
         let mockPlayer3 = MockPlayerProtocol()
             .identified(by: "p3")
-            .health(is: 1)
+            .health(is: 3)
             .maxHealth(is: 3)
         let mockState = MockGameStateProtocol()
             .withEnabledDefaultImplementation(GameStateProtocolStub())
@@ -44,33 +44,10 @@ class SaloonTests: XCTestCase {
         
         // Assert
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")
+        verify(mockState).players.get()
         verify(mockState).gainLifePoint(playerId: "p1")
         verify(mockState).gainLifePoint(playerId: "p2")
-        verify(mockState).gainLifePoint(playerId: "p3")
-    }
-    
-    func test_OnlyNotMaxHealthPlayerGainLifePoints_IfPlayingSaloon() {
-        // Given
-        let mockPlayer1 = MockPlayerProtocol()
-            .identified(by: "p1")
-            .health(is: 4)
-            .maxHealth(is: 4)
-        let mockPlayer2 = MockPlayerProtocol()
-            .identified(by: "p2")
-            .health(is: 3)
-            .maxHealth(is: 4)
-        let mockState = MockGameStateProtocol()
-            .withEnabledDefaultImplementation(GameStateProtocolStub())
-            .players(are: mockPlayer1, mockPlayer2)
-        
-        let sut = Saloon(actorId: "p1", cardId: "c1")
-        
-        // When
-        sut.execute(in: mockState)
-        
-        // Assert
-        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
-        verify(mockState).gainLifePoint(playerId: "p2")
+        verifyNoMoreInteractions(mockState)
     }
 }
 
@@ -94,6 +71,11 @@ class SaloonRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions as? [Saloon], [Saloon(actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(actions?.count, 1)
+        XCTAssertEqual(actions?[0].name, "saloon")
+        XCTAssertEqual(actions?[0].actorId, "p1")
+        XCTAssertEqual(actions?[0].cardId, "c1")
+        XCTAssertEqual(actions?[0].options as? [Saloon], [Saloon(actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(actions?[0].options[0].description, "p1 plays c1")
     }
 }

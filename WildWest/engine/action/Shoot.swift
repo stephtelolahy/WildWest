@@ -18,13 +18,11 @@ struct Shoot: ActionProtocol, Equatable {
     }
     
     var description: String {
-        "\(actorId) play \(cardId) against \(targetId)"
+        "\(actorId) plays \(cardId) against \(targetId)"
     }
 }
 
 struct ShootRule: RuleProtocol {
-    
-    let actionName: String = "Shoot"
     
     private let calculator: RangeCalculatorProtocol
     
@@ -32,41 +30,45 @@ struct ShootRule: RuleProtocol {
         self.calculator = calculator
     }
     
-    func match(with state: GameStateProtocol) -> [ActionProtocol] {
+    func match(with state: GameStateProtocol) -> [GenericAction]? {
         guard state.challenge == nil else {
-            return []
+            return nil
         }
         
         let actor = state.players[state.turn]
         let cards = actor.handCards(named: .bang)
         guard !cards.isEmpty else {
-            return []
+            return nil
         }
         
         let maxShoots = calculator.maximumNumberOfShoots(of: actor)
         guard maxShoots == 0 || state.turnShoots < maxShoots  else {
-            return []
+            return nil
         }
         
-        let otherPlayers = state.players.filter { aPlayer -> Bool in
-            guard aPlayer.identifier != actor.identifier else {
+        let otherPlayers = state.players.filter { player -> Bool in
+            guard player.identifier != actor.identifier else {
                 return false
             }
             
-            let distance = calculator.distance(from: actor.identifier, to: aPlayer.identifier, in: state)
+            let distance = calculator.distance(from: actor.identifier, to: player.identifier, in: state)
             let reachableDistance = calculator.reachableDistance(of: actor)
             return distance <= reachableDistance
         }
         
-        var result: [Shoot] = []
-        for card in cards {
-            for otherPlayer in otherPlayers {
-                result.append(Shoot(actorId: actor.identifier,
-                                    cardId: card.identifier,
-                                    targetId: otherPlayer.identifier))
-            }
+        guard !otherPlayers.isEmpty else {
+            return nil
         }
         
-        return result
+        return cards.map { card in
+            let options = otherPlayers.map { Shoot(actorId: actor.identifier,
+                                                   cardId: card.identifier,
+                                                   targetId: $0.identifier)
+            }
+            return GenericAction(name: card.name.rawValue,
+                                 actorId: actor.identifier,
+                                 cardId: card.identifier,
+                                 options: options)
+        }
     }
 }

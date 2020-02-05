@@ -26,7 +26,7 @@ class GameEngine: GameEngineProtocol {
         
         action.execute(in: state)
         state.addCommand(action)
-        state.setActions(rules.compactMap { $0.matchGeneric(with: state) })
+        state.setActions(rules.compactMap { $0.match(with: state) }.flatMap { $0 })
         stateSubject.onNext(state)
     }
 }

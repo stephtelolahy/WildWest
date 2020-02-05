@@ -59,7 +59,12 @@ class BeerRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions as? [Beer], [Beer(actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(actions?.count, 1)
+        XCTAssertEqual(actions?[0].name, "beer")
+        XCTAssertEqual(actions?[0].actorId, "p1")
+        XCTAssertEqual(actions?[0].cardId, "c1")
+        XCTAssertEqual(actions?[0].options as? [Beer], [Beer(actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(actions?[0].options[0].description, "p1 plays c1")
     }
     
     func test_CannotPlayBeer_IfMaxHealth() {
@@ -80,7 +85,7 @@ class BeerRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertTrue(actions.isEmpty)
+        XCTAssertNil(actions)
     }
     
     func test_CannotPlayBeer_IfThereAreOnly2PlayersLeft() {
@@ -99,6 +104,6 @@ class BeerRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertTrue(actions.isEmpty)
+        XCTAssertNil(actions)
     }
 }

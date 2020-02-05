@@ -16,17 +16,15 @@ struct Beer: ActionProtocol, Equatable {
     }
     
     var description: String {
-        "\(actorId) play \(cardId)"
+        "\(actorId) plays \(cardId)"
     }
 }
 
 struct BeerRule: RuleProtocol {
     
-    let actionName: String = "Beer"
-    
-    func match(with state: GameStateProtocol) -> [ActionProtocol] {
+    func match(with state: GameStateProtocol) -> [GenericAction]? {
         guard state.challenge == nil else {
-            return []
+            return nil
         }
         
         let actor = state.players[state.turn]
@@ -34,9 +32,13 @@ struct BeerRule: RuleProtocol {
         guard !cards.isEmpty,
             state.players.count > 2,
             actor.health < actor.maxHealth else {
-                return []
+                return nil
         }
         
-        return cards.map { Beer(actorId: actor.identifier, cardId: $0.identifier) }
+        return cards.map { GenericAction(name: $0.name.rawValue,
+                                         actorId: actor.identifier,
+                                         cardId: $0.identifier,
+                                         options: [Beer(actorId: actor.identifier, cardId: $0.identifier)])
+        }
     }
 }

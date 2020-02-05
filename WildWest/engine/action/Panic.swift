@@ -24,13 +24,11 @@ struct Panic: ActionProtocol, Equatable {
     }
     
     var description: String {
-        "\(actorId) play \(cardId) to discard \(targetPlayerId)'s \(targetCardId) from \(targetCardSource)"
+        "\(actorId) plays \(cardId) to discard \(targetCardId) from \(targetPlayerId)'s \(targetCardSource)"
     }
 }
 
 struct PanicRule: RuleProtocol {
-    
-    let actionName: String = "Panic"
     
     private let calculator: RangeCalculatorProtocol
     
@@ -38,42 +36,59 @@ struct PanicRule: RuleProtocol {
         self.calculator = calculator
     }
     
-    func match(with state: GameStateProtocol) -> [ActionProtocol] {
+    func match(with state: GameStateProtocol) -> [GenericAction]? {
         guard state.challenge == nil else {
-            return []
+            return nil
         }
         
         let actor = state.players[state.turn]
         let cards = actor.handCards(named: .panic)
         guard !cards.isEmpty else {
-            return []
+            return nil
         }
         
-        var result: [Panic] = []
+        var discardableCards: [DiscardableCard] = []
+        discardableCards += actor.inPlay.map { DiscardableCard(identifier: $0.identifier,
+                                                               ownerId: actor.identifier,
+                                                               source: .inPlay)
+        }
+        
         let otherPlayers = state.players.filter {
             $0.identifier != actor.identifier
-            && calculator.distance(from: actor.identifier, to: $0.identifier, in: state) <= 1
+                && calculator.distance(from: actor.identifier, to: $0.identifier, in: state) <= 1
         }
         
-        for card in cards {
-            for otherPlayer in otherPlayers {
-                for handCard in otherPlayer.hand {
-                    result.append(Panic(actorId: actor.identifier,
-                                        cardId: card.identifier,
-                                        targetPlayerId: otherPlayer.identifier,
-                                        targetCardId: handCard.identifier,
-                                        targetCardSource: .hand))
-                }
-                for inPlayCard in otherPlayer.inPlay {
-                    result.append(Panic(actorId: actor.identifier,
-                                        cardId: card.identifier,
-                                        targetPlayerId: otherPlayer.identifier,
-                                        targetCardId: inPlayCard.identifier,
-                                        targetCardSource: .inPlay))
-                }
+        for player in otherPlayers {
+            discardableCards += player.hand.map { DiscardableCard(identifier: $0.identifier,
+                                                                  ownerId: player.identifier,
+                                                                  source: .hand)
+                
+            }
+            
+            discardableCards += player.inPlay.map { DiscardableCard(identifier: $0.identifier,
+                                                                    ownerId: player.identifier,
+                                                                    source: .inPlay)
+                
             }
         }
         
-        return result
+        guard !discardableCards.isEmpty else {
+            return nil
+        }
+        
+        return cards.map { card in
+            let options = discardableCards.map { Panic(actorId: actor.identifier,
+                                                       cardId: card.identifier,
+                                                       targetPlayerId: $0.ownerId,
+                                                       targetCardId: $0.identifier,
+                                                       targetCardSource: $0.source)
+            }
+            
+            return GenericAction(name: card.name.rawValue,
+                                 actorId: actor.identifier,
+                                 cardId: card.identifier,
+                                 options: options)
+        }
+        
     }
 }

@@ -33,16 +33,20 @@ class StartTurnRuleTests: XCTestCase {
         // Given
         let sut = StartTurnRule()
         let player1 = MockPlayerProtocol().identified(by: "p1")
-        let player2 = MockPlayerProtocol().identified(by: "p2")
         let mockState = MockGameStateProtocol()
-            .currentTurn(is: 1)
-            .players(are: player1, player2)
+            .currentTurn(is: 0)
+            .players(are: player1, MockPlayerProtocol())
             .challenge(is: .startTurn)
         
         // When
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions as? [StartTurn], [StartTurn(actorId: "p2")])
+        XCTAssertEqual(actions?.count, 1)
+        XCTAssertEqual(actions?[0].name, "startTurn")
+        XCTAssertEqual(actions?[0].actorId, "p1")
+        XCTAssertNil(actions?[0].cardId)
+        XCTAssertEqual(actions?[0].options as? [StartTurn], [StartTurn(actorId: "p1")])
+        XCTAssertEqual(actions?[0].options[0].description, "p1 start turn")
     }
 }

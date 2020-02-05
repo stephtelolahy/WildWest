@@ -13,19 +13,21 @@ class PlayerCell: UICollectionViewCell {
     @IBOutlet private weak var figureImageView: UIImageView!
     @IBOutlet private weak var infoLabel: UILabel!
     
-    private var isActive: Bool = false
+    private var item: PlayerItem?
     
-    func update(with player: PlayerProtocol, isActive: Bool) {
+    func update(with item: PlayerItem) {
+        self.item = item
+        
+        guard let player = item.player else {
+            figureImageView.image = nil
+            infoLabel.text = nil
+            backgroundColor = .clear
+            return
+        }
+        
         figureImageView.image = UIImage(named: player.imageName)
         infoLabel.text = player.string
-        self.isActive = isActive
         updateBackground()
-    }
-    
-    func clear() {
-        figureImageView.image = nil
-        infoLabel.text = nil
-        backgroundColor = .clear
     }
     
     override var isSelected: Bool {
@@ -35,12 +37,18 @@ class PlayerCell: UICollectionViewCell {
     }
     
     private func updateBackground() {
-        if isActive {
-            backgroundColor = isSelected ?  .systemYellow : .systemGreen
-        } else {
-            backgroundColor = isSelected ? .systemYellow : .clear
+        guard let item = self.item,
+            item.player != nil else {
+                backgroundColor = .clear
+                return
         }
         
+        guard !isSelected else {
+            backgroundColor = .systemYellow
+            return
+        }
+        
+        backgroundColor = item.isActive ? .systemGreen : .clear
     }
 }
 

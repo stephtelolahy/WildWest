@@ -17,35 +17,37 @@ struct Duel: ActionProtocol, Equatable {
     }
     
     var description: String {
-        "\(actorId) play \(cardId)"
+        "\(actorId) plays \(cardId) against \(targetId)"
     }
 }
 
 struct DuelRule: RuleProtocol {
     
-    let actionName: String = "Duel"
-    
-    func match(with state: GameStateProtocol) -> [ActionProtocol] {
+    func match(with state: GameStateProtocol) -> [GenericAction]? {
         guard state.challenge == nil else {
-            return []
+            return nil
         }
         
         let actor = state.players[state.turn]
         let cards = actor.handCards(named: .duel)
         guard !cards.isEmpty else {
-            return []
+            return nil
         }
         
-        var result: [Duel] = []
         let otherPlayers = state.players.filter { $0.identifier != actor.identifier }
-        for card in cards {
-            for otherPlayer in otherPlayers {
-                result.append(Duel(actorId: actor.identifier,
-                                   cardId: card.identifier,
-                                   targetId: otherPlayer.identifier))
-            }
+        guard !otherPlayers.isEmpty else {
+            return nil
         }
         
-        return result
+        return cards.map { card in
+            let options = otherPlayers.map { Duel(actorId: actor.identifier,
+                                                  cardId: card.identifier,
+                                                  targetId: $0.identifier)
+            }
+            return GenericAction(name: card.name.rawValue,
+                                 actorId: actor.identifier,
+                                 cardId: card.identifier,
+                                 options: options)
+        }
     }
 }
