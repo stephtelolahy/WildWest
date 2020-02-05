@@ -22,8 +22,13 @@ class PlayersAdapter: PlayersAdapterProtocol {
     var items: [PlayerItem] = []
     
     private var state: GameStateProtocol?
+    private var playerIdentifierByIndex: [Int: String?] = [:]
     
     func setState(_ state: GameStateProtocol) {
+        if self.state == nil {
+            playerIdentifierByIndex = PlayerIndexBuilder.buildIndexes(with: state)
+        }
+        
         self.state = state
         updateItems()
     }
@@ -37,33 +42,24 @@ class PlayersAdapter: PlayersAdapterProtocol {
             return []
         }
         
-        let indexes = playerIndexes[state.players.count]
-        return indexes.map { index in
-            if index == 0 {
-                return PlayerItem(player: nil, isActive: false)
-            } else {
-                let player = state.players[index - 1]
-                let isActive = state.actions.contains(where: { $0.actorId == player.identifier })
-                return PlayerItem(player: player, isActive: isActive)
+        return Array(0..<PlayerIndexBuilder.itemsCount).map { index in
+            guard let playerId = playerIdentifierByIndex[index],
+                let player = state.players.first(where: { $0.identifier == playerId }) else {
+                    return PlayerItem(player: nil, isActive: false)
             }
+            
+            let isActive = state.actions.contains(where: { $0.actorId == playerId })
+            return PlayerItem(player: player, isActive: isActive)
         }
     }
+}
+
+enum PlayerIndexBuilder {
     
-    private func player(at index: Int) -> PlayerProtocol? {
-        guard let state = self.state else {
-            return nil
-        }
-        
-        let playerIndex = playerIndexes[state.players.count][index] - 1
-        guard playerIndex >= 0 else {
-            return nil
-        }
-        
-        return state.players[playerIndex]
-    }
+    static let itemsCount = 9
     
-    private var playerIndexes: [[Int]] {
-        return [
+    static func buildIndexes(with state: GameStateProtocol) -> [Int: String?] {
+        let configuration: [[Int]] = [
             [0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 1, 0, 0, 0, 0, 0],
             [0, 0, 0, 1, 0, 2, 0, 0, 0],
@@ -73,5 +69,18 @@ class PlayersAdapter: PlayersAdapterProtocol {
             [1, 0, 2, 6, 0, 3, 5, 0, 4],
             [1, 2, 3, 7, 0, 4, 6, 0, 5]
         ]
+        
+        var result: [Int: String?] = [:]
+        let indexes = configuration[state.players.count]
+        for (index, element) in indexes.enumerated() {
+            if element > 0 {
+                let player = state.players[element - 1]
+                result[index] = player.identifier
+            } else {
+                result[index] = nil
+            }
+        }
+        
+        return result
     }
 }
