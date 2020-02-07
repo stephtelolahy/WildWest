@@ -351,7 +351,31 @@ class GameStateTests: XCTestCase {
     }
     
     func test_EndTurn_IfTurnPlayerIsEliminated() {
-        #warning("TODO: implement after integrating Duel, Dynamite")
+        // Given
+        let players: [PlayerProtocol] = [
+            MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p1"),
+            MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p2"),
+            MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p3"),
+            MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p4")
+        ]
+        sut = GameState(players: players,
+                        deck: mockDeck,
+                        turn: 1, // turn player is "p2"
+            challenge: nil,
+            turnShoots: 0,
+            generalStoreCards: [],
+            outcome: nil,
+            actions: [],
+            commands: [],
+            eliminated: [])
+        
+        // When
+        sut.eliminate(playerId: "p2") // p2 is eliminated
+        
+        // Assert
+        XCTAssertEqual(sut.players.map { $0.identifier }, ["p1", "p3", "p4"])
+        XCTAssertEqual(sut.turn, 1) // turn player is set to "p3"
+        XCTAssertEqual(sut.challenge, .startTurn)
     }
     
     func test_EndGame_IfSheriffIsEliminated() {

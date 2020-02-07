@@ -162,12 +162,23 @@ class GameState: GameStateProtocol {
         player.inPlay.forEach { discardInPlay(playerId: playerId, cardId: $0.identifier) }
         eliminated.append(player)
         
-        let turnPlayerId = players[turn].identifier
-        players.remove(at: playerIndex)
-        guard let turnPlayerIndex = players.firstIndex(where: { $0.identifier == turnPlayerId }) else {
-            return
+        if playerIndex == turn { // active player is eliminated
+            
+            let nextPlayerIndex = (turn + 1) % players.count
+            let turnPlayerId = players[nextPlayerIndex].identifier
+            players.remove(at: playerIndex)
+            if let updatedTurn = players.firstIndex(where: { $0.identifier == turnPlayerId }) {
+                turn = updatedTurn
+                challenge = .startTurn
+            }
+            
+        } else { // another player is eliminated
+            
+            let turnPlayerId = players[turn].identifier
+            players.remove(at: playerIndex)
+            if let updatedTurn = players.firstIndex(where: { $0.identifier == turnPlayerId }) {
+                turn = updatedTurn
+            }
         }
-        
-        turn = turnPlayerIndex
     }
 }
