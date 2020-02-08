@@ -26,7 +26,15 @@ class GameEngine: GameEngineProtocol {
         
         action.execute(in: state)
         state.addCommand(action)
-        state.setActions(rules.compactMap { $0.match(with: state) }.flatMap { $0 })
+        state.setActions(actions(matching: state))
         stateSubject.onNext(state)
+    }
+    
+    private func actions(matching state: GameStateProtocol) -> [GenericAction] {
+        guard state.outcome == nil else {
+            return []
+        }
+        
+        return rules.compactMap { $0.match(with: state) }.flatMap { $0 }
     }
 }

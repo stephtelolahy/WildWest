@@ -34,14 +34,6 @@ class GameEngineTests: XCTestCase {
         sut = GameEngine(state: mockState, rules: [mockRule1, mockRule2])
     }
     
-    func test_ExposePassedStateInConstructor() {
-        // Given
-        // When
-        // Assert
-        let state = try? sut.stateSubject.value()
-        XCTAssertNotNil(state)
-    }
-    
     func test_AddActionToCommands_IfExecuting() {
         // Given
         let mockAction = MockActionProtocol()
@@ -89,5 +81,21 @@ class GameEngineTests: XCTestCase {
         XCTAssertEqual(argumentCaptor.value?[0].actorId, "p1")
         XCTAssertEqual(argumentCaptor.value?[0].name, "ac")
         XCTAssertEqual(argumentCaptor.value?[0].options.map { $0.description }, ["a1", "a2"])
+    }
+    
+    func test_DoNotGenerateActions_IfGameIsOver() {
+        // Given
+        let mockAction = MockActionProtocol().withEnabledDefaultImplementation(ActionProtocolStub())
+        Cuckoo.stub(mockState) { mock in
+            when(mock.outcome.get).thenReturn(.sheriffWin)
+        }
+        // When
+        sut.execute(mockAction)
+        
+        // Assert
+        verify(mockAction).execute(in: state(equalTo: mockState))
+        verify(mockState).setActions(isEmpty())
+        verifyNoMoreInteractions(mockRule1)
+        verifyNoMoreInteractions(mockRule2)
     }
 }

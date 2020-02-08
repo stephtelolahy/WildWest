@@ -36,7 +36,7 @@ protocol GameStateProtocol {
     func eliminate(playerId: String)
 }
 
-enum GameOutcome {
+enum GameOutcome: String {
     case sheriffWin,
     outlawWin,
     renegadeWin

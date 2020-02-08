@@ -9,9 +9,17 @@
 import Cuckoo
 
 extension MockPlayerProtocol {
+    
     func identified(by identifier: String) -> MockPlayerProtocol {
         Cuckoo.stub(self) { mock in
             when(mock.identifier.get).thenReturn(identifier)
+        }
+        return self
+    }
+    
+    func role(is role: Role) -> MockPlayerProtocol {
+        Cuckoo.stub(self) { mock in
+            when(mock.role.get).thenReturn(role)
         }
         return self
     }

@@ -101,6 +101,10 @@ private extension GameViewController {
     }
     
     func displayTitle(for state: GameStateProtocol) -> String {
+        if let outcome = state.outcome {
+            return outcome.rawValue
+        }
+        
         if let challenge = state.challenge {
             switch challenge {
             case .startTurn:
