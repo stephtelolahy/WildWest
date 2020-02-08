@@ -15,6 +15,7 @@ struct GeneralStore: ActionProtocol, Equatable {
             return
         }
         
+        state.discardHand(playerId: actorId, cardId: cardId)
         let playersCount = state.players.count
         let playerIds = Array(0..<playersCount).map { state.players[(actorIndex + $0) % playersCount].identifier }
         state.setChallenge(.generalStore(playerIds))

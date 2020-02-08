@@ -22,6 +22,21 @@ import Cuckoo
  */
 class GeneralStoreTests: XCTestCase {
     
+    func test_DiscardCard_IfPlayingGeneralStore() {
+        // Given
+        let mockState = MockGameStateProtocol()
+            .withEnabledDefaultImplementation(GameStateProtocolStub())
+            .players(are: MockPlayerProtocol().identified(by: "p1"))
+        
+        let sut = GeneralStore(actorId: "p1", cardId: "c1")
+        
+        // When
+        sut.execute(in: mockState)
+        
+        // Assert
+        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
+    }
+    
     func test_SetChallengeToGeneralStoreAndSetChoosableCards_IfPlayingGeneralStore() {
         // Given
         let mockState = MockGameStateProtocol()
