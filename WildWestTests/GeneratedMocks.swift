@@ -1029,7 +1029,7 @@ import Cuckoo
     
     
     
-     var turn: Int {
+     var turn: String {
         get {
             return cuckoo_manager.getter("turn",
                 superclassCall:
@@ -1265,9 +1265,9 @@ import Cuckoo
     
     
     
-     func setTurn(_ turn: Int)  {
+     func setTurn(_ turn: String)  {
         
-    return cuckoo_manager.call("setTurn(_: Int)",
+    return cuckoo_manager.call("setTurn(_: String)",
             parameters: (turn),
             escapingParameters: (turn),
             superclassCall:
@@ -1402,7 +1402,7 @@ import Cuckoo
 	    }
 	    
 	    
-	    var turn: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, Int> {
+	    var turn: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, String> {
 	        return .init(manager: cuckoo_manager, name: "turn")
 	    }
 	    
@@ -1482,9 +1482,9 @@ import Cuckoo
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "setChallenge(_: Challenge?)", parameterMatchers: matchers))
 	    }
 	    
-	    func setTurn<M1: Cuckoo.Matchable>(_ turn: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(Int)> where M1.MatchedType == Int {
-	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: turn) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "setTurn(_: Int)", parameterMatchers: matchers))
+	    func setTurn<M1: Cuckoo.Matchable>(_ turn: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(String)> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: turn) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "setTurn(_: String)", parameterMatchers: matchers))
 	    }
 	    
 	    func setTurnShoots<M1: Cuckoo.Matchable>(_ shoots: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(Int)> where M1.MatchedType == Int {
@@ -1547,7 +1547,7 @@ import Cuckoo
 	    }
 	    
 	    
-	    var turn: Cuckoo.VerifyReadOnlyProperty<Int> {
+	    var turn: Cuckoo.VerifyReadOnlyProperty<String> {
 	        return .init(manager: cuckoo_manager, name: "turn", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
@@ -1637,9 +1637,9 @@ import Cuckoo
 	    }
 	    
 	    @discardableResult
-	    func setTurn<M1: Cuckoo.Matchable>(_ turn: M1) -> Cuckoo.__DoNotUse<(Int), Void> where M1.MatchedType == Int {
-	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: turn) { $0 }]
-	        return cuckoo_manager.verify("setTurn(_: Int)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    func setTurn<M1: Cuckoo.Matchable>(_ turn: M1) -> Cuckoo.__DoNotUse<(String), Void> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: turn) { $0 }]
+	        return cuckoo_manager.verify("setTurn(_: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
@@ -1706,9 +1706,9 @@ import Cuckoo
     }
     
     
-     var turn: Int {
+     var turn: String {
         get {
-            return DefaultValueRegistry.defaultValue(for: (Int).self)
+            return DefaultValueRegistry.defaultValue(for: (String).self)
         }
         
     }
@@ -1805,7 +1805,7 @@ import Cuckoo
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
-     func setTurn(_ turn: Int)   {
+     func setTurn(_ turn: String)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     

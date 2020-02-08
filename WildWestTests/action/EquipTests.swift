@@ -132,7 +132,7 @@ class EquipRuleTests: XCTestCase {
             .noCardsInPlay()
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer)
         
         // When
@@ -168,11 +168,12 @@ class EquipRuleTests: XCTestCase {
         let mockCard2 = MockCardProtocol()
             .named(.mustang)
         let mockPlayer = MockPlayerProtocol()
+            .identified(by: "p1")
             .holding(mockCard1)
             .playing(mockCard2)
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer)
         
         // When
@@ -188,10 +189,11 @@ class EquipRuleTests: XCTestCase {
         let mockCard = MockCardProtocol()
             .named(.jail)
         let mockPlayer = MockPlayerProtocol()
+            .identified(by: "p1")
             .holding(mockCard)
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer)
         
         // When

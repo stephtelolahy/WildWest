@@ -31,11 +31,11 @@ struct ShootRule: RuleProtocol {
     }
     
     func match(with state: GameStateProtocol) -> [GenericAction]? {
-        guard state.challenge == nil else {
+        guard state.challenge == nil,
+            let actor = state.players.first(where: { $0.identifier == state.turn }) else {
             return nil
         }
         
-        let actor = state.players[state.turn]
         let cards = actor.handCards(named: .bang)
         guard !cards.isEmpty else {
             return nil

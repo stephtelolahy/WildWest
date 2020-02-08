@@ -68,7 +68,7 @@ class DuelRuleTests: XCTestCase {
         let mockPlayer3 = MockPlayerProtocol().identified(by: "p3")
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
         
         // When

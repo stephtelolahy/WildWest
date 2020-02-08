@@ -62,7 +62,7 @@ class CatBalouRuleTests: XCTestCase {
         
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2)
         
         // When
@@ -94,7 +94,7 @@ class CatBalouRuleTests: XCTestCase {
         
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2)
         
         // When
@@ -121,7 +121,7 @@ class CatBalouRuleTests: XCTestCase {
         
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer1)
         
         // When
@@ -153,7 +153,7 @@ class CatBalouRuleTests: XCTestCase {
         
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2)
         
         // When

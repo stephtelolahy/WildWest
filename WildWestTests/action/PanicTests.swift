@@ -68,7 +68,7 @@ class PanicRuleTests: XCTestCase {
         
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
         
         let mockRangeCalculator = MockRangeCalculatorProtocol()
@@ -115,7 +115,7 @@ class PanicRuleTests: XCTestCase {
         
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
         
         let mockRangeCalculator = MockRangeCalculatorProtocol()
@@ -147,7 +147,7 @@ class PanicRuleTests: XCTestCase {
         
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2)
         
         let mockRangeCalculator = MockRangeCalculatorProtocol()
@@ -173,7 +173,7 @@ class PanicRuleTests: XCTestCase {
         
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer1)
         
         let mockRangeCalculator = MockRangeCalculatorProtocol()

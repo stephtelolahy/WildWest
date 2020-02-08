@@ -34,7 +34,7 @@ class StartTurnRuleTests: XCTestCase {
         let sut = StartTurnRule()
         let player1 = MockPlayerProtocol().identified(by: "p1")
         let mockState = MockGameStateProtocol()
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: player1, MockPlayerProtocol())
             .challenge(is: .startTurn)
         

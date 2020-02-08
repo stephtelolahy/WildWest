@@ -28,10 +28,9 @@ struct StartTurnRule: RuleProtocol {
             return nil
         }
         
-        let actor = state.players[state.turn]
         return [GenericAction(name: "startTurn",
-                              actorId: actor.identifier,
+                              actorId: state.turn,
                               cardId: nil,
-                              options: [StartTurn(actorId: actor.identifier)])]
+                              options: [StartTurn(actorId: state.turn)])]
     }
 }

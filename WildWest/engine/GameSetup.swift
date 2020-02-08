@@ -39,17 +39,18 @@ class GameSetup: GameSetupProtocol {
                           inPlay: [])
         }
         
-        var actions: [GenericAction] = []
-        if let sheriff = players.first(where: { $0.role == .sheriff }) {
-            actions.append(GenericAction(name: "startTurn",
-                                         actorId: sheriff.identifier,
-                                         cardId: nil,
-                                         options: [StartTurn(actorId: sheriff.identifier)]))
+        guard let sheriff = players.first(where: { $0.role == .sheriff }) else {
+            fatalError("sheriff not found")
         }
+        
+        let actions = [GenericAction(name: "startTurn",
+                                     actorId: sheriff.identifier,
+                                     cardId: nil,
+                                     options: [StartTurn(actorId: sheriff.identifier)])]
         
         return GameState(players: players,
                          deck: Deck(cards: deck, discardPile: []),
-                         turn: 0,
+                         turn: sheriff.identifier,
                          challenge: nil,
                          turnShoots: 0,
                          generalStoreCards: [],

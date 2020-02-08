@@ -10,7 +10,7 @@ class GameState: GameStateProtocol {
     
     var players: [PlayerProtocol]
     let deck: DeckProtocol
-    var turn: Int
+    var turn: String
     var challenge: Challenge?
     var turnShoots: Int
     var generalStoreCards: [CardProtocol]
@@ -21,7 +21,7 @@ class GameState: GameStateProtocol {
     
     init(players: [PlayerProtocol],
          deck: DeckProtocol,
-         turn: Int,
+         turn: String,
          challenge: Challenge?,
          turnShoots: Int,
          generalStoreCards: [CardProtocol],
@@ -53,7 +53,7 @@ class GameState: GameStateProtocol {
         self.challenge = challenge
     }
     
-    func setTurn(_ turn: Int) {
+    func setTurn(_ turn: String) {
         self.turn = turn
     }
     
@@ -153,33 +153,25 @@ class GameState: GameStateProtocol {
     }
     
     func eliminate(playerId: String) {
-        guard let playerIndex = players.firstIndex(where: { $0.identifier == playerId }) else {
-            return
+        guard let player = players.first(where: { $0.identifier == playerId }),
+            let playerIndex = players.firstIndex(where: { $0.identifier == playerId }) else {
+                return
         }
         
-        let player = players[playerIndex]
         player.hand.forEach { discardHand(playerId: playerId, cardId: $0.identifier) }
         player.inPlay.forEach { discardInPlay(playerId: playerId, cardId: $0.identifier) }
-        eliminated.append(player)
         
-        if playerIndex == turn { // active player is eliminated
-            
-            let nextPlayerIndex = (turn + 1) % players.count
-            let turnPlayerId = players[nextPlayerIndex].identifier
-            players.remove(at: playerIndex)
-            if let updatedTurn = players.firstIndex(where: { $0.identifier == turnPlayerId }) {
-                turn = updatedTurn
-                challenge = .startTurn
-            }
-            
-        } else { // another player is eliminated
-            
-            let turnPlayerId = players[turn].identifier
-            players.remove(at: playerIndex)
-            if let updatedTurn = players.firstIndex(where: { $0.identifier == turnPlayerId }) {
-                turn = updatedTurn
-            }
+        // active player is eliminated, update turn and trigger startTurn challenge
+        if playerId == turn {
+            let nextPlayerIndex = (playerIndex + 1) % players.count
+            let nextPlayerId = players[nextPlayerIndex].identifier
+            turn = nextPlayerId
+            challenge = .startTurn
         }
+        
+        players.remove(at: playerIndex)
+        
+        eliminated.append(player)
         
         outcome = Self.calculateOutcome(with: players)
     }

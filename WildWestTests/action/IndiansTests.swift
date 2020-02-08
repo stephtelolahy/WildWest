@@ -52,7 +52,7 @@ class IndiansRuleTests: XCTestCase {
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer)
         
         // When

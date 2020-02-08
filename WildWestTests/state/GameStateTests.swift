@@ -20,7 +20,7 @@ class GameStateTests: XCTestCase {
         let mockDeck = MockDeckProtocol()
         let sut = GameState(players: mockPlayers,
                             deck: mockDeck,
-                            turn: 0,
+                            turn: "p1",
                             challenge: nil,
                             turnShoots: 0,
                             generalStoreCards: [],
@@ -32,7 +32,7 @@ class GameStateTests: XCTestCase {
         // Assert
         XCTAssertEqual(sut.players.map { $0.identifier }, ["p1", "p2"])
         XCTAssertTrue(sut.deck as? MockDeckProtocol === mockDeck)
-        XCTAssertEqual(sut.turn, 0)
+        XCTAssertEqual(sut.turn, "p1")
         XCTAssertNil(sut.challenge)
         XCTAssertEqual(sut.turnShoots, 0)
         XCTAssertTrue(sut.generalStoreCards.isEmpty)
@@ -53,7 +53,7 @@ class GameStateTests: XCTestCase {
             .identified(by: "p1")
         let sut = GameState(players: [mockPlayer1],
                             deck: mockDeck,
-                            turn: 0,
+                            turn: "p1",
                             challenge: nil,
                             turnShoots: 0,
                             generalStoreCards: [],
@@ -84,7 +84,7 @@ class GameStateTests: XCTestCase {
         let mockDeck = MockDeckProtocol().withEnabledDefaultImplementation(DeckProtocolStub())
         let sut = GameState(players: [mockPlayer1],
                             deck: mockDeck,
-                            turn: 0,
+                            turn: "p1",
                             challenge: nil,
                             turnShoots: 0,
                             generalStoreCards: [],
@@ -115,7 +115,7 @@ class GameStateTests: XCTestCase {
         let mockDeck = MockDeckProtocol().withEnabledDefaultImplementation(DeckProtocolStub())
         let sut = GameState(players: [mockPlayer1],
                             deck: mockDeck,
-                            turn: 0,
+                            turn: "p1",
                             challenge: nil,
                             turnShoots: 0,
                             generalStoreCards: [],
@@ -143,7 +143,7 @@ class GameStateTests: XCTestCase {
             .withEnabledDefaultImplementation(PlayerProtocolStub())
         let sut = GameState(players: [mockPlayer1],
                             deck: MockDeckProtocol(),
-                            turn: 0,
+                            turn: "p1",
                             challenge: nil,
                             turnShoots: 0,
                             generalStoreCards: [],
@@ -173,7 +173,7 @@ class GameStateTests: XCTestCase {
         }
         let sut = GameState(players: [mockPlayer1],
                             deck: MockDeckProtocol(),
-                            turn: 0,
+                            turn: "p1",
                             challenge: nil,
                             turnShoots: 0,
                             generalStoreCards: [],
@@ -196,7 +196,7 @@ class GameStateTests: XCTestCase {
         // Given
         let sut = GameState(players: [],
                             deck: MockDeckProtocol(),
-                            turn: 0,
+                            turn: "p1",
                             challenge: nil,
                             turnShoots: 0,
                             generalStoreCards: [],
@@ -206,17 +206,17 @@ class GameStateTests: XCTestCase {
                             eliminated: [])
         
         // When
-        sut.setTurn(1)
+        sut.setTurn("p2")
         
         // Assert
-        XCTAssertEqual(sut.turn, 1)
+        XCTAssertEqual(sut.turn, "p2")
     }
     
     func test_SetTurnShoots() {
         // Given
         let sut = GameState(players: [],
                             deck: MockDeckProtocol(),
-                            turn: 0,
+                            turn: "p1",
                             challenge: nil,
                             turnShoots: 0,
                             generalStoreCards: [],
@@ -238,7 +238,7 @@ class GameStateTests: XCTestCase {
         let action2 = MockActionProtocol().described(by: "a2")
         let sut = GameState(players: [],
                             deck: MockDeckProtocol(),
-                            turn: 0,
+                            turn: "p1",
                             challenge: nil,
                             turnShoots: 0,
                             generalStoreCards: [],
@@ -260,7 +260,7 @@ class GameStateTests: XCTestCase {
         // Given
         let sut = GameState(players: [],
                             deck: MockDeckProtocol(),
-                            turn: 0,
+                            turn: "p1",
                             challenge: nil,
                             turnShoots: 0,
                             generalStoreCards: [],
@@ -280,7 +280,7 @@ class GameStateTests: XCTestCase {
         // Given
         let sut = GameState(players: [],
                             deck: MockDeckProtocol(),
-                            turn: 0,
+                            turn: "p1",
                             challenge: .startTurn,
                             turnShoots: 0,
                             generalStoreCards: [],
@@ -299,7 +299,7 @@ class GameStateTests: XCTestCase {
         // Given
         let sut = GameState(players: [],
                             deck: MockDeckProtocol(),
-                            turn: 0,
+                            turn: "p1",
                             challenge: nil,
                             turnShoots: 0,
                             generalStoreCards: [],
@@ -328,7 +328,7 @@ class GameStateTests: XCTestCase {
         }
         let sut = GameState(players: [mockPlayer1, mockPlayer2],
                             deck: MockDeckProtocol(),
-                            turn: 0,
+                            turn: "p1",
                             challenge: .startTurn,
                             turnShoots: 0,
                             generalStoreCards: [],
@@ -358,7 +358,7 @@ class GameStateTests: XCTestCase {
         }
         let sut = GameState(players: [mockPlayer1, mockPlayer2],
                             deck: MockDeckProtocol(),
-                            turn: 0,
+                            turn: "p1",
                             challenge: .startTurn,
                             turnShoots: 0,
                             generalStoreCards: [],
@@ -387,7 +387,7 @@ class GameStateTests: XCTestCase {
             .withEnabledDefaultImplementation(PlayerProtocolStub())
         let sut = GameState(players: [mockPlayer1],
                             deck: MockDeckProtocol(),
-                            turn: 0,
+                            turn: "p1",
                             challenge: .startTurn,
                             turnShoots: 0,
                             generalStoreCards: [],
@@ -425,10 +425,9 @@ class GameStateTests: XCTestCase {
             when(mock.removeInPlayById("c4")).thenReturn(card4)
         }
         // Given
-        // turn player is "p4"
         let sut = GameState(players: [mockPlayer1, mockPlayer2],
                             deck: mockDeck,
-                            turn: 0,
+                            turn: "p1",
                             challenge: nil,
                             turnShoots: 0,
                             generalStoreCards: [],
@@ -462,10 +461,9 @@ class GameStateTests: XCTestCase {
             MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p3").role(is: .deputy),
             MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p4").role(is: .outlaw)
         ]
-        // turn player is "p4"
         let sut = GameState(players: mockPlayers,
                             deck: MockDeckProtocol(),
-                            turn: 3,
+                            turn: "p4",
                             challenge: nil,
                             turnShoots: 0,
                             generalStoreCards: [],
@@ -479,7 +477,7 @@ class GameStateTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(sut.players.map { $0.identifier }, ["p1", "p3", "p4"])
-        XCTAssertEqual(sut.turn, 2) // turn player is still "p4"
+        XCTAssertEqual(sut.turn, "p4")
     }
     
     func test_SetGeneralStoreCards() {
@@ -492,7 +490,7 @@ class GameStateTests: XCTestCase {
         }
         let sut = GameState(players: [],
                             deck: mockDeck,
-                            turn: 0,
+                            turn: "p1",
                             challenge: nil,
                             turnShoots: 0,
                             generalStoreCards: [],
@@ -517,7 +515,7 @@ class GameStateTests: XCTestCase {
         let mockDeck = MockDeckProtocol().withEnabledDefaultImplementation(DeckProtocolStub())
         let sut = GameState(players: [mockPlayer1],
                             deck: mockDeck,
-                            turn: 0,
+                            turn: "p1",
                             challenge: .generalStore(["p1", "p2"]),
                             turnShoots: 0,
                             generalStoreCards: [card1, card2],
@@ -542,10 +540,9 @@ class GameStateTests: XCTestCase {
             MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p3").role(is: .deputy),
             MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p4").role(is: .outlaw)
         ]
-        // turn player is "p2"
         let sut = GameState(players: mockPlayers,
                             deck: MockDeckProtocol(),
-                            turn: 1,
+                            turn: "p2",
                             challenge: nil,
                             turnShoots: 0,
                             generalStoreCards: [],
@@ -555,11 +552,11 @@ class GameStateTests: XCTestCase {
                             eliminated: [])
         
         // When
-        sut.eliminate(playerId: "p2") // p2 is eliminated
+        sut.eliminate(playerId: "p2")
         
         // Assert
         XCTAssertEqual(sut.players.map { $0.identifier }, ["p1", "p3", "p4"])
-        XCTAssertEqual(sut.turn, 1) // turn player is set to "p3"
+        XCTAssertEqual(sut.turn, "p3")
         XCTAssertEqual(sut.challenge, .startTurn)
     }
     
@@ -573,7 +570,7 @@ class GameStateTests: XCTestCase {
         ]
         let sut = GameState(players: mockPlayers,
                             deck: MockDeckProtocol(),
-                            turn: 0,
+                            turn: "p1",
                             challenge: nil,
                             turnShoots: 0,
                             generalStoreCards: [],
@@ -597,7 +594,7 @@ class GameStateTests: XCTestCase {
         ]
         let sut = GameState(players: mockPlayers,
                             deck: MockDeckProtocol(),
-                            turn: 0,
+                            turn: "p1",
                             challenge: nil,
                             turnShoots: 0,
                             generalStoreCards: [],
@@ -622,7 +619,7 @@ class GameStateTests: XCTestCase {
         ]
         let sut = GameState(players: mockPlayers,
                             deck: MockDeckProtocol(),
-                            turn: 0,
+                            turn: "p1",
                             challenge: nil,
                             turnShoots: 0,
                             generalStoreCards: [],
