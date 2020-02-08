@@ -22,7 +22,7 @@ class GameStateTests: XCTestCase {
                             deck: mockDeck,
                             turn: "p1",
                             challenge: nil,
-                            turnShoots: 0,
+                            bangsPlayed: 0,
                             generalStoreCards: [],
                             outcome: nil,
                             actions: [],
@@ -34,7 +34,7 @@ class GameStateTests: XCTestCase {
         XCTAssertTrue(sut.deck as? MockDeckProtocol === mockDeck)
         XCTAssertEqual(sut.turn, "p1")
         XCTAssertNil(sut.challenge)
-        XCTAssertEqual(sut.turnShoots, 0)
+        XCTAssertEqual(sut.bangsPlayed, 0)
         XCTAssertTrue(sut.generalStoreCards.isEmpty)
         XCTAssertNil(sut.outcome)
         XCTAssertTrue(sut.commands.isEmpty)
@@ -55,7 +55,7 @@ class GameStateTests: XCTestCase {
                             deck: mockDeck,
                             turn: "p1",
                             challenge: nil,
-                            turnShoots: 0,
+                            bangsPlayed: 0,
                             generalStoreCards: [],
                             outcome: nil,
                             actions: [],
@@ -86,7 +86,7 @@ class GameStateTests: XCTestCase {
                             deck: mockDeck,
                             turn: "p1",
                             challenge: nil,
-                            turnShoots: 0,
+                            bangsPlayed: 0,
                             generalStoreCards: [],
                             outcome: nil,
                             actions: [],
@@ -117,7 +117,7 @@ class GameStateTests: XCTestCase {
                             deck: mockDeck,
                             turn: "p1",
                             challenge: nil,
-                            turnShoots: 0,
+                            bangsPlayed: 0,
                             generalStoreCards: [],
                             outcome: nil,
                             actions: [],
@@ -145,7 +145,7 @@ class GameStateTests: XCTestCase {
                             deck: MockDeckProtocol(),
                             turn: "p1",
                             challenge: nil,
-                            turnShoots: 0,
+                            bangsPlayed: 0,
                             generalStoreCards: [],
                             outcome: nil,
                             actions: [],
@@ -175,7 +175,7 @@ class GameStateTests: XCTestCase {
                             deck: MockDeckProtocol(),
                             turn: "p1",
                             challenge: nil,
-                            turnShoots: 0,
+                            bangsPlayed: 0,
                             generalStoreCards: [],
                             outcome: nil,
                             actions: [],
@@ -198,7 +198,7 @@ class GameStateTests: XCTestCase {
                             deck: MockDeckProtocol(),
                             turn: "p1",
                             challenge: nil,
-                            turnShoots: 0,
+                            bangsPlayed: 0,
                             generalStoreCards: [],
                             outcome: nil,
                             actions: [],
@@ -212,13 +212,13 @@ class GameStateTests: XCTestCase {
         XCTAssertEqual(sut.turn, "p2")
     }
     
-    func test_SetTurnShoots() {
+    func test_SetBangsPlayed() {
         // Given
         let sut = GameState(players: [],
                             deck: MockDeckProtocol(),
                             turn: "p1",
                             challenge: nil,
-                            turnShoots: 0,
+                            bangsPlayed: 0,
                             generalStoreCards: [],
                             outcome: nil,
                             actions: [],
@@ -226,10 +226,10 @@ class GameStateTests: XCTestCase {
                             eliminated: [])
         
         // When
-        sut.setTurnShoots(1)
+        sut.setBangsPlayed(1)
         
         // Assert
-        XCTAssertEqual(sut.turnShoots, 1)
+        XCTAssertEqual(sut.bangsPlayed, 1)
     }
     
     func test_AddCommand() {
@@ -240,7 +240,7 @@ class GameStateTests: XCTestCase {
                             deck: MockDeckProtocol(),
                             turn: "p1",
                             challenge: nil,
-                            turnShoots: 0,
+                            bangsPlayed: 0,
                             generalStoreCards: [],
                             outcome: nil,
                             actions: [],
@@ -262,7 +262,7 @@ class GameStateTests: XCTestCase {
                             deck: MockDeckProtocol(),
                             turn: "p1",
                             challenge: nil,
-                            turnShoots: 0,
+                            bangsPlayed: 0,
                             generalStoreCards: [],
                             outcome: nil,
                             actions: [],
@@ -282,7 +282,7 @@ class GameStateTests: XCTestCase {
                             deck: MockDeckProtocol(),
                             turn: "p1",
                             challenge: .startTurn,
-                            turnShoots: 0,
+                            bangsPlayed: 0,
                             generalStoreCards: [],
                             outcome: nil,
                             actions: [],
@@ -301,7 +301,7 @@ class GameStateTests: XCTestCase {
                             deck: MockDeckProtocol(),
                             turn: "p1",
                             challenge: nil,
-                            turnShoots: 0,
+                            bangsPlayed: 0,
                             generalStoreCards: [],
                             outcome: nil,
                             actions: [],
@@ -330,7 +330,7 @@ class GameStateTests: XCTestCase {
                             deck: MockDeckProtocol(),
                             turn: "p1",
                             challenge: .startTurn,
-                            turnShoots: 0,
+                            bangsPlayed: 0,
                             generalStoreCards: [],
                             outcome: nil,
                             actions: [],
@@ -360,7 +360,7 @@ class GameStateTests: XCTestCase {
                             deck: MockDeckProtocol(),
                             turn: "p1",
                             challenge: .startTurn,
-                            turnShoots: 0,
+                            bangsPlayed: 0,
                             generalStoreCards: [],
                             outcome: nil,
                             actions: [],
@@ -389,7 +389,7 @@ class GameStateTests: XCTestCase {
                             deck: MockDeckProtocol(),
                             turn: "p1",
                             challenge: .startTurn,
-                            turnShoots: 0,
+                            bangsPlayed: 0,
                             generalStoreCards: [],
                             outcome: nil,
                             actions: [],
@@ -429,7 +429,7 @@ class GameStateTests: XCTestCase {
                             deck: mockDeck,
                             turn: "p1",
                             challenge: nil,
-                            turnShoots: 0,
+                            bangsPlayed: 0,
                             generalStoreCards: [],
                             outcome: nil,
                             actions: [],
@@ -465,7 +465,7 @@ class GameStateTests: XCTestCase {
                             deck: MockDeckProtocol(),
                             turn: "p4",
                             challenge: nil,
-                            turnShoots: 0,
+                            bangsPlayed: 0,
                             generalStoreCards: [],
                             outcome: nil,
                             actions: [],
@@ -492,7 +492,7 @@ class GameStateTests: XCTestCase {
                             deck: mockDeck,
                             turn: "p1",
                             challenge: nil,
-                            turnShoots: 0,
+                            bangsPlayed: 0,
                             generalStoreCards: [],
                             outcome: nil,
                             actions: [],
@@ -517,7 +517,7 @@ class GameStateTests: XCTestCase {
                             deck: mockDeck,
                             turn: "p1",
                             challenge: .generalStore(["p1", "p2"]),
-                            turnShoots: 0,
+                            bangsPlayed: 0,
                             generalStoreCards: [card1, card2],
                             outcome: nil,
                             actions: [],
@@ -544,7 +544,7 @@ class GameStateTests: XCTestCase {
                             deck: MockDeckProtocol(),
                             turn: "p2",
                             challenge: nil,
-                            turnShoots: 0,
+                            bangsPlayed: 0,
                             generalStoreCards: [],
                             outcome: nil,
                             actions: [],
@@ -572,7 +572,7 @@ class GameStateTests: XCTestCase {
                             deck: MockDeckProtocol(),
                             turn: "p1",
                             challenge: nil,
-                            turnShoots: 0,
+                            bangsPlayed: 0,
                             generalStoreCards: [],
                             outcome: nil,
                             actions: [],
@@ -596,7 +596,7 @@ class GameStateTests: XCTestCase {
                             deck: MockDeckProtocol(),
                             turn: "p1",
                             challenge: nil,
-                            turnShoots: 0,
+                            bangsPlayed: 0,
                             generalStoreCards: [],
                             outcome: nil,
                             actions: [],
@@ -621,7 +621,7 @@ class GameStateTests: XCTestCase {
                             deck: MockDeckProtocol(),
                             turn: "p1",
                             challenge: nil,
-                            turnShoots: 0,
+                            bangsPlayed: 0,
                             generalStoreCards: [],
                             outcome: nil,
                             actions: [],

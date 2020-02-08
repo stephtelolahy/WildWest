@@ -7,7 +7,6 @@
 //
 
 struct Equip: ActionProtocol, Equatable {
-    
     let actorId: String
     let cardId: String
     

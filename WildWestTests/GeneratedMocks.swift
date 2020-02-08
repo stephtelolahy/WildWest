@@ -1057,14 +1057,14 @@ import Cuckoo
     
     
     
-     var turnShoots: Int {
+     var bangsPlayed: Int {
         get {
-            return cuckoo_manager.getter("turnShoots",
+            return cuckoo_manager.getter("bangsPlayed",
                 superclassCall:
                     
                     Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                     ,
-                defaultCall: __defaultImplStub!.turnShoots)
+                defaultCall: __defaultImplStub!.bangsPlayed)
         }
         
     }
@@ -1280,16 +1280,16 @@ import Cuckoo
     
     
     
-     func setTurnShoots(_ shoots: Int)  {
+     func setBangsPlayed(_ count: Int)  {
         
-    return cuckoo_manager.call("setTurnShoots(_: Int)",
-            parameters: (shoots),
-            escapingParameters: (shoots),
+    return cuckoo_manager.call("setBangsPlayed(_: Int)",
+            parameters: (count),
+            escapingParameters: (count),
             superclassCall:
                 
                 Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
-            defaultCall: __defaultImplStub!.setTurnShoots(shoots))
+            defaultCall: __defaultImplStub!.setBangsPlayed(count))
         
     }
     
@@ -1412,8 +1412,8 @@ import Cuckoo
 	    }
 	    
 	    
-	    var turnShoots: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, Int> {
-	        return .init(manager: cuckoo_manager, name: "turnShoots")
+	    var bangsPlayed: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, Int> {
+	        return .init(manager: cuckoo_manager, name: "bangsPlayed")
 	    }
 	    
 	    
@@ -1487,9 +1487,9 @@ import Cuckoo
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "setTurn(_: String)", parameterMatchers: matchers))
 	    }
 	    
-	    func setTurnShoots<M1: Cuckoo.Matchable>(_ shoots: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(Int)> where M1.MatchedType == Int {
-	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: shoots) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "setTurnShoots(_: Int)", parameterMatchers: matchers))
+	    func setBangsPlayed<M1: Cuckoo.Matchable>(_ count: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(Int)> where M1.MatchedType == Int {
+	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: count) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "setBangsPlayed(_: Int)", parameterMatchers: matchers))
 	    }
 	    
 	    func setupGeneralStore<M1: Cuckoo.Matchable>(count: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(Int)> where M1.MatchedType == Int {
@@ -1557,8 +1557,8 @@ import Cuckoo
 	    }
 	    
 	    
-	    var turnShoots: Cuckoo.VerifyReadOnlyProperty<Int> {
-	        return .init(manager: cuckoo_manager, name: "turnShoots", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var bangsPlayed: Cuckoo.VerifyReadOnlyProperty<Int> {
+	        return .init(manager: cuckoo_manager, name: "bangsPlayed", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	    
@@ -1643,9 +1643,9 @@ import Cuckoo
 	    }
 	    
 	    @discardableResult
-	    func setTurnShoots<M1: Cuckoo.Matchable>(_ shoots: M1) -> Cuckoo.__DoNotUse<(Int), Void> where M1.MatchedType == Int {
-	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: shoots) { $0 }]
-	        return cuckoo_manager.verify("setTurnShoots(_: Int)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    func setBangsPlayed<M1: Cuckoo.Matchable>(_ count: M1) -> Cuckoo.__DoNotUse<(Int), Void> where M1.MatchedType == Int {
+	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: count) { $0 }]
+	        return cuckoo_manager.verify("setBangsPlayed(_: Int)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
@@ -1722,7 +1722,7 @@ import Cuckoo
     }
     
     
-     var turnShoots: Int {
+     var bangsPlayed: Int {
         get {
             return DefaultValueRegistry.defaultValue(for: (Int).self)
         }
@@ -1809,7 +1809,7 @@ import Cuckoo
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
-     func setTurnShoots(_ shoots: Int)   {
+     func setBangsPlayed(_ count: Int)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     

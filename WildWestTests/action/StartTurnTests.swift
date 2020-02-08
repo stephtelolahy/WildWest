@@ -22,7 +22,7 @@ class StartTurnTests: XCTestCase {
         // Assert
         verify(mockState).setChallenge(isNil())
         verify(mockState, times(2)).pullDeck(playerId: "p1")
-        verify(mockState).setTurnShoots(0)
+        verify(mockState).setBangsPlayed(0)
         verifyNoMoreInteractions(mockState)
     }
 }
