@@ -11,34 +11,13 @@ import Cuckoo
 
 class GameEngineTests: XCTestCase {
     
-    private var sut: GameEngineProtocol!
-    private var mockState: MockGameStateProtocol!
-    private var mockRule1: MockRuleProtocol!
-    private var mockRule2: MockRuleProtocol!
-    private var mockPlayer1: MockPlayerProtocol!
-    private var mockPlayer2: MockPlayerProtocol!
-    
-    override func setUp() {
-        mockPlayer1 = MockPlayerProtocol()
-            .withEnabledDefaultImplementation(PlayerProtocolStub())
-            .identified(by: "p1")
-        mockPlayer2 = MockPlayerProtocol()
-            .withEnabledDefaultImplementation(PlayerProtocolStub())
-            .identified(by: "p2")
-        
-        mockState = MockGameStateProtocol()
-            .withEnabledDefaultImplementation(GameStateProtocolStub())
-            .players(are: mockPlayer1, mockPlayer2)
-        mockRule1 = MockRuleProtocol().withEnabledDefaultImplementation(RuleProtocolStub())
-        mockRule2 = MockRuleProtocol().withEnabledDefaultImplementation(RuleProtocolStub())
-        sut = GameEngine(state: mockState, rules: [mockRule1, mockRule2])
-    }
-    
     func test_AddActionToCommands_IfExecuting() {
         // Given
+        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
         let mockAction = MockActionProtocol()
             .withEnabledDefaultImplementation(ActionProtocolStub())
             .described(by: "ac")
+        let sut = GameEngine(state: mockState, rules: [])
         
         // When
         sut.execute(mockAction)
@@ -50,6 +29,7 @@ class GameEngineTests: XCTestCase {
     
     func test_SetMatchingActions_IfExecuting() {
         // Given
+        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
         let mockAction = MockActionProtocol().withEnabledDefaultImplementation(ActionProtocolStub())
         let action1 = MockActionProtocol()
             .described(by: "a1")
@@ -61,13 +41,15 @@ class GameEngineTests: XCTestCase {
                                           actorId: "p1",
                                           cardId: nil,
                                           options: [action1, action2])
+        let mockRule1 = MockRuleProtocol()
+        let mockRule2 = MockRuleProtocol()
         Cuckoo.stub(mockRule1) { mock in
             when(mock.match(with: state(equalTo: mockState))).thenReturn(nil)
         }
-        
         Cuckoo.stub(mockRule2) { mock in
             when(mock.match(with: state(equalTo: mockState))).thenReturn([genericAction])
         }
+        let sut = GameEngine(state: mockState, rules: [mockRule1, mockRule2])
         
         // When
         sut.execute(mockAction)
@@ -85,10 +67,14 @@ class GameEngineTests: XCTestCase {
     
     func test_DoNotGenerateActions_IfGameIsOver() {
         // Given
+        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
         let mockAction = MockActionProtocol().withEnabledDefaultImplementation(ActionProtocolStub())
         Cuckoo.stub(mockState) { mock in
             when(mock.outcome.get).thenReturn(.sheriffWin)
         }
+        let mockRule1 = MockRuleProtocol()
+        let sut = GameEngine(state: mockState, rules: [mockRule1])
+        
         // When
         sut.execute(mockAction)
         
@@ -96,6 +82,5 @@ class GameEngineTests: XCTestCase {
         verify(mockAction).execute(in: state(equalTo: mockState))
         verify(mockState).setActions(isEmpty())
         verifyNoMoreInteractions(mockRule1)
-        verifyNoMoreInteractions(mockRule2)
     }
 }
