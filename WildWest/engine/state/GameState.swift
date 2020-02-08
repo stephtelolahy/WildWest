@@ -130,6 +130,17 @@ class GameState: GameStateProtocol {
         }
     }
     
+    func putInJail(playerId: String, cardId: String, targetId: String) {
+        guard let player = players.first(where: { $0.identifier == playerId }),
+            let target = players.first(where: { $0.identifier == targetId })else {
+                return
+        }
+        
+        if let card = player.removeHandById(cardId) {
+            target.addInPlay(card)
+        }
+    }
+    
     func pullHand(playerId: String, otherId: String, cardId: String) {
         guard let player = players.first(where: { $0.identifier == playerId }),
             let other = players.first(where: { $0.identifier == otherId }) else {

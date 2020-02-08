@@ -192,6 +192,42 @@ class GameStateTests: XCTestCase {
         verifyNoMoreInteractions(mockPlayer1)
     }
     
+    func test_PutJailInFrontOfTargetPlayer_IfPuttingInJail() {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .withEnabledDefaultImplementation(PlayerProtocolStub())
+        let card1 = MockCardProtocol().identified(by: "c1")
+        Cuckoo.stub(mockPlayer1) { mock in
+            when(mock.removeHandById("c1")).thenReturn(card1)
+        }
+        let mockPlayer2 = MockPlayerProtocol()
+            .identified(by: "p2")
+            .withEnabledDefaultImplementation(PlayerProtocolStub())
+        
+        let sut = GameState(players: [mockPlayer1, mockPlayer2],
+                            deck: MockDeckProtocol(),
+                            turn: "p1",
+                            challenge: nil,
+                            bangsPlayed: 0,
+                            generalStoreCards: [],
+                            outcome: nil,
+                            actions: [],
+                            commands: [],
+                            eliminated: [])
+        
+        // When
+        sut.putInJail(playerId: "p1", cardId: "c1", targetId: "p2")
+        
+        // Assert
+        verify(mockPlayer1, atLeastOnce()).identifier.get()
+        verify(mockPlayer1).removeHandById("c1")
+        verify(mockPlayer2, atLeastOnce()).identifier.get()
+        verify(mockPlayer2).addInPlay(card(identifiedBy: "c1"))
+        verifyNoMoreInteractions(mockPlayer1)
+        verifyNoMoreInteractions(mockPlayer2)
+    }
+    
     func test_SetTurn() {
         // Given
         let sut = GameState(players: [],
@@ -254,7 +290,6 @@ class GameStateTests: XCTestCase {
         // Assert
         XCTAssertEqual(sut.commands.map { $0.description }, ["a1", "a2"])
     }
-    
     
     func test_SetChallenge() {
         // Given

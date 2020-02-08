@@ -24,6 +24,7 @@ protocol GameStateProtocol {
     func gainLifePoint(playerId: String)
     func pullDeck(playerId: String)
     func putInPlay(playerId: String, cardId: String)
+    func putInJail(playerId: String, cardId: String, targetId: String)
     func addCommand(_ action: ActionProtocol)
     func setChallenge(_ challenge: Challenge?)
     func setTurn(_ turn: String)

@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import Cuckoo
 
 /**
  Jail
@@ -22,9 +23,96 @@ import XCTest
  Jail cannot be played on the Sheriff.
  */
 class JailTests: XCTestCase {
-
+    
+    func test_JailDescription() {
+        // Given
+        let sut = Jail(actorId: "p1", cardId: "c1", targetId: "p2")
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.description, "p1 put p2 in jail")
+    }
+    
+    func test_PutCardInPlayOfTargetPlayer_IfPlayingJail() {
+        // Given
+        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
+        let sut = Jail(actorId: "p1", cardId: "c1", targetId: "p2")
+        
+        // When
+        sut.execute(in: mockState)
+        
+        // Assert
+        verify(mockState).putInJail(playerId: "p1", cardId: "c1", targetId: "p2")
+    }
 }
 
 class JailRuleTests: XCTestCase {
-
+    
+    func test_CanPlayJail_IfHoldingCardAndAgainsNonSheriffPlayer() {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .holding(MockCardProtocol().identified(by: "c1").named(.jail))
+        let mockPlayer2 = MockPlayerProtocol()
+            .identified(by: "p2")
+            .role(is: .outlaw)
+            .noCardsInPlay()
+        let mockState = MockGameStateProtocol()
+            .challenge(is: nil)
+            .currentTurn(is: "p1")
+            .players(are: mockPlayer1, mockPlayer2)
+        let sut = JailRule()
+        
+        // When
+        let actions = sut.match(with: mockState)
+        
+        // Assert
+        XCTAssertEqual(actions?.count, 1)
+        XCTAssertEqual(actions?[0].name, "jail")
+        XCTAssertEqual(actions?[0].cardId, "c1")
+        XCTAssertEqual(actions?[0].options as? [Jail], [Jail(actorId: "p1", cardId: "c1", targetId: "p2")])
+    }
+    
+    func test_CannotPlayJail_IfTargetPlayerIsSheriff() {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .holding(MockCardProtocol().identified(by: "c1").named(.jail))
+        let mockPlayer2 = MockPlayerProtocol()
+            .identified(by: "p2")
+            .role(is: .sheriff)
+        let mockState = MockGameStateProtocol()
+            .challenge(is: nil)
+            .currentTurn(is: "p1")
+            .players(are: mockPlayer1, mockPlayer2)
+        let sut = JailRule()
+        
+        // When
+        let actions = sut.match(with: mockState)
+        
+        // Assert
+        XCTAssertNil(actions)
+    }
+    
+    func test_CannotPlayJail_IfTargetPlayerIsAlreadyInJail() {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .holding(MockCardProtocol().identified(by: "c1").named(.jail))
+        let mockPlayer2 = MockPlayerProtocol()
+            .identified(by: "p2")
+            .role(is: .deputy)
+            .playing(MockCardProtocol().named(.jail))
+        let mockState = MockGameStateProtocol()
+            .challenge(is: nil)
+            .currentTurn(is: "p1")
+            .players(are: mockPlayer1, mockPlayer2)
+        let sut = JailRule()
+        
+        // When
+        let actions = sut.match(with: mockState)
+        
+        // Assert
+        XCTAssertNil(actions)
+    }
 }

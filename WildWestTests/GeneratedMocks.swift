@@ -1235,6 +1235,21 @@ import Cuckoo
     
     
     
+     func putInJail(playerId: String, cardId: String, targetId: String)  {
+        
+    return cuckoo_manager.call("putInJail(playerId: String, cardId: String, targetId: String)",
+            parameters: (playerId, cardId, targetId),
+            escapingParameters: (playerId, cardId, targetId),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.putInJail(playerId: playerId, cardId: cardId, targetId: targetId))
+        
+    }
+    
+    
+    
      func addCommand(_ action: ActionProtocol)  {
         
     return cuckoo_manager.call("addCommand(_: ActionProtocol)",
@@ -1472,6 +1487,11 @@ import Cuckoo
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "putInPlay(playerId: String, cardId: String)", parameterMatchers: matchers))
 	    }
 	    
+	    func putInJail<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable>(playerId: M1, cardId: M2, targetId: M3) -> Cuckoo.ProtocolStubNoReturnFunction<(String, String, String)> where M1.MatchedType == String, M2.MatchedType == String, M3.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: cardId) { $0.1 }, wrap(matchable: targetId) { $0.2 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "putInJail(playerId: String, cardId: String, targetId: String)", parameterMatchers: matchers))
+	    }
+	    
 	    func addCommand<M1: Cuckoo.Matchable>(_ action: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(ActionProtocol)> where M1.MatchedType == ActionProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(ActionProtocol)>] = [wrap(matchable: action) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "addCommand(_: ActionProtocol)", parameterMatchers: matchers))
@@ -1622,6 +1642,12 @@ import Cuckoo
 	    func putInPlay<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(playerId: M1, cardId: M2) -> Cuckoo.__DoNotUse<(String, String), Void> where M1.MatchedType == String, M2.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: cardId) { $0.1 }]
 	        return cuckoo_manager.verify("putInPlay(playerId: String, cardId: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func putInJail<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable>(playerId: M1, cardId: M2, targetId: M3) -> Cuckoo.__DoNotUse<(String, String, String), Void> where M1.MatchedType == String, M2.MatchedType == String, M3.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: cardId) { $0.1 }, wrap(matchable: targetId) { $0.2 }]
+	        return cuckoo_manager.verify("putInJail(playerId: String, cardId: String, targetId: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
@@ -1794,6 +1820,10 @@ import Cuckoo
     }
     
      func putInPlay(playerId: String, cardId: String)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func putInJail(playerId: String, cardId: String, targetId: String)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
