@@ -41,13 +41,9 @@ struct DiscardBangRule: RuleProtocol {
             break
         }
         
-        guard let actor = state.players.first(where: { $0.identifier == actorId }) else {
-            return nil
-        }
-        
-        let cards = actor.handCards(named: .bang)
-        guard !cards.isEmpty else {
-            return nil
+        guard let actor = state.players.first(where: { $0.identifier == actorId }),
+            let cards = actor.handCards(named: .bang) else {
+                return nil
         }
         
         return cards.map { GenericAction(name: "discardBang",

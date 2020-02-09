@@ -27,13 +27,9 @@ struct MissedRule: RuleProtocol {
             return nil
         }
         
-        guard let actor = state.players.first(where: { $0.identifier == targetIds.first }) else {
-            return nil
-        }
-        
-        let cards = actor.handCards(named: .missed)
-        guard !cards.isEmpty else {
-            return nil
+        guard let actor = state.players.first(where: { $0.identifier == targetIds.first }),
+            let cards = actor.handCards(named: .missed) else {
+                return nil
         }
         
         return cards.map { GenericAction(name: $0.name.rawValue,

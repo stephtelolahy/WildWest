@@ -32,13 +32,9 @@ struct CatBalouRule: RuleProtocol {
     
     func match(with state: GameStateProtocol) -> [GenericAction]? {
         guard state.challenge == nil,
-            let actor = state.players.first(where: { $0.identifier == state.turn }) else {
+            let actor = state.players.first(where: { $0.identifier == state.turn }),
+            let cards = actor.handCards(named: .catBalou) else {
                 return nil
-        }
-        
-        let cards = actor.handCards(named: .catBalou)
-        guard !cards.isEmpty else {
-            return nil
         }
         
         var discardableCards: [DiscardableCard] = []

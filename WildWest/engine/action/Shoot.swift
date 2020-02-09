@@ -32,13 +32,9 @@ struct ShootRule: RuleProtocol {
     
     func match(with state: GameStateProtocol) -> [GenericAction]? {
         guard state.challenge == nil,
-            let actor = state.players.first(where: { $0.identifier == state.turn }) else {
+            let actor = state.players.first(where: { $0.identifier == state.turn }),
+            let cards = actor.handCards(named: .bang) else {
                 return nil
-        }
-        
-        let cards = actor.handCards(named: .bang)
-        guard !cards.isEmpty else {
-            return nil
         }
         
         let maxShoots = calculator.maximumNumberOfShoots(of: actor)
@@ -46,13 +42,13 @@ struct ShootRule: RuleProtocol {
             return nil
         }
         
+        let reachableDistance = calculator.reachableDistance(of: actor)
         let otherPlayers = state.players.filter { player -> Bool in
             guard player.identifier != actor.identifier else {
                 return false
             }
             
             let distance = calculator.distance(from: actor.identifier, to: player.identifier, in: state)
-            let reachableDistance = calculator.reachableDistance(of: actor)
             return distance <= reachableDistance
         }
         

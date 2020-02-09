@@ -37,17 +37,19 @@ struct EquipRule: RuleProtocol {
                 return nil
         }
         
-        let cards = actor.handCards(named: .volcanic,
-                                    .schofield,
-                                    .remington,
-                                    .winchester,
-                                    .revCarbine,
-                                    .mustang,
-                                    .scope,
-                                    .barrel,
-                                    .dynamite)
-            .filter { actor.inPlayCards(named: $0.name).isEmpty }
-        
+        let equipableCardNames: [CardName] = [.volcanic,
+                                              .schofield,
+                                              .remington,
+                                              .winchester,
+                                              .revCarbine,
+                                              .mustang,
+                                              .scope,
+                                              .barrel,
+                                              .dynamite]
+        let cards = actor.hand.filter {
+            equipableCardNames.contains($0.name)
+                && actor.inPlayCards(named: $0.name).isEmpty
+        }
         guard !cards.isEmpty else {
             return nil
         }

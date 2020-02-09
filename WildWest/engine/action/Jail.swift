@@ -23,13 +23,9 @@ struct Jail: ActionProtocol, Equatable {
 struct JailRule: RuleProtocol {
     func match(with state: GameStateProtocol) -> [GenericAction]? {
         guard state.challenge == nil,
-            let actor = state.players.first(where: { $0.identifier == state.turn }) else {
+            let actor = state.players.first(where: { $0.identifier == state.turn }),
+            let cards = actor.handCards(named: .jail) else {
                 return nil
-        }
-        
-        let cards = actor.handCards(named: .jail)
-        guard !cards.isEmpty else {
-            return nil
         }
         
         let otherPlayers = state.players.filter { player in

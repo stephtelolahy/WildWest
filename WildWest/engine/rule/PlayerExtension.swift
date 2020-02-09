@@ -8,11 +8,16 @@
 
 extension PlayerProtocol {
     
-    func handCards(named names: CardName...) -> [CardProtocol] {
-        return hand.filter({ names.contains($0.name) })
+    func handCards(named cardName: CardName) -> [CardProtocol]? {
+        let cards = hand.filter { $0.name == cardName }
+        guard !cards.isEmpty else {
+            return nil
+        }
+        
+        return cards
     }
     
-    func inPlayCards(named names: CardName...) -> [CardProtocol] {
-        return inPlay.filter({ names.contains($0.name) })
+    func inPlayCards(named cardName: CardName) -> [CardProtocol] {
+        return inPlay.filter { $0.name == cardName }
     }
 }
