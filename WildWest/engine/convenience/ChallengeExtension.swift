@@ -7,6 +7,7 @@
 //
 
 extension Challenge {
+    
     func removing(_ playerId: String) -> Challenge? {
         switch self {
         case let .shoot(playerIds):
@@ -33,11 +34,8 @@ extension Challenge {
                 return .generalStore(remainingIds)
             }
             
-        case .duel:
-            return nil
-            
         default:
-            return self
+            return nil
         }
     }
 }

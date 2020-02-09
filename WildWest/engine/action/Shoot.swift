@@ -43,13 +43,9 @@ struct ShootRule: RuleProtocol {
         }
         
         let reachableDistance = calculator.reachableDistance(of: actor)
-        let otherPlayers = state.players.filter { player -> Bool in
-            guard player.identifier != actor.identifier else {
-                return false
-            }
-            
-            let distance = calculator.distance(from: actor.identifier, to: player.identifier, in: state)
-            return distance <= reachableDistance
+        let otherPlayers = state.players.filter {
+            $0.identifier != actor.identifier
+                && calculator.distance(from: actor.identifier, to: $0.identifier, in: state) <= reachableDistance
         }
         
         guard !otherPlayers.isEmpty else {

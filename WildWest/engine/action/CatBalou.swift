@@ -37,27 +37,8 @@ struct CatBalouRule: RuleProtocol {
                 return nil
         }
         
-        var discardableCards: [DiscardableCard] = []
-        discardableCards += actor.inPlay.map { DiscardableCard(identifier: $0.identifier,
-                                                               ownerId: actor.identifier,
-                                                               source: .inPlay)
-        }
-        
         let otherPlayers = state.players.filter { $0.identifier != actor.identifier }
-        for player in otherPlayers {
-            discardableCards += player.hand.map { DiscardableCard(identifier: $0.identifier,
-                                                                  ownerId: player.identifier,
-                                                                  source: .hand)
-                
-            }
-            
-            discardableCards += player.inPlay.map { DiscardableCard(identifier: $0.identifier,
-                                                                    ownerId: player.identifier,
-                                                                    source: .inPlay)
-                
-            }
-        }
-        
+        let discardableCards = state.discardableCards(from: actor, and: otherPlayers)
         guard !discardableCards.isEmpty else {
             return nil
         }
@@ -66,7 +47,7 @@ struct CatBalouRule: RuleProtocol {
             let options = discardableCards.map { CatBalou(actorId: actor.identifier,
                                                           cardId: card.identifier,
                                                           targetPlayerId: $0.ownerId,
-                                                          targetCardId: $0.identifier,
+                                                          targetCardId: $0.cardId,
                                                           targetCardSource: $0.source)
             }
             

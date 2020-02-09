@@ -9,3 +9,10 @@
 protocol RuleProtocol {
     func match(with state: GameStateProtocol) -> [GenericAction]?
 }
+
+struct GenericAction {
+    let name: String
+    let actorId: String
+    let cardId: String?
+    let options: [ActionProtocol]
+}

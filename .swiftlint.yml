@@ -59,7 +59,7 @@ function_body_length:
  - 25 # warning
  - 35 # error
 file_length:
-  warning: 100
+  warning: 500
   error: 1200
 # naming rules can set warnings/errors for min_length and max_length
 # additionally they can set excluded names

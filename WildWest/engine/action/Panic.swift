@@ -6,6 +6,10 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
+enum CardSource: Equatable {
+    case hand, inPlay
+}
+
 struct Panic: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
@@ -43,31 +47,13 @@ struct PanicRule: RuleProtocol {
                 return nil
         }
         
-        var discardableCards: [DiscardableCard] = []
-        discardableCards += actor.inPlay.map { DiscardableCard(identifier: $0.identifier,
-                                                               ownerId: actor.identifier,
-                                                               source: .inPlay)
-        }
-        
+        let reachableDistance = 1
         let otherPlayers = state.players.filter {
             $0.identifier != actor.identifier
-                && calculator.distance(from: actor.identifier, to: $0.identifier, in: state) <= 1
+                && calculator.distance(from: actor.identifier, to: $0.identifier, in: state) <= reachableDistance
         }
         
-        for player in otherPlayers {
-            discardableCards += player.hand.map { DiscardableCard(identifier: $0.identifier,
-                                                                  ownerId: player.identifier,
-                                                                  source: .hand)
-                
-            }
-            
-            discardableCards += player.inPlay.map { DiscardableCard(identifier: $0.identifier,
-                                                                    ownerId: player.identifier,
-                                                                    source: .inPlay)
-                
-            }
-        }
-        
+        let discardableCards = state.discardableCards(from: actor, and: otherPlayers)
         guard !discardableCards.isEmpty else {
             return nil
         }
@@ -76,7 +62,7 @@ struct PanicRule: RuleProtocol {
             let options = discardableCards.map { Panic(actorId: actor.identifier,
                                                        cardId: card.identifier,
                                                        targetPlayerId: $0.ownerId,
-                                                       targetCardId: $0.identifier,
+                                                       targetCardId: $0.cardId,
                                                        targetCardSource: $0.source)
             }
             
