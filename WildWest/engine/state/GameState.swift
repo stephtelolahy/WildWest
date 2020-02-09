@@ -10,9 +10,10 @@ class GameState: GameStateProtocol {
     
     var players: [PlayerProtocol]
     let deck: DeckProtocol
-    var turn: Int
+    var turn: String
     var challenge: Challenge?
-    var turnShoots: Int
+    var bangsPlayed: Int
+    var generalStoreCards: [CardProtocol]
     var outcome: GameOutcome?
     var commands: [ActionProtocol]
     var actions: [GenericAction]
@@ -20,9 +21,10 @@ class GameState: GameStateProtocol {
     
     init(players: [PlayerProtocol],
          deck: DeckProtocol,
-         turn: Int,
+         turn: String,
          challenge: Challenge?,
-         turnShoots: Int,
+         bangsPlayed: Int,
+         generalStoreCards: [CardProtocol],
          outcome: GameOutcome?,
          actions: [GenericAction],
          commands: [ActionProtocol],
@@ -31,7 +33,8 @@ class GameState: GameStateProtocol {
         self.deck = deck
         self.turn = turn
         self.challenge = challenge
-        self.turnShoots = turnShoots
+        self.bangsPlayed = bangsPlayed
+        self.generalStoreCards = generalStoreCards
         self.outcome = outcome
         self.commands = commands
         self.actions = actions
@@ -50,20 +53,39 @@ class GameState: GameStateProtocol {
         self.challenge = challenge
     }
     
-    func setTurn(_ turn: Int) {
+    func setTurn(_ turn: String) {
         self.turn = turn
     }
     
-    func setTurnShoots(_ shoots: Int) {
-        self.turnShoots = shoots
+    func setBangsPlayed(_ count: Int) {
+        self.bangsPlayed = count
     }
     
-    func pullFromDeck(playerId: String) {
+    func setupGeneralStore(count: Int) {
+        generalStoreCards = Array(1...count).map { _ in deck.pull() }
+    }
+    
+    func pullGeneralStore(playerId: String, cardId: String) {
+        guard let player = players.first(where: { $0.identifier == playerId }),
+            let cardIndex = generalStoreCards.firstIndex(where: { $0.identifier == cardId }) else {
+                return
+        }
+        
+        let card = generalStoreCards[cardIndex]
+        generalStoreCards.remove(at: cardIndex)
+        player.addHand(card)
+    }
+    
+    func pullDeck(playerId: String) {
         guard let player = players.first(where: { $0.identifier == playerId }) else {
             return
         }
         
         player.addHand(deck.pull())
+    }
+    
+    func revealDeck() {
+        deck.addToDiscard(deck.pull())
     }
     
     func discardHand(playerId: String, cardId: String) {
@@ -112,6 +134,17 @@ class GameState: GameStateProtocol {
         }
     }
     
+    func putInJail(playerId: String, cardId: String, targetId: String) {
+        guard let player = players.first(where: { $0.identifier == playerId }),
+            let target = players.first(where: { $0.identifier == targetId })else {
+                return
+        }
+        
+        if let card = player.removeHandById(cardId) {
+            target.addInPlay(card)
+        }
+    }
+    
     func pullHand(playerId: String, otherId: String, cardId: String) {
         guard let player = players.first(where: { $0.identifier == playerId }),
             let other = players.first(where: { $0.identifier == otherId }) else {
@@ -135,20 +168,45 @@ class GameState: GameStateProtocol {
     }
     
     func eliminate(playerId: String) {
-        guard let player = players.first(where: { $0.identifier == playerId }) else {
-            return
+        guard let player = players.first(where: { $0.identifier == playerId }),
+            let playerIndex = players.firstIndex(where: { $0.identifier == playerId }) else {
+                return
         }
         
         player.hand.forEach { discardHand(playerId: playerId, cardId: $0.identifier) }
         player.inPlay.forEach { discardInPlay(playerId: playerId, cardId: $0.identifier) }
-        eliminated.append(player)
         
-        let turnPlayerId = players[turn].identifier
-        players.removeAll(where: { $0.identifier == playerId })
-        guard let turnPlayerIndex = players.firstIndex(where: { $0.identifier == turnPlayerId }) else {
-            return
+        // active player is eliminated, update turn and trigger startTurn challenge
+        if playerId == turn {
+            let nextPlayerIndex = (playerIndex + 1) % players.count
+            let nextPlayerId = players[nextPlayerIndex].identifier
+            turn = nextPlayerId
+            challenge = .startTurn
         }
         
-        turn = turnPlayerIndex
+        players.remove(at: playerIndex)
+        
+        eliminated.append(player)
+        
+        outcome = Self.calculateOutcome(with: players)
+    }
+    
+    private static func calculateOutcome(with players: [PlayerProtocol]) -> GameOutcome? {
+        let allOutlawsAreEliminated = players.filter { $0.role == .outlaw || $0.role == .renegade }.isEmpty
+        if allOutlawsAreEliminated {
+            return .sheriffWin
+        }
+        
+        let sheriffIsEliminated = players.filter { $0.role == .sheriff }.isEmpty
+        if sheriffIsEliminated {
+            let lastPlayerIsRenegade = players.count == 1 && players[0].role == .renegade
+            if lastPlayerIsRenegade {
+                return .renegadeWin
+            } else {
+                return .outlawWin
+            }
+        }
+        
+        return nil
     }
 }

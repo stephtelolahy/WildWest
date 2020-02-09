@@ -31,37 +31,14 @@ struct CatBalou: ActionProtocol, Equatable {
 struct CatBalouRule: RuleProtocol {
     
     func match(with state: GameStateProtocol) -> [GenericAction]? {
-        guard state.challenge == nil else {
-            return nil
-        }
-        
-        let actor = state.players[state.turn]
-        let cards = actor.handCards(named: .catBalou)
-        guard !cards.isEmpty else {
-            return nil
-        }
-        
-        var discardableCards: [DiscardableCard] = []
-        discardableCards += actor.inPlay.map { DiscardableCard(identifier: $0.identifier,
-                                                               ownerId: actor.identifier,
-                                                               source: .inPlay)
+        guard state.challenge == nil,
+            let actor = state.players.first(where: { $0.identifier == state.turn }),
+            let cards = actor.handCards(named: .catBalou) else {
+                return nil
         }
         
         let otherPlayers = state.players.filter { $0.identifier != actor.identifier }
-        for player in otherPlayers {
-            discardableCards += player.hand.map { DiscardableCard(identifier: $0.identifier,
-                                                                  ownerId: player.identifier,
-                                                                  source: .hand)
-                
-            }
-            
-            discardableCards += player.inPlay.map { DiscardableCard(identifier: $0.identifier,
-                                                                    ownerId: player.identifier,
-                                                                    source: .inPlay)
-                
-            }
-        }
-        
+        let discardableCards = state.discardableCards(from: actor, and: otherPlayers)
         guard !discardableCards.isEmpty else {
             return nil
         }
@@ -70,7 +47,7 @@ struct CatBalouRule: RuleProtocol {
             let options = discardableCards.map { CatBalou(actorId: actor.identifier,
                                                           cardId: card.identifier,
                                                           targetPlayerId: $0.ownerId,
-                                                          targetCardId: $0.identifier,
+                                                          targetCardId: $0.cardId,
                                                           targetCardSource: $0.source)
             }
             

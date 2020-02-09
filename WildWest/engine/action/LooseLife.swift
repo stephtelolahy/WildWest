@@ -19,34 +19,12 @@ struct LooseLife: ActionProtocol, Equatable {
             return
         }
         
+        state.setChallenge(state.challenge?.removing(actorId))
+        
         if player.health >= 2 {
             state.looseLifePoint(playerId: actorId)
         } else {
             state.eliminate(playerId: actorId)
-        }
-        
-        switch state.challenge {
-        case let .shoot(targetIds):
-            let remainingTargetIds = targetIds.filter { $0 != actorId }
-            if remainingTargetIds.isEmpty {
-                state.setChallenge(nil)
-            } else {
-                state.setChallenge(.shoot(remainingTargetIds))
-            }
-            
-        case let .indians(targetIds):
-            let remainingTargetIds = targetIds.filter { $0 != actorId }
-            if remainingTargetIds.isEmpty {
-                state.setChallenge(nil)
-            } else {
-                state.setChallenge(.indians(remainingTargetIds))
-            }
-            
-        case .duel:
-            state.setChallenge(nil)
-            
-        default:
-            break
         }
     }
 }

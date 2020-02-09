@@ -9,6 +9,14 @@
 import XCTest
 import Cuckoo
 
+/**
+ Gatling
+ The Gatling shoots “a BANG!” to “all the other players”,
+ regardless of the distance. Even though the Gatling shoots
+ a BANG! to all the other players, it is not considered a
+ BANG! card. During your turn you can play any number of
+ Gatling, but only one BANG! card.
+ */
 class GatlingTests: XCTestCase {
     
     func test_DiscardCardAndSetChallengeToShootAllOtherPlayersRightDirection_IfPlayingGatling() {
@@ -46,7 +54,7 @@ class GatlingRuleTests: XCTestCase {
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer)
         
         // When

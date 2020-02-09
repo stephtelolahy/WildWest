@@ -16,9 +16,9 @@ extension MockGameStateProtocol {
         return self
     }
     
-    func currentTurn(is turn: Int) -> MockGameStateProtocol {
+    func currentTurn(is playerId: String) -> MockGameStateProtocol {
         Cuckoo.stub(self) { mock in
-            when(mock.turn.get).thenReturn(turn)
+            when(mock.turn.get).thenReturn(playerId)
         }
         return self
     }
@@ -30,9 +30,9 @@ extension MockGameStateProtocol {
         return self
     }
     
-    func turnShoots(is shoots: Int) -> MockGameStateProtocol {
+    func bangsPlayed(is shoots: Int) -> MockGameStateProtocol {
         Cuckoo.stub(self) { mock in
-            when(mock.turnShoots.get).thenReturn(shoots)
+            when(mock.bangsPlayed.get).thenReturn(shoots)
         }
         return self
     }
@@ -40,6 +40,13 @@ extension MockGameStateProtocol {
     func commands(are commands: ActionProtocol...) -> MockGameStateProtocol {
         Cuckoo.stub(self) { mock in
             when(mock.commands.get).thenReturn(commands)
+        }
+        return self
+    }
+    
+    func deck(is deck: DeckProtocol) -> MockGameStateProtocol {
+        Cuckoo.stub(self) { mock in
+            when(mock.deck.get).thenReturn(deck)
         }
         return self
     }

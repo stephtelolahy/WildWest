@@ -9,6 +9,33 @@
 import XCTest
 import Cuckoo
 
+/**
+ Weapons
+ You start the game with a Colt .45 revolver. This is not
+ represented by any card, but it is drawn on your playing board.
+ Using the Colt .45 you can only hit targets at a distance of 1,
+ i.e. only players sitting to your right or your left.
+ In order to hit targets farther than distance 1, you need to
+ play a bigger weapon: place it over the Colt .45. Weapons can
+ be recognized from their blue border with no
+ bullet holes, black-and-white illustration and the number
+ into the sight (see picture) that represents the maximum
+ reachable distance. The weapon in play substitutes the Colt
+ .45, until the card is removed somehow. Even if weapons are
+ played on the board, they can still be stolen (e.g. through
+ the play of a Panic!) or discarded (e.g. through Cat Balou).
+ The only weapon you can never lose is the ol’ Colt .45!
+ You can only have one weapon in play at a time: if you
+ want to play a new weapon when you already have one, you
+ must discard the one you already have.
+ Important: weapons do not change the distance between
+ players. They represent your maximum reachable distance
+ when shooting.
+ Volcanic: with this card in play you may play any number
+ of BANG! cards during your turn. These BANG! cards can
+ be aimed at the same or different targets, but are limited to
+ a distance of 1.
+ */
 class RangeCalculatorTests: XCTestCase {
     
     private let sut = RangeCalculator()

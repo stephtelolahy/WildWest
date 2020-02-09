@@ -12,9 +12,9 @@ struct WellsFargo: ActionProtocol, Equatable {
     
     func execute(in state: GameStateProtocol) {
         state.discardHand(playerId: actorId, cardId: cardId)
-        state.pullFromDeck(playerId: actorId)
-        state.pullFromDeck(playerId: actorId)
-        state.pullFromDeck(playerId: actorId)
+        state.pullDeck(playerId: actorId)
+        state.pullDeck(playerId: actorId)
+        state.pullDeck(playerId: actorId)
     }
     
     var description: String {
@@ -25,14 +25,10 @@ struct WellsFargo: ActionProtocol, Equatable {
 struct WellsFargoRule: RuleProtocol {
     
     func match(with state: GameStateProtocol) -> [GenericAction]? {
-        guard state.challenge == nil else {
-            return nil
-        }
-        
-        let actor = state.players[state.turn]
-        let cards = actor.handCards(named: .wellsFargo)
-        guard !cards.isEmpty else {
-            return nil
+        guard state.challenge == nil,
+            let actor = state.players.first(where: { $0.identifier == state.turn }),
+            let cards = actor.handCards(named: .wellsFargo) else {
+                return nil
         }
         
         return cards.map { GenericAction(name: $0.name.rawValue,

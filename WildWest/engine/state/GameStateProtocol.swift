@@ -9,9 +9,10 @@
 protocol GameStateProtocol {
     var players: [PlayerProtocol] { get }
     var deck: DeckProtocol { get }
-    var turn: Int { get }
+    var turn: String { get }
     var challenge: Challenge? { get }
-    var turnShoots: Int { get }
+    var bangsPlayed: Int { get }
+    var generalStoreCards: [CardProtocol] { get }
     var outcome: GameOutcome? { get }
     var actions: [GenericAction] { get }
     var commands: [ActionProtocol] { get }
@@ -21,19 +22,23 @@ protocol GameStateProtocol {
     func discardHand(playerId: String, cardId: String)
     func discardInPlay(playerId: String, cardId: String)
     func gainLifePoint(playerId: String)
-    func pullFromDeck(playerId: String)
+    func pullDeck(playerId: String)
     func putInPlay(playerId: String, cardId: String)
+    func putInJail(playerId: String, cardId: String, targetId: String)
     func addCommand(_ action: ActionProtocol)
     func setChallenge(_ challenge: Challenge?)
-    func setTurn(_ turn: Int)
-    func setTurnShoots(_ shoots: Int)
+    func setTurn(_ turn: String)
+    func setBangsPlayed(_ count: Int)
+    func setupGeneralStore(count: Int)
+    func pullGeneralStore(playerId: String, cardId: String)
     func pullHand(playerId: String, otherId: String, cardId: String)
     func pullInPlay(playerId: String, otherId: String, cardId: String)
     func looseLifePoint(playerId: String)
     func eliminate(playerId: String)
+    func revealDeck()
 }
 
-enum GameOutcome {
+enum GameOutcome: String {
     case sheriffWin,
     outlawWin,
     renegadeWin
@@ -44,5 +49,5 @@ enum Challenge: Equatable {
     case shoot([String])
     case indians([String])
     case duel([String])
-    case generalStore
+    case generalStore([String])
 }

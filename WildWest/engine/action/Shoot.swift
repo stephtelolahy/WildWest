@@ -14,7 +14,7 @@ struct Shoot: ActionProtocol, Equatable {
     func execute(in state: GameStateProtocol) {
         state.discardHand(playerId: actorId, cardId: cardId)
         state.setChallenge(.shoot([targetId]))
-        state.setTurnShoots(state.turnShoots + 1)
+        state.setBangsPlayed(state.bangsPlayed + 1)
     }
     
     var description: String {
@@ -31,29 +31,21 @@ struct ShootRule: RuleProtocol {
     }
     
     func match(with state: GameStateProtocol) -> [GenericAction]? {
-        guard state.challenge == nil else {
-            return nil
-        }
-        
-        let actor = state.players[state.turn]
-        let cards = actor.handCards(named: .bang)
-        guard !cards.isEmpty else {
-            return nil
+        guard state.challenge == nil,
+            let actor = state.players.first(where: { $0.identifier == state.turn }),
+            let cards = actor.handCards(named: .bang) else {
+                return nil
         }
         
         let maxShoots = calculator.maximumNumberOfShoots(of: actor)
-        guard maxShoots == 0 || state.turnShoots < maxShoots  else {
+        guard maxShoots == 0 || state.bangsPlayed < maxShoots  else {
             return nil
         }
         
-        let otherPlayers = state.players.filter { player -> Bool in
-            guard player.identifier != actor.identifier else {
-                return false
-            }
-            
-            let distance = calculator.distance(from: actor.identifier, to: player.identifier, in: state)
-            let reachableDistance = calculator.reachableDistance(of: actor)
-            return distance <= reachableDistance
+        let reachableDistance = calculator.reachableDistance(of: actor)
+        let otherPlayers = state.players.filter {
+            $0.identifier != actor.identifier
+                && calculator.distance(from: actor.identifier, to: $0.identifier, in: state) <= reachableDistance
         }
         
         guard !otherPlayers.isEmpty else {

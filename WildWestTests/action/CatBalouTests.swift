@@ -9,6 +9,11 @@
 import XCTest
 import Cuckoo
 
+/**
+ Cat Balou
+ Force “any one player” to “discard a card”, regardless of
+ the distance
+ */
 class CatBalouTests: XCTestCase {
     
     func test_DiscardOtherPlayerHandCard_IfPlayingCatBalou() {
@@ -57,7 +62,7 @@ class CatBalouRuleTests: XCTestCase {
         
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2)
         
         // When
@@ -89,7 +94,7 @@ class CatBalouRuleTests: XCTestCase {
         
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2)
         
         // When
@@ -116,7 +121,7 @@ class CatBalouRuleTests: XCTestCase {
         
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer1)
         
         // When
@@ -148,7 +153,7 @@ class CatBalouRuleTests: XCTestCase {
         
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2)
         
         // When

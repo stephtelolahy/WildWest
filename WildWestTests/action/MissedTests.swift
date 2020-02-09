@@ -9,6 +9,24 @@
 import XCTest
 import Cuckoo
 
+/**
+ If you are hit by a BANG! you may
+ immediately play a Missed! - even though
+ it is not your turn! - to
+ cancel the shot. If you do
+ not, you lose one life point
+ (discard a bullet). Discarded
+ bullet go into a pile in the
+ middle of the table. If you
+ have no more bullets left,
+ i.e. you lose your last life
+ point, you are out of the
+ game, unless you play
+ immediately a Beer (see
+ next paragraph). You can only cancel shots
+ aimed at you. The BANG! card is discarded,
+ even when cancelled
+ */
 class MissedTests: XCTestCase {
     
     func test_DiscardCardAndRemoveChallenge_IfPlayingMissed() {

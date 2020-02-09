@@ -9,6 +9,14 @@
 import XCTest
 import Cuckoo
 
+/**
+ Discard excess cards
+ Once the second phase is over (you do not want to or cannot play any more
+ cards), then you must discard from your hand any cards exceeding your
+ hand-size limit. Remember that your hand size limit, at the end of your
+ turn, is equal to the number of bullets (i.e. life points) you currently have.
+ Then it is the next player’s turn, in clockwise order.
+ */
 class EndTurnTests: XCTestCase {
     
     func test_ChangeTurnToNextPlayer_IfAPlayerJustEndedTurn() {
@@ -19,7 +27,7 @@ class EndTurnTests: XCTestCase {
             .identified(by: "p2")
         let mockState = MockGameStateProtocol()
             .withEnabledDefaultImplementation(GameStateProtocolStub())
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2)
         
         let sut = EndTurn(actorId: "p1", cardsToDiscardIds: [])
@@ -28,7 +36,7 @@ class EndTurnTests: XCTestCase {
         sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).setTurn(1)
+        verify(mockState).setTurn("p2")
     }
     
     func test_ChangeTurnToFirstPlayer_IfLastPlayerJustEndedTurn() {
@@ -39,7 +47,7 @@ class EndTurnTests: XCTestCase {
             .identified(by: "p2")
         let mockState = MockGameStateProtocol()
             .withEnabledDefaultImplementation(GameStateProtocolStub())
-            .currentTurn(is: 1)
+            .currentTurn(is: "p2")
             .players(are: mockPlayer1, mockPlayer2)
         
         let sut = EndTurn(actorId: "p2", cardsToDiscardIds: [])
@@ -48,14 +56,14 @@ class EndTurnTests: XCTestCase {
         sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).setTurn(0)
+        verify(mockState).setTurn("p1")
     }
     
     func test_DiscardExcessCards_IfEndingTurn() {
         // Given
         let mockState = MockGameStateProtocol()
             .withEnabledDefaultImplementation(GameStateProtocolStub())
-            .players(are: MockPlayerProtocol(), MockPlayerProtocol())
+            .players(are: MockPlayerProtocol().identified(by: "p1"))
         
         let sut = EndTurn(actorId: "p1", cardsToDiscardIds: ["c1", "c2"])
         
@@ -69,12 +77,10 @@ class EndTurnTests: XCTestCase {
     
     func test_TriggerStartTurnChallenge_IfEndingTurn() {
         // Given
-        let mockPlayer1 = MockPlayerProtocol()
-            .identified(by: "p1")
         let mockState = MockGameStateProtocol()
             .withEnabledDefaultImplementation(GameStateProtocolStub())
-            .currentTurn(is: 0)
-            .players(are: mockPlayer1, MockPlayerProtocol())
+            .currentTurn(is: "p1")
+            .players(are: MockPlayerProtocol().identified(by: "p1"), MockPlayerProtocol().identified(by: "p2"))
         
         let sut = EndTurn(actorId: "p1", cardsToDiscardIds: [])
         
@@ -100,7 +106,7 @@ class EndTurnRuleTests: XCTestCase {
             .holding(card1, card2, card3)
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
@@ -127,7 +133,7 @@ class EndTurnRuleTests: XCTestCase {
             .holding(card1, card2, card3)
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
@@ -161,7 +167,7 @@ class EndTurnRuleTests: XCTestCase {
             .holding(card1, card2, card3)
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When

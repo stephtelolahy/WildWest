@@ -12,17 +12,7 @@ struct Missed: ActionProtocol, Equatable {
     
     func execute(in state: GameStateProtocol) {
         state.discardHand(playerId: actorId, cardId: cardId)
-        
-        guard case let .shoot(targetIds) = state.challenge else {
-            return
-        }
-        
-        let remainingTargetIds = targetIds.filter { $0 != actorId }
-        if remainingTargetIds.isEmpty {
-            state.setChallenge(nil)
-        } else {
-            state.setChallenge(.shoot(remainingTargetIds))
-        }
+        state.setChallenge(state.challenge?.removing(actorId))
     }
     
     var description: String {
@@ -37,13 +27,9 @@ struct MissedRule: RuleProtocol {
             return nil
         }
         
-        guard let actor = state.players.first(where: { $0.identifier == targetIds.first }) else {
-            return nil
-        }
-        
-        let cards = actor.handCards(named: .missed)
-        guard !cards.isEmpty else {
-            return nil
+        guard let actor = state.players.first(where: { $0.identifier == targetIds.first }),
+            let cards = actor.handCards(named: .missed) else {
+                return nil
         }
         
         return cards.map { GenericAction(name: $0.name.rawValue,

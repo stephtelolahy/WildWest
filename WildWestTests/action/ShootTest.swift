@@ -35,7 +35,7 @@ class ShootTest: XCTestCase {
         // Given
         let mockState = MockGameStateProtocol()
             .withEnabledDefaultImplementation(GameStateProtocolStub())
-            .turnShoots(is: 1)
+            .bangsPlayed(is: 1)
         
         let sut = Shoot(actorId: "p1", cardId: "c1", targetId: "p2")
         
@@ -45,8 +45,8 @@ class ShootTest: XCTestCase {
         // Assert
         verify(mockState).discardHand(playerId: "p1", cardId: "c1")
         verify(mockState).setChallenge(equal(to: .shoot(["p2"])))
-        verify(mockState).turnShoots.get()
-        verify(mockState).setTurnShoots(2)
+        verify(mockState).bangsPlayed.get()
+        verify(mockState).setBangsPlayed(2)
         verifyNoMoreInteractions(mockState)
     }
 }
@@ -62,9 +62,9 @@ class ShootRuleTest: XCTestCase {
         let mockPlayer3 = MockPlayerProtocol().identified(by: "p3")
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
-            .turnShoots(is: 0)
+            .bangsPlayed(is: 0)
         let mockCalculator = MockRangeCalculatorProtocol()
         Cuckoo.stub(mockCalculator) { mock in
             when(mock.distance(from: "p1", to: "p2", in: state(equalTo: mockState))).thenReturn(1)
@@ -102,9 +102,9 @@ class ShootRuleTest: XCTestCase {
         let mockPlayer3 = MockPlayerProtocol().identified(by: "p3")
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
-            .turnShoots(is: 0)
+            .bangsPlayed(is: 0)
         let mockCalculator = MockRangeCalculatorProtocol()
         Cuckoo.stub(mockCalculator) { mock in
             when(mock.distance(from: "p1", to: "p2", in: state(equalTo: mockState))).thenReturn(2)
@@ -131,7 +131,7 @@ class ShootRuleTest: XCTestCase {
         let mockPlayer3 = MockPlayerProtocol().identified(by: "p3")
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
         let mockCalculator = MockRangeCalculatorProtocol()
         Cuckoo.stub(mockCalculator) { mock in
@@ -169,9 +169,9 @@ class ShootRuleTest: XCTestCase {
         let mockPlayer2 = MockPlayerProtocol().identified(by: "p2")
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2)
-            .turnShoots(is: 1)
+            .bangsPlayed(is: 1)
         let mockCalculator = MockRangeCalculatorProtocol()
         Cuckoo.stub(mockCalculator) { mock in
             when(mock.distance(from: "p1", to: "p2", in: state(equalTo: mockState))).thenReturn(1)

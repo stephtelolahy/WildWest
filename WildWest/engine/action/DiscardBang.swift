@@ -13,21 +13,11 @@ struct DiscardBang: ActionProtocol, Equatable {
     func execute(in state: GameStateProtocol) {
         state.discardHand(playerId: actorId, cardId: cardId)
         
-        switch state.challenge {
-        case let .indians(targetIds):
-            let remainingTargetIds = targetIds.filter { $0 != actorId }
-            if remainingTargetIds.isEmpty {
-                state.setChallenge(nil)
-            } else {
-                state.setChallenge(.indians(remainingTargetIds))
-            }
-            
-        case let .duel(playerIds):
+        if case let .duel(playerIds) = state.challenge {
             let permutedPlayerIds = [playerIds[1], playerIds[0]]
             state.setChallenge(.duel(permutedPlayerIds))
-            
-        default:
-            break
+        } else {
+            state.setChallenge(state.challenge?.removing(actorId))
         }
     }
     
@@ -51,13 +41,9 @@ struct DiscardBangRule: RuleProtocol {
             break
         }
         
-        guard let actor = state.players.first(where: { $0.identifier == actorId }) else {
-            return nil
-        }
-        
-        let cards = actor.handCards(named: .bang)
-        guard !cards.isEmpty else {
-            return nil
+        guard let actor = state.players.first(where: { $0.identifier == actorId }),
+            let cards = actor.handCards(named: .bang) else {
+                return nil
         }
         
         return cards.map { GenericAction(name: "discardBang",

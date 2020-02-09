@@ -29,14 +29,10 @@ struct Indians: ActionProtocol, Equatable {
 struct IndiansRule: RuleProtocol {
     
     func match(with state: GameStateProtocol) -> [GenericAction]? {
-        guard state.challenge == nil else {
-            return nil
-        }
-        
-        let actor = state.players[state.turn]
-        let cards = actor.handCards(named: .indians)
-        guard !cards.isEmpty else {
-            return nil
+        guard state.challenge == nil,
+            let actor = state.players.first(where: { $0.identifier == state.turn }),
+            let cards = actor.handCards(named: .indians) else {
+                return nil
         }
         
         return cards.map { GenericAction(name: $0.name.rawValue,

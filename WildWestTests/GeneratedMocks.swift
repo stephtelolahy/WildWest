@@ -1029,7 +1029,7 @@ import Cuckoo
     
     
     
-     var turn: Int {
+     var turn: String {
         get {
             return cuckoo_manager.getter("turn",
                 superclassCall:
@@ -1057,14 +1057,28 @@ import Cuckoo
     
     
     
-     var turnShoots: Int {
+     var bangsPlayed: Int {
         get {
-            return cuckoo_manager.getter("turnShoots",
+            return cuckoo_manager.getter("bangsPlayed",
                 superclassCall:
                     
                     Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                     ,
-                defaultCall: __defaultImplStub!.turnShoots)
+                defaultCall: __defaultImplStub!.bangsPlayed)
+        }
+        
+    }
+    
+    
+    
+     var generalStoreCards: [CardProtocol] {
+        get {
+            return cuckoo_manager.getter("generalStoreCards",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.generalStoreCards)
         }
         
     }
@@ -1191,16 +1205,16 @@ import Cuckoo
     
     
     
-     func pullFromDeck(playerId: String)  {
+     func pullDeck(playerId: String)  {
         
-    return cuckoo_manager.call("pullFromDeck(playerId: String)",
+    return cuckoo_manager.call("pullDeck(playerId: String)",
             parameters: (playerId),
             escapingParameters: (playerId),
             superclassCall:
                 
                 Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
-            defaultCall: __defaultImplStub!.pullFromDeck(playerId: playerId))
+            defaultCall: __defaultImplStub!.pullDeck(playerId: playerId))
         
     }
     
@@ -1216,6 +1230,21 @@ import Cuckoo
                 Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
             defaultCall: __defaultImplStub!.putInPlay(playerId: playerId, cardId: cardId))
+        
+    }
+    
+    
+    
+     func putInJail(playerId: String, cardId: String, targetId: String)  {
+        
+    return cuckoo_manager.call("putInJail(playerId: String, cardId: String, targetId: String)",
+            parameters: (playerId, cardId, targetId),
+            escapingParameters: (playerId, cardId, targetId),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.putInJail(playerId: playerId, cardId: cardId, targetId: targetId))
         
     }
     
@@ -1251,9 +1280,9 @@ import Cuckoo
     
     
     
-     func setTurn(_ turn: Int)  {
+     func setTurn(_ turn: String)  {
         
-    return cuckoo_manager.call("setTurn(_: Int)",
+    return cuckoo_manager.call("setTurn(_: String)",
             parameters: (turn),
             escapingParameters: (turn),
             superclassCall:
@@ -1266,16 +1295,46 @@ import Cuckoo
     
     
     
-     func setTurnShoots(_ shoots: Int)  {
+     func setBangsPlayed(_ count: Int)  {
         
-    return cuckoo_manager.call("setTurnShoots(_: Int)",
-            parameters: (shoots),
-            escapingParameters: (shoots),
+    return cuckoo_manager.call("setBangsPlayed(_: Int)",
+            parameters: (count),
+            escapingParameters: (count),
             superclassCall:
                 
                 Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
-            defaultCall: __defaultImplStub!.setTurnShoots(shoots))
+            defaultCall: __defaultImplStub!.setBangsPlayed(count))
+        
+    }
+    
+    
+    
+     func setupGeneralStore(count: Int)  {
+        
+    return cuckoo_manager.call("setupGeneralStore(count: Int)",
+            parameters: (count),
+            escapingParameters: (count),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.setupGeneralStore(count: count))
+        
+    }
+    
+    
+    
+     func pullGeneralStore(playerId: String, cardId: String)  {
+        
+    return cuckoo_manager.call("pullGeneralStore(playerId: String, cardId: String)",
+            parameters: (playerId, cardId),
+            escapingParameters: (playerId, cardId),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.pullGeneralStore(playerId: playerId, cardId: cardId))
         
     }
     
@@ -1339,6 +1398,21 @@ import Cuckoo
         
     }
     
+    
+    
+     func revealDeck()  {
+        
+    return cuckoo_manager.call("revealDeck()",
+            parameters: (),
+            escapingParameters: (),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.revealDeck())
+        
+    }
+    
 
 	 struct __StubbingProxy_GameStateProtocol: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
@@ -1358,7 +1432,7 @@ import Cuckoo
 	    }
 	    
 	    
-	    var turn: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, Int> {
+	    var turn: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, String> {
 	        return .init(manager: cuckoo_manager, name: "turn")
 	    }
 	    
@@ -1368,8 +1442,13 @@ import Cuckoo
 	    }
 	    
 	    
-	    var turnShoots: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, Int> {
-	        return .init(manager: cuckoo_manager, name: "turnShoots")
+	    var bangsPlayed: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, Int> {
+	        return .init(manager: cuckoo_manager, name: "bangsPlayed")
+	    }
+	    
+	    
+	    var generalStoreCards: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [CardProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "generalStoreCards")
 	    }
 	    
 	    
@@ -1413,14 +1492,19 @@ import Cuckoo
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "gainLifePoint(playerId: String)", parameterMatchers: matchers))
 	    }
 	    
-	    func pullFromDeck<M1: Cuckoo.Matchable>(playerId: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(String)> where M1.MatchedType == String {
+	    func pullDeck<M1: Cuckoo.Matchable>(playerId: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(String)> where M1.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: playerId) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "pullFromDeck(playerId: String)", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "pullDeck(playerId: String)", parameterMatchers: matchers))
 	    }
 	    
 	    func putInPlay<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(playerId: M1, cardId: M2) -> Cuckoo.ProtocolStubNoReturnFunction<(String, String)> where M1.MatchedType == String, M2.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: cardId) { $0.1 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "putInPlay(playerId: String, cardId: String)", parameterMatchers: matchers))
+	    }
+	    
+	    func putInJail<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable>(playerId: M1, cardId: M2, targetId: M3) -> Cuckoo.ProtocolStubNoReturnFunction<(String, String, String)> where M1.MatchedType == String, M2.MatchedType == String, M3.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: cardId) { $0.1 }, wrap(matchable: targetId) { $0.2 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "putInJail(playerId: String, cardId: String, targetId: String)", parameterMatchers: matchers))
 	    }
 	    
 	    func addCommand<M1: Cuckoo.Matchable>(_ action: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(ActionProtocol)> where M1.MatchedType == ActionProtocol {
@@ -1433,14 +1517,24 @@ import Cuckoo
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "setChallenge(_: Challenge?)", parameterMatchers: matchers))
 	    }
 	    
-	    func setTurn<M1: Cuckoo.Matchable>(_ turn: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(Int)> where M1.MatchedType == Int {
-	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: turn) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "setTurn(_: Int)", parameterMatchers: matchers))
+	    func setTurn<M1: Cuckoo.Matchable>(_ turn: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(String)> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: turn) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "setTurn(_: String)", parameterMatchers: matchers))
 	    }
 	    
-	    func setTurnShoots<M1: Cuckoo.Matchable>(_ shoots: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(Int)> where M1.MatchedType == Int {
-	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: shoots) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "setTurnShoots(_: Int)", parameterMatchers: matchers))
+	    func setBangsPlayed<M1: Cuckoo.Matchable>(_ count: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(Int)> where M1.MatchedType == Int {
+	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: count) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "setBangsPlayed(_: Int)", parameterMatchers: matchers))
+	    }
+	    
+	    func setupGeneralStore<M1: Cuckoo.Matchable>(count: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(Int)> where M1.MatchedType == Int {
+	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: count) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "setupGeneralStore(count: Int)", parameterMatchers: matchers))
+	    }
+	    
+	    func pullGeneralStore<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(playerId: M1, cardId: M2) -> Cuckoo.ProtocolStubNoReturnFunction<(String, String)> where M1.MatchedType == String, M2.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: cardId) { $0.1 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "pullGeneralStore(playerId: String, cardId: String)", parameterMatchers: matchers))
 	    }
 	    
 	    func pullHand<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable>(playerId: M1, otherId: M2, cardId: M3) -> Cuckoo.ProtocolStubNoReturnFunction<(String, String, String)> where M1.MatchedType == String, M2.MatchedType == String, M3.MatchedType == String {
@@ -1461,6 +1555,11 @@ import Cuckoo
 	    func eliminate<M1: Cuckoo.Matchable>(playerId: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(String)> where M1.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: playerId) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "eliminate(playerId: String)", parameterMatchers: matchers))
+	    }
+	    
+	    func revealDeck() -> Cuckoo.ProtocolStubNoReturnFunction<()> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "revealDeck()", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -1488,7 +1587,7 @@ import Cuckoo
 	    }
 	    
 	    
-	    var turn: Cuckoo.VerifyReadOnlyProperty<Int> {
+	    var turn: Cuckoo.VerifyReadOnlyProperty<String> {
 	        return .init(manager: cuckoo_manager, name: "turn", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
@@ -1498,8 +1597,13 @@ import Cuckoo
 	    }
 	    
 	    
-	    var turnShoots: Cuckoo.VerifyReadOnlyProperty<Int> {
-	        return .init(manager: cuckoo_manager, name: "turnShoots", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var bangsPlayed: Cuckoo.VerifyReadOnlyProperty<Int> {
+	        return .init(manager: cuckoo_manager, name: "bangsPlayed", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var generalStoreCards: Cuckoo.VerifyReadOnlyProperty<[CardProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "generalStoreCards", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	    
@@ -1549,15 +1653,21 @@ import Cuckoo
 	    }
 	    
 	    @discardableResult
-	    func pullFromDeck<M1: Cuckoo.Matchable>(playerId: M1) -> Cuckoo.__DoNotUse<(String), Void> where M1.MatchedType == String {
+	    func pullDeck<M1: Cuckoo.Matchable>(playerId: M1) -> Cuckoo.__DoNotUse<(String), Void> where M1.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: playerId) { $0 }]
-	        return cuckoo_manager.verify("pullFromDeck(playerId: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("pullDeck(playerId: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
 	    func putInPlay<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(playerId: M1, cardId: M2) -> Cuckoo.__DoNotUse<(String, String), Void> where M1.MatchedType == String, M2.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: cardId) { $0.1 }]
 	        return cuckoo_manager.verify("putInPlay(playerId: String, cardId: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func putInJail<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable>(playerId: M1, cardId: M2, targetId: M3) -> Cuckoo.__DoNotUse<(String, String, String), Void> where M1.MatchedType == String, M2.MatchedType == String, M3.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: cardId) { $0.1 }, wrap(matchable: targetId) { $0.2 }]
+	        return cuckoo_manager.verify("putInJail(playerId: String, cardId: String, targetId: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
@@ -1573,15 +1683,27 @@ import Cuckoo
 	    }
 	    
 	    @discardableResult
-	    func setTurn<M1: Cuckoo.Matchable>(_ turn: M1) -> Cuckoo.__DoNotUse<(Int), Void> where M1.MatchedType == Int {
-	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: turn) { $0 }]
-	        return cuckoo_manager.verify("setTurn(_: Int)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    func setTurn<M1: Cuckoo.Matchable>(_ turn: M1) -> Cuckoo.__DoNotUse<(String), Void> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: turn) { $0 }]
+	        return cuckoo_manager.verify("setTurn(_: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
-	    func setTurnShoots<M1: Cuckoo.Matchable>(_ shoots: M1) -> Cuckoo.__DoNotUse<(Int), Void> where M1.MatchedType == Int {
-	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: shoots) { $0 }]
-	        return cuckoo_manager.verify("setTurnShoots(_: Int)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    func setBangsPlayed<M1: Cuckoo.Matchable>(_ count: M1) -> Cuckoo.__DoNotUse<(Int), Void> where M1.MatchedType == Int {
+	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: count) { $0 }]
+	        return cuckoo_manager.verify("setBangsPlayed(_: Int)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func setupGeneralStore<M1: Cuckoo.Matchable>(count: M1) -> Cuckoo.__DoNotUse<(Int), Void> where M1.MatchedType == Int {
+	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: count) { $0 }]
+	        return cuckoo_manager.verify("setupGeneralStore(count: Int)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func pullGeneralStore<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(playerId: M1, cardId: M2) -> Cuckoo.__DoNotUse<(String, String), Void> where M1.MatchedType == String, M2.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: cardId) { $0.1 }]
+	        return cuckoo_manager.verify("pullGeneralStore(playerId: String, cardId: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
@@ -1608,6 +1730,12 @@ import Cuckoo
 	        return cuckoo_manager.verify("eliminate(playerId: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
+	    @discardableResult
+	    func revealDeck() -> Cuckoo.__DoNotUse<(), Void> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return cuckoo_manager.verify("revealDeck()", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
 	}
 }
 
@@ -1630,9 +1758,9 @@ import Cuckoo
     }
     
     
-     var turn: Int {
+     var turn: String {
         get {
-            return DefaultValueRegistry.defaultValue(for: (Int).self)
+            return DefaultValueRegistry.defaultValue(for: (String).self)
         }
         
     }
@@ -1646,9 +1774,17 @@ import Cuckoo
     }
     
     
-     var turnShoots: Int {
+     var bangsPlayed: Int {
         get {
             return DefaultValueRegistry.defaultValue(for: (Int).self)
+        }
+        
+    }
+    
+    
+     var generalStoreCards: [CardProtocol] {
+        get {
+            return DefaultValueRegistry.defaultValue(for: ([CardProtocol]).self)
         }
         
     }
@@ -1705,11 +1841,15 @@ import Cuckoo
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
-     func pullFromDeck(playerId: String)   {
+     func pullDeck(playerId: String)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
      func putInPlay(playerId: String, cardId: String)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func putInJail(playerId: String, cardId: String, targetId: String)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
@@ -1721,11 +1861,19 @@ import Cuckoo
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
-     func setTurn(_ turn: Int)   {
+     func setTurn(_ turn: String)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
-     func setTurnShoots(_ shoots: Int)   {
+     func setBangsPlayed(_ count: Int)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func setupGeneralStore(count: Int)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func pullGeneralStore(playerId: String, cardId: String)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
@@ -1742,6 +1890,10 @@ import Cuckoo
     }
     
      func eliminate(playerId: String)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func revealDeck()   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     

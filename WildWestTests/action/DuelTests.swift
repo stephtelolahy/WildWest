@@ -9,6 +9,19 @@
 import XCTest
 import Cuckoo
 
+/**
+ Duel
+ With this card you can challenge any other
+ player (staring him in the eyes!), regardless
+ of the distance. The challenged player may discard a BANG!
+ card (even though it is not his turn!). If he does, you may
+ discard a BANG! card, and so on: the first player failing to
+ discard a BANG! card loses one life point, and the duel is
+ over. You cannot play Missed! or use the Barrel during a
+ duel. The Duel is not a BANG! card. BANG! cards discarded
+ during a Duel are not accounted towards the “one BANG!
+ card” limitation.
+ */
 class DuelTests: XCTestCase {
     
     func test_DiscardDuelCard_IfPlayingDuel() {
@@ -55,7 +68,7 @@ class DuelRuleTests: XCTestCase {
         let mockPlayer3 = MockPlayerProtocol().identified(by: "p3")
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
         
         // When

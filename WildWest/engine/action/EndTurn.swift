@@ -12,8 +12,14 @@ struct EndTurn: ActionProtocol, Equatable {
     
     func execute(in state: GameStateProtocol) {
         cardsToDiscardIds.forEach { state.discardHand(playerId: actorId, cardId: $0) }
-        let nextIndex = (state.turn + 1) % state.players.count
-        state.setTurn(nextIndex)
+        
+        guard let turnIndex = state.players.firstIndex(where: { $0.identifier == state.turn }) else {
+            return
+        }
+        
+        let nextIndex = (turnIndex + 1) % state.players.count
+        let nextPlayer = state.players[nextIndex]
+        state.setTurn(nextPlayer.identifier)
         state.setChallenge(.startTurn)
     }
     
@@ -29,14 +35,12 @@ struct EndTurn: ActionProtocol, Equatable {
 struct EndTurnRule: RuleProtocol {
     
     func match(with state: GameStateProtocol) -> [GenericAction]? {
-        guard state.challenge == nil else {
-            return nil
+        guard state.challenge == nil,
+            let actor = state.players.first(where: { $0.identifier == state.turn }) else {
+                return nil
         }
         
-        let actor = state.players[state.turn]
-        
         var options: [EndTurn] = []
-        
         if actor.hand.count <= actor.health {
             options = [EndTurn(actorId: actor.identifier, cardsToDiscardIds: [])]
         } else {

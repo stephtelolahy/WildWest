@@ -21,8 +21,8 @@ class StartTurnTests: XCTestCase {
         
         // Assert
         verify(mockState).setChallenge(isNil())
-        verify(mockState, times(2)).pullFromDeck(playerId: "p1")
-        verify(mockState).setTurnShoots(0)
+        verify(mockState, times(2)).pullDeck(playerId: "p1")
+        verify(mockState).setBangsPlayed(0)
         verifyNoMoreInteractions(mockState)
     }
 }
@@ -32,10 +32,12 @@ class StartTurnRuleTests: XCTestCase {
     func test_ShouldStartTurn_IfChallengeIsStartTurn() {
         // Given
         let sut = StartTurnRule()
-        let player1 = MockPlayerProtocol().identified(by: "p1")
+        let player1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .noCardsInPlay()
         let mockState = MockGameStateProtocol()
-            .currentTurn(is: 0)
-            .players(are: player1, MockPlayerProtocol())
+            .currentTurn(is: "p1")
+            .players(are: player1)
             .challenge(is: .startTurn)
         
         // When
@@ -48,5 +50,23 @@ class StartTurnRuleTests: XCTestCase {
         XCTAssertNil(actions?[0].cardId)
         XCTAssertEqual(actions?[0].options as? [StartTurn], [StartTurn(actorId: "p1")])
         XCTAssertEqual(actions?[0].options[0].description, "p1 start turn")
+    }
+    
+    func test_CannotStartTurn_IfPlayingJail() {
+        // Given
+        let sut = StartTurnRule()
+        let player1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .playing(MockCardProtocol().named(.jail))
+        let mockState = MockGameStateProtocol()
+            .currentTurn(is: "p1")
+            .players(are: player1, MockPlayerProtocol())
+            .challenge(is: .startTurn)
+        
+        // When
+        let actions = sut.match(with: mockState)
+        
+        // Assert
+        XCTAssertNil(actions)
     }
 }

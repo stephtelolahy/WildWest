@@ -17,10 +17,12 @@ class GameSetup: GameSetupProtocol {
         return Array(order.prefix(playersCount))
     }
     
+    // swiftlint:disable function_body_length
     func setupGame(roles: [Role], figures: [FigureProtocol], cards: [CardProtocol]) -> GameStateProtocol {
         let shuffledFigures = figures.shuffled()
-        var deck = cards.shuffled()
-        let players: [Player] = roles.enumerated().map { index, role in
+        let shuffledRoles = roles.shuffled()
+        var shuffledCards = cards.shuffled()
+        let players: [Player] = shuffledRoles.enumerated().map { index, role in
             let figure = shuffledFigures[index]
             var health = figure.bullets
             if role == .sheriff {
@@ -28,7 +30,7 @@ class GameSetup: GameSetupProtocol {
             }
             var hand: [CardProtocol] = []
             while hand.count < health {
-                hand.append(deck.removeFirst())
+                hand.append(shuffledCards.removeFirst())
             }
             return Player(role: role,
                           ability: figure.ability,
@@ -39,19 +41,21 @@ class GameSetup: GameSetupProtocol {
                           inPlay: [])
         }
         
-        var actions: [GenericAction] = []
-        if let sheriff = players.first(where: { $0.role == .sheriff }) {
-            actions.append(GenericAction(name: "startTurn",
-                                         actorId: sheriff.identifier,
-                                         cardId: nil,
-                                         options: [StartTurn(actorId: sheriff.identifier)]))
+        guard let sheriff = players.first(where: { $0.role == .sheriff }) else {
+            fatalError("sheriff not found")
         }
         
+        let actions = [GenericAction(name: "startTurn",
+                                     actorId: sheriff.identifier,
+                                     cardId: nil,
+                                     options: [StartTurn(actorId: sheriff.identifier)])]
+        
         return GameState(players: players,
-                         deck: Deck(cards: deck, discardPile: []),
-                         turn: 0,
+                         deck: Deck(cards: shuffledCards, discardPile: []),
+                         turn: sheriff.identifier,
                          challenge: nil,
-                         turnShoots: 0,
+                         bangsPlayed: 0,
+                         generalStoreCards: [],
                          outcome: nil,
                          actions: actions,
                          commands: [],

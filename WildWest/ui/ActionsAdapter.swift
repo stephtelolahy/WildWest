@@ -26,18 +26,14 @@ class ActionsAdapter: ActionsAdapterProtocol {
     
     func setState(_ state: GameStateProtocol) {
         self.state = state
-        updateItems()
+        items = buildItems()
     }
     
     func setPlayerIdentifier(_ identifier: String?) {
         self.playerIdentifier = identifier
-        updateItems()
-    }
-    
-    private func updateItems() {
         items = buildItems()
     }
-    
+
     private func buildItems() -> [ActionItem] {
         guard let playerIdentifier = self.playerIdentifier,
             let state = self.state,

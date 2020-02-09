@@ -22,4 +22,11 @@ extension MockCardProtocol {
         }
         return self
     }
+    
+    func suit(is suit: CardSuit) -> MockCardProtocol {
+        Cuckoo.stub(self) { mock in
+            when(mock.suit.get).thenReturn(suit)
+        }
+        return self
+    }
 }

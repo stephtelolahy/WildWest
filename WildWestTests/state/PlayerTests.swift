@@ -10,24 +10,19 @@ import XCTest
 
 class PlayerTests: XCTestCase {
     
-    var sut: PlayerProtocol!
-    
-    override func setUp() {
+    func test_InitialProperties() {
         // Given
         let card1 = MockCardProtocol().identified(by: "c1")
         let card2 = MockCardProtocol().identified(by: "c2")
         let card3 = MockCardProtocol().identified(by: "c3")
-        sut = Player(role: .deputy,
-                     ability: .blackJack,
-                     maxHealth: 4,
-                     imageName: "image",
-                     health: 2,
-                     hand: [card1, card2],
-                     inPlay: [card3])
-    }
-    
-    func test_InitialProperties() {
-        // Given
+        let sut = Player(role: .deputy,
+                         ability: .blackJack,
+                         maxHealth: 4,
+                         imageName: "image",
+                         health: 2,
+                         hand: [card1, card2],
+                         inPlay: [card3])
+        
         // When
         // Assert
         XCTAssertEqual(sut.role, .deputy)
@@ -41,6 +36,14 @@ class PlayerTests: XCTestCase {
     
     func test_SetHealth() {
         // Given
+        let sut = Player(role: .deputy,
+                         ability: .blackJack,
+                         maxHealth: 4,
+                         imageName: "",
+                         health: 2,
+                         hand: [],
+                         inPlay: [])
+        
         // When
         sut.setHealth(3)
         
@@ -50,6 +53,14 @@ class PlayerTests: XCTestCase {
     
     func test_PlayerIdentifier_IsAbility() {
         // Given
+        let sut = Player(role: .deputy,
+                         ability: .blackJack,
+                         maxHealth: 4,
+                         imageName: "",
+                         health: 2,
+                         hand: [],
+                         inPlay: [])
+        
         // When
         // Assert
         XCTAssertEqual(sut.identifier, "blackJack")
@@ -60,13 +71,13 @@ class PlayerTests: XCTestCase {
         let card1 = MockCardProtocol().identified(by: "c1")
         let card2 = MockCardProtocol().identified(by: "c2")
         let card3 = MockCardProtocol().identified(by: "c3")
-        sut = Player(role: .renegade,
-                     ability: .willyTheKid,
-                     maxHealth: 4,
-                     imageName: "",
-                     health: 1,
-                     hand: [card1, card2],
-                     inPlay: [])
+        let sut = Player(role: .renegade,
+                         ability: .willyTheKid,
+                         maxHealth: 4,
+                         imageName: "",
+                         health: 1,
+                         hand: [card1, card2],
+                         inPlay: [])
         
         // When
         sut.addHand(card3)
@@ -81,13 +92,13 @@ class PlayerTests: XCTestCase {
         let card1 = MockCardProtocol().identified(by: "c1")
         let card2 = MockCardProtocol().identified(by: "c2")
         let card3 = MockCardProtocol().identified(by: "c3")
-        sut = Player(role: .renegade,
-                     ability: .willyTheKid,
-                     maxHealth: 4,
-                     imageName: "",
-                     health: 1,
-                     hand: [card1, card2, card3],
-                     inPlay: [])
+        let sut = Player(role: .renegade,
+                         ability: .willyTheKid,
+                         maxHealth: 4,
+                         imageName: "",
+                         health: 1,
+                         hand: [card1, card2, card3],
+                         inPlay: [])
         
         // When
         let card = sut.removeHandById("c2")
@@ -102,13 +113,13 @@ class PlayerTests: XCTestCase {
         // Given
         let card1 = MockCardProtocol().identified(by: "c1")
         let card2 = MockCardProtocol().identified(by: "c2")
-        sut = Player(role: .renegade,
-                     ability: .willyTheKid,
-                     maxHealth: 4,
-                     imageName: "",
-                     health: 1,
-                     hand: [card1, card2],
-                     inPlay: [])
+        let sut = Player(role: .renegade,
+                         ability: .willyTheKid,
+                         maxHealth: 4,
+                         imageName: "",
+                         health: 1,
+                         hand: [card1, card2],
+                         inPlay: [])
         
         // When
         let card = sut.removeHandById("c3")
@@ -124,13 +135,13 @@ class PlayerTests: XCTestCase {
         let card1 = MockCardProtocol().identified(by: "c1")
         let card2 = MockCardProtocol().identified(by: "c2")
         let card3 = MockCardProtocol().identified(by: "c3")
-        sut = Player(role: .renegade,
-                     ability: .willyTheKid,
-                     maxHealth: 4,
-                     imageName: "",
-                     health: 1,
-                     hand: [],
-                     inPlay: [card1, card2])
+        let sut = Player(role: .renegade,
+                         ability: .willyTheKid,
+                         maxHealth: 4,
+                         imageName: "",
+                         health: 1,
+                         hand: [],
+                         inPlay: [card1, card2])
         
         // When
         sut.addInPlay(card3)
@@ -145,13 +156,13 @@ class PlayerTests: XCTestCase {
         let card1 = MockCardProtocol().identified(by: "c1")
         let card2 = MockCardProtocol().identified(by: "c2")
         let card3 = MockCardProtocol().identified(by: "c3")
-        sut = Player(role: .renegade,
-                     ability: .willyTheKid,
-                     maxHealth: 4,
-                     imageName: "",
-                     health: 1,
-                     hand: [],
-                     inPlay: [card1, card2, card3])
+        let sut = Player(role: .renegade,
+                         ability: .willyTheKid,
+                         maxHealth: 4,
+                         imageName: "",
+                         health: 1,
+                         hand: [],
+                         inPlay: [card1, card2, card3])
         
         // When
         let card = sut.removeInPlayById("c2")
@@ -166,13 +177,13 @@ class PlayerTests: XCTestCase {
         // Given
         let card1 = MockCardProtocol().identified(by: "c1")
         let card2 = MockCardProtocol().identified(by: "c2")
-        sut = Player(role: .renegade,
-                     ability: .willyTheKid,
-                     maxHealth: 4,
-                     imageName: "",
-                     health: 1,
-                     hand: [],
-                     inPlay: [card1, card2])
+        let sut = Player(role: .renegade,
+                         ability: .willyTheKid,
+                         maxHealth: 4,
+                         imageName: "",
+                         health: 1,
+                         hand: [],
+                         inPlay: [card1, card2])
         
         // When
         let card = sut.removeInPlayById("c3")

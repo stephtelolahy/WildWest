@@ -7,7 +7,6 @@
 //
 
 struct Equip: ActionProtocol, Equatable {
-    
     let actorId: String
     let cardId: String
     
@@ -33,22 +32,24 @@ struct Equip: ActionProtocol, Equatable {
 struct EquipRule: RuleProtocol {
     
     func match(with state: GameStateProtocol) -> [GenericAction]? {
-        guard state.challenge == nil else {
-            return nil
+        guard state.challenge == nil,
+            let actor = state.players.first(where: { $0.identifier == state.turn }) else {
+                return nil
         }
         
-        let actor = state.players[state.turn]
-        let cards = actor.handCards(named: .volcanic,
-                                    .schofield,
-                                    .remington,
-                                    .winchester,
-                                    .revCarbine,
-                                    .barrel,
-                                    .mustang,
-                                    .scope,
-                                    .dynamite)
-            .filter { actor.inPlayCards(named: $0.name).isEmpty }
-        
+        let equipableCardNames: [CardName] = [.volcanic,
+                                              .schofield,
+                                              .remington,
+                                              .winchester,
+                                              .revCarbine,
+                                              .mustang,
+                                              .scope,
+                                              .barrel,
+                                              .dynamite]
+        let cards = actor.hand.filter {
+            equipableCardNames.contains($0.name)
+                && actor.inPlayCards(named: $0.name).isEmpty
+        }
         guard !cards.isEmpty else {
             return nil
         }

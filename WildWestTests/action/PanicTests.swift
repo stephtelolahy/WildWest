@@ -9,6 +9,13 @@
 import XCTest
 import Cuckoo
 
+/**
+ Panic!
+ The symbols state: “Draw
+ a card” from “a player at
+ distance 1”. Remember that this distance is not modified by
+ weapons, but only by cards such as Mustang and/or Scope.
+ */
 class PanicTests: XCTestCase {
     
     func test_PullOtherPlayerHandCard_IfPlayingPanic() {
@@ -61,7 +68,7 @@ class PanicRuleTests: XCTestCase {
         
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
         
         let mockRangeCalculator = MockRangeCalculatorProtocol()
@@ -108,7 +115,7 @@ class PanicRuleTests: XCTestCase {
         
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
         
         let mockRangeCalculator = MockRangeCalculatorProtocol()
@@ -140,7 +147,7 @@ class PanicRuleTests: XCTestCase {
         
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2)
         
         let mockRangeCalculator = MockRangeCalculatorProtocol()
@@ -166,7 +173,7 @@ class PanicRuleTests: XCTestCase {
         
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
-            .currentTurn(is: 0)
+            .currentTurn(is: "p1")
             .players(are: mockPlayer1)
         
         let mockRangeCalculator = MockRangeCalculatorProtocol()
