@@ -12,17 +12,7 @@ struct Missed: ActionProtocol, Equatable {
     
     func execute(in state: GameStateProtocol) {
         state.discardHand(playerId: actorId, cardId: cardId)
-        
-        guard case let .shoot(targetIds) = state.challenge else {
-            return
-        }
-        
-        let remainingTargetIds = targetIds.filter { $0 != actorId }
-        if remainingTargetIds.isEmpty {
-            state.setChallenge(nil)
-        } else {
-            state.setChallenge(.shoot(remainingTargetIds))
-        }
+        state.setChallenge(state.challenge?.removing(actorId))
     }
     
     var description: String {

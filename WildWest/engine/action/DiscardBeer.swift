@@ -8,6 +8,7 @@
 
 struct DiscardBeer: ActionProtocol, Equatable {
     let actorId: String
+    let cardIds: [String]
     
     func execute(in state: GameStateProtocol) {
         

@@ -11,17 +11,7 @@ struct ChooseCard: ActionProtocol, Equatable {
     let cardId: String
     
     func execute(in state: GameStateProtocol) {
-        guard case let .generalStore(playerIds) = state.challenge else {
-            return
-        }
-        
-        let remainingPlayerIds = playerIds.filter { $0 != actorId }
-        if remainingPlayerIds.isEmpty {
-            state.setChallenge(nil)
-        } else {
-            state.setChallenge(.generalStore(remainingPlayerIds))
-        }
-        
+        state.setChallenge(state.challenge?.removing(actorId))
         state.pullGeneralStore(playerId: actorId, cardId: cardId)
     }
     

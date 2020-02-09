@@ -12,6 +12,7 @@ struct Gatling: ActionProtocol, Equatable {
     
     func execute(in state: GameStateProtocol) {
         state.discardHand(playerId: actorId, cardId: cardId)
+        
         guard let actorIndex = state.players.firstIndex(where: { $0.identifier == actorId }) else {
             return
         }
@@ -31,7 +32,7 @@ struct GatlingRule: RuleProtocol {
     func match(with state: GameStateProtocol) -> [GenericAction]? {
         guard state.challenge == nil,
             let actor = state.players.first(where: { $0.identifier == state.turn }) else {
-            return nil
+                return nil
         }
         
         let cards = actor.handCards(named: .gatling)

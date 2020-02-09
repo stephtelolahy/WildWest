@@ -34,7 +34,7 @@ struct EquipRule: RuleProtocol {
     func match(with state: GameStateProtocol) -> [GenericAction]? {
         guard state.challenge == nil,
             let actor = state.players.first(where: { $0.identifier == state.turn }) else {
-            return nil
+                return nil
         }
         
         let cards = actor.handCards(named: .volcanic,
@@ -42,9 +42,9 @@ struct EquipRule: RuleProtocol {
                                     .remington,
                                     .winchester,
                                     .revCarbine,
-                                    .barrel,
                                     .mustang,
                                     .scope,
+                                    .barrel,
                                     .dynamite)
             .filter { actor.inPlayCards(named: $0.name).isEmpty }
         
