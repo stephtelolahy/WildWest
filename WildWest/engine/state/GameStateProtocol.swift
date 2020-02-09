@@ -35,6 +35,7 @@ protocol GameStateProtocol {
     func pullInPlay(playerId: String, otherId: String, cardId: String)
     func looseLifePoint(playerId: String)
     func eliminate(playerId: String)
+    func revealDeck()
 }
 
 enum GameOutcome: String {

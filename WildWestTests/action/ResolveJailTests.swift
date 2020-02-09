@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import Cuckoo
 
 class ResolveJailTests: XCTestCase {
     
@@ -19,17 +20,75 @@ class ResolveJailTests: XCTestCase {
         XCTAssertEqual(sut.description, "p1 resolves c1")
     }
     
-    func test_DiscardJail_AfterResolve() {
-        XCTFail()
+    func test_DiscardJail_IfResolvingJail() {
+        // Given
+        let mockState = MockGameStateProtocol()
+            .withEnabledDefaultImplementation(GameStateProtocolStub())
+            .deck(is: MockDeckProtocol().withEnabledDefaultImplementation(DeckProtocolStub()))
+        let sut = ResolveJail(actorId: "p1", cardId: "c1")
+        
+        // When
+        sut.execute(in: mockState)
+        
+        // Assert
+        verify(mockState).discardInPlay(playerId: "p1", cardId: "c1")
     }
     
+    func test_RevealCardFromDeck_IfResolvingJail() {
+        // Given
+        let mockState = MockGameStateProtocol()
+            .withEnabledDefaultImplementation(GameStateProtocolStub())
+            .deck(is: MockDeckProtocol().withEnabledDefaultImplementation(DeckProtocolStub()))
+        let sut = ResolveJail(actorId: "p1", cardId: "c1")
+        
+        // When
+        sut.execute(in: mockState)
+        
+        // Assert
+        verify(mockState).revealDeck()
+    }
     
     func test_StartTurn_IfReturnHeartFromDeck() {
-        XCTFail()
+        // Given
+        let mockCard = MockCardProtocol().suit(is: .hearts)
+        let mockDeck = MockDeckProtocol()
+        Cuckoo.stub(mockDeck) { mock in
+            when(mock.discardPile.get).thenReturn([mockCard, MockCardProtocol()])
+        }
+        let mockState = MockGameStateProtocol()
+            .withEnabledDefaultImplementation(GameStateProtocolStub())
+            .deck(is: mockDeck)
+            .currentTurn(is: "p1")
+        
+        let sut = ResolveJail(actorId: "p1", cardId: "c1")
+        
+        // When
+        sut.execute(in: mockState)
+        
+        // Assert
+        verify(mockState, never()).setTurn(anyString())
     }
     
     func test_SkipTurn_IfReturnNonHeartFromDeck() {
-        XCTFail()
+        // Given
+        let mockCard = MockCardProtocol().identified(by: "c1").suit(is: .clubs)
+        let mockDeck = MockDeckProtocol()
+        Cuckoo.stub(mockDeck) { mock in
+            when(mock.discardPile.get).thenReturn([mockCard, MockCardProtocol()])
+        }
+        let mockState = MockGameStateProtocol()
+            .withEnabledDefaultImplementation(GameStateProtocolStub())
+            .players(are: MockPlayerProtocol().identified(by: "p1"), MockPlayerProtocol().identified(by: "p2"))
+            .deck(is: mockDeck)
+            .currentTurn(is: "p1")
+        
+        let sut = ResolveJail(actorId: "p1", cardId: "c1")
+        
+        // When
+        sut.execute(in: mockState)
+        
+        // Assert
+        verify(mockState).setTurn("p2")
     }
 }
 

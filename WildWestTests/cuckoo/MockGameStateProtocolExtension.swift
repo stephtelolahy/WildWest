@@ -43,4 +43,11 @@ extension MockGameStateProtocol {
         }
         return self
     }
+    
+    func deck(is deck: DeckProtocol) -> MockGameStateProtocol {
+        Cuckoo.stub(self) { mock in
+            when(mock.deck.get).thenReturn(deck)
+        }
+        return self
+    }
 }

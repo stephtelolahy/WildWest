@@ -1398,6 +1398,21 @@ import Cuckoo
         
     }
     
+    
+    
+     func revealDeck()  {
+        
+    return cuckoo_manager.call("revealDeck()",
+            parameters: (),
+            escapingParameters: (),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.revealDeck())
+        
+    }
+    
 
 	 struct __StubbingProxy_GameStateProtocol: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
@@ -1540,6 +1555,11 @@ import Cuckoo
 	    func eliminate<M1: Cuckoo.Matchable>(playerId: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(String)> where M1.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: playerId) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "eliminate(playerId: String)", parameterMatchers: matchers))
+	    }
+	    
+	    func revealDeck() -> Cuckoo.ProtocolStubNoReturnFunction<()> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameStateProtocol.self, method: "revealDeck()", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -1710,6 +1730,12 @@ import Cuckoo
 	        return cuckoo_manager.verify("eliminate(playerId: String)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
+	    @discardableResult
+	    func revealDeck() -> Cuckoo.__DoNotUse<(), Void> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return cuckoo_manager.verify("revealDeck()", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
 	}
 }
 
@@ -1864,6 +1890,10 @@ import Cuckoo
     }
     
      func eliminate(playerId: String)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func revealDeck()   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     

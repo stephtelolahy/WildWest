@@ -228,6 +228,33 @@ class GameStateTests: XCTestCase {
         verifyNoMoreInteractions(mockPlayer2)
     }
     
+    func test_DiscardCardImmediately_IfRevealingFromDeck() {
+        // Given
+        let mockDeck = MockDeckProtocol()
+        Cuckoo.stub(mockDeck) { mock in
+            when(mock.pull()).thenReturn(MockCardProtocol().identified(by: "c1"))
+            when(mock.addToDiscard(any())).thenDoNothing()
+        }
+        let sut = GameState(players: [],
+                            deck: mockDeck,
+                            turn: "p1",
+                            challenge: nil,
+                            bangsPlayed: 0,
+                            generalStoreCards: [],
+                            outcome: nil,
+                            actions: [],
+                            commands: [],
+                            eliminated: [])
+        
+        // When
+        sut.revealDeck()
+        
+        // Assert
+        verify(mockDeck).pull()
+        verify(mockDeck).addToDiscard(card(identifiedBy: "c1"))
+        verifyNoMoreInteractions(mockDeck)
+    }
+    
     func test_SetTurn() {
         // Given
         let sut = GameState(players: [],

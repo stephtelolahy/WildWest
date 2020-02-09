@@ -84,6 +84,10 @@ class GameState: GameStateProtocol {
         player.addHand(deck.pull())
     }
     
+    func revealDeck() {
+        deck.addToDiscard(deck.pull())
+    }
+    
     func discardHand(playerId: String, cardId: String) {
         guard let player = players.first(where: { $0.identifier == playerId }) else {
             return

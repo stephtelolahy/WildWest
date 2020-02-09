@@ -11,7 +11,14 @@ struct ResolveJail: ActionProtocol, Equatable {
     let cardId: String
     
     func execute(in state: GameStateProtocol) {
-        
+        state.revealDeck()
+        if state.deck.discardPile.first?.suit != .hearts,
+            let turnIndex = state.players.firstIndex(where: { $0.identifier == state.turn }) {
+            let nextIndex = (turnIndex + 1) % state.players.count
+            let nextPlayer = state.players[nextIndex]
+            state.setTurn(nextPlayer.identifier)
+        }
+        state.discardInPlay(playerId: actorId, cardId: cardId)
     }
     
     var description: String {
