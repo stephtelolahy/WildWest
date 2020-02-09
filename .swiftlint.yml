@@ -52,14 +52,14 @@ force_try:
 line_length: 120
 # they can set both implicitly with an array
 type_body_length:
-  - 128 # warning
+  - 64 # warning
   - 256 # error
 # or they can set both explicitly
-#function_body_length: 
-#  - 25 # warning
-#  - 35 # error
+function_body_length: 
+ - 25 # warning
+ - 35 # error
 file_length:
-  warning: 500
+  warning: 100
   error: 1200
 # naming rules can set warnings/errors for min_length and max_length
 # additionally they can set excluded names
