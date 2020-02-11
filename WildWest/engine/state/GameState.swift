@@ -60,16 +60,6 @@ class GameState: GameStateProtocol {
         deck.addToDiscard(deck.pull())
     }
     
-    func discardHand(playerId: String, cardId: String) {
-        guard let player = players.first(where: { $0.identifier == playerId }) else {
-            return
-        }
-        
-        if let card = player.removeHandById(cardId) {
-            deck.addToDiscard(card)
-        }
-    }
-    
     func discardInPlay(playerId: String, cardId: String) {
         guard let player = players.first(where: { $0.identifier == playerId }) else {
             return

@@ -38,8 +38,8 @@ class GameViewController: UIViewController, Subscribable {
         let rules: [RuleProtocol] = [
             BeerRule(),
             SaloonRule(),
-            //            StagecoachRule(),
-            //            WellsFargoRule(),
+                        StagecoachRule(),
+                        WellsFargoRule(),
             //            EquipRule(),
             //            CatBalouRule(),
             //            PanicRule(calculator: calculator),

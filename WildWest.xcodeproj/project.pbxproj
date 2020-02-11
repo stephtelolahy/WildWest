@@ -64,6 +64,12 @@
 		33D964AE23DD907E007295E7 /* ResourcesProviderTests+Figures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D964AD23DD907E007295E7 /* ResourcesProviderTests+Figures.swift */; };
 		33D964B223DD9119007295E7 /* MatcherExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D964B123DD9119007295E7 /* MatcherExtension.swift */; };
 		33D964B523DDDB1E007295E7 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A733F723DC5AC300E9B2AD /* GameEngine.swift */; };
+		33EBF4DC23F34A5300C300A7 /* WellsFargo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49F86E23BA0E3E00543F59 /* WellsFargo.swift */; };
+		33EBF4DD23F34A5400C300A7 /* WellsFargo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49F86E23BA0E3E00543F59 /* WellsFargo.swift */; };
+		33EBF4DE23F34A5700C300A7 /* Stagecoach.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49F86B23BA0C4600543F59 /* Stagecoach.swift */; };
+		33EBF4DF23F34A5800C300A7 /* Stagecoach.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49F86B23BA0C4600543F59 /* Stagecoach.swift */; };
+		33EBF4E023F34A7100C300A7 /* StagecoachTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD48DD2923BEAE1300E5B552 /* StagecoachTests.swift */; };
+		33EBF4E123F34A7400C300A7 /* WellsFargoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD48DD2B23BEAFAF00E5B552 /* WellsFargoTests.swift */; };
 		33F850C723F322CC00D4C18A /* StartTurnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFB62823DCAD1800C96CED /* StartTurnTests.swift */; };
 		33F94AB223F056DA00D1BCFE /* StartTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFB62523DCAC9E00C96CED /* StartTurn.swift */; };
 		33F94AB323F056DA00D1BCFE /* StartTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFB62523DCAC9E00C96CED /* StartTurn.swift */; };
@@ -791,10 +797,12 @@
 				33ABE07223EA097A009A54E4 /* ActionsAdapter.swift in Sources */,
 				332499B323DB9F650082EF09 /* GameViewController.swift in Sources */,
 				AD671A1C23D8F9D600F0AA4A /* CardExtension.swift in Sources */,
+				33EBF4DE23F34A5700C300A7 /* Stagecoach.swift in Sources */,
 				AD52B99C23B17A310013240B /* GameState.swift in Sources */,
 				332499B123DB9F140082EF09 /* PlayerCell.swift in Sources */,
 				33F94AB623F0580800D1BCFE /* GameUpdateProtocol.swift in Sources */,
 				33F94AB223F056DA00D1BCFE /* StartTurn.swift in Sources */,
+				33EBF4DC23F34A5300C300A7 /* WellsFargo.swift in Sources */,
 				3319255223F31A7C00416FFB /* ActionsViewController.swift in Sources */,
 				33D477E723E4F9E300E232D9 /* RangeCalculatorProtocol.swift in Sources */,
 				33ABE07023E9DA5B009A54E4 /* ActionCell.swift in Sources */,
@@ -829,6 +837,7 @@
 				335A147423F312F700D9971E /* MutableGameState.swift in Sources */,
 				AD7F34B923D79841001B4072 /* MockCardProtocolExtension.swift in Sources */,
 				AD7EAFBF23D7846D00FE23D5 /* GameSetupTests.swift in Sources */,
+				33EBF4E023F34A7100C300A7 /* StagecoachTests.swift in Sources */,
 				ADD035D923A9604F003B2576 /* GameStateProtocol.swift in Sources */,
 				AD36CDDE23C51EFA008D4EDB /* ResourcesProvider.swift in Sources */,
 				33ABE07323EA097A009A54E4 /* ActionsAdapter.swift in Sources */,
@@ -840,6 +849,7 @@
 				AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */,
 				3302906023F32AC20099C438 /* Beer.swift in Sources */,
 				33D477ED23E55AFA00E232D9 /* RangeCalculatorTests.swift in Sources */,
+				33EBF4E123F34A7400C300A7 /* WellsFargoTests.swift in Sources */,
 				3319255523F31CC600416FFB /* DiscardableCard.swift in Sources */,
 				33D964AC23DD9049007295E7 /* ResourcesProviderTests+Cards.swift in Sources */,
 				33D964AE23DD907E007295E7 /* ResourcesProviderTests+Figures.swift in Sources */,
@@ -865,8 +875,10 @@
 				ADE91AD523BA00DC00F7316B /* GameSetup.swift in Sources */,
 				AD52B99423B175110013240B /* Card.swift in Sources */,
 				3302905F23F32ABE0099C438 /* BeerTests.swift in Sources */,
+				33EBF4DD23F34A5400C300A7 /* WellsFargo.swift in Sources */,
 				AD671A1D23D8F9D600F0AA4A /* CardExtension.swift in Sources */,
 				3395258723E37D3E003DE948 /* ResourcesProviderProtocol.swift in Sources */,
+				33EBF4DF23F34A5800C300A7 /* Stagecoach.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

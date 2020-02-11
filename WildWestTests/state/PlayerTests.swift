@@ -10,30 +10,6 @@ import XCTest
 
 class PlayerTests: XCTestCase {
     
-    func test_InitialProperties() {
-        // Given
-        let card1 = MockCardProtocol().identified(by: "c1")
-        let card2 = MockCardProtocol().identified(by: "c2")
-        let card3 = MockCardProtocol().identified(by: "c3")
-        let sut = Player(role: .deputy,
-                         ability: .blackJack,
-                         maxHealth: 4,
-                         imageName: "image",
-                         health: 2,
-                         hand: [card1, card2],
-                         inPlay: [card3])
-        
-        // When
-        // Assert
-        XCTAssertEqual(sut.role, .deputy)
-        XCTAssertEqual(sut.ability, .blackJack)
-        XCTAssertEqual(sut.imageName, "image")
-        XCTAssertEqual(sut.maxHealth, 4)
-        XCTAssertEqual(sut.health, 2)
-        XCTAssertEqual(sut.hand.map { $0.identifier }, ["c1", "c2"])
-        XCTAssertEqual(sut.inPlay.map { $0.identifier }, ["c3"])
-    }
-    
     func test_SetHealth() {
         // Given
         let sut = Player(role: .deputy,
@@ -84,49 +60,6 @@ class PlayerTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(sut.hand.map { $0.identifier }, ["c1", "c2", "c3"])
-        XCTAssertTrue(sut.inPlay.isEmpty)
-    }
-    
-    func test_ReturnCard_IfRemovingHandById() {
-        // Given
-        let card1 = MockCardProtocol().identified(by: "c1")
-        let card2 = MockCardProtocol().identified(by: "c2")
-        let card3 = MockCardProtocol().identified(by: "c3")
-        let sut = Player(role: .renegade,
-                         ability: .willyTheKid,
-                         maxHealth: 4,
-                         imageName: "",
-                         health: 1,
-                         hand: [card1, card2, card3],
-                         inPlay: [])
-        
-        // When
-        let card = sut.removeHandById("c2")
-        
-        // Assert
-        XCTAssertEqual(card?.identifier, "c2")
-        XCTAssertEqual(sut.hand.map { $0.identifier }, ["c1", "c3"])
-        XCTAssertTrue(sut.inPlay.isEmpty)
-    }
-    
-    func test_ReturnNil_IfHandCardToRemoveIsNotFound() {
-        // Given
-        let card1 = MockCardProtocol().identified(by: "c1")
-        let card2 = MockCardProtocol().identified(by: "c2")
-        let sut = Player(role: .renegade,
-                         ability: .willyTheKid,
-                         maxHealth: 4,
-                         imageName: "",
-                         health: 1,
-                         hand: [card1, card2],
-                         inPlay: [])
-        
-        // When
-        let card = sut.removeHandById("c3")
-        
-        // Assert
-        XCTAssertNil(card)
-        XCTAssertEqual(sut.hand.map { $0.identifier }, ["c1", "c2"])
         XCTAssertTrue(sut.inPlay.isEmpty)
     }
     

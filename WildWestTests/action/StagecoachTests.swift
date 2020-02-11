@@ -14,18 +14,28 @@ import Cuckoo
 ///
 class StagecoachTests: XCTestCase {
     
+    func test_stagecoachDescription() {
+        // Given
+        let sut = Stagecoach(actorId: "p1", cardId: "c1")
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.description, "p1 plays c1")
+    }
+    
     func test_Pull2Cards_IfPlayingStagecoach() {
         // Given
         let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
         let sut = Stagecoach(actorId: "p1", cardId: "c1")
         
         // When
-        sut.execute(in: mockState)
+        let updates = sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
-        verify(mockState, times(2)).pullDeck(playerId: "p1")
-        verifyNoMoreInteractions(mockState)
+        XCTAssertEqual(updates as? [GameUpdate], [
+            .playerDiscardHand("p1", "c1"),
+            .playerPullCardFromDeck("p1"),
+            .playerPullCardFromDeck("p1")])
     }   
 }
 
@@ -49,11 +59,6 @@ class StagecoachRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions?.count, 1)
-        XCTAssertEqual(actions?[0].name, "stagecoach")
-        XCTAssertEqual(actions?[0].actorId, "p1")
-        XCTAssertEqual(actions?[0].cardId, "c1")
-        XCTAssertEqual(actions?[0].options as? [Stagecoach], [Stagecoach(actorId: "p1", cardId: "c1")])
-        XCTAssertEqual(actions?[0].options[0].description, "p1 plays c1")
+        XCTAssertEqual(actions as? [Stagecoach], [Stagecoach(actorId: "p1", cardId: "c1")])
     }
 }

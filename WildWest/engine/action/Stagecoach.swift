@@ -10,10 +10,13 @@ struct Stagecoach: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
     
-    func execute(in state: GameStateProtocol) {
-        state.discardHand(playerId: actorId, cardId: cardId)
-        state.pullDeck(playerId: actorId)
-        state.pullDeck(playerId: actorId)
+    func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
+        let updates: [GameUpdate] = [
+            .playerDiscardHand(actorId, cardId),
+            .playerPullCardFromDeck(actorId),
+            .playerPullCardFromDeck(actorId)
+        ]
+        return updates
     }
     
     var description: String {
@@ -23,17 +26,13 @@ struct Stagecoach: ActionProtocol, Equatable {
 
 struct StagecoachRule: RuleProtocol {
     
-    func match(with state: GameStateProtocol) -> [GenericAction]? {
+    func match(with state: GameStateProtocol) -> [ActionProtocol]? {
         guard state.challenge == nil,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
             let cards = actor.handCards(named: .stagecoach) else {
                 return nil
         }
         
-        return cards.map { GenericAction(name: $0.name.rawValue,
-                                         actorId: actor.identifier,
-                                         cardId: $0.identifier,
-                                         options: [Stagecoach(actorId: actor.identifier, cardId: $0.identifier)])
-        }
+        return cards.map { Stagecoach(actorId: actor.identifier, cardId: $0.identifier) }
     }
 }
