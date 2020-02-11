@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3302905C23F327AE0099C438 /* Saloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE91AC523B9F84200F7316B /* Saloon.swift */; };
+		3302905D23F327B40099C438 /* SaloonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD48DD3123BEB12800E5B552 /* SaloonTests.swift */; };
+		3302905E23F329780099C438 /* Saloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE91AC523B9F84200F7316B /* Saloon.swift */; };
+		3302905F23F32ABE0099C438 /* BeerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD48DD2F23BEB11800E5B552 /* BeerTests.swift */; };
+		3302906023F32AC20099C438 /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5643423A4E09C00C1BD01 /* Beer.swift */; };
+		3302906123F32AC30099C438 /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5643423A4E09C00C1BD01 /* Beer.swift */; };
 		3319255223F31A7C00416FFB /* ActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3319255123F31A7C00416FFB /* ActionsViewController.swift */; };
 		3319255423F31CC400416FFB /* DiscardableCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3319255323F31CC400416FFB /* DiscardableCard.swift */; };
 		3319255523F31CC600416FFB /* DiscardableCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3319255323F31CC400416FFB /* DiscardableCard.swift */; };
@@ -774,6 +780,7 @@
 				AD52B99923B178CC0013240B /* Player.swift in Sources */,
 				3324018E23DBA6C800B92439 /* UICollectionViewExtension.swift in Sources */,
 				33A4381223E4BD3200C39DD6 /* ArrayExtension.swift in Sources */,
+				3302906123F32AC30099C438 /* Beer.swift in Sources */,
 				336AA6F023F1450800328837 /* MutableGameStateProtocol.swift in Sources */,
 				33A733F823DC5AC300E9B2AD /* GameEngine.swift in Sources */,
 				33AFA25323DC201A00425BEB /* ClassNameProtocol.swift in Sources */,
@@ -797,6 +804,7 @@
 				33ABE07523EA21AC009A54E4 /* PlayersAdapter.swift in Sources */,
 				ADD035CF23A96002003B2576 /* CardProtocol.swift in Sources */,
 				33BA280123F1E9830084A3C9 /* MutableGameState.swift in Sources */,
+				3302905E23F329780099C438 /* Saloon.swift in Sources */,
 				33A733EE23DC4A5300E9B2AD /* Subscribable.swift in Sources */,
 				33BA280323F1EDCE0084A3C9 /* GameUpdate.swift in Sources */,
 				339A294923EFEFE7002C5CD8 /* ChallengeExtension.swift in Sources */,
@@ -811,6 +819,7 @@
 				33BA280423F1EDCE0084A3C9 /* GameUpdate.swift in Sources */,
 				3395258423E37D07003DE948 /* GameSetupProtocol.swift in Sources */,
 				ADD035CD23A95F37003B2576 /* RuleProtocol.swift in Sources */,
+				3302905C23F327AE0099C438 /* Saloon.swift in Sources */,
 				33F850C723F322CC00D4C18A /* StartTurnTests.swift in Sources */,
 				AD49F86823BA054D00543F59 /* Figure.swift in Sources */,
 				AD52B99D23B17A310013240B /* GameState.swift in Sources */,
@@ -829,6 +838,7 @@
 				33A4381323E4BD3200C39DD6 /* ArrayExtension.swift in Sources */,
 				33F94AB723F0580800D1BCFE /* GameUpdateProtocol.swift in Sources */,
 				AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */,
+				3302906023F32AC20099C438 /* Beer.swift in Sources */,
 				33D477ED23E55AFA00E232D9 /* RangeCalculatorTests.swift in Sources */,
 				3319255523F31CC600416FFB /* DiscardableCard.swift in Sources */,
 				33D964AC23DD9049007295E7 /* ResourcesProviderTests+Cards.swift in Sources */,
@@ -838,6 +848,7 @@
 				33F94AB323F056DA00D1BCFE /* StartTurn.swift in Sources */,
 				AD36CDEF23C52306008D4EDB /* CardTests.swift in Sources */,
 				336AA6F123F1450B00328837 /* MutableGameStateProtocol.swift in Sources */,
+				3302905D23F327B40099C438 /* SaloonTests.swift in Sources */,
 				33D477F223E57DE500E232D9 /* FigureProtocol.swift in Sources */,
 				339A295023EFFE70002C5CD8 /* GameStateExtension.swift in Sources */,
 				33D477E823E4F9E300E232D9 /* RangeCalculatorProtocol.swift in Sources */,
@@ -853,6 +864,7 @@
 				AD52B99A23B178CC0013240B /* Player.swift in Sources */,
 				ADE91AD523BA00DC00F7316B /* GameSetup.swift in Sources */,
 				AD52B99423B175110013240B /* Card.swift in Sources */,
+				3302905F23F32ABE0099C438 /* BeerTests.swift in Sources */,
 				AD671A1D23D8F9D600F0AA4A /* CardExtension.swift in Sources */,
 				3395258723E37D3E003DE948 /* ResourcesProviderProtocol.swift in Sources */,
 			);

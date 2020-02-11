@@ -11,6 +11,8 @@ enum GameUpdate: Equatable {
     case setChallenge(Challenge?)
     case setBangsPlayed(Int)
     case playerPullCardFromDeck(String)
+    case playerDiscardHand(String, String)
+    case playerSetHealth(String, Int)
 }
 
 extension GameUpdate: GameUpdateProtocol {
@@ -26,8 +28,16 @@ extension GameUpdate: GameUpdateProtocol {
             state.setBangsPlayed(count)
             
         case let .playerPullCardFromDeck(playerId):
-            let card = state.pullDeck()
-            state.player(playerId, addHandCard: card)
+            let card = state.deckRemoveFirst()
+            state.playerAddHandCard(playerId, card)
+            
+        case let .playerDiscardHand(playerId, cardId):
+            if let card = state.playerRemoveHandCard(playerId, cardId) {
+                state.addDiscard(card)
+            }
+            
+        case let .playerSetHealth(playerId, health):
+            state.playerSetHealth(playerId, health)
         }
     }
 }

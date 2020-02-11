@@ -34,18 +34,31 @@ import Cuckoo
  */
 class BeerTests: XCTestCase {
     
-    func test_GainLifePoint_IfPlayingBeer() {
+    func test_BeerDescription() {
         // Given
-        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
         let sut = Beer(actorId: "p1", cardId: "c1")
         
         // When
-        sut.execute(in: mockState)
+        // Assert
+        XCTAssertEqual(sut.description, "p1 plays c1")
+    }
+    
+    
+    func test_GainLifePoint_IfPlayingBeer() {
+        // Given
+        let mockState = MockGameStateProtocol()
+            .withEnabledDefaultImplementation(GameStateProtocolStub())
+            .players(are: MockPlayerProtocol().identified(by: "p1").health(is: 3))
+        let sut = Beer(actorId: "p1", cardId: "c1")
+        
+        // When
+        let updates = sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
-        verify(mockState).gainLifePoint(playerId: "p1")
-        verifyNoMoreInteractions(mockState)
+        XCTAssertEqual(updates as? [GameUpdate], [
+            .playerDiscardHand("p1", "c1"),
+            .playerSetHealth("p1", 4)
+        ])
     }
 }
 
@@ -71,12 +84,7 @@ class BeerRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions?.count, 1)
-        XCTAssertEqual(actions?[0].name, "beer")
-        XCTAssertEqual(actions?[0].actorId, "p1")
-        XCTAssertEqual(actions?[0].cardId, "c1")
-        XCTAssertEqual(actions?[0].options as? [Beer], [Beer(actorId: "p1", cardId: "c1")])
-        XCTAssertEqual(actions?[0].options[0].description, "p1 plays c1")
+        XCTAssertEqual(actions as? [Beer], [Beer(actorId: "p1", cardId: "c1")])
     }
     
     func test_CannotPlayBeer_IfMaxHealth() {

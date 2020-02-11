@@ -49,7 +49,6 @@ class GameSetup: GameSetupProtocol {
         
         return GameState(players: players,
                          deck: shuffledCards,
-                         discardPile: [],
                          turn: sheriff.identifier,
                          challenge: nil,
                          bangsPlayed: 0,

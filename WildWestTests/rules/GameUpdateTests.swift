@@ -67,7 +67,7 @@ class GameUpdateTests: XCTestCase {
         // Given
         let mockState = MockMutableGameStateProtocol().withEnabledDefaultImplementation(MutableGameStateProtocolStub())
         Cuckoo.stub(mockState) { mock in
-            when(mock.pullDeck()).thenReturn(MockCardProtocol().identified(by: "c1"))
+            when(mock.deckRemoveFirst()).thenReturn(MockCardProtocol().identified(by: "c1"))
         }
         let sut = GameUpdate.playerPullCardFromDeck("p1")
         
@@ -75,8 +75,38 @@ class GameUpdateTests: XCTestCase {
         sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).pullDeck()
-        verify(mockState).player("p1", addHandCard: card(identifiedBy: "c1"))
+        verify(mockState).deckRemoveFirst()
+        verify(mockState).playerAddHandCard("p1", card(identifiedBy: "c1"))
+        verifyNoMoreInteractions(mockState)
+    }
+    
+    func test_playerDiscardHand() {
+        // Given
+        let mockState = MockMutableGameStateProtocol().withEnabledDefaultImplementation(MutableGameStateProtocolStub())
+        Cuckoo.stub(mockState) { mock in
+            when(mock.playerRemoveHandCard("p1", "c1")).thenReturn(MockCardProtocol().identified(by: "cx"))
+        }
+        let sut = GameUpdate.playerDiscardHand("p1", "c1")
+        
+        // When
+        sut.execute(in: mockState)
+        
+        // Assert
+        verify(mockState).playerRemoveHandCard("p1", "c1")
+        verify(mockState).addDiscard(card(identifiedBy: "cx"))
+        verifyNoMoreInteractions(mockState)
+    }
+    
+    func test_playerSetHealth() {
+        // Given
+        let mockState = MockMutableGameStateProtocol().withEnabledDefaultImplementation(MutableGameStateProtocolStub())
+        let sut = GameUpdate.playerSetHealth("p1", 2)
+        
+        // When
+        sut.execute(in: mockState)
+        
+        // Assert
+        verify(mockState).playerSetHealth("p1", 2)
         verifyNoMoreInteractions(mockState)
     }
 }

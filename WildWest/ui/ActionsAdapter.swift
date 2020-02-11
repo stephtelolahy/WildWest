@@ -45,7 +45,7 @@ class ActionsAdapter: ActionsAdapterProtocol {
         
         let actions = state.actions.filter { $0.actorId == playerIdentifier }
         
-        let cardLessActions = actions.filter { $0.cardId == nil }
+        let cardLessActions = actions.filter { $0.cardId.isEmpty }
         if !cardLessActions.isEmpty {
             result.append(ActionItem(card: nil, actions: cardLessActions))
         }

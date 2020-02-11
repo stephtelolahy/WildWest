@@ -36,9 +36,8 @@ class GameViewController: UIViewController, Subscribable {
         
         let calculator = RangeCalculator()
         let rules: [RuleProtocol] = [
-            StartTurnRule()
-            //            BeerRule(),
-            //            SaloonRule(),
+            BeerRule(),
+            SaloonRule(),
             //            StagecoachRule(),
             //            WellsFargoRule(),
             //            EquipRule(),
@@ -59,6 +58,7 @@ class GameViewController: UIViewController, Subscribable {
             //            ResolveJailRule(),
             //            ResolveDynamiteRule(),
             //            DiscardBeerRule()
+            StartTurnRule()
         ]
         return GameEngine(state: state, mutableState: mutableState, rules: rules)
     }()

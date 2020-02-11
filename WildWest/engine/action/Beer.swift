@@ -10,9 +10,15 @@ struct Beer: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
     
-    func execute(in state: GameStateProtocol) {
-        state.discardHand(playerId: actorId, cardId: cardId)
-        state.gainLifePoint(playerId: actorId)
+    func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
+        guard let player = state.players.first(where: { $0.identifier == actorId }) else {
+            return []
+        }
+        
+        let updates: [GameUpdate] = [
+            .playerDiscardHand(actorId, cardId),
+            .playerSetHealth(actorId, player.health + 1)]
+        return updates
     }
     
     var description: String {
@@ -22,7 +28,7 @@ struct Beer: ActionProtocol, Equatable {
 
 struct BeerRule: RuleProtocol {
     
-    func match(with state: GameStateProtocol) -> [GenericAction]? {
+    func match(with state: GameStateProtocol) -> [ActionProtocol]? {
         guard state.challenge == nil,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
             let cards = actor.handCards(named: .beer),
@@ -31,10 +37,6 @@ struct BeerRule: RuleProtocol {
                 return nil
         }
         
-        return cards.map { GenericAction(name: $0.name.rawValue,
-                                         actorId: actor.identifier,
-                                         cardId: $0.identifier,
-                                         options: [Beer(actorId: actor.identifier, cardId: $0.identifier)])
-        }
+        return cards.map { Beer(actorId: actor.identifier, cardId: $0.identifier) }
     }
 }

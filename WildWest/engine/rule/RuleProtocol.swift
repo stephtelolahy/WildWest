@@ -12,7 +12,7 @@ protocol RuleProtocol {
 
 protocol ActionProtocol {
     var actorId: String { get }
-    var cardId: String? { get }
+    var cardId: String { get }
     var description: String { get }
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol]

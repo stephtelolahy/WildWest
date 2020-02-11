@@ -8,7 +8,7 @@
 
 struct StartTurn: ActionProtocol, Equatable {
     let actorId: String
-    let cardId: String? = nil
+    let cardId: String = ""
     
     var description: String {
         "\(actorId) starts turn"

@@ -28,11 +28,41 @@ extension GameState: MutableGameStateProtocol {
         self.actions = actions
     }
     
-    func player(_ playerId: String, addHandCard card: CardProtocol) {
-        (players.first(where: { $0.identifier == playerId }) as? Player)?.hand.append(card)
-    }
+    /// Deck
     
-    func pullDeck() -> CardProtocol {
+    func deckRemoveFirst() -> CardProtocol {
         deck.removeFirst()
     }
+    
+    func addDiscard(_ card: CardProtocol) {
+        deck.append(card)
+    }
+    
+    /// Player
+    
+    func playerAddHandCard(_ playerId: String, _ card: CardProtocol) {
+        guard let player = players.first(where: { $0.identifier == playerId }) as? Player else {
+            return
+        }
+        
+        player.hand.append(card)
+    }
+    
+    func playerRemoveHandCard(_ playerId: String, _ cardId: String) -> CardProtocol? {
+        guard let player = players.first(where: { $0.identifier == playerId }) as? Player,
+            let cardIndex = player.hand.firstIndex(where: { $0.identifier == cardId }) else {
+                return nil
+        }
+        
+        return player.hand.remove(at: cardIndex)
+    }
+    
+    func playerSetHealth(_ playerId: String, _ health: Int) {
+        guard let player = players.first(where: { $0.identifier == playerId }) as? Player else {
+            return
+        }
+        
+        player.health = health
+    }
+    
 }
