@@ -31,17 +31,13 @@ class Player: PlayerProtocol {
         self.hand = hand
         self.inPlay = inPlay
     }
-    
+ 
     var identifier: String {
         return ability.rawValue
     }
-    
+ /*
     func setHealth(_ health: Int) {
         self.health = health
-    }
-    
-    func addHand(_ card: CardProtocol) {
-        hand.append(card)
     }
     
     func removeHandById(_ cardId: String) -> CardProtocol? {
@@ -67,4 +63,5 @@ class Player: PlayerProtocol {
         inPlay.remove(at: index)
         return card
     }
+ */
 }

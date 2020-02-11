@@ -12,25 +12,26 @@ class GameEngine: GameEngineProtocol {
     
     let stateSubject: BehaviorSubject<GameStateProtocol>
     
+    private let state: GameStateProtocol
+    private let mutableState: MutableGameStateProtocol
     private let rules: [RuleProtocol]
     
-    init(state: GameStateProtocol, rules: [RuleProtocol]) {
-        stateSubject = BehaviorSubject(value: state)
+    init(state: GameStateProtocol, mutableState: MutableGameStateProtocol, rules: [RuleProtocol]) {
+        self.state = state
+        self.mutableState = mutableState
         self.rules = rules
+        stateSubject = BehaviorSubject(value: state)
     }
     
-    func execute(_ action: ActionProtocol) {
-        guard let state = try? stateSubject.value() else {
-            return
-        }
-        
-        action.execute(in: state)
-        state.addCommand(action)
-        state.setActions(actions(matching: state))
+    func execute(_ command: ActionProtocol) {
+        let updates = command.execute(in: state)
+        updates.forEach { $0.execute(in: mutableState) }
+        mutableState.addCommand(command)
+        mutableState.setActions(actions(matching: state))
         stateSubject.onNext(state)
     }
     
-    private func actions(matching state: GameStateProtocol) -> [GenericAction] {
+    private func actions(matching state: GameStateProtocol) -> [ActionProtocol] {
         guard state.outcome == nil else {
             return []
         }

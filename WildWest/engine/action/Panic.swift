@@ -6,10 +6,6 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-enum CardSource: Equatable {
-    case hand, inPlay
-}
-
 struct Panic: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String

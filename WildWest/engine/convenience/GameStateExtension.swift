@@ -6,8 +6,6 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-typealias DiscardableCard = (cardId: String, ownerId: String, source: CardSource)
-
 extension GameStateProtocol {
     
     func discardableCards(from actor: PlayerProtocol, and otherPlayers: [PlayerProtocol]) -> [DiscardableCard] {

@@ -11,19 +11,29 @@ import Cuckoo
 
 class StartTurnTests: XCTestCase {
     
-    func test_Pull2CardsFromDeck_IfStartingTurn() {
+    func test_StartTurnDescription() {
         // Given
-        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
         let sut = StartTurn(actorId: "p1")
         
         // When
-        sut.execute(in: mockState)
+        // Assert
+        XCTAssertEqual(sut.description, "p1 starts turn")
+    }
+    
+    func test_Pull2CardsFromDeck_IfStartingTurn() {
+        // Given
+        let sut = StartTurn(actorId: "p1")
+        
+        // When
+        let updates = sut.execute(in: MockGameStateProtocol())
         
         // Assert
-        verify(mockState).setChallenge(isNil())
-        verify(mockState, times(2)).pullDeck(playerId: "p1")
-        verify(mockState).setBangsPlayed(0)
-        verifyNoMoreInteractions(mockState)
+        XCTAssertEqual(updates as? [GameUpdate], [
+            .setChallenge(nil),
+            .setBangsPlayed(0),
+            .playerPullCardFromDeck("p1"),
+            .playerPullCardFromDeck("p1")
+        ])
     }
 }
 
@@ -44,12 +54,7 @@ class StartTurnRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions?.count, 1)
-        XCTAssertEqual(actions?[0].name, "startTurn")
-        XCTAssertEqual(actions?[0].actorId, "p1")
-        XCTAssertNil(actions?[0].cardId)
-        XCTAssertEqual(actions?[0].options as? [StartTurn], [StartTurn(actorId: "p1")])
-        XCTAssertEqual(actions?[0].options[0].description, "p1 start turn")
+        XCTAssertEqual(actions as? [StartTurn], [StartTurn(actorId: "p1")])
     }
     
     func test_CannotStartTurn_IfPlayingJail() {

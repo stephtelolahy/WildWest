@@ -15,12 +15,6 @@ protocol PlayerProtocol {
     var hand: [CardProtocol] { get }
     var inPlay: [CardProtocol] { get }
     var imageName: String { get }
-    
-    func setHealth(_ value: Int)
-    func addHand(_ card: CardProtocol)
-    func removeHandById(_ cardId: String) -> CardProtocol?
-    func addInPlay(_ card: CardProtocol)
-    func removeInPlayById(_ cardId: String) -> CardProtocol?
 }
 
 enum Role: String, Decodable {

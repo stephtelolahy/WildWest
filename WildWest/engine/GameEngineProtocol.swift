@@ -11,5 +11,5 @@ import RxSwift
 protocol GameEngineProtocol {
     var stateSubject: BehaviorSubject<GameStateProtocol> { get }
     
-    func execute(_ action: ActionProtocol)
+    func execute(_ command: ActionProtocol)
 }

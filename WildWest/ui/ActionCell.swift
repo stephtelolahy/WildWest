@@ -23,10 +23,10 @@ class ActionCell: UICollectionViewCell {
             infoLabel.text = "\(card.value) \(card.suit.string)"
         } else {
             cardImageView.image = nil
-            infoLabel.text = item.action?.name
+            infoLabel.text = "unknown"
         }
         
-        cardImageView.alpha = item.action != nil ? 1.0 : 0.4
+        cardImageView.alpha = !item.actions.isEmpty ? 1.0 : 0.4
     }
 }
 

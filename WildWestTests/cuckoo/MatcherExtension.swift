@@ -20,15 +20,33 @@ func cards(identifiedBy identifiers: [String]) -> ParameterMatcher<[CardProtocol
     })
 }
 
-func action(describedBy description: String) -> ParameterMatcher<ActionProtocol> {
-    return ParameterMatcher(matchesFunction: { action -> Bool in
-        return action.description == description
-    })
-}
-
 func state(equalTo object: AnyObject) -> ParameterMatcher<GameStateProtocol> {
     return ParameterMatcher(matchesFunction: { state -> Bool in
         return state as AnyObject === object
+    })
+}
+
+func mutableState(equalTo object: AnyObject) -> ParameterMatcher<MutableGameStateProtocol> {
+    return ParameterMatcher(matchesFunction: { state -> Bool in
+        return state as AnyObject === object
+    })
+}
+
+func action(equalTo object: AnyObject) -> ParameterMatcher<ActionProtocol> {
+    return ParameterMatcher(matchesFunction: { action -> Bool in
+        return action as AnyObject === object
+    })
+}
+
+func actions(equalTo array: [AnyObject]) -> ParameterMatcher<[ActionProtocol]> {
+    return ParameterMatcher(matchesFunction: { actions -> Bool in
+        for (index, element) in actions.enumerated() {
+            guard element as AnyObject === array[index] else {
+                return false
+            }
+        }
+        
+        return true
     })
 }
 

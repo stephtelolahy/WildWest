@@ -9,28 +9,31 @@
 class GameState: GameStateProtocol {
     
     var players: [PlayerProtocol]
-    let deck: DeckProtocol
+    var deck: [CardProtocol]
+    var discardPile: [CardProtocol]
     var turn: String
     var challenge: Challenge?
     var bangsPlayed: Int
     var generalStoreCards: [CardProtocol]
     var outcome: GameOutcome?
     var commands: [ActionProtocol]
-    var actions: [GenericAction]
+    var actions: [ActionProtocol]
     var eliminated: [PlayerProtocol]
     
     init(players: [PlayerProtocol],
-         deck: DeckProtocol,
+         deck: [CardProtocol],
+         discardPile: [CardProtocol],
          turn: String,
          challenge: Challenge?,
          bangsPlayed: Int,
          generalStoreCards: [CardProtocol],
          outcome: GameOutcome?,
-         actions: [GenericAction],
+         actions: [ActionProtocol],
          commands: [ActionProtocol],
          eliminated: [PlayerProtocol]) {
         self.players = players
         self.deck = deck
+        self.discardPile = discardPile
         self.turn = turn
         self.challenge = challenge
         self.bangsPlayed = bangsPlayed
@@ -40,27 +43,7 @@ class GameState: GameStateProtocol {
         self.actions = actions
         self.eliminated = eliminated
     }
-    
-    func setActions(_ actions: [GenericAction]) {
-        self.actions = actions
-    }
-    
-    func addCommand(_ action: ActionProtocol) {
-        commands.append(action)
-    }
-    
-    func setChallenge(_ challenge: Challenge?) {
-        self.challenge = challenge
-    }
-    
-    func setTurn(_ turn: String) {
-        self.turn = turn
-    }
-    
-    func setBangsPlayed(_ count: Int) {
-        self.bangsPlayed = count
-    }
-    
+    /*
     func setupGeneralStore(count: Int) {
         generalStoreCards = Array(1...count).map { _ in deck.pull() }
     }
@@ -74,14 +57,6 @@ class GameState: GameStateProtocol {
         let card = generalStoreCards[cardIndex]
         generalStoreCards.remove(at: cardIndex)
         player.addHand(card)
-    }
-    
-    func pullDeck(playerId: String) {
-        guard let player = players.first(where: { $0.identifier == playerId }) else {
-            return
-        }
-        
-        player.addHand(deck.pull())
     }
     
     func revealDeck() {
@@ -209,4 +184,5 @@ class GameState: GameStateProtocol {
         
         return nil
     }
+ */
 }

@@ -30,33 +30,37 @@ class GameViewController: UIViewController, Subscribable {
         let gameSetup = GameSetup()
         let roles = gameSetup.roles(for: 7)
         let state = gameSetup.setupGame(roles: roles, figures: figures, cards: cards)
+        guard let mutableState = state as? MutableGameStateProtocol else {
+            fatalError("Unmutable state")
+        }
+        
         let calculator = RangeCalculator()
         let rules: [RuleProtocol] = [
-            BeerRule(),
-            SaloonRule(),
-            StagecoachRule(),
-            WellsFargoRule(),
-            EquipRule(),
-            CatBalouRule(),
-            PanicRule(calculator: calculator),
-            ShootRule(calculator: calculator),
-            MissedRule(),
-            GatlingRule(),
-            IndiansRule(),
-            JailRule(),
-            GeneralStoreRule(),
-            DiscardBangRule(),
-            DuelRule(),
-            LooseLifeRule(),
-            StartTurnRule(),
-            EndTurnRule(),
-            ResolveBarrelRule(),
-            ChooseCardRule(),
-            ResolveJailRule(),
-            ResolveDynamiteRule(),
-            DiscardBeerRule()
+            StartTurnRule()
+            //            BeerRule(),
+            //            SaloonRule(),
+            //            StagecoachRule(),
+            //            WellsFargoRule(),
+            //            EquipRule(),
+            //            CatBalouRule(),
+            //            PanicRule(calculator: calculator),
+            //            ShootRule(calculator: calculator),
+            //            MissedRule(),
+            //            GatlingRule(),
+            //            IndiansRule(),
+            //            JailRule(),
+            //            GeneralStoreRule(),
+            //            DiscardBangRule(),
+            //            DuelRule(),
+            //            LooseLifeRule(),
+            //            EndTurnRule(),
+            //            ResolveBarrelRule(),
+            //            ChooseCardRule(),
+            //            ResolveJailRule(),
+            //            ResolveDynamiteRule(),
+            //            DiscardBeerRule()
         ]
-        return GameEngine(state: state, rules: rules)
+        return GameEngine(state: state, mutableState: mutableState, rules: rules)
     }()
     
     private var state: GameStateProtocol?
@@ -122,7 +126,7 @@ private extension GameViewController {
         
         if state.actions.count == 1,
             let uniqueAction = state.actions.first {
-            return uniqueAction.name
+            return uniqueAction.description
         }
         
         return "play any card"
@@ -138,16 +142,16 @@ private extension GameViewController {
         playersCollectionViewDidSelectItem(at: indexPath)
     }
     
-    func showOptions(of genericAction: GenericAction) {
-        let alertController = UIAlertController(title: genericAction.name,
+    func showOptions(_ actions: [ActionProtocol]) {
+        let alertController = UIAlertController(title: nil,
                                                 message: nil,
                                                 preferredStyle: .actionSheet)
         
-        genericAction.options.forEach { option in
-            alertController.addAction(UIAlertAction(title: option.description,
+        actions.forEach { action in
+            alertController.addAction(UIAlertAction(title: action.description,
                                                     style: .default,
                                                     handler: { [weak self] _ in
-                                                        self?.engine.execute(option)
+                                                        self?.engine.execute(action)
             }))
         }
         
@@ -218,11 +222,12 @@ extension GameViewController: UICollectionViewDelegate {
     }
     
     private func actionsCollectionViewDidSelectItem(at indexPath: IndexPath) {
-        guard let action = actionsAdapter.items[indexPath.row].action else {
+        let actions = actionsAdapter.items[indexPath.row].actions
+        guard !actions.isEmpty  else {
             return
         }
         
-        showOptions(of: action)
+        showOptions(actions)
     }
 }
 

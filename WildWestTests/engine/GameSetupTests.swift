@@ -88,19 +88,18 @@ class GameSetupTests: XCTestCase {
         // InitialDeckContainsShuffleCards
         let distributedCardIds = state.players.map { $0.hand }.flatMap { $0 }.map { $0.identifier }
         let remainingCardIds = cards.map { $0.identifier }.filter { !distributedCardIds.contains($0) }
-        let deckCardIds = state.deck.cards.map { $0.identifier }
+        let deckCardIds = state.deck.map { $0.identifier }
         XCTAssertTrue(deckCardIds.isShuffed(from: remainingCardIds))
+        XCTAssertTrue(state.discardPile.isEmpty)
         // PlayerInitialHealthIsEqualToFigureBullets
         XCTAssertTrue(state.players.filter { $0.role != .sheriff }.allSatisfy { $0.health == 4 })
-        
         // SheriffStartsTurn
         let sheriff = state.players.first { $0.role == .sheriff }!
         XCTAssertEqual(state.turn, sheriff.identifier)
         // SheriffHasOneAdditionalHealth
         XCTAssertEqual(sheriff.health, 5)
         // Available actions should be only sherif's start turn
-        XCTAssertEqual(state.actions.count, 1)
-        XCTAssertEqual(state.actions[0].options as? [StartTurn], [StartTurn(actorId: sheriff.identifier)])
+        XCTAssertEqual(state.actions as? [StartTurn], [StartTurn(actorId: sheriff.identifier)])
         // Commands is empty
         XCTAssertTrue(state.commands.isEmpty)
     }
