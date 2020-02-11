@@ -17,8 +17,8 @@ struct StartTurn: ActionProtocol, Equatable {
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
         let updates: [GameUpdate] = [.setChallenge(nil),
                                      .setBangsPlayed(0),
-                                     .playerPullCardFromDeck(actorId),
-                                     .playerPullCardFromDeck(actorId)]
+                                     .playerPullFromDeck(actorId),
+                                     .playerPullFromDeck(actorId)]
         return updates
     }
 }

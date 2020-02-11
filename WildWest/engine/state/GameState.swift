@@ -60,42 +60,6 @@ class GameState: GameStateProtocol {
         deck.addToDiscard(deck.pull())
     }
     
-    func discardInPlay(playerId: String, cardId: String) {
-        guard let player = players.first(where: { $0.identifier == playerId }) else {
-            return
-        }
-        
-        if let card = player.removeInPlayById(cardId) {
-            deck.addToDiscard(card)
-        }
-    }
-    
-    func gainLifePoint(playerId: String) {
-        guard let player = players.first(where: { $0.identifier == playerId }) else {
-            return
-        }
-        
-        player.setHealth(player.health + 1)
-    }
-    
-    func looseLifePoint(playerId: String) {
-        guard let player = players.first(where: { $0.identifier == playerId }) else {
-            return
-        }
-        
-        player.setHealth(player.health - 1)
-    }
-    
-    func putInPlay(playerId: String, cardId: String) {
-        guard let player = players.first(where: { $0.identifier == playerId }) else {
-            return
-        }
-        
-        if let card = player.removeHandById(cardId) {
-            player.addInPlay(card)
-        }
-    }
-    
     func putInJail(playerId: String, cardId: String, targetId: String) {
         guard let player = players.first(where: { $0.identifier == playerId }),
             let target = players.first(where: { $0.identifier == targetId })else {

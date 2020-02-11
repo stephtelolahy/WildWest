@@ -8,15 +8,9 @@
 
 import Cuckoo
 
-func card(identifiedBy identifier: String) -> ParameterMatcher<CardProtocol> {
+func card(equalTo object: AnyObject) -> ParameterMatcher<CardProtocol> {
     return ParameterMatcher(matchesFunction: { card -> Bool in
-        return card.identifier == identifier
-    })
-}
-
-func cards(identifiedBy identifiers: [String]) -> ParameterMatcher<[CardProtocol]> {
-    return ParameterMatcher(matchesFunction: { cards -> Bool in
-        return cards.map { $0.identifier } == identifiers
+        return card as AnyObject === object
     })
 }
 

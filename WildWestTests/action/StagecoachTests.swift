@@ -34,8 +34,8 @@ class StagecoachTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
             .playerDiscardHand("p1", "c1"),
-            .playerPullCardFromDeck("p1"),
-            .playerPullCardFromDeck("p1")])
+            .playerPullFromDeck("p1"),
+            .playerPullFromDeck("p1")])
     }   
 }
 

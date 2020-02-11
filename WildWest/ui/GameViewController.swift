@@ -23,6 +23,7 @@ class GameViewController: UIViewController, Subscribable {
     
     // MARK: Properties
     
+    // swiftlint:disable force_cast
     private lazy var engine: GameEngineProtocol = {
         let provider = ResourcesProvider(jsonReader: JsonReader(bundle: Bundle.main))
         let figures = provider.allFigures()
@@ -30,17 +31,14 @@ class GameViewController: UIViewController, Subscribable {
         let gameSetup = GameSetup()
         let roles = gameSetup.roles(for: 7)
         let state = gameSetup.setupGame(roles: roles, figures: figures, cards: cards)
-        guard let mutableState = state as? MutableGameStateProtocol else {
-            fatalError("Unmutable state")
-        }
-        
+        let mutableState = state as! MutableGameStateProtocol
         let calculator = RangeCalculator()
         let rules: [RuleProtocol] = [
             BeerRule(),
             SaloonRule(),
-                        StagecoachRule(),
-                        WellsFargoRule(),
-            //            EquipRule(),
+            StagecoachRule(),
+            WellsFargoRule(),
+            EquipRule(),
             //            CatBalouRule(),
             //            PanicRule(calculator: calculator),
             //            ShootRule(calculator: calculator),

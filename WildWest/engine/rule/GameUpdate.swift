@@ -10,12 +10,15 @@ enum GameUpdate: Equatable {
     case setTurn(String)
     case setChallenge(Challenge?)
     case setBangsPlayed(Int)
-    case playerPullCardFromDeck(String)
+    case playerPullFromDeck(String)
     case playerDiscardHand(String, String)
     case playerSetHealth(String, Int)
+    case playerPutInPlay(String, String)
+    case playerDiscardInPlay(String, String)
 }
 
 extension GameUpdate: GameUpdateProtocol {
+    // swiftlint:disable cyclomatic_complexity
     func execute(in state: MutableGameStateProtocol) {
         switch self {
         case let .setTurn(turn):
@@ -27,17 +30,27 @@ extension GameUpdate: GameUpdateProtocol {
         case let .setBangsPlayed(count):
             state.setBangsPlayed(count)
             
-        case let .playerPullCardFromDeck(playerId):
+        case let .playerPullFromDeck(playerId):
             let card = state.deckRemoveFirst()
-            state.playerAddHandCard(playerId, card)
+            state.playerAddHand(playerId, card)
             
         case let .playerDiscardHand(playerId, cardId):
-            if let card = state.playerRemoveHandCard(playerId, cardId) {
+            if let card = state.playerRemoveHand(playerId, cardId) {
                 state.addDiscard(card)
             }
             
         case let .playerSetHealth(playerId, health):
             state.playerSetHealth(playerId, health)
+            
+        case let .playerPutInPlay(playerId, cardId):
+            if let card = state.playerRemoveHand(playerId, cardId) {
+                state.playerAddInPlay(playerId, card)
+            }
+            
+        case let .playerDiscardInPlay(playerId, cardId):
+            if let card = state.playerRemoveInPlay(playerId, cardId) {
+                state.addDiscard(card)
+            }
         }
     }
 }

@@ -13,8 +13,8 @@ struct Stagecoach: ActionProtocol, Equatable {
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
         let updates: [GameUpdate] = [
             .playerDiscardHand(actorId, cardId),
-            .playerPullCardFromDeck(actorId),
-            .playerPullCardFromDeck(actorId)
+            .playerPullFromDeck(actorId),
+            .playerPullFromDeck(actorId)
         ]
         return updates
     }

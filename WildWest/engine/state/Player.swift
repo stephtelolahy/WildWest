@@ -31,24 +31,8 @@ class Player: PlayerProtocol {
         self.hand = hand
         self.inPlay = inPlay
     }
- 
+    
     var identifier: String {
         return ability.rawValue
     }
- /*
-    
-    func addInPlay(_ card: CardProtocol) {
-        inPlay.append(card)
-    }
-    
-    func removeInPlayById(_ cardId: String) -> CardProtocol? {
-        guard let index = inPlay.firstIndex(where: { $0.identifier == cardId }) else {
-            return nil
-        }
-        
-        let card = inPlay[index]
-        inPlay.remove(at: index)
-        return card
-    }
- */
 }
