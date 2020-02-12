@@ -60,39 +60,6 @@ class GameState: GameStateProtocol {
         deck.addToDiscard(deck.pull())
     }
     
-    func putInJail(playerId: String, cardId: String, targetId: String) {
-        guard let player = players.first(where: { $0.identifier == playerId }),
-            let target = players.first(where: { $0.identifier == targetId })else {
-                return
-        }
-        
-        if let card = player.removeHandById(cardId) {
-            target.addInPlay(card)
-        }
-    }
-    
-    func pullHand(playerId: String, otherId: String, cardId: String) {
-        guard let player = players.first(where: { $0.identifier == playerId }),
-            let other = players.first(where: { $0.identifier == otherId }) else {
-                return
-        }
-        
-        if let card = other.removeHandById(cardId) {
-            player.addHand(card)
-        }
-    }
-    
-    func pullInPlay(playerId: String, otherId: String, cardId: String) {
-        guard let player = players.first(where: { $0.identifier == playerId }),
-            let other = players.first(where: { $0.identifier == otherId }) else {
-                return
-        }
-        
-        if let card = other.removeInPlayById(cardId) {
-            player.addHand(card)
-        }
-    }
-    
     func eliminate(playerId: String) {
         guard let player = players.first(where: { $0.identifier == playerId }),
             let playerIndex = players.firstIndex(where: { $0.identifier == playerId }) else {

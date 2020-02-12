@@ -17,6 +17,7 @@ enum GameUpdate: Equatable {
     case playerDiscardInPlay(String, String)
     case playerPullFromOtherHand(String, String, String)
     case playerPullFromOtherInPlay(String, String, String)
+    case playerPutInPlayOfOther(String, String, String)
 }
 
 extension GameUpdate: GameUpdateProtocol {
@@ -63,6 +64,11 @@ extension GameUpdate: GameUpdateProtocol {
         case let .playerPullFromOtherInPlay(playerId, otherId, cardId):
             if let card = state.playerRemoveInPlay(otherId, cardId) {
                 state.playerAddHand(playerId, card)
+            }
+            
+        case let .playerPutInPlayOfOther(playerId, otherId, cardId):
+            if let card = state.playerRemoveHand(playerId, cardId) {
+                state.playerAddInPlay(otherId, card)
             }
         }
     }

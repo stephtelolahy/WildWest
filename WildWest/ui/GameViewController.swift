@@ -45,7 +45,7 @@ class GameViewController: UIViewController, Subscribable {
             //            MissedRule(),
             //            GatlingRule(),
             //            IndiansRule(),
-            //            JailRule(),
+                        JailRule(),
             //            GeneralStoreRule(),
             //            DiscardBangRule(),
             //            DuelRule(),

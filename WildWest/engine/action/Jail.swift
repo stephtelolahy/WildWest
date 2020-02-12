@@ -11,8 +11,8 @@ struct Jail: ActionProtocol, Equatable {
     let cardId: String
     let targetId: String
     
-    func execute(in state: GameStateProtocol) {
-        state.putInJail(playerId: actorId, cardId: cardId, targetId: targetId)
+    func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
+        [GameUpdate.playerPutInPlayOfOther(actorId, targetId, cardId)]
     }
     
     var description: String {
@@ -21,7 +21,8 @@ struct Jail: ActionProtocol, Equatable {
 }
 
 struct JailRule: RuleProtocol {
-    func match(with state: GameStateProtocol) -> [GenericAction]? {
+    
+    func match(with state: GameStateProtocol) -> [ActionProtocol]? {
         guard state.challenge == nil,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
             let cards = actor.handCards(named: .jail) else {
@@ -43,14 +44,7 @@ struct JailRule: RuleProtocol {
         }
         
         return cards.map { card in
-            let options = otherPlayers.map { Jail(actorId: actor.identifier,
-                                                  cardId: card.identifier,
-                                                  targetId: $0.identifier)
-            }
-            return GenericAction(name: card.name.rawValue,
-                                 actorId: actor.identifier,
-                                 cardId: card.identifier,
-                                 options: options)
-        }
+            otherPlayers.map { Jail(actorId: actor.identifier, cardId: card.identifier, targetId: $0.identifier) }
+        }.flatMap { $0 }
     }
 }

@@ -23,6 +23,9 @@
 		336AA6F023F1450800328837 /* MutableGameStateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* MutableGameStateProtocol.swift */; };
 		336AA6F123F1450B00328837 /* MutableGameStateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* MutableGameStateProtocol.swift */; };
 		336AA6F223F14D4B00328837 /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F2505C23DDDBCC00A0FDD1 /* GameEngineTests.swift */; };
+		3383ABD023F461D20028B4B3 /* Jail.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A0FA23BAB7DD0050E173 /* Jail.swift */; };
+		3383ABD123F461D20028B4B3 /* Jail.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A0FA23BAB7DD0050E173 /* Jail.swift */; };
+		3383ABD223F461E10028B4B3 /* JailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C45DDB23EB15A400B62508 /* JailTests.swift */; };
 		338E39A023F3E3F7002FA99B /* CatBalou.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10F23BAB89C0050E173 /* CatBalou.swift */; };
 		338E39A123F3E3F8002FA99B /* CatBalou.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10F23BAB89C0050E173 /* CatBalou.swift */; };
 		338E39A223F3E3FD002FA99B /* Panic.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10C23BAB8780050E173 /* Panic.swift */; };
@@ -818,6 +821,7 @@
 				ADD035CC23A95F37003B2576 /* RuleProtocol.swift in Sources */,
 				33ABE07523EA21AC009A54E4 /* PlayersAdapter.swift in Sources */,
 				ADD035CF23A96002003B2576 /* CardProtocol.swift in Sources */,
+				3383ABD123F461D20028B4B3 /* Jail.swift in Sources */,
 				33BA280123F1E9830084A3C9 /* MutableGameState.swift in Sources */,
 				33EBF4E323F35A5F00C300A7 /* Equip.swift in Sources */,
 				3302905E23F329780099C438 /* Saloon.swift in Sources */,
@@ -833,6 +837,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				338E39A323F3E3FE002FA99B /* Panic.swift in Sources */,
+				3383ABD223F461E10028B4B3 /* JailTests.swift in Sources */,
 				33BA280423F1EDCE0084A3C9 /* GameUpdate.swift in Sources */,
 				3395258423E37D07003DE948 /* GameSetupProtocol.swift in Sources */,
 				ADD035CD23A95F37003B2576 /* RuleProtocol.swift in Sources */,
@@ -859,6 +864,7 @@
 				338E39A123F3E3F8002FA99B /* CatBalou.swift in Sources */,
 				33A4381323E4BD3200C39DD6 /* ArrayExtension.swift in Sources */,
 				33F94AB723F0580800D1BCFE /* GameUpdateProtocol.swift in Sources */,
+				3383ABD023F461D20028B4B3 /* Jail.swift in Sources */,
 				AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */,
 				3302906023F32AC20099C438 /* Beer.swift in Sources */,
 				33D477ED23E55AFA00E232D9 /* RangeCalculatorTests.swift in Sources */,
