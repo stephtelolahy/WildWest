@@ -23,6 +23,12 @@
 		336AA6F023F1450800328837 /* MutableGameStateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* MutableGameStateProtocol.swift */; };
 		336AA6F123F1450B00328837 /* MutableGameStateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* MutableGameStateProtocol.swift */; };
 		336AA6F223F14D4B00328837 /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F2505C23DDDBCC00A0FDD1 /* GameEngineTests.swift */; };
+		338E39A023F3E3F7002FA99B /* CatBalou.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10F23BAB89C0050E173 /* CatBalou.swift */; };
+		338E39A123F3E3F8002FA99B /* CatBalou.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10F23BAB89C0050E173 /* CatBalou.swift */; };
+		338E39A223F3E3FD002FA99B /* Panic.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10C23BAB8780050E173 /* Panic.swift */; };
+		338E39A323F3E3FE002FA99B /* Panic.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10C23BAB8780050E173 /* Panic.swift */; };
+		338E39A523F3E409002FA99B /* PanicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A4381623E4C1FD00C39DD6 /* PanicTests.swift */; };
+		338E39A623F3EB59002FA99B /* CatBalouTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A4380F23E496FF00C39DD6 /* CatBalouTests.swift */; };
 		3395258023E37CCE003DE948 /* GameEngineProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3395257F23E37CCE003DE948 /* GameEngineProtocol.swift */; };
 		3395258123E37CCE003DE948 /* GameEngineProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3395257F23E37CCE003DE948 /* GameEngineProtocol.swift */; };
 		3395258323E37D07003DE948 /* GameSetupProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3395258223E37D07003DE948 /* GameSetupProtocol.swift */; };
@@ -383,14 +389,14 @@
 				AD49F86B23BA0C4600543F59 /* Stagecoach.swift */,
 				AD49F86E23BA0E3E00543F59 /* WellsFargo.swift */,
 				ADB5A0F423BAB29C0050E173 /* Equip.swift */,
+				ADB5A10C23BAB8780050E173 /* Panic.swift */,
+				ADB5A10F23BAB89C0050E173 /* CatBalou.swift */,
 				ADB5A0FA23BAB7DD0050E173 /* Jail.swift */,
 				ADB5A0FD23BAB8070050E173 /* Shoot.swift */,
 				ADB5A10023BAB81E0050E173 /* Missed.swift */,
 				ADB5A10623BAB84E0050E173 /* Gatling.swift */,
 				ADB5A10923BAB8630050E173 /* Indians.swift */,
 				ADB5A10323BAB8370050E173 /* Duel.swift */,
-				ADB5A10C23BAB8780050E173 /* Panic.swift */,
-				ADB5A10F23BAB89C0050E173 /* CatBalou.swift */,
 				ADB5A11223BAB9330050E173 /* GeneralStore.swift */,
 				33AFB62523DCAC9E00C96CED /* StartTurn.swift */,
 				ADB5A11523BABBE80050E173 /* EndTurn.swift */,
@@ -451,15 +457,15 @@
 		AD48DD2823BEABD100E5B552 /* action */ = {
 			isa = PBXGroup;
 			children = (
+				33AFB62823DCAD1800C96CED /* StartTurnTests.swift */,
 				AD48DD2F23BEB11800E5B552 /* BeerTests.swift */,
 				AD48DD3123BEB12800E5B552 /* SaloonTests.swift */,
 				AD48DD2923BEAE1300E5B552 /* StagecoachTests.swift */,
 				AD48DD2B23BEAFAF00E5B552 /* WellsFargoTests.swift */,
 				AD48DD2D23BEB06600E5B552 /* EquipTests.swift */,
-				33AFB62823DCAD1800C96CED /* StartTurnTests.swift */,
-				33B7DFA523E20BDD0051718E /* EndTurnTests.swift */,
-				33A4380F23E496FF00C39DD6 /* CatBalouTests.swift */,
 				33A4381623E4C1FD00C39DD6 /* PanicTests.swift */,
+				33A4380F23E496FF00C39DD6 /* CatBalouTests.swift */,
+				33B7DFA523E20BDD0051718E /* EndTurnTests.swift */,
 				33A1410C23E5CFE800E40AA8 /* ShootTest.swift */,
 				33AE8F5823E6303B00DC2A41 /* MissedTests.swift */,
 				33B04DBF23E6ED7C006636F5 /* GatlingTests.swift */,
@@ -788,6 +794,7 @@
 				3302906123F32AC30099C438 /* Beer.swift in Sources */,
 				336AA6F023F1450800328837 /* MutableGameStateProtocol.swift in Sources */,
 				33A733F823DC5AC300E9B2AD /* GameEngine.swift in Sources */,
+				338E39A223F3E3FD002FA99B /* Panic.swift in Sources */,
 				33AFA25323DC201A00425BEB /* ClassNameProtocol.swift in Sources */,
 				AD36CDDD23C51EFA008D4EDB /* ResourcesProvider.swift in Sources */,
 				ADD035D823A9604F003B2576 /* GameStateProtocol.swift in Sources */,
@@ -803,6 +810,7 @@
 				33F94AB223F056DA00D1BCFE /* StartTurn.swift in Sources */,
 				33EBF4DC23F34A5300C300A7 /* WellsFargo.swift in Sources */,
 				3319255223F31A7C00416FFB /* ActionsViewController.swift in Sources */,
+				338E39A023F3E3F7002FA99B /* CatBalou.swift in Sources */,
 				33D477E723E4F9E300E232D9 /* RangeCalculatorProtocol.swift in Sources */,
 				33ABE07023E9DA5B009A54E4 /* ActionCell.swift in Sources */,
 				3395258023E37CCE003DE948 /* GameEngineProtocol.swift in Sources */,
@@ -824,6 +832,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				338E39A323F3E3FE002FA99B /* Panic.swift in Sources */,
 				33BA280423F1EDCE0084A3C9 /* GameUpdate.swift in Sources */,
 				3395258423E37D07003DE948 /* GameSetupProtocol.swift in Sources */,
 				ADD035CD23A95F37003B2576 /* RuleProtocol.swift in Sources */,
@@ -844,14 +853,17 @@
 				AD36CDDE23C51EFA008D4EDB /* ResourcesProvider.swift in Sources */,
 				33ABE07323EA097A009A54E4 /* ActionsAdapter.swift in Sources */,
 				33ABE07623EA21AC009A54E4 /* PlayersAdapter.swift in Sources */,
+				338E39A523F3E409002FA99B /* PanicTests.swift in Sources */,
 				336AA6F223F14D4B00328837 /* GameEngineTests.swift in Sources */,
 				33A4381523E4BE8200C39DD6 /* ArrayExtensionTests.swift in Sources */,
+				338E39A123F3E3F8002FA99B /* CatBalou.swift in Sources */,
 				33A4381323E4BD3200C39DD6 /* ArrayExtension.swift in Sources */,
 				33F94AB723F0580800D1BCFE /* GameUpdateProtocol.swift in Sources */,
 				AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */,
 				3302906023F32AC20099C438 /* Beer.swift in Sources */,
 				33D477ED23E55AFA00E232D9 /* RangeCalculatorTests.swift in Sources */,
 				33EBF4E123F34A7400C300A7 /* WellsFargoTests.swift in Sources */,
+				338E39A623F3EB59002FA99B /* CatBalouTests.swift in Sources */,
 				3319255523F31CC600416FFB /* DiscardableCard.swift in Sources */,
 				33D964AC23DD9049007295E7 /* ResourcesProviderTests+Cards.swift in Sources */,
 				33D964AE23DD907E007295E7 /* ResourcesProviderTests+Figures.swift in Sources */,

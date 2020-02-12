@@ -9,28 +9,28 @@
 struct CatBalou: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
-    let targetPlayerId: String
-    let targetCardId: String
-    let targetCardSource: CardSource
+    let target: DiscardableCard
     
-    func execute(in state: GameStateProtocol) {
-        state.discardHand(playerId: actorId, cardId: cardId)
-        switch targetCardSource {
+    func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
+        var updates: [GameUpdate] = []
+        updates.append(.playerDiscardHand(actorId, cardId))
+        switch target.source {
         case .hand:
-            state.discardHand(playerId: targetPlayerId, cardId: targetCardId)
+            updates.append(.playerDiscardHand(target.ownerId, target.cardId))
         case .inPlay:
-            state.discardInPlay(playerId: targetPlayerId, cardId: targetCardId)
+            updates.append(.playerDiscardInPlay(target.ownerId, target.cardId))
         }
+        return updates
     }
     
     var description: String {
-        "\(actorId) plays \(cardId) to discard \(targetCardId) from \(targetPlayerId)'s \(targetCardSource)"
+        "\(actorId) plays \(cardId) to discard \(target.cardId) from \(target.ownerId)'s \(target.source)"
     }
 }
 
 struct CatBalouRule: RuleProtocol {
     
-    func match(with state: GameStateProtocol) -> [GenericAction]? {
+    func match(with state: GameStateProtocol) -> [ActionProtocol]? {
         guard state.challenge == nil,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
             let cards = actor.handCards(named: .catBalou) else {
@@ -38,23 +38,11 @@ struct CatBalouRule: RuleProtocol {
         }
         
         let otherPlayers = state.players.filter { $0.identifier != actor.identifier }
-        let discardableCards = state.discardableCards(from: actor, and: otherPlayers)
-        guard !discardableCards.isEmpty else {
+        guard let discardableCards = state.discardableCards(from: actor, and: otherPlayers) else {
             return nil
         }
-        
         return cards.map { card in
-            let options = discardableCards.map { CatBalou(actorId: actor.identifier,
-                                                          cardId: card.identifier,
-                                                          targetPlayerId: $0.ownerId,
-                                                          targetCardId: $0.cardId,
-                                                          targetCardSource: $0.source)
-            }
-            
-            return GenericAction(name: card.name.rawValue,
-                                 actorId: actor.identifier,
-                                 cardId: card.identifier,
-                                 options: options)
-        }
+            discardableCards.map { CatBalou(actorId: actor.identifier, cardId: card.identifier, target: $0) }
+        }.flatMap { $0 }
     }
 }

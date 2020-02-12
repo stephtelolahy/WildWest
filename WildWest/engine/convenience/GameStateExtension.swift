@@ -8,8 +8,7 @@
 
 extension GameStateProtocol {
     
-    func discardableCards(from actor: PlayerProtocol, and otherPlayers: [PlayerProtocol]) -> [DiscardableCard] {
-        
+    func discardableCards(from actor: PlayerProtocol, and otherPlayers: [PlayerProtocol]) -> [DiscardableCard]? {
         var result: [DiscardableCard] = []
         result += actor.inPlay.map { DiscardableCard(cardId: $0.identifier,
                                                      ownerId: actor.identifier,
@@ -27,6 +26,10 @@ extension GameStateProtocol {
                                                           ownerId: player.identifier,
                                                           source: .inPlay)
             }
+        }
+        
+        guard !result.isEmpty else {
+            return nil
         }
         
         return result

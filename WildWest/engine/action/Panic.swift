@@ -9,22 +9,22 @@
 struct Panic: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
-    let targetPlayerId: String
-    let targetCardId: String
-    let targetCardSource: CardSource
+    let target: DiscardableCard
     
-    func execute(in state: GameStateProtocol) {
-        state.discardHand(playerId: actorId, cardId: cardId)
-        switch targetCardSource {
+    func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
+        var updates: [GameUpdate] = []
+        updates.append(.playerDiscardHand(actorId, cardId))
+        switch target.source {
         case .hand:
-            state.pullHand(playerId: actorId, otherId: targetPlayerId, cardId: targetCardId)
+            updates.append(.playerPullFromOtherHand(actorId, target.ownerId, target.cardId))
         case .inPlay:
-            state.pullInPlay(playerId: actorId, otherId: targetPlayerId, cardId: targetCardId)
+            updates.append(.playerPullFromOtherInPlay(actorId, target.ownerId, target.cardId))
         }
+        return updates
     }
     
     var description: String {
-        "\(actorId) plays \(cardId) to discard \(targetCardId) from \(targetPlayerId)'s \(targetCardSource)"
+        "\(actorId) plays \(cardId) to take \(target.cardId) from \(target.ownerId)'s \(target.source)"
     }
 }
 
@@ -36,7 +36,7 @@ struct PanicRule: RuleProtocol {
         self.calculator = calculator
     }
     
-    func match(with state: GameStateProtocol) -> [GenericAction]? {
+    func match(with state: GameStateProtocol) -> [ActionProtocol]? {
         guard state.challenge == nil,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
             let cards = actor.handCards(named: .panic) else {
@@ -49,24 +49,12 @@ struct PanicRule: RuleProtocol {
                 && calculator.distance(from: actor.identifier, to: $0.identifier, in: state) <= reachableDistance
         }
         
-        let discardableCards = state.discardableCards(from: actor, and: otherPlayers)
-        guard !discardableCards.isEmpty else {
+        guard let discardableCards = state.discardableCards(from: actor, and: otherPlayers) else {
             return nil
         }
         
         return cards.map { card in
-            let options = discardableCards.map { Panic(actorId: actor.identifier,
-                                                       cardId: card.identifier,
-                                                       targetPlayerId: $0.ownerId,
-                                                       targetCardId: $0.cardId,
-                                                       targetCardSource: $0.source)
-            }
-            
-            return GenericAction(name: card.name.rawValue,
-                                 actorId: actor.identifier,
-                                 cardId: card.identifier,
-                                 options: options)
-        }
-        
+            discardableCards.map { Panic(actorId: actor.identifier, cardId: card.identifier, target: $0) }
+        }.flatMap { $0 }
     }
 }

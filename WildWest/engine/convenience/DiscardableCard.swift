@@ -6,8 +6,12 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
+struct DiscardableCard: Equatable {
+    let cardId: String
+    let ownerId: String
+    let source: CardSource
+}
+
 enum CardSource: Equatable {
     case hand, inPlay
 }
-
-typealias DiscardableCard = (cardId: String, ownerId: String, source: CardSource)

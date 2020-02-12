@@ -70,6 +70,15 @@ import Cuckoo
  */
 class EquipTests: XCTestCase {
     
+    func test_EquipDescription() {
+        // Given
+        let sut = Equip(actorId: "p1", cardId: "c1")
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.description, "p1 plays c1")
+    }
+    
     func test_PutCardInPlay_IfEquipping() {
         // Given
         let mockPlayer = MockPlayerProtocol()
