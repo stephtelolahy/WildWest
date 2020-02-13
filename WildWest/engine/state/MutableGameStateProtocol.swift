@@ -12,6 +12,7 @@ protocol MutableGameStateProtocol {
     func setBangsPlayed(_ bangsPlayed: Int)
     func addCommand(_ command: ActionProtocol)
     func setActions(_ actions: [ActionProtocol])
+    func setOutcome(_ outcome: GameOutcome)
     func removePlayer(_ playerId: String) -> PlayerProtocol?
     func addEliminated(_ player: PlayerProtocol)
     
@@ -27,4 +28,7 @@ protocol MutableGameStateProtocol {
     func playerRemoveHand(_ playerId: String, _ cardId: String) -> CardProtocol?
     func playerAddInPlay(_ playerId: String, _ card: CardProtocol)
     func playerRemoveInPlay(_ playerId: String, _ cardId: String) -> CardProtocol?
+    func playerRemoveAllHand(_ playerId: String) -> [CardProtocol]
+    func playerRemoveAllInPlay(_ playerId: String) -> [CardProtocol]
+    
 }

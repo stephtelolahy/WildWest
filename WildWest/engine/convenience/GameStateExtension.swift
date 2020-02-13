@@ -34,4 +34,13 @@ extension GameStateProtocol {
         
         return result
     }
+    
+    var nextTurn: String {
+        guard let turnIndex = players.firstIndex(where: { $0.identifier == turn }) else {
+            return ""
+        }
+        
+        let nextPlayerIndex = (turnIndex + 1) % players.count
+        return players[nextPlayerIndex].identifier
+    }
 }

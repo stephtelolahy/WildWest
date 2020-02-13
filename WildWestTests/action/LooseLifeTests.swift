@@ -13,11 +13,11 @@ class LooseLifeTests: XCTestCase {
     
     func test_LooseLifePointDescription() {
         // Given
-        let sut = LooseLife(actorId: "p1")
+        let sut = LooseLife(actorId: "p1", points: 1)
         
         // When
         // Assert
-        XCTAssertEqual(sut.description, "p1 looses life point")
+        XCTAssertEqual(sut.description, "p1 looses 1 life points")
     }
     
     func test_LooseLifePoint_IfLoosingLifePoint() {
@@ -28,7 +28,7 @@ class LooseLifeTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
             .challenge(is: .shoot(["p1"]))
-        let sut = LooseLife(actorId: "p1")
+        let sut = LooseLife(actorId: "p1", points: 1)
         
         // When
         let updates = sut.execute(in: mockState)
@@ -46,9 +46,10 @@ class LooseLifeTests: XCTestCase {
             .identified(by: "p1")
             .health(is: 1)
         let mockState = MockGameStateProtocol()
+            .currentTurn(is: "px")
             .challenge(is: .shoot(["p1"]))
             .players(are: mockPlayer1, MockPlayerProtocol())
-        let sut = LooseLife(actorId: "p1")
+        let sut = LooseLife(actorId: "p1", points: 1)
         
         // When
         let updates = sut.execute(in: mockState)
@@ -68,7 +69,7 @@ class LooseLifeTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .challenge(is: .shoot(["p1", "p2", "p3"]))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
-        let sut = LooseLife(actorId: "p1")
+        let sut = LooseLife(actorId: "p1", points: 1)
         
         // When
         let updates = sut.execute(in: mockState)
@@ -88,7 +89,7 @@ class LooseLifeTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .challenge(is: .indians(["p1", "p2", "p3"]))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
-        let sut = LooseLife(actorId: "p1")
+        let sut = LooseLife(actorId: "p1", points: 1)
         
         // When
         let updates = sut.execute(in: mockState)
@@ -108,7 +109,7 @@ class LooseLifeTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .challenge(is: .duel(["p1", "p2"]))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
-        let sut = LooseLife(actorId: "p1")
+        let sut = LooseLife(actorId: "p1", points: 1)
         
         // When
         let updates = sut.execute(in: mockState)
@@ -119,6 +120,28 @@ class LooseLifeTests: XCTestCase {
             .setChallenge(nil)
         ])
     }
+    
+    func test_EndTurn_IfTurnPlayerIsEliminated() {
+        // Given
+        let mockState = MockGameStateProtocol()
+            .challenge(is: nil)
+            .currentTurn(is: "p1")
+            .players(are: MockPlayerProtocol().identified(by: "p1").health(is: 1),
+                     MockPlayerProtocol().identified(by: "p2"),
+                     MockPlayerProtocol().identified(by: "p3"))
+        let sut = LooseLife(actorId: "p1", points: 1)
+        
+        // When
+        let updates = sut.execute(in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates as? [GameUpdate], [
+            .eliminatePlayer("p1"),
+            .setTurn("p2"),
+            .setChallenge(.startTurn)
+        ])
+    }
+    
 }
 
 class LooseLifeRuleTests: XCTestCase {
@@ -135,7 +158,7 @@ class LooseLifeRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions as? [LooseLife], [LooseLife(actorId: "p1")])
+        XCTAssertEqual(actions as? [LooseLife], [LooseLife(actorId: "p1", points: 1)])
     }
     
     func test_CanLooseLife_IfChallengedByIndians() {
@@ -150,7 +173,7 @@ class LooseLifeRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions as? [LooseLife], [LooseLife(actorId: "p1")])
+        XCTAssertEqual(actions as? [LooseLife], [LooseLife(actorId: "p1", points: 1)])
     }
     
     func test_CanLooseLife_IfChallengedByDuel() {
@@ -165,6 +188,6 @@ class LooseLifeRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions as? [LooseLife], [LooseLife(actorId: "p1")])
+        XCTAssertEqual(actions as? [LooseLife], [LooseLife(actorId: "p1", points: 1)])
     }
 }

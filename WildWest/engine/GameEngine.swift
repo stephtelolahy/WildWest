@@ -27,6 +27,9 @@ class GameEngine: GameEngineProtocol {
         let updates = command.execute(in: state)
         updates.forEach { $0.execute(in: mutableState) }
         mutableState.addCommand(command)
+        // TODO: compute outcome
+        // if game over end game
+        // else generate actions
         mutableState.setActions(actions(matching: state))
         stateSubject.onNext(state)
     }

@@ -36,6 +36,10 @@ extension GameState: MutableGameStateProtocol {
         eliminated.append(player)
     }
     
+    func setOutcome(_ outcome: GameOutcome) {
+        self.outcome = outcome
+    }
+    
     /// Deck
     
     func deckRemoveFirst() -> CardProtocol {
@@ -74,6 +78,26 @@ extension GameState: MutableGameStateProtocol {
     
     func playerRemoveInPlay(_ playerId: String, _ cardId: String) -> CardProtocol? {
         player(playerId)?.inPlay.removeFirst(where: { $0.identifier == cardId })
+    }
+    
+    func playerRemoveAllHand(_ playerId: String) -> [CardProtocol] {
+        guard let player = player(playerId) else {
+            return []
+        }
+        
+        let cards = player.hand
+        player.hand.removeAll()
+        return cards
+    }
+    
+    func playerRemoveAllInPlay(_ playerId: String) -> [CardProtocol] {
+        guard let player = player(playerId) else {
+            return []
+        }
+        
+        let cards = player.inPlay
+        player.inPlay.removeAll()
+        return cards
     }
 }
 

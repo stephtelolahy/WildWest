@@ -12,8 +12,6 @@
 		3302906023F32AC20099C438 /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5643423A4E09C00C1BD01 /* Beer.swift */; };
 		3302906123F32AC30099C438 /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5643423A4E09C00C1BD01 /* Beer.swift */; };
 		3319255223F31A7C00416FFB /* ActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3319255123F31A7C00416FFB /* ActionsViewController.swift */; };
-		3319255423F31CC400416FFB /* DiscardableCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3319255323F31CC400416FFB /* DiscardableCard.swift */; };
-		3319255523F31CC600416FFB /* DiscardableCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3319255323F31CC400416FFB /* DiscardableCard.swift */; };
 		3322724F23F5CEDE0028933D /* StartTurnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFB62823DCAD1800C96CED /* StartTurnTests.swift */; };
 		3322725023F5CEDE0028933D /* BeerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD48DD2F23BEB11800E5B552 /* BeerTests.swift */; };
 		3322725123F5CEDE0028933D /* SaloonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD48DD3123BEB12800E5B552 /* SaloonTests.swift */; };
@@ -186,7 +184,6 @@
 		102E20EA2AD38505FB9CFBD5 /* libPods-WildWestTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WildWestTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		15EFD4A90888EB671B9B5CF5 /* Pods-WildWestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.debug.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3319255123F31A7C00416FFB /* ActionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionsViewController.swift; sourceTree = "<group>"; };
-		3319255323F31CC400416FFB /* DiscardableCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardableCard.swift; sourceTree = "<group>"; };
 		3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		332499B023DB9F140082EF09 /* PlayerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCell.swift; sourceTree = "<group>"; };
 		332499B223DB9F650082EF09 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -356,7 +353,6 @@
 				AD671A1B23D8F9D600F0AA4A /* CardExtension.swift */,
 				339A294823EFEFE7002C5CD8 /* ChallengeExtension.swift */,
 				339A294E23EFFE70002C5CD8 /* GameStateExtension.swift */,
-				3319255323F31CC400416FFB /* DiscardableCard.swift */,
 			);
 			path = convenience;
 			sourceTree = "<group>";
@@ -881,7 +877,6 @@
 				33BA280323F1EDCE0084A3C9 /* GameUpdate.swift in Sources */,
 				339A294923EFEFE7002C5CD8 /* ChallengeExtension.swift in Sources */,
 				3383AC1123F53BBF0028B4B3 /* ChooseCard.swift in Sources */,
-				3319255423F31CC400416FFB /* DiscardableCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -929,7 +924,6 @@
 				33D477ED23E55AFA00E232D9 /* RangeCalculatorTests.swift in Sources */,
 				3322725923F5CEDE0028933D /* MissedTests.swift in Sources */,
 				3383ABEF23F53B960028B4B3 /* ResolveJail.swift in Sources */,
-				3319255523F31CC600416FFB /* DiscardableCard.swift in Sources */,
 				33D964AC23DD9049007295E7 /* ResourcesProviderTests+Cards.swift in Sources */,
 				33D964AE23DD907E007295E7 /* ResourcesProviderTests+Figures.swift in Sources */,
 				3383ABE923F53B540028B4B3 /* DiscardBeer.swift in Sources */,

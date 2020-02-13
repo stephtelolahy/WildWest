@@ -19,7 +19,7 @@ protocol GameStateProtocol {
     var eliminated: [PlayerProtocol] { get }
 }
 
-enum GameOutcome: String {
+enum GameOutcome: String, Equatable {
     case sheriffWin,
     outlawWin,
     renegadeWin

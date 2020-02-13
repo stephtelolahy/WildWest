@@ -18,11 +18,8 @@ struct ResolveJail: ActionProtocol, Equatable {
         var updates: [GameUpdate] = []
         updates.append(.flipOverFirstDeckCard)
         updates.append(.playerDiscardInPlay(actorId, cardId))
-        if deckCard.suit != .hearts,
-            let turnIndex = state.players.firstIndex(where: { $0.identifier == state.turn }) {
-            let nextIndex = (turnIndex + 1) % state.players.count
-            let nextPlayer = state.players[nextIndex]
-            updates.append(.setTurn(nextPlayer.identifier))
+        if deckCard.suit != .hearts {
+            updates.append(.setTurn(state.nextTurn))
         }
         return updates
     }

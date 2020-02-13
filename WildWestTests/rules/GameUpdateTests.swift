@@ -11,6 +11,19 @@ import Cuckoo
 
 class GameUpdateTests: XCTestCase {
     
+    func test_SetOutcome() {
+        // Given
+        let mockState = MockMutableGameStateProtocol().withEnabledDefaultImplementation(MutableGameStateProtocolStub())
+        let sut = GameUpdate.setOutcome(.outlawWin)
+        
+        // When
+        sut.execute(in: mockState)
+        
+        // Assert
+        verify(mockState).setOutcome(equal(to: .outlawWin))
+        verifyNoMoreInteractions(mockState)
+    }
+    
     func test_SetTurn() {
         // Given
         let mockState = MockMutableGameStateProtocol().withEnabledDefaultImplementation(MutableGameStateProtocolStub())
@@ -242,7 +255,7 @@ class GameUpdateTests: XCTestCase {
         verifyNoMoreInteractions(mockState)
     }
     
-    func test_DiscardCardImmediately_IfRevealingFromDeck() {
+    func test_DiscardFlippedCard_IfRevealingFromDeck() {
         // Given
         let mockState = MockMutableGameStateProtocol().withEnabledDefaultImplementation(MutableGameStateProtocolStub())
         let mockCard = MockCardProtocol()
@@ -260,7 +273,7 @@ class GameUpdateTests: XCTestCase {
         verifyNoMoreInteractions(mockState)
     }
     
-    func test_eliminatePlayer() {
+    func test_RemoveFromActive_IfPlayerEliminated() {
         // Given
         let mockState = MockMutableGameStateProtocol().withEnabledDefaultImplementation(MutableGameStateProtocolStub())
         let mockPlayer = MockPlayerProtocol()
@@ -275,6 +288,32 @@ class GameUpdateTests: XCTestCase {
         // Assert
         verify(mockState).removePlayer("p1")
         verify(mockState).addEliminated(player(equalTo: mockPlayer))
-        verifyNoMoreInteractions(mockState)
+    }
+    
+    func test_DiscardAllCards_IfPlayerEliminated() {
+        // Given
+        let mockState = MockMutableGameStateProtocol().withEnabledDefaultImplementation(MutableGameStateProtocolStub())
+        let mockCard1 = MockCardProtocol()
+        let mockCard2 = MockCardProtocol()
+        let mockCard3 = MockCardProtocol()
+        let mockCard4 = MockCardProtocol()
+        Cuckoo.stub(mockState) { mock in
+            when(mock.playerRemoveAllHand("p1")).thenReturn([mockCard1, mockCard2])
+            when(mock.playerRemoveAllInPlay("p1")).thenReturn([mockCard3, mockCard4])
+        }
+        
+        // Given
+        let sut = GameUpdate.eliminatePlayer("p1")
+        
+        // When
+        sut.execute(in: mockState)
+        
+        // Assert
+        verify(mockState).playerRemoveAllHand("p1")
+        verify(mockState).playerRemoveAllInPlay("p1")
+        verify(mockState).addDiscard(card(equalTo: mockCard1))
+        verify(mockState).addDiscard(card(equalTo: mockCard2))
+        verify(mockState).addDiscard(card(equalTo: mockCard3))
+        verify(mockState).addDiscard(card(equalTo: mockCard4))
     }
 }

@@ -10,6 +10,7 @@ enum GameUpdate: Equatable {
     case setTurn(String)
     case setChallenge(Challenge?)
     case setBangsPlayed(Int)
+    case setOutcome(GameOutcome)
     case playerSetHealth(String, Int)
     case playerPullFromDeck(String)
     case playerDiscardHand(String, String)
@@ -31,6 +32,9 @@ extension GameUpdate: GameUpdateProtocol {
         switch self {
         case let .setTurn(turn):
             state.setTurn(turn)
+            
+        case let .setOutcome(outcome):
+            state.setOutcome(outcome)
             
         case let .setChallenge(challenge):
             state.setChallenge(challenge)
@@ -91,6 +95,8 @@ extension GameUpdate: GameUpdateProtocol {
             state.addDiscard(card)
             
         case let .eliminatePlayer(playerId):
+            let cards = state.playerRemoveAllHand(playerId) + state.playerRemoveAllInPlay(playerId)
+            cards.forEach { state.addDiscard($0) }
             if let player = state.removePlayer(playerId) {
                 state.addEliminated(player)
             }

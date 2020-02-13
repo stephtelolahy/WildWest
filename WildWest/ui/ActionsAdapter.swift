@@ -42,19 +42,14 @@ class ActionsAdapter: ActionsAdapterProtocol {
         }
         
         var result: [ActionItem] = []
-        
-        let actions = state.actions.filter { $0.actorId == playerIdentifier }
-        
-        let cardLessActions = actions.filter { $0.cardId.isEmpty }
-        if !cardLessActions.isEmpty {
-            result.append(ActionItem(card: nil, actions: cardLessActions))
-        }
-        
+        var actions = state.actions.filter { $0.actorId == playerIdentifier }
         player.hand.forEach { card in
-            let cardActions = actions.filter { $0.cardId == card.identifier }
-            result.append(ActionItem(card: card, actions: cardActions))
+            result.append(ActionItem(card: card, actions: actions.filter { $0.cardId == card.identifier }))
+            actions.removeAll(where: { $0.cardId == card.identifier })
         }
-        
+        if !actions.isEmpty {
+            result.insert(ActionItem(card: nil, actions: actions), at: 0)
+        }
         return result
     }
 }

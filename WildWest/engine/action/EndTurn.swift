@@ -12,14 +12,8 @@ struct EndTurn: ActionProtocol, Equatable {
     let cardsToDiscardIds: [String]
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
-        guard let turnIndex = state.players.firstIndex(where: { $0.identifier == state.turn }) else {
-            return []
-        }
-        
         var updates: [GameUpdate] = cardsToDiscardIds.map { GameUpdate.playerDiscardHand(actorId, $0) }
-        let nextIndex = (turnIndex + 1) % state.players.count
-        let nextPlayer = state.players[nextIndex]
-        updates.append(.setTurn(nextPlayer.identifier))
+        updates.append(.setTurn(state.nextTurn))
         updates.append(.setChallenge(.startTurn))
         return updates
     }

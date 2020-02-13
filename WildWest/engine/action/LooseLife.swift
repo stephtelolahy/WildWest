@@ -9,9 +9,10 @@
 struct LooseLife: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String = ""
+    let points: Int
     
     var description: String {
-        "\(actorId) looses life point"
+        "\(actorId) looses \(points) life points"
     }
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
@@ -20,17 +21,22 @@ struct LooseLife: ActionProtocol, Equatable {
         }
         
         var updates: [GameUpdate] = []
-        let health = player.health - 1
+        let health = player.health - points
         if health > 0 {
             updates.append(.playerSetHealth(actorId, health))
-            updates.append(.setChallenge(state.challenge?.removing(actorId)))
-            return updates
+        } else {
+            updates.append(.eliminatePlayer(actorId))
+            if actorId == state.turn {
+                updates.append(.setTurn(state.nextTurn))
+                updates.append(.setChallenge(.startTurn))
+                return updates
+            }
         }
         
-        updates.append(.eliminatePlayer(actorId))
-        // TODO: update outcome
-        // TODO: update turn
-        updates.append(.setChallenge(state.challenge?.removing(actorId)))
+        if let challenge = state.challenge {
+            updates.append(.setChallenge(challenge.removing(actorId)))
+        }
+        
         return updates
     }
 }
@@ -57,6 +63,6 @@ struct LooseLifeRule: RuleProtocol {
             return nil
         }
         
-        return [LooseLife(actorId: actor.identifier)]
+        return [LooseLife(actorId: actor.identifier, points: 1)]
     }
 }

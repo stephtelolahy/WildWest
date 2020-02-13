@@ -41,29 +41,6 @@ class GameState: GameStateProtocol {
         self.eliminated = eliminated
     }
     /*
-    func eliminate(playerId: String) {
-        guard let player = players.first(where: { $0.identifier == playerId }),
-            let playerIndex = players.firstIndex(where: { $0.identifier == playerId }) else {
-                return
-        }
-        
-        player.hand.forEach { discardHand(playerId: playerId, cardId: $0.identifier) }
-        player.inPlay.forEach { discardInPlay(playerId: playerId, cardId: $0.identifier) }
-        
-        // active player is eliminated, update turn and trigger startTurn challenge
-        if playerId == turn {
-            let nextPlayerIndex = (playerIndex + 1) % players.count
-            let nextPlayerId = players[nextPlayerIndex].identifier
-            turn = nextPlayerId
-            challenge = .startTurn
-        }
-        
-        players.remove(at: playerIndex)
-        
-        eliminated.append(player)
-        
-        outcome = Self.calculateOutcome(with: players)
-    }
     
     private static func calculateOutcome(with players: [PlayerProtocol]) -> GameOutcome? {
         let allOutlawsAreEliminated = players.filter { $0.role == .outlaw || $0.role == .renegade }.isEmpty

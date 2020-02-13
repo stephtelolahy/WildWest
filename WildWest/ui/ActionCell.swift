@@ -23,7 +23,7 @@ class ActionCell: UICollectionViewCell {
             infoLabel.text = "\(card.value) \(card.suit.string)"
         } else {
             cardImageView.image = nil
-            infoLabel.text = "unknown"
+            infoLabel.text = "other"
         }
         
         cardImageView.alpha = !item.actions.isEmpty ? 1.0 : 0.4
