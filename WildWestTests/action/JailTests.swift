@@ -35,7 +35,7 @@ class JailTests: XCTestCase {
     
     func test_PutCardInPlayOfTargetPlayer_IfPlayingJail() {
         // Given
-        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
+        let mockState = MockGameStateProtocol()
         let sut = Jail(actorId: "p1", cardId: "c1", targetId: "p2")
         
         // When

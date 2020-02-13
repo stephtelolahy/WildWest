@@ -43,7 +43,6 @@ class SaloonTests: XCTestCase {
             .health(is: 3)
             .maxHealth(is: 3)
         let mockState = MockGameStateProtocol()
-            .withEnabledDefaultImplementation(GameStateProtocolStub())
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
         
         let sut = Saloon(actorId: "p1", cardId: "c1")

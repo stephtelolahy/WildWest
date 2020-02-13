@@ -32,6 +32,18 @@
 		3383ABD623F5312B0028B4B3 /* Missed.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10023BAB81E0050E173 /* Missed.swift */; };
 		3383ABD723F5312B0028B4B3 /* Missed.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10023BAB81E0050E173 /* Missed.swift */; };
 		3383ABD823F531490028B4B3 /* MissedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AE8F5823E6303B00DC2A41 /* MissedTests.swift */; };
+		3383ABD923F5332A0028B4B3 /* Gatling.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10623BAB84E0050E173 /* Gatling.swift */; };
+		3383ABDA23F5332A0028B4B3 /* Gatling.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10623BAB84E0050E173 /* Gatling.swift */; };
+		3383ABDB23F5332F0028B4B3 /* GatlingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B04DBF23E6ED7C006636F5 /* GatlingTests.swift */; };
+		3383ABDC23F533390028B4B3 /* Indians.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10923BAB8630050E173 /* Indians.swift */; };
+		3383ABDD23F533390028B4B3 /* Indians.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10923BAB8630050E173 /* Indians.swift */; };
+		3383ABDE23F5333C0028B4B3 /* Duel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10323BAB8370050E173 /* Duel.swift */; };
+		3383ABDF23F5333D0028B4B3 /* Duel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10323BAB8370050E173 /* Duel.swift */; };
+		3383ABE023F533480028B4B3 /* DiscardBang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EC5D3A23E737E500E14890 /* DiscardBang.swift */; };
+		3383ABE123F533490028B4B3 /* DiscardBang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EC5D3A23E737E500E14890 /* DiscardBang.swift */; };
+		3383ABE223F533540028B4B3 /* DiscardBangTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EC5D3D23E7387F00E14890 /* DiscardBangTests.swift */; };
+		3383ABE323F533660028B4B3 /* DuelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EC5D3F23E7410E00E14890 /* DuelTests.swift */; };
+		3383ABE423F5336D0028B4B3 /* IndiansTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EC5D3823E7362C00E14890 /* IndiansTests.swift */; };
 		338E39A023F3E3F7002FA99B /* CatBalou.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10F23BAB89C0050E173 /* CatBalou.swift */; };
 		338E39A123F3E3F8002FA99B /* CatBalou.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10F23BAB89C0050E173 /* CatBalou.swift */; };
 		338E39A223F3E3FD002FA99B /* Panic.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10C23BAB8780050E173 /* Panic.swift */; };
@@ -406,12 +418,12 @@
 				ADB5A10623BAB84E0050E173 /* Gatling.swift */,
 				ADB5A10923BAB8630050E173 /* Indians.swift */,
 				ADB5A10323BAB8370050E173 /* Duel.swift */,
+				33EC5D3A23E737E500E14890 /* DiscardBang.swift */,
 				ADB5A11223BAB9330050E173 /* GeneralStore.swift */,
+				33C45DD623EB14A100B62508 /* ChooseCard.swift */,
 				33AFB62523DCAC9E00C96CED /* StartTurn.swift */,
 				ADB5A11523BABBE80050E173 /* EndTurn.swift */,
 				33EC5D3323E71C1400E14890 /* LooseLife.swift */,
-				33EC5D3A23E737E500E14890 /* DiscardBang.swift */,
-				33C45DD623EB14A100B62508 /* ChooseCard.swift */,
 				33C45DDD23EB15E900B62508 /* ResolveJail.swift */,
 				33C45DD123EB11EB00B62508 /* ResolveBarrel.swift */,
 				33C45DE223EB176B00B62508 /* ResolveDynamite.swift */,
@@ -796,10 +808,12 @@
 				AD49F86723BA054400543F59 /* Figure.swift in Sources */,
 				AD46810E23BEA2B0000B42C7 /* PlayerExtension.swift in Sources */,
 				339A294F23EFFE70002C5CD8 /* GameStateExtension.swift in Sources */,
+				3383ABE123F533490028B4B3 /* DiscardBang.swift in Sources */,
 				ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */,
 				AD52B99923B178CC0013240B /* Player.swift in Sources */,
 				3324018E23DBA6C800B92439 /* UICollectionViewExtension.swift in Sources */,
 				33A4381223E4BD3200C39DD6 /* ArrayExtension.swift in Sources */,
+				3383ABDA23F5332A0028B4B3 /* Gatling.swift in Sources */,
 				3302906123F32AC30099C438 /* Beer.swift in Sources */,
 				336AA6F023F1450800328837 /* MutableGameStateProtocol.swift in Sources */,
 				33A733F823DC5AC300E9B2AD /* GameEngine.swift in Sources */,
@@ -826,9 +840,11 @@
 				3383ABD423F4657C0028B4B3 /* Shoot.swift in Sources */,
 				AD52B99323B175110013240B /* Card.swift in Sources */,
 				ADD035CC23A95F37003B2576 /* RuleProtocol.swift in Sources */,
+				3383ABDF23F5333D0028B4B3 /* Duel.swift in Sources */,
 				33ABE07523EA21AC009A54E4 /* PlayersAdapter.swift in Sources */,
 				ADD035CF23A96002003B2576 /* CardProtocol.swift in Sources */,
 				3383ABD123F461D20028B4B3 /* Jail.swift in Sources */,
+				3383ABDD23F533390028B4B3 /* Indians.swift in Sources */,
 				33BA280123F1E9830084A3C9 /* MutableGameState.swift in Sources */,
 				33EBF4E323F35A5F00C300A7 /* Equip.swift in Sources */,
 				3302905E23F329780099C438 /* Saloon.swift in Sources */,
@@ -846,16 +862,19 @@
 			files = (
 				338E39A323F3E3FE002FA99B /* Panic.swift in Sources */,
 				3383ABD223F461E10028B4B3 /* JailTests.swift in Sources */,
+				3383ABD923F5332A0028B4B3 /* Gatling.swift in Sources */,
 				33BA280423F1EDCE0084A3C9 /* GameUpdate.swift in Sources */,
 				3395258423E37D07003DE948 /* GameSetupProtocol.swift in Sources */,
 				ADD035CD23A95F37003B2576 /* RuleProtocol.swift in Sources */,
 				3302905C23F327AE0099C438 /* Saloon.swift in Sources */,
 				33F850C723F322CC00D4C18A /* StartTurnTests.swift in Sources */,
+				3383ABDB23F5332F0028B4B3 /* GatlingTests.swift in Sources */,
 				AD49F86823BA054D00543F59 /* Figure.swift in Sources */,
 				AD52B99D23B17A310013240B /* GameState.swift in Sources */,
 				339A294A23EFEFE7002C5CD8 /* ChallengeExtension.swift in Sources */,
 				33EBF4E423F35A9200C300A7 /* EquipTests.swift in Sources */,
 				AD46810F23BEA2B0000B42C7 /* PlayerExtension.swift in Sources */,
+				3383ABE023F533480028B4B3 /* DiscardBang.swift in Sources */,
 				33D964B523DDDB1E007295E7 /* GameEngine.swift in Sources */,
 				33EBF4E223F35A5E00C300A7 /* Equip.swift in Sources */,
 				335A147423F312F700D9971E /* MutableGameState.swift in Sources */,
@@ -890,8 +909,10 @@
 				3302905D23F327B40099C438 /* SaloonTests.swift in Sources */,
 				33D477F223E57DE500E232D9 /* FigureProtocol.swift in Sources */,
 				339A295023EFFE70002C5CD8 /* GameStateExtension.swift in Sources */,
+				3383ABE323F533660028B4B3 /* DuelTests.swift in Sources */,
 				33D477E823E4F9E300E232D9 /* RangeCalculatorProtocol.swift in Sources */,
 				ADD035D623A96034003B2576 /* PlayerProtocol.swift in Sources */,
+				3383ABDC23F533390028B4B3 /* Indians.swift in Sources */,
 				ADE91ACE23B9FE2300F7316B /* JsonReader.swift in Sources */,
 				33D477EB23E4FA0F00E232D9 /* RangeCalculator.swift in Sources */,
 				AD4BE6AA23DA4B12003A610A /* CollectionExtension.swift in Sources */,
@@ -902,10 +923,13 @@
 				AD7F34BF23D79893001B4072 /* MockGameStateProtocolExtension.swift in Sources */,
 				AD7F34BD23D79879001B4072 /* MockPlayerProtocolExtension.swift in Sources */,
 				33D477F423E57FDD00E232D9 /* MockFigureProtocolExtension.swift in Sources */,
+				3383ABE423F5336D0028B4B3 /* IndiansTests.swift in Sources */,
 				ADD035D023A96002003B2576 /* CardProtocol.swift in Sources */,
 				AD52B99A23B178CC0013240B /* Player.swift in Sources */,
+				3383ABE223F533540028B4B3 /* DiscardBangTests.swift in Sources */,
 				ADE91AD523BA00DC00F7316B /* GameSetup.swift in Sources */,
 				AD52B99423B175110013240B /* Card.swift in Sources */,
+				3383ABDE23F5333C0028B4B3 /* Duel.swift in Sources */,
 				3302905F23F32ABE0099C438 /* BeerTests.swift in Sources */,
 				33EBF4DD23F34A5400C300A7 /* WellsFargo.swift in Sources */,
 				AD671A1D23D8F9D600F0AA4A /* CardExtension.swift in Sources */,

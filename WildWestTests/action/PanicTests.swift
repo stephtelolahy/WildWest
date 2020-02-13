@@ -29,7 +29,7 @@ class PanicTests: XCTestCase {
     
     func test_PullOtherPlayerHandCard_IfPlayingPanic() {
         // Given
-        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
+        let mockState = MockGameStateProtocol()
         let sut = Panic(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c2", ownerId: "p2", source: .hand))
         
         // When
@@ -44,7 +44,7 @@ class PanicTests: XCTestCase {
     
     func test_PullOtherPlayerInPlayCard_IfPlayingPanic() {
         // Given
-        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
+        let mockState = MockGameStateProtocol()
         let sut = Panic(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c2", ownerId: "p2", source: .inPlay))
         
         // When

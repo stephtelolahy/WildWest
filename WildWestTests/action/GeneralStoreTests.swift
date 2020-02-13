@@ -25,7 +25,6 @@ class GeneralStoreTests: XCTestCase {
     func test_DiscardCard_IfPlayingGeneralStore() {
         // Given
         let mockState = MockGameStateProtocol()
-            .withEnabledDefaultImplementation(GameStateProtocolStub())
             .players(are: MockPlayerProtocol().identified(by: "p1"))
         
         let sut = GeneralStore(actorId: "p1", cardId: "c1")
@@ -40,7 +39,6 @@ class GeneralStoreTests: XCTestCase {
     func test_SetChallengeToGeneralStoreAndSetChoosableCards_IfPlayingGeneralStore() {
         // Given
         let mockState = MockGameStateProtocol()
-            .withEnabledDefaultImplementation(GameStateProtocolStub())
             .players(are: MockPlayerProtocol().identified(by: "p3"),
                      MockPlayerProtocol().identified(by: "p4"),
                      MockPlayerProtocol().identified(by: "p1"),

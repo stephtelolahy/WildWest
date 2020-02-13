@@ -47,7 +47,6 @@ class BeerTests: XCTestCase {
     func test_GainLifePoint_IfPlayingBeer() {
         // Given
         let mockState = MockGameStateProtocol()
-            .withEnabledDefaultImplementation(GameStateProtocolStub())
             .players(are: MockPlayerProtocol().identified(by: "p1").health(is: 3))
         let sut = Beer(actorId: "p1", cardId: "c1")
         

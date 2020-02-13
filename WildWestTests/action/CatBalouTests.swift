@@ -27,7 +27,7 @@ class CatBalouTests: XCTestCase {
     
     func test_DiscardOtherPlayerHandCard_IfPlayingCatBalou() {
         // Given
-        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
+        let mockState = MockGameStateProtocol()
         let sut = CatBalou(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c2", ownerId: "p2", source: .hand))
         
         // When
@@ -42,7 +42,7 @@ class CatBalouTests: XCTestCase {
     
     func test_DiscardOtherPlayerInPlayCard_IfPlayingCatBalou() {
         // Given
-        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
+        let mockState = MockGameStateProtocol()
         let sut = CatBalou(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c2", ownerId: "p2", source: .inPlay))
         
         // When
