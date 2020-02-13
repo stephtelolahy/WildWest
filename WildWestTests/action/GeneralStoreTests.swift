@@ -22,18 +22,13 @@ import Cuckoo
  */
 class GeneralStoreTests: XCTestCase {
     
-    func test_DiscardCard_IfPlayingGeneralStore() {
+    func test_GeneralStoreDescription() {
         // Given
-        let mockState = MockGameStateProtocol()
-            .players(are: MockPlayerProtocol().identified(by: "p1"))
-        
         let sut = GeneralStore(actorId: "p1", cardId: "c1")
         
         // When
-        sut.execute(in: mockState)
-        
         // Assert
-        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
+        XCTAssertEqual(sut.description, "p1 plays c1")
     }
     
     func test_SetChallengeToGeneralStoreAndSetChoosableCards_IfPlayingGeneralStore() {
@@ -47,11 +42,14 @@ class GeneralStoreTests: XCTestCase {
         let sut = GeneralStore(actorId: "p1", cardId: "c1")
         
         // When
-        sut.execute(in: mockState)
+        let updates = sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).setupGeneralStore(count: 4)
-        verify(mockState).setChallenge(equal(to: .generalStore(["p1", "p2", "p3", "p4"])))
+        XCTAssertEqual(updates as? [GameUpdate], [
+            .playerDiscardHand("p1", "c1"),
+            .setupGeneralStore(4),
+            .setChallenge(.generalStore(["p1", "p2", "p3", "p4"]))
+        ])
     }
 }
 
@@ -75,11 +73,6 @@ class GeneralStoreRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions?.count, 1)
-        XCTAssertEqual(actions?[0].name, "generalStore")
-        XCTAssertEqual(actions?[0].actorId, "p1")
-        XCTAssertEqual(actions?[0].cardId, "c1")
-        XCTAssertEqual(actions?[0].options as? [GeneralStore], [GeneralStore(actorId: "p1", cardId: "c1")])
-        XCTAssertEqual(actions?[0].options[0].description, "p1 plays c1")
+        XCTAssertEqual(actions as? [GeneralStore],  [GeneralStore(actorId: "p1", cardId: "c1")])
     }
 }

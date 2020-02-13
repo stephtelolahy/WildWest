@@ -1006,14 +1006,14 @@ import Cuckoo
     
     
     
-     var generalStoreCards: [CardProtocol] {
+     var generalStore: [CardProtocol] {
         get {
-            return cuckoo_manager.getter("generalStoreCards",
+            return cuckoo_manager.getter("generalStore",
                 superclassCall:
                     
                     Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                     ,
-                defaultCall: __defaultImplStub!.generalStoreCards)
+                defaultCall: __defaultImplStub!.generalStore)
         }
         
     }
@@ -1112,8 +1112,8 @@ import Cuckoo
 	    }
 	    
 	    
-	    var generalStoreCards: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [CardProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "generalStoreCards")
+	    var generalStore: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [CardProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "generalStore")
 	    }
 	    
 	    
@@ -1177,8 +1177,8 @@ import Cuckoo
 	    }
 	    
 	    
-	    var generalStoreCards: Cuckoo.VerifyReadOnlyProperty<[CardProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "generalStoreCards", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var generalStore: Cuckoo.VerifyReadOnlyProperty<[CardProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "generalStore", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	    
@@ -1249,7 +1249,7 @@ import Cuckoo
     }
     
     
-     var generalStoreCards: [CardProtocol] {
+     var generalStore: [CardProtocol] {
         get {
             return DefaultValueRegistry.defaultValue(for: ([CardProtocol]).self)
         }
@@ -1399,6 +1399,36 @@ import Cuckoo
     
     
     
+     func removePlayer(_ playerId: String) -> PlayerProtocol? {
+        
+    return cuckoo_manager.call("removePlayer(_: String) -> PlayerProtocol?",
+            parameters: (playerId),
+            escapingParameters: (playerId),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.removePlayer(playerId))
+        
+    }
+    
+    
+    
+     func addEliminated(_ player: PlayerProtocol)  {
+        
+    return cuckoo_manager.call("addEliminated(_: PlayerProtocol)",
+            parameters: (player),
+            escapingParameters: (player),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.addEliminated(player))
+        
+    }
+    
+    
+    
      func deckRemoveFirst() -> CardProtocol {
         
     return cuckoo_manager.call("deckRemoveFirst() -> CardProtocol",
@@ -1424,6 +1454,36 @@ import Cuckoo
                 Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
             defaultCall: __defaultImplStub!.addDiscard(card))
+        
+    }
+    
+    
+    
+     func addGeneralStore(_ card: CardProtocol)  {
+        
+    return cuckoo_manager.call("addGeneralStore(_: CardProtocol)",
+            parameters: (card),
+            escapingParameters: (card),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.addGeneralStore(card))
+        
+    }
+    
+    
+    
+     func removeGeneralStore(_ cardId: String) -> CardProtocol? {
+        
+    return cuckoo_manager.call("removeGeneralStore(_: String) -> CardProtocol?",
+            parameters: (cardId),
+            escapingParameters: (cardId),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.removeGeneralStore(cardId))
         
     }
     
@@ -1536,6 +1596,16 @@ import Cuckoo
 	        return .init(stub: cuckoo_manager.createStub(for: MockMutableGameStateProtocol.self, method: "setActions(_: [ActionProtocol])", parameterMatchers: matchers))
 	    }
 	    
+	    func removePlayer<M1: Cuckoo.Matchable>(_ playerId: M1) -> Cuckoo.ProtocolStubFunction<(String), PlayerProtocol?> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: playerId) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockMutableGameStateProtocol.self, method: "removePlayer(_: String) -> PlayerProtocol?", parameterMatchers: matchers))
+	    }
+	    
+	    func addEliminated<M1: Cuckoo.Matchable>(_ player: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(PlayerProtocol)> where M1.MatchedType == PlayerProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(PlayerProtocol)>] = [wrap(matchable: player) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockMutableGameStateProtocol.self, method: "addEliminated(_: PlayerProtocol)", parameterMatchers: matchers))
+	    }
+	    
 	    func deckRemoveFirst() -> Cuckoo.ProtocolStubFunction<(), CardProtocol> {
 	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
 	        return .init(stub: cuckoo_manager.createStub(for: MockMutableGameStateProtocol.self, method: "deckRemoveFirst() -> CardProtocol", parameterMatchers: matchers))
@@ -1544,6 +1614,16 @@ import Cuckoo
 	    func addDiscard<M1: Cuckoo.Matchable>(_ card: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(CardProtocol)> where M1.MatchedType == CardProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(CardProtocol)>] = [wrap(matchable: card) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockMutableGameStateProtocol.self, method: "addDiscard(_: CardProtocol)", parameterMatchers: matchers))
+	    }
+	    
+	    func addGeneralStore<M1: Cuckoo.Matchable>(_ card: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(CardProtocol)> where M1.MatchedType == CardProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(CardProtocol)>] = [wrap(matchable: card) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockMutableGameStateProtocol.self, method: "addGeneralStore(_: CardProtocol)", parameterMatchers: matchers))
+	    }
+	    
+	    func removeGeneralStore<M1: Cuckoo.Matchable>(_ cardId: M1) -> Cuckoo.ProtocolStubFunction<(String), CardProtocol?> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: cardId) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockMutableGameStateProtocol.self, method: "removeGeneralStore(_: String) -> CardProtocol?", parameterMatchers: matchers))
 	    }
 	    
 	    func playerSetHealth<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ playerId: M1, _ health: M2) -> Cuckoo.ProtocolStubNoReturnFunction<(String, Int)> where M1.MatchedType == String, M2.MatchedType == Int {
@@ -1618,6 +1698,18 @@ import Cuckoo
 	    }
 	    
 	    @discardableResult
+	    func removePlayer<M1: Cuckoo.Matchable>(_ playerId: M1) -> Cuckoo.__DoNotUse<(String), PlayerProtocol?> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: playerId) { $0 }]
+	        return cuckoo_manager.verify("removePlayer(_: String) -> PlayerProtocol?", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func addEliminated<M1: Cuckoo.Matchable>(_ player: M1) -> Cuckoo.__DoNotUse<(PlayerProtocol), Void> where M1.MatchedType == PlayerProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(PlayerProtocol)>] = [wrap(matchable: player) { $0 }]
+	        return cuckoo_manager.verify("addEliminated(_: PlayerProtocol)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
 	    func deckRemoveFirst() -> Cuckoo.__DoNotUse<(), CardProtocol> {
 	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
 	        return cuckoo_manager.verify("deckRemoveFirst() -> CardProtocol", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
@@ -1627,6 +1719,18 @@ import Cuckoo
 	    func addDiscard<M1: Cuckoo.Matchable>(_ card: M1) -> Cuckoo.__DoNotUse<(CardProtocol), Void> where M1.MatchedType == CardProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(CardProtocol)>] = [wrap(matchable: card) { $0 }]
 	        return cuckoo_manager.verify("addDiscard(_: CardProtocol)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func addGeneralStore<M1: Cuckoo.Matchable>(_ card: M1) -> Cuckoo.__DoNotUse<(CardProtocol), Void> where M1.MatchedType == CardProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(CardProtocol)>] = [wrap(matchable: card) { $0 }]
+	        return cuckoo_manager.verify("addGeneralStore(_: CardProtocol)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func removeGeneralStore<M1: Cuckoo.Matchable>(_ cardId: M1) -> Cuckoo.__DoNotUse<(String), CardProtocol?> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: cardId) { $0 }]
+	        return cuckoo_manager.verify("removeGeneralStore(_: String) -> CardProtocol?", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
@@ -1688,12 +1792,28 @@ import Cuckoo
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
+     func removePlayer(_ playerId: String) -> PlayerProtocol?  {
+        return DefaultValueRegistry.defaultValue(for: (PlayerProtocol?).self)
+    }
+    
+     func addEliminated(_ player: PlayerProtocol)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
      func deckRemoveFirst() -> CardProtocol  {
         return DefaultValueRegistry.defaultValue(for: (CardProtocol).self)
     }
     
      func addDiscard(_ card: CardProtocol)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func addGeneralStore(_ card: CardProtocol)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func removeGeneralStore(_ cardId: String) -> CardProtocol?  {
+        return DefaultValueRegistry.defaultValue(for: (CardProtocol?).self)
     }
     
      func playerSetHealth(_ playerId: String, _ health: Int)   {

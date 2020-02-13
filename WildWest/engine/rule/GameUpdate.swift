@@ -18,6 +18,10 @@ enum GameUpdate: Equatable {
     case playerPullFromOtherHand(String, String, String)
     case playerPullFromOtherInPlay(String, String, String)
     case playerPutInPlayOfOther(String, String, String)
+    case playerPullFromGeneralStore(String, String)
+    case setupGeneralStore(Int)
+    case flipOverFirstDeckCard
+    case eliminatePlayer(String)
 }
 
 extension GameUpdate: GameUpdateProtocol {
@@ -69,6 +73,26 @@ extension GameUpdate: GameUpdateProtocol {
         case let .playerPutInPlayOfOther(playerId, otherId, cardId):
             if let card = state.playerRemoveHand(playerId, cardId) {
                 state.playerAddInPlay(otherId, card)
+            }
+            
+        case let .playerPullFromGeneralStore(playerId, cardId):
+            if let card = state.removeGeneralStore(cardId) {
+                state.playerAddHand(playerId, card)
+            }
+            
+        case let .setupGeneralStore(cardsCount):
+            Array(1...cardsCount)
+                .map { _ in state.deckRemoveFirst() }
+                .compactMap { $0 }
+                .forEach { state.addGeneralStore($0) }
+            
+        case .flipOverFirstDeckCard:
+            let card = state.deckRemoveFirst()
+            state.addDiscard(card)
+            
+        case let .eliminatePlayer(playerId):
+            if let player = state.removePlayer(playerId) {
+                state.addEliminated(player)
             }
         }
     }

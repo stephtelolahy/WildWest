@@ -10,34 +10,37 @@ struct ResolveJail: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
     
-    func execute(in state: GameStateProtocol) {
-        state.revealDeck()
-        if state.deck.discardPile.first?.suit != .hearts,
+    func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
+        guard let deckCard = state.deck.first else {
+            return []
+        }
+        
+        var updates: [GameUpdate] = []
+        updates.append(.flipOverFirstDeckCard)
+        updates.append(.playerDiscardInPlay(actorId, cardId))
+        if deckCard.suit != .hearts,
             let turnIndex = state.players.firstIndex(where: { $0.identifier == state.turn }) {
             let nextIndex = (turnIndex + 1) % state.players.count
             let nextPlayer = state.players[nextIndex]
-            state.setTurn(nextPlayer.identifier)
+            updates.append(.setTurn(nextPlayer.identifier))
         }
-        state.discardInPlay(playerId: actorId, cardId: cardId)
+        return updates
     }
     
     var description: String {
-        return "\(actorId) resolves \(cardId)"
+        "\(actorId) resolves \(cardId)"
     }
 }
 
 struct ResolveJailRule: RuleProtocol {
     
-    func match(with state: GameStateProtocol) -> [GenericAction]? {
+    func match(with state: GameStateProtocol) -> [ActionProtocol]? {
         guard case .startTurn = state.challenge,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
             let card = actor.inPlay.first(where: { $0.name == .jail })  else {
                 return nil
         }
         
-        return [GenericAction(name: "resolve jail",
-                              actorId: actor.identifier,
-                              cardId: nil,
-                              options: [ResolveJail(actorId: actor.identifier, cardId: card.identifier)])]
+        return [ResolveJail(actorId: actor.identifier, cardId: card.identifier)]
     }
 }

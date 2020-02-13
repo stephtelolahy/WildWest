@@ -48,15 +48,15 @@ class GameViewController: UIViewController, Subscribable {
             JailRule(),
             DiscardBangRule(),
             DuelRule(),
-            //            GeneralStoreRule(),
-            //            ChooseCardRule(),
-            //            LooseLifeRule(),
-            //            EndTurnRule(),
-            //            ResolveBarrelRule(),
-            //            ResolveJailRule(),
-            //            ResolveDynamiteRule(),
-            //            DiscardBeerRule()
-            StartTurnRule()
+            GeneralStoreRule(),
+            ChooseCardRule(),
+            LooseLifeRule(),
+            StartTurnRule(),
+            EndTurnRule(),
+            ResolveBarrelRule(),
+            ResolveJailRule(),
+            ResolveDynamiteRule(),
+            DiscardBeerRule()
         ]
         return GameEngine(state: state, mutableState: mutableState, rules: rules)
     }()

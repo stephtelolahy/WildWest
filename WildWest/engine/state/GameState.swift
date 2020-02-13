@@ -13,7 +13,7 @@ class GameState: GameStateProtocol {
     var turn: String
     var challenge: Challenge?
     var bangsPlayed: Int
-    var generalStoreCards: [CardProtocol]
+    var generalStore: [CardProtocol]
     var outcome: GameOutcome?
     var commands: [ActionProtocol]
     var actions: [ActionProtocol]
@@ -24,7 +24,7 @@ class GameState: GameStateProtocol {
          turn: String,
          challenge: Challenge?,
          bangsPlayed: Int,
-         generalStoreCards: [CardProtocol],
+         generalStore: [CardProtocol],
          outcome: GameOutcome?,
          actions: [ActionProtocol],
          commands: [ActionProtocol],
@@ -34,32 +34,13 @@ class GameState: GameStateProtocol {
         self.turn = turn
         self.challenge = challenge
         self.bangsPlayed = bangsPlayed
-        self.generalStoreCards = generalStoreCards
+        self.generalStore = generalStore
         self.outcome = outcome
         self.commands = commands
         self.actions = actions
         self.eliminated = eliminated
     }
     /*
-    func setupGeneralStore(count: Int) {
-        generalStoreCards = Array(1...count).map { _ in deck.pull() }
-    }
-    
-    func pullGeneralStore(playerId: String, cardId: String) {
-        guard let player = players.first(where: { $0.identifier == playerId }),
-            let cardIndex = generalStoreCards.firstIndex(where: { $0.identifier == cardId }) else {
-                return
-        }
-        
-        let card = generalStoreCards[cardIndex]
-        generalStoreCards.remove(at: cardIndex)
-        player.addHand(card)
-    }
-    
-    func revealDeck() {
-        deck.addToDiscard(deck.pull())
-    }
-    
     func eliminate(playerId: String) {
         guard let player = players.first(where: { $0.identifier == playerId }),
             let playerIndex = players.firstIndex(where: { $0.identifier == playerId }) else {

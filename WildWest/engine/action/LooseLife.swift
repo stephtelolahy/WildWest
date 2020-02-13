@@ -7,31 +7,37 @@
 //
 
 struct LooseLife: ActionProtocol, Equatable {
-    
     let actorId: String
+    let cardId: String = ""
     
     var description: String {
         "\(actorId) looses life point"
     }
     
-    func execute(in state: GameStateProtocol) {
+    func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
         guard let player = state.players.first(where: { $0.identifier == actorId }) else {
-            return
+            return []
         }
         
-        state.setChallenge(state.challenge?.removing(actorId))
-        
-        if player.health >= 2 {
-            state.looseLifePoint(playerId: actorId)
-        } else {
-            state.eliminate(playerId: actorId)
+        var updates: [GameUpdate] = []
+        let health = player.health - 1
+        if health > 0 {
+            updates.append(.playerSetHealth(actorId, health))
+            updates.append(.setChallenge(state.challenge?.removing(actorId)))
+            return updates
         }
+        
+        updates.append(.eliminatePlayer(actorId))
+        // TODO: update outcome
+        // TODO: update turn
+        updates.append(.setChallenge(state.challenge?.removing(actorId)))
+        return updates
     }
 }
 
 struct LooseLifeRule: RuleProtocol {
     
-    func match(with state: GameStateProtocol) -> [GenericAction]? {
+    func match(with state: GameStateProtocol) -> [ActionProtocol]? {
         var actorId: String?
         
         switch state.challenge {
@@ -51,9 +57,6 @@ struct LooseLifeRule: RuleProtocol {
             return nil
         }
         
-        return [GenericAction(name: "looseLifePoint",
-                              actorId: actor.identifier,
-                              cardId: nil,
-                              options: [LooseLife(actorId: actor.identifier)])]
+        return [LooseLife(actorId: actor.identifier)]
     }
 }

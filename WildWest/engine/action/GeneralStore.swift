@@ -10,16 +10,19 @@ struct GeneralStore: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
     
-    func execute(in state: GameStateProtocol) {
+    func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
         guard let actorIndex = state.players.firstIndex(where: { $0.identifier == actorId }) else {
-            return
+            return []
         }
         
-        state.discardHand(playerId: actorId, cardId: cardId)
         let playersCount = state.players.count
         let playerIds = Array(0..<playersCount).map { state.players[(actorIndex + $0) % playersCount].identifier }
-        state.setChallenge(.generalStore(playerIds))
-        state.setupGeneralStore(count: playersCount)
+        let updates: [GameUpdate] = [
+            .playerDiscardHand(actorId, cardId),
+            .setupGeneralStore(playersCount),
+            .setChallenge(.generalStore(playerIds))
+        ]
+        return updates
     }
     
     var description: String {
@@ -29,17 +32,13 @@ struct GeneralStore: ActionProtocol, Equatable {
 
 struct GeneralStoreRule: RuleProtocol {
     
-    func match(with state: GameStateProtocol) -> [GenericAction]? {
+    func match(with state: GameStateProtocol) -> [ActionProtocol]? {
         guard state.challenge == nil,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
             let cards = actor.handCards(named: .generalStore) else {
                 return nil
         }
         
-        return cards.map { GenericAction(name: $0.name.rawValue,
-                                         actorId: actor.identifier,
-                                         cardId: $0.identifier,
-                                         options: [GeneralStore(actorId: actor.identifier, cardId: $0.identifier)])
-        }
+        return cards.map { GeneralStore(actorId: actor.identifier, cardId: $0.identifier) }
     }
 }

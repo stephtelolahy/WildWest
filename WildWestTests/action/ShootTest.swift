@@ -61,7 +61,7 @@ class ShootTest: XCTestCase {
 
 class ShootRuleTest: XCTestCase {
     
-    func test_CanPlayShoot_IfYourTurnAndOwnCardAndOtherIsReachableByDefault() {
+    func test_CanPlayShoot_IfYourTurnAndOwnCardAndOtherIsAtRangeOf1() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")

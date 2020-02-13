@@ -52,7 +52,7 @@ class GameSetup: GameSetupProtocol {
                          turn: sheriff.identifier,
                          challenge: nil,
                          bangsPlayed: 0,
-                         generalStoreCards: [],
+                         generalStore: [],
                          outcome: nil,
                          actions: actions,
                          commands: [],

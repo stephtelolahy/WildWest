@@ -28,6 +28,14 @@ extension GameState: MutableGameStateProtocol {
         self.actions = actions
     }
     
+    func removePlayer(_ playerId: String) -> PlayerProtocol? {
+        players.removeFirst(where: { $0.identifier == playerId })
+    }
+    
+    func addEliminated(_ player: PlayerProtocol) {
+        eliminated.append(player)
+    }
+    
     /// Deck
     
     func deckRemoveFirst() -> CardProtocol {
@@ -38,48 +46,39 @@ extension GameState: MutableGameStateProtocol {
         deck.append(card)
     }
     
+    func addGeneralStore(_ card: CardProtocol) {
+        generalStore.append(card)
+    }
+    
+    func removeGeneralStore(_ cardId: String) -> CardProtocol? {
+        generalStore.removeFirst(where: { $0.identifier == cardId })
+    }
+    
     /// Player
     
     func playerSetHealth(_ playerId: String, _ health: Int) {
-        guard let player = players.first(where: { $0.identifier == playerId }) as? Player else {
-            return
-        }
-        
-        player.health = health
+        player(playerId)?.health = health
     }
     
     func playerAddHand(_ playerId: String, _ card: CardProtocol) {
-        guard let player = players.first(where: { $0.identifier == playerId }) as? Player else {
-            return
-        }
-        
-        player.hand.append(card)
+        player(playerId)?.hand.append(card)
     }
     
     func playerRemoveHand(_ playerId: String, _ cardId: String) -> CardProtocol? {
-        guard let player = players.first(where: { $0.identifier == playerId }) as? Player,
-            let cardIndex = player.hand.firstIndex(where: { $0.identifier == cardId }) else {
-                return nil
-        }
-        
-        return player.hand.remove(at: cardIndex)
+        player(playerId)?.hand.removeFirst(where: { $0.identifier == cardId })
     }
     
     func playerAddInPlay(_ playerId: String, _ card: CardProtocol) {
-        guard let player = players.first(where: { $0.identifier == playerId }) as? Player else {
-            return
-        }
-        
-        player.inPlay.append(card)
+        player(playerId)?.inPlay.append(card)
     }
     
     func playerRemoveInPlay(_ playerId: String, _ cardId: String) -> CardProtocol? {
-        guard let player = players.first(where: { $0.identifier == playerId }) as? Player,
-            let cardIndex = player.inPlay.firstIndex(where: { $0.identifier == cardId }) else {
-                return nil
-        }
-        
-        return player.inPlay.remove(at: cardIndex)
+        player(playerId)?.inPlay.removeFirst(where: { $0.identifier == cardId })
     }
-    
+}
+
+private extension GameState {
+    func player(_ playerId: String) -> Player? {
+        players.first(where: { $0.identifier == playerId }) as? Player
+    }
 }

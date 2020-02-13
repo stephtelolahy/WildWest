@@ -8,19 +8,20 @@
 
 struct ResolveDynamite: ActionProtocol, Equatable {
     let actorId: String
+    let cardId: String = ""
     
-    func execute(in state: GameStateProtocol) {
-        
+    func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
+        []
     }
     
     var description: String {
-        return ""
+        ""
     }
 }
 
 struct ResolveDynamiteRule: RuleProtocol {
     
-    func match(with state: GameStateProtocol) -> [GenericAction]? {
+    func match(with state: GameStateProtocol) -> [ActionProtocol]? {
         nil
     }
 }

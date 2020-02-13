@@ -11,64 +11,7 @@ import Cuckoo
 
 class GameStateTests: XCTestCase {
     
-    func test_InitialProperties() {
-        // Given
-        let mockPlayers = [
-            MockPlayerProtocol().identified(by: "p1"),
-            MockPlayerProtocol().identified(by: "p2")
-        ]
-        let mockDeck = MockDeckProtocol()
-        let sut = GameState(players: mockPlayers,
-                            deck: mockDeck,
-                            turn: "p1",
-                            challenge: nil,
-                            bangsPlayed: 0,
-                            generalStoreCards: [],
-                            outcome: nil,
-                            actions: [],
-                            commands: [],
-                            eliminated: [])
-        // When
-        // Assert
-        XCTAssertEqual(sut.players.map { $0.identifier }, ["p1", "p2"])
-        XCTAssertTrue(sut.deck as? MockDeckProtocol === mockDeck)
-        XCTAssertEqual(sut.turn, "p1")
-        XCTAssertNil(sut.challenge)
-        XCTAssertEqual(sut.bangsPlayed, 0)
-        XCTAssertTrue(sut.generalStoreCards.isEmpty)
-        XCTAssertNil(sut.outcome)
-        XCTAssertTrue(sut.commands.isEmpty)
-        XCTAssertTrue(sut.eliminated.isEmpty)
-    }
-    
-    func test_DiscardCardImmediately_IfRevealingFromDeck() {
-        // Given
-        let mockDeck = MockDeckProtocol()
-        Cuckoo.stub(mockDeck) { mock in
-            when(mock.pull()).thenReturn(MockCardProtocol().identified(by: "c1"))
-            when(mock.addToDiscard(any())).thenDoNothing()
-        }
-        let sut = GameState(players: [],
-                            deck: mockDeck,
-                            turn: "p1",
-                            challenge: nil,
-                            bangsPlayed: 0,
-                            generalStoreCards: [],
-                            outcome: nil,
-                            actions: [],
-                            commands: [],
-                            eliminated: [])
-        
-        // When
-        sut.revealDeck()
-        
-        // Assert
-        verify(mockDeck).pull()
-        verify(mockDeck).addToDiscard(card(identifiedBy: "c1"))
-        verifyNoMoreInteractions(mockDeck)
-    }
-    
-    func test_RevealRoleAndDiscardAllCards_IfPlayerEliminated() {
+    func test_DiscardAllCards_IfPlayerEliminated() {
         // Given
         let mockPlayer1 = MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p1").role(is: .sheriff)
         let mockPlayer2 = MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p2").role(is: .renegade)
@@ -140,58 +83,6 @@ class GameStateTests: XCTestCase {
         // Assert
         XCTAssertEqual(sut.players.map { $0.identifier }, ["p1", "p3", "p4"])
         XCTAssertEqual(sut.turn, "p4")
-    }
-    
-    func test_SetGeneralStoreCards() {
-        // Given
-        let mockDeck = MockDeckProtocol()
-        Cuckoo.stub(mockDeck) { mock in
-            when(mock.pull()).thenReturn(MockCardProtocol().identified(by: "c1"),
-                                         MockCardProtocol().identified(by: "c2"),
-                                         MockCardProtocol().identified(by: "c3"))
-        }
-        let sut = GameState(players: [],
-                            deck: mockDeck,
-                            turn: "p1",
-                            challenge: nil,
-                            bangsPlayed: 0,
-                            generalStoreCards: [],
-                            outcome: nil,
-                            actions: [],
-                            commands: [],
-                            eliminated: [])
-        
-        // When
-        
-        sut.setupGeneralStore(count: 3)
-        
-        // Assert
-        XCTAssertEqual(sut.generalStoreCards.map { $0.identifier }, ["c1", "c2", "c3"])
-    }
-    
-    func test_PullCardFromGeneralStore() {
-        // Given
-        let  mockPlayer1 = MockPlayerProtocol().identified(by: "p1").withEnabledDefaultImplementation(PlayerProtocolStub())
-        let card1 = MockCardProtocol().identified(by: "c1")
-        let card2 = MockCardProtocol().identified(by: "c2")
-        let mockDeck = MockDeckProtocol().withEnabledDefaultImplementation(DeckProtocolStub())
-        let sut = GameState(players: [mockPlayer1],
-                            deck: mockDeck,
-                            turn: "p1",
-                            challenge: .generalStore(["p1", "p2"]),
-                            bangsPlayed: 0,
-                            generalStoreCards: [card1, card2],
-                            outcome: nil,
-                            actions: [],
-                            commands: [],
-                            eliminated: [])
-        
-        // When
-        sut.pullGeneralStore(playerId: "p1", cardId: "c1")
-        
-        // Aseert
-        XCTAssertEqual(sut.generalStoreCards.map { $0.identifier }, ["c2"])
-        verify(mockPlayer1).addHand(card(identifiedBy: "c1"))
     }
     
     func test_EndTurn_IfTurnPlayerIsEliminated() {
