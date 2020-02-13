@@ -26,6 +26,9 @@
 		3383ABD023F461D20028B4B3 /* Jail.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A0FA23BAB7DD0050E173 /* Jail.swift */; };
 		3383ABD123F461D20028B4B3 /* Jail.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A0FA23BAB7DD0050E173 /* Jail.swift */; };
 		3383ABD223F461E10028B4B3 /* JailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C45DDB23EB15A400B62508 /* JailTests.swift */; };
+		3383ABD323F4657C0028B4B3 /* Shoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A0FD23BAB8070050E173 /* Shoot.swift */; };
+		3383ABD423F4657C0028B4B3 /* Shoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A0FD23BAB8070050E173 /* Shoot.swift */; };
+		3383ABD523F465930028B4B3 /* ShootTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A1410C23E5CFE800E40AA8 /* ShootTest.swift */; };
 		338E39A023F3E3F7002FA99B /* CatBalou.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10F23BAB89C0050E173 /* CatBalou.swift */; };
 		338E39A123F3E3F8002FA99B /* CatBalou.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10F23BAB89C0050E173 /* CatBalou.swift */; };
 		338E39A223F3E3FD002FA99B /* Panic.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10C23BAB8780050E173 /* Panic.swift */; };
@@ -817,6 +820,7 @@
 				33D477E723E4F9E300E232D9 /* RangeCalculatorProtocol.swift in Sources */,
 				33ABE07023E9DA5B009A54E4 /* ActionCell.swift in Sources */,
 				3395258023E37CCE003DE948 /* GameEngineProtocol.swift in Sources */,
+				3383ABD423F4657C0028B4B3 /* Shoot.swift in Sources */,
 				AD52B99323B175110013240B /* Card.swift in Sources */,
 				ADD035CC23A95F37003B2576 /* RuleProtocol.swift in Sources */,
 				33ABE07523EA21AC009A54E4 /* PlayersAdapter.swift in Sources */,
@@ -887,6 +891,8 @@
 				33D477EB23E4FA0F00E232D9 /* RangeCalculator.swift in Sources */,
 				AD4BE6AA23DA4B12003A610A /* CollectionExtension.swift in Sources */,
 				33D964B223DD9119007295E7 /* MatcherExtension.swift in Sources */,
+				3383ABD523F465930028B4B3 /* ShootTest.swift in Sources */,
+				3383ABD323F4657C0028B4B3 /* Shoot.swift in Sources */,
 				AD7F34BF23D79893001B4072 /* MockGameStateProtocolExtension.swift in Sources */,
 				AD7F34BD23D79879001B4072 /* MockPlayerProtocolExtension.swift in Sources */,
 				33D477F423E57FDD00E232D9 /* MockFigureProtocolExtension.swift in Sources */,

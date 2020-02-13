@@ -11,10 +11,13 @@ struct Shoot: ActionProtocol, Equatable {
     let cardId: String
     let targetId: String
     
-    func execute(in state: GameStateProtocol) {
-        state.discardHand(playerId: actorId, cardId: cardId)
-        state.setChallenge(.shoot([targetId]))
-        state.setBangsPlayed(state.bangsPlayed + 1)
+    func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
+        let updates: [GameUpdate] = [
+            .playerDiscardHand(actorId, cardId),
+            .setChallenge(.shoot([targetId])),
+            .setBangsPlayed(state.bangsPlayed + 1)
+        ]
+        return updates
     }
     
     var description: String {
@@ -30,7 +33,7 @@ struct ShootRule: RuleProtocol {
         self.calculator = calculator
     }
     
-    func match(with state: GameStateProtocol) -> [GenericAction]? {
+    func match(with state: GameStateProtocol) -> [ActionProtocol]? {
         guard state.challenge == nil,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
             let cards = actor.handCards(named: .bang) else {
@@ -53,14 +56,7 @@ struct ShootRule: RuleProtocol {
         }
         
         return cards.map { card in
-            let options = otherPlayers.map { Shoot(actorId: actor.identifier,
-                                                   cardId: card.identifier,
-                                                   targetId: $0.identifier)
-            }
-            return GenericAction(name: card.name.rawValue,
-                                 actorId: actor.identifier,
-                                 cardId: card.identifier,
-                                 options: options)
-        }
+            otherPlayers.map { Shoot(actorId: actor.identifier, cardId: card.identifier, targetId: $0.identifier) }
+        }.flatMap { $0 }
     }
 }

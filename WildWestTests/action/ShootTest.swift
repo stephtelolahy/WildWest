@@ -31,23 +31,31 @@ import Cuckoo
 
 class ShootTest: XCTestCase {
     
+    func test_EquipDescription() {
+        // Given
+        let sut = Shoot(actorId: "p1", cardId: "c1", targetId: "p2")
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.description, "p1 plays c1 against p2")
+    }
+    
     func test_DiscardCardAndTriggerBangChallengeAndIncrementShootsCount_IfPlayingShoot() {
         // Given
         let mockState = MockGameStateProtocol()
-            .withEnabledDefaultImplementation(GameStateProtocolStub())
             .bangsPlayed(is: 1)
         
         let sut = Shoot(actorId: "p1", cardId: "c1", targetId: "p2")
         
         // When
-        sut.execute(in: mockState)
+        let updates = sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
-        verify(mockState).setChallenge(equal(to: .shoot(["p2"])))
-        verify(mockState).bangsPlayed.get()
-        verify(mockState).setBangsPlayed(2)
-        verifyNoMoreInteractions(mockState)
+        XCTAssertEqual(updates as? [GameUpdate], [
+            .playerDiscardHand("p1", "c1"),
+            .setChallenge(.shoot(["p2"])),
+            .setBangsPlayed(2)
+        ])
     }
 }
 
@@ -79,17 +87,9 @@ class ShootRuleTest: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions?.count, 1)
-        XCTAssertEqual(actions?[0].name, "bang")
-        XCTAssertEqual(actions?[0].actorId, "p1")
-        XCTAssertEqual(actions?[0].cardId, "c1")
-        XCTAssertEqual(actions?[0].options as? [Shoot], [
+        XCTAssertEqual(actions as? [Shoot], [
             Shoot(actorId: "p1", cardId: "c1", targetId: "p2"),
             Shoot(actorId: "p1", cardId: "c1", targetId: "p3")
-        ])
-        XCTAssertEqual(actions?[0].options.map { $0.description }, [
-            "p1 plays c1 against p2",
-            "p1 plays c1 against p3"
         ])
     }
     
@@ -147,17 +147,9 @@ class ShootRuleTest: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions?.count, 1)
-        XCTAssertEqual(actions?[0].name, "bang")
-        XCTAssertEqual(actions?[0].actorId, "p1")
-        XCTAssertEqual(actions?[0].cardId, "c1")
-        XCTAssertEqual(actions?[0].options as? [Shoot], [
+        XCTAssertEqual(actions as? [Shoot], [
             Shoot(actorId: "p1", cardId: "c1", targetId: "p2"),
             Shoot(actorId: "p1", cardId: "c1", targetId: "p3")
-        ])
-        XCTAssertEqual(actions?[0].options.map { $0.description }, [
-            "p1 plays c1 against p2",
-            "p1 plays c1 against p3"
         ])
     }
     
