@@ -29,38 +29,44 @@ import Cuckoo
  */
 class MissedTests: XCTestCase {
     
-    func test_DiscardCardAndRemoveChallenge_IfPlayingMissed() {
+    func test_MissedDescription() {
         // Given
-        let mockState = MockGameStateProtocol()
-            .withEnabledDefaultImplementation(GameStateProtocolStub())
-            .challenge(is: .shoot(["p1"]))
         let sut = Missed(actorId: "p1", cardId: "c1")
         
         // When
-        sut.execute(in: mockState)
+        // Assert
+        XCTAssertEqual(sut.description, "p1 plays c1")
+    }
+    
+    func test_DiscardCardAndRemoveChallenge_IfPlayingMissed() {
+        // Given
+        let mockState = MockGameStateProtocol().challenge(is: .shoot(["p1"]))
+        let sut = Missed(actorId: "p1", cardId: "c1")
+        
+        // When
+        let updates = sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
-        verify(mockState).challenge.get()
-        verify(mockState).setChallenge(isNil())
-        verifyNoMoreInteractions(mockState)
+        XCTAssertEqual(updates as? [GameUpdate], [
+            .playerDiscardHand("p1", "c1"),
+            .setChallenge(nil)
+        ])
     }
     
     func test_DiscardCardAndRemoveActorFromChallenge_IfPlayingMissed() {
         // Given
         let mockState = MockGameStateProtocol()
-            .withEnabledDefaultImplementation(GameStateProtocolStub())
             .challenge(is: .shoot(["p1", "p2", "p3"]))
         let sut = Missed(actorId: "p1", cardId: "c1")
         
         // When
-        sut.execute(in: mockState)
+        let updates = sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
-        verify(mockState).challenge.get()
-        verify(mockState).setChallenge(equal(to: .shoot(["p2", "p3"])))
-        verifyNoMoreInteractions(mockState)
+        XCTAssertEqual(updates as? [GameUpdate], [
+            .playerDiscardHand("p1", "c1"),
+            .setChallenge(.shoot(["p2", "p3"]))
+        ])
     }
 }
 
@@ -83,11 +89,6 @@ class MissedRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions?.count, 1)
-        XCTAssertEqual(actions?[0].name, "missed")
-        XCTAssertEqual(actions?[0].actorId, "p1")
-        XCTAssertEqual(actions?[0].cardId, "c1")
-        XCTAssertEqual(actions?[0].options as? [Missed], [Missed(actorId: "p1", cardId: "c1")])
-        XCTAssertEqual(actions?[0].options[0].description, "p1 plays c1")
+        XCTAssertEqual(actions as? [Missed], [Missed(actorId: "p1", cardId: "c1")])
     }
 }

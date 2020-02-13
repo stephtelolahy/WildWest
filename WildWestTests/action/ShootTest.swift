@@ -31,7 +31,7 @@ import Cuckoo
 
 class ShootTest: XCTestCase {
     
-    func test_EquipDescription() {
+    func test_ShootDescription() {
         // Given
         let sut = Shoot(actorId: "p1", cardId: "c1", targetId: "p2")
         
