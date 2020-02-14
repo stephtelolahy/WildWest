@@ -15,11 +15,16 @@ class GameEngine: GameEngineProtocol {
     private let state: GameStateProtocol
     private let mutableState: MutableGameStateProtocol
     private let rules: [RuleProtocol]
+    private let calculator: OutcomeCalculatorProtocol
     
-    init(state: GameStateProtocol, mutableState: MutableGameStateProtocol, rules: [RuleProtocol]) {
+    init(state: GameStateProtocol,
+         mutableState: MutableGameStateProtocol,
+         rules: [RuleProtocol],
+         calculator: OutcomeCalculatorProtocol) {
         self.state = state
         self.mutableState = mutableState
         self.rules = rules
+        self.calculator = calculator
         stateSubject = BehaviorSubject(value: state)
     }
     
@@ -27,18 +32,14 @@ class GameEngine: GameEngineProtocol {
         let updates = command.execute(in: state)
         updates.forEach { $0.execute(in: mutableState) }
         mutableState.addCommand(command)
-        // TODO: compute outcome
-        // if game over end game
-        // else generate actions
-        mutableState.setActions(actions(matching: state))
-        stateSubject.onNext(state)
-    }
-    
-    private func actions(matching state: GameStateProtocol) -> [ActionProtocol] {
-        guard state.outcome == nil else {
-            return []
+        if let outcome = calculator.outcome(for: state.players.map { $0.role }) {
+            mutableState.setOutcome(outcome)
+            mutableState.setActions([])
+        } else {
+            let actions = rules.compactMap { $0.match(with: state) }.flatMap { $0 }
+            mutableState.setActions(actions)
         }
         
-        return rules.compactMap { $0.match(with: state) }.flatMap { $0 }
+        stateSubject.onNext(state)
     }
 }

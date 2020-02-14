@@ -58,7 +58,7 @@ class GameViewController: UIViewController, Subscribable {
             ResolveDynamiteRule(),
             DiscardBeerRule()
         ]
-        return GameEngine(state: state, mutableState: mutableState, rules: rules)
+        return GameEngine(state: state, mutableState: mutableState, rules: rules, calculator: OutcomeCalculator())
     }()
     
     private var state: GameStateProtocol?

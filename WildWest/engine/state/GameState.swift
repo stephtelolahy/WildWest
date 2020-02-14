@@ -40,25 +40,4 @@ class GameState: GameStateProtocol {
         self.actions = actions
         self.eliminated = eliminated
     }
-    /*
-    
-    private static func calculateOutcome(with players: [PlayerProtocol]) -> GameOutcome? {
-        let allOutlawsAreEliminated = players.filter { $0.role == .outlaw || $0.role == .renegade }.isEmpty
-        if allOutlawsAreEliminated {
-            return .sheriffWin
-        }
-        
-        let sheriffIsEliminated = players.filter { $0.role == .sheriff }.isEmpty
-        if sheriffIsEliminated {
-            let lastPlayerIsRenegade = players.count == 1 && players[0].role == .renegade
-            if lastPlayerIsRenegade {
-                return .renegadeWin
-            } else {
-                return .outlawWin
-            }
-        }
-        
-        return nil
-    }
- */
 }
