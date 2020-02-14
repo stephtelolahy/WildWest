@@ -26,6 +26,7 @@ struct LooseLife: ActionProtocol, Equatable {
             updates.append(.playerSetHealth(actorId, health))
         } else {
             updates.append(.eliminatePlayer(actorId))
+            
             if actorId == state.turn {
                 updates.append(.setTurn(state.nextTurn))
                 updates.append(.setChallenge(.startTurn))
@@ -34,7 +35,13 @@ struct LooseLife: ActionProtocol, Equatable {
         }
         
         if let challenge = state.challenge {
-            updates.append(.setChallenge(challenge.removing(actorId)))
+            switch challenge {
+            case .dynamiteExplode:
+                updates.append(.setChallenge(.startTurn))
+                
+            default:
+                updates.append(.setChallenge(challenge.removing(actorId)))
+            }
         }
         
         return updates
@@ -44,25 +51,21 @@ struct LooseLife: ActionProtocol, Equatable {
 struct LooseLifeRule: RuleProtocol {
     
     func match(with state: GameStateProtocol) -> [ActionProtocol]? {
-        var actorId: String?
-        
         switch state.challenge {
         case let .shoot(targetIds):
-            actorId = targetIds.first
+            return [LooseLife(actorId: targetIds[0], points: 1)]
             
         case let .indians(targetIds):
-            actorId = targetIds.first
+            return [LooseLife(actorId: targetIds[0], points: 1)]
             
         case let .duel(playerIds):
-            actorId = playerIds.first
+            return [LooseLife(actorId: playerIds[0], points: 1)]
+            
+        case let .dynamiteExplode(playerId):
+            return [LooseLife(actorId: playerId, points: 3)]
+            
         default:
-            break
-        }
-        
-        guard let actor = state.players.first(where: { $0.identifier == actorId }) else {
             return nil
         }
-        
-        return [LooseLife(actorId: actor.identifier, points: 1)]
     }
 }

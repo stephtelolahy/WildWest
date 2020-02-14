@@ -40,6 +40,26 @@ class LooseLifeTests: XCTestCase {
         ])
     }
     
+    func test_StartTurn_IfLoosingLifePointOnDynamiteExploded() {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .health(is: 4)
+        let mockState = MockGameStateProtocol()
+            .players(are: mockPlayer1)
+            .challenge(is: .dynamiteExplode("p1"))
+        let sut = LooseLife(actorId: "p1", points: 3)
+        
+        // When
+        let updates = sut.execute(in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates as? [GameUpdate], [
+            .playerSetHealth("p1", 1),
+            .setChallenge(.startTurn)
+        ])
+    }
+    
     func test_EliminateActor_IfLoosingLastLife() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
@@ -149,10 +169,8 @@ class LooseLifeRuleTests: XCTestCase {
     func test_CanLooseLife_IfChallengedByShoot() {
         // Given
         let sut = LooseLifeRule()
-        let mockPlayer1 = MockPlayerProtocol().identified(by: "p1")
         let mockState = MockGameStateProtocol()
             .challenge(is: .shoot(["p1", "p2"]))
-            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
         let actions = sut.match(with: mockState)
@@ -164,10 +182,8 @@ class LooseLifeRuleTests: XCTestCase {
     func test_CanLooseLife_IfChallengedByIndians() {
         // Given
         let sut = LooseLifeRule()
-        let mockPlayer1 = MockPlayerProtocol().identified(by: "p1")
         let mockState = MockGameStateProtocol()
             .challenge(is: .indians(["p1", "p2"]))
-            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
         let actions = sut.match(with: mockState)
@@ -179,15 +195,26 @@ class LooseLifeRuleTests: XCTestCase {
     func test_CanLooseLife_IfChallengedByDuel() {
         // Given
         let sut = LooseLifeRule()
-        let mockPlayer1 = MockPlayerProtocol().identified(by: "p1")
         let mockState = MockGameStateProtocol()
             .challenge(is: .duel(["p1", "p2"]))
-            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
         let actions = sut.match(with: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [LooseLife], [LooseLife(actorId: "p1", points: 1)])
+    }
+    
+    func test_CanLooseLife_IfChallengedByDynamiteExplode() {
+        // Given
+        let sut = LooseLifeRule()
+        let mockState = MockGameStateProtocol()
+            .challenge(is: .dynamiteExplode("p1"))
+        
+        // When
+        let actions = sut.match(with: mockState)
+        
+        // Assert
+        XCTAssertEqual(actions as? [LooseLife], [LooseLife(actorId: "p1", points: 3)])
     }
 }

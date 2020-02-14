@@ -215,6 +215,24 @@ class GameUpdateTests: XCTestCase {
         verifyNoMoreInteractions(mockState)
     }
     
+    func test_MoveCardFromInPlayToOtherInPlay_IfPlayerPassInPlayOfOther() {
+        // Given
+        let mockState = MockMutableGameStateProtocol().withEnabledDefaultImplementation(MutableGameStateProtocolStub())
+        let mockCard = MockCardProtocol()
+        Cuckoo.stub(mockState) { mock in
+            when(mock.playerRemoveInPlay("p1", "c1")).thenReturn(mockCard)
+        }
+        let sut = GameUpdate.playerPassInPlayOfOther("p1", "p2", "c1")
+        
+        // When
+        sut.execute(in: mockState)
+        
+        // Assert
+        verify(mockState).playerRemoveInPlay("p1", "c1")
+        verify(mockState).playerAddInPlay("p2", card(equalTo: mockCard))
+        verifyNoMoreInteractions(mockState)
+    }
+    
     func test_PlayerPullFromGeneralStore() {
         // Given
         let mockState = MockMutableGameStateProtocol().withEnabledDefaultImplementation(MutableGameStateProtocolStub())

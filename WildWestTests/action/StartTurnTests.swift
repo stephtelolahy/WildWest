@@ -74,4 +74,22 @@ class StartTurnRuleTests: XCTestCase {
         // Assert
         XCTAssertNil(actions)
     }
+    
+    func test_CannotStartTurn_IfPlayingDynamite() {
+        // Given
+        let sut = StartTurnRule()
+        let player1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .playing(MockCardProtocol().named(.dynamite))
+        let mockState = MockGameStateProtocol()
+            .currentTurn(is: "p1")
+            .players(are: player1, MockPlayerProtocol())
+            .challenge(is: .startTurn)
+        
+        // When
+        let actions = sut.match(with: mockState)
+        
+        // Assert
+        XCTAssertNil(actions)
+    }
 }

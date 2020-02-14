@@ -11,14 +11,14 @@ struct ResolveJail: ActionProtocol, Equatable {
     let cardId: String
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
-        guard let deckCard = state.deck.first else {
+        guard let flippedCard = state.deck.first else {
             return []
         }
         
         var updates: [GameUpdate] = []
         updates.append(.flipOverFirstDeckCard)
         updates.append(.playerDiscardInPlay(actorId, cardId))
-        if deckCard.suit != .hearts {
+        if !flippedCard.makeEscapeFromJail {
             updates.append(.setTurn(state.nextTurn))
         }
         return updates
@@ -34,6 +34,7 @@ struct ResolveJailRule: RuleProtocol {
     func match(with state: GameStateProtocol) -> [ActionProtocol]? {
         guard case .startTurn = state.challenge,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
+            actor.inPlay.filter({ $0.name == .dynamite }).isEmpty,
             let card = actor.inPlay.first(where: { $0.name == .jail })  else {
                 return nil
         }

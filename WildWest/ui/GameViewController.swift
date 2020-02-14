@@ -53,10 +53,10 @@ class GameViewController: UIViewController, Subscribable {
             LooseLifeRule(),
             StartTurnRule(),
             EndTurnRule(),
-            ResolveBarrelRule(),
             ResolveJailRule(),
             ResolveDynamiteRule(),
-            DiscardBeerRule()
+            DiscardBeerRule(),
+            ResolveBarrelRule()
         ]
         return GameEngine(state: state, mutableState: mutableState, rules: rules, calculator: OutcomeCalculator())
     }()
@@ -108,18 +108,7 @@ private extension GameViewController {
         }
         
         if let challenge = state.challenge {
-            switch challenge {
-            case .startTurn:
-                return "startTurn"
-            case .duel:
-                return "duel"
-            case .shoot:
-                return "shoot"
-            case .indians:
-                return "indians"
-            case .generalStore:
-                return "generalStore"
-            }
+            return challenge.displayString
         }
         
         if state.actions.count == 1,
@@ -253,5 +242,24 @@ extension GameViewController: UICollectionViewDelegateFlowLayout {
         let height: CGFloat = collectionView.bounds.height - 2 * spacing
         let width: CGFloat = height * ratio
         return CGSize(width: width, height: height)
+    }
+}
+
+private extension Challenge {
+    var displayString: String {
+        switch self {
+        case .startTurn:
+            return "startTurn"
+        case .duel:
+            return "duel"
+        case .shoot:
+            return "shoot"
+        case .indians:
+            return "indians"
+        case .generalStore:
+            return "generalStore"
+        case .dynamiteExplode:
+            return "dynamiteExplode"
+        }
     }
 }

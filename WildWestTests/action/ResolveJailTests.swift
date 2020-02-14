@@ -11,7 +11,7 @@ import Cuckoo
 
 class ResolveJailTests: XCTestCase {
     
-    func test_ResolveJainDescription() {
+    func test_ResolveJailDescription() {
         // Given
         let sut = ResolveJail(actorId: "p1", cardId: "c1")
         
@@ -83,5 +83,24 @@ class ResolveJailRuleTests: XCTestCase {
         
         // assert
         XCTAssertEqual(actions as? [ResolveJail], [ResolveJail(actorId: "p1", cardId: "c1")])
+    }
+    
+    func test_ShouldResolveDynamite_BeforeResolvingJail() {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .playing(MockCardProtocol().named(.dynamite).identified(by: "c1"),
+                     MockCardProtocol().named(.jail).identified(by: "c2"))
+        let mockState = MockGameStateProtocol()
+            .players(are: mockPlayer1)
+            .challenge(is: .startTurn)
+            .currentTurn(is: "p1")
+        let sut = ResolveJailRule()
+        
+        // When
+        let actions = sut.match(with: mockState)
+        
+        // assert
+        XCTAssertNil(actions)
     }
 }

@@ -31,4 +31,5 @@ enum Challenge: Equatable {
     case indians([String])
     case duel([String])
     case generalStore([String])
+    case dynamiteExplode(String)
 }
