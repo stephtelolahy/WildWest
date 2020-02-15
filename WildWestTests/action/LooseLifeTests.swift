@@ -27,7 +27,7 @@ class LooseLifeTests: XCTestCase {
             .health(is: 3)
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
-            .challenge(is: .shoot(["p1"]))
+            .challenge(is: nil)
         let sut = LooseLife(actorId: "p1", points: 1)
         
         // When
@@ -35,28 +35,7 @@ class LooseLifeTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
-            .playerSetHealth("p1", 2),
-            .setChallenge(nil)
-        ])
-    }
-    
-    func test_StartTurn_IfLoosingLifePointOnDynamiteExploded() {
-        // Given
-        let mockPlayer1 = MockPlayerProtocol()
-            .identified(by: "p1")
-            .health(is: 4)
-        let mockState = MockGameStateProtocol()
-            .players(are: mockPlayer1)
-            .challenge(is: .dynamiteExplode("p1"))
-        let sut = LooseLife(actorId: "p1", points: 3)
-        
-        // When
-        let updates = sut.execute(in: mockState)
-        
-        // Assert
-        XCTAssertEqual(updates as? [GameUpdate], [
-            .playerSetHealth("p1", 1),
-            .setChallenge(.startTurn("p1"))
+            .playerSetHealth("p1", 2)
         ])
     }
     
@@ -78,6 +57,26 @@ class LooseLifeTests: XCTestCase {
         XCTAssertEqual(updates as? [GameUpdate], [
             .eliminatePlayer("p1"),
             .setChallenge(nil)
+        ])
+    }
+    
+    func test_TriggerStartTurnChallenge_IfLoosingLifePointOnDynamiteExploded() {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .health(is: 4)
+        let mockState = MockGameStateProtocol()
+            .players(are: mockPlayer1)
+            .challenge(is: .dynamiteExplode("p1"))
+        let sut = LooseLife(actorId: "p1", points: 3)
+        
+        // When
+        let updates = sut.execute(in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates as? [GameUpdate], [
+            .playerSetHealth("p1", 1),
+            .setChallenge(.startTurn("p1"))
         ])
     }
     
@@ -141,7 +140,7 @@ class LooseLifeTests: XCTestCase {
         ])
     }
     
-    func test_EndTurn_IfTurnPlayerIsEliminated() {
+    func test_TriggerNextPlayerStartTurnChallenge_IfTurnPlayerIsEliminated() {
         // Given
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
