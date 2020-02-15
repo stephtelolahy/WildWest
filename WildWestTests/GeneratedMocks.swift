@@ -21,6 +21,20 @@ import Cuckoo
     
 
     
+    
+    
+     var description: String {
+        get {
+            return cuckoo_manager.getter("description",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.description)
+        }
+        
+    }
+    
 
     
 
@@ -49,6 +63,11 @@ import Cuckoo
 	    }
 	    
 	    
+	    var description: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameUpdateProtocol, String> {
+	        return .init(manager: cuckoo_manager, name: "description")
+	    }
+	    
+	    
 	    func execute<M1: Cuckoo.Matchable>(in state: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(MutableGameStateProtocol)> where M1.MatchedType == MutableGameStateProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(MutableGameStateProtocol)>] = [wrap(matchable: state) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameUpdateProtocol.self, method: "execute(in: MutableGameStateProtocol)", parameterMatchers: matchers))
@@ -68,6 +87,11 @@ import Cuckoo
 	    }
 	
 	    
+	    
+	    var description: Cuckoo.VerifyReadOnlyProperty<String> {
+	        return .init(manager: cuckoo_manager, name: "description", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
 	
 	    
 	    @discardableResult
@@ -80,6 +104,14 @@ import Cuckoo
 }
 
  class GameUpdateProtocolStub: GameUpdateProtocol {
+    
+    
+     var description: String {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (String).self)
+        }
+        
+    }
     
 
     

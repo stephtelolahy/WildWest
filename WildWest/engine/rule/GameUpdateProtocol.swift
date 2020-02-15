@@ -8,5 +8,7 @@
 
 /// Elementary game update which could be materialized by an animation
 protocol GameUpdateProtocol {
+    var description: String { get }
+    
     func execute(in state: MutableGameStateProtocol)
 }

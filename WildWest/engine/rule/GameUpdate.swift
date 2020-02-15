@@ -41,8 +41,13 @@ extension GameUpdate: GameUpdateProtocol {
             
         case let .setChallenge(challenge):
             state.setChallenge(challenge)
-            if case .shoot = challenge {
+            switch challenge {
+            case let .startTurn(turn):
+                state.setTurn(turn)
+            case .shoot:
                 state.setBarrelsResolved(0)
+            default:
+                break
             }
             
         case let .setBangsPlayed(count):
@@ -114,6 +119,64 @@ extension GameUpdate: GameUpdateProtocol {
             if let player = state.removePlayer(playerId) {
                 state.addEliminated(player)
             }
+        }
+    }
+    
+    var description: String {
+        switch self {
+        case let .setTurn(turn):
+            return "setTurn \(turn)"
+            
+        case let .setOutcome(outcome):
+            return "setOutcome \(outcome)"
+            
+        case let .setChallenge(challenge):
+            return "setChallenge \(challenge?.description ?? "nil")"
+            
+        case let .setBangsPlayed(count):
+            return "setBangsPlayed \(count)"
+            
+        case let .setBarrelsResolved(count):
+            return "setBarrelsResolved \(count)"
+            
+        case let .playerPullFromDeck(playerId):
+            return "\(playerId) pullFromDeck "
+            
+        case let .playerDiscardHand(playerId, cardId):
+            return "\(playerId) discardHand \(cardId)"
+            
+        case let .playerSetHealth(playerId, health):
+            return "\(playerId) setHealth \(health)"
+            
+        case let .playerPutInPlay(playerId, cardId):
+            return "\(playerId) putInPlay \(cardId)"
+            
+        case let .playerDiscardInPlay(playerId, cardId):
+            return "\(playerId) discardInPlay \(cardId)"
+            
+        case let .playerPullFromOtherHand(playerId, otherId, cardId):
+            return "\(playerId) pullFromOtherHand \(otherId) \(cardId)"
+            
+        case let .playerPullFromOtherInPlay(playerId, otherId, cardId):
+            return "\(playerId) pullFromOtherInPlay \(otherId) \(cardId)"
+            
+        case let .playerPutInPlayOfOther(playerId, otherId, cardId):
+            return "\(playerId) putInPlayOfOther \(otherId) \(cardId)"
+            
+        case let .playerPassInPlayOfOther(playerId, otherId, cardId):
+            return "\(playerId) passInPlayOfOther \(otherId) \(cardId)"
+            
+        case let .playerPullFromGeneralStore(playerId, cardId):
+            return "\(playerId) pullFromGeneralStore \(cardId)"
+            
+        case let .setupGeneralStore(cardsCount):
+            return "setupGeneralStore \(cardsCount)"
+            
+        case .flipOverFirstDeckCard:
+            return "flipOverFirstDeckCard"
+            
+        case let .eliminatePlayer(playerId):
+            return "eliminate \(playerId)"
         }
     }
 }

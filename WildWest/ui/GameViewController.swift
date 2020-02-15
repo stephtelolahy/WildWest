@@ -64,6 +64,7 @@ class GameViewController: UIViewController, Subscribable {
     private var state: GameStateProtocol?
     private let playersAdapter: PlayersAdapterProtocol = PlayersAdapter()
     private let actionsAdapter: ActionsAdapterProtocol = ActionsAdapter()
+    private let aiAgent: AIProtocol = PlayAllHandAI()
     
     // MARK: Lifecycle
     
@@ -87,6 +88,11 @@ class GameViewController: UIViewController, Subscribable {
         actionsViewController.actions = actions.reversed()
         navigationController?.pushViewController(actionsViewController, animated: true)
     }
+    
+    @IBAction private func playButtonTapped(_ sender: Any) {
+        autoPlay(1)
+    }
+    
 }
 
 private extension GameViewController {
@@ -96,31 +102,15 @@ private extension GameViewController {
         playersAdapter.setState(state)
         actionsAdapter.setState(state)
         playersCollectionView.reloadData()
-        title = displayTitle(for: state)
+        title = state.mainMessage()
         DispatchQueue.main.async { [weak self] in
             self?.selectActivePlayer()
         }
     }
     
-    func displayTitle(for state: GameStateProtocol) -> String {
-        if let outcome = state.outcome {
-            return outcome.rawValue
-        }
-        
-        if let challenge = state.challenge {
-            return challenge.displayString
-        }
-        
-        if state.actions.count == 1,
-            let uniqueAction = state.actions.first {
-            return uniqueAction.description
-        }
-        
-        return "play any card"
-    }
-    
     func selectActivePlayer() {
         guard let activePlayerIndex = playersAdapter.items.firstIndex(where: { $0.isActive }) else {
+            actionsCollectionView.reloadData()
             return
         }
         
@@ -147,6 +137,22 @@ private extension GameViewController {
                                                 handler: nil))
         
         present(alertController, animated: true)
+    }
+    
+    func autoPlay(_ intervalInSeconds: TimeInterval) {
+        guard #available(iOS 10.0, *) else {
+            return
+        }
+        
+        Timer.scheduledTimer(withTimeInterval: intervalInSeconds, repeats: true) { [weak self] timer in
+            guard let state = self?.state,
+                let command = self?.aiAgent.chooseCommand(in: state) else {
+                    timer.invalidate()
+                    return
+            }
+            
+            self?.engine.execute(command)
+        }
     }
 }
 
@@ -245,21 +251,22 @@ extension GameViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-private extension Challenge {
-    var displayString: String {
-        switch self {
-        case .startTurn:
-            return "startTurn"
-        case .duel:
-            return "duel"
-        case .shoot:
-            return "shoot"
-        case .indians:
-            return "indians"
-        case .generalStore:
-            return "generalStore"
-        case .dynamiteExplode:
-            return "dynamiteExplode"
+private extension GameStateProtocol {
+    
+    func mainMessage() -> String {
+        if let outcome = self.outcome {
+            return outcome.rawValue
         }
+        
+        if let challenge = self.challenge {
+            return challenge.description
+        }
+        
+        if actions.count == 1,
+            let uniqueAction = actions.first {
+            return uniqueAction.description
+        }
+        
+        return "play any card"
     }
 }

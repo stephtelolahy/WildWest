@@ -30,7 +30,11 @@ class GameEngine: GameEngineProtocol {
     
     func execute(_ command: ActionProtocol) {
         let updates = command.execute(in: state)
-        updates.forEach { $0.execute(in: mutableState) }
+        print("\n*** \(command.description) ***")
+        updates.forEach {
+            $0.execute(in: mutableState)
+            print($0.description)
+        }
         mutableState.addCommand(command)
         if let outcome = calculator.outcome(for: state.players.map { $0.role }) {
             mutableState.setOutcome(outcome)
