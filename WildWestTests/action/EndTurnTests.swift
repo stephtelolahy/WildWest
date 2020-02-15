@@ -30,10 +30,8 @@ class EndTurnTests: XCTestCase {
     
     func test_ChangeTurnToNextPlayer_IfAPlayerJustEndedTurn() {
         // Given
-        let mockPlayer1 = MockPlayerProtocol()
-            .identified(by: "p1")
-        let mockPlayer2 = MockPlayerProtocol()
-            .identified(by: "p2")
+        let mockPlayer1 = MockPlayerProtocol().identified(by: "p1")
+        let mockPlayer2 = MockPlayerProtocol().identified(by: "p2")
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2)
@@ -45,17 +43,14 @@ class EndTurnTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
-            .setTurn("p2"),
-            .setChallenge(.startTurn)
+            .setChallenge(.startTurn("p2"))
         ])
     }
     
     func test_ChangeTurnToFirstPlayer_IfLastPlayerJustEndedTurn() {
         // Given
-        let mockPlayer1 = MockPlayerProtocol()
-            .identified(by: "p1")
-        let mockPlayer2 = MockPlayerProtocol()
-            .identified(by: "p2")
+        let mockPlayer1 = MockPlayerProtocol().identified(by: "p1")
+        let mockPlayer2 = MockPlayerProtocol().identified(by: "p2")
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p2")
             .players(are: mockPlayer1, mockPlayer2)
@@ -67,16 +62,17 @@ class EndTurnTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
-            .setTurn("p1"),
-            .setChallenge(.startTurn)
+            .setChallenge(.startTurn("p1"))
         ])
     }
     
     func test_DiscardExcessCards_IfEndingTurn() {
         // Given
+        let mockPlayer1 = MockPlayerProtocol().identified(by: "p1")
+        let mockPlayer2 = MockPlayerProtocol().identified(by: "p2")
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p1")
-            .players(are: MockPlayerProtocol().identified(by: "p1"), MockPlayerProtocol().identified(by: "p2"))
+            .players(are: mockPlayer1, mockPlayer2)
         
         let sut = EndTurn(actorId: "p1", cardsToDiscardIds: ["c1", "c2"])
         
@@ -87,8 +83,7 @@ class EndTurnTests: XCTestCase {
         XCTAssertEqual(updates as? [GameUpdate], [
             .playerDiscardHand("p1", "c1"),
             .playerDiscardHand("p1", "c2"),
-            .setTurn("p2"),
-            .setChallenge(.startTurn)
+            .setChallenge(.startTurn("p2"))
         ])
     }
 }

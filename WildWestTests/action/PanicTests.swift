@@ -82,13 +82,13 @@ class PanicRuleTests: XCTestCase {
             .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
         
-        let mockRangeCalculator = MockRangeCalculatorProtocol()
-        Cuckoo.stub(mockRangeCalculator) { mock in
+        let mockCalculator = MockRangeCalculatorProtocol()
+        Cuckoo.stub(mockCalculator) { mock in
             when(mock.distance(from: "p1", to: "p2", in: any())).thenReturn(1)
             when(mock.distance(from: "p1", to: "p3", in: any())).thenReturn(0)
         }
         
-        let sut = PanicRule(calculator: mockRangeCalculator)
+        let sut = PanicRule(calculator: mockCalculator)
         
         // When
         let actions = sut.match(with: mockState)
@@ -122,13 +122,13 @@ class PanicRuleTests: XCTestCase {
             .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
         
-        let mockRangeCalculator = MockRangeCalculatorProtocol()
-        Cuckoo.stub(mockRangeCalculator) { mock in
+        let mockCalculator = MockRangeCalculatorProtocol()
+        Cuckoo.stub(mockCalculator) { mock in
             when(mock.distance(from: "p1", to: "p2", in: any())).thenReturn(2)
             when(mock.distance(from: "p1", to: "p3", in: any())).thenReturn(3)
         }
         
-        let sut = PanicRule(calculator: mockRangeCalculator)
+        let sut = PanicRule(calculator: mockCalculator)
         
         // When
         let actions = sut.match(with: mockState)
@@ -154,12 +154,12 @@ class PanicRuleTests: XCTestCase {
             .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2)
         
-        let mockRangeCalculator = MockRangeCalculatorProtocol()
-        Cuckoo.stub(mockRangeCalculator) { mock in
+        let mockCalculator = MockRangeCalculatorProtocol()
+        Cuckoo.stub(mockCalculator) { mock in
             when(mock.distance(from: "p1", to: "p2", in: any())).thenReturn(1)
         }
         
-        let sut = PanicRule(calculator: mockRangeCalculator)
+        let sut = PanicRule(calculator: mockCalculator)
         
         // When
         let actions = sut.match(with: mockState)
@@ -180,12 +180,12 @@ class PanicRuleTests: XCTestCase {
             .currentTurn(is: "p1")
             .players(are: mockPlayer1)
         
-        let mockRangeCalculator = MockRangeCalculatorProtocol()
-        Cuckoo.stub(mockRangeCalculator) { mock in
+        let mockCalculator = MockRangeCalculatorProtocol()
+        Cuckoo.stub(mockCalculator) { mock in
             when(mock.distance(from: "p1", to: "p2", in: any())).thenReturn(1)
         }
         
-        let sut = PanicRule(calculator: mockRangeCalculator)
+        let sut = PanicRule(calculator: mockCalculator)
         
         // When
         let actions = sut.match(with: mockState)

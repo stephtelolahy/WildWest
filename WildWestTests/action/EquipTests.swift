@@ -100,19 +100,19 @@ class EquipTests: XCTestCase {
         // Given
         let mockPlayer = MockPlayerProtocol()
             .identified(by: "p1")
-            .holding(MockCardProtocol().identified(by: "volcanic").named(.schofield))
-            .playing(MockCardProtocol().identified(by: "schofield").named(.volcanic))
+            .holding(MockCardProtocol().identified(by: "c1").named(.schofield))
+            .playing(MockCardProtocol().identified(by: "c2").named(.volcanic))
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer)
-        let sut = Equip(actorId: "p1", cardId: "volcanic")
+        let sut = Equip(actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(in: mockState)
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
-            .playerDiscardInPlay("p1", "schofield"),
-            .playerPutInPlay("p1", "volcanic")])
+            .playerDiscardInPlay("p1", "c2"),
+            .playerPutInPlay("p1", "c1")])
     }
 }
 
@@ -153,10 +153,8 @@ class EquipRuleTests: XCTestCase {
     func test_CannotEquip_IfAlreadyPlayingCardWithTheSameName() {
         // Given
         let sut = EquipRule()
-        let mockCard1 = MockCardProtocol()
-            .named(.mustang)
-        let mockCard2 = MockCardProtocol()
-            .named(.mustang)
+        let mockCard1 = MockCardProtocol().named(.mustang)
+        let mockCard2 = MockCardProtocol().named(.mustang)
         let mockPlayer = MockPlayerProtocol()
             .identified(by: "p1")
             .holding(mockCard1)

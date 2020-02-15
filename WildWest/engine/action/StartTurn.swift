@@ -15,7 +15,8 @@ struct StartTurn: ActionProtocol, Equatable {
     }
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
-        let updates: [GameUpdate] = [.setChallenge(nil),
+        let updates: [GameUpdate] = [.setTurn(actorId),
+                                     .setChallenge(nil),
                                      .setBangsPlayed(0),
                                      .playerPullFromDeck(actorId),
                                      .playerPullFromDeck(actorId)]
@@ -26,8 +27,8 @@ struct StartTurn: ActionProtocol, Equatable {
 struct StartTurnRule: RuleProtocol {
     
     func match(with state: GameStateProtocol) -> [ActionProtocol]? {
-        guard case .startTurn = state.challenge,
-            let actor = state.players.first(where: { $0.identifier == state.turn }),
+        guard case let .startTurn(actorId) = state.challenge,
+            let actor = state.players.first(where: { $0.identifier == actorId }),
             actor.inPlay.filter({ $0.name == .jail || $0.name == .dynamite }).isEmpty else {
                 return nil
         }

@@ -34,8 +34,8 @@ struct ResolveDynamite: ActionProtocol, Equatable {
 struct ResolveDynamiteRule: RuleProtocol {
     
     func match(with state: GameStateProtocol) -> [ActionProtocol]? {
-        guard case .startTurn = state.challenge,
-            let actor = state.players.first(where: { $0.identifier == state.turn }),
+        guard case let .startTurn(actorId) = state.challenge,
+            let actor = state.players.first(where: { $0.identifier == actorId }),
             let card = actor.inPlay.first(where: { $0.name == .dynamite })  else {
                 return nil
         }

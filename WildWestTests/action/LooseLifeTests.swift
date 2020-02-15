@@ -56,7 +56,7 @@ class LooseLifeTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
             .playerSetHealth("p1", 1),
-            .setChallenge(.startTurn)
+            .setChallenge(.startTurn("p1"))
         ])
     }
     
@@ -147,8 +147,7 @@ class LooseLifeTests: XCTestCase {
             .challenge(is: nil)
             .currentTurn(is: "p1")
             .players(are: MockPlayerProtocol().identified(by: "p1").health(is: 1),
-                     MockPlayerProtocol().identified(by: "p2"),
-                     MockPlayerProtocol().identified(by: "p3"))
+                     MockPlayerProtocol().identified(by: "p2"))
         let sut = LooseLife(actorId: "p1", points: 1)
         
         // When
@@ -157,8 +156,7 @@ class LooseLifeTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
             .eliminatePlayer("p1"),
-            .setTurn("p2"),
-            .setChallenge(.startTurn)
+            .setChallenge(.startTurn("p2"))
         ])
     }
     

@@ -92,8 +92,7 @@ class ResolveDynamiteRuleTests: XCTestCase {
             .playing(MockCardProtocol().named(.dynamite).identified(by: "c1"))
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
-            .challenge(is: .startTurn)
-            .currentTurn(is: "p1")
+            .challenge(is: .startTurn("p1"))
         let sut = ResolveDynamiteRule()
         
         // When
@@ -111,8 +110,7 @@ class ResolveDynamiteRuleTests: XCTestCase {
                      MockCardProtocol().named(.jail).identified(by: "c2"))
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
-            .challenge(is: .startTurn)
-            .currentTurn(is: "p1")
+            .challenge(is: .startTurn("p1"))
         let sut = ResolveDynamiteRule()
         
         // When

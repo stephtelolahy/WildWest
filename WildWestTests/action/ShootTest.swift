@@ -42,9 +42,7 @@ class ShootTest: XCTestCase {
     
     func test_DiscardCardAndTriggerBangChallengeAndIncrementShootsCount_IfPlayingShoot() {
         // Given
-        let mockState = MockGameStateProtocol()
-            .bangsPlayed(is: 1)
-        
+        let mockState = MockGameStateProtocol().bangsPlayed(is: 1)
         let sut = Shoot(actorId: "p1", cardId: "c1", targetId: "p2")
         
         // When

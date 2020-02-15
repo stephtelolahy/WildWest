@@ -10,10 +10,6 @@ import Foundation
 
 extension Collection where Element:  Equatable {
     
-    func count(of element: Element) -> Int {
-        filter { $0 == element }.count
-    }
-    
     func isShuffed(from array: [Element]) -> Bool {
         guard count == array.count,
             filter({ !array.contains($0) }).isEmpty else {

@@ -10,7 +10,7 @@
 import XCTest
 
 class ResourcesProviderTests_Cards: XCTestCase {
-
+    
     private lazy var cards: [CardProtocol] = {
         let jsonReader = JsonReader(bundle: Bundle(for: type(of: self)))
         let sut: ResourcesProviderProtocol = ResourcesProvider(jsonReader: jsonReader)
@@ -171,5 +171,5 @@ class ResourcesProviderTests_Cards: XCTestCase {
         let bundle = Bundle(for: type(of: self))
         XCTAssertTrue(cards.allSatisfy { UIImage(named: $0.imageName, in: bundle, compatibleWith: nil) != nil })
     }
-
+    
 }

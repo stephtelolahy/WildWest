@@ -514,11 +514,11 @@
 				33EC5D3D23E7387F00E14890 /* DiscardBangTests.swift */,
 				33EC5D3F23E7410E00E14890 /* DuelTests.swift */,
 				33C45DCB23EB0F7200B62508 /* GeneralStoreTests.swift */,
-				33C45DD423EB128200B62508 /* ResolveBarrelTests.swift */,
 				33C45DD923EB154900B62508 /* ChooseCardTests.swift */,
 				33C45DDB23EB15A400B62508 /* JailTests.swift */,
 				33C45DE023EB168E00B62508 /* ResolveJailTests.swift */,
 				33C45DE523EB184F00B62508 /* ResolveDynamiteTests.swift */,
+				33C45DD423EB128200B62508 /* ResolveBarrelTests.swift */,
 				33C45DEA23EB190600B62508 /* DiscardBeerTests.swift */,
 			);
 			path = action;

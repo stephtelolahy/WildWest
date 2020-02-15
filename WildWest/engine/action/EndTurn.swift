@@ -13,8 +13,7 @@ struct EndTurn: ActionProtocol, Equatable {
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
         var updates: [GameUpdate] = cardsToDiscardIds.map { GameUpdate.playerDiscardHand(actorId, $0) }
-        updates.append(.setTurn(state.nextTurn))
-        updates.append(.setChallenge(.startTurn))
+        updates.append(.setChallenge(.startTurn(state.nextTurn)))
         return updates
     }
     

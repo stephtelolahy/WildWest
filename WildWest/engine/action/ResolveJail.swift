@@ -19,7 +19,7 @@ struct ResolveJail: ActionProtocol, Equatable {
         updates.append(.flipOverFirstDeckCard)
         updates.append(.playerDiscardInPlay(actorId, cardId))
         if !flippedCard.makeEscapeFromJail {
-            updates.append(.setTurn(state.nextTurn))
+            updates.append(.setChallenge(.startTurn(state.nextTurn)))
         }
         return updates
     }
@@ -32,8 +32,8 @@ struct ResolveJail: ActionProtocol, Equatable {
 struct ResolveJailRule: RuleProtocol {
     
     func match(with state: GameStateProtocol) -> [ActionProtocol]? {
-        guard case .startTurn = state.challenge,
-            let actor = state.players.first(where: { $0.identifier == state.turn }),
+        guard case let .startTurn(actorId) = state.challenge,
+            let actor = state.players.first(where: { $0.identifier == actorId }),
             actor.inPlay.filter({ $0.name == .dynamite }).isEmpty,
             let card = actor.inPlay.first(where: { $0.name == .jail })  else {
                 return nil

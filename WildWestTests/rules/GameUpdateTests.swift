@@ -53,13 +53,13 @@ class GameUpdateTests: XCTestCase {
     func test_SetChallenge() {
         // Given
         let mockState = MockMutableGameStateProtocol().withEnabledDefaultImplementation(MutableGameStateProtocolStub())
-        let sut = GameUpdate.setChallenge(.startTurn)
+        let sut = GameUpdate.setChallenge(.startTurn("p1"))
         
         // When
         sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).setChallenge(equal(to: .startTurn))
+        verify(mockState).setChallenge(equal(to: .startTurn("p1")))
         verifyNoMoreInteractions(mockState)
     }
     

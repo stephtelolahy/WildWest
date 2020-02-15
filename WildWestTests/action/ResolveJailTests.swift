@@ -60,7 +60,7 @@ class ResolveJailTests: XCTestCase {
         XCTAssertEqual(updates as? [GameUpdate], [
             .flipOverFirstDeckCard,
             .playerDiscardInPlay("p1", "c1"),
-            .setTurn("p2")
+            .setChallenge(.startTurn("p2"))
         ])
     }
 }
@@ -74,8 +74,7 @@ class ResolveJailRuleTests: XCTestCase {
             .playing(MockCardProtocol().named(.jail).identified(by: "c1"))
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
-            .challenge(is: .startTurn)
-            .currentTurn(is: "p1")
+            .challenge(is: .startTurn("p1"))
         let sut = ResolveJailRule()
         
         // When
@@ -93,8 +92,7 @@ class ResolveJailRuleTests: XCTestCase {
                      MockCardProtocol().named(.jail).identified(by: "c2"))
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
-            .challenge(is: .startTurn)
-            .currentTurn(is: "p1")
+            .challenge(is: .startTurn("p1"))
         let sut = ResolveJailRule()
         
         // When

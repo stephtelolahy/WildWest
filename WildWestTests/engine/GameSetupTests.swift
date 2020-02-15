@@ -19,9 +19,9 @@ class GameSetupTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(roles.count, 4)
-        XCTAssertEqual(roles.count(of: .sheriff), 1)
-        XCTAssertEqual(roles.count(of: .outlaw), 2)
-        XCTAssertEqual(roles.count(of: .renegade), 1)
+        XCTAssertEqual(roles.filter { $0 == .sheriff }.count, 1)
+        XCTAssertEqual(roles.filter { $0 == .outlaw }.count, 2)
+        XCTAssertEqual(roles.filter { $0 == .renegade }.count, 1)
     }
     
     func test_Roles_For5Players() {
@@ -31,10 +31,10 @@ class GameSetupTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(roles.count, 5)
-        XCTAssertEqual(roles.count(of: .sheriff), 1)
-        XCTAssertEqual(roles.count(of: .outlaw), 2)
-        XCTAssertEqual(roles.count(of: .renegade), 1)
-        XCTAssertEqual(roles.count(of: .deputy), 1)
+        XCTAssertEqual(roles.filter { $0 == .sheriff }.count, 1)
+        XCTAssertEqual(roles.filter { $0 == .outlaw }.count, 2)
+        XCTAssertEqual(roles.filter { $0 == .renegade }.count, 1)
+        XCTAssertEqual(roles.filter { $0 == .deputy }.count, 1)
     }
     
     func test_Roles_For6Players() {
@@ -44,10 +44,10 @@ class GameSetupTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(roles.count, 6)
-        XCTAssertEqual(roles.count(of: .sheriff), 1)
-        XCTAssertEqual(roles.count(of: .outlaw), 3)
-        XCTAssertEqual(roles.count(of: .renegade), 1)
-        XCTAssertEqual(roles.count(of: .deputy), 1)
+        XCTAssertEqual(roles.filter { $0 == .sheriff }.count, 1)
+        XCTAssertEqual(roles.filter { $0 == .outlaw }.count, 3)
+        XCTAssertEqual(roles.filter { $0 == .renegade }.count, 1)
+        XCTAssertEqual(roles.filter { $0 == .deputy }.count, 1)
     }
     
     func test_Roles_For7Players() {
@@ -57,10 +57,10 @@ class GameSetupTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(roles.count, 7)
-        XCTAssertEqual(roles.count(of: .sheriff), 1)
-        XCTAssertEqual(roles.count(of: .outlaw), 3)
-        XCTAssertEqual(roles.count(of: .renegade), 1)
-        XCTAssertEqual(roles.count(of: .deputy), 2)
+        XCTAssertEqual(roles.filter { $0 == .sheriff }.count, 1)
+        XCTAssertEqual(roles.filter { $0 == .outlaw }.count, 3)
+        XCTAssertEqual(roles.filter { $0 == .renegade }.count, 1)
+        XCTAssertEqual(roles.filter { $0 == .deputy }.count, 2)
     }
     
     func test_SetupGameWith4Players() {
