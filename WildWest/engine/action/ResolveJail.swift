@@ -10,34 +10,35 @@ struct ResolveJail: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
     
-    func execute(in state: GameStateProtocol) {
-        state.revealDeck()
-        if state.deck.discardPile.first?.suit != .hearts,
-            let turnIndex = state.players.firstIndex(where: { $0.identifier == state.turn }) {
-            let nextIndex = (turnIndex + 1) % state.players.count
-            let nextPlayer = state.players[nextIndex]
-            state.setTurn(nextPlayer.identifier)
+    func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
+        guard let flippedCard = state.deck.first else {
+            return []
         }
-        state.discardInPlay(playerId: actorId, cardId: cardId)
+        
+        var updates: [GameUpdate] = []
+        updates.append(.flipOverFirstDeckCard)
+        updates.append(.playerDiscardInPlay(actorId, cardId))
+        if !flippedCard.makeEscapeFromJail {
+            updates.append(.setChallenge(.startTurn(state.nextTurn)))
+        }
+        return updates
     }
     
     var description: String {
-        return "\(actorId) resolves \(cardId)"
+        "\(actorId) resolves \(cardId)"
     }
 }
 
 struct ResolveJailRule: RuleProtocol {
     
-    func match(with state: GameStateProtocol) -> [GenericAction]? {
-        guard case .startTurn = state.challenge,
-            let actor = state.players.first(where: { $0.identifier == state.turn }),
+    func match(with state: GameStateProtocol) -> [ActionProtocol]? {
+        guard case let .startTurn(actorId) = state.challenge,
+            let actor = state.players.first(where: { $0.identifier == actorId }),
+            actor.inPlay.filter({ $0.name == .dynamite }).isEmpty,
             let card = actor.inPlay.first(where: { $0.name == .jail })  else {
                 return nil
         }
         
-        return [GenericAction(name: "resolve jail",
-                              actorId: actor.identifier,
-                              cardId: nil,
-                              options: [ResolveJail(actorId: actor.identifier, cardId: card.identifier)])]
+        return [ResolveJail(actorId: actor.identifier, cardId: card.identifier)]
     }
 }

@@ -35,4 +35,16 @@ extension CardProtocol {
             return 1
         }
     }
+    
+    var makeEscapeFromJail: Bool {
+        suit == .hearts
+    }
+    
+    var makeDynamiteExplode: Bool {
+        suit == .spades && ["2", "3", "4", "5", "6", "7", "8", "9"].contains(value)
+    }
+    
+    var makeBarrelWorking: Bool {
+        suit == .hearts
+    }
 }

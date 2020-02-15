@@ -45,17 +45,15 @@ class GameSetup: GameSetupProtocol {
             fatalError("sheriff not found")
         }
         
-        let actions = [GenericAction(name: "startTurn",
-                                     actorId: sheriff.identifier,
-                                     cardId: nil,
-                                     options: [StartTurn(actorId: sheriff.identifier)])]
+        let actions = [StartTurn(actorId: sheriff.identifier)]
         
         return GameState(players: players,
-                         deck: Deck(cards: shuffledCards, discardPile: []),
+                         deck: shuffledCards,
                          turn: sheriff.identifier,
                          challenge: nil,
                          bangsPlayed: 0,
-                         generalStoreCards: [],
+                         barrelsResolved: 0,
+                         generalStore: [],
                          outcome: nil,
                          actions: actions,
                          commands: [],

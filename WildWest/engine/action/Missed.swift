@@ -10,9 +10,12 @@ struct Missed: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
     
-    func execute(in state: GameStateProtocol) {
-        state.discardHand(playerId: actorId, cardId: cardId)
-        state.setChallenge(state.challenge?.removing(actorId))
+    func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
+        let updates: [GameUpdate] = [
+            .playerDiscardHand(actorId, cardId),
+            .setChallenge(state.challenge?.removing(actorId))
+        ]
+        return updates
     }
     
     var description: String {
@@ -22,20 +25,13 @@ struct Missed: ActionProtocol, Equatable {
 
 struct MissedRule: RuleProtocol {
     
-    func match(with state: GameStateProtocol) -> [GenericAction]? {
-        guard case let .shoot(targetIds) = state.challenge else {
-            return nil
-        }
-        
-        guard let actor = state.players.first(where: { $0.identifier == targetIds.first }),
+    func match(with state: GameStateProtocol) -> [ActionProtocol]? {
+        guard case let .shoot(targetIds) = state.challenge,
+            let actor = state.players.first(where: { $0.identifier == targetIds.first }),
             let cards = actor.handCards(named: .missed) else {
                 return nil
         }
         
-        return cards.map { GenericAction(name: $0.name.rawValue,
-                                         actorId: actor.identifier,
-                                         cardId: $0.identifier,
-                                         options: [Missed(actorId: actor.identifier, cardId: $0.identifier)])
-        }
+        return cards.map { Missed(actorId: actor.identifier, cardId: $0.identifier) }
     }
 }

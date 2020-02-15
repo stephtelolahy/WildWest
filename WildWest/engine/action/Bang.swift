@@ -1,20 +1,23 @@
 //
-//  Shoot.swift
+//  Bang.swift
 //  WildWest
 //
 //  Created by Hugues Stéphano TELOLAHY on 12/30/19.
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct Shoot: ActionProtocol, Equatable {
+struct Bang: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
     let targetId: String
     
-    func execute(in state: GameStateProtocol) {
-        state.discardHand(playerId: actorId, cardId: cardId)
-        state.setChallenge(.shoot([targetId]))
-        state.setBangsPlayed(state.bangsPlayed + 1)
+    func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
+        let updates: [GameUpdate] = [
+            .playerDiscardHand(actorId, cardId),
+            .setChallenge(.shoot([targetId])),
+            .setBangsPlayed(state.bangsPlayed + 1)
+        ]
+        return updates
     }
     
     var description: String {
@@ -22,7 +25,7 @@ struct Shoot: ActionProtocol, Equatable {
     }
 }
 
-struct ShootRule: RuleProtocol {
+struct BangRule: RuleProtocol {
     
     private let calculator: RangeCalculatorProtocol
     
@@ -30,7 +33,7 @@ struct ShootRule: RuleProtocol {
         self.calculator = calculator
     }
     
-    func match(with state: GameStateProtocol) -> [GenericAction]? {
+    func match(with state: GameStateProtocol) -> [ActionProtocol]? {
         guard state.challenge == nil,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
             let cards = actor.handCards(named: .bang) else {
@@ -53,14 +56,7 @@ struct ShootRule: RuleProtocol {
         }
         
         return cards.map { card in
-            let options = otherPlayers.map { Shoot(actorId: actor.identifier,
-                                                   cardId: card.identifier,
-                                                   targetId: $0.identifier)
-            }
-            return GenericAction(name: card.name.rawValue,
-                                 actorId: actor.identifier,
-                                 cardId: card.identifier,
-                                 options: options)
-        }
+            otherPlayers.map { Bang(actorId: actor.identifier, cardId: card.identifier, targetId: $0.identifier) }
+        }.flatMap { $0 }
     }
 }

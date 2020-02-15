@@ -7,8 +7,8 @@
 //
 
 struct ActionItem {
-    let action: GenericAction?
     let card: CardProtocol?
+    let actions: [ActionProtocol]
 }
 
 protocol ActionsAdapterProtocol {
@@ -33,7 +33,7 @@ class ActionsAdapter: ActionsAdapterProtocol {
         self.playerIdentifier = identifier
         items = buildItems()
     }
-
+    
     private func buildItems() -> [ActionItem] {
         guard let playerIdentifier = self.playerIdentifier,
             let state = self.state,
@@ -41,17 +41,15 @@ class ActionsAdapter: ActionsAdapterProtocol {
                 return []
         }
         
-        let cards = player.hand
-        let actions = state.actions.filter { $0.actorId == playerIdentifier }
         var result: [ActionItem] = []
-        let cardLessActions = actions.filter { $0.cardId == nil }
-        cardLessActions.forEach { result.append(ActionItem(action: $0, card: nil)) }
-        
-        cards.forEach { card in
-            let action = actions.first(where: { $0.cardId == card.identifier })
-            result.append(ActionItem(action: action, card: card))
+        var actions = state.actions.filter { $0.actorId == playerIdentifier }
+        player.hand.forEach { card in
+            result.append(ActionItem(card: card, actions: actions.filter { $0.cardId == card.identifier }))
+            actions.removeAll(where: { $0.cardId == card.identifier })
         }
-        
+        if !actions.isEmpty {
+            result.insert(ActionItem(card: nil, actions: actions), at: 0)
+        }
         return result
     }
 }

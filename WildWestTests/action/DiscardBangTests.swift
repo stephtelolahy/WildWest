@@ -11,46 +11,45 @@ import Cuckoo
 
 class DiscardBangTests: XCTestCase {
     
-    func test_DiscardCard_IfDiscardingBang() {
+    func test_DiscardBangDescription() {
         // Given
-        let mockState = MockGameStateProtocol()
-            .withEnabledDefaultImplementation(GameStateProtocolStub())
-            .challenge(is: .indians(["p1", "p2", "p3"]))
         let sut = DiscardBang(actorId: "p1", cardId: "c1")
         
         // When
-        sut.execute(in: mockState)
-        
         // Assert
-        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
+        XCTAssertEqual(sut.description, "p1 discards c1")
     }
     
     func test_RemoveActorFromIndiansChallenge_IfDiscardingBang() {
         // Given
         let mockState = MockGameStateProtocol()
-            .withEnabledDefaultImplementation(GameStateProtocolStub())
             .challenge(is: .indians(["p1", "p2", "p3"]))
         let sut = DiscardBang(actorId: "p1", cardId: "c1")
         
         // When
-        sut.execute(in: mockState)
+        let updates = sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).setChallenge(equal(to: .indians(["p2", "p3"])))
+        XCTAssertEqual(updates as? [GameUpdate], [
+            .playerDiscardHand("p1", "c1"),
+            .setChallenge(.indians(["p2", "p3"]))
+        ])
     }
     
     func test_SwitchTargetOfDuelChallenge_IfDiscardingBang() {
         // Given
         let mockState = MockGameStateProtocol()
-            .withEnabledDefaultImplementation(GameStateProtocolStub())
             .challenge(is: .duel(["p1", "p2"]))
         let sut = DiscardBang(actorId: "p1", cardId: "c1")
         
         // When
-        sut.execute(in: mockState)
+        let updates = sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).setChallenge(equal(to: .duel(["p2", "p1"])))
+        XCTAssertEqual(updates as? [GameUpdate], [
+            .playerDiscardHand("p1", "c1"),
+            .setChallenge(.duel(["p2", "p1"]))
+        ])
     }
 }
 
@@ -73,12 +72,7 @@ class DiscardBangRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions?.count, 1)
-        XCTAssertEqual(actions?[0].name, "discardBang")
-        XCTAssertEqual(actions?[0].actorId, "p1")
-        XCTAssertEqual(actions?[0].cardId, "c1")
-        XCTAssertEqual(actions?[0].options as? [DiscardBang], [DiscardBang(actorId: "p1", cardId: "c1")])
-        XCTAssertEqual(actions?[0].options[0].description, "p1 discards c1")
+        XCTAssertEqual(actions as? [DiscardBang], [DiscardBang(actorId: "p1", cardId: "c1")])
     }
     
     func test_CanDiscardBang_IfIsTargetOfDuelAndHoldingBangCard() {
@@ -98,11 +92,6 @@ class DiscardBangRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions?.count, 1)
-        XCTAssertEqual(actions?[0].name, "discardBang")
-        XCTAssertEqual(actions?[0].actorId, "p1")
-        XCTAssertEqual(actions?[0].cardId, "c1")
-        XCTAssertEqual(actions?[0].options as? [DiscardBang], [DiscardBang(actorId: "p1", cardId: "c1")])
-        XCTAssertEqual(actions?[0].options[0].description, "p1 discards c1")
+        XCTAssertEqual(actions as? [DiscardBang], [DiscardBang(actorId: "p1", cardId: "c1")])
     }
 }

@@ -70,6 +70,15 @@ import Cuckoo
  */
 class EquipTests: XCTestCase {
     
+    func test_EquipDescription() {
+        // Given
+        let sut = Equip(actorId: "p1", cardId: "c1")
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.description, "p1 plays c1")
+    }
+    
     func test_PutCardInPlay_IfEquipping() {
         // Given
         let mockPlayer = MockPlayerProtocol()
@@ -77,17 +86,14 @@ class EquipTests: XCTestCase {
             .holding(MockCardProtocol().identified(by: "c1").named(.schofield))
             .noCardsInPlay()
         let mockState = MockGameStateProtocol()
-            .withEnabledDefaultImplementation(GameStateProtocolStub())
             .players(are: mockPlayer)
         let sut = Equip(actorId: "p1", cardId: "c1")
         
         // When
-        sut.execute(in: mockState)
+        let updates = sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).players.get()
-        verify(mockState).putInPlay(playerId: "p1", cardId: "c1")
-        verifyNoMoreInteractions(mockState)
+        XCTAssertEqual(updates as? [GameUpdate], [.playerPutInPlay("p1", "c1")])
     }
     
     func test_DiscardPreviousGun_IfArmingNewGun() {
@@ -97,18 +103,16 @@ class EquipTests: XCTestCase {
             .holding(MockCardProtocol().identified(by: "c1").named(.schofield))
             .playing(MockCardProtocol().identified(by: "c2").named(.volcanic))
         let mockState = MockGameStateProtocol()
-            .withEnabledDefaultImplementation(GameStateProtocolStub())
             .players(are: mockPlayer)
         let sut = Equip(actorId: "p1", cardId: "c1")
         
         // When
-        sut.execute(in: mockState)
+        let updates = sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).players.get()
-        verify(mockState).putInPlay(playerId: "p1", cardId: "c1")
-        verify(mockState).discardInPlay(playerId: "p1", cardId: "c2")
-        verifyNoMoreInteractions(mockState)
+        XCTAssertEqual(updates as? [GameUpdate], [
+            .playerDiscardInPlay("p1", "c2"),
+            .playerPutInPlay("p1", "c1")])
     }
 }
 
@@ -139,34 +143,18 @@ class EquipRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions?.count, 3)
-        
-        XCTAssertEqual(actions?[0].name, "schofield")
-        XCTAssertEqual(actions?[0].actorId, "p1")
-        XCTAssertEqual(actions?[0].cardId, "c1")
-        XCTAssertEqual(actions?[0].options as? [Equip], [Equip(actorId: "p1", cardId: "c1")])
-        XCTAssertEqual(actions?[0].options[0].description, "p1 plays c1")
-        
-        XCTAssertEqual(actions?[1].name, "scope")
-        XCTAssertEqual(actions?[1].actorId, "p1")
-        XCTAssertEqual(actions?[1].cardId, "c2")
-        XCTAssertEqual(actions?[1].options as? [Equip], [Equip(actorId: "p1", cardId: "c2")])
-        XCTAssertEqual(actions?[1].options[0].description, "p1 plays c2")
-        
-        XCTAssertEqual(actions?[2].name, "dynamite")
-        XCTAssertEqual(actions?[2].actorId, "p1")
-        XCTAssertEqual(actions?[2].cardId, "c3")
-        XCTAssertEqual(actions?[2].options as? [Equip], [Equip(actorId: "p1", cardId: "c3")])
-        XCTAssertEqual(actions?[2].options[0].description, "p1 plays c3")
+        XCTAssertEqual(actions as? [Equip], [
+            Equip(actorId: "p1", cardId: "c1"),
+            Equip(actorId: "p1", cardId: "c2"),
+            Equip(actorId: "p1", cardId: "c3")
+        ])
     }
     
     func test_CannotEquip_IfAlreadyPlayingCardWithTheSameName() {
         // Given
         let sut = EquipRule()
-        let mockCard1 = MockCardProtocol()
-            .named(.mustang)
-        let mockCard2 = MockCardProtocol()
-            .named(.mustang)
+        let mockCard1 = MockCardProtocol().named(.mustang)
+        let mockCard2 = MockCardProtocol().named(.mustang)
         let mockPlayer = MockPlayerProtocol()
             .identified(by: "p1")
             .holding(mockCard1)

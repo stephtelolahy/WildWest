@@ -11,76 +11,84 @@ import Cuckoo
 
 class GameEngineTests: XCTestCase {
     
-    func test_AddActionToCommands_IfExecuting() {
-        // Given
-        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
-        let mockAction = MockActionProtocol()
-            .withEnabledDefaultImplementation(ActionProtocolStub())
-            .described(by: "ac")
-        let sut = GameEngine(state: mockState, rules: [])
-        
-        // When
-        sut.execute(mockAction)
-        
-        // Assert
-        verify(mockAction).execute(in: state(equalTo: mockState))
-        verify(mockState).addCommand(action(describedBy: "ac"))
+    var mockState: MockGameStateProtocol!
+    var mockMutableState: MockMutableGameStateProtocol!
+    var mockRule: MockRuleProtocol!
+    var mockCalculator: MockOutcomeCalculatorProtocol!
+    var mockAction: MockActionProtocol!
+    
+    var sut: GameEngineProtocol!
+    
+    override func setUp() {
+        mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
+        mockMutableState = MockMutableGameStateProtocol().withEnabledDefaultImplementation(MutableGameStateProtocolStub())
+        mockRule = MockRuleProtocol().withEnabledDefaultImplementation(RuleProtocolStub())
+        mockCalculator = MockOutcomeCalculatorProtocol().withEnabledDefaultImplementation(OutcomeCalculatorProtocolStub())
+        sut = GameEngine(state: mockState, mutableState: mockMutableState, rules: [mockRule], calculator: mockCalculator)
+        mockAction = MockActionProtocol().withEnabledDefaultImplementation(ActionProtocolStub())
     }
     
-    func test_SetMatchingActions_IfExecuting() {
+    func test_ExecuteGameUpdates_IfExecutingCommand() {
         // Given
-        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
-        let mockAction = MockActionProtocol().withEnabledDefaultImplementation(ActionProtocolStub())
-        let action1 = MockActionProtocol()
-            .described(by: "a1")
-            .actorId(is: "p1")
-        let action2 = MockActionProtocol()
-            .described(by: "a2")
-            .actorId(is: "p1")
-        let genericAction = GenericAction(name: "ac",
-                                          actorId: "p1",
-                                          cardId: nil,
-                                          options: [action1, action2])
-        let mockRule1 = MockRuleProtocol()
-        let mockRule2 = MockRuleProtocol()
-        Cuckoo.stub(mockRule1) { mock in
-            when(mock.match(with: state(equalTo: mockState))).thenReturn(nil)
+        let mockUpdate1 = MockGameUpdateProtocol().withEnabledDefaultImplementation(GameUpdateProtocolStub())
+        let mockUpdate2 = MockGameUpdateProtocol().withEnabledDefaultImplementation(GameUpdateProtocolStub())
+        Cuckoo.stub(mockAction) { mock in
+            when(mock.execute(in: state(equalTo: mockState))).thenReturn([mockUpdate1, mockUpdate2])
         }
-        Cuckoo.stub(mockRule2) { mock in
-            when(mock.match(with: state(equalTo: mockState))).thenReturn([genericAction])
-        }
-        let sut = GameEngine(state: mockState, rules: [mockRule1, mockRule2])
         
         // When
         sut.execute(mockAction)
         
         // Assert
-        verify(mockRule1).match(with: state(equalTo: mockState))
-        verify(mockRule2).match(with: state(equalTo: mockState))
-        let argumentCaptor = ArgumentCaptor<[GenericAction]>()
-        verify(mockState).setActions(argumentCaptor.capture())
-        XCTAssertEqual(argumentCaptor.value?.count, 1)
-        XCTAssertEqual(argumentCaptor.value?[0].actorId, "p1")
-        XCTAssertEqual(argumentCaptor.value?[0].name, "ac")
-        XCTAssertEqual(argumentCaptor.value?[0].options.map { $0.description }, ["a1", "a2"])
+        verify(mockUpdate1).execute(in: mutableState(equalTo: mockMutableState))
+        verify(mockUpdate2).execute(in: mutableState(equalTo: mockMutableState))
+    }
+    
+    func test_AddCommandToHistory_IfExecutingCommand() {
+        // Given
+        // When
+        sut.execute(mockAction)
+        
+        // Assert
+        verify(mockMutableState).addCommand(action(equalTo: mockAction))
+    }
+    
+    func test_SetMatchingActions_IfExecutingCommand() {
+        // Given
+        let matchedAction1 = MockActionProtocol()
+        let matchedAction2 = MockActionProtocol()
+        Cuckoo.stub(mockRule) { mock in
+            when(mock.match(with: state(equalTo: mockState))).thenReturn([matchedAction1, matchedAction2])
+        }
+        
+        // When
+        sut.execute(mockAction)
+        
+        // Assert
+        verify(mockRule).match(with: state(equalTo: mockState))
+        verify(mockMutableState).setActions(actions(equalTo: [matchedAction1, matchedAction2]))
     }
     
     func test_DoNotGenerateActions_IfGameIsOver() {
         // Given
-        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
-        let mockAction = MockActionProtocol().withEnabledDefaultImplementation(ActionProtocolStub())
         Cuckoo.stub(mockState) { mock in
-            when(mock.outcome.get).thenReturn(.sheriffWin)
+            when(mock.players.get).thenReturn([
+                MockPlayerProtocol().role(is: .deputy),
+                MockPlayerProtocol().role(is: .renegade),
+                MockPlayerProtocol().role(is: .outlaw)
+            ])
         }
-        let mockRule1 = MockRuleProtocol()
-        let sut = GameEngine(state: mockState, rules: [mockRule1])
+        Cuckoo.stub(mockCalculator) { mock in
+            when(mock.outcome(for: any())).thenReturn(.outlawWin)
+        }
         
         // When
         sut.execute(mockAction)
         
         // Assert
-        verify(mockAction).execute(in: state(equalTo: mockState))
-        verify(mockState).setActions(isEmpty())
-        verifyNoMoreInteractions(mockRule1)
+        verify(mockCalculator).outcome(for: equal(to: [.deputy, .renegade, .outlaw]))
+        verify(mockMutableState).setOutcome(equal(to: .outlawWin))
+        verify(mockMutableState).setActions(isEmpty())
+        verifyNoMoreInteractions(mockRule)
     }
 }

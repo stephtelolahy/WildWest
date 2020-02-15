@@ -18,32 +18,43 @@ import Cuckoo
  */
 class PanicTests: XCTestCase {
     
-    func test_PullOtherPlayerHandCard_IfPlayingPanic() {
+    func test_PanicDescription() {
         // Given
-        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
-        let sut = Panic(actorId: "p1", cardId: "c1", targetPlayerId: "p2", targetCardId: "c2", targetCardSource: .hand)
+        let sut = Panic(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c2", ownerId: "p2", source: .hand))
         
         // When
-        sut.execute(in: mockState)
+        // Assert
+        XCTAssertEqual(sut.description, "p1 plays c1 to take c2 from p2's hand")
+    }
+    
+    func test_PullOtherPlayerHandCard_IfPlayingPanic() {
+        // Given
+        let mockState = MockGameStateProtocol()
+        let sut = Panic(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c2", ownerId: "p2", source: .hand))
+        
+        // When
+        let updates = sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
-        verify(mockState).pullHand(playerId: "p1", otherId: "p2", cardId: "c2")
-        verifyNoMoreInteractions(mockState)
+        XCTAssertEqual(updates as? [GameUpdate], [
+            .playerDiscardHand("p1", "c1"),
+            .playerPullFromOtherHand("p1", "p2", "c2")
+        ])
     }
     
     func test_PullOtherPlayerInPlayCard_IfPlayingPanic() {
         // Given
-        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
-        let sut = Panic(actorId: "p1", cardId: "c1", targetPlayerId: "p2", targetCardId: "c2", targetCardSource: .inPlay)
+        let mockState = MockGameStateProtocol()
+        let sut = Panic(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c2", ownerId: "p2", source: .inPlay))
         
         // When
-        sut.execute(in: mockState)
+        let updates = sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
-        verify(mockState).pullInPlay(playerId: "p1", otherId: "p2", cardId: "c2")
-        verifyNoMoreInteractions(mockState)
+        XCTAssertEqual(updates as? [GameUpdate], [
+            .playerDiscardHand("p1", "c1"),
+            .playerPullFromOtherInPlay("p1", "p2", "c2")
+        ])
     }
 }
 
@@ -71,29 +82,22 @@ class PanicRuleTests: XCTestCase {
             .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
         
-        let mockRangeCalculator = MockRangeCalculatorProtocol()
-        Cuckoo.stub(mockRangeCalculator) { mock in
+        let mockCalculator = MockRangeCalculatorProtocol()
+        Cuckoo.stub(mockCalculator) { mock in
             when(mock.distance(from: "p1", to: "p2", in: any())).thenReturn(1)
             when(mock.distance(from: "p1", to: "p3", in: any())).thenReturn(0)
         }
         
-        let sut = PanicRule(calculator: mockRangeCalculator)
+        let sut = PanicRule(calculator: mockCalculator)
         
         // When
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions?.count, 1)
-        XCTAssertEqual(actions?[0].name, "panic")
-        XCTAssertEqual(actions?[0].actorId, "p1")
-        XCTAssertEqual(actions?[0].cardId, "c1")
-        XCTAssertEqual(actions?[0].options as? [Panic], [
-            Panic(actorId: "p1", cardId: "c1", targetPlayerId: "p2", targetCardId: "c2", targetCardSource: .hand),
-            Panic(actorId: "p1", cardId: "c1", targetPlayerId: "p3", targetCardId: "c3", targetCardSource: .inPlay)
+        XCTAssertEqual(actions as? [Panic], [
+            Panic(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c2", ownerId: "p2", source: .hand)),
+            Panic(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c3", ownerId: "p3", source: .inPlay))
         ])
-        XCTAssertEqual(actions?[0].options.map { $0.description }, [
-            "p1 plays c1 to discard c2 from p2's hand",
-            "p1 plays c1 to discard c3 from p3's inPlay"])
     }
     
     func test_CannotPlayPanic_IfOtherCardsAreMoreThan1() {
@@ -118,13 +122,13 @@ class PanicRuleTests: XCTestCase {
             .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
         
-        let mockRangeCalculator = MockRangeCalculatorProtocol()
-        Cuckoo.stub(mockRangeCalculator) { mock in
+        let mockCalculator = MockRangeCalculatorProtocol()
+        Cuckoo.stub(mockCalculator) { mock in
             when(mock.distance(from: "p1", to: "p2", in: any())).thenReturn(2)
             when(mock.distance(from: "p1", to: "p3", in: any())).thenReturn(3)
         }
         
-        let sut = PanicRule(calculator: mockRangeCalculator)
+        let sut = PanicRule(calculator: mockCalculator)
         
         // When
         let actions = sut.match(with: mockState)
@@ -150,12 +154,12 @@ class PanicRuleTests: XCTestCase {
             .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2)
         
-        let mockRangeCalculator = MockRangeCalculatorProtocol()
-        Cuckoo.stub(mockRangeCalculator) { mock in
+        let mockCalculator = MockRangeCalculatorProtocol()
+        Cuckoo.stub(mockCalculator) { mock in
             when(mock.distance(from: "p1", to: "p2", in: any())).thenReturn(1)
         }
         
-        let sut = PanicRule(calculator: mockRangeCalculator)
+        let sut = PanicRule(calculator: mockCalculator)
         
         // When
         let actions = sut.match(with: mockState)
@@ -176,24 +180,19 @@ class PanicRuleTests: XCTestCase {
             .currentTurn(is: "p1")
             .players(are: mockPlayer1)
         
-        let mockRangeCalculator = MockRangeCalculatorProtocol()
-        Cuckoo.stub(mockRangeCalculator) { mock in
+        let mockCalculator = MockRangeCalculatorProtocol()
+        Cuckoo.stub(mockCalculator) { mock in
             when(mock.distance(from: "p1", to: "p2", in: any())).thenReturn(1)
         }
         
-        let sut = PanicRule(calculator: mockRangeCalculator)
+        let sut = PanicRule(calculator: mockCalculator)
         
         // When
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions?.count, 1)
-        XCTAssertEqual(actions?[0].name, "panic")
-        XCTAssertEqual(actions?[0].actorId, "p1")
-        XCTAssertEqual(actions?[0].cardId, "c1")
-        XCTAssertEqual(actions?[0].options as? [Panic], [
-            Panic(actorId: "p1", cardId: "c1", targetPlayerId: "p1", targetCardId: "c2", targetCardSource: .inPlay)
+        XCTAssertEqual(actions as? [Panic], [
+            Panic(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c2", ownerId: "p1", source: .inPlay))
         ])
-        XCTAssertEqual(actions?[0].options[0].description, "p1 plays c1 to discard c2 from p1's inPlay")
     }
 }

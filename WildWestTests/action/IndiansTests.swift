@@ -17,6 +17,15 @@ import Cuckoo
  */
 class IndiansTests: XCTestCase {
     
+    func test_IndiansDescription() {
+        // Given
+        let sut = Indians(actorId: "p1", cardId: "c1")
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.description, "p1 plays c1")
+    }
+    
     func test_DiscardCardAndSetChallengeToIndiansAllOtherPlayersRightDirection_IfPlayingIndians() {
         // Given
         let mockPlayer1 = MockPlayerProtocol().identified(by: "p1")
@@ -24,18 +33,17 @@ class IndiansTests: XCTestCase {
         let mockPlayer3 = MockPlayerProtocol().identified(by: "p3")
         let mockPlayer4 = MockPlayerProtocol().identified(by: "p4")
         let mockState = MockGameStateProtocol()
-            .withEnabledDefaultImplementation(GameStateProtocolStub())
             .players(are: mockPlayer4, mockPlayer1, mockPlayer2, mockPlayer3)
         let sut = Indians(actorId: "p1", cardId: "c1")
         
         // When
-        sut.execute(in: mockState)
+        let updates = sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
-        verify(mockState, atLeastOnce()).players.get()
-        verify(mockState).setChallenge(equal(to: .indians(["p2", "p3", "p4"])))
-        verifyNoMoreInteractions(mockState)
+        XCTAssertEqual(updates as? [GameUpdate], [
+            .playerDiscardHand("p1", "c1"),
+            .setChallenge(.indians(["p2", "p3", "p4"]))
+        ])
     }
 }
 
@@ -59,11 +67,6 @@ class IndiansRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions?.count, 1)
-        XCTAssertEqual(actions?[0].name, "indians")
-        XCTAssertEqual(actions?[0].actorId, "p1")
-        XCTAssertEqual(actions?[0].cardId, "c1")
-        XCTAssertEqual(actions?[0].options as? [Indians], [Indians(actorId: "p1", cardId: "c1")])
-        XCTAssertEqual(actions?[0].options[0].description, "p1 plays c1")
+        XCTAssertEqual(actions as? [Indians], [Indians(actorId: "p1", cardId: "c1")])
     }
 }

@@ -33,3 +33,12 @@ extension Array where Element: Equatable {
         return result
     }
 }
+
+extension Array {
+    mutating func removeFirst(where shouldBeRemoved: (Element) -> Bool) -> Element? {
+        guard let index = self.firstIndex(where: { shouldBeRemoved($0) }) else {
+            return nil
+        }
+        return self.remove(at: index)
+    }
+}

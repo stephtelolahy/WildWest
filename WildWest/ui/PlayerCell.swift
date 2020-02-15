@@ -43,12 +43,22 @@ class PlayerCell: UICollectionViewCell {
                 return
         }
         
-        guard !isSelected else {
+        if item.isTurn {
+            backgroundColor = .systemOrange
+            return
+        }
+        
+        if isSelected {
             backgroundColor = .systemYellow
             return
         }
         
-        backgroundColor = item.isActive ? .systemGreen : .clear
+        if item.isActive {
+            backgroundColor = .systemGreen
+            return
+        }
+        
+        backgroundColor = .clear
     }
 }
 

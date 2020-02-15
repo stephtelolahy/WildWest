@@ -8,19 +8,13 @@
 
 struct EndTurn: ActionProtocol, Equatable {
     let actorId: String
+    let cardId: String = ""
     let cardsToDiscardIds: [String]
     
-    func execute(in state: GameStateProtocol) {
-        cardsToDiscardIds.forEach { state.discardHand(playerId: actorId, cardId: $0) }
-        
-        guard let turnIndex = state.players.firstIndex(where: { $0.identifier == state.turn }) else {
-            return
-        }
-        
-        let nextIndex = (turnIndex + 1) % state.players.count
-        let nextPlayer = state.players[nextIndex]
-        state.setTurn(nextPlayer.identifier)
-        state.setChallenge(.startTurn)
+    func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
+        var updates: [GameUpdate] = cardsToDiscardIds.map { GameUpdate.playerDiscardHand(actorId, $0) }
+        updates.append(.setChallenge(.startTurn(state.nextTurn)))
+        return updates
     }
     
     var description: String {
@@ -34,25 +28,20 @@ struct EndTurn: ActionProtocol, Equatable {
 
 struct EndTurnRule: RuleProtocol {
     
-    func match(with state: GameStateProtocol) -> [GenericAction]? {
+    func match(with state: GameStateProtocol) -> [ActionProtocol]? {
         guard state.challenge == nil,
             let actor = state.players.first(where: { $0.identifier == state.turn }) else {
                 return nil
         }
         
-        var options: [EndTurn] = []
-        if actor.hand.count <= actor.health {
-            options = [EndTurn(actorId: actor.identifier, cardsToDiscardIds: [])]
-        } else {
-            let cardsToDiscardCount = actor.hand.count - actor.health
-            let handCardIds = actor.hand.map { $0.identifier }
-            let cardsCombinations = handCardIds.combine(by: cardsToDiscardCount)
-            options = cardsCombinations.map { EndTurn(actorId: actor.identifier, cardsToDiscardIds: $0) }
+        let haveExcessCards = actor.hand.count > actor.health
+        guard haveExcessCards else {
+            return [EndTurn(actorId: actor.identifier, cardsToDiscardIds: [])]
         }
         
-        return [GenericAction(name: "endTurn",
-                              actorId: actor.identifier,
-                              cardId: nil,
-                              options: options)]
+        let cardsToDiscardCount = actor.hand.count - actor.health
+        let handCardIds = actor.hand.map { $0.identifier }
+        let cardsCombinations = handCardIds.combine(by: cardsToDiscardCount)
+        return cardsCombinations.map { EndTurn(actorId: actor.identifier, cardsToDiscardIds: $0) }
     }
 }

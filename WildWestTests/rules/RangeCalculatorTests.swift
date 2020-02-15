@@ -50,7 +50,7 @@ class RangeCalculatorTests: XCTestCase {
         let mockState = MockGameStateProtocol().players(are: mockPlayer1)
         
         // When
-        // Assert
+        // Asserta
         XCTAssertEqual(sut.distance(from: "p1", to: "p1", in: mockState), 0)
     }
     

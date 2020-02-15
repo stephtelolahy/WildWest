@@ -9,7 +9,7 @@
 import XCTest
 
 class ResourcesProviderTests_Figures: XCTestCase {
-
+    
     private lazy var figures: [FigureProtocol] = {
         let jsonReader = JsonReader(bundle: Bundle(for: type(of: self)))
         let sut: ResourcesProviderProtocol = ResourcesProvider(jsonReader: jsonReader)
@@ -43,5 +43,5 @@ class ResourcesProviderTests_Figures: XCTestCase {
         let bundle = Bundle(for: type(of: self))
         XCTAssertTrue(figures.allSatisfy { UIImage(named: $0.imageName, in: bundle, compatibleWith: nil) != nil })
     }
-
+    
 }

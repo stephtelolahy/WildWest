@@ -35,14 +35,14 @@ class JailTests: XCTestCase {
     
     func test_PutCardInPlayOfTargetPlayer_IfPlayingJail() {
         // Given
-        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
+        let mockState = MockGameStateProtocol()
         let sut = Jail(actorId: "p1", cardId: "c1", targetId: "p2")
         
         // When
-        sut.execute(in: mockState)
+        let updates = sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).putInJail(playerId: "p1", cardId: "c1", targetId: "p2")
+        XCTAssertEqual(updates as? [GameUpdate], [.playerPutInPlayOfOther("p1", "p2", "c1")])
     }
 }
 
@@ -67,10 +67,7 @@ class JailRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions?.count, 1)
-        XCTAssertEqual(actions?[0].name, "jail")
-        XCTAssertEqual(actions?[0].cardId, "c1")
-        XCTAssertEqual(actions?[0].options as? [Jail], [Jail(actorId: "p1", cardId: "c1", targetId: "p2")])
+        XCTAssertEqual(actions as? [Jail], [Jail(actorId: "p1", cardId: "c1", targetId: "p2")])
     }
     
     func test_CannotPlayJail_IfTargetPlayerIsSheriff() {

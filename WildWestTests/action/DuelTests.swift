@@ -24,32 +24,28 @@ import Cuckoo
  */
 class DuelTests: XCTestCase {
     
-    func test_DiscardDuelCard_IfPlayingDuel() {
+    func test_DuelDescription() {
         // Given
-        let mockState = MockGameStateProtocol()
-            .withEnabledDefaultImplementation(GameStateProtocolStub())
-        
         let sut = Duel(actorId: "p1", cardId: "c1", targetId: "p2")
         
         // When
-        sut.execute(in: mockState)
-        
         // Assert
-        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
+        XCTAssertEqual(sut.description, "p1 plays c1 against p2")
     }
     
     func test_TriggerDuelChallenge_IfPlayingDuel() {
         // Given
         let mockState = MockGameStateProtocol()
-            .withEnabledDefaultImplementation(GameStateProtocolStub())
-        
         let sut = Duel(actorId: "p1", cardId: "c1", targetId: "p2")
         
         // When
-        sut.execute(in: mockState)
+        let updates = sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).setChallenge(equal(to: .duel(["p2", "p1"])))
+        XCTAssertEqual(updates as? [GameUpdate], [
+            .playerDiscardHand("p1", "c1"),
+            .setChallenge(.duel(["p2", "p1"]))
+        ])
     }
 }
 
@@ -74,17 +70,10 @@ class DuelRuleTests: XCTestCase {
         // When
         let actions = sut.match(with: mockState)
         
-        // AssertXCTAssertEqual(actions?.count, 1)
-        XCTAssertEqual(actions?[0].name, "duel")
-        XCTAssertEqual(actions?[0].actorId, "p1")
-        XCTAssertEqual(actions?[0].cardId, "c1")
-        XCTAssertEqual(actions?[0].options as? [Duel], [
+        XCTAssertEqual(actions as? [Duel], [
             Duel(actorId: "p1", cardId: "c1", targetId: "p2"),
             Duel(actorId: "p1", cardId: "c1", targetId: "p3")
         ])
-        XCTAssertEqual(actions?[0].options.map { $0.description }, [
-            "p1 plays c1 against p2",
-            "p1 plays c1 against p3"])
     }
     
 }

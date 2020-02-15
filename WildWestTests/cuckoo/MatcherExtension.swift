@@ -8,27 +8,39 @@
 
 import Cuckoo
 
-func card(identifiedBy identifier: String) -> ParameterMatcher<CardProtocol> {
+func card(equalTo object: AnyObject) -> ParameterMatcher<CardProtocol> {
     return ParameterMatcher(matchesFunction: { card -> Bool in
-        return card.identifier == identifier
-    })
-}
-
-func cards(identifiedBy identifiers: [String]) -> ParameterMatcher<[CardProtocol]> {
-    return ParameterMatcher(matchesFunction: { cards -> Bool in
-        return cards.map { $0.identifier } == identifiers
-    })
-}
-
-func action(describedBy description: String) -> ParameterMatcher<ActionProtocol> {
-    return ParameterMatcher(matchesFunction: { action -> Bool in
-        return action.description == description
+        return card as AnyObject === object
     })
 }
 
 func state(equalTo object: AnyObject) -> ParameterMatcher<GameStateProtocol> {
     return ParameterMatcher(matchesFunction: { state -> Bool in
         return state as AnyObject === object
+    })
+}
+
+func mutableState(equalTo object: AnyObject) -> ParameterMatcher<MutableGameStateProtocol> {
+    return ParameterMatcher(matchesFunction: { state -> Bool in
+        return state as AnyObject === object
+    })
+}
+
+func action(equalTo object: AnyObject) -> ParameterMatcher<ActionProtocol> {
+    return ParameterMatcher(matchesFunction: { action -> Bool in
+        return action as AnyObject === object
+    })
+}
+
+func actions(equalTo array: [AnyObject]) -> ParameterMatcher<[ActionProtocol]> {
+    return ParameterMatcher(matchesFunction: { actions -> Bool in
+        for (index, element) in actions.enumerated() {
+            guard element as AnyObject === array[index] else {
+                return false
+            }
+        }
+        
+        return true
     })
 }
 

@@ -31,29 +31,35 @@ import Cuckoo
 
 class ShootTest: XCTestCase {
     
-    func test_DiscardCardAndTriggerBangChallengeAndIncrementShootsCount_IfPlayingShoot() {
+    func test_ShootDescription() {
         // Given
-        let mockState = MockGameStateProtocol()
-            .withEnabledDefaultImplementation(GameStateProtocolStub())
-            .bangsPlayed(is: 1)
-        
-        let sut = Shoot(actorId: "p1", cardId: "c1", targetId: "p2")
+        let sut = Bang(actorId: "p1", cardId: "c1", targetId: "p2")
         
         // When
-        sut.execute(in: mockState)
+        // Assert
+        XCTAssertEqual(sut.description, "p1 plays c1 against p2")
+    }
+    
+    func test_DiscardCardAndTriggerBangChallengeAndIncrementShootsCount_IfPlayingShoot() {
+        // Given
+        let mockState = MockGameStateProtocol().bangsPlayed(is: 1)
+        let sut = Bang(actorId: "p1", cardId: "c1", targetId: "p2")
+        
+        // When
+        let updates = sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
-        verify(mockState).setChallenge(equal(to: .shoot(["p2"])))
-        verify(mockState).bangsPlayed.get()
-        verify(mockState).setBangsPlayed(2)
-        verifyNoMoreInteractions(mockState)
+        XCTAssertEqual(updates as? [GameUpdate], [
+            .playerDiscardHand("p1", "c1"),
+            .setChallenge(.shoot(["p2"])),
+            .setBangsPlayed(2)
+        ])
     }
 }
 
 class ShootRuleTest: XCTestCase {
     
-    func test_CanPlayShoot_IfYourTurnAndOwnCardAndOtherIsReachableByDefault() {
+    func test_CanPlayShoot_IfYourTurnAndOwnCardAndOtherIsAtRangeOf1() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
@@ -73,23 +79,15 @@ class ShootRuleTest: XCTestCase {
             when(mock.maximumNumberOfShoots(of: player(equalTo: mockPlayer1))).thenReturn(1)
         }
         
-        let sut = ShootRule(calculator: mockCalculator)
+        let sut = BangRule(calculator: mockCalculator)
         
         // When
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions?.count, 1)
-        XCTAssertEqual(actions?[0].name, "bang")
-        XCTAssertEqual(actions?[0].actorId, "p1")
-        XCTAssertEqual(actions?[0].cardId, "c1")
-        XCTAssertEqual(actions?[0].options as? [Shoot], [
-            Shoot(actorId: "p1", cardId: "c1", targetId: "p2"),
-            Shoot(actorId: "p1", cardId: "c1", targetId: "p3")
-        ])
-        XCTAssertEqual(actions?[0].options.map { $0.description }, [
-            "p1 plays c1 against p2",
-            "p1 plays c1 against p3"
+        XCTAssertEqual(actions as? [Bang], [
+            Bang(actorId: "p1", cardId: "c1", targetId: "p2"),
+            Bang(actorId: "p1", cardId: "c1", targetId: "p3")
         ])
     }
     
@@ -113,7 +111,7 @@ class ShootRuleTest: XCTestCase {
             when(mock.maximumNumberOfShoots(of: player(equalTo: mockPlayer1))).thenReturn(0)
         }
         
-        let sut = ShootRule(calculator: mockCalculator)
+        let sut = BangRule(calculator: mockCalculator)
         
         // When
         let actions = sut.match(with: mockState)
@@ -141,23 +139,15 @@ class ShootRuleTest: XCTestCase {
             when(mock.maximumNumberOfShoots(of: player(equalTo: mockPlayer1))).thenReturn(0)
         }
         
-        let sut = ShootRule(calculator: mockCalculator)
+        let sut = BangRule(calculator: mockCalculator)
         
         // When
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions?.count, 1)
-        XCTAssertEqual(actions?[0].name, "bang")
-        XCTAssertEqual(actions?[0].actorId, "p1")
-        XCTAssertEqual(actions?[0].cardId, "c1")
-        XCTAssertEqual(actions?[0].options as? [Shoot], [
-            Shoot(actorId: "p1", cardId: "c1", targetId: "p2"),
-            Shoot(actorId: "p1", cardId: "c1", targetId: "p3")
-        ])
-        XCTAssertEqual(actions?[0].options.map { $0.description }, [
-            "p1 plays c1 against p2",
-            "p1 plays c1 against p3"
+        XCTAssertEqual(actions as? [Bang], [
+            Bang(actorId: "p1", cardId: "c1", targetId: "p2"),
+            Bang(actorId: "p1", cardId: "c1", targetId: "p3")
         ])
     }
     
@@ -179,7 +169,7 @@ class ShootRuleTest: XCTestCase {
             when(mock.maximumNumberOfShoots(of: player(equalTo: mockPlayer1))).thenReturn(1)
         }
         
-        let sut = ShootRule(calculator: mockCalculator)
+        let sut = BangRule(calculator: mockCalculator)
         
         // When
         let actions = sut.match(with: mockState)

@@ -7,53 +7,64 @@
 //
 
 struct LooseLife: ActionProtocol, Equatable {
-    
     let actorId: String
+    let cardId: String = ""
+    let points: Int
     
     var description: String {
-        "\(actorId) looses life point"
+        "\(actorId) looses \(points) life points"
     }
     
-    func execute(in state: GameStateProtocol) {
+    func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
         guard let player = state.players.first(where: { $0.identifier == actorId }) else {
-            return
+            return []
         }
         
-        state.setChallenge(state.challenge?.removing(actorId))
-        
-        if player.health >= 2 {
-            state.looseLifePoint(playerId: actorId)
+        var updates: [GameUpdate] = []
+        let health = player.health - points
+        if health > 0 {
+            updates.append(.playerSetHealth(actorId, health))
         } else {
-            state.eliminate(playerId: actorId)
+            updates.append(.eliminatePlayer(actorId))
+            
+            if actorId == state.turn {
+                updates.append(.setChallenge(.startTurn(state.nextTurn)))
+                return updates
+            }
         }
+        
+        if let challenge = state.challenge {
+            switch challenge {
+            case .dynamiteExplode:
+                updates.append(.setChallenge(.startTurn(actorId)))
+                
+            default:
+                updates.append(.setChallenge(challenge.removing(actorId)))
+            }
+        }
+        
+        return updates
     }
 }
 
 struct LooseLifeRule: RuleProtocol {
     
-    func match(with state: GameStateProtocol) -> [GenericAction]? {
-        var actorId: String?
-        
+    func match(with state: GameStateProtocol) -> [ActionProtocol]? {
         switch state.challenge {
         case let .shoot(targetIds):
-            actorId = targetIds.first
+            return [LooseLife(actorId: targetIds[0], points: 1)]
             
         case let .indians(targetIds):
-            actorId = targetIds.first
+            return [LooseLife(actorId: targetIds[0], points: 1)]
             
         case let .duel(playerIds):
-            actorId = playerIds.first
+            return [LooseLife(actorId: playerIds[0], points: 1)]
+            
+        case let .dynamiteExplode(playerId):
+            return [LooseLife(actorId: playerId, points: 3)]
+            
         default:
-            break
-        }
-        
-        guard let actor = state.players.first(where: { $0.identifier == actorId }) else {
             return nil
         }
-        
-        return [GenericAction(name: "looseLifePoint",
-                              actorId: actor.identifier,
-                              cardId: nil,
-                              options: [LooseLife(actorId: actor.identifier)])]
     }
 }

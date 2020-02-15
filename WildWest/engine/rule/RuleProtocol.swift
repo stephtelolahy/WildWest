@@ -7,12 +7,13 @@
 //
 
 protocol RuleProtocol {
-    func match(with state: GameStateProtocol) -> [GenericAction]?
+    func match(with state: GameStateProtocol) -> [ActionProtocol]?
 }
 
-struct GenericAction {
-    let name: String
-    let actorId: String
-    let cardId: String?
-    let options: [ActionProtocol]
+protocol ActionProtocol {
+    var actorId: String { get }
+    var cardId: String { get }
+    var description: String { get }
+    
+    func execute(in state: GameStateProtocol) -> [GameUpdateProtocol]
 }

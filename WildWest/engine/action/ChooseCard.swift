@@ -10,19 +10,22 @@ struct ChooseCard: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
     
-    func execute(in state: GameStateProtocol) {
-        state.setChallenge(state.challenge?.removing(actorId))
-        state.pullGeneralStore(playerId: actorId, cardId: cardId)
+    func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
+        let updates: [GameUpdate] = [
+            .playerPullFromGeneralStore(actorId, cardId),
+            .setChallenge(state.challenge?.removing(actorId))
+        ]
+        return updates
     }
     
     var description: String {
-        return "\(actorId) chooses \(cardId)"
+        "\(actorId) chooses \(cardId)"
     }
 }
 
 struct ChooseCardRule: RuleProtocol {
     
-    func match(with state: GameStateProtocol) -> [GenericAction]? {
+    func match(with state: GameStateProtocol) -> [ActionProtocol]? {
         var actorId: String?
         switch state.challenge {
         case let .generalStore(playerIds):
@@ -36,10 +39,6 @@ struct ChooseCardRule: RuleProtocol {
             return nil
         }
         
-        let options = state.generalStoreCards.map { ChooseCard(actorId: actor.identifier, cardId: $0.identifier) }
-        return [GenericAction(name: "chooseCard",
-                              actorId: actor.identifier,
-                              cardId: nil,
-                              options: options)]
+        return state.generalStore.map { ChooseCard(actorId: actor.identifier, cardId: $0.identifier) }
     }
 }

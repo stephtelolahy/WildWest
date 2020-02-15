@@ -9,6 +9,7 @@
 import Cuckoo
 
 extension MockCardProtocol {
+    
     func identified(by identifier: String) -> MockCardProtocol {
         Cuckoo.stub(self) { mock in
             when(mock.identifier.get).thenReturn(identifier)
@@ -26,6 +27,13 @@ extension MockCardProtocol {
     func suit(is suit: CardSuit) -> MockCardProtocol {
         Cuckoo.stub(self) { mock in
             when(mock.suit.get).thenReturn(suit)
+        }
+        return self
+    }
+    
+    func value(is value: String) -> MockCardProtocol {
+        Cuckoo.stub(self) { mock in
+            when(mock.value.get).thenReturn(value)
         }
         return self
     }

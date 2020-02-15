@@ -19,6 +19,15 @@ import Cuckoo
  */
 class GatlingTests: XCTestCase {
     
+    func test_GatlingDescription() {
+        // Given
+        let sut = Gatling(actorId: "p1", cardId: "c1")
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.description, "p1 plays c1")
+    }
+    
     func test_DiscardCardAndSetChallengeToShootAllOtherPlayersRightDirection_IfPlayingGatling() {
         // Given
         let mockPlayer1 = MockPlayerProtocol().identified(by: "p1")
@@ -26,18 +35,17 @@ class GatlingTests: XCTestCase {
         let mockPlayer3 = MockPlayerProtocol().identified(by: "p3")
         let mockPlayer4 = MockPlayerProtocol().identified(by: "p4")
         let mockState = MockGameStateProtocol()
-            .withEnabledDefaultImplementation(GameStateProtocolStub())
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3, mockPlayer4)
         let sut = Gatling(actorId: "p2", cardId: "c2")
         
         // When
-        sut.execute(in: mockState)
+        let updates = sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).discardHand(playerId: "p2", cardId: "c2")
-        verify(mockState, atLeastOnce()).players.get()
-        verify(mockState).setChallenge(equal(to: .shoot(["p3", "p4", "p1"])))
-        verifyNoMoreInteractions(mockState)
+        XCTAssertEqual(updates as? [GameUpdate], [
+            .playerDiscardHand("p2", "c2"),
+            .setChallenge(.shoot(["p3", "p4", "p1"]))
+        ])
     }
 }
 
@@ -61,11 +69,5 @@ class GatlingRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions?.count, 1)
-        XCTAssertEqual(actions?[0].name, "gatling")
-        XCTAssertEqual(actions?[0].actorId, "p1")
-        XCTAssertEqual(actions?[0].cardId, "c1")
-        XCTAssertEqual(actions?[0].options as? [Gatling], [Gatling(actorId: "p1", cardId: "c1")])
-        XCTAssertEqual(actions?[0].options[0].description, "p1 plays c1")
-    }
+        XCTAssertEqual(actions as? [Gatling], [Gatling(actorId: "p1", cardId: "c1")])    }
 }

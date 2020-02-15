@@ -10,18 +10,22 @@ struct Equip: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
     
-    func execute(in state: GameStateProtocol) {
+    func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
         guard let player = state.players.first(where: { $0.identifier == actorId }),
             let card = player.hand.first(where: { $0.identifier == cardId }) else {
-                return
+                return []
         }
+        
+        var updates: [GameUpdate] = []
         
         if card.isGun,
             let currentGun = player.inPlay.first(where: { $0.isGun }) {
-            state.discardInPlay(playerId: actorId, cardId: currentGun.identifier)
+            updates.append(.playerDiscardInPlay(actorId, currentGun.identifier))
         }
         
-        state.putInPlay(playerId: actorId, cardId: cardId)
+        updates.append(.playerPutInPlay(actorId, cardId))
+        
+        return updates
     }
     
     var description: String {
@@ -31,7 +35,7 @@ struct Equip: ActionProtocol, Equatable {
 
 struct EquipRule: RuleProtocol {
     
-    func match(with state: GameStateProtocol) -> [GenericAction]? {
+    func match(with state: GameStateProtocol) -> [ActionProtocol]? {
         guard state.challenge == nil,
             let actor = state.players.first(where: { $0.identifier == state.turn }) else {
                 return nil
@@ -48,16 +52,12 @@ struct EquipRule: RuleProtocol {
                                               .dynamite]
         let cards = actor.hand.filter {
             equipableCardNames.contains($0.name)
-                && actor.inPlayCards(named: $0.name).isEmpty
+                && actor.inPlayCards(named: $0.name) == nil
         }
         guard !cards.isEmpty else {
             return nil
         }
         
-        return cards.map { GenericAction(name: $0.name.rawValue,
-                                         actorId: actor.identifier,
-                                         cardId: $0.identifier,
-                                         options: [Equip(actorId: actor.identifier, cardId: $0.identifier)])
-        }
+        return cards.map { Equip(actorId: actor.identifier, cardId: $0.identifier) }
     }
 }

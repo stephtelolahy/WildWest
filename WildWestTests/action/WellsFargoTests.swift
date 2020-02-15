@@ -14,18 +14,29 @@ import Cuckoo
 ///
 class WellsFargoTests: XCTestCase {
     
+    func test_wellsFargoDescription() {
+        // Given
+        let sut = Stagecoach(actorId: "p1", cardId: "c1")
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.description, "p1 plays c1")
+    }
+    
     func test_Pull3Cards_IfPlayingWellsFargo() {
         // Given
-        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
+        let mockState = MockGameStateProtocol()
         let sut = WellsFargo(actorId: "p1", cardId: "c1")
         
         // When
-        sut.execute(in: mockState)
+        let updates = sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
-        verify(mockState, times(3)).pullDeck(playerId: "p1")
-        verifyNoMoreInteractions(mockState)
+        XCTAssertEqual(updates as? [GameUpdate], [
+            .playerDiscardHand("p1", "c1"),
+            .playerPullFromDeck("p1"),
+            .playerPullFromDeck("p1"),
+            .playerPullFromDeck("p1")])
     }
 }
 
@@ -49,11 +60,6 @@ class WellsFargoRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions?.count, 1)
-        XCTAssertEqual(actions?[0].name, "wellsFargo")
-        XCTAssertEqual(actions?[0].actorId, "p1")
-        XCTAssertEqual(actions?[0].cardId, "c1")
-        XCTAssertEqual(actions?[0].options as? [WellsFargo], [WellsFargo(actorId: "p1", cardId: "c1")])
-        XCTAssertEqual(actions?[0].options[0].description, "p1 plays c1")
+        XCTAssertEqual(actions as? [WellsFargo], [WellsFargo(actorId: "p1", cardId: "c1")])
     }
 }

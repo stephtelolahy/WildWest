@@ -11,34 +11,45 @@ import Cuckoo
 
 class ChooseCardTests: XCTestCase {
     
-    func test_PickOnceCardFromGeneralStore_IfChoosingCard() {
+    func test_ChooseCardDescription() {
+        // Given
+        let sut = ChooseCard(actorId: "p1", cardId: "c1")
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.description, "p1 chooses c1")
+    }
+    
+    func test_PickOneCardFromGeneralStore_IfChoosingCard() {
         // Given
         let mockState = MockGameStateProtocol()
-            .withEnabledDefaultImplementation(GameStateProtocolStub())
             .challenge(is: .generalStore(["p1", "p2"]))
         let sut = ChooseCard(actorId: "p1", cardId: "c1")
         
         // When
-        sut.execute(in: mockState)
+        let updates = sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).pullGeneralStore(playerId: "p1", cardId: "c1")
-        verify(mockState).setChallenge(equal(to: .generalStore(["p2"])))
+        XCTAssertEqual(updates as? [GameUpdate], [
+            .playerPullFromGeneralStore("p1", "c1"),
+            .setChallenge(.generalStore(["p2"]))
+        ])
     }
     
-    func test_CloseChallenge_IfChoosingLastCard() {
+    func test_RemoveChallenge_IfChoosingLastCard() {
         // Given
         let mockState = MockGameStateProtocol()
-            .withEnabledDefaultImplementation(GameStateProtocolStub())
             .challenge(is: .generalStore(["p1"]))
         let sut = ChooseCard(actorId: "p1", cardId: "c1")
         
         // When
-        sut.execute(in: mockState)
+        let updates = sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).pullGeneralStore(playerId: "p1", cardId: "c1")
-        verify(mockState).setChallenge(isNil())
+        XCTAssertEqual(updates as? [GameUpdate], [
+            .playerPullFromGeneralStore("p1", "c1"),
+            .setChallenge(nil)
+        ])
     }
 }
 
@@ -52,7 +63,7 @@ class ChooseCardRuleTests: XCTestCase {
         Cuckoo.stub(mockState) { mock in
             let card1 = MockCardProtocol().identified(by: "c1")
             let card2 = MockCardProtocol().identified(by: "c2")
-            when(mock.generalStoreCards.get).thenReturn([card1, card2])
+            when(mock.generalStore.get).thenReturn([card1, card2])
         }
         
         let sut = ChooseCardRule()
@@ -61,15 +72,9 @@ class ChooseCardRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions?.count, 1)
-        XCTAssertEqual(actions?[0].name, "chooseCard")
-        XCTAssertEqual(actions?[0].actorId, "p1")
-        XCTAssertNil(actions?[0].cardId)
-        XCTAssertEqual(actions?[0].options as? [ChooseCard], [
+        XCTAssertEqual(actions as? [ChooseCard], [
             ChooseCard(actorId: "p1", cardId: "c1"),
-            ChooseCard(actorId: "p1", cardId: "c2")])
-        XCTAssertEqual(actions?[0].options.map { $0.description }, [
-            "p1 chooses c1",
-            "p1 chooses c2"])
+            ChooseCard(actorId: "p1", cardId: "c2")
+        ])
     }
 }

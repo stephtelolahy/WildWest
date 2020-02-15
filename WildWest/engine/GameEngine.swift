@@ -12,29 +12,38 @@ class GameEngine: GameEngineProtocol {
     
     let stateSubject: BehaviorSubject<GameStateProtocol>
     
+    private let state: GameStateProtocol
+    private let mutableState: MutableGameStateProtocol
     private let rules: [RuleProtocol]
+    private let calculator: OutcomeCalculatorProtocol
     
-    init(state: GameStateProtocol, rules: [RuleProtocol]) {
-        stateSubject = BehaviorSubject(value: state)
+    init(state: GameStateProtocol,
+         mutableState: MutableGameStateProtocol,
+         rules: [RuleProtocol],
+         calculator: OutcomeCalculatorProtocol) {
+        self.state = state
+        self.mutableState = mutableState
         self.rules = rules
+        self.calculator = calculator
+        stateSubject = BehaviorSubject(value: state)
     }
     
-    func execute(_ action: ActionProtocol) {
-        guard let state = try? stateSubject.value() else {
-            return
+    func execute(_ command: ActionProtocol) {
+        let updates = command.execute(in: state)
+        print("\n*** \(command.description) ***")
+        updates.forEach {
+            $0.execute(in: mutableState)
+            print($0.description)
+        }
+        mutableState.addCommand(command)
+        if let outcome = calculator.outcome(for: state.players.map { $0.role }) {
+            mutableState.setOutcome(outcome)
+            mutableState.setActions([])
+        } else {
+            let actions = rules.compactMap { $0.match(with: state) }.flatMap { $0 }
+            mutableState.setActions(actions)
         }
         
-        action.execute(in: state)
-        state.addCommand(action)
-        state.setActions(actions(matching: state))
         stateSubject.onNext(state)
-    }
-    
-    private func actions(matching state: GameStateProtocol) -> [GenericAction] {
-        guard state.outcome == nil else {
-            return []
-        }
-        
-        return rules.compactMap { $0.match(with: state) }.flatMap { $0 }
     }
 }

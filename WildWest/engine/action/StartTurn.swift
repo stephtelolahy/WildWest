@@ -8,31 +8,30 @@
 
 struct StartTurn: ActionProtocol, Equatable {
     let actorId: String
+    let cardId: String = ""
     
     var description: String {
-        "\(actorId) start turn"
+        "\(actorId) starts turn"
     }
     
-    func execute(in state: GameStateProtocol) {
-        state.setChallenge(nil)
-        state.setBangsPlayed(0)
-        state.pullDeck(playerId: actorId)
-        state.pullDeck(playerId: actorId)
+    func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
+        let updates: [GameUpdate] = [.setTurn(actorId),
+                                     .setChallenge(nil),
+                                     .playerPullFromDeck(actorId),
+                                     .playerPullFromDeck(actorId)]
+        return updates
     }
 }
 
 struct StartTurnRule: RuleProtocol {
     
-    func match(with state: GameStateProtocol) -> [GenericAction]? {
-        guard case .startTurn = state.challenge,
-            let actor = state.players.first(where: { $0.identifier == state.turn }),
-            actor.inPlayCards(named: .jail).isEmpty else {
+    func match(with state: GameStateProtocol) -> [ActionProtocol]? {
+        guard case let .startTurn(actorId) = state.challenge,
+            let actor = state.players.first(where: { $0.identifier == actorId }),
+            actor.inPlay.filter({ $0.name == .jail || $0.name == .dynamite }).isEmpty else {
                 return nil
         }
         
-        return [GenericAction(name: "startTurn",
-                              actorId: state.turn,
-                              cardId: nil,
-                              options: [StartTurn(actorId: state.turn)])]
+        return [StartTurn(actorId: actor.identifier)]
     }
 }

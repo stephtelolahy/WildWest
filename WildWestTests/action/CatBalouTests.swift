@@ -16,32 +16,43 @@ import Cuckoo
  */
 class CatBalouTests: XCTestCase {
     
-    func test_DiscardOtherPlayerHandCard_IfPlayingCatBalou() {
+    func test_CatBalouDescription() {
         // Given
-        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
-        let sut = CatBalou(actorId: "p1", cardId: "c1", targetPlayerId: "p2", targetCardId: "c2", targetCardSource: .hand)
+        let sut = CatBalou(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c2", ownerId: "p2", source: .hand))
         
         // When
-        sut.execute(in: mockState)
+        // Assert
+        XCTAssertEqual(sut.description, "p1 plays c1 to discard c2 from p2's hand")
+    }
+    
+    func test_DiscardOtherPlayerHandCard_IfPlayingCatBalou() {
+        // Given
+        let mockState = MockGameStateProtocol()
+        let sut = CatBalou(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c2", ownerId: "p2", source: .hand))
+        
+        // When
+        let updates = sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
-        verify(mockState).discardHand(playerId: "p2", cardId: "c2")
-        verifyNoMoreInteractions(mockState)
+        XCTAssertEqual(updates as? [GameUpdate], [
+            .playerDiscardHand("p1", "c1"),
+            .playerDiscardHand("p2", "c2")
+        ])
     }
     
     func test_DiscardOtherPlayerInPlayCard_IfPlayingCatBalou() {
         // Given
-        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
-        let sut = CatBalou(actorId: "p1", cardId: "c1", targetPlayerId: "p2", targetCardId: "c2", targetCardSource: .inPlay)
+        let mockState = MockGameStateProtocol()
+        let sut = CatBalou(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c2", ownerId: "p2", source: .inPlay))
         
         // When
-        sut.execute(in: mockState)
+        let updates = sut.execute(in: mockState)
         
         // Assert
-        verify(mockState).discardHand(playerId: "p1", cardId: "c1")
-        verify(mockState).discardInPlay(playerId: "p2", cardId: "c2")
-        verifyNoMoreInteractions(mockState)
+        XCTAssertEqual(updates as? [GameUpdate], [
+            .playerDiscardHand("p1", "c1"),
+            .playerDiscardInPlay("p2", "c2")
+        ])
     }
 }
 
@@ -69,14 +80,9 @@ class CatBalouRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions?.count, 1)
-        XCTAssertEqual(actions?[0].name, "catBalou")
-        XCTAssertEqual(actions?[0].actorId, "p1")
-        XCTAssertEqual(actions?[0].cardId, "c1")
-        XCTAssertEqual(actions?[0].options as? [CatBalou], [
-            CatBalou(actorId: "p1", cardId: "c1", targetPlayerId: "p2", targetCardId: "c2", targetCardSource: .hand)
+        XCTAssertEqual(actions as? [CatBalou], [
+            CatBalou(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c2", ownerId: "p2", source: .hand))
         ])
-        XCTAssertEqual(actions?[0].options[0].description, "p1 plays c1 to discard c2 from p2's hand")
     }
     
     func test_CanPlayCatBalouToDiscardOtherInPlay_IfYourTurnAndOwnCard() {
@@ -101,14 +107,9 @@ class CatBalouRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions?.count, 1)
-        XCTAssertEqual(actions?[0].name, "catBalou")
-        XCTAssertEqual(actions?[0].actorId, "p1")
-        XCTAssertEqual(actions?[0].cardId, "c1")
-        XCTAssertEqual(actions?[0].options as? [CatBalou], [
-            CatBalou(actorId: "p1", cardId: "c1", targetPlayerId: "p2", targetCardId: "c2", targetCardSource: .inPlay)
+        XCTAssertEqual(actions as? [CatBalou], [
+            CatBalou(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c2", ownerId: "p2", source: .inPlay))
         ])
-        XCTAssertEqual(actions?[0].options[0].description, "p1 plays c1 to discard c2 from p2's inPlay")
     }
     
     func test_CanPlayCatBalouToDiscardSelfInPlayCard_IfYourTurnAndOwnCard() {
@@ -128,14 +129,9 @@ class CatBalouRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions?.count, 1)
-        XCTAssertEqual(actions?[0].name, "catBalou")
-        XCTAssertEqual(actions?[0].actorId, "p1")
-        XCTAssertEqual(actions?[0].cardId, "c1")
-        XCTAssertEqual(actions?[0].options as? [CatBalou], [
-            CatBalou(actorId: "p1", cardId: "c1", targetPlayerId: "p1", targetCardId: "c2", targetCardSource: .inPlay)
+        XCTAssertEqual(actions as? [CatBalou], [
+            CatBalou(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c2", ownerId: "p1", source: .inPlay))
         ])
-        XCTAssertEqual(actions?[0].options[0].description, "p1 plays c1 to discard c2 from p1's inPlay")
     }
     
     func test_CannotPlayCatBalou_IfNoCardsToDiscard() {

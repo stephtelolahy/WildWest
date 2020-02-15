@@ -9,6 +9,7 @@
 struct PlayerItem {
     let player: PlayerProtocol?
     let isActive: Bool
+    let isTurn: Bool
 }
 
 protocol PlayersAdapterProtocol {
@@ -41,11 +42,12 @@ class PlayersAdapter: PlayersAdapterProtocol {
         return Array(0..<PlayerIndexBuilder.itemsCount).map { index in
             guard let playerId = playerIdentifierByIndex[index],
                 let player = state.players.first(where: { $0.identifier == playerId }) else {
-                    return PlayerItem(player: nil, isActive: false)
+                    return PlayerItem(player: nil, isActive: false, isTurn: false)
             }
             
             let isActive = state.actions.contains(where: { $0.actorId == playerId })
-            return PlayerItem(player: player, isActive: isActive)
+            let isTurn = player.identifier == state.turn
+            return PlayerItem(player: player, isActive: isActive, isTurn: isTurn)
         }
     }
 }

@@ -11,9 +11,12 @@ struct Duel: ActionProtocol, Equatable {
     let cardId: String
     let targetId: String
     
-    func execute(in state: GameStateProtocol) {
-        state.discardHand(playerId: actorId, cardId: cardId)
-        state.setChallenge(.duel([targetId, actorId]))
+    func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
+        let updates: [GameUpdate] = [
+            .playerDiscardHand(actorId, cardId),
+            .setChallenge(.duel([targetId, actorId]))
+        ]
+        return updates
     }
     
     var description: String {
@@ -23,7 +26,7 @@ struct Duel: ActionProtocol, Equatable {
 
 struct DuelRule: RuleProtocol {
     
-    func match(with state: GameStateProtocol) -> [GenericAction]? {
+    func match(with state: GameStateProtocol) -> [ActionProtocol]? {
         guard state.challenge == nil,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
             let cards = actor.handCards(named: .duel) else {
@@ -36,14 +39,7 @@ struct DuelRule: RuleProtocol {
         }
         
         return cards.map { card in
-            let options = otherPlayers.map { Duel(actorId: actor.identifier,
-                                                  cardId: card.identifier,
-                                                  targetId: $0.identifier)
-            }
-            return GenericAction(name: card.name.rawValue,
-                                 actorId: actor.identifier,
-                                 cardId: card.identifier,
-                                 options: options)
-        }
+            otherPlayers.map { Duel(actorId: actor.identifier, cardId: card.identifier, targetId: $0.identifier) }
+        }.flatMap { $0 }
     }
 }

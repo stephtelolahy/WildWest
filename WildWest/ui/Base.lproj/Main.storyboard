@@ -163,9 +163,9 @@
                         <viewLayoutGuide key="safeArea" id="cXD-5P-evL"/>
                     </view>
                     <navigationItem key="navigationItem" title="Your turn" id="CGv-Ba-0dC">
-                        <barButtonItem key="rightBarButtonItem" systemItem="reply" id="ueO-1J-Lps">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="ueO-1J-Lps">
                             <connections>
-                                <action selector="historyButtonTapped:" destination="Yy6-0k-mhK" id="CLz-Zu-edF"/>
+                                <action selector="actionsButtonTapped:" destination="Yy6-0k-mhK" id="Hsp-Hn-9Ju"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

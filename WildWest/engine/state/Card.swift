@@ -14,6 +14,6 @@ struct Card: CardProtocol, Decodable {
     let imageName: String
     
     var identifier: String {
-        return "\(name)-\(value)-\(suit)"
+        "\(name)-\(value)-\(suit)"
     }
 }

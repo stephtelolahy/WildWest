@@ -23,6 +23,7 @@ class GameViewController: UIViewController, Subscribable {
     
     // MARK: Properties
     
+    // swiftlint:disable force_cast
     private lazy var engine: GameEngineProtocol = {
         let provider = ResourcesProvider(jsonReader: JsonReader(bundle: Bundle.main))
         let figures = provider.allFigures()
@@ -30,6 +31,7 @@ class GameViewController: UIViewController, Subscribable {
         let gameSetup = GameSetup()
         let roles = gameSetup.roles(for: 7)
         let state = gameSetup.setupGame(roles: roles, figures: figures, cards: cards)
+        let mutableState = state as! MutableGameStateProtocol
         let calculator = RangeCalculator()
         let rules: [RuleProtocol] = [
             BeerRule(),
@@ -39,29 +41,30 @@ class GameViewController: UIViewController, Subscribable {
             EquipRule(),
             CatBalouRule(),
             PanicRule(calculator: calculator),
-            ShootRule(calculator: calculator),
+            BangRule(calculator: calculator),
             MissedRule(),
             GatlingRule(),
             IndiansRule(),
             JailRule(),
-            GeneralStoreRule(),
             DiscardBangRule(),
             DuelRule(),
+            GeneralStoreRule(),
+            ChooseCardRule(),
             LooseLifeRule(),
             StartTurnRule(),
             EndTurnRule(),
-            ResolveBarrelRule(),
-            ChooseCardRule(),
             ResolveJailRule(),
             ResolveDynamiteRule(),
-            DiscardBeerRule()
+            DiscardBeerRule(),
+            ResolveBarrelRule()
         ]
-        return GameEngine(state: state, rules: rules)
+        return GameEngine(state: state, mutableState: mutableState, rules: rules, calculator: OutcomeCalculator())
     }()
     
     private var state: GameStateProtocol?
     private let playersAdapter: PlayersAdapterProtocol = PlayersAdapter()
     private let actionsAdapter: ActionsAdapterProtocol = ActionsAdapter()
+    private let aiAgent: AIProtocol = PlayAllHandAI()
     
     // MARK: Lifecycle
     
@@ -76,14 +79,34 @@ class GameViewController: UIViewController, Subscribable {
     
     // MARK: IBAction
     
-    @IBAction private func historyButtonTapped(_ sender: Any) {
-        guard let actions = state?.commands else {
-            return
-        }
+    @IBAction private func actionsButtonTapped(_ sender: Any) {
+        let alertController = UIAlertController(title: nil,
+                                                message: nil,
+                                                preferredStyle: .actionSheet)
         
-        let actionsViewController = ActionsViewController()
-        actionsViewController.actions = actions.reversed()
-        navigationController?.pushViewController(actionsViewController, animated: true)
+        alertController.addAction(UIAlertAction(title: "Autoplay",
+                                                style: .default,
+                                                handler: { [weak self] _ in
+                                                    self?.autoPlay(1)
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Commands",
+                                                style: .default,
+                                                handler: { [weak self] _ in
+                                                    self?.showCommands()
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Stats",
+                                                style: .default,
+                                                handler: { [weak self] _ in
+                                                    self?.showStats()
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Cancel",
+                                                style: .cancel,
+                                                handler: nil))
+        
+        present(alertController, animated: true)
     }
 }
 
@@ -94,42 +117,15 @@ private extension GameViewController {
         playersAdapter.setState(state)
         actionsAdapter.setState(state)
         playersCollectionView.reloadData()
-        title = displayTitle(for: state)
+        title = state.mainMessage()
         DispatchQueue.main.async { [weak self] in
             self?.selectActivePlayer()
         }
     }
     
-    func displayTitle(for state: GameStateProtocol) -> String {
-        if let outcome = state.outcome {
-            return outcome.rawValue
-        }
-        
-        if let challenge = state.challenge {
-            switch challenge {
-            case .startTurn:
-                return "startTurn"
-            case .duel:
-                return "duel"
-            case .shoot:
-                return "shoot"
-            case .indians:
-                return "indians"
-            case .generalStore:
-                return "generalStore"
-            }
-        }
-        
-        if state.actions.count == 1,
-            let uniqueAction = state.actions.first {
-            return uniqueAction.name
-        }
-        
-        return "play any card"
-    }
-    
     func selectActivePlayer() {
         guard let activePlayerIndex = playersAdapter.items.firstIndex(where: { $0.isActive }) else {
+            actionsCollectionView.reloadData()
             return
         }
         
@@ -138,16 +134,16 @@ private extension GameViewController {
         playersCollectionViewDidSelectItem(at: indexPath)
     }
     
-    func showOptions(of genericAction: GenericAction) {
-        let alertController = UIAlertController(title: genericAction.name,
+    func showOptions(_ actions: [ActionProtocol]) {
+        let alertController = UIAlertController(title: nil,
                                                 message: nil,
                                                 preferredStyle: .actionSheet)
         
-        genericAction.options.forEach { option in
-            alertController.addAction(UIAlertAction(title: option.description,
+        actions.forEach { action in
+            alertController.addAction(UIAlertAction(title: action.description,
                                                     style: .default,
                                                     handler: { [weak self] _ in
-                                                        self?.engine.execute(option)
+                                                        self?.engine.execute(action)
             }))
         }
         
@@ -156,6 +152,34 @@ private extension GameViewController {
                                                 handler: nil))
         
         present(alertController, animated: true)
+    }
+    
+    func autoPlay(_ intervalInSeconds: TimeInterval) {
+        guard #available(iOS 10.0, *) else {
+            return
+        }
+        
+        Timer.scheduledTimer(withTimeInterval: intervalInSeconds, repeats: true) { [weak self] timer in
+            guard let state = self?.state,
+                let command = self?.aiAgent.chooseCommand(in: state) else {
+                    timer.invalidate()
+                    return
+            }
+            
+            self?.engine.execute(command)
+        }
+    }
+    
+    func showCommands() {
+        let viewController = CommandsViewController()
+        viewController.stateSubject = engine.stateSubject
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func showStats() {
+        let viewController = StatsViewController()
+        viewController.stateSubject = engine.stateSubject
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
@@ -218,11 +242,12 @@ extension GameViewController: UICollectionViewDelegate {
     }
     
     private func actionsCollectionViewDidSelectItem(at indexPath: IndexPath) {
-        guard let action = actionsAdapter.items[indexPath.row].action else {
+        let actions = actionsAdapter.items[indexPath.row].actions
+        guard !actions.isEmpty  else {
             return
         }
         
-        showOptions(of: action)
+        showOptions(actions)
     }
 }
 
@@ -250,5 +275,25 @@ extension GameViewController: UICollectionViewDelegateFlowLayout {
         let height: CGFloat = collectionView.bounds.height - 2 * spacing
         let width: CGFloat = height * ratio
         return CGSize(width: width, height: height)
+    }
+}
+
+private extension GameStateProtocol {
+    
+    func mainMessage() -> String {
+        if let outcome = self.outcome {
+            return outcome.rawValue
+        }
+        
+        if let challenge = self.challenge {
+            return challenge.description
+        }
+        
+        if actions.count == 1,
+            let uniqueAction = actions.first {
+            return uniqueAction.description
+        }
+        
+        return "play any card"
     }
 }

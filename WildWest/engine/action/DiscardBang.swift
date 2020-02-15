@@ -10,15 +10,17 @@ struct DiscardBang: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
     
-    func execute(in state: GameStateProtocol) {
-        state.discardHand(playerId: actorId, cardId: cardId)
+    func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
+        var updates: [GameUpdate] = []
+        updates.append(.playerDiscardHand(actorId, cardId))
         
         if case let .duel(playerIds) = state.challenge {
             let permutedPlayerIds = [playerIds[1], playerIds[0]]
-            state.setChallenge(.duel(permutedPlayerIds))
+            updates.append(.setChallenge(.duel(permutedPlayerIds)))
         } else {
-            state.setChallenge(state.challenge?.removing(actorId))
+            updates.append(.setChallenge(state.challenge?.removing(actorId)))
         }
+        return updates
     }
     
     var description: String {
@@ -28,7 +30,7 @@ struct DiscardBang: ActionProtocol, Equatable {
 
 struct DiscardBangRule: RuleProtocol {
     
-    func match(with state: GameStateProtocol) -> [GenericAction]? {
+    func match(with state: GameStateProtocol) -> [ActionProtocol]? {
         var actorId: String?
         switch state.challenge {
         case let .indians(targetIds):
@@ -46,10 +48,6 @@ struct DiscardBangRule: RuleProtocol {
                 return nil
         }
         
-        return cards.map { GenericAction(name: "discardBang",
-                                         actorId: actor.identifier,
-                                         cardId: $0.identifier,
-                                         options: [DiscardBang(actorId: actor.identifier, cardId: $0.identifier)])
-        }
+        return cards.map { DiscardBang(actorId: actor.identifier, cardId: $0.identifier) }
     }
 }

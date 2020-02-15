@@ -6,7 +6,7 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-struct RangeCalculator: RangeCalculatorProtocol {
+class RangeCalculator: RangeCalculatorProtocol {
     
     func distance(from playerId: String, to otherId: String, in state: GameStateProtocol) -> Int {
         guard let pIndex = state.players.firstIndex(where: { $0.identifier == playerId }),

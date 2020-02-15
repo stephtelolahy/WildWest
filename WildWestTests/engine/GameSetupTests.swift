@@ -19,9 +19,9 @@ class GameSetupTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(roles.count, 4)
-        XCTAssertEqual(roles.count(of: .sheriff), 1)
-        XCTAssertEqual(roles.count(of: .outlaw), 2)
-        XCTAssertEqual(roles.count(of: .renegade), 1)
+        XCTAssertEqual(roles.filter { $0 == .sheriff }.count, 1)
+        XCTAssertEqual(roles.filter { $0 == .outlaw }.count, 2)
+        XCTAssertEqual(roles.filter { $0 == .renegade }.count, 1)
     }
     
     func test_Roles_For5Players() {
@@ -31,10 +31,10 @@ class GameSetupTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(roles.count, 5)
-        XCTAssertEqual(roles.count(of: .sheriff), 1)
-        XCTAssertEqual(roles.count(of: .outlaw), 2)
-        XCTAssertEqual(roles.count(of: .renegade), 1)
-        XCTAssertEqual(roles.count(of: .deputy), 1)
+        XCTAssertEqual(roles.filter { $0 == .sheriff }.count, 1)
+        XCTAssertEqual(roles.filter { $0 == .outlaw }.count, 2)
+        XCTAssertEqual(roles.filter { $0 == .renegade }.count, 1)
+        XCTAssertEqual(roles.filter { $0 == .deputy }.count, 1)
     }
     
     func test_Roles_For6Players() {
@@ -44,10 +44,10 @@ class GameSetupTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(roles.count, 6)
-        XCTAssertEqual(roles.count(of: .sheriff), 1)
-        XCTAssertEqual(roles.count(of: .outlaw), 3)
-        XCTAssertEqual(roles.count(of: .renegade), 1)
-        XCTAssertEqual(roles.count(of: .deputy), 1)
+        XCTAssertEqual(roles.filter { $0 == .sheriff }.count, 1)
+        XCTAssertEqual(roles.filter { $0 == .outlaw }.count, 3)
+        XCTAssertEqual(roles.filter { $0 == .renegade }.count, 1)
+        XCTAssertEqual(roles.filter { $0 == .deputy }.count, 1)
     }
     
     func test_Roles_For7Players() {
@@ -57,10 +57,10 @@ class GameSetupTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(roles.count, 7)
-        XCTAssertEqual(roles.count(of: .sheriff), 1)
-        XCTAssertEqual(roles.count(of: .outlaw), 3)
-        XCTAssertEqual(roles.count(of: .renegade), 1)
-        XCTAssertEqual(roles.count(of: .deputy), 2)
+        XCTAssertEqual(roles.filter { $0 == .sheriff }.count, 1)
+        XCTAssertEqual(roles.filter { $0 == .outlaw }.count, 3)
+        XCTAssertEqual(roles.filter { $0 == .renegade }.count, 1)
+        XCTAssertEqual(roles.filter { $0 == .deputy }.count, 2)
     }
     
     func test_SetupGameWith4Players() {
@@ -88,20 +88,22 @@ class GameSetupTests: XCTestCase {
         // InitialDeckContainsShuffleCards
         let distributedCardIds = state.players.map { $0.hand }.flatMap { $0 }.map { $0.identifier }
         let remainingCardIds = cards.map { $0.identifier }.filter { !distributedCardIds.contains($0) }
-        let deckCardIds = state.deck.cards.map { $0.identifier }
+        let deckCardIds = state.deck.map { $0.identifier }
         XCTAssertTrue(deckCardIds.isShuffed(from: remainingCardIds))
         // PlayerInitialHealthIsEqualToFigureBullets
         XCTAssertTrue(state.players.filter { $0.role != .sheriff }.allSatisfy { $0.health == 4 })
-        
         // SheriffStartsTurn
         let sheriff = state.players.first { $0.role == .sheriff }!
         XCTAssertEqual(state.turn, sheriff.identifier)
         // SheriffHasOneAdditionalHealth
         XCTAssertEqual(sheriff.health, 5)
         // Available actions should be only sherif's start turn
-        XCTAssertEqual(state.actions.count, 1)
-        XCTAssertEqual(state.actions[0].options as? [StartTurn], [StartTurn(actorId: sheriff.identifier)])
+        XCTAssertEqual(state.actions as? [StartTurn], [StartTurn(actorId: sheriff.identifier)])
         // Commands is empty
         XCTAssertTrue(state.commands.isEmpty)
+        // Flags are reset to 0
+        XCTAssertEqual(state.bangsPlayed, 0)
+        XCTAssertEqual(state.barrelsResolved, 0)
+        XCTAssertNil(state.challenge)
     }
 }

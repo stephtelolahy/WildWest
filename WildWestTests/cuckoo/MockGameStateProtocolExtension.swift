@@ -37,16 +37,9 @@ extension MockGameStateProtocol {
         return self
     }
     
-    func commands(are commands: ActionProtocol...) -> MockGameStateProtocol {
+    func barrelsResolved(is count: Int) -> MockGameStateProtocol {
         Cuckoo.stub(self) { mock in
-            when(mock.commands.get).thenReturn(commands)
-        }
-        return self
-    }
-    
-    func deck(is deck: DeckProtocol) -> MockGameStateProtocol {
-        Cuckoo.stub(self) { mock in
-            when(mock.deck.get).thenReturn(deck)
+            when(mock.barrelsResolved.get).thenReturn(count)
         }
         return self
     }
