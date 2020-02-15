@@ -52,7 +52,7 @@ struct EquipRule: RuleProtocol {
                                               .dynamite]
         let cards = actor.hand.filter {
             equipableCardNames.contains($0.name)
-                && actor.inPlayCards(named: $0.name).isEmpty
+                && actor.inPlayCards(named: $0.name) == nil
         }
         guard !cards.isEmpty else {
             return nil

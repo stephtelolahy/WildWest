@@ -33,7 +33,7 @@ class ShootTest: XCTestCase {
     
     func test_ShootDescription() {
         // Given
-        let sut = Shoot(actorId: "p1", cardId: "c1", targetId: "p2")
+        let sut = Bang(actorId: "p1", cardId: "c1", targetId: "p2")
         
         // When
         // Assert
@@ -43,7 +43,7 @@ class ShootTest: XCTestCase {
     func test_DiscardCardAndTriggerBangChallengeAndIncrementShootsCount_IfPlayingShoot() {
         // Given
         let mockState = MockGameStateProtocol().bangsPlayed(is: 1)
-        let sut = Shoot(actorId: "p1", cardId: "c1", targetId: "p2")
+        let sut = Bang(actorId: "p1", cardId: "c1", targetId: "p2")
         
         // When
         let updates = sut.execute(in: mockState)
@@ -79,15 +79,15 @@ class ShootRuleTest: XCTestCase {
             when(mock.maximumNumberOfShoots(of: player(equalTo: mockPlayer1))).thenReturn(1)
         }
         
-        let sut = ShootRule(calculator: mockCalculator)
+        let sut = BangRule(calculator: mockCalculator)
         
         // When
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions as? [Shoot], [
-            Shoot(actorId: "p1", cardId: "c1", targetId: "p2"),
-            Shoot(actorId: "p1", cardId: "c1", targetId: "p3")
+        XCTAssertEqual(actions as? [Bang], [
+            Bang(actorId: "p1", cardId: "c1", targetId: "p2"),
+            Bang(actorId: "p1", cardId: "c1", targetId: "p3")
         ])
     }
     
@@ -111,7 +111,7 @@ class ShootRuleTest: XCTestCase {
             when(mock.maximumNumberOfShoots(of: player(equalTo: mockPlayer1))).thenReturn(0)
         }
         
-        let sut = ShootRule(calculator: mockCalculator)
+        let sut = BangRule(calculator: mockCalculator)
         
         // When
         let actions = sut.match(with: mockState)
@@ -139,15 +139,15 @@ class ShootRuleTest: XCTestCase {
             when(mock.maximumNumberOfShoots(of: player(equalTo: mockPlayer1))).thenReturn(0)
         }
         
-        let sut = ShootRule(calculator: mockCalculator)
+        let sut = BangRule(calculator: mockCalculator)
         
         // When
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions as? [Shoot], [
-            Shoot(actorId: "p1", cardId: "c1", targetId: "p2"),
-            Shoot(actorId: "p1", cardId: "c1", targetId: "p3")
+        XCTAssertEqual(actions as? [Bang], [
+            Bang(actorId: "p1", cardId: "c1", targetId: "p2"),
+            Bang(actorId: "p1", cardId: "c1", targetId: "p3")
         ])
     }
     
@@ -169,7 +169,7 @@ class ShootRuleTest: XCTestCase {
             when(mock.maximumNumberOfShoots(of: player(equalTo: mockPlayer1))).thenReturn(1)
         }
         
-        let sut = ShootRule(calculator: mockCalculator)
+        let sut = BangRule(calculator: mockCalculator)
         
         // When
         let actions = sut.match(with: mockState)

@@ -13,6 +13,7 @@ class GameState: GameStateProtocol {
     var turn: String
     var challenge: Challenge?
     var bangsPlayed: Int
+    var barrelsResolved: Int
     var generalStore: [CardProtocol]
     var outcome: GameOutcome?
     var commands: [ActionProtocol]
@@ -24,6 +25,7 @@ class GameState: GameStateProtocol {
          turn: String,
          challenge: Challenge?,
          bangsPlayed: Int,
+         barrelsResolved: Int,
          generalStore: [CardProtocol],
          outcome: GameOutcome?,
          actions: [ActionProtocol],
@@ -34,6 +36,7 @@ class GameState: GameStateProtocol {
         self.turn = turn
         self.challenge = challenge
         self.bangsPlayed = bangsPlayed
+        self.barrelsResolved = barrelsResolved
         self.generalStore = generalStore
         self.outcome = outcome
         self.commands = commands

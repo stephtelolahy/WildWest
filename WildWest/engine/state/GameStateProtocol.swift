@@ -12,6 +12,7 @@ protocol GameStateProtocol {
     var turn: String { get }
     var challenge: Challenge? { get }
     var bangsPlayed: Int { get }
+    var barrelsResolved: Int { get }
     var generalStore: [CardProtocol] { get }
     var outcome: GameOutcome? { get }
     var actions: [ActionProtocol] { get }

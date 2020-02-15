@@ -32,7 +32,7 @@ struct JailRule: RuleProtocol {
         let otherPlayers = state.players.filter { player in
             guard player.identifier != actor.identifier,
                 player.role != .sheriff,
-                player.inPlayCards(named: .jail).isEmpty else {
+                player.inPlayCards(named: .jail) == nil else {
                     return false
             }
             

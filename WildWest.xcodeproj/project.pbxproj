@@ -49,8 +49,8 @@
 		336AA6F223F14D4B00328837 /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F2505C23DDDBCC00A0FDD1 /* GameEngineTests.swift */; };
 		3383ABD023F461D20028B4B3 /* Jail.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A0FA23BAB7DD0050E173 /* Jail.swift */; };
 		3383ABD123F461D20028B4B3 /* Jail.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A0FA23BAB7DD0050E173 /* Jail.swift */; };
-		3383ABD323F4657C0028B4B3 /* Shoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A0FD23BAB8070050E173 /* Shoot.swift */; };
-		3383ABD423F4657C0028B4B3 /* Shoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A0FD23BAB8070050E173 /* Shoot.swift */; };
+		3383ABD323F4657C0028B4B3 /* Bang.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A0FD23BAB8070050E173 /* Bang.swift */; };
+		3383ABD423F4657C0028B4B3 /* Bang.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A0FD23BAB8070050E173 /* Bang.swift */; };
 		3383ABD623F5312B0028B4B3 /* Missed.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10023BAB81E0050E173 /* Missed.swift */; };
 		3383ABD723F5312B0028B4B3 /* Missed.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10023BAB81E0050E173 /* Missed.swift */; };
 		3383ABD923F5332A0028B4B3 /* Gatling.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10623BAB84E0050E173 /* Gatling.swift */; };
@@ -276,7 +276,7 @@
 		AD7F34BE23D79893001B4072 /* MockGameStateProtocolExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGameStateProtocolExtension.swift; sourceTree = "<group>"; };
 		ADB5A0F423BAB29C0050E173 /* Equip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equip.swift; sourceTree = "<group>"; };
 		ADB5A0FA23BAB7DD0050E173 /* Jail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jail.swift; sourceTree = "<group>"; };
-		ADB5A0FD23BAB8070050E173 /* Shoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shoot.swift; sourceTree = "<group>"; };
+		ADB5A0FD23BAB8070050E173 /* Bang.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bang.swift; sourceTree = "<group>"; };
 		ADB5A10023BAB81E0050E173 /* Missed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Missed.swift; sourceTree = "<group>"; };
 		ADB5A10323BAB8370050E173 /* Duel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Duel.swift; sourceTree = "<group>"; };
 		ADB5A10623BAB84E0050E173 /* Gatling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gatling.swift; sourceTree = "<group>"; };
@@ -439,7 +439,7 @@
 				ADB5A10C23BAB8780050E173 /* Panic.swift */,
 				ADB5A10F23BAB89C0050E173 /* CatBalou.swift */,
 				ADB5A0FA23BAB7DD0050E173 /* Jail.swift */,
-				ADB5A0FD23BAB8070050E173 /* Shoot.swift */,
+				ADB5A0FD23BAB8070050E173 /* Bang.swift */,
 				ADB5A10023BAB81E0050E173 /* Missed.swift */,
 				ADB5A10623BAB84E0050E173 /* Gatling.swift */,
 				ADB5A10923BAB8630050E173 /* Indians.swift */,
@@ -861,7 +861,7 @@
 				33D477E723E4F9E300E232D9 /* RangeCalculatorProtocol.swift in Sources */,
 				33ABE07023E9DA5B009A54E4 /* ActionCell.swift in Sources */,
 				3395258023E37CCE003DE948 /* GameEngineProtocol.swift in Sources */,
-				3383ABD423F4657C0028B4B3 /* Shoot.swift in Sources */,
+				3383ABD423F4657C0028B4B3 /* Bang.swift in Sources */,
 				AD52B99323B175110013240B /* Card.swift in Sources */,
 				ADD035CC23A95F37003B2576 /* RuleProtocol.swift in Sources */,
 				3383ABDF23F5333D0028B4B3 /* Duel.swift in Sources */,
@@ -960,7 +960,7 @@
 				3383ABF123F53B990028B4B3 /* LooseLife.swift in Sources */,
 				3322725C23F5CEDE0028933D /* IndiansTests.swift in Sources */,
 				3322725E23F5CEDE0028933D /* DuelTests.swift in Sources */,
-				3383ABD323F4657C0028B4B3 /* Shoot.swift in Sources */,
+				3383ABD323F4657C0028B4B3 /* Bang.swift in Sources */,
 				3322725423F5CEDE0028933D /* EquipTests.swift in Sources */,
 				AD7F34BF23D79893001B4072 /* MockGameStateProtocolExtension.swift in Sources */,
 				AD7F34BD23D79879001B4072 /* MockPlayerProtocolExtension.swift in Sources */,

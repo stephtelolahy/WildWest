@@ -17,7 +17,12 @@ extension PlayerProtocol {
         return cards
     }
     
-    func inPlayCards(named cardName: CardName) -> [CardProtocol] {
-        return inPlay.filter { $0.name == cardName }
+    func inPlayCards(named cardName: CardName) -> [CardProtocol]? {
+        let cards = inPlay.filter { $0.name == cardName }
+        guard !cards.isEmpty else {
+            return nil
+        }
+        
+        return cards
     }
 }

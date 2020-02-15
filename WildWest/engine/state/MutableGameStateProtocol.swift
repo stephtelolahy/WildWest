@@ -10,6 +10,7 @@ protocol MutableGameStateProtocol {
     func setTurn(_ turn: String)
     func setChallenge(_ challenge: Challenge?)
     func setBangsPlayed(_ bangsPlayed: Int)
+    func setBarrelsResolved(_ barrelsResolved: Int)
     func addCommand(_ command: ActionProtocol)
     func setActions(_ actions: [ActionProtocol])
     func setOutcome(_ outcome: GameOutcome)

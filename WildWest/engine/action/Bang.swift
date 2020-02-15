@@ -1,12 +1,12 @@
 //
-//  Shoot.swift
+//  Bang.swift
 //  WildWest
 //
 //  Created by Hugues Stéphano TELOLAHY on 12/30/19.
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct Shoot: ActionProtocol, Equatable {
+struct Bang: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
     let targetId: String
@@ -25,7 +25,7 @@ struct Shoot: ActionProtocol, Equatable {
     }
 }
 
-struct ShootRule: RuleProtocol {
+struct BangRule: RuleProtocol {
     
     private let calculator: RangeCalculatorProtocol
     
@@ -56,7 +56,7 @@ struct ShootRule: RuleProtocol {
         }
         
         return cards.map { card in
-            otherPlayers.map { Shoot(actorId: actor.identifier, cardId: card.identifier, targetId: $0.identifier) }
+            otherPlayers.map { Bang(actorId: actor.identifier, cardId: card.identifier, targetId: $0.identifier) }
         }.flatMap { $0 }
     }
 }

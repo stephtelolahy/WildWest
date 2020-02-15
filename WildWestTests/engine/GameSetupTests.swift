@@ -101,5 +101,9 @@ class GameSetupTests: XCTestCase {
         XCTAssertEqual(state.actions as? [StartTurn], [StartTurn(actorId: sheriff.identifier)])
         // Commands is empty
         XCTAssertTrue(state.commands.isEmpty)
+        // Flags are reset to 0
+        XCTAssertEqual(state.bangsPlayed, 0)
+        XCTAssertEqual(state.barrelsResolved, 0)
+        XCTAssertNil(state.challenge)
     }
 }

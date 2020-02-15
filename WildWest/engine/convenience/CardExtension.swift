@@ -43,4 +43,8 @@ extension CardProtocol {
     var makeDynamiteExplode: Bool {
         suit == .spades && ["2", "3", "4", "5", "6", "7", "8", "9"].contains(value)
     }
+    
+    var makeBarrelWorking: Bool {
+        suit == .hearts
+    }
 }

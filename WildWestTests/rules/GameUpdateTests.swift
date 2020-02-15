@@ -24,7 +24,7 @@ class GameUpdateTests: XCTestCase {
         verifyNoMoreInteractions(mockState)
     }
     
-    func test_SetTurn() {
+    func test_ResetBangsPlayed_IfSettingTurn() {
         // Given
         let mockState = MockMutableGameStateProtocol().withEnabledDefaultImplementation(MutableGameStateProtocolStub())
         let sut = GameUpdate.setTurn("p1")
@@ -34,6 +34,7 @@ class GameUpdateTests: XCTestCase {
         
         // Assert
         verify(mockState).setTurn("p1")
+        verify(mockState).setBangsPlayed(0)
         verifyNoMoreInteractions(mockState)
     }
     
@@ -63,6 +64,20 @@ class GameUpdateTests: XCTestCase {
         verifyNoMoreInteractions(mockState)
     }
     
+    func test_ResetResolvedBarrels_IfSettingShootChallenge() {
+        // Given
+        let mockState = MockMutableGameStateProtocol().withEnabledDefaultImplementation(MutableGameStateProtocolStub())
+        let sut = GameUpdate.setChallenge(.shoot(["p1"]))
+        
+        // When
+        sut.execute(in: mockState)
+        
+        // Assert
+        verify(mockState).setChallenge(equal(to: .shoot(["p1"])))
+        verify(mockState).setBarrelsResolved(0)
+        verifyNoMoreInteractions(mockState)
+    }
+    
     func test_SetBangsPlayed() {
         // Given
         let mockState = MockMutableGameStateProtocol().withEnabledDefaultImplementation(MutableGameStateProtocolStub())
@@ -73,6 +88,19 @@ class GameUpdateTests: XCTestCase {
         
         // Assert
         verify(mockState).setBangsPlayed(1)
+        verifyNoMoreInteractions(mockState)
+    }
+    
+    func test_SetBarrelsResolved() {
+        // Given
+        let mockState = MockMutableGameStateProtocol().withEnabledDefaultImplementation(MutableGameStateProtocolStub())
+        let sut = GameUpdate.setBarrelsResolved(1)
+        
+        // When
+        sut.execute(in: mockState)
+        
+        // Assert
+        verify(mockState).setBarrelsResolved(1)
         verifyNoMoreInteractions(mockState)
     }
     

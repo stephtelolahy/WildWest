@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import Cuckoo
 
 /**
  Barrel
@@ -26,9 +27,104 @@ import XCTest
  with a Missed!.
  */
 class ResolveBarrelTests: XCTestCase {
-
+    
+    func test_ResolveBArrelDescription() {
+        // Given
+        let sut = ResolveBarrel(actorId: "p1", cardId: "c1")
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.description, "p1 resolves c1")
+    }
+    
+    func test_ResolveShootChallenge_IfReturnHeartFromDeck() {
+        // Given
+        let mockCard = MockCardProtocol().suit(is: .hearts)
+        let mockState = MockGameStateProtocol()
+        Cuckoo.stub(mockState) { mock in
+            when(mock.deck.get).thenReturn([mockCard, MockCardProtocol()])
+            when(mock.challenge.get).thenReturn(.shoot(["p1"]))
+            when(mock.barrelsResolved.get).thenReturn(0)
+        }
+        
+        let sut = ResolveBarrel(actorId: "p1", cardId: "c1")
+        
+        // When
+        let updates = sut.execute(in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates as? [GameUpdate], [
+            .flipOverFirstDeckCard,
+            .setBarrelsResolved(1),
+            .setChallenge(nil)
+        ])
+    }
+    
+    func test_DoNotResolveShootChallenge_IfReturnNonHeartFromDeck() {
+        // Given
+        let mockCard = MockCardProtocol().identified(by: "c1").suit(is: .diamonds)
+        let mockState = MockGameStateProtocol()
+        Cuckoo.stub(mockState) { mock in
+            when(mock.deck.get).thenReturn([mockCard, MockCardProtocol()])
+            when(mock.challenge.get).thenReturn(.shoot(["p1"]))
+            when(mock.barrelsResolved.get).thenReturn(0)
+        }
+        
+        let sut = ResolveBarrel(actorId: "p1", cardId: "c1")
+        
+        // When
+        let updates = sut.execute(in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates as? [GameUpdate], [
+            .flipOverFirstDeckCard,
+            .setBarrelsResolved(1)
+        ])
+    }
 }
 
 class ResolveBarrelRuleTests: XCTestCase {
-
+    
+    func test_CanResolveBarrel_IfIsTargetOfShootAndPlayingBarrel() {
+        // Given
+        let sut = ResolveBarrelRule()
+        let mockCard = MockCardProtocol()
+            .named(.barrel)
+            .identified(by: "c1")
+        let mockPlayer1 = MockPlayerProtocol()
+            .playing(mockCard)
+            .identified(by: "p1")
+        let mockState = MockGameStateProtocol()
+            .challenge(is: .shoot(["p1"]))
+            .players(are: mockPlayer1)
+            .barrelsResolved(is: 0)
+        
+        // When
+        let actions = sut.match(with: mockState)
+        
+        // Assert
+        XCTAssertEqual(actions as? [ResolveBarrel], [ResolveBarrel(actorId: "p1", cardId: "c1")])
+    }
+    
+    func test_CannotResolveBarrel_IfAlreadyResolvedBarrel() {
+        // Given
+        let sut = ResolveBarrelRule()
+        let mockCard = MockCardProtocol()
+            .named(.barrel)
+            .identified(by: "c1")
+        let mockPlayer1 = MockPlayerProtocol()
+            .playing(mockCard)
+            .identified(by: "p1")
+        let mockState = MockGameStateProtocol()
+            .challenge(is: .shoot(["p1"]))
+            .players(are: mockPlayer1)
+            .barrelsResolved(is: 1)
+        
+        // When
+        let actions = sut.match(with: mockState)
+        
+        // Assert
+        XCTAssertNil(actions)
+    }
+    
 }

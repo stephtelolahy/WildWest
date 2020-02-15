@@ -41,7 +41,7 @@ class GameViewController: UIViewController, Subscribable {
             EquipRule(),
             CatBalouRule(),
             PanicRule(calculator: calculator),
-            ShootRule(calculator: calculator),
+            BangRule(calculator: calculator),
             MissedRule(),
             GatlingRule(),
             IndiansRule(),

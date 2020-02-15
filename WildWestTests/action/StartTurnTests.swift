@@ -31,7 +31,6 @@ class StartTurnTests: XCTestCase {
         XCTAssertEqual(updates as? [GameUpdate], [
             .setTurn("p1"),
             .setChallenge(nil),
-            .setBangsPlayed(0),
             .playerPullFromDeck("p1"),
             .playerPullFromDeck("p1")
         ])

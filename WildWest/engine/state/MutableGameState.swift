@@ -20,6 +20,10 @@ extension GameState: MutableGameStateProtocol {
         self.bangsPlayed = bangsPlayed
     }
     
+    func setBarrelsResolved(_ barrelsResolved: Int) {
+        self.barrelsResolved = barrelsResolved
+    }
+    
     func addCommand(_ command: ActionProtocol) {
         commands.append(command)
     }

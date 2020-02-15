@@ -36,4 +36,11 @@ extension MockGameStateProtocol {
         }
         return self
     }
+    
+    func barrelsResolved(is count: Int) -> MockGameStateProtocol {
+        Cuckoo.stub(self) { mock in
+            when(mock.barrelsResolved.get).thenReturn(count)
+        }
+        return self
+    }
 }
