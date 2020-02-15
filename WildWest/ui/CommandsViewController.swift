@@ -1,26 +1,31 @@
 //
-//  ActionsViewController.swift
+//  CommandsViewController.swift
 //  WildWest
 //
-//  Created by Hugues Stephano Telolahy on 25/01/2020.
+//  Created by Hugues Stephano Telolahy on 15/02/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
 import UIKit
+import RxSwift
 
-protocol ActionsViewControllerDelegate: NSObjectProtocol {
-    func actionsViewController(_ controller: ActionsViewController, didSelect action: ActionProtocol)
-}
-
-class ActionsViewController: UITableViewController {
+class CommandsViewController: UITableViewController, Subscribable {
     
+    var stateSubject: BehaviorSubject<GameStateProtocol>?
     var actions: [ActionProtocol] = []
-    
-    weak var delegate: ActionsViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ActionCell")
+        
+        guard let stateSubject = self.stateSubject else {
+            return
+        }
+        
+        sub(stateSubject.subscribe(onNext: { [weak self] state in
+            self?.actions = state.commands.reversed()
+            self?.tableView.reloadData()
+        }))
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -31,10 +36,5 @@ class ActionsViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ActionCell", for: indexPath)
         cell.textLabel?.text = actions[indexPath.row].description
         return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.actionsViewController(self, didSelect: actions[indexPath.row])
-        dismiss(animated: true)
     }
 }

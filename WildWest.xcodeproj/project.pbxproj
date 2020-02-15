@@ -11,6 +11,8 @@
 		3301E63923F7EEF700AB35C7 /* AIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3301E63723F7EEF700AB35C7 /* AIProtocol.swift */; };
 		3301E63B23F7EF7E00AB35C7 /* PlayAllHandAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3301E63A23F7EF7E00AB35C7 /* PlayAllHandAI.swift */; };
 		3301E63C23F7EF7E00AB35C7 /* PlayAllHandAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3301E63A23F7EF7E00AB35C7 /* PlayAllHandAI.swift */; };
+		3301E63E23F8081F00AB35C7 /* CommandsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3301E63D23F8081F00AB35C7 /* CommandsViewController.swift */; };
+		3301E64023F80AE600AB35C7 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3301E63F23F80AE600AB35C7 /* StatsViewController.swift */; };
 		3302905C23F327AE0099C438 /* Saloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE91AC523B9F84200F7316B /* Saloon.swift */; };
 		3302905E23F329780099C438 /* Saloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE91AC523B9F84200F7316B /* Saloon.swift */; };
 		3302906023F32AC20099C438 /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5643423A4E09C00C1BD01 /* Beer.swift */; };
@@ -20,7 +22,6 @@
 		330B7E1123F70D0200B3653D /* OutcomeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330B7E1023F70D0200B3653D /* OutcomeCalculator.swift */; };
 		330B7E1223F70D0200B3653D /* OutcomeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330B7E1023F70D0200B3653D /* OutcomeCalculator.swift */; };
 		330B7E1423F70D8700B3653D /* OutcomeCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330B7E1323F70D8700B3653D /* OutcomeCalculatorTests.swift */; };
-		3319255223F31A7C00416FFB /* ActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3319255123F31A7C00416FFB /* ActionsViewController.swift */; };
 		3322724F23F5CEDE0028933D /* StartTurnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFB62823DCAD1800C96CED /* StartTurnTests.swift */; };
 		3322725023F5CEDE0028933D /* BeerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD48DD2F23BEB11800E5B552 /* BeerTests.swift */; };
 		3322725123F5CEDE0028933D /* SaloonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD48DD3123BEB12800E5B552 /* SaloonTests.swift */; };
@@ -194,10 +195,11 @@
 		15EFD4A90888EB671B9B5CF5 /* Pods-WildWestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.debug.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3301E63723F7EEF700AB35C7 /* AIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIProtocol.swift; sourceTree = "<group>"; };
 		3301E63A23F7EF7E00AB35C7 /* PlayAllHandAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayAllHandAI.swift; sourceTree = "<group>"; };
+		3301E63D23F8081F00AB35C7 /* CommandsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandsViewController.swift; sourceTree = "<group>"; };
+		3301E63F23F80AE600AB35C7 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		330B7E0D23F70CAB00B3653D /* OutcomeCalculatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutcomeCalculatorProtocol.swift; sourceTree = "<group>"; };
 		330B7E1023F70D0200B3653D /* OutcomeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutcomeCalculator.swift; sourceTree = "<group>"; };
 		330B7E1323F70D8700B3653D /* OutcomeCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutcomeCalculatorTests.swift; sourceTree = "<group>"; };
-		3319255123F31A7C00416FFB /* ActionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionsViewController.swift; sourceTree = "<group>"; };
 		3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		332499B023DB9F140082EF09 /* PlayerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCell.swift; sourceTree = "<group>"; };
 		332499B223DB9F650082EF09 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -608,7 +610,8 @@
 				33ABE07123EA097A009A54E4 /* ActionsAdapter.swift */,
 				332499B023DB9F140082EF09 /* PlayerCell.swift */,
 				33ABE06F23E9DA5B009A54E4 /* ActionCell.swift */,
-				3319255123F31A7C00416FFB /* ActionsViewController.swift */,
+				3301E63D23F8081F00AB35C7 /* CommandsViewController.swift */,
+				3301E63F23F80AE600AB35C7 /* StatsViewController.swift */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -842,6 +845,7 @@
 				3395258323E37D07003DE948 /* GameSetupProtocol.swift in Sources */,
 				AD49F86723BA054400543F59 /* Figure.swift in Sources */,
 				AD46810E23BEA2B0000B42C7 /* PlayerExtension.swift in Sources */,
+				3301E64023F80AE600AB35C7 /* StatsViewController.swift in Sources */,
 				339A294F23EFFE70002C5CD8 /* GameStateExtension.swift in Sources */,
 				3383ABE123F533490028B4B3 /* DiscardBang.swift in Sources */,
 				ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */,
@@ -867,6 +871,7 @@
 				33ABE07223EA097A009A54E4 /* ActionsAdapter.swift in Sources */,
 				332499B323DB9F650082EF09 /* GameViewController.swift in Sources */,
 				AD671A1C23D8F9D600F0AA4A /* CardExtension.swift in Sources */,
+				3301E63E23F8081F00AB35C7 /* CommandsViewController.swift in Sources */,
 				33EBF4DE23F34A5700C300A7 /* Stagecoach.swift in Sources */,
 				3301E63B23F7EF7E00AB35C7 /* PlayAllHandAI.swift in Sources */,
 				AD52B99C23B17A310013240B /* GameState.swift in Sources */,
@@ -874,7 +879,6 @@
 				33F94AB623F0580800D1BCFE /* GameUpdateProtocol.swift in Sources */,
 				33F94AB223F056DA00D1BCFE /* StartTurn.swift in Sources */,
 				33EBF4DC23F34A5300C300A7 /* WellsFargo.swift in Sources */,
-				3319255223F31A7C00416FFB /* ActionsViewController.swift in Sources */,
 				338E39A023F3E3F7002FA99B /* CatBalou.swift in Sources */,
 				33D477E723E4F9E300E232D9 /* RangeCalculatorProtocol.swift in Sources */,
 				33ABE07023E9DA5B009A54E4 /* ActionCell.swift in Sources */,

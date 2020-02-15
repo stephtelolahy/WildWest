@@ -79,20 +79,35 @@ class GameViewController: UIViewController, Subscribable {
     
     // MARK: IBAction
     
-    @IBAction private func historyButtonTapped(_ sender: Any) {
-        guard let actions = state?.commands else {
-            return
-        }
+    @IBAction private func actionsButtonTapped(_ sender: Any) {
+        let alertController = UIAlertController(title: nil,
+                                                message: nil,
+                                                preferredStyle: .actionSheet)
         
-        let actionsViewController = ActionsViewController()
-        actionsViewController.actions = actions.reversed()
-        navigationController?.pushViewController(actionsViewController, animated: true)
+        alertController.addAction(UIAlertAction(title: "Autoplay",
+                                                style: .default,
+                                                handler: { [weak self] _ in
+                                                    self?.autoPlay(1)
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Commands",
+                                                style: .default,
+                                                handler: { [weak self] _ in
+                                                    self?.showCommands()
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Stats",
+                                                style: .default,
+                                                handler: { [weak self] _ in
+                                                    self?.showStats()
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Cancel",
+                                                style: .cancel,
+                                                handler: nil))
+        
+        present(alertController, animated: true)
     }
-    
-    @IBAction private func playButtonTapped(_ sender: Any) {
-        autoPlay(1)
-    }
-    
 }
 
 private extension GameViewController {
@@ -153,6 +168,18 @@ private extension GameViewController {
             
             self?.engine.execute(command)
         }
+    }
+    
+    func showCommands() {
+        let viewController = CommandsViewController()
+        viewController.stateSubject = engine.stateSubject
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func showStats() {
+        let viewController = StatsViewController()
+        viewController.stateSubject = engine.stateSubject
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 

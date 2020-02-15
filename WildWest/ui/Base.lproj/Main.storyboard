@@ -163,18 +163,11 @@
                         <viewLayoutGuide key="safeArea" id="cXD-5P-evL"/>
                     </view>
                     <navigationItem key="navigationItem" title="Your turn" id="CGv-Ba-0dC">
-                        <rightBarButtonItems>
-                            <barButtonItem title="Auto" id="9f6-xf-PmD">
-                                <connections>
-                                    <action selector="playButtonTapped:" destination="Yy6-0k-mhK" id="I0H-us-wkQ"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="reply" id="ueO-1J-Lps">
-                                <connections>
-                                    <action selector="historyButtonTapped:" destination="Yy6-0k-mhK" id="CLz-Zu-edF"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="ueO-1J-Lps">
+                            <connections>
+                                <action selector="actionsButtonTapped:" destination="Yy6-0k-mhK" id="Hsp-Hn-9Ju"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="actionsCollectionView" destination="YnA-A3-EaS" id="HoZ-WM-M1l"/>
