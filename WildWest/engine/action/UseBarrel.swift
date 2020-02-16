@@ -1,12 +1,12 @@
 //
-//  ResolveBarrel.swift
+//  UseBarrel.swift
 //  WildWest
 //
 //  Created by Hugues Stephano Telolahy on 05/02/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-struct ResolveBarrel: ActionProtocol, Equatable {
+struct UseBarrel: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
     
@@ -25,11 +25,11 @@ struct ResolveBarrel: ActionProtocol, Equatable {
     }
     
     var description: String {
-        "\(actorId) resolves \(cardId)"
+        "\(actorId) uses \(cardId)"
     }
 }
 
-struct ResolveBarrelRule: RuleProtocol {
+struct UseBarrelRule: RuleProtocol {
     
     func match(with state: GameStateProtocol) -> [ActionProtocol]? {
         let maxBarrels = 1
@@ -40,6 +40,6 @@ struct ResolveBarrelRule: RuleProtocol {
                 return nil
         }
         
-        return cards.map { ResolveBarrel(actorId: actor.identifier, cardId: $0.identifier) }
+        return cards.map { UseBarrel(actorId: actor.identifier, cardId: $0.identifier) }
     }
 }

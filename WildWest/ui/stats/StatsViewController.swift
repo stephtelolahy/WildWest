@@ -72,7 +72,7 @@ extension GameStateProtocol {
             GameEvent(name: "jail", occurences: commandsHistory.filter { $0 is Jail }.count),
             GameEvent(name: "resolveJail", occurences: commandsHistory.filter { $0 is ResolveJail }.count),
             GameEvent(name: "resolveDynamite", occurences: commandsHistory.filter { $0 is ResolveDynamite }.count),
-            GameEvent(name: "resolveBarrel", occurences: commandsHistory.filter { $0 is ResolveBarrel }.count),
+            GameEvent(name: "useBarrel", occurences: commandsHistory.filter { $0 is UseBarrel }.count),
             GameEvent(name: "volcanic", occurences: commandsHistory.filter { ($0 as? Equip)?.cardId.contains("volcanic") == true }.count),
             GameEvent(name: "schofield", occurences: commandsHistory.filter { ($0 as? Equip)?.cardId.contains("schofield") == true }.count),
             GameEvent(name: "remington", occurences: commandsHistory.filter { ($0 as? Equip)?.cardId.contains("remington") == true }.count),

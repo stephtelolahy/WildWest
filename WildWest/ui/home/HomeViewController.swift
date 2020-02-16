@@ -47,7 +47,7 @@ private extension HomeViewController {
             ResolveJailRule(),
             ResolveDynamiteRule(),
             DiscardBeerRule(),
-            ResolveBarrelRule()
+            UseBarrelRule()
         ]
     }
     

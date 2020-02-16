@@ -38,6 +38,11 @@ class RandomAIPreferPlay: AIProtocol {
             return -1
         }
         
+        // prefer use barrel instead of discard card
+        if move is UseBarrel {
+            return 1
+        }
+        
         return 0
     }
     
