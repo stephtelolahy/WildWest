@@ -64,10 +64,11 @@ class PlayerCell: UICollectionViewCell {
 
 private extension PlayerProtocol {
     var string: String {
+        let healthString = Array(0..<health).map { _ in "▓" }.joined()
         return """
-        \(health)/\(maxHealth)
+        \(healthString)/\(maxHealth)
         \(role == .sheriff ? role.rawValue : "?")
-        x\(hand.count)
+        [] \(hand.count)
         \(inPlay.map { $0.name.rawValue }.joined(separator: "\n"))
         """
     }

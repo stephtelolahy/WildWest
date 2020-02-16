@@ -64,7 +64,7 @@ class GameViewController: UIViewController, Subscribable {
     private var state: GameStateProtocol?
     private let playersAdapter: PlayersAdapterProtocol = PlayersAdapter()
     private let actionsAdapter: ActionsAdapterProtocol = ActionsAdapter()
-    private let aiAgent: AIProtocol = PlayAllHandAI()
+    private let aiAgent: AIProtocol = RandomAI()
     
     // MARK: Lifecycle
     
@@ -161,7 +161,7 @@ private extension GameViewController {
         
         Timer.scheduledTimer(withTimeInterval: intervalInSeconds, repeats: true) { [weak self] timer in
             guard let state = self?.state,
-                let command = self?.aiAgent.chooseCommand(in: state) else {
+                let command = self?.aiAgent.bestMove(in: state) else {
                     timer.invalidate()
                     return
             }

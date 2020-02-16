@@ -6,7 +6,6 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-/// Agent able to play itself
 protocol AIProtocol {
-    func chooseCommand(in state: GameStateProtocol) -> ActionProtocol?
+    func bestMove(in state: GameStateProtocol) -> ActionProtocol?
 }
