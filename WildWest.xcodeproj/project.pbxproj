@@ -17,6 +17,8 @@
 		3302906123F32AC30099C438 /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5643423A4E09C00C1BD01 /* Beer.swift */; };
 		3302E51923F8DD0D004FE76E /* RandomAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E51823F8DD0D004FE76E /* RandomAI.swift */; };
 		3302E51A23F8DD1B004FE76E /* RandomAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E51823F8DD0D004FE76E /* RandomAI.swift */; };
+		3302E51C23F8E34C004FE76E /* RandomAIPreferPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E51B23F8E34C004FE76E /* RandomAIPreferPlay.swift */; };
+		3302E51D23F8E34C004FE76E /* RandomAIPreferPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E51B23F8E34C004FE76E /* RandomAIPreferPlay.swift */; };
 		330B7E0E23F70CAB00B3653D /* OutcomeCalculatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330B7E0D23F70CAB00B3653D /* OutcomeCalculatorProtocol.swift */; };
 		330B7E0F23F70CAF00B3653D /* OutcomeCalculatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330B7E0D23F70CAB00B3653D /* OutcomeCalculatorProtocol.swift */; };
 		330B7E1123F70D0200B3653D /* OutcomeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330B7E1023F70D0200B3653D /* OutcomeCalculator.swift */; };
@@ -197,6 +199,7 @@
 		3301E63D23F8081F00AB35C7 /* CommandsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandsViewController.swift; sourceTree = "<group>"; };
 		3301E63F23F80AE600AB35C7 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		3302E51823F8DD0D004FE76E /* RandomAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomAI.swift; sourceTree = "<group>"; };
+		3302E51B23F8E34C004FE76E /* RandomAIPreferPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomAIPreferPlay.swift; sourceTree = "<group>"; };
 		330B7E0D23F70CAB00B3653D /* OutcomeCalculatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutcomeCalculatorProtocol.swift; sourceTree = "<group>"; };
 		330B7E1023F70D0200B3653D /* OutcomeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutcomeCalculator.swift; sourceTree = "<group>"; };
 		330B7E1323F70D8700B3653D /* OutcomeCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutcomeCalculatorTests.swift; sourceTree = "<group>"; };
@@ -348,6 +351,7 @@
 			children = (
 				3301E63723F7EEF700AB35C7 /* AIProtocol.swift */,
 				3302E51823F8DD0D004FE76E /* RandomAI.swift */,
+				3302E51B23F8E34C004FE76E /* RandomAIPreferPlay.swift */,
 			);
 			path = ai;
 			sourceTree = "<group>";
@@ -869,6 +873,7 @@
 				330B7E1123F70D0200B3653D /* OutcomeCalculator.swift in Sources */,
 				3301E63823F7EEF700AB35C7 /* AIProtocol.swift in Sources */,
 				33ABE07223EA097A009A54E4 /* ActionsAdapter.swift in Sources */,
+				3302E51C23F8E34C004FE76E /* RandomAIPreferPlay.swift in Sources */,
 				332499B323DB9F650082EF09 /* GameViewController.swift in Sources */,
 				AD671A1C23D8F9D600F0AA4A /* CardExtension.swift in Sources */,
 				3301E63E23F8081F00AB35C7 /* CommandsViewController.swift in Sources */,
@@ -991,6 +996,7 @@
 				3322725D23F5CEDE0028933D /* DiscardBangTests.swift in Sources */,
 				3301E63923F7EEF700AB35C7 /* AIProtocol.swift in Sources */,
 				ADD035D023A96002003B2576 /* CardProtocol.swift in Sources */,
+				3302E51D23F8E34C004FE76E /* RandomAIPreferPlay.swift in Sources */,
 				AD52B99A23B178CC0013240B /* Player.swift in Sources */,
 				ADE91AD523BA00DC00F7316B /* GameSetup.swift in Sources */,
 				3383ABF323F53B9C0028B4B3 /* EndTurn.swift in Sources */,
@@ -1168,6 +1174,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.wildwest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Provisionning Wildcard development iOS";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1187,6 +1194,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.wildwest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Provisionning Wildcard development iOS";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

@@ -6,16 +6,8 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-struct EvaluatedMove {
-    let move: ActionProtocol
-    let score: Int
-}
-
 class RandomAI: AIProtocol {
     func bestMove(in state: GameStateProtocol) -> ActionProtocol? {
-        let activePlayers = Set(state.actions.map { $0.actorId })
-        assert(activePlayers.count == 1)
-        
-        return state.actions.randomElement()
+        state.actions.randomElement()
     }
 }

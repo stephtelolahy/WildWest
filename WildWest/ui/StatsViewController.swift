@@ -51,7 +51,6 @@ extension GameStateProtocol {
     func buildStats() -> [GameEvent] {
         return [
             GameEvent(name: "startTurn", occurences: commands.filter { $0 is StartTurn }.count),
-            GameEvent(name: "endTurn", occurences: commands.filter { $0 is EndTurn }.count),
             GameEvent(name: "beer", occurences: commands.filter { $0 is Beer }.count),
             GameEvent(name: "saloon", occurences: commands.filter { $0 is Saloon }.count),
             GameEvent(name: "stagecoach", occurences: commands.filter { $0 is Stagecoach }.count),
@@ -64,7 +63,6 @@ extension GameStateProtocol {
             GameEvent(name: "indians", occurences: commands.filter { $0 is Indians }.count),
             GameEvent(name: "duel", occurences: commands.filter { $0 is Duel }.count),
             GameEvent(name: "generalStore", occurences: commands.filter { $0 is GeneralStore }.count),
-            GameEvent(name: "chooseCard", occurences: commands.filter { $0 is ChooseCard }.count),
             GameEvent(name: "looseLife1", occurences: commands.filter { ($0 as? LooseLife)?.points == 1 }.count),
             GameEvent(name: "looseLife3", occurences: commands.filter { ($0 as? LooseLife)?.points == 3 }.count),
             GameEvent(name: "discardBang", occurences: commands.filter { $0 is DiscardBang }.count),

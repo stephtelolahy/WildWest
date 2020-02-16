@@ -64,7 +64,7 @@ class GameViewController: UIViewController, Subscribable {
     private var state: GameStateProtocol?
     private let playersAdapter: PlayersAdapterProtocol = PlayersAdapter()
     private let actionsAdapter: ActionsAdapterProtocol = ActionsAdapter()
-    private let aiAgent: AIProtocol = RandomAI()
+    private let aiAgent: AIProtocol = RandomAIPreferPlay()
     
     // MARK: Lifecycle
     
@@ -82,12 +82,12 @@ class GameViewController: UIViewController, Subscribable {
     @IBAction private func actionsButtonTapped(_ sender: Any) {
         let alertController = UIAlertController(title: nil,
                                                 message: nil,
-                                                preferredStyle: .actionSheet)
+                                                preferredStyle: .alert)
         
         alertController.addAction(UIAlertAction(title: "Autoplay",
                                                 style: .default,
                                                 handler: { [weak self] _ in
-                                                    self?.autoPlay(1)
+                                                    self?.autoPlay(0.5)
         }))
         
         alertController.addAction(UIAlertAction(title: "Commands",
@@ -137,7 +137,7 @@ private extension GameViewController {
     func showOptions(_ actions: [ActionProtocol]) {
         let alertController = UIAlertController(title: nil,
                                                 message: nil,
-                                                preferredStyle: .actionSheet)
+                                                preferredStyle: .alert)
         
         actions.forEach { action in
             alertController.addAction(UIAlertAction(title: action.description,

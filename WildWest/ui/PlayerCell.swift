@@ -66,10 +66,10 @@ private extension PlayerProtocol {
     var string: String {
         let healthString = Array(0..<health).map { _ in "▓" }.joined()
         return """
-        \(healthString)/\(maxHealth)
         \(role == .sheriff ? role.rawValue : "?")
+        \(healthString)
         [] \(hand.count)
-        \(inPlay.map { $0.name.rawValue }.joined(separator: "\n"))
+        \(inPlay.map { "[\($0.name.rawValue)]" }.joined(separator: "\n"))
         """
     }
 }
