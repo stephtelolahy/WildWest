@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3301BEF423F962F000B4364D /* RandomAIWithRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3301BEF323F962F000B4364D /* RandomAIWithRole.swift */; };
+		3301BEF523F962F000B4364D /* RandomAIWithRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3301BEF323F962F000B4364D /* RandomAIWithRole.swift */; };
 		3301E63823F7EEF700AB35C7 /* AIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3301E63723F7EEF700AB35C7 /* AIProtocol.swift */; };
 		3301E63923F7EEF700AB35C7 /* AIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3301E63723F7EEF700AB35C7 /* AIProtocol.swift */; };
 		3301E63E23F8081F00AB35C7 /* CommandsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3301E63D23F8081F00AB35C7 /* CommandsViewController.swift */; };
@@ -196,6 +198,7 @@
 /* Begin PBXFileReference section */
 		102E20EA2AD38505FB9CFBD5 /* libPods-WildWestTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WildWestTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		15EFD4A90888EB671B9B5CF5 /* Pods-WildWestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.debug.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3301BEF323F962F000B4364D /* RandomAIWithRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomAIWithRole.swift; sourceTree = "<group>"; };
 		3301E63723F7EEF700AB35C7 /* AIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIProtocol.swift; sourceTree = "<group>"; };
 		3301E63D23F8081F00AB35C7 /* CommandsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandsViewController.swift; sourceTree = "<group>"; };
 		3301E63F23F80AE600AB35C7 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
@@ -354,6 +357,7 @@
 				3301E63723F7EEF700AB35C7 /* AIProtocol.swift */,
 				3302E51823F8DD0D004FE76E /* RandomAI.swift */,
 				3302E51B23F8E34C004FE76E /* RandomAIPreferPlay.swift */,
+				3301BEF323F962F000B4364D /* RandomAIWithRole.swift */,
 			);
 			path = ai;
 			sourceTree = "<group>";
@@ -890,6 +894,7 @@
 				ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */,
 				AD52B99923B178CC0013240B /* Player.swift in Sources */,
 				3324018E23DBA6C800B92439 /* UICollectionViewExtension.swift in Sources */,
+				3301BEF423F962F000B4364D /* RandomAIWithRole.swift in Sources */,
 				33A4381223E4BD3200C39DD6 /* ArrayExtension.swift in Sources */,
 				3383ABE723F53AFA0028B4B3 /* ResolveDynamite.swift in Sources */,
 				3383ABDA23F5332A0028B4B3 /* Gatling.swift in Sources */,
@@ -960,6 +965,7 @@
 				AD49F86823BA054D00543F59 /* Figure.swift in Sources */,
 				AD52B99D23B17A310013240B /* GameState.swift in Sources */,
 				339A294A23EFEFE7002C5CD8 /* ChallengeExtension.swift in Sources */,
+				3301BEF523F962F000B4364D /* RandomAIWithRole.swift in Sources */,
 				AD46810F23BEA2B0000B42C7 /* PlayerExtension.swift in Sources */,
 				3383ABE023F533480028B4B3 /* DiscardBang.swift in Sources */,
 				33D964B523DDDB1E007295E7 /* GameEngine.swift in Sources */,

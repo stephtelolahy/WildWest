@@ -27,7 +27,7 @@ class GameViewController: UIViewController, Subscribable {
     private var state: GameStateProtocol?
     private let playersAdapter: PlayersAdapterProtocol = PlayersAdapter()
     private let actionsAdapter: ActionsAdapterProtocol = ActionsAdapter()
-    private let aiAgent: AIProtocol = RandomAIPreferPlay()
+    private let aiAgent: AIProtocol = RandomAIWithRole()
     
     // MARK: Lifecycle
     
