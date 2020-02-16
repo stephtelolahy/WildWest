@@ -8,6 +8,6 @@
 
 class RandomAI: AIProtocol {
     func bestMove(in state: GameStateProtocol) -> ActionProtocol? {
-        state.actions.randomElement()
+        state.validMoves.randomElement()
     }
 }

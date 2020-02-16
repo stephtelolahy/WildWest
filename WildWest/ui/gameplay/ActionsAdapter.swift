@@ -42,7 +42,7 @@ class ActionsAdapter: ActionsAdapterProtocol {
         }
         
         var result: [ActionItem] = []
-        var actions = state.actions.filter { $0.actorId == playerIdentifier }
+        var actions = state.validMoves.filter { $0.actorId == playerIdentifier }
         player.hand.forEach { card in
             result.append(ActionItem(card: card, actions: actions.filter { $0.cardId == card.identifier }))
             actions.removeAll(where: { $0.cardId == card.identifier })

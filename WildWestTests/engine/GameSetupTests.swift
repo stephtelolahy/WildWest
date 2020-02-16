@@ -98,9 +98,9 @@ class GameSetupTests: XCTestCase {
         // SheriffHasOneAdditionalHealth
         XCTAssertEqual(sheriff.health, 5)
         // Available actions should be only sherif's start turn
-        XCTAssertEqual(state.actions as? [StartTurn], [StartTurn(actorId: sheriff.identifier)])
+        XCTAssertEqual(state.validMoves as? [StartTurn], [StartTurn(actorId: sheriff.identifier)])
         // Commands is empty
-        XCTAssertTrue(state.commands.isEmpty)
+        XCTAssertTrue(state.commandsHistory.isEmpty)
         // Flags are reset to 0
         XCTAssertEqual(state.bangsPlayed, 0)
         XCTAssertEqual(state.barrelsResolved, 0)

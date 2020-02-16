@@ -1,18 +1,22 @@
 //
-//  MutableGameStateProtocol.swift
+//  GameDatabaseProtocol.swift
 //  WildWest
 //
 //  Created by Hugues Stephano Telolahy on 10/02/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-protocol MutableGameStateProtocol {
+protocol GameDatabaseProtocol {
+    
+    var state: GameStateProtocol { get }
+    
+    // Flags
     func setTurn(_ turn: String)
     func setChallenge(_ challenge: Challenge?)
     func setBangsPlayed(_ bangsPlayed: Int)
     func setBarrelsResolved(_ barrelsResolved: Int)
-    func addCommand(_ command: ActionProtocol)
-    func setActions(_ actions: [ActionProtocol])
+    func addCommandsHistory(_ actions: ActionProtocol)
+    func setValidMoves(_ actions: [ActionProtocol])
     func setOutcome(_ outcome: GameOutcome)
     func removePlayer(_ playerId: String) -> PlayerProtocol?
     func addEliminated(_ player: PlayerProtocol)

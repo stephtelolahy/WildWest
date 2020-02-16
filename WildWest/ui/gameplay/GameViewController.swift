@@ -23,8 +23,7 @@ class GameViewController: UIViewController, Subscribable {
     
     // MARK: Properties
     
-    // swiftlint:disable implicitly_unwrapped_optional
-    var engine: GameEngineProtocol!
+    var engine: GameEngineProtocol?
     private var state: GameStateProtocol?
     private let playersAdapter: PlayersAdapterProtocol = PlayersAdapter()
     private let actionsAdapter: ActionsAdapterProtocol = ActionsAdapter()
@@ -36,6 +35,11 @@ class GameViewController: UIViewController, Subscribable {
         super.viewDidLoad()
         playersCollectionView.setItemSpacing(spacing)
         actionsCollectionView.setItemSpacing(spacing)
+        
+        guard let engine = self.engine else {
+            return
+        }
+        
         sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
             self?.update(with: state)
         }))
@@ -107,7 +111,7 @@ private extension GameViewController {
             alertController.addAction(UIAlertAction(title: action.description,
                                                     style: .default,
                                                     handler: { [weak self] _ in
-                                                        self?.engine.execute(action)
+                                                        self?.engine?.execute(action)
             }))
         }
         
@@ -130,19 +134,19 @@ private extension GameViewController {
                     return
             }
             
-            self?.engine.execute(command)
+            self?.engine?.execute(command)
         }
     }
     
     func showCommands() {
         let viewController = CommandsViewController()
-        viewController.stateSubject = engine.stateSubject
+        viewController.stateSubject = engine?.stateSubject
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     func showStats() {
         let viewController = StatsViewController()
-        viewController.stateSubject = engine.stateSubject
+        viewController.stateSubject = engine?.stateSubject
         navigationController?.pushViewController(viewController, animated: true)
     }
 }
@@ -253,8 +257,8 @@ private extension GameStateProtocol {
             return challenge.description
         }
         
-        if actions.count == 1,
-            let uniqueAction = actions.first {
+        if validMoves.count == 1,
+            let uniqueAction = validMoves.first {
             return uniqueAction.description
         }
         

@@ -22,20 +22,9 @@ class HomeViewController: UITableViewController {
 
 private extension HomeViewController {
     
-    // swiftlint:disable function_body_length
-    private func createGameEngine() -> GameEngineProtocol? {
-        let provider = ResourcesProvider(jsonReader: JsonReader(bundle: Bundle.main))
-        let figures = provider.allFigures()
-        let cards = provider.allCards()
-        let gameSetup = GameSetup()
-        let roles = gameSetup.roles(for: 7)
-        let state = gameSetup.setupGame(roles: roles, figures: figures, cards: cards)
-        guard let mutableState = state as? MutableGameStateProtocol else {
-            return nil
-        }
-        
+    private func classicRules() -> [RuleProtocol] {
         let calculator = RangeCalculator()
-        let rules: [RuleProtocol] = [
+        return [
             BeerRule(),
             SaloonRule(),
             StagecoachRule(),
@@ -60,6 +49,19 @@ private extension HomeViewController {
             DiscardBeerRule(),
             ResolveBarrelRule()
         ]
-        return GameEngine(state: state, mutableState: mutableState, rules: rules, calculator: OutcomeCalculator())
+    }
+    
+    private func createGameEngine() -> GameEngineProtocol? {
+        let provider = ResourcesProvider(jsonReader: JsonReader(bundle: Bundle.main))
+        let figures = provider.allFigures()
+        let cards = provider.allCards()
+        let gameSetup = GameSetup()
+        let roles = gameSetup.roles(for: 7)
+        let state = gameSetup.setupGame(roles: roles, figures: figures, cards: cards)
+        guard let database = state as? GameDatabaseProtocol else {
+            return nil
+        }
+        
+        return GameEngine(database: database, rules: classicRules(), calculator: OutcomeCalculator())
     }
 }

@@ -23,7 +23,7 @@ class CommandsViewController: UITableViewController, Subscribable {
         }
         
         sub(stateSubject.subscribe(onNext: { [weak self] state in
-            self?.actions = state.commands.reversed()
+            self?.actions = state.commandsHistory.reversed()
             self?.tableView.reloadData()
         }))
     }

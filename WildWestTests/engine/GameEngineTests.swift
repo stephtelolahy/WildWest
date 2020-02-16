@@ -12,7 +12,7 @@ import Cuckoo
 class GameEngineTests: XCTestCase {
     
     var mockState: MockGameStateProtocol!
-    var mockMutableState: MockMutableGameStateProtocol!
+    var mockDatabase: MockGameDatabaseProtocol!
     var mockRule: MockRuleProtocol!
     var mockCalculator: MockOutcomeCalculatorProtocol!
     var mockAction: MockActionProtocol!
@@ -21,10 +21,13 @@ class GameEngineTests: XCTestCase {
     
     override func setUp() {
         mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
-        mockMutableState = MockMutableGameStateProtocol().withEnabledDefaultImplementation(MutableGameStateProtocolStub())
+        mockDatabase = MockGameDatabaseProtocol().withEnabledDefaultImplementation(GameDatabaseProtocolStub())
+        Cuckoo.stub(mockDatabase) { mock in
+            when(mock.state.get).thenReturn(mockState)
+        }
         mockRule = MockRuleProtocol().withEnabledDefaultImplementation(RuleProtocolStub())
         mockCalculator = MockOutcomeCalculatorProtocol().withEnabledDefaultImplementation(OutcomeCalculatorProtocolStub())
-        sut = GameEngine(state: mockState, mutableState: mockMutableState, rules: [mockRule], calculator: mockCalculator)
+        sut = GameEngine(database: mockDatabase, rules: [mockRule], calculator: mockCalculator)
         mockAction = MockActionProtocol().withEnabledDefaultImplementation(ActionProtocolStub())
     }
     
@@ -40,8 +43,8 @@ class GameEngineTests: XCTestCase {
         sut.execute(mockAction)
         
         // Assert
-        verify(mockUpdate1).execute(in: mutableState(equalTo: mockMutableState))
-        verify(mockUpdate2).execute(in: mutableState(equalTo: mockMutableState))
+        verify(mockUpdate1).execute(in: database(equalTo: mockDatabase))
+        verify(mockUpdate2).execute(in: database(equalTo: mockDatabase))
     }
     
     func test_AddCommandToHistory_IfExecutingCommand() {
@@ -50,10 +53,10 @@ class GameEngineTests: XCTestCase {
         sut.execute(mockAction)
         
         // Assert
-        verify(mockMutableState).addCommand(action(equalTo: mockAction))
+        verify(mockDatabase).addCommandsHistory(action(equalTo: mockAction))
     }
     
-    func test_SetMatchingActions_IfExecutingCommand() {
+    func test_SetMatchingActionsAsValidMoves_IfExecutingCommand() {
         // Given
         let matchedAction1 = MockActionProtocol()
         let matchedAction2 = MockActionProtocol()
@@ -66,7 +69,7 @@ class GameEngineTests: XCTestCase {
         
         // Assert
         verify(mockRule).match(with: state(equalTo: mockState))
-        verify(mockMutableState).setActions(actions(equalTo: [matchedAction1, matchedAction2]))
+        verify(mockDatabase).setValidMoves(actions(equalTo: [matchedAction1, matchedAction2]))
     }
     
     func test_DoNotGenerateActions_IfGameIsOver() {
@@ -87,8 +90,8 @@ class GameEngineTests: XCTestCase {
         
         // Assert
         verify(mockCalculator).outcome(for: equal(to: [.deputy, .renegade, .outlaw]))
-        verify(mockMutableState).setOutcome(equal(to: .outlawWin))
-        verify(mockMutableState).setActions(isEmpty())
+        verify(mockDatabase).setOutcome(equal(to: .outlawWin))
+        verify(mockDatabase).setValidMoves(isEmpty())
         verifyNoMoreInteractions(mockRule)
     }
 }

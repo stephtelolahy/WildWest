@@ -9,13 +9,13 @@
 class RandomAIPreferPlay: AIProtocol {
     
     func bestMove(in state: GameStateProtocol) -> ActionProtocol? {
-        guard state.actions.count > 1 else {
-            return state.actions.first
+        guard state.validMoves.count > 1 else {
+            return state.validMoves.first
         }
         
         var evaluatedMoves: [EvaluatedMove] = []
         var bestScore = Int.min
-        state.actions.forEach { move in
+        state.validMoves.forEach { move in
             let score = evaluate(move, in: state)
             evaluatedMoves.append(EvaluatedMove(move: move, score: score))
             if score > bestScore {

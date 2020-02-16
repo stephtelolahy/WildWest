@@ -45,7 +45,7 @@ class PlayersAdapter: PlayersAdapterProtocol {
                     return PlayerItem(player: nil, isActive: false, isTurn: false)
             }
             
-            let isActive = state.actions.contains(where: { $0.actorId == playerId })
+            let isActive = state.validMoves.contains(where: { $0.actorId == playerId })
             let isTurn = player.identifier == state.turn
             return PlayerItem(player: player, isActive: isActive, isTurn: isTurn)
         }

@@ -55,8 +55,8 @@ class GameSetup: GameSetupProtocol {
                          barrelsResolved: 0,
                          generalStore: [],
                          outcome: nil,
-                         actions: actions,
-                         commands: [],
+                         validMoves: actions,
+                         commandsHistory: [],
                          eliminated: [])
     }
 }

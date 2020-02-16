@@ -20,9 +20,9 @@ func state(equalTo object: AnyObject) -> ParameterMatcher<GameStateProtocol> {
     })
 }
 
-func mutableState(equalTo object: AnyObject) -> ParameterMatcher<MutableGameStateProtocol> {
-    return ParameterMatcher(matchesFunction: { state -> Bool in
-        return state as AnyObject === object
+func database(equalTo object: AnyObject) -> ParameterMatcher<GameDatabaseProtocol> {
+    return ParameterMatcher(matchesFunction: { database -> Bool in
+        return database as AnyObject === object
     })
 }
 
