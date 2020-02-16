@@ -23,44 +23,8 @@ class GameViewController: UIViewController, Subscribable {
     
     // MARK: Properties
     
-    // swiftlint:disable force_cast
-    private lazy var engine: GameEngineProtocol = {
-        let provider = ResourcesProvider(jsonReader: JsonReader(bundle: Bundle.main))
-        let figures = provider.allFigures()
-        let cards = provider.allCards()
-        let gameSetup = GameSetup()
-        let roles = gameSetup.roles(for: 7)
-        let state = gameSetup.setupGame(roles: roles, figures: figures, cards: cards)
-        let mutableState = state as! MutableGameStateProtocol
-        let calculator = RangeCalculator()
-        let rules: [RuleProtocol] = [
-            BeerRule(),
-            SaloonRule(),
-            StagecoachRule(),
-            WellsFargoRule(),
-            EquipRule(),
-            CatBalouRule(),
-            PanicRule(calculator: calculator),
-            BangRule(calculator: calculator),
-            MissedRule(),
-            GatlingRule(),
-            IndiansRule(),
-            JailRule(),
-            DiscardBangRule(),
-            DuelRule(),
-            GeneralStoreRule(),
-            ChooseCardRule(),
-            LooseLifeRule(),
-            StartTurnRule(),
-            EndTurnRule(),
-            ResolveJailRule(),
-            ResolveDynamiteRule(),
-            DiscardBeerRule(),
-            ResolveBarrelRule()
-        ]
-        return GameEngine(state: state, mutableState: mutableState, rules: rules, calculator: OutcomeCalculator())
-    }()
-    
+    // swiftlint:disable implicitly_unwrapped_optional
+    var engine: GameEngineProtocol!
     private var state: GameStateProtocol?
     private let playersAdapter: PlayersAdapterProtocol = PlayersAdapter()
     private let actionsAdapter: ActionsAdapterProtocol = ActionsAdapter()

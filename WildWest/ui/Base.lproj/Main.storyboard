@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Yy6-0k-mhK" kind="relationship" relationship="rootViewController" id="2TE-n0-bUQ"/>
+                        <segue destination="hpl-cv-4vv" kind="relationship" relationship="rootViewController" id="5Xe-iv-XQk"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FRH-Ox-3gV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -176,7 +176,55 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="peW-QT-3Rf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1862" y="860"/>
+            <point key="canvasLocation" x="2716" y="860"/>
+        </scene>
+        <!--Home View Controller-->
+        <scene sceneID="c4k-sw-NYJ">
+            <objects>
+                <tableViewController id="hpl-cv-4vv" customClass="HomeViewController" customModule="WildWest" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="2ta-lG-zaH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <sections>
+                            <tableViewSection id="JQM-Oj-6wF">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="aGQ-hp-TMr">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aGQ-hp-TMr" id="HwZ-RD-iVw">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New game" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZT-p3-Zah">
+                                                    <rect key="frame" x="146.5" y="11.5" width="82" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ZZT-p3-Zah" firstAttribute="centerX" secondItem="HwZ-RD-iVw" secondAttribute="centerX" id="d5i-ei-g5m"/>
+                                                <constraint firstItem="ZZT-p3-Zah" firstAttribute="centerY" secondItem="HwZ-RD-iVw" secondAttribute="centerY" id="tjr-HC-v2j"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Yy6-0k-mhK" kind="show" id="Z3H-7r-xKs"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="hpl-cv-4vv" id="gt9-k1-wq5"/>
+                            <outlet property="delegate" destination="hpl-cv-4vv" id="Hmc-Lv-RNl"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="3lO-kA-50y"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Gj-0S-Sa9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1905" y="860"/>
         </scene>
     </scenes>
 </document>
