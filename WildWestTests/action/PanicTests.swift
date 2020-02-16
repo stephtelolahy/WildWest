@@ -18,19 +18,32 @@ import Cuckoo
  */
 class PanicTests: XCTestCase {
     
-    func test_PanicDescription() {
+    func test_PanicSpecificInPlayCardDescription() {
         // Given
-        let sut = Panic(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c2", ownerId: "p2", source: .hand))
+        let sut = Panic(actorId: "p1", cardId: "c1", target: TargetCard(ownerId: "p2", source: .inPlay("c2")))
         
         // When
         // Assert
-        XCTAssertEqual(sut.description, "p1 plays c1 to take c2 from p2's hand")
+        XCTAssertEqual(sut.description, "p1 plays c1 to take c2 from p2")
+    }
+    
+    func test_PanicRandomHandCardDescription() {
+        // Given
+        let sut = Panic(actorId: "p1", cardId: "c1", target: TargetCard(ownerId: "p2", source: .randomHand))
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.description, "p1 plays c1 to take random hand card from p2")
     }
     
     func test_PullOtherPlayerHandCard_IfPlayingPanic() {
         // Given
+        let mockPlayer2 = MockPlayerProtocol()
+            .identified(by: "p2")
+            .holding(MockCardProtocol().identified(by: "c2"))
         let mockState = MockGameStateProtocol()
-        let sut = Panic(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c2", ownerId: "p2", source: .hand))
+            .players(are: mockPlayer2)
+        let sut = Panic(actorId: "p1", cardId: "c1", target: TargetCard(ownerId: "p2", source: .randomHand))
         
         // When
         let updates = sut.execute(in: mockState)
@@ -45,7 +58,7 @@ class PanicTests: XCTestCase {
     func test_PullOtherPlayerInPlayCard_IfPlayingPanic() {
         // Given
         let mockState = MockGameStateProtocol()
-        let sut = Panic(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c2", ownerId: "p2", source: .inPlay))
+        let sut = Panic(actorId: "p1", cardId: "c1", target: TargetCard(ownerId: "p2", source: .inPlay("c2")))
         
         // When
         let updates = sut.execute(in: mockState)
@@ -95,8 +108,8 @@ class PanicRuleTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(actions as? [Panic], [
-            Panic(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c2", ownerId: "p2", source: .hand)),
-            Panic(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c3", ownerId: "p3", source: .inPlay))
+            Panic(actorId: "p1", cardId: "c1", target: TargetCard(ownerId: "p2", source: .randomHand)),
+            Panic(actorId: "p1", cardId: "c1", target: TargetCard(ownerId: "p3", source: .inPlay("c3")))
         ])
     }
     
@@ -192,7 +205,7 @@ class PanicRuleTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(actions as? [Panic], [
-            Panic(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c2", ownerId: "p1", source: .inPlay))
+            Panic(actorId: "p1", cardId: "c1", target: TargetCard(ownerId: "p1", source: .inPlay("c2")))
         ])
     }
 }

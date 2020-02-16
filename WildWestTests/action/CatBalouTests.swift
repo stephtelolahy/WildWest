@@ -16,19 +16,32 @@ import Cuckoo
  */
 class CatBalouTests: XCTestCase {
     
-    func test_CatBalouDescription() {
+    func test_CatBalouSpecificInPlayCardDescription() {
         // Given
-        let sut = CatBalou(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c2", ownerId: "p2", source: .hand))
+        let sut = CatBalou(actorId: "p1", cardId: "c1", target: TargetCard(ownerId: "p2", source: .inPlay("c2")))
         
         // When
         // Assert
-        XCTAssertEqual(sut.description, "p1 plays c1 to discard c2 from p2's hand")
+        XCTAssertEqual(sut.description, "p1 plays c1 to discard c2 from p2")
+    }
+    
+    func test_CatBalouRandomHandCardDescription() {
+        // Given
+        let sut = CatBalou(actorId: "p1", cardId: "c1", target: TargetCard(ownerId: "p2", source: .randomHand))
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.description, "p1 plays c1 to discard random hand card from p2")
     }
     
     func test_DiscardOtherPlayerHandCard_IfPlayingCatBalou() {
         // Given
+        let mockPlayer2 = MockPlayerProtocol()
+            .identified(by: "p2")
+            .holding(MockCardProtocol().identified(by: "c2"))
         let mockState = MockGameStateProtocol()
-        let sut = CatBalou(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c2", ownerId: "p2", source: .hand))
+            .players(are: mockPlayer2)
+        let sut = CatBalou(actorId: "p1", cardId: "c1", target: TargetCard(ownerId: "p2", source: .randomHand))
         
         // When
         let updates = sut.execute(in: mockState)
@@ -43,7 +56,7 @@ class CatBalouTests: XCTestCase {
     func test_DiscardOtherPlayerInPlayCard_IfPlayingCatBalou() {
         // Given
         let mockState = MockGameStateProtocol()
-        let sut = CatBalou(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c2", ownerId: "p2", source: .inPlay))
+        let sut = CatBalou(actorId: "p1", cardId: "c1", target: TargetCard(ownerId: "p2", source: .inPlay("c2")))
         
         // When
         let updates = sut.execute(in: mockState)
@@ -68,7 +81,7 @@ class CatBalouRuleTests: XCTestCase {
         
         let mockPlayer2 = MockPlayerProtocol()
             .identified(by: "p2")
-            .holding(MockCardProtocol().identified(by: "c2"))
+            .holding(MockCardProtocol())
             .noCardsInPlay()
         
         let mockState = MockGameStateProtocol()
@@ -81,7 +94,7 @@ class CatBalouRuleTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(actions as? [CatBalou], [
-            CatBalou(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c2", ownerId: "p2", source: .hand))
+            CatBalou(actorId: "p1", cardId: "c1", target: TargetCard(ownerId: "p2", source: .randomHand))
         ])
     }
     
@@ -108,7 +121,7 @@ class CatBalouRuleTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(actions as? [CatBalou], [
-            CatBalou(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c2", ownerId: "p2", source: .inPlay))
+            CatBalou(actorId: "p1", cardId: "c1", target: TargetCard(ownerId: "p2", source: .inPlay("c2")))
         ])
     }
     
@@ -130,7 +143,7 @@ class CatBalouRuleTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(actions as? [CatBalou], [
-            CatBalou(actorId: "p1", cardId: "c1", target: DiscardableCard(cardId: "c2", ownerId: "p1", source: .inPlay))
+            CatBalou(actorId: "p1", cardId: "c1", target: TargetCard(ownerId: "p1", source: .inPlay("c2")))
         ])
     }
     
