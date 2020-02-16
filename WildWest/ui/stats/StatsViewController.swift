@@ -83,6 +83,6 @@ extension GameStateProtocol {
             GameEvent(name: "barrel", occurences: commandsHistory.filter { ($0 as? Equip)?.cardId.contains("barrel") == true }.count),
             GameEvent(name: "dynamite", occurences: commandsHistory.filter { ($0 as? Equip)?.cardId.contains("dynamite") == true }.count)
         ]
-        .sorted(by: { $0.occurences > $1.occurences })
+        .sorted(by: { $0.name < $1.name })
     }
 }

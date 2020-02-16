@@ -23,11 +23,25 @@ class GameViewController: UIViewController, Subscribable {
     
     // MARK: Properties
     
-    var engine: GameEngineProtocol?
+    private lazy var engine: GameEngineProtocol = {
+        GameEngine(database: GameLoader().createGame(for: 7),
+                   rules: GameLoader().classicRules(),
+                   calculator: OutcomeCalculator())
+    }()
+    
+    private lazy var aiAgents: [AIPlayerAgent] = {
+        guard let state = try? engine.stateSubject.value() else {
+            return []
+        }
+        
+        return state.players.filter { $0.role != .sheriff }.map { player in
+            AIPlayerAgent(engine: engine, playerId: player.identifier, ai: RandomAIWithRole())
+        }
+    }()
+    
     private var state: GameStateProtocol?
     private let playersAdapter: PlayersAdapterProtocol = PlayersAdapter()
     private let actionsAdapter: ActionsAdapterProtocol = ActionsAdapter()
-    private let aiAgent: AIProtocol = RandomAIWithRole()
     
     // MARK: Lifecycle
     
@@ -35,14 +49,14 @@ class GameViewController: UIViewController, Subscribable {
         super.viewDidLoad()
         playersCollectionView.setItemSpacing(spacing)
         actionsCollectionView.setItemSpacing(spacing)
-        
-        guard let engine = self.engine else {
-            return
-        }
-        
         sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
             self?.update(with: state)
         }))
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        aiAgents.forEach { $0.start() }
     }
     
     // MARK: IBAction
@@ -51,12 +65,6 @@ class GameViewController: UIViewController, Subscribable {
         let alertController = UIAlertController(title: nil,
                                                 message: nil,
                                                 preferredStyle: .alert)
-        
-        alertController.addAction(UIAlertAction(title: "Autoplay",
-                                                style: .default,
-                                                handler: { [weak self] _ in
-                                                    self?.autoPlay(0.5)
-        }))
         
         alertController.addAction(UIAlertAction(title: "Commands",
                                                 style: .default,
@@ -111,7 +119,7 @@ private extension GameViewController {
             alertController.addAction(UIAlertAction(title: action.description,
                                                     style: .default,
                                                     handler: { [weak self] _ in
-                                                        self?.engine?.execute(action)
+                                                        self?.engine.execute(action)
             }))
         }
         
@@ -122,31 +130,15 @@ private extension GameViewController {
         present(alertController, animated: true)
     }
     
-    func autoPlay(_ intervalInSeconds: TimeInterval) {
-        guard #available(iOS 10.0, *) else {
-            return
-        }
-        
-        Timer.scheduledTimer(withTimeInterval: intervalInSeconds, repeats: true) { [weak self] timer in
-            guard let state = self?.state,
-                let command = self?.aiAgent.bestMove(in: state) else {
-                    timer.invalidate()
-                    return
-            }
-            
-            self?.engine?.execute(command)
-        }
-    }
-    
     func showCommands() {
         let viewController = CommandsViewController()
-        viewController.stateSubject = engine?.stateSubject
+        viewController.stateSubject = engine.stateSubject
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     func showStats() {
         let viewController = StatsViewController()
-        viewController.stateSubject = engine?.stateSubject
+        viewController.stateSubject = engine.stateSubject
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

@@ -7,6 +7,7 @@
 //
 
 protocol AIProtocol {
+    func bestMove(in state: GameStateProtocol) -> ActionProtocol?
     func evaluate(_ move: ActionProtocol, in state: GameStateProtocol) -> Int
 }
 

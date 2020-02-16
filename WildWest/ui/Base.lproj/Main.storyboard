@@ -178,10 +178,10 @@
             </objects>
             <point key="canvasLocation" x="2716" y="860"/>
         </scene>
-        <!--Home View Controller-->
+        <!--Table View Controller-->
         <scene sceneID="c4k-sw-NYJ">
             <objects>
-                <tableViewController id="hpl-cv-4vv" customClass="HomeViewController" customModule="WildWest" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="hpl-cv-4vv" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="2ta-lG-zaH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
