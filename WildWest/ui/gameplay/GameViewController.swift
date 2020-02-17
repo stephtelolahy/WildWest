@@ -52,10 +52,6 @@ class GameViewController: UIViewController, Subscribable {
         sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
             self?.update(with: state)
         }))
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         aiAgents.forEach { $0.start() }
     }
     

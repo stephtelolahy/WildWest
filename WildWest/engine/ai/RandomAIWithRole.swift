@@ -31,7 +31,6 @@ class RandomAIWithRole: RandomAI {
         
         if let catBalou = move as? CatBalou {
             if case let .inPlay(cardId) = catBalou.target.source, cardId.contains("jail") {
-
                 return evaluateHelp(from: catBalou.actorId, to: catBalou.target.ownerId, in: state)
             }
             return evaluateWeakAttack(from: catBalou.actorId, to: catBalou.target.ownerId, in: state)

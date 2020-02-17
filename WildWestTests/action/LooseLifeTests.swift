@@ -55,6 +55,7 @@ class LooseLifeTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
+            .playerSetHealth("p1", 0),
             .eliminatePlayer("p1"),
             .setChallenge(nil)
         ])
@@ -154,6 +155,7 @@ class LooseLifeTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
+            .playerSetHealth("p1", 0),
             .eliminatePlayer("p1"),
             .setChallenge(.startTurn("p2"))
         ])

@@ -35,8 +35,8 @@ class ActionsAdapter: ActionsAdapterProtocol {
     }
     
     private func buildItems() -> [ActionItem] {
-        guard let playerIdentifier = self.playerIdentifier,
-            let state = self.state,
+        guard let state = self.state,
+            let playerIdentifier = self.playerIdentifier,
             let player = state.players.first(where: { $0.identifier == playerIdentifier }) else {
                 return []
         }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxSwift
 
 class AIPlayerAgent: Subscribable {
     let engine: GameEngineProtocol

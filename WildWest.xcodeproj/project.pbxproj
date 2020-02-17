@@ -12,7 +12,6 @@
 		3301BEF723F9A44100B4364D /* GameLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3301BEF623F9A44100B4364D /* GameLoader.swift */; };
 		3301BEF823F9A44100B4364D /* GameLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3301BEF623F9A44100B4364D /* GameLoader.swift */; };
 		3301BEFA23F9A79B00B4364D /* AIPlayerAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3301BEF923F9A79B00B4364D /* AIPlayerAgent.swift */; };
-		3301BEFB23F9A79B00B4364D /* AIPlayerAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3301BEF923F9A79B00B4364D /* AIPlayerAgent.swift */; };
 		3301E63823F7EEF700AB35C7 /* AIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3301E63723F7EEF700AB35C7 /* AIProtocol.swift */; };
 		3301E63923F7EEF700AB35C7 /* AIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3301E63723F7EEF700AB35C7 /* AIProtocol.swift */; };
 		3301E63E23F8081F00AB35C7 /* CommandsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3301E63D23F8081F00AB35C7 /* CommandsViewController.swift */; };
@@ -982,7 +981,6 @@
 				3322725323F5CEDE0028933D /* WellsFargoTests.swift in Sources */,
 				330B7E1223F70D0200B3653D /* OutcomeCalculator.swift in Sources */,
 				338E39A123F3E3F8002FA99B /* CatBalou.swift in Sources */,
-				3301BEFB23F9A79B00B4364D /* AIPlayerAgent.swift in Sources */,
 				33A4381323E4BD3200C39DD6 /* ArrayExtension.swift in Sources */,
 				33F94AB723F0580800D1BCFE /* GameUpdateProtocol.swift in Sources */,
 				3383ABD023F461D20028B4B3 /* Jail.swift in Sources */,

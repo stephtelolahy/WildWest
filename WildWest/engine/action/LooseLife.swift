@@ -21,10 +21,10 @@ struct LooseLife: ActionProtocol, Equatable {
         }
         
         var updates: [GameUpdate] = []
-        let health = player.health - points
-        if health > 0 {
-            updates.append(.playerSetHealth(actorId, health))
-        } else {
+        let health = max(0, player.health - points)
+        updates.append(.playerSetHealth(actorId, health))
+        
+        if health == 0 {
             updates.append(.eliminatePlayer(actorId))
             
             if actorId == state.turn {

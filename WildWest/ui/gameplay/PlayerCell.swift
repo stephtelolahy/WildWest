@@ -26,7 +26,7 @@ class PlayerCell: UICollectionViewCell {
         }
         
         figureImageView.image = UIImage(named: player.imageName)
-        infoLabel.text = player.string
+        infoLabel.text = !item.isEliminated ? player.string : player.eliminatedString
         updateBackground()
     }
     
@@ -42,6 +42,8 @@ class PlayerCell: UICollectionViewCell {
                 backgroundColor = .clear
                 return
         }
+        
+        figureImageView.alpha = !item.isEliminated ? 1.0 : 0.4
         
         if item.isTurn {
             backgroundColor = .systemOrange
@@ -67,6 +69,16 @@ private extension PlayerProtocol {
         let healthString = Array(0..<health).map { _ in "▓" }.joined()
         return """
         \(role == .sheriff ? role.rawValue : "?")
+        \(healthString)
+        [] \(hand.count)
+        \(inPlay.map { "[\($0.name.rawValue)]" }.joined(separator: "\n"))
+        """
+    }
+    
+    var eliminatedString: String {
+        let healthString = Array(0..<health).map { _ in "▓" }.joined()
+        return """
+        \(role.rawValue)
         \(healthString)
         [] \(hand.count)
         \(inPlay.map { "[\($0.name.rawValue)]" }.joined(separator: "\n"))
