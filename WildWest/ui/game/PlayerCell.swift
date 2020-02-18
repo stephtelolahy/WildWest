@@ -12,22 +12,29 @@ class PlayerCell: UICollectionViewCell {
     
     @IBOutlet private weak var figureImageView: UIImageView!
     @IBOutlet private weak var infoLabel: UILabel!
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var equipmentLabel: UILabel!
     
     private var item: PlayerItem?
     
     func update(with item: PlayerItem) {
         self.item = item
+        updateBackground()
         
         guard let player = item.player else {
             figureImageView.image = nil
+            nameLabel.text = nil
             infoLabel.text = nil
-            backgroundColor = .clear
+            equipmentLabel.text = nil
+            figureImageView.alpha = 0.0
             return
         }
         
+        nameLabel.text = player.ability.rawValue.uppercased()
+        figureImageView.alpha = !item.isEliminated ? 1.0 : 0.4
+        equipmentLabel.text = player.inPlay.map { "[\($0.name.rawValue)]" }.joined(separator: "\n")
+        infoLabel.text = player.infoText(when: item.isEliminated)
         figureImageView.image = UIImage(named: player.imageName)
-        infoLabel.text = !item.isEliminated ? player.string : player.eliminatedString
-        updateBackground()
     }
     
     override var isSelected: Bool {
@@ -43,45 +50,27 @@ class PlayerCell: UICollectionViewCell {
                 return
         }
         
-        figureImageView.alpha = !item.isEliminated ? 1.0 : 0.4
-        
-        if item.isTurn {
-            backgroundColor = .systemOrange
-            return
-        }
-        
         if isSelected {
             backgroundColor = .systemYellow
-            return
-        }
-        
-        if item.isActive {
+        } else if item.isTurn {
+            backgroundColor = .systemOrange
+        } else if item.isActive {
             backgroundColor = .systemGreen
-            return
+        } else {
+            backgroundColor = .clear
         }
-        
-        backgroundColor = .clear
     }
 }
 
 private extension PlayerProtocol {
-    var string: String {
+    func infoText(when eliminated: Bool) -> String {
         let healthString = Array(0..<health).map { _ in "▓" }.joined()
+        let roleString = eliminated ? role.rawValue : (role == .sheriff ? role.rawValue : "?")
+        let handString = "[] \(hand.count)"
         return """
-        \(role == .sheriff ? role.rawValue : "?")
+        \(roleString)
         \(healthString)
-        [] \(hand.count)
-        \(inPlay.map { "[\($0.name.rawValue)]" }.joined(separator: "\n"))
-        """
-    }
-    
-    var eliminatedString: String {
-        let healthString = Array(0..<health).map { _ in "▓" }.joined()
-        return """
-        \(role.rawValue)
-        \(healthString)
-        [] \(hand.count)
-        \(inPlay.map { "[\($0.name.rawValue)]" }.joined(separator: "\n"))
+        \(handString)
         """
     }
 }

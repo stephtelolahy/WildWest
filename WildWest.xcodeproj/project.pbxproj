@@ -370,7 +370,7 @@
 			path = database;
 			sourceTree = "<group>";
 		};
-		3385A1F423F9352800CD9660 /* gameplay */ = {
+		3385A1F423F9352800CD9660 /* game */ = {
 			isa = PBXGroup;
 			children = (
 				332499B223DB9F650082EF09 /* GameViewController.swift */,
@@ -381,7 +381,7 @@
 				3301BEF623F9A44100B4364D /* GameLoader.swift */,
 				3301BEF923F9A79B00B4364D /* AIPlayerAgent.swift */,
 			);
-			path = gameplay;
+			path = game;
 			sourceTree = "<group>";
 		};
 		3385A1F523F9353C00CD9660 /* stats */ = {
@@ -466,7 +466,6 @@
 				AD36CDDA23C51DA6008D4EDB /* action */,
 				3301E63323F7EEB800AB35C7 /* ai */,
 				339A295123EFFEB2002C5CD8 /* convenience */,
-				33D477EF23E57CE100E232D9 /* provider */,
 			);
 			path = engine;
 			sourceTree = "<group>";
@@ -616,6 +615,7 @@
 			children = (
 				AD36CDD723C51C27008D4EDB /* engine */,
 				ADE91AD223BA005000F7316B /* ui */,
+				33D477EF23E57CE100E232D9 /* provider */,
 				AD36CDDF23C51F08008D4EDB /* misc */,
 				AD36CDE023C51F59008D4EDB /* resources */,
 				ADB7D2EB239EE03800653905 /* AppDelegate.swift */,
@@ -643,7 +643,7 @@
 		ADE91AD223BA005000F7316B /* ui */ = {
 			isa = PBXGroup;
 			children = (
-				3385A1F423F9352800CD9660 /* gameplay */,
+				3385A1F423F9352800CD9660 /* game */,
 				3385A1F523F9353C00CD9660 /* stats */,
 				ADB7D2F6239EE03900653905 /* LaunchScreen.storyboard */,
 				ADB7D2F1239EE03800653905 /* Main.storyboard */,
