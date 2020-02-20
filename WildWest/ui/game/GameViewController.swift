@@ -13,68 +13,30 @@ class GameViewController: UIViewController, Subscribable {
     
     // MARK: Constants
     
-    private let spacing: CGFloat = 4.0
-    private let ratio: CGFloat = 250.0 / 389.0
+    enum Constants {
+        static let spacing: CGFloat = 4.0
+        static let ratio: CGFloat = 250.0 / 389.0
+    }
     
     // MARK: IBOutlets
     
     @IBOutlet private weak var playersCollectionView: UICollectionView!
     @IBOutlet private weak var actionsCollectionView: UICollectionView!
+    @IBOutlet private weak var circleView: UIView!
     
     // MARK: Properties
     
-    // swiftlint:disable force_cast
-    private lazy var engine: GameEngineProtocol = {
-        let provider = ResourcesProvider(jsonReader: JsonReader(bundle: Bundle.main))
-        let figures = provider.allFigures()
-        let cards = provider.allCards()
-        let gameSetup = GameSetup()
-        let roles = gameSetup.roles(for: 7)
-        let state = gameSetup.setupGame(roles: roles, figures: figures, cards: cards)
-        let mutableState = state as! MutableGameStateProtocol
-        let calculator = RangeCalculator()
-        let rules: [RuleProtocol] = [
-            BeerRule(),
-            SaloonRule(),
-            StagecoachRule(),
-            WellsFargoRule(),
-            EquipRule(),
-            CatBalouRule(),
-            PanicRule(calculator: calculator),
-            BangRule(calculator: calculator),
-            MissedRule(),
-            GatlingRule(),
-            IndiansRule(),
-            JailRule(),
-            DiscardBangRule(),
-            DuelRule(),
-            GeneralStoreRule(),
-            ChooseCardRule(),
-            LooseLifeRule(),
-            StartTurnRule(),
-            EndTurnRule(),
-            ResolveJailRule(),
-            ResolveDynamiteRule(),
-            DiscardBeerRule(),
-            ResolveBarrelRule()
-        ]
-        return GameEngine(state: state, mutableState: mutableState, rules: rules, calculator: OutcomeCalculator())
-    }()
-    
-    private var state: GameStateProtocol?
+    private var engine: GameEngineProtocol?
+    private var aiAgents: [AIPlayerAgentProtocol]?
     private let playersAdapter: PlayersAdapterProtocol = PlayersAdapter()
     private let actionsAdapter: ActionsAdapterProtocol = ActionsAdapter()
-    private let aiAgent: AIProtocol = PlayAllHandAI()
     
     // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        playersCollectionView.setItemSpacing(spacing)
-        actionsCollectionView.setItemSpacing(spacing)
-        sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
-            self?.update(with: state)
-        }))
+        setupView()
+        startGame()
     }
     
     // MARK: IBAction
@@ -82,13 +44,7 @@ class GameViewController: UIViewController, Subscribable {
     @IBAction private func actionsButtonTapped(_ sender: Any) {
         let alertController = UIAlertController(title: nil,
                                                 message: nil,
-                                                preferredStyle: .actionSheet)
-        
-        alertController.addAction(UIAlertAction(title: "Autoplay",
-                                                style: .default,
-                                                handler: { [weak self] _ in
-                                                    self?.autoPlay(1)
-        }))
+                                                preferredStyle: .alert)
         
         alertController.addAction(UIAlertAction(title: "Commands",
                                                 style: .default,
@@ -112,18 +68,42 @@ class GameViewController: UIViewController, Subscribable {
 
 private extension GameViewController {
     
+    func setupView() {
+        playersCollectionView.setItemSpacing(Constants.spacing)
+        actionsCollectionView.setItemSpacing(Constants.spacing)
+        circleView.layer.cornerRadius = circleView.bounds.width / 2
+        circleView.layer.borderWidth = 16
+        circleView.layer.borderColor = UIColor.systemBlue.cgColor
+    }
+    
+    func startGame() {
+        let database = GameLoader().createGame(for: 7)
+        let engine = GameEngine(database: database,
+                                rules: GameLoader().classicRules(),
+                                calculator: OutcomeCalculator())
+        self.engine = engine
+        sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
+            self?.update(with: state)
+        }))
+        
+        let aiAgents = database.state.players
+            .filter { $0.role != .sheriff }
+            .map { AIPlayerAgent(playerId: $0.identifier, ai: RandomAIWithRole(), engine: engine) }
+        self.aiAgents = aiAgents
+        aiAgents.forEach { $0.start() }
+    }
+    
     func update(with state: GameStateProtocol) {
-        self.state = state
         playersAdapter.setState(state)
         actionsAdapter.setState(state)
         playersCollectionView.reloadData()
         title = state.mainMessage()
         DispatchQueue.main.async { [weak self] in
-            self?.selectActivePlayer()
+            self?.autoSelectActivePlayer()
         }
     }
     
-    func selectActivePlayer() {
+    func autoSelectActivePlayer() {
         guard let activePlayerIndex = playersAdapter.items.firstIndex(where: { $0.isActive }) else {
             actionsCollectionView.reloadData()
             return
@@ -137,13 +117,13 @@ private extension GameViewController {
     func showOptions(_ actions: [ActionProtocol]) {
         let alertController = UIAlertController(title: nil,
                                                 message: nil,
-                                                preferredStyle: .actionSheet)
+                                                preferredStyle: .alert)
         
         actions.forEach { action in
             alertController.addAction(UIAlertAction(title: action.description,
                                                     style: .default,
                                                     handler: { [weak self] _ in
-                                                        self?.engine.execute(action)
+                                                        self?.engine?.execute(action)
             }))
         }
         
@@ -154,31 +134,15 @@ private extension GameViewController {
         present(alertController, animated: true)
     }
     
-    func autoPlay(_ intervalInSeconds: TimeInterval) {
-        guard #available(iOS 10.0, *) else {
-            return
-        }
-        
-        Timer.scheduledTimer(withTimeInterval: intervalInSeconds, repeats: true) { [weak self] timer in
-            guard let state = self?.state,
-                let command = self?.aiAgent.chooseCommand(in: state) else {
-                    timer.invalidate()
-                    return
-            }
-            
-            self?.engine.execute(command)
-        }
-    }
-    
     func showCommands() {
         let viewController = CommandsViewController()
-        viewController.stateSubject = engine.stateSubject
+        viewController.stateSubject = engine?.stateSubject
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     func showStats() {
         let viewController = StatsViewController()
-        viewController.stateSubject = engine.stateSubject
+        viewController.stateSubject = engine?.stateSubject
         navigationController?.pushViewController(viewController, animated: true)
     }
 }
@@ -264,16 +228,16 @@ extension GameViewController: UICollectionViewDelegateFlowLayout {
     }
     
     private func playerCellSize(_ collectionView: UICollectionView) -> CGSize {
-        let totalHeight = collectionView.bounds.height - 4 * spacing
+        let totalHeight = collectionView.bounds.height - 4 * Constants.spacing
         let height = totalHeight / 3
-        let totalWidth = collectionView.bounds.width - 4 * spacing
+        let totalWidth = collectionView.bounds.width - 4 * Constants.spacing
         let width = totalWidth / 3
         return CGSize(width: width, height: height)
     }
     
     private func actionCellSize(_ collectionView: UICollectionView) -> CGSize {
-        let height: CGFloat = collectionView.bounds.height - 2 * spacing
-        let width: CGFloat = height * ratio
+        let height: CGFloat = collectionView.bounds.height - 2 * Constants.spacing
+        let width: CGFloat = height * Constants.ratio
         return CGSize(width: width, height: height)
     }
 }
@@ -289,8 +253,8 @@ private extension GameStateProtocol {
             return challenge.description
         }
         
-        if actions.count == 1,
-            let uniqueAction = actions.first {
+        if validMoves.count == 1,
+            let uniqueAction = validMoves.first {
             return uniqueAction.description
         }
         

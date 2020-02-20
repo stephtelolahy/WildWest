@@ -12,38 +12,35 @@ class GameEngine: GameEngineProtocol {
     
     let stateSubject: BehaviorSubject<GameStateProtocol>
     
-    private let state: GameStateProtocol
-    private let mutableState: MutableGameStateProtocol
+    private let database: GameDatabaseProtocol
     private let rules: [RuleProtocol]
     private let calculator: OutcomeCalculatorProtocol
     
-    init(state: GameStateProtocol,
-         mutableState: MutableGameStateProtocol,
+    init(database: GameDatabaseProtocol,
          rules: [RuleProtocol],
          calculator: OutcomeCalculatorProtocol) {
-        self.state = state
-        self.mutableState = mutableState
+        self.database = database
         self.rules = rules
         self.calculator = calculator
-        stateSubject = BehaviorSubject(value: state)
+        stateSubject = BehaviorSubject(value: database.state)
     }
     
-    func execute(_ command: ActionProtocol) {
-        let updates = command.execute(in: state)
-        print("\n*** \(command.description) ***")
+    func execute(_ action: ActionProtocol) {
+        let updates = action.execute(in: database.state)
+        print("\n*** \(action.description) ***")
         updates.forEach {
-            $0.execute(in: mutableState)
+            $0.execute(in: database)
             print($0.description)
         }
-        mutableState.addCommand(command)
-        if let outcome = calculator.outcome(for: state.players.map { $0.role }) {
-            mutableState.setOutcome(outcome)
-            mutableState.setActions([])
+        database.addCommandsHistory(action)
+        if let outcome = calculator.outcome(for: database.state.players.map { $0.role }) {
+            database.setOutcome(outcome)
+            database.setValidMoves([])
         } else {
-            let actions = rules.compactMap { $0.match(with: state) }.flatMap { $0 }
-            mutableState.setActions(actions)
+            let actions = rules.compactMap { $0.match(with: database.state) }.flatMap { $0 }
+            database.setValidMoves(actions)
         }
         
-        stateSubject.onNext(state)
+        stateSubject.onNext(database.state)
     }
 }

@@ -16,8 +16,8 @@ class GameState: GameStateProtocol {
     var barrelsResolved: Int
     var generalStore: [CardProtocol]
     var outcome: GameOutcome?
-    var commands: [ActionProtocol]
-    var actions: [ActionProtocol]
+    var validMoves: [ActionProtocol]
+    var commandsHistory: [ActionProtocol]
     var eliminated: [PlayerProtocol]
     
     init(players: [PlayerProtocol],
@@ -28,8 +28,8 @@ class GameState: GameStateProtocol {
          barrelsResolved: Int,
          generalStore: [CardProtocol],
          outcome: GameOutcome?,
-         actions: [ActionProtocol],
-         commands: [ActionProtocol],
+         validMoves: [ActionProtocol],
+         commandsHistory: [ActionProtocol],
          eliminated: [PlayerProtocol]) {
         self.players = players
         self.deck = deck
@@ -39,8 +39,8 @@ class GameState: GameStateProtocol {
         self.barrelsResolved = barrelsResolved
         self.generalStore = generalStore
         self.outcome = outcome
-        self.commands = commands
-        self.actions = actions
+        self.commandsHistory = commandsHistory
+        self.validMoves = validMoves
         self.eliminated = eliminated
     }
 }

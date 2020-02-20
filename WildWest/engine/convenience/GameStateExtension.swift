@@ -8,24 +8,16 @@
 
 extension GameStateProtocol {
     
-    func discardableCards(from actor: PlayerProtocol, and otherPlayers: [PlayerProtocol]) -> [DiscardableCard]? {
-        var result: [DiscardableCard] = []
-        result += actor.inPlay.map { DiscardableCard(cardId: $0.identifier,
-                                                     ownerId: actor.identifier,
-                                                     source: .inPlay)
-        }
+    func targetCards(from actor: PlayerProtocol, and otherPlayers: [PlayerProtocol]) -> [TargetCard]? {
+        var result: [TargetCard] = []
         
-        for player in otherPlayers {
-            result += player.hand.map { DiscardableCard(cardId: $0.identifier,
-                                                        ownerId: player.identifier,
-                                                        source: .hand)
-                
+        result += actor.inPlay.map { TargetCard(ownerId: actor.identifier, source: .inPlay($0.identifier)) }
+        
+        otherPlayers.forEach { player in
+            if !player.hand.isEmpty {
+                result.append(TargetCard(ownerId: player.identifier, source: .randomHand))
             }
-            
-            result += player.inPlay.map { DiscardableCard(cardId: $0.identifier,
-                                                          ownerId: player.identifier,
-                                                          source: .inPlay)
-            }
+            result += player.inPlay.map { TargetCard(ownerId: player.identifier, source: .inPlay($0.identifier)) }
         }
         
         guard !result.isEmpty else {

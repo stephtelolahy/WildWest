@@ -1,12 +1,18 @@
 //
-//  MutableGameState.swift
+//  GameDatabase.swift
 //  WildWest
 //
 //  Created by Hugues Stephano Telolahy on 10/02/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-extension GameState: MutableGameStateProtocol {
+extension GameState: GameDatabaseProtocol {
+    
+    var state: GameStateProtocol {
+        self
+    }
+    
+    // Flags
     
     func setTurn(_ turn: String) {
         self.turn = turn
@@ -24,12 +30,12 @@ extension GameState: MutableGameStateProtocol {
         self.barrelsResolved = barrelsResolved
     }
     
-    func addCommand(_ command: ActionProtocol) {
-        commands.append(command)
+    func addCommandsHistory(_ actions: ActionProtocol) {
+        commandsHistory.append(actions)
     }
     
-    func setActions(_ actions: [ActionProtocol]) {
-        self.actions = actions
+    func setValidMoves(_ actions: [ActionProtocol]) {
+        self.validMoves = actions
     }
     
     func removePlayer(_ playerId: String) -> PlayerProtocol? {
@@ -65,48 +71,44 @@ extension GameState: MutableGameStateProtocol {
     /// Player
     
     func playerSetHealth(_ playerId: String, _ health: Int) {
-        player(playerId)?.health = health
+        player(playerId).health = health
     }
     
     func playerAddHand(_ playerId: String, _ card: CardProtocol) {
-        player(playerId)?.hand.append(card)
+        player(playerId).hand.append(card)
     }
     
     func playerRemoveHand(_ playerId: String, _ cardId: String) -> CardProtocol? {
-        player(playerId)?.hand.removeFirst(where: { $0.identifier == cardId })
+        player(playerId).hand.removeFirst(where: { $0.identifier == cardId })
     }
     
     func playerAddInPlay(_ playerId: String, _ card: CardProtocol) {
-        player(playerId)?.inPlay.append(card)
+        player(playerId).inPlay.append(card)
     }
     
     func playerRemoveInPlay(_ playerId: String, _ cardId: String) -> CardProtocol? {
-        player(playerId)?.inPlay.removeFirst(where: { $0.identifier == cardId })
+        player(playerId).inPlay.removeFirst(where: { $0.identifier == cardId })
     }
     
     func playerRemoveAllHand(_ playerId: String) -> [CardProtocol] {
-        guard let player = player(playerId) else {
-            return []
-        }
-        
-        let cards = player.hand
-        player.hand.removeAll()
+        let cards = player(playerId).hand
+        player(playerId).hand.removeAll()
         return cards
     }
     
     func playerRemoveAllInPlay(_ playerId: String) -> [CardProtocol] {
-        guard let player = player(playerId) else {
-            return []
-        }
-        
-        let cards = player.inPlay
-        player.inPlay.removeAll()
+        let cards = player(playerId).inPlay
+        player(playerId).inPlay.removeAll()
         return cards
     }
 }
 
 private extension GameState {
-    func player(_ playerId: String) -> Player? {
-        players.first(where: { $0.identifier == playerId }) as? Player
+    func player(_ playerId: String) -> Player {
+        guard let player = players.first(where: { $0.identifier == playerId }) as? Player else {
+            fatalError("player not found")
+        }
+        
+        return player
     }
 }

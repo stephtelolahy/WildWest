@@ -15,8 +15,8 @@ protocol GameStateProtocol {
     var barrelsResolved: Int { get }
     var generalStore: [CardProtocol] { get }
     var outcome: GameOutcome? { get }
-    var actions: [ActionProtocol] { get }
-    var commands: [ActionProtocol] { get }
+    var validMoves: [ActionProtocol] { get }
+    var commandsHistory: [ActionProtocol] { get }
     var eliminated: [PlayerProtocol] { get }
 }
 

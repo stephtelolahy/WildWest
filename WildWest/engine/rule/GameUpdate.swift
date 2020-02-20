@@ -30,94 +30,94 @@ enum GameUpdate: Equatable {
 extension GameUpdate: GameUpdateProtocol {
     // swiftlint:disable cyclomatic_complexity
     // swiftlint:disable function_body_length
-    func execute(in state: MutableGameStateProtocol) {
+    func execute(in database: GameDatabaseProtocol) {
         switch self {
         case let .setTurn(turn):
-            state.setTurn(turn)
-            state.setBangsPlayed(0)
+            database.setTurn(turn)
+            database.setBangsPlayed(0)
             
         case let .setOutcome(outcome):
-            state.setOutcome(outcome)
+            database.setOutcome(outcome)
             
         case let .setChallenge(challenge):
-            state.setChallenge(challenge)
+            database.setChallenge(challenge)
             switch challenge {
             case let .startTurn(turn):
-                state.setTurn(turn)
+                database.setTurn(turn)
             case .shoot:
-                state.setBarrelsResolved(0)
+                database.setBarrelsResolved(0)
             default:
                 break
             }
             
         case let .setBangsPlayed(count):
-            state.setBangsPlayed(count)
+            database.setBangsPlayed(count)
             
         case let .setBarrelsResolved(count):
-            state.setBarrelsResolved(count)
+            database.setBarrelsResolved(count)
             
         case let .playerPullFromDeck(playerId):
-            let card = state.deckRemoveFirst()
-            state.playerAddHand(playerId, card)
+            let card = database.deckRemoveFirst()
+            database.playerAddHand(playerId, card)
             
         case let .playerDiscardHand(playerId, cardId):
-            if let card = state.playerRemoveHand(playerId, cardId) {
-                state.addDiscard(card)
+            if let card = database.playerRemoveHand(playerId, cardId) {
+                database.addDiscard(card)
             }
             
         case let .playerSetHealth(playerId, health):
-            state.playerSetHealth(playerId, health)
+            database.playerSetHealth(playerId, health)
             
         case let .playerPutInPlay(playerId, cardId):
-            if let card = state.playerRemoveHand(playerId, cardId) {
-                state.playerAddInPlay(playerId, card)
+            if let card = database.playerRemoveHand(playerId, cardId) {
+                database.playerAddInPlay(playerId, card)
             }
             
         case let .playerDiscardInPlay(playerId, cardId):
-            if let card = state.playerRemoveInPlay(playerId, cardId) {
-                state.addDiscard(card)
+            if let card = database.playerRemoveInPlay(playerId, cardId) {
+                database.addDiscard(card)
             }
             
         case let .playerPullFromOtherHand(playerId, otherId, cardId):
-            if let card = state.playerRemoveHand(otherId, cardId) {
-                state.playerAddHand(playerId, card)
+            if let card = database.playerRemoveHand(otherId, cardId) {
+                database.playerAddHand(playerId, card)
             }
             
         case let .playerPullFromOtherInPlay(playerId, otherId, cardId):
-            if let card = state.playerRemoveInPlay(otherId, cardId) {
-                state.playerAddHand(playerId, card)
+            if let card = database.playerRemoveInPlay(otherId, cardId) {
+                database.playerAddHand(playerId, card)
             }
             
         case let .playerPutInPlayOfOther(playerId, otherId, cardId):
-            if let card = state.playerRemoveHand(playerId, cardId) {
-                state.playerAddInPlay(otherId, card)
+            if let card = database.playerRemoveHand(playerId, cardId) {
+                database.playerAddInPlay(otherId, card)
             }
             
         case let .playerPassInPlayOfOther(playerId, otherId, cardId):
-            if let card = state.playerRemoveInPlay(playerId, cardId) {
-                state.playerAddInPlay(otherId, card)
+            if let card = database.playerRemoveInPlay(playerId, cardId) {
+                database.playerAddInPlay(otherId, card)
             }
             
         case let .playerPullFromGeneralStore(playerId, cardId):
-            if let card = state.removeGeneralStore(cardId) {
-                state.playerAddHand(playerId, card)
+            if let card = database.removeGeneralStore(cardId) {
+                database.playerAddHand(playerId, card)
             }
             
         case let .setupGeneralStore(cardsCount):
             Array(1...cardsCount)
-                .map { _ in state.deckRemoveFirst() }
+                .map { _ in database.deckRemoveFirst() }
                 .compactMap { $0 }
-                .forEach { state.addGeneralStore($0) }
+                .forEach { database.addGeneralStore($0) }
             
         case .flipOverFirstDeckCard:
-            let card = state.deckRemoveFirst()
-            state.addDiscard(card)
+            let card = database.deckRemoveFirst()
+            database.addDiscard(card)
             
         case let .eliminatePlayer(playerId):
-            let cards = state.playerRemoveAllHand(playerId) + state.playerRemoveAllInPlay(playerId)
-            cards.forEach { state.addDiscard($0) }
-            if let player = state.removePlayer(playerId) {
-                state.addEliminated(player)
+            let cards = database.playerRemoveAllHand(playerId) + database.playerRemoveAllInPlay(playerId)
+            cards.forEach { database.addDiscard($0) }
+            if let player = database.removePlayer(playerId) {
+                database.addEliminated(player)
             }
         }
     }

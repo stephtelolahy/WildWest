@@ -6,35 +6,33 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct DiscardableCard: Equatable {
-    let cardId: String
-    let ownerId: String
-    let source: CardSource
-}
-
-enum CardSource: Equatable {
-    case hand, inPlay
-}
-
 struct Panic: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
-    let target: DiscardableCard
+    let target: TargetCard
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
         var updates: [GameUpdate] = []
         updates.append(.playerDiscardHand(actorId, cardId))
         switch target.source {
-        case .hand:
-            updates.append(.playerPullFromOtherHand(actorId, target.ownerId, target.cardId))
-        case .inPlay:
-            updates.append(.playerPullFromOtherInPlay(actorId, target.ownerId, target.cardId))
+        case .randomHand:
+            if let player = state.players.first(where: { $0.identifier == target.ownerId }),
+                let card = player.hand.randomElement() {
+                updates.append(.playerPullFromOtherHand(actorId, target.ownerId, card.identifier))
+            }
+        case let .inPlay(targetCardId):
+            updates.append(.playerPullFromOtherInPlay(actorId, target.ownerId, targetCardId))
         }
         return updates
     }
     
     var description: String {
-        "\(actorId) plays \(cardId) to take \(target.cardId) from \(target.ownerId)'s \(target.source)"
+        switch target.source {
+        case .randomHand:
+            return "\(actorId) plays \(cardId) to take random hand card from \(target.ownerId)"
+        case let .inPlay(targetCardId):
+            return "\(actorId) plays \(cardId) to take \(targetCardId) from \(target.ownerId)"
+        }
     }
 }
 
@@ -59,12 +57,12 @@ struct PanicRule: RuleProtocol {
                 && calculator.distance(from: actor.identifier, to: $0.identifier, in: state) <= reachableDistance
         }
         
-        guard let discardableCards = state.discardableCards(from: actor, and: otherPlayers) else {
+        guard let targetCards = state.targetCards(from: actor, and: otherPlayers) else {
             return nil
         }
         
         return cards.map { card in
-            discardableCards.map { Panic(actorId: actor.identifier, cardId: card.identifier, target: $0) }
+            targetCards.map { Panic(actorId: actor.identifier, cardId: card.identifier, target: $0) }
         }.flatMap { $0 }
     }
 }

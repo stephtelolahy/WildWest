@@ -10,5 +10,5 @@
 protocol GameUpdateProtocol {
     var description: String { get }
     
-    func execute(in state: MutableGameStateProtocol)
+    func execute(in database: GameDatabaseProtocol)
 }
