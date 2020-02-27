@@ -34,6 +34,9 @@ extension Challenge {
                 return .generalStore(remainingIds)
             }
             
+        case .startTurnDynamiteExploded:
+            return .startTurn
+            
         default:
             return nil
         }

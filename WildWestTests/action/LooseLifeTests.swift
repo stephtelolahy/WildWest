@@ -68,7 +68,7 @@ class LooseLifeTests: XCTestCase {
             .health(is: 4)
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
-            .challenge(is: .dynamiteExplode("p1"))
+            .challenge(is: .startTurnDynamiteExploded)
         let sut = LooseLife(actorId: "p1", points: 3)
         
         // When
@@ -77,7 +77,7 @@ class LooseLifeTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
             .playerSetHealth("p1", 1),
-            .setChallenge(.startTurn("p1"))
+            .setChallenge(.startTurn)
         ])
     }
     
@@ -157,7 +157,8 @@ class LooseLifeTests: XCTestCase {
         XCTAssertEqual(updates as? [GameUpdate], [
             .playerSetHealth("p1", 0),
             .eliminatePlayer("p1"),
-            .setChallenge(.startTurn("p2"))
+            .setTurn("p2"),
+            .setChallenge(.startTurn)
         ])
     }
     
@@ -208,7 +209,8 @@ class LooseLifeRuleTests: XCTestCase {
         // Given
         let sut = LooseLifeRule()
         let mockState = MockGameStateProtocol()
-            .challenge(is: .dynamiteExplode("p1"))
+            .currentTurn(is: "p1")
+            .challenge(is: .startTurnDynamiteExploded)
         
         // When
         let actions = sut.match(with: mockState)

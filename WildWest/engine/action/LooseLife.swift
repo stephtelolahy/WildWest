@@ -28,19 +28,14 @@ struct LooseLife: ActionProtocol, Equatable {
             updates.append(.eliminatePlayer(actorId))
             
             if actorId == state.turn {
-                updates.append(.setChallenge(.startTurn(state.nextTurn)))
+                updates.append(.setTurn(state.nextTurn))
+                updates.append(.setChallenge(.startTurn))
                 return updates
             }
         }
         
         if let challenge = state.challenge {
-            switch challenge {
-            case .dynamiteExplode:
-                updates.append(.setChallenge(.startTurn(actorId)))
-                
-            default:
-                updates.append(.setChallenge(challenge.removing(actorId)))
-            }
+            updates.append(.setChallenge(challenge.removing(actorId)))
         }
         
         return updates
@@ -60,8 +55,8 @@ struct LooseLifeRule: RuleProtocol {
         case let .duel(playerIds):
             return [LooseLife(actorId: playerIds[0], points: 1)]
             
-        case let .dynamiteExplode(playerId):
-            return [LooseLife(actorId: playerId, points: 3)]
+        case .startTurnDynamiteExploded:
+            return [LooseLife(actorId: state.turn, points: 3)]
             
         default:
             return nil

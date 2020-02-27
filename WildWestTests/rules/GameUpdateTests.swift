@@ -63,16 +63,15 @@ class GameUpdateTests: XCTestCase {
         verifyNoMoreInteractions(mockDatabase)
     }
     
-    func test_SetTurnAndChallenge_IfSettingStartTurnChallenge() {
+    func test_SetChallenge_IfSettingStartTurnChallenge() {
         // Given
-        let sut = GameUpdate.setChallenge(.startTurn("p1"))
+        let sut = GameUpdate.setChallenge(.startTurn)
         
         // When
         sut.execute(in: mockDatabase)
         
         // Assert
-        verify(mockDatabase).setChallenge(equal(to: .startTurn("p1")))
-        verify(mockDatabase).setTurn("p1")
+        verify(mockDatabase).setChallenge(equal(to: .startTurn))
         verifyNoMoreInteractions(mockDatabase)
     }
     

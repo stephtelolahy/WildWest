@@ -79,7 +79,7 @@ class DiscardBeerTests: XCTestCase {
     func test_TriggerStartTurnChallenge_IfDiscardBeerOnDynamiteExploded() {
         // Given
         let mockState = MockGameStateProtocol()
-            .challenge(is: .dynamiteExplode("p1"))
+            .challenge(is: .startTurnDynamiteExploded)
         let sut = DiscardBeer(actorId: "p1", cardsToDiscardIds: ["c1", "c2"])
         
         // When
@@ -89,7 +89,7 @@ class DiscardBeerTests: XCTestCase {
         XCTAssertEqual(updates as? [GameUpdate], [
             .playerDiscardHand("p1", "c1"),
             .playerDiscardHand("p1", "c2"),
-            .setChallenge(.startTurn("p1"))
+            .setChallenge(.startTurn)
         ])
     }
     
@@ -172,7 +172,8 @@ class DiscardBeerRuleTests: XCTestCase {
             .health(is: 1)
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
-            .challenge(is: .dynamiteExplode("p1"))
+            .currentTurn(is: "p1")
+            .challenge(is: .startTurnDynamiteExploded)
         
         // When
         let actions = sut.match(with: mockState)

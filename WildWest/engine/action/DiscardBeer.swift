@@ -14,13 +14,7 @@ struct DiscardBeer: ActionProtocol, Equatable {
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
         var updates: [GameUpdate] = cardsToDiscardIds.map { .playerDiscardHand(actorId, $0) }
         if let challenge = state.challenge {
-            switch challenge {
-            case .dynamiteExplode:
-                updates.append(.setChallenge(.startTurn(actorId)))
-                
-            default:
-                updates.append(.setChallenge(challenge.removing(actorId)))
-            }
+            updates.append(.setChallenge(challenge.removing(actorId)))
         }
         return updates
     }
@@ -47,8 +41,8 @@ struct DiscardBeerRule: RuleProtocol {
         case let .duel(playerIds):
             return matchDiscardBeer(actorId: playerIds[0], damage: 1, state: state)
             
-        case let .dynamiteExplode(playerId):
-            return matchDiscardBeer(actorId: playerId, damage: 3, state: state)
+        case .startTurnDynamiteExploded:
+            return matchDiscardBeer(actorId: state.turn, damage: 3, state: state)
             
         default:
             return nil

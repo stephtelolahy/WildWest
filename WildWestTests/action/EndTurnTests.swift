@@ -43,7 +43,8 @@ class EndTurnTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
-            .setChallenge(.startTurn("p2"))
+            .setTurn("p2"),
+            .setChallenge(.startTurn)
         ])
     }
     
@@ -62,7 +63,8 @@ class EndTurnTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
-            .setChallenge(.startTurn("p1"))
+            .setTurn("p1"),
+            .setChallenge(.startTurn)
         ])
     }
     
@@ -83,7 +85,8 @@ class EndTurnTests: XCTestCase {
         XCTAssertEqual(updates as? [GameUpdate], [
             .playerDiscardHand("p1", "c1"),
             .playerDiscardHand("p1", "c2"),
-            .setChallenge(.startTurn("p2"))
+            .setTurn("p2"),
+            .setChallenge(.startTurn)
         ])
     }
 }

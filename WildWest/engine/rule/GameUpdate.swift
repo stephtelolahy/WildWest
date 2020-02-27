@@ -42,8 +42,6 @@ extension GameUpdate: GameUpdateProtocol {
         case let .setChallenge(challenge):
             database.setChallenge(challenge)
             switch challenge {
-            case let .startTurn(turn):
-                database.setTurn(turn)
             case .shoot:
                 database.setBarrelsResolved(0)
             default:

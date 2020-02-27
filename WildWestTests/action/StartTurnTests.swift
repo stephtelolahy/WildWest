@@ -29,7 +29,6 @@ class StartTurnTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
-            .setTurn("p1"),
             .setChallenge(nil),
             .playerPullFromDeck("p1", 2)
         ])
@@ -45,7 +44,8 @@ class StartTurnRuleTests: XCTestCase {
             .identified(by: "p1")
             .noCardsInPlay()
         let mockState = MockGameStateProtocol()
-            .challenge(is: .startTurn("p1"))
+            .currentTurn(is: "p1")
+            .challenge(is: .startTurn)
             .players(are: player1)
         
         // When
@@ -62,7 +62,8 @@ class StartTurnRuleTests: XCTestCase {
             .identified(by: "p1")
             .playing(MockCardProtocol().named(.jail))
         let mockState = MockGameStateProtocol()
-            .challenge(is: .startTurn("p1"))
+            .currentTurn(is: "p1")
+            .challenge(is: .startTurn)
             .players(are: player1)
         
         // When
@@ -79,7 +80,8 @@ class StartTurnRuleTests: XCTestCase {
             .identified(by: "p1")
             .playing(MockCardProtocol().named(.dynamite))
         let mockState = MockGameStateProtocol()
-            .challenge(is: .startTurn("p1"))
+            .currentTurn(is: "p1")
+            .challenge(is: .startTurn)
             .players(are: player1)
         
         // When
