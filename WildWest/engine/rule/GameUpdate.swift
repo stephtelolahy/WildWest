@@ -13,7 +13,7 @@ enum GameUpdate: Equatable {
     case setBarrelsResolved(Int)
     case setOutcome(GameOutcome)
     case playerSetHealth(String, Int)
-    case playerPullFromDeck(String)
+    case playerPullFromDeck(String, Int)
     case playerDiscardHand(String, String)
     case playerPutInPlay(String, String)
     case playerDiscardInPlay(String, String)
@@ -56,9 +56,11 @@ extension GameUpdate: GameUpdateProtocol {
         case let .setBarrelsResolved(count):
             database.setBarrelsResolved(count)
             
-        case let .playerPullFromDeck(playerId):
-            let card = database.deckRemoveFirst()
-            database.playerAddHand(playerId, card)
+        case let .playerPullFromDeck(playerId, cardsCount):
+            Array(1...cardsCount).forEach { _ in
+                let card = database.deckRemoveFirst()
+                database.playerAddHand(playerId, card)
+            }
             
         case let .playerDiscardHand(playerId, cardId):
             if let card = database.playerRemoveHand(playerId, cardId) {
@@ -139,8 +141,8 @@ extension GameUpdate: GameUpdateProtocol {
         case let .setBarrelsResolved(count):
             return "setBarrelsResolved \(count)"
             
-        case let .playerPullFromDeck(playerId):
-            return "\(playerId) pullFromDeck "
+        case let .playerPullFromDeck(playerId, cardsCount):
+            return "\(playerId) pullFromDeck \(cardsCount)"
             
         case let .playerDiscardHand(playerId, cardId):
             return "\(playerId) discardHand \(cardId)"

@@ -106,7 +106,7 @@ class GameUpdateTests: XCTestCase {
         Cuckoo.stub(mockDatabase) { mock in
             when(mock.deckRemoveFirst()).thenReturn(mockCard)
         }
-        let sut = GameUpdate.playerPullFromDeck("p1")
+        let sut = GameUpdate.playerPullFromDeck("p1", 1)
         
         // When
         sut.execute(in: mockDatabase)

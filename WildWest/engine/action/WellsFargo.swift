@@ -13,9 +13,7 @@ struct WellsFargo: ActionProtocol, Equatable {
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
         let updates: [GameUpdate] = [
             .playerDiscardHand(actorId, cardId),
-            .playerPullFromDeck(actorId),
-            .playerPullFromDeck(actorId),
-            .playerPullFromDeck(actorId)
+            .playerPullFromDeck(actorId, 3)
         ]
         return updates
     }
