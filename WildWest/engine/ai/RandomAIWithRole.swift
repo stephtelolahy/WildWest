@@ -40,53 +40,67 @@ class RandomAIWithRole: RandomAI {
     }
     
     private func evaluateStrongAttack(from actorId: String, to targetId: String, in state: GameStateProtocol) -> Int {
-        if state.player(targetId, isEnemyOf: actorId) {
-            return 3
-        } else {
-            return -3
+        switch state.relationship(of: actorId, to: targetId) {
+        case .enemy:
+            return Score.strongAttackEnemy
+        case .teammate:
+            return Score.strongAttackTeammate
+        case .unknown:
+            return Score.strongAttackUnknown
         }
     }
     
     private func evaluateWeakAttack(from actorId: String, to targetId: String, in state: GameStateProtocol) -> Int {
-        if state.player(targetId, isEnemyOf: actorId) {
-            return 1
-        } else {
-            return -2
+        switch state.relationship(of: actorId, to: targetId) {
+        case .enemy:
+            return Score.weakAttackEnemy
+        case .teammate:
+            return Score.weakAttackTeammate
+        case .unknown:
+            return Score.weakAttackUnknown
         }
     }
     
     private func evaluateHelp(from actorId: String, to targetId: String, in state: GameStateProtocol) -> Int {
-        if !state.player(targetId, isEnemyOf: actorId) {
-            return 3
-        } else {
-            return -3
+        switch state.relationship(of: actorId, to: targetId) {
+        case .enemy:
+            return Score.helpEnemy
+        case .teammate:
+            return Score.helpTeammate
+        case .unknown:
+            return Score.helpUnknown
         }
     }
 }
 
+private enum PlayerRelationship {
+    case enemy
+    case teammate
+    case unknown
+}
+
 private extension GameStateProtocol {
-    func player(_ targetId: String, isEnemyOf sourceId: String) -> Bool {
+    func relationship(of sourceId: String, to targetId: String) -> PlayerRelationship {
         guard let target = players.first(where: { $0.identifier == targetId }),
             let source = players.first(where: { $0.identifier == sourceId }) else {
-                return false
+                return .unknown
         }
         
-        let targetRole: Role? = target.role == .sheriff ? .sheriff : nil // sheriff or unknown
-        return source.role.isEnnemy(of: targetRole)
+        return source.role.relationship(to: target.role)
     }
 }
 
 private extension Role {
-    func isEnnemy(of anotherRole: Role?) -> Bool {
+    func relationship(to anotherRole: Role) -> PlayerRelationship {
         switch self {
-        case .deputy:
-            return anotherRole != .sheriff
-            
         case .outlaw:
-            return anotherRole == .sheriff
+            return anotherRole == .sheriff ? .enemy : .unknown
+            
+        case .deputy:
+            return anotherRole == .sheriff ? .teammate : .unknown
             
         default:
-            return true
+            return .unknown
         }
     }
 }

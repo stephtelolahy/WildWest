@@ -6,7 +6,7 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-class ResourcesProvider: ResourcesProviderProtocol {
+struct ResourcesProvider: ResourcesProviderProtocol {
     
     private let jsonReader: JsonReaderProtocol
     

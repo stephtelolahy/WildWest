@@ -17,23 +17,29 @@ class AIPlayerAgent: AIPlayerAgentProtocol, Subscribable {
     let engine: GameEngineProtocol
     let playerId: String
     let ai: AIProtocol
+    let delay: Double
     
-    init(playerId: String, ai: AIProtocol, engine: GameEngineProtocol) {
+    init(playerId: String, ai: AIProtocol, engine: GameEngineProtocol, delay: Double) {
         self.playerId = playerId
         self.ai = ai
         self.engine = engine
+        self.delay = delay
     }
     
     func start() {
         sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
-            guard state.validMoves.contains(where: { $0.actorId == self?.playerId }),
-                let command = self?.ai.bestMove(in: state) else {
-                    return
-            }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                self?.engine.execute(command)
-            }
+            self?.processState(state)
         }))
+    }
+    
+    private func processState(_ state: GameStateProtocol) {
+        guard state.validMoves.contains(where: { $0.actorId == playerId }),
+            let command = ai.bestMove(in: state) else {
+                return
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
+            self?.engine.execute(command)
+        }
     }
 }
