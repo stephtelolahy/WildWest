@@ -17,7 +17,6 @@ struct UseBarrel: ActionProtocol, Equatable {
         
         var updates: [GameUpdate] = []
         updates.append(.flipOverFirstDeckCard)
-        updates.append(.setBarrelsResolved(state.barrelsResolved + 1))
         if flippedCard.makeBarrelWorking {
             updates.append(.setChallenge(state.challenge?.removing(actorId)))
         }

@@ -9,8 +9,6 @@
 enum GameUpdate: Equatable {
     case setTurn(String)
     case setChallenge(Challenge?)
-    case setBangsPlayed(Int)
-    case setBarrelsResolved(Int)
     case setOutcome(GameOutcome)
     case playerSetHealth(String, Int)
     case playerPullFromDeck(String, Int)
@@ -41,18 +39,12 @@ extension GameUpdate: GameUpdateProtocol {
             
         case let .setChallenge(challenge):
             database.setChallenge(challenge)
-            switch challenge {
-            case .shoot:
+            if case let .shoot(_, cardName) = challenge {
+                if case .bang = cardName {
+                    database.setBangsPlayed(database.state.bangsPlayed + 1)
+                }
                 database.setBarrelsResolved(0)
-            default:
-                break
             }
-            
-        case let .setBangsPlayed(count):
-            database.setBangsPlayed(count)
-            
-        case let .setBarrelsResolved(count):
-            database.setBarrelsResolved(count)
             
         case let .playerPullFromDeck(playerId, cardsCount):
             Array(1...cardsCount).forEach { _ in
@@ -112,6 +104,7 @@ extension GameUpdate: GameUpdateProtocol {
         case .flipOverFirstDeckCard:
             let card = database.deckRemoveFirst()
             database.addDiscard(card)
+            database.setBarrelsResolved(database.state.barrelsResolved + 1)
             
         case let .eliminatePlayer(playerId):
             let cards = database.playerRemoveAllHand(playerId) + database.playerRemoveAllInPlay(playerId)
@@ -132,12 +125,6 @@ extension GameUpdate: GameUpdateProtocol {
             
         case let .setChallenge(challenge):
             return "setChallenge \(challenge?.description ?? "nil")"
-            
-        case let .setBangsPlayed(count):
-            return "setBangsPlayed \(count)"
-            
-        case let .setBarrelsResolved(count):
-            return "setBarrelsResolved \(count)"
             
         case let .playerPullFromDeck(playerId, cardsCount):
             return "\(playerId) pullFromDeck \(cardsCount)"
