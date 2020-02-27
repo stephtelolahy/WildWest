@@ -10,12 +10,12 @@ extension Challenge {
     
     func removing(_ playerId: String) -> Challenge? {
         switch self {
-        case let .shoot(playerIds):
+        case let .shoot(playerIds, cardName):
             let remainingIds = playerIds.filter { $0 != playerId }
             if remainingIds.isEmpty {
                 return nil
             } else {
-                return .shoot(remainingIds)
+                return .shoot(remainingIds, cardName)
             }
             
         case let .indians(playerIds):

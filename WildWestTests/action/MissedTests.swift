@@ -40,7 +40,7 @@ class MissedTests: XCTestCase {
     
     func test_DiscardCardAndRemoveChallenge_IfPlayingMissed() {
         // Given
-        let mockState = MockGameStateProtocol().challenge(is: .shoot(["p1"]))
+        let mockState = MockGameStateProtocol().challenge(is: .shoot(["p1"], .bang))
         let sut = Missed(actorId: "p1", cardId: "c1")
         
         // When
@@ -56,7 +56,7 @@ class MissedTests: XCTestCase {
     func test_DiscardCardAndRemoveActorFromChallenge_IfPlayingMissed() {
         // Given
         let mockState = MockGameStateProtocol()
-            .challenge(is: .shoot(["p1", "p2", "p3"]))
+            .challenge(is: .shoot(["p1", "p2", "p3"], .gatling))
         let sut = Missed(actorId: "p1", cardId: "c1")
         
         // When
@@ -65,7 +65,7 @@ class MissedTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
             .playerDiscardHand("p1", "c1"),
-            .setChallenge(.shoot(["p2", "p3"]))
+            .setChallenge(.shoot(["p2", "p3"], .gatling))
         ])
     }
 }
@@ -82,7 +82,7 @@ class MissedRuleTests: XCTestCase {
             .holding(mockCard)
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
-            .challenge(is: .shoot(["p1", "p2"]))
+            .challenge(is: .shoot(["p1", "p2"], .gatling))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When

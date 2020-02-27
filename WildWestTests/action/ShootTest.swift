@@ -51,7 +51,7 @@ class ShootTest: XCTestCase {
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
             .playerDiscardHand("p1", "c1"),
-            .setChallenge(.shoot(["p2"])),
+            .setChallenge(.shoot(["p2"], .bang)),
             .setBangsPlayed(2)
         ])
     }

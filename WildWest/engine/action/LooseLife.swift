@@ -46,7 +46,7 @@ struct LooseLifeRule: RuleProtocol {
     
     func match(with state: GameStateProtocol) -> [ActionProtocol]? {
         switch state.challenge {
-        case let .shoot(targetIds):
+        case let .shoot(targetIds, _):
             return [LooseLife(actorId: targetIds[0], points: 1)]
             
         case let .indians(targetIds):

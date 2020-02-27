@@ -43,7 +43,7 @@ class UseBarrelTests: XCTestCase {
         let mockState = MockGameStateProtocol()
         Cuckoo.stub(mockState) { mock in
             when(mock.deck.get).thenReturn([mockCard, MockCardProtocol()])
-            when(mock.challenge.get).thenReturn(.shoot(["p1"]))
+            when(mock.challenge.get).thenReturn(.shoot(["p1"], .bang))
             when(mock.barrelsResolved.get).thenReturn(0)
         }
         
@@ -66,7 +66,7 @@ class UseBarrelTests: XCTestCase {
         let mockState = MockGameStateProtocol()
         Cuckoo.stub(mockState) { mock in
             when(mock.deck.get).thenReturn([mockCard, MockCardProtocol()])
-            when(mock.challenge.get).thenReturn(.shoot(["p1"]))
+            when(mock.challenge.get).thenReturn(.shoot(["p1"], .bang))
             when(mock.barrelsResolved.get).thenReturn(0)
         }
         
@@ -95,7 +95,7 @@ class UseBarrelRuleTests: XCTestCase {
             .playing(mockCard)
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
-            .challenge(is: .shoot(["p1"]))
+            .challenge(is: .shoot(["p1"], .bang))
             .players(are: mockPlayer1)
             .barrelsResolved(is: 0)
         
@@ -116,7 +116,7 @@ class UseBarrelRuleTests: XCTestCase {
             .playing(mockCard)
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
-            .challenge(is: .shoot(["p1"]))
+            .challenge(is: .shoot(["p1"], .bang))
             .players(are: mockPlayer1)
             .barrelsResolved(is: 1)
         

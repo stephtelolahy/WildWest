@@ -46,7 +46,7 @@ class LooseLifeTests: XCTestCase {
             .health(is: 1)
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "px")
-            .challenge(is: .shoot(["p1"]))
+            .challenge(is: .shoot(["p1"], .bang))
             .players(are: mockPlayer1, MockPlayerProtocol())
         let sut = LooseLife(actorId: "p1", points: 1)
         
@@ -87,7 +87,7 @@ class LooseLifeTests: XCTestCase {
             .identified(by: "p1")
             .health(is: 3)
         let mockState = MockGameStateProtocol()
-            .challenge(is: .shoot(["p1", "p2", "p3"]))
+            .challenge(is: .shoot(["p1", "p2", "p3"], .gatling))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         let sut = LooseLife(actorId: "p1", points: 1)
         
@@ -97,7 +97,7 @@ class LooseLifeTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
             .playerSetHealth("p1", 2),
-            .setChallenge(.shoot(["p2", "p3"]))
+            .setChallenge(.shoot(["p2", "p3"], .gatling))
         ])
     }
     
@@ -170,7 +170,7 @@ class LooseLifeRuleTests: XCTestCase {
         // Given
         let sut = LooseLifeRule()
         let mockState = MockGameStateProtocol()
-            .challenge(is: .shoot(["p1", "p2"]))
+            .challenge(is: .shoot(["p1", "p2"], .gatling))
         
         // When
         let actions = sut.match(with: mockState)

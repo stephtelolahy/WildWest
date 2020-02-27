@@ -52,13 +52,13 @@ class GameUpdateTests: XCTestCase {
     
     func test_ResetResolvedBarrels_IfSettingShootChallenge() {
         // Given
-        let sut = GameUpdate.setChallenge(.shoot(["p1"]))
+        let sut = GameUpdate.setChallenge(.shoot(["p1"], .bang))
         
         // When
         sut.execute(in: mockDatabase)
         
         // Assert
-        verify(mockDatabase).setChallenge(equal(to: .shoot(["p1"])))
+        verify(mockDatabase).setChallenge(equal(to: .shoot(["p1"], .bang)))
         verify(mockDatabase).setBarrelsResolved(0)
         verifyNoMoreInteractions(mockDatabase)
     }

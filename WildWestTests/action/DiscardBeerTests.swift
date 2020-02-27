@@ -31,7 +31,7 @@ class DiscardBeerTests: XCTestCase {
     func test_RemoveActorFromShootChallenge_IfDiscardingBeer() {
         // Given
         let mockState = MockGameStateProtocol()
-            .challenge(is: .shoot(["p1", "p2", "p3"]))
+            .challenge(is: .shoot(["p1", "p2", "p3"], .gatling))
         let sut = DiscardBeer(actorId: "p1", cardsToDiscardIds: ["c1"])
         
         // When
@@ -40,7 +40,7 @@ class DiscardBeerTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
             .playerDiscardHand("p1", "c1"),
-            .setChallenge(.shoot(["p2", "p3"]))
+            .setChallenge(.shoot(["p2", "p3"], .gatling))
         ])
     }
     
@@ -108,7 +108,7 @@ class DiscardBeerRuleTests: XCTestCase {
             .identified(by: "p1")
             .health(is: 1)
         let mockState = MockGameStateProtocol()
-            .challenge(is: .shoot(["p1", "p2"]))
+            .challenge(is: .shoot(["p1", "p2"], .gatling))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
@@ -193,7 +193,7 @@ class DiscardBeerRuleTests: XCTestCase {
             .identified(by: "p1")
             .health(is: 1)
         let mockState = MockGameStateProtocol()
-            .challenge(is: .shoot(["p1", "p2"]))
+            .challenge(is: .shoot(["p1", "p2"], .gatling))
             .players(are: mockPlayer1, MockPlayerProtocol())
         
         // When

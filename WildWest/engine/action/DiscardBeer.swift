@@ -32,7 +32,7 @@ struct DiscardBeerRule: RuleProtocol {
         }
         
         switch state.challenge {
-        case let .shoot(targetIds):
+        case let .shoot(targetIds, _):
             return matchDiscardBeer(actorId: targetIds[0], damage: 1, state: state)
             
         case let .indians(targetIds):
