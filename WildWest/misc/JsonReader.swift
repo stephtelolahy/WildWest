@@ -12,7 +12,7 @@ protocol JsonReaderProtocol {
     func load<T: Decodable>(_ class: T.Type, file: String) -> T
 }
 
-class JsonReader: JsonReaderProtocol {
+struct JsonReader: JsonReaderProtocol {
     private let bundle: Bundle
     
     init(bundle: Bundle) {

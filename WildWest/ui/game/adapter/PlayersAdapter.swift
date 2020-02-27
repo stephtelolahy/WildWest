@@ -7,24 +7,28 @@
 //
 
 struct PlayerItem {
-    let player: PlayerProtocol?
+    let player: PlayerProtocol
     let isActive: Bool
     let isTurn: Bool
     let isEliminated: Bool
+    let isRevealed: Bool
+    let isControlled: Bool
 }
 
 protocol PlayersAdapterProtocol {
-    var items: [PlayerItem] { get }
+    var items: [PlayerItem?] { get }
     
     func setState(_ state: GameStateProtocol)
+    func setControlledPlayerId(_ identifier: String?)
 }
 
 class PlayersAdapter: PlayersAdapterProtocol {
     
-    var items: [PlayerItem] = []
+    var items: [PlayerItem?] = []
     
     private var state: GameStateProtocol?
     private var playerIndexes: [Int: String?] = [:]
+    private var controlledPlayerId: String?
     
     func setState(_ state: GameStateProtocol) {
         if self.state == nil {
@@ -35,32 +39,50 @@ class PlayersAdapter: PlayersAdapterProtocol {
         items = buildItems()
     }
     
-    private func buildItems() -> [PlayerItem] {
+    func setControlledPlayerId(_ identifier: String?) {
+        controlledPlayerId = identifier
+        items = buildItems()
+    }
+    
+    private func buildItems() -> [PlayerItem?] {
         guard let state = self.state else {
             return []
         }
         
         return Array(0..<MapConfiguration.itemsCount).map { index in
             guard let playerId = playerIndexes[index] else {
-                return PlayerItem(player: nil, isActive: false, isTurn: false, isEliminated: true)
+                return nil
+            }
+            
+            if let eliminatedPlayer = state.eliminated.first(where: { $0.identifier == playerId }) {
+                return PlayerItem(player: eliminatedPlayer,
+                                  isActive: false,
+                                  isTurn: false,
+                                  isEliminated: true,
+                                  isRevealed: true,
+                                  isControlled: false)
             }
             
             if let player = state.players.first(where: { $0.identifier == playerId }) {
                 let isActive = state.validMoves.contains(where: { $0.actorId == playerId })
                 let isTurn = player.identifier == state.turn
-                return PlayerItem(player: player, isActive: isActive, isTurn: isTurn, isEliminated: false)
+                let isRevealed = state.outcome != nil
+                    || player.role == .sheriff
+                    || player.identifier == controlledPlayerId
+                return PlayerItem(player: player,
+                                  isActive: isActive,
+                                  isTurn: isTurn,
+                                  isEliminated: false,
+                                  isRevealed: isRevealed,
+                                  isControlled: player.identifier == controlledPlayerId)
             }
             
-            if let eliminatedPlayer = state.eliminated.first(where: { $0.identifier == playerId }) {
-                return PlayerItem(player: eliminatedPlayer, isActive: false, isTurn: false, isEliminated: true)
-            }
-            
-            return PlayerItem(player: nil, isActive: false, isTurn: false, isEliminated: true)
+            return nil
         }
     }
 }
 
-enum MapConfiguration {
+private enum MapConfiguration {
     
     static let itemsCount = 9
     

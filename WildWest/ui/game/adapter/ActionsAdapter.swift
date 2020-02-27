@@ -15,13 +15,13 @@ protocol ActionsAdapterProtocol {
     var items: [ActionItem] { get }
     
     func setState(_ state: GameStateProtocol)
-    func setPlayerIdentifier(_ identifier: String?)
+    func setControlledPlayerId(_ identifier: String?)
 }
 
 class ActionsAdapter: ActionsAdapterProtocol {
     
     var items: [ActionItem] = []
-    private var playerIdentifier: String?
+    private var controlledPlayerId: String?
     private var state: GameStateProtocol?
     
     func setState(_ state: GameStateProtocol) {
@@ -29,14 +29,14 @@ class ActionsAdapter: ActionsAdapterProtocol {
         items = buildItems()
     }
     
-    func setPlayerIdentifier(_ identifier: String?) {
-        self.playerIdentifier = identifier
+    func setControlledPlayerId(_ identifier: String?) {
+        self.controlledPlayerId = identifier
         items = buildItems()
     }
     
     private func buildItems() -> [ActionItem] {
         guard let state = self.state,
-            let playerIdentifier = self.playerIdentifier,
+            let playerIdentifier = self.controlledPlayerId,
             let player = state.players.first(where: { $0.identifier == playerIdentifier }) else {
                 return []
         }

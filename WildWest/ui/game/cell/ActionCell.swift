@@ -14,46 +14,31 @@ class ActionCell: UICollectionViewCell {
     
     @IBOutlet private weak var cardView: UIView!
     @IBOutlet private weak var cardImageView: UIImageView!
-    @IBOutlet private weak var nameLabel: UILabel!
-    @IBOutlet private weak var valueLabel: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        cardView.layer.borderWidth = 4
-    }
     
     // MARK: Setup
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        contentView.layer.cornerRadius = 8
+    }
+    
     func update(with item: ActionItem) {
-        cardView.alpha = !item.actions.isEmpty ? 1.0 : 0.4
+        cardView.isHidden = !item.actions.isEmpty
         
         guard let card = item.card else {
-            cardImageView.image = #imageLiteral(resourceName: "01_nothing")
-            nameLabel.text = nil
-            valueLabel.text = "\(item.actions.count)"
-            cardView.layer.borderColor = UIColor.brown.cgColor
+            if (item.actions.first as? ChooseCard) != nil {
+                cardImageView.image = #imageLiteral(resourceName: "01_choose_card")
+            } else if (item.actions.first as? EndTurn) != nil {
+                cardImageView.image = #imageLiteral(resourceName: "01_end_turn")
+            } else if (item.actions.first as? LooseLife) != nil {
+                cardImageView.image = #imageLiteral(resourceName: "01_nothing")
+            } else {
+                cardImageView.image = #imageLiteral(resourceName: "01_more") // use barrel, discard beer
+            }
             return
         }
         
         cardImageView.image = UIImage(named: card.imageName)
-        nameLabel.text = card.name.rawValue.uppercased()
-        valueLabel.text = "\(card.value)\(card.suit.string)"
-        cardView.layer.borderColor = card.name.isBlue ? UIColor.systemBlue.cgColor : UIColor.brown.cgColor
-    }
-}
-
-private extension CardSuit {
-    var string: String {
-        switch self {
-        case .spades:
-            return "♠"
-        case .hearts:
-            return "♥"
-        case .diamonds:
-            return "♦"
-        case .clubs:
-            return "♣"
-        }
     }
 }
 
