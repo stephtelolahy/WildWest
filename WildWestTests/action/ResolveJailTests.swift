@@ -20,7 +20,7 @@ class ResolveJailTests: XCTestCase {
         XCTAssertEqual(sut.description, "p1 resolves c1")
     }
     
-    func test_StartTurn_IfReturnHeartFromDeck() {
+    func test_DiscardJail_IfReturnHeartFromDeck() {
         // Given
         let mockCard = MockCardProtocol().suit(is: .hearts)
         let mockState = MockGameStateProtocol()

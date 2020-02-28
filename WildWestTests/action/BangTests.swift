@@ -1,8 +1,8 @@
 //
-//  ShootTest.swift
+//  BangTests.swift
 //  WildWestTests
 //
-//  Created by Hugues Stephano Telolahy on 01/02/2020.
+//  Created by Hugues Stephano Telolahy on 28/02/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
@@ -29,7 +29,7 @@ import Cuckoo
  distance 4.
  */
 
-class ShootTest: XCTestCase {
+class BangTests: XCTestCase {
     
     func test_ShootDescription() {
         // Given
