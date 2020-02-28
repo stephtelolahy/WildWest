@@ -1164,6 +1164,20 @@ import Cuckoo
         
     }
     
+    
+    
+     var autoPlay: Bool {
+        get {
+            return cuckoo_manager.getter("autoPlay",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.autoPlay)
+        }
+        
+    }
+    
 
     
 
@@ -1207,6 +1221,11 @@ import Cuckoo
 	    }
 	    
 	    
+	    var autoPlay: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockActionProtocol, Bool> {
+	        return .init(manager: cuckoo_manager, name: "autoPlay")
+	    }
+	    
+	    
 	    func execute<M1: Cuckoo.Matchable>(in state: M1) -> Cuckoo.ProtocolStubFunction<(GameStateProtocol), [GameUpdateProtocol]> where M1.MatchedType == GameStateProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockActionProtocol.self, method: "execute(in: GameStateProtocol) -> [GameUpdateProtocol]", parameterMatchers: matchers))
@@ -1239,6 +1258,11 @@ import Cuckoo
 	    
 	    var description: Cuckoo.VerifyReadOnlyProperty<String> {
 	        return .init(manager: cuckoo_manager, name: "description", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var autoPlay: Cuckoo.VerifyReadOnlyProperty<Bool> {
+	        return .init(manager: cuckoo_manager, name: "autoPlay", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	
@@ -1274,6 +1298,14 @@ import Cuckoo
      var description: String {
         get {
             return DefaultValueRegistry.defaultValue(for: (String).self)
+        }
+        
+    }
+    
+    
+     var autoPlay: Bool {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (Bool).self)
         }
         
     }

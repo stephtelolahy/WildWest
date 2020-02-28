@@ -9,6 +9,7 @@
 struct ResolveJail: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
+    let autoPlay = true
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
         guard let flippedCard = state.deck.first else {

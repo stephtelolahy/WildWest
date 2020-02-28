@@ -8,7 +8,8 @@
 
 struct Eliminate: ActionProtocol, Equatable {
     let actorId: String
-    let cardId: String = ""
+    let cardId = ""
+    let autoPlay = true
     
     var description: String {
         "\(actorId) is eliminated"

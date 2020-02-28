@@ -9,6 +9,7 @@
 struct Stagecoach: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
+    let autoPlay = false
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
         let updates: [GameUpdate] = [

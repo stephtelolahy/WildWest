@@ -8,8 +8,9 @@
 
 struct LooseLife: ActionProtocol, Equatable {
     let actorId: String
-    let cardId: String = ""
     let points: Int
+    let cardId = ""
+    let autoPlay = false
     
     var description: String {
         "\(actorId) looses \(points) life points"

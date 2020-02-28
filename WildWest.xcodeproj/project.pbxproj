@@ -572,13 +572,13 @@
 				33EC5D3A23E737E500E14890 /* DiscardBang.swift */,
 				ADB5A11223BAB9330050E173 /* GeneralStore.swift */,
 				33C45DD623EB14A100B62508 /* ChooseCard.swift */,
-				33AFB62523DCAC9E00C96CED /* StartTurn.swift */,
 				ADB5A11523BABBE80050E173 /* EndTurn.swift */,
 				33EC5D3323E71C1400E14890 /* LooseLife.swift */,
+				33C45DE723EB18A800B62508 /* DiscardBeer.swift */,
+				33AFB62523DCAC9E00C96CED /* StartTurn.swift */,
 				33C45DDD23EB15E900B62508 /* ResolveJail.swift */,
 				33C45DD123EB11EB00B62508 /* ResolveBarrel.swift */,
 				33C45DE223EB176B00B62508 /* ResolveDynamite.swift */,
-				33C45DE723EB18A800B62508 /* DiscardBeer.swift */,
 				3309D7172408DC3000713E15 /* Eliminate.swift */,
 			);
 			path = action;
