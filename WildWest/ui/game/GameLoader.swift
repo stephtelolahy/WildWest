@@ -48,7 +48,8 @@ class GameLoader {
             ResolveJailRule(),
             ResolveDynamiteRule(),
             DiscardBeerRule(),
-            UseBarrelRule()
+            UseBarrelRule(),
+            EliminateRule()
         ]
     }
 }

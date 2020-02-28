@@ -39,28 +39,6 @@ class LooseLifeTests: XCTestCase {
         ])
     }
     
-    func test_EliminateActor_IfLoosingLastLife() {
-        // Given
-        let mockPlayer1 = MockPlayerProtocol()
-            .identified(by: "p1")
-            .health(is: 1)
-        let mockState = MockGameStateProtocol()
-            .currentTurn(is: "px")
-            .challenge(is: .shoot(["p1"], .bang))
-            .players(are: mockPlayer1, MockPlayerProtocol())
-        let sut = LooseLife(actorId: "p1", points: 1)
-        
-        // When
-        let updates = sut.execute(in: mockState)
-        
-        // Assert
-        XCTAssertEqual(updates as? [GameUpdate], [
-            .playerSetHealth("p1", 0),
-            .eliminatePlayer("p1"),
-            .setChallenge(nil)
-        ])
-    }
-    
     func test_TriggerStartTurnChallenge_IfLoosingLifePointOnDynamiteExploded() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
@@ -140,28 +118,6 @@ class LooseLifeTests: XCTestCase {
             .setChallenge(nil)
         ])
     }
-    
-    func test_TriggerNextPlayerStartTurnChallenge_IfTurnPlayerIsEliminated() {
-        // Given
-        let mockState = MockGameStateProtocol()
-            .challenge(is: nil)
-            .currentTurn(is: "p1")
-            .players(are: MockPlayerProtocol().identified(by: "p1").health(is: 1),
-                     MockPlayerProtocol().identified(by: "p2"))
-        let sut = LooseLife(actorId: "p1", points: 1)
-        
-        // When
-        let updates = sut.execute(in: mockState)
-        
-        // Assert
-        XCTAssertEqual(updates as? [GameUpdate], [
-            .playerSetHealth("p1", 0),
-            .eliminatePlayer("p1"),
-            .setTurn("p2"),
-            .setChallenge(.startTurn)
-        ])
-    }
-    
 }
 
 class LooseLifeRuleTests: XCTestCase {
@@ -205,7 +161,7 @@ class LooseLifeRuleTests: XCTestCase {
         XCTAssertEqual(actions as? [LooseLife], [LooseLife(actorId: "p1", points: 1)])
     }
     
-    func test_CanLooseLife_IfChallengedByDynamiteExplode() {
+    func test_CanLooseLife_IfChallengedByDynamiteExploded() {
         // Given
         let sut = LooseLifeRule()
         let mockState = MockGameStateProtocol()

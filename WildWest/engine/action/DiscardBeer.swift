@@ -13,9 +13,7 @@ struct DiscardBeer: ActionProtocol, Equatable {
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
         var updates: [GameUpdate] = cardsToDiscardIds.map { .playerDiscardHand(actorId, $0) }
-        if let challenge = state.challenge {
-            updates.append(.setChallenge(challenge.removing(actorId)))
-        }
+        updates.append(.setChallenge(state.challenge?.removing(actorId)))
         return updates
     }
     

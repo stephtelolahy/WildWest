@@ -9,6 +9,8 @@
 enum GameUpdate: Equatable {
     case setTurn(String)
     case setChallenge(Challenge?)
+    case flipOverFirstDeckCard
+    
     case setOutcome(GameOutcome)
     case playerSetHealth(String, Int)
     case playerPullFromDeck(String, Int)
@@ -21,7 +23,6 @@ enum GameUpdate: Equatable {
     case playerPassInPlayOfOther(String, String, String)
     case playerPullFromGeneralStore(String, String)
     case setupGeneralStore(Int)
-    case flipOverFirstDeckCard
     case eliminatePlayer(String)
 }
 
