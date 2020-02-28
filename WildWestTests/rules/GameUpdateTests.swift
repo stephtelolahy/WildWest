@@ -210,46 +210,4 @@ class GameUpdateTests: XCTestCase {
         verify(mockDatabase).addGeneralStore(card(equalTo: mockCard3))
         verifyNoMoreInteractions(mockDatabase)
     }
-    
-    func test_RemoveFromActive_IfPlayerEliminated() {
-        // Given
-        let mockPlayer = MockPlayerProtocol()
-        Cuckoo.stub(mockDatabase) { mock in
-            when(mock.removePlayer("p1")).thenReturn(mockPlayer)
-        }
-        let sut = GameUpdate.eliminatePlayer("p1")
-        
-        // When
-        sut.execute(in: mockDatabase)
-        
-        // Assert
-        verify(mockDatabase).removePlayer("p1")
-        verify(mockDatabase).addEliminated(player(equalTo: mockPlayer))
-    }
-    
-    func test_DiscardAllCards_IfPlayerEliminated() {
-        // Given
-        let mockCard1 = MockCardProtocol()
-        let mockCard2 = MockCardProtocol()
-        let mockCard3 = MockCardProtocol()
-        let mockCard4 = MockCardProtocol()
-        Cuckoo.stub(mockDatabase) { mock in
-            when(mock.playerRemoveAllHand("p1")).thenReturn([mockCard1, mockCard2])
-            when(mock.playerRemoveAllInPlay("p1")).thenReturn([mockCard3, mockCard4])
-        }
-        
-        // Given
-        let sut = GameUpdate.eliminatePlayer("p1")
-        
-        // When
-        sut.execute(in: mockDatabase)
-        
-        // Assert
-        verify(mockDatabase).playerRemoveAllHand("p1")
-        verify(mockDatabase).playerRemoveAllInPlay("p1")
-        verify(mockDatabase).addDiscard(card(equalTo: mockCard1))
-        verify(mockDatabase).addDiscard(card(equalTo: mockCard2))
-        verify(mockDatabase).addDiscard(card(equalTo: mockCard3))
-        verify(mockDatabase).addDiscard(card(equalTo: mockCard4))
-    }
 }

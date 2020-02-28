@@ -21,6 +21,9 @@
 		3302906123F32AC30099C438 /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5643423A4E09C00C1BD01 /* Beer.swift */; };
 		3302E51C23F8E34C004FE76E /* RandomAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E51B23F8E34C004FE76E /* RandomAI.swift */; };
 		3302E51D23F8E34C004FE76E /* RandomAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E51B23F8E34C004FE76E /* RandomAI.swift */; };
+		3303E23B2408E28400BB9E23 /* GameUpdateEliminatePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3303E23A2408E28400BB9E23 /* GameUpdateEliminatePlayer.swift */; };
+		3303E23D2408E3C000BB9E23 /* GameUpdateEliminatePlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3303E23C2408E3C000BB9E23 /* GameUpdateEliminatePlayerTests.swift */; };
+		3303E23E2408E4A600BB9E23 /* GameUpdateEliminatePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3303E23A2408E28400BB9E23 /* GameUpdateEliminatePlayer.swift */; };
 		3309D7082408D1EE00713E15 /* GameUpdateSetTurnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3309D7072408D1EE00713E15 /* GameUpdateSetTurnTests.swift */; };
 		3309D70B2408D36600713E15 /* GameUpdateSetTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3309D70A2408D36600713E15 /* GameUpdateSetTurn.swift */; };
 		3309D70C2408D36A00713E15 /* GameUpdateSetTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3309D70A2408D36600713E15 /* GameUpdateSetTurn.swift */; };
@@ -217,6 +220,8 @@
 		3301E63723F7EEF700AB35C7 /* AIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIProtocol.swift; sourceTree = "<group>"; };
 		3301E63F23F80AE600AB35C7 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		3302E51B23F8E34C004FE76E /* RandomAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomAI.swift; sourceTree = "<group>"; };
+		3303E23A2408E28400BB9E23 /* GameUpdateEliminatePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUpdateEliminatePlayer.swift; sourceTree = "<group>"; };
+		3303E23C2408E3C000BB9E23 /* GameUpdateEliminatePlayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUpdateEliminatePlayerTests.swift; sourceTree = "<group>"; };
 		3309D7072408D1EE00713E15 /* GameUpdateSetTurnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUpdateSetTurnTests.swift; sourceTree = "<group>"; };
 		3309D70A2408D36600713E15 /* GameUpdateSetTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUpdateSetTurn.swift; sourceTree = "<group>"; };
 		3309D70D2408D49D00713E15 /* GameUpdateSetChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUpdateSetChallenge.swift; sourceTree = "<group>"; };
@@ -391,6 +396,7 @@
 				3309D7072408D1EE00713E15 /* GameUpdateSetTurnTests.swift */,
 				3309D7102408D56F00713E15 /* GameUpdateSetChallengeTests.swift */,
 				3309D7152408D90200713E15 /* GameUpdateFlipOverFirstDeckCardTests.swift */,
+				3303E23C2408E3C000BB9E23 /* GameUpdateEliminatePlayerTests.swift */,
 			);
 			path = update;
 			sourceTree = "<group>";
@@ -401,6 +407,7 @@
 				3309D70A2408D36600713E15 /* GameUpdateSetTurn.swift */,
 				3309D70D2408D49D00713E15 /* GameUpdateSetChallenge.swift */,
 				3309D7122408D89200713E15 /* GameUpdateFlipOverFirstDeckCard.swift */,
+				3303E23A2408E28400BB9E23 /* GameUpdateEliminatePlayer.swift */,
 			);
 			path = update;
 			sourceTree = "<group>";
@@ -980,6 +987,7 @@
 				3309D7182408DC3000713E15 /* Eliminate.swift in Sources */,
 				AD671A1C23D8F9D600F0AA4A /* CardExtension.swift in Sources */,
 				3301BEFA23F9A79B00B4364D /* AIPlayerAgent.swift in Sources */,
+				3303E23B2408E28400BB9E23 /* GameUpdateEliminatePlayer.swift in Sources */,
 				33E4412424077DAB00B2848E /* UITableViewExtension.swift in Sources */,
 				33EBF4DE23F34A5700C300A7 /* Stagecoach.swift in Sources */,
 				AD52B99C23B17A310013240B /* GameState.swift in Sources */,
@@ -1030,6 +1038,7 @@
 				3309D70F2408D49D00713E15 /* GameUpdateSetChallenge.swift in Sources */,
 				339A294A23EFEFE7002C5CD8 /* ChallengeExtension.swift in Sources */,
 				3301BEF523F962F000B4364D /* RandomAIWithRole.swift in Sources */,
+				3303E23D2408E3C000BB9E23 /* GameUpdateEliminatePlayerTests.swift in Sources */,
 				AD46810F23BEA2B0000B42C7 /* PlayerExtension.swift in Sources */,
 				3383ABE023F533480028B4B3 /* DiscardBang.swift in Sources */,
 				33D964B523DDDB1E007295E7 /* GameEngine.swift in Sources */,
@@ -1105,6 +1114,7 @@
 				3322725B23F5CEDE0028933D /* LooseLifeTests.swift in Sources */,
 				3322725D23F5CEDE0028933D /* DiscardBangTests.swift in Sources */,
 				3301E63923F7EEF700AB35C7 /* AIProtocol.swift in Sources */,
+				3303E23E2408E4A600BB9E23 /* GameUpdateEliminatePlayer.swift in Sources */,
 				ADD035D023A96002003B2576 /* CardProtocol.swift in Sources */,
 				3302E51D23F8E34C004FE76E /* RandomAI.swift in Sources */,
 				AD52B99A23B178CC0013240B /* Player.swift in Sources */,

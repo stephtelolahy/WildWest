@@ -33,7 +33,5 @@ protocol GameDatabaseProtocol {
     func playerRemoveHand(_ playerId: String, _ cardId: String) -> CardProtocol?
     func playerAddInPlay(_ playerId: String, _ card: CardProtocol)
     func playerRemoveInPlay(_ playerId: String, _ cardId: String) -> CardProtocol?
-    func playerRemoveAllHand(_ playerId: String) -> [CardProtocol]
-    func playerRemoveAllInPlay(_ playerId: String) -> [CardProtocol]
     
 }

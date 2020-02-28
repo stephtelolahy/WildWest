@@ -89,18 +89,6 @@ extension GameState: GameDatabaseProtocol {
     func playerRemoveInPlay(_ playerId: String, _ cardId: String) -> CardProtocol? {
         player(playerId).inPlay.removeFirst(where: { $0.identifier == cardId })
     }
-    
-    func playerRemoveAllHand(_ playerId: String) -> [CardProtocol] {
-        let cards = player(playerId).hand
-        player(playerId).hand.removeAll()
-        return cards
-    }
-    
-    func playerRemoveAllInPlay(_ playerId: String) -> [CardProtocol] {
-        let cards = player(playerId).inPlay
-        player(playerId).inPlay.removeAll()
-        return cards
-    }
 }
 
 private extension GameState {

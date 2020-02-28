@@ -309,36 +309,6 @@ import Cuckoo
         
     }
     
-    
-    
-     func playerRemoveAllHand(_ playerId: String) -> [CardProtocol] {
-        
-    return cuckoo_manager.call("playerRemoveAllHand(_: String) -> [CardProtocol]",
-            parameters: (playerId),
-            escapingParameters: (playerId),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.playerRemoveAllHand(playerId))
-        
-    }
-    
-    
-    
-     func playerRemoveAllInPlay(_ playerId: String) -> [CardProtocol] {
-        
-    return cuckoo_manager.call("playerRemoveAllInPlay(_: String) -> [CardProtocol]",
-            parameters: (playerId),
-            escapingParameters: (playerId),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.playerRemoveAllInPlay(playerId))
-        
-    }
-    
 
 	 struct __StubbingProxy_GameDatabaseProtocol: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
@@ -441,16 +411,6 @@ import Cuckoo
 	    func playerRemoveInPlay<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ playerId: M1, _ cardId: M2) -> Cuckoo.ProtocolStubFunction<(String, String), CardProtocol?> where M1.MatchedType == String, M2.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: playerId) { $0.0 }, wrap(matchable: cardId) { $0.1 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "playerRemoveInPlay(_: String, _: String) -> CardProtocol?", parameterMatchers: matchers))
-	    }
-	    
-	    func playerRemoveAllHand<M1: Cuckoo.Matchable>(_ playerId: M1) -> Cuckoo.ProtocolStubFunction<(String), [CardProtocol]> where M1.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: playerId) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "playerRemoveAllHand(_: String) -> [CardProtocol]", parameterMatchers: matchers))
-	    }
-	    
-	    func playerRemoveAllInPlay<M1: Cuckoo.Matchable>(_ playerId: M1) -> Cuckoo.ProtocolStubFunction<(String), [CardProtocol]> where M1.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: playerId) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "playerRemoveAllInPlay(_: String) -> [CardProtocol]", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -582,18 +542,6 @@ import Cuckoo
 	        return cuckoo_manager.verify("playerRemoveInPlay(_: String, _: String) -> CardProtocol?", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
-	    @discardableResult
-	    func playerRemoveAllHand<M1: Cuckoo.Matchable>(_ playerId: M1) -> Cuckoo.__DoNotUse<(String), [CardProtocol]> where M1.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: playerId) { $0 }]
-	        return cuckoo_manager.verify("playerRemoveAllHand(_: String) -> [CardProtocol]", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
-	    func playerRemoveAllInPlay<M1: Cuckoo.Matchable>(_ playerId: M1) -> Cuckoo.__DoNotUse<(String), [CardProtocol]> where M1.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: playerId) { $0 }]
-	        return cuckoo_manager.verify("playerRemoveAllInPlay(_: String) -> [CardProtocol]", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
 	}
 }
 
@@ -681,14 +629,6 @@ import Cuckoo
     
      func playerRemoveInPlay(_ playerId: String, _ cardId: String) -> CardProtocol?  {
         return DefaultValueRegistry.defaultValue(for: (CardProtocol?).self)
-    }
-    
-     func playerRemoveAllHand(_ playerId: String) -> [CardProtocol]  {
-        return DefaultValueRegistry.defaultValue(for: ([CardProtocol]).self)
-    }
-    
-     func playerRemoveAllInPlay(_ playerId: String) -> [CardProtocol]  {
-        return DefaultValueRegistry.defaultValue(for: ([CardProtocol]).self)
     }
     
 }

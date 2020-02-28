@@ -15,7 +15,13 @@ struct Eliminate: ActionProtocol, Equatable {
     }
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
+        guard let actor = state.players.first(where: { $0.identifier == actorId }) else {
+            return []
+        }
+        
         var updates: [GameUpdate] = []
+        actor.hand.forEach { updates.append(.playerDiscardHand(actorId, $0.identifier)) }
+        actor.inPlay.forEach { updates.append(.playerDiscardInPlay(actorId, $0.identifier)) }
         updates.append(.eliminatePlayer(actorId))
         if actorId == state.turn {
             updates.append(.setTurn(state.nextTurn))

@@ -10,6 +10,7 @@ enum GameUpdate: Equatable {
     case setTurn(String)
     case setChallenge(Challenge?)
     case flipOverFirstDeckCard
+    case eliminatePlayer(String)
     
     case setOutcome(GameOutcome)
     case playerSetHealth(String, Int)
@@ -23,7 +24,6 @@ enum GameUpdate: Equatable {
     case playerPassInPlayOfOther(String, String, String)
     case playerPullFromGeneralStore(String, String)
     case setupGeneralStore(Int)
-    case eliminatePlayer(String)
 }
 
 extension GameUpdate: GameUpdateProtocol {
@@ -99,11 +99,7 @@ extension GameUpdate: GameUpdateProtocol {
             GameUpdateFlipOverFirstDeckCard().execute(in: database)
             
         case let .eliminatePlayer(playerId):
-            let cards = database.playerRemoveAllHand(playerId) + database.playerRemoveAllInPlay(playerId)
-            cards.forEach { database.addDiscard($0) }
-            if let player = database.removePlayer(playerId) {
-                database.addEliminated(player)
-            }
+            GameUpdateEliminatePlayer(playerId: playerId).execute(in: database)
         }
     }
     
@@ -155,7 +151,7 @@ extension GameUpdate: GameUpdateProtocol {
             return GameUpdateFlipOverFirstDeckCard().description
             
         case let .eliminatePlayer(playerId):
-            return "eliminate \(playerId)"
+            return GameUpdateEliminatePlayer(playerId: playerId).description
         }
     }
 }
