@@ -26,32 +26,33 @@ class GameLoader {
     }
     
     func classicRules() -> [RuleProtocol] {
-        let calculator = RangeCalculator()
-        return [
+        [
+            EliminateRule(),
+            ResolveDynamiteRule(),
+            ResolveJailRule(),
+            StartTurnRule(),
+            UseBarrelRule(),
+            
+            MissedRule(),
+            DiscardBangRule(),
+            DiscardBeerRule(),
+            ChooseCardRule(),
+            LooseLifeRule(),
+            
             BeerRule(),
             SaloonRule(),
             StagecoachRule(),
             WellsFargoRule(),
             EquipRule(),
             CatBalouRule(),
-            PanicRule(calculator: calculator),
-            BangRule(calculator: calculator),
-            MissedRule(),
+            PanicRule(calculator: RangeCalculator()),
+            BangRule(calculator: RangeCalculator()),
             GatlingRule(),
             IndiansRule(),
-            JailRule(),
-            DiscardBangRule(),
             DuelRule(),
+            JailRule(),
             GeneralStoreRule(),
-            ChooseCardRule(),
-            LooseLifeRule(),
-            StartTurnRule(),
-            EndTurnRule(),
-            ResolveJailRule(),
-            ResolveDynamiteRule(),
-            DiscardBeerRule(),
-            UseBarrelRule(),
-            EliminateRule()
+            EndTurnRule()
         ]
     }
 }

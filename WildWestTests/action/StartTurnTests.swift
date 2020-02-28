@@ -43,6 +43,7 @@ class StartTurnRuleTests: XCTestCase {
         let player1 = MockPlayerProtocol()
             .identified(by: "p1")
             .noCardsInPlay()
+            .health(is: 1)
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p1")
             .challenge(is: .startTurn)
@@ -60,6 +61,7 @@ class StartTurnRuleTests: XCTestCase {
         let sut = StartTurnRule()
         let player1 = MockPlayerProtocol()
             .identified(by: "p1")
+            .health(is: 1)
             .playing(MockCardProtocol().named(.jail))
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p1")
@@ -78,7 +80,27 @@ class StartTurnRuleTests: XCTestCase {
         let sut = StartTurnRule()
         let player1 = MockPlayerProtocol()
             .identified(by: "p1")
+            .health(is: 1)
             .playing(MockCardProtocol().named(.dynamite))
+        let mockState = MockGameStateProtocol()
+            .currentTurn(is: "p1")
+            .challenge(is: .startTurn)
+            .players(are: player1)
+        
+        // When
+        let actions = sut.match(with: mockState)
+        
+        // Assert
+        XCTAssertNil(actions)
+    }
+    
+    func test_CannotStartTurn_IfHealth_IsZero() {
+        // Given
+        let sut = StartTurnRule()
+        let player1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .noCardsInPlay()
+            .health(is: 0)
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p1")
             .challenge(is: .startTurn)

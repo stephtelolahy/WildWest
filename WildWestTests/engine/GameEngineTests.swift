@@ -58,8 +58,8 @@ class GameEngineTests: XCTestCase {
     
     func test_SetMatchingActionsAsValidMoves_IfExecutingCommand() {
         // Given
-        let matchedAction1 = MockActionProtocol()
-        let matchedAction2 = MockActionProtocol()
+        let matchedAction1 = MockActionProtocol().autoPlay(is: false)
+        let matchedAction2 = MockActionProtocol().autoPlay(is: false)
         Cuckoo.stub(mockRule) { mock in
             when(mock.match(with: state(equalTo: mockState))).thenReturn([matchedAction1, matchedAction2])
         }
@@ -69,7 +69,13 @@ class GameEngineTests: XCTestCase {
         
         // Assert
         verify(mockRule).match(with: state(equalTo: mockState))
-        verify(mockDatabase).setValidMoves(actions(equalTo: [matchedAction1, matchedAction2]))
+        let argumentCaptor = ArgumentCaptor<[ActionProtocol]>()
+        verify(mockDatabase, atLeastOnce()).setValidMoves(argumentCaptor.capture())
+        XCTAssertTrue(argumentCaptor.allValues.count == 2)
+        XCTAssertTrue(argumentCaptor.allValues[0].isEmpty)
+        XCTAssertTrue(argumentCaptor.allValues[1].count == 2)
+        XCTAssertTrue(argumentCaptor.allValues[1][0] as? MockActionProtocol === matchedAction1)
+        XCTAssertTrue(argumentCaptor.allValues[1][1] as? MockActionProtocol === matchedAction2)
     }
     
     func test_DoNotGenerateActions_IfGameIsOver() {
