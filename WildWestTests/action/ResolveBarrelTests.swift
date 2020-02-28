@@ -1,5 +1,5 @@
 //
-//  UseBarrelTests.swift
+//  ResolveBarrelTests.swift
 //  WildWestTests
 //
 //  Created by Hugues Stephano Telolahy on 05/02/2020.
@@ -26,11 +26,11 @@ import Cuckoo
  effect, but you could have still tried to cancel the BANG!
  with a Missed!.
  */
-class UseBarrelTests: XCTestCase {
+class ResolveBarrelTests: XCTestCase {
     
-    func test_UseBarrelDescription() {
+    func test_ResolveBarrelDescription() {
         // Given
-        let sut = UseBarrel(actorId: "p1", cardId: "c1")
+        let sut = ResolveBarrel(actorId: "p1", cardId: "c1")
         
         // When
         // Assert
@@ -47,7 +47,7 @@ class UseBarrelTests: XCTestCase {
             when(mock.barrelsResolved.get).thenReturn(0)
         }
         
-        let sut = UseBarrel(actorId: "p1", cardId: "c1")
+        let sut = ResolveBarrel(actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(in: mockState)
@@ -69,7 +69,7 @@ class UseBarrelTests: XCTestCase {
             when(mock.barrelsResolved.get).thenReturn(0)
         }
         
-        let sut = UseBarrel(actorId: "p1", cardId: "c1")
+        let sut = ResolveBarrel(actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(in: mockState)
@@ -101,10 +101,10 @@ class UseBarrelRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions as? [UseBarrel], [UseBarrel(actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(actions as? [ResolveBarrel], [ResolveBarrel(actorId: "p1", cardId: "c1")])
     }
     
-    func test_CannotUseBarrel_IfAlreadyResolvedBarrel() {
+    func test_CannotResolvedBarrelTwice() {
         // Given
         let sut = UseBarrelRule()
         let mockCard = MockCardProtocol()

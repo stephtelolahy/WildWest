@@ -19,11 +19,6 @@ class RandomAI: AIProtocol {
             return Score.looseLife
         }
         
-        // prefer use barrel instead of discard card
-        if move is UseBarrel {
-            return Score.useBarrel
-        }
-        
         if let equip = move as? Equip {
             if let actor = state.players.first(where: { $0.identifier == equip.actorId }),
                 let card = actor.hand.first(where: { $0.identifier == equip.cardId }),
