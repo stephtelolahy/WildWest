@@ -77,7 +77,7 @@ class ResolveDynamiteTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
             .flipOverFirstDeckCard,
-            .setChallenge(.dynamiteExplode("p1")),
+            .setChallenge(.startTurnDynamiteExploded),
             .playerDiscardInPlay("p1", "c1")
         ])
     }
@@ -92,7 +92,8 @@ class ResolveDynamiteRuleTests: XCTestCase {
             .playing(MockCardProtocol().named(.dynamite).identified(by: "c1"))
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
-            .challenge(is: .startTurn("p1"))
+            .currentTurn(is: "p1")
+            .challenge(is: .startTurn)
         let sut = ResolveDynamiteRule()
         
         // When
@@ -110,7 +111,8 @@ class ResolveDynamiteRuleTests: XCTestCase {
                      MockCardProtocol().named(.jail).identified(by: "c2"))
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
-            .challenge(is: .startTurn("p1"))
+            .currentTurn(is: "p1")
+            .challenge(is: .startTurn)
         let sut = ResolveDynamiteRule()
         
         // When

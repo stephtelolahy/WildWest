@@ -9,6 +9,7 @@
 struct Gatling: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
+    let autoPlay = false
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
         guard let actorIndex = state.players.firstIndex(where: { $0.identifier == actorId }) else {
@@ -19,7 +20,7 @@ struct Gatling: ActionProtocol, Equatable {
         let targetIds = Array(1..<playersCount).map { state.players[(actorIndex + $0) % playersCount].identifier }
         let updates: [GameUpdate] = [
             .playerDiscardHand(actorId, cardId),
-            .setChallenge(.shoot(targetIds))
+            .setChallenge(.shoot(targetIds, .gatling))
         ]
         return updates
     }

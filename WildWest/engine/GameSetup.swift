@@ -17,21 +17,12 @@ class GameSetup: GameSetupProtocol {
         return Array(order.prefix(playersCount))
     }
     
-    // swiftlint:disable function_body_length
     func setupGame(roles: [Role], figures: [FigureProtocol], cards: [CardProtocol]) -> GameStateProtocol {
-        let shuffledFigures = figures.shuffled()
-        let shuffledRoles = roles.shuffled()
-        var shuffledCards = cards.shuffled()
-        let players: [Player] = shuffledRoles.enumerated().map { index, role in
-            let figure = shuffledFigures[index]
-            var health = figure.bullets
-            if role == .sheriff {
-                health += 1
-            }
-            var hand: [CardProtocol] = []
-            while hand.count < health {
-                hand.append(shuffledCards.removeFirst())
-            }
+        var deck = cards
+        let players: [Player] = roles.enumerated().map { index, role in
+            let figure = figures[index]
+            let health = role == .sheriff ? figure.bullets + 1 : figure.bullets
+            let hand: [CardProtocol] = Array(1...health).map { _ in deck.removeFirst() }
             return Player(role: role,
                           ability: figure.ability,
                           maxHealth: health,
@@ -41,21 +32,15 @@ class GameSetup: GameSetupProtocol {
                           inPlay: [])
         }
         
-        guard let sheriff = players.first(where: { $0.role == .sheriff }) else {
-            fatalError("sheriff not found")
-        }
-        
-        let actions = [StartTurn(actorId: sheriff.identifier)]
-        
         return GameState(players: players,
-                         deck: shuffledCards,
-                         turn: sheriff.identifier,
+                         deck: deck,
+                         turn: "",
                          challenge: nil,
                          bangsPlayed: 0,
                          barrelsResolved: 0,
                          generalStore: [],
                          outcome: nil,
-                         validMoves: actions,
+                         validMoves: [],
                          commandsHistory: [],
                          eliminated: [])
     }

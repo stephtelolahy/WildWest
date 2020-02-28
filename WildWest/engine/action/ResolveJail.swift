@@ -9,6 +9,7 @@
 struct ResolveJail: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
+    let autoPlay = true
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
         guard let flippedCard = state.deck.first else {
@@ -19,7 +20,8 @@ struct ResolveJail: ActionProtocol, Equatable {
         updates.append(.flipOverFirstDeckCard)
         updates.append(.playerDiscardInPlay(actorId, cardId))
         if !flippedCard.makeEscapeFromJail {
-            updates.append(.setChallenge(.startTurn(state.nextTurn)))
+            updates.append(.setTurn(state.nextTurn))
+            updates.append(.setChallenge(.startTurn))
         }
         return updates
     }
@@ -32,8 +34,8 @@ struct ResolveJail: ActionProtocol, Equatable {
 struct ResolveJailRule: RuleProtocol {
     
     func match(with state: GameStateProtocol) -> [ActionProtocol]? {
-        guard case let .startTurn(actorId) = state.challenge,
-            let actor = state.players.first(where: { $0.identifier == actorId }),
+        guard case .startTurn = state.challenge,
+            let actor = state.players.first(where: { $0.identifier == state.turn }),
             actor.inPlay.filter({ $0.name == .dynamite }).isEmpty,
             let card = actor.inPlay.first(where: { $0.name == .jail })  else {
                 return nil

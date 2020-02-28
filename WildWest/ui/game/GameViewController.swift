@@ -102,6 +102,8 @@ private extension GameViewController {
         }
         self.aiAgents = aiAgents
         aiAgents.forEach { $0.start() }
+        
+        engine.start()
     }
     
     func update(with state: GameStateProtocol) {
@@ -204,11 +206,11 @@ extension GameViewController: UICollectionViewDataSource {
     }
     
     private func playersCollectionViewNumberOfItems() -> Int {
-        return playersAdapter.items.count
+        playersAdapter.items.count
     }
     
     private func actionsCollectionViewNumberOfItems() -> Int {
-        return actionsAdapter.items.count
+        actionsAdapter.items.count
     }
     
     private func playersCollectionView(_ collectionView: UICollectionView,

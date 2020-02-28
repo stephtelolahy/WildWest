@@ -10,12 +10,12 @@ struct Bang: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
     let targetId: String
+    let autoPlay = false
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
         let updates: [GameUpdate] = [
             .playerDiscardHand(actorId, cardId),
-            .setChallenge(.shoot([targetId])),
-            .setBangsPlayed(state.bangsPlayed + 1)
+            .setChallenge(.shoot([targetId], .bang))
         ]
         return updates
     }

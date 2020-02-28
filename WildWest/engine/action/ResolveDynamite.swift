@@ -9,6 +9,7 @@
 struct ResolveDynamite: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
+    let autoPlay = true
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
         guard let flippedCard = state.deck.first else {
@@ -18,7 +19,7 @@ struct ResolveDynamite: ActionProtocol, Equatable {
         var updates: [GameUpdate] = []
         updates.append(.flipOverFirstDeckCard)
         if flippedCard.makeDynamiteExplode {
-            updates.append(.setChallenge(.dynamiteExplode(actorId)))
+            updates.append(.setChallenge(.startTurnDynamiteExploded))
             updates.append(.playerDiscardInPlay(actorId, cardId))
         } else {
             updates.append(.playerPassInPlayOfOther(actorId, state.nextTurn, cardId))
@@ -34,8 +35,8 @@ struct ResolveDynamite: ActionProtocol, Equatable {
 struct ResolveDynamiteRule: RuleProtocol {
     
     func match(with state: GameStateProtocol) -> [ActionProtocol]? {
-        guard case let .startTurn(actorId) = state.challenge,
-            let actor = state.players.first(where: { $0.identifier == actorId }),
+        guard case .startTurn = state.challenge,
+            let actor = state.players.first(where: { $0.identifier == state.turn }),
             let card = actor.inPlay.first(where: { $0.name == .dynamite })  else {
                 return nil
         }

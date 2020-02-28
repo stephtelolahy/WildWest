@@ -9,13 +9,12 @@
 struct WellsFargo: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
+    let autoPlay = false
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
         let updates: [GameUpdate] = [
             .playerDiscardHand(actorId, cardId),
-            .playerPullFromDeck(actorId),
-            .playerPullFromDeck(actorId),
-            .playerPullFromDeck(actorId)
+            .playerPullFromDeck(actorId, 3)
         ]
         return updates
     }

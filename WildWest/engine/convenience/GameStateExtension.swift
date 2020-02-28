@@ -40,18 +40,30 @@ extension GameStateProtocol {
 extension Challenge {
     var description: String {
         switch self {
-        case let .startTurn(playerId):
-            return "startTurn(\(playerId))"
+        case .startTurn:
+            return "startTurn"
+            
+        case .startTurnDynamiteExploded:
+            return "dynamiteExploded"
+            
         case let .duel(playerIds):
             return "duel(\(playerIds.joined(separator: ", ")))"
-        case let .shoot(playerIds):
-            return "shoot(\(playerIds.joined(separator: ", ")))"
+            
+        case let .shoot(playerIds, cardName):
+            switch cardName {
+            case .bang:
+                return "bang(\(playerIds.joined(separator: ", ")))"
+            case .gatling:
+                return "gatling(\(playerIds.joined(separator: ", ")))"
+            default:
+                return "shoot(\(playerIds.joined(separator: ", ")))"
+            }
+            
         case let .indians(playerIds):
             return "indians(\(playerIds.joined(separator: ", ")))"
+            
         case let .generalStore(playerIds):
             return "generalStore(\(playerIds.joined(separator: ", ")))"
-        case let .dynamiteExplode(playerId):
-            return "dynamiteExplode(\(playerId))"
         }
     }
 }

@@ -25,20 +25,41 @@ class GameEngine: GameEngineProtocol {
         stateSubject = BehaviorSubject(value: database.state)
     }
     
-    func execute(_ action: ActionProtocol) {
-        let updates = action.execute(in: database.state)
-        print("\n*** \(action.description) ***")
-        updates.forEach {
-            $0.execute(in: database)
-            print($0.description)
+    func start() {
+        guard let sheriff = database.state.players.first(where: { $0.role == .sheriff }) else {
+            return
         }
-        database.addCommandsHistory(action)
-        if let outcome = calculator.outcome(for: database.state.players.map { $0.role }) {
-            database.setOutcome(outcome)
-            database.setValidMoves([])
-        } else {
-            let actions = rules.compactMap { $0.match(with: database.state) }.flatMap { $0 }
-            database.setValidMoves(actions)
+        
+        database.setTurn(sheriff.identifier)
+        execute(StartTurn(actorId: sheriff.identifier))
+    }
+    
+    func execute(_ action: ActionProtocol) {
+        database.setValidMoves([])
+        var moves: [ActionProtocol] = [action]
+        
+        while !moves.isEmpty {
+            let move = moves.remove(at: 0)
+            database.addCommandsHistory(move)
+            
+            print("\n*** \(move.description) ***")
+            let updates = move.execute(in: database.state)
+            updates.forEach {
+                $0.execute(in: database)
+                print($0.description)
+            }
+            
+            if let outcome = calculator.outcome(for: database.state.players.map { $0.role }) {
+                database.setOutcome(outcome)
+            } else {
+                let validMoves = rules.compactMap { $0.match(with: database.state) }.flatMap { $0 }
+                let autoPlayMoves = validMoves.filter({ $0.autoPlay })
+                if !autoPlayMoves.isEmpty {
+                    moves.append(contentsOf: autoPlayMoves)
+                } else {
+                    database.setValidMoves(validMoves)
+                }
+            }
         }
         
         stateSubject.onNext(database.state)

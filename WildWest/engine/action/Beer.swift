@@ -9,6 +9,7 @@
 struct Beer: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
+    let autoPlay = false
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
         guard let player = state.players.first(where: { $0.identifier == actorId }) else {

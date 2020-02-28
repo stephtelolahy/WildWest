@@ -71,44 +71,28 @@ extension GameState: GameDatabaseProtocol {
     /// Player
     
     func playerSetHealth(_ playerId: String, _ health: Int) {
-        player(playerId).health = health
+        player(playerId)?.health = health
     }
     
     func playerAddHand(_ playerId: String, _ card: CardProtocol) {
-        player(playerId).hand.append(card)
+        player(playerId)?.hand.append(card)
     }
     
     func playerRemoveHand(_ playerId: String, _ cardId: String) -> CardProtocol? {
-        player(playerId).hand.removeFirst(where: { $0.identifier == cardId })
+        player(playerId)?.hand.removeFirst(where: { $0.identifier == cardId })
     }
     
     func playerAddInPlay(_ playerId: String, _ card: CardProtocol) {
-        player(playerId).inPlay.append(card)
+        player(playerId)?.inPlay.append(card)
     }
     
     func playerRemoveInPlay(_ playerId: String, _ cardId: String) -> CardProtocol? {
-        player(playerId).inPlay.removeFirst(where: { $0.identifier == cardId })
-    }
-    
-    func playerRemoveAllHand(_ playerId: String) -> [CardProtocol] {
-        let cards = player(playerId).hand
-        player(playerId).hand.removeAll()
-        return cards
-    }
-    
-    func playerRemoveAllInPlay(_ playerId: String) -> [CardProtocol] {
-        let cards = player(playerId).inPlay
-        player(playerId).inPlay.removeAll()
-        return cards
+        player(playerId)?.inPlay.removeFirst(where: { $0.identifier == cardId })
     }
 }
 
 private extension GameState {
-    func player(_ playerId: String) -> Player {
-        guard let player = players.first(where: { $0.identifier == playerId }) as? Player else {
-            fatalError("player not found")
-        }
-        
-        return player
+    func player(_ playerId: String) -> Player? {
+        players.first(where: { $0.identifier == playerId }) as? Player
     }
 }

@@ -8,8 +8,9 @@
 
 struct LooseLife: ActionProtocol, Equatable {
     let actorId: String
-    let cardId: String = ""
     let points: Int
+    let cardId = ""
+    let autoPlay = false
     
     var description: String {
         "\(actorId) looses \(points) life points"
@@ -21,28 +22,10 @@ struct LooseLife: ActionProtocol, Equatable {
         }
         
         var updates: [GameUpdate] = []
-        let health = max(0, player.health - points)
-        updates.append(.playerSetHealth(actorId, health))
-        
-        if health == 0 {
-            updates.append(.eliminatePlayer(actorId))
-            
-            if actorId == state.turn {
-                updates.append(.setChallenge(.startTurn(state.nextTurn)))
-                return updates
-            }
-        }
-        
+        updates.append(.playerSetHealth(actorId, player.health - points))
         if let challenge = state.challenge {
-            switch challenge {
-            case .dynamiteExplode:
-                updates.append(.setChallenge(.startTurn(actorId)))
-                
-            default:
-                updates.append(.setChallenge(challenge.removing(actorId)))
-            }
+            updates.append(.setChallenge(challenge.removing(actorId)))
         }
-        
         return updates
     }
 }
@@ -51,7 +34,7 @@ struct LooseLifeRule: RuleProtocol {
     
     func match(with state: GameStateProtocol) -> [ActionProtocol]? {
         switch state.challenge {
-        case let .shoot(targetIds):
+        case let .shoot(targetIds, _):
             return [LooseLife(actorId: targetIds[0], points: 1)]
             
         case let .indians(targetIds):
@@ -60,8 +43,8 @@ struct LooseLifeRule: RuleProtocol {
         case let .duel(playerIds):
             return [LooseLife(actorId: playerIds[0], points: 1)]
             
-        case let .dynamiteExplode(playerId):
-            return [LooseLife(actorId: playerId, points: 3)]
+        case .startTurnDynamiteExploded:
+            return [LooseLife(actorId: state.turn, points: 3)]
             
         default:
             return nil

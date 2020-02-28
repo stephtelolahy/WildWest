@@ -8,12 +8,14 @@
 
 struct EndTurn: ActionProtocol, Equatable {
     let actorId: String
-    let cardId: String = ""
     let cardsToDiscardIds: [String]
+    let cardId = ""
+    let autoPlay = false
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
         var updates: [GameUpdate] = cardsToDiscardIds.map { GameUpdate.playerDiscardHand(actorId, $0) }
-        updates.append(.setChallenge(.startTurn(state.nextTurn)))
+        updates.append(.setTurn(state.nextTurn))
+        updates.append(.setChallenge(.startTurn))
         return updates
     }
     

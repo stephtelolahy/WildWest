@@ -22,7 +22,7 @@ extension Subscribable where Self: AnyObject {
     
     private var disposeBag: DisposeBag {
         get {
-            return associatedObject(base: self, key: &AssociatedKeys.disposeBagKey) { DisposeBag() }
+            associatedObject(base: self, key: &AssociatedKeys.disposeBagKey) { DisposeBag() }
         }
         set(newValue) {
             associateObject(base: self, key: &AssociatedKeys.disposeBagKey, value: newValue)

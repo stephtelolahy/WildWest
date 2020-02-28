@@ -41,7 +41,7 @@ class StatsViewController: UITableViewController, Subscribable {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stats.count
+        stats.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

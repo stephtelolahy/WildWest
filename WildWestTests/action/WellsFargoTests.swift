@@ -34,9 +34,7 @@ class WellsFargoTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
             .playerDiscardHand("p1", "c1"),
-            .playerPullFromDeck("p1"),
-            .playerPullFromDeck("p1"),
-            .playerPullFromDeck("p1")])
+            .playerPullFromDeck("p1", 3)])
     }
 }
 

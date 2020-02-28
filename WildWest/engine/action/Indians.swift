@@ -9,6 +9,7 @@
 struct Indians: ActionProtocol, Equatable {
     let actorId: String
     let cardId: String
+    let autoPlay = false
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
         guard let actorIndex = state.players.firstIndex(where: { $0.identifier == actorId }) else {

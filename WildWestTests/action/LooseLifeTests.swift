@@ -39,28 +39,6 @@ class LooseLifeTests: XCTestCase {
         ])
     }
     
-    func test_EliminateActor_IfLoosingLastLife() {
-        // Given
-        let mockPlayer1 = MockPlayerProtocol()
-            .identified(by: "p1")
-            .health(is: 1)
-        let mockState = MockGameStateProtocol()
-            .currentTurn(is: "px")
-            .challenge(is: .shoot(["p1"]))
-            .players(are: mockPlayer1, MockPlayerProtocol())
-        let sut = LooseLife(actorId: "p1", points: 1)
-        
-        // When
-        let updates = sut.execute(in: mockState)
-        
-        // Assert
-        XCTAssertEqual(updates as? [GameUpdate], [
-            .playerSetHealth("p1", 0),
-            .eliminatePlayer("p1"),
-            .setChallenge(nil)
-        ])
-    }
-    
     func test_TriggerStartTurnChallenge_IfLoosingLifePointOnDynamiteExploded() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
@@ -68,7 +46,7 @@ class LooseLifeTests: XCTestCase {
             .health(is: 4)
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
-            .challenge(is: .dynamiteExplode("p1"))
+            .challenge(is: .startTurnDynamiteExploded)
         let sut = LooseLife(actorId: "p1", points: 3)
         
         // When
@@ -77,7 +55,7 @@ class LooseLifeTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
             .playerSetHealth("p1", 1),
-            .setChallenge(.startTurn("p1"))
+            .setChallenge(.startTurn)
         ])
     }
     
@@ -87,7 +65,7 @@ class LooseLifeTests: XCTestCase {
             .identified(by: "p1")
             .health(is: 3)
         let mockState = MockGameStateProtocol()
-            .challenge(is: .shoot(["p1", "p2", "p3"]))
+            .challenge(is: .shoot(["p1", "p2", "p3"], .gatling))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         let sut = LooseLife(actorId: "p1", points: 1)
         
@@ -97,7 +75,7 @@ class LooseLifeTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
             .playerSetHealth("p1", 2),
-            .setChallenge(.shoot(["p2", "p3"]))
+            .setChallenge(.shoot(["p2", "p3"], .gatling))
         ])
     }
     
@@ -140,27 +118,6 @@ class LooseLifeTests: XCTestCase {
             .setChallenge(nil)
         ])
     }
-    
-    func test_TriggerNextPlayerStartTurnChallenge_IfTurnPlayerIsEliminated() {
-        // Given
-        let mockState = MockGameStateProtocol()
-            .challenge(is: nil)
-            .currentTurn(is: "p1")
-            .players(are: MockPlayerProtocol().identified(by: "p1").health(is: 1),
-                     MockPlayerProtocol().identified(by: "p2"))
-        let sut = LooseLife(actorId: "p1", points: 1)
-        
-        // When
-        let updates = sut.execute(in: mockState)
-        
-        // Assert
-        XCTAssertEqual(updates as? [GameUpdate], [
-            .playerSetHealth("p1", 0),
-            .eliminatePlayer("p1"),
-            .setChallenge(.startTurn("p2"))
-        ])
-    }
-    
 }
 
 class LooseLifeRuleTests: XCTestCase {
@@ -169,7 +126,7 @@ class LooseLifeRuleTests: XCTestCase {
         // Given
         let sut = LooseLifeRule()
         let mockState = MockGameStateProtocol()
-            .challenge(is: .shoot(["p1", "p2"]))
+            .challenge(is: .shoot(["p1", "p2"], .gatling))
         
         // When
         let actions = sut.match(with: mockState)
@@ -204,11 +161,12 @@ class LooseLifeRuleTests: XCTestCase {
         XCTAssertEqual(actions as? [LooseLife], [LooseLife(actorId: "p1", points: 1)])
     }
     
-    func test_CanLooseLife_IfChallengedByDynamiteExplode() {
+    func test_CanLooseLife_IfChallengedByDynamiteExploded() {
         // Given
         let sut = LooseLifeRule()
         let mockState = MockGameStateProtocol()
-            .challenge(is: .dynamiteExplode("p1"))
+            .currentTurn(is: "p1")
+            .challenge(is: .startTurnDynamiteExploded)
         
         // When
         let actions = sut.match(with: mockState)
