@@ -31,20 +31,13 @@ extension GameUpdate: GameUpdateProtocol {
     func execute(in database: GameDatabaseProtocol) {
         switch self {
         case let .setTurn(turn):
-            database.setTurn(turn)
-            database.setBangsPlayed(0)
+            GameUpdateSetTurn(turn: turn).execute(in: database)
+            
+        case let .setChallenge(challenge):
+            GameUpdateSetChallenge(challenge: challenge).execute(in: database)
             
         case let .setOutcome(outcome):
             database.setOutcome(outcome)
-            
-        case let .setChallenge(challenge):
-            database.setChallenge(challenge)
-            if case let .shoot(_, cardName) = challenge {
-                if case .bang = cardName {
-                    database.setBangsPlayed(database.state.bangsPlayed + 1)
-                }
-                database.setBarrelsResolved(0)
-            }
             
         case let .playerPullFromDeck(playerId, cardsCount):
             Array(1...cardsCount).forEach { _ in
@@ -102,9 +95,7 @@ extension GameUpdate: GameUpdateProtocol {
                 .forEach { database.addGeneralStore($0) }
             
         case .flipOverFirstDeckCard:
-            let card = database.deckRemoveFirst()
-            database.addDiscard(card)
-            database.setBarrelsResolved(database.state.barrelsResolved + 1)
+            GameUpdateFlipOverFirstDeckCard().execute(in: database)
             
         case let .eliminatePlayer(playerId):
             let cards = database.playerRemoveAllHand(playerId) + database.playerRemoveAllInPlay(playerId)
@@ -118,13 +109,13 @@ extension GameUpdate: GameUpdateProtocol {
     var description: String {
         switch self {
         case let .setTurn(turn):
-            return "setTurn \(turn)"
+            return GameUpdateSetTurn(turn: turn).description
+            
+        case let .setChallenge(challenge):
+            return GameUpdateSetChallenge(challenge: challenge).description
             
         case let .setOutcome(outcome):
             return "setOutcome \(outcome)"
-            
-        case let .setChallenge(challenge):
-            return "setChallenge \(challenge?.description ?? "nil")"
             
         case let .playerPullFromDeck(playerId, cardsCount):
             return "\(playerId) pullFromDeck \(cardsCount)"
@@ -160,7 +151,7 @@ extension GameUpdate: GameUpdateProtocol {
             return "setupGeneralStore \(cardsCount)"
             
         case .flipOverFirstDeckCard:
-            return "flipOverFirstDeckCard"
+            return GameUpdateFlipOverFirstDeckCard().description
             
         case let .eliminatePlayer(playerId):
             return "eliminate \(playerId)"

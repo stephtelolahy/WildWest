@@ -55,7 +55,6 @@ class UseBarrelTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
             .flipOverFirstDeckCard,
-            .setBarrelsResolved(1),
             .setChallenge(nil)
         ])
     }
@@ -77,8 +76,7 @@ class UseBarrelTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
-            .flipOverFirstDeckCard,
-            .setBarrelsResolved(1)
+            .flipOverFirstDeckCard
         ])
     }
 }

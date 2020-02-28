@@ -40,9 +40,9 @@ class ShootTest: XCTestCase {
         XCTAssertEqual(sut.description, "p1 plays c1 against p2")
     }
     
-    func test_DiscardCardAndTriggerBangChallengeAndIncrementShootsCount_IfPlayingShoot() {
+    func test_DiscardCardAndTriggerBangChallenge_IfPlayingBang() {
         // Given
-        let mockState = MockGameStateProtocol().bangsPlayed(is: 1)
+        let mockState = MockGameStateProtocol()
         let sut = Bang(actorId: "p1", cardId: "c1", targetId: "p2")
         
         // When
@@ -51,8 +51,7 @@ class ShootTest: XCTestCase {
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
             .playerDiscardHand("p1", "c1"),
-            .setChallenge(.shoot(["p2"], .bang)),
-            .setBangsPlayed(2)
+            .setChallenge(.shoot(["p2"], .bang))
         ])
     }
 }

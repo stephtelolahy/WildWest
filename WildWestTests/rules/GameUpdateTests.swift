@@ -25,80 +25,6 @@ class GameUpdateTests: XCTestCase {
         verifyNoMoreInteractions(mockDatabase)
     }
     
-    func test_SetTurnAndResetBangsPlayed_IfSettingTurn() {
-        // Given
-        let sut = GameUpdate.setTurn("p1")
-        
-        // When
-        sut.execute(in: mockDatabase)
-        
-        // Assert
-        verify(mockDatabase).setTurn("p1")
-        verify(mockDatabase).setBangsPlayed(0)
-        verifyNoMoreInteractions(mockDatabase)
-    }
-    
-    func test_RemoveChallenge() {
-        // Given
-        let sut = GameUpdate.setChallenge(nil)
-        
-        // When
-        sut.execute(in: mockDatabase)
-        
-        // Assert
-        verify(mockDatabase).setChallenge(isNil())
-        verifyNoMoreInteractions(mockDatabase)
-    }
-    
-    func test_ResetResolvedBarrels_IfSettingShootChallenge() {
-        // Given
-        let sut = GameUpdate.setChallenge(.shoot(["p1"], .bang))
-        
-        // When
-        sut.execute(in: mockDatabase)
-        
-        // Assert
-        verify(mockDatabase).setChallenge(equal(to: .shoot(["p1"], .bang)))
-        verify(mockDatabase).setBarrelsResolved(0)
-        verifyNoMoreInteractions(mockDatabase)
-    }
-    
-    func test_SetChallenge_IfSettingStartTurnChallenge() {
-        // Given
-        let sut = GameUpdate.setChallenge(.startTurn)
-        
-        // When
-        sut.execute(in: mockDatabase)
-        
-        // Assert
-        verify(mockDatabase).setChallenge(equal(to: .startTurn))
-        verifyNoMoreInteractions(mockDatabase)
-    }
-    
-    func test_SetBangsPlayed() {
-        // Given
-        let sut = GameUpdate.setBangsPlayed(1)
-        
-        // When
-        sut.execute(in: mockDatabase)
-        
-        // Assert
-        verify(mockDatabase).setBangsPlayed(1)
-        verifyNoMoreInteractions(mockDatabase)
-    }
-    
-    func test_SetBarrelsResolved() {
-        // Given
-        let sut = GameUpdate.setBarrelsResolved(1)
-        
-        // When
-        sut.execute(in: mockDatabase)
-        
-        // Assert
-        verify(mockDatabase).setBarrelsResolved(1)
-        verifyNoMoreInteractions(mockDatabase)
-    }
-    
     func test_MoveCardFromDeckToHand_IfPlayerPullCardFromDeck() {
         // Given
         let mockCard = MockCardProtocol()
@@ -282,23 +208,6 @@ class GameUpdateTests: XCTestCase {
         verify(mockDatabase).addGeneralStore(card(equalTo: mockCard1))
         verify(mockDatabase).addGeneralStore(card(equalTo: mockCard2))
         verify(mockDatabase).addGeneralStore(card(equalTo: mockCard3))
-        verifyNoMoreInteractions(mockDatabase)
-    }
-    
-    func test_DiscardFlippedCard_IfRevealingFromDeck() {
-        // Given
-        let mockCard = MockCardProtocol()
-        Cuckoo.stub(mockDatabase) { mock in
-            when(mock.deckRemoveFirst()).thenReturn(mockCard)
-        }
-        let sut = GameUpdate.flipOverFirstDeckCard
-        
-        // When
-        sut.execute(in: mockDatabase)
-        
-        // Assert
-        verify(mockDatabase).deckRemoveFirst()
-        verify(mockDatabase).addDiscard(card(equalTo: mockCard))
         verifyNoMoreInteractions(mockDatabase)
     }
     
