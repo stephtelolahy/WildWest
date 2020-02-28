@@ -206,11 +206,11 @@ extension GameViewController: UICollectionViewDataSource {
     }
     
     private func playersCollectionViewNumberOfItems() -> Int {
-        return playersAdapter.items.count
+        playersAdapter.items.count
     }
     
     private func actionsCollectionViewNumberOfItems() -> Int {
-        return actionsAdapter.items.count
+        actionsAdapter.items.count
     }
     
     private func playersCollectionView(_ collectionView: UICollectionView,

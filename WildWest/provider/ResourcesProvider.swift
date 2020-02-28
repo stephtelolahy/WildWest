@@ -15,10 +15,10 @@ struct ResourcesProvider: ResourcesProviderProtocol {
     }
     
     func allCards() -> [CardProtocol] {
-        return jsonReader.load([Card].self, file: "cards")
+        jsonReader.load([Card].self, file: "cards")
     }
     
     func allFigures() -> [FigureProtocol] {
-        return jsonReader.load([Figure].self, file: "figures")
+        jsonReader.load([Figure].self, file: "figures")
     }
 }

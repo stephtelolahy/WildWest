@@ -33,6 +33,6 @@ class Player: PlayerProtocol {
     }
     
     var identifier: String {
-        return ability.rawValue
+        ability.rawValue
     }
 }
