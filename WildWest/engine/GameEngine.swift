@@ -25,6 +25,15 @@ class GameEngine: GameEngineProtocol {
         stateSubject = BehaviorSubject(value: database.state)
     }
     
+    func start() {
+        guard let sheriff = database.state.players.first(where: { $0.role == .sheriff }) else {
+            return
+        }
+        
+        database.setTurn(sheriff.identifier)
+        execute(StartTurn(actorId: sheriff.identifier))
+    }
+    
     func execute(_ action: ActionProtocol) {
         let updates = action.execute(in: database.state)
         print("\n*** \(action.description) ***")

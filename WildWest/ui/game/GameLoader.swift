@@ -15,7 +15,9 @@ class GameLoader {
         let cards = provider.allCards()
         let gameSetup = GameSetup()
         let roles = gameSetup.roles(for: playersCount)
-        let state = gameSetup.setupGame(roles: roles, figures: figures, cards: cards)
+        let state = gameSetup.setupGame(roles: roles.shuffled(),
+                                        figures: figures.shuffled(),
+                                        cards: cards.shuffled())
         guard let database = state as? GameDatabaseProtocol else {
             fatalError("Invalid database")
         }

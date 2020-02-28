@@ -92,13 +92,13 @@ class GameSetupTests: XCTestCase {
         XCTAssertTrue(deckCardIds.isShuffed(from: remainingCardIds))
         // PlayerInitialHealthIsEqualToFigureBullets
         XCTAssertTrue(state.players.filter { $0.role != .sheriff }.allSatisfy { $0.health == 4 })
-        // SheriffStartsTurn
-        let sheriff = state.players.first { $0.role == .sheriff }!
-        XCTAssertEqual(state.turn, sheriff.identifier)
+        // Turn is empty
+        XCTAssertEqual(state.turn, "")
         // SheriffHasOneAdditionalHealth
+        let sheriff = state.players.first { $0.role == .sheriff }!
         XCTAssertEqual(sheriff.health, 5)
-        // Available actions should be only sherif's start turn
-        XCTAssertEqual(state.validMoves as? [StartTurn], [StartTurn(actorId: sheriff.identifier)])
+        // Valid moves are empty
+        XCTAssertTrue(state.validMoves.isEmpty)
         // Commands is empty
         XCTAssertTrue(state.commandsHistory.isEmpty)
         // Flags are reset to 0

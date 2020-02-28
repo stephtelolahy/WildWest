@@ -102,6 +102,8 @@ private extension GameViewController {
         }
         self.aiAgents = aiAgents
         aiAgents.forEach { $0.start() }
+        
+        engine.start()
     }
     
     func update(with state: GameStateProtocol) {
