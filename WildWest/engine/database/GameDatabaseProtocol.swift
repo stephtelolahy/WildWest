@@ -20,6 +20,7 @@ protocol GameDatabaseProtocol {
     func setOutcome(_ outcome: GameOutcome)
     func removePlayer(_ playerId: String) -> PlayerProtocol?
     func addEliminated(_ player: PlayerProtocol)
+    func addDamageEvent(_ event: DamageEvent)
     
     /// Deck
     func deckRemoveFirst() -> CardProtocol

@@ -17,15 +17,16 @@ struct LooseLife: ActionProtocol, Equatable {
     }
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
-        guard let player = state.players.first(where: { $0.identifier == actorId }) else {
-            return []
+        guard let player = state.players.first(where: { $0.identifier == actorId }),
+            let challenge = state.challenge,
+            let damageSource = challenge.damageSource else {
+                return []
         }
         
-        var updates: [GameUpdate] = []
-        updates.append(.playerSetHealth(actorId, player.health - points))
-        if let challenge = state.challenge {
-            updates.append(.setChallenge(challenge.removing(actorId)))
-        }
+        let updates: [GameUpdate] = [
+            .playerLooseHealth(actorId, player.health - points, damageSource),
+            .setChallenge(challenge.removing(actorId))
+        ]
         return updates
     }
 }
@@ -34,13 +35,13 @@ struct LooseLifeRule: RuleProtocol {
     
     func match(with state: GameStateProtocol) -> [ActionProtocol]? {
         switch state.challenge {
-        case let .shoot(targetIds, _):
+        case let .shoot(targetIds, _, _):
             return [LooseLife(actorId: targetIds[0], points: 1)]
             
-        case let .indians(targetIds):
+        case let .indians(targetIds, _):
             return [LooseLife(actorId: targetIds[0], points: 1)]
             
-        case let .duel(playerIds):
+        case let .duel(playerIds, _):
             return [LooseLife(actorId: playerIds[0], points: 1)]
             
         case .startTurnDynamiteExploded:

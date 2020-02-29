@@ -11,9 +11,9 @@ enum GameUpdate: Equatable {
     case setChallenge(Challenge?)
     case flipOverFirstDeckCard
     case eliminatePlayer(String)
+    case playerGainHealth(String, Int)
+    case playerLooseHealth(String, Int, DamageEvent.Source)
     
-    case setOutcome(GameOutcome)
-    case playerSetHealth(String, Int)
     case playerPullFromDeck(String, Int)
     case playerDiscardHand(String, String)
     case playerPutInPlay(String, String)
@@ -37,8 +37,11 @@ extension GameUpdate: GameUpdateProtocol {
         case let .setChallenge(challenge):
             GameUpdateSetChallenge(challenge: challenge).execute(in: database)
             
-        case let .setOutcome(outcome):
-            database.setOutcome(outcome)
+        case let .playerGainHealth(playerId, health):
+            GameUpdatePlayerGainHealth(playerId: playerId, health: health).execute(in: database)
+            
+        case let .playerLooseHealth(playerId, health, source):
+            GameUpdatePlayerLooseHealth(playerId: playerId, health: health, source: source).execute(in: database)
             
         case let .playerPullFromDeck(playerId, cardsCount):
             Array(1...cardsCount).forEach { _ in
@@ -50,9 +53,6 @@ extension GameUpdate: GameUpdateProtocol {
             if let card = database.playerRemoveHand(playerId, cardId) {
                 database.addDiscard(card)
             }
-            
-        case let .playerSetHealth(playerId, health):
-            database.playerSetHealth(playerId, health)
             
         case let .playerPutInPlay(playerId, cardId):
             if let card = database.playerRemoveHand(playerId, cardId) {
@@ -111,17 +111,17 @@ extension GameUpdate: GameUpdateProtocol {
         case let .setChallenge(challenge):
             return GameUpdateSetChallenge(challenge: challenge).description
             
-        case let .setOutcome(outcome):
-            return "setOutcome \(outcome)"
+        case let .playerGainHealth(playerId, health):
+            return GameUpdatePlayerGainHealth(playerId: playerId, health: health).description
+            
+        case let .playerLooseHealth(playerId, health, source):
+            return GameUpdatePlayerLooseHealth(playerId: playerId, health: health, source: source).description
             
         case let .playerPullFromDeck(playerId, cardsCount):
             return "\(playerId) pullFromDeck \(cardsCount)"
             
         case let .playerDiscardHand(playerId, cardId):
             return "\(playerId) discardHand \(cardId)"
-            
-        case let .playerSetHealth(playerId, health):
-            return "\(playerId) setHealth \(health)"
             
         case let .playerPutInPlay(playerId, cardId):
             return "\(playerId) putInPlay \(cardId)"

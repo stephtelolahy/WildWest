@@ -33,7 +33,7 @@ struct UseBarrelRule: RuleProtocol {
     
     func match(with state: GameStateProtocol) -> [ActionProtocol]? {
         let maxBarrels = 1
-        guard case let .shoot(targetIds, _) = state.challenge,
+        guard case let .shoot(targetIds, _, _) = state.challenge,
             let actor = state.players.first(where: { $0.identifier == targetIds.first }),
             let cards = actor.inPlayCards(named: .barrel),
             state.barrelsResolved < maxBarrels else {

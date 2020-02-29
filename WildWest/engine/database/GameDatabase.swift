@@ -50,6 +50,10 @@ extension GameState: GameDatabaseProtocol {
         self.outcome = outcome
     }
     
+    func addDamageEvent(_ event: DamageEvent) {
+        damageEvents.append(event)
+    }
+    
     /// Deck
     
     func deckRemoveFirst() -> CardProtocol {

@@ -15,7 +15,7 @@ struct GameUpdateSetChallenge: GameUpdateProtocol {
     
     func execute(in database: GameDatabaseProtocol) {
         database.setChallenge(challenge)
-        if case let .shoot(_, cardName) = challenge {
+        if case let .shoot(_, cardName, _) = challenge {
             if case .bang = cardName {
                 database.setBangsPlayed(database.state.bangsPlayed + 1)
             }

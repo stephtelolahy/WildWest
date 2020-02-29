@@ -176,6 +176,21 @@ import Cuckoo
     
     
     
+     func addDamageEvent(_ event: DamageEvent)  {
+        
+    return cuckoo_manager.call("addDamageEvent(_: DamageEvent)",
+            parameters: (event),
+            escapingParameters: (event),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.addDamageEvent(event))
+        
+    }
+    
+    
+    
      func deckRemoveFirst() -> CardProtocol {
         
     return cuckoo_manager.call("deckRemoveFirst() -> CardProtocol",
@@ -368,6 +383,11 @@ import Cuckoo
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "addEliminated(_: PlayerProtocol)", parameterMatchers: matchers))
 	    }
 	    
+	    func addDamageEvent<M1: Cuckoo.Matchable>(_ event: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(DamageEvent)> where M1.MatchedType == DamageEvent {
+	        let matchers: [Cuckoo.ParameterMatcher<(DamageEvent)>] = [wrap(matchable: event) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "addDamageEvent(_: DamageEvent)", parameterMatchers: matchers))
+	    }
+	    
 	    func deckRemoveFirst() -> Cuckoo.ProtocolStubFunction<(), CardProtocol> {
 	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "deckRemoveFirst() -> CardProtocol", parameterMatchers: matchers))
@@ -489,6 +509,12 @@ import Cuckoo
 	    }
 	    
 	    @discardableResult
+	    func addDamageEvent<M1: Cuckoo.Matchable>(_ event: M1) -> Cuckoo.__DoNotUse<(DamageEvent), Void> where M1.MatchedType == DamageEvent {
+	        let matchers: [Cuckoo.ParameterMatcher<(DamageEvent)>] = [wrap(matchable: event) { $0 }]
+	        return cuckoo_manager.verify("addDamageEvent(_: DamageEvent)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
 	    func deckRemoveFirst() -> Cuckoo.__DoNotUse<(), CardProtocol> {
 	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
 	        return cuckoo_manager.verify("deckRemoveFirst() -> CardProtocol", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
@@ -592,6 +618,10 @@ import Cuckoo
     }
     
      func addEliminated(_ player: PlayerProtocol)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func addDamageEvent(_ event: DamageEvent)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
@@ -1882,6 +1912,20 @@ import Cuckoo
         
     }
     
+    
+    
+     var damageEvents: [DamageEvent] {
+        get {
+            return cuckoo_manager.getter("damageEvents",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.damageEvents)
+        }
+        
+    }
+    
 
     
 
@@ -1947,6 +1991,11 @@ import Cuckoo
 	    
 	    var moves: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [ActionProtocol]> {
 	        return .init(manager: cuckoo_manager, name: "moves")
+	    }
+	    
+	    
+	    var damageEvents: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [DamageEvent]> {
+	        return .init(manager: cuckoo_manager, name: "damageEvents")
 	    }
 	    
 	    
@@ -2017,6 +2066,11 @@ import Cuckoo
 	    
 	    var moves: Cuckoo.VerifyReadOnlyProperty<[ActionProtocol]> {
 	        return .init(manager: cuckoo_manager, name: "moves", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var damageEvents: Cuckoo.VerifyReadOnlyProperty<[DamageEvent]> {
+	        return .init(manager: cuckoo_manager, name: "damageEvents", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	
@@ -2110,6 +2164,14 @@ import Cuckoo
      var moves: [ActionProtocol] {
         get {
             return DefaultValueRegistry.defaultValue(for: ([ActionProtocol]).self)
+        }
+        
+    }
+    
+    
+     var damageEvents: [DamageEvent] {
+        get {
+            return DefaultValueRegistry.defaultValue(for: ([DamageEvent]).self)
         }
         
     }

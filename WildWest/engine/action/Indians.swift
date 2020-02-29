@@ -20,7 +20,7 @@ struct Indians: ActionProtocol, Equatable {
         let targetIds = Array(1..<playersCount).map { state.players[(actorIndex + $0) % playersCount].identifier }
         let updates: [GameUpdate] = [
             .playerDiscardHand(actorId, cardId),
-            .setChallenge(.indians(targetIds))
+            .setChallenge(.indians(targetIds, .byPlayer(actorId)))
         ]
         return updates
     }

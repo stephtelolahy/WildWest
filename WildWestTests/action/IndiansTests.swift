@@ -42,7 +42,7 @@ class IndiansTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
             .playerDiscardHand("p1", "c1"),
-            .setChallenge(.indians(["p2", "p3", "p4"]))
+            .setChallenge(.indians(["p2", "p3", "p4"], .byPlayer("p1")))
         ])
     }
 }

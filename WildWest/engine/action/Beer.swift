@@ -18,7 +18,7 @@ struct Beer: ActionProtocol, Equatable {
         
         let updates: [GameUpdate] = [
             .playerDiscardHand(actorId, cardId),
-            .playerSetHealth(actorId, player.health + 1)]
+            .playerGainHealth(actorId, player.health + 1)]
         return updates
     }
     

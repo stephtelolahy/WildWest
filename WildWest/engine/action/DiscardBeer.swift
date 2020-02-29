@@ -31,13 +31,13 @@ struct DiscardBeerRule: RuleProtocol {
         }
         
         switch state.challenge {
-        case let .shoot(targetIds, _):
+        case let .shoot(targetIds, _, _):
             return matchDiscardBeer(actorId: targetIds[0], damage: 1, state: state)
             
-        case let .indians(targetIds):
+        case let .indians(targetIds, _):
             return matchDiscardBeer(actorId: targetIds[0], damage: 1, state: state)
             
-        case let .duel(playerIds):
+        case let .duel(playerIds, _):
             return matchDiscardBeer(actorId: playerIds[0], damage: 1, state: state)
             
         case .startTurnDynamiteExploded:

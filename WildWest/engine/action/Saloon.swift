@@ -12,10 +12,10 @@ struct Saloon: ActionProtocol, Equatable {
     let autoPlay = false
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
+        var updates: [GameUpdate] = []
+        updates.append(.playerDiscardHand(actorId, cardId))
         let damagedPlayers = state.players.filter { $0.health < $0.maxHealth }
-        let updates: [GameUpdate] =
-            [.playerDiscardHand(actorId, cardId)]
-            + damagedPlayers.map { .playerSetHealth($0.identifier, $0.health + 1) }
+        damagedPlayers.forEach { updates.append(.playerGainHealth($0.identifier, $0.health + 1)) }
         return updates
     }
     

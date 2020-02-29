@@ -101,6 +101,7 @@ class GameSetupTests: XCTestCase {
         XCTAssertTrue(state.validMoves.isEmpty)
         // Moves is empty
         XCTAssertTrue(state.moves.isEmpty)
+        XCTAssertTrue(state.damageEvents.isEmpty)
         // Flags are reset to 0
         XCTAssertEqual(state.bangsPlayed, 0)
         XCTAssertEqual(state.barrelsResolved, 0)

@@ -66,6 +66,12 @@
 		3322726523F5CEDE0028933D /* DiscardBeerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C45DEA23EB190600B62508 /* DiscardBeerTests.swift */; };
 		3324018E23DBA6C800B92439 /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */; };
 		332499B323DB9F650082EF09 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332499B223DB9F650082EF09 /* GameViewController.swift */; };
+		3335E5F2240AEE5C000B89EB /* GameUpdatePlayerGainHealthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E5F0240AEE5C000B89EB /* GameUpdatePlayerGainHealthTests.swift */; };
+		3335E5F5240AEE67000B89EB /* GameUpdatePlayerLooseHealthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E5F3240AEE67000B89EB /* GameUpdatePlayerLooseHealthTests.swift */; };
+		3335E5F7240AEE89000B89EB /* GameUpdatePlayerGainHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E5F6240AEE89000B89EB /* GameUpdatePlayerGainHealth.swift */; };
+		3335E5F8240AEE89000B89EB /* GameUpdatePlayerGainHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E5F6240AEE89000B89EB /* GameUpdatePlayerGainHealth.swift */; };
+		3335E5FA240AEE95000B89EB /* GameUpdatePlayerLooseHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E5F9240AEE95000B89EB /* GameUpdatePlayerLooseHealth.swift */; };
+		3335E5FB240AEE95000B89EB /* GameUpdatePlayerLooseHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E5F9240AEE95000B89EB /* GameUpdatePlayerLooseHealth.swift */; };
 		335A147423F312F700D9971E /* GameDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BA280023F1E9830084A3C9 /* GameDatabase.swift */; };
 		3367EB79240979360079DB41 /* MockActionProtocolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3367EB78240979360079DB41 /* MockActionProtocolExtension.swift */; };
 		336AA6F023F1450800328837 /* GameDatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */; };
@@ -238,6 +244,10 @@
 		330B7E1323F70D8700B3653D /* OutcomeCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutcomeCalculatorTests.swift; sourceTree = "<group>"; };
 		3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		332499B223DB9F650082EF09 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		3335E5F0240AEE5C000B89EB /* GameUpdatePlayerGainHealthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUpdatePlayerGainHealthTests.swift; sourceTree = "<group>"; };
+		3335E5F3240AEE67000B89EB /* GameUpdatePlayerLooseHealthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUpdatePlayerLooseHealthTests.swift; sourceTree = "<group>"; };
+		3335E5F6240AEE89000B89EB /* GameUpdatePlayerGainHealth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUpdatePlayerGainHealth.swift; sourceTree = "<group>"; };
+		3335E5F9240AEE95000B89EB /* GameUpdatePlayerLooseHealth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUpdatePlayerLooseHealth.swift; sourceTree = "<group>"; };
 		3367EB78240979360079DB41 /* MockActionProtocolExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockActionProtocolExtension.swift; sourceTree = "<group>"; };
 		336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDatabaseProtocol.swift; sourceTree = "<group>"; };
 		3395257F23E37CCE003DE948 /* GameEngineProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineProtocol.swift; sourceTree = "<group>"; };
@@ -399,6 +409,8 @@
 				3309D7102408D56F00713E15 /* GameUpdateSetChallengeTests.swift */,
 				3309D7152408D90200713E15 /* GameUpdateFlipOverFirstDeckCardTests.swift */,
 				3303E23C2408E3C000BB9E23 /* GameUpdateEliminatePlayerTests.swift */,
+				3335E5F0240AEE5C000B89EB /* GameUpdatePlayerGainHealthTests.swift */,
+				3335E5F3240AEE67000B89EB /* GameUpdatePlayerLooseHealthTests.swift */,
 			);
 			path = update;
 			sourceTree = "<group>";
@@ -410,6 +422,8 @@
 				3309D70D2408D49D00713E15 /* GameUpdateSetChallenge.swift */,
 				3309D7122408D89200713E15 /* GameUpdateFlipOverFirstDeckCard.swift */,
 				3303E23A2408E28400BB9E23 /* GameUpdateEliminatePlayer.swift */,
+				3335E5F6240AEE89000B89EB /* GameUpdatePlayerGainHealth.swift */,
+				3335E5F9240AEE95000B89EB /* GameUpdatePlayerLooseHealth.swift */,
 			);
 			path = update;
 			sourceTree = "<group>";
@@ -478,6 +492,7 @@
 			children = (
 				3395258523E37D3E003DE948 /* ResourcesProviderProtocol.swift */,
 				AD36CDDC23C51EFA008D4EDB /* ResourcesProvider.swift */,
+				ADE91ACC23B9FE2300F7316B /* JsonReader.swift */,
 			);
 			path = provider;
 			sourceTree = "<group>";
@@ -590,7 +605,6 @@
 		AD36CDDF23C51F08008D4EDB /* misc */ = {
 			isa = PBXGroup;
 			children = (
-				ADE91ACC23B9FE2300F7316B /* JsonReader.swift */,
 				3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */,
 				33E4412324077DAB00B2848E /* UITableViewExtension.swift */,
 				33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */,
@@ -950,12 +964,14 @@
 				ADE91AD423BA00DC00F7316B /* GameSetup.swift in Sources */,
 				33D477EA23E4FA0F00E232D9 /* RangeCalculator.swift in Sources */,
 				ADD035D523A96034003B2576 /* PlayerProtocol.swift in Sources */,
+				3335E5F7240AEE89000B89EB /* GameUpdatePlayerGainHealth.swift in Sources */,
 				3301BEF723F9A44100B4364D /* GameLoader.swift in Sources */,
 				33D477F123E57DE500E232D9 /* FigureProtocol.swift in Sources */,
 				330B7E0E23F70CAB00B3653D /* OutcomeCalculatorProtocol.swift in Sources */,
 				3395258323E37D07003DE948 /* GameSetupProtocol.swift in Sources */,
 				AD49F86723BA054400543F59 /* Figure.swift in Sources */,
 				AD46810E23BEA2B0000B42C7 /* PlayerExtension.swift in Sources */,
+				3335E5FA240AEE95000B89EB /* GameUpdatePlayerLooseHealth.swift in Sources */,
 				3301E64023F80AE600AB35C7 /* StatsViewController.swift in Sources */,
 				339A294F23EFFE70002C5CD8 /* GameStateExtension.swift in Sources */,
 				3309D70E2408D49D00713E15 /* GameUpdateSetChallenge.swift in Sources */,
@@ -1029,6 +1045,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3335E5F2240AEE5C000B89EB /* GameUpdatePlayerGainHealthTests.swift in Sources */,
 				338E39A323F3E3FE002FA99B /* Panic.swift in Sources */,
 				3383ABD923F5332A0028B4B3 /* Gatling.swift in Sources */,
 				33BA280423F1EDCE0084A3C9 /* GameUpdate.swift in Sources */,
@@ -1046,6 +1063,7 @@
 				3383ABE023F533480028B4B3 /* DiscardBang.swift in Sources */,
 				33D964B523DDDB1E007295E7 /* GameEngine.swift in Sources */,
 				3322726123F5CEDE0028933D /* ChooseCardTests.swift in Sources */,
+				3335E5F5240AEE67000B89EB /* GameUpdatePlayerLooseHealthTests.swift in Sources */,
 				33EBF4E223F35A5E00C300A7 /* Equip.swift in Sources */,
 				335A147423F312F700D9971E /* GameDatabase.swift in Sources */,
 				AD7F34B923D79841001B4072 /* MockCardProtocolExtension.swift in Sources */,
@@ -1090,6 +1108,7 @@
 				339A295023EFFE70002C5CD8 /* GameStateExtension.swift in Sources */,
 				3322726523F5CEDE0028933D /* DiscardBeerTests.swift in Sources */,
 				33D477E823E4F9E300E232D9 /* RangeCalculatorProtocol.swift in Sources */,
+				3335E5F8240AEE89000B89EB /* GameUpdatePlayerGainHealth.swift in Sources */,
 				3309D7142408D89200713E15 /* GameUpdateFlipOverFirstDeckCard.swift in Sources */,
 				3303E2432408E99F00BB9E23 /* BangTests.swift in Sources */,
 				ADD035D623A96034003B2576 /* PlayerProtocol.swift in Sources */,
@@ -1114,6 +1133,7 @@
 				AD7F34BF23D79893001B4072 /* MockGameStateProtocolExtension.swift in Sources */,
 				AD7F34BD23D79879001B4072 /* MockPlayerProtocolExtension.swift in Sources */,
 				33D477F423E57FDD00E232D9 /* MockFigureProtocolExtension.swift in Sources */,
+				3335E5FB240AEE95000B89EB /* GameUpdatePlayerLooseHealth.swift in Sources */,
 				3322725B23F5CEDE0028933D /* LooseLifeTests.swift in Sources */,
 				3322725D23F5CEDE0028933D /* DiscardBangTests.swift in Sources */,
 				3301E63923F7EEF700AB35C7 /* AIProtocol.swift in Sources */,

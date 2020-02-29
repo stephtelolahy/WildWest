@@ -10,20 +10,20 @@ extension Challenge {
     
     func removing(_ playerId: String) -> Challenge? {
         switch self {
-        case let .shoot(playerIds, cardName):
+        case let .shoot(playerIds, cardName, source):
             let remainingIds = playerIds.filter { $0 != playerId }
             if remainingIds.isEmpty {
                 return nil
             } else {
-                return .shoot(remainingIds, cardName)
+                return .shoot(remainingIds, cardName, source)
             }
             
-        case let .indians(playerIds):
+        case let .indians(playerIds, source):
             let remainingIds = playerIds.filter { $0 != playerId }
             if remainingIds.isEmpty {
                 return nil
             } else {
-                return .indians(remainingIds)
+                return .indians(remainingIds, source)
             }
             
         case let .generalStore(playerIds):
@@ -36,6 +36,25 @@ extension Challenge {
             
         case .startTurnDynamiteExploded:
             return .startTurn
+            
+        default:
+            return nil
+        }
+    }
+    
+    var damageSource: DamageEvent.Source? {
+        switch self {
+        case let .shoot(_, _, source):
+            return source
+            
+        case let .duel(_, source):
+            return source
+            
+        case let .indians(_, source):
+            return source
+            
+        case .startTurnDynamiteExploded:
+            return .byDynamite
             
         default:
             return nil

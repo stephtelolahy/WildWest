@@ -15,9 +15,9 @@ struct DiscardBang: ActionProtocol, Equatable {
         var updates: [GameUpdate] = []
         updates.append(.playerDiscardHand(actorId, cardId))
         
-        if case let .duel(playerIds) = state.challenge {
+        if case let .duel(playerIds, source) = state.challenge {
             let permutedPlayerIds = [playerIds[1], playerIds[0]]
-            updates.append(.setChallenge(.duel(permutedPlayerIds)))
+            updates.append(.setChallenge(.duel(permutedPlayerIds, source)))
         } else {
             updates.append(.setChallenge(state.challenge?.removing(actorId)))
         }
@@ -34,10 +34,10 @@ struct DiscardBangRule: RuleProtocol {
     func match(with state: GameStateProtocol) -> [ActionProtocol]? {
         var actorId: String?
         switch state.challenge {
-        case let .indians(targetIds):
+        case let .indians(targetIds, _):
             actorId = targetIds.first
             
-        case let .duel(playerIds):
+        case let .duel(playerIds, _):
             actorId = playerIds.first
             
         default:

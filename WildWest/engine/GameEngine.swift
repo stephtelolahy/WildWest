@@ -51,14 +51,15 @@ class GameEngine: GameEngineProtocol {
             
             if let outcome = calculator.outcome(for: database.state.players.map { $0.role }) {
                 database.setOutcome(outcome)
+                break
+            }
+            
+            let validMoves = rules.compactMap { $0.match(with: database.state) }.flatMap { $0 }
+            let autoPlayMoves = validMoves.filter({ $0.autoPlay })
+            if !autoPlayMoves.isEmpty {
+                moves.append(contentsOf: autoPlayMoves)
             } else {
-                let validMoves = rules.compactMap { $0.match(with: database.state) }.flatMap { $0 }
-                let autoPlayMoves = validMoves.filter({ $0.autoPlay })
-                if !autoPlayMoves.isEmpty {
-                    moves.append(contentsOf: autoPlayMoves)
-                } else {
-                    database.setValidMoves(validMoves)
-                }
+                database.setValidMoves(validMoves)
             }
         }
         
