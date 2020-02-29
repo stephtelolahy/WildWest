@@ -30,8 +30,8 @@ extension GameState: GameDatabaseProtocol {
         self.barrelsResolved = barrelsResolved
     }
     
-    func addCommandsHistory(_ actions: ActionProtocol) {
-        commandsHistory.append(actions)
+    func addMove(_ action: ActionProtocol) {
+        moves.append(action)
     }
     
     func setValidMoves(_ actions: [ActionProtocol]) {

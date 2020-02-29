@@ -14,10 +14,10 @@ protocol GameStateProtocol {
     var bangsPlayed: Int { get }
     var barrelsResolved: Int { get }
     var generalStore: [CardProtocol] { get }
+    var eliminated: [PlayerProtocol] { get }
     var outcome: GameOutcome? { get }
     var validMoves: [ActionProtocol] { get }
-    var commandsHistory: [ActionProtocol] { get }
-    var eliminated: [PlayerProtocol] { get }
+    var moves: [ActionProtocol] { get }
 }
 
 enum GameOutcome: String, Equatable {

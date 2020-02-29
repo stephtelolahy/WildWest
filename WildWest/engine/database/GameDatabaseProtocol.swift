@@ -15,7 +15,7 @@ protocol GameDatabaseProtocol {
     func setChallenge(_ challenge: Challenge?)
     func setBangsPlayed(_ bangsPlayed: Int)
     func setBarrelsResolved(_ barrelsResolved: Int)
-    func addCommandsHistory(_ actions: ActionProtocol)
+    func addMove(_ action: ActionProtocol)
     func setValidMoves(_ actions: [ActionProtocol])
     func setOutcome(_ outcome: GameOutcome)
     func removePlayer(_ playerId: String) -> PlayerProtocol?

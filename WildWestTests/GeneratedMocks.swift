@@ -101,16 +101,16 @@ import Cuckoo
     
     
     
-     func addCommandsHistory(_ actions: ActionProtocol)  {
+     func addMove(_ action: ActionProtocol)  {
         
-    return cuckoo_manager.call("addCommandsHistory(_: ActionProtocol)",
-            parameters: (actions),
-            escapingParameters: (actions),
+    return cuckoo_manager.call("addMove(_: ActionProtocol)",
+            parameters: (action),
+            escapingParameters: (action),
             superclassCall:
                 
                 Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
-            defaultCall: __defaultImplStub!.addCommandsHistory(actions))
+            defaultCall: __defaultImplStub!.addMove(action))
         
     }
     
@@ -343,9 +343,9 @@ import Cuckoo
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "setBarrelsResolved(_: Int)", parameterMatchers: matchers))
 	    }
 	    
-	    func addCommandsHistory<M1: Cuckoo.Matchable>(_ actions: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(ActionProtocol)> where M1.MatchedType == ActionProtocol {
-	        let matchers: [Cuckoo.ParameterMatcher<(ActionProtocol)>] = [wrap(matchable: actions) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "addCommandsHistory(_: ActionProtocol)", parameterMatchers: matchers))
+	    func addMove<M1: Cuckoo.Matchable>(_ action: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(ActionProtocol)> where M1.MatchedType == ActionProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(ActionProtocol)>] = [wrap(matchable: action) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "addMove(_: ActionProtocol)", parameterMatchers: matchers))
 	    }
 	    
 	    func setValidMoves<M1: Cuckoo.Matchable>(_ actions: M1) -> Cuckoo.ProtocolStubNoReturnFunction<([ActionProtocol])> where M1.MatchedType == [ActionProtocol] {
@@ -459,9 +459,9 @@ import Cuckoo
 	    }
 	    
 	    @discardableResult
-	    func addCommandsHistory<M1: Cuckoo.Matchable>(_ actions: M1) -> Cuckoo.__DoNotUse<(ActionProtocol), Void> where M1.MatchedType == ActionProtocol {
-	        let matchers: [Cuckoo.ParameterMatcher<(ActionProtocol)>] = [wrap(matchable: actions) { $0 }]
-	        return cuckoo_manager.verify("addCommandsHistory(_: ActionProtocol)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    func addMove<M1: Cuckoo.Matchable>(_ action: M1) -> Cuckoo.__DoNotUse<(ActionProtocol), Void> where M1.MatchedType == ActionProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(ActionProtocol)>] = [wrap(matchable: action) { $0 }]
+	        return cuckoo_manager.verify("addMove(_: ActionProtocol)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
@@ -575,7 +575,7 @@ import Cuckoo
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
-     func addCommandsHistory(_ actions: ActionProtocol)   {
+     func addMove(_ action: ActionProtocol)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
@@ -1828,6 +1828,20 @@ import Cuckoo
     
     
     
+     var eliminated: [PlayerProtocol] {
+        get {
+            return cuckoo_manager.getter("eliminated",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.eliminated)
+        }
+        
+    }
+    
+    
+    
      var outcome: GameOutcome? {
         get {
             return cuckoo_manager.getter("outcome",
@@ -1856,28 +1870,14 @@ import Cuckoo
     
     
     
-     var commandsHistory: [ActionProtocol] {
+     var moves: [ActionProtocol] {
         get {
-            return cuckoo_manager.getter("commandsHistory",
+            return cuckoo_manager.getter("moves",
                 superclassCall:
                     
                     Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                     ,
-                defaultCall: __defaultImplStub!.commandsHistory)
-        }
-        
-    }
-    
-    
-    
-     var eliminated: [PlayerProtocol] {
-        get {
-            return cuckoo_manager.getter("eliminated",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.eliminated)
+                defaultCall: __defaultImplStub!.moves)
         }
         
     }
@@ -1930,6 +1930,11 @@ import Cuckoo
 	    }
 	    
 	    
+	    var eliminated: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [PlayerProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "eliminated")
+	    }
+	    
+	    
 	    var outcome: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, GameOutcome?> {
 	        return .init(manager: cuckoo_manager, name: "outcome")
 	    }
@@ -1940,13 +1945,8 @@ import Cuckoo
 	    }
 	    
 	    
-	    var commandsHistory: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [ActionProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "commandsHistory")
-	    }
-	    
-	    
-	    var eliminated: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [PlayerProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "eliminated")
+	    var moves: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [ActionProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "moves")
 	    }
 	    
 	    
@@ -2000,6 +2000,11 @@ import Cuckoo
 	    }
 	    
 	    
+	    var eliminated: Cuckoo.VerifyReadOnlyProperty<[PlayerProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "eliminated", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
 	    var outcome: Cuckoo.VerifyReadOnlyProperty<GameOutcome?> {
 	        return .init(manager: cuckoo_manager, name: "outcome", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
@@ -2010,13 +2015,8 @@ import Cuckoo
 	    }
 	    
 	    
-	    var commandsHistory: Cuckoo.VerifyReadOnlyProperty<[ActionProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "commandsHistory", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
-	    var eliminated: Cuckoo.VerifyReadOnlyProperty<[PlayerProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "eliminated", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var moves: Cuckoo.VerifyReadOnlyProperty<[ActionProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "moves", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	
@@ -2083,6 +2083,14 @@ import Cuckoo
     }
     
     
+     var eliminated: [PlayerProtocol] {
+        get {
+            return DefaultValueRegistry.defaultValue(for: ([PlayerProtocol]).self)
+        }
+        
+    }
+    
+    
      var outcome: GameOutcome? {
         get {
             return DefaultValueRegistry.defaultValue(for: (GameOutcome?).self)
@@ -2099,17 +2107,9 @@ import Cuckoo
     }
     
     
-     var commandsHistory: [ActionProtocol] {
+     var moves: [ActionProtocol] {
         get {
             return DefaultValueRegistry.defaultValue(for: ([ActionProtocol]).self)
-        }
-        
-    }
-    
-    
-     var eliminated: [PlayerProtocol] {
-        get {
-            return DefaultValueRegistry.defaultValue(for: ([PlayerProtocol]).self)
         }
         
     }

@@ -41,7 +41,7 @@ class GameSetup: GameSetupProtocol {
                          generalStore: [],
                          outcome: nil,
                          validMoves: [],
-                         commandsHistory: [],
+                         moves: [],
                          eliminated: [])
     }
 }

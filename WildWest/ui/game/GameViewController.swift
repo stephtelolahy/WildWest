@@ -109,7 +109,7 @@ private extension GameViewController {
     func update(with state: GameStateProtocol) {
         playersAdapter.setState(state)
         actionsAdapter.setState(state)
-        messages = state.commandsHistory.map { $0.description }
+        messages = state.moves.map { $0.description }
         playersCollectionView.reloadData()
         actionsCollectionView.reloadData()
         messageTableView.reloadDataSwollingAtBottom()

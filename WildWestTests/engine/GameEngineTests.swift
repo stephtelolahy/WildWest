@@ -31,7 +31,7 @@ class GameEngineTests: XCTestCase {
         mockAction = MockActionProtocol().withEnabledDefaultImplementation(ActionProtocolStub())
     }
     
-    func test_ExecuteGameUpdates_IfExecutingCommand() {
+    func test_ExecuteGameUpdates_IfExecutingAction() {
         // Given
         let mockUpdate1 = MockGameUpdateProtocol().withEnabledDefaultImplementation(GameUpdateProtocolStub())
         let mockUpdate2 = MockGameUpdateProtocol().withEnabledDefaultImplementation(GameUpdateProtocolStub())
@@ -47,16 +47,16 @@ class GameEngineTests: XCTestCase {
         verify(mockUpdate2).execute(in: database(equalTo: mockDatabase))
     }
     
-    func test_AddCommandToHistory_IfExecutingCommand() {
+    func test_AddMoves_IfExecutingAction() {
         // Given
         // When
         sut.execute(mockAction)
         
         // Assert
-        verify(mockDatabase).addCommandsHistory(action(equalTo: mockAction))
+        verify(mockDatabase).addMove(action(equalTo: mockAction))
     }
     
-    func test_SetMatchingActionsAsValidMoves_IfExecutingCommand() {
+    func test_SetMatchingActionsAsValidMoves_IfExecutingAction() {
         // Given
         let matchedAction1 = MockActionProtocol().autoPlay(is: false)
         let matchedAction2 = MockActionProtocol().autoPlay(is: false)
