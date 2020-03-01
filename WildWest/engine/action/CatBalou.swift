@@ -6,17 +6,7 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct TargetCard: Equatable {
-    let ownerId: String
-    let source: TargetCardSource
-}
-
-enum TargetCardSource: Equatable {
-    case randomHand
-    case inPlay(String)
-}
-
-struct CatBalou: PlayCardAtionProtocol, Equatable {
+struct CatBalou: PlayCardAgainstOneCardActionProtocol, Equatable {
     let actorId: String
     let cardId: String
     let target: TargetCard

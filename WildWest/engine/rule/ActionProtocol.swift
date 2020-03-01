@@ -22,6 +22,10 @@ protocol PlayCardAgainstOnePlayerActionProtocol: PlayCardAtionProtocol {
     var targetId: String { get }
 }
 
+protocol PlayCardAgainstOneCardActionProtocol: PlayCardAtionProtocol {
+    var target: TargetCard { get }
+}
+
 protocol ChooseCardActionProtocol: ActionProtocol {
     var cardId: String { get }
 }
@@ -35,4 +39,14 @@ struct Action: ActionProtocol {
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
         updates
     }
+}
+
+struct TargetCard: Equatable {
+    let ownerId: String
+    let source: TargetCardSource
+}
+
+enum TargetCardSource: Equatable {
+    case randomHand
+    case inPlay(String)
 }

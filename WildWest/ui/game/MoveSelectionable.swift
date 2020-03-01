@@ -19,18 +19,23 @@ extension MoveSelectionable where Self: UIViewController {
             return
         }
         
-        if actions.count == 1 {
-            completion(actions[0])
-            return
-        }
-        
         if let playCardAgainstOnePlayerActions = actions as? [PlayCardAgainstOnePlayerActionProtocol] {
             selectPlayer(within: playCardAgainstOnePlayerActions, completion: completion)
             return
         }
         
+        if let playCardAgainstOneCardActions = actions as? [PlayCardAgainstOneCardActionProtocol] {
+            selectTargetCard(within: playCardAgainstOneCardActions, completion: completion)
+            return
+        }
+        
         if let chooseCardActions = actions as? [ChooseCardActionProtocol] {
             selectCard(within: chooseCardActions, completion: completion)
+            return
+        }
+        
+        if actions.count == 1 {
+            completion(actions[0])
             return
         }
         
@@ -41,6 +46,14 @@ extension MoveSelectionable where Self: UIViewController {
                               completion: @escaping ((ActionProtocol) -> Void)) {
         let targetIds = actions.map { $0.targetId }
         select(within: targetIds, title: "Select player") { index in
+            completion(actions[index])
+        }
+    }
+    
+    private func selectTargetCard(within actions: [PlayCardAgainstOneCardActionProtocol],
+                                  completion: @escaping ((ActionProtocol) -> Void)) {
+        let targets = actions.map { $0.target.description }
+        select(within: targets, title: "Taget card") { index in
             completion(actions[index])
         }
     }
@@ -76,5 +89,16 @@ private extension UIViewController {
                                                 handler: nil))
         
         present(alertController, animated: true)
+    }
+}
+
+private extension TargetCard {
+    var description: String {
+        switch source {
+        case .randomHand:
+            return "\(ownerId)'s random hand"
+        case let .inPlay(targetCardId):
+            return "\(ownerId)'s \(targetCardId)"
+        }
     }
 }
