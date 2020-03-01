@@ -24,15 +24,36 @@ extension MoveSelectionable where Self: UIViewController {
             return
         }
         
-        let alertController = UIAlertController(title: nil,
+        if let bangs = actions as? [Bang] {
+            selectBang(within: bangs, completion: completion)
+            return
+        }
+        
+        assert(false, "unsupported")
+    }
+    
+    private func selectBang(within actions: [Bang], completion: @escaping ((ActionProtocol) -> Void)) {
+        let targetIds = actions.map { $0.targetId }
+        select(within: targetIds, title: "Bang") { index in
+            completion(actions[index])
+        }
+    }
+}
+
+private extension UIViewController {
+    func select(within choices: [String], title: String, completion: @escaping((Int) -> Void)) {
+        let alertController = UIAlertController(title: title,
                                                 message: nil,
                                                 preferredStyle: .alert)
         
-        actions.forEach { action in
-            alertController.addAction(UIAlertAction(title: action.description,
+        choices.forEach { choice in
+            alertController.addAction(UIAlertAction(title: choice,
                                                     style: .default,
                                                     handler: { _ in
-                                                        completion(action)
+                                                        guard let index = choices.firstIndex(of: choice) else {
+                                                            return
+                                                        }
+                                                        completion(index)
             }))
         }
         
