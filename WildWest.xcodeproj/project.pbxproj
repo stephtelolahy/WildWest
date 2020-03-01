@@ -72,6 +72,16 @@
 		3335E5F8240AEE89000B89EB /* GameUpdatePlayerGainHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E5F6240AEE89000B89EB /* GameUpdatePlayerGainHealth.swift */; };
 		3335E5FA240AEE95000B89EB /* GameUpdatePlayerLooseHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E5F9240AEE95000B89EB /* GameUpdatePlayerLooseHealth.swift */; };
 		3335E5FB240AEE95000B89EB /* GameUpdatePlayerLooseHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E5F9240AEE95000B89EB /* GameUpdatePlayerLooseHealth.swift */; };
+		3335E601240B48F5000B89EB /* EffectRuleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E600240B48F5000B89EB /* EffectRuleProtocol.swift */; };
+		3335E602240B48F5000B89EB /* EffectRuleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E600240B48F5000B89EB /* EffectRuleProtocol.swift */; };
+		3335E604240B4D7E000B89EB /* RewardOneWhoEliminatesOutlaw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E603240B4D7E000B89EB /* RewardOneWhoEliminatesOutlaw.swift */; };
+		3335E605240B4D7E000B89EB /* RewardOneWhoEliminatesOutlaw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E603240B4D7E000B89EB /* RewardOneWhoEliminatesOutlaw.swift */; };
+		3335E607240B4E2E000B89EB /* DiscardAllSheriffCardsOnEliminateDeputy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E606240B4E2E000B89EB /* DiscardAllSheriffCardsOnEliminateDeputy.swift */; };
+		3335E608240B4E2E000B89EB /* DiscardAllSheriffCardsOnEliminateDeputy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E606240B4E2E000B89EB /* DiscardAllSheriffCardsOnEliminateDeputy.swift */; };
+		3335E60A240B5068000B89EB /* SetOutComeOnGameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E609240B5068000B89EB /* SetOutComeOnGameOver.swift */; };
+		3335E60B240B5068000B89EB /* SetOutComeOnGameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E609240B5068000B89EB /* SetOutComeOnGameOver.swift */; };
+		3335E610240B5A33000B89EB /* ActionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E60F240B5A33000B89EB /* ActionProtocol.swift */; };
+		3335E611240B5A33000B89EB /* ActionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E60F240B5A33000B89EB /* ActionProtocol.swift */; };
 		335A147423F312F700D9971E /* GameDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BA280023F1E9830084A3C9 /* GameDatabase.swift */; };
 		3367EB79240979360079DB41 /* MockActionProtocolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3367EB78240979360079DB41 /* MockActionProtocolExtension.swift */; };
 		336AA6F023F1450800328837 /* GameDatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */; };
@@ -248,6 +258,11 @@
 		3335E5F3240AEE67000B89EB /* GameUpdatePlayerLooseHealthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUpdatePlayerLooseHealthTests.swift; sourceTree = "<group>"; };
 		3335E5F6240AEE89000B89EB /* GameUpdatePlayerGainHealth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUpdatePlayerGainHealth.swift; sourceTree = "<group>"; };
 		3335E5F9240AEE95000B89EB /* GameUpdatePlayerLooseHealth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUpdatePlayerLooseHealth.swift; sourceTree = "<group>"; };
+		3335E600240B48F5000B89EB /* EffectRuleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectRuleProtocol.swift; sourceTree = "<group>"; };
+		3335E603240B4D7E000B89EB /* RewardOneWhoEliminatesOutlaw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardOneWhoEliminatesOutlaw.swift; sourceTree = "<group>"; };
+		3335E606240B4E2E000B89EB /* DiscardAllSheriffCardsOnEliminateDeputy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardAllSheriffCardsOnEliminateDeputy.swift; sourceTree = "<group>"; };
+		3335E609240B5068000B89EB /* SetOutComeOnGameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetOutComeOnGameOver.swift; sourceTree = "<group>"; };
+		3335E60F240B5A33000B89EB /* ActionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionProtocol.swift; sourceTree = "<group>"; };
 		3367EB78240979360079DB41 /* MockActionProtocolExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockActionProtocolExtension.swift; sourceTree = "<group>"; };
 		336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDatabaseProtocol.swift; sourceTree = "<group>"; };
 		3395257F23E37CCE003DE948 /* GameEngineProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineProtocol.swift; sourceTree = "<group>"; };
@@ -428,6 +443,16 @@
 			path = update;
 			sourceTree = "<group>";
 		};
+		3335E5FC240B46D5000B89EB /* effect */ = {
+			isa = PBXGroup;
+			children = (
+				3335E603240B4D7E000B89EB /* RewardOneWhoEliminatesOutlaw.swift */,
+				3335E606240B4E2E000B89EB /* DiscardAllSheriffCardsOnEliminateDeputy.swift */,
+				3335E609240B5068000B89EB /* SetOutComeOnGameOver.swift */,
+			);
+			path = effect;
+			sourceTree = "<group>";
+		};
 		3366493823F93EE000125483 /* database */ = {
 			isa = PBXGroup;
 			children = (
@@ -550,6 +575,7 @@
 				AD46810C23BEA27F000B42C7 /* rule */,
 				AD36CDDA23C51DA6008D4EDB /* action */,
 				3309D7092408D31E00713E15 /* update */,
+				3335E5FC240B46D5000B89EB /* effect */,
 				3301E63323F7EEB800AB35C7 /* ai */,
 				339A295123EFFEB2002C5CD8 /* convenience */,
 			);
@@ -628,6 +654,8 @@
 			isa = PBXGroup;
 			children = (
 				ADD035CB23A95F37003B2576 /* RuleProtocol.swift */,
+				3335E60F240B5A33000B89EB /* ActionProtocol.swift */,
+				3335E600240B48F5000B89EB /* EffectRuleProtocol.swift */,
 				33F94AB523F0580800D1BCFE /* GameUpdateProtocol.swift */,
 				33BA280223F1EDCE0084A3C9 /* GameUpdate.swift */,
 				33D477E623E4F9E200E232D9 /* RangeCalculatorProtocol.swift */,
@@ -895,7 +923,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/engine/state/GameStateProtocol.swift\" \\\n\"${INPUT_DIR}/engine/state/PlayerProtocol.swift\" \\\n\"${INPUT_DIR}/engine/state/CardProtocol.swift\" \\\n\"${INPUT_DIR}/engine/state/FigureProtocol.swift\" \\\n\"${INPUT_DIR}/engine/database/GameDatabaseProtocol.swift\" \\\n\"${INPUT_DIR}/engine/rule/RuleProtocol.swift\" \\\n\"${INPUT_DIR}/engine/rule/GameUpdateProtocol.swift\" \\\n\"${INPUT_DIR}/engine/rule/RangeCalculatorProtocol.swift\" \\\n\"${INPUT_DIR}/engine/rule/OutcomeCalculatorProtocol.swift\"\n";
+			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/engine/state/GameStateProtocol.swift\" \\\n\"${INPUT_DIR}/engine/state/PlayerProtocol.swift\" \\\n\"${INPUT_DIR}/engine/state/CardProtocol.swift\" \\\n\"${INPUT_DIR}/engine/state/FigureProtocol.swift\" \\\n\"${INPUT_DIR}/engine/database/GameDatabaseProtocol.swift\" \\\n\"${INPUT_DIR}/engine/rule/RuleProtocol.swift\" \\\n\"${INPUT_DIR}/engine/rule/ActionProtocol.swift\" \\\n\"${INPUT_DIR}/engine/rule/GameUpdateProtocol.swift\" \\\n\"${INPUT_DIR}/engine/rule/RangeCalculatorProtocol.swift\" \\\n\"${INPUT_DIR}/engine/rule/OutcomeCalculatorProtocol.swift\" \\\n\"${INPUT_DIR}/engine/rule/EffectRuleProtocol.swift\"\n";
 		};
 		AD8540A223A4291100568FE9 /* Run Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -964,6 +992,7 @@
 				ADE91AD423BA00DC00F7316B /* GameSetup.swift in Sources */,
 				33D477EA23E4FA0F00E232D9 /* RangeCalculator.swift in Sources */,
 				ADD035D523A96034003B2576 /* PlayerProtocol.swift in Sources */,
+				3335E60A240B5068000B89EB /* SetOutComeOnGameOver.swift in Sources */,
 				3335E5F7240AEE89000B89EB /* GameUpdatePlayerGainHealth.swift in Sources */,
 				3301BEF723F9A44100B4364D /* GameLoader.swift in Sources */,
 				33D477F123E57DE500E232D9 /* FigureProtocol.swift in Sources */,
@@ -974,6 +1003,7 @@
 				3335E5FA240AEE95000B89EB /* GameUpdatePlayerLooseHealth.swift in Sources */,
 				3301E64023F80AE600AB35C7 /* StatsViewController.swift in Sources */,
 				339A294F23EFFE70002C5CD8 /* GameStateExtension.swift in Sources */,
+				3335E604240B4D7E000B89EB /* RewardOneWhoEliminatesOutlaw.swift in Sources */,
 				3309D70E2408D49D00713E15 /* GameUpdateSetChallenge.swift in Sources */,
 				3383ABE123F533490028B4B3 /* DiscardBang.swift in Sources */,
 				ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */,
@@ -984,6 +1014,7 @@
 				3383ABE723F53AFA0028B4B3 /* ResolveDynamite.swift in Sources */,
 				3383ABDA23F5332A0028B4B3 /* Gatling.swift in Sources */,
 				3302906123F32AC30099C438 /* Beer.swift in Sources */,
+				3335E610240B5A33000B89EB /* ActionProtocol.swift in Sources */,
 				336AA6F023F1450800328837 /* GameDatabaseProtocol.swift in Sources */,
 				33E4411D24077CA000B2848E /* ActionCell.swift in Sources */,
 				3383ABEE23F53B950028B4B3 /* ResolveJail.swift in Sources */,
@@ -1000,6 +1031,7 @@
 				3395258623E37D3E003DE948 /* ResourcesProviderProtocol.swift in Sources */,
 				33E4412124077D8000B2848E /* Score.swift in Sources */,
 				330B7E1123F70D0200B3653D /* OutcomeCalculator.swift in Sources */,
+				3335E607240B4E2E000B89EB /* DiscardAllSheriffCardsOnEliminateDeputy.swift in Sources */,
 				3301E63823F7EEF700AB35C7 /* AIProtocol.swift in Sources */,
 				3302E51C23F8E34C004FE76E /* RandomAI.swift in Sources */,
 				332499B323DB9F650082EF09 /* GameViewController.swift in Sources */,
@@ -1036,6 +1068,7 @@
 				33E4411E24077CA000B2848E /* PlayerCell.swift in Sources */,
 				33BA280323F1EDCE0084A3C9 /* GameUpdate.swift in Sources */,
 				339A294923EFEFE7002C5CD8 /* ChallengeExtension.swift in Sources */,
+				3335E601240B48F5000B89EB /* EffectRuleProtocol.swift in Sources */,
 				3309D70B2408D36600713E15 /* GameUpdateSetTurn.swift in Sources */,
 				3383AC1123F53BBF0028B4B3 /* ChooseCard.swift in Sources */,
 			);
@@ -1069,6 +1102,7 @@
 				AD7F34B923D79841001B4072 /* MockCardProtocolExtension.swift in Sources */,
 				AD7EAFBF23D7846D00FE23D5 /* GameSetupTests.swift in Sources */,
 				3383ABE823F53AFD0028B4B3 /* ResolveBarrel.swift in Sources */,
+				3335E605240B4D7E000B89EB /* RewardOneWhoEliminatesOutlaw.swift in Sources */,
 				3322725123F5CEDE0028933D /* SaloonTests.swift in Sources */,
 				ADD035D923A9604F003B2576 /* GameStateProtocol.swift in Sources */,
 				3322725523F5CEDE0028933D /* PanicTests.swift in Sources */,
@@ -1084,6 +1118,7 @@
 				33A4381323E4BD3200C39DD6 /* ArrayExtension.swift in Sources */,
 				33F94AB723F0580800D1BCFE /* GameUpdateProtocol.swift in Sources */,
 				3383ABD023F461D20028B4B3 /* Jail.swift in Sources */,
+				3335E608240B4E2E000B89EB /* DiscardAllSheriffCardsOnEliminateDeputy.swift in Sources */,
 				AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */,
 				3309D7112408D56F00713E15 /* GameUpdateSetChallengeTests.swift in Sources */,
 				3322724F23F5CEDE0028933D /* StartTurnTests.swift in Sources */,
@@ -1102,12 +1137,14 @@
 				336AA6F123F1450B00328837 /* GameDatabaseProtocol.swift in Sources */,
 				3383ABE623F53AFA0028B4B3 /* ResolveDynamite.swift in Sources */,
 				3322725223F5CEDE0028933D /* StagecoachTests.swift in Sources */,
+				3335E602240B48F5000B89EB /* EffectRuleProtocol.swift in Sources */,
 				3322725F23F5CEDE0028933D /* GeneralStoreTests.swift in Sources */,
 				33D477F223E57DE500E232D9 /* FigureProtocol.swift in Sources */,
 				3322726323F5CEDE0028933D /* ResolveJailTests.swift in Sources */,
 				339A295023EFFE70002C5CD8 /* GameStateExtension.swift in Sources */,
 				3322726523F5CEDE0028933D /* DiscardBeerTests.swift in Sources */,
 				33D477E823E4F9E300E232D9 /* RangeCalculatorProtocol.swift in Sources */,
+				3335E60B240B5068000B89EB /* SetOutComeOnGameOver.swift in Sources */,
 				3335E5F8240AEE89000B89EB /* GameUpdatePlayerGainHealth.swift in Sources */,
 				3309D7142408D89200713E15 /* GameUpdateFlipOverFirstDeckCard.swift in Sources */,
 				3303E2432408E99F00BB9E23 /* BangTests.swift in Sources */,
@@ -1119,6 +1156,7 @@
 				ADE91ACE23B9FE2300F7316B /* JsonReader.swift in Sources */,
 				33D477EB23E4FA0F00E232D9 /* RangeCalculator.swift in Sources */,
 				AD4BE6AA23DA4B12003A610A /* CollectionExtension.swift in Sources */,
+				3335E611240B5A33000B89EB /* ActionProtocol.swift in Sources */,
 				3383ABD723F5312B0028B4B3 /* Missed.swift in Sources */,
 				33D964B223DD9119007295E7 /* MatcherExtension.swift in Sources */,
 				3367EB79240979360079DB41 /* MockActionProtocolExtension.swift in Sources */,

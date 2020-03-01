@@ -81,24 +81,25 @@ private extension GameViewController {
     }
     
     func startGame() {
-        let database = GameLoader().createGame(for: 7)
+        let gameLoader = GameLoader()
+        let database = gameLoader.createGame(for: 7)
         let engine = GameEngine(database: database,
-                                rules: GameLoader().classicRules(),
-                                calculator: OutcomeCalculator())
+                                rules: gameLoader.classicRules(),
+                                effectRules: gameLoader.effectRules())
         self.engine = engine
-        sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
-            self?.update(with: state)
-        }))
+//        sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
+//            self?.update(with: state)
+//        }))
         
-        controlledPlayerId = database.state.players.first(where: { $0.role == .sheriff })?.identifier
+//        controlledPlayerId = database.state.players.first(where: { $0.role == .sheriff })?.identifier
         playersAdapter.setControlledPlayerId(controlledPlayerId)
         actionsAdapter.setControlledPlayerId(controlledPlayerId)
         
         let aiPlayers = database.state.players.filter { $0.identifier != controlledPlayerId }
         let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
-                                                     ai: RandomAIWithRole(), 
+                                                     ai: RandomAIWithRole(),
                                                      engine: engine,
-                                                     delay: 0.5)
+                                                     delay: 0.1)
         }
         self.aiAgents = aiAgents
         aiAgents.forEach { $0.start() }

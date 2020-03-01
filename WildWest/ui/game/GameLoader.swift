@@ -55,4 +55,12 @@ class GameLoader {
             EndTurnRule()
         ]
     }
+    
+    func effectRules() -> [EffectRuleProtocol] {
+        [
+            SetOutComeOnGameOverRule(calculator: OutcomeCalculator()),
+            RewardOneWhoEliminatesOutlawRule(),
+            DiscardAllSheriffCardsOnEliminateDeputy()
+        ]
+    }
 }

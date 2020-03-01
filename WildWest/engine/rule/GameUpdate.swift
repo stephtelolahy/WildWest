@@ -24,6 +24,7 @@ enum GameUpdate: Equatable {
     case playerPassInPlayOfOther(String, String, String)
     case playerPullFromGeneralStore(String, String)
     case setupGeneralStore(Int)
+    case setOutcome(GameOutcome)
 }
 
 extension GameUpdate: GameUpdateProtocol {
@@ -100,6 +101,9 @@ extension GameUpdate: GameUpdateProtocol {
             
         case let .eliminatePlayer(playerId):
             GameUpdateEliminatePlayer(playerId: playerId).execute(in: database)
+            
+        case let .setOutcome(outcome):
+            database.setOutcome(outcome)
         }
     }
     
@@ -152,6 +156,9 @@ extension GameUpdate: GameUpdateProtocol {
             
         case let .eliminatePlayer(playerId):
             return GameUpdateEliminatePlayer(playerId: playerId).description
+            
+        case let .setOutcome(outcome):
+            return "setOutcome \(outcome)"
         }
     }
 }

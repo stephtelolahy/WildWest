@@ -14,7 +14,7 @@ class GameEngineTests: XCTestCase {
     var mockState: MockGameStateProtocol!
     var mockDatabase: MockGameDatabaseProtocol!
     var mockRule: MockRuleProtocol!
-    var mockCalculator: MockOutcomeCalculatorProtocol!
+    var mockEffectRule: MockEffectRuleProtocol!
     var mockAction: MockActionProtocol!
     
     var sut: GameEngineProtocol!
@@ -26,8 +26,8 @@ class GameEngineTests: XCTestCase {
             when(mock.state.get).thenReturn(mockState)
         }
         mockRule = MockRuleProtocol().withEnabledDefaultImplementation(RuleProtocolStub())
-        mockCalculator = MockOutcomeCalculatorProtocol().withEnabledDefaultImplementation(OutcomeCalculatorProtocolStub())
-        sut = GameEngine(database: mockDatabase, rules: [mockRule], calculator: mockCalculator)
+        mockEffectRule = MockEffectRuleProtocol().withEnabledDefaultImplementation(EffectRuleProtocolStub())
+        sut = GameEngine(database: mockDatabase, rules: [mockRule], effectRules: [mockEffectRule])
         mockAction = MockActionProtocol().withEnabledDefaultImplementation(ActionProtocolStub())
     }
     
@@ -81,22 +81,13 @@ class GameEngineTests: XCTestCase {
     func test_DoNotGenerateActions_IfGameIsOver() {
         // Given
         Cuckoo.stub(mockState) { mock in
-            when(mock.players.get).thenReturn([
-                MockPlayerProtocol().role(is: .deputy),
-                MockPlayerProtocol().role(is: .renegade),
-                MockPlayerProtocol().role(is: .outlaw)
-            ])
-        }
-        Cuckoo.stub(mockCalculator) { mock in
-            when(mock.outcome(for: any())).thenReturn(.outlawWin)
+            when(mock.outcome.get).thenReturn(.outlawWin)
         }
         
         // When
         sut.execute(mockAction)
         
         // Assert
-        verify(mockCalculator).outcome(for: equal(to: [.deputy, .renegade, .outlaw]))
-        verify(mockDatabase).setOutcome(equal(to: .outlawWin))
         verify(mockDatabase).setValidMoves(isEmpty())
         verifyNoMoreInteractions(mockRule)
     }

@@ -668,6 +668,100 @@ import Cuckoo
 @testable import WildWest
 
 
+ class MockEffectRuleProtocol: EffectRuleProtocol, Cuckoo.ProtocolMock {
+    
+     typealias MocksType = EffectRuleProtocol
+    
+     typealias Stubbing = __StubbingProxy_EffectRuleProtocol
+     typealias Verification = __VerificationProxy_EffectRuleProtocol
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: EffectRuleProtocol?
+
+     func enableDefaultImplementation(_ stub: EffectRuleProtocol) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+
+    
+
+    
+    
+    
+     func effectOnExecuting(action: ActionProtocol, in state: GameStateProtocol) -> ActionProtocol? {
+        
+    return cuckoo_manager.call("effectOnExecuting(action: ActionProtocol, in: GameStateProtocol) -> ActionProtocol?",
+            parameters: (action, state),
+            escapingParameters: (action, state),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.effectOnExecuting(action: action, in: state))
+        
+    }
+    
+
+	 struct __StubbingProxy_EffectRuleProtocol: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    func effectOnExecuting<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(action: M1, in state: M2) -> Cuckoo.ProtocolStubFunction<(ActionProtocol, GameStateProtocol), ActionProtocol?> where M1.MatchedType == ActionProtocol, M2.MatchedType == GameStateProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(ActionProtocol, GameStateProtocol)>] = [wrap(matchable: action) { $0.0 }, wrap(matchable: state) { $0.1 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockEffectRuleProtocol.self, method: "effectOnExecuting(action: ActionProtocol, in: GameStateProtocol) -> ActionProtocol?", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	 struct __VerificationProxy_EffectRuleProtocol: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	
+	    
+	    @discardableResult
+	    func effectOnExecuting<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(action: M1, in state: M2) -> Cuckoo.__DoNotUse<(ActionProtocol, GameStateProtocol), ActionProtocol?> where M1.MatchedType == ActionProtocol, M2.MatchedType == GameStateProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(ActionProtocol, GameStateProtocol)>] = [wrap(matchable: action) { $0.0 }, wrap(matchable: state) { $0.1 }]
+	        return cuckoo_manager.verify("effectOnExecuting(action: ActionProtocol, in: GameStateProtocol) -> ActionProtocol?", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+ class EffectRuleProtocolStub: EffectRuleProtocol {
+    
+
+    
+
+    
+     func effectOnExecuting(action: ActionProtocol, in state: GameStateProtocol) -> ActionProtocol?  {
+        return DefaultValueRegistry.defaultValue(for: (ActionProtocol?).self)
+    }
+    
+}
+
+
+import Cuckoo
+@testable import WildWest
+
+
  class MockGameUpdateProtocol: GameUpdateProtocol, Cuckoo.ProtocolMock {
     
      typealias MocksType = GameUpdateProtocol
