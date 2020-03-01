@@ -20,7 +20,6 @@ struct SetOutComeOnGameOverRule: EffectRuleProtocol {
         let updates: [GameUpdate] = [.setOutcome(outcome)]
         
         return Action(actorId: "",
-                      cardId: "",
                       autoPlay: true,
                       description: description,
                       updates: updates)

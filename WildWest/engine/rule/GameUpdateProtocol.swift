@@ -6,7 +6,6 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-/// Elementary game update which could be materialized by an animation
 protocol GameUpdateProtocol {
     var description: String { get }
     

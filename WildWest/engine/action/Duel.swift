@@ -6,7 +6,7 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct Duel: PlayCardAtionProtocol, Equatable {
+struct Duel: PlayCardAgainstOnePlayerActionProtocol, Equatable {
     let actorId: String
     let cardId: String
     let targetId: String

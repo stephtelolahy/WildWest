@@ -24,17 +24,18 @@ extension MoveSelectionable where Self: UIViewController {
             return
         }
         
-        if let bangs = actions as? [Bang] {
-            selectBang(within: bangs, completion: completion)
+        if let playCardAgainstOnePlayerActions = actions as? [PlayCardAgainstOnePlayerActionProtocol] {
+            selectPlayer(within: playCardAgainstOnePlayerActions, completion: completion)
             return
         }
         
         assert(false, "unsupported")
     }
     
-    private func selectBang(within actions: [Bang], completion: @escaping ((ActionProtocol) -> Void)) {
+    private func selectPlayer(within actions: [PlayCardAgainstOnePlayerActionProtocol],
+                              completion: @escaping ((ActionProtocol) -> Void)) {
         let targetIds = actions.map { $0.targetId }
-        select(within: targetIds, title: "Bang") { index in
+        select(within: targetIds, title: "Select player") { index in
             completion(actions[index])
         }
     }

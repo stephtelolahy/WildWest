@@ -18,9 +18,12 @@ protocol PlayCardAtionProtocol: ActionProtocol {
     var cardId: String { get }
 }
 
+protocol PlayCardAgainstOnePlayerActionProtocol: PlayCardAtionProtocol {
+    var targetId: String { get }
+}
+
 struct Action: ActionProtocol {
     let actorId: String
-    let cardId: String
     let autoPlay: Bool
     let description: String
     let updates: [GameUpdateProtocol]

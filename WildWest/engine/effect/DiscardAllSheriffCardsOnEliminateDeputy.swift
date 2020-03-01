@@ -26,7 +26,6 @@ struct DiscardAllSheriffCardsOnEliminateDeputy: EffectRuleProtocol {
         offender.inPlay.forEach { updates.append(.playerDiscardInPlay(offenderId, $0.identifier)) }
         
         return Action(actorId: offenderId,
-                      cardId: "",
                       autoPlay: true,
                       description: description,
                       updates: updates)

@@ -22,7 +22,6 @@ struct RewardOneWhoEliminatesOutlawRule: EffectRuleProtocol {
         let description = "\(offenderId) gain 3 cards reward on eliminating outlaw"
         let updates: [GameUpdate] = [.playerPullFromDeck(offenderId, 3)]
         return Action(actorId: offenderId,
-                      cardId: "",
                       autoPlay: true,
                       description: description,
                       updates: updates)
