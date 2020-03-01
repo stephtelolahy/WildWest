@@ -23,7 +23,7 @@ class DiscardBangTests: XCTestCase {
     func test_RemoveActorFromIndiansChallenge_IfDiscardingBang() {
         // Given
         let mockState = MockGameStateProtocol()
-            .challenge(is: .indians(["p1", "p2", "p3"]))
+            .challenge(is: .indians(["p1", "p2", "p3"], .byPlayer("px")))
         let sut = DiscardBang(actorId: "p1", cardId: "c1")
         
         // When
@@ -32,14 +32,14 @@ class DiscardBangTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
             .playerDiscardHand("p1", "c1"),
-            .setChallenge(.indians(["p2", "p3"]))
+            .setChallenge(.indians(["p2", "p3"], .byPlayer("px")))
         ])
     }
     
     func test_SwitchTargetOfDuelChallenge_IfDiscardingBang() {
         // Given
         let mockState = MockGameStateProtocol()
-            .challenge(is: .duel(["p1", "p2"]))
+            .challenge(is: .duel(["p1", "p2"], .byPlayer("p2")))
         let sut = DiscardBang(actorId: "p1", cardId: "c1")
         
         // When
@@ -48,7 +48,7 @@ class DiscardBangTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
             .playerDiscardHand("p1", "c1"),
-            .setChallenge(.duel(["p2", "p1"]))
+            .setChallenge(.duel(["p2", "p1"], .byPlayer("p2")))
         ])
     }
 }
@@ -65,7 +65,7 @@ class DiscardBangRuleTests: XCTestCase {
             .holding(mockCard)
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
-            .challenge(is: .indians(["p1", "p2"]))
+            .challenge(is: .indians(["p1", "p2"], .byPlayer("px")))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
@@ -85,7 +85,7 @@ class DiscardBangRuleTests: XCTestCase {
             .holding(mockCard)
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
-            .challenge(is: .duel(["p1", "p2"]))
+            .challenge(is: .duel(["p1", "p2"], .byPlayer("p2")))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When

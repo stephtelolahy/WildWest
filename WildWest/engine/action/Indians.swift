@@ -6,7 +6,7 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct Indians: ActionProtocol, Equatable {
+struct Indians: PlayCardAtionProtocol, Equatable {
     let actorId: String
     let cardId: String
     let autoPlay = false
@@ -18,10 +18,9 @@ struct Indians: ActionProtocol, Equatable {
         
         let playersCount = state.players.count
         let targetIds = Array(1..<playersCount).map { state.players[(actorIndex + $0) % playersCount].identifier }
-        
         let updates: [GameUpdate] = [
             .playerDiscardHand(actorId, cardId),
-            .setChallenge(.indians(targetIds))
+            .setChallenge(.indians(targetIds, .byPlayer(actorId)))
         ]
         return updates
     }

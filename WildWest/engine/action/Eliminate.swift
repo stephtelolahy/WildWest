@@ -8,7 +8,6 @@
 
 struct Eliminate: ActionProtocol, Equatable {
     let actorId: String
-    let cardId = ""
     let autoPlay = true
     
     var description: String {
@@ -28,6 +27,7 @@ struct Eliminate: ActionProtocol, Equatable {
             updates.append(.setTurn(state.nextTurn))
             updates.append(.setChallenge(.startTurn))
         }
+        
         return updates
     }
 }

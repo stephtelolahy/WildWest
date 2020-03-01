@@ -14,10 +14,11 @@ protocol GameStateProtocol {
     var bangsPlayed: Int { get }
     var barrelsResolved: Int { get }
     var generalStore: [CardProtocol] { get }
+    var eliminated: [PlayerProtocol] { get }
     var outcome: GameOutcome? { get }
     var validMoves: [ActionProtocol] { get }
-    var commandsHistory: [ActionProtocol] { get }
-    var eliminated: [PlayerProtocol] { get }
+    var moves: [ActionProtocol] { get }
+    var damageEvents: [DamageEvent] { get }
 }
 
 enum GameOutcome: String, Equatable {
@@ -29,8 +30,18 @@ enum GameOutcome: String, Equatable {
 enum Challenge: Equatable {
     case startTurn
     case startTurnDynamiteExploded
-    case shoot([String], CardName)
-    case indians([String])
-    case duel([String])
+    case shoot([String], CardName, DamageEvent.Source)
+    case indians([String], DamageEvent.Source)
+    case duel([String], DamageEvent.Source)
     case generalStore([String])
+}
+
+struct DamageEvent: Equatable {
+    let playerId: String
+    let source: Source
+    
+    enum Source: Equatable {
+        case byDynamite
+        case byPlayer(String)
+    }
 }

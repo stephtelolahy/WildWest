@@ -6,7 +6,7 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct Bang: ActionProtocol, Equatable {
+struct Bang: PlayCardAgainstOnePlayerActionProtocol, Equatable {
     let actorId: String
     let cardId: String
     let targetId: String
@@ -15,7 +15,7 @@ struct Bang: ActionProtocol, Equatable {
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
         let updates: [GameUpdate] = [
             .playerDiscardHand(actorId, cardId),
-            .setChallenge(.shoot([targetId], .bang))
+            .setChallenge(.shoot([targetId], .bang, .byPlayer(actorId)))
         ]
         return updates
     }

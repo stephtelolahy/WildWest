@@ -6,7 +6,7 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct Panic: ActionProtocol, Equatable {
+struct Panic: PlayCardAgainstOneCardActionProtocol, Equatable {
     let actorId: String
     let cardId: String
     let target: TargetCard

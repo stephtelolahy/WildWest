@@ -38,10 +38,11 @@ class GameSetup: GameSetupProtocol {
                          challenge: nil,
                          bangsPlayed: 0,
                          barrelsResolved: 0,
+                         damageEvents: [],
                          generalStore: [],
                          outcome: nil,
                          validMoves: [],
-                         commandsHistory: [],
+                         moves: [],
                          eliminated: [])
     }
 }

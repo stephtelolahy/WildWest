@@ -6,19 +6,15 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct Beer: ActionProtocol, Equatable {
+struct Beer: PlayCardAtionProtocol, Equatable {
     let actorId: String
     let cardId: String
     let autoPlay = false
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
-        guard let player = state.players.first(where: { $0.identifier == actorId }) else {
-            return []
-        }
-        
         let updates: [GameUpdate] = [
             .playerDiscardHand(actorId, cardId),
-            .playerSetHealth(actorId, player.health + 1)]
+            .playerGainHealth(actorId, 1)]
         return updates
     }
     

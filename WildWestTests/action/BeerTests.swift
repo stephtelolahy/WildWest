@@ -47,7 +47,6 @@ class BeerTests: XCTestCase {
     func test_GainLifePoint_IfPlayingBeer() {
         // Given
         let mockState = MockGameStateProtocol()
-            .players(are: MockPlayerProtocol().identified(by: "p1").health(is: 3))
         let sut = Beer(actorId: "p1", cardId: "c1")
         
         // When
@@ -56,7 +55,7 @@ class BeerTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
             .playerDiscardHand("p1", "c1"),
-            .playerSetHealth("p1", 4)
+            .playerGainHealth("p1", 1)
         ])
     }
 }

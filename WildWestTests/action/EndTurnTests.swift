@@ -21,7 +21,7 @@ class EndTurnTests: XCTestCase {
     
     func test_EndTurnDescription() {
         // Given
-        let sut = EndTurn(actorId: "p1", cardsToDiscardIds: ["c1", "c2"])
+        let sut = EndTurn(actorId: "p1", cardIds: ["c1", "c2"])
         
         // When
         // Assert
@@ -36,7 +36,7 @@ class EndTurnTests: XCTestCase {
             .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2)
         
-        let sut = EndTurn(actorId: "p1", cardsToDiscardIds: [])
+        let sut = EndTurn(actorId: "p1", cardIds: [])
         
         // When
         let updates = sut.execute(in: mockState)
@@ -56,7 +56,7 @@ class EndTurnTests: XCTestCase {
             .currentTurn(is: "p2")
             .players(are: mockPlayer1, mockPlayer2)
         
-        let sut = EndTurn(actorId: "p2", cardsToDiscardIds: [])
+        let sut = EndTurn(actorId: "p2", cardIds: [])
         
         // When
         let updates = sut.execute(in: mockState)
@@ -76,7 +76,7 @@ class EndTurnTests: XCTestCase {
             .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2)
         
-        let sut = EndTurn(actorId: "p1", cardsToDiscardIds: ["c1", "c2"])
+        let sut = EndTurn(actorId: "p1", cardIds: ["c1", "c2"])
         
         // When
         let updates = sut.execute(in: mockState)
@@ -112,7 +112,7 @@ class EndTurnRuleTests: XCTestCase {
         let actions = sut.match(with: mockState)
         
         // Assert
-        XCTAssertEqual(actions as? [EndTurn], [EndTurn(actorId: "p1", cardsToDiscardIds: [])])
+        XCTAssertEqual(actions as? [EndTurn], [EndTurn(actorId: "p1", cardIds: [])])
     }
     
     func test_CanEndTurnWithDicardingOneExcessCard_IfPlayingNoChallenge() {
@@ -135,9 +135,9 @@ class EndTurnRuleTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(actions as? [EndTurn], [
-            EndTurn(actorId: "p1", cardsToDiscardIds: ["c1"]),
-            EndTurn(actorId: "p1", cardsToDiscardIds: ["c2"]),
-            EndTurn(actorId: "p1", cardsToDiscardIds: ["c3"])
+            EndTurn(actorId: "p1", cardIds: ["c1"]),
+            EndTurn(actorId: "p1", cardIds: ["c2"]),
+            EndTurn(actorId: "p1", cardIds: ["c3"])
         ])
     }
     
@@ -161,9 +161,9 @@ class EndTurnRuleTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(actions as? [EndTurn], [
-            EndTurn(actorId: "p1", cardsToDiscardIds: ["c1", "c2"]),
-            EndTurn(actorId: "p1", cardsToDiscardIds: ["c1", "c3"]),
-            EndTurn(actorId: "p1", cardsToDiscardIds: ["c2", "c3"])
+            EndTurn(actorId: "p1", cardIds: ["c1", "c2"]),
+            EndTurn(actorId: "p1", cardIds: ["c1", "c3"]),
+            EndTurn(actorId: "p1", cardIds: ["c2", "c3"])
         ])
     }
 }

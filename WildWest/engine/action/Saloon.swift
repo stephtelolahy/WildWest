@@ -6,15 +6,16 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct Saloon: ActionProtocol, Equatable {
+struct Saloon: PlayCardAtionProtocol, Equatable {
     let actorId: String
     let cardId: String
     let autoPlay = false
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
-        var updates: [GameUpdate] = [.playerDiscardHand(actorId, cardId)]
+        var updates: [GameUpdate] = []
+        updates.append(.playerDiscardHand(actorId, cardId))
         let damagedPlayers = state.players.filter { $0.health < $0.maxHealth }
-        damagedPlayers.forEach { updates.append(.playerSetHealth($0.identifier, $0.health + 1)) }
+        damagedPlayers.forEach { updates.append(.playerGainHealth($0.identifier, 1)) }
         return updates
     }
     

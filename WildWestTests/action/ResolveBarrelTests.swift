@@ -34,7 +34,7 @@ class ResolveBarrelTests: XCTestCase {
         
         // When
         // Assert
-        XCTAssertEqual(sut.description, "p1 uses c1")
+        XCTAssertEqual(sut.description, "p1 resolves c1")
     }
     
     func test_ResolveShootChallenge_IfReturnHeartFromDeck() {
@@ -43,7 +43,7 @@ class ResolveBarrelTests: XCTestCase {
         let mockState = MockGameStateProtocol()
         Cuckoo.stub(mockState) { mock in
             when(mock.deck.get).thenReturn([mockCard, MockCardProtocol()])
-            when(mock.challenge.get).thenReturn(.shoot(["p1"], .bang))
+            when(mock.challenge.get).thenReturn(.shoot(["p1"], .bang, .byPlayer("px")))
             when(mock.barrelsResolved.get).thenReturn(0)
         }
         
@@ -65,7 +65,7 @@ class ResolveBarrelTests: XCTestCase {
         let mockState = MockGameStateProtocol()
         Cuckoo.stub(mockState) { mock in
             when(mock.deck.get).thenReturn([mockCard, MockCardProtocol()])
-            when(mock.challenge.get).thenReturn(.shoot(["p1"], .bang))
+            when(mock.challenge.get).thenReturn(.shoot(["p1"], .bang, .byPlayer("px")))
             when(mock.barrelsResolved.get).thenReturn(0)
         }
         
@@ -93,7 +93,7 @@ class UseBarrelRuleTests: XCTestCase {
             .playing(mockCard)
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
-            .challenge(is: .shoot(["p1"], .bang))
+            .challenge(is: .shoot(["p1"], .bang, .byPlayer("px")))
             .players(are: mockPlayer1)
             .barrelsResolved(is: 0)
         
@@ -114,7 +114,7 @@ class UseBarrelRuleTests: XCTestCase {
             .playing(mockCard)
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
-            .challenge(is: .shoot(["p1"], .bang))
+            .challenge(is: .shoot(["p1"], .bang, .byPlayer("px")))
             .players(are: mockPlayer1)
             .barrelsResolved(is: 1)
         

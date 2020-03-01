@@ -13,18 +13,6 @@ class GameUpdateTests: XCTestCase {
     
     let mockDatabase = MockGameDatabaseProtocol().withEnabledDefaultImplementation(GameDatabaseProtocolStub())
     
-    func test_SetOutcome() {
-        // Given
-        let sut = GameUpdate.setOutcome(.outlawWin)
-        
-        // When
-        sut.execute(in: mockDatabase)
-        
-        // Assert
-        verify(mockDatabase).setOutcome(equal(to: .outlawWin))
-        verifyNoMoreInteractions(mockDatabase)
-    }
-    
     func test_MoveCardFromDeckToHand_IfPlayerPullCardFromDeck() {
         // Given
         let mockCard = MockCardProtocol()
@@ -56,18 +44,6 @@ class GameUpdateTests: XCTestCase {
         // Assert
         verify(mockDatabase).playerRemoveHand("p1", "c1")
         verify(mockDatabase).addDiscard(card(equalTo: mockCard))
-        verifyNoMoreInteractions(mockDatabase)
-    }
-    
-    func test_playerSetHealth() {
-        // Given
-        let sut = GameUpdate.playerSetHealth("p1", 2)
-        
-        // When
-        sut.execute(in: mockDatabase)
-        
-        // Assert
-        verify(mockDatabase).playerSetHealth("p1", 2)
         verifyNoMoreInteractions(mockDatabase)
     }
     

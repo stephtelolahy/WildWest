@@ -14,6 +14,24 @@ struct Card: CardProtocol, Decodable {
     let imageName: String
     
     var identifier: String {
-        "\(name)-\(value)-\(suit)"
+        "\(name)-\(value)\(suit.description)"
+    }
+}
+
+private extension CardSuit {
+    var description: String {
+        switch self {
+        case .clubs:
+            return "♣"
+            
+        case .diamonds:
+            return "♦"
+            
+        case .hearts:
+            return "♥"
+            
+        case .spades:
+            return "♠"
+        }
     }
 }

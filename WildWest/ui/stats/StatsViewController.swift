@@ -64,7 +64,7 @@ private extension GameStateProtocol {
         let otherPlayers = allPlayers.filter { $0.role != .sheriff }
         let stats = otherPlayers.map { AgressivityStat(source: $0.identifier, target: sheriff.identifier, value: 0) }
         
-        commandsHistory.forEach { move in
+        moves.forEach { move in
             
             if let bang = move as? Bang {
                 appendStrongAttack(from: bang.actorId, to: bang.targetId, in: stats)

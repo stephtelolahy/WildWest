@@ -30,8 +30,8 @@ extension GameState: GameDatabaseProtocol {
         self.barrelsResolved = barrelsResolved
     }
     
-    func addCommandsHistory(_ actions: ActionProtocol) {
-        commandsHistory.append(actions)
+    func addMove(_ action: ActionProtocol) {
+        moves.append(action)
     }
     
     func setValidMoves(_ actions: [ActionProtocol]) {
@@ -48,6 +48,10 @@ extension GameState: GameDatabaseProtocol {
     
     func setOutcome(_ outcome: GameOutcome) {
         self.outcome = outcome
+    }
+    
+    func addDamageEvent(_ event: DamageEvent) {
+        damageEvents.append(event)
     }
     
     /// Deck

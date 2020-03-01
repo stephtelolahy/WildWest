@@ -6,7 +6,7 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct Missed: ActionProtocol, Equatable {
+struct Missed: PlayCardAtionProtocol, Equatable {
     let actorId: String
     let cardId: String
     let autoPlay = false
@@ -27,7 +27,7 @@ struct Missed: ActionProtocol, Equatable {
 struct MissedRule: RuleProtocol {
     
     func match(with state: GameStateProtocol) -> [ActionProtocol]? {
-        guard case let .shoot(targetIds, _) = state.challenge,
+        guard case let .shoot(targetIds, _, _) = state.challenge,
             let actor = state.players.first(where: { $0.identifier == targetIds.first }),
             let cards = actor.handCards(named: .missed) else {
                 return nil

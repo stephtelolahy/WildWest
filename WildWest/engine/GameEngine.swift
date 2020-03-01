@@ -14,14 +14,14 @@ class GameEngine: GameEngineProtocol {
     
     private let database: GameDatabaseProtocol
     private let rules: [RuleProtocol]
-    private let calculator: OutcomeCalculatorProtocol
+    private let effectRules: [EffectRuleProtocol]
     
     init(database: GameDatabaseProtocol,
          rules: [RuleProtocol],
-         calculator: OutcomeCalculatorProtocol) {
+         effectRules: [EffectRuleProtocol]) {
         self.database = database
         self.rules = rules
-        self.calculator = calculator
+        self.effectRules = effectRules
         stateSubject = BehaviorSubject(value: database.state)
     }
     
@@ -40,7 +40,7 @@ class GameEngine: GameEngineProtocol {
         
         while !moves.isEmpty {
             let move = moves.remove(at: 0)
-            database.addCommandsHistory(move)
+            database.addMove(move)
             
             print("\n*** \(move.description) ***")
             let updates = move.execute(in: database.state)
@@ -49,16 +49,22 @@ class GameEngine: GameEngineProtocol {
                 print($0.description)
             }
             
-            if let outcome = calculator.outcome(for: database.state.players.map { $0.role }) {
-                database.setOutcome(outcome)
+            guard database.state.outcome == nil else {
+                break
+            }
+            
+            let effects = effectRules.compactMap { $0.effectOnExecuting(action: move, in: database.state) }
+            if !effects.isEmpty {
+                moves.append(contentsOf: effects)
+                continue
+            }
+            
+            let validMoves = rules.compactMap { $0.match(with: database.state) }.flatMap { $0 }
+            let autoPlayMoves = validMoves.filter({ $0.autoPlay })
+            if !autoPlayMoves.isEmpty {
+                moves.append(contentsOf: autoPlayMoves)
             } else {
-                let validMoves = rules.compactMap { $0.match(with: database.state) }.flatMap { $0 }
-                let autoPlayMoves = validMoves.filter({ $0.autoPlay })
-                if !autoPlayMoves.isEmpty {
-                    moves.append(contentsOf: autoPlayMoves)
-                } else {
-                    database.setValidMoves(validMoves)
-                }
+                database.setValidMoves(validMoves)
             }
         }
         

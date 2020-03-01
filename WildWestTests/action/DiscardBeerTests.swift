@@ -31,7 +31,7 @@ class DiscardBeerTests: XCTestCase {
     func test_RemoveActorFromShootChallenge_IfDiscardingBeer() {
         // Given
         let mockState = MockGameStateProtocol()
-            .challenge(is: .shoot(["p1", "p2", "p3"], .gatling))
+            .challenge(is: .shoot(["p1", "p2", "p3"], .gatling, .byPlayer("px")))
         let sut = DiscardBeer(actorId: "p1", cardsToDiscardIds: ["c1"])
         
         // When
@@ -40,14 +40,14 @@ class DiscardBeerTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
             .playerDiscardHand("p1", "c1"),
-            .setChallenge(.shoot(["p2", "p3"], .gatling))
+            .setChallenge(.shoot(["p2", "p3"], .gatling, .byPlayer("px")))
         ])
     }
     
     func test_RemoveActorFromIndiansChallenge_IfDiscardingBeer() {
         // Given
         let mockState = MockGameStateProtocol()
-            .challenge(is: .indians(["p1", "p2", "p3"]))
+            .challenge(is: .indians(["p1", "p2", "p3"], .byPlayer("px")))
         let sut = DiscardBeer(actorId: "p1", cardsToDiscardIds: ["c1"])
         
         // When
@@ -56,14 +56,14 @@ class DiscardBeerTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
             .playerDiscardHand("p1", "c1"),
-            .setChallenge(.indians(["p2", "p3"]))
+            .setChallenge(.indians(["p2", "p3"], .byPlayer("px")))
         ])
     }
     
     func test_RemoveDuelChallenge_IfDiscardingBeer() {
         // Given
         let mockState = MockGameStateProtocol()
-            .challenge(is: .duel(["p1", "p2"]))
+            .challenge(is: .duel(["p1", "p2"], .byPlayer("p1")))
         let sut = DiscardBeer(actorId: "p1", cardsToDiscardIds: ["c1"])
         
         // When
@@ -108,7 +108,7 @@ class DiscardBeerRuleTests: XCTestCase {
             .identified(by: "p1")
             .health(is: 1)
         let mockState = MockGameStateProtocol()
-            .challenge(is: .shoot(["p1", "p2"], .gatling))
+            .challenge(is: .shoot(["p1", "p2"], .gatling, .byPlayer("px")))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
@@ -129,7 +129,7 @@ class DiscardBeerRuleTests: XCTestCase {
             .identified(by: "p1")
             .health(is: 1)
         let mockState = MockGameStateProtocol()
-            .challenge(is: .indians(["p1", "p2"]))
+            .challenge(is: .indians(["p1", "p2"], .byPlayer("px")))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
@@ -150,7 +150,7 @@ class DiscardBeerRuleTests: XCTestCase {
             .identified(by: "p1")
             .health(is: 1)
         let mockState = MockGameStateProtocol()
-            .challenge(is: .duel(["p1", "p2"]))
+            .challenge(is: .duel(["p1", "p2"], .byPlayer("p2")))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
@@ -193,7 +193,7 @@ class DiscardBeerRuleTests: XCTestCase {
             .identified(by: "p1")
             .health(is: 1)
         let mockState = MockGameStateProtocol()
-            .challenge(is: .shoot(["p1", "p2"], .gatling))
+            .challenge(is: .shoot(["p1", "p2"], .gatling, .byPlayer("px")))
             .players(are: mockPlayer1, MockPlayerProtocol())
         
         // When

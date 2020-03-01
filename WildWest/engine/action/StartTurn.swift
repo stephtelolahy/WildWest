@@ -8,7 +8,6 @@
 
 struct StartTurn: ActionProtocol, Equatable {
     let actorId: String
-    let cardId = ""
     let autoPlay = true
     
     var description: String {
@@ -16,8 +15,8 @@ struct StartTurn: ActionProtocol, Equatable {
     }
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
-        let updates: [GameUpdate] = [.setChallenge(nil),
-                                     .playerPullFromDeck(actorId, 2)]
+        let updates: [GameUpdate] = [.playerPullFromDeck(actorId, 2),
+                                     .setChallenge(nil)]
         return updates
     }
 }

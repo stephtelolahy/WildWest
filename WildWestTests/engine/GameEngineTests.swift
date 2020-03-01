@@ -14,7 +14,7 @@ class GameEngineTests: XCTestCase {
     var mockState: MockGameStateProtocol!
     var mockDatabase: MockGameDatabaseProtocol!
     var mockRule: MockRuleProtocol!
-    var mockCalculator: MockOutcomeCalculatorProtocol!
+    var mockEffectRule: MockEffectRuleProtocol!
     var mockAction: MockActionProtocol!
     
     var sut: GameEngineProtocol!
@@ -26,12 +26,12 @@ class GameEngineTests: XCTestCase {
             when(mock.state.get).thenReturn(mockState)
         }
         mockRule = MockRuleProtocol().withEnabledDefaultImplementation(RuleProtocolStub())
-        mockCalculator = MockOutcomeCalculatorProtocol().withEnabledDefaultImplementation(OutcomeCalculatorProtocolStub())
-        sut = GameEngine(database: mockDatabase, rules: [mockRule], calculator: mockCalculator)
+        mockEffectRule = MockEffectRuleProtocol().withEnabledDefaultImplementation(EffectRuleProtocolStub())
+        sut = GameEngine(database: mockDatabase, rules: [mockRule], effectRules: [mockEffectRule])
         mockAction = MockActionProtocol().withEnabledDefaultImplementation(ActionProtocolStub())
     }
     
-    func test_ExecuteGameUpdates_IfExecutingCommand() {
+    func test_ExecuteGameUpdates_IfExecutingAction() {
         // Given
         let mockUpdate1 = MockGameUpdateProtocol().withEnabledDefaultImplementation(GameUpdateProtocolStub())
         let mockUpdate2 = MockGameUpdateProtocol().withEnabledDefaultImplementation(GameUpdateProtocolStub())
@@ -47,16 +47,16 @@ class GameEngineTests: XCTestCase {
         verify(mockUpdate2).execute(in: database(equalTo: mockDatabase))
     }
     
-    func test_AddCommandToHistory_IfExecutingCommand() {
+    func test_AddMoves_IfExecutingAction() {
         // Given
         // When
         sut.execute(mockAction)
         
         // Assert
-        verify(mockDatabase).addCommandsHistory(action(equalTo: mockAction))
+        verify(mockDatabase).addMove(action(equalTo: mockAction))
     }
     
-    func test_SetMatchingActionsAsValidMoves_IfExecutingCommand() {
+    func test_SetMatchingActionsAsValidMoves_IfExecutingAction() {
         // Given
         let matchedAction1 = MockActionProtocol().autoPlay(is: false)
         let matchedAction2 = MockActionProtocol().autoPlay(is: false)
@@ -81,22 +81,13 @@ class GameEngineTests: XCTestCase {
     func test_DoNotGenerateActions_IfGameIsOver() {
         // Given
         Cuckoo.stub(mockState) { mock in
-            when(mock.players.get).thenReturn([
-                MockPlayerProtocol().role(is: .deputy),
-                MockPlayerProtocol().role(is: .renegade),
-                MockPlayerProtocol().role(is: .outlaw)
-            ])
-        }
-        Cuckoo.stub(mockCalculator) { mock in
-            when(mock.outcome(for: any())).thenReturn(.outlawWin)
+            when(mock.outcome.get).thenReturn(.outlawWin)
         }
         
         // When
         sut.execute(mockAction)
         
         // Assert
-        verify(mockCalculator).outcome(for: equal(to: [.deputy, .renegade, .outlaw]))
-        verify(mockDatabase).setOutcome(equal(to: .outlawWin))
         verify(mockDatabase).setValidMoves(isEmpty())
         verifyNoMoreInteractions(mockRule)
     }

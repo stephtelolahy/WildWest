@@ -14,11 +14,12 @@ class GameState: GameStateProtocol {
     var challenge: Challenge?
     var bangsPlayed: Int
     var barrelsResolved: Int
+    var damageEvents: [DamageEvent]
     var generalStore: [CardProtocol]
+    var eliminated: [PlayerProtocol]
     var outcome: GameOutcome?
     var validMoves: [ActionProtocol]
-    var commandsHistory: [ActionProtocol]
-    var eliminated: [PlayerProtocol]
+    var moves: [ActionProtocol]
     
     init(players: [PlayerProtocol],
          deck: [CardProtocol],
@@ -26,10 +27,11 @@ class GameState: GameStateProtocol {
          challenge: Challenge?,
          bangsPlayed: Int,
          barrelsResolved: Int,
+         damageEvents: [DamageEvent],
          generalStore: [CardProtocol],
          outcome: GameOutcome?,
          validMoves: [ActionProtocol],
-         commandsHistory: [ActionProtocol],
+         moves: [ActionProtocol],
          eliminated: [PlayerProtocol]) {
         self.players = players
         self.deck = deck
@@ -37,9 +39,10 @@ class GameState: GameStateProtocol {
         self.challenge = challenge
         self.bangsPlayed = bangsPlayed
         self.barrelsResolved = barrelsResolved
+        self.damageEvents = damageEvents
         self.generalStore = generalStore
         self.outcome = outcome
-        self.commandsHistory = commandsHistory
+        self.moves = moves
         self.validMoves = validMoves
         self.eliminated = eliminated
     }

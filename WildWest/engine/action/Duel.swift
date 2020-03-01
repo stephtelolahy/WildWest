@@ -6,7 +6,7 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct Duel: ActionProtocol, Equatable {
+struct Duel: PlayCardAgainstOnePlayerActionProtocol, Equatable {
     let actorId: String
     let cardId: String
     let targetId: String
@@ -15,7 +15,7 @@ struct Duel: ActionProtocol, Equatable {
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
         let updates: [GameUpdate] = [
             .playerDiscardHand(actorId, cardId),
-            .setChallenge(.duel([targetId, actorId]))
+            .setChallenge(.duel([targetId, actorId], .byPlayer(actorId)))
         ]
         return updates
     }

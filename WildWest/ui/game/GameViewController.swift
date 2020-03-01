@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class GameViewController: UIViewController, Subscribable {
+class GameViewController: UIViewController, Subscribable, MoveSelectionable {
     
     // MARK: Constants
     
@@ -24,6 +24,7 @@ class GameViewController: UIViewController, Subscribable {
     @IBOutlet private weak var actionsCollectionView: UICollectionView!
     @IBOutlet private weak var messageTableView: UITableView!
     @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var discardImageView: UIImageView!
     
     // MARK: Properties
     
@@ -81,10 +82,12 @@ private extension GameViewController {
     }
     
     func startGame() {
-        let database = GameLoader().createGame(for: 7)
+        let provider = ResourcesProvider(jsonReader: JsonReader(bundle: Bundle.main))
+        let gameLoader = GameLoader()
+        let database = gameLoader.createGame(for: 7, provider: provider)
         let engine = GameEngine(database: database,
-                                rules: GameLoader().classicRules(),
-                                calculator: OutcomeCalculator())
+                                rules: gameLoader.classicRules(),
+                                effectRules: gameLoader.effectRules())
         self.engine = engine
         sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
             self?.update(with: state)
@@ -96,7 +99,7 @@ private extension GameViewController {
         
         let aiPlayers = database.state.players.filter { $0.identifier != controlledPlayerId }
         let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
-                                                     ai: RandomAIWithRole(), 
+                                                     ai: RandomAIWithRole(),
                                                      engine: engine,
                                                      delay: 0.5)
         }
@@ -109,40 +112,14 @@ private extension GameViewController {
     func update(with state: GameStateProtocol) {
         playersAdapter.setState(state)
         actionsAdapter.setState(state)
-        messages = state.commandsHistory.map { $0.description }
+        messages = state.moves.map { $0.description }
         playersCollectionView.reloadData()
         actionsCollectionView.reloadData()
         messageTableView.reloadDataSwollingAtBottom()
         titleLabel.text = titleText(with: state)
-    }
-    
-    func showOptions(_ actions: [ActionProtocol]) {
-        guard !actions.isEmpty else {
-            return
+        if let topDiscardCard = state.deck.last {
+            discardImageView.image = UIImage(named: topDiscardCard.imageName)
         }
-        
-        if actions.count == 1 {
-            engine?.execute(actions[0])
-            return
-        }
-        
-        let alertController = UIAlertController(title: nil,
-                                                message: nil,
-                                                preferredStyle: .alert)
-        
-        actions.forEach { action in
-            alertController.addAction(UIAlertAction(title: action.description,
-                                                    style: .default,
-                                                    handler: { [weak self] _ in
-                                                        self?.engine?.execute(action)
-            }))
-        }
-        
-        alertController.addAction(UIAlertAction(title: "Cancel",
-                                                style: .cancel,
-                                                handler: nil))
-        
-        present(alertController, animated: true)
     }
     
     func showStats() {
@@ -242,7 +219,9 @@ extension GameViewController: UICollectionViewDelegate {
     }
     
     private func actionsCollectionViewDidSelectItem(at indexPath: IndexPath) {
-        showOptions(actionsAdapter.items[indexPath.row].actions)
+        selectMove(within: actionsAdapter.items[indexPath.row].actions) { [weak self] move in
+            self?.engine?.execute(move)
+        }
     }
 }
 
