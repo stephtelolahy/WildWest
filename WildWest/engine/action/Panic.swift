@@ -58,7 +58,7 @@ struct PanicRule: RuleProtocol {
                 && calculator.distance(from: actor.identifier, to: $0.identifier, in: state) <= reachableDistance
         }
         
-        guard let targetCards = state.targetCards(from: actor, and: otherPlayers) else {
+        guard let targetCards = state.targetCards(from: otherPlayers) else {
             return nil
         }
         
