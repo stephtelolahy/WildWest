@@ -9,34 +9,27 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Menu View Controller-->
         <scene sceneID="5co-p4-5HW">
             <objects>
-                <viewController id="8GX-Wa-ifS" sceneMemberID="viewController">
+                <viewController id="8GX-Wa-ifS" customClass="MenuViewController" customModule="WildWest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="q5r-gt-aD8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_board" translatesAutoresizingMaskIntoConstraints="NO" id="tQt-mn-EZR">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s8o-qf-BAQ">
                                 <rect key="frame" x="170.5" y="317" width="34" height="33"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <state key="normal" title="Play"/>
                                 <connections>
-                                    <segue destination="Yy6-0k-mhK" kind="presentation" id="uzT-BZ-ArZ"/>
+                                    <action selector="playButtonTapped:" destination="8GX-Wa-ifS" eventType="touchUpInside" id="fna-Vk-lga"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="tQt-mn-EZR" secondAttribute="bottom" id="4ai-Bv-NN8"/>
                             <constraint firstItem="s8o-qf-BAQ" firstAttribute="centerY" secondItem="q5r-gt-aD8" secondAttribute="centerY" id="IrU-08-kTr"/>
                             <constraint firstItem="s8o-qf-BAQ" firstAttribute="centerX" secondItem="q5r-gt-aD8" secondAttribute="centerX" id="RsQ-Gg-z9n"/>
-                            <constraint firstAttribute="trailing" secondItem="tQt-mn-EZR" secondAttribute="trailing" id="f3b-dI-ifn"/>
-                            <constraint firstItem="tQt-mn-EZR" firstAttribute="top" secondItem="q5r-gt-aD8" secondAttribute="top" id="ho9-cw-Gwv"/>
-                            <constraint firstItem="tQt-mn-EZR" firstAttribute="leading" secondItem="q5r-gt-aD8" secondAttribute="leading" id="wFQ-bN-mJu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tm4-HU-FPt"/>
                     </view>
@@ -49,7 +42,7 @@
         <!--Your turn-->
         <scene sceneID="5RH-Er-B9e">
             <objects>
-                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="Yy6-0k-mhK" customClass="GameViewController" customModule="WildWest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GameViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="Yy6-0k-mhK" customClass="GameViewController" customModule="WildWest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SPv-lk-pld">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -192,7 +185,7 @@
                                         </constraints>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="01_barile" translatesAutoresizingMaskIntoConstraints="NO" id="F8P-W3-OtS" userLabel="discardImageView">
-                                        <rect key="frame" x="47" y="0.0" width="47" height="73.000000000000057"/>
+                                        <rect key="frame" x="47" y="0.0" width="47" height="73"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="F8P-W3-OtS" secondAttribute="height" multiplier="250:389" id="yAr-Jz-kkr"/>
@@ -358,6 +351,6 @@
     <resources>
         <image name="01_back" width="160" height="247"/>
         <image name="01_barile" width="125" height="194.5"/>
-        <image name="bg_board" width="800" height="1200"/>
+        <image name="bg_board" width="400" height="600"/>
     </resources>
 </document>

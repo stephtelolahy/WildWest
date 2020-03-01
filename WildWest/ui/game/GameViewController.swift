@@ -28,19 +28,34 @@ class GameViewController: UIViewController, Subscribable, MoveSelectionable {
     
     // MARK: Properties
     
-    private var engine: GameEngineProtocol?
-    private var aiAgents: [AIPlayerAgentProtocol]?
+    var engine: GameEngineProtocol?
+    var aiAgents: [AIPlayerAgentProtocol]?
+    var controlledPlayerId: String?
+    
     private let playersAdapter: PlayersAdapterProtocol = PlayersAdapter()
     private let actionsAdapter: ActionsAdapterProtocol = ActionsAdapter()
-    private var controlledPlayerId: String?
-    private var messages: [String] = []
+    private let messagesAdapter: MessagesAdapterProtocol = MessagesAdapter()
     
     // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        startGame()
+        playersCollectionView.setItemSpacing(Constants.spacing)
+        actionsCollectionView.setItemSpacing(Constants.spacing)
+        
+        playersAdapter.setControlledPlayerId(controlledPlayerId)
+        actionsAdapter.setControlledPlayerId(controlledPlayerId)
+        
+        guard let engine = self.engine else {
+            return
+        }
+        
+        sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
+            self?.update(with: state)
+        }))
+        engine.start()
+        
+        aiAgents?.forEach { $0.start() }
     }
     
     // MARK: IBAction
@@ -56,7 +71,7 @@ class GameViewController: UIViewController, Subscribable, MoveSelectionable {
                                                     self?.showStats()
         }))
         
-        alertController.addAction(UIAlertAction(title: "Exit",
+        alertController.addAction(UIAlertAction(title: "Quit",
                                                 style: .default,
                                                 handler: { [weak self] _ in
                                                     self?.dismiss(animated: true)
@@ -76,47 +91,14 @@ class GameViewController: UIViewController, Subscribable, MoveSelectionable {
 
 private extension GameViewController {
     
-    func setupView() {
-        playersCollectionView.setItemSpacing(Constants.spacing)
-        actionsCollectionView.setItemSpacing(Constants.spacing)
-    }
-    
-    func startGame() {
-        let provider = ResourcesProvider(jsonReader: JsonReader(bundle: Bundle.main))
-        let gameLoader = GameLoader()
-        let database = gameLoader.createGame(for: 7, provider: provider)
-        let engine = GameEngine(database: database,
-                                rules: gameLoader.classicRules(),
-                                effectRules: gameLoader.effectRules())
-        self.engine = engine
-        sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
-            self?.update(with: state)
-        }))
-        
-        controlledPlayerId = database.state.players.first(where: { $0.role == .sheriff })?.identifier
-        playersAdapter.setControlledPlayerId(controlledPlayerId)
-        actionsAdapter.setControlledPlayerId(controlledPlayerId)
-        
-        let aiPlayers = database.state.players.filter { $0.identifier != controlledPlayerId }
-        let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
-                                                     ai: RandomAIWithRole(),
-                                                     engine: engine,
-                                                     delay: 0.5)
-        }
-        self.aiAgents = aiAgents
-        aiAgents.forEach { $0.start() }
-        
-        engine.start()
-    }
-    
     func update(with state: GameStateProtocol) {
         playersAdapter.setState(state)
         actionsAdapter.setState(state)
-        messages = state.moves.map { $0.description }
+        messagesAdapter.setState(state)
         playersCollectionView.reloadData()
         actionsCollectionView.reloadData()
         messageTableView.reloadDataSwollingAtBottom()
-        titleLabel.text = titleText(with: state)
+        titleLabel.text = messagesAdapter.title
         if let topDiscardCard = state.deck.last {
             discardImageView.image = UIImage(named: topDiscardCard.imageName)
         }
@@ -127,28 +109,12 @@ private extension GameViewController {
         viewController.stateSubject = engine?.stateSubject
         present(viewController, animated: true)
     }
-    
-    func titleText(with state: GameStateProtocol) -> String {
-        if let outcome = state.outcome {
-            return outcome.rawValue
-        }
-        
-        if let challenge = state.challenge {
-            return challenge.description
-        }
-        
-        if state.validMoves.contains(where: { $0.actorId == controlledPlayerId }) {
-            return "your turn"
-        }
-        
-        return "waiting others to play"
-    }
 }
 
 extension GameViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        messages.count
+        messagesAdapter.messages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -157,7 +123,7 @@ extension GameViewController: UITableViewDataSource {
                                                         return UITableViewCell()
         }
         
-        cell.update(with: messages[indexPath.row])
+        cell.update(with: messagesAdapter.messages[indexPath.row])
         return cell
     }
 }
