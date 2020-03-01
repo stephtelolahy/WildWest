@@ -34,7 +34,7 @@ class ResolveBarrelTests: XCTestCase {
         
         // When
         // Assert
-        XCTAssertEqual(sut.description, "p1 uses c1")
+        XCTAssertEqual(sut.description, "p1 resolves c1")
     }
     
     func test_ResolveShootChallenge_IfReturnHeartFromDeck() {

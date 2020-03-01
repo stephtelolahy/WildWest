@@ -15,12 +15,18 @@ class GameUpdatePlayerGainHealthTests: XCTestCase {
     
     func test_playerSetHealth_IfGainLifePoints() {
         // Given
-        let sut = GameUpdate.playerGainHealth("p1", 2)
+        let mockState = MockGameStateProtocol()
+            .players(are: MockPlayerProtocol().identified(by: "p1").health(is: 1))
+        Cuckoo.stub(mockDatabase) { mock in
+            when(mock.state.get).thenReturn(mockState)
+        }
+        let sut = GameUpdate.playerGainHealth("p1", 1)
         
         // When
         sut.execute(in: mockDatabase)
         
         // Assert
+        verify(mockDatabase).state.get()
         verify(mockDatabase).playerSetHealth("p1", 2)
         verifyNoMoreInteractions(mockDatabase)
     }

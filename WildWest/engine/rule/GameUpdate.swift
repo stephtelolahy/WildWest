@@ -45,11 +45,11 @@ extension GameUpdate: GameUpdateProtocol {
         case let .setChallenge(challenge):
             GameUpdateSetChallenge(challenge: challenge).execute(in: database)
             
-        case let .playerGainHealth(playerId, health):
-            GameUpdatePlayerGainHealth(playerId: playerId, health: health).execute(in: database)
+        case let .playerGainHealth(playerId, points):
+            GameUpdatePlayerGainHealth(playerId: playerId, points: points).execute(in: database)
             
-        case let .playerLooseHealth(playerId, health, source):
-            GameUpdatePlayerLooseHealth(playerId: playerId, health: health, source: source).execute(in: database)
+        case let .playerLooseHealth(playerId, points, source):
+            GameUpdatePlayerLooseHealth(playerId: playerId, points: points, source: source).execute(in: database)
             
         case let .playerPullFromDeck(playerId, cardsCount):
             Array(1...cardsCount).forEach { _ in
@@ -122,11 +122,11 @@ extension GameUpdate: GameUpdateProtocol {
         case let .setChallenge(challenge):
             return GameUpdateSetChallenge(challenge: challenge).description
             
-        case let .playerGainHealth(playerId, health):
-            return GameUpdatePlayerGainHealth(playerId: playerId, health: health).description
+        case let .playerGainHealth(playerId, points):
+            return GameUpdatePlayerGainHealth(playerId: playerId, points: points).description
             
-        case let .playerLooseHealth(playerId, health, source):
-            return GameUpdatePlayerLooseHealth(playerId: playerId, health: health, source: source).description
+        case let .playerLooseHealth(playerId, points, source):
+            return GameUpdatePlayerLooseHealth(playerId: playerId, points: points, source: source).description
             
         case let .playerPullFromDeck(playerId, cardsCount):
             return "\(playerId) pullFromDeck \(cardsCount)"

@@ -25,7 +25,7 @@ struct ResolveBarrel: ActionProtocol, Equatable {
     }
     
     var description: String {
-        "\(actorId) uses \(cardId)"
+        "\(actorId) resolves \(cardId)"
     }
 }
 

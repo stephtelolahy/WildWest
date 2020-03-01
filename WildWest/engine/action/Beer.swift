@@ -12,13 +12,9 @@ struct Beer: PlayCardAtionProtocol, Equatable {
     let autoPlay = false
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
-        guard let player = state.players.first(where: { $0.identifier == actorId }) else {
-            return []
-        }
-        
         let updates: [GameUpdate] = [
             .playerDiscardHand(actorId, cardId),
-            .playerGainHealth(actorId, player.health + 1)]
+            .playerGainHealth(actorId, 1)]
         return updates
     }
     

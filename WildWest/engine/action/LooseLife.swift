@@ -16,14 +16,13 @@ struct LooseLife: ActionProtocol, Equatable {
     }
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
-        guard let player = state.players.first(where: { $0.identifier == actorId }),
-            let challenge = state.challenge,
+        guard let challenge = state.challenge,
             let damageSource = challenge.damageSource else {
                 return []
         }
         
         let updates: [GameUpdate] = [
-            .playerLooseHealth(actorId, player.health - points, damageSource),
+            .playerLooseHealth(actorId, points, damageSource),
             .setChallenge(challenge.removing(actorId))
         ]
         return updates

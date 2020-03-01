@@ -53,8 +53,8 @@ class SaloonTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
             .playerDiscardHand("p1", "c1"),
-            .playerGainHealth("p1", 3),
-            .playerGainHealth("p2", 4)
+            .playerGainHealth("p1", 1),
+            .playerGainHealth("p2", 1)
         ])
     }
 }

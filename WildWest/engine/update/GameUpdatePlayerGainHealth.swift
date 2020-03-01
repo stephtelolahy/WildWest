@@ -8,13 +8,18 @@
 
 struct GameUpdatePlayerGainHealth: GameUpdateProtocol {
     let playerId: String
-    let health: Int
+    let points: Int
     
     var description: String {
-        "\(playerId) gain health to \(health)"
+        "\(playerId) gain \(points) life points"
     }
     
     func execute(in database: GameDatabaseProtocol) {
+        guard let player = database.state.players.first(where: { $0.identifier == playerId }) else {
+            return
+        }
+        
+        let health = player.health + points
         database.playerSetHealth(playerId, health)
     }
 }

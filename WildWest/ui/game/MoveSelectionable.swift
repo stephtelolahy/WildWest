@@ -44,7 +44,9 @@ extension MoveSelectionable where Self: UIViewController {
             return
         }
         
-        assert(false, "unsupported")
+        select(within: actions.map { $0.description }, title: "Select option") { index in
+            completion(actions[index])
+        }
     }
     
     private func selectPlayer(within actions: [PlayCardAgainstOnePlayerActionProtocol],

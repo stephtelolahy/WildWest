@@ -24,7 +24,6 @@ class LooseLifeTests: XCTestCase {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
-            .health(is: 3)
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
             .challenge(is: .shoot(["p1"], .bang, .byPlayer("px")))
@@ -35,7 +34,7 @@ class LooseLifeTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
-            .playerLooseHealth("p1", 2, .byPlayer("px")),
+            .playerLooseHealth("p1", 1, .byPlayer("px")),
             .setChallenge(nil)
         ])
     }
@@ -44,7 +43,6 @@ class LooseLifeTests: XCTestCase {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
-            .health(is: 4)
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
             .challenge(is: .startTurnDynamiteExploded)
@@ -55,7 +53,7 @@ class LooseLifeTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
-            .playerLooseHealth("p1", 1, .byDynamite),
+            .playerLooseHealth("p1", 3, .byDynamite),
             .setChallenge(.startTurn)
         ])
     }
@@ -64,7 +62,6 @@ class LooseLifeTests: XCTestCase {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
-            .health(is: 3)
         let mockState = MockGameStateProtocol()
             .challenge(is: .shoot(["p1", "p2", "p3"], .gatling, .byPlayer("px")))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
@@ -75,7 +72,7 @@ class LooseLifeTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
-            .playerLooseHealth("p1", 2, .byPlayer("px")),
+            .playerLooseHealth("p1", 1, .byPlayer("px")),
             .setChallenge(.shoot(["p2", "p3"], .gatling, .byPlayer("px")))
         ])
     }
@@ -84,7 +81,6 @@ class LooseLifeTests: XCTestCase {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
-            .health(is: 3)
         let mockState = MockGameStateProtocol()
             .challenge(is: .indians(["p1", "p2", "p3"], .byPlayer("px")))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
@@ -95,7 +91,7 @@ class LooseLifeTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
-            .playerLooseHealth("p1", 2, .byPlayer("px")),
+            .playerLooseHealth("p1", 1, .byPlayer("px")),
             .setChallenge(.indians(["p2", "p3"], .byPlayer("px")))
         ])
     }
@@ -104,7 +100,6 @@ class LooseLifeTests: XCTestCase {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
-            .health(is: 3)
         let mockState = MockGameStateProtocol()
             .challenge(is: .duel(["p1", "p2"], .byPlayer("p2")))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
@@ -115,7 +110,7 @@ class LooseLifeTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
-            .playerLooseHealth("p1", 2, .byPlayer("p2")),
+            .playerLooseHealth("p1", 1, .byPlayer("p2")),
             .setChallenge(nil)
         ])
     }

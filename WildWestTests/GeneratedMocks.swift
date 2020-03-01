@@ -1795,19 +1795,19 @@ import Cuckoo
 
 
 
- class MockChooseCardCombinationActionProtocol: ChooseCardCombinationActionProtocol, Cuckoo.ProtocolMock {
+ class MockChooseCardsCombinationActionProtocol: ChooseCardsCombinationActionProtocol, Cuckoo.ProtocolMock {
     
-     typealias MocksType = ChooseCardCombinationActionProtocol
+     typealias MocksType = ChooseCardsCombinationActionProtocol
     
-     typealias Stubbing = __StubbingProxy_ChooseCardCombinationActionProtocol
-     typealias Verification = __VerificationProxy_ChooseCardCombinationActionProtocol
+     typealias Stubbing = __StubbingProxy_ChooseCardsCombinationActionProtocol
+     typealias Verification = __VerificationProxy_ChooseCardsCombinationActionProtocol
 
      let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
 
     
-    private var __defaultImplStub: ChooseCardCombinationActionProtocol?
+    private var __defaultImplStub: ChooseCardsCombinationActionProtocol?
 
-     func enableDefaultImplementation(_ stub: ChooseCardCombinationActionProtocol) {
+     func enableDefaultImplementation(_ stub: ChooseCardsCombinationActionProtocol) {
         __defaultImplStub = stub
         cuckoo_manager.enableDefaultStubImplementation()
     }
@@ -1890,7 +1890,7 @@ import Cuckoo
     }
     
 
-	 struct __StubbingProxy_ChooseCardCombinationActionProtocol: Cuckoo.StubbingProxy {
+	 struct __StubbingProxy_ChooseCardsCombinationActionProtocol: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
 	
 	     init(manager: Cuckoo.MockManager) {
@@ -1898,34 +1898,34 @@ import Cuckoo
 	    }
 	    
 	    
-	    var cardIds: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockChooseCardCombinationActionProtocol, [String]> {
+	    var cardIds: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockChooseCardsCombinationActionProtocol, [String]> {
 	        return .init(manager: cuckoo_manager, name: "cardIds")
 	    }
 	    
 	    
-	    var actorId: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockChooseCardCombinationActionProtocol, String> {
+	    var actorId: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockChooseCardsCombinationActionProtocol, String> {
 	        return .init(manager: cuckoo_manager, name: "actorId")
 	    }
 	    
 	    
-	    var description: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockChooseCardCombinationActionProtocol, String> {
+	    var description: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockChooseCardsCombinationActionProtocol, String> {
 	        return .init(manager: cuckoo_manager, name: "description")
 	    }
 	    
 	    
-	    var autoPlay: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockChooseCardCombinationActionProtocol, Bool> {
+	    var autoPlay: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockChooseCardsCombinationActionProtocol, Bool> {
 	        return .init(manager: cuckoo_manager, name: "autoPlay")
 	    }
 	    
 	    
 	    func execute<M1: Cuckoo.Matchable>(in state: M1) -> Cuckoo.ProtocolStubFunction<(GameStateProtocol), [GameUpdateProtocol]> where M1.MatchedType == GameStateProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockChooseCardCombinationActionProtocol.self, method: "execute(in: GameStateProtocol) -> [GameUpdateProtocol]", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockChooseCardsCombinationActionProtocol.self, method: "execute(in: GameStateProtocol) -> [GameUpdateProtocol]", parameterMatchers: matchers))
 	    }
 	    
 	}
 
-	 struct __VerificationProxy_ChooseCardCombinationActionProtocol: Cuckoo.VerificationProxy {
+	 struct __VerificationProxy_ChooseCardsCombinationActionProtocol: Cuckoo.VerificationProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
 	    private let callMatcher: Cuckoo.CallMatcher
 	    private let sourceLocation: Cuckoo.SourceLocation
@@ -1968,7 +1968,7 @@ import Cuckoo
 	}
 }
 
- class ChooseCardCombinationActionProtocolStub: ChooseCardCombinationActionProtocol {
+ class ChooseCardsCombinationActionProtocolStub: ChooseCardsCombinationActionProtocol {
     
     
      var cardIds: [String] {

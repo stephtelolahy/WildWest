@@ -8,14 +8,19 @@
 
 struct GameUpdatePlayerLooseHealth: GameUpdateProtocol {
     let playerId: String
-    let health: Int
+    let points: Int
     let source: DamageEvent.Source
     
     var description: String {
-        "\(playerId) looses health \(health) \(source)"
+        "\(playerId) looses \(points) life points \(source)"
     }
     
     func execute(in database: GameDatabaseProtocol) {
+        guard let player = database.state.players.first(where: { $0.identifier == playerId }) else {
+            return
+        }
+        
+        let health = max(0, player.health - points)
         database.playerSetHealth(playerId, health)
         database.addDamageEvent(DamageEvent(playerId: playerId, source: source))
     }

@@ -20,7 +20,7 @@ struct DiscardAllSheriffCardsOnEliminateDeputy: EffectRuleProtocol {
                 return nil
         }
         
-        let description = "\(offenderId) loose all cards on eliminating deputy"
+        let description = "\(offenderId) loose all cards on eliminating his deputy"
         var updates: [GameUpdate] = []
         offender.hand.forEach { updates.append(.playerDiscardHand(offenderId, $0.identifier)) }
         offender.inPlay.forEach { updates.append(.playerDiscardInPlay(offenderId, $0.identifier)) }
