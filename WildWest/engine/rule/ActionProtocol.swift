@@ -30,6 +30,10 @@ protocol ChooseCardActionProtocol: ActionProtocol {
     var cardId: String { get }
 }
 
+protocol ChooseCardsCombinationActionProtocol: ActionProtocol {
+    var cardIds: [String] { get }
+}
+
 struct Action: ActionProtocol {
     let actorId: String
     let autoPlay: Bool

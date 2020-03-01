@@ -6,13 +6,13 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct EndTurn: ActionProtocol, Equatable {
+struct EndTurn: ChooseCardsCombinationActionProtocol, Equatable {
     let actorId: String
-    let cardsToDiscardIds: [String]
+    let cardIds: [String]
     let autoPlay = false
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
-        var updates: [GameUpdate] = cardsToDiscardIds.map { GameUpdate.playerDiscardHand(actorId, $0) }
+        var updates: [GameUpdate] = cardIds.map { GameUpdate.playerDiscardHand(actorId, $0) }
         updates.append(.setTurn(state.nextTurn))
         updates.append(.setChallenge(.startTurn))
         return updates
@@ -20,8 +20,8 @@ struct EndTurn: ActionProtocol, Equatable {
     
     var description: String {
         var text = "\(actorId) end turn"
-        if !cardsToDiscardIds.isEmpty {
-            text += " discarding \( cardsToDiscardIds.joined(separator: ", "))"
+        if !cardIds.isEmpty {
+            text += " discarding \( cardIds.joined(separator: ", "))"
         }
         return text
     }
@@ -37,12 +37,12 @@ struct EndTurnRule: RuleProtocol {
         
         let haveExcessCards = actor.hand.count > actor.health
         guard haveExcessCards else {
-            return [EndTurn(actorId: actor.identifier, cardsToDiscardIds: [])]
+            return [EndTurn(actorId: actor.identifier, cardIds: [])]
         }
         
         let cardsToDiscardCount = actor.hand.count - actor.health
         let handCardIds = actor.hand.map { $0.identifier }
         let cardsCombinations = handCardIds.combine(by: cardsToDiscardCount)
-        return cardsCombinations.map { EndTurn(actorId: actor.identifier, cardsToDiscardIds: $0) }
+        return cardsCombinations.map { EndTurn(actorId: actor.identifier, cardIds: $0) }
     }
 }
