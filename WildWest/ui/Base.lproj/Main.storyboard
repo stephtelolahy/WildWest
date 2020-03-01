@@ -57,6 +57,19 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_board" translatesAutoresizingMaskIntoConstraints="NO" id="Zz6-li-k9a">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAP-Di-VFz">
+                                <rect key="frame" x="334" y="16" width="25" height="24"/>
+                                <connections>
+                                    <action selector="menuButtonTapped:" destination="Yy6-0k-mhK" eventType="touchUpInside" id="IYI-iB-7dY"/>
+                                </connections>
+                            </button>
+                            <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your turn" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H6O-tM-KGf">
+                                <rect key="frame" x="60" y="20" width="255" height="20"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Cuo-aq-X8E" userLabel="stateCollectionView">
                                 <rect key="frame" x="0.0" y="56" width="375" height="375"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -168,6 +181,28 @@
                                     <outlet property="delegate" destination="Yy6-0k-mhK" id="BPE-CC-im0"/>
                                 </connections>
                             </collectionView>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l2k-9K-ciW" userLabel="deckStackView">
+                                <rect key="frame" x="140.5" y="207" width="94" height="73"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="01_back" translatesAutoresizingMaskIntoConstraints="NO" id="DFl-Ga-f06" userLabel="deckImageView">
+                                        <rect key="frame" x="0.0" y="0.0" width="47" height="73"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="DFl-Ga-f06" secondAttribute="height" multiplier="250:389" id="wos-hc-9FD"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="01_barile" translatesAutoresizingMaskIntoConstraints="NO" id="F8P-W3-OtS" userLabel="discardImageView">
+                                        <rect key="frame" x="47" y="0.0" width="47" height="73.000000000000057"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="F8P-W3-OtS" secondAttribute="height" multiplier="250:389" id="yAr-Jz-kkr"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="DFl-Ga-f06" firstAttribute="width" secondItem="F8P-W3-OtS" secondAttribute="width" id="6WP-px-Oyb"/>
+                                </constraints>
+                            </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="iCj-xh-rDL">
                                 <rect key="frame" x="0.0" y="439" width="375" height="95"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -267,19 +302,6 @@
                                     <outlet property="delegate" destination="Yy6-0k-mhK" id="6PP-Y0-uVP"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAP-Di-VFz">
-                                <rect key="frame" x="334" y="16" width="25" height="24"/>
-                                <connections>
-                                    <action selector="menuButtonTapped:" destination="Yy6-0k-mhK" eventType="touchUpInside" id="IYI-iB-7dY"/>
-                                </connections>
-                            </button>
-                            <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your turn" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H6O-tM-KGf">
-                                <rect key="frame" x="60" y="20" width="255" height="20"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -289,6 +311,7 @@
                             <constraint firstItem="YnA-A3-EaS" firstAttribute="leading" secondItem="cXD-5P-evL" secondAttribute="leading" id="Bgg-xG-1fx"/>
                             <constraint firstItem="Cuo-aq-X8E" firstAttribute="trailing" secondItem="cXD-5P-evL" secondAttribute="trailing" id="DA0-Ud-BBO"/>
                             <constraint firstItem="Zz6-li-k9a" firstAttribute="top" secondItem="SPv-lk-pld" secondAttribute="top" id="NYk-8E-dzO"/>
+                            <constraint firstItem="l2k-9K-ciW" firstAttribute="centerX" secondItem="Cuo-aq-X8E" secondAttribute="centerX" id="SON-FN-Rbn"/>
                             <constraint firstItem="H6O-tM-KGf" firstAttribute="top" secondItem="cXD-5P-evL" secondAttribute="top" constant="20" id="Xho-cr-1gU"/>
                             <constraint firstItem="cXD-5P-evL" firstAttribute="trailing" secondItem="gAP-Di-VFz" secondAttribute="trailing" constant="16" id="eeq-I1-JMV"/>
                             <constraint firstItem="H6O-tM-KGf" firstAttribute="leading" secondItem="cXD-5P-evL" secondAttribute="leading" constant="60" id="gKI-9M-6aJ"/>
@@ -299,7 +322,9 @@
                             <constraint firstItem="YnA-A3-EaS" firstAttribute="trailing" secondItem="cXD-5P-evL" secondAttribute="trailing" id="l1E-Q8-slA"/>
                             <constraint firstItem="YnA-A3-EaS" firstAttribute="top" secondItem="iCj-xh-rDL" secondAttribute="bottom" constant="8" id="liQ-Hc-UCk"/>
                             <constraint firstItem="cXD-5P-evL" firstAttribute="trailing" secondItem="H6O-tM-KGf" secondAttribute="trailing" constant="60" id="mFw-x9-b1J"/>
+                            <constraint firstItem="l2k-9K-ciW" firstAttribute="width" secondItem="Cuo-aq-X8E" secondAttribute="width" multiplier="0.25" id="mxx-XI-pNg"/>
                             <constraint firstItem="gAP-Di-VFz" firstAttribute="top" secondItem="cXD-5P-evL" secondAttribute="top" constant="16" id="xaN-yR-kIv"/>
+                            <constraint firstItem="l2k-9K-ciW" firstAttribute="centerY" secondItem="Cuo-aq-X8E" secondAttribute="centerY" id="yKV-fA-R8S"/>
                             <constraint firstItem="iCj-xh-rDL" firstAttribute="leading" secondItem="cXD-5P-evL" secondAttribute="leading" id="yd2-ta-YE1"/>
                             <constraint firstItem="iCj-xh-rDL" firstAttribute="top" secondItem="Cuo-aq-X8E" secondAttribute="bottom" constant="8" id="z9G-3b-ZSH"/>
                         </constraints>
@@ -319,6 +344,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="actionsCollectionView" destination="YnA-A3-EaS" id="HoZ-WM-M1l"/>
+                        <outlet property="discardImageView" destination="F8P-W3-OtS" id="OEd-7U-BS6"/>
                         <outlet property="messageTableView" destination="iCj-xh-rDL" id="Bv5-eY-6ye"/>
                         <outlet property="playersCollectionView" destination="Cuo-aq-X8E" id="Ffa-eb-FVY"/>
                         <outlet property="titleLabel" destination="H6O-tM-KGf" id="I0Y-yZ-IzN"/>
@@ -330,6 +356,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="01_back" width="160" height="247"/>
+        <image name="01_barile" width="125" height="194.5"/>
         <image name="bg_board" width="800" height="1200"/>
     </resources>
 </document>

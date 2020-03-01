@@ -24,6 +24,7 @@ class GameViewController: UIViewController, Subscribable, MoveSelectionable {
     @IBOutlet private weak var actionsCollectionView: UICollectionView!
     @IBOutlet private weak var messageTableView: UITableView!
     @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var discardImageView: UIImageView!
     
     // MARK: Properties
     
@@ -116,6 +117,9 @@ private extension GameViewController {
         actionsCollectionView.reloadData()
         messageTableView.reloadDataSwollingAtBottom()
         titleLabel.text = titleText(with: state)
+        if let topDiscardCard = state.deck.last {
+            discardImageView.image = UIImage(named: topDiscardCard.imageName)
+        }
     }
     
     func showStats() {
