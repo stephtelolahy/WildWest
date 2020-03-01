@@ -29,6 +29,11 @@ extension MoveSelectionable where Self: UIViewController {
             return
         }
         
+        if let chooseCardActions = actions as? [ChooseCardActionProtocol] {
+            selectCard(within: chooseCardActions, completion: completion)
+            return
+        }
+        
         assert(false, "unsupported")
     }
     
@@ -36,6 +41,14 @@ extension MoveSelectionable where Self: UIViewController {
                               completion: @escaping ((ActionProtocol) -> Void)) {
         let targetIds = actions.map { $0.targetId }
         select(within: targetIds, title: "Select player") { index in
+            completion(actions[index])
+        }
+    }
+    
+    private func selectCard(within actions: [ChooseCardActionProtocol],
+                            completion: @escaping ((ActionProtocol) -> Void)) {
+        let cardIds = actions.map { $0.cardId }
+        select(within: cardIds, title: "Select card") { index in
             completion(actions[index])
         }
     }

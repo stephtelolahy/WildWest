@@ -6,7 +6,7 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-struct ChooseCard: ActionProtocol, Equatable {
+struct ChooseCard: ChooseCardActionProtocol, Equatable {
     let actorId: String
     let cardId: String
     let autoPlay = false
