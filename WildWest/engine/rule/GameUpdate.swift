@@ -27,6 +27,13 @@ enum GameUpdate: Equatable {
     case setOutcome(GameOutcome)
 }
 
+enum GameUpdateE: Equatable {
+    
+    struct Class1: Equatable {
+        let prop: String
+    }
+}
+
 extension GameUpdate: GameUpdateProtocol {
     // swiftlint:disable cyclomatic_complexity
     // swiftlint:disable function_body_length

@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class GameViewController: UIViewController, Subscribable {
+class GameViewController: UIViewController, Subscribable, MoveSelectionable {
     
     // MARK: Constants
     
@@ -81,17 +81,18 @@ private extension GameViewController {
     }
     
     func startGame() {
+        let provider = ResourcesProvider(jsonReader: JsonReader(bundle: Bundle.main))
         let gameLoader = GameLoader()
-        let database = gameLoader.createGame(for: 7)
+        let database = gameLoader.createGame(for: 7, provider: provider)
         let engine = GameEngine(database: database,
                                 rules: gameLoader.classicRules(),
                                 effectRules: gameLoader.effectRules())
         self.engine = engine
-//        sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
-//            self?.update(with: state)
-//        }))
+        sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
+            self?.update(with: state)
+        }))
         
-//        controlledPlayerId = database.state.players.first(where: { $0.role == .sheriff })?.identifier
+        controlledPlayerId = database.state.players.first(where: { $0.role == .sheriff })?.identifier
         playersAdapter.setControlledPlayerId(controlledPlayerId)
         actionsAdapter.setControlledPlayerId(controlledPlayerId)
         
@@ -99,7 +100,7 @@ private extension GameViewController {
         let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
                                                      ai: RandomAIWithRole(),
                                                      engine: engine,
-                                                     delay: 0.1)
+                                                     delay: 0.5)
         }
         self.aiAgents = aiAgents
         aiAgents.forEach { $0.start() }
@@ -115,35 +116,6 @@ private extension GameViewController {
         actionsCollectionView.reloadData()
         messageTableView.reloadDataSwollingAtBottom()
         titleLabel.text = titleText(with: state)
-    }
-    
-    func showOptions(_ actions: [ActionProtocol]) {
-        guard !actions.isEmpty else {
-            return
-        }
-        
-        if actions.count == 1 {
-            engine?.execute(actions[0])
-            return
-        }
-        
-        let alertController = UIAlertController(title: nil,
-                                                message: nil,
-                                                preferredStyle: .alert)
-        
-        actions.forEach { action in
-            alertController.addAction(UIAlertAction(title: action.description,
-                                                    style: .default,
-                                                    handler: { [weak self] _ in
-                                                        self?.engine?.execute(action)
-            }))
-        }
-        
-        alertController.addAction(UIAlertAction(title: "Cancel",
-                                                style: .cancel,
-                                                handler: nil))
-        
-        present(alertController, animated: true)
     }
     
     func showStats() {
@@ -243,7 +215,9 @@ extension GameViewController: UICollectionViewDelegate {
     }
     
     private func actionsCollectionViewDidSelectItem(at indexPath: IndexPath) {
-        showOptions(actionsAdapter.items[indexPath.row].actions)
+        selectMove(within: actionsAdapter.items[indexPath.row].actions) { [weak self] move in
+            self?.engine?.execute(move)
+        }
     }
 }
 

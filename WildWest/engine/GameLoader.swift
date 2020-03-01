@@ -5,12 +5,10 @@
 //  Created by Hugues Stephano Telolahy on 16/02/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-import Foundation
 
 class GameLoader {
     
-    func createGame(for playersCount: Int) -> GameDatabaseProtocol {
-        let provider = ResourcesProvider(jsonReader: JsonReader(bundle: Bundle.main))
+    func createGame(for playersCount: Int, provider: ResourcesProviderProtocol) -> GameDatabaseProtocol {
         let figures = provider.allFigures()
         let cards = provider.allCards()
         let gameSetup = GameSetup()
