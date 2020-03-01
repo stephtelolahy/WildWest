@@ -6,7 +6,7 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct Saloon: ActionProtocol, Equatable {
+struct Saloon: PlayCardAtionProtocol, Equatable {
     let actorId: String
     let cardId: String
     let autoPlay = false

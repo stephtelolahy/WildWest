@@ -6,7 +6,7 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct GeneralStore: ActionProtocol, Equatable {
+struct GeneralStore: PlayCardAtionProtocol, Equatable {
     let actorId: String
     let cardId: String
     let autoPlay = false

@@ -6,7 +6,7 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-struct DiscardBang: ActionProtocol, Equatable {
+struct DiscardBang: PlayCardAtionProtocol, Equatable {
     let actorId: String
     let cardId: String
     let autoPlay = false

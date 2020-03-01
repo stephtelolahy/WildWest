@@ -6,7 +6,7 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-struct DiscardBeer: ActionProtocol, Equatable {
+struct DiscardBeer: PlayCardAtionProtocol, Equatable {
     let actorId: String
     let cardsToDiscardIds: [String]
     let cardId = ""

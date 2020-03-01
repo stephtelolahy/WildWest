@@ -9,7 +9,6 @@
 struct EndTurn: ActionProtocol, Equatable {
     let actorId: String
     let cardsToDiscardIds: [String]
-    let cardId = ""
     let autoPlay = false
     
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {

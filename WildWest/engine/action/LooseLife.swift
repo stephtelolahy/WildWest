@@ -9,7 +9,6 @@
 struct LooseLife: ActionProtocol, Equatable {
     let actorId: String
     let points: Int
-    let cardId = ""
     let autoPlay = false
     
     var description: String {

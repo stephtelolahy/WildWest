@@ -6,7 +6,7 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct Gatling: ActionProtocol, Equatable {
+struct Gatling: PlayCardAtionProtocol, Equatable {
     let actorId: String
     let cardId: String
     let autoPlay = false

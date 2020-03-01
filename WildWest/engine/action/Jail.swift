@@ -6,7 +6,7 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct Jail: ActionProtocol, Equatable {
+struct Jail: PlayCardAtionProtocol, Equatable {
     let actorId: String
     let cardId: String
     let targetId: String

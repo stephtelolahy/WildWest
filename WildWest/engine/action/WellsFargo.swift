@@ -6,7 +6,7 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct WellsFargo: ActionProtocol, Equatable {
+struct WellsFargo: PlayCardAtionProtocol, Equatable {
     let actorId: String
     let cardId: String
     let autoPlay = false

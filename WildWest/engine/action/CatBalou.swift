@@ -16,7 +16,7 @@ enum TargetCardSource: Equatable {
     case inPlay(String)
 }
 
-struct CatBalou: ActionProtocol, Equatable {
+struct CatBalou: PlayCardAtionProtocol, Equatable {
     let actorId: String
     let cardId: String
     let target: TargetCard

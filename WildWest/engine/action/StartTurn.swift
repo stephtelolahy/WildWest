@@ -8,7 +8,6 @@
 
 struct StartTurn: ActionProtocol, Equatable {
     let actorId: String
-    let cardId = ""
     let autoPlay = true
     
     var description: String {
