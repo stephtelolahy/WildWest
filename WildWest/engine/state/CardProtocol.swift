@@ -14,7 +14,7 @@ protocol CardProtocol {
     var imageName: String { get }
 }
 
-enum CardName: String, Decodable {
+enum CardName: String, Codable {
     case colt45,
     volcanic,
     schofield,
@@ -40,7 +40,7 @@ enum CardName: String, Decodable {
     generalStore
 }
 
-enum CardSuit: String, Decodable {
+enum CardSuit: String, Codable {
     case spades,
     hearts,
     diamonds,

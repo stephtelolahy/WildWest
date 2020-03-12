@@ -6,7 +6,7 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct Card: CardProtocol, Decodable {
+struct Card: CardProtocol, Codable {
     
     let name: CardName
     let value: String
