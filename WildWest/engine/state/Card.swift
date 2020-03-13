@@ -22,16 +22,16 @@ private extension CardSuit {
     var description: String {
         switch self {
         case .clubs:
-            return "♣"
+            return "♣️"
             
         case .diamonds:
-            return "♦"
+            return "♦️"
             
         case .hearts:
-            return "♥"
+            return "♥️"
             
         case .spades:
-            return "♠"
+            return "♠️"
         }
     }
 }

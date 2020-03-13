@@ -124,7 +124,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="role" textAlignment="right" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SSO-eg-But">
-                                                    <rect key="frame" x="0.0" y="37" width="34.5" height="16"/>
+                                                    <rect key="frame" x="0.0" y="37" width="19.5" height="16"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="16"/>
                                                     <nil key="textColor"/>
@@ -137,6 +137,7 @@
                                             <constraint firstItem="BGV-60-VS0" firstAttribute="width" secondItem="YdZ-er-2Pm" secondAttribute="width" multiplier="0.5" id="0UM-HK-kxK"/>
                                             <constraint firstItem="ILd-SS-hgA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YdZ-er-2Pm" secondAttribute="leading" constant="2" id="3jW-bn-TAP"/>
                                             <constraint firstItem="RyI-Pr-kap" firstAttribute="leading" secondItem="YdZ-er-2Pm" secondAttribute="leading" id="3w0-eI-IMo"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SSO-eg-But" secondAttribute="trailing" constant="8" id="8YK-yl-upA"/>
                                             <constraint firstItem="BGV-60-VS0" firstAttribute="leading" secondItem="ZDs-Cy-7BZ" secondAttribute="trailing" constant="2" id="CdY-1P-FE8"/>
                                             <constraint firstItem="ILd-SS-hgA" firstAttribute="top" secondItem="BGV-60-VS0" secondAttribute="bottom" constant="2" id="IxT-Sb-pEC"/>
                                             <constraint firstItem="0DL-RG-Swb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YdZ-er-2Pm" secondAttribute="leading" symbolic="YES" id="Kv0-OB-Xa0"/>
@@ -149,7 +150,6 @@
                                             <constraint firstAttribute="trailing" secondItem="0DL-RG-Swb" secondAttribute="trailing" constant="2" id="dLQ-zg-BXB"/>
                                             <constraint firstItem="ZDs-Cy-7BZ" firstAttribute="leading" secondItem="YdZ-er-2Pm" secondAttribute="leading" id="idh-Fu-0UK"/>
                                             <constraint firstItem="RyI-Pr-kap" firstAttribute="trailing" secondItem="BGV-60-VS0" secondAttribute="trailing" id="jB7-X5-0WI"/>
-                                            <constraint firstItem="BGV-60-VS0" firstAttribute="leading" secondItem="SSO-eg-But" secondAttribute="trailing" constant="2" id="l4M-h5-qDF"/>
                                             <constraint firstItem="SSO-eg-But" firstAttribute="leading" secondItem="YdZ-er-2Pm" secondAttribute="leading" id="pxO-fg-hcc"/>
                                             <constraint firstItem="ZDs-Cy-7BZ" firstAttribute="bottom" secondItem="BGV-60-VS0" secondAttribute="bottom" id="rst-OM-Ual"/>
                                             <constraint firstItem="BGV-60-VS0" firstAttribute="centerX" secondItem="YdZ-er-2Pm" secondAttribute="centerX" id="wER-fW-GTU"/>
@@ -207,7 +207,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="38"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="message" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0nF-jE-NjX">
+                                                <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="message" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0nF-jE-NjX">
                                                     <rect key="frame" x="15" y="11" width="345" height="16"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="16"/>

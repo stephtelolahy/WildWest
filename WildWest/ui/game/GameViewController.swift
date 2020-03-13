@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class GameViewController: UIViewController, Subscribable, MoveSelectionable {
+class GameViewController: UIViewController, Subscribable, MoveSelector {
     
     // MARK: Constants
     
@@ -114,7 +114,7 @@ private extension GameViewController {
 extension GameViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        messagesAdapter.messages.count
+        messagesAdapter.actions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -123,7 +123,7 @@ extension GameViewController: UITableViewDataSource {
                                                         return UITableViewCell()
         }
         
-        cell.update(with: messagesAdapter.messages[indexPath.row])
+        cell.update(with: messagesAdapter.actions[indexPath.row])
         return cell
     }
 }

@@ -82,7 +82,7 @@
 		3335E60B240B5068000B89EB /* SetOutComeOnGameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E609240B5068000B89EB /* SetOutComeOnGameOver.swift */; };
 		3335E610240B5A33000B89EB /* ActionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E60F240B5A33000B89EB /* ActionProtocol.swift */; };
 		3335E611240B5A33000B89EB /* ActionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E60F240B5A33000B89EB /* ActionProtocol.swift */; };
-		3335E615240B5F48000B89EB /* MoveSelectionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E614240B5F48000B89EB /* MoveSelectionable.swift */; };
+		3335E615240B5F48000B89EB /* MoveSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E614240B5F48000B89EB /* MoveSelector.swift */; };
 		3349EF7D240C504A0014C901 /* MessagesAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3349EF7C240C504A0014C901 /* MessagesAdapter.swift */; };
 		335A147423F312F700D9971E /* GameDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BA280023F1E9830084A3C9 /* GameDatabase.swift */; };
 		3367EB79240979360079DB41 /* MockActionProtocolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3367EB78240979360079DB41 /* MockActionProtocolExtension.swift */; };
@@ -266,7 +266,7 @@
 		3335E606240B4E2E000B89EB /* DiscardAllSheriffCardsOnEliminateDeputy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardAllSheriffCardsOnEliminateDeputy.swift; sourceTree = "<group>"; };
 		3335E609240B5068000B89EB /* SetOutComeOnGameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetOutComeOnGameOver.swift; sourceTree = "<group>"; };
 		3335E60F240B5A33000B89EB /* ActionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionProtocol.swift; sourceTree = "<group>"; };
-		3335E614240B5F48000B89EB /* MoveSelectionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveSelectionable.swift; sourceTree = "<group>"; };
+		3335E614240B5F48000B89EB /* MoveSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveSelector.swift; sourceTree = "<group>"; };
 		3349EF7C240C504A0014C901 /* MessagesAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesAdapter.swift; sourceTree = "<group>"; };
 		3367EB78240979360079DB41 /* MockActionProtocolExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockActionProtocolExtension.swift; sourceTree = "<group>"; };
 		336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDatabaseProtocol.swift; sourceTree = "<group>"; };
@@ -473,7 +473,7 @@
 			isa = PBXGroup;
 			children = (
 				332499B223DB9F650082EF09 /* GameViewController.swift */,
-				3335E614240B5F48000B89EB /* MoveSelectionable.swift */,
+				3335E614240B5F48000B89EB /* MoveSelector.swift */,
 				33E4411424077CA000B2848E /* adapter */,
 				33E4411724077CA000B2848E /* cell */,
 			);
@@ -590,8 +590,8 @@
 				3366493823F93EE000125483 /* database */,
 				AD46810C23BEA27F000B42C7 /* rule */,
 				AD36CDDA23C51DA6008D4EDB /* action */,
-				3309D7092408D31E00713E15 /* update */,
 				3335E5FC240B46D5000B89EB /* effect */,
+				3309D7092408D31E00713E15 /* update */,
 				3301E63323F7EEB800AB35C7 /* ai */,
 				339A295123EFFEB2002C5CD8 /* convenience */,
 			);
@@ -1013,7 +1013,7 @@
 				3335E5F7240AEE89000B89EB /* GameUpdatePlayerGainHealth.swift in Sources */,
 				3301BEF723F9A44100B4364D /* GameLoader.swift in Sources */,
 				33D477F123E57DE500E232D9 /* FigureProtocol.swift in Sources */,
-				3335E615240B5F48000B89EB /* MoveSelectionable.swift in Sources */,
+				3335E615240B5F48000B89EB /* MoveSelector.swift in Sources */,
 				330B7E0E23F70CAB00B3653D /* OutcomeCalculatorProtocol.swift in Sources */,
 				3395258323E37D07003DE948 /* GameSetupProtocol.swift in Sources */,
 				AD49F86723BA054400543F59 /* Figure.swift in Sources */,
@@ -1300,7 +1300,6 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=100 -Xfrontend -warn-long-function-bodies=100 -Onone";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1355,7 +1354,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=100 -Xfrontend -warn-long-function-bodies=100  ";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";

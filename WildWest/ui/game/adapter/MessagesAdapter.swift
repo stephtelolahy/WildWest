@@ -7,7 +7,7 @@
 //
 
 protocol MessagesAdapterProtocol {
-    var messages: [String] { get }
+    var actions: [ActionProtocol] { get }
     var title: String? { get }
     
     func setState(_ state: GameStateProtocol)
@@ -16,12 +16,12 @@ protocol MessagesAdapterProtocol {
 
 class MessagesAdapter: MessagesAdapterProtocol {
     
-    var messages: [String] = []
+    var actions: [ActionProtocol] = []
     var title: String?
     private var controlledPlayerId: String?
     
     func setState(_ state: GameStateProtocol) {
-        messages = state.moves.map { $0.description }
+        actions = state.moves
         title = titleText(for: state)
     }
     
