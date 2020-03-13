@@ -11,38 +11,16 @@ struct ActionItem {
     let actions: [ActionProtocol]
 }
 
-protocol ActionsAdapterProtocol {
-    var items: [ActionItem] { get }
+enum ActionsAdapter {
     
-    func setState(_ state: GameStateProtocol)
-    func setControlledPlayerId(_ identifier: String?)
-}
-
-class ActionsAdapter: ActionsAdapterProtocol {
-    
-    var items: [ActionItem] = []
-    private var controlledPlayerId: String?
-    private var state: GameStateProtocol?
-    
-    func setState(_ state: GameStateProtocol) {
-        self.state = state
-        items = buildItems()
-    }
-    
-    func setControlledPlayerId(_ identifier: String?) {
-        self.controlledPlayerId = identifier
-        items = buildItems()
-    }
-    
-    private func buildItems() -> [ActionItem] {
-        guard let state = self.state,
-            let playerIdentifier = self.controlledPlayerId,
-            let player = state.players.first(where: { $0.identifier == playerIdentifier }) else {
+    static func buildActions(state: GameStateProtocol, for controlledPlayerId: String?) -> [ActionItem] {
+        guard let controlledPlayerId = controlledPlayerId,
+            let player = state.players.first(where: { $0.identifier == controlledPlayerId }) else {
                 return []
         }
         
         var result: [ActionItem] = []
-        var actions = state.validMoves.filter { $0.actorId == playerIdentifier }
+        var actions = state.validMoves.filter { $0.actorId == controlledPlayerId }
         player.hand.forEach { card in
             let cardActions = actions.filter { ($0 as? PlayCardAtionProtocol)?.cardId == card.identifier }
             result.append(ActionItem(card: card, actions: cardActions))
@@ -52,5 +30,22 @@ class ActionsAdapter: ActionsAdapterProtocol {
             result.insert(ActionItem(card: nil, actions: actions), at: 0)
         }
         return result
+    }
+    
+    static func buildInstruction(state: GameStateProtocol, for controlledPlayerId: String?) -> String {
+        if let outcome = state.outcome {
+            return outcome.rawValue
+        }
+        
+        if let challenge = state.challenge {
+            return challenge.description
+        }
+        
+        guard let controlledPlayerId = controlledPlayerId,
+            state.validMoves.contains(where: { $0.actorId == controlledPlayerId }) else {
+                return "waiting others to play"
+        }
+        
+        return "your turn"
     }
 }

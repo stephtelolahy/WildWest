@@ -15,41 +15,11 @@ struct PlayerItem {
     let isControlled: Bool
 }
 
-protocol PlayersAdapterProtocol {
-    var items: [PlayerItem?] { get }
-    
-    func setState(_ state: GameStateProtocol)
-    func setControlledPlayerId(_ identifier: String?)
-}
-
-class PlayersAdapter: PlayersAdapterProtocol {
-    
-    var items: [PlayerItem?] = []
-    
-    private var state: GameStateProtocol?
-    private var playerIndexes: [Int: String?] = [:]
-    private var controlledPlayerId: String?
-    
-    func setState(_ state: GameStateProtocol) {
-        if self.state == nil {
-            playerIndexes = MapConfiguration.buildIndexes(with: state)
-        }
-        
-        self.state = state
-        items = buildItems()
-    }
-    
-    func setControlledPlayerId(_ identifier: String?) {
-        controlledPlayerId = identifier
-        items = buildItems()
-    }
-    
-    private func buildItems() -> [PlayerItem?] {
-        guard let state = self.state else {
-            return []
-        }
-        
-        return Array(0..<MapConfiguration.itemsCount).map { index in
+enum PlayersAdapter {
+    static func buildItems(state: GameStateProtocol,
+                           for controlledPlayerId: String?,
+                           playerIndexes: [Int: String?]) -> [PlayerItem?] {
+        Array(0..<MapConfiguration.itemsCount).map { index in
             guard let playerId = playerIndexes[index] else {
                 return nil
             }
@@ -82,28 +52,27 @@ class PlayersAdapter: PlayersAdapterProtocol {
     }
 }
 
-private enum MapConfiguration {
+enum MapConfiguration {
     
     static let itemsCount = 9
     
-    static func buildIndexes(with state: GameStateProtocol) -> [Int: String?] {
-        let configuration: [[Int]] = [
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 1, 0, 0, 0, 0, 0],
-            [0, 0, 0, 1, 0, 2, 0, 0, 0],
-            [1, 0, 2, 0, 0, 0, 0, 3, 0],
-            [1, 0, 2, 0, 0, 0, 4, 0, 3],
-            [1, 2, 3, 0, 0, 0, 5, 0, 4],
-            [1, 0, 2, 6, 0, 3, 5, 0, 4],
-            [1, 2, 3, 7, 0, 4, 6, 0, 5]
-        ]
-        
+    private static let configuration: [[Int]] = [
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 1, 0, 2, 0, 0, 0],
+        [1, 0, 2, 0, 0, 0, 0, 3, 0],
+        [1, 0, 2, 0, 0, 0, 4, 0, 3],
+        [1, 2, 3, 0, 0, 0, 5, 0, 4],
+        [1, 0, 2, 6, 0, 3, 5, 0, 4],
+        [1, 2, 3, 7, 0, 4, 6, 0, 5]
+    ]
+    
+    static func buildIndexes(with playerIds: [String]) -> [Int: String?] {
         var result: [Int: String?] = [:]
-        let indexes = configuration[state.players.count]
+        let indexes = configuration[playerIds.count]
         for (index, element) in indexes.enumerated() {
             if element > 0 {
-                let player = state.players[element - 1]
-                result[index] = player.identifier
+                result[index] = playerIds[element - 1]
             } else {
                 result[index] = nil
             }
