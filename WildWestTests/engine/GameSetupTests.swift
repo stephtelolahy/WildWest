@@ -90,6 +90,8 @@ class GameSetupTests: XCTestCase {
         let remainingCardIds = cards.map { $0.identifier }.filter { !distributedCardIds.contains($0) }
         let deckCardIds = state.deck.map { $0.identifier }
         XCTAssertTrue(deckCardIds.isShuffed(from: remainingCardIds))
+        // Discard pile is empty
+        XCTAssertTrue(state.discardPile.isEmpty)
         // PlayerInitialHealthIsEqualToFigureBullets
         XCTAssertTrue(state.players.filter { $0.role != .sheriff }.allSatisfy { $0.health == 4 })
         // Turn is empty

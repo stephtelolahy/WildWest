@@ -100,7 +100,7 @@ private extension GameViewController {
         
         titleLabel.text = ActionsAdapter.buildInstruction(state: state, for: controlledPlayerId)
         
-        discardImageView.image = UIImage(named: state.deck.last?.imageName ?? "")
+        discardImageView.image = UIImage(named: state.discardPile.first?.imageName ?? "")
     }
     
     func showStats() {

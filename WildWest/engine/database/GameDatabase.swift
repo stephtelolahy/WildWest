@@ -62,6 +62,7 @@ extension GameState: GameDatabaseProtocol {
     
     func addDiscard(_ card: CardProtocol) {
         deck.append(card)
+        discardPile = [card]
     }
     
     func addGeneralStore(_ card: CardProtocol) {

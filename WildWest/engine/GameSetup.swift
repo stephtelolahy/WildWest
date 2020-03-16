@@ -34,6 +34,7 @@ class GameSetup: GameSetupProtocol {
         
         return GameState(players: players,
                          deck: deck,
+                         discardPile: [],
                          turn: "",
                          challenge: nil,
                          bangsPlayed: 0,

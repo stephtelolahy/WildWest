@@ -3012,6 +3012,20 @@ import Cuckoo
     
     
     
+     var discardPile: [CardProtocol] {
+        get {
+            return cuckoo_manager.getter("discardPile",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.discardPile)
+        }
+        
+    }
+    
+    
+    
      var turn: String {
         get {
             return cuckoo_manager.getter("turn",
@@ -3173,6 +3187,11 @@ import Cuckoo
 	    }
 	    
 	    
+	    var discardPile: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [CardProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "discardPile")
+	    }
+	    
+	    
 	    var turn: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, String> {
 	        return .init(manager: cuckoo_manager, name: "turn")
 	    }
@@ -3248,6 +3267,11 @@ import Cuckoo
 	    }
 	    
 	    
+	    var discardPile: Cuckoo.VerifyReadOnlyProperty<[CardProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "discardPile", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
 	    var turn: Cuckoo.VerifyReadOnlyProperty<String> {
 	        return .init(manager: cuckoo_manager, name: "turn", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
@@ -3314,6 +3338,14 @@ import Cuckoo
     
     
      var deck: [CardProtocol] {
+        get {
+            return DefaultValueRegistry.defaultValue(for: ([CardProtocol]).self)
+        }
+        
+    }
+    
+    
+     var discardPile: [CardProtocol] {
         get {
             return DefaultValueRegistry.defaultValue(for: ([CardProtocol]).self)
         }

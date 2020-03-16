@@ -29,7 +29,7 @@ private extension MessageCell {
             "DiscardBeer": "😝",
             "Duel": "🔫",
             "Eliminate": "☠️",
-            "EndTurn": "❌",
+            "EndTurn": "✔️",
             "Equip": "😎",
             "Gatling": "🔫",
             "GeneralStore": "💰",
