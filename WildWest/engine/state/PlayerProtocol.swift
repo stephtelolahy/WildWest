@@ -17,14 +17,14 @@ protocol PlayerProtocol {
     var imageName: String { get }
 }
 
-enum Role: String, Decodable {
+enum Role: String, Codable {
     case sheriff,
     outlaw,
     renegade,
     deputy
 }
 
-enum Ability: String, Decodable {
+enum Ability: String, Codable {
     case bartCassidy,
     blackJack,
     calamityJanet,

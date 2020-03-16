@@ -30,18 +30,34 @@ enum GameOutcome: String, Equatable {
 enum Challenge: Equatable {
     case startTurn
     case startTurnDynamiteExploded
-    case shoot([String], CardName, DamageEvent.Source)
-    case indians([String], DamageEvent.Source)
-    case duel([String], DamageEvent.Source)
+    case shoot([String], CardName, String)
+    case indians([String], String)
+    case duel([String], String)
     case generalStore([String])
 }
 
 struct DamageEvent: Equatable {
     let playerId: String
-    let source: Source
+    let source: DamageSource
+}
+
+enum DamageSource: Equatable {
+    case byDynamite
+    case byPlayer(String)
+}
+
+struct CodableChallenge: Equatable, Codable {
+    let name: Name
+    let targetIds: [String]
+    var sourceId: String?
+    var cardName: CardName?
     
-    enum Source: Equatable {
-        case byDynamite
-        case byPlayer(String)
+    enum Name: String, Codable {
+        case startTurn
+        case dynamiteExploded
+        case shoot
+        case indians
+        case duel
+        case generalStore
     }
 }

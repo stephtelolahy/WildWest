@@ -125,28 +125,6 @@ class CatBalouRuleTests: XCTestCase {
         ])
     }
     
-    func test_CanPlayCatBalouToDiscardSelfInPlayCard_IfYourTurnAndOwnCard() {
-        // Given
-        let sut = CatBalouRule()
-        let mockPlayer1 = MockPlayerProtocol()
-            .identified(by: "p1")
-            .holding(MockCardProtocol().named(.catBalou).identified(by: "c1"))
-            .playing(MockCardProtocol().identified(by: "c2"))
-        
-        let mockState = MockGameStateProtocol()
-            .challenge(is: nil)
-            .currentTurn(is: "p1")
-            .players(are: mockPlayer1)
-        
-        // When
-        let actions = sut.match(with: mockState)
-        
-        // Assert
-        XCTAssertEqual(actions as? [CatBalou], [
-            CatBalou(actorId: "p1", cardId: "c1", target: TargetCard(ownerId: "p1", source: .inPlay("c2")))
-        ])
-    }
-    
     func test_CannotPlayCatBalou_IfNoCardsToDiscard() {
         // Given
         let sut = CatBalouRule()

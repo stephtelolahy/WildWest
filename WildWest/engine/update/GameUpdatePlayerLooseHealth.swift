@@ -9,7 +9,7 @@
 struct GameUpdatePlayerLooseHealth: GameUpdateProtocol {
     let playerId: String
     let points: Int
-    let source: DamageEvent.Source
+    let source: DamageSource
     
     var description: String {
         "\(playerId) looses \(points) life points \(source)"

@@ -26,7 +26,7 @@ class LooseLifeTests: XCTestCase {
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
-            .challenge(is: .shoot(["p1"], .bang, .byPlayer("px")))
+            .challenge(is: .shoot(["p1"], .bang, "px"))
         let sut = LooseLife(actorId: "p1", points: 1)
         
         // When
@@ -63,7 +63,7 @@ class LooseLifeTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
-            .challenge(is: .shoot(["p1", "p2", "p3"], .gatling, .byPlayer("px")))
+            .challenge(is: .shoot(["p1", "p2", "p3"], .gatling, "px"))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         let sut = LooseLife(actorId: "p1", points: 1)
         
@@ -73,7 +73,7 @@ class LooseLifeTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
             .playerLooseHealth("p1", 1, .byPlayer("px")),
-            .setChallenge(.shoot(["p2", "p3"], .gatling, .byPlayer("px")))
+            .setChallenge(.shoot(["p2", "p3"], .gatling, "px"))
         ])
     }
     
@@ -82,7 +82,7 @@ class LooseLifeTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
-            .challenge(is: .indians(["p1", "p2", "p3"], .byPlayer("px")))
+            .challenge(is: .indians(["p1", "p2", "p3"], "px"))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         let sut = LooseLife(actorId: "p1", points: 1)
         
@@ -92,7 +92,7 @@ class LooseLifeTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
             .playerLooseHealth("p1", 1, .byPlayer("px")),
-            .setChallenge(.indians(["p2", "p3"], .byPlayer("px")))
+            .setChallenge(.indians(["p2", "p3"], "px"))
         ])
     }
     
@@ -101,7 +101,7 @@ class LooseLifeTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
-            .challenge(is: .duel(["p1", "p2"], .byPlayer("p2")))
+            .challenge(is: .duel(["p1", "p2"], "p2"))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         let sut = LooseLife(actorId: "p1", points: 1)
         
@@ -122,7 +122,7 @@ class LooseLifeRuleTests: XCTestCase {
         // Given
         let sut = LooseLifeRule()
         let mockState = MockGameStateProtocol()
-            .challenge(is: .shoot(["p1", "p2"], .gatling, .byPlayer("px")))
+            .challenge(is: .shoot(["p1", "p2"], .gatling, "px"))
         
         // When
         let actions = sut.match(with: mockState)
@@ -135,7 +135,7 @@ class LooseLifeRuleTests: XCTestCase {
         // Given
         let sut = LooseLifeRule()
         let mockState = MockGameStateProtocol()
-            .challenge(is: .indians(["p1", "p2"], .byPlayer("px")))
+            .challenge(is: .indians(["p1", "p2"], "px"))
         
         // When
         let actions = sut.match(with: mockState)
@@ -148,7 +148,7 @@ class LooseLifeRuleTests: XCTestCase {
         // Given
         let sut = LooseLifeRule()
         let mockState = MockGameStateProtocol()
-            .challenge(is: .duel(["p1", "p2"], .byPlayer("p2")))
+            .challenge(is: .duel(["p1", "p2"], "p2"))
         
         // When
         let actions = sut.match(with: mockState)

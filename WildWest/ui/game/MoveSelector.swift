@@ -1,5 +1,5 @@
 //
-//  MoveSelectionable.swift
+//  MoveSelector.swift
 //  WildWest
 //
 //  Created by Hugues Stephano Telolahy on 01/03/2020.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol MoveSelectionable {
+protocol MoveSelector {
     func selectMove(within actions: [ActionProtocol], completion: @escaping ((ActionProtocol) -> Void))
 }
 
-extension MoveSelectionable where Self: UIViewController {
+extension MoveSelector where Self: UIViewController {
     
     func selectMove(within actions: [ActionProtocol], completion: @escaping ((ActionProtocol) -> Void)) {
         guard !actions.isEmpty else {
@@ -34,8 +34,9 @@ extension MoveSelectionable where Self: UIViewController {
             return
         }
         
-        if actions.count == 1 {
-            completion(actions[0])
+        if actions.count == 1,
+            let uniqueAction = actions.first {
+            completion(uniqueAction)
             return
         }
         

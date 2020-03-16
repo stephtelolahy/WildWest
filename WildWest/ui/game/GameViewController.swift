@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class GameViewController: UIViewController, Subscribable, MoveSelectionable {
+class GameViewController: UIViewController, Subscribable, MoveSelector {
     
     // MARK: Constants
     
@@ -28,19 +28,34 @@ class GameViewController: UIViewController, Subscribable, MoveSelectionable {
     
     // MARK: Properties
     
-    private var engine: GameEngineProtocol?
-    private var aiAgents: [AIPlayerAgentProtocol]?
-    private let playersAdapter: PlayersAdapterProtocol = PlayersAdapter()
-    private let actionsAdapter: ActionsAdapterProtocol = ActionsAdapter()
-    private var controlledPlayerId: String?
-    private var messages: [String] = []
+    // swiftlint:disable implicitly_unwrapped_optional
+    var engine: GameEngineProtocol!
+    var aiAgents: [AIPlayerAgentProtocol] = []
+    var controlledPlayerId: String?
+    
+    private var actionItems: [ActionItem] = []
+    private var messages: [ActionProtocol] = []
+    private var playerIndexes: [Int: String?] = [:]
+    private var playerItems: [PlayerItem?] = []
     
     // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        startGame()
+        playersCollectionView.setItemSpacing(Constants.spacing)
+        actionsCollectionView.setItemSpacing(Constants.spacing)
+        
+        if let state = try? engine.stateSubject.value() {
+            let playerIds = state.players.map { $0.identifier }
+            playerIndexes = MapConfiguration.buildIndexes(with: playerIds)
+        }
+        
+        sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
+            self?.update(with: state)
+        }))
+        engine.start()
+        
+        aiAgents.forEach { $0.start() }
     }
     
     // MARK: IBAction
@@ -56,7 +71,7 @@ class GameViewController: UIViewController, Subscribable, MoveSelectionable {
                                                     self?.showStats()
         }))
         
-        alertController.addAction(UIAlertAction(title: "Exit",
+        alertController.addAction(UIAlertAction(title: "Quit",
                                                 style: .default,
                                                 handler: { [weak self] _ in
                                                     self?.dismiss(animated: true)
@@ -68,80 +83,30 @@ class GameViewController: UIViewController, Subscribable, MoveSelectionable {
         
         present(alertController, animated: true)
     }
-    
-    @IBAction private func actionsButtonTapped(_ sender: Any) {
-        showStats()
-    }
 }
 
 private extension GameViewController {
     
-    func setupView() {
-        playersCollectionView.setItemSpacing(Constants.spacing)
-        actionsCollectionView.setItemSpacing(Constants.spacing)
-    }
-    
-    func startGame() {
-        let provider = ResourcesProvider(jsonReader: JsonReader(bundle: Bundle.main))
-        let gameLoader = GameLoader()
-        let database = gameLoader.createGame(for: 7, provider: provider)
-        let engine = GameEngine(database: database,
-                                rules: gameLoader.classicRules(),
-                                effectRules: gameLoader.effectRules())
-        self.engine = engine
-        sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
-            self?.update(with: state)
-        }))
-        
-        controlledPlayerId = database.state.players.first(where: { $0.role == .sheriff })?.identifier
-        playersAdapter.setControlledPlayerId(controlledPlayerId)
-        actionsAdapter.setControlledPlayerId(controlledPlayerId)
-        
-        let aiPlayers = database.state.players.filter { $0.identifier != controlledPlayerId }
-        let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
-                                                     ai: RandomAIWithRole(),
-                                                     engine: engine,
-                                                     delay: 0.5)
-        }
-        self.aiAgents = aiAgents
-        aiAgents.forEach { $0.start() }
-        
-        engine.start()
-    }
-    
     func update(with state: GameStateProtocol) {
-        playersAdapter.setState(state)
-        actionsAdapter.setState(state)
-        messages = state.moves.map { $0.description }
+        
+        playerItems = PlayersAdapter.buildItems(state: state, for: controlledPlayerId, playerIndexes: playerIndexes)
         playersCollectionView.reloadData()
+        
+        actionItems = ActionsAdapter.buildActions(state: state, for: controlledPlayerId)
         actionsCollectionView.reloadData()
+        
+        messages = state.moves
         messageTableView.reloadDataSwollingAtBottom()
-        titleLabel.text = titleText(with: state)
-        if let topDiscardCard = state.deck.last {
-            discardImageView.image = UIImage(named: topDiscardCard.imageName)
-        }
+        
+        titleLabel.text = ActionsAdapter.buildInstruction(state: state, for: controlledPlayerId)
+        
+        discardImageView.image = UIImage(named: state.deck.last?.imageName ?? "")
     }
     
     func showStats() {
         let viewController = StatsViewController()
         viewController.stateSubject = engine?.stateSubject
         present(viewController, animated: true)
-    }
-    
-    func titleText(with state: GameStateProtocol) -> String {
-        if let outcome = state.outcome {
-            return outcome.rawValue
-        }
-        
-        if let challenge = state.challenge {
-            return challenge.description
-        }
-        
-        if state.validMoves.contains(where: { $0.actorId == controlledPlayerId }) {
-            return "your turn"
-        }
-        
-        return "waiting others to play"
     }
 }
 
@@ -183,24 +148,24 @@ extension GameViewController: UICollectionViewDataSource {
     }
     
     private func playersCollectionViewNumberOfItems() -> Int {
-        playersAdapter.items.count
+        playerItems.count
     }
     
     private func actionsCollectionViewNumberOfItems() -> Int {
-        actionsAdapter.items.count
+        actionItems.count
     }
     
     private func playersCollectionView(_ collectionView: UICollectionView,
                                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(with: PlayerCell.self, for: indexPath)
-        cell.update(with: playersAdapter.items[indexPath.row])
+        cell.update(with: playerItems[indexPath.row])
         return cell
     }
     
     private func actionsCollectionView(_ collectionView: UICollectionView,
                                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(with: ActionCell.self, for: indexPath)
-        cell.update(with: actionsAdapter.items[indexPath.row])
+        cell.update(with: actionItems[indexPath.row])
         return cell
     }
 }
@@ -219,7 +184,7 @@ extension GameViewController: UICollectionViewDelegate {
     }
     
     private func actionsCollectionViewDidSelectItem(at indexPath: IndexPath) {
-        selectMove(within: actionsAdapter.items[indexPath.row].actions) { [weak self] move in
+        selectMove(within: actionItems[indexPath.row].actions) { [weak self] move in
             self?.engine?.execute(move)
         }
     }

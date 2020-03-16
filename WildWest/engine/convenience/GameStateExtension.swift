@@ -8,11 +8,8 @@
 
 extension GameStateProtocol {
     
-    func targetCards(from actor: PlayerProtocol, and otherPlayers: [PlayerProtocol]) -> [TargetCard]? {
+    func targetCards(from otherPlayers: [PlayerProtocol]) -> [TargetCard]? {
         var result: [TargetCard] = []
-        
-        result += actor.inPlay.map { TargetCard(ownerId: actor.identifier, source: .inPlay($0.identifier)) }
-        
         otherPlayers.forEach { player in
             if !player.hand.isEmpty {
                 result.append(TargetCard(ownerId: player.identifier, source: .randomHand))

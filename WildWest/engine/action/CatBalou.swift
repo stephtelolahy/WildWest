@@ -47,9 +47,10 @@ struct CatBalouRule: RuleProtocol {
         }
         
         let otherPlayers = state.players.filter { $0.identifier != actor.identifier }
-        guard let targetCards = state.targetCards(from: actor, and: otherPlayers) else {
+        guard let targetCards = state.targetCards(from: otherPlayers) else {
             return nil
         }
+        
         return cards.map { card in
             targetCards.map { CatBalou(actorId: actor.identifier, cardId: card.identifier, target: $0) }
         }.flatMap { $0 }

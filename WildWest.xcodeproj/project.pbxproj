@@ -82,7 +82,7 @@
 		3335E60B240B5068000B89EB /* SetOutComeOnGameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E609240B5068000B89EB /* SetOutComeOnGameOver.swift */; };
 		3335E610240B5A33000B89EB /* ActionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E60F240B5A33000B89EB /* ActionProtocol.swift */; };
 		3335E611240B5A33000B89EB /* ActionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E60F240B5A33000B89EB /* ActionProtocol.swift */; };
-		3335E615240B5F48000B89EB /* MoveSelectionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E614240B5F48000B89EB /* MoveSelectionable.swift */; };
+		3335E615240B5F48000B89EB /* MoveSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E614240B5F48000B89EB /* MoveSelector.swift */; };
 		335A147423F312F700D9971E /* GameDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BA280023F1E9830084A3C9 /* GameDatabase.swift */; };
 		3367EB79240979360079DB41 /* MockActionProtocolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3367EB78240979360079DB41 /* MockActionProtocolExtension.swift */; };
 		336AA6F023F1450800328837 /* GameDatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */; };
@@ -176,6 +176,7 @@
 		33F94AB323F056DA00D1BCFE /* StartTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFB62523DCAC9E00C96CED /* StartTurn.swift */; };
 		33F94AB623F0580800D1BCFE /* GameUpdateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F94AB523F0580800D1BCFE /* GameUpdateProtocol.swift */; };
 		33F94AB723F0580800D1BCFE /* GameUpdateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F94AB523F0580800D1BCFE /* GameUpdateProtocol.swift */; };
+		33FDD70C240BFB4B00BC3E14 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */; };
 		8DBD562D47470962F400716D /* libPods-WildWestTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 102E20EA2AD38505FB9CFBD5 /* libPods-WildWestTests.a */; };
 		AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */; };
 		AD36CDDD23C51EFA008D4EDB /* ResourcesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD36CDDC23C51EFA008D4EDB /* ResourcesProvider.swift */; };
@@ -264,7 +265,7 @@
 		3335E606240B4E2E000B89EB /* DiscardAllSheriffCardsOnEliminateDeputy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardAllSheriffCardsOnEliminateDeputy.swift; sourceTree = "<group>"; };
 		3335E609240B5068000B89EB /* SetOutComeOnGameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetOutComeOnGameOver.swift; sourceTree = "<group>"; };
 		3335E60F240B5A33000B89EB /* ActionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionProtocol.swift; sourceTree = "<group>"; };
-		3335E614240B5F48000B89EB /* MoveSelectionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveSelectionable.swift; sourceTree = "<group>"; };
+		3335E614240B5F48000B89EB /* MoveSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveSelector.swift; sourceTree = "<group>"; };
 		3367EB78240979360079DB41 /* MockActionProtocolExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockActionProtocolExtension.swift; sourceTree = "<group>"; };
 		336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDatabaseProtocol.swift; sourceTree = "<group>"; };
 		3395257F23E37CCE003DE948 /* GameEngineProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineProtocol.swift; sourceTree = "<group>"; };
@@ -322,6 +323,7 @@
 		33EC5D3F23E7410E00E14890 /* DuelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuelTests.swift; sourceTree = "<group>"; };
 		33F2505C23DDDBCC00A0FDD1 /* GameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
 		33F94AB523F0580800D1BCFE /* GameUpdateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUpdateProtocol.swift; sourceTree = "<group>"; };
+		33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		51195E55CF3E86BE639C2405 /* Pods-WildWest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.debug.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.debug.xcconfig"; sourceTree = "<group>"; };
 		6D17AD4368D4F158C313A85D /* Pods-WildWestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.release.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.release.xcconfig"; sourceTree = "<group>"; };
 		873275DE3D79FFF36F6D066E /* Pods-WildWest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.release.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.release.xcconfig"; sourceTree = "<group>"; };
@@ -469,7 +471,7 @@
 			isa = PBXGroup;
 			children = (
 				332499B223DB9F650082EF09 /* GameViewController.swift */,
-				3335E614240B5F48000B89EB /* MoveSelectionable.swift */,
+				3335E614240B5F48000B89EB /* MoveSelector.swift */,
 				33E4411424077CA000B2848E /* adapter */,
 				33E4411724077CA000B2848E /* cell */,
 			);
@@ -556,6 +558,14 @@
 			path = cuckoo;
 			sourceTree = "<group>";
 		};
+		33FDD70A240BFB3800BC3E14 /* menu */ = {
+			isa = PBXGroup;
+			children = (
+				33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */,
+			);
+			path = menu;
+			sourceTree = "<group>";
+		};
 		AD208A6623C6809B0082AC98 /* extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -577,8 +587,8 @@
 				3366493823F93EE000125483 /* database */,
 				AD46810C23BEA27F000B42C7 /* rule */,
 				AD36CDDA23C51DA6008D4EDB /* action */,
-				3309D7092408D31E00713E15 /* update */,
 				3335E5FC240B46D5000B89EB /* effect */,
+				3309D7092408D31E00713E15 /* update */,
 				3301E63323F7EEB800AB35C7 /* ai */,
 				339A295123EFFEB2002C5CD8 /* convenience */,
 			);
@@ -763,6 +773,7 @@
 		ADE91AD223BA005000F7316B /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				33FDD70A240BFB3800BC3E14 /* menu */,
 				3385A1F423F9352800CD9660 /* game */,
 				3385A1F523F9353C00CD9660 /* stats */,
 				ADB7D2F6239EE03900653905 /* LaunchScreen.storyboard */,
@@ -999,7 +1010,7 @@
 				3335E5F7240AEE89000B89EB /* GameUpdatePlayerGainHealth.swift in Sources */,
 				3301BEF723F9A44100B4364D /* GameLoader.swift in Sources */,
 				33D477F123E57DE500E232D9 /* FigureProtocol.swift in Sources */,
-				3335E615240B5F48000B89EB /* MoveSelectionable.swift in Sources */,
+				3335E615240B5F48000B89EB /* MoveSelector.swift in Sources */,
 				330B7E0E23F70CAB00B3653D /* OutcomeCalculatorProtocol.swift in Sources */,
 				3395258323E37D07003DE948 /* GameSetupProtocol.swift in Sources */,
 				AD49F86723BA054400543F59 /* Figure.swift in Sources */,
@@ -1023,6 +1034,7 @@
 				33E4411D24077CA000B2848E /* ActionCell.swift in Sources */,
 				3383ABEE23F53B950028B4B3 /* ResolveJail.swift in Sources */,
 				3383ABF023F53B980028B4B3 /* LooseLife.swift in Sources */,
+				33FDD70C240BFB4B00BC3E14 /* MenuViewController.swift in Sources */,
 				33A733F823DC5AC300E9B2AD /* GameEngine.swift in Sources */,
 				338E39A223F3E3FD002FA99B /* Panic.swift in Sources */,
 				33AFA25323DC201A00425BEB /* ClassNameProtocol.swift in Sources */,
@@ -1284,7 +1296,6 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=100 -Xfrontend -warn-long-function-bodies=100 -Onone";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1339,7 +1350,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=100 -Xfrontend -warn-long-function-bodies=100  ";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";

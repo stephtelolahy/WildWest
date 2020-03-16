@@ -15,7 +15,7 @@ struct Duel: PlayCardAgainstOnePlayerActionProtocol, Equatable {
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
         let updates: [GameUpdate] = [
             .playerDiscardHand(actorId, cardId),
-            .setChallenge(.duel([targetId, actorId], .byPlayer(actorId)))
+            .setChallenge(.duel([targetId, actorId], actorId))
         ]
         return updates
     }

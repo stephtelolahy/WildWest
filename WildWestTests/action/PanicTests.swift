@@ -180,32 +180,4 @@ class PanicRuleTests: XCTestCase {
         // Assert
         XCTAssertNil(actions)
     }
-    
-    func test_CanPlayPanicToDiscardSelfInPlayCard_IfYourTurnAndOwnCard() {
-        // Given
-        let mockPlayer1 = MockPlayerProtocol()
-            .identified(by: "p1")
-            .holding(MockCardProtocol().named(.panic).identified(by: "c1"))
-            .playing(MockCardProtocol().identified(by: "c2"))
-        
-        let mockState = MockGameStateProtocol()
-            .challenge(is: nil)
-            .currentTurn(is: "p1")
-            .players(are: mockPlayer1)
-        
-        let mockCalculator = MockRangeCalculatorProtocol()
-        Cuckoo.stub(mockCalculator) { mock in
-            when(mock.distance(from: "p1", to: "p2", in: any())).thenReturn(1)
-        }
-        
-        let sut = PanicRule(calculator: mockCalculator)
-        
-        // When
-        let actions = sut.match(with: mockState)
-        
-        // Assert
-        XCTAssertEqual(actions as? [Panic], [
-            Panic(actorId: "p1", cardId: "c1", target: TargetCard(ownerId: "p1", source: .inPlay("c2")))
-        ])
-    }
 }
