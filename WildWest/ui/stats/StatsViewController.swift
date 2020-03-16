@@ -24,7 +24,7 @@ class AgressivityStat {
 class StatsViewController: UITableViewController, Subscribable {
     
     var stateSubject: BehaviorSubject<GameStateProtocol>?
-    var stats: [AgressivityStat] = []
+    private var stats: [AgressivityStat] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +64,7 @@ private extension GameStateProtocol {
         let otherPlayers = allPlayers.filter { $0.role != .sheriff }
         let stats = otherPlayers.map { AgressivityStat(source: $0.identifier, target: sheriff.identifier, value: 0) }
         
-        moves.forEach { move in
+        executedMoves.forEach { move in
             
             if let bang = move as? Bang {
                 appendStrongAttack(from: bang.actorId, to: bang.targetId, in: stats)

@@ -17,7 +17,7 @@ protocol GameStateProtocol {
     var eliminated: [PlayerProtocol] { get }
     var outcome: GameOutcome? { get }
     var validMoves: [ActionProtocol] { get }
-    var moves: [ActionProtocol] { get }
+    var executedMoves: [ActionProtocol] { get }
     var damageEvents: [DamageEvent] { get }
 }
 
@@ -44,20 +44,4 @@ struct DamageEvent: Equatable {
 enum DamageSource: Equatable {
     case byDynamite
     case byPlayer(String)
-}
-
-struct CodableChallenge: Equatable, Codable {
-    let name: Name
-    let targetIds: [String]
-    var sourceId: String?
-    var cardName: CardName?
-    
-    enum Name: String, Codable {
-        case startTurn
-        case dynamiteExploded
-        case shoot
-        case indians
-        case duel
-        case generalStore
-    }
 }

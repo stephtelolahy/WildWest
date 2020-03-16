@@ -101,16 +101,16 @@ import Cuckoo
     
     
     
-     func addMove(_ action: ActionProtocol)  {
+     func addExecutedMove(_ action: ActionProtocol)  {
         
-    return cuckoo_manager.call("addMove(_: ActionProtocol)",
+    return cuckoo_manager.call("addExecutedMove(_: ActionProtocol)",
             parameters: (action),
             escapingParameters: (action),
             superclassCall:
                 
                 Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
-            defaultCall: __defaultImplStub!.addMove(action))
+            defaultCall: __defaultImplStub!.addExecutedMove(action))
         
     }
     
@@ -358,9 +358,9 @@ import Cuckoo
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "setBarrelsResolved(_: Int)", parameterMatchers: matchers))
 	    }
 	    
-	    func addMove<M1: Cuckoo.Matchable>(_ action: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(ActionProtocol)> where M1.MatchedType == ActionProtocol {
+	    func addExecutedMove<M1: Cuckoo.Matchable>(_ action: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(ActionProtocol)> where M1.MatchedType == ActionProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(ActionProtocol)>] = [wrap(matchable: action) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "addMove(_: ActionProtocol)", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "addExecutedMove(_: ActionProtocol)", parameterMatchers: matchers))
 	    }
 	    
 	    func setValidMoves<M1: Cuckoo.Matchable>(_ actions: M1) -> Cuckoo.ProtocolStubNoReturnFunction<([ActionProtocol])> where M1.MatchedType == [ActionProtocol] {
@@ -479,9 +479,9 @@ import Cuckoo
 	    }
 	    
 	    @discardableResult
-	    func addMove<M1: Cuckoo.Matchable>(_ action: M1) -> Cuckoo.__DoNotUse<(ActionProtocol), Void> where M1.MatchedType == ActionProtocol {
+	    func addExecutedMove<M1: Cuckoo.Matchable>(_ action: M1) -> Cuckoo.__DoNotUse<(ActionProtocol), Void> where M1.MatchedType == ActionProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(ActionProtocol)>] = [wrap(matchable: action) { $0 }]
-	        return cuckoo_manager.verify("addMove(_: ActionProtocol)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("addExecutedMove(_: ActionProtocol)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
@@ -601,7 +601,7 @@ import Cuckoo
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
-     func addMove(_ action: ActionProtocol)   {
+     func addExecutedMove(_ action: ActionProtocol)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
@@ -3124,14 +3124,14 @@ import Cuckoo
     
     
     
-     var moves: [ActionProtocol] {
+     var executedMoves: [ActionProtocol] {
         get {
-            return cuckoo_manager.getter("moves",
+            return cuckoo_manager.getter("executedMoves",
                 superclassCall:
                     
                     Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                     ,
-                defaultCall: __defaultImplStub!.moves)
+                defaultCall: __defaultImplStub!.executedMoves)
         }
         
     }
@@ -3213,8 +3213,8 @@ import Cuckoo
 	    }
 	    
 	    
-	    var moves: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [ActionProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "moves")
+	    var executedMoves: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [ActionProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "executedMoves")
 	    }
 	    
 	    
@@ -3288,8 +3288,8 @@ import Cuckoo
 	    }
 	    
 	    
-	    var moves: Cuckoo.VerifyReadOnlyProperty<[ActionProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "moves", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var executedMoves: Cuckoo.VerifyReadOnlyProperty<[ActionProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "executedMoves", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	    
@@ -3385,7 +3385,7 @@ import Cuckoo
     }
     
     
-     var moves: [ActionProtocol] {
+     var executedMoves: [ActionProtocol] {
         get {
             return DefaultValueRegistry.defaultValue(for: ([ActionProtocol]).self)
         }

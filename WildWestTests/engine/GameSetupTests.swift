@@ -97,10 +97,10 @@ class GameSetupTests: XCTestCase {
         // SheriffHasOneAdditionalHealth
         let sheriff = state.players.first { $0.role == .sheriff }!
         XCTAssertEqual(sheriff.health, 5)
-        // Valid moves are empty
+        // Valid moves is empty
         XCTAssertTrue(state.validMoves.isEmpty)
-        // Moves is empty
-        XCTAssertTrue(state.moves.isEmpty)
+        // Executed moves is empty
+        XCTAssertTrue(state.executedMoves.isEmpty)
         XCTAssertTrue(state.damageEvents.isEmpty)
         // Flags are reset to 0
         XCTAssertEqual(state.bangsPlayed, 0)
