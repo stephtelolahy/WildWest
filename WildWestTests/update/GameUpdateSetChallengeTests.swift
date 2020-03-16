@@ -43,7 +43,7 @@ class GameUpdateSetChallengeTests: XCTestCase {
         Cuckoo.stub(mockDatabase) { mock in
             when(mock.state.get).thenReturn(mockState)
         }
-        let sut = GameUpdate.setChallenge(.shoot(["p1"], .bang, .byPlayer("px")))
+        let sut = GameUpdate.setChallenge(.shoot(["p1"], .bang, "px"))
         
         // When
         sut.execute(in: mockDatabase)
@@ -54,7 +54,7 @@ class GameUpdateSetChallengeTests: XCTestCase {
     
     func test_ResetBarrelsResolved_IfSettingShootChallenge() {
         // Given
-        let sut = GameUpdate.setChallenge(.shoot(["p1"], .gatling, .byPlayer("px")))
+        let sut = GameUpdate.setChallenge(.shoot(["p1"], .gatling, "px"))
         
         // When
         sut.execute(in: mockDatabase)

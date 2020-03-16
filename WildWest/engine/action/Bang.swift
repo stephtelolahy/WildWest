@@ -15,7 +15,7 @@ struct Bang: PlayCardAgainstOnePlayerActionProtocol, Equatable {
     func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
         let updates: [GameUpdate] = [
             .playerDiscardHand(actorId, cardId),
-            .setChallenge(.shoot([targetId], .bang, .byPlayer(actorId)))
+            .setChallenge(.shoot([targetId], .bang, actorId))
         ]
         return updates
     }

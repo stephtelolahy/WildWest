@@ -44,7 +44,7 @@ class DuelTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
             .playerDiscardHand("p1", "c1"),
-            .setChallenge(.duel(["p2", "p1"], .byPlayer("p1")))
+            .setChallenge(.duel(["p2", "p1"], "p1"))
         ])
     }
 }

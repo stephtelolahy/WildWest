@@ -42,16 +42,16 @@ extension Challenge {
         }
     }
     
-    var damageSource: DamageEvent.Source? {
+    var damageSource: DamageSource? {
         switch self {
-        case let .shoot(_, _, source):
-            return source
+        case let .shoot(_, _, sourceId):
+            return .byPlayer(sourceId)
             
-        case let .duel(_, source):
-            return source
+        case let .duel(_, sourceId):
+            return .byPlayer(sourceId)
             
-        case let .indians(_, source):
-            return source
+        case let .indians(_, sourceId):
+            return .byPlayer(sourceId)
             
         case .startTurnDynamiteExploded:
             return .byDynamite

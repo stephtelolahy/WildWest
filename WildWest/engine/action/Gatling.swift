@@ -20,7 +20,7 @@ struct Gatling: PlayCardAtionProtocol, Equatable {
         let targetIds = Array(1..<playersCount).map { state.players[(actorIndex + $0) % playersCount].identifier }
         let updates: [GameUpdate] = [
             .playerDiscardHand(actorId, cardId),
-            .setChallenge(.shoot(targetIds, .gatling, .byPlayer(actorId)))
+            .setChallenge(.shoot(targetIds, .gatling, actorId))
         ]
         return updates
     }

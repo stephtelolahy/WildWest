@@ -12,7 +12,7 @@ enum GameUpdate: Equatable {
     case flipOverFirstDeckCard
     case eliminatePlayer(String)
     case playerGainHealth(String, Int)
-    case playerLooseHealth(String, Int, DamageEvent.Source)
+    case playerLooseHealth(String, Int, DamageSource)
     
     case playerPullFromDeck(String, Int)
     case playerDiscardHand(String, String)
