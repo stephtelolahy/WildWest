@@ -90,6 +90,8 @@ class GameSetupTests: XCTestCase {
         let remainingCardIds = cards.map { $0.identifier }.filter { !distributedCardIds.contains($0) }
         let deckCardIds = state.deck.map { $0.identifier }
         XCTAssertTrue(deckCardIds.isShuffed(from: remainingCardIds))
+        // Discard pile is empty
+        XCTAssertTrue(state.discardPile.isEmpty)
         // PlayerInitialHealthIsEqualToFigureBullets
         XCTAssertTrue(state.players.filter { $0.role != .sheriff }.allSatisfy { $0.health == 4 })
         // Turn is empty
@@ -97,10 +99,10 @@ class GameSetupTests: XCTestCase {
         // SheriffHasOneAdditionalHealth
         let sheriff = state.players.first { $0.role == .sheriff }!
         XCTAssertEqual(sheriff.health, 5)
-        // Valid moves are empty
+        // Valid moves is empty
         XCTAssertTrue(state.validMoves.isEmpty)
-        // Moves is empty
-        XCTAssertTrue(state.moves.isEmpty)
+        // Executed moves is empty
+        XCTAssertTrue(state.executedMoves.isEmpty)
         XCTAssertTrue(state.damageEvents.isEmpty)
         // Flags are reset to 0
         XCTAssertEqual(state.bangsPlayed, 0)

@@ -53,7 +53,7 @@ class GameEngineTests: XCTestCase {
         sut.execute(mockAction)
         
         // Assert
-        verify(mockDatabase).addMove(action(equalTo: mockAction))
+        verify(mockDatabase).addExecutedMove(action(equalTo: mockAction))
     }
     
     func test_SetMatchingActionsAsValidMoves_IfExecutingAction() {

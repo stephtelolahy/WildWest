@@ -40,7 +40,7 @@ class GameEngine: GameEngineProtocol {
         
         while !moves.isEmpty {
             let move = moves.remove(at: 0)
-            database.addMove(move)
+            database.addExecutedMove(move)
             
             print("\n*** \(move.description) ***")
             let updates = move.execute(in: database.state)

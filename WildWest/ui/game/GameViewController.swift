@@ -33,10 +33,10 @@ class GameViewController: UIViewController, Subscribable, MoveSelector {
     var aiAgents: [AIPlayerAgentProtocol] = []
     var controlledPlayerId: String?
     
-    private var actionItems: [ActionItem] = []
-    private var messages: [ActionProtocol] = []
     private var playerIndexes: [Int: String?] = [:]
     private var playerItems: [PlayerItem?] = []
+    private var actionItems: [ActionItem] = []
+    private var messages: [ActionProtocol] = []
     
     // MARK: Lifecycle
     
@@ -53,8 +53,8 @@ class GameViewController: UIViewController, Subscribable, MoveSelector {
         sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
             self?.update(with: state)
         }))
-        engine.start()
         
+        engine.start()
         aiAgents.forEach { $0.start() }
     }
     
@@ -95,12 +95,12 @@ private extension GameViewController {
         actionItems = ActionsAdapter.buildActions(state: state, for: controlledPlayerId)
         actionsCollectionView.reloadData()
         
-        messages = state.moves
+        messages = state.executedMoves
         messageTableView.reloadDataSwollingAtBottom()
         
         titleLabel.text = ActionsAdapter.buildInstruction(state: state, for: controlledPlayerId)
         
-        discardImageView.image = UIImage(named: state.deck.last?.imageName ?? "")
+        discardImageView.image = UIImage(named: state.discardPile.first?.imageName ?? "")
     }
     
     func showStats() {

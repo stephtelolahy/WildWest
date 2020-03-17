@@ -30,8 +30,8 @@ extension GameState: GameDatabaseProtocol {
         self.barrelsResolved = barrelsResolved
     }
     
-    func addMove(_ action: ActionProtocol) {
-        moves.append(action)
+    func addExecutedMove(_ action: ActionProtocol) {
+        executedMoves.append(action)
     }
     
     func setValidMoves(_ actions: [ActionProtocol]) {
@@ -62,6 +62,7 @@ extension GameState: GameDatabaseProtocol {
     
     func addDiscard(_ card: CardProtocol) {
         deck.append(card)
+        discardPile = [card]
     }
     
     func addGeneralStore(_ card: CardProtocol) {
