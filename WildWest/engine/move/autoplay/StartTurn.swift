@@ -15,14 +15,15 @@ class StartTurnMatcher: AutoplayMoveMatcherProtocol {
                 return nil
         }
         
-        return [.startTurn(actorId: actor.identifier)]
+        return [GameMove(name: .startTurn, actorId: actor.identifier)]
     }
 }
 
 class StartTurnExecutor: MoveExecutorProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case let .startTurn(actorId) = move else {
-            return nil
+        guard case .startTurn = move.name,
+            let actorId = move.actorId else {
+                return nil
         }
         
         return [.playerPullFromDeck(actorId, 2),

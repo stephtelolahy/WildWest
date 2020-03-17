@@ -12,6 +12,7 @@ protocol MoveDescriptor {
 
 extension MoveDescriptor {
     func description(for move: GameMove) -> String? {
+        /*
         switch move {
         case let .startTurn(actorId):
             return "🔥 \(actorId) starts turn phase1"
@@ -19,6 +20,11 @@ extension MoveDescriptor {
         case let .beer(actorId, cardId):
             return "🍺 \(actorId) plays \(cardId)"
             
+        case let .saloon(actorId, cardId):
+            return "🍺 \(actorId) plays \(cardId)"
+            
         }
+        */
+        nil
     }
 }

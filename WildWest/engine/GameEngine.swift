@@ -17,18 +17,21 @@ class GameEngine: GameEngineProtocol {
     private let autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol]
     private let effectMatchers: [EffectMatcherProtocol]
     private let moveExecutors: [MoveExecutorProtocol]
+    private let updateExecutors: [UpdateExecutorProtocol]
     
     init(database: GameDatabaseProtocol,
          validMoveMatchers: [ValidMoveMatcherProtocol],
          autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol],
          effectMatchers: [EffectMatcherProtocol],
-         moveExecutors: [MoveExecutorProtocol]) {
+         moveExecutors: [MoveExecutorProtocol],
+         updateExecutors: [UpdateExecutorProtocol]) {
         self.database = database
         self.stateSubject = BehaviorSubject(value: database.state)
         self.validMoveMatchers = validMoveMatchers
         self.autoPlayMoveMatchers = autoPlayMoveMatchers
         self.effectMatchers = effectMatchers
         self.moveExecutors = moveExecutors
+        self.updateExecutors = updateExecutors
     }
     
     func start() {
@@ -37,7 +40,7 @@ class GameEngine: GameEngineProtocol {
         }
         
         database.setTurn(sheriff.identifier)
-        execute(.startTurn(actorId: sheriff.identifier))
+        execute(GameMove(name: .startTurn, actorId: sheriff.identifier))
     }
     
     // swiftlint:disable function_body_length
@@ -60,9 +63,12 @@ class GameEngine: GameEngineProtocol {
             let updatesQueue = moveExecutors
                 .compactMap { $0.execute(move, in: database.state) }
                 .flatMap { $0 }
-            updatesQueue.forEach {
-                $0.execute(in: database)
-                print(String(describing: $0))
+            
+            updatesQueue.forEach { update in
+                print(String(describing: update))
+                updateExecutors.forEach { executor in
+                    executor.execute(update, in: database)
+                }
             }
             
             // check if game over
@@ -91,8 +97,8 @@ class GameEngine: GameEngineProtocol {
             let validMoves: [String: [GameMove]] = validMoveMatchers
                 .compactMap { $0.validMoves(matching: database.state) }
                 .merged()
-            guard validMoves.keys.count == 1 else {
-                fatalError("illegal state with \(validMoves.keys.count) active players")
+            guard validMoves.keys.count <= 1 else {
+                fatalError("Illegal multiple active players (\(validMoves.keys.count))")
             }
             
             database.setValidMoves(validMoves)

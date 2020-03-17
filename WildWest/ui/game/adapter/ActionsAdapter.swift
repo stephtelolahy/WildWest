@@ -20,6 +20,7 @@ enum ActionsAdapter {
         }
         
         var result: [ActionItem] = []
+        /*
         var actions = state.validMoves[controlledPlayerId] ?? []
         
         player.hand.forEach { card in
@@ -31,7 +32,7 @@ enum ActionsAdapter {
         if !actions.isEmpty {
             result.insert(ActionItem(card: nil, actions: actions), at: 0)
         }
-        
+        */
         return result
     }
     

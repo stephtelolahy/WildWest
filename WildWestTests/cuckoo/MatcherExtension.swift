@@ -26,24 +26,6 @@ func database(equalTo object: AnyObject) -> ParameterMatcher<GameDatabaseProtoco
     })
 }
 
-func action(equalTo object: AnyObject) -> ParameterMatcher<ActionProtocol> {
-    return ParameterMatcher(matchesFunction: { action -> Bool in
-        return action as AnyObject === object
-    })
-}
-
-func actions(equalTo array: [AnyObject]) -> ParameterMatcher<[ActionProtocol]> {
-    return ParameterMatcher(matchesFunction: { actions -> Bool in
-        for (index, element) in actions.enumerated() {
-            guard element as AnyObject === array[index] else {
-                return false
-            }
-        }
-        
-        return true
-    })
-}
-
 func player(equalTo object: AnyObject) -> ParameterMatcher<PlayerProtocol> {
     return ParameterMatcher(matchesFunction: { player -> Bool in
         return player as AnyObject === object

@@ -1,5 +1,5 @@
 //
-//  ResourcesProviderTests+Figures.swift
+//  ResourcesTests+Figures.swift
 //  WildWestTests
 //
 //  Created by Hugues Stephano Telolahy on 26/01/2020.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-class ResourcesProviderTests_Figures: XCTestCase {
+class ResourcesTests_Figures: XCTestCase {
     
     private lazy var figures: [FigureProtocol] = {
         let jsonReader = JsonReader(bundle: Bundle(for: type(of: self)))

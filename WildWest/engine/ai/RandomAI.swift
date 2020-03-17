@@ -8,7 +8,7 @@
 
 class RandomAI: AIProtocol {
     func evaluate(_ move: GameMove, in state: GameStateProtocol) -> Int {
-        
+        /*
         // prefer play instead of do nothing
         if move is EndTurn {
             return Score.endTurn
@@ -28,7 +28,7 @@ class RandomAI: AIProtocol {
                 return Score.useLowerRangeGun
             }
         }
-        
+        */
         return 0
     }
 }

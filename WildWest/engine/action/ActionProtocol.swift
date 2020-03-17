@@ -44,13 +44,3 @@ struct Action: ActionProtocol {
         updates
     }
 }
-
-struct TargetCard: Equatable {
-    let ownerId: String
-    let source: TargetCardSource
-}
-
-enum TargetCardSource: Equatable {
-    case randomHand
-    case inPlay(String)
-}

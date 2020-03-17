@@ -16,7 +16,7 @@ class MessageCell: UITableViewCell, MoveDescriptor {
         messageLabel.text = description(for: move)
     }
 }
-
+/*
 private extension MessageCell {
     
     var emojis: [String: String] {
@@ -40,7 +40,6 @@ private extension MessageCell {
             "ResolveBarrel": "❔",
             "ResolveDynamite": "❔",
             "ResolveJail": "❔",
-            "Saloon": "🍺",
             "Stagecoach": "💰",
             "StartTurn": "🔥",
             "WellsFargo": "💰",
@@ -59,3 +58,4 @@ private extension MessageCell {
         return emoji
     }
 }
+*/

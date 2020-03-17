@@ -63,7 +63,7 @@ private extension GameStateProtocol {
         
         let otherPlayers = allPlayers.filter { $0.role != .sheriff }
         let stats = otherPlayers.map { AgressivityStat(source: $0.identifier, target: sheriff.identifier, value: 0) }
-        
+        /*
         executedMoves.forEach { move in
             
             if let bang = move as? Bang {
@@ -94,7 +94,7 @@ private extension GameStateProtocol {
                 }
             }
         }
-        
+        */
         return stats.sorted(by: { $0.value > $1.value })
     }
     

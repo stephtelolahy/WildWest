@@ -14,8 +14,11 @@ class StartTurnExecutorTests: XCTestCase {
     
     func test_Pull2CardsFromDeck_IfStartingTurn() {
         // Given
+        let mockState = MockGameStateProtocol()
+        let move = GameMove(name: .startTurn, actorId: "p1")
+        
         // When
-        let updates = sut.execute(.startTurn(actorId: "p1"), in: MockGameStateProtocol())
+        let updates = sut.execute(move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.playerPullFromDeck("p1", 2),

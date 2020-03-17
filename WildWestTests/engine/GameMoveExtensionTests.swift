@@ -9,18 +9,18 @@
 import XCTest
 
 class GameMoveExtensionTests: XCTestCase {
-
+    
     func test_MergingGameMoves() {
         // Given
         let moves: [[String: [GameMove]]] = [
-            ["p1": [.startTurn(actorId: "p1")]],
-            ["p1": [.startTurn(actorId: "p1")]]
+            ["p1": [GameMove(name: .playCard)]],
+            ["p1": [GameMove(name: .endTurn)]]
         ]
         
         // When
         let merged = moves.merged()
         
         // Assert
-        XCTAssertEqual(merged, ["p1": [.startTurn(actorId: "p1"), .startTurn(actorId: "p1")]])
+        XCTAssertEqual(merged, ["p1": [GameMove(name: .playCard), GameMove(name: .endTurn)]])
     }
 }

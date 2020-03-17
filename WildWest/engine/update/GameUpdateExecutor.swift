@@ -1,16 +1,16 @@
 //
-//  GameUpdate.swift
+//  GameUpdateExecutor.swift
 //  WildWest
 //
-//  Created by Hugues Stephano Telolahy on 10/02/2020.
+//  Created by Hugues Stéphano TELOLAHY on 3/17/20.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-extension GameUpdate: GameUpdateProtocol {
+class GameUpdateExecutor: GameUpdateExecutorProtocol {
     // swiftlint:disable cyclomatic_complexity
     // swiftlint:disable function_body_length
-    func execute(in database: GameDatabaseProtocol) {
-        switch self {
+    func execute(_ update: GameUpdate, in database: GameDatabaseProtocol) {
+        switch update {
         case let .setTurn(turn):
             GameUpdateSetTurn(turn: turn).execute(in: database)
             
@@ -83,61 +83,6 @@ extension GameUpdate: GameUpdateProtocol {
             
         case let .setOutcome(outcome):
             database.setOutcome(outcome)
-        }
-    }
-    
-    var description: String {
-        switch self {
-        case let .setTurn(turn):
-            return GameUpdateSetTurn(turn: turn).description
-            
-        case let .setChallenge(challenge):
-            return GameUpdateSetChallenge(challenge: challenge).description
-            
-        case let .playerGainHealth(playerId, points):
-            return GameUpdatePlayerGainHealth(playerId: playerId, points: points).description
-            
-        case let .playerLooseHealth(playerId, points, source):
-            return GameUpdatePlayerLooseHealth(playerId: playerId, points: points, source: source).description
-            
-        case let .playerPullFromDeck(playerId, cardsCount):
-            return "\(playerId) pullFromDeck \(cardsCount)"
-            
-        case let .playerDiscardHand(playerId, cardId):
-            return "\(playerId) discardHand \(cardId)"
-            
-        case let .playerPutInPlay(playerId, cardId):
-            return "\(playerId) putInPlay \(cardId)"
-            
-        case let .playerDiscardInPlay(playerId, cardId):
-            return "\(playerId) discardInPlay \(cardId)"
-            
-        case let .playerPullFromOtherHand(playerId, otherId, cardId):
-            return "\(playerId) pullFromOtherHand \(otherId) \(cardId)"
-            
-        case let .playerPullFromOtherInPlay(playerId, otherId, cardId):
-            return "\(playerId) pullFromOtherInPlay \(otherId) \(cardId)"
-            
-        case let .playerPutInPlayOfOther(playerId, otherId, cardId):
-            return "\(playerId) putInPlayOfOther \(otherId) \(cardId)"
-            
-        case let .playerPassInPlayOfOther(playerId, otherId, cardId):
-            return "\(playerId) passInPlayOfOther \(otherId) \(cardId)"
-            
-        case let .playerPullFromGeneralStore(playerId, cardId):
-            return "\(playerId) pullFromGeneralStore \(cardId)"
-            
-        case let .setupGeneralStore(cardsCount):
-            return "setupGeneralStore \(cardsCount)"
-            
-        case .flipOverFirstDeckCard:
-            return GameUpdateFlipOverFirstDeckCard().description
-            
-        case let .eliminatePlayer(playerId):
-            return GameUpdateEliminatePlayer(playerId: playerId).description
-            
-        case let .setOutcome(outcome):
-            return "setOutcome \(outcome)"
         }
     }
 }

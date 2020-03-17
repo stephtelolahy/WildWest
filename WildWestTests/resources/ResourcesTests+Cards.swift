@@ -1,6 +1,6 @@
 
 //
-//  ResourcesProviderTests+Cards.swift
+//  ResourcesTests+Cards.swift
 //  WildWestTests
 //
 //  Created by Hugues Stephano Telolahy on 26/01/2020.
@@ -9,7 +9,7 @@
 
 import XCTest
 
-class ResourcesProviderTests_Cards: XCTestCase {
+class ResourcesTests_Cards: XCTestCase {
     
     private lazy var cards: [CardProtocol] = {
         let jsonReader = JsonReader(bundle: Bundle(for: type(of: self)))

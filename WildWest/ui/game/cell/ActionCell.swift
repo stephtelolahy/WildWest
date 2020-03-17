@@ -26,6 +26,7 @@ class ActionCell: UICollectionViewCell {
         cardView.isHidden = !item.actions.isEmpty
         
         guard let card = item.card else {
+            /*
             if (item.actions.first as? ChooseCard) != nil {
                 cardImageView.image = #imageLiteral(resourceName: "01_choose_card")
             } else if (item.actions.first as? EndTurn) != nil {
@@ -35,6 +36,7 @@ class ActionCell: UICollectionViewCell {
             } else {
                 cardImageView.image = #imageLiteral(resourceName: "01_more") // use barrel, discard beer
             }
+            */
             return
         }
         

@@ -11,84 +11,94 @@ import Cuckoo
 
 class GameEngineTests: XCTestCase {
     
-    var mockState: MockGameStateProtocol!
-    var mockDatabase: MockGameDatabaseProtocol!
-    var mockRule: MockRuleProtocol!
-    var mockEffectRule: MockEffectRuleProtocol!
-    var mockAction: MockActionProtocol!
+    private var sut: GameEngine!
     
-    var sut: GameEngineProtocol!
+    private var mockDatabase: MockGameDatabaseProtocol!
+    private var mockState: MockGameStateProtocol!
+    private var mockValidMoveMatcher: MockValidMoveMatcherProtocol!
+    private var mockAutoPlayMoveMatcher: MockAutoplayMoveMatcherProtocol!
+    private var mockEffectMatcher: MockEffectMatcherProtocol!
+    private var mockMoveExecutor: MockMoveExecutorProtocol!
+    private var mockUpdateExecutor: MockUpdateExecutorProtocol!
     
     override func setUp() {
         mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
         mockDatabase = MockGameDatabaseProtocol().withEnabledDefaultImplementation(GameDatabaseProtocolStub())
+        mockValidMoveMatcher = MockValidMoveMatcherProtocol().withEnabledDefaultImplementation(ValidMoveMatcherProtocolStub())
+        mockAutoPlayMoveMatcher = MockAutoplayMoveMatcherProtocol().withEnabledDefaultImplementation(AutoplayMoveMatcherProtocolStub())
+        mockEffectMatcher = MockEffectMatcherProtocol().withEnabledDefaultImplementation(EffectMatcherProtocolStub())
+        mockMoveExecutor = MockMoveExecutorProtocol().withEnabledDefaultImplementation(MoveExecutorProtocolStub())
+        mockUpdateExecutor = MockUpdateExecutorProtocol().withEnabledDefaultImplementation(UpdateExecutorProtocolStub())
         Cuckoo.stub(mockDatabase) { mock in
             when(mock.state.get).thenReturn(mockState)
         }
-        mockRule = MockRuleProtocol().withEnabledDefaultImplementation(RuleProtocolStub())
-        mockEffectRule = MockEffectRuleProtocol().withEnabledDefaultImplementation(EffectRuleProtocolStub())
-        sut = GameEngine(database: mockDatabase, rules: [mockRule], effectRules: [mockEffectRule])
-        mockAction = MockActionProtocol().withEnabledDefaultImplementation(ActionProtocolStub())
+        
+        sut = GameEngine(database: mockDatabase,
+                         validMoveMatchers: [mockValidMoveMatcher],
+                         autoPlayMoveMatchers: [mockAutoPlayMoveMatcher],
+                         effectMatchers: [mockEffectMatcher],
+                         moveExecutors: [mockMoveExecutor],
+                         updateExecutors: [mockUpdateExecutor])
     }
     
-    func test_ExecuteGameUpdates_IfExecutingAction() {
+    func test_ExecuteGameUpdates_IfExecutingMove() {
         // Given
-        let mockUpdate1 = MockGameUpdateProtocol().withEnabledDefaultImplementation(GameUpdateProtocolStub())
-        let mockUpdate2 = MockGameUpdateProtocol().withEnabledDefaultImplementation(GameUpdateProtocolStub())
-        Cuckoo.stub(mockAction) { mock in
-            when(mock.execute(in: state(equalTo: mockState))).thenReturn([mockUpdate1, mockUpdate2])
+        let move = GameMove(name: .startTurn)
+        let update: GameUpdate = .playerPullFromDeck("p1", 2)
+        Cuckoo.stub(mockMoveExecutor) { mock in
+            when(mock.execute(equal(to: move), in: state(equalTo: mockState))).thenReturn([update])
         }
         
         // When
-        sut.execute(mockAction)
+        sut.execute(move)
         
         // Assert
-        verify(mockUpdate1).execute(in: database(equalTo: mockDatabase))
-        verify(mockUpdate2).execute(in: database(equalTo: mockDatabase))
+        verify(mockUpdateExecutor).execute(equal(to: update), in: database(equalTo: mockDatabase))
     }
     
-    func test_AddMoves_IfExecutingAction() {
+    func test_AddExecutedMoves_IfExecutingMove() {
         // Given
+        let move = GameMove(name: .startTurn)
+        
         // When
-        sut.execute(mockAction)
+        sut.execute(move)
         
         // Assert
-        verify(mockDatabase).addExecutedMove(action(equalTo: mockAction))
+        verify(mockDatabase).addExecutedMove(equal(to: move))
     }
     
-    func test_SetMatchingActionsAsValidMoves_IfExecutingAction() {
+    func test_SetValidMoves_IfExecutingMove() {
         // Given
-        let matchedAction1 = MockActionProtocol().autoPlay(is: false)
-        let matchedAction2 = MockActionProtocol().autoPlay(is: false)
-        Cuckoo.stub(mockRule) { mock in
-            when(mock.match(with: state(equalTo: mockState))).thenReturn([matchedAction1, matchedAction2])
+        let move = GameMove(name: .startTurn)
+        let validMove = GameMove(name: .playCard)
+        Cuckoo.stub(mockValidMoveMatcher) { mock in
+            when(mock.validMoves(matching: state(equalTo: mockState))).thenReturn(["p1": [validMove]])
         }
         
         // When
-        sut.execute(mockAction)
+        sut.execute(move)
         
         // Assert
-        verify(mockRule).match(with: state(equalTo: mockState))
-        let argumentCaptor = ArgumentCaptor<[ActionProtocol]>()
+        let argumentCaptor = ArgumentCaptor<[String: [GameMove]]>()
         verify(mockDatabase, atLeastOnce()).setValidMoves(argumentCaptor.capture())
         XCTAssertTrue(argumentCaptor.allValues.count == 2)
-        XCTAssertTrue(argumentCaptor.allValues[0].isEmpty)
-        XCTAssertTrue(argumentCaptor.allValues[1].count == 2)
-        XCTAssertTrue(argumentCaptor.allValues[1][0] as? MockActionProtocol === matchedAction1)
-        XCTAssertTrue(argumentCaptor.allValues[1][1] as? MockActionProtocol === matchedAction2)
+        XCTAssertEqual(argumentCaptor.allValues[0], [:])
+        XCTAssertEqual(argumentCaptor.allValues[1], ["p1": [validMove]])
     }
     
     func test_DoNotGenerateActions_IfGameIsOver() {
         // Given
+        let move = GameMove(name: .startTurn)
         Cuckoo.stub(mockState) { mock in
             when(mock.outcome.get).thenReturn(.outlawWin)
         }
         
         // When
-        sut.execute(mockAction)
+        sut.execute(move)
         
         // Assert
-        verify(mockDatabase).setValidMoves(isEmpty())
-        verifyNoMoreInteractions(mockRule)
+        verify(mockDatabase).setValidMoves(equal(to: [:]))
+        verifyNoMoreInteractions(mockValidMoveMatcher)
+        verifyNoMoreInteractions(mockEffectMatcher)
     }
 }

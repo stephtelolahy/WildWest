@@ -110,7 +110,7 @@ private extension UIViewController {
         present(alertController, animated: true)
     }
 }
-
+/*
 private extension TargetCard {
     var description: String {
         switch source {
@@ -121,3 +121,4 @@ private extension TargetCard {
         }
     }
 }
+*/

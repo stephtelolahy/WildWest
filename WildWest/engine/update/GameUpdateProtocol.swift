@@ -6,12 +6,6 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-protocol GameUpdateProtocol {
-    var description: String { get }
-    
-    func execute(in database: GameDatabaseProtocol)
-}
-
 enum GameUpdate: Equatable {
     case setTurn(String)
     case setChallenge(Challenge?)
@@ -32,7 +26,7 @@ enum GameUpdate: Equatable {
     case setOutcome(GameOutcome)
 }
 
-// Define database transaction on executing update
+// Define database transaction on executing a GameUpdate
 protocol UpdateExecutorProtocol {
     func execute(_ update: GameUpdate, in database: GameDatabaseProtocol)
 }

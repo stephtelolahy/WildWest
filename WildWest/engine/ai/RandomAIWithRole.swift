@@ -9,7 +9,7 @@
 class RandomAIWithRole: RandomAI {
     
     override func evaluate(_ move: GameMove, in state: GameStateProtocol) -> Int {
-        
+        /*
         if let bang = move as? Bang {
             return evaluateStrongAttack(from: bang.actorId, to: bang.targetId, in: state)
         }
@@ -35,7 +35,7 @@ class RandomAIWithRole: RandomAI {
             }
             return evaluateWeakAttack(from: catBalou.actorId, to: catBalou.target.ownerId, in: state)
         }
-        
+        */
         return super.evaluate(move, in: state)
     }
     

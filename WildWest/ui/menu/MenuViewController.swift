@@ -58,7 +58,8 @@ class MenuViewController: UIViewController {
                                 validMoveMatchers: config.validMoveMatchers,
                                 autoPlayMoveMatchers: config.autoPlayMoveMatchers,
                                 effectMatchers: config.effectMatchers,
-                                moveExecutors: config.moveExectors)
+                                moveExecutors: config.moveExectors,
+                                updateExecutors: config.updateExecutors)
         
         let controlledPlayerId = database.state.players.first(where: { $0.role == .sheriff })?.identifier
         

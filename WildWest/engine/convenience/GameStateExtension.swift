@@ -7,7 +7,7 @@
 //
 
 extension GameStateProtocol {
-    
+    /*
     func targetCards(from otherPlayers: [PlayerProtocol]) -> [TargetCard]? {
         var result: [TargetCard] = []
         otherPlayers.forEach { player in
@@ -23,7 +23,7 @@ extension GameStateProtocol {
         
         return result
     }
-    
+    */
     var nextTurn: String {
         guard let turnIndex = players.firstIndex(where: { $0.identifier == turn }) else {
             return ""

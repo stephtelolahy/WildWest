@@ -1,18 +1,16 @@
 //
-//  Beer.swift
+//  Saloon.swift
 //  WildWest
 //
-//  Created by Hugues Stéphano TELOLAHY on 12/14/19.
+//  Created by Hugues Stéphano TELOLAHY on 12/30/19.
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-class BeerMatcher: ValidMoveMatcherProtocol {
+class SaloonMatcher: ValidMoveMatcherProtocol {
     func validMoves(matching state: GameStateProtocol) -> [String: [GameMove]]? {
         guard state.challenge == nil,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
-            let cards = actor.handCards(named: .beer),
-            state.players.count > 2,
-            actor.health < actor.maxHealth else {
+            let cards = actor.handCards(named: .saloon) else {
                 return nil
         }
         
@@ -26,16 +24,19 @@ class BeerMatcher: ValidMoveMatcherProtocol {
     }
 }
 
-class BeerExecutor: MoveExecutorProtocol {
+class SaloonExecutor: MoveExecutorProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .playCard = move.name,
-            case .beer = move.cardName,
+            case .saloon = move.cardName,
             let cardId = move.cardId,
             let actorId = move.actorId else {
                 return nil
         }
         
-        return [.playerDiscardHand(actorId, cardId),
-                .playerGainHealth(actorId, 1)]
-    }
+        var updates: [GameUpdate] = []
+        updates.append(.playerDiscardHand(actorId, cardId))
+        let damagedPlayers = state.players.filter { $0.health < $0.maxHealth }
+        damagedPlayers.forEach { updates.append(.playerGainHealth($0.identifier, 1)) }
+        return updates
+    }    
 }
