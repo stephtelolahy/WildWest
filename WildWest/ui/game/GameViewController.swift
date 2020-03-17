@@ -9,7 +9,8 @@
 import UIKit
 import RxSwift
 
-class GameViewController: UIViewController, Subscribable, MoveSelector {
+class GameViewController: UIViewController,
+Subscribable, MoveSelector, PlayersAdapter, ActionsAdapter, InstructionBuilder {
     
     // MARK: Constants
     
@@ -50,7 +51,7 @@ class GameViewController: UIViewController, Subscribable, MoveSelector {
         }
         
         let playerIds = state.players.map { $0.identifier }
-        playerIndexes = MapConfiguration.buildIndexes(with: playerIds)
+        playerIndexes = buildIndexes(with: playerIds)
         
         sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
             self?.update(with: state)
@@ -90,19 +91,15 @@ class GameViewController: UIViewController, Subscribable, MoveSelector {
 private extension GameViewController {
     
     func update(with state: GameStateProtocol) {
-        
-        playerItems = PlayersAdapter.buildItems(state: state, for: controlledPlayerId, playerIndexes: playerIndexes)
+        playerItems = buildItems(state: state, for: controlledPlayerId, playerIndexes: playerIndexes)
         playersCollectionView.reloadData()
-        
-        actionItems = ActionsAdapter.buildActions(state: state, for: controlledPlayerId)
-        actionsCollectionView.reloadData()
-        
+        discardImageView.image = UIImage(named: state.discardPile.first?.imageName ?? "")
         messages = state.executedMoves
         messageTableView.reloadDataSwollingAtBottom()
         
-        titleLabel.text = ActionsAdapter.buildInstruction(state: state, for: controlledPlayerId)
-        
-        discardImageView.image = UIImage(named: state.discardPile.first?.imageName ?? "")
+        actionItems = buildActions(state: state, for: controlledPlayerId)
+        actionsCollectionView.reloadData()
+        titleLabel.text = buildInstruction(state: state, for: controlledPlayerId)
     }
     
     func showStats() {

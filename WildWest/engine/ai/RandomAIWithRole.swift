@@ -8,35 +8,23 @@
 
 class RandomAIWithRole: RandomAI {
     
+    private let classifier: MoveClassifierProtocol = MoveClassifier()
+    
     override func evaluate(_ move: GameMove, in state: GameStateProtocol) -> Int {
-        /*
-        if let bang = move as? Bang {
-            return evaluateStrongAttack(from: bang.actorId, to: bang.targetId, in: state)
+        let classification = classifier.classify(move)
+        switch classification {
+        case let .strongAttack(actorId, targetId):
+            return evaluateStrongAttack(from: actorId, to: targetId, in: state)
+            
+        case let .weakAttack(actorId, targetId):
+            return evaluateWeakAttack(from: actorId, to: targetId, in: state)
+            
+        case let .help(actorId, targetId):
+            return evaluateHelp(from: actorId, to: targetId, in: state)
+            
+        default:
+            return super.evaluate(move, in: state)
         }
-        
-        if let duel = move as? Duel {
-            return evaluateStrongAttack(from: duel.actorId, to: duel.targetId, in: state)
-        }
-        
-        if let jail = move as? Jail {
-            return evaluateWeakAttack(from: jail.actorId, to: jail.targetId, in: state)
-        }
-        
-        if let panic = move as? Panic {
-            if case let .inPlay(cardId) = panic.target.source, cardId.contains("jail") {
-                return evaluateHelp(from: panic.actorId, to: panic.target.ownerId, in: state)
-            }
-            return evaluateWeakAttack(from: panic.actorId, to: panic.target.ownerId, in: state)
-        }
-        
-        if let catBalou = move as? CatBalou {
-            if case let .inPlay(cardId) = catBalou.target.source, cardId.contains("jail") {
-                return evaluateHelp(from: catBalou.actorId, to: catBalou.target.ownerId, in: state)
-            }
-            return evaluateWeakAttack(from: catBalou.actorId, to: catBalou.target.ownerId, in: state)
-        }
-        */
-        return super.evaluate(move, in: state)
     }
     
     private func evaluateStrongAttack(from actorId: String, to targetId: String, in state: GameStateProtocol) -> Int {

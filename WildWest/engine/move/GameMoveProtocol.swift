@@ -18,10 +18,12 @@ struct GameMove: Equatable {
 }
 
 enum MoveName: String {
-    case startTurn   // phase1: start turn
+    case startTurn  // phase1: start turn
     case playCard   // phase2: play hand card
     case endTurn    // phase3: end turn discarding excess cards
-    case discard    // reaction move
+    case discard    // reaction move: discard hand card
+    case pass       // reaction move: do nothing while attacked
+    case chooseCard // reaction move: choose card
 }
 
 struct TargetCard: Equatable {

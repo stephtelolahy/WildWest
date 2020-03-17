@@ -31,13 +31,7 @@ class MenuViewController: UIViewController {
         present(alertController, animated: true)
     }
     
-    // swiftlint:disable function_body_length
     private func startGame(for playersCount: Int) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let gameViewController =
-            storyboard.instantiateViewController(withIdentifier: "GameViewController") as? GameViewController else {
-                return
-        }
         
         let jsonReader = JsonReader(bundle: Bundle.main)
         let config = GameConfiguration(jsonReader: jsonReader)
@@ -71,11 +65,22 @@ class MenuViewController: UIViewController {
                                                      delay: 0.5)
         }
         
+        presentGame(engine: engine, controlledPlayerId: controlledPlayerId, aiAgents: aiAgents)
+    }
+    
+}
+
+private extension UIViewController {
+    func presentGame(engine: GameEngine, controlledPlayerId: String?, aiAgents: [AIPlayerAgent]) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let gameViewController =
+            storyboard.instantiateViewController(withIdentifier: "GameViewController") as? GameViewController else {
+                return
+        }
+        
         gameViewController.engine = engine
         gameViewController.controlledPlayerId = controlledPlayerId
         gameViewController.aiAgents = aiAgents
-        
         present(gameViewController, animated: true)
     }
-    
 }

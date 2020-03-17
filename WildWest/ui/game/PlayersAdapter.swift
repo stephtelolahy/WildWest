@@ -15,11 +15,19 @@ struct PlayerItem {
     let isControlled: Bool
 }
 
-enum PlayersAdapter {
-    static func buildItems(state: GameStateProtocol,
-                           for controlledPlayerId: String?,
-                           playerIndexes: [Int: String]) -> [PlayerItem?] {
-        Array(0..<MapConfiguration.itemsCount).map { index in
+protocol PlayersAdapter {
+    func buildIndexes(with playerIds: [String]) -> [Int: String]
+    func buildItems(state: GameStateProtocol,
+                    for controlledPlayerId: String?,
+                    playerIndexes: [Int: String]) -> [PlayerItem?]
+}
+
+extension PlayersAdapter {
+    
+    func buildItems(state: GameStateProtocol,
+                    for controlledPlayerId: String?,
+                    playerIndexes: [Int: String]) -> [PlayerItem?] {
+        Array(0..<9).map { index in
             guard let playerId = playerIndexes[index] else {
                 return nil
             }
@@ -50,24 +58,18 @@ enum PlayersAdapter {
             return nil
         }
     }
-}
-
-enum MapConfiguration {
     
-    static let itemsCount = 9
-    
-    private static let configuration: [[Int]] = [
-        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 1, 0, 0, 0, 0, 0],
-        [0, 0, 0, 1, 0, 2, 0, 0, 0],
-        [1, 0, 2, 0, 0, 0, 0, 3, 0],
-        [1, 0, 2, 0, 0, 0, 4, 0, 3],
-        [1, 2, 3, 0, 0, 0, 5, 0, 4],
-        [1, 0, 2, 6, 0, 3, 5, 0, 4],
-        [1, 2, 3, 7, 0, 4, 6, 0, 5]
-    ]
-    
-    static func buildIndexes(with playerIds: [String]) -> [Int: String] {
+    func buildIndexes(with playerIds: [String]) -> [Int: String] {
+        let configuration: [[Int]] = [
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 1, 0, 0, 0, 0, 0],
+            [0, 0, 0, 1, 0, 2, 0, 0, 0],
+            [1, 0, 2, 0, 0, 0, 0, 3, 0],
+            [1, 0, 2, 0, 0, 0, 4, 0, 3],
+            [1, 2, 3, 0, 0, 0, 5, 0, 4],
+            [1, 0, 2, 6, 0, 3, 5, 0, 4],
+            [1, 2, 3, 7, 0, 4, 6, 0, 5]
+        ]
         var result: [Int: String] = [:]
         let indexes = configuration[playerIds.count]
         for (index, element) in indexes.enumerated() where element > 0 {

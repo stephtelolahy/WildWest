@@ -9,81 +9,74 @@
 import UIKit
 
 protocol MoveSelector {
-    func selectMove(within actions: [GameMove], completion: @escaping ((GameMove) -> Void))
+    func selectMove(within moves: [GameMove], completion: @escaping (GameMove) -> Void)
 }
 
 extension MoveSelector where Self: UIViewController {
     
-    func selectMove(within actions: [GameMove], completion: @escaping ((GameMove) -> Void)) {
-        /*
-        guard !actions.isEmpty else {
+    func selectMove(within moves: [GameMove], completion: @escaping (GameMove) -> Void) {
+        guard !moves.isEmpty else {
             return
         }
         
-        if let playCardAgainstOnePlayerActions = actions as? [PlayCardAgainstOnePlayerActionProtocol] {
-            selectPlayer(within: playCardAgainstOnePlayerActions, completion: completion)
+        if moves.contains(where: { $0.targetId != nil }) {
+            selectPlayer(within: moves, completion: completion)
             return
         }
         
-        if let playCardAgainstOneCardActions = actions as? [PlayCardAgainstOneCardActionProtocol] {
-            selectTargetCard(within: playCardAgainstOneCardActions, completion: completion)
+        if moves.contains(where: { $0.targetCard != nil }) {
+            selectTargetCard(within: moves, completion: completion)
             return
         }
         
-        if let chooseCardActions = actions as? [ChooseCardActionProtocol] {
-            selectCard(within: chooseCardActions, completion: completion)
+        if moves.contains(where: { $0.name == .chooseCard }) {
+            selectCard(within: moves, completion: completion)
             return
         }
         
-        if actions.count == 1,
-            let uniqueAction = actions.first {
-            completion(uniqueAction)
+        if moves.count == 1,
+            let uniqueMove = moves.first {
+            completion(uniqueMove)
             return
         }
         
-        if let chooseCardsCombinationsActions = actions as? [ChooseCardsCombinationActionProtocol] {
-            selectCardsCombination(within: chooseCardsCombinationsActions, completion: completion)
+        if moves.contains(where: { $0.discardedCardIs != nil }) {
+            selectCardsCombination(within: moves, completion: completion)
             return
         }
         
-        select(within: actions.map { $0.description }, title: "Select option") { index in
-            completion(actions[index])
+        select(within: moves.map { $0.name.rawValue }, title: "Select option") { index in
+            completion(moves[index])
         }
-         */
     }
-    /*
-    private func selectPlayer(within actions: [PlayCardAgainstOnePlayerActionProtocol],
-                              completion: @escaping ((ActionProtocol) -> Void)) {
-        let targetIds = actions.map { $0.targetId }
+    
+    private func selectPlayer(within moves: [GameMove], completion: @escaping (GameMove) -> Void) {
+        let targetIds = moves.compactMap { $0.targetId }
         select(within: targetIds, title: "Select player") { index in
-            completion(actions[index])
+            completion(moves[index])
         }
     }
     
-    private func selectTargetCard(within actions: [PlayCardAgainstOneCardActionProtocol],
-                                  completion: @escaping ((ActionProtocol) -> Void)) {
-        let targets = actions.map { $0.target.description }
-        select(within: targets, title: "Taget card") { index in
-            completion(actions[index])
+    private func selectTargetCard(within moves: [GameMove], completion: @escaping (GameMove) -> Void) {
+        let targets = moves.compactMap { $0.targetCard?.description }
+        select(within: targets, title: "Select target card") { index in
+            completion(moves[index])
         }
     }
     
-    private func selectCard(within actions: [ChooseCardActionProtocol],
-                            completion: @escaping ((ActionProtocol) -> Void)) {
-        let cardIds = actions.map { $0.cardId }
+    private func selectCard(within moves: [GameMove], completion: @escaping (GameMove) -> Void) {
+        let cardIds = moves.compactMap { $0.cardId }
         select(within: cardIds, title: "Select card") { index in
-            completion(actions[index])
+            completion(moves[index])
         }
     }
     
-    private func selectCardsCombination(within actions: [ChooseCardsCombinationActionProtocol],
-                                        completion: @escaping ((ActionProtocol) -> Void)) {
-        let cardsCombinations = actions.map { $0.cardIds.joined(separator: ", ") }
+    private func selectCardsCombination(within moves: [GameMove], completion: @escaping (GameMove) -> Void) {
+        let cardsCombinations = moves.compactMap { $0.discardedCardIs?.joined(separator: ", ") }
         select(within: cardsCombinations, title: "Select cards") { index in
-            completion(actions[index])
+            completion(moves[index])
         }
     }
-     */
 }
 
 private extension UIViewController {
@@ -110,8 +103,8 @@ private extension UIViewController {
         present(alertController, animated: true)
     }
 }
-/*
-private extension TargetCard {
+
+extension TargetCard {
     var description: String {
         switch source {
         case .randomHand:
@@ -121,4 +114,3 @@ private extension TargetCard {
         }
     }
 }
-*/

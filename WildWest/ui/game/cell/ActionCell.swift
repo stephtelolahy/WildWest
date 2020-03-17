@@ -26,37 +26,24 @@ class ActionCell: UICollectionViewCell {
         cardView.isHidden = !item.actions.isEmpty
         
         guard let card = item.card else {
-            /*
-            if (item.actions.first as? ChooseCard) != nil {
-                cardImageView.image = #imageLiteral(resourceName: "01_choose_card")
-            } else if (item.actions.first as? EndTurn) != nil {
-                cardImageView.image = #imageLiteral(resourceName: "01_end_turn")
-            } else if (item.actions.first as? LooseLife) != nil {
-                cardImageView.image = #imageLiteral(resourceName: "01_nothing")
-            } else {
-                cardImageView.image = #imageLiteral(resourceName: "01_more") // use barrel, discard beer
+            if let move = item.actions.first {
+                switch move.name {
+                case .chooseCard:
+                    cardImageView.image = #imageLiteral(resourceName: "01_choose_card")
+                    
+                case .endTurn:
+                    cardImageView.image = #imageLiteral(resourceName: "01_end_turn")
+                    
+                case .pass:
+                    cardImageView.image = #imageLiteral(resourceName: "01_nothing")
+                    
+                default:
+                    cardImageView.image = #imageLiteral(resourceName: "01_more")
+                }
             }
-            */
             return
         }
         
         cardImageView.image = UIImage(named: card.imageName)
-    }
-}
-
-private extension CardName {
-    var isBlue: Bool {
-        let blueCards: [CardName]  = [
-            .volcanic,
-            .schofield,
-            .remington,
-            .winchester,
-            .revCarbine,
-            .barrel,
-            .mustang,
-            .scope,
-            .dynamite,
-            .jail]
-        return blueCards.contains(self)
     }
 }

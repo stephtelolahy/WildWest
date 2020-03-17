@@ -6,25 +6,58 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
+import UIKit
+
 protocol MoveDescriptor {
     func description(for move: GameMove) -> String?
 }
 
 extension MoveDescriptor {
     func description(for move: GameMove) -> String? {
-        /*
-        switch move {
-        case let .startTurn(actorId):
-            return "🔥 \(actorId) starts turn phase1"
-            
-        case let .beer(actorId, cardId):
-            return "🍺 \(actorId) plays \(cardId)"
-            
-        case let .saloon(actorId, cardId):
-            return "🍺 \(actorId) plays \(cardId)"
-            
+        let components: [String?] = [
+            move.actorId,
+            move.name.rawValue,
+            move.cardName?.rawValue,
+            move.targetId,
+            move.targetCard?.description
+        ]
+        let text = components.compactMap { $0 }.joined(separator: " ")
+        guard let prefix = emojis.keys.first(where: { text.lowercased().contains($0.lowercased()) }) else {
+            fatalError("No matching prefix found")
         }
-        */
-        nil
+        return "\(prefix) desc"
+    }
+    
+    var emojis: [String: String] {
+        [
+            "Bang": "🔫",
+            "Beer": "🍺",
+            "CatBalou": "‼️",
+            "ChooseCard": "💰",
+            "DiscardBang": "🔫",
+            "DiscardBeer": "😝",
+            "Duel": "🔫",
+            "Eliminate": "☠️",
+            "EndTurn": "✔️",
+            "Equip": "😎",
+            "Gatling": "🔫",
+            "GeneralStore": "💰", // 🎁
+            "Indians": "💢",
+            "Jail": "🚧",
+            "LooseLife": "❤️",
+            "Missed": "😝",
+            "Panic": "‼️", // ❗️❌
+            "Play dynamite": "💣",
+            "ResolveBarrel": "❔",
+            "ResolveDynamite": "❔", // 💥
+            "ResolveJail": "❔",
+            "Saloon": "🍺", // 🍻
+            "Stagecoach": "💰", //
+            "StartTurn": "🔥",
+            "WellsFargo": "💰",
+            "DiscardAllSheriffCardsOnEliminateDeputy": "⚠️",
+            "RewardOneWhoEliminatesOutlaw": "🎁",
+            "SetOutComeOnGameOver": "🎉" // 🎖🏆 🏜
+        ]
     }
 }

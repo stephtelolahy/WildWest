@@ -8,7 +8,7 @@
 
 enum Score {
     static let endTurn = -1
-    static let looseLife = -1
+    static let pass = -1
     static let useLowerRangeGun = -1
     static let strongAttackEnemy = 3
     static let strongAttackTeammate = -3

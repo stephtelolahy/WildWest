@@ -32,7 +32,7 @@ extension AIProtocol {
     }
 }
 
-struct EvaluatedMove {
+private struct EvaluatedMove {
     let move: GameMove
     let score: Int
 }

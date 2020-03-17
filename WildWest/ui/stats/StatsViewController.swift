@@ -9,18 +9,6 @@
 import UIKit
 import RxSwift
 
-class AgressivityStat {
-    let source: String
-    let target: String
-    var value: Int
-    
-    init(source: String, target: String, value: Int) {
-        self.source = source
-        self.target = target
-        self.value = value
-    }
-}
-
 class StatsViewController: UITableViewController, Subscribable {
     
     var stateSubject: BehaviorSubject<GameStateProtocol>?
@@ -35,7 +23,7 @@ class StatsViewController: UITableViewController, Subscribable {
         }
         
         sub(stateSubject.subscribe(onNext: { [weak self] state in
-            self?.stats = state.buildStats()
+            self?.stats = state.buildAntiSheriffStats()
             self?.tableView.reloadData()
         }))
     }
@@ -54,59 +42,53 @@ class StatsViewController: UITableViewController, Subscribable {
 
 private extension GameStateProtocol {
     
-    func buildStats() -> [AgressivityStat] {
-        
+    func buildAntiSheriffStats() -> [AgressivityStat] {
         let allPlayers = players + eliminated
         guard let sheriff = allPlayers.first(where: { $0.role == .sheriff }) else {
             return []
         }
         
         let otherPlayers = allPlayers.filter { $0.role != .sheriff }
-        let stats = otherPlayers.map { AgressivityStat(source: $0.identifier, target: sheriff.identifier, value: 0) }
-        /*
+        var stats = otherPlayers.map { AgressivityStat(source: $0.identifier, target: sheriff.identifier, value: 0) }
+        
+        let classifier = MoveClassifier()
         executedMoves.forEach { move in
             
-            if let bang = move as? Bang {
-                appendStrongAttack(from: bang.actorId, to: bang.targetId, in: stats)
-            }
-            
-            if let duel = move as? Duel {
-                appendStrongAttack(from: duel.actorId, to: duel.targetId, in: stats)
-            }
-            
-            if let jail = move as? Jail {
-                appendWeakAttack(from: jail.actorId, to: jail.targetId, in: stats)
-            }
-            
-            if let panic = move as? Panic {
-                if case let .inPlay(cardId) = panic.target.source, cardId.contains("jail") {
-                    appendHelp(from: panic.actorId, to: panic.target.ownerId, in: stats)
-                } else {
-                    appendWeakAttack(from: panic.actorId, to: panic.target.ownerId, in: stats)
-                }
-            }
-            
-            if let catBalou = move as? CatBalou {
-                if case let .inPlay(cardId) = catBalou.target.source, cardId.contains("jail") {
-                    appendHelp(from: catBalou.actorId, to: catBalou.target.ownerId, in: stats)
-                } else {
-                    appendWeakAttack(from: catBalou.actorId, to: catBalou.target.ownerId, in: stats)
-                }
+            let classification = classifier.classify(move)
+            switch classification {
+            case let .strongAttack(actorId, targetId):
+                stats.append(Score.strongAttackEnemy, from: actorId, to: targetId)
+                
+            case let .weakAttack(actorId, targetId):
+                stats.append(Score.weakAttackEnemy, from: actorId, to: targetId)
+                
+            case let .help(actorId, targetId):
+                stats.append(Score.helpEnemy, from: actorId, to: targetId)
+                
+            default:
+                break
             }
         }
-        */
+        
         return stats.sorted(by: { $0.value > $1.value })
     }
+}
+
+private class AgressivityStat {
+    let source: String
+    let target: String
+    var value: Int
     
-    func appendStrongAttack(from actorId: String, to targetId: String, in stats: [AgressivityStat]) {
-        stats.first(where: { $0.source == actorId && $0.target == targetId })?.value += Score.strongAttackEnemy
+    init(source: String, target: String, value: Int) {
+        self.source = source
+        self.target = target
+        self.value = value
     }
+}
+
+private extension Array where Element == AgressivityStat {
     
-    func appendWeakAttack(from actorId: String, to targetId: String, in stats: [AgressivityStat]) {
-        stats.first(where: { $0.source == actorId && $0.target == targetId })?.value += Score.weakAttackEnemy
-    }
-    
-    func appendHelp(from actorId: String, to targetId: String, in stats: [AgressivityStat]) {
-        stats.first(where: { $0.source == actorId && $0.target == targetId })?.value += Score.helpEnemy
+    mutating func append(_ value: Int, from actorId: String, to targetId: String) {
+        first(where: { $0.source == actorId && $0.target == targetId })?.value += value
     }
 }

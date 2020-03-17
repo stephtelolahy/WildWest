@@ -7,7 +7,7 @@
 //
 
 extension GameStateProtocol {
-    /*
+    
     func targetCards(from otherPlayers: [PlayerProtocol]) -> [TargetCard]? {
         var result: [TargetCard] = []
         otherPlayers.forEach { player in
@@ -23,7 +23,7 @@ extension GameStateProtocol {
         
         return result
     }
-    */
+    
     var nextTurn: String {
         guard let turnIndex = players.firstIndex(where: { $0.identifier == turn }) else {
             return ""
@@ -31,36 +31,5 @@ extension GameStateProtocol {
         
         let nextPlayerIndex = (turnIndex + 1) % players.count
         return players[nextPlayerIndex].identifier
-    }
-}
-
-extension Challenge {
-    var description: String {
-        switch self {
-        case .startTurn:
-            return "startTurn"
-            
-        case .startTurnDynamiteExploded:
-            return "dynamiteExploded"
-            
-        case let .duel(playerIds, _):
-            return "duel(\(playerIds.joined(separator: ", ")))"
-            
-        case let .shoot(playerIds, cardName, _):
-            switch cardName {
-            case .bang:
-                return "bang(\(playerIds.joined(separator: ", ")))"
-            case .gatling:
-                return "gatling(\(playerIds.joined(separator: ", ")))"
-            default:
-                return "shoot(\(playerIds.joined(separator: ", ")))"
-            }
-            
-        case let .indians(playerIds, _):
-            return "indians(\(playerIds.joined(separator: ", ")))"
-            
-        case let .generalStore(playerIds):
-            return "generalStore(\(playerIds.joined(separator: ", ")))"
-        }
     }
 }
