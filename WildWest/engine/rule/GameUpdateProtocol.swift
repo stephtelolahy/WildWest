@@ -11,3 +11,28 @@ protocol GameUpdateProtocol {
     
     func execute(in database: GameDatabaseProtocol)
 }
+
+enum GameUpdate: Equatable {
+    case setTurn(String)
+    case setChallenge(Challenge?)
+    case flipOverFirstDeckCard
+    case eliminatePlayer(String)
+    case playerGainHealth(String, Int)
+    case playerLooseHealth(String, Int, DamageSource)
+    case playerPullFromDeck(String, Int)
+    case playerDiscardHand(String, String)
+    case playerPutInPlay(String, String)
+    case playerDiscardInPlay(String, String)
+    case playerPullFromOtherHand(String, String, String)
+    case playerPullFromOtherInPlay(String, String, String)
+    case playerPutInPlayOfOther(String, String, String)
+    case playerPassInPlayOfOther(String, String, String)
+    case playerPullFromGeneralStore(String, String)
+    case setupGeneralStore(Int)
+    case setOutcome(GameOutcome)
+}
+
+// Define database transaction on executing update
+protocol UpdateExecutorProtocol {
+    func execute(_ update: GameUpdate, in database: GameDatabaseProtocol)
+}

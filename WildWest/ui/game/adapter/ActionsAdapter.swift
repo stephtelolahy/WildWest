@@ -8,7 +8,7 @@
 
 struct ActionItem {
     let card: CardProtocol?
-    let actions: [ActionProtocol]
+    let actions: [GameMove]
 }
 
 enum ActionsAdapter {
@@ -20,15 +20,18 @@ enum ActionsAdapter {
         }
         
         var result: [ActionItem] = []
-        var actions = state.validMoves.filter { $0.actorId == controlledPlayerId }
+        var actions = state.validMoves[controlledPlayerId] ?? []
+        
         player.hand.forEach { card in
             let cardActions = actions.filter { ($0 as? PlayCardAtionProtocol)?.cardId == card.identifier }
             result.append(ActionItem(card: card, actions: cardActions))
             actions.removeAll(where: { ($0 as? PlayCardAtionProtocol)?.cardId == card.identifier })
         }
+        
         if !actions.isEmpty {
             result.insert(ActionItem(card: nil, actions: actions), at: 0)
         }
+        
         return result
     }
     
@@ -42,7 +45,7 @@ enum ActionsAdapter {
         }
         
         guard let controlledPlayerId = controlledPlayerId,
-            state.validMoves.contains(where: { $0.actorId == controlledPlayerId }) else {
+            state.validMoves[controlledPlayerId] != nil else {
                 return "waiting others to play"
         }
         

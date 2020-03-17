@@ -18,7 +18,7 @@ struct PlayerItem {
 enum PlayersAdapter {
     static func buildItems(state: GameStateProtocol,
                            for controlledPlayerId: String?,
-                           playerIndexes: [Int: String?]) -> [PlayerItem?] {
+                           playerIndexes: [Int: String]) -> [PlayerItem?] {
         Array(0..<MapConfiguration.itemsCount).map { index in
             guard let playerId = playerIndexes[index] else {
                 return nil
@@ -34,7 +34,7 @@ enum PlayersAdapter {
             }
             
             if let player = state.players.first(where: { $0.identifier == playerId }) {
-                let isActive = state.validMoves.contains(where: { $0.actorId == playerId })
+                let isActive = state.validMoves[playerId] != nil
                 let isTurn = player.identifier == state.turn
                 let isRevealed = state.outcome != nil
                     || player.role == .sheriff
@@ -67,17 +67,12 @@ enum MapConfiguration {
         [1, 2, 3, 7, 0, 4, 6, 0, 5]
     ]
     
-    static func buildIndexes(with playerIds: [String]) -> [Int: String?] {
-        var result: [Int: String?] = [:]
+    static func buildIndexes(with playerIds: [String]) -> [Int: String] {
+        var result: [Int: String] = [:]
         let indexes = configuration[playerIds.count]
-        for (index, element) in indexes.enumerated() {
-            if element > 0 {
-                result[index] = playerIds[element - 1]
-            } else {
-                result[index] = nil
-            }
+        for (index, element) in indexes.enumerated() where element > 0 {
+            result[index] = playerIds[element - 1]
         }
-        
         return result
     }
 }

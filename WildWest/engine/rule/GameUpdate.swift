@@ -6,34 +6,6 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-enum GameUpdate: Equatable {
-    case setTurn(String)
-    case setChallenge(Challenge?)
-    case flipOverFirstDeckCard
-    case eliminatePlayer(String)
-    case playerGainHealth(String, Int)
-    case playerLooseHealth(String, Int, DamageSource)
-    
-    case playerPullFromDeck(String, Int)
-    case playerDiscardHand(String, String)
-    case playerPutInPlay(String, String)
-    case playerDiscardInPlay(String, String)
-    case playerPullFromOtherHand(String, String, String)
-    case playerPullFromOtherInPlay(String, String, String)
-    case playerPutInPlayOfOther(String, String, String)
-    case playerPassInPlayOfOther(String, String, String)
-    case playerPullFromGeneralStore(String, String)
-    case setupGeneralStore(Int)
-    case setOutcome(GameOutcome)
-}
-
-enum GameUpdateE: Equatable {
-    
-    struct Class1: Equatable {
-        let prop: String
-    }
-}
-
 extension GameUpdate: GameUpdateProtocol {
     // swiftlint:disable cyclomatic_complexity
     // swiftlint:disable function_body_length

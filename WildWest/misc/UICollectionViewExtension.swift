@@ -18,8 +18,10 @@ extension UICollectionView {
         flowLayout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
     }
     
-    // swiftlint:disable force_cast
     func dequeueReusableCell<T: UICollectionViewCell>(with type: T.Type, for indexPath: IndexPath) -> T {
-        dequeueReusableCell(withReuseIdentifier: type.className, for: indexPath) as! T
+        guard let cell = dequeueReusableCell(withReuseIdentifier: type.className, for: indexPath) as? T else {
+            fatalError("Cell not found")
+        }
+        return cell
     }
 }

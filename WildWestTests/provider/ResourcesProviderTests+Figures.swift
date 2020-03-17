@@ -12,8 +12,8 @@ class ResourcesProviderTests_Figures: XCTestCase {
     
     private lazy var figures: [FigureProtocol] = {
         let jsonReader = JsonReader(bundle: Bundle(for: type(of: self)))
-        let sut: ResourcesProviderProtocol = ResourcesProvider(jsonReader: jsonReader)
-        return sut.allFigures()
+        let sut = GameConfiguration(jsonReader: jsonReader)
+        return sut.allFigures
     }()
     
     func test_Load16PFigures() {

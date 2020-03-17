@@ -8,7 +8,7 @@
 
 class RandomAIWithRole: RandomAI {
     
-    override func evaluate(_ move: ActionProtocol, in state: GameStateProtocol) -> Int {
+    override func evaluate(_ move: GameMove, in state: GameStateProtocol) -> Int {
         
         if let bang = move as? Bang {
             return evaluateStrongAttack(from: bang.actorId, to: bang.targetId, in: state)

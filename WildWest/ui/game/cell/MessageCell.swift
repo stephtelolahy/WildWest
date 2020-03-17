@@ -8,12 +8,12 @@
 
 import UIKit
 
-class MessageCell: UITableViewCell {
+class MessageCell: UITableViewCell, MoveDescriptor {
     
     @IBOutlet private weak var messageLabel: UILabel!
     
-    func update(with action: ActionProtocol) {
-        messageLabel.text = "\(emoji(for: action)) \(action.description)"
+    func update(with move: GameMove) {
+        messageLabel.text = description(for: move)
     }
 }
 

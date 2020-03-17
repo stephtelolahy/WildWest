@@ -13,16 +13,22 @@ class GameEngine: GameEngineProtocol {
     let stateSubject: BehaviorSubject<GameStateProtocol>
     
     private let database: GameDatabaseProtocol
-    private let rules: [RuleProtocol]
-    private let effectRules: [EffectRuleProtocol]
+    private let validMoveMatchers: [ValidMoveMatcherProtocol]
+    private let autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol]
+    private let effectMatchers: [EffectMatcherProtocol]
+    private let moveExecutors: [MoveExecutorProtocol]
     
     init(database: GameDatabaseProtocol,
-         rules: [RuleProtocol],
-         effectRules: [EffectRuleProtocol]) {
+         validMoveMatchers: [ValidMoveMatcherProtocol],
+         autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol],
+         effectMatchers: [EffectMatcherProtocol],
+         moveExecutors: [MoveExecutorProtocol]) {
         self.database = database
-        self.rules = rules
-        self.effectRules = effectRules
-        stateSubject = BehaviorSubject(value: database.state)
+        self.stateSubject = BehaviorSubject(value: database.state)
+        self.validMoveMatchers = validMoveMatchers
+        self.autoPlayMoveMatchers = autoPlayMoveMatchers
+        self.effectMatchers = effectMatchers
+        self.moveExecutors = moveExecutors
     }
     
     func start() {
@@ -31,41 +37,65 @@ class GameEngine: GameEngineProtocol {
         }
         
         database.setTurn(sheriff.identifier)
-        execute(StartTurn(actorId: sheriff.identifier))
+        execute(.startTurn(actorId: sheriff.identifier))
     }
     
-    func execute(_ action: ActionProtocol) {
-        database.setValidMoves([])
-        var moves: [ActionProtocol] = [action]
+    // swiftlint:disable function_body_length
+    func execute(_ command: GameMove) {
+        // no move is allowed during update
+        database.setValidMoves([:])
         
-        while !moves.isEmpty {
-            let move = moves.remove(at: 0)
-            database.addExecutedMove(move)
-            
-            print("\n*** \(move.description) ***")
-            let updates = move.execute(in: database.state)
-            updates.forEach {
-                $0.execute(in: database)
-                print($0.description)
+        var movesQueue: [GameMove] = [command]
+        while !movesQueue.isEmpty {
+            // wait some delay
+            do {
+                sleep(1)
             }
             
+            let move = movesQueue.remove(at: 0)
+            
+            database.addExecutedMove(move)
+            print("\n*** \(String(describing: move)) ***")
+            
+            let updatesQueue = moveExecutors
+                .compactMap { $0.execute(move, in: database.state) }
+                .flatMap { $0 }
+            updatesQueue.forEach {
+                $0.execute(in: database)
+                print(String(describing: $0))
+            }
+            
+            // check if game over
             guard database.state.outcome == nil else {
                 break
             }
             
-            let effects = effectRules.compactMap { $0.effectOnExecuting(action: move, in: database.state) }
+            // check effects
+            let effects = effectMatchers
+                .compactMap { $0.effects(onExecuting: move, in: database.state) }
             if !effects.isEmpty {
-                moves.append(contentsOf: effects)
+                movesQueue.append(contentsOf: effects)
                 continue
             }
             
-            let validMoves = rules.compactMap { $0.match(with: database.state) }.flatMap { $0 }
-            let autoPlayMoves = validMoves.filter({ $0.autoPlay })
-            if !autoPlayMoves.isEmpty {
-                moves.append(contentsOf: autoPlayMoves)
-            } else {
-                database.setValidMoves(validMoves)
+            // check autoPlay moves
+            let autoPlays = autoPlayMoveMatchers
+                .compactMap { $0.autoPlayMoves(matching: database.state) }
+                .flatMap { $0 }
+            if !autoPlays.isEmpty {
+                movesQueue.append(contentsOf: autoPlays)
+                continue
             }
+            
+            // finally generate valid moves
+            let validMoves: [String: [GameMove]] = validMoveMatchers
+                .compactMap { $0.validMoves(matching: database.state) }
+                .merged()
+            guard validMoves.keys.count == 1 else {
+                fatalError("illegal state with \(validMoves.keys.count) active players")
+            }
+            
+            database.setValidMoves(validMoves)
         }
         
         stateSubject.onNext(database.state)

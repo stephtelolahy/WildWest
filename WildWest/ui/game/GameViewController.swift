@@ -28,15 +28,14 @@ class GameViewController: UIViewController, Subscribable, MoveSelector {
     
     // MARK: Properties
     
-    // swiftlint:disable implicitly_unwrapped_optional
-    var engine: GameEngineProtocol!
+    var engine: GameEngineProtocol?
     var aiAgents: [AIPlayerAgentProtocol] = []
     var controlledPlayerId: String?
     
-    private var playerIndexes: [Int: String?] = [:]
+    private var playerIndexes: [Int: String] = [:]
     private var playerItems: [PlayerItem?] = []
     private var actionItems: [ActionItem] = []
-    private var messages: [ActionProtocol] = []
+    private var messages: [GameMove] = []
     
     // MARK: Lifecycle
     
@@ -45,10 +44,13 @@ class GameViewController: UIViewController, Subscribable, MoveSelector {
         playersCollectionView.setItemSpacing(Constants.spacing)
         actionsCollectionView.setItemSpacing(Constants.spacing)
         
-        if let state = try? engine.stateSubject.value() {
-            let playerIds = state.players.map { $0.identifier }
-            playerIndexes = MapConfiguration.buildIndexes(with: playerIds)
+        guard let engine = self.engine,
+            let state = try? engine.stateSubject.value() else {
+            return
         }
+        
+        let playerIds = state.players.map { $0.identifier }
+        playerIndexes = MapConfiguration.buildIndexes(with: playerIds)
         
         sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
             self?.update(with: state)

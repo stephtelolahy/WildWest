@@ -19,8 +19,8 @@ class GameState: GameStateProtocol {
     var generalStore: [CardProtocol]
     var eliminated: [PlayerProtocol]
     var outcome: GameOutcome?
-    var validMoves: [ActionProtocol]
-    var executedMoves: [ActionProtocol]
+    var validMoves: [String: [GameMove]]
+    var executedMoves: [GameMove]
     
     init(players: [PlayerProtocol],
          deck: [CardProtocol],
@@ -32,8 +32,8 @@ class GameState: GameStateProtocol {
          damageEvents: [DamageEvent],
          generalStore: [CardProtocol],
          outcome: GameOutcome?,
-         validMoves: [ActionProtocol],
-         executedMoves: [ActionProtocol],
+         validMoves: [String: [GameMove]],
+         executedMoves: [GameMove],
          eliminated: [PlayerProtocol]) {
         self.players = players
         self.deck = deck

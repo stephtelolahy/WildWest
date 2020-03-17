@@ -9,12 +9,13 @@
 import UIKit
 
 protocol MoveSelector {
-    func selectMove(within actions: [ActionProtocol], completion: @escaping ((ActionProtocol) -> Void))
+    func selectMove(within actions: [GameMove], completion: @escaping ((GameMove) -> Void))
 }
 
 extension MoveSelector where Self: UIViewController {
     
-    func selectMove(within actions: [ActionProtocol], completion: @escaping ((ActionProtocol) -> Void)) {
+    func selectMove(within actions: [GameMove], completion: @escaping ((GameMove) -> Void)) {
+        /*
         guard !actions.isEmpty else {
             return
         }
@@ -48,8 +49,9 @@ extension MoveSelector where Self: UIViewController {
         select(within: actions.map { $0.description }, title: "Select option") { index in
             completion(actions[index])
         }
+         */
     }
-    
+    /*
     private func selectPlayer(within actions: [PlayCardAgainstOnePlayerActionProtocol],
                               completion: @escaping ((ActionProtocol) -> Void)) {
         let targetIds = actions.map { $0.targetId }
@@ -81,6 +83,7 @@ extension MoveSelector where Self: UIViewController {
             completion(actions[index])
         }
     }
+     */
 }
 
 private extension UIViewController {

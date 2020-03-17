@@ -7,19 +7,19 @@
 //
 
 protocol AIProtocol {
-    func bestMove(in state: GameStateProtocol) -> ActionProtocol?
-    func evaluate(_ move: ActionProtocol, in state: GameStateProtocol) -> Int
+    func bestMove(among moves: [GameMove], in state: GameStateProtocol) -> GameMove?
+    func evaluate(_ move: GameMove, in state: GameStateProtocol) -> Int
 }
 
 extension AIProtocol {
-    func bestMove(in state: GameStateProtocol) -> ActionProtocol? {
-        guard state.validMoves.count > 1 else {
-            return state.validMoves.first
+    func bestMove(among moves: [GameMove], in state: GameStateProtocol) -> GameMove? {
+        guard moves.count > 1 else {
+            return moves.first
         }
         
         var evaluatedMoves: [EvaluatedMove] = []
         var bestScore = Int.min
-        state.validMoves.forEach { move in
+        moves.forEach { move in
             let score = evaluate(move, in: state)
             evaluatedMoves.append(EvaluatedMove(move: move, score: score))
             if score > bestScore {
@@ -33,6 +33,6 @@ extension AIProtocol {
 }
 
 struct EvaluatedMove {
-    let move: ActionProtocol
+    let move: GameMove
     let score: Int
 }

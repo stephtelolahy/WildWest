@@ -1,45 +1,19 @@
 //
-//  StartTurnTests.swift
+//  StartTurnMatcherTests.swift
 //  WildWestTests
 //
-//  Created by Hugues Stephano Telolahy on 25/01/2020.
+//  Created by Hugues Stéphano TELOLAHY on 3/16/20.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
 import XCTest
-import Cuckoo
 
-class StartTurnTests: XCTestCase {
+class StartTurnMatcherTests: XCTestCase {
     
-    func test_StartTurnDescription() {
-        // Given
-        let sut = StartTurn(actorId: "p1")
-        
-        // When
-        // Assert
-        XCTAssertEqual(sut.description, "p1 starts turn")
-    }
-    
-    func test_Pull2CardsFromDeck_IfStartingTurn() {
-        // Given
-        let sut = StartTurn(actorId: "p1")
-        
-        // When
-        let updates = sut.execute(in: MockGameStateProtocol())
-        
-        // Assert
-        XCTAssertEqual(updates as? [GameUpdate], [
-            .playerPullFromDeck("p1", 2),
-            .setChallenge(nil)
-        ])
-    }
-}
-
-class StartTurnRuleTests: XCTestCase {
+    private let sut = StartTurnMatcher()
     
     func test_ShouldStartTurn_IfChallengeIsStartTurn() {
         // Given
-        let sut = StartTurnRule()
         let player1 = MockPlayerProtocol()
             .identified(by: "p1")
             .noCardsInPlay()
@@ -50,15 +24,14 @@ class StartTurnRuleTests: XCTestCase {
             .players(are: player1)
         
         // When
-        let actions = sut.match(with: mockState)
+        let actions = sut.autoPlayMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(actions as? [StartTurn], [StartTurn(actorId: "p1")])
+        XCTAssertEqual(actions, [.startTurn(actorId: "p1")])
     }
     
     func test_CannotStartTurn_IfPlayingJail() {
         // Given
-        let sut = StartTurnRule()
         let player1 = MockPlayerProtocol()
             .identified(by: "p1")
             .health(is: 1)
@@ -69,7 +42,7 @@ class StartTurnRuleTests: XCTestCase {
             .players(are: player1)
         
         // When
-        let actions = sut.match(with: mockState)
+        let actions = sut.autoPlayMoves(matching: mockState)
         
         // Assert
         XCTAssertNil(actions)
@@ -77,7 +50,6 @@ class StartTurnRuleTests: XCTestCase {
     
     func test_CannotStartTurn_IfPlayingDynamite() {
         // Given
-        let sut = StartTurnRule()
         let player1 = MockPlayerProtocol()
             .identified(by: "p1")
             .health(is: 1)
@@ -88,7 +60,7 @@ class StartTurnRuleTests: XCTestCase {
             .players(are: player1)
         
         // When
-        let actions = sut.match(with: mockState)
+        let actions = sut.autoPlayMoves(matching: mockState)
         
         // Assert
         XCTAssertNil(actions)
@@ -96,7 +68,6 @@ class StartTurnRuleTests: XCTestCase {
     
     func test_CannotStartTurn_IfHealth_IsZero() {
         // Given
-        let sut = StartTurnRule()
         let player1 = MockPlayerProtocol()
             .identified(by: "p1")
             .noCardsInPlay()
@@ -107,9 +78,10 @@ class StartTurnRuleTests: XCTestCase {
             .players(are: player1)
         
         // When
-        let actions = sut.match(with: mockState)
+        let actions = sut.autoPlayMoves(matching: mockState)
         
         // Assert
         XCTAssertNil(actions)
     }
+    
 }

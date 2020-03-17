@@ -17,8 +17,8 @@ protocol GameStateProtocol {
     var generalStore: [CardProtocol] { get }
     var eliminated: [PlayerProtocol] { get }
     var outcome: GameOutcome? { get }
-    var validMoves: [ActionProtocol] { get }
-    var executedMoves: [ActionProtocol] { get }
+    var validMoves: [String: [GameMove]] { get }
+    var executedMoves: [GameMove] { get }
     var damageEvents: [DamageEvent] { get }
 }
 

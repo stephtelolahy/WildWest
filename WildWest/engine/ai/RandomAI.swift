@@ -7,7 +7,7 @@
 //
 
 class RandomAI: AIProtocol {
-    func evaluate(_ move: ActionProtocol, in state: GameStateProtocol) -> Int {
+    func evaluate(_ move: GameMove, in state: GameStateProtocol) -> Int {
         
         // prefer play instead of do nothing
         if move is EndTurn {
