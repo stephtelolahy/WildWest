@@ -23,7 +23,7 @@ class GameConfiguration {
     }
     
     var validMoveMatchers: [ValidMoveMatcherProtocol] {
-        []
+        [BeerMatcher()]
     }
     
     var autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol] {
@@ -35,6 +35,7 @@ class GameConfiguration {
     }
     
     var moveExectors: [MoveExecutorProtocol] {
-        []
+        [StartTurnExecutor(),
+         BeerExecutor()]
     }
 }

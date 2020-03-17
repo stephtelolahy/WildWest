@@ -11,7 +11,7 @@ class StartTurnMatcher: AutoplayMoveMatcherProtocol {
         guard case .startTurn = state.challenge,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
             actor.health > 0,
-            actor.inPlay.filter({ $0.name == .jail || $0.name == .dynamite }).isEmpty else {
+            !actor.inPlay.contains(where: { $0.name == .jail || $0.name == .dynamite }) else {
                 return nil
         }
         

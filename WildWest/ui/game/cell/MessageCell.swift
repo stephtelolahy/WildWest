@@ -22,7 +22,6 @@ private extension MessageCell {
     var emojis: [String: String] {
         [
             "Bang": "🔫",
-            "Beer": "🍺",
             "CatBalou": "‼️",
             "ChooseCard": "💰",
             "DiscardBang": "🔫",

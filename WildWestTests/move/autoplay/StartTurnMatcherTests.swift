@@ -24,10 +24,10 @@ class StartTurnMatcherTests: XCTestCase {
             .players(are: player1)
         
         // When
-        let actions = sut.autoPlayMoves(matching: mockState)
+        let moves = sut.autoPlayMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(actions, [.startTurn(actorId: "p1")])
+        XCTAssertEqual(moves, [.startTurn(actorId: "p1")])
     }
     
     func test_CannotStartTurn_IfPlayingJail() {
@@ -42,10 +42,10 @@ class StartTurnMatcherTests: XCTestCase {
             .players(are: player1)
         
         // When
-        let actions = sut.autoPlayMoves(matching: mockState)
+        let moves = sut.autoPlayMoves(matching: mockState)
         
         // Assert
-        XCTAssertNil(actions)
+        XCTAssertNil(moves)
     }
     
     func test_CannotStartTurn_IfPlayingDynamite() {
@@ -60,10 +60,10 @@ class StartTurnMatcherTests: XCTestCase {
             .players(are: player1)
         
         // When
-        let actions = sut.autoPlayMoves(matching: mockState)
+        let moves = sut.autoPlayMoves(matching: mockState)
         
         // Assert
-        XCTAssertNil(actions)
+        XCTAssertNil(moves)
     }
     
     func test_CannotStartTurn_IfHealth_IsZero() {
@@ -78,10 +78,10 @@ class StartTurnMatcherTests: XCTestCase {
             .players(are: player1)
         
         // When
-        let actions = sut.autoPlayMoves(matching: mockState)
+        let moves = sut.autoPlayMoves(matching: mockState)
         
         // Assert
-        XCTAssertNil(actions)
+        XCTAssertNil(moves)
     }
     
 }

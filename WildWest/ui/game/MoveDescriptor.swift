@@ -16,6 +16,9 @@ extension MoveDescriptor {
         case let .startTurn(actorId):
             return "🔥 \(actorId) starts turn phase1"
             
+        case let .beer(actorId, cardId):
+            return "🍺 \(actorId) plays \(cardId)"
+            
         }
     }
 }

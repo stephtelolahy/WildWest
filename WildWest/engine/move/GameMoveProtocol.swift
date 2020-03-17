@@ -9,9 +9,10 @@
 /// A concrete action performed by a player or the game itself
 enum GameMove: Equatable {
     case startTurn(actorId: String)
+    case beer(actorId: String, cardId: String)
 }
 
-/// Function defining valid player move regarding given state
+/// Function defining manual player move regarding given state
 protocol ValidMoveMatcherProtocol {
     func validMoves(matching state: GameStateProtocol) -> [String: [GameMove]]?
 }
