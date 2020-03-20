@@ -27,8 +27,7 @@ class StartTurnMatcherTests: XCTestCase {
         let moves = sut.autoPlayMoves(matching: mockState)
         
         // Assert
-        let expectedMove = GameMove(name: .startTurn, actorId: "p1")
-        XCTAssertEqual(moves, [expectedMove])
+        XCTAssertEqual(moves, [GameMove(name: .startTurn, actorId: "p1")])
     }
     
     func test_CannotStartTurn_IfPlayingJail() {

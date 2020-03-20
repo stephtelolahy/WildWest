@@ -55,6 +55,7 @@ class GameEngine: GameEngineProtocol {
                 sleep(1)
             }
             
+            // execute move
             let move = movesQueue.remove(at: 0)
             
             database.addExecutedMove(move)
@@ -94,9 +95,11 @@ class GameEngine: GameEngineProtocol {
             }
             
             // finally generate valid moves
-            let validMoves: [String: [GameMove]] = validMoveMatchers
+            let validMoves = validMoveMatchers
                 .compactMap { $0.validMoves(matching: database.state) }
-                .merged()
+                .flatMap { $0 }
+                .groupedByActor()
+            
             guard validMoves.keys.count <= 1 else {
                 fatalError("Illegal multiple active players (\(validMoves.keys.count))")
             }

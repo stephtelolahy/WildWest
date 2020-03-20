@@ -41,23 +41,24 @@ extension MoveDescriptor {
             "EndTurn": "✔️",
             "Equip": "😎",
             "Gatling": "🔫",
-            "GeneralStore": "💰", // 🎁
+            "GeneralStore": "💰",
             "Indians": "💢",
             "Jail": "🚧",
             "LooseLife": "❤️",
             "Missed": "😝",
-            "Panic": "‼️", // ❗️❌
-            "Play dynamite": "💣",
+            "Panic": "‼️",
+            "Dynamite": "💣",
             "ResolveBarrel": "❔",
-            "ResolveDynamite": "❔", // 💥
+            "ResolveDynamite": "❔",
             "ResolveJail": "❔",
-            "Saloon": "🍺", // 🍻
-            "Stagecoach": "💰", //
+            "Saloon": "🍺",
+            "Stagecoach": "💰",
             "StartTurn": "🔥",
             "WellsFargo": "💰",
             "DiscardAllSheriffCardsOnEliminateDeputy": "⚠️",
             "RewardOneWhoEliminatesOutlaw": "🎁",
-            "SetOutComeOnGameOver": "🎉" // 🎖🏆 🏜
+            "SetOutComeOnGameOver": "🎉"
+            //  ❗️❌ 💥 🎖🏆 🏜 🍻
         ]
     }
 }

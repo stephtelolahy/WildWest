@@ -7,20 +7,19 @@
 //
 
 class SaloonMatcher: ValidMoveMatcherProtocol {
-    func validMoves(matching state: GameStateProtocol) -> [String: [GameMove]]? {
+    func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
             let cards = actor.handCards(named: .saloon) else {
                 return nil
         }
         
-        let moves = cards.map {
+        return cards.map {
             GameMove(name: .playCard,
                      actorId: actor.identifier,
                      cardId: $0.identifier,
                      cardName: $0.name)
         }
-        return [actor.identifier: moves]
     }
 }
 

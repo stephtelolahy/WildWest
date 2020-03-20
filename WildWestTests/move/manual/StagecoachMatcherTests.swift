@@ -1,21 +1,21 @@
 //
-//  SaloonMatcherTests.swift
+//  StagecoachMatcherTests.swift
 //  WildWestTests
 //
-//  Created by Hugues Stéphano TELOLAHY on 3/17/20.
+//  Created by Hugues Stephano Telolahy on 20/03/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
 import XCTest
 
-class SaloonMatcherTests: XCTestCase {
+class StagecoachMatcherTests: XCTestCase {
+
+    private let sut = StagecoachMatcher()
     
-    private let sut = SaloonMatcher()
-    
-    func test_CanPlaySaloon_IfYourTurnAndOwnCard() {
+    func test_CanPlayStagecoach_IfYourTurnAndOwnCard() {
         // Given
         let mockCard = MockCardProtocol()
-            .named(.saloon)
+            .named(.stagecoach)
             .identified(by: "c1")
         let mockPlayer = MockPlayerProtocol()
             .holding(mockCard)
@@ -29,6 +29,6 @@ class SaloonMatcherTests: XCTestCase {
         let moves = sut.validMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .playCard, actorId: "p1", cardId: "c1", cardName: .saloon)])
+        XCTAssertEqual(moves, [GameMove(name: .playCard, actorId: "p1", cardId: "c1", cardName: .stagecoach)])
     }
 }

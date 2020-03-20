@@ -43,6 +43,10 @@
 		339A294A23EFEFE7002C5CD8 /* ChallengeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339A294823EFEFE7002C5CD8 /* ChallengeExtension.swift */; };
 		339A294F23EFFE70002C5CD8 /* GameStateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339A294E23EFFE70002C5CD8 /* GameStateExtension.swift */; };
 		339A295023EFFE70002C5CD8 /* GameStateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339A294E23EFFE70002C5CD8 /* GameStateExtension.swift */; };
+		339CA26E24254F4800D43128 /* Stagecoach.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49F86B23BA0C4600543F59 /* Stagecoach.swift */; };
+		339CA26F24254F4800D43128 /* Stagecoach.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49F86B23BA0C4600543F59 /* Stagecoach.swift */; };
+		339CA271242551A800D43128 /* StagecoachMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339CA270242551A800D43128 /* StagecoachMatcherTests.swift */; };
+		339CA2732425528800D43128 /* StagecoachExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339CA2722425528800D43128 /* StagecoachExecutorTests.swift */; };
 		33A4381223E4BD3200C39DD6 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A4381123E4BD3200C39DD6 /* ArrayExtension.swift */; };
 		33A4381323E4BD3200C39DD6 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A4381123E4BD3200C39DD6 /* ArrayExtension.swift */; };
 		33A4381523E4BE8200C39DD6 /* ArrayExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A4381423E4BE8200C39DD6 /* ArrayExtensionTests.swift */; };
@@ -184,6 +188,8 @@
 		3395258223E37D07003DE948 /* GameSetupProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetupProtocol.swift; sourceTree = "<group>"; };
 		339A294823EFEFE7002C5CD8 /* ChallengeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeExtension.swift; sourceTree = "<group>"; };
 		339A294E23EFFE70002C5CD8 /* GameStateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateExtension.swift; sourceTree = "<group>"; };
+		339CA270242551A800D43128 /* StagecoachMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagecoachMatcherTests.swift; sourceTree = "<group>"; };
+		339CA2722425528800D43128 /* StagecoachExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagecoachExecutorTests.swift; sourceTree = "<group>"; };
 		33A4380F23E496FF00C39DD6 /* CatBalouTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBalouTests.swift; sourceTree = "<group>"; };
 		33A4381123E4BD3200C39DD6 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		33A4381423E4BE8200C39DD6 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
@@ -243,7 +249,6 @@
 		AD374E4B242144200025FD4A /* BeerMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerMatcherTests.swift; sourceTree = "<group>"; };
 		AD374E53242146970025FD4A /* BeerExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerExecutorTests.swift; sourceTree = "<group>"; };
 		AD46810D23BEA2B0000B42C7 /* PlayerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerExtension.swift; sourceTree = "<group>"; };
-		AD48DD2923BEAE1300E5B552 /* StagecoachTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagecoachTests.swift; sourceTree = "<group>"; };
 		AD48DD2B23BEAFAF00E5B552 /* WellsFargoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WellsFargoTests.swift; sourceTree = "<group>"; };
 		AD48DD2D23BEB06600E5B552 /* EquipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipTests.swift; sourceTree = "<group>"; };
 		AD49F86623BA054400543F59 /* Figure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Figure.swift; sourceTree = "<group>"; };
@@ -519,7 +524,6 @@
 		AD36CDDA23C51DA6008D4EDB /* action */ = {
 			isa = PBXGroup;
 			children = (
-				AD49F86B23BA0C4600543F59 /* Stagecoach.swift */,
 				AD49F86E23BA0E3E00543F59 /* WellsFargo.swift */,
 				ADB5A10C23BAB8780050E173 /* Panic.swift */,
 				ADB5A10F23BAB89C0050E173 /* CatBalou.swift */,
@@ -571,7 +575,11 @@
 			isa = PBXGroup;
 			children = (
 				AD374E4B242144200025FD4A /* BeerMatcherTests.swift */,
+				AD374E53242146970025FD4A /* BeerExecutorTests.swift */,
 				AD1EF2A324214C1C00F15BF8 /* SaloonMatcherTests.swift */,
+				AD1EF2A524214C5300F15BF8 /* SaloonExecutorTests.swift */,
+				339CA270242551A800D43128 /* StagecoachMatcherTests.swift */,
+				339CA2722425528800D43128 /* StagecoachExecutorTests.swift */,
 			);
 			path = manual;
 			sourceTree = "<group>";
@@ -580,18 +588,9 @@
 			isa = PBXGroup;
 			children = (
 				ADB2D8AF242001AE00AD0C11 /* StartTurnMatcherTests.swift */,
+				ADB2D8B924200FFA00AD0C11 /* StartTurnExecutorTests.swift */,
 			);
 			path = autoplay;
-			sourceTree = "<group>";
-		};
-		AD374E4F242145F00025FD4A /* executor */ = {
-			isa = PBXGroup;
-			children = (
-				ADB2D8B924200FFA00AD0C11 /* StartTurnExecutorTests.swift */,
-				AD374E53242146970025FD4A /* BeerExecutorTests.swift */,
-				AD1EF2A524214C5300F15BF8 /* SaloonExecutorTests.swift */,
-			);
-			path = executor;
 			sourceTree = "<group>";
 		};
 		AD374E502421460B0025FD4A /* manual */ = {
@@ -599,6 +598,7 @@
 			children = (
 				ADD5643423A4E09C00C1BD01 /* Beer.swift */,
 				ADE91AC523B9F84200F7316B /* Saloon.swift */,
+				AD49F86B23BA0C4600543F59 /* Stagecoach.swift */,
 			);
 			path = manual;
 			sourceTree = "<group>";
@@ -632,7 +632,6 @@
 		AD48DD2823BEABD100E5B552 /* action */ = {
 			isa = PBXGroup;
 			children = (
-				AD48DD2923BEAE1300E5B552 /* StagecoachTests.swift */,
 				AD48DD2B23BEAFAF00E5B552 /* WellsFargoTests.swift */,
 				AD48DD2D23BEB06600E5B552 /* EquipTests.swift */,
 				33A4381623E4C1FD00C39DD6 /* PanicTests.swift */,
@@ -681,7 +680,6 @@
 		ADB2D8C62420149F00AD0C11 /* move */ = {
 			isa = PBXGroup;
 			children = (
-				AD374E4F242145F00025FD4A /* executor */,
 				AD374E4D242145CA0025FD4A /* manual */,
 				AD374E4E242145DF0025FD4A /* autoplay */,
 			);
@@ -986,6 +984,7 @@
 				339A294F23EFFE70002C5CD8 /* GameStateExtension.swift in Sources */,
 				AD6A958E24202B0200D0F937 /* GameConfiguration.swift in Sources */,
 				ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */,
+				339CA26E24254F4800D43128 /* Stagecoach.swift in Sources */,
 				AD52B99923B178CC0013240B /* Player.swift in Sources */,
 				3324018E23DBA6C800B92439 /* UICollectionViewExtension.swift in Sources */,
 				3301BEF423F962F000B4364D /* RandomAIWithRole.swift in Sources */,
@@ -1061,6 +1060,8 @@
 				33D964AE23DD907E007295E7 /* ResourcesTests+Figures.swift in Sources */,
 				3395258123E37CCE003DE948 /* GameEngineProtocol.swift in Sources */,
 				330B7E0F23F70CAF00B3653D /* OutcomeCalculatorProtocol.swift in Sources */,
+				339CA2732425528800D43128 /* StagecoachExecutorTests.swift in Sources */,
+				339CA271242551A800D43128 /* StagecoachMatcherTests.swift in Sources */,
 				ADB2D8B0242001AE00AD0C11 /* StartTurnMatcherTests.swift in Sources */,
 				336AA6F123F1450B00328837 /* GameDatabaseProtocol.swift in Sources */,
 				ADD4DB702420A8F2001BBD48 /* GameMoveExtensionTests.swift in Sources */,
@@ -1083,6 +1084,7 @@
 				3301E63923F7EEF700AB35C7 /* AIProtocol.swift in Sources */,
 				ADD035D023A96002003B2576 /* CardProtocol.swift in Sources */,
 				3302E51D23F8E34C004FE76E /* RandomAI.swift in Sources */,
+				339CA26F24254F4800D43128 /* Stagecoach.swift in Sources */,
 				AD52B99A23B178CC0013240B /* Player.swift in Sources */,
 				ADE91AD523BA00DC00F7316B /* GameSetup.swift in Sources */,
 				3390F90C24253932001057A7 /* MoveClassifier.swift in Sources */,

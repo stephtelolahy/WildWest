@@ -70,9 +70,9 @@ class GameEngineTests: XCTestCase {
     func test_SetValidMoves_IfExecutingMove() {
         // Given
         let move = GameMove(name: .startTurn)
-        let validMove = GameMove(name: .playCard)
+        let validMove = GameMove(name: .playCard, actorId: "p1")
         Cuckoo.stub(mockValidMoveMatcher) { mock in
-            when(mock.validMoves(matching: state(equalTo: mockState))).thenReturn(["p1": [validMove]])
+            when(mock.validMoves(matching: state(equalTo: mockState))).thenReturn([validMove])
         }
         
         // When

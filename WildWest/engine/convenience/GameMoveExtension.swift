@@ -6,18 +6,22 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-extension Array where Element == [String: [GameMove]] {
-    func merged() -> Element {
-        reduce([:], { acc, dict in
-            var result = acc
-            for (key, value) in dict {
-                if let existingValue = result[key] {
-                    result[key] = existingValue + value
-                } else {
-                    result[key] = value
-                }
+extension Array where Element == GameMove {
+    
+    func groupedByActor() -> [String: [GameMove]] {
+        var grouped: [String: [GameMove]] = [:]
+        for move in self {
+            guard let actorId = move.actorId else {
+                continue
             }
-            return result
-        })
+            
+            if grouped[actorId] != nil {
+                grouped[actorId]!.append(move)
+            } else {
+                grouped[actorId] = [move]
+            }
+        }
+        
+        return grouped
     }
 }

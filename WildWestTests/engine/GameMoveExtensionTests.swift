@@ -10,17 +10,16 @@ import XCTest
 
 class GameMoveExtensionTests: XCTestCase {
     
-    func test_MergingGameMoves() {
+    func test_GroupingMovesByActor() {
         // Given
-        let moves: [[String: [GameMove]]] = [
-            ["p1": [GameMove(name: .playCard)]],
-            ["p1": [GameMove(name: .endTurn)]]
-        ]
+        let moves = [GameMove(name: .playCard, actorId: "p1"),
+                     GameMove(name: .endTurn, actorId: "p1")]
         
         // When
-        let merged = moves.merged()
+        let grouped = moves.groupedByActor()
         
         // Assert
-        XCTAssertEqual(merged, ["p1": [GameMove(name: .playCard), GameMove(name: .endTurn)]])
+        XCTAssertEqual(grouped, ["p1": [GameMove(name: .playCard, actorId: "p1"),
+                                        GameMove(name: .endTurn, actorId: "p1")]])
     }
 }

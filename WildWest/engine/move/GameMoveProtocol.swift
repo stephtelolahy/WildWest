@@ -38,7 +38,7 @@ enum TargetCardSource: Equatable {
 
 /// Function defining manual player move regarding given state
 protocol ValidMoveMatcherProtocol {
-    func validMoves(matching state: GameStateProtocol) -> [String: [GameMove]]?
+    func validMoves(matching state: GameStateProtocol) -> [GameMove]?
 }
 
 /// Function defining automatic player move regarding given state
@@ -46,12 +46,12 @@ protocol AutoplayMoveMatcherProtocol {
     func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]?
 }
 
-// Function defining effect after playing given move
+/// Function defining effect after playing given move
 protocol EffectMatcherProtocol {
     func effects(onExecuting move: GameMove, in state: GameStateProtocol) -> GameMove?
 }
 
-// Function defining game updates on executing move
+/// Function defining game updates on executing move
 protocol MoveExecutorProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]?
 }
