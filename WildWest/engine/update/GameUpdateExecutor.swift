@@ -6,10 +6,11 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-class GameUpdateExecutor: GameUpdateExecutorProtocol {
+class GameUpdateExecutor: UpdateExecutorProtocol {
     // swiftlint:disable cyclomatic_complexity
     // swiftlint:disable function_body_length
     func execute(_ update: GameUpdate, in database: GameDatabaseProtocol) {
+        /*
         switch update {
         case let .setTurn(turn):
             GameUpdateSetTurn(turn: turn).execute(in: database)
@@ -84,5 +85,6 @@ class GameUpdateExecutor: GameUpdateExecutorProtocol {
         case let .setOutcome(outcome):
             database.setOutcome(outcome)
         }
+        */
     }
 }

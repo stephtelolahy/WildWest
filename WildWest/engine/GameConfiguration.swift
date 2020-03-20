@@ -24,7 +24,9 @@ class GameConfiguration {
     
     var validMoveMatchers: [ValidMoveMatcherProtocol] {
         [BeerMatcher(),
-         SaloonMatcher()]
+         SaloonMatcher(),
+         StagecoachMatcher(),
+         WellsFargoMatcher()]
     }
     
     var autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol] {
@@ -38,10 +40,12 @@ class GameConfiguration {
     var moveExectors: [MoveExecutorProtocol] {
         [StartTurnExecutor(),
          BeerExecutor(),
-         SaloonExecutor()]
+         SaloonExecutor(),
+         StagecoachExecutor(),
+         WellsFargoExecutor()]
     }
     
     var updateExecutors: [UpdateExecutorProtocol] {
-        []
+        [GameUpdateExecutor()]
     }
 }

@@ -47,6 +47,12 @@
 		339CA26F24254F4800D43128 /* Stagecoach.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49F86B23BA0C4600543F59 /* Stagecoach.swift */; };
 		339CA271242551A800D43128 /* StagecoachMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339CA270242551A800D43128 /* StagecoachMatcherTests.swift */; };
 		339CA2732425528800D43128 /* StagecoachExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339CA2722425528800D43128 /* StagecoachExecutorTests.swift */; };
+		339CA27424256DA400D43128 /* WellsFargo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49F86E23BA0E3E00543F59 /* WellsFargo.swift */; };
+		339CA27524256DA400D43128 /* WellsFargo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49F86E23BA0E3E00543F59 /* WellsFargo.swift */; };
+		339CA27724256F4500D43128 /* WellsFargoMatcherMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339CA27624256F4500D43128 /* WellsFargoMatcherMatcher.swift */; };
+		339CA27924256FC600D43128 /* WellsFargoExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339CA27824256FC600D43128 /* WellsFargoExecutorTests.swift */; };
+		339CA27A242578C800D43128 /* GameUpdateExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1EF2A724214DE500F15BF8 /* GameUpdateExecutor.swift */; };
+		339CA27B242578C900D43128 /* GameUpdateExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1EF2A724214DE500F15BF8 /* GameUpdateExecutor.swift */; };
 		33A4381223E4BD3200C39DD6 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A4381123E4BD3200C39DD6 /* ArrayExtension.swift */; };
 		33A4381323E4BD3200C39DD6 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A4381123E4BD3200C39DD6 /* ArrayExtension.swift */; };
 		33A4381523E4BE8200C39DD6 /* ArrayExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A4381423E4BE8200C39DD6 /* ArrayExtensionTests.swift */; };
@@ -190,6 +196,8 @@
 		339A294E23EFFE70002C5CD8 /* GameStateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateExtension.swift; sourceTree = "<group>"; };
 		339CA270242551A800D43128 /* StagecoachMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagecoachMatcherTests.swift; sourceTree = "<group>"; };
 		339CA2722425528800D43128 /* StagecoachExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagecoachExecutorTests.swift; sourceTree = "<group>"; };
+		339CA27624256F4500D43128 /* WellsFargoMatcherMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WellsFargoMatcherMatcher.swift; sourceTree = "<group>"; };
+		339CA27824256FC600D43128 /* WellsFargoExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WellsFargoExecutorTests.swift; sourceTree = "<group>"; };
 		33A4380F23E496FF00C39DD6 /* CatBalouTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBalouTests.swift; sourceTree = "<group>"; };
 		33A4381123E4BD3200C39DD6 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		33A4381423E4BE8200C39DD6 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
@@ -249,7 +257,6 @@
 		AD374E4B242144200025FD4A /* BeerMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerMatcherTests.swift; sourceTree = "<group>"; };
 		AD374E53242146970025FD4A /* BeerExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerExecutorTests.swift; sourceTree = "<group>"; };
 		AD46810D23BEA2B0000B42C7 /* PlayerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerExtension.swift; sourceTree = "<group>"; };
-		AD48DD2B23BEAFAF00E5B552 /* WellsFargoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WellsFargoTests.swift; sourceTree = "<group>"; };
 		AD48DD2D23BEB06600E5B552 /* EquipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipTests.swift; sourceTree = "<group>"; };
 		AD49F86623BA054400543F59 /* Figure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Figure.swift; sourceTree = "<group>"; };
 		AD49F86923BA074100543F59 /* figures.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = figures.json; sourceTree = "<group>"; };
@@ -524,7 +531,6 @@
 		AD36CDDA23C51DA6008D4EDB /* action */ = {
 			isa = PBXGroup;
 			children = (
-				AD49F86E23BA0E3E00543F59 /* WellsFargo.swift */,
 				ADB5A10C23BAB8780050E173 /* Panic.swift */,
 				ADB5A10F23BAB89C0050E173 /* CatBalou.swift */,
 				ADB5A0FD23BAB8070050E173 /* Bang.swift */,
@@ -580,6 +586,8 @@
 				AD1EF2A524214C5300F15BF8 /* SaloonExecutorTests.swift */,
 				339CA270242551A800D43128 /* StagecoachMatcherTests.swift */,
 				339CA2722425528800D43128 /* StagecoachExecutorTests.swift */,
+				339CA27624256F4500D43128 /* WellsFargoMatcherMatcher.swift */,
+				339CA27824256FC600D43128 /* WellsFargoExecutorTests.swift */,
 			);
 			path = manual;
 			sourceTree = "<group>";
@@ -599,6 +607,7 @@
 				ADD5643423A4E09C00C1BD01 /* Beer.swift */,
 				ADE91AC523B9F84200F7316B /* Saloon.swift */,
 				AD49F86B23BA0C4600543F59 /* Stagecoach.swift */,
+				AD49F86E23BA0E3E00543F59 /* WellsFargo.swift */,
 			);
 			path = manual;
 			sourceTree = "<group>";
@@ -632,7 +641,6 @@
 		AD48DD2823BEABD100E5B552 /* action */ = {
 			isa = PBXGroup;
 			children = (
-				AD48DD2B23BEAFAF00E5B552 /* WellsFargoTests.swift */,
 				AD48DD2D23BEB06600E5B552 /* EquipTests.swift */,
 				33A4381623E4C1FD00C39DD6 /* PanicTests.swift */,
 				33A4380F23E496FF00C39DD6 /* CatBalouTests.swift */,
@@ -973,6 +981,7 @@
 				338FAD16242543030096B488 /* InstructionBuilder.swift in Sources */,
 				ADE91AD423BA00DC00F7316B /* GameSetup.swift in Sources */,
 				33D477EA23E4FA0F00E232D9 /* RangeCalculator.swift in Sources */,
+				339CA27A242578C800D43128 /* GameUpdateExecutor.swift in Sources */,
 				ADD035D523A96034003B2576 /* PlayerProtocol.swift in Sources */,
 				33D477F123E57DE500E232D9 /* FigureProtocol.swift in Sources */,
 				3335E615240B5F48000B89EB /* MoveSelector.swift in Sources */,
@@ -1011,6 +1020,7 @@
 				AD671A1C23D8F9D600F0AA4A /* CardExtension.swift in Sources */,
 				ADB2D8AC2420005600AD0C11 /* GameMoveProtocol.swift in Sources */,
 				3301BEFA23F9A79B00B4364D /* AIPlayerAgent.swift in Sources */,
+				339CA27524256DA400D43128 /* WellsFargo.swift in Sources */,
 				33E4412424077DAB00B2848E /* UITableViewExtension.swift in Sources */,
 				AD52B99C23B17A310013240B /* GameState.swift in Sources */,
 				33F94AB623F0580800D1BCFE /* GameUpdateProtocol.swift in Sources */,
@@ -1033,12 +1043,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3395258423E37D07003DE948 /* GameSetupProtocol.swift in Sources */,
+				339CA27724256F4500D43128 /* WellsFargoMatcherMatcher.swift in Sources */,
 				3302905C23F327AE0099C438 /* Saloon.swift in Sources */,
 				AD6A958F24202D1500D0F937 /* GameConfiguration.swift in Sources */,
 				AD49F86823BA054D00543F59 /* Figure.swift in Sources */,
 				AD52B99D23B17A310013240B /* GameState.swift in Sources */,
 				339A294A23EFEFE7002C5CD8 /* ChallengeExtension.swift in Sources */,
 				3301BEF523F962F000B4364D /* RandomAIWithRole.swift in Sources */,
+				339CA27B242578C900D43128 /* GameUpdateExecutor.swift in Sources */,
 				AD46810F23BEA2B0000B42C7 /* PlayerExtension.swift in Sources */,
 				33D964B523DDDB1E007295E7 /* GameEngine.swift in Sources */,
 				335A147423F312F700D9971E /* GameDatabase.swift in Sources */,
@@ -1047,6 +1059,7 @@
 				AD7EAFBF23D7846D00FE23D5 /* GameSetupTests.swift in Sources */,
 				ADD035D923A9604F003B2576 /* GameStateProtocol.swift in Sources */,
 				330B7E1423F70D8700B3653D /* OutcomeCalculatorTests.swift in Sources */,
+				339CA27924256FC600D43128 /* WellsFargoExecutorTests.swift in Sources */,
 				33A4381523E4BE8200C39DD6 /* ArrayExtensionTests.swift in Sources */,
 				AD374E4C242144200025FD4A /* BeerMatcherTests.swift in Sources */,
 				AD1EF2A424214C1C00F15BF8 /* SaloonMatcherTests.swift in Sources */,
@@ -1073,6 +1086,7 @@
 				ADB2D8AD2420005600AD0C11 /* GameMoveProtocol.swift in Sources */,
 				ADE91ACE23B9FE2300F7316B /* JsonReader.swift in Sources */,
 				33D477EB23E4FA0F00E232D9 /* RangeCalculator.swift in Sources */,
+				339CA27424256DA400D43128 /* WellsFargo.swift in Sources */,
 				AD4BE6AA23DA4B12003A610A /* CollectionExtension.swift in Sources */,
 				AD98FA872421552C00AF4D7C /* GameEngineTests.swift in Sources */,
 				33D964B223DD9119007295E7 /* MatcherExtension.swift in Sources */,
