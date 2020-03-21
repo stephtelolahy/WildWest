@@ -54,7 +54,7 @@ extension MoveDescriptor {
             "GeneralStore": "💰",
             "Indians": "💢",
             "Jail": "🚧",
-            "LooseLife": "❤️",
+            "pass": "❤️",
             "Missed": "😝",
             "Panic": "‼️",
             "Dynamite": "💣",

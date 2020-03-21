@@ -8,6 +8,25 @@
 
 extension Challenge {
     
+    var damage: Int {
+        switch self {
+        case .shoot:
+            return 1
+            
+        case .indians:
+            return 1
+            
+        case .duel:
+            return 1
+            
+        case .dynamiteExploded:
+            return 3
+            
+        default:
+            fatalError("Illegal state")
+        }
+    }
+    
     func removing(_ playerId: String) -> Challenge? {
         switch self {
         case let .shoot(playerIds, cardName, source):
@@ -57,7 +76,7 @@ extension Challenge {
             return .byDynamite
             
         default:
-            return nil
+            fatalError("Illegal state")
         }
     }
 }

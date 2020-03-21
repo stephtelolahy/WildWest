@@ -8,33 +8,35 @@
 
 class DiscardBeerMatcher: ValidMoveMatcherProtocol {
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
-        guard state.players.count > 2 else {
-            return nil
+        guard let challenge = state.challenge,
+            state.players.count > 2 else {
+                return nil
         }
         
-        switch state.challenge {
+        switch challenge {
         case let .shoot(targetIds, _, _):
-            return matchDiscardBeer(actorId: targetIds.first, damage: 1, in: state)
+            return matchDiscardBeer(actorId: targetIds.first, challenge: challenge, in: state)
             
         case let .indians(targetIds, _):
-            return matchDiscardBeer(actorId: targetIds.first, damage: 1, in: state)
+            return matchDiscardBeer(actorId: targetIds.first, challenge: challenge, in: state)
             
         case let .duel(playerIds, _):
-            return matchDiscardBeer(actorId: playerIds.first, damage: 1, in: state)
+            return matchDiscardBeer(actorId: playerIds.first, challenge: challenge, in: state)
             
         case .dynamiteExploded:
-            return matchDiscardBeer(actorId: state.turn, damage: 3, in: state)
+            return matchDiscardBeer(actorId: state.turn, challenge: challenge, in: state)
             
         default:
             return nil
         }
     }
     
-    private func matchDiscardBeer(actorId: String?, damage: Int, in state: GameStateProtocol) -> [GameMove]? {
+    private func matchDiscardBeer(actorId: String?, challenge: Challenge, in state: GameStateProtocol) -> [GameMove]? {
         guard let actor = state.players.first(where: { $0.identifier == actorId }) else {
             return nil
         }
         
+        let damage = challenge.damage
         let willBeEliminated = actor.health - damage <= 0
         guard willBeEliminated else {
             return nil
