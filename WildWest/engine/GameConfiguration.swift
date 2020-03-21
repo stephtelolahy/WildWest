@@ -41,7 +41,8 @@ class GameConfiguration {
          DiscardMissedMatcher(),
          ResolveBarrelMatcher(),
          DiscardBangOnDuelMatcher(),
-         DiscardBangOnIndiansMatcher()]
+         DiscardBangOnIndiansMatcher(),
+         DiscardBeerMatcher()]
     }
     
     var autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol] {
@@ -77,7 +78,8 @@ class GameConfiguration {
          DiscardMissedExecutor(),
          ResolveBarrelExecutor(),
          DiscardBangOnDuelExecutor(),
-         DiscardBangOnIndiansExecutor()]
+         DiscardBangOnIndiansExecutor(),
+         DiscardBeerExecutor()]
     }
     
     var updateExecutors: [UpdateExecutorProtocol] {

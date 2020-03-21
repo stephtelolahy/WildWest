@@ -31,7 +31,7 @@ class ResolveDynamiteExecutor: MoveExecutorProtocol {
         var updates: [GameUpdate] = []
         updates.append(.flipOverFirstDeckCard)
         if topDeckCard.makeDynamiteExplode {
-            updates.append(.setChallenge(.startTurnDynamiteExploded))
+            updates.append(.setChallenge(.dynamiteExploded))
             updates.append(.playerDiscardInPlay(actorId, cardId))
         } else {
             updates.append(.playerPassInPlayOfOther(actorId, state.nextTurn, cardId))

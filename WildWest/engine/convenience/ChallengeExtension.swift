@@ -34,7 +34,7 @@ extension Challenge {
                 return .generalStore(remainingIds)
             }
             
-        case .startTurnDynamiteExploded:
+        case .dynamiteExploded:
             return .startTurn
             
         default:
@@ -53,7 +53,7 @@ extension Challenge {
         case let .indians(_, sourceId):
             return .byPlayer(sourceId)
             
-        case .startTurnDynamiteExploded:
+        case .dynamiteExploded:
             return .byDynamite
             
         default:

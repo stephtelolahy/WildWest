@@ -20,20 +20,6 @@ class ChooseGeneralStoreCardMatcher: ValidMoveMatcherProtocol {
     }
 }
 
-class PullGeneralStoreLastCardMatcher: AutoplayMoveMatcherProtocol {
-    func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
-        guard case let .generalStore(playerIds) = state.challenge,
-            playerIds.count == 1,
-            let actorId = playerIds.first else {
-                return nil
-        }
-        
-        return state.generalStore.map {
-            GameMove(name: .choose, actorId: actorId, cardId: $0.identifier)
-        }
-    }
-}
-
 class ChooseGeneralStoreCardExecutor: MoveExecutorProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .choose = move.name,

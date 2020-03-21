@@ -30,7 +30,7 @@ enum GameOutcome: String, Equatable {
 
 enum Challenge: Equatable {
     case startTurn
-    case startTurnDynamiteExploded
+    case dynamiteExploded
     case shoot([String], CardName, String)
     case indians([String], String)
     case duel([String], String)

@@ -35,7 +35,7 @@ private extension Challenge {
         case .startTurn:
             return "startTurn"
             
-        case .startTurnDynamiteExploded:
+        case .dynamiteExploded:
             return "dynamiteExploded"
             
         case let .duel(playerIds, _):

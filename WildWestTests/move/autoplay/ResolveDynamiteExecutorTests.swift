@@ -10,7 +10,7 @@ import XCTest
 import Cuckoo
 
 class ResolveDynamiteExecutorTests: XCTestCase {
-
+    
     private let sut = ResolveDynamiteExecutor()
     
     func test_PassDynamiteToNextPlayer_IfDoesNotExplode() {
@@ -49,7 +49,7 @@ class ResolveDynamiteExecutorTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.flipOverFirstDeckCard,
-                                 .setChallenge(.startTurnDynamiteExploded),
+                                 .setChallenge(.dynamiteExploded),
                                  .playerDiscardInPlay("p1", "c1")])
     }
 }
