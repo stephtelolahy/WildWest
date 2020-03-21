@@ -31,7 +31,8 @@ class GameConfiguration {
          PanicMatcher(calculator: RangeCalculator()),
          CatBalouMatcher(calculator: RangeCalculator()),
          EquipMatcher(),
-         DynamiteMatcher()]
+         DynamiteMatcher(),
+         GeneralStoreMatcher()]
     }
     
     var autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol] {
@@ -56,7 +57,8 @@ class GameConfiguration {
          EquipExecutor(),
          DynamiteExecutor(),
          ResolveDynamiteExecutor(),
-         ResolveJailExecutor()]
+         ResolveJailExecutor(),
+         GeneralStoreExecutor()]
     }
     
     var updateExecutors: [UpdateExecutorProtocol] {
