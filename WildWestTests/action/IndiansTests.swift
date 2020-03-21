@@ -64,7 +64,7 @@ class IndiansRuleTests: XCTestCase {
             .players(are: mockPlayer)
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [Indians], [Indians(actorId: "p1", cardId: "c1")])

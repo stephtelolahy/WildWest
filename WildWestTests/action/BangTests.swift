@@ -81,7 +81,7 @@ class ShootRuleTest: XCTestCase {
         let sut = BangRule(calculator: mockCalculator)
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [Bang], [
@@ -113,7 +113,7 @@ class ShootRuleTest: XCTestCase {
         let sut = BangRule(calculator: mockCalculator)
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertNil(actions)
@@ -141,7 +141,7 @@ class ShootRuleTest: XCTestCase {
         let sut = BangRule(calculator: mockCalculator)
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [Bang], [
@@ -171,7 +171,7 @@ class ShootRuleTest: XCTestCase {
         let sut = BangRule(calculator: mockCalculator)
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertNil(actions)

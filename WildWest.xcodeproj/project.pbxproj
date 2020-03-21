@@ -19,6 +19,10 @@
 		3302906123F32AC30099C438 /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5643423A4E09C00C1BD01 /* Beer.swift */; };
 		3302E51C23F8E34C004FE76E /* RandomAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E51B23F8E34C004FE76E /* RandomAI.swift */; };
 		3302E51D23F8E34C004FE76E /* RandomAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E51B23F8E34C004FE76E /* RandomAI.swift */; };
+		3308D7E02425E14900ECE83C /* Panic.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10C23BAB8780050E173 /* Panic.swift */; };
+		3308D7E12425E14900ECE83C /* Panic.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10C23BAB8780050E173 /* Panic.swift */; };
+		3308D7E32425E58000ECE83C /* PanicMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3308D7E22425E58000ECE83C /* PanicMatcherTests.swift */; };
+		3308D7E52425E8D500ECE83C /* PanicExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3308D7E42425E8D500ECE83C /* PanicExecutorTests.swift */; };
 		330B7E0E23F70CAB00B3653D /* OutcomeCalculatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330B7E0D23F70CAB00B3653D /* OutcomeCalculatorProtocol.swift */; };
 		330B7E0F23F70CAF00B3653D /* OutcomeCalculatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330B7E0D23F70CAB00B3653D /* OutcomeCalculatorProtocol.swift */; };
 		330B7E1123F70D0200B3653D /* OutcomeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330B7E1023F70D0200B3653D /* OutcomeCalculator.swift */; };
@@ -164,6 +168,8 @@
 		3302E51B23F8E34C004FE76E /* RandomAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomAI.swift; sourceTree = "<group>"; };
 		3303E23F2408E91C00BB9E23 /* ResolveBarrelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResolveBarrelTests.swift; sourceTree = "<group>"; };
 		3303E2422408E99F00BB9E23 /* BangTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BangTests.swift; sourceTree = "<group>"; };
+		3308D7E22425E58000ECE83C /* PanicMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanicMatcherTests.swift; sourceTree = "<group>"; };
+		3308D7E42425E8D500ECE83C /* PanicExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanicExecutorTests.swift; sourceTree = "<group>"; };
 		3309D7172408DC3000713E15 /* Eliminate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Eliminate.swift; sourceTree = "<group>"; };
 		3309D71A2408DE4200713E15 /* EliminateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EliminateTests.swift; sourceTree = "<group>"; };
 		330B7E0D23F70CAB00B3653D /* OutcomeCalculatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutcomeCalculatorProtocol.swift; sourceTree = "<group>"; };
@@ -190,7 +196,6 @@
 		33A4380F23E496FF00C39DD6 /* CatBalouTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBalouTests.swift; sourceTree = "<group>"; };
 		33A4381123E4BD3200C39DD6 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		33A4381423E4BE8200C39DD6 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
-		33A4381623E4C1FD00C39DD6 /* PanicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanicTests.swift; sourceTree = "<group>"; };
 		33A733ED23DC4A5300E9B2AD /* Subscribable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subscribable.swift; sourceTree = "<group>"; };
 		33A733F723DC5AC300E9B2AD /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		33A815EC23DB54350081A055 /* roles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = roles.json; sourceTree = "<group>"; };
@@ -508,7 +513,6 @@
 		AD36CDDA23C51DA6008D4EDB /* action */ = {
 			isa = PBXGroup;
 			children = (
-				ADB5A10C23BAB8780050E173 /* Panic.swift */,
 				ADB5A10F23BAB89C0050E173 /* CatBalou.swift */,
 				ADB5A0FD23BAB8070050E173 /* Bang.swift */,
 				ADB5A10023BAB81E0050E173 /* Missed.swift */,
@@ -565,6 +569,8 @@
 				339CA2722425528800D43128 /* StagecoachExecutorTests.swift */,
 				339CA27624256F4500D43128 /* WellsFargoMatcherMatcher.swift */,
 				339CA27824256FC600D43128 /* WellsFargoExecutorTests.swift */,
+				3308D7E22425E58000ECE83C /* PanicMatcherTests.swift */,
+				3308D7E42425E8D500ECE83C /* PanicExecutorTests.swift */,
 			);
 			path = manual;
 			sourceTree = "<group>";
@@ -585,6 +591,7 @@
 				ADE91AC523B9F84200F7316B /* Saloon.swift */,
 				AD49F86B23BA0C4600543F59 /* Stagecoach.swift */,
 				AD49F86E23BA0E3E00543F59 /* WellsFargo.swift */,
+				ADB5A10C23BAB8780050E173 /* Panic.swift */,
 			);
 			path = manual;
 			sourceTree = "<group>";
@@ -619,7 +626,6 @@
 			isa = PBXGroup;
 			children = (
 				AD48DD2D23BEB06600E5B552 /* EquipTests.swift */,
-				33A4381623E4C1FD00C39DD6 /* PanicTests.swift */,
 				33A4380F23E496FF00C39DD6 /* CatBalouTests.swift */,
 				33B7DFA523E20BDD0051718E /* EndTurnTests.swift */,
 				3303E2422408E99F00BB9E23 /* BangTests.swift */,
@@ -1000,6 +1006,7 @@
 				339CA27524256DA400D43128 /* WellsFargo.swift in Sources */,
 				33E4412424077DAB00B2848E /* UITableViewExtension.swift in Sources */,
 				AD52B99C23B17A310013240B /* GameState.swift in Sources */,
+				3308D7E02425E14900ECE83C /* Panic.swift in Sources */,
 				33F94AB623F0580800D1BCFE /* GameUpdateProtocol.swift in Sources */,
 				33D477E723E4F9E300E232D9 /* RangeCalculatorProtocol.swift in Sources */,
 				3395258023E37CCE003DE948 /* GameEngineProtocol.swift in Sources */,
@@ -1031,6 +1038,7 @@
 				AD46810F23BEA2B0000B42C7 /* PlayerExtension.swift in Sources */,
 				33D964B523DDDB1E007295E7 /* GameEngine.swift in Sources */,
 				335A147423F312F700D9971E /* GameDatabase.swift in Sources */,
+				3308D7E12425E14900ECE83C /* Panic.swift in Sources */,
 				AD374E54242146970025FD4A /* BeerExecutorTests.swift in Sources */,
 				AD7F34B923D79841001B4072 /* MockCardProtocolExtension.swift in Sources */,
 				AD7EAFBF23D7846D00FE23D5 /* GameSetupTests.swift in Sources */,
@@ -1042,6 +1050,7 @@
 				AD1EF2A424214C1C00F15BF8 /* SaloonMatcherTests.swift in Sources */,
 				330B7E1223F70D0200B3653D /* OutcomeCalculator.swift in Sources */,
 				33A4381323E4BD3200C39DD6 /* ArrayExtension.swift in Sources */,
+				3308D7E32425E58000ECE83C /* PanicMatcherTests.swift in Sources */,
 				33F94AB723F0580800D1BCFE /* GameUpdateProtocol.swift in Sources */,
 				AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */,
 				3302906023F32AC20099C438 /* Beer.swift in Sources */,
@@ -1063,6 +1072,7 @@
 				ADB2D8AD2420005600AD0C11 /* GameMoveProtocol.swift in Sources */,
 				339CA27C2425DE1300D43128 /* GameUpdateTests.swift in Sources */,
 				ADE91ACE23B9FE2300F7316B /* JsonReader.swift in Sources */,
+				3308D7E52425E8D500ECE83C /* PanicExecutorTests.swift in Sources */,
 				33D477EB23E4FA0F00E232D9 /* RangeCalculator.swift in Sources */,
 				339CA27424256DA400D43128 /* WellsFargo.swift in Sources */,
 				AD4BE6AA23DA4B12003A610A /* CollectionExtension.swift in Sources */,

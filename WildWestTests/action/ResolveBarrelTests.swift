@@ -98,7 +98,7 @@ class UseBarrelRuleTests: XCTestCase {
             .barrelsResolved(is: 0)
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [ResolveBarrel], [ResolveBarrel(actorId: "p1", cardId: "c1")])
@@ -119,7 +119,7 @@ class UseBarrelRuleTests: XCTestCase {
             .barrelsResolved(is: 1)
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertNil(actions)

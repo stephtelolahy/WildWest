@@ -103,7 +103,7 @@ class EliminateRuleTests: XCTestCase {
             .players(are: player1)
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [Eliminate], [Eliminate(actorId: "p1")])

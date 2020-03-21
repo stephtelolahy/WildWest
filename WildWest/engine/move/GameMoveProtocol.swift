@@ -48,7 +48,7 @@ protocol AutoplayMoveMatcherProtocol {
 
 /// Function defining effect after playing given move
 protocol EffectMatcherProtocol {
-    func effects(onExecuting move: GameMove, in state: GameStateProtocol) -> GameMove?
+    func effects(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameMove]?
 }
 
 /// Function defining game updates on executing move

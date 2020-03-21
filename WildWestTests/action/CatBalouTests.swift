@@ -90,7 +90,7 @@ class CatBalouRuleTests: XCTestCase {
             .players(are: mockPlayer1, mockPlayer2)
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [CatBalou], [
@@ -117,7 +117,7 @@ class CatBalouRuleTests: XCTestCase {
             .players(are: mockPlayer1, mockPlayer2)
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [CatBalou], [
@@ -144,7 +144,7 @@ class CatBalouRuleTests: XCTestCase {
             .players(are: mockPlayer1, mockPlayer2)
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertNil(actions)

@@ -69,7 +69,7 @@ class DiscardBangRuleTests: XCTestCase {
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [DiscardBang], [DiscardBang(actorId: "p1", cardId: "c1")])
@@ -89,7 +89,7 @@ class DiscardBangRuleTests: XCTestCase {
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [DiscardBang], [DiscardBang(actorId: "p1", cardId: "c1")])

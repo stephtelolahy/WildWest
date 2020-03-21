@@ -68,7 +68,7 @@ class DuelRuleTests: XCTestCase {
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         XCTAssertEqual(actions as? [Duel], [
             Duel(actorId: "p1", cardId: "c1", targetId: "p2"),

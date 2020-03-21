@@ -86,7 +86,7 @@ class MissedRuleTests: XCTestCase {
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [Missed], [Missed(actorId: "p1", cardId: "c1")])

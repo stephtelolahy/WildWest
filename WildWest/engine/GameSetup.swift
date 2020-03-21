@@ -35,7 +35,7 @@ class GameSetup: GameSetupProtocol {
         return GameState(players: players,
                          deck: deck,
                          discardPile: [],
-                         turn: "",
+                         turn: nil,
                          challenge: nil,
                          bangsPlayed: 0,
                          barrelsResolved: 0,

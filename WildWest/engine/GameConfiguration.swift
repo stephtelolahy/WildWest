@@ -26,7 +26,8 @@ class GameConfiguration {
         [BeerMatcher(),
          SaloonMatcher(),
          StagecoachMatcher(),
-         WellsFargoMatcher()]
+         WellsFargoMatcher(),
+         PanicMatcher(calculator: RangeCalculator())]
     }
     
     var autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol] {
@@ -42,7 +43,8 @@ class GameConfiguration {
          BeerExecutor(),
          SaloonExecutor(),
          StagecoachExecutor(),
-         WellsFargoExecutor()]
+         WellsFargoExecutor(),
+         PanicExecutor()]
     }
     
     var updateExecutors: [UpdateExecutorProtocol] {

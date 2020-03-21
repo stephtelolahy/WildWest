@@ -140,7 +140,7 @@ class EquipRuleTests: XCTestCase {
             .players(are: mockPlayer)
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [Equip], [
@@ -165,7 +165,7 @@ class EquipRuleTests: XCTestCase {
             .players(are: mockPlayer)
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertNil(actions)
@@ -185,7 +185,7 @@ class EquipRuleTests: XCTestCase {
             .players(are: mockPlayer)
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertNil(actions)

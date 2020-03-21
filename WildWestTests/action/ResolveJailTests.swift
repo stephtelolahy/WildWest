@@ -80,7 +80,7 @@ class ResolveJailRuleTests: XCTestCase {
         let sut = ResolveJailRule()
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // assert
         XCTAssertEqual(actions as? [ResolveJail], [ResolveJail(actorId: "p1", cardId: "c1")])
@@ -99,7 +99,7 @@ class ResolveJailRuleTests: XCTestCase {
         let sut = ResolveJailRule()
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // assert
         XCTAssertNil(actions)

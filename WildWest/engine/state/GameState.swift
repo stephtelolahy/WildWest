@@ -11,7 +11,7 @@ class GameState: GameStateProtocol {
     var players: [PlayerProtocol]
     var deck: [CardProtocol]
     var discardPile: [CardProtocol]
-    var turn: String
+    var turn: String?
     var challenge: Challenge?
     var bangsPlayed: Int
     var barrelsResolved: Int
@@ -25,7 +25,7 @@ class GameState: GameStateProtocol {
     init(players: [PlayerProtocol],
          deck: [CardProtocol],
          discardPile: [CardProtocol],
-         turn: String,
+         turn: String?,
          challenge: Challenge?,
          bangsPlayed: Int,
          barrelsResolved: Int,

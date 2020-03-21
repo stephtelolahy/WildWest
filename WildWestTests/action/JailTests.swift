@@ -64,7 +64,7 @@ class JailRuleTests: XCTestCase {
         let sut = JailRule()
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [Jail], [Jail(actorId: "p1", cardId: "c1", targetId: "p2")])
@@ -85,7 +85,7 @@ class JailRuleTests: XCTestCase {
         let sut = JailRule()
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertNil(actions)
@@ -107,7 +107,7 @@ class JailRuleTests: XCTestCase {
         let sut = JailRule()
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertNil(actions)

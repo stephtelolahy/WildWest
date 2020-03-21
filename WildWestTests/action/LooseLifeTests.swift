@@ -125,7 +125,7 @@ class LooseLifeRuleTests: XCTestCase {
             .challenge(is: .shoot(["p1", "p2"], .gatling, "px"))
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [LooseLife], [LooseLife(actorId: "p1", points: 1)])
@@ -138,7 +138,7 @@ class LooseLifeRuleTests: XCTestCase {
             .challenge(is: .indians(["p1", "p2"], "px"))
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [LooseLife], [LooseLife(actorId: "p1", points: 1)])
@@ -151,7 +151,7 @@ class LooseLifeRuleTests: XCTestCase {
             .challenge(is: .duel(["p1", "p2"], "p2"))
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [LooseLife], [LooseLife(actorId: "p1", points: 1)])
@@ -165,7 +165,7 @@ class LooseLifeRuleTests: XCTestCase {
             .challenge(is: .startTurnDynamiteExploded)
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [LooseLife], [LooseLife(actorId: "p1", points: 3)])

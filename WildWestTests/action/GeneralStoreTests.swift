@@ -70,7 +70,7 @@ class GeneralStoreRuleTests: XCTestCase {
         let sut = GeneralStoreRule()
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [GeneralStore],  [GeneralStore(actorId: "p1", cardId: "c1")])

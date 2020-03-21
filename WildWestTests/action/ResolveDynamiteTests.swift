@@ -97,7 +97,7 @@ class ResolveDynamiteRuleTests: XCTestCase {
         let sut = ResolveDynamiteRule()
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // assert
         XCTAssertEqual(actions as? [ResolveDynamite], [ResolveDynamite(actorId: "p1", cardId: "c1")])
@@ -116,7 +116,7 @@ class ResolveDynamiteRuleTests: XCTestCase {
         let sut = ResolveDynamiteRule()
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // assert
         XCTAssertEqual(actions as? [ResolveDynamite], [ResolveDynamite(actorId: "p1", cardId: "c1")])

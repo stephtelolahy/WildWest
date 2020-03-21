@@ -112,7 +112,7 @@ class DiscardBeerRuleTests: XCTestCase {
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [DiscardBeer], [DiscardBeer(actorId: "p1", cardsToDiscardIds: ["c1"])])
@@ -133,7 +133,7 @@ class DiscardBeerRuleTests: XCTestCase {
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [DiscardBeer], [DiscardBeer(actorId: "p1", cardsToDiscardIds: ["c1"])])
@@ -154,7 +154,7 @@ class DiscardBeerRuleTests: XCTestCase {
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [DiscardBeer], [DiscardBeer(actorId: "p1", cardsToDiscardIds: ["c1"])])
@@ -176,7 +176,7 @@ class DiscardBeerRuleTests: XCTestCase {
             .challenge(is: .startTurnDynamiteExploded)
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [DiscardBeer], [DiscardBeer(actorId: "p1", cardsToDiscardIds: ["c1", "c2", "c3"])])
@@ -197,7 +197,7 @@ class DiscardBeerRuleTests: XCTestCase {
             .players(are: mockPlayer1, MockPlayerProtocol())
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertNil(actions)

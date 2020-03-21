@@ -109,7 +109,7 @@ class EndTurnRuleTests: XCTestCase {
             .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [EndTurn], [EndTurn(actorId: "p1", cardIds: [])])
@@ -131,7 +131,7 @@ class EndTurnRuleTests: XCTestCase {
             .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [EndTurn], [
@@ -157,7 +157,7 @@ class EndTurnRuleTests: XCTestCase {
             .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
-        let actions = sut.match(with: mockState)
+        let moves = sut.validMoves(matching: mockState)
         
         // Assert
         XCTAssertEqual(actions as? [EndTurn], [
