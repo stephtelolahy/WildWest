@@ -46,7 +46,6 @@ class EquipExecutor: MoveExecutorProtocol {
             let currentGun = actor.inPlay.first(where: { $0.name.isGun }) {
             updates.append(.playerDiscardInPlay(actorId, currentGun.identifier))
         }
-        
         updates.append(.playerPutInPlay(actorId, cardId))
         return updates
     }

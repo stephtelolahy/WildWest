@@ -32,13 +32,15 @@ class GameConfiguration {
          CatBalouMatcher(calculator: RangeCalculator()),
          EquipMatcher(),
          DynamiteMatcher(),
-         GeneralStoreMatcher()]
+         GeneralStoreMatcher(),
+         ChooseGeneralStoreCardMatcher()]
     }
     
     var autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol] {
         [StartTurnMatcher(),
          ResolveDynamiteMatcher(),
-         ResolveJailMatcher()]
+         ResolveJailMatcher(),
+         PullGeneralStoreLastCardMatcher()]
     }
     
     var effectMatchers: [EffectMatcherProtocol] {
@@ -58,7 +60,8 @@ class GameConfiguration {
          DynamiteExecutor(),
          ResolveDynamiteExecutor(),
          ResolveJailExecutor(),
-         GeneralStoreExecutor()]
+         GeneralStoreExecutor(),
+         ChooseGeneralStoreCardExecutor()]
     }
     
     var updateExecutors: [UpdateExecutorProtocol] {

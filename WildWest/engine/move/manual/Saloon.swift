@@ -35,7 +35,9 @@ class SaloonExecutor: MoveExecutorProtocol {
         var updates: [GameUpdate] = []
         updates.append(.playerDiscardHand(actorId, cardId))
         let damagedPlayers = state.players.filter { $0.health < $0.maxHealth }
-        damagedPlayers.forEach { updates.append(.playerGainHealth($0.identifier, 1)) }
+        damagedPlayers.forEach {
+            updates.append(.playerGainHealth($0.identifier, 1))
+        }
         return updates
     }    
 }
