@@ -20,8 +20,7 @@ extension CardName {
     var isEquipment: Bool {
         let equipments: [CardName] = [.mustang,
                                       .scope,
-                                      .barrel,
-                                      .dynamite]
+                                      .barrel]
         return equipments.contains(self)
     }
     
@@ -55,7 +54,7 @@ extension CardProtocol {
         suit == .spades && ["2", "3", "4", "5", "6", "7", "8", "9"].contains(value)
     }
     
-    var makeBarrelWorking: Bool {
+    var makeBarrelWork: Bool {
         suit == .hearts
     }
 }

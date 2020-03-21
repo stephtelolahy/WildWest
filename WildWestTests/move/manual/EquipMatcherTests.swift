@@ -20,12 +20,9 @@ class EquipMatcherTests: XCTestCase {
         let mockCard2 = MockCardProtocol()
             .named(.scope)
             .identified(by: "c2")
-        let mockCard3 = MockCardProtocol()
-            .named(.dynamite)
-            .identified(by: "c3")
         let mockPlayer = MockPlayerProtocol()
             .identified(by: "p1")
-            .holding(mockCard1, mockCard2, mockCard3)
+            .holding(mockCard1, mockCard2)
             .noCardsInPlay()
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
@@ -38,8 +35,7 @@ class EquipMatcherTests: XCTestCase {
         // Assert
         XCTAssertEqual(moves, [
             GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .schofield),
-            GameMove(name: .play, actorId: "p1", cardId: "c2", cardName: .scope),
-            GameMove(name: .play, actorId: "p1", cardId: "c3", cardName: .dynamite)
+            GameMove(name: .play, actorId: "p1", cardId: "c2", cardName: .scope)
         ])
     }
     

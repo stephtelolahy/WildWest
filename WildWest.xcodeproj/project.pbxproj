@@ -51,6 +51,10 @@
 		33911EEF2426165C0023C6AF /* ResolveDynamite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33911EED242616580023C6AF /* ResolveDynamite.swift */; };
 		33911EF1242618EE0023C6AF /* ResolveDynamiteMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33911EF0242618EE0023C6AF /* ResolveDynamiteMatcherTests.swift */; };
 		33911EF3242619170023C6AF /* ResolveDynamiteExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33911EF2242619170023C6AF /* ResolveDynamiteExecutorTests.swift */; };
+		33911EF524261B470023C6AF /* Dynamite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33911EF424261B470023C6AF /* Dynamite.swift */; };
+		33911EF624261B470023C6AF /* Dynamite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33911EF424261B470023C6AF /* Dynamite.swift */; };
+		33911EF824261CE20023C6AF /* DynamiteMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33911EF724261CE20023C6AF /* DynamiteMatcherTests.swift */; };
+		33911EFA24261CFD0023C6AF /* DynamiteExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33911EF924261CFD0023C6AF /* DynamiteExecutorTests.swift */; };
 		3395258023E37CCE003DE948 /* GameEngineProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3395257F23E37CCE003DE948 /* GameEngineProtocol.swift */; };
 		3395258123E37CCE003DE948 /* GameEngineProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3395257F23E37CCE003DE948 /* GameEngineProtocol.swift */; };
 		3395258323E37D07003DE948 /* GameSetupProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3395258223E37D07003DE948 /* GameSetupProtocol.swift */; };
@@ -208,6 +212,9 @@
 		33911EED242616580023C6AF /* ResolveDynamite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveDynamite.swift; sourceTree = "<group>"; };
 		33911EF0242618EE0023C6AF /* ResolveDynamiteMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveDynamiteMatcherTests.swift; sourceTree = "<group>"; };
 		33911EF2242619170023C6AF /* ResolveDynamiteExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveDynamiteExecutorTests.swift; sourceTree = "<group>"; };
+		33911EF424261B470023C6AF /* Dynamite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dynamite.swift; sourceTree = "<group>"; };
+		33911EF724261CE20023C6AF /* DynamiteMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamiteMatcherTests.swift; sourceTree = "<group>"; };
+		33911EF924261CFD0023C6AF /* DynamiteExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamiteExecutorTests.swift; sourceTree = "<group>"; };
 		3395257F23E37CCE003DE948 /* GameEngineProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineProtocol.swift; sourceTree = "<group>"; };
 		3395258223E37D07003DE948 /* GameSetupProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetupProtocol.swift; sourceTree = "<group>"; };
 		339A294823EFEFE7002C5CD8 /* ChallengeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeExtension.swift; sourceTree = "<group>"; };
@@ -600,6 +607,8 @@
 				333B23412425ECB400685454 /* CatBalouExecutorTests.swift */,
 				33CD7E51242610A00072155C /* EquipMatcherTests.swift */,
 				33CD7E53242610DE0072155C /* EquipExecutorTests.swift */,
+				33911EF724261CE20023C6AF /* DynamiteMatcherTests.swift */,
+				33911EF924261CFD0023C6AF /* DynamiteExecutorTests.swift */,
 			);
 			path = manual;
 			sourceTree = "<group>";
@@ -626,6 +635,7 @@
 				ADB5A10C23BAB8780050E173 /* Panic.swift */,
 				ADB5A10F23BAB89C0050E173 /* CatBalou.swift */,
 				ADB5A0F423BAB29C0050E173 /* Equip.swift */,
+				33911EF424261B470023C6AF /* Dynamite.swift */,
 			);
 			path = manual;
 			sourceTree = "<group>";
@@ -1009,6 +1019,7 @@
 				339A294F23EFFE70002C5CD8 /* GameStateExtension.swift in Sources */,
 				AD6A958E24202B0200D0F937 /* GameConfiguration.swift in Sources */,
 				ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */,
+				33911EF524261B470023C6AF /* Dynamite.swift in Sources */,
 				339CA26E24254F4800D43128 /* Stagecoach.swift in Sources */,
 				AD52B99923B178CC0013240B /* Player.swift in Sources */,
 				3324018E23DBA6C800B92439 /* UICollectionViewExtension.swift in Sources */,
@@ -1073,6 +1084,7 @@
 				339A294A23EFEFE7002C5CD8 /* ChallengeExtension.swift in Sources */,
 				3301BEF523F962F000B4364D /* RandomAIWithRole.swift in Sources */,
 				339CA27B242578C900D43128 /* GameUpdateExecutor.swift in Sources */,
+				33911EFA24261CFD0023C6AF /* DynamiteExecutorTests.swift in Sources */,
 				AD46810F23BEA2B0000B42C7 /* PlayerExtension.swift in Sources */,
 				333B23422425ECB400685454 /* CatBalouExecutorTests.swift in Sources */,
 				333B233D2425EC3C00685454 /* CatBalou.swift in Sources */,
@@ -1080,6 +1092,7 @@
 				335A147423F312F700D9971E /* GameDatabase.swift in Sources */,
 				3308D7E12425E14900ECE83C /* Panic.swift in Sources */,
 				AD374E54242146970025FD4A /* BeerExecutorTests.swift in Sources */,
+				33911EF824261CE20023C6AF /* DynamiteMatcherTests.swift in Sources */,
 				AD7F34B923D79841001B4072 /* MockCardProtocolExtension.swift in Sources */,
 				AD7EAFBF23D7846D00FE23D5 /* GameSetupTests.swift in Sources */,
 				333B234B2425F33A00685454 /* EndTurnExecutorTests.swift in Sources */,
@@ -1096,6 +1109,7 @@
 				3308D7E32425E58000ECE83C /* PanicMatcherTests.swift in Sources */,
 				33F94AB723F0580800D1BCFE /* GameUpdateProtocol.swift in Sources */,
 				AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */,
+				33911EF624261B470023C6AF /* Dynamite.swift in Sources */,
 				3302906023F32AC20099C438 /* Beer.swift in Sources */,
 				33CD7E4F24260C240072155C /* Equip.swift in Sources */,
 				33D477ED23E55AFA00E232D9 /* RangeCalculatorTests.swift in Sources */,

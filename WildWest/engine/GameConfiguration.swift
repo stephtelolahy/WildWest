@@ -30,7 +30,8 @@ class GameConfiguration {
          WellsFargoMatcher(),
          PanicMatcher(calculator: RangeCalculator()),
          CatBalouMatcher(calculator: RangeCalculator()),
-         EquipMatcher()]
+         EquipMatcher(),
+         DynamiteMatcher()]
     }
     
     var autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol] {
@@ -52,6 +53,7 @@ class GameConfiguration {
          PanicExecutor(),
          CatBalouExecutor(),
          EquipExecutor(),
+         DynamiteExecutor(),
          ResolveDynamiteExecutor()]
     }
     
