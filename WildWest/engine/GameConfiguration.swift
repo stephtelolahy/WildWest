@@ -37,7 +37,8 @@ class GameConfiguration {
          BangMatcher(calculator: RangeCalculator()),
          GatlingMatcher(),
          IndiansMatcher(),
-         DuelMatcher()]
+         DuelMatcher(),
+         MissedMatcher()]
     }
     
     var autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol] {
@@ -69,7 +70,8 @@ class GameConfiguration {
          BangExecutor(),
          GatlingExecutor(),
          IndiansExecutor(),
-         DuelExecutor()]
+         DuelExecutor(),
+         MissedExecutor()]
     }
     
     var updateExecutors: [UpdateExecutorProtocol] {
