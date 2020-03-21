@@ -31,7 +31,7 @@ class BeerMatcherTests: XCTestCase {
         let moves = sut.validMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .playCard, actorId: "p1", cardId: "c1", cardName: .beer)])
+        XCTAssertEqual(moves, [GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .beer)])
     }
     
     func test_CannotPlayBeer_IfMaxHealth() {

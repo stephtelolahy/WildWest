@@ -19,7 +19,7 @@ class CatBalouExecutorTests: XCTestCase {
             .holding(MockCardProtocol().identified(by: "c2"))
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer2)
-        let move = GameMove(name: .playCard, actorId: "p1", cardId: "c1", cardName: .catBalou, targetCard: TargetCard(ownerId: "p2", source: .randomHand))
+        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .catBalou, targetCard: TargetCard(ownerId: "p2", source: .randomHand))
         
         // When
         let updates = sut.execute(move, in: mockState)
@@ -32,7 +32,7 @@ class CatBalouExecutorTests: XCTestCase {
     func test_DiscardOtherPlayerInPlayCard_IfPlayingCatBalou() {
         // Given
         let mockState = MockGameStateProtocol()
-        let move = GameMove(name: .playCard, actorId: "p1", cardId: "c1", cardName: .catBalou, targetCard: TargetCard(ownerId: "p2", source: .inPlay("c2")))
+        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .catBalou, targetCard: TargetCard(ownerId: "p2", source: .inPlay("c2")))
         
         // When
         let updates = sut.execute(move, in: mockState)

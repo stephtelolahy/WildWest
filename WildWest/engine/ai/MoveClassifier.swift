@@ -8,21 +8,21 @@
 
 class MoveClassifier: MoveClassifierProtocol {
     func classify(_ move: GameMove) -> MoveClassification {
-        if case .playCard = move.name,
+        if case .play = move.name,
             let actorId = move.actorId,
             [CardName.bang, CardName.duel].contains(move.cardName),
             let targetId = move.targetId {
             return .strongAttack(actorId: actorId, targetId: targetId)
         }
         
-        if case .playCard = move.name,
+        if case .play = move.name,
             let actorId = move.actorId,
             case .jail = move.cardName,
             let targetId = move.targetId {
             return .weakAttack(actorId: actorId, targetId: targetId)
         }
         
-        if case .playCard = move.name,
+        if case .play = move.name,
             let actorId = move.actorId,
             [CardName.panic, CardName.catBalou].contains(move.cardName),
             let targetCard = move.targetCard {

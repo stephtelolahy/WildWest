@@ -52,9 +52,9 @@ class EndTurnMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(moves, [
-            GameMove(name: .endTurn, actorId: "p1", discardedCardIds: ["c1"]),
-            GameMove(name: .endTurn, actorId: "p1", discardedCardIds: ["c2"]),
-            GameMove(name: .endTurn, actorId: "p1", discardedCardIds: ["c3"])
+            GameMove(name: .endTurn, actorId: "p1", discardIds: ["c1"]),
+            GameMove(name: .endTurn, actorId: "p1", discardIds: ["c2"]),
+            GameMove(name: .endTurn, actorId: "p1", discardIds: ["c3"])
         ])
     }
     
@@ -77,9 +77,9 @@ class EndTurnMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(moves, [
-            GameMove(name: .endTurn, actorId: "p1", discardedCardIds: ["c1", "c2"]),
-            GameMove(name: .endTurn, actorId: "p1", discardedCardIds: ["c1", "c3"]),
-            GameMove(name: .endTurn, actorId: "p1", discardedCardIds: ["c2", "c3"])
+            GameMove(name: .endTurn, actorId: "p1", discardIds: ["c1", "c2"]),
+            GameMove(name: .endTurn, actorId: "p1", discardIds: ["c1", "c3"]),
+            GameMove(name: .endTurn, actorId: "p1", discardIds: ["c2", "c3"])
         ])
     }
 }

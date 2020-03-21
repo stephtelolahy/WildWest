@@ -28,7 +28,7 @@ class SaloonExecutorTests: XCTestCase {
             .maxHealth(is: 3)
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
-        let move = GameMove(name: .playCard, actorId: "p1", cardId: "c1", cardName: .saloon)
+        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .saloon)
         
         // When
         let updates = sut.execute(move, in: mockState)

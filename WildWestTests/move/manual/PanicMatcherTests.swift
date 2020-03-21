@@ -51,8 +51,8 @@ class PanicMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(moves, [
-            GameMove(name:.playCard, actorId: "p1", cardId: "c1", cardName: .panic, targetCard: TargetCard(ownerId: "p2", source: .randomHand)),
-            GameMove(name: .playCard, actorId: "p1", cardId: "c1", cardName: .panic, targetCard: TargetCard(ownerId: "p3", source: .inPlay("c3")))
+            GameMove(name:.play, actorId: "p1", cardId: "c1", cardName: .panic, targetCard: TargetCard(ownerId: "p2", source: .randomHand)),
+            GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .panic, targetCard: TargetCard(ownerId: "p3", source: .inPlay("c3")))
         ])
     }
     

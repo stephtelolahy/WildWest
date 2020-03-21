@@ -29,7 +29,8 @@ class GameConfiguration {
          StagecoachMatcher(),
          WellsFargoMatcher(),
          PanicMatcher(calculator: RangeCalculator()),
-         CatBalouMatcher(calculator: RangeCalculator())]
+         CatBalouMatcher(calculator: RangeCalculator()),
+         EquipMatcher()]
     }
     
     var autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol] {
@@ -48,7 +49,8 @@ class GameConfiguration {
          StagecoachExecutor(),
          WellsFargoExecutor(),
          PanicExecutor(),
-         CatBalouExecutor()]
+         CatBalouExecutor(),
+         EquipExecutor()]
     }
     
     var updateExecutors: [UpdateExecutorProtocol] {

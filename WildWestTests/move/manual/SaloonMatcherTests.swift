@@ -29,6 +29,6 @@ class SaloonMatcherTests: XCTestCase {
         let moves = sut.validMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .playCard, actorId: "p1", cardId: "c1", cardName: .saloon)])
+        XCTAssertEqual(moves, [GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .saloon)])
     }
 }

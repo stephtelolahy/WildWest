@@ -40,7 +40,7 @@ class CatBalouMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(moves, [
-            GameMove(name: .playCard, actorId: "p1", cardId: "c1", cardName: .catBalou, targetCard: TargetCard(ownerId: "p2", source: .randomHand))
+            GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .catBalou, targetCard: TargetCard(ownerId: "p2", source: .randomHand))
         ])
     }
     
@@ -66,7 +66,7 @@ class CatBalouMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(moves, [
-            GameMove(name: .playCard, actorId: "p1", cardId: "c1", cardName: .catBalou, targetCard: TargetCard(ownerId: "p2", source: .inPlay("c2")))
+            GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .catBalou, targetCard: TargetCard(ownerId: "p2", source: .inPlay("c2")))
         ])
     }
     

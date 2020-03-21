@@ -15,7 +15,7 @@ class BeerExecutorTests: XCTestCase {
     func test_GainLifePoint_IfPlayingBeer() {
         // Given
         let mockState = MockGameStateProtocol()
-        let move = GameMove(name: .playCard, actorId: "p1", cardId: "c1", cardName: .beer)
+        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .beer)
         
         // When
         let updates = sut.execute(move, in: mockState)

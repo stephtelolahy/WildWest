@@ -29,7 +29,7 @@ extension MoveSelector where Self: UIViewController {
             return
         }
         
-        if moves.contains(where: { $0.name == .chooseCard }) {
+        if moves.contains(where: { $0.name == .choose }) {
             selectCard(within: moves, completion: completion)
             return
         }
@@ -40,7 +40,7 @@ extension MoveSelector where Self: UIViewController {
             return
         }
         
-        if moves.contains(where: { $0.discardedCardIds != nil }) {
+        if moves.contains(where: { $0.discardIds != nil }) {
             selectCardsCombination(within: moves, completion: completion)
             return
         }
@@ -72,7 +72,7 @@ extension MoveSelector where Self: UIViewController {
     }
     
     private func selectCardsCombination(within moves: [GameMove], completion: @escaping (GameMove) -> Void) {
-        let cardsCombinations = moves.compactMap { $0.discardedCardIds?.joined(separator: ", ") }
+        let cardsCombinations = moves.compactMap { $0.discardIds?.joined(separator: ", ") }
         select(within: cardsCombinations, title: "Select cards") { index in
             completion(moves[index])
         }

@@ -32,11 +32,11 @@ class RangeCalculator: RangeCalculatorProtocol {
     }
     
     func reachableDistance(of player: PlayerProtocol) -> Int {
-        guard let weapon = player.inPlay.first(where: { $0.isGun }) else {
+        guard let weapon = player.inPlay.first(where: { $0.name.isGun }) else {
             return 1
         }
         
-        return weapon.reachableDistance
+        return weapon.name.reachableDistance
     }
     
     func maximumNumberOfShoots(of player: PlayerProtocol) -> Int {

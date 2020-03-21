@@ -28,7 +28,7 @@ class CatBalouMatcher: ValidMoveMatcherProtocol {
         
         return cards.map { card in
             targetCards.map {
-                GameMove(name: .playCard,
+                GameMove(name: .play,
                          actorId: actor.identifier,
                          cardId: card.identifier,
                          cardName: card.name,
@@ -40,7 +40,7 @@ class CatBalouMatcher: ValidMoveMatcherProtocol {
 
 class CatBalouExecutor: MoveExecutorProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .playCard = move.name,
+        guard case .play = move.name,
             case .catBalou = move.cardName,
             let cardId = move.cardId,
             let actorId = move.actorId,

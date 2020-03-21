@@ -19,7 +19,7 @@ class PanicExecutorTests: XCTestCase {
             .holding(MockCardProtocol().identified(by: "c2"))
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer2)
-        let move = GameMove(name: .playCard, actorId: "p1", cardId: "c1", cardName: .panic, targetCard: TargetCard(ownerId: "p2", source: .randomHand))
+        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .panic, targetCard: TargetCard(ownerId: "p2", source: .randomHand))
         
         // When
         let updates = sut.execute(move, in: mockState)
@@ -32,7 +32,7 @@ class PanicExecutorTests: XCTestCase {
     func test_PullOtherPlayerInPlayCard_IfPlayingPanic() {
         // Given
         let mockState = MockGameStateProtocol()
-        let move = GameMove(name: .playCard, actorId: "p1", cardId: "c1", cardName: .panic, targetCard: TargetCard(ownerId: "p2", source: .inPlay("c2")))
+        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .panic, targetCard: TargetCard(ownerId: "p2", source: .inPlay("c2")))
         
         // When
         let updates = sut.execute(move, in: mockState)

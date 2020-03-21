@@ -21,7 +21,7 @@ class EndTurnMatcher: ValidMoveMatcherProtocol {
         let cardsToDiscardCount = actor.hand.count - actor.health
         let handCardIds = actor.hand.map { $0.identifier }
         let cardsCombinations = handCardIds.combine(by: cardsToDiscardCount)
-        return cardsCombinations.map { GameMove(name: .endTurn, actorId: actor.identifier, discardedCardIds: $0) }
+        return cardsCombinations.map { GameMove(name: .endTurn, actorId: actor.identifier, discardIds: $0) }
     }
 }
 
@@ -32,7 +32,7 @@ class EndTurnExecutor: MoveExecutorProtocol {
         }
         
         var updates: [GameUpdate] = []
-        if let cardIds = move.discardedCardIds {
+        if let cardIds = move.discardIds {
             cardIds.forEach { updates.append(.playerDiscardHand(actorId, $0)) }
         }
         updates.append(.setTurn(state.nextTurn))

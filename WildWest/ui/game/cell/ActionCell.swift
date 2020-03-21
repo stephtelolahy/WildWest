@@ -28,7 +28,7 @@ class ActionCell: UICollectionViewCell {
         guard let card = item.card else {
             if let move = item.actions.first {
                 switch move.name {
-                case .chooseCard:
+                case .choose:
                     cardImageView.image = #imageLiteral(resourceName: "01_choose_card")
                     
                 case .endTurn:

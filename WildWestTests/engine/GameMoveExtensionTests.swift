@@ -12,14 +12,14 @@ class GameMoveExtensionTests: XCTestCase {
     
     func test_GroupingMovesByActor() {
         // Given
-        let moves = [GameMove(name: .playCard, actorId: "p1"),
+        let moves = [GameMove(name: .play, actorId: "p1"),
                      GameMove(name: .endTurn, actorId: "p1")]
         
         // When
         let grouped = moves.groupedByActor()
         
         // Assert
-        XCTAssertEqual(grouped, ["p1": [GameMove(name: .playCard, actorId: "p1"),
+        XCTAssertEqual(grouped, ["p1": [GameMove(name: .play, actorId: "p1"),
                                         GameMove(name: .endTurn, actorId: "p1")]])
     }
 }

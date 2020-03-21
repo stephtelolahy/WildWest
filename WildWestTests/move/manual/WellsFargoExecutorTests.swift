@@ -15,7 +15,7 @@ class WellsFargoExecutorTests: XCTestCase {
     func test_Pull3Cards_IfPlayingWellsFargo() {
         // Given
         let mockState = MockGameStateProtocol()
-        let move = GameMove(name: .playCard, actorId: "p1", cardId: "c1", cardName: .wellsFargo)
+        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .wellsFargo)
         
         // When
         let updates = sut.execute(move, in: mockState)

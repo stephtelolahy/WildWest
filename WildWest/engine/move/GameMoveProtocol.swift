@@ -14,15 +14,15 @@ struct GameMove: Equatable {
     var cardName: CardName?             // name of played card
     var targetId: String?               // identifier of targeted player
     var targetCard: TargetCard?         // identifier of targeted card
-    var discardedCardIds: [String]?      // identifiers of discarded hand cards
+    var discardIds: [String]?           // identifiers of discarded hand cards
 }
 
 enum MoveName: String {
     case startTurn  // phase1: start turn
-    case playCard   // phase2: play hand card
+    case play       // phase2: play hand card
     case endTurn    // phase3: end turn discarding excess cards
     case discard    // reaction move: discard hand card
-    case chooseCard // reaction move: choose card
+    case choose     // reaction move: choose card
     case pass       // reaction move: do nothing while attacked
 }
 

@@ -15,7 +15,7 @@ class StagecoachExecutorTests: XCTestCase {
     func test_Pull2Cards_IfPlayingStagecoach() {
         // Given
         let mockState = MockGameStateProtocol()
-        let move = GameMove(name: .playCard, actorId: "p1", cardId: "c1", cardName: .stagecoach)
+        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .stagecoach)
         
         // When
         let updates = sut.execute(move, in: mockState)

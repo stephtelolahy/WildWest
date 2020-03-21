@@ -15,7 +15,7 @@ class SaloonMatcher: ValidMoveMatcherProtocol {
         }
         
         return cards.map {
-            GameMove(name: .playCard,
+            GameMove(name: .play,
                      actorId: actor.identifier,
                      cardId: $0.identifier,
                      cardName: $0.name)
@@ -25,7 +25,7 @@ class SaloonMatcher: ValidMoveMatcherProtocol {
 
 class SaloonExecutor: MoveExecutorProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .playCard = move.name,
+        guard case .play = move.name,
             case .saloon = move.cardName,
             let cardId = move.cardId,
             let actorId = move.actorId else {

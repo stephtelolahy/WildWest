@@ -33,7 +33,7 @@ class PanicMatcher: ValidMoveMatcherProtocol {
         
         return cards.map { card in
             targetCards.map {
-                GameMove(name: .playCard,
+                GameMove(name: .play,
                          actorId: actor.identifier,
                          cardId: card.identifier,
                          cardName: card.name,
@@ -45,7 +45,7 @@ class PanicMatcher: ValidMoveMatcherProtocol {
 
 class PanicExecutor: MoveExecutorProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .playCard = move.name,
+        guard case .play = move.name,
             case .panic = move.cardName,
             let cardId = move.cardId,
             let actorId = move.actorId,

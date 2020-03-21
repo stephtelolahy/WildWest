@@ -53,7 +53,7 @@ class EndTurnExecutorTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2)
-        let move = GameMove(name: .endTurn, actorId: "p1", discardedCardIds: ["c1", "c2"])
+        let move = GameMove(name: .endTurn, actorId: "p1", discardIds: ["c1", "c2"])
         
         // When
         let updates = sut.execute(move, in: mockState)

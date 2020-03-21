@@ -20,14 +20,14 @@ class RandomAI: AIProtocol {
         }
         
         // prefer keep larger range gun
-        if case .playCard = move.name,
+        if case .play = move.name,
             let cardId = move.cardId,
             let actorId = move.actorId,
             let actor = state.players.first(where: { $0.identifier == actorId }),
             let card = actor.hand.first(where: { $0.identifier == cardId }),
-            card.isGun,
-            let currentGun = actor.inPlay.first(where: { $0.isGun }),
-            currentGun.reachableDistance > card.reachableDistance {
+            card.name.isGun,
+            let currentGun = actor.inPlay.first(where: { $0.name.isGun }),
+            currentGun.name.reachableDistance > card.name.reachableDistance {
             return Score.useLowerRangeGun
         }
         
