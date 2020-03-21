@@ -1,5 +1,5 @@
 //
-//  MissedExecutorTests.swift
+//  DiscardMissedExecutorTests.swift
 //  WildWestTests
 //
 //  Created by Hugues Stephano Telolahy on 21/03/2020.
@@ -8,9 +8,9 @@
 
 import XCTest
 
-class MissedExecutorTests: XCTestCase {
+class DiscardMissedExecutorTests: XCTestCase {
     
-    private let sut = MissedExecutor()
+    private let sut = DiscardMissedExecutor()
     
     func test_DiscardCardAndRemoveShootChallenge_IfPlayingMissed() {
         // Given

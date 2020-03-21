@@ -38,8 +38,10 @@ class GameConfiguration {
          GatlingMatcher(),
          IndiansMatcher(),
          DuelMatcher(),
-         MissedMatcher(),
-         ResolveBarrelMatcher()]
+         DiscardMissedMatcher(),
+         ResolveBarrelMatcher(),
+         DiscardBangOnDuelMatcher(),
+         DiscardBangOnIndiansMatcher()]
     }
     
     var autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol] {
@@ -72,8 +74,10 @@ class GameConfiguration {
          GatlingExecutor(),
          IndiansExecutor(),
          DuelExecutor(),
-         MissedExecutor(),
-         ResolveBarrelExecutor()]
+         DiscardMissedExecutor(),
+         ResolveBarrelExecutor(),
+         DiscardBangOnDuelExecutor(),
+         DiscardBangOnIndiansExecutor()]
     }
     
     var updateExecutors: [UpdateExecutorProtocol] {

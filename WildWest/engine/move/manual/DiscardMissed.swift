@@ -1,12 +1,12 @@
 //
-//  Missed.swift
+//  DiscardMissed.swift
 //  WildWest
 //
-//  Created by Hugues Stéphano TELOLAHY on 12/30/19.
-//  Copyright © 2019 creativeGames. All rights reserved.
+//  Created by Hugues Stephano Telolahy on 21/03/2020.
+//  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-class MissedMatcher: ValidMoveMatcherProtocol {
+class DiscardMissedMatcher: ValidMoveMatcherProtocol {
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard case let .shoot(targetIds, _, _) = state.challenge,
             let actor = state.players.first(where: { $0.identifier == targetIds.first }),
@@ -23,13 +23,13 @@ class MissedMatcher: ValidMoveMatcherProtocol {
     }
 }
 
-class MissedExecutor: MoveExecutorProtocol {
+class DiscardMissedExecutor: MoveExecutorProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .discard = move.name,
             case .missed = move.cardName,
             let actorId = move.actorId,
             let cardId = move.cardId else {
-            return nil
+                return nil
         }
         
         return [.playerDiscardHand(actorId, cardId),

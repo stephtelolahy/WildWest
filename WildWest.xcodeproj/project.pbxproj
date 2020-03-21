@@ -88,10 +88,8 @@
 		33911F2E242664000023C6AF /* Duel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10323BAB8370050E173 /* Duel.swift */; };
 		33911F3024266ED50023C6AF /* DuelMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33911F2F24266ED50023C6AF /* DuelMatcherTests.swift */; };
 		33911F3224266F770023C6AF /* DuelExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33911F3124266F770023C6AF /* DuelExecutorTests.swift */; };
-		33911F33242671D60023C6AF /* Missed.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10023BAB81E0050E173 /* Missed.swift */; };
-		33911F34242671D60023C6AF /* Missed.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10023BAB81E0050E173 /* Missed.swift */; };
-		33911F36242674C90023C6AF /* MissedMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33911F35242674C90023C6AF /* MissedMatcherTests.swift */; };
-		33911F38242674E00023C6AF /* MissedExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33911F37242674E00023C6AF /* MissedExecutorTests.swift */; };
+		33911F36242674C90023C6AF /* DiscardMissedMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33911F35242674C90023C6AF /* DiscardMissedMatcherTests.swift */; };
+		33911F38242674E00023C6AF /* DiscardMissedExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33911F37242674E00023C6AF /* DiscardMissedExecutorTests.swift */; };
 		33911F392426791F0023C6AF /* ResolveBarrel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C45DD123EB11EB00B62508 /* ResolveBarrel.swift */; };
 		33911F3A2426791F0023C6AF /* ResolveBarrel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C45DD123EB11EB00B62508 /* ResolveBarrel.swift */; };
 		3395258023E37CCE003DE948 /* GameEngineProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3395257F23E37CCE003DE948 /* GameEngineProtocol.swift */; };
@@ -152,6 +150,14 @@
 		33F94AB723F0580800D1BCFE /* GameUpdateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F94AB523F0580800D1BCFE /* GameUpdateProtocol.swift */; };
 		33FD755424267C5400C8622F /* ResolveBarrelMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FD755324267C5400C8622F /* ResolveBarrelMatcherTests.swift */; };
 		33FD755624267C7200C8622F /* ResolveBarrelExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FD755524267C7200C8622F /* ResolveBarrelExecutorTests.swift */; };
+		33FD755724267E6100C8622F /* DiscardBang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EC5D3A23E737E500E14890 /* DiscardBang.swift */; };
+		33FD755824267E6100C8622F /* DiscardBang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EC5D3A23E737E500E14890 /* DiscardBang.swift */; };
+		33FD755A24267F0D00C8622F /* DiscardMissed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FD755924267F0D00C8622F /* DiscardMissed.swift */; };
+		33FD755B24267F0D00C8622F /* DiscardMissed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FD755924267F0D00C8622F /* DiscardMissed.swift */; };
+		33FD755D242682BD00C8622F /* DiscardBangOnDuelMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FD755C242682BD00C8622F /* DiscardBangOnDuelMatcherTests.swift */; };
+		33FD755F242682DC00C8622F /* DiscardBangOnIndiansMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FD755E242682DC00C8622F /* DiscardBangOnIndiansMatcherTests.swift */; };
+		33FD7561242682F500C8622F /* DiscardBangOnDuelExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FD7560242682F500C8622F /* DiscardBangOnDuelExecutorTests.swift */; };
+		33FD75632426831100C8622F /* DiscardBangOnIndiansExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FD75622426831100C8622F /* DiscardBangOnIndiansExecutorTests.swift */; };
 		33FDD70C240BFB4B00BC3E14 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */; };
 		8DBD562D47470962F400716D /* libPods-WildWestTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 102E20EA2AD38505FB9CFBD5 /* libPods-WildWestTests.a */; };
 		AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */; };
@@ -272,8 +278,8 @@
 		33911F2B242661E10023C6AF /* IndiansExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndiansExecutorTests.swift; sourceTree = "<group>"; };
 		33911F2F24266ED50023C6AF /* DuelMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuelMatcherTests.swift; sourceTree = "<group>"; };
 		33911F3124266F770023C6AF /* DuelExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuelExecutorTests.swift; sourceTree = "<group>"; };
-		33911F35242674C90023C6AF /* MissedMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissedMatcherTests.swift; sourceTree = "<group>"; };
-		33911F37242674E00023C6AF /* MissedExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissedExecutorTests.swift; sourceTree = "<group>"; };
+		33911F35242674C90023C6AF /* DiscardMissedMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardMissedMatcherTests.swift; sourceTree = "<group>"; };
+		33911F37242674E00023C6AF /* DiscardMissedExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardMissedExecutorTests.swift; sourceTree = "<group>"; };
 		3395257F23E37CCE003DE948 /* GameEngineProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineProtocol.swift; sourceTree = "<group>"; };
 		3395258223E37D07003DE948 /* GameSetupProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetupProtocol.swift; sourceTree = "<group>"; };
 		339A294823EFEFE7002C5CD8 /* ChallengeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeExtension.swift; sourceTree = "<group>"; };
@@ -314,11 +320,15 @@
 		33EC5D3323E71C1400E14890 /* LooseLife.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LooseLife.swift; sourceTree = "<group>"; };
 		33EC5D3623E71C9D00E14890 /* LooseLifeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LooseLifeTests.swift; sourceTree = "<group>"; };
 		33EC5D3A23E737E500E14890 /* DiscardBang.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardBang.swift; sourceTree = "<group>"; };
-		33EC5D3D23E7387F00E14890 /* DiscardBangTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardBangTests.swift; sourceTree = "<group>"; };
 		33F2505C23DDDBCC00A0FDD1 /* GameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
 		33F94AB523F0580800D1BCFE /* GameUpdateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUpdateProtocol.swift; sourceTree = "<group>"; };
 		33FD755324267C5400C8622F /* ResolveBarrelMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveBarrelMatcherTests.swift; sourceTree = "<group>"; };
 		33FD755524267C7200C8622F /* ResolveBarrelExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveBarrelExecutorTests.swift; sourceTree = "<group>"; };
+		33FD755924267F0D00C8622F /* DiscardMissed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardMissed.swift; sourceTree = "<group>"; };
+		33FD755C242682BD00C8622F /* DiscardBangOnDuelMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardBangOnDuelMatcherTests.swift; sourceTree = "<group>"; };
+		33FD755E242682DC00C8622F /* DiscardBangOnIndiansMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardBangOnIndiansMatcherTests.swift; sourceTree = "<group>"; };
+		33FD7560242682F500C8622F /* DiscardBangOnDuelExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardBangOnDuelExecutorTests.swift; sourceTree = "<group>"; };
+		33FD75622426831100C8622F /* DiscardBangOnIndiansExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardBangOnIndiansExecutorTests.swift; sourceTree = "<group>"; };
 		33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		51195E55CF3E86BE639C2405 /* Pods-WildWest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.debug.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.debug.xcconfig"; sourceTree = "<group>"; };
 		6D17AD4368D4F158C313A85D /* Pods-WildWestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.release.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -352,7 +362,6 @@
 		ADB5A0F423BAB29C0050E173 /* Equip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equip.swift; sourceTree = "<group>"; };
 		ADB5A0FA23BAB7DD0050E173 /* Jail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jail.swift; sourceTree = "<group>"; };
 		ADB5A0FD23BAB8070050E173 /* Bang.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bang.swift; sourceTree = "<group>"; };
-		ADB5A10023BAB81E0050E173 /* Missed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Missed.swift; sourceTree = "<group>"; };
 		ADB5A10323BAB8370050E173 /* Duel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Duel.swift; sourceTree = "<group>"; };
 		ADB5A10623BAB84E0050E173 /* Gatling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gatling.swift; sourceTree = "<group>"; };
 		ADB5A10923BAB8630050E173 /* Indians.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Indians.swift; sourceTree = "<group>"; };
@@ -600,7 +609,6 @@
 			isa = PBXGroup;
 			children = (
 				33C45DE723EB18A800B62508 /* DiscardBeer.swift */,
-				33EC5D3A23E737E500E14890 /* DiscardBang.swift */,
 				33EC5D3323E71C1400E14890 /* LooseLife.swift */,
 				3309D7172408DC3000713E15 /* Eliminate.swift */,
 			);
@@ -665,8 +673,12 @@
 				33911F2B242661E10023C6AF /* IndiansExecutorTests.swift */,
 				33911F2F24266ED50023C6AF /* DuelMatcherTests.swift */,
 				33911F3124266F770023C6AF /* DuelExecutorTests.swift */,
-				33911F35242674C90023C6AF /* MissedMatcherTests.swift */,
-				33911F37242674E00023C6AF /* MissedExecutorTests.swift */,
+				33911F35242674C90023C6AF /* DiscardMissedMatcherTests.swift */,
+				33911F37242674E00023C6AF /* DiscardMissedExecutorTests.swift */,
+				33FD755C242682BD00C8622F /* DiscardBangOnDuelMatcherTests.swift */,
+				33FD755E242682DC00C8622F /* DiscardBangOnIndiansMatcherTests.swift */,
+				33FD7560242682F500C8622F /* DiscardBangOnDuelExecutorTests.swift */,
+				33FD75622426831100C8622F /* DiscardBangOnIndiansExecutorTests.swift */,
 			);
 			path = manual;
 			sourceTree = "<group>";
@@ -706,7 +718,8 @@
 				ADB5A10623BAB84E0050E173 /* Gatling.swift */,
 				ADB5A10923BAB8630050E173 /* Indians.swift */,
 				ADB5A10323BAB8370050E173 /* Duel.swift */,
-				ADB5A10023BAB81E0050E173 /* Missed.swift */,
+				33FD755924267F0D00C8622F /* DiscardMissed.swift */,
+				33EC5D3A23E737E500E14890 /* DiscardBang.swift */,
 			);
 			path = manual;
 			sourceTree = "<group>";
@@ -744,7 +757,6 @@
 			isa = PBXGroup;
 			children = (
 				33EC5D3623E71C9D00E14890 /* LooseLifeTests.swift */,
-				33EC5D3D23E7387F00E14890 /* DiscardBangTests.swift */,
 				33C45DEA23EB190600B62508 /* DiscardBeerTests.swift */,
 				3309D71A2408DE4200713E15 /* EliminateTests.swift */,
 			);
@@ -1097,6 +1109,7 @@
 				33E4411D24077CA000B2848E /* ActionCell.swift in Sources */,
 				ADD4DB6E24209E4D001BBD48 /* MoveDescriptor.swift in Sources */,
 				33FDD70C240BFB4B00BC3E14 /* MenuViewController.swift in Sources */,
+				33FD755A24267F0D00C8622F /* DiscardMissed.swift in Sources */,
 				ADB2D8C42420147200AD0C11 /* StartTurn.swift in Sources */,
 				33A733F823DC5AC300E9B2AD /* GameEngine.swift in Sources */,
 				33911F392426791F0023C6AF /* ResolveBarrel.swift in Sources */,
@@ -1110,6 +1123,7 @@
 				330B7E1123F70D0200B3653D /* OutcomeCalculator.swift in Sources */,
 				33911EFC24261E220023C6AF /* Jail.swift in Sources */,
 				3390F90E242539BA001057A7 /* MoveClassifierProtocol.swift in Sources */,
+				33FD755724267E6100C8622F /* DiscardBang.swift in Sources */,
 				3390F90B24253932001057A7 /* MoveClassifier.swift in Sources */,
 				3301E63823F7EEF700AB35C7 /* AIProtocol.swift in Sources */,
 				3302E51C23F8E34C004FE76E /* RandomAI.swift in Sources */,
@@ -1135,7 +1149,6 @@
 				33911F2E242664000023C6AF /* Duel.swift in Sources */,
 				33A733EE23DC4A5300E9B2AD /* Subscribable.swift in Sources */,
 				33E4411C24077CA000B2848E /* ActionsAdapter.swift in Sources */,
-				33911F33242671D60023C6AF /* Missed.swift in Sources */,
 				333B233E2425EC3D00685454 /* CatBalou.swift in Sources */,
 				33E4411E24077CA000B2848E /* PlayerCell.swift in Sources */,
 				339A294923EFEFE7002C5CD8 /* ChallengeExtension.swift in Sources */,
@@ -1157,7 +1170,7 @@
 				333B23402425ECA600685454 /* CatBalouMatcherTests.swift in Sources */,
 				339A294A23EFEFE7002C5CD8 /* ChallengeExtension.swift in Sources */,
 				3301BEF523F962F000B4364D /* RandomAIWithRole.swift in Sources */,
-				33911F38242674E00023C6AF /* MissedExecutorTests.swift in Sources */,
+				33911F38242674E00023C6AF /* DiscardMissedExecutorTests.swift in Sources */,
 				339CA27B242578C900D43128 /* GameUpdateExecutor.swift in Sources */,
 				33911EFA24261CFD0023C6AF /* DynamiteExecutorTests.swift in Sources */,
 				33911F2D242664000023C6AF /* Duel.swift in Sources */,
@@ -1187,6 +1200,7 @@
 				330B7E1223F70D0200B3653D /* OutcomeCalculator.swift in Sources */,
 				33A4381323E4BD3200C39DD6 /* ArrayExtension.swift in Sources */,
 				333B23462425F20500685454 /* EndTurn.swift in Sources */,
+				33FD75632426831100C8622F /* DiscardBangOnIndiansExecutorTests.swift in Sources */,
 				3308D7E32425E58000ECE83C /* PanicMatcherTests.swift in Sources */,
 				33F94AB723F0580800D1BCFE /* GameUpdateProtocol.swift in Sources */,
 				33911F2824265E540023C6AF /* Indians.swift in Sources */,
@@ -1201,6 +1215,7 @@
 				33D964AE23DD907E007295E7 /* ResourcesTests+Figures.swift in Sources */,
 				3395258123E37CCE003DE948 /* GameEngineProtocol.swift in Sources */,
 				33911F062426309D0023C6AF /* ResolveJailExecutorTests.swift in Sources */,
+				33FD7561242682F500C8622F /* DiscardBangOnDuelExecutorTests.swift in Sources */,
 				330B7E0F23F70CAF00B3653D /* OutcomeCalculatorProtocol.swift in Sources */,
 				339CA2732425528800D43128 /* StagecoachExecutorTests.swift in Sources */,
 				33911F22242659FE0023C6AF /* Gatling.swift in Sources */,
@@ -1211,23 +1226,25 @@
 				336AA6F123F1450B00328837 /* GameDatabaseProtocol.swift in Sources */,
 				ADD4DB702420A8F2001BBD48 /* GameMoveExtensionTests.swift in Sources */,
 				33D477F223E57DE500E232D9 /* FigureProtocol.swift in Sources */,
+				33FD755F242682DC00C8622F /* DiscardBangOnIndiansMatcherTests.swift in Sources */,
 				33911F0124262F7E0023C6AF /* ResolveJail.swift in Sources */,
 				339A295023EFFE70002C5CD8 /* GameStateExtension.swift in Sources */,
 				ADB2D8C52420147200AD0C11 /* StartTurn.swift in Sources */,
 				33D477E823E4F9E300E232D9 /* RangeCalculatorProtocol.swift in Sources */,
 				33911F142426424A0023C6AF /* ChooseGeneralStoreCardMatcherTests.swift in Sources */,
+				33FD755824267E6100C8622F /* DiscardBang.swift in Sources */,
 				33911F2A242661BB0023C6AF /* IndiansMatcherTests.swift in Sources */,
 				ADD035D623A96034003B2576 /* PlayerProtocol.swift in Sources */,
 				ADB2D8AD2420005600AD0C11 /* GameMoveProtocol.swift in Sources */,
 				339CA27C2425DE1300D43128 /* GameUpdateTests.swift in Sources */,
 				33911F07242633320023C6AF /* GeneralStore.swift in Sources */,
-				33911F34242671D60023C6AF /* Missed.swift in Sources */,
 				ADE91ACE23B9FE2300F7316B /* JsonReader.swift in Sources */,
 				33911F0A242634850023C6AF /* GeneralStoreMatcherTests.swift in Sources */,
 				3308D7E52425E8D500ECE83C /* PanicExecutorTests.swift in Sources */,
 				33911F1C242646260023C6AF /* Bang.swift in Sources */,
 				33D477EB23E4FA0F00E232D9 /* RangeCalculator.swift in Sources */,
-				33911F36242674C90023C6AF /* MissedMatcherTests.swift in Sources */,
+				33911F36242674C90023C6AF /* DiscardMissedMatcherTests.swift in Sources */,
+				33FD755D242682BD00C8622F /* DiscardBangOnDuelMatcherTests.swift in Sources */,
 				33911EFB24261E220023C6AF /* Jail.swift in Sources */,
 				33CD7E54242610DE0072155C /* EquipExecutorTests.swift in Sources */,
 				33911F2624265CC00023C6AF /* GatlingExecutorTests.swift in Sources */,
@@ -1260,6 +1277,7 @@
 				3390F90F242539BA001057A7 /* MoveClassifierProtocol.swift in Sources */,
 				AD671A1D23D8F9D600F0AA4A /* CardExtension.swift in Sources */,
 				ADB2D8BA24200FFA00AD0C11 /* StartTurnExecutorTests.swift in Sources */,
+				33FD755B24267F0D00C8622F /* DiscardMissed.swift in Sources */,
 				33911F0C2426349B0023C6AF /* GeneralStoreExecutorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

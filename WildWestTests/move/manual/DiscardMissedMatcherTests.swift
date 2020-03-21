@@ -1,5 +1,5 @@
 //
-//  MissedMatcherTests.swift
+//  DiscardMissedMatcherTests.swift
 //  WildWestTests
 //
 //  Created by Hugues Stephano Telolahy on 21/03/2020.
@@ -8,9 +8,9 @@
 
 import XCTest
 
-class MissedMatcherTests: XCTestCase {
+class DiscardMissedMatcherTests: XCTestCase {
     
-    private let sut = MissedMatcher()
+    private let sut = DiscardMissedMatcher()
     
     func test_CanPlayMissed_IfIsTargetOfBangAndHoldingMissedCard() {
         // Given
