@@ -36,7 +36,8 @@ class GameConfiguration {
     
     var autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol] {
         [StartTurnMatcher(),
-         ResolveDynamiteMatcher()]
+         ResolveDynamiteMatcher(),
+         ResolveJailMatcher()]
     }
     
     var effectMatchers: [EffectMatcherProtocol] {
@@ -54,7 +55,8 @@ class GameConfiguration {
          CatBalouExecutor(),
          EquipExecutor(),
          DynamiteExecutor(),
-         ResolveDynamiteExecutor()]
+         ResolveDynamiteExecutor(),
+         ResolveJailExecutor()]
     }
     
     var updateExecutors: [UpdateExecutorProtocol] {
