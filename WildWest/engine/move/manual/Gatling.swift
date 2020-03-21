@@ -26,10 +26,11 @@ class GatlingMatcher: ValidMoveMatcherProtocol {
 class GatlingExecutor: MoveExecutorProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
+            case .gatling = move.cardName,
             let actorId = move.actorId,
             let cardId = move.cardId,
             let actorIndex = state.players.firstIndex(where: { $0.identifier == actorId }) else {
-            return nil
+                return nil
         }
         
         let playersCount = state.players.count

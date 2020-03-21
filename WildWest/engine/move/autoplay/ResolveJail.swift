@@ -25,9 +25,9 @@ class ResolveJailMatcher: AutoplayMoveMatcherProtocol {
 class ResolveJailExecutor: MoveExecutorProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .resolve = move.name,
+            case .jail = move.cardName,
             let actorId = move.actorId,
             let cardId = move.cardId,
-            case .jail = move.cardName,
             let topDeckCard = state.deck.first else {
                 return nil
         }

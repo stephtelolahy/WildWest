@@ -33,10 +33,10 @@ class EquipMatcher: ValidMoveMatcherProtocol {
 class EquipExecutor: MoveExecutorProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
-            let actorId = move.actorId,
-            let cardId = move.cardId,
             let cardName = move.cardName,
             (cardName.isEquipment || cardName.isGun),
+            let actorId = move.actorId,
+            let cardId = move.cardId,
             let actor = state.players.first(where: { $0.identifier == actorId }) else {
                 return nil
         }

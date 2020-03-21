@@ -43,9 +43,9 @@ class JailMatcher: ValidMoveMatcherProtocol {
 class JailExecutor: MoveExecutorProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
+            case .jail = move.cardName,
             let actorId = move.actorId,
             let cardId = move.cardId,
-            case .jail = move.cardName,
             let targetId = move.targetId else {
                 return nil
         }

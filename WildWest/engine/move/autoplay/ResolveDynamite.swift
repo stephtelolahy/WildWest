@@ -21,9 +21,9 @@ class ResolveDynamiteMatcher: AutoplayMoveMatcherProtocol {
 class ResolveDynamiteExecutor: MoveExecutorProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .resolve = move.name,
+            case .dynamite = move.cardName,
             let actorId = move.actorId,
             let cardId = move.cardId,
-            case .dynamite = move.cardName,
             let topDeckCard = state.deck.first else {
                 return nil
         }

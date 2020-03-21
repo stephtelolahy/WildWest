@@ -51,11 +51,11 @@ class BangMatcher: ValidMoveMatcherProtocol {
 class BangExecutor: MoveExecutorProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
+            case .bang = move.cardName,
             let actorId = move.actorId,
             let cardId = move.cardId,
-            case .bang = move.cardName,
             let targetId = move.targetId else {
-            return nil
+                return nil
         }
         
         return [.playerDiscardHand(actorId, cardId),

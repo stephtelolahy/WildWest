@@ -26,9 +26,9 @@ class DynamiteMatcher: ValidMoveMatcherProtocol {
 class DynamiteExecutor: MoveExecutorProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
+            case .dynamite = move.cardName,
             let actorId = move.actorId,
-            let cardId = move.cardId,
-            case .dynamite = move.cardName else {
+            let cardId = move.cardId else {
                 return nil
         }
         

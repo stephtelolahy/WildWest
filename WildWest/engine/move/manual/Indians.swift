@@ -1,16 +1,16 @@
 //
-//  GeneralStore.swift
+//  Indians.swift
 //  WildWest
 //
-//  Created by Hugues Stéphano TELOLAHY on 12/31/19.
+//  Created by Hugues Stéphano TELOLAHY on 12/30/19.
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-class GeneralStoreMatcher: ValidMoveMatcherProtocol {
+class IndiansMatcher: ValidMoveMatcherProtocol {
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
-            let cards = actor.handCards(named: .generalStore) else {
+            let cards = actor.handCards(named: .indians) else {
                 return nil
         }
         
@@ -18,15 +18,15 @@ class GeneralStoreMatcher: ValidMoveMatcherProtocol {
             GameMove(name: .play,
                      actorId: actor.identifier,
                      cardId: $0.identifier,
-                     cardName: .generalStore)
+                     cardName: $0.name)
         }
     }
 }
 
-class GeneralStoreExecutor: MoveExecutorProtocol {
+class IndiansExecutor: MoveExecutorProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
-            case .generalStore = move.cardName,
+            case .indians = move.cardName,
             let actorId = move.actorId,
             let cardId = move.cardId,
             let actorIndex = state.players.firstIndex(where: { $0.identifier == actorId }) else {
@@ -34,9 +34,8 @@ class GeneralStoreExecutor: MoveExecutorProtocol {
         }
         
         let playersCount = state.players.count
-        let playerIds = Array(0..<playersCount).map { state.players[(actorIndex + $0) % playersCount].identifier }
+        let targetIds = Array(1..<playersCount).map { state.players[(actorIndex + $0) % playersCount].identifier }
         return [.playerDiscardHand(actorId, cardId),
-                .setupGeneralStore(playersCount),
-                .setChallenge(.generalStore(playerIds))]
+                .setChallenge(.indians(targetIds, actorId))]
     }
 }

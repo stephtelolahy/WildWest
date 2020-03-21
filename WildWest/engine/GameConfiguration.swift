@@ -35,7 +35,8 @@ class GameConfiguration {
          GeneralStoreMatcher(),
          ChooseGeneralStoreCardMatcher(),
          BangMatcher(calculator: RangeCalculator()),
-         GatlingMatcher()]
+         GatlingMatcher(),
+         IndiansMatcher()]
     }
     
     var autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol] {
@@ -65,7 +66,8 @@ class GameConfiguration {
          GeneralStoreExecutor(),
          ChooseGeneralStoreCardExecutor(),
          BangExecutor(),
-         GatlingExecutor()]
+         GatlingExecutor(),
+         IndiansExecutor()]
     }
     
     var updateExecutors: [UpdateExecutorProtocol] {

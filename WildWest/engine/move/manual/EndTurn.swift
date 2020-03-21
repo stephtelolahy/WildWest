@@ -27,7 +27,8 @@ class EndTurnMatcher: ValidMoveMatcherProtocol {
 
 class EndTurnExecutor: MoveExecutorProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .endTurn = move.name, let actorId = move.actorId else {
+        guard case .endTurn = move.name,
+            let actorId = move.actorId else {
             return nil
         }
         
