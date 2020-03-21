@@ -15,7 +15,7 @@ class PanicMatcherTests: XCTestCase {
     private var mockCalculator: MockRangeCalculatorProtocol!
     
     override func setUp() {
-        mockCalculator = MockRangeCalculatorProtocol().withEnabledDefaultImplementation(RangeCalculatorProtocolStub())
+        mockCalculator = MockRangeCalculatorProtocol()
         sut = PanicMatcher(calculator: mockCalculator)
     }
     
