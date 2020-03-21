@@ -27,7 +27,7 @@ class ChooseCardTests: XCTestCase {
         let sut = ChooseCard(actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(in: mockState)
+        let updates = sut.execute(move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
@@ -43,7 +43,7 @@ class ChooseCardTests: XCTestCase {
         let sut = ChooseCard(actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(in: mockState)
+        let updates = sut.execute(move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [

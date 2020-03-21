@@ -39,7 +39,7 @@ class GatlingTests: XCTestCase {
         let sut = Gatling(actorId: "p2", cardId: "c2")
         
         // When
-        let updates = sut.execute(in: mockState)
+        let updates = sut.execute(move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [

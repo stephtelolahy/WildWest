@@ -30,7 +30,7 @@ class LooseLifeTests: XCTestCase {
         let sut = LooseLife(actorId: "p1", points: 1)
         
         // When
-        let updates = sut.execute(in: mockState)
+        let updates = sut.execute(move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
@@ -49,7 +49,7 @@ class LooseLifeTests: XCTestCase {
         let sut = LooseLife(actorId: "p1", points: 3)
         
         // When
-        let updates = sut.execute(in: mockState)
+        let updates = sut.execute(move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
@@ -68,7 +68,7 @@ class LooseLifeTests: XCTestCase {
         let sut = LooseLife(actorId: "p1", points: 1)
         
         // When
-        let updates = sut.execute(in: mockState)
+        let updates = sut.execute(move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
@@ -87,7 +87,7 @@ class LooseLifeTests: XCTestCase {
         let sut = LooseLife(actorId: "p1", points: 1)
         
         // When
-        let updates = sut.execute(in: mockState)
+        let updates = sut.execute(move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
@@ -106,7 +106,7 @@ class LooseLifeTests: XCTestCase {
         let sut = LooseLife(actorId: "p1", points: 1)
         
         // When
-        let updates = sut.execute(in: mockState)
+        let updates = sut.execute(move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [

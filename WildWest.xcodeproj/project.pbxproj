@@ -35,6 +35,10 @@
 		333B233E2425EC3D00685454 /* CatBalou.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10F23BAB89C0050E173 /* CatBalou.swift */; };
 		333B23402425ECA600685454 /* CatBalouMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333B233F2425ECA600685454 /* CatBalouMatcherTests.swift */; };
 		333B23422425ECB400685454 /* CatBalouExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333B23412425ECB400685454 /* CatBalouExecutorTests.swift */; };
+		333B23462425F20500685454 /* EndTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A11523BABBE80050E173 /* EndTurn.swift */; };
+		333B23472425F20500685454 /* EndTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A11523BABBE80050E173 /* EndTurn.swift */; };
+		333B23492425F31700685454 /* EndTurnMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333B23482425F31700685454 /* EndTurnMatcherTests.swift */; };
+		333B234B2425F33A00685454 /* EndTurnExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333B234A2425F33A00685454 /* EndTurnExecutorTests.swift */; };
 		335A147423F312F700D9971E /* GameDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BA280023F1E9830084A3C9 /* GameDatabase.swift */; };
 		336AA6F023F1450800328837 /* GameDatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */; };
 		336AA6F123F1450B00328837 /* GameDatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */; };
@@ -187,6 +191,8 @@
 		3335E614240B5F48000B89EB /* MoveSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveSelector.swift; sourceTree = "<group>"; };
 		333B233F2425ECA600685454 /* CatBalouMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBalouMatcherTests.swift; sourceTree = "<group>"; };
 		333B23412425ECB400685454 /* CatBalouExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBalouExecutorTests.swift; sourceTree = "<group>"; };
+		333B23482425F31700685454 /* EndTurnMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTurnMatcherTests.swift; sourceTree = "<group>"; };
+		333B234A2425F33A00685454 /* EndTurnExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTurnExecutorTests.swift; sourceTree = "<group>"; };
 		336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDatabaseProtocol.swift; sourceTree = "<group>"; };
 		338FAD15242543030096B488 /* InstructionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionBuilder.swift; sourceTree = "<group>"; };
 		3390F90A24253932001057A7 /* MoveClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveClassifier.swift; sourceTree = "<group>"; };
@@ -207,7 +213,6 @@
 		33AE8F5823E6303B00DC2A41 /* MissedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissedTests.swift; sourceTree = "<group>"; };
 		33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameProtocol.swift; sourceTree = "<group>"; };
 		33B04DBF23E6ED7C006636F5 /* GatlingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatlingTests.swift; sourceTree = "<group>"; };
-		33B7DFA523E20BDD0051718E /* EndTurnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTurnTests.swift; sourceTree = "<group>"; };
 		33BA280023F1E9830084A3C9 /* GameDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDatabase.swift; sourceTree = "<group>"; };
 		33BA280623F1EF100084A3C9 /* GameUpdateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUpdateTests.swift; sourceTree = "<group>"; };
 		33C45DCB23EB0F7200B62508 /* GeneralStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralStoreTests.swift; sourceTree = "<group>"; };
@@ -379,6 +384,13 @@
 			path = effect;
 			sourceTree = "<group>";
 		};
+		333B234C2425F4E300685454 /* effect */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = effect;
+			sourceTree = "<group>";
+		};
 		3366493823F93EE000125483 /* database */ = {
 			isa = PBXGroup;
 			children = (
@@ -529,7 +541,6 @@
 				ADB5A0F423BAB29C0050E173 /* Equip.swift */,
 				ADB5A0FA23BAB7DD0050E173 /* Jail.swift */,
 				33C45DD623EB14A100B62508 /* ChooseCard.swift */,
-				ADB5A11523BABBE80050E173 /* EndTurn.swift */,
 				33EC5D3323E71C1400E14890 /* LooseLife.swift */,
 				3309D7172408DC3000713E15 /* Eliminate.swift */,
 				33C45DE223EB176B00B62508 /* ResolveDynamite.swift */,
@@ -565,6 +576,8 @@
 		AD374E4D242145CA0025FD4A /* manual */ = {
 			isa = PBXGroup;
 			children = (
+				333B23482425F31700685454 /* EndTurnMatcherTests.swift */,
+				333B234A2425F33A00685454 /* EndTurnExecutorTests.swift */,
 				AD374E4B242144200025FD4A /* BeerMatcherTests.swift */,
 				AD374E53242146970025FD4A /* BeerExecutorTests.swift */,
 				AD1EF2A324214C1C00F15BF8 /* SaloonMatcherTests.swift */,
@@ -593,6 +606,7 @@
 		AD374E502421460B0025FD4A /* manual */ = {
 			isa = PBXGroup;
 			children = (
+				ADB5A11523BABBE80050E173 /* EndTurn.swift */,
 				ADD5643423A4E09C00C1BD01 /* Beer.swift */,
 				ADE91AC523B9F84200F7316B /* Saloon.swift */,
 				AD49F86B23BA0C4600543F59 /* Stagecoach.swift */,
@@ -633,7 +647,6 @@
 			isa = PBXGroup;
 			children = (
 				AD48DD2D23BEB06600E5B552 /* EquipTests.swift */,
-				33B7DFA523E20BDD0051718E /* EndTurnTests.swift */,
 				3303E2422408E99F00BB9E23 /* BangTests.swift */,
 				33AE8F5823E6303B00DC2A41 /* MissedTests.swift */,
 				33B04DBF23E6ED7C006636F5 /* GatlingTests.swift */,
@@ -679,6 +692,7 @@
 			children = (
 				AD374E4D242145CA0025FD4A /* manual */,
 				AD374E4E242145DF0025FD4A /* autoplay */,
+				333B234C2425F4E300685454 /* effect */,
 			);
 			path = move;
 			sourceTree = "<group>";
@@ -971,6 +985,7 @@
 				ADE91AD423BA00DC00F7316B /* GameSetup.swift in Sources */,
 				33D477EA23E4FA0F00E232D9 /* RangeCalculator.swift in Sources */,
 				339CA27A242578C800D43128 /* GameUpdateExecutor.swift in Sources */,
+				333B23472425F20500685454 /* EndTurn.swift in Sources */,
 				ADD035D523A96034003B2576 /* PlayerProtocol.swift in Sources */,
 				33D477F123E57DE500E232D9 /* FigureProtocol.swift in Sources */,
 				3335E615240B5F48000B89EB /* MoveSelector.swift in Sources */,
@@ -1034,6 +1049,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3395258423E37D07003DE948 /* GameSetupProtocol.swift in Sources */,
+				333B23492425F31700685454 /* EndTurnMatcherTests.swift in Sources */,
 				339CA27724256F4500D43128 /* WellsFargoMatcherMatcher.swift in Sources */,
 				3302905C23F327AE0099C438 /* Saloon.swift in Sources */,
 				AD6A958F24202D1500D0F937 /* GameConfiguration.swift in Sources */,
@@ -1052,6 +1068,7 @@
 				AD374E54242146970025FD4A /* BeerExecutorTests.swift in Sources */,
 				AD7F34B923D79841001B4072 /* MockCardProtocolExtension.swift in Sources */,
 				AD7EAFBF23D7846D00FE23D5 /* GameSetupTests.swift in Sources */,
+				333B234B2425F33A00685454 /* EndTurnExecutorTests.swift in Sources */,
 				ADD035D923A9604F003B2576 /* GameStateProtocol.swift in Sources */,
 				330B7E1423F70D8700B3653D /* OutcomeCalculatorTests.swift in Sources */,
 				339CA27924256FC600D43128 /* WellsFargoExecutorTests.swift in Sources */,
@@ -1060,6 +1077,7 @@
 				AD1EF2A424214C1C00F15BF8 /* SaloonMatcherTests.swift in Sources */,
 				330B7E1223F70D0200B3653D /* OutcomeCalculator.swift in Sources */,
 				33A4381323E4BD3200C39DD6 /* ArrayExtension.swift in Sources */,
+				333B23462425F20500685454 /* EndTurn.swift in Sources */,
 				3308D7E32425E58000ECE83C /* PanicMatcherTests.swift in Sources */,
 				33F94AB723F0580800D1BCFE /* GameUpdateProtocol.swift in Sources */,
 				AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */,

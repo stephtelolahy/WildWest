@@ -50,12 +50,6 @@ class GameEngine: GameEngineProtocol {
         
         var movesQueue: [GameMove] = [command]
         while !movesQueue.isEmpty {
-            // wait some delay
-            do {
-                sleep(1)
-            }
-            
-            // execute move
             let move = movesQueue.remove(at: 0)
             
             database.addExecutedMove(move)

@@ -52,7 +52,7 @@ class ResolveDynamiteTests: XCTestCase {
         let sut = ResolveDynamite(actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(in: mockState)
+        let updates = sut.execute(move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
@@ -72,7 +72,7 @@ class ResolveDynamiteTests: XCTestCase {
         let sut = ResolveDynamite(actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(in: mockState)
+        let updates = sut.execute(move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [

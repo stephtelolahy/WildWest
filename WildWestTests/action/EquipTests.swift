@@ -90,7 +90,7 @@ class EquipTests: XCTestCase {
         let sut = Equip(actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(in: mockState)
+        let updates = sut.execute(move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [.playerPutInPlay("p1", "c1")])
@@ -107,7 +107,7 @@ class EquipTests: XCTestCase {
         let sut = Equip(actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(in: mockState)
+        let updates = sut.execute(move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [

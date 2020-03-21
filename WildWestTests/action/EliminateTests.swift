@@ -31,7 +31,7 @@ class EliminateTests: XCTestCase {
         let sut = Eliminate(actorId: "p1")
         
         // When
-        let updates = sut.execute(in: mockState)
+        let updates = sut.execute(move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
@@ -55,7 +55,7 @@ class EliminateTests: XCTestCase {
         let sut = Eliminate(actorId: "p1")
         
         // When
-        let updates = sut.execute(in: mockState)
+        let updates = sut.execute(move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
@@ -79,7 +79,7 @@ class EliminateTests: XCTestCase {
         let sut = Eliminate(actorId: "p1")
         
         // When
-        let updates = sut.execute(in: mockState)
+        let updates = sut.execute(move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [

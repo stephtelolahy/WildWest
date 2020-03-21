@@ -39,7 +39,7 @@ class DuelTests: XCTestCase {
         let sut = Duel(actorId: "p1", cardId: "c1", targetId: "p2")
         
         // When
-        let updates = sut.execute(in: mockState)
+        let updates = sut.execute(move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [

@@ -35,7 +35,7 @@ class DiscardBeerTests: XCTestCase {
         let sut = DiscardBeer(actorId: "p1", cardsToDiscardIds: ["c1"])
         
         // When
-        let updates = sut.execute(in: mockState)
+        let updates = sut.execute(move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
@@ -51,7 +51,7 @@ class DiscardBeerTests: XCTestCase {
         let sut = DiscardBeer(actorId: "p1", cardsToDiscardIds: ["c1"])
         
         // When
-        let updates = sut.execute(in: mockState)
+        let updates = sut.execute(move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
@@ -67,7 +67,7 @@ class DiscardBeerTests: XCTestCase {
         let sut = DiscardBeer(actorId: "p1", cardsToDiscardIds: ["c1"])
         
         // When
-        let updates = sut.execute(in: mockState)
+        let updates = sut.execute(move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
@@ -83,7 +83,7 @@ class DiscardBeerTests: XCTestCase {
         let sut = DiscardBeer(actorId: "p1", cardsToDiscardIds: ["c1", "c2"])
         
         // When
-        let updates = sut.execute(in: mockState)
+        let updates = sut.execute(move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates as? [GameUpdate], [
