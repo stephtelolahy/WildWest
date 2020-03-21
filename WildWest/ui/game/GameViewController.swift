@@ -93,7 +93,13 @@ private extension GameViewController {
     func update(with state: GameStateProtocol) {
         playerItems = buildItems(state: state, for: controlledPlayerId, playerIndexes: playerIndexes)
         playersCollectionView.reloadData()
-        discardImageView.image = UIImage(named: state.discardPile.first?.imageName ?? "")
+        
+        if let topDiscardPile = state.discardPile.first {
+           discardImageView.image = UIImage(named: topDiscardPile.imageName)
+        } else {
+           discardImageView.image = nil
+        }
+        
         messages = state.executedMoves
         messageTableView.reloadDataSwollingAtBottom()
         

@@ -24,6 +24,7 @@ enum MoveName: String {
     case discard    // reaction move: discard hand card
     case choose     // reaction move: choose card
     case pass       // reaction move: do nothing while attacked
+    case resolve    // autoplay move: resolving
 }
 
 struct TargetCard: Equatable {

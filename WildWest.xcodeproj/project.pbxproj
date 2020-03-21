@@ -47,6 +47,10 @@
 		3390F90C24253932001057A7 /* MoveClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3390F90A24253932001057A7 /* MoveClassifier.swift */; };
 		3390F90E242539BA001057A7 /* MoveClassifierProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3390F90D242539BA001057A7 /* MoveClassifierProtocol.swift */; };
 		3390F90F242539BA001057A7 /* MoveClassifierProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3390F90D242539BA001057A7 /* MoveClassifierProtocol.swift */; };
+		33911EEE242616580023C6AF /* ResolveDynamite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33911EED242616580023C6AF /* ResolveDynamite.swift */; };
+		33911EEF2426165C0023C6AF /* ResolveDynamite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33911EED242616580023C6AF /* ResolveDynamite.swift */; };
+		33911EF1242618EE0023C6AF /* ResolveDynamiteMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33911EF0242618EE0023C6AF /* ResolveDynamiteMatcherTests.swift */; };
+		33911EF3242619170023C6AF /* ResolveDynamiteExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33911EF2242619170023C6AF /* ResolveDynamiteExecutorTests.swift */; };
 		3395258023E37CCE003DE948 /* GameEngineProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3395257F23E37CCE003DE948 /* GameEngineProtocol.swift */; };
 		3395258123E37CCE003DE948 /* GameEngineProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3395257F23E37CCE003DE948 /* GameEngineProtocol.swift */; };
 		3395258323E37D07003DE948 /* GameSetupProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3395258223E37D07003DE948 /* GameSetupProtocol.swift */; };
@@ -201,6 +205,9 @@
 		338FAD15242543030096B488 /* InstructionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionBuilder.swift; sourceTree = "<group>"; };
 		3390F90A24253932001057A7 /* MoveClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveClassifier.swift; sourceTree = "<group>"; };
 		3390F90D242539BA001057A7 /* MoveClassifierProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveClassifierProtocol.swift; sourceTree = "<group>"; };
+		33911EED242616580023C6AF /* ResolveDynamite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveDynamite.swift; sourceTree = "<group>"; };
+		33911EF0242618EE0023C6AF /* ResolveDynamiteMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveDynamiteMatcherTests.swift; sourceTree = "<group>"; };
+		33911EF2242619170023C6AF /* ResolveDynamiteExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveDynamiteExecutorTests.swift; sourceTree = "<group>"; };
 		3395257F23E37CCE003DE948 /* GameEngineProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineProtocol.swift; sourceTree = "<group>"; };
 		3395258223E37D07003DE948 /* GameSetupProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetupProtocol.swift; sourceTree = "<group>"; };
 		339A294823EFEFE7002C5CD8 /* ChallengeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeExtension.swift; sourceTree = "<group>"; };
@@ -226,8 +233,6 @@
 		33C45DDB23EB15A400B62508 /* JailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JailTests.swift; sourceTree = "<group>"; };
 		33C45DDD23EB15E900B62508 /* ResolveJail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveJail.swift; sourceTree = "<group>"; };
 		33C45DE023EB168E00B62508 /* ResolveJailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveJailTests.swift; sourceTree = "<group>"; };
-		33C45DE223EB176B00B62508 /* ResolveDynamite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveDynamite.swift; sourceTree = "<group>"; };
-		33C45DE523EB184F00B62508 /* ResolveDynamiteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveDynamiteTests.swift; sourceTree = "<group>"; };
 		33C45DE723EB18A800B62508 /* DiscardBeer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardBeer.swift; sourceTree = "<group>"; };
 		33C45DEA23EB190600B62508 /* DiscardBeerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardBeerTests.swift; sourceTree = "<group>"; };
 		33CD7E51242610A00072155C /* EquipMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipMatcherTests.swift; sourceTree = "<group>"; };
@@ -535,20 +540,19 @@
 		AD36CDDA23C51DA6008D4EDB /* action */ = {
 			isa = PBXGroup;
 			children = (
+				ADB5A0FA23BAB7DD0050E173 /* Jail.swift */,
+				33C45DDD23EB15E900B62508 /* ResolveJail.swift */,
+				ADB5A11223BAB9330050E173 /* GeneralStore.swift */,
+				33C45DD623EB14A100B62508 /* ChooseCard.swift */,
 				ADB5A0FD23BAB8070050E173 /* Bang.swift */,
-				ADB5A10023BAB81E0050E173 /* Missed.swift */,
 				ADB5A10623BAB84E0050E173 /* Gatling.swift */,
 				ADB5A10923BAB8630050E173 /* Indians.swift */,
 				ADB5A10323BAB8370050E173 /* Duel.swift */,
-				ADB5A11223BAB9330050E173 /* GeneralStore.swift */,
+				ADB5A10023BAB81E0050E173 /* Missed.swift */,
 				33C45DE723EB18A800B62508 /* DiscardBeer.swift */,
 				33EC5D3A23E737E500E14890 /* DiscardBang.swift */,
-				ADB5A0FA23BAB7DD0050E173 /* Jail.swift */,
-				33C45DD623EB14A100B62508 /* ChooseCard.swift */,
 				33EC5D3323E71C1400E14890 /* LooseLife.swift */,
 				3309D7172408DC3000713E15 /* Eliminate.swift */,
-				33C45DE223EB176B00B62508 /* ResolveDynamite.swift */,
-				33C45DDD23EB15E900B62508 /* ResolveJail.swift */,
 				33C45DD123EB11EB00B62508 /* ResolveBarrel.swift */,
 			);
 			path = action;
@@ -605,6 +609,8 @@
 			children = (
 				ADB2D8AF242001AE00AD0C11 /* StartTurnMatcherTests.swift */,
 				ADB2D8B924200FFA00AD0C11 /* StartTurnExecutorTests.swift */,
+				33911EF0242618EE0023C6AF /* ResolveDynamiteMatcherTests.swift */,
+				33911EF2242619170023C6AF /* ResolveDynamiteExecutorTests.swift */,
 			);
 			path = autoplay;
 			sourceTree = "<group>";
@@ -628,6 +634,7 @@
 			isa = PBXGroup;
 			children = (
 				ADB2D8C32420147200AD0C11 /* StartTurn.swift */,
+				33911EED242616580023C6AF /* ResolveDynamite.swift */,
 			);
 			path = autoplay;
 			sourceTree = "<group>";
@@ -664,7 +671,6 @@
 				33C45DD923EB154900B62508 /* ChooseCardTests.swift */,
 				33C45DDB23EB15A400B62508 /* JailTests.swift */,
 				33C45DE023EB168E00B62508 /* ResolveJailTests.swift */,
-				33C45DE523EB184F00B62508 /* ResolveDynamiteTests.swift */,
 				3303E23F2408E91C00BB9E23 /* ResolveBarrelTests.swift */,
 				33C45DEA23EB190600B62508 /* DiscardBeerTests.swift */,
 				3309D71A2408DE4200713E15 /* EliminateTests.swift */,
@@ -1034,6 +1040,7 @@
 				339CA27524256DA400D43128 /* WellsFargo.swift in Sources */,
 				33E4412424077DAB00B2848E /* UITableViewExtension.swift in Sources */,
 				AD52B99C23B17A310013240B /* GameState.swift in Sources */,
+				33911EEE242616580023C6AF /* ResolveDynamite.swift in Sources */,
 				3308D7E02425E14900ECE83C /* Panic.swift in Sources */,
 				33F94AB623F0580800D1BCFE /* GameUpdateProtocol.swift in Sources */,
 				33D477E723E4F9E300E232D9 /* RangeCalculatorProtocol.swift in Sources */,
@@ -1081,6 +1088,7 @@
 				339CA27924256FC600D43128 /* WellsFargoExecutorTests.swift in Sources */,
 				33A4381523E4BE8200C39DD6 /* ArrayExtensionTests.swift in Sources */,
 				AD374E4C242144200025FD4A /* BeerMatcherTests.swift in Sources */,
+				33911EF3242619170023C6AF /* ResolveDynamiteExecutorTests.swift in Sources */,
 				AD1EF2A424214C1C00F15BF8 /* SaloonMatcherTests.swift in Sources */,
 				330B7E1223F70D0200B3653D /* OutcomeCalculator.swift in Sources */,
 				33A4381323E4BD3200C39DD6 /* ArrayExtension.swift in Sources */,
@@ -1097,6 +1105,7 @@
 				330B7E0F23F70CAF00B3653D /* OutcomeCalculatorProtocol.swift in Sources */,
 				339CA2732425528800D43128 /* StagecoachExecutorTests.swift in Sources */,
 				339CA271242551A800D43128 /* StagecoachMatcherTests.swift in Sources */,
+				33911EF1242618EE0023C6AF /* ResolveDynamiteMatcherTests.swift in Sources */,
 				ADB2D8B0242001AE00AD0C11 /* StartTurnMatcherTests.swift in Sources */,
 				336AA6F123F1450B00328837 /* GameDatabaseProtocol.swift in Sources */,
 				ADD4DB702420A8F2001BBD48 /* GameMoveExtensionTests.swift in Sources */,
@@ -1126,6 +1135,7 @@
 				3302E51D23F8E34C004FE76E /* RandomAI.swift in Sources */,
 				339CA26F24254F4800D43128 /* Stagecoach.swift in Sources */,
 				AD52B99A23B178CC0013240B /* Player.swift in Sources */,
+				33911EEF2426165C0023C6AF /* ResolveDynamite.swift in Sources */,
 				ADE91AD523BA00DC00F7316B /* GameSetup.swift in Sources */,
 				3390F90C24253932001057A7 /* MoveClassifier.swift in Sources */,
 				AD52B99423B175110013240B /* Card.swift in Sources */,

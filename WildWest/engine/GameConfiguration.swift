@@ -34,7 +34,8 @@ class GameConfiguration {
     }
     
     var autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol] {
-        [StartTurnMatcher()]
+        [StartTurnMatcher(),
+         ResolveDynamiteMatcher()]
     }
     
     var effectMatchers: [EffectMatcherProtocol] {
@@ -50,7 +51,8 @@ class GameConfiguration {
          WellsFargoExecutor(),
          PanicExecutor(),
          CatBalouExecutor(),
-         EquipExecutor()]
+         EquipExecutor(),
+         ResolveDynamiteExecutor()]
     }
     
     var updateExecutors: [UpdateExecutorProtocol] {
