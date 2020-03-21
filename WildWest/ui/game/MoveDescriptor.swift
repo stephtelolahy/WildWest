@@ -30,7 +30,7 @@ extension MoveDescriptor {
         return "\(emoji.value) \(text)"
     }
     
-    var emojis: [String: String] {
+    private var emojis: [String: String] {
         [
             "Bang": "🔫",
             "Beer": "🍺",

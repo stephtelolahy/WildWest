@@ -33,7 +33,8 @@ class GameConfiguration {
          EquipMatcher(),
          DynamiteMatcher(),
          GeneralStoreMatcher(),
-         ChooseGeneralStoreCardMatcher()]
+         ChooseGeneralStoreCardMatcher(),
+         BangMatcher(calculator: RangeCalculator())]
     }
     
     var autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol] {
@@ -61,7 +62,8 @@ class GameConfiguration {
          ResolveDynamiteExecutor(),
          ResolveJailExecutor(),
          GeneralStoreExecutor(),
-         ChooseGeneralStoreCardExecutor()]
+         ChooseGeneralStoreCardExecutor(),
+         BangExecutor()]
     }
     
     var updateExecutors: [UpdateExecutorProtocol] {

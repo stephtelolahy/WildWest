@@ -6,26 +6,7 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct Bang: PlayCardAgainstOnePlayerActionProtocol, Equatable {
-    let actorId: String
-    let cardId: String
-    let targetId: String
-    let autoPlay = false
-    
-    func execute(in state: GameStateProtocol) -> [GameUpdateProtocol] {
-        let updates: [GameUpdate] = [
-            .playerDiscardHand(actorId, cardId),
-            .setChallenge(.shoot([targetId], .bang, actorId))
-        ]
-        return updates
-    }
-    
-    var description: String {
-        "\(actorId) plays \(cardId) against \(targetId)"
-    }
-}
-
-struct BangRule: RuleProtocol {
+class BangMatcher: ValidMoveMatcherProtocol {
     
     private let calculator: RangeCalculatorProtocol
     
@@ -33,7 +14,7 @@ struct BangRule: RuleProtocol {
         self.calculator = calculator
     }
     
-    func match(with state: GameStateProtocol) -> [ActionProtocol]? {
+    func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
             let cards = actor.handCards(named: .bang) else {
@@ -56,7 +37,28 @@ struct BangRule: RuleProtocol {
         }
         
         return cards.map { card in
-            otherPlayers.map { Bang(actorId: actor.identifier, cardId: card.identifier, targetId: $0.identifier) }
+            otherPlayers.map {
+                GameMove(name: .play,
+                         actorId: actor.identifier,
+                         cardId: card.identifier,
+                         cardName: card.name,
+                         targetId: $0.identifier)
+            }
         }.flatMap { $0 }
+    }
+}
+
+class BangExecutor: MoveExecutorProtocol {
+    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+        guard case .play = move.name,
+            let actorId = move.actorId,
+            let cardId = move.cardId,
+            case .bang = move.cardName,
+            let targetId = move.targetId else {
+            return nil
+        }
+        
+        return [.playerDiscardHand(actorId, cardId),
+                .setChallenge(.shoot([targetId], .bang, actorId))]
     }
 }
