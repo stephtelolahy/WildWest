@@ -10,19 +10,32 @@ class GameUpdateExecutor: UpdateExecutorProtocol {
     // swiftlint:disable cyclomatic_complexity
     // swiftlint:disable function_body_length
     func execute(_ update: GameUpdate, in database: GameDatabaseProtocol) {
-        /*
         switch update {
         case let .setTurn(turn):
-            GameUpdateSetTurn(turn: turn).execute(in: database)
+            database.setTurn(turn)
+            database.setBangsPlayed(0)
             
         case let .setChallenge(challenge):
-            GameUpdateSetChallenge(challenge: challenge).execute(in: database)
+            database.setChallenge(challenge)
+            if case let .shoot(_, cardName, _) = challenge {
+                if case .bang = cardName {
+                    database.setBangsPlayed(database.state.bangsPlayed + 1)
+                }
+                database.setBarrelsResolved(0)
+            }
             
         case let .playerGainHealth(playerId, points):
-            GameUpdatePlayerGainHealth(playerId: playerId, points: points).execute(in: database)
+            if let player = database.state.players.first(where: { $0.identifier == playerId }) {
+                let health = player.health + points
+                database.playerSetHealth(playerId, health)
+            }
             
         case let .playerLooseHealth(playerId, points, source):
-            GameUpdatePlayerLooseHealth(playerId: playerId, points: points, source: source).execute(in: database)
+            if let player = database.state.players.first(where: { $0.identifier == playerId }) {
+                let health = max(0, player.health - points)
+                database.playerSetHealth(playerId, health)
+                database.addDamageEvent(DamageEvent(playerId: playerId, source: source))
+            }
             
         case let .playerPullFromDeck(playerId, cardsCount):
             Array(1...cardsCount).forEach { _ in
@@ -77,14 +90,17 @@ class GameUpdateExecutor: UpdateExecutorProtocol {
                 .forEach { database.addGeneralStore($0) }
             
         case .flipOverFirstDeckCard:
-            GameUpdateFlipOverFirstDeckCard().execute(in: database)
+            let card = database.deckRemoveFirst()
+            database.addDiscard(card)
+            database.setBarrelsResolved(database.state.barrelsResolved + 1)
             
         case let .eliminatePlayer(playerId):
-            GameUpdateEliminatePlayer(playerId: playerId).execute(in: database)
+            if let player = database.removePlayer(playerId) {
+                database.addEliminated(player)
+            }
             
         case let .setOutcome(outcome):
             database.setOutcome(outcome)
         }
-        */
     }
 }

@@ -22,10 +22,12 @@ extension MoveDescriptor {
             move.targetCard?.description
         ]
         let text = components.compactMap { $0 }.joined(separator: " ")
-        guard let prefix = emojis.keys.first(where: { text.lowercased().contains($0.lowercased()) }) else {
-            fatalError("No matching prefix found")
+        
+        guard let emoji = emojis.first(where: { text.lowercased().contains($0.key.lowercased()) }) else {
+            fatalError("No matching emoji found")
         }
-        return "\(prefix) desc"
+        
+        return "\(emoji.value) \(text)"
     }
     
     var emojis: [String: String] {
