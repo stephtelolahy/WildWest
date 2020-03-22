@@ -53,7 +53,8 @@ class GameConfiguration {
     }
     
     var effectMatchers: [EffectMatcherProtocol] {
-        [EliminateMatcher()]
+        [EliminateMatcher(),
+         GainRewardOnEliminatingOutlawMatcher()]
     }
     
     var moveExectors: [MoveExecutorProtocol] {
@@ -81,7 +82,8 @@ class GameConfiguration {
          DiscardBangOnIndiansExecutor(),
          DiscardBeerExecutor(),
          PassExecutor(),
-         EliminateExecutor(calculator: OutcomeCalculator())]
+         EliminateExecutor(calculator: OutcomeCalculator()),
+         GainRewardOnEliminatingOutlawExecutor()]
     }
     
     var updateExecutors: [UpdateExecutorProtocol] {

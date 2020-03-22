@@ -96,7 +96,7 @@ class GameEngine: GameEngineProtocol {
             
             guard validMoves.keys.count <= 1 else {
                 fatalError("Illegal multiple active players (\(validMoves.keys.count))")
-            }
+            } 
             
             database.setValidMoves(validMoves)
         }

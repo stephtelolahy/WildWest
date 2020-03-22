@@ -34,6 +34,10 @@
 		33318D592427425D0055C6C5 /* Eliminate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3309D7172408DC3000713E15 /* Eliminate.swift */; };
 		33318D5B242744EA0055C6C5 /* EliminateMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33318D5A242744EA0055C6C5 /* EliminateMatcherTests.swift */; };
 		33318D5D242744FE0055C6C5 /* EliminateExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33318D5C242744FE0055C6C5 /* EliminateExecutorTests.swift */; };
+		33318D5F2427494D0055C6C5 /* GainRewardOnEliminatingOutlaw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33318D5E2427494D0055C6C5 /* GainRewardOnEliminatingOutlaw.swift */; };
+		33318D602427494D0055C6C5 /* GainRewardOnEliminatingOutlaw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33318D5E2427494D0055C6C5 /* GainRewardOnEliminatingOutlaw.swift */; };
+		33318D6224274BDF0055C6C5 /* GainRewardOnEliminatingOutlawMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33318D6124274BDF0055C6C5 /* GainRewardOnEliminatingOutlawMatcherTests.swift */; };
+		33318D6424274BF70055C6C5 /* GainRewardOnEliminatingOutlawExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33318D6324274BF70055C6C5 /* GainRewardOnEliminatingOutlawExecutorTests.swift */; };
 		3335E615240B5F48000B89EB /* MoveSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E614240B5F48000B89EB /* MoveSelector.swift */; };
 		333B233D2425EC3C00685454 /* CatBalou.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10F23BAB89C0050E173 /* CatBalou.swift */; };
 		333B233E2425EC3D00685454 /* CatBalou.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A10F23BAB89C0050E173 /* CatBalou.swift */; };
@@ -254,7 +258,9 @@
 		332499B223DB9F650082EF09 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		33318D5A242744EA0055C6C5 /* EliminateMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EliminateMatcherTests.swift; sourceTree = "<group>"; };
 		33318D5C242744FE0055C6C5 /* EliminateExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EliminateExecutorTests.swift; sourceTree = "<group>"; };
-		3335E603240B4D7E000B89EB /* RewardOneWhoEliminatesOutlaw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardOneWhoEliminatesOutlaw.swift; sourceTree = "<group>"; };
+		33318D5E2427494D0055C6C5 /* GainRewardOnEliminatingOutlaw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainRewardOnEliminatingOutlaw.swift; sourceTree = "<group>"; };
+		33318D6124274BDF0055C6C5 /* GainRewardOnEliminatingOutlawMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainRewardOnEliminatingOutlawMatcherTests.swift; sourceTree = "<group>"; };
+		33318D6324274BF70055C6C5 /* GainRewardOnEliminatingOutlawExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainRewardOnEliminatingOutlawExecutorTests.swift; sourceTree = "<group>"; };
 		3335E606240B4E2E000B89EB /* DiscardAllSheriffCardsOnEliminateDeputy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardAllSheriffCardsOnEliminateDeputy.swift; sourceTree = "<group>"; };
 		3335E614240B5F48000B89EB /* MoveSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveSelector.swift; sourceTree = "<group>"; };
 		333B233F2425ECA600685454 /* CatBalouMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBalouMatcherTests.swift; sourceTree = "<group>"; };
@@ -467,7 +473,6 @@
 		3335E5FC240B46D5000B89EB /* effect */ = {
 			isa = PBXGroup;
 			children = (
-				3335E603240B4D7E000B89EB /* RewardOneWhoEliminatesOutlaw.swift */,
 				3335E606240B4E2E000B89EB /* DiscardAllSheriffCardsOnEliminateDeputy.swift */,
 			);
 			path = effect;
@@ -478,6 +483,8 @@
 			children = (
 				33318D5A242744EA0055C6C5 /* EliminateMatcherTests.swift */,
 				33318D5C242744FE0055C6C5 /* EliminateExecutorTests.swift */,
+				33318D6124274BDF0055C6C5 /* GainRewardOnEliminatingOutlawMatcherTests.swift */,
+				33318D6324274BF70055C6C5 /* GainRewardOnEliminatingOutlawExecutorTests.swift */,
 			);
 			path = effect;
 			sourceTree = "<group>";
@@ -778,6 +785,7 @@
 			isa = PBXGroup;
 			children = (
 				3309D7172408DC3000713E15 /* Eliminate.swift */,
+				33318D5E2427494D0055C6C5 /* GainRewardOnEliminatingOutlaw.swift */,
 			);
 			path = effect;
 			sourceTree = "<group>";
@@ -1183,6 +1191,7 @@
 				333B233E2425EC3D00685454 /* CatBalou.swift in Sources */,
 				33E4411E24077CA000B2848E /* PlayerCell.swift in Sources */,
 				3351B58624269386004F18C3 /* Pass.swift in Sources */,
+				33318D5F2427494D0055C6C5 /* GainRewardOnEliminatingOutlaw.swift in Sources */,
 				339A294923EFEFE7002C5CD8 /* ChallengeExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1195,6 +1204,7 @@
 				333B23492425F31700685454 /* EndTurnMatcherTests.swift in Sources */,
 				33911F04242630850023C6AF /* ResolveJailMatcherTests.swift in Sources */,
 				339CA27724256F4500D43128 /* WellsFargoMatcherMatcher.swift in Sources */,
+				33318D602427494D0055C6C5 /* GainRewardOnEliminatingOutlaw.swift in Sources */,
 				3302905C23F327AE0099C438 /* Saloon.swift in Sources */,
 				AD6A958F24202D1500D0F937 /* GameConfiguration.swift in Sources */,
 				33FD75652426859200C8622F /* DiscardBeer.swift in Sources */,
@@ -1204,6 +1214,7 @@
 				339A294A23EFEFE7002C5CD8 /* ChallengeExtension.swift in Sources */,
 				3301BEF523F962F000B4364D /* RandomAIWithRole.swift in Sources */,
 				33911F38242674E00023C6AF /* DiscardMissedExecutorTests.swift in Sources */,
+				33318D6424274BF70055C6C5 /* GainRewardOnEliminatingOutlawExecutorTests.swift in Sources */,
 				339CA27B242578C900D43128 /* GameUpdateExecutor.swift in Sources */,
 				33911EFA24261CFD0023C6AF /* DynamiteExecutorTests.swift in Sources */,
 				33911F2D242664000023C6AF /* Duel.swift in Sources */,
@@ -1245,6 +1256,7 @@
 				33318D5B242744EA0055C6C5 /* EliminateMatcherTests.swift in Sources */,
 				33911F1E242648780023C6AF /* BangMatcherTests.swift in Sources */,
 				3302906023F32AC20099C438 /* Beer.swift in Sources */,
+				33318D6224274BDF0055C6C5 /* GainRewardOnEliminatingOutlawMatcherTests.swift in Sources */,
 				33911F3224266F770023C6AF /* DuelExecutorTests.swift in Sources */,
 				33CD7E4F24260C240072155C /* Equip.swift in Sources */,
 				33D477ED23E55AFA00E232D9 /* RangeCalculatorTests.swift in Sources */,
