@@ -12,5 +12,5 @@ protocol GameEngineProtocol {
     var stateSubject: BehaviorSubject<GameStateProtocol> { get }
     
     func start()
-    func execute(_ move: GameMove)
+    func queue(_ move: GameMove)
 }

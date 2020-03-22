@@ -32,12 +32,11 @@ extension MoveDescriptor {
     
     private var emojis: [String: String] {
         [
+            "Discard": "😝",
             "Bang": "🔫",
             "Beer": "🍺",
             "CatBalou": "❌",
             "Choose": "💰",
-            "DiscardBang": "🔫",
-            "DiscardBeer": "😝",
             "Duel": "🔫",
             "EndTurn": "✔️",
             "Gatling": "🔫",

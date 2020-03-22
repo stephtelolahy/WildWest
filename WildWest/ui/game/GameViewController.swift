@@ -202,7 +202,7 @@ extension GameViewController: UICollectionViewDelegate {
     
     private func actionsCollectionViewDidSelectItem(at indexPath: IndexPath) {
         selectMove(within: actionItems[indexPath.row].actions) { [weak self] move in
-            self?.engine?.execute(move)
+            self?.engine?.queue(move)
         }
     }
 }

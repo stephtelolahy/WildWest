@@ -39,7 +39,7 @@ class AIPlayerAgent: AIPlayerAgentProtocol, Subscribable {
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
-            self?.engine.execute(move)
+            self?.engine.queue(move)
         }
     }
 }

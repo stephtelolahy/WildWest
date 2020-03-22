@@ -15,7 +15,7 @@ class MenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        playersCountStepper.value = 7
+        playersCountStepper.value = 5
         updatePlayersLabel()
     }
     
@@ -59,7 +59,7 @@ class MenuViewController: UIViewController {
                                 moveExecutors: config.moveExectors,
                                 updateExecutors: config.updateExecutors)
         
-        //        let controlledPlayerId: String? = nil
+//        let controlledPlayerId: String? = nil
         let controlledPlayerId = state.players.first(where: { $0.role == .sheriff })?.identifier
         
         let aiPlayers = database.state.players.filter { $0.identifier != controlledPlayerId }
@@ -67,7 +67,7 @@ class MenuViewController: UIViewController {
         let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
                                                      ai: RandomAIWithRole(),
                                                      engine: engine,
-                                                     delay: 0.5)
+                                                     delay: 0.0)
         }
         
         presentGame(engine: engine, controlledPlayerId: controlledPlayerId, aiAgents: aiAgents)
