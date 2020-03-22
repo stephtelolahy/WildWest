@@ -6,6 +6,7 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
+// swiftlint:disable type_body_length
 class GameConfiguration {
     
     private let jsonReader: JsonReaderProtocol
@@ -54,7 +55,8 @@ class GameConfiguration {
     
     var effectMatchers: [EffectMatcherProtocol] {
         [EliminateMatcher(),
-         GainRewardOnEliminatingOutlawMatcher()]
+         GainRewardOnEliminatingOutlawMatcher(),
+         PenalizeSheriffOnEliminatingDeputyMatcher()]
     }
     
     var moveExectors: [MoveExecutorProtocol] {
@@ -83,7 +85,8 @@ class GameConfiguration {
          DiscardBeerExecutor(),
          PassExecutor(),
          EliminateExecutor(calculator: OutcomeCalculator()),
-         GainRewardOnEliminatingOutlawExecutor()]
+         GainRewardOnEliminatingOutlawExecutor(),
+         PenalizeSheriffOnEliminatingDeputyExecutor()]
     }
     
     var updateExecutors: [UpdateExecutorProtocol] {

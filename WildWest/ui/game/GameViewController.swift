@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 
 class GameViewController: UIViewController,
-Subscribable, MoveSelector, PlayersAdapter, ActionsAdapter, InstructionBuilder {
+Subscribable, MoveSelector, PlayersAdapter, ActionsAdapter, InstructionBuilder, StatsBuilder {
     
     // MARK: Constants
     
@@ -47,7 +47,7 @@ Subscribable, MoveSelector, PlayersAdapter, ActionsAdapter, InstructionBuilder {
         
         guard let engine = self.engine,
             let state = try? engine.stateSubject.value() else {
-            return
+                return
         }
         
         let playerIds = state.players.map { $0.identifier }
@@ -64,27 +64,7 @@ Subscribable, MoveSelector, PlayersAdapter, ActionsAdapter, InstructionBuilder {
     // MARK: IBAction
     
     @IBAction private func menuButtonTapped(_ sender: Any) {
-        let alertController = UIAlertController(title: nil,
-                                                message: nil,
-                                                preferredStyle: .alert)
-        
-        alertController.addAction(UIAlertAction(title: "Stats",
-                                                style: .default,
-                                                handler: { [weak self] _ in
-                                                    self?.showStats()
-        }))
-        
-        alertController.addAction(UIAlertAction(title: "Quit",
-                                                style: .default,
-                                                handler: { [weak self] _ in
-                                                    self?.dismiss(animated: true)
-        }))
-        
-        alertController.addAction(UIAlertAction(title: "Continue",
-                                                style: .cancel,
-                                                handler: nil))
-        
-        present(alertController, animated: true)
+        showStats()
     }
 }
 
@@ -95,9 +75,9 @@ private extension GameViewController {
         playersCollectionView.reloadData()
         
         if let topDiscardPile = state.discardPile.first {
-           discardImageView.image = UIImage(named: topDiscardPile.imageName)
+            discardImageView.image = UIImage(named: topDiscardPile.imageName)
         } else {
-           discardImageView.image = nil
+            discardImageView.image = nil
         }
         
         messages = state.executedMoves
@@ -106,12 +86,44 @@ private extension GameViewController {
         actionItems = buildActions(state: state, for: controlledPlayerId)
         actionsCollectionView.reloadData()
         titleLabel.text = buildInstruction(state: state, for: controlledPlayerId)
+        
+        if let outcome = state.outcome {
+            showGameOver(outcome: outcome)
+        }
+    }
+    
+    func showGameOver(outcome: GameOutcome) {
+        let alertController = UIAlertController(title: "Game Over",
+                                                message: outcome.rawValue,
+                                                preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "OK",
+                                                style: .cancel,
+                                                handler: { [weak self] _ in
+                                                    self?.dismiss(animated: true)
+        }))
+        
+        present(alertController, animated: true)
     }
     
     func showStats() {
-        let viewController = StatsViewController()
-        viewController.stateSubject = engine?.stateSubject
-        present(viewController, animated: true)
+        guard let state = try? engine?.stateSubject.value() else {
+            return
+        }
+        
+        let message = buildAntiSheriffScore(state: state)
+            .map { "\($0.source) : \($0.value)" }
+            .joined(separator: "\n")
+        
+        let alertController = UIAlertController(title: "Anti-Sheriff Stats",
+                                                message: message,
+                                                preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "OK",
+                                                style: .cancel,
+                                                handler: nil))
+        
+        present(alertController, animated: true)
     }
 }
 

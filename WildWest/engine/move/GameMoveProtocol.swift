@@ -30,7 +30,7 @@ enum MoveName: String {
     // game effects
     case eliminate
     case gainRewardOnEliminatingOutlaw
-    case penalizeSheriffOnEliminatingHisDeputy
+    case penalizeSheriffOnEliminatingDeputy
 }
 
 struct TargetCard: Equatable {

@@ -34,7 +34,7 @@ extension MoveDescriptor {
         [
             "Bang": "🔫",
             "Beer": "🍺",
-            "CatBalou": "‼️",
+            "CatBalou": "❌",
             "Choose": "💰",
             "DiscardBang": "🔫",
             "DiscardBeer": "😝",
@@ -57,14 +57,13 @@ extension MoveDescriptor {
             "Panic": "‼️",
             "Dynamite": "💣",
             "Resolve": "❔",
-            "Saloon": "🍺",
+            "Saloon": "🍻",
             "Stagecoach": "💰",
             "StartTurn": "🔥",
             "WellsFargo": "💰",
-            "Eliminate": "☠️"
-//            "DiscardAllSheriffCardsOnEliminateDeputy": "⚠️",
-//            "RewardOneWhoEliminatesOutlaw": "🎁",
-            //  ❗️❌ 💥 🎖🏆 🏜 🍻
+            "Eliminate": "☠️",
+            "Reward": "🎁",
+            "Penalize": "⚠️"
         ]
     }
 }
