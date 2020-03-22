@@ -10,7 +10,8 @@ class DynamiteMatcher: ValidMoveMatcherProtocol {
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
-            let cards = actor.handCards(named: .dynamite) else {
+            let cards = actor.handCards(named: .dynamite),
+            actor.inPlayCards(named: .dynamite) == nil else {
                 return nil
         }
         

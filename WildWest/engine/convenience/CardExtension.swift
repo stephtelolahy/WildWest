@@ -54,7 +54,7 @@ extension CardProtocol {
         suit == .spades && ["2", "3", "4", "5", "6", "7", "8", "9"].contains(value)
     }
     
-    var makeBarrelWork: Bool {
+    var makeBarrelSuccessful: Bool {
         suit == .hearts
     }
 }

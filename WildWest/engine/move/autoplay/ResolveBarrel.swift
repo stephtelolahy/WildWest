@@ -6,8 +6,8 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-class ResolveBarrelMatcher: ValidMoveMatcherProtocol {
-    func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
+class ResolveBarrelMatcher: AutoplayMoveMatcherProtocol {
+    func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
         let maxBarrelsResolved = 1
         guard case let .shoot(targetIds, _, _) = state.challenge,
             let actor = state.players.first(where: { $0.identifier == targetIds.first }),
@@ -36,7 +36,7 @@ class ResolveBarrelExecutor: MoveExecutorProtocol {
         
         var updates: [GameUpdate] = []
         updates.append(.flipOverFirstDeckCard)
-        if topDeckCard.makeBarrelWork {
+        if topDeckCard.makeBarrelSuccessful {
             updates.append(.setChallenge(state.challenge?.removing(actorId)))
         }
         return updates

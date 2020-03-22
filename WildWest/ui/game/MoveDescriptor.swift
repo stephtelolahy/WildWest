@@ -35,13 +35,11 @@ extension MoveDescriptor {
             "Bang": "🔫",
             "Beer": "🍺",
             "CatBalou": "‼️",
-            "ChooseCard": "💰",
+            "Choose": "💰",
             "DiscardBang": "🔫",
             "DiscardBeer": "😝",
             "Duel": "🔫",
-            "Eliminate": "☠️",
             "EndTurn": "✔️",
-            "Equip": "😎",
             "Gatling": "🔫",
             "volcanic": "😎",
             "schofield": "😎",
@@ -58,16 +56,14 @@ extension MoveDescriptor {
             "Missed": "😝",
             "Panic": "‼️",
             "Dynamite": "💣",
-            "ResolveBarrel": "❔",
-            "ResolveDynamite": "❔",
-            "ResolveJail": "❔",
+            "Resolve": "❔",
             "Saloon": "🍺",
             "Stagecoach": "💰",
             "StartTurn": "🔥",
             "WellsFargo": "💰",
-            "DiscardAllSheriffCardsOnEliminateDeputy": "⚠️",
-            "RewardOneWhoEliminatesOutlaw": "🎁",
-            "SetOutComeOnGameOver": "🎉"
+            "Eliminate": "☠️"
+//            "DiscardAllSheriffCardsOnEliminateDeputy": "⚠️",
+//            "RewardOneWhoEliminatesOutlaw": "🎁",
             //  ❗️❌ 💥 🎖🏆 🏜 🍻
         ]
     }

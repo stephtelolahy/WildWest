@@ -73,8 +73,7 @@ class GameEngine: GameEngineProtocol {
             
             // check effects
             let effects = effectMatchers
-                .compactMap { $0.effects(onExecuting: move, in: database.state) }
-                .flatMap { $0 }
+                .compactMap { $0.effect(onExecuting: move, in: database.state) }
             if !effects.isEmpty {
                 movesQueue.append(contentsOf: effects)
                 continue

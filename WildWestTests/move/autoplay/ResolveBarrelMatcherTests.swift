@@ -12,7 +12,7 @@ class ResolveBarrelMatcherTests: XCTestCase {
     
     private let sut = ResolveBarrelMatcher()
     
-    func test_CanUseBarrel_IfIsTargetOfShootAndPlayingBarrel() {
+    func test_ShouldUseBarrel_IfIsTargetOfShootAndPlayingBarrel() {
         // Given
         let mockCard = MockCardProtocol()
             .named(.barrel)
@@ -26,7 +26,7 @@ class ResolveBarrelMatcherTests: XCTestCase {
             .barrelsResolved(is: 0)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.autoPlayMoves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .resolve, actorId: "p1", cardId: "c1", cardName: .barrel)])
@@ -46,7 +46,7 @@ class ResolveBarrelMatcherTests: XCTestCase {
             .barrelsResolved(is: 1)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.autoPlayMoves(matching: mockState)
         
         // Assert
         XCTAssertNil(moves)

@@ -9,7 +9,6 @@
 class ChooseGeneralStoreCardMatcher: ValidMoveMatcherProtocol {
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard case let .generalStore(playerIds) = state.challenge,
-            playerIds.count >= 2,
             let actorId = playerIds.first else {
                 return nil
         }

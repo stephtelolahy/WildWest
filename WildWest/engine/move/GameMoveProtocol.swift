@@ -10,7 +10,7 @@
 struct GameMove: Equatable {
     let name: MoveName                  // move type
     var actorId: String?                // identifier of player performing move
-    var cardId: String?                 // identifier of played card
+    var cardId: String?                 // identifier of played/chosen card
     var cardName: CardName?             // name of played card
     var targetId: String?               // identifier of targeted player
     var targetCard: TargetCard?         // identifier of targeted card
@@ -18,13 +18,19 @@ struct GameMove: Equatable {
 }
 
 enum MoveName: String {
-    case startTurn  // phase1: start turn
-    case play       // phase2: play hand card
+    // player moves
+    case startTurn  // phase1: start turn drawing 2 cards
+    case play       // phase2: play a hand card
     case endTurn    // phase3: end turn discarding excess cards
-    case discard    // reaction move: discard hand card
-    case choose     // reaction move: choose card
+    case choose     // reaction move: choose one card from general store
+    case discard    // reaction move: discard card to cancel an attack
     case pass       // reaction move: do nothing while attacked
-    case resolve    // autoplay move: resolving
+    case resolve    // special move: flip over the top card of the deck to apply an effect of inPlay card
+    
+    // game effects
+    case eliminate
+    case gainRewardOnEliminatingOutlaw
+    case penalizeSheriffOnEliminatingHisDeputy
 }
 
 struct TargetCard: Equatable {
@@ -49,7 +55,7 @@ protocol AutoplayMoveMatcherProtocol {
 
 /// Function defining effect after playing given move
 protocol EffectMatcherProtocol {
-    func effects(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameMove]?
+    func effect(onExecuting move: GameMove, in state: GameStateProtocol) -> GameMove?
 }
 
 /// Function defining game updates on executing move

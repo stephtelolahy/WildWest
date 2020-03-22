@@ -39,7 +39,6 @@ class GameConfiguration {
          IndiansMatcher(),
          DuelMatcher(),
          DiscardMissedMatcher(),
-         ResolveBarrelMatcher(),
          DiscardBangOnDuelMatcher(),
          DiscardBangOnIndiansMatcher(),
          DiscardBeerMatcher(),
@@ -50,11 +49,11 @@ class GameConfiguration {
         [StartTurnMatcher(),
          ResolveDynamiteMatcher(),
          ResolveJailMatcher(),
-         PullGeneralStoreLastCardMatcher()]
+         ResolveBarrelMatcher()]
     }
     
     var effectMatchers: [EffectMatcherProtocol] {
-        []
+        [EliminateMatcher()]
     }
     
     var moveExectors: [MoveExecutorProtocol] {
@@ -81,7 +80,8 @@ class GameConfiguration {
          DiscardBangOnDuelExecutor(),
          DiscardBangOnIndiansExecutor(),
          DiscardBeerExecutor(),
-         PassExecutor()]
+         PassExecutor(),
+         EliminateExecutor(calculator: OutcomeCalculator())]
     }
     
     var updateExecutors: [UpdateExecutorProtocol] {

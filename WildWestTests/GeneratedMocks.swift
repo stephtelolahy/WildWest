@@ -875,16 +875,16 @@ import Cuckoo
     
     
     
-     func effects(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameMove]? {
+     func effect(onExecuting move: GameMove, in state: GameStateProtocol) -> GameMove? {
         
-    return cuckoo_manager.call("effects(onExecuting: GameMove, in: GameStateProtocol) -> [GameMove]?",
+    return cuckoo_manager.call("effect(onExecuting: GameMove, in: GameStateProtocol) -> GameMove?",
             parameters: (move, state),
             escapingParameters: (move, state),
             superclassCall:
                 
                 Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
-            defaultCall: __defaultImplStub!.effects(onExecuting: move, in: state))
+            defaultCall: __defaultImplStub!.effect(onExecuting: move, in: state))
         
     }
     
@@ -897,9 +897,9 @@ import Cuckoo
 	    }
 	    
 	    
-	    func effects<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(onExecuting move: M1, in state: M2) -> Cuckoo.ProtocolStubFunction<(GameMove, GameStateProtocol), [GameMove]?> where M1.MatchedType == GameMove, M2.MatchedType == GameStateProtocol {
+	    func effect<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(onExecuting move: M1, in state: M2) -> Cuckoo.ProtocolStubFunction<(GameMove, GameStateProtocol), GameMove?> where M1.MatchedType == GameMove, M2.MatchedType == GameStateProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(GameMove, GameStateProtocol)>] = [wrap(matchable: move) { $0.0 }, wrap(matchable: state) { $0.1 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockEffectMatcherProtocol.self, method: "effects(onExecuting: GameMove, in: GameStateProtocol) -> [GameMove]?", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockEffectMatcherProtocol.self, method: "effect(onExecuting: GameMove, in: GameStateProtocol) -> GameMove?", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -919,9 +919,9 @@ import Cuckoo
 	
 	    
 	    @discardableResult
-	    func effects<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(onExecuting move: M1, in state: M2) -> Cuckoo.__DoNotUse<(GameMove, GameStateProtocol), [GameMove]?> where M1.MatchedType == GameMove, M2.MatchedType == GameStateProtocol {
+	    func effect<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(onExecuting move: M1, in state: M2) -> Cuckoo.__DoNotUse<(GameMove, GameStateProtocol), GameMove?> where M1.MatchedType == GameMove, M2.MatchedType == GameStateProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(GameMove, GameStateProtocol)>] = [wrap(matchable: move) { $0.0 }, wrap(matchable: state) { $0.1 }]
-	        return cuckoo_manager.verify("effects(onExecuting: GameMove, in: GameStateProtocol) -> [GameMove]?", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("effect(onExecuting: GameMove, in: GameStateProtocol) -> GameMove?", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -933,8 +933,8 @@ import Cuckoo
     
 
     
-     func effects(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameMove]?  {
-        return DefaultValueRegistry.defaultValue(for: ([GameMove]?).self)
+     func effect(onExecuting move: GameMove, in state: GameStateProtocol) -> GameMove?  {
+        return DefaultValueRegistry.defaultValue(for: (GameMove?).self)
     }
     
 }
