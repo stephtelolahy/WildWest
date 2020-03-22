@@ -12,6 +12,7 @@ class MenuViewController: UIViewController {
     
     @IBOutlet private weak var playersCountStepper: UIStepper!
     @IBOutlet private weak var playersCountLabel: UILabel!
+    @IBOutlet private weak var playAsSheriffSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,8 +60,12 @@ class MenuViewController: UIViewController {
                                 moveExecutors: config.moveExectors,
                                 updateExecutors: config.updateExecutors)
         
-//        let controlledPlayerId: String? = nil
-        let controlledPlayerId = state.players.first(where: { $0.role == .sheriff })?.identifier
+        var controlledPlayerId: String?
+        if playAsSheriffSwitch.isOn {
+            controlledPlayerId = state.players.first(where: { $0.role == .sheriff })?.identifier
+        } else {
+            controlledPlayerId = state.players.first(where: { $0.role != .sheriff })?.identifier
+        }
         
         let aiPlayers = database.state.players.filter { $0.identifier != controlledPlayerId }
         

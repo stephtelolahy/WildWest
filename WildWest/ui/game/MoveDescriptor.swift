@@ -20,8 +20,8 @@ extension MoveDescriptor {
             move.cardName?.rawValue,
             move.targetId,
             move.targetCard?.description
-            ]
-            .compactMap { $0 }
+        ]
+        .compactMap { $0 }
         
         return "\(emoji(matching: components)) \(components.joined(separator: " "))"
     }
