@@ -20,27 +20,61 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_board" translatesAutoresizingMaskIntoConstraints="NO" id="wkF-lE-jNq">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s8o-qf-BAQ">
-                                <rect key="frame" x="170.5" y="317" width="34" height="33"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                <state key="normal" title="Play"/>
-                                <connections>
-                                    <action selector="playButtonTapped:" destination="8GX-Wa-ifS" eventType="touchUpInside" id="fna-Vk-lga"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="1ml-If-Dys">
+                                <rect key="frame" x="137.5" y="252.5" width="100" height="162"/>
+                                <subviews>
+                                    <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X players" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W7q-8B-UEd">
+                                        <rect key="frame" x="21.5" y="0.0" width="57.5" height="20"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="7" minimumValue="4" maximumValue="7" translatesAutoresizingMaskIntoConstraints="NO" id="dkh-y9-bbs">
+                                        <rect key="frame" x="3" y="49" width="94" height="32"/>
+                                        <connections>
+                                            <action selector="stepperValueChanged:" destination="8GX-Wa-ifS" eventType="valueChanged" id="v0n-ag-ZtQ"/>
+                                        </connections>
+                                    </stepper>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s8o-qf-BAQ">
+                                        <rect key="frame" x="0.0" y="110" width="100" height="52"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="cJz-6l-Jdk"/>
+                                            <constraint firstAttribute="width" secondItem="s8o-qf-BAQ" secondAttribute="height" multiplier="557:291" id="d4G-rt-8LJ"/>
+                                        </constraints>
+                                        <state key="normal" image="ic_play"/>
+                                        <connections>
+                                            <action selector="playButtonTapped:" destination="8GX-Wa-ifS" eventType="touchUpInside" id="fna-Vk-lga"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_splash" translatesAutoresizingMaskIntoConstraints="NO" id="nUc-dp-SOW">
+                                <rect key="frame" x="112.5" y="38.5" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="nUc-dp-SOW" secondAttribute="height" multiplier="1:1" id="iTc-HC-HH9"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="wkF-lE-jNq" secondAttribute="bottom" id="2df-Mq-2DI"/>
                             <constraint firstItem="wkF-lE-jNq" firstAttribute="leading" secondItem="q5r-gt-aD8" secondAttribute="leading" id="Aci-lc-dCZ"/>
-                            <constraint firstItem="s8o-qf-BAQ" firstAttribute="centerY" secondItem="q5r-gt-aD8" secondAttribute="centerY" id="IrU-08-kTr"/>
+                            <constraint firstItem="1ml-If-Dys" firstAttribute="centerY" secondItem="q5r-gt-aD8" secondAttribute="centerY" id="HDS-w8-7JK"/>
                             <constraint firstAttribute="trailing" secondItem="wkF-lE-jNq" secondAttribute="trailing" id="KzL-eG-9JI"/>
-                            <constraint firstItem="s8o-qf-BAQ" firstAttribute="centerX" secondItem="q5r-gt-aD8" secondAttribute="centerX" id="RsQ-Gg-z9n"/>
+                            <constraint firstItem="nUc-dp-SOW" firstAttribute="width" secondItem="q5r-gt-aD8" secondAttribute="width" multiplier="0.4" id="U5i-5V-OIM"/>
+                            <constraint firstItem="nUc-dp-SOW" firstAttribute="centerX" secondItem="q5r-gt-aD8" secondAttribute="centerX" id="cF9-E3-uZQ"/>
+                            <constraint firstItem="1ml-If-Dys" firstAttribute="centerX" secondItem="q5r-gt-aD8" secondAttribute="centerX" id="gPe-iT-DeT"/>
+                            <constraint firstItem="1ml-If-Dys" firstAttribute="top" secondItem="nUc-dp-SOW" secondAttribute="bottom" constant="64" id="nzM-Hd-Yv0"/>
                             <constraint firstItem="wkF-lE-jNq" firstAttribute="top" secondItem="q5r-gt-aD8" secondAttribute="top" id="yff-87-h4o"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tm4-HU-FPt"/>
                     </view>
                     <navigationItem key="navigationItem" id="h6d-G1-qO8"/>
+                    <connections>
+                        <outlet property="playersCountLabel" destination="W7q-8B-UEd" id="KXc-Hi-f35"/>
+                        <outlet property="playersCountStepper" destination="dkh-y9-bbs" id="x8n-SB-vOh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4YQ-gS-3Ah" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -364,5 +398,7 @@
         <image name="01_back" width="160" height="247"/>
         <image name="01_barile" width="125" height="194.5"/>
         <image name="bg_board" width="400" height="600"/>
+        <image name="bg_splash" width="104" height="58.5"/>
+        <image name="ic_play" width="557" height="291"/>
     </resources>
 </document>

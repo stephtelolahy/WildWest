@@ -10,28 +10,32 @@ import UIKit
 
 class MenuViewController: UIViewController {
     
-    @IBAction private func playButtonTapped(_ sender: Any) {
-        let alertController = UIAlertController(title: "New Game",
-                                                message: nil,
-                                                preferredStyle: .alert)
-        
-        Array(4...7).forEach { playersCount in
-            let title = "\(playersCount) players"
-            alertController.addAction(UIAlertAction(title: title,
-                                                    style: .default,
-                                                    handler: { [weak self] _ in
-                                                        self?.startGame(for: playersCount)
-            }))
-        }
-        
-        alertController.addAction(UIAlertAction(title: "Cancel",
-                                                style: .cancel,
-                                                handler: nil))
-        
-        present(alertController, animated: true)
+    @IBOutlet private weak var playersCountStepper: UIStepper!
+    @IBOutlet private weak var playersCountLabel: UILabel!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        playersCountStepper.value = 7
+        updatePlayersLabel()
     }
     
-    private func startGame(for playersCount: Int) {
+    @IBAction private func playButtonTapped(_ sender: Any) {
+        startGame()
+    }
+    
+    @IBAction private func stepperValueChanged(_ sender: Any) {
+        updatePlayersLabel()
+    }
+    
+    private func updatePlayersLabel() {
+        playersCountLabel.text = "\(playersCount) players"
+    }
+    
+    private var playersCount: Int {
+        Int(playersCountStepper.value)
+    }
+    
+    private func startGame() {
         
         let jsonReader = JsonReader(bundle: Bundle.main)
         let config = GameConfiguration(jsonReader: jsonReader)
@@ -56,7 +60,7 @@ class MenuViewController: UIViewController {
                                 updateExecutors: config.updateExecutors)
         
         let controlledPlayerId: String? = nil
-//        let controlledPlayerId = database.state.players.first(where: { $0.role == .sheriff })?.identifier
+        //        let controlledPlayerId = state.players.first(where: { $0.role == .sheriff })?.identifier
         
         let aiPlayers = database.state.players.filter { $0.identifier != controlledPlayerId }
         
