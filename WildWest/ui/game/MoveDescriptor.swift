@@ -14,20 +14,26 @@ protocol MoveDescriptor {
 
 extension MoveDescriptor {
     func description(for move: GameMove) -> String? {
-        let components: [String?] = [
+        let components: [String] = [
             move.actorId,
             move.name.rawValue,
             move.cardName?.rawValue,
             move.targetId,
             move.targetCard?.description
-        ]
-        let text = components.compactMap { $0 }.joined(separator: " ")
+            ]
+            .compactMap { $0 }
         
-        guard let emoji = emojis.first(where: { text.lowercased().contains($0.key.lowercased()) }) else {
-            fatalError("No matching emoji found")
+        return "\(emoji(matching: components)) \(components.joined(separator: " "))"
+    }
+    
+    private func emoji(matching components: [String]) -> String {
+        for component in components {
+            let filtered = emojis.filter { component.lowercased().contains($0.key.lowercased()) }
+            if let match = filtered.first {
+                return match.value
+            }
         }
-        
-        return "\(emoji.value) \(text)"
+        fatalError("No matching emoji found")
     }
     
     private var emojis: [String: String] {

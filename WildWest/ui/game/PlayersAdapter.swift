@@ -15,14 +15,14 @@ struct PlayerItem {
     let isControlled: Bool
 }
 
-protocol PlayersAdapter {
-    func buildIndexes(with playerIds: [String]) -> [Int: String]
+protocol PlayersAdapterProtocol {
+    func buildIndexes(playerIds: [String], controlledId: String?) -> [Int: String]
     func buildItems(state: GameStateProtocol,
                     for controlledPlayerId: String?,
                     playerIndexes: [Int: String]) -> [PlayerItem?]
 }
 
-extension PlayersAdapter {
+class PlayersAdapter: PlayersAdapterProtocol {
     
     func buildItems(state: GameStateProtocol,
                     for controlledPlayerId: String?,
@@ -59,21 +59,29 @@ extension PlayersAdapter {
         }
     }
     
-    func buildIndexes(with playerIds: [String]) -> [Int: String] {
+    func buildIndexes(playerIds: [String], controlledId: String?) -> [Int: String] {
         let configuration: [[Int]] = [
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 1, 0, 0, 0, 0, 0],
-            [0, 0, 0, 1, 0, 2, 0, 0, 0],
-            [1, 0, 2, 0, 0, 0, 0, 3, 0],
-            [1, 0, 2, 0, 0, 0, 4, 0, 3],
-            [1, 2, 3, 0, 0, 0, 5, 0, 4],
-            [1, 0, 2, 6, 0, 3, 5, 0, 4],
-            [1, 2, 3, 7, 0, 4, 6, 0, 5]
+            [0, 0, 0, 0, 0, 0, 0, 0, 0], // 0 player
+            [0, 0, 0, 0, 0, 0, 0, 1, 0], // 1 player
+            [0, 2, 0, 0, 0, 0, 0, 1, 0], // 2 players
+            [2, 0, 3, 0, 0, 0, 0, 1, 0], // 3 players
+            [0, 3, 0, 2, 0, 4, 0, 1, 0], // 4 players
+            [3, 0, 4, 2, 0, 5, 0, 1, 0], // 5 players
+            [3, 4, 5, 2, 0, 6, 0, 1, 0], // 6 players
+            [4, 5, 6, 3, 0, 7, 2, 1, 0]  // 7 players
         ]
+        
+        var shiftedIds = playerIds
+        if shiftedIds.contains(where: { $0 == controlledId }) {
+            while shiftedIds[0] != controlledId {
+                shiftedIds.append(shiftedIds.remove(at: 0))
+            }
+        }
+        
         var result: [Int: String] = [:]
         let indexes = configuration[playerIds.count]
         for (index, element) in indexes.enumerated() where element > 0 {
-            result[index] = playerIds[element - 1]
+            result[index] = shiftedIds[element - 1]
         }
         return result
     }

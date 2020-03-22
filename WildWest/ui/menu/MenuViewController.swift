@@ -67,7 +67,7 @@ class MenuViewController: UIViewController {
         let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
                                                      ai: RandomAIWithRole(),
                                                      engine: engine,
-                                                     delay: 0.0)
+                                                     delay: 0.5)
         }
         
         presentGame(engine: engine, controlledPlayerId: controlledPlayerId, aiAgents: aiAgents)

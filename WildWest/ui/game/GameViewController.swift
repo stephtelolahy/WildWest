@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 
 class GameViewController: UIViewController,
-Subscribable, MoveSelector, PlayersAdapter, ActionsAdapter, InstructionBuilder, StatsBuilder {
+Subscribable, MoveSelector, ActionsAdapter, InstructionBuilder, StatsBuilder {
     
     // MARK: Constants
     
@@ -38,6 +38,8 @@ Subscribable, MoveSelector, PlayersAdapter, ActionsAdapter, InstructionBuilder, 
     private var actionItems: [ActionItem] = []
     private var messages: [GameMove] = []
     
+    private lazy var playerAdapter = PlayersAdapter()
+    
     // MARK: Lifecycle
     
     override func viewDidLoad() {
@@ -51,7 +53,7 @@ Subscribable, MoveSelector, PlayersAdapter, ActionsAdapter, InstructionBuilder, 
         }
         
         let playerIds = state.players.map { $0.identifier }
-        playerIndexes = buildIndexes(with: playerIds)
+        playerIndexes = playerAdapter.buildIndexes(playerIds: playerIds, controlledId: controlledPlayerId)
         
         sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
             self?.update(with: state)
@@ -71,7 +73,7 @@ Subscribable, MoveSelector, PlayersAdapter, ActionsAdapter, InstructionBuilder, 
 private extension GameViewController {
     
     func update(with state: GameStateProtocol) {
-        playerItems = buildItems(state: state, for: controlledPlayerId, playerIndexes: playerIndexes)
+        playerItems = playerAdapter.buildItems(state: state, for: controlledPlayerId, playerIndexes: playerIndexes)
         playersCollectionView.reloadData()
         
         if let topDiscardPile = state.discardPile.first {
