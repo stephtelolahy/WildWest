@@ -9,9 +9,17 @@
 import Cuckoo
 
 extension MockGameStateProtocol {
+    
     func players(are players: PlayerProtocol...) -> MockGameStateProtocol {
         Cuckoo.stub(self) { mock in
             when(mock.players.get).thenReturn(players)
+        }
+        return self
+    }
+    
+    func eliminated(are players: PlayerProtocol...) -> MockGameStateProtocol {
+        Cuckoo.stub(self) { mock in
+            when(mock.eliminated.get).thenReturn(players)
         }
         return self
     }
@@ -40,6 +48,13 @@ extension MockGameStateProtocol {
     func barrelsResolved(is count: Int) -> MockGameStateProtocol {
         Cuckoo.stub(self) { mock in
             when(mock.barrelsResolved.get).thenReturn(count)
+        }
+        return self
+    }
+    
+    func damageEvents(are events: DamageEvent...) -> MockGameStateProtocol {
+        Cuckoo.stub(self) { mock in
+            when(mock.damageEvents.get).thenReturn(events)
         }
         return self
     }

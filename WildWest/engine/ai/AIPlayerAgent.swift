@@ -33,13 +33,13 @@ class AIPlayerAgent: AIPlayerAgentProtocol, Subscribable {
     }
     
     private func processState(_ state: GameStateProtocol) {
-        guard state.validMoves.contains(where: { $0.actorId == playerId }),
-            let move = ai.bestMove(in: state) else {
+        guard let moves = state.validMoves[playerId],
+            let move = ai.bestMove(among: moves, in: state) else {
                 return
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
-            self?.engine.execute(move)
+            self?.engine.queue(move)
         }
     }
 }

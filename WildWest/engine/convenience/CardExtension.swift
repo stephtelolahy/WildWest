@@ -6,7 +6,7 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-extension CardProtocol {
+extension CardName {
     
     var isGun: Bool {
         let guns: [CardName] = [.volcanic,
@@ -14,11 +14,18 @@ extension CardProtocol {
                                 .remington,
                                 .winchester,
                                 .revCarbine]
-        return guns.contains(name)
+        return guns.contains(self)
+    }
+    
+    var isEquipment: Bool {
+        let equipments: [CardName] = [.mustang,
+                                      .scope,
+                                      .barrel]
+        return equipments.contains(self)
     }
     
     var reachableDistance: Int {
-        switch name {
+        switch self {
         case .schofield:
             return 2
             
@@ -35,6 +42,9 @@ extension CardProtocol {
             return 1
         }
     }
+}
+
+extension CardProtocol {
     
     var makeEscapeFromJail: Bool {
         suit == .hearts
@@ -44,7 +54,7 @@ extension CardProtocol {
         suit == .spades && ["2", "3", "4", "5", "6", "7", "8", "9"].contains(value)
     }
     
-    var makeBarrelWorking: Bool {
+    var makeBarrelSuccessful: Bool {
         suit == .hearts
     }
 }

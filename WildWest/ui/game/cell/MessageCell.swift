@@ -8,55 +8,11 @@
 
 import UIKit
 
-class MessageCell: UITableViewCell {
+class MessageCell: UITableViewCell, MoveDescriptor {
     
     @IBOutlet private weak var messageLabel: UILabel!
     
-    func update(with action: ActionProtocol) {
-        messageLabel.text = "\(emoji(for: action)) \(action.description)"
-    }
-}
-
-private extension MessageCell {
-    
-    var emojis: [String: String] {
-        [
-            "Bang": "🔫",
-            "Beer": "🍺",
-            "CatBalou": "‼️",
-            "ChooseCard": "💰",
-            "DiscardBang": "🔫",
-            "DiscardBeer": "😝",
-            "Duel": "🔫",
-            "Eliminate": "☠️",
-            "EndTurn": "✔️",
-            "Equip": "😎",
-            "Gatling": "🔫",
-            "GeneralStore": "💰",
-            "Indians": "💢",
-            "Jail": "🚧",
-            "LooseLife": "❤️",
-            "Missed": "😝",
-            "Panic": "‼️",
-            "ResolveBarrel": "❔",
-            "ResolveDynamite": "❔",
-            "ResolveJail": "❔",
-            "Saloon": "🍺",
-            "Stagecoach": "💰",
-            "StartTurn": "🔥",
-            "WellsFargo": "💰",
-            "DiscardAllSheriffCardsOnEliminateDeputy": "⚠️",
-            "RewardOneWhoEliminatesOutlaw": "🎁",
-            "SetOutComeOnGameOver": "🎉"
-        ]
-    }
-    
-    func emoji(for action: ActionProtocol) -> String {
-        
-        guard let className = String(describing: action).split(separator: "(").first,
-            let emoji = emojis[String(className)] else {
-            return ""
-        }
-        return emoji
+    func update(with move: GameMove) {
+        messageLabel.text = description(for: move)
     }
 }

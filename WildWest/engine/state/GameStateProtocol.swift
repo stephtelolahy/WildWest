@@ -10,15 +10,15 @@ protocol GameStateProtocol {
     var players: [PlayerProtocol] { get }
     var deck: [CardProtocol] { get }
     var discardPile: [CardProtocol] { get }
-    var turn: String { get }
+    var turn: String? { get }
     var challenge: Challenge? { get }
     var bangsPlayed: Int { get }
     var barrelsResolved: Int { get }
     var generalStore: [CardProtocol] { get }
     var eliminated: [PlayerProtocol] { get }
     var outcome: GameOutcome? { get }
-    var validMoves: [ActionProtocol] { get }
-    var executedMoves: [ActionProtocol] { get }
+    var validMoves: [String: [GameMove]] { get }
+    var executedMoves: [GameMove] { get }
     var damageEvents: [DamageEvent] { get }
 }
 
@@ -30,7 +30,7 @@ enum GameOutcome: String, Equatable {
 
 enum Challenge: Equatable {
     case startTurn
-    case startTurnDynamiteExploded
+    case dynamiteExploded
     case shoot([String], CardName, String)
     case indians([String], String)
     case duel([String], String)

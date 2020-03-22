@@ -7,26 +7,28 @@
 //
 
 class RandomAI: AIProtocol {
-    func evaluate(_ move: ActionProtocol, in state: GameStateProtocol) -> Int {
+    func evaluate(_ move: GameMove, in state: GameStateProtocol) -> Int {
         
         // prefer play instead of do nothing
-        if move is EndTurn {
+        if case .endTurn = move.name {
             return Score.endTurn
         }
         
         // prefer reaction instead of do nothing
-        if move is LooseLife {
-            return Score.looseLife
+        if case .pass = move.name {
+            return Score.pass
         }
         
-        if let equip = move as? Equip {
-            if let actor = state.players.first(where: { $0.identifier == equip.actorId }),
-                let card = actor.hand.first(where: { $0.identifier == equip.cardId }),
-                card.isGun,
-                let currentGun = actor.inPlay.first(where: { $0.isGun }),
-                currentGun.reachableDistance > card.reachableDistance {
-                return Score.useLowerRangeGun
-            }
+        // prefer keep larger range gun
+        if case .play = move.name,
+            let cardId = move.cardId,
+            let actorId = move.actorId,
+            let actor = state.players.first(where: { $0.identifier == actorId }),
+            let card = actor.hand.first(where: { $0.identifier == cardId }),
+            card.name.isGun,
+            let currentGun = actor.inPlay.first(where: { $0.name.isGun }),
+            currentGun.name.reachableDistance > card.name.reachableDistance {
+            return Score.useLowerRangeGun
         }
         
         return 0

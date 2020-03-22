@@ -9,7 +9,8 @@
 import UIKit
 import RxSwift
 
-class GameViewController: UIViewController, Subscribable, MoveSelector {
+class GameViewController: UIViewController,
+Subscribable, MoveSelector, ActionsAdapter, InstructionBuilder, StatsBuilder {
     
     // MARK: Constants
     
@@ -28,15 +29,16 @@ class GameViewController: UIViewController, Subscribable, MoveSelector {
     
     // MARK: Properties
     
-    // swiftlint:disable implicitly_unwrapped_optional
-    var engine: GameEngineProtocol!
+    var engine: GameEngineProtocol?
     var aiAgents: [AIPlayerAgentProtocol] = []
     var controlledPlayerId: String?
     
-    private var playerIndexes: [Int: String?] = [:]
+    private var playerIndexes: [Int: String] = [:]
     private var playerItems: [PlayerItem?] = []
     private var actionItems: [ActionItem] = []
-    private var messages: [ActionProtocol] = []
+    private var messages: [GameMove] = []
+    
+    private lazy var playerAdapter = PlayersAdapter()
     
     // MARK: Lifecycle
     
@@ -45,10 +47,13 @@ class GameViewController: UIViewController, Subscribable, MoveSelector {
         playersCollectionView.setItemSpacing(Constants.spacing)
         actionsCollectionView.setItemSpacing(Constants.spacing)
         
-        if let state = try? engine.stateSubject.value() {
-            let playerIds = state.players.map { $0.identifier }
-            playerIndexes = MapConfiguration.buildIndexes(with: playerIds)
+        guard let engine = self.engine,
+            let state = try? engine.stateSubject.value() else {
+                return
         }
+        
+        let playerIds = state.players.map { $0.identifier }
+        playerIndexes = playerAdapter.buildIndexes(playerIds: playerIds, controlledId: controlledPlayerId)
         
         sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
             self?.update(with: state)
@@ -61,52 +66,66 @@ class GameViewController: UIViewController, Subscribable, MoveSelector {
     // MARK: IBAction
     
     @IBAction private func menuButtonTapped(_ sender: Any) {
-        let alertController = UIAlertController(title: nil,
-                                                message: nil,
-                                                preferredStyle: .alert)
-        
-        alertController.addAction(UIAlertAction(title: "Stats",
-                                                style: .default,
-                                                handler: { [weak self] _ in
-                                                    self?.showStats()
-        }))
-        
-        alertController.addAction(UIAlertAction(title: "Quit",
-                                                style: .default,
-                                                handler: { [weak self] _ in
-                                                    self?.dismiss(animated: true)
-        }))
-        
-        alertController.addAction(UIAlertAction(title: "Continue",
-                                                style: .cancel,
-                                                handler: nil))
-        
-        present(alertController, animated: true)
+        showStats()
     }
 }
 
 private extension GameViewController {
     
     func update(with state: GameStateProtocol) {
-        
-        playerItems = PlayersAdapter.buildItems(state: state, for: controlledPlayerId, playerIndexes: playerIndexes)
+        playerItems = playerAdapter.buildItems(state: state, for: controlledPlayerId, playerIndexes: playerIndexes)
         playersCollectionView.reloadData()
         
-        actionItems = ActionsAdapter.buildActions(state: state, for: controlledPlayerId)
-        actionsCollectionView.reloadData()
+        if let topDiscardPile = state.discardPile.first {
+            discardImageView.image = UIImage(named: topDiscardPile.imageName)
+        } else {
+            discardImageView.image = nil
+        }
         
         messages = state.executedMoves
         messageTableView.reloadDataSwollingAtBottom()
         
-        titleLabel.text = ActionsAdapter.buildInstruction(state: state, for: controlledPlayerId)
+        actionItems = buildActions(state: state, for: controlledPlayerId)
+        actionsCollectionView.reloadData()
+        titleLabel.text = buildInstruction(state: state, for: controlledPlayerId)
         
-        discardImageView.image = UIImage(named: state.discardPile.first?.imageName ?? "")
+        if let outcome = state.outcome {
+            showGameOver(outcome: outcome)
+        }
+    }
+    
+    func showGameOver(outcome: GameOutcome) {
+        let alertController = UIAlertController(title: "Game Over",
+                                                message: outcome.rawValue,
+                                                preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "OK",
+                                                style: .cancel,
+                                                handler: { [weak self] _ in
+                                                    self?.dismiss(animated: true)
+        }))
+        
+        present(alertController, animated: true)
     }
     
     func showStats() {
-        let viewController = StatsViewController()
-        viewController.stateSubject = engine?.stateSubject
-        present(viewController, animated: true)
+        guard let state = try? engine?.stateSubject.value() else {
+            return
+        }
+        
+        let message = buildAntiSheriffScore(state: state)
+            .map { "\($0.source) : \($0.value)" }
+            .joined(separator: "\n")
+        
+        let alertController = UIAlertController(title: "Anti-Sheriff Stats",
+                                                message: message,
+                                                preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "OK",
+                                                style: .cancel,
+                                                handler: nil))
+        
+        present(alertController, animated: true)
     }
 }
 
@@ -185,7 +204,7 @@ extension GameViewController: UICollectionViewDelegate {
     
     private func actionsCollectionViewDidSelectItem(at indexPath: IndexPath) {
         selectMove(within: actionItems[indexPath.row].actions) { [weak self] move in
-            self?.engine?.execute(move)
+            self?.engine?.queue(move)
         }
     }
 }

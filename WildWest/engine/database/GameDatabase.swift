@@ -30,12 +30,12 @@ extension GameState: GameDatabaseProtocol {
         self.barrelsResolved = barrelsResolved
     }
     
-    func addExecutedMove(_ action: ActionProtocol) {
-        executedMoves.append(action)
+    func addExecutedMove(_ move: GameMove) {
+        executedMoves.append(move)
     }
-    
-    func setValidMoves(_ actions: [ActionProtocol]) {
-        self.validMoves = actions
+
+    func setValidMoves(_ moves: [String: [GameMove]]) {
+        self.validMoves = moves
     }
     
     func removePlayer(_ playerId: String) -> PlayerProtocol? {

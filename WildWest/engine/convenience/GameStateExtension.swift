@@ -33,34 +33,3 @@ extension GameStateProtocol {
         return players[nextPlayerIndex].identifier
     }
 }
-
-extension Challenge {
-    var description: String {
-        switch self {
-        case .startTurn:
-            return "startTurn"
-            
-        case .startTurnDynamiteExploded:
-            return "dynamiteExploded"
-            
-        case let .duel(playerIds, _):
-            return "duel(\(playerIds.joined(separator: ", ")))"
-            
-        case let .shoot(playerIds, cardName, _):
-            switch cardName {
-            case .bang:
-                return "bang(\(playerIds.joined(separator: ", ")))"
-            case .gatling:
-                return "gatling(\(playerIds.joined(separator: ", ")))"
-            default:
-                return "shoot(\(playerIds.joined(separator: ", ")))"
-            }
-            
-        case let .indians(playerIds, _):
-            return "indians(\(playerIds.joined(separator: ", ")))"
-            
-        case let .generalStore(playerIds):
-            return "generalStore(\(playerIds.joined(separator: ", ")))"
-        }
-    }
-}
