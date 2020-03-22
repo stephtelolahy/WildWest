@@ -59,8 +59,8 @@ class MenuViewController: UIViewController {
                                 moveExecutors: config.moveExectors,
                                 updateExecutors: config.updateExecutors)
         
-        let controlledPlayerId: String? = nil
-        //        let controlledPlayerId = state.players.first(where: { $0.role == .sheriff })?.identifier
+        //        let controlledPlayerId: String? = nil
+        let controlledPlayerId = state.players.first(where: { $0.role == .sheriff })?.identifier
         
         let aiPlayers = database.state.players.filter { $0.identifier != controlledPlayerId }
         
