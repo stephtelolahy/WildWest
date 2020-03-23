@@ -8,12 +8,12 @@
 
 import UIKit
 
-protocol MoveDescriptor {
-    func description(for move: GameMove) -> String?
+protocol MoveDescriptorProtocol {
+    func description(for move: GameMove) -> String
 }
 
-extension MoveDescriptor {
-    func description(for move: GameMove) -> String? {
+class MoveDescriptor: MoveDescriptorProtocol {
+    func description(for move: GameMove) -> String {
         let components: [String] = [
             move.actorId,
             move.name.rawValue,

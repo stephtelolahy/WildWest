@@ -20,6 +20,7 @@ class GameEngine: GameEngineProtocol {
     private let updateExecutors: [UpdateExecutorProtocol]
     
     private var movesQueue: [GameMove] = []
+    private var running = false
     
     init(database: GameDatabaseProtocol,
          validMoveMatchers: [ValidMoveMatcherProtocol],
@@ -45,8 +46,6 @@ class GameEngine: GameEngineProtocol {
         queue(GameMove(name: .startTurn, actorId: sheriff.identifier))
     }
     
-    private var running = false
-    
     func queue(_ move: GameMove) {
         movesQueue.append(move)
         
@@ -54,10 +53,11 @@ class GameEngine: GameEngineProtocol {
             return
         }
         
+        running = true
+        
         let move = self.movesQueue.remove(at: 0)
         self.execute(move)
         
-        running = true
         if #available(iOS 10.0, *) {
             Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] timer in
                 guard let self = self else {
@@ -79,6 +79,11 @@ class GameEngine: GameEngineProtocol {
     }
     
     func execute(_ move: GameMove) {
+        _execute(move)
+        stateSubject.onNext(database.state)
+    }
+    
+    private func _execute(_ move: GameMove) {
         // no move is allowed during update
         database.setValidMoves([:])
         
@@ -95,8 +100,6 @@ class GameEngine: GameEngineProtocol {
                 executor.execute(update, in: database)
             }
         }
-        
-        stateSubject.onNext(database.state)
         
         // check if game over
         guard database.state.outcome == nil else {
@@ -131,6 +134,5 @@ class GameEngine: GameEngineProtocol {
         }
         
         database.setValidMoves(validMoves)
-        stateSubject.onNext(database.state)
     }
 }

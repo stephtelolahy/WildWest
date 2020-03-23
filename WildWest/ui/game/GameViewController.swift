@@ -36,9 +36,10 @@ Subscribable, MoveSelector, ActionsAdapter, InstructionBuilder, StatsBuilder {
     private var playerIndexes: [Int: String] = [:]
     private var playerItems: [PlayerItem?] = []
     private var actionItems: [ActionItem] = []
-    private var messages: [GameMove] = []
+    private var messages: [String] = []
     
     private lazy var playerAdapter = PlayersAdapter()
+    private lazy var moveDescriptor = MoveDescriptor()
     
     // MARK: Lifecycle
     
@@ -82,8 +83,10 @@ private extension GameViewController {
             discardImageView.image = nil
         }
         
-        messages = state.executedMoves
-        messageTableView.reloadDataSwollingAtBottom()
+        if let lastMove = state.executedMoves.last {
+            messages.append(moveDescriptor.description(for: lastMove))
+            messageTableView.reloadDataSwollingAtBottom()
+        }
         
         actionItems = buildActions(state: state, for: controlledPlayerId)
         actionsCollectionView.reloadData()

@@ -8,11 +8,11 @@
 
 import UIKit
 
-class MessageCell: UITableViewCell, MoveDescriptor {
+class MessageCell: UITableViewCell {
     
     @IBOutlet private weak var messageLabel: UILabel!
     
-    func update(with move: GameMove) {
-        messageLabel.text = description(for: move)
+    func update(with message: String) {
+        messageLabel.text = message
     }
 }
