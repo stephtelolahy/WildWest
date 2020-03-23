@@ -18,6 +18,7 @@ class GameEngine: GameEngineProtocol {
     private let effectMatchers: [EffectMatcherProtocol]
     private let moveExecutors: [MoveExecutorProtocol]
     private let updateExecutors: [UpdateExecutorProtocol]
+    private let updateDelay: Double
     
     private var movesQueue: [GameMove] = []
     private var running = false
@@ -27,7 +28,8 @@ class GameEngine: GameEngineProtocol {
          autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol],
          effectMatchers: [EffectMatcherProtocol],
          moveExecutors: [MoveExecutorProtocol],
-         updateExecutors: [UpdateExecutorProtocol]) {
+         updateExecutors: [UpdateExecutorProtocol],
+         updateDelay: Double) {
         self.database = database
         self.stateSubject = BehaviorSubject(value: database.state)
         self.validMoveMatchers = validMoveMatchers
@@ -35,6 +37,7 @@ class GameEngine: GameEngineProtocol {
         self.effectMatchers = effectMatchers
         self.moveExecutors = moveExecutors
         self.updateExecutors = updateExecutors
+        self.updateDelay = updateDelay
     }
     
     func start() {
@@ -59,7 +62,7 @@ class GameEngine: GameEngineProtocol {
         self.execute(move)
         
         if #available(iOS 10.0, *) {
-            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] timer in
+            Timer.scheduledTimer(withTimeInterval: updateDelay, repeats: true) { [weak self] timer in
                 guard let self = self else {
                     return
                 }

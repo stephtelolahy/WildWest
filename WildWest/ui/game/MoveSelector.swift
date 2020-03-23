@@ -83,7 +83,7 @@ private extension UIViewController {
     func select(within choices: [String], title: String, completion: @escaping((Int) -> Void)) {
         let alertController = UIAlertController(title: title,
                                                 message: nil,
-                                                preferredStyle: .alert)
+                                                preferredStyle: .actionSheet)
         
         choices.forEach { choice in
             alertController.addAction(UIAlertAction(title: choice,

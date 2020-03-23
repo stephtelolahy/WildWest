@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class MenuViewController: UIViewController {
     
@@ -18,6 +19,37 @@ class MenuViewController: UIViewController {
         super.viewDidLoad()
         playersCountStepper.value = 5
         updatePlayersLabel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        playThemeMusic()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopMusic()
+    }
+    
+    private var audioPlayer: AVAudioPlayer?
+    
+    private func playThemeMusic() {
+        guard let path = Bundle.main.path(forResource: "Cowboy_Theme-Pavak-1711860633.mp3", ofType: nil) else {
+            return
+        }
+        
+        let url = URL(fileURLWithPath: path)
+        
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.play()
+        } catch {
+            // couldn't load file :(
+        }
+    }
+    
+    private func stopMusic() {
+        audioPlayer?.stop()
     }
     
     @IBAction private func playButtonTapped(_ sender: Any) {
@@ -58,7 +90,8 @@ class MenuViewController: UIViewController {
                                 autoPlayMoveMatchers: config.autoPlayMoveMatchers,
                                 effectMatchers: config.effectMatchers,
                                 moveExecutors: config.moveExectors,
-                                updateExecutors: config.updateExecutors)
+                                updateExecutors: config.updateExecutors,
+                                updateDelay: 1.0)
         
         var controlledPlayerId: String?
         if playAsSheriffSwitch.isOn {

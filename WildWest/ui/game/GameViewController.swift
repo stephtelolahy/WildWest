@@ -40,6 +40,7 @@ Subscribable, MoveSelector, ActionsAdapter, InstructionBuilder, StatsBuilder {
     
     private lazy var playerAdapter = PlayersAdapter()
     private lazy var moveDescriptor = MoveDescriptor()
+    private lazy var moveSoundPlayer = MoveSoundPlayer()
     
     // MARK: Lifecycle
     
@@ -86,6 +87,8 @@ private extension GameViewController {
         if let lastMove = state.executedMoves.last {
             messages.append(moveDescriptor.description(for: lastMove))
             messageTableView.reloadDataSwollingAtBottom()
+            
+            moveSoundPlayer.playSound(for: lastMove)
         }
         
         actionItems = buildActions(state: state, for: controlledPlayerId)
