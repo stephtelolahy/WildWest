@@ -16,46 +16,49 @@ extension InstructionBuilder {
             return outcome.rawValue
         }
         
-        if let challenge = state.challenge {
-            return challenge.description
+        guard let controlledPlayerId = controlledPlayerId else {
+            return "viewing game"
         }
         
-        guard let controlledPlayerId = controlledPlayerId,
-            state.validMoves[controlledPlayerId] != nil else {
-                return "waiting others to play"
+        guard state.validMoves[controlledPlayerId] != nil else {
+            return "waiting others to play"
         }
         
-        return "play any card"
+        guard let challenge = state.challenge else {
+            return "play any card"
+        }
+        
+        return challenge.instruction
     }
 }
 
 private extension Challenge {
-    var description: String {
+    var instruction: String {
         switch self {
-        case .startTurn:
-            return "startTurn"
-            
         case .dynamiteExploded:
-            return "dynamiteExploded"
+            return "dynamite exploded"
             
-        case let .duel(playerIds, _):
-            return "duel(\(playerIds.joined(separator: ", ")))"
+        case let .duel(_, offenderId):
+            return "duel by \(offenderId)"
             
-        case let .shoot(playerIds, cardName, _):
+        case let .shoot(_, cardName, offenderId):
             switch cardName {
             case .bang:
-                return "bang(\(playerIds.joined(separator: ", ")))"
+                return "bang by \(offenderId)"
             case .gatling:
-                return "gatling(\(playerIds.joined(separator: ", ")))"
+                return "gatling by \(offenderId)"
             default:
-                return "shoot(\(playerIds.joined(separator: ", ")))"
+                return "shoot by \(offenderId)"
             }
             
-        case let .indians(playerIds, _):
-            return "indians(\(playerIds.joined(separator: ", ")))"
+        case let .indians(_, offenderId):
+            return "indians by \(offenderId)"
             
-        case let .generalStore(playerIds):
-            return "generalStore(\(playerIds.joined(separator: ", ")))"
+        case .generalStore:
+            return "choose card from general store"
+            
+        default:
+            fatalError("Illegal state")
         }
     }
 }
