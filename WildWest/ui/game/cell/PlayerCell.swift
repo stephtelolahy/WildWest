@@ -47,7 +47,9 @@ class PlayerCell: UICollectionViewCell {
         figureImageView.alpha = !item.isEliminated ? 1.0 : 0.4
         equipmentLabel.text = player.inPlay.map { "[\($0.name.rawValue)]" }.joined(separator: "\n")
         roleLabel.text = item.isRevealed ? player.role.rawValue : ""
-        healthLabel.text = Array(0..<player.health).map { _ in "▓" }.joined()
+        healthLabel.text = ""
+            + Array(player.health..<player.maxHealth).map { _ in "░" }
+            + Array(0..<player.health).map { _ in "■" }.joined()
         handLabel.text = "[] \(player.hand.count)"
         figureImageView.image = UIImage(named: player.imageName)
     }
