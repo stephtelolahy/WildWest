@@ -2182,7 +2182,7 @@ import Cuckoo
     
     
     
-     var role: Role {
+     var role: Role? {
         get {
             return cuckoo_manager.getter("role",
                 superclassCall:
@@ -2296,7 +2296,7 @@ import Cuckoo
 	    }
 	    
 	    
-	    var role: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, Role> {
+	    var role: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, Role?> {
 	        return .init(manager: cuckoo_manager, name: "role")
 	    }
 	    
@@ -2351,7 +2351,7 @@ import Cuckoo
 	    }
 	    
 	    
-	    var role: Cuckoo.VerifyReadOnlyProperty<Role> {
+	    var role: Cuckoo.VerifyReadOnlyProperty<Role?> {
 	        return .init(manager: cuckoo_manager, name: "role", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
@@ -2401,9 +2401,9 @@ import Cuckoo
     }
     
     
-     var role: Role {
+     var role: Role? {
         get {
-            return DefaultValueRegistry.defaultValue(for: (Role).self)
+            return DefaultValueRegistry.defaultValue(for: (Role?).self)
         }
         
     }

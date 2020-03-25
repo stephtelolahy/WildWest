@@ -68,6 +68,7 @@ class MenuViewController: UIViewController {
         Int(playersCountStepper.value)
     }
     
+    // swiftlint:disable function_body_length
     private func startGame() {
         
         let jsonReader = JsonReader(bundle: Bundle.main)
@@ -110,7 +111,6 @@ class MenuViewController: UIViewController {
         
         presentGame(engine: engine, controlledPlayerId: controlledPlayerId, aiAgents: aiAgents)
     }
-    
 }
 
 private extension UIViewController {

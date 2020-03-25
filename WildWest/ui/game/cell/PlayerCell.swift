@@ -46,7 +46,11 @@ class PlayerCell: UICollectionViewCell {
         nameLabel.text = player.ability.rawValue.uppercased()
         figureImageView.alpha = !item.isEliminated ? 1.0 : 0.4
         equipmentLabel.text = player.inPlay.map { "[\($0.name.rawValue)]" }.joined(separator: "\n")
-        roleLabel.text = item.isRevealed ? player.role.rawValue : ""
+        if let role = item.player.role {
+            roleLabel.text = role.rawValue
+        } else {
+            roleLabel.text = ""
+        }
         healthLabel.text = ""
             + Array(player.health..<player.maxHealth).map { _ in "░" }
             + Array(0..<player.health).map { _ in "■" }.joined()
@@ -63,9 +67,9 @@ class PlayerCell: UICollectionViewCell {
         if item.isControlled {
             backgroundColor = UIColor.white.withAlphaComponent(0.4)
         } else if item.isTurn {
-            backgroundColor = UIColor.green.withAlphaComponent(0.3)
+            backgroundColor = UIColor.green.withAlphaComponent(0.4)
         } else if item.isActive {
-            backgroundColor = UIColor.green.withAlphaComponent(0.2)
+            backgroundColor = UIColor.yellow.withAlphaComponent(0.4)
         } else {
             backgroundColor = .clear
         }

@@ -8,11 +8,10 @@
 
 struct PlayerItem {
     let player: PlayerProtocol
-    let isActive: Bool
-    let isTurn: Bool
-    let isEliminated: Bool
-    let isRevealed: Bool
     let isControlled: Bool
+    let isTurn: Bool
+    let isActive: Bool
+    let isEliminated: Bool
 }
 
 protocol PlayersAdapterProtocol {
@@ -34,25 +33,20 @@ class PlayersAdapter: PlayersAdapterProtocol {
             
             if let eliminatedPlayer = state.eliminated.first(where: { $0.identifier == playerId }) {
                 return PlayerItem(player: eliminatedPlayer,
-                                  isActive: false,
+                                  isControlled: false,
                                   isTurn: false,
-                                  isEliminated: true,
-                                  isRevealed: true,
-                                  isControlled: false)
+                                  isActive: false,
+                                  isEliminated: true)
             }
             
             if let player = state.players.first(where: { $0.identifier == playerId }) {
                 let isActive = state.validMoves[playerId] != nil
                 let isTurn = player.identifier == state.turn
-                let isRevealed = state.outcome != nil
-                    || player.role == .sheriff
-                    || player.identifier == controlledPlayerId
                 return PlayerItem(player: player,
-                                  isActive: isActive,
+                                  isControlled: player.identifier == controlledPlayerId,
                                   isTurn: isTurn,
-                                  isEliminated: false,
-                                  isRevealed: isRevealed,
-                                  isControlled: player.identifier == controlledPlayerId)
+                                  isActive: isActive,
+                                  isEliminated: false)
             }
             
             return nil

@@ -8,7 +8,7 @@
 
 protocol PlayerProtocol {
     var identifier: String { get }
-    var role: Role { get }
+    var role: Role? { get }
     var ability: Ability { get }
     var maxHealth: Int { get }
     var health: Int { get }

@@ -10,8 +10,7 @@ import RxSwift
 
 class GameEngine: GameEngineProtocol {
     
-    let stateSubject: BehaviorSubject<GameStateProtocol>
-    
+    private let stateSubject: BehaviorSubject<GameStateProtocol>
     private let database: GameDatabaseProtocol
     private let validMoveMatchers: [ValidMoveMatcherProtocol]
     private let autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol]
@@ -86,23 +85,18 @@ class GameEngine: GameEngineProtocol {
         stateSubject.onNext(database.state)
     }
     
-    private func _execute(_ move: GameMove) {
+    func observeAs(playerId: String?) -> Observable<GameStateProtocol> {
+        stateSubject.map { $0.hidingRoles(except: playerId) }
+    }
+}
+
+private extension GameEngine {
+    func _execute(_ move: GameMove) {
         // no move is allowed during update
         database.setValidMoves([:])
         
-        database.addExecutedMove(move)
-        print("\n*** \(String(describing: move)) ***")
-        
-        let updatesQueue = moveExecutors
-            .compactMap { $0.execute(move, in: database.state) }
-            .flatMap { $0 }
-        
-        updatesQueue.forEach { update in
-            print(String(describing: update))
-            updateExecutors.forEach { executor in
-                executor.execute(update, in: database)
-            }
-        }
+        // execute move
+        _executeUpdates(move)
         
         // check if game over
         guard database.state.outcome == nil else {
@@ -137,5 +131,51 @@ class GameEngine: GameEngineProtocol {
         }
         
         database.setValidMoves(validMoves)
+    }
+    
+    func _executeUpdates(_ move: GameMove) {
+        let updatesQueue = moveExecutors
+            .compactMap { $0.execute(move, in: database.state) }
+            .flatMap { $0 }
+        
+        updatesQueue.forEach { update in
+            print(String(describing: update))
+            updateExecutors.forEach { executor in
+                executor.execute(update, in: database)
+            }
+        }
+        
+        database.addExecutedMove(move)
+        print("\n*** \(String(describing: move)) ***")
+    }
+}
+
+private extension GameStateProtocol {
+    func hidingRoles(except playerId: String?) -> GameStateProtocol {
+        GameState(players: players.map { $0.hidingRole(where: $0.identifier != playerId && $0.role != .sheriff) },
+                  deck: deck,
+                  discardPile: discardPile,
+                  turn: turn,
+                  challenge: challenge,
+                  bangsPlayed: bangsPlayed,
+                  barrelsResolved: barrelsResolved,
+                  damageEvents: damageEvents,
+                  generalStore: generalStore,
+                  outcome: outcome,
+                  validMoves: validMoves,
+                  executedMoves: executedMoves,
+                  eliminated: eliminated)
+    }
+}
+
+private extension PlayerProtocol {
+    func hidingRole(where condition: Bool) -> PlayerProtocol {
+        Player(role: condition ? nil : role,
+               ability: ability,
+               maxHealth: maxHealth,
+               imageName: imageName,
+               health: health,
+               hand: hand,
+               inPlay: inPlay)
     }
 }

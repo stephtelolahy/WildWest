@@ -74,18 +74,19 @@ private extension GameStateProtocol {
                 return .unknown
         }
         
-        return source.role.relationship(to: target.role)
-    }
-}
-
-private extension Role {
-    func relationship(to anotherRole: Role) -> PlayerRelationship {
-        switch self {
+        switch source.role {
         case .outlaw:
-            return anotherRole == .sheriff ? .enemy : .unknown
+            return target.role == .sheriff ? .enemy : .unknown
             
         case .deputy:
-            return anotherRole == .sheriff ? .teammate : .unknown
+            return target.role == .sheriff ? .teammate : .unknown
+            
+        case .renegade:
+            if target.role == .sheriff {
+                return players.count > 2 ? .teammate : .enemy
+            } else {
+                return .unknown
+            }
             
         default:
             return .unknown
