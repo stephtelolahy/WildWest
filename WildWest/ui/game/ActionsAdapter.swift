@@ -31,6 +31,9 @@ extension ActionsAdapter {
             moves.removeAll(where: { $0.cardId == card.identifier })
         }
         
+        // show active cards first
+        result = result.sorted(by: { $0.actions.count > $1.actions.count })
+        
         if !moves.isEmpty {
             result.insert(ActionItem(card: nil, actions: moves), at: 0)
         }
