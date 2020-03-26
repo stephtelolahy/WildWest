@@ -6,36 +6,57 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-class ResolveDynamiteMatcher: AutoplayMoveMatcherProtocol {
+class ExplodeDynamiteMatcher: AutoplayMoveMatcherProtocol {
     func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard case .startTurn = state.challenge,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
-            let card = actor.inPlay.first(where: { $0.name == .dynamite })  else {
+            let card = actor.inPlay.first(where: { $0.name == .dynamite }),
+            let topDeckCard = state.deck.first,
+            topDeckCard.makeDynamiteExplode else {
                 return nil
         }
         
-        return [GameMove(name: .resolve, actorId: actor.identifier, cardId: card.identifier, cardName: card.name)]
+        return [GameMove(name: .explodeDynamite, actorId: actor.identifier, cardId: card.identifier)]
     }
 }
 
-class ResolveDynamiteExecutor: MoveExecutorProtocol {
+class ExplodeDynamiteExecutor: MoveExecutorProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .resolve = move.name,
-            case .dynamite = move.cardName,
+        guard case .explodeDynamite = move.name,
             let actorId = move.actorId,
-            let cardId = move.cardId,
-            let topDeckCard = state.deck.first else {
+            let cardId = move.cardId else {
                 return nil
         }
         
-        var updates: [GameUpdate] = []
-        updates.append(.flipOverFirstDeckCard)
-        if topDeckCard.makeDynamiteExplode {
-            updates.append(.setChallenge(.dynamiteExploded))
-            updates.append(.playerDiscardInPlay(actorId, cardId))
-        } else {
-            updates.append(.playerPassInPlayOfOther(actorId, state.nextTurn, cardId))
+        return  [.flipOverFirstDeckCard,
+                 .setChallenge(.dynamiteExploded),
+                 .playerDiscardInPlay(actorId, cardId)]
+    }
+}
+
+class PassDynamiteMatcher: AutoplayMoveMatcherProtocol {
+    func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
+        guard case .startTurn = state.challenge,
+            let actor = state.players.first(where: { $0.identifier == state.turn }),
+            let card = actor.inPlay.first(where: { $0.name == .dynamite }),
+            let topDeckCard = state.deck.first,
+            !topDeckCard.makeDynamiteExplode else {
+                return nil
         }
-        return updates
+        
+        return [GameMove(name: .passDynamite, actorId: actor.identifier, cardId: card.identifier)]
+    }
+}
+
+class PassDynamiteExecutor: MoveExecutorProtocol {
+    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+        guard case .passDynamite = move.name,
+            let actorId = move.actorId,
+            let cardId = move.cardId else {
+                return nil
+        }
+        
+        return  [.flipOverFirstDeckCard,
+                 .playerPassInPlayOfOther(actorId, state.nextTurn, cardId)]
     }
 }

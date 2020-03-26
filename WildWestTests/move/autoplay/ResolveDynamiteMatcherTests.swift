@@ -8,11 +8,12 @@
 
 import XCTest
 
-class ResolveDynamiteMatcherTests: XCTestCase {
+
+class ExplodeDynamiteMatcherTests: XCTestCase {
     
-    private let sut = ResolveDynamiteMatcher()
+    private let sut = ExplodeDynamiteMatcher()
     
-    func test_ShouldResolveDynamite_BeforeStartingTurn() {
+    func test_ShouldExplodeDynamite_BeforeStartingTurn() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
@@ -21,29 +22,36 @@ class ResolveDynamiteMatcherTests: XCTestCase {
             .players(are: mockPlayer1)
             .currentTurn(is: "p1")
             .challenge(is: .startTurn)
+            .topDeck(is: MockCardProtocol().value(is: "2").suit(is: .spades))
         
         // When
         let moves = sut.autoPlayMoves(matching: mockState)
         
         // assert
-        XCTAssertEqual(moves, [GameMove(name: .resolve, actorId: "p1", cardId: "c1", cardName: .dynamite)])
+        XCTAssertEqual(moves, [GameMove(name: .explodeDynamite, actorId: "p1", cardId: "c1")])
     }
+}
+
+class PassDynamiteMatcherTests: XCTestCase {
     
-    func test_ShouldResolveDynamite_BeforeResolvingJail() {
+    private let sut = PassDynamiteMatcher()
+    
+    func test_ShouldPassDynamite_BeforeStartingTurn() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
-            .playing(MockCardProtocol().named(.dynamite).identified(by: "c1"),
-                     MockCardProtocol().named(.jail).identified(by: "c2"))
+            .playing(MockCardProtocol().named(.dynamite).identified(by: "c1"))
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
             .currentTurn(is: "p1")
             .challenge(is: .startTurn)
+            .topDeck(is: MockCardProtocol().value(is: "2").suit(is: .diamonds))
         
         // When
         let moves = sut.autoPlayMoves(matching: mockState)
         
         // assert
-        XCTAssertEqual(moves, [GameMove(name: .resolve, actorId: "p1", cardId: "c1", cardName: .dynamite)])
+        XCTAssertEqual(moves, [GameMove(name: .passDynamite, actorId: "p1", cardId: "c1")])
     }
+    
 }

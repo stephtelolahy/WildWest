@@ -49,7 +49,8 @@ class GameConfiguration {
     
     var autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol] {
         [StartTurnMatcher(),
-         ResolveDynamiteMatcher(),
+         ExplodeDynamiteMatcher(),
+         PassDynamiteMatcher(),
          EscapeFromJailMatcher(),
          StayInJailMatcher(),
          UseBarrelMatcher(),
@@ -74,7 +75,9 @@ class GameConfiguration {
          EquipExecutor(),
          JailExecutor(),
          DynamiteExecutor(),
-         ResolveDynamiteExecutor(),
+         ExplodeDynamiteExecutor(),
+         PassDynamiteExecutor(),
+         PassDynamiteExecutor(),
          EscapeFromJailExecutor(),
          StayInJailExecutor(),
          GeneralStoreExecutor(),

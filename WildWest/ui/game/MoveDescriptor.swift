@@ -54,6 +54,8 @@ class MoveDescriptor: MoveDescriptorProtocol {
             "stayInJail": "😞",
             "escapeFromJail": "😅",
             "useBarrel": "😝",
-            "failBarrel": "😞"
+            "failBarrel": "😞",
+            "explodeDynamite": "💥",
+            "passDynamite": "💣"
         ]
 }

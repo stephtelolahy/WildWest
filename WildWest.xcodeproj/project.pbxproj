@@ -51,6 +51,7 @@
 		333B23472425F20500685454 /* EndTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A11523BABBE80050E173 /* EndTurn.swift */; };
 		333B23492425F31700685454 /* EndTurnMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333B23482425F31700685454 /* EndTurnMatcherTests.swift */; };
 		333B234B2425F33A00685454 /* EndTurnExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333B234A2425F33A00685454 /* EndTurnExecutorTests.swift */; };
+		333E8757242D5B3B00EAE8FC /* Big Bomb-SoundBible.com-1219802495.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 333E8756242D5B3B00EAE8FC /* Big Bomb-SoundBible.com-1219802495.mp3 */; };
 		3351B58624269386004F18C3 /* Pass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3351B58524269386004F18C3 /* Pass.swift */; };
 		3351B58724269386004F18C3 /* Pass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3351B58524269386004F18C3 /* Pass.swift */; };
 		3351B58924269A24004F18C3 /* PassMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3351B58824269A24004F18C3 /* PassMatcherTests.swift */; };
@@ -311,6 +312,7 @@
 		333B23412425ECB400685454 /* CatBalouExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBalouExecutorTests.swift; sourceTree = "<group>"; };
 		333B23482425F31700685454 /* EndTurnMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTurnMatcherTests.swift; sourceTree = "<group>"; };
 		333B234A2425F33A00685454 /* EndTurnExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTurnExecutorTests.swift; sourceTree = "<group>"; };
+		333E8756242D5B3B00EAE8FC /* Big Bomb-SoundBible.com-1219802495.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Big Bomb-SoundBible.com-1219802495.mp3"; sourceTree = "<group>"; };
 		3351B58524269386004F18C3 /* Pass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pass.swift; sourceTree = "<group>"; };
 		3351B58824269A24004F18C3 /* PassMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassMatcherTests.swift; sourceTree = "<group>"; };
 		3351B58A24269A3B004F18C3 /* PassExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassExecutorTests.swift; sourceTree = "<group>"; };
@@ -568,6 +570,7 @@
 				338A5FC1242BC9A900766541 /* shotgun-old_school-RA_The_Sun_God-1129942741.mp3 */,
 				3383CFCD242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 */,
 				3383CFCF242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 */,
+				333E8756242D5B3B00EAE8FC /* Big Bomb-SoundBible.com-1219802495.mp3 */,
 			);
 			path = sfx;
 			sourceTree = "<group>";
@@ -1115,6 +1118,7 @@
 				ADE91AD023B9FF0700F7316B /* cards.json in Resources */,
 				338A5FC0242BC8CE00766541 /* flyby-Conor-1500306612.mp3 in Resources */,
 				335BED9E2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 in Resources */,
+				333E8757242D5B3B00EAE8FC /* Big Bomb-SoundBible.com-1219802495.mp3 in Resources */,
 				AD49F86A23BA074100543F59 /* figures.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -152,19 +152,22 @@ private extension GameEngine {
 
 private extension GameStateProtocol {
     func hidingRoles(except playerId: String?) -> GameStateProtocol {
-        GameState(players: players.map { $0.hidingRole(where: $0.identifier != playerId && $0.role != .sheriff) },
-                  deck: deck,
-                  discardPile: discardPile,
-                  turn: turn,
-                  challenge: challenge,
-                  bangsPlayed: bangsPlayed,
-                  barrelsResolved: barrelsResolved,
-                  damageEvents: damageEvents,
-                  generalStore: generalStore,
-                  outcome: outcome,
-                  validMoves: validMoves,
-                  executedMoves: executedMoves,
-                  eliminated: eliminated)
+        let updatedPlayers = players.map {
+            $0.hidingRole(where: $0.identifier != playerId && $0.role != .sheriff && outcome == nil)
+        }
+        return GameState(players: updatedPlayers,
+                         deck: deck,
+                         discardPile: discardPile,
+                         turn: turn,
+                         challenge: challenge,
+                         bangsPlayed: bangsPlayed,
+                         barrelsResolved: barrelsResolved,
+                         damageEvents: damageEvents,
+                         generalStore: generalStore,
+                         outcome: outcome,
+                         validMoves: validMoves,
+                         executedMoves: executedMoves,
+                         eliminated: eliminated)
     }
 }
 

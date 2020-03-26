@@ -65,11 +65,13 @@ class MoveSoundPlayer: MoveSoundPlayerProtocol {
             "StartTurn": "🔥",
             "WellsFargo": "Horse Galloping-SoundBible.com-1451398148",
             "Eliminate": "☠️",
-            "Reward": "Ta Da-SoundBible.com-1884170640",
+            "Reward": "Horse Galloping-SoundBible.com-1451398148",
             "Penalize": "Slap-SoundMaster13-49669815",
-            "stayInJail": "Metal Clang-SoundBible.com-19572601",
+            "stayInJail": "Slide Closed-SoundBible.com-1521580537",
             "escapeFromJail": "Ta Da-SoundBible.com-1884170640",
             "useBarrel": "Western Ricochet-SoundBible.com-1725886901",
-            "failBarrel": "Metal Clang-SoundBible.com-19572601"
+            "failBarrel": "Metal Clang-SoundBible.com-19572601",
+            "explodeDynamite": "Big Bomb-SoundBible.com-1219802495",
+            "passDynamite": "Fuse Burning-SoundBible.com-1372982430"
         ]
 }
