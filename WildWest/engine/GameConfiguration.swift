@@ -50,7 +50,8 @@ class GameConfiguration {
     var autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol] {
         [StartTurnMatcher(),
          ResolveDynamiteMatcher(),
-         ResolveJailMatcher(),
+         EscapeFromJailMatcher(),
+         StayInJailMatcher(),
          ResolveBarrelMatcher()]
     }
     
@@ -73,7 +74,8 @@ class GameConfiguration {
          JailExecutor(),
          DynamiteExecutor(),
          ResolveDynamiteExecutor(),
-         ResolveJailExecutor(),
+         EscapeFromJailExecutor(),
+         StayInJailExecutor(),
          GeneralStoreExecutor(),
          ChooseGeneralStoreCardExecutor(),
          BangExecutor(),

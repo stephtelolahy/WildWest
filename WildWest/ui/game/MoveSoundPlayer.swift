@@ -62,10 +62,12 @@ class MoveSoundPlayer: MoveSoundPlayerProtocol {
             "Resolve": "Slide Closed-SoundBible.com-1521580537",
             "Saloon": "Slurping 2-SoundBible.com-1269549524",
             "Stagecoach": "Horse Galloping-SoundBible.com-1451398148",
-            "StartTurn": "",
+            "StartTurn": "🔥",
             "WellsFargo": "Horse Galloping-SoundBible.com-1451398148",
             "Eliminate": "☠️",
-            "Reward": "Horse Galloping-SoundBible.com-1451398148",
-            "Penalize": "Slap-SoundMaster13-49669815"
+            "Reward": "Ta Da-SoundBible.com-1884170640",
+            "Penalize": "Slap-SoundMaster13-49669815",
+            "stayInJail": "Metal Clang-SoundBible.com-19572601",
+            "escapeFromJail": "Ta Da-SoundBible.com-1884170640"
         ]
 }
