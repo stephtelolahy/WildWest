@@ -8,7 +8,7 @@
 
 class Player: PlayerProtocol {
     
-    let role: Role
+    let role: Role?
     let ability: Ability
     let maxHealth: Int
     let imageName: String
@@ -16,7 +16,7 @@ class Player: PlayerProtocol {
     var hand: [CardProtocol]
     var inPlay: [CardProtocol]
     
-    init(role: Role,
+    init(role: Role?,
          ability: Ability,
          maxHealth: Int,
          imageName: String,

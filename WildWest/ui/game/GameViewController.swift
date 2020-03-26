@@ -36,9 +36,12 @@ Subscribable, MoveSelector, ActionsAdapter, InstructionBuilder, StatsBuilder {
     private var playerIndexes: [Int: String] = [:]
     private var playerItems: [PlayerItem?] = []
     private var actionItems: [ActionItem] = []
-    private var messages: [GameMove] = []
+    private var messages: [String] = []
+    private var antiSheriffScore: [AgressivityStat] = []
     
     private lazy var playerAdapter = PlayersAdapter()
+    private lazy var moveDescriptor = MoveDescriptor()
+    private lazy var moveSoundPlayer = MoveSoundPlayer()
     
     // MARK: Lifecycle
     
@@ -47,15 +50,11 @@ Subscribable, MoveSelector, ActionsAdapter, InstructionBuilder, StatsBuilder {
         playersCollectionView.setItemSpacing(Constants.spacing)
         actionsCollectionView.setItemSpacing(Constants.spacing)
         
-        guard let engine = self.engine,
-            let state = try? engine.stateSubject.value() else {
-                return
+        guard let engine = self.engine else {
+            return
         }
         
-        let playerIds = state.players.map { $0.identifier }
-        playerIndexes = playerAdapter.buildIndexes(playerIds: playerIds, controlledId: controlledPlayerId)
-        
-        sub(engine.stateSubject.subscribe(onNext: { [weak self] state in
+        sub(engine.observeAs(playerId: controlledPlayerId).subscribe(onNext: { [weak self] state in
             self?.update(with: state)
         }))
         
@@ -73,6 +72,14 @@ Subscribable, MoveSelector, ActionsAdapter, InstructionBuilder, StatsBuilder {
 private extension GameViewController {
     
     func update(with state: GameStateProtocol) {
+        
+        if playerIndexes.isEmpty {
+            let playerIds = state.players.map { $0.identifier }
+            playerIndexes = playerAdapter.buildIndexes(playerIds: playerIds, controlledId: controlledPlayerId)
+        }
+        
+        antiSheriffScore = buildAntiSheriffScore(state: state)
+        
         playerItems = playerAdapter.buildItems(state: state, for: controlledPlayerId, playerIndexes: playerIndexes)
         playersCollectionView.reloadData()
         
@@ -82,8 +89,12 @@ private extension GameViewController {
             discardImageView.image = nil
         }
         
-        messages = state.executedMoves
-        messageTableView.reloadDataSwollingAtBottom()
+        if let lastMove = state.executedMoves.last {
+            messages.append(moveDescriptor.description(for: lastMove))
+            messageTableView.reloadDataSwollingAtBottom()
+            
+            moveSoundPlayer.playSound(for: lastMove)
+        }
         
         actionItems = buildActions(state: state, for: controlledPlayerId)
         actionsCollectionView.reloadData()
@@ -109,11 +120,8 @@ private extension GameViewController {
     }
     
     func showStats() {
-        guard let state = try? engine?.stateSubject.value() else {
-            return
-        }
         
-        let message = buildAntiSheriffScore(state: state)
+        let message = antiSheriffScore
             .map { "\($0.source) : \($0.value)" }
             .joined(separator: "\n")
         

@@ -8,35 +8,17 @@
 
 import UIKit
 
-protocol MoveDescriptor {
-    func description(for move: GameMove) -> String?
+protocol MoveDescriptorProtocol {
+    func description(for move: GameMove) -> String
 }
 
-extension MoveDescriptor {
-    func description(for move: GameMove) -> String? {
-        let components: [String] = [
-            move.actorId,
-            move.name.rawValue,
-            move.cardName?.rawValue,
-            move.targetId,
-            move.targetCard?.description
-        ]
-        .compactMap { $0 }
-        
-        return "\(emoji(matching: components)) \(components.joined(separator: " "))"
+class MoveDescriptor: MoveDescriptorProtocol {
+    func description(for move: GameMove) -> String {
+        let components = move.asComponents()
+        return "\(emojis.value(matching: components)) \(components.joined(separator: " "))"
     }
     
-    private func emoji(matching components: [String]) -> String {
-        for component in components {
-            let filtered = emojis.filter { component.lowercased().contains($0.key.lowercased()) }
-            if let match = filtered.first {
-                return match.value
-            }
-        }
-        fatalError("No matching emoji found")
-    }
-    
-    private var emojis: [String: String] {
+    private let emojis: [String: String] =
         [
             "Discard": "😝",
             "Bang": "🔫",
@@ -70,5 +52,4 @@ extension MoveDescriptor {
             "Reward": "🎁",
             "Penalize": "⚠️"
         ]
-    }
 }

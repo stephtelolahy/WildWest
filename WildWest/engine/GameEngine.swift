@@ -10,23 +10,25 @@ import RxSwift
 
 class GameEngine: GameEngineProtocol {
     
-    let stateSubject: BehaviorSubject<GameStateProtocol>
-    
+    private let stateSubject: BehaviorSubject<GameStateProtocol>
     private let database: GameDatabaseProtocol
     private let validMoveMatchers: [ValidMoveMatcherProtocol]
     private let autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol]
     private let effectMatchers: [EffectMatcherProtocol]
     private let moveExecutors: [MoveExecutorProtocol]
     private let updateExecutors: [UpdateExecutorProtocol]
+    private let updateDelay: Double
     
     private var movesQueue: [GameMove] = []
+    private var running = false
     
     init(database: GameDatabaseProtocol,
          validMoveMatchers: [ValidMoveMatcherProtocol],
          autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol],
          effectMatchers: [EffectMatcherProtocol],
          moveExecutors: [MoveExecutorProtocol],
-         updateExecutors: [UpdateExecutorProtocol]) {
+         updateExecutors: [UpdateExecutorProtocol],
+         updateDelay: Double) {
         self.database = database
         self.stateSubject = BehaviorSubject(value: database.state)
         self.validMoveMatchers = validMoveMatchers
@@ -34,6 +36,7 @@ class GameEngine: GameEngineProtocol {
         self.effectMatchers = effectMatchers
         self.moveExecutors = moveExecutors
         self.updateExecutors = updateExecutors
+        self.updateDelay = updateDelay
     }
     
     func start() {
@@ -45,8 +48,6 @@ class GameEngine: GameEngineProtocol {
         queue(GameMove(name: .startTurn, actorId: sheriff.identifier))
     }
     
-    private var running = false
-    
     func queue(_ move: GameMove) {
         movesQueue.append(move)
         
@@ -54,12 +55,13 @@ class GameEngine: GameEngineProtocol {
             return
         }
         
+        running = true
+        
         let move = self.movesQueue.remove(at: 0)
         self.execute(move)
         
-        running = true
         if #available(iOS 10.0, *) {
-            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] timer in
+            Timer.scheduledTimer(withTimeInterval: updateDelay, repeats: true) { [weak self] timer in
                 guard let self = self else {
                     return
                 }
@@ -74,29 +76,27 @@ class GameEngine: GameEngineProtocol {
                 self.execute(move)
             }
         } else {
-            // Fallback on earlier versions
+            // TODO: Fallback on earlier versions
         }
     }
     
     func execute(_ move: GameMove) {
+        _execute(move)
+        stateSubject.onNext(database.state)
+    }
+    
+    func observeAs(playerId: String?) -> Observable<GameStateProtocol> {
+        stateSubject.map { $0.hidingRoles(except: playerId) }
+    }
+}
+
+private extension GameEngine {
+    func _execute(_ move: GameMove) {
         // no move is allowed during update
         database.setValidMoves([:])
         
-        database.addExecutedMove(move)
-        print("\n*** \(String(describing: move)) ***")
-        
-        let updatesQueue = moveExecutors
-            .compactMap { $0.execute(move, in: database.state) }
-            .flatMap { $0 }
-        
-        updatesQueue.forEach { update in
-            print(String(describing: update))
-            updateExecutors.forEach { executor in
-                executor.execute(update, in: database)
-            }
-        }
-        
-        stateSubject.onNext(database.state)
+        // execute move
+        _executeUpdates(move)
         
         // check if game over
         guard database.state.outcome == nil else {
@@ -131,6 +131,51 @@ class GameEngine: GameEngineProtocol {
         }
         
         database.setValidMoves(validMoves)
-        stateSubject.onNext(database.state)
+    }
+    
+    func _executeUpdates(_ move: GameMove) {
+        let updatesQueue = moveExecutors
+            .compactMap { $0.execute(move, in: database.state) }
+            .flatMap { $0 }
+        
+        updatesQueue.forEach { update in
+            print(String(describing: update))
+            updateExecutors.forEach { executor in
+                executor.execute(update, in: database)
+            }
+        }
+        
+        database.addExecutedMove(move)
+        print("\n*** \(String(describing: move)) ***")
+    }
+}
+
+private extension GameStateProtocol {
+    func hidingRoles(except playerId: String?) -> GameStateProtocol {
+        GameState(players: players.map { $0.hidingRole(where: $0.identifier != playerId && $0.role != .sheriff) },
+                  deck: deck,
+                  discardPile: discardPile,
+                  turn: turn,
+                  challenge: challenge,
+                  bangsPlayed: bangsPlayed,
+                  barrelsResolved: barrelsResolved,
+                  damageEvents: damageEvents,
+                  generalStore: generalStore,
+                  outcome: outcome,
+                  validMoves: validMoves,
+                  executedMoves: executedMoves,
+                  eliminated: eliminated)
+    }
+}
+
+private extension PlayerProtocol {
+    func hidingRole(where condition: Bool) -> PlayerProtocol {
+        Player(role: condition ? nil : role,
+               ability: ability,
+               maxHealth: maxHealth,
+               imageName: imageName,
+               health: health,
+               hand: hand,
+               inPlay: inPlay)
     }
 }

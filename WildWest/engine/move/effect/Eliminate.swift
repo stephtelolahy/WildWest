@@ -43,7 +43,7 @@ class EliminateExecutor: MoveExecutorProtocol {
             updates.append(.setChallenge(.startTurn))
         }
         
-        let remainingRoles = state.players.filter { $0.identifier != actorId }.map { $0.role }
+        let remainingRoles = state.players.filter { $0.identifier != actorId }.compactMap { $0.role }
         if let outcome = calculator.outcome(for: remainingRoles) {
             updates.append(.setOutcome(outcome))
         }

@@ -38,7 +38,8 @@ class GameEngineTests: XCTestCase {
                          autoPlayMoveMatchers: [mockAutoPlayMoveMatcher],
                          effectMatchers: [mockEffectMatcher],
                          moveExecutors: [mockMoveExecutor],
-                         updateExecutors: [mockUpdateExecutor])
+                         updateExecutors: [mockUpdateExecutor],
+                         updateDelay: 0.0)
     }
     
     func test_ExecuteGameUpdates_IfExecutingMove() {

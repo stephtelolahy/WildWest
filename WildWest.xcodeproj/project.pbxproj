@@ -56,8 +56,42 @@
 		3351B58924269A24004F18C3 /* PassMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3351B58824269A24004F18C3 /* PassMatcherTests.swift */; };
 		3351B58B24269A3B004F18C3 /* PassExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3351B58A24269A3B004F18C3 /* PassExecutorTests.swift */; };
 		335A147423F312F700D9971E /* GameDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BA280023F1E9830084A3C9 /* GameDatabase.swift */; };
+		335BED692429334F009184A3 /* MoveSoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335BED682429334F009184A3 /* MoveSoundPlayer.swift */; };
+		335BED6A24293358009184A3 /* MoveSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E614240B5F48000B89EB /* MoveSelector.swift */; };
+		335BED6B24293358009184A3 /* MoveDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD4DB6D24209E4D001BBD48 /* MoveDescriptor.swift */; };
+		335BED6C24293358009184A3 /* InstructionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338FAD15242543030096B488 /* InstructionBuilder.swift */; };
+		335BED6D24293358009184A3 /* StatsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33318D6C24275AAE0055C6C5 /* StatsBuilder.swift */; };
+		335BED6E24293358009184A3 /* ActionsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E4411624077CA000B2848E /* ActionsAdapter.swift */; };
+		335BED6F24293358009184A3 /* MoveSoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335BED682429334F009184A3 /* MoveSoundPlayer.swift */; };
+		335BED7824293431009184A3 /* Western Ricochet-SoundBible.com-1725886901.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED722429342F009184A3 /* Western Ricochet-SoundBible.com-1725886901.mp3 */; };
+		335BED7924293431009184A3 /* Horse Galloping-SoundBible.com-1451398148.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED732429342F009184A3 /* Horse Galloping-SoundBible.com-1451398148.mp3 */; };
+		335BED7A24293431009184A3 /* Slap-SoundMaster13-49669815.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED7424293430009184A3 /* Slap-SoundMaster13-49669815.mp3 */; };
+		335BED7C24293431009184A3 /* Cowboy_with_spurs-G-rant-1371954508.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED7624293430009184A3 /* Cowboy_with_spurs-G-rant-1371954508.mp3 */; };
+		335BED7D24293431009184A3 /* Gun_loud-Soundmaster_-88363983.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED7724293431009184A3 /* Gun_loud-Soundmaster_-88363983.mp3 */; };
+		335BED7F2429394D009184A3 /* GameMove+Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335BED7E2429394D009184A3 /* GameMove+Components.swift */; };
+		335BED802429394D009184A3 /* GameMove+Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335BED7E2429394D009184A3 /* GameMove+Components.swift */; };
+		335BED8224293B65009184A3 /* Fuse Burning-SoundBible.com-1372982430.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED8124293B64009184A3 /* Fuse Burning-SoundBible.com-1372982430.mp3 */; };
+		335BED8324293B65009184A3 /* Fuse Burning-SoundBible.com-1372982430.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED8124293B64009184A3 /* Fuse Burning-SoundBible.com-1372982430.mp3 */; };
+		335BED8524293C2D009184A3 /* Slurping 2-SoundBible.com-1269549524.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED8424293C2D009184A3 /* Slurping 2-SoundBible.com-1269549524.mp3 */; };
+		335BED8624293C2D009184A3 /* Slurping 2-SoundBible.com-1269549524.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED8424293C2D009184A3 /* Slurping 2-SoundBible.com-1269549524.mp3 */; };
+		335BED8924293D49009184A3 /* Cowboy_Theme-Pavak-1711860633.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED8824293D49009184A3 /* Cowboy_Theme-Pavak-1711860633.mp3 */; };
+		335BED8A24293D49009184A3 /* Cowboy_Theme-Pavak-1711860633.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED8824293D49009184A3 /* Cowboy_Theme-Pavak-1711860633.mp3 */; };
+		335BED8C24293FCA009184A3 /* Shotgun-SoundBible.com-862990674.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED8B24293FCA009184A3 /* Shotgun-SoundBible.com-862990674.mp3 */; };
+		335BED8D24293FCA009184A3 /* Shotgun-SoundBible.com-862990674.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED8B24293FCA009184A3 /* Shotgun-SoundBible.com-862990674.mp3 */; };
+		335BED922429416A009184A3 /* Metal Latch-SoundBible.com-736691159.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED912429416A009184A3 /* Metal Latch-SoundBible.com-736691159.mp3 */; };
+		335BED932429416A009184A3 /* Metal Latch-SoundBible.com-736691159.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED912429416A009184A3 /* Metal Latch-SoundBible.com-736691159.mp3 */; };
+		335BED95242941DA009184A3 /* Slide Closed-SoundBible.com-1521580537.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED94242941DA009184A3 /* Slide Closed-SoundBible.com-1521580537.mp3 */; };
+		335BED96242941DA009184A3 /* Slide Closed-SoundBible.com-1521580537.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED94242941DA009184A3 /* Slide Closed-SoundBible.com-1521580537.mp3 */; };
+		335BED9824294422009184A3 /* Peacock-SoundBible.com-1698361099.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9724294422009184A3 /* Peacock-SoundBible.com-1698361099.mp3 */; };
+		335BED9924294422009184A3 /* Peacock-SoundBible.com-1698361099.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9724294422009184A3 /* Peacock-SoundBible.com-1698361099.mp3 */; };
+		335BED9B2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9A2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 */; };
+		335BED9C2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9A2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 */; };
+		335BED9E2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */; };
+		335BED9F2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */; };
 		336AA6F023F1450800328837 /* GameDatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */; };
 		336AA6F123F1450B00328837 /* GameDatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */; };
+		338A5FC0242BC8CE00766541 /* flyby-Conor-1500306612.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 338A5FBF242BC8CE00766541 /* flyby-Conor-1500306612.mp3 */; };
+		338A5FC2242BC9AA00766541 /* shotgun-old_school-RA_The_Sun_God-1129942741.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 338A5FC1242BC9A900766541 /* shotgun-old_school-RA_The_Sun_God-1129942741.mp3 */; };
 		338FAD16242543030096B488 /* InstructionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338FAD15242543030096B488 /* InstructionBuilder.swift */; };
 		3390F90B24253932001057A7 /* MoveClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3390F90A24253932001057A7 /* MoveClassifier.swift */; };
 		3390F90C24253932001057A7 /* MoveClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3390F90A24253932001057A7 /* MoveClassifier.swift */; };
@@ -278,7 +312,25 @@
 		3351B58524269386004F18C3 /* Pass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pass.swift; sourceTree = "<group>"; };
 		3351B58824269A24004F18C3 /* PassMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassMatcherTests.swift; sourceTree = "<group>"; };
 		3351B58A24269A3B004F18C3 /* PassExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassExecutorTests.swift; sourceTree = "<group>"; };
+		335BED682429334F009184A3 /* MoveSoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveSoundPlayer.swift; sourceTree = "<group>"; };
+		335BED722429342F009184A3 /* Western Ricochet-SoundBible.com-1725886901.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Western Ricochet-SoundBible.com-1725886901.mp3"; sourceTree = "<group>"; };
+		335BED732429342F009184A3 /* Horse Galloping-SoundBible.com-1451398148.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Horse Galloping-SoundBible.com-1451398148.mp3"; sourceTree = "<group>"; };
+		335BED7424293430009184A3 /* Slap-SoundMaster13-49669815.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Slap-SoundMaster13-49669815.mp3"; sourceTree = "<group>"; };
+		335BED7624293430009184A3 /* Cowboy_with_spurs-G-rant-1371954508.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Cowboy_with_spurs-G-rant-1371954508.mp3"; sourceTree = "<group>"; };
+		335BED7724293431009184A3 /* Gun_loud-Soundmaster_-88363983.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Gun_loud-Soundmaster_-88363983.mp3"; sourceTree = "<group>"; };
+		335BED7E2429394D009184A3 /* GameMove+Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameMove+Components.swift"; sourceTree = "<group>"; };
+		335BED8124293B64009184A3 /* Fuse Burning-SoundBible.com-1372982430.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Fuse Burning-SoundBible.com-1372982430.mp3"; sourceTree = "<group>"; };
+		335BED8424293C2D009184A3 /* Slurping 2-SoundBible.com-1269549524.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Slurping 2-SoundBible.com-1269549524.mp3"; sourceTree = "<group>"; };
+		335BED8824293D49009184A3 /* Cowboy_Theme-Pavak-1711860633.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Cowboy_Theme-Pavak-1711860633.mp3"; sourceTree = "<group>"; };
+		335BED8B24293FCA009184A3 /* Shotgun-SoundBible.com-862990674.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Shotgun-SoundBible.com-862990674.mp3"; sourceTree = "<group>"; };
+		335BED912429416A009184A3 /* Metal Latch-SoundBible.com-736691159.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Metal Latch-SoundBible.com-736691159.mp3"; sourceTree = "<group>"; };
+		335BED94242941DA009184A3 /* Slide Closed-SoundBible.com-1521580537.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Slide Closed-SoundBible.com-1521580537.mp3"; sourceTree = "<group>"; };
+		335BED9724294422009184A3 /* Peacock-SoundBible.com-1698361099.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Peacock-SoundBible.com-1698361099.mp3"; sourceTree = "<group>"; };
+		335BED9A2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Pain-SoundBible.com-1883168362.mp3"; sourceTree = "<group>"; };
+		335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Automatic Machine Gun-SoundBible.com-253461580.mp3"; sourceTree = "<group>"; };
 		336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDatabaseProtocol.swift; sourceTree = "<group>"; };
+		338A5FBF242BC8CE00766541 /* flyby-Conor-1500306612.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "flyby-Conor-1500306612.mp3"; sourceTree = "<group>"; };
+		338A5FC1242BC9A900766541 /* shotgun-old_school-RA_The_Sun_God-1129942741.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "shotgun-old_school-RA_The_Sun_God-1129942741.mp3"; sourceTree = "<group>"; };
 		338FAD15242543030096B488 /* InstructionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionBuilder.swift; sourceTree = "<group>"; };
 		3390F90A24253932001057A7 /* MoveClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveClassifier.swift; sourceTree = "<group>"; };
 		3390F90D242539BA001057A7 /* MoveClassifierProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveClassifierProtocol.swift; sourceTree = "<group>"; };
@@ -492,6 +544,46 @@
 			path = effect;
 			sourceTree = "<group>";
 		};
+		335BED7024293418009184A3 /* sfx */ = {
+			isa = PBXGroup;
+			children = (
+				335BED94242941DA009184A3 /* Slide Closed-SoundBible.com-1521580537.mp3 */,
+				335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */,
+				335BED7624293430009184A3 /* Cowboy_with_spurs-G-rant-1371954508.mp3 */,
+				335BED912429416A009184A3 /* Metal Latch-SoundBible.com-736691159.mp3 */,
+				335BED7724293431009184A3 /* Gun_loud-Soundmaster_-88363983.mp3 */,
+				335BED9A2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 */,
+				335BED732429342F009184A3 /* Horse Galloping-SoundBible.com-1451398148.mp3 */,
+				335BED8B24293FCA009184A3 /* Shotgun-SoundBible.com-862990674.mp3 */,
+				335BED7424293430009184A3 /* Slap-SoundMaster13-49669815.mp3 */,
+				335BED722429342F009184A3 /* Western Ricochet-SoundBible.com-1725886901.mp3 */,
+				335BED9724294422009184A3 /* Peacock-SoundBible.com-1698361099.mp3 */,
+				335BED8124293B64009184A3 /* Fuse Burning-SoundBible.com-1372982430.mp3 */,
+				335BED8424293C2D009184A3 /* Slurping 2-SoundBible.com-1269549524.mp3 */,
+				338A5FBF242BC8CE00766541 /* flyby-Conor-1500306612.mp3 */,
+				338A5FC1242BC9A900766541 /* shotgun-old_school-RA_The_Sun_God-1129942741.mp3 */,
+			);
+			path = sfx;
+			sourceTree = "<group>";
+		};
+		335BED712429341E009184A3 /* json */ = {
+			isa = PBXGroup;
+			children = (
+				ADE91ACF23B9FF0700F7316B /* cards.json */,
+				AD49F86923BA074100543F59 /* figures.json */,
+				33A815EC23DB54350081A055 /* roles.json */,
+			);
+			path = json;
+			sourceTree = "<group>";
+		};
+		335BED8724293D3D009184A3 /* music */ = {
+			isa = PBXGroup;
+			children = (
+				335BED8824293D49009184A3 /* Cowboy_Theme-Pavak-1711860633.mp3 */,
+			);
+			path = music;
+			sourceTree = "<group>";
+		};
 		3366493823F93EE000125483 /* database */ = {
 			isa = PBXGroup;
 			children = (
@@ -506,11 +598,13 @@
 			children = (
 				332499B223DB9F650082EF09 /* GameViewController.swift */,
 				3335E614240B5F48000B89EB /* MoveSelector.swift */,
-				ADD4DB6D24209E4D001BBD48 /* MoveDescriptor.swift */,
 				338FAD15242543030096B488 /* InstructionBuilder.swift */,
 				33318D6C24275AAE0055C6C5 /* StatsBuilder.swift */,
 				33E4411624077CA000B2848E /* ActionsAdapter.swift */,
 				33E4411524077CA000B2848E /* PlayersAdapter.swift */,
+				ADD4DB6D24209E4D001BBD48 /* MoveDescriptor.swift */,
+				335BED682429334F009184A3 /* MoveSoundPlayer.swift */,
+				335BED7E2429394D009184A3 /* GameMove+Components.swift */,
 				33E4411724077CA000B2848E /* cell */,
 			);
 			path = game;
@@ -730,9 +824,9 @@
 		AD36CDE023C51F59008D4EDB /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				ADE91ACF23B9FF0700F7316B /* cards.json */,
-				AD49F86923BA074100543F59 /* figures.json */,
-				33A815EC23DB54350081A055 /* roles.json */,
+				335BED712429341E009184A3 /* json */,
+				335BED8724293D3D009184A3 /* music */,
+				335BED7024293418009184A3 /* sfx */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -993,10 +1087,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADB7D2F8239EE03900653905 /* LaunchScreen.storyboard in Resources */,
+				335BED8224293B65009184A3 /* Fuse Burning-SoundBible.com-1372982430.mp3 in Resources */,
 				ADB7D2F5239EE03900653905 /* Assets.xcassets in Resources */,
+				335BED7C24293431009184A3 /* Cowboy_with_spurs-G-rant-1371954508.mp3 in Resources */,
+				335BED8524293C2D009184A3 /* Slurping 2-SoundBible.com-1269549524.mp3 in Resources */,
+				335BED922429416A009184A3 /* Metal Latch-SoundBible.com-736691159.mp3 in Resources */,
+				335BED7D24293431009184A3 /* Gun_loud-Soundmaster_-88363983.mp3 in Resources */,
+				335BED7A24293431009184A3 /* Slap-SoundMaster13-49669815.mp3 in Resources */,
+				335BED95242941DA009184A3 /* Slide Closed-SoundBible.com-1521580537.mp3 in Resources */,
+				335BED7824293431009184A3 /* Western Ricochet-SoundBible.com-1725886901.mp3 in Resources */,
+				335BED8C24293FCA009184A3 /* Shotgun-SoundBible.com-862990674.mp3 in Resources */,
+				335BED7924293431009184A3 /* Horse Galloping-SoundBible.com-1451398148.mp3 in Resources */,
+				335BED8924293D49009184A3 /* Cowboy_Theme-Pavak-1711860633.mp3 in Resources */,
+				335BED9824294422009184A3 /* Peacock-SoundBible.com-1698361099.mp3 in Resources */,
+				338A5FC2242BC9AA00766541 /* shotgun-old_school-RA_The_Sun_God-1129942741.mp3 in Resources */,
 				ADB7D2F3239EE03800653905 /* Main.storyboard in Resources */,
 				33A815ED23DB54350081A055 /* roles.json in Resources */,
+				335BED9B2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 in Resources */,
 				ADE91AD023B9FF0700F7316B /* cards.json in Resources */,
+				338A5FC0242BC8CE00766541 /* flyby-Conor-1500306612.mp3 in Resources */,
+				335BED9E2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 in Resources */,
 				AD49F86A23BA074100543F59 /* figures.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1006,9 +1116,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				33A815EB23DB525A0081A055 /* figures.json in Resources */,
+				335BED9924294422009184A3 /* Peacock-SoundBible.com-1698361099.mp3 in Resources */,
 				33A815E623DB507D0081A055 /* Assets.xcassets in Resources */,
+				335BED8A24293D49009184A3 /* Cowboy_Theme-Pavak-1711860633.mp3 in Resources */,
+				335BED8D24293FCA009184A3 /* Shotgun-SoundBible.com-862990674.mp3 in Resources */,
+				335BED9F2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 in Resources */,
+				335BED96242941DA009184A3 /* Slide Closed-SoundBible.com-1521580537.mp3 in Resources */,
+				335BED8324293B65009184A3 /* Fuse Burning-SoundBible.com-1372982430.mp3 in Resources */,
+				335BED932429416A009184A3 /* Metal Latch-SoundBible.com-736691159.mp3 in Resources */,
+				335BED9C2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 in Resources */,
 				ADE91AD123B9FF0700F7316B /* cards.json in Resources */,
 				33A815EE23DB54350081A055 /* roles.json in Resources */,
+				335BED8624293C2D009184A3 /* Slurping 2-SoundBible.com-1269549524.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1148,6 +1267,7 @@
 				33A4381223E4BD3200C39DD6 /* ArrayExtension.swift in Sources */,
 				3302906123F32AC30099C438 /* Beer.swift in Sources */,
 				336AA6F023F1450800328837 /* GameDatabaseProtocol.swift in Sources */,
+				335BED692429334F009184A3 /* MoveSoundPlayer.swift in Sources */,
 				33E4411D24077CA000B2848E /* ActionCell.swift in Sources */,
 				ADD4DB6E24209E4D001BBD48 /* MoveDescriptor.swift in Sources */,
 				33FDD70C240BFB4B00BC3E14 /* MenuViewController.swift in Sources */,
@@ -1186,6 +1306,7 @@
 				33D477E723E4F9E300E232D9 /* RangeCalculatorProtocol.swift in Sources */,
 				3395258023E37CCE003DE948 /* GameEngineProtocol.swift in Sources */,
 				AD52B99323B175110013240B /* Card.swift in Sources */,
+				335BED7F2429394D009184A3 /* GameMove+Components.swift in Sources */,
 				ADD4DB722420AA2B001BBD48 /* GameMoveExtension.swift in Sources */,
 				ADD035CF23A96002003B2576 /* CardProtocol.swift in Sources */,
 				33BA280123F1E9830084A3C9 /* GameDatabase.swift in Sources */,
@@ -1245,12 +1366,14 @@
 				33A4381523E4BE8200C39DD6 /* ArrayExtensionTests.swift in Sources */,
 				33911F2C242661E10023C6AF /* IndiansExecutorTests.swift in Sources */,
 				AD374E4C242144200025FD4A /* BeerMatcherTests.swift in Sources */,
+				335BED6E24293358009184A3 /* ActionsAdapter.swift in Sources */,
 				3351B58B24269A3B004F18C3 /* PassExecutorTests.swift in Sources */,
 				33911EF3242619170023C6AF /* ResolveDynamiteExecutorTests.swift in Sources */,
 				33911F0024261F920023C6AF /* JailExecutorTests.swift in Sources */,
 				33FD755624267C7200C8622F /* ResolveBarrelExecutorTests.swift in Sources */,
 				AD1EF2A424214C1C00F15BF8 /* SaloonMatcherTests.swift in Sources */,
 				330B7E1223F70D0200B3653D /* OutcomeCalculator.swift in Sources */,
+				335BED6F24293358009184A3 /* MoveSoundPlayer.swift in Sources */,
 				33A4381323E4BD3200C39DD6 /* ArrayExtension.swift in Sources */,
 				333B23462425F20500685454 /* EndTurn.swift in Sources */,
 				3351B58924269A24004F18C3 /* PassMatcherTests.swift in Sources */,
@@ -1270,6 +1393,8 @@
 				33D964AC23DD9049007295E7 /* ResourcesTests+Cards.swift in Sources */,
 				33318D6B242750290055C6C5 /* PenalizeSheriffOnEliminatingDeputyExecutorTests.swift in Sources */,
 				33D964AE23DD907E007295E7 /* ResourcesTests+Figures.swift in Sources */,
+				335BED6B24293358009184A3 /* MoveDescriptor.swift in Sources */,
+				335BED802429394D009184A3 /* GameMove+Components.swift in Sources */,
 				3395258123E37CCE003DE948 /* GameEngineProtocol.swift in Sources */,
 				33911F062426309D0023C6AF /* ResolveJailExecutorTests.swift in Sources */,
 				33FD7561242682F500C8622F /* DiscardBangOnDuelExecutorTests.swift in Sources */,
@@ -1279,6 +1404,8 @@
 				33911F3024266ED50023C6AF /* DuelMatcherTests.swift in Sources */,
 				339CA271242551A800D43128 /* StagecoachMatcherTests.swift in Sources */,
 				33911EF1242618EE0023C6AF /* ResolveDynamiteMatcherTests.swift in Sources */,
+				335BED6D24293358009184A3 /* StatsBuilder.swift in Sources */,
+				335BED6C24293358009184A3 /* InstructionBuilder.swift in Sources */,
 				ADB2D8B0242001AE00AD0C11 /* StartTurnMatcherTests.swift in Sources */,
 				33318D69242750130055C6C5 /* PenalizeSheriffOnEliminatingDeputyMatcherTests.swift in Sources */,
 				336AA6F123F1450B00328837 /* GameDatabaseProtocol.swift in Sources */,
@@ -1330,6 +1457,7 @@
 				339CA26F24254F4800D43128 /* Stagecoach.swift in Sources */,
 				33911F18242642C00023C6AF /* ChooseGeneralStoreCardExecutorTests.swift in Sources */,
 				33911EFE24261F6E0023C6AF /* JailMatcherTests.swift in Sources */,
+				335BED6A24293358009184A3 /* MoveSelector.swift in Sources */,
 				AD52B99A23B178CC0013240B /* Player.swift in Sources */,
 				33911EEF2426165C0023C6AF /* ResolveDynamite.swift in Sources */,
 				ADE91AD523BA00DC00F7316B /* GameSetup.swift in Sources */,

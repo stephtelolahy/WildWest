@@ -21,16 +21,23 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1ml-If-Dys">
-                                <rect key="frame" x="97.5" y="133.5" width="180.5" height="400"/>
+                                <rect key="frame" x="65.5" y="133.5" width="244.5" height="400"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_splash" translatesAutoresizingMaskIntoConstraints="NO" id="nUc-dp-SOW" userLabel="logo">
-                                        <rect key="frame" x="38" y="0.0" width="104" height="104"/>
+                                        <rect key="frame" x="70" y="0.0" width="104" height="104"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="nUc-dp-SOW" secondAttribute="height" multiplier="1:1" id="iTc-HC-HH9"/>
                                         </constraints>
                                     </imageView>
+                                    <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Western Card Game\ by Stéphano T." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQg-zg-mUN">
+                                        <rect key="frame" x="0.0" y="148" width="244.5" height="20"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="TgM-gl-AKs">
-                                        <rect key="frame" x="0.0" y="180" width="180.5" height="92"/>
+                                        <rect key="frame" x="32" y="212" width="180.5" height="92"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="y3J-eS-E6e">
                                                 <rect key="frame" x="0.0" y="0.0" width="180.5" height="32"/>
@@ -68,7 +75,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s8o-qf-BAQ">
-                                        <rect key="frame" x="40" y="348" width="100" height="52"/>
+                                        <rect key="frame" x="72" y="348" width="100" height="52"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="cJz-6l-Jdk"/>
                                             <constraint firstAttribute="width" secondItem="s8o-qf-BAQ" secondAttribute="height" multiplier="557:291" id="d4G-rt-8LJ"/>
@@ -129,7 +136,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="iCj-xh-rDL">
-                                <rect key="frame" x="0.0" y="56" width="375" height="95"/>
+                                <rect key="frame" x="0.0" y="56" width="375" height="70"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MessageCell" id="Z7O-3O-qgz" customClass="MessageCell" customModule="WildWest" customModuleProvider="target">
@@ -165,7 +172,7 @@
                                 </connections>
                             </tableView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Cuo-aq-X8E" userLabel="stateCollectionView">
-                                <rect key="frame" x="0.0" y="159" width="375" height="375"/>
+                                <rect key="frame" x="0.0" y="134" width="375" height="375"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Cuo-aq-X8E" secondAttribute="height" multiplier="1:1" id="mQT-Z2-cbz"/>
@@ -276,7 +283,7 @@
                                 </connections>
                             </collectionView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="l2k-9K-ciW" userLabel="deckStackView">
-                                <rect key="frame" x="140.5" y="311.5" width="94" height="70"/>
+                                <rect key="frame" x="140.5" y="286.5" width="94" height="70"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="01_back" translatesAutoresizingMaskIntoConstraints="NO" id="DFl-Ga-f06" userLabel="deckImageView">
                                         <rect key="frame" x="0.0" y="0.0" width="45" height="70"/>
@@ -303,10 +310,10 @@
                                 </constraints>
                             </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YnA-A3-EaS" userLabel="handCollectionView">
-                                <rect key="frame" x="0.0" y="542" width="375" height="125"/>
+                                <rect key="frame" x="0.0" y="517" width="375" height="150"/>
                                 <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="YnA-A3-EaS" secondAttribute="height" multiplier="3:1" id="9sU-54-PvN"/>
+                                    <constraint firstAttribute="width" secondItem="YnA-A3-EaS" secondAttribute="height" multiplier="5:2" id="9sU-54-PvN"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="t6I-k1-1v1">
                                     <size key="itemSize" width="120" height="110"/>
@@ -316,7 +323,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActionCell" id="iIg-zU-zlR" customClass="ActionCell" customModule="WildWest" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="7.5" width="120" height="110"/>
+                                        <rect key="frame" x="0.0" y="20" width="120" height="110"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Qir-o8-rNa">
                                             <rect key="frame" x="0.0" y="0.0" width="120" height="110"/>
