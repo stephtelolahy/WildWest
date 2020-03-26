@@ -90,12 +90,10 @@
 		335BED9F2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */; };
 		336AA6F023F1450800328837 /* GameDatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */; };
 		336AA6F123F1450B00328837 /* GameDatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */; };
-		337F20F9242D42C400828342 /* StayInJailMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337F20F8242D42C400828342 /* StayInJailMatcherTests.swift */; };
-		3383CFC8242D430900777E61 /* StayInJailExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3383CFC7242D430900777E61 /* StayInJailExecutorTests.swift */; };
-		3383CFCA242D432200777E61 /* EscapeFromJailMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3383CFC9242D432200777E61 /* EscapeFromJailMatcherTests.swift */; };
-		3383CFCC242D433A00777E61 /* EscapeFromJailExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3383CFCB242D433A00777E61 /* EscapeFromJailExecutorTests.swift */; };
 		3383CFCE242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3383CFCD242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 */; };
 		3383CFD0242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3383CFCF242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 */; };
+		3383CFD2242D4DA500777E61 /* ResolveJailMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3383CFD1242D4DA500777E61 /* ResolveJailMatcherTests.swift */; };
+		3383CFD4242D4DB700777E61 /* ResolveJailExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3383CFD3242D4DB700777E61 /* ResolveJailExecutorTests.swift */; };
 		338A5FC0242BC8CE00766541 /* flyby-Conor-1500306612.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 338A5FBF242BC8CE00766541 /* flyby-Conor-1500306612.mp3 */; };
 		338A5FC2242BC9AA00766541 /* shotgun-old_school-RA_The_Sun_God-1129942741.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 338A5FC1242BC9A900766541 /* shotgun-old_school-RA_The_Sun_God-1129942741.mp3 */; };
 		338FAD16242543030096B488 /* InstructionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338FAD15242543030096B488 /* InstructionBuilder.swift */; };
@@ -333,12 +331,10 @@
 		335BED9A2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Pain-SoundBible.com-1883168362.mp3"; sourceTree = "<group>"; };
 		335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Automatic Machine Gun-SoundBible.com-253461580.mp3"; sourceTree = "<group>"; };
 		336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDatabaseProtocol.swift; sourceTree = "<group>"; };
-		337F20F8242D42C400828342 /* StayInJailMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StayInJailMatcherTests.swift; sourceTree = "<group>"; };
-		3383CFC7242D430900777E61 /* StayInJailExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StayInJailExecutorTests.swift; sourceTree = "<group>"; };
-		3383CFC9242D432200777E61 /* EscapeFromJailMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EscapeFromJailMatcherTests.swift; sourceTree = "<group>"; };
-		3383CFCB242D433A00777E61 /* EscapeFromJailExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EscapeFromJailExecutorTests.swift; sourceTree = "<group>"; };
 		3383CFCD242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Metal Clang-SoundBible.com-19572601.mp3"; sourceTree = "<group>"; };
 		3383CFCF242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Ta Da-SoundBible.com-1884170640.mp3"; sourceTree = "<group>"; };
+		3383CFD1242D4DA500777E61 /* ResolveJailMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveJailMatcherTests.swift; sourceTree = "<group>"; };
+		3383CFD3242D4DB700777E61 /* ResolveJailExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveJailExecutorTests.swift; sourceTree = "<group>"; };
 		338A5FBF242BC8CE00766541 /* flyby-Conor-1500306612.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "flyby-Conor-1500306612.mp3"; sourceTree = "<group>"; };
 		338A5FC1242BC9A900766541 /* shotgun-old_school-RA_The_Sun_God-1129942741.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "shotgun-old_school-RA_The_Sun_God-1129942741.mp3"; sourceTree = "<group>"; };
 		338FAD15242543030096B488 /* InstructionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionBuilder.swift; sourceTree = "<group>"; };
@@ -861,10 +857,8 @@
 				33911EF2242619170023C6AF /* ResolveDynamiteExecutorTests.swift */,
 				33FD755324267C5400C8622F /* ResolveBarrelMatcherTests.swift */,
 				33FD755524267C7200C8622F /* ResolveBarrelExecutorTests.swift */,
-				337F20F8242D42C400828342 /* StayInJailMatcherTests.swift */,
-				3383CFC7242D430900777E61 /* StayInJailExecutorTests.swift */,
-				3383CFC9242D432200777E61 /* EscapeFromJailMatcherTests.swift */,
-				3383CFCB242D433A00777E61 /* EscapeFromJailExecutorTests.swift */,
+				3383CFD1242D4DA500777E61 /* ResolveJailMatcherTests.swift */,
+				3383CFD3242D4DB700777E61 /* ResolveJailExecutorTests.swift */,
 			);
 			path = autoplay;
 			sourceTree = "<group>";
@@ -1343,7 +1337,6 @@
 				3395258423E37D07003DE948 /* GameSetupProtocol.swift in Sources */,
 				333B23492425F31700685454 /* EndTurnMatcherTests.swift in Sources */,
 				339CA27724256F4500D43128 /* WellsFargoMatcherMatcher.swift in Sources */,
-				3383CFC8242D430900777E61 /* StayInJailExecutorTests.swift in Sources */,
 				33318D602427494D0055C6C5 /* GainRewardOnEliminatingOutlaw.swift in Sources */,
 				3302905C23F327AE0099C438 /* Saloon.swift in Sources */,
 				33FB59B72427F69100090D23 /* PlayersAdapterTests.swift in Sources */,
@@ -1425,7 +1418,6 @@
 				ADD4DB702420A8F2001BBD48 /* GameMoveExtensionTests.swift in Sources */,
 				33D477F223E57DE500E232D9 /* FigureProtocol.swift in Sources */,
 				33FD755F242682DC00C8622F /* DiscardBangOnIndiansMatcherTests.swift in Sources */,
-				337F20F9242D42C400828342 /* StayInJailMatcherTests.swift in Sources */,
 				33911F0124262F7E0023C6AF /* ResolveJail.swift in Sources */,
 				3351B58724269386004F18C3 /* Pass.swift in Sources */,
 				339A295023EFFE70002C5CD8 /* GameStateExtension.swift in Sources */,
@@ -1441,12 +1433,12 @@
 				ADE91ACE23B9FE2300F7316B /* JsonReader.swift in Sources */,
 				33911F0A242634850023C6AF /* GeneralStoreMatcherTests.swift in Sources */,
 				3308D7E52425E8D500ECE83C /* PanicExecutorTests.swift in Sources */,
+				3383CFD2242D4DA500777E61 /* ResolveJailMatcherTests.swift in Sources */,
 				33911F1C242646260023C6AF /* Bang.swift in Sources */,
 				33D477EB23E4FA0F00E232D9 /* RangeCalculator.swift in Sources */,
 				33911F36242674C90023C6AF /* DiscardMissedMatcherTests.swift in Sources */,
 				33FD755D242682BD00C8622F /* DiscardBangOnDuelMatcherTests.swift in Sources */,
 				33911EFB24261E220023C6AF /* Jail.swift in Sources */,
-				3383CFCA242D432200777E61 /* EscapeFromJailMatcherTests.swift in Sources */,
 				33CD7E54242610DE0072155C /* EquipExecutorTests.swift in Sources */,
 				33911F2624265CC00023C6AF /* GatlingExecutorTests.swift in Sources */,
 				33911F2424265CA40023C6AF /* GatlingMatcherTests.swift in Sources */,
@@ -1462,6 +1454,7 @@
 				33CD7E52242610A00072155C /* EquipMatcherTests.swift in Sources */,
 				AD1EF2A624214C5300F15BF8 /* SaloonExecutorTests.swift in Sources */,
 				AD7F34BF23D79893001B4072 /* MockGameStateProtocolExtension.swift in Sources */,
+				3383CFD4242D4DB700777E61 /* ResolveJailExecutorTests.swift in Sources */,
 				AD7F34BD23D79879001B4072 /* MockPlayerProtocolExtension.swift in Sources */,
 				33D477F423E57FDD00E232D9 /* MockFigureProtocolExtension.swift in Sources */,
 				3301E63923F7EEF700AB35C7 /* AIProtocol.swift in Sources */,
@@ -1479,7 +1472,6 @@
 				3390F90C24253932001057A7 /* MoveClassifier.swift in Sources */,
 				AD52B99423B175110013240B /* Card.swift in Sources */,
 				33E4412224077D8000B2848E /* Score.swift in Sources */,
-				3383CFCC242D433A00777E61 /* EscapeFromJailExecutorTests.swift in Sources */,
 				3390F90F242539BA001057A7 /* MoveClassifierProtocol.swift in Sources */,
 				AD671A1D23D8F9D600F0AA4A /* CardExtension.swift in Sources */,
 				ADB2D8BA24200FFA00AD0C11 /* StartTurnExecutorTests.swift in Sources */,

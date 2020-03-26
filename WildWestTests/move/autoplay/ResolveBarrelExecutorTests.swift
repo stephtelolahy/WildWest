@@ -9,21 +9,19 @@
 import XCTest
 import Cuckoo
 
-class ResolveBarrelExecutorTests: XCTestCase {
+class UseBarrelExecutorTests: XCTestCase {
     
-    private let sut = ResolveBarrelExecutor()
+    private let sut = UseBarrelExecutor()
     
     func test_ResolveShootChallenge_IfReturnHeartFromDeck() {
         // Given
-        let mockCard = MockCardProtocol().suit(is: .hearts)
         let mockState = MockGameStateProtocol()
         Cuckoo.stub(mockState) { mock in
-            when(mock.deck.get).thenReturn([mockCard, MockCardProtocol()])
             when(mock.challenge.get).thenReturn(.shoot(["p1"], .bang, "px"))
             when(mock.barrelsResolved.get).thenReturn(0)
         }
         
-        let move = GameMove(name: .resolve, actorId: "p1", cardId: "c1", cardName: .barrel)
+        let move = GameMove(name: .useBarrel, actorId: "p1")
         
         // When
         let updates = sut.execute(move, in: mockState)
@@ -32,18 +30,21 @@ class ResolveBarrelExecutorTests: XCTestCase {
         XCTAssertEqual(updates, [.flipOverFirstDeckCard,
                                  .setChallenge(nil)])
     }
+}
+
+class FailBarelExecutorTests: XCTestCase {
+    
+    private let sut = FailBarelExecutor()
     
     func test_DoNotResolveShootChallenge_IfReturnNonHeartFromDeck() {
         // Given
-        let mockCard = MockCardProtocol().identified(by: "c1").suit(is: .diamonds)
         let mockState = MockGameStateProtocol()
         Cuckoo.stub(mockState) { mock in
-            when(mock.deck.get).thenReturn([mockCard, MockCardProtocol()])
             when(mock.challenge.get).thenReturn(.shoot(["p1"], .bang, "px"))
             when(mock.barrelsResolved.get).thenReturn(0)
         }
         
-        let move = GameMove(name: .resolve, actorId: "p1", cardId: "c1", cardName: .barrel)
+        let move = GameMove(name: .failBarrel, actorId: "p1")
         
         // When
         let updates = sut.execute(move, in: mockState)

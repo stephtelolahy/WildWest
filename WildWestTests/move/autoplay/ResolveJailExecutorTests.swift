@@ -1,5 +1,5 @@
 //
-//  StayInJailExecutorTests.swift
+//  ResolveJailExecutorTests.swift
 //  WildWestTests
 //
 //  Created by Hugues Stephano Telolahy on 26/03/2020.
@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import Cuckoo
 
 class StayInJailExecutorTests: XCTestCase {
 
@@ -28,5 +27,23 @@ class StayInJailExecutorTests: XCTestCase {
                                  .playerDiscardInPlay("p1", "c1"),
                                  .setTurn("p2"),
                                  .setChallenge(.startTurn)])
+    }
+}
+
+class EscapeFromJailExecutorTests: XCTestCase {
+
+    private let sut = EscapeFromJailExecutor()
+
+    func test_DiscardJail_IfEscapeFromJail() {
+        // Given
+        let mockState = MockGameStateProtocol()
+        let move = GameMove(name: .escapeFromJail, actorId: "p1", cardId: "c1")
+        
+        // When
+        let updates = sut.execute(move, in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates, [.flipOverFirstDeckCard,
+                                 .playerDiscardInPlay("p1", "c1")])
     }
 }

@@ -68,6 +68,8 @@ class MoveSoundPlayer: MoveSoundPlayerProtocol {
             "Reward": "Ta Da-SoundBible.com-1884170640",
             "Penalize": "Slap-SoundMaster13-49669815",
             "stayInJail": "Metal Clang-SoundBible.com-19572601",
-            "escapeFromJail": "Ta Da-SoundBible.com-1884170640"
+            "escapeFromJail": "Ta Da-SoundBible.com-1884170640",
+            "useBarrel": "Western Ricochet-SoundBible.com-1725886901",
+            "failBarrel": "Metal Clang-SoundBible.com-19572601"
         ]
 }

@@ -52,7 +52,8 @@ class GameConfiguration {
          ResolveDynamiteMatcher(),
          EscapeFromJailMatcher(),
          StayInJailMatcher(),
-         ResolveBarrelMatcher()]
+         UseBarrelMatcher(),
+         FailBarelMatcher()]
     }
     
     var effectMatchers: [EffectMatcherProtocol] {
@@ -83,7 +84,8 @@ class GameConfiguration {
          IndiansExecutor(),
          DuelExecutor(),
          DiscardMissedExecutor(),
-         ResolveBarrelExecutor(),
+         UseBarrelExecutor(),
+         FailBarelExecutor(),
          DiscardBangOnDuelExecutor(),
          DiscardBangOnIndiansExecutor(),
          DiscardBeerExecutor(),
