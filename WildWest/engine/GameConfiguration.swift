@@ -97,8 +97,4 @@ class GameConfiguration {
          GainRewardOnEliminatingOutlawExecutor(),
          PenalizeSheriffOnEliminatingDeputyExecutor()]
     }
-    
-    var updateExecutors: [UpdateExecutorProtocol] {
-        [GameUpdateExecutor()]
-    }
 }

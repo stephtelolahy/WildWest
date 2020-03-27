@@ -88,7 +88,7 @@ class MenuViewController: UIViewController {
                                 autoPlayMoveMatchers: config.autoPlayMoveMatchers,
                                 effectMatchers: config.effectMatchers,
                                 moveExecutors: config.moveExectors,
-                                updateExecutors: config.updateExecutors,
+                                updateExecutor: GameUpdateExecutor(),
                                 updateDelay: 1.0)
         
         var controlledPlayerId: String?
