@@ -25,9 +25,16 @@ enum MoveName: String {
     case choose     // reaction move: choose one card from general store
     case discard    // reaction move: discard card to cancel an attack
     case pass       // reaction move: do nothing while attacked
-    case resolve    // special move: flip over the top card of the deck to apply an effect of inPlay card
     
-    // game effects
+    // autoPlay
+    case escapeFromJail
+    case stayInJail
+    case explodeDynamite
+    case passDynamite
+    case useBarrel
+    case failBarrel
+    
+    // effects
     case eliminate
     case gainRewardOnEliminatingOutlaw
     case penalizeSheriffOnEliminatingDeputy

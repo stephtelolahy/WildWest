@@ -1,76 +1,83 @@
 //
-//  GameDatabase.swift
+//  MemoryCachedDataBase.swift
 //  WildWest
 //
-//  Created by Hugues Stephano Telolahy on 10/02/2020.
+//  Created by Hugues Stephano Telolahy on 27/03/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
+// swiftlint:disable force_cast
 
-extension GameState: GameDatabaseProtocol {
+class MemoryCachedDataBase: GameDatabaseProtocol {
+    
+    private var mutableState: GameState
+    
+    init(state: GameStateProtocol) {
+        mutableState = state as! GameState
+    }
     
     var state: GameStateProtocol {
-        self
+        mutableState
     }
     
     // Flags
     
     func setTurn(_ turn: String) {
-        self.turn = turn
+        mutableState.turn = turn
     }
     
     func setChallenge(_ challenge: Challenge?) {
-        self.challenge = challenge
+        mutableState.challenge = challenge
     }
     
     func setBangsPlayed(_ bangsPlayed: Int) {
-        self.bangsPlayed = bangsPlayed
+        mutableState.bangsPlayed = bangsPlayed
     }
     
     func setBarrelsResolved(_ barrelsResolved: Int) {
-        self.barrelsResolved = barrelsResolved
+        mutableState.barrelsResolved = barrelsResolved
     }
     
     func addExecutedMove(_ move: GameMove) {
-        executedMoves.append(move)
+        mutableState.executedMoves.append(move)
     }
-
+    
     func setValidMoves(_ moves: [String: [GameMove]]) {
-        self.validMoves = moves
+        mutableState.validMoves = moves
     }
     
     func removePlayer(_ playerId: String) -> PlayerProtocol? {
-        players.removeFirst(where: { $0.identifier == playerId })
+        mutableState.players.removeFirst(where: { $0.identifier == playerId })
     }
     
     func addEliminated(_ player: PlayerProtocol) {
-        eliminated.append(player)
+        mutableState.eliminated.append(player)
     }
     
     func setOutcome(_ outcome: GameOutcome) {
-        self.outcome = outcome
+        mutableState.outcome = outcome
     }
     
     func addDamageEvent(_ event: DamageEvent) {
-        damageEvents.append(event)
+        mutableState.damageEvents.append(event)
     }
     
     /// Deck
     
     func deckRemoveFirst() -> CardProtocol {
-        deck.removeFirst()
+        mutableState.deck.removeFirst()
     }
     
     func addDiscard(_ card: CardProtocol) {
-        deck.append(card)
-        discardPile = [card]
+        mutableState.deck.append(card)
+        mutableState.discardPile = [card]
     }
     
     func addGeneralStore(_ card: CardProtocol) {
-        generalStore.append(card)
+        mutableState.generalStore.append(card)
     }
     
     func removeGeneralStore(_ cardId: String) -> CardProtocol? {
-        generalStore.removeFirst(where: { $0.identifier == cardId })
+        mutableState.generalStore.removeFirst(where: { $0.identifier == cardId })
     }
     
     /// Player
@@ -96,8 +103,8 @@ extension GameState: GameDatabaseProtocol {
     }
 }
 
-private extension GameState {
+private extension MemoryCachedDataBase {
     func player(_ playerId: String) -> Player? {
-        players.first(where: { $0.identifier == playerId }) as? Player
+        mutableState.players.first(where: { $0.identifier == playerId }) as? Player
     }
 }

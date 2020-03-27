@@ -81,17 +81,14 @@ class MenuViewController: UIViewController {
         let state = gameSetup.setupGame(roles: roles.shuffled(),
                                         figures: figures.shuffled(),
                                         cards: cards.shuffled())
-        
-        guard let database = state as? GameDatabaseProtocol else {
-            fatalError("Invalid database")
-        }
+        let database = MemoryCachedDataBase(state: state)
         
         let engine = GameEngine(database: database,
                                 validMoveMatchers: config.validMoveMatchers,
                                 autoPlayMoveMatchers: config.autoPlayMoveMatchers,
                                 effectMatchers: config.effectMatchers,
                                 moveExecutors: config.moveExectors,
-                                updateExecutors: config.updateExecutors,
+                                updateExecutor: GameUpdateExecutor(),
                                 updateDelay: 1.0)
         
         var controlledPlayerId: String?

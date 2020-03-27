@@ -1,46 +1,23 @@
-
 //
 //  ResolveJailExecutorTests.swift
 //  WildWestTests
 //
-//  Created by Hugues Stephano Telolahy on 21/03/2020.
+//  Created by Hugues Stephano Telolahy on 26/03/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
 import XCTest
-import Cuckoo
 
-class ResolveJailExecutorTests: XCTestCase {
+class StayInJailExecutorTests: XCTestCase {
+
+    private let sut = StayInJailExecutor()
     
-    private let sut = ResolveJailExecutor()
-    
-    func test_DiscardJail_IfReturnHeartFromDeck() {
+    func test_SkipTurn_IfStayInJail() {
         // Given
-        let mockCard = MockCardProtocol().suit(is: .hearts)
-        let mockState = MockGameStateProtocol()
-        Cuckoo.stub(mockState) { mock in
-            when(mock.deck.get).thenReturn([mockCard, MockCardProtocol()])
-        }
-        let move = GameMove(name: .resolve, actorId: "p1", cardId: "c1", cardName: .jail)
-        
-        // When
-        let updates = sut.execute(move, in: mockState)
-        
-        // Assert
-        XCTAssertEqual(updates, [.flipOverFirstDeckCard,
-                                 .playerDiscardInPlay("p1", "c1")])
-    }
-    
-    func test_SkipTurn_IfReturnNonHeartFromDeck() {
-        // Given
-        let mockCard = MockCardProtocol().identified(by: "c1").suit(is: .clubs)
         let mockState = MockGameStateProtocol()
             .players(are: MockPlayerProtocol().identified(by: "p1"), MockPlayerProtocol().identified(by: "p2"))
             .currentTurn(is: "p1")
-        Cuckoo.stub(mockState) { mock in
-            when(mock.deck.get).thenReturn([mockCard, MockCardProtocol()])
-        }
-        let move = GameMove(name: .resolve, actorId: "p1", cardId: "c1", cardName: .jail)
+        let move = GameMove(name: .stayInJail, actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(move, in: mockState)
@@ -50,5 +27,23 @@ class ResolveJailExecutorTests: XCTestCase {
                                  .playerDiscardInPlay("p1", "c1"),
                                  .setTurn("p2"),
                                  .setChallenge(.startTurn)])
+    }
+}
+
+class EscapeFromJailExecutorTests: XCTestCase {
+
+    private let sut = EscapeFromJailExecutor()
+
+    func test_DiscardJail_IfEscapeFromJail() {
+        // Given
+        let mockState = MockGameStateProtocol()
+        let move = GameMove(name: .escapeFromJail, actorId: "p1", cardId: "c1")
+        
+        // When
+        let updates = sut.execute(move, in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates, [.flipOverFirstDeckCard,
+                                 .playerDiscardInPlay("p1", "c1")])
     }
 }

@@ -49,9 +49,12 @@ class GameConfiguration {
     
     var autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol] {
         [StartTurnMatcher(),
-         ResolveDynamiteMatcher(),
-         ResolveJailMatcher(),
-         ResolveBarrelMatcher()]
+         ExplodeDynamiteMatcher(),
+         PassDynamiteMatcher(),
+         EscapeFromJailMatcher(),
+         StayInJailMatcher(),
+         UseBarrelMatcher(),
+         FailBarelMatcher()]
     }
     
     var effectMatchers: [EffectMatcherProtocol] {
@@ -72,8 +75,11 @@ class GameConfiguration {
          EquipExecutor(),
          JailExecutor(),
          DynamiteExecutor(),
-         ResolveDynamiteExecutor(),
-         ResolveJailExecutor(),
+         ExplodeDynamiteExecutor(),
+         PassDynamiteExecutor(),
+         PassDynamiteExecutor(),
+         EscapeFromJailExecutor(),
+         StayInJailExecutor(),
          GeneralStoreExecutor(),
          ChooseGeneralStoreCardExecutor(),
          BangExecutor(),
@@ -81,7 +87,8 @@ class GameConfiguration {
          IndiansExecutor(),
          DuelExecutor(),
          DiscardMissedExecutor(),
-         ResolveBarrelExecutor(),
+         UseBarrelExecutor(),
+         FailBarelExecutor(),
          DiscardBangOnDuelExecutor(),
          DiscardBangOnIndiansExecutor(),
          DiscardBeerExecutor(),
@@ -89,9 +96,5 @@ class GameConfiguration {
          EliminateExecutor(calculator: OutcomeCalculator()),
          GainRewardOnEliminatingOutlawExecutor(),
          PenalizeSheriffOnEliminatingDeputyExecutor()]
-    }
-    
-    var updateExecutors: [UpdateExecutorProtocol] {
-        [GameUpdateExecutor()]
     }
 }

@@ -6,6 +6,7 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
+/// Accessor to state
 protocol GameDatabaseProtocol {
     
     var state: GameStateProtocol { get }
@@ -34,5 +35,4 @@ protocol GameDatabaseProtocol {
     func playerRemoveHand(_ playerId: String, _ cardId: String) -> CardProtocol?
     func playerAddInPlay(_ playerId: String, _ card: CardProtocol)
     func playerRemoveInPlay(_ playerId: String, _ cardId: String) -> CardProtocol?
-    
 }

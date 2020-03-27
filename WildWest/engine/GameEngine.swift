@@ -8,38 +8,41 @@
 
 import RxSwift
 
-class GameEngine: GameEngineProtocol {
+class GameEngine: GameEngineProtocol, Subscribable {
     
     private let stateSubject: BehaviorSubject<GameStateProtocol>
+    private let commandSubject: DelaySubject<GameMove>
+    
     private let database: GameDatabaseProtocol
+    private let updateExecutor: UpdateExecutorProtocol
+    
     private let validMoveMatchers: [ValidMoveMatcherProtocol]
     private let autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol]
     private let effectMatchers: [EffectMatcherProtocol]
     private let moveExecutors: [MoveExecutorProtocol]
-    private let updateExecutors: [UpdateExecutorProtocol]
-    private let updateDelay: Double
-    
-    private var movesQueue: [GameMove] = []
-    private var running = false
     
     init(database: GameDatabaseProtocol,
          validMoveMatchers: [ValidMoveMatcherProtocol],
          autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol],
          effectMatchers: [EffectMatcherProtocol],
          moveExecutors: [MoveExecutorProtocol],
-         updateExecutors: [UpdateExecutorProtocol],
-         updateDelay: Double) {
+         updateExecutor: UpdateExecutorProtocol,
+         updateDelay: TimeInterval) {
         self.database = database
         self.stateSubject = BehaviorSubject(value: database.state)
         self.validMoveMatchers = validMoveMatchers
         self.autoPlayMoveMatchers = autoPlayMoveMatchers
         self.effectMatchers = effectMatchers
         self.moveExecutors = moveExecutors
-        self.updateExecutors = updateExecutors
-        self.updateDelay = updateDelay
+        self.updateExecutor = updateExecutor
+        self.commandSubject = DelaySubject(delay: updateDelay)
     }
     
     func start() {
+        sub(commandSubject.observable.subscribe(onNext: { [weak self] move in
+            self?.execute(move)
+        }))
+        
         guard let sheriff = database.state.players.first(where: { $0.role == .sheriff }) else {
             return
         }
@@ -49,39 +52,11 @@ class GameEngine: GameEngineProtocol {
     }
     
     func queue(_ move: GameMove) {
-        movesQueue.append(move)
-        
-        guard !running else {
-            return
-        }
-        
-        running = true
-        
-        let move = self.movesQueue.remove(at: 0)
-        self.execute(move)
-        
-        if #available(iOS 10.0, *) {
-            Timer.scheduledTimer(withTimeInterval: updateDelay, repeats: true) { [weak self] timer in
-                guard let self = self else {
-                    return
-                }
-                
-                guard !self.movesQueue.isEmpty else {
-                    timer.invalidate()
-                    self.running = false
-                    return
-                }
-                
-                let move = self.movesQueue.remove(at: 0)
-                self.execute(move)
-            }
-        } else {
-            // TODO: Fallback on earlier versions
-        }
+        commandSubject.onNext(move)
     }
     
     func execute(_ move: GameMove) {
-        _execute(move)
+        executeMove(move)
         stateSubject.onNext(database.state)
     }
     
@@ -91,12 +66,12 @@ class GameEngine: GameEngineProtocol {
 }
 
 private extension GameEngine {
-    func _execute(_ move: GameMove) {
+    func executeMove(_ move: GameMove) {
         // no move is allowed during update
         database.setValidMoves([:])
         
-        // execute move
-        _executeUpdates(move)
+        // apply updates
+        executeUpdates(move)
         
         // check if game over
         guard database.state.outcome == nil else {
@@ -107,7 +82,7 @@ private extension GameEngine {
         let effects = effectMatchers
             .compactMap { $0.effect(onExecuting: move, in: database.state) }
         if !effects.isEmpty {
-            movesQueue.append(contentsOf: effects)
+            effects.forEach { commandSubject.onNext($0) }
             return
         }
         
@@ -116,7 +91,7 @@ private extension GameEngine {
             .compactMap { $0.autoPlayMoves(matching: database.state) }
             .flatMap { $0 }
         if !autoPlays.isEmpty {
-            movesQueue.append(contentsOf: autoPlays)
+            autoPlays.forEach { commandSubject.onNext($0) }
             return
         }
         
@@ -133,49 +108,17 @@ private extension GameEngine {
         database.setValidMoves(validMoves)
     }
     
-    func _executeUpdates(_ move: GameMove) {
+    func executeUpdates(_ move: GameMove) {
         let updatesQueue = moveExecutors
             .compactMap { $0.execute(move, in: database.state) }
             .flatMap { $0 }
         
         updatesQueue.forEach { update in
             print(String(describing: update))
-            updateExecutors.forEach { executor in
-                executor.execute(update, in: database)
-            }
+            updateExecutor.execute(update, in: database)
         }
         
         database.addExecutedMove(move)
         print("\n*** \(String(describing: move)) ***")
-    }
-}
-
-private extension GameStateProtocol {
-    func hidingRoles(except playerId: String?) -> GameStateProtocol {
-        GameState(players: players.map { $0.hidingRole(where: $0.identifier != playerId && $0.role != .sheriff) },
-                  deck: deck,
-                  discardPile: discardPile,
-                  turn: turn,
-                  challenge: challenge,
-                  bangsPlayed: bangsPlayed,
-                  barrelsResolved: barrelsResolved,
-                  damageEvents: damageEvents,
-                  generalStore: generalStore,
-                  outcome: outcome,
-                  validMoves: validMoves,
-                  executedMoves: executedMoves,
-                  eliminated: eliminated)
-    }
-}
-
-private extension PlayerProtocol {
-    func hidingRole(where condition: Bool) -> PlayerProtocol {
-        Player(role: condition ? nil : role,
-               ability: ability,
-               maxHealth: maxHealth,
-               imageName: imageName,
-               health: health,
-               hand: hand,
-               inPlay: inPlay)
     }
 }

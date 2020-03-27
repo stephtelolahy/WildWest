@@ -50,6 +50,12 @@ class MoveDescriptor: MoveDescriptorProtocol {
             "WellsFargo": "💰",
             "Eliminate": "☠️",
             "Reward": "🎁",
-            "Penalize": "⚠️"
+            "Penalize": "⚠️",
+            "stayInJail": "😞",
+            "escapeFromJail": "😅",
+            "useBarrel": "😝",
+            "failBarrel": "😞",
+            "explodeDynamite": "💥",
+            "passDynamite": "💣"
         ]
 }
