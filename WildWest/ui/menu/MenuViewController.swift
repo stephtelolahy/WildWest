@@ -68,7 +68,6 @@ class MenuViewController: UIViewController {
         Int(playersCountStepper.value)
     }
     
-    // swiftlint:disable function_body_length
     private func startGame() {
         
         let jsonReader = JsonReader(bundle: Bundle.main)
@@ -84,10 +83,7 @@ class MenuViewController: UIViewController {
         let database = MemoryCachedDataBase(state: state)
         
         let engine = GameEngine(database: database,
-                                validMoveMatchers: config.validMoveMatchers,
-                                autoPlayMoveMatchers: config.autoPlayMoveMatchers,
-                                effectMatchers: config.effectMatchers,
-                                moveExecutors: config.moveExectors,
+                                moveMatchers: config.moveMatchers,
                                 updateExecutor: GameUpdateExecutor(),
                                 updateDelay: 1.0)
         

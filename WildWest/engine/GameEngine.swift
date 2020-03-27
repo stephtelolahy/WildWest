@@ -12,41 +12,35 @@ class GameEngine: GameEngineProtocol, Subscribable {
     
     private let stateSubject: BehaviorSubject<GameStateProtocol>
     private let commandSubject: DelaySubject<GameMove>
-    
     private let database: GameDatabaseProtocol
     private let updateExecutor: UpdateExecutorProtocol
-    
-    private let validMoveMatchers: [ValidMoveMatcherProtocol]
-    private let autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol]
-    private let effectMatchers: [EffectMatcherProtocol]
-    private let moveExecutors: [MoveExecutorProtocol]
+    private let moveMatchers: [MoveMatcherProtocol]
     
     init(database: GameDatabaseProtocol,
-         validMoveMatchers: [ValidMoveMatcherProtocol],
-         autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol],
-         effectMatchers: [EffectMatcherProtocol],
-         moveExecutors: [MoveExecutorProtocol],
+         moveMatchers: [MoveMatcherProtocol],
          updateExecutor: UpdateExecutorProtocol,
          updateDelay: TimeInterval) {
         self.database = database
         self.stateSubject = BehaviorSubject(value: database.state)
-        self.validMoveMatchers = validMoveMatchers
-        self.autoPlayMoveMatchers = autoPlayMoveMatchers
-        self.effectMatchers = effectMatchers
-        self.moveExecutors = moveExecutors
+        self.moveMatchers = moveMatchers
         self.updateExecutor = updateExecutor
         self.commandSubject = DelaySubject(delay: updateDelay)
     }
     
     func start() {
         sub(commandSubject.observable.subscribe(onNext: { [weak self] move in
-            self?.execute(move)
+            guard let self = self else {
+                return
+            }
+            
+            self.execute(move)
+            self.stateSubject.onNext(self.database.state)
         }))
         
+        // TODO: convert to moveMatcher StartGame
         guard let sheriff = database.state.players.first(where: { $0.role == .sheriff }) else {
             return
         }
-        
         database.setTurn(sheriff.identifier)
         queue(GameMove(name: .startTurn, actorId: sheriff.identifier))
     }
@@ -56,22 +50,20 @@ class GameEngine: GameEngineProtocol, Subscribable {
     }
     
     func execute(_ move: GameMove) {
-        executeMove(move)
-        stateSubject.onNext(database.state)
-    }
-    
-    func observeAs(playerId: String?) -> Observable<GameStateProtocol> {
-        stateSubject.map { $0.hidingRoles(except: playerId) }
-    }
-}
-
-private extension GameEngine {
-    func executeMove(_ move: GameMove) {
         // no move is allowed during update
         database.setValidMoves([:])
         
         // apply updates
-        executeUpdates(move)
+        print("\n*** \(String(describing: move)) ***")
+        
+        let updatesQueue = moveMatchers.compactMap { $0.execute(move, in: database.state) }.flatMap { $0 }
+        
+        updatesQueue.forEach { update in
+            print("> \(String(describing: update))")
+            updateExecutor.execute(update, in: database)
+        }
+        
+        database.addExecutedMove(move)
         
         // check if game over
         guard database.state.outcome == nil else {
@@ -79,25 +71,21 @@ private extension GameEngine {
         }
         
         // check effects
-        let effects = effectMatchers
-            .compactMap { $0.effect(onExecuting: move, in: database.state) }
+        let effects = moveMatchers.compactMap { $0.effect(onExecuting: move, in: database.state) }
         if !effects.isEmpty {
             effects.forEach { commandSubject.onNext($0) }
             return
         }
         
         // check autoPlay moves
-        let autoPlays = autoPlayMoveMatchers
-            .compactMap { $0.autoPlayMoves(matching: database.state) }
-            .flatMap { $0 }
+        let autoPlays = moveMatchers.compactMap { $0.autoPlayMoves(matching: database.state) }.flatMap { $0 }
         if !autoPlays.isEmpty {
             autoPlays.forEach { commandSubject.onNext($0) }
             return
         }
         
         // finally generate valid moves
-        let validMoves = validMoveMatchers
-            .compactMap { $0.validMoves(matching: database.state) }
+        let validMoves = moveMatchers.compactMap { $0.validMoves(matching: database.state) }
             .flatMap { $0 }
             .groupedByActor()
         
@@ -108,17 +96,7 @@ private extension GameEngine {
         database.setValidMoves(validMoves)
     }
     
-    func executeUpdates(_ move: GameMove) {
-        let updatesQueue = moveExecutors
-            .compactMap { $0.execute(move, in: database.state) }
-            .flatMap { $0 }
-        
-        updatesQueue.forEach { update in
-            print(String(describing: update))
-            updateExecutor.execute(update, in: database)
-        }
-        
-        database.addExecutedMove(move)
-        print("\n*** \(String(describing: move)) ***")
+    func observeAs(playerId: String?) -> Observable<GameStateProtocol> {
+        stateSubject.map { $0.hidingRoles(except: playerId) }
     }
 }

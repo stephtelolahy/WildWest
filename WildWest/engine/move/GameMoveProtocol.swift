@@ -17,27 +17,26 @@ struct GameMove: Equatable {
     var discardIds: [String]?           // identifiers of discarded hand cards
 }
 
-enum MoveName: String {
-    // player moves
-    case startTurn  // phase1: start turn drawing 2 cards
-    case play       // phase2: play a hand card
-    case endTurn    // phase3: end turn discarding excess cards
-    case choose     // reaction move: choose one card from general store
-    case discard    // reaction move: discard card to cancel an attack
-    case pass       // reaction move: do nothing while attacked
+struct MoveName: RawRepresentable, Equatable {
+    typealias RawValue = String
     
-    // autoPlay
-    case escapeFromJail
-    case stayInJail
-    case explodeDynamite
-    case passDynamite
-    case useBarrel
-    case failBarrel
+    init?(rawValue: String) {
+        self.rawValue = rawValue
+    }
     
-    // effects
-    case eliminate
-    case gainRewardOnEliminatingOutlaw
-    case penalizeSheriffOnEliminatingDeputy
+    init(_ rawValue: String) {
+        self.rawValue = rawValue
+    }
+    
+    var rawValue: String
+}
+
+extension MoveName {
+    static let startTurn = MoveName("startTurn")    // phase1: start turn drawing 2 cards
+    static let play = MoveName("play")              // phase2: play a hand card
+    static let endTurn = MoveName("endTurn")        // phase3: end turn discarding excess cards
+    static let choose = MoveName("choose")          // reaction move: choose one card from general store
+    static let pass = MoveName("pass")              // reaction move: do nothing while attacked
 }
 
 struct TargetCard: Equatable {
@@ -50,22 +49,29 @@ enum TargetCardSource: Equatable {
     case inPlay(String)
 }
 
-/// Function defining manual player move regarding given state
-protocol ValidMoveMatcherProtocol {
+/// Function matching state to moves
+protocol MoveMatcherProtocol {
     func validMoves(matching state: GameStateProtocol) -> [GameMove]?
-}
-
-/// Function defining automatic player move regarding given state
-protocol AutoplayMoveMatcherProtocol {
     func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]?
-}
-
-/// Function defining effect after playing given move
-protocol EffectMatcherProtocol {
     func effect(onExecuting move: GameMove, in state: GameStateProtocol) -> GameMove?
+    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]?
 }
 
-/// Function defining game updates on executing move
-protocol MoveExecutorProtocol {
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]?
+extension MoveMatcherProtocol {
+    
+    func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
+        nil
+    }
+    
+    func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
+        nil
+    }
+    
+    func effect(onExecuting move: GameMove, in state: GameStateProtocol) -> GameMove? {
+        nil
+    }
+    
+    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+        nil
+    }
 }

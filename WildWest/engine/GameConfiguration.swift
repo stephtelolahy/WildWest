@@ -6,7 +6,6 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-// swiftlint:disable type_body_length
 class GameConfiguration {
     
     private let jsonReader: JsonReaderProtocol
@@ -23,47 +22,9 @@ class GameConfiguration {
         jsonReader.load([Figure].self, file: "figures")
     }
     
-    var validMoveMatchers: [ValidMoveMatcherProtocol] {
-        [EndTurnMatcher(),
-         BeerMatcher(),
-         SaloonMatcher(),
-         StagecoachMatcher(),
-         WellsFargoMatcher(),
-         PanicMatcher(calculator: RangeCalculator()),
-         CatBalouMatcher(calculator: RangeCalculator()),
-         EquipMatcher(),
-         JailMatcher(),
-         DynamiteMatcher(),
-         GeneralStoreMatcher(),
-         ChooseGeneralStoreCardMatcher(),
-         BangMatcher(calculator: RangeCalculator()),
-         GatlingMatcher(),
-         IndiansMatcher(),
-         DuelMatcher(),
-         DiscardMissedMatcher(),
-         DiscardBangOnDuelMatcher(),
-         DiscardBangOnIndiansMatcher(),
-         DiscardBeerMatcher(),
-         PassMatcher()]
-    }
-    
-    var autoPlayMoveMatchers: [AutoplayMoveMatcherProtocol] {
-        [StartTurnMatcher(),
-         ExplodeDynamiteMatcher(),
-         PassDynamiteMatcher(),
-         EscapeFromJailMatcher(),
-         StayInJailMatcher(),
-         UseBarrelMatcher(),
-         FailBarelMatcher()]
-    }
-    
-    var effectMatchers: [EffectMatcherProtocol] {
-        [EliminateMatcher(),
-         GainRewardOnEliminatingOutlawMatcher(),
-         PenalizeSheriffOnEliminatingDeputyMatcher()]
-    }
-    
-    var moveExectors: [MoveExecutorProtocol] {
+    var moveMatchers: [MoveMatcherProtocol] {
+        []
+        /*
         [EndTurnExecutor(),
          StartTurnExecutor(),
          BeerExecutor(),
@@ -96,5 +57,6 @@ class GameConfiguration {
          EliminateExecutor(calculator: OutcomeCalculator()),
          GainRewardOnEliminatingOutlawExecutor(),
          PenalizeSheriffOnEliminatingDeputyExecutor()]
+         */
     }
 }
