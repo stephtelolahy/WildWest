@@ -56,7 +56,6 @@
 		3351B58724269386004F18C3 /* Pass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3351B58524269386004F18C3 /* Pass.swift */; };
 		3351B58924269A24004F18C3 /* PassMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3351B58824269A24004F18C3 /* PassMatcherTests.swift */; };
 		3351B58B24269A3B004F18C3 /* PassExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3351B58A24269A3B004F18C3 /* PassExecutorTests.swift */; };
-		335A147423F312F700D9971E /* GameDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BA280023F1E9830084A3C9 /* GameDatabase.swift */; };
 		335BED692429334F009184A3 /* MoveSoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335BED682429334F009184A3 /* MoveSoundPlayer.swift */; };
 		335BED6A24293358009184A3 /* MoveSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E614240B5F48000B89EB /* MoveSelector.swift */; };
 		335BED6B24293358009184A3 /* MoveDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD4DB6D24209E4D001BBD48 /* MoveDescriptor.swift */; };
@@ -173,7 +172,8 @@
 		33A815ED23DB54350081A055 /* roles.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A815EC23DB54350081A055 /* roles.json */; };
 		33A815EE23DB54350081A055 /* roles.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A815EC23DB54350081A055 /* roles.json */; };
 		33AFA25323DC201A00425BEB /* ClassNameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */; };
-		33BA280123F1E9830084A3C9 /* GameDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BA280023F1E9830084A3C9 /* GameDatabase.swift */; };
+		33BAE346242E74CD0098B41F /* MemoryCachedDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BAE345242E74CD0098B41F /* MemoryCachedDataBase.swift */; };
+		33BAE347242E74CD0098B41F /* MemoryCachedDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BAE345242E74CD0098B41F /* MemoryCachedDataBase.swift */; };
 		33CD7E4F24260C240072155C /* Equip.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A0F423BAB29C0050E173 /* Equip.swift */; };
 		33CD7E5024260C240072155C /* Equip.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5A0F423BAB29C0050E173 /* Equip.swift */; };
 		33CD7E52242610A00072155C /* EquipMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CD7E51242610A00072155C /* EquipMatcherTests.swift */; };
@@ -379,8 +379,8 @@
 		33A733F723DC5AC300E9B2AD /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		33A815EC23DB54350081A055 /* roles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = roles.json; sourceTree = "<group>"; };
 		33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameProtocol.swift; sourceTree = "<group>"; };
-		33BA280023F1E9830084A3C9 /* GameDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDatabase.swift; sourceTree = "<group>"; };
 		33BA280623F1EF100084A3C9 /* GameUpdateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUpdateTests.swift; sourceTree = "<group>"; };
+		33BAE345242E74CD0098B41F /* MemoryCachedDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCachedDataBase.swift; sourceTree = "<group>"; };
 		33C45DD123EB11EB00B62508 /* ResolveBarrel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveBarrel.swift; sourceTree = "<group>"; };
 		33C45DDD23EB15E900B62508 /* ResolveJail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveJail.swift; sourceTree = "<group>"; };
 		33C45DE723EB18A800B62508 /* DiscardBeer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardBeer.swift; sourceTree = "<group>"; };
@@ -597,7 +597,7 @@
 			isa = PBXGroup;
 			children = (
 				336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */,
-				33BA280023F1E9830084A3C9 /* GameDatabase.swift */,
+				33BAE345242E74CD0098B41F /* MemoryCachedDataBase.swift */,
 			);
 			path = database;
 			sourceTree = "<group>";
@@ -1321,8 +1321,8 @@
 				335BED7F2429394D009184A3 /* GameMove+Components.swift in Sources */,
 				ADD4DB722420AA2B001BBD48 /* GameMoveExtension.swift in Sources */,
 				ADD035CF23A96002003B2576 /* CardProtocol.swift in Sources */,
-				33BA280123F1E9830084A3C9 /* GameDatabase.swift in Sources */,
 				3302905E23F329780099C438 /* Saloon.swift in Sources */,
+				33BAE346242E74CD0098B41F /* MemoryCachedDataBase.swift in Sources */,
 				33911F2E242664000023C6AF /* Duel.swift in Sources */,
 				33A733EE23DC4A5300E9B2AD /* Subscribable.swift in Sources */,
 				33E4411C24077CA000B2848E /* ActionsAdapter.swift in Sources */,
@@ -1361,7 +1361,6 @@
 				333B23422425ECB400685454 /* CatBalouExecutorTests.swift in Sources */,
 				333B233D2425EC3C00685454 /* CatBalou.swift in Sources */,
 				33D964B523DDDB1E007295E7 /* GameEngine.swift in Sources */,
-				335A147423F312F700D9971E /* GameDatabase.swift in Sources */,
 				33911F3A2426791F0023C6AF /* ResolveBarrel.swift in Sources */,
 				3308D7E12425E14900ECE83C /* Panic.swift in Sources */,
 				AD374E54242146970025FD4A /* BeerExecutorTests.swift in Sources */,
@@ -1381,6 +1380,7 @@
 				3351B58B24269A3B004F18C3 /* PassExecutorTests.swift in Sources */,
 				33911EF3242619170023C6AF /* ResolveDynamiteExecutorTests.swift in Sources */,
 				33911F0024261F920023C6AF /* JailExecutorTests.swift in Sources */,
+				33BAE347242E74CD0098B41F /* MemoryCachedDataBase.swift in Sources */,
 				33FD755624267C7200C8622F /* ResolveBarrelExecutorTests.swift in Sources */,
 				AD1EF2A424214C1C00F15BF8 /* SaloonMatcherTests.swift in Sources */,
 				330B7E1223F70D0200B3653D /* OutcomeCalculator.swift in Sources */,
