@@ -37,17 +37,21 @@ class GameEngine: GameEngineProtocol, Subscribable {
             self.stateSubject.onNext(self.database.state)
         }))
         
-        // TODO: convert to moveMatcher StartGame
-        guard let sheriff = database.state.players.first(where: { $0.role == .sheriff }) else {
-            return
-        }
-        database.setTurn(sheriff.identifier)
-        queue(GameMove(name: .startTurn, actorId: sheriff.identifier))
+        moveMatchers.compactMap { $0.autoPlayMoves(matching: database.state) }
+            .flatMap { $0 }
+            .forEach { queue($0) }
     }
     
     func queue(_ move: GameMove) {
         commandSubject.onNext(move)
     }
+    
+    func observeAs(playerId: String?) -> Observable<GameStateProtocol> {
+        stateSubject.map { $0.hidingRoles(except: playerId) }
+    }
+}
+
+extension GameEngine {
     
     func execute(_ move: GameMove) {
         // no move is allowed during update
@@ -94,9 +98,5 @@ class GameEngine: GameEngineProtocol, Subscribable {
         }
         
         database.setValidMoves(validMoves)
-    }
-    
-    func observeAs(playerId: String?) -> Observable<GameStateProtocol> {
-        stateSubject.map { $0.hidingRoles(except: playerId) }
     }
 }
