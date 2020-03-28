@@ -7,6 +7,7 @@
 //
 
 class EndTurnMatcher: MoveMatcherProtocol {
+    
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
             let actor = state.players.first(where: { $0.identifier == state.turn }) else {
@@ -23,9 +24,7 @@ class EndTurnMatcher: MoveMatcherProtocol {
         let cardsCombinations = handCardIds.combine(by: cardsToDiscardCount)
         return cardsCombinations.map { GameMove(name: .endTurn, actorId: actor.identifier, discardIds: $0) }
     }
-}
-
-class EndTurnExecutor: MoveExecutorProtocol {
+    
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .endTurn = move.name,
             let actorId = move.actorId else {

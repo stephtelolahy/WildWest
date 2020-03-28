@@ -49,6 +49,7 @@ class GameConfiguration {
             GatlingMatcher(),
             IndiansMatcher(),
             DuelMatcher(),
+            EndTurnMatcher(),
             
             // manual reaction
             DiscardMissedMatcher(),
