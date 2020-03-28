@@ -10,7 +10,7 @@ import XCTest
 
 class GameSetupTests: XCTestCase {
     
-    private let sut: GameSetupProtocol = GameSetup()
+    private let sut = GameSetup()
     
     func test_Roles_For4Players() {
         // Given
@@ -76,7 +76,7 @@ class GameSetupTests: XCTestCase {
         // Verify expected number of players
         XCTAssertEqual(state.players.count, 4)
         // ShuffleRolesBetweenPlayers
-        XCTAssertTrue(state.players.map { $0.role }.isShuffed(from: roles))
+        XCTAssertEqual(state.players.map { $0.role }, roles)
         // ShuffleCharactersBetweenPlayers
         XCTAssertTrue(state.players.allSatisfy { figures.map { $0.ability }.contains($0.ability) })
         // PlayerInitialInPlayIsEmpty
@@ -89,7 +89,7 @@ class GameSetupTests: XCTestCase {
         let distributedCardIds = state.players.map { $0.hand }.flatMap { $0 }.map { $0.identifier }
         let remainingCardIds = cards.map { $0.identifier }.filter { !distributedCardIds.contains($0) }
         let deckCardIds = state.deck.map { $0.identifier }
-        XCTAssertTrue(deckCardIds.isShuffed(from: remainingCardIds))
+        XCTAssertEqual(deckCardIds, remainingCardIds)
         // Discard pile is empty
         XCTAssertTrue(state.discardPile.isEmpty)
         // PlayerInitialHealthIsEqualToFigureBullets

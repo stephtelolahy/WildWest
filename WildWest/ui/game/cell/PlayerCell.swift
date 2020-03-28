@@ -43,7 +43,7 @@ class PlayerCell: UICollectionViewCell {
         }
         
         let player = item.player
-        nameLabel.text = player.ability.rawValue.uppercased()
+        nameLabel.text = "\(player.ability.rawValue.uppercased())\n\(item.score?.description ?? "")"
         figureImageView.alpha = !item.isEliminated ? 1.0 : 0.4
         equipmentLabel.text = player.inPlay.map { "[\($0.name.rawValue)]" }.joined(separator: "\n")
         if let role = item.player.role {
@@ -64,12 +64,14 @@ class PlayerCell: UICollectionViewCell {
             return
         }
         
-        if item.isControlled {
-            backgroundColor = UIColor.white.withAlphaComponent(0.4)
+        if item.isAttacked {
+            backgroundColor = UIColor.orange
+        } else if item.isHelped {
+            backgroundColor = UIColor.blue.withAlphaComponent(0.4)
         } else if item.isTurn {
             backgroundColor = UIColor.green.withAlphaComponent(0.4)
-        } else if item.isActive {
-            backgroundColor = UIColor.yellow.withAlphaComponent(0.4)
+        } else if item.isControlled {
+            backgroundColor = UIColor.white.withAlphaComponent(0.4)
         } else {
             backgroundColor = .clear
         }

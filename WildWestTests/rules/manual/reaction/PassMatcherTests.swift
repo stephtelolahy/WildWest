@@ -1,0 +1,148 @@
+//
+//  PassMatcherTests.swift
+//  WildWestTests
+//
+//  Created by Hugues Stephano Telolahy on 21/03/2020.
+//  Copyright © 2020 creativeGames. All rights reserved.
+//
+
+import XCTest
+
+class PassMatcherTests: XCTestCase {
+    
+    private let sut = PassMatcher()
+    
+    func test_CanPass_IfChallengedByShoot() {
+        // Given
+        let mockState = MockGameStateProtocol()
+            .challenge(is: .shoot(["p1", "p2"], .gatling, "px"))
+        
+        // When
+        let moves = sut.validMoves(matching: mockState)
+        
+        // Assert
+        XCTAssertEqual(moves, [GameMove(name: .pass, actorId: "p1")])
+    }
+    
+    func test_CanPass_IfChallengedByIndians() {
+        // Given
+        let mockState = MockGameStateProtocol()
+            .challenge(is: .indians(["p1", "p2"], "px"))
+        
+        // When
+        let moves = sut.validMoves(matching: mockState)
+        
+        // Assert
+        XCTAssertEqual(moves, [GameMove(name: .pass, actorId: "p1")])
+    }
+    
+    func test_CanPass_IfChallengedByDuel() {
+        // Given
+        let mockState = MockGameStateProtocol()
+            .challenge(is: .duel(["p1", "p2"], "p2"))
+        
+        // When
+        let moves = sut.validMoves(matching: mockState)
+        
+        // Assert
+        XCTAssertEqual(moves, [GameMove(name: .pass, actorId: "p1")])
+    }
+    
+    func test_CanPass_IfChallengedByDynamiteExploded() {
+        // Given
+        let mockState = MockGameStateProtocol()
+            .currentTurn(is: "p1")
+            .challenge(is: .dynamiteExploded)
+        
+        // When
+        let moves = sut.validMoves(matching: mockState)
+        
+        // Assert
+        XCTAssertEqual(moves, [GameMove(name: .pass, actorId: "p1")])
+    }
+    
+    func test_LooseHealth_IfPassing() {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+        let mockState = MockGameStateProtocol()
+            .players(are: mockPlayer1)
+            .challenge(is: .shoot(["p1"], .bang, "px"))
+        let move = GameMove(name: .pass, actorId: "p1")
+        
+        // When
+        let updates = sut.execute(move, in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates, [.playerLooseHealth("p1", 1, .byPlayer("px")),
+                                 .setChallenge(nil)])
+    }
+    
+    func test_TriggerStartTurnChallenge_IfPassingOnDynamiteExploded() {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+        let mockState = MockGameStateProtocol()
+            .players(are: mockPlayer1)
+            .challenge(is: .dynamiteExploded)
+        let move = GameMove(name: .pass, actorId: "p1")
+        
+        // When
+        let updates = sut.execute(move, in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates, [.playerLooseHealth("p1", 3, .byDynamite),
+                                 .setChallenge(.startTurn)])
+    }
+    
+    func test_RemoveActorFromShootChallenge_IfPassing() {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+        let mockState = MockGameStateProtocol()
+            .challenge(is: .shoot(["p1", "p2", "p3"], .gatling, "px"))
+            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
+        let move = GameMove(name: .pass, actorId: "p1")
+        
+        // When
+        let updates = sut.execute(move, in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates, [.playerLooseHealth("p1", 1, .byPlayer("px")),
+                                 .setChallenge(.shoot(["p2", "p3"], .gatling, "px"))])
+    }
+    
+    func test_RemoveActorFromIndiansChallenge_IfPassing() {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+        let mockState = MockGameStateProtocol()
+            .challenge(is: .indians(["p1", "p2", "p3"], "px"))
+            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
+        let move = GameMove(name: .pass, actorId: "p1")
+        
+        // When
+        let updates = sut.execute(move, in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates, [.playerLooseHealth("p1", 1, .byPlayer("px")),
+                                 .setChallenge(.indians(["p2", "p3"], "px"))])
+    }
+    
+    func test_RemoveDuelChallenge_IfPassing() {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+        let mockState = MockGameStateProtocol()
+            .challenge(is: .duel(["p1", "p2"], "p2"))
+            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
+        let move = GameMove(name: .pass, actorId: "p1")
+        
+        // When
+        let updates = sut.execute(move, in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates, [.playerLooseHealth("p1", 1, .byPlayer("p2")),
+                                 .setChallenge(nil)])
+    }
+}

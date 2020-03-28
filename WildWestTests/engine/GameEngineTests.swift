@@ -15,38 +15,44 @@ class GameEngineTests: XCTestCase {
     
     private var mockDatabase: MockGameDatabaseProtocol!
     private var mockState: MockGameStateProtocol!
-    private var mockValidMoveMatcher: MockValidMoveMatcherProtocol!
-    private var mockAutoPlayMoveMatcher: MockAutoplayMoveMatcherProtocol!
-    private var mockEffectMatcher: MockEffectMatcherProtocol!
-    private var mockMoveExecutor: MockMoveExecutorProtocol!
+    private var mockMoveMatcher: MockMoveMatcherProtocol!
     private var mockUpdateExecutor: MockUpdateExecutorProtocol!
     
     override func setUp() {
         mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
         mockDatabase = MockGameDatabaseProtocol().withEnabledDefaultImplementation(GameDatabaseProtocolStub())
-        mockValidMoveMatcher = MockValidMoveMatcherProtocol().withEnabledDefaultImplementation(ValidMoveMatcherProtocolStub())
-        mockAutoPlayMoveMatcher = MockAutoplayMoveMatcherProtocol().withEnabledDefaultImplementation(AutoplayMoveMatcherProtocolStub())
-        mockEffectMatcher = MockEffectMatcherProtocol().withEnabledDefaultImplementation(EffectMatcherProtocolStub())
-        mockMoveExecutor = MockMoveExecutorProtocol().withEnabledDefaultImplementation(MoveExecutorProtocolStub())
+        mockMoveMatcher = MockMoveMatcherProtocol().withEnabledDefaultImplementation(MoveMatcherProtocolStub())
         mockUpdateExecutor = MockUpdateExecutorProtocol().withEnabledDefaultImplementation(UpdateExecutorProtocolStub())
         Cuckoo.stub(mockDatabase) { mock in
             when(mock.state.get).thenReturn(mockState)
         }
         
         sut = GameEngine(database: mockDatabase,
-                         validMoveMatchers: [mockValidMoveMatcher],
-                         autoPlayMoveMatchers: [mockAutoPlayMoveMatcher],
-                         effectMatchers: [mockEffectMatcher],
-                         moveExecutors: [mockMoveExecutor],
+                         moveMatchers: [mockMoveMatcher],
                          updateExecutor: mockUpdateExecutor,
                          updateDelay: 0)
     }
     
+    func test_ExecuteAutoPlayMove_IfStartingGame() {
+        // Given
+        let move = GameMove(name: MoveName("dummy"))
+        Cuckoo.stub(mockMoveMatcher) { mock in
+            when(mock.autoPlayMoves(matching: any())).thenReturn([move])
+        }
+        
+        // When
+        sut.start()
+        
+        // Assert
+        verify(mockMoveMatcher, atLeastOnce()).autoPlayMoves(matching: state(equalTo: mockState))
+        verify(mockMoveMatcher).execute(equal(to: move), in: state(equalTo: mockState))
+    }
+    
     func test_ExecuteGameUpdates_IfExecutingMove() {
         // Given
-        let move = GameMove(name: .startTurn)
+        let move = GameMove(name: MoveName("dummy"))
         let update: GameUpdate = .playerPullFromDeck("p1", 2)
-        Cuckoo.stub(mockMoveExecutor) { mock in
+        Cuckoo.stub(mockMoveMatcher) { mock in
             when(mock.execute(equal(to: move), in: state(equalTo: mockState))).thenReturn([update])
         }
         
@@ -59,7 +65,7 @@ class GameEngineTests: XCTestCase {
     
     func test_AddExecutedMoves_IfExecutingMove() {
         // Given
-        let move = GameMove(name: .startTurn)
+        let move = GameMove(name: MoveName("dummy"))
         
         // When
         sut.execute(move)
@@ -70,9 +76,9 @@ class GameEngineTests: XCTestCase {
     
     func test_SetValidMoves_IfExecutingMove() {
         // Given
-        let move = GameMove(name: .startTurn)
+        let move = GameMove(name: MoveName("dummy"))
         let validMove = GameMove(name: .play, actorId: "p1")
-        Cuckoo.stub(mockValidMoveMatcher) { mock in
+        Cuckoo.stub(mockMoveMatcher) { mock in
             when(mock.validMoves(matching: state(equalTo: mockState))).thenReturn([validMove])
         }
         
@@ -89,7 +95,7 @@ class GameEngineTests: XCTestCase {
     
     func test_DoNotGenerateActions_IfGameIsOver() {
         // Given
-        let move = GameMove(name: .startTurn)
+        let move = GameMove(name: MoveName("dummy"))
         Cuckoo.stub(mockState) { mock in
             when(mock.outcome.get).thenReturn(.outlawWin)
         }
@@ -99,7 +105,8 @@ class GameEngineTests: XCTestCase {
         
         // Assert
         verify(mockDatabase).setValidMoves(equal(to: [:]))
-        verifyNoMoreInteractions(mockValidMoveMatcher)
-        verifyNoMoreInteractions(mockEffectMatcher)
+        verify(mockMoveMatcher, never()).effect(onExecuting: any(), in: any())
+        verify(mockMoveMatcher, never()).autoPlayMoves(matching: any())
+        verify(mockMoveMatcher, never()).validMoves(matching: any())
     }
 }

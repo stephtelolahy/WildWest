@@ -13,9 +13,9 @@ protocol MoveDescriptorProtocol {
 }
 
 class MoveDescriptor: MoveDescriptorProtocol {
+    
     func description(for move: GameMove) -> String {
-        let components = move.asComponents()
-        return "\(emojis.value(matching: components)) \(components.joined(separator: " "))"
+        "\(emojis.value(matching: move)) \(move.asComponents().joined(separator: " "))"
     }
     
     private let emojis: [String: String] =

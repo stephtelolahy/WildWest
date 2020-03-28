@@ -5,14 +5,17 @@
 //  Created by Hugues Stephano Telolahy on 27/03/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-// swiftlint:disable force_cast
 
 class MemoryCachedDataBase: GameDatabaseProtocol {
     
     private var mutableState: GameState
     
     init(state: GameStateProtocol) {
-        mutableState = state as! GameState
+        guard let mutableState = state as? GameState else {
+            fatalError("Cannot create mutable state")
+        }
+        
+        self.mutableState = mutableState
     }
     
     var state: GameStateProtocol {

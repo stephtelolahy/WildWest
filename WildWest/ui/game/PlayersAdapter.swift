@@ -10,22 +10,26 @@ struct PlayerItem {
     let player: PlayerProtocol
     let isControlled: Bool
     let isTurn: Bool
-    let isActive: Bool
+    let isAttacked: Bool
+    let isHelped: Bool
     let isEliminated: Bool
+    let score: Int?
 }
 
 protocol PlayersAdapterProtocol {
     func buildIndexes(playerIds: [String], controlledId: String?) -> [Int: String]
     func buildItems(state: GameStateProtocol,
                     for controlledPlayerId: String?,
-                    playerIndexes: [Int: String]) -> [PlayerItem?]
+                    playerIndexes: [Int: String],
+                    antiSheriffScore: [String: Int]) -> [PlayerItem?]
 }
 
 class PlayersAdapter: PlayersAdapterProtocol {
     
     func buildItems(state: GameStateProtocol,
                     for controlledPlayerId: String?,
-                    playerIndexes: [Int: String]) -> [PlayerItem?] {
+                    playerIndexes: [Int: String],
+                    antiSheriffScore: [String: Int]) -> [PlayerItem?] {
         Array(0..<9).map { index in
             guard let playerId = playerIndexes[index] else {
                 return nil
@@ -35,18 +39,20 @@ class PlayersAdapter: PlayersAdapterProtocol {
                 return PlayerItem(player: eliminatedPlayer,
                                   isControlled: false,
                                   isTurn: false,
-                                  isActive: false,
-                                  isEliminated: true)
+                                  isAttacked: false,
+                                  isHelped: false,
+                                  isEliminated: true,
+                                  score: antiSheriffScore[playerId])
             }
             
             if let player = state.players.first(where: { $0.identifier == playerId }) {
-                let isActive = state.validMoves[playerId] != nil
-                let isTurn = player.identifier == state.turn
                 return PlayerItem(player: player,
                                   isControlled: player.identifier == controlledPlayerId,
-                                  isTurn: isTurn,
-                                  isActive: isActive,
-                                  isEliminated: false)
+                                  isTurn: player.identifier == state.turn,
+                                  isAttacked: state.isPlayerAttacked(playerId),
+                                  isHelped: state.isPlayerHelped(playerId),
+                                  isEliminated: false,
+                                  score: antiSheriffScore[playerId])
             }
             
             return nil
@@ -78,5 +84,72 @@ class PlayersAdapter: PlayersAdapterProtocol {
             result[index] = shiftedIds[element - 1]
         }
         return result
+    }
+}
+
+private extension GameStateProtocol {
+    
+    func isPlayerAttacked(_ playerId: String) -> Bool {
+        if let challenge = self.challenge {
+            switch challenge {
+            case let .duel(playerIds, _):
+                return playerIds.first == playerId
+                
+            case let .indians(targetIds, _):
+                return targetIds.contains(playerId)
+                
+            case let .shoot(targetIds, _, _):
+                return targetIds.contains(playerId)
+                
+            case .dynamiteExploded:
+                return turn == playerId
+                
+            default:
+                return false
+            }
+        }
+        
+        let classifier = MoveClassifier()
+        if let lastMove = executedMoves.last {
+            let classification = classifier.classify(lastMove)
+            switch classification {
+            case let .strongAttack(_, targetId):
+                return targetId == playerId
+                
+            case let .weakAttack(_, targetId):
+                return targetId == playerId
+                
+            default:
+                return false
+            }
+        }
+        
+        return false
+    }
+    
+    func isPlayerHelped(_ playerId: String) -> Bool {
+        if let challenge = self.challenge {
+            switch challenge {
+            case let .generalStore(playerIds):
+                return playerIds.contains(playerId)
+                
+            default:
+                return false
+            }
+        }
+        
+        let classifier = MoveClassifier()
+        if let lastMove = executedMoves.last {
+            let classification = classifier.classify(lastMove)
+            switch classification {
+            case let .help(_, targetId):
+                return targetId == playerId
+                
+            default:
+                return false
+            }
+        }
+        
+        return false
     }
 }

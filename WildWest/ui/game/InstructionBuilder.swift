@@ -6,11 +6,11 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-protocol InstructionBuilder {
+protocol InstructionBuilderProtocol {
     func buildInstruction(state: GameStateProtocol, for controlledPlayerId: String?) -> String
 }
 
-extension InstructionBuilder {
+class InstructionBuilder: InstructionBuilderProtocol {
     func buildInstruction(state: GameStateProtocol, for controlledPlayerId: String?) -> String {
         if let outcome = state.outcome {
             return outcome.rawValue
@@ -32,7 +32,7 @@ extension InstructionBuilder {
     }
 }
 
-private extension Challenge {
+extension Challenge {
     var instruction: String {
         switch self {
         case .dynamiteExploded:

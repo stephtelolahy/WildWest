@@ -68,28 +68,22 @@ class MenuViewController: UIViewController {
         Int(playersCountStepper.value)
     }
     
-    // swiftlint:disable function_body_length
     private func startGame() {
         
         let jsonReader = JsonReader(bundle: Bundle.main)
         let config = GameConfiguration(jsonReader: jsonReader)
-        let figures = config.allFigures
-        let cards = config.allCards
+        let figures = config.allFigures.shuffled()
+        let cards = config.allCards.shuffled()
         
         let gameSetup = GameSetup()
-        let roles = gameSetup.roles(for: playersCount)
-        let state = gameSetup.setupGame(roles: roles.shuffled(),
-                                        figures: figures.shuffled(),
-                                        cards: cards.shuffled())
+        let roles = gameSetup.roles(for: playersCount).shuffled()
+        let state = gameSetup.setupGame(roles: roles, figures: figures, cards: cards)
         let database = MemoryCachedDataBase(state: state)
         
         let engine = GameEngine(database: database,
-                                validMoveMatchers: config.validMoveMatchers,
-                                autoPlayMoveMatchers: config.autoPlayMoveMatchers,
-                                effectMatchers: config.effectMatchers,
-                                moveExecutors: config.moveExectors,
+                                moveMatchers: config.moveMatchers,
                                 updateExecutor: GameUpdateExecutor(),
-                                updateDelay: 1.0)
+                                updateDelay: 0.5)
         
         var controlledPlayerId: String?
         if playAsSheriffSwitch.isOn {
@@ -99,7 +93,6 @@ class MenuViewController: UIViewController {
         }
         
         let aiPlayers = database.state.players.filter { $0.identifier != controlledPlayerId }
-        
         let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
                                                      ai: RandomAIWithRole(),
                                                      engine: engine,

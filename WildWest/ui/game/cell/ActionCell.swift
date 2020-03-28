@@ -19,31 +19,11 @@ class ActionCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.layer.cornerRadius = 8
+        contentView.layer.cornerRadius = 2
     }
     
     func update(with item: ActionItem) {
-        cardView.isHidden = !item.actions.isEmpty
-        
-        guard let card = item.card else {
-            if let move = item.actions.first {
-                switch move.name {
-                case .choose:
-                    cardImageView.image = #imageLiteral(resourceName: "01_choose_card")
-                    
-                case .endTurn:
-                    cardImageView.image = #imageLiteral(resourceName: "01_end_turn")
-                    
-                case .pass:
-                    cardImageView.image = #imageLiteral(resourceName: "01_nothing")
-                    
-                default:
-                    cardImageView.image = #imageLiteral(resourceName: "01_more")
-                }
-            }
-            return
-        }
-        
-        cardImageView.image = UIImage(named: card.imageName)
+        cardView.isHidden = !item.moves.isEmpty
+        cardImageView.image = UIImage(named: item.card.imageName)
     }
 }

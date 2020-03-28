@@ -5,12 +5,12 @@
 //  Created by Hugues Stephano Telolahy on 24/01/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
+// swiftlint:disable function_body_length
 
 import UIKit
 import RxSwift
 
-class GameViewController: UIViewController,
-Subscribable, MoveSelector, ActionsAdapter, InstructionBuilder, StatsBuilder {
+class GameViewController: UIViewController, Subscribable {
     
     // MARK: Constants
     
@@ -21,6 +21,7 @@ Subscribable, MoveSelector, ActionsAdapter, InstructionBuilder, StatsBuilder {
     
     // MARK: IBOutlets
     
+    @IBOutlet private weak var endTurnButton: UIButton!
     @IBOutlet private weak var playersCollectionView: UICollectionView!
     @IBOutlet private weak var actionsCollectionView: UICollectionView!
     @IBOutlet private weak var messageTableView: UITableView!
@@ -37,11 +38,17 @@ Subscribable, MoveSelector, ActionsAdapter, InstructionBuilder, StatsBuilder {
     private var playerItems: [PlayerItem?] = []
     private var actionItems: [ActionItem] = []
     private var messages: [String] = []
-    private var antiSheriffScore: [AgressivityStat] = []
+    private var antiSheriffScore: [String: Int] = [:]
+    private var endTurnMoves: [GameMove] = []
     
     private lazy var playerAdapter = PlayersAdapter()
+    private lazy var actionsAdapter = ActionsAdapter()
     private lazy var moveDescriptor = MoveDescriptor()
     private lazy var moveSoundPlayer = MoveSoundPlayer()
+    private lazy var statsBuilder = StatsBuilder()
+    private lazy var instructionBuilder = InstructionBuilder()
+    private lazy var playMoveSelector = PlayMoveSelector(viewController: self)
+    private lazy var reactionMoveSelector = ReactionMoveSelector(viewController: self)
     
     // MARK: Lifecycle
     
@@ -65,7 +72,13 @@ Subscribable, MoveSelector, ActionsAdapter, InstructionBuilder, StatsBuilder {
     // MARK: IBAction
     
     @IBAction private func menuButtonTapped(_ sender: Any) {
-        showStats()
+        dismiss(animated: true)
+    }
+    
+    @IBAction private func endTurnTapped(_ sender: Any) {
+        playMoveSelector.selectMove(within: endTurnMoves) { [weak self] move in
+            self?.engine?.queue(move)
+        }
     }
 }
 
@@ -78,9 +91,12 @@ private extension GameViewController {
             playerIndexes = playerAdapter.buildIndexes(playerIds: playerIds, controlledId: controlledPlayerId)
         }
         
-        antiSheriffScore = buildAntiSheriffScore(state: state)
+        antiSheriffScore = statsBuilder.buildAntiSheriffScore(state: state)
         
-        playerItems = playerAdapter.buildItems(state: state, for: controlledPlayerId, playerIndexes: playerIndexes)
+        playerItems = playerAdapter.buildItems(state: state,
+                                               for: controlledPlayerId,
+                                               playerIndexes: playerIndexes,
+                                               antiSheriffScore: antiSheriffScore)
         playersCollectionView.reloadData()
         
         if let topDiscardPile = state.discardPile.first {
@@ -96,13 +112,29 @@ private extension GameViewController {
             moveSoundPlayer.playSound(for: lastMove)
         }
         
-        actionItems = buildActions(state: state, for: controlledPlayerId)
+        actionItems = actionsAdapter.buildActions(state: state, for: controlledPlayerId)
         actionsCollectionView.reloadData()
-        titleLabel.text = buildInstruction(state: state, for: controlledPlayerId)
+        titleLabel.text = instructionBuilder.buildInstruction(state: state, for: controlledPlayerId)
         
         if let outcome = state.outcome {
             showGameOver(outcome: outcome)
         }
+        
+        if let challenge = state.challenge,
+            let controlledPlayerId = self.controlledPlayerId,
+            let reactionMoves = state.validMoves[controlledPlayerId] {
+            reactionMoveSelector.selectMove(within: reactionMoves, challenge: challenge) { [weak self] move in
+                self?.engine?.queue(move)
+            }
+        }
+        
+        endTurnMoves = []
+        if let controlledPlayerId = self.controlledPlayerId,
+            let moves = state.validMoves[controlledPlayerId] {
+            endTurnMoves = moves.filter { $0.name == .endTurn }
+        }
+        
+        endTurnButton.isEnabled = !endTurnMoves.isEmpty
     }
     
     func showGameOver(outcome: GameOutcome) {
@@ -115,23 +147,6 @@ private extension GameViewController {
                                                 handler: { [weak self] _ in
                                                     self?.dismiss(animated: true)
         }))
-        
-        present(alertController, animated: true)
-    }
-    
-    func showStats() {
-        
-        let message = antiSheriffScore
-            .map { "\($0.source) : \($0.value)" }
-            .joined(separator: "\n")
-        
-        let alertController = UIAlertController(title: "Anti-Sheriff Stats",
-                                                message: message,
-                                                preferredStyle: .alert)
-        
-        alertController.addAction(UIAlertAction(title: "OK",
-                                                style: .cancel,
-                                                handler: nil))
         
         present(alertController, animated: true)
     }
@@ -211,7 +226,8 @@ extension GameViewController: UICollectionViewDelegate {
     }
     
     private func actionsCollectionViewDidSelectItem(at indexPath: IndexPath) {
-        selectMove(within: actionItems[indexPath.row].actions) { [weak self] move in
+        let moves = actionItems[indexPath.row].moves
+        playMoveSelector.selectMove(within: moves) { [weak self] move in
             self?.engine?.queue(move)
         }
     }
