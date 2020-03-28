@@ -9,10 +9,14 @@
 extension PlayerProtocol {
     
     var bangLimitsPerTurn: Int {
+        if ability == .willyTheKid {
+            return 0
+        }
+        
         if inPlay.contains(where: { $0.name == .volcanic }) {
             return 0
-        } else {
-            return 1
         }
+        
+        return 1
     }
 }

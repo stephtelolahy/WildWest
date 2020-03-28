@@ -11,30 +11,39 @@ import Cuckoo
 
 class Player_RangeTests: XCTestCase {
     
-    private let sut = MockPlayerProtocol()
-
-    func test_DefaultMaxNumberOfShootsIs1() {
+    func test_DefaultBangsLimitPerTurnIs1() {
         // Given
-        Cuckoo.stub(sut) { mock in
-            when(mock.inPlay.get).thenReturn([])
-        }
+        let sut = MockPlayerProtocol()
+            .noCardsInPlay()
+            .ability(is: .bartCassidy)
         
         // When
         // Assert
         XCTAssertEqual(sut.bangLimitsPerTurn, 1)
     }
     
-    func test_IllimitedNumberOfShoots_IfPlayingVolcanic() {
+    func test_UnlimitedBangsPerTurn_IfPlayingVolcanic() {
         // Given
+        let sut = MockPlayerProtocol()
+            .playing(MockCardProtocol().named(.volcanic))
+            .ability(is: .bartCassidy)
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.bangLimitsPerTurn, 0)
+    }
+    
+    func test_UnlimitedBangsPerTurn_IfFigureIsWillyTheKid() {
+        // Given
+        let sut = MockPlayerProtocol()
         Cuckoo.stub(sut) { mock in
-            when(mock.inPlay.get).thenReturn([
-                MockCardProtocol().named(.volcanic)
-            ])
+            when(mock.ability.get).thenReturn(.willyTheKid)
+            when(mock.inPlay.get).thenReturn([])
         }
         
         // When
         // Assert
         XCTAssertEqual(sut.bangLimitsPerTurn, 0)
     }
-
+    
 }

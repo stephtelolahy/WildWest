@@ -65,4 +65,11 @@ extension MockPlayerProtocol {
         }
         return self
     }
+    
+    func ability(is ability: Ability) -> MockPlayerProtocol {
+        Cuckoo.stub(self) { mock in
+            when(mock.ability.get).thenReturn(ability)
+        }
+        return self
+    }
 }
