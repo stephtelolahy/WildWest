@@ -20,7 +20,7 @@ class MoveSoundPlayer: MoveSoundPlayerProtocol {
         
         sfxPlayers = sfxPlayers.filter { $0.isPlaying }
         
-        let fileName = sfx.value(matching: move.asComponents())
+        let fileName = sfx.value(matching: move)
         guard let path = Bundle.main.path(forResource: "\(fileName).mp3", ofType: nil) else {
             return
         }

@@ -1,18 +1,24 @@
 //
-//  MoveSelector.swift
+//  PlayMoveSelector.swift
 //  WildWest
 //
-//  Created by Hugues Stephano Telolahy on 01/03/2020.
+//  Created by Hugues Stephano Telolahy on 28/03/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
 import UIKit
 
-protocol MoveSelector {
+protocol PlayMoveSelectorProtocol {
     func selectMove(within moves: [GameMove], completion: @escaping (GameMove) -> Void)
 }
 
-extension MoveSelector where Self: UIViewController {
+class PlayMoveSelector: PlayMoveSelectorProtocol {
+    
+    private unowned var viewController: UIViewController
+    
+    init(viewController: UIViewController) {
+        self.viewController = viewController
+    }
     
     func selectMove(within moves: [GameMove], completion: @escaping (GameMove) -> Void) {
         guard !moves.isEmpty else {
@@ -20,17 +26,18 @@ extension MoveSelector where Self: UIViewController {
         }
         
         if moves.contains(where: { $0.targetId != nil }) {
-            selectPlayer(within: moves, completion: completion)
+            let targetIds = moves.compactMap { $0.targetId }
+            viewController.select(title: "Select player", choices: targetIds) { index in
+                completion(moves[index])
+            }
             return
         }
         
         if moves.contains(where: { $0.targetCard != nil }) {
-            selectTargetCard(within: moves, completion: completion)
-            return
-        }
-        
-        if moves.contains(where: { $0.name == .choose }) {
-            selectCard(within: moves, completion: completion)
+            let targets = moves.compactMap { $0.targetCard?.description }
+            viewController.select(title: "Select target card", choices: targets) { index in
+                completion(moves[index])
+            }
             return
         }
         
@@ -41,46 +48,20 @@ extension MoveSelector where Self: UIViewController {
         }
         
         if moves.contains(where: { $0.discardIds != nil }) {
-            selectCardsCombination(within: moves, completion: completion)
+            let cardsCombinations = moves.compactMap { $0.discardIds?.joined(separator: ", ") }
+            viewController.select(title: "Select cards", choices: cardsCombinations) { index in
+                completion(moves[index])
+            }
             return
         }
         
-        select(within: moves.map { $0.name.rawValue }, title: "Select option") { index in
-            completion(moves[index])
-        }
-    }
-    
-    private func selectPlayer(within moves: [GameMove], completion: @escaping (GameMove) -> Void) {
-        let targetIds = moves.compactMap { $0.targetId }
-        select(within: targetIds, title: "Select player") { index in
-            completion(moves[index])
-        }
-    }
-    
-    private func selectTargetCard(within moves: [GameMove], completion: @escaping (GameMove) -> Void) {
-        let targets = moves.compactMap { $0.targetCard?.description }
-        select(within: targets, title: "Select target card") { index in
-            completion(moves[index])
-        }
-    }
-    
-    private func selectCard(within moves: [GameMove], completion: @escaping (GameMove) -> Void) {
-        let cardIds = moves.compactMap { $0.cardId }
-        select(within: cardIds, title: "Select card") { index in
-            completion(moves[index])
-        }
-    }
-    
-    private func selectCardsCombination(within moves: [GameMove], completion: @escaping (GameMove) -> Void) {
-        let cardsCombinations = moves.compactMap { $0.discardIds?.joined(separator: ", ") }
-        select(within: cardsCombinations, title: "Select cards") { index in
-            completion(moves[index])
-        }
+        fatalError("Illegal state")
     }
 }
 
 private extension UIViewController {
-    func select(within choices: [String], title: String, completion: @escaping((Int) -> Void)) {
+    
+    func select(title: String, choices: [String], completion: @escaping((Int) -> Void)) {
         let alertController = UIAlertController(title: title,
                                                 message: nil,
                                                 preferredStyle: .actionSheet)

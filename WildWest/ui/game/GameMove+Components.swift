@@ -19,8 +19,9 @@ extension GameMove {
 }
 
 extension Dictionary where Key == String, Value == String {
-    func value(matching components: [String]) -> String {
-        for component in components {
+    
+    func value(matching move: GameMove) -> String {
+        for component in move.asComponents() {
             let filtered = self.filter { component.lowercased().contains($0.key.lowercased()) }
             if let match = filtered.first {
                 return match.value

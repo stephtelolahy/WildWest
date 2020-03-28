@@ -7,8 +7,8 @@
 //
 
 struct ActionItem {
-    let card: CardProtocol?
-    let actions: [GameMove]
+    let card: CardProtocol
+    let moves: [GameMove]
 }
 
 protocol ActionsAdapterProtocol {
@@ -22,22 +22,10 @@ class ActionsAdapter: ActionsAdapterProtocol {
                 return []
         }
         
-        var result: [ActionItem] = []
-        var moves = state.validMoves[controlledPlayerId] ?? []
-        
-        player.hand.forEach { card in
-            let relatedMoves = moves.filter { $0.cardId == card.identifier }
-            result.append(ActionItem(card: card, actions: relatedMoves))
-            moves.removeAll(where: { $0.cardId == card.identifier })
+        let playerMoves = state.validMoves[controlledPlayerId] ?? []
+        return player.hand.map { card in
+            ActionItem(card: card,
+                       moves: playerMoves.filter { $0.cardId == card.identifier })
         }
-        
-        // show active cards first
-        result = result.sorted(by: { $0.actions.count > $1.actions.count })
-        
-        if !moves.isEmpty {
-            result.insert(ActionItem(card: nil, actions: moves), at: 0)
-        }
-        
-        return result
     }
 }

@@ -5,11 +5,12 @@
 //  Created by Hugues Stephano Telolahy on 24/01/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
+// swiftlint:disable function_body_length
 
 import UIKit
 import RxSwift
 
-class GameViewController: UIViewController, Subscribable, MoveSelector {
+class GameViewController: UIViewController, Subscribable {
     
     // MARK: Constants
     
@@ -44,6 +45,8 @@ class GameViewController: UIViewController, Subscribable, MoveSelector {
     private lazy var moveSoundPlayer = MoveSoundPlayer()
     private lazy var statsBuilder = StatsBuilder()
     private lazy var instructionBuilder = InstructionBuilder()
+    private lazy var playMoveSelector = PlayMoveSelector(viewController: self)
+    private lazy var reactionMoveSelector = ReactionMoveSelector(viewController: self)
     
     // MARK: Lifecycle
     
@@ -107,6 +110,14 @@ private extension GameViewController {
         
         if let outcome = state.outcome {
             showGameOver(outcome: outcome)
+        }
+        
+        if let challenge = state.challenge,
+            let controlledPlayerId = self.controlledPlayerId,
+            let reactionMoves = state.validMoves[controlledPlayerId] {
+            reactionMoveSelector.selectMove(within: reactionMoves, challenge: challenge) { [weak self] move in
+                self?.engine?.queue(move)
+            }
         }
     }
     
@@ -199,7 +210,8 @@ extension GameViewController: UICollectionViewDelegate {
     }
     
     private func actionsCollectionViewDidSelectItem(at indexPath: IndexPath) {
-        selectMove(within: actionItems[indexPath.row].actions) { [weak self] move in
+        let moves = actionItems[indexPath.row].moves
+        playMoveSelector.selectMove(within: moves) { [weak self] move in
             self?.engine?.queue(move)
         }
     }
