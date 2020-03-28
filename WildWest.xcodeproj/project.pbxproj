@@ -25,6 +25,9 @@
 		332DFE10242F1C1F009C35E6 /* StartTurnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332DFE0F242F1C1F009C35E6 /* StartTurnTests.swift */; };
 		33318D6D24275AAE0055C6C5 /* StatsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33318D6C24275AAE0055C6C5 /* StatsBuilder.swift */; };
 		3335E615240B5F48000B89EB /* MoveSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E614240B5F48000B89EB /* MoveSelector.swift */; };
+		333800F9242F20A6003F7327 /* ResolveDynamite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33911EED242616580023C6AF /* ResolveDynamite.swift */; };
+		333800FA242F20A6003F7327 /* ResolveDynamite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33911EED242616580023C6AF /* ResolveDynamite.swift */; };
+		333800FC242F21A0003F7327 /* ResolveDynamiteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333800FB242F21A0003F7327 /* ResolveDynamiteTests.swift */; };
 		333E8757242D5B3B00EAE8FC /* Big Bomb-SoundBible.com-1219802495.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 333E8756242D5B3B00EAE8FC /* Big Bomb-SoundBible.com-1219802495.mp3 */; };
 		335BED692429334F009184A3 /* MoveSoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335BED682429334F009184A3 /* MoveSoundPlayer.swift */; };
 		335BED6A24293358009184A3 /* MoveSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E614240B5F48000B89EB /* MoveSelector.swift */; };
@@ -210,6 +213,7 @@
 		33318D6A242750290055C6C5 /* PenalizeSheriffOnEliminatingDeputyExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenalizeSheriffOnEliminatingDeputyExecutorTests.swift; sourceTree = "<group>"; };
 		33318D6C24275AAE0055C6C5 /* StatsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsBuilder.swift; sourceTree = "<group>"; };
 		3335E614240B5F48000B89EB /* MoveSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveSelector.swift; sourceTree = "<group>"; };
+		333800FB242F21A0003F7327 /* ResolveDynamiteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveDynamiteTests.swift; sourceTree = "<group>"; };
 		333B233F2425ECA600685454 /* CatBalouMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBalouMatcherTests.swift; sourceTree = "<group>"; };
 		333B23412425ECB400685454 /* CatBalouExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBalouExecutorTests.swift; sourceTree = "<group>"; };
 		333B23482425F31700685454 /* EndTurnMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTurnMatcherTests.swift; sourceTree = "<group>"; };
@@ -245,8 +249,6 @@
 		3390F90A24253932001057A7 /* MoveClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveClassifier.swift; sourceTree = "<group>"; };
 		3390F90D242539BA001057A7 /* MoveClassifierProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveClassifierProtocol.swift; sourceTree = "<group>"; };
 		33911EED242616580023C6AF /* ResolveDynamite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveDynamite.swift; sourceTree = "<group>"; };
-		33911EF0242618EE0023C6AF /* ResolveDynamiteMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveDynamiteMatcherTests.swift; sourceTree = "<group>"; };
-		33911EF2242619170023C6AF /* ResolveDynamiteExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveDynamiteExecutorTests.swift; sourceTree = "<group>"; };
 		33911EF424261B470023C6AF /* Dynamite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dynamite.swift; sourceTree = "<group>"; };
 		33911EF724261CE20023C6AF /* DynamiteMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamiteMatcherTests.swift; sourceTree = "<group>"; };
 		33911EF924261CFD0023C6AF /* DynamiteExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamiteExecutorTests.swift; sourceTree = "<group>"; };
@@ -771,8 +773,7 @@
 			children = (
 				332DFE0D242F1BFC009C35E6 /* StartGameTests.swift */,
 				332DFE0F242F1C1F009C35E6 /* StartTurnTests.swift */,
-				33911EF0242618EE0023C6AF /* ResolveDynamiteMatcherTests.swift */,
-				33911EF2242619170023C6AF /* ResolveDynamiteExecutorTests.swift */,
+				333800FB242F21A0003F7327 /* ResolveDynamiteTests.swift */,
 				33FD755324267C5400C8622F /* ResolveBarrelMatcherTests.swift */,
 				33FD755524267C7200C8622F /* ResolveBarrelExecutorTests.swift */,
 				3383CFD1242D4DA500777E61 /* ResolveJailMatcherTests.swift */,
@@ -1185,6 +1186,7 @@
 				33E4411F24077CA000B2848E /* MessageCell.swift in Sources */,
 				ADD035D823A9604F003B2576 /* GameStateProtocol.swift in Sources */,
 				ADE91ACD23B9FE2300F7316B /* JsonReader.swift in Sources */,
+				333800F9242F20A6003F7327 /* ResolveDynamite.swift in Sources */,
 				33EE1B9D242F188D00A1E4F7 /* GameMove.swift in Sources */,
 				33E4412124077D8000B2848E /* Score.swift in Sources */,
 				330B7E1123F70D0200B3653D /* OutcomeCalculator.swift in Sources */,
@@ -1265,6 +1267,7 @@
 				ADD035D623A96034003B2576 /* PlayerProtocol.swift in Sources */,
 				339CA27C2425DE1300D43128 /* GameUpdateTests.swift in Sources */,
 				ADE91ACE23B9FE2300F7316B /* JsonReader.swift in Sources */,
+				333800FA242F20A6003F7327 /* ResolveDynamite.swift in Sources */,
 				33D477EB23E4FA0F00E232D9 /* RangeCalculator.swift in Sources */,
 				AD98FA872421552C00AF4D7C /* GameEngineTests.swift in Sources */,
 				33D964B223DD9119007295E7 /* MatcherExtension.swift in Sources */,
@@ -1285,6 +1288,7 @@
 				33EE1B9E242F188D00A1E4F7 /* GameMove.swift in Sources */,
 				3390F90F242539BA001057A7 /* MoveClassifierProtocol.swift in Sources */,
 				AD671A1D23D8F9D600F0AA4A /* CardExtension.swift in Sources */,
+				333800FC242F21A0003F7327 /* ResolveDynamiteTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

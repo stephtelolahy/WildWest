@@ -6,7 +6,8 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-class ExplodeDynamiteMatcher: AutoplayMoveMatcherProtocol {
+class ExplodeDynamiteMatcher: MoveMatcherProtocol {
+    
     func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard case .startTurn = state.challenge,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
@@ -18,9 +19,7 @@ class ExplodeDynamiteMatcher: AutoplayMoveMatcherProtocol {
         
         return [GameMove(name: .explodeDynamite, actorId: actor.identifier, cardId: card.identifier)]
     }
-}
-
-class ExplodeDynamiteExecutor: MoveExecutorProtocol {
+    
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .explodeDynamite = move.name,
             let actorId = move.actorId,
@@ -34,7 +33,8 @@ class ExplodeDynamiteExecutor: MoveExecutorProtocol {
     }
 }
 
-class PassDynamiteMatcher: AutoplayMoveMatcherProtocol {
+class PassDynamiteMatcher: MoveMatcherProtocol {
+    
     func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard case .startTurn = state.challenge,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
@@ -46,9 +46,7 @@ class PassDynamiteMatcher: AutoplayMoveMatcherProtocol {
         
         return [GameMove(name: .passDynamite, actorId: actor.identifier, cardId: card.identifier)]
     }
-}
-
-class PassDynamiteExecutor: MoveExecutorProtocol {
+    
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .passDynamite = move.name,
             let actorId = move.actorId,
@@ -59,4 +57,9 @@ class PassDynamiteExecutor: MoveExecutorProtocol {
         return  [.flipOverFirstDeckCard,
                  .playerPassInPlayOfOther(actorId, state.nextTurn, cardId)]
     }
+}
+
+private extension MoveName {
+    static let explodeDynamite = MoveName("explodeDynamite")
+    static let passDynamite = MoveName("passDynamite")
 }
