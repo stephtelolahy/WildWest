@@ -73,4 +73,16 @@ class JailMatcherTests: XCTestCase {
         // Assert
         XCTAssertNil(moves)
     }
+    
+    func test_PutCardInPlayOfTargetPlayer_IfPlayingJail() {
+        // Given
+        let mockState = MockGameStateProtocol()
+        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .jail, targetId: "p2")
+        
+        // When
+        let updates = sut.execute(move, in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates, [.playerPutInPlayOfOther("p1", "p2", "c1")])
+    }
 }

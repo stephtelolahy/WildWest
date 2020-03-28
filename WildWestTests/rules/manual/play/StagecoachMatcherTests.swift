@@ -31,4 +31,17 @@ class StagecoachMatcherTests: XCTestCase {
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .stagecoach)])
     }
+    
+    func test_Pull2Cards_IfPlayingStagecoach() {
+        // Given
+        let mockState = MockGameStateProtocol()
+        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .stagecoach)
+        
+        // When
+        let updates = sut.execute(move, in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
+                                 .playerPullFromDeck("p1", 2)])
+    }
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-class PassMatcher: ValidMoveMatcherProtocol {
+class PassMatcher: MoveMatcherProtocol {
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         switch state.challenge {
         case let .shoot(targetIds, _, _):

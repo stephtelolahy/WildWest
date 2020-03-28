@@ -74,4 +74,17 @@ class BeerMatcherTests: XCTestCase {
         XCTAssertNil(moves)
     }
     
+    func test_GainLifePoint_IfPlayingBeer() {
+        // Given
+        let mockState = MockGameStateProtocol()
+        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .beer)
+        
+        // When
+        let updates = sut.execute(move, in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
+                                 .playerGainHealth("p1", 1)])
+    }
+    
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-class BangMatcher: ValidMoveMatcherProtocol {
+class BangMatcher: MoveMatcherProtocol {
     
     private let calculator: RangeCalculatorProtocol
     
@@ -46,9 +46,7 @@ class BangMatcher: ValidMoveMatcherProtocol {
             }
         }.flatMap { $0 }
     }
-}
-
-class BangExecutor: MoveExecutorProtocol {
+    
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
             case .bang = move.cardName,

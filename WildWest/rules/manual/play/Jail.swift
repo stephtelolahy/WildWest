@@ -6,7 +6,8 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-class JailMatcher: ValidMoveMatcherProtocol {
+class JailMatcher: MoveMatcherProtocol {
+    
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
@@ -38,9 +39,7 @@ class JailMatcher: ValidMoveMatcherProtocol {
             }
         }.flatMap { $0 }
     }
-}
-
-class JailExecutor: MoveExecutorProtocol {
+    
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
             case .jail = move.cardName,

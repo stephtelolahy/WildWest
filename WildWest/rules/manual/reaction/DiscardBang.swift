@@ -6,7 +6,7 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-class DiscardBangOnDuelMatcher: ValidMoveMatcherProtocol {
+class DiscardBangOnDuelMatcher: MoveMatcherProtocol {
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard case let .duel(playerIds, _) = state.challenge,
             let actor = state.players.first(where: { $0.identifier == playerIds.first }),
@@ -23,7 +23,7 @@ class DiscardBangOnDuelMatcher: ValidMoveMatcherProtocol {
     }
 }
 
-class DiscardBangOnIndiansMatcher: ValidMoveMatcherProtocol {
+class DiscardBangOnIndiansMatcher: MoveMatcherProtocol {
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard case let .indians(targetIds, _) = state.challenge,
             let actor = state.players.first(where: { $0.identifier == targetIds.first }),

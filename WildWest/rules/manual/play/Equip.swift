@@ -6,7 +6,8 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-class EquipMatcher: ValidMoveMatcherProtocol {
+class EquipMatcher: MoveMatcherProtocol {
+    
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
             let actor = state.players.first(where: { $0.identifier == state.turn }) else {
@@ -28,9 +29,7 @@ class EquipMatcher: ValidMoveMatcherProtocol {
                      cardName: $0.name)
         }
     }
-}
-
-class EquipExecutor: MoveExecutorProtocol {
+    
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
             let cardName = move.cardName,

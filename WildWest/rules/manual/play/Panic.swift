@@ -6,7 +6,7 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-class PanicMatcher: ValidMoveMatcherProtocol {
+class PanicMatcher: MoveMatcherProtocol {
     
     private let calculator: RangeCalculatorProtocol
     
@@ -41,9 +41,7 @@ class PanicMatcher: ValidMoveMatcherProtocol {
             }
         }.flatMap { $0 }
     }
-}
-
-class PanicExecutor: MoveExecutorProtocol {
+    
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
             case .panic = move.cardName,

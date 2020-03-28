@@ -6,7 +6,8 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-class StagecoachMatcher: ValidMoveMatcherProtocol {
+class StagecoachMatcher: MoveMatcherProtocol {
+    
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
@@ -21,9 +22,7 @@ class StagecoachMatcher: ValidMoveMatcherProtocol {
                      cardName: $0.name)
         }
     }
-}
-
-class StagecoachExecutor: MoveExecutorProtocol {
+    
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
             case .stagecoach = move.cardName,

@@ -23,38 +23,39 @@ class GameConfiguration {
     }
     
     var moveMatchers: [MoveMatcherProtocol] {
-        [StartGameMatcher(),
-         StartTurnMatcher(),
-         ExplodeDynamiteMatcher(),
-         PassDynamiteMatcher(),
-         EscapeFromJailMatcher(),
-         StayInJailMatcher(),
-         UseBarrelMatcher(),
-         FailBarelMatcher(),
+        [
+            // auto play
+            StartGameMatcher(),
+            StartTurnMatcher(),
+            ExplodeDynamiteMatcher(),
+            PassDynamiteMatcher(),
+            EscapeFromJailMatcher(),
+            StayInJailMatcher(),
+            UseBarrelMatcher(),
+            FailBarelMatcher(),
+            // manual play
+            BeerMatcher(),
+            SaloonMatcher(),
+            StagecoachMatcher(),
+            WellsFargoMatcher(),
+            PanicMatcher(calculator: RangeCalculator()),
+            CatBalouMatcher(calculator: RangeCalculator()),
+            EquipMatcher(),
+            DynamiteMatcher(),
+            JailMatcher(),
+            GeneralStoreMatcher(),
+            BangMatcher(calculator: RangeCalculator()),
+            GatlingMatcher(),
+            IndiansMatcher(),
+            DuelMatcher(),
+            // manual reaction
+            
+            // Effect
         ]
         /*
         [EndTurnMatcher(),
-         StartTurnMatcher(),
-         BeerMatcher(),
-         SaloonMatcher(),
-         StagecoachMatcher(),
-         WellsFargoMatcher(),
-         PanicMatcher(),
-         CatBalouMatcher(),
-         EquipMatcher(),
-         JailMatcher(),
-         DynamiteMatcher(),
-         
-         PassDynamiteMatcher(),
-         
-         GeneralStoreMatcher(),
          ChooseGeneralStoreCardMatcher(),
-         BangMatcher(),
-         GatlingMatcher(),
-         IndiansMatcher(),
-         DuelMatcher(),
          DiscardMissedMatcher(),
-         
          DiscardBangOnDuelMatcher(),
          DiscardBangOnIndiansMatcher(),
          DiscardBeerMatcher(),

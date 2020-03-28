@@ -6,7 +6,7 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-class ChooseGeneralStoreCardMatcher: ValidMoveMatcherProtocol {
+class ChooseGeneralStoreCardMatcher: MoveMatcherProtocol {
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard case let .generalStore(playerIds) = state.challenge,
             let actorId = playerIds.first else {

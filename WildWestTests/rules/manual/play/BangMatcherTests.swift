@@ -123,4 +123,17 @@ class BangMatcherTests: XCTestCase {
         // Assert
         XCTAssertNil(moves)
     }
+    
+    func test_DiscardCardAndTriggerBangChallenge_IfPlayingBang() {
+        // Given
+        let mockState = MockGameStateProtocol()
+        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .bang, targetId: "p2")
+        
+        // When
+        let updates = sut.execute(move, in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
+                                 .setChallenge(.shoot(["p2"], .bang, "p1"))])
+    }
 }

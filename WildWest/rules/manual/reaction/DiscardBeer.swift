@@ -6,7 +6,7 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-class DiscardBeerMatcher: ValidMoveMatcherProtocol {
+class DiscardBeerMatcher: MoveMatcherProtocol {
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard let challenge = state.challenge,
             state.players.count > 2 else {

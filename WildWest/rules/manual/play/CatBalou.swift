@@ -6,7 +6,7 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-class CatBalouMatcher: ValidMoveMatcherProtocol {
+class CatBalouMatcher: MoveMatcherProtocol {
     
     private let calculator: RangeCalculatorProtocol
     
@@ -36,9 +36,7 @@ class CatBalouMatcher: ValidMoveMatcherProtocol {
             }
         }.flatMap { $0 }
     }
-}
-
-class CatBalouExecutor: MoveExecutorProtocol {
+    
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
             case .catBalou = move.cardName,
