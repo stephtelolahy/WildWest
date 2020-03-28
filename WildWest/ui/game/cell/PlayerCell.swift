@@ -64,12 +64,12 @@ class PlayerCell: UICollectionViewCell {
             return
         }
         
-        if item.isControlled {
-            backgroundColor = UIColor.white.withAlphaComponent(0.4)
+        if item.isAttacked {
+            backgroundColor = UIColor.orange
         } else if item.isTurn {
             backgroundColor = UIColor.green.withAlphaComponent(0.4)
-        } else if item.isActive {
-            backgroundColor = UIColor.yellow.withAlphaComponent(0.4)
+        } else if item.isControlled {
+            backgroundColor = UIColor.white.withAlphaComponent(0.4)
         } else {
             backgroundColor = .clear
         }

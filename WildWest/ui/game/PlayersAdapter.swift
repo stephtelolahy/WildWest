@@ -10,7 +10,7 @@ struct PlayerItem {
     let player: PlayerProtocol
     let isControlled: Bool
     let isTurn: Bool
-    let isActive: Bool
+    let isAttacked: Bool
     let isEliminated: Bool
     let score: Int?
 }
@@ -38,18 +38,18 @@ class PlayersAdapter: PlayersAdapterProtocol {
                 return PlayerItem(player: eliminatedPlayer,
                                   isControlled: false,
                                   isTurn: false,
-                                  isActive: false,
+                                  isAttacked: false,
                                   isEliminated: true,
                                   score: antiSheriffScore[playerId])
             }
             
             if let player = state.players.first(where: { $0.identifier == playerId }) {
-                let isActive = state.validMoves[playerId] != nil
                 let isTurn = player.identifier == state.turn
+                let isAttacked = state.isPlayerAttacked(playerId)
                 return PlayerItem(player: player,
                                   isControlled: player.identifier == controlledPlayerId,
                                   isTurn: isTurn,
-                                  isActive: isActive,
+                                  isAttacked: isAttacked,
                                   isEliminated: false,
                                   score: antiSheriffScore[playerId])
             }
@@ -83,5 +83,46 @@ class PlayersAdapter: PlayersAdapterProtocol {
             result[index] = shiftedIds[element - 1]
         }
         return result
+    }
+}
+
+private extension GameStateProtocol {
+    
+    func isPlayerAttacked(_ playerId: String) -> Bool {
+        if let challenge = self.challenge {
+            switch challenge {
+            case let .duel(playerIds, _):
+                return playerIds.first == playerId
+                
+            case let .indians(targetIds, _):
+                return targetIds.contains(playerId)
+                
+            case let .shoot(targetIds, _, _):
+                return targetIds.contains(playerId)
+                
+            case .dynamiteExploded:
+                return turn == playerId
+                
+            default:
+                return false
+            }
+        }
+        
+        let classifier = MoveClassifier()
+        if let lastMove = executedMoves.last {
+            let classification = classifier.classify(lastMove)
+            switch classification {
+            case let .strongAttack(_, targetId):
+                return targetId == playerId
+                
+            case let .weakAttack(_, targetId):
+                return targetId == playerId
+                
+            default:
+                return false
+            }
+        }
+        
+        return false
     }
 }
