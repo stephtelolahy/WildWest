@@ -19,7 +19,7 @@ class ActionCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.layer.cornerRadius = 8
+        contentView.layer.cornerRadius = 2
     }
     
     func update(with item: ActionItem) {
