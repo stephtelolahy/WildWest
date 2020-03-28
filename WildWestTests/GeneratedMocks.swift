@@ -668,190 +668,6 @@ import Cuckoo
 @testable import WildWest
 
 
- class MockMoveMatcherProtocol: MoveMatcherProtocol, Cuckoo.ProtocolMock {
-    
-     typealias MocksType = MoveMatcherProtocol
-    
-     typealias Stubbing = __StubbingProxy_MoveMatcherProtocol
-     typealias Verification = __VerificationProxy_MoveMatcherProtocol
-
-     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
-
-    
-    private var __defaultImplStub: MoveMatcherProtocol?
-
-     func enableDefaultImplementation(_ stub: MoveMatcherProtocol) {
-        __defaultImplStub = stub
-        cuckoo_manager.enableDefaultStubImplementation()
-    }
-    
-
-    
-
-    
-
-    
-    
-    
-     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
-        
-    return cuckoo_manager.call("validMoves(matching: GameStateProtocol) -> [GameMove]?",
-            parameters: (state),
-            escapingParameters: (state),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.validMoves(matching: state))
-        
-    }
-    
-    
-    
-     func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
-        
-    return cuckoo_manager.call("autoPlayMoves(matching: GameStateProtocol) -> [GameMove]?",
-            parameters: (state),
-            escapingParameters: (state),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.autoPlayMoves(matching: state))
-        
-    }
-    
-    
-    
-     func effect(onExecuting move: GameMove, in state: GameStateProtocol) -> GameMove? {
-        
-    return cuckoo_manager.call("effect(onExecuting: GameMove, in: GameStateProtocol) -> GameMove?",
-            parameters: (move, state),
-            escapingParameters: (move, state),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.effect(onExecuting: move, in: state))
-        
-    }
-    
-    
-    
-     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        
-    return cuckoo_manager.call("execute(_: GameMove, in: GameStateProtocol) -> [GameUpdate]?",
-            parameters: (move, state),
-            escapingParameters: (move, state),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.execute(move, in: state))
-        
-    }
-    
-
-	 struct __StubbingProxy_MoveMatcherProtocol: Cuckoo.StubbingProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	
-	     init(manager: Cuckoo.MockManager) {
-	        self.cuckoo_manager = manager
-	    }
-	    
-	    
-	    func validMoves<M1: Cuckoo.Matchable>(matching state: M1) -> Cuckoo.ProtocolStubFunction<(GameStateProtocol), [GameMove]?> where M1.MatchedType == GameStateProtocol {
-	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockMoveMatcherProtocol.self, method: "validMoves(matching: GameStateProtocol) -> [GameMove]?", parameterMatchers: matchers))
-	    }
-	    
-	    func autoPlayMoves<M1: Cuckoo.Matchable>(matching state: M1) -> Cuckoo.ProtocolStubFunction<(GameStateProtocol), [GameMove]?> where M1.MatchedType == GameStateProtocol {
-	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockMoveMatcherProtocol.self, method: "autoPlayMoves(matching: GameStateProtocol) -> [GameMove]?", parameterMatchers: matchers))
-	    }
-	    
-	    func effect<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(onExecuting move: M1, in state: M2) -> Cuckoo.ProtocolStubFunction<(GameMove, GameStateProtocol), GameMove?> where M1.MatchedType == GameMove, M2.MatchedType == GameStateProtocol {
-	        let matchers: [Cuckoo.ParameterMatcher<(GameMove, GameStateProtocol)>] = [wrap(matchable: move) { $0.0 }, wrap(matchable: state) { $0.1 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockMoveMatcherProtocol.self, method: "effect(onExecuting: GameMove, in: GameStateProtocol) -> GameMove?", parameterMatchers: matchers))
-	    }
-	    
-	    func execute<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ move: M1, in state: M2) -> Cuckoo.ProtocolStubFunction<(GameMove, GameStateProtocol), [GameUpdate]?> where M1.MatchedType == GameMove, M2.MatchedType == GameStateProtocol {
-	        let matchers: [Cuckoo.ParameterMatcher<(GameMove, GameStateProtocol)>] = [wrap(matchable: move) { $0.0 }, wrap(matchable: state) { $0.1 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockMoveMatcherProtocol.self, method: "execute(_: GameMove, in: GameStateProtocol) -> [GameUpdate]?", parameterMatchers: matchers))
-	    }
-	    
-	}
-
-	 struct __VerificationProxy_MoveMatcherProtocol: Cuckoo.VerificationProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	    private let callMatcher: Cuckoo.CallMatcher
-	    private let sourceLocation: Cuckoo.SourceLocation
-	
-	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
-	        self.cuckoo_manager = manager
-	        self.callMatcher = callMatcher
-	        self.sourceLocation = sourceLocation
-	    }
-	
-	    
-	
-	    
-	    @discardableResult
-	    func validMoves<M1: Cuckoo.Matchable>(matching state: M1) -> Cuckoo.__DoNotUse<(GameStateProtocol), [GameMove]?> where M1.MatchedType == GameStateProtocol {
-	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
-	        return cuckoo_manager.verify("validMoves(matching: GameStateProtocol) -> [GameMove]?", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
-	    func autoPlayMoves<M1: Cuckoo.Matchable>(matching state: M1) -> Cuckoo.__DoNotUse<(GameStateProtocol), [GameMove]?> where M1.MatchedType == GameStateProtocol {
-	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
-	        return cuckoo_manager.verify("autoPlayMoves(matching: GameStateProtocol) -> [GameMove]?", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
-	    func effect<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(onExecuting move: M1, in state: M2) -> Cuckoo.__DoNotUse<(GameMove, GameStateProtocol), GameMove?> where M1.MatchedType == GameMove, M2.MatchedType == GameStateProtocol {
-	        let matchers: [Cuckoo.ParameterMatcher<(GameMove, GameStateProtocol)>] = [wrap(matchable: move) { $0.0 }, wrap(matchable: state) { $0.1 }]
-	        return cuckoo_manager.verify("effect(onExecuting: GameMove, in: GameStateProtocol) -> GameMove?", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
-	    func execute<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ move: M1, in state: M2) -> Cuckoo.__DoNotUse<(GameMove, GameStateProtocol), [GameUpdate]?> where M1.MatchedType == GameMove, M2.MatchedType == GameStateProtocol {
-	        let matchers: [Cuckoo.ParameterMatcher<(GameMove, GameStateProtocol)>] = [wrap(matchable: move) { $0.0 }, wrap(matchable: state) { $0.1 }]
-	        return cuckoo_manager.verify("execute(_: GameMove, in: GameStateProtocol) -> [GameUpdate]?", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	}
-}
-
- class MoveMatcherProtocolStub: MoveMatcherProtocol {
-    
-
-    
-
-    
-     func validMoves(matching state: GameStateProtocol) -> [GameMove]?  {
-        return DefaultValueRegistry.defaultValue(for: ([GameMove]?).self)
-    }
-    
-     func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]?  {
-        return DefaultValueRegistry.defaultValue(for: ([GameMove]?).self)
-    }
-    
-     func effect(onExecuting move: GameMove, in state: GameStateProtocol) -> GameMove?  {
-        return DefaultValueRegistry.defaultValue(for: (GameMove?).self)
-    }
-    
-     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]?  {
-        return DefaultValueRegistry.defaultValue(for: ([GameUpdate]?).self)
-    }
-    
-}
-
-
-import Cuckoo
-@testable import WildWest
-
-
  class MockOutcomeCalculatorProtocol: OutcomeCalculatorProtocol, Cuckoo.ProtocolMock {
     
      typealias MocksType = OutcomeCalculatorProtocol
@@ -1091,6 +907,190 @@ import Cuckoo
     
      func maximumNumberOfShoots(of player: PlayerProtocol) -> Int  {
         return DefaultValueRegistry.defaultValue(for: (Int).self)
+    }
+    
+}
+
+
+import Cuckoo
+@testable import WildWest
+
+
+ class MockMoveMatcherProtocol: MoveMatcherProtocol, Cuckoo.ProtocolMock {
+    
+     typealias MocksType = MoveMatcherProtocol
+    
+     typealias Stubbing = __StubbingProxy_MoveMatcherProtocol
+     typealias Verification = __VerificationProxy_MoveMatcherProtocol
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: MoveMatcherProtocol?
+
+     func enableDefaultImplementation(_ stub: MoveMatcherProtocol) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+
+    
+
+    
+    
+    
+     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
+        
+    return cuckoo_manager.call("validMoves(matching: GameStateProtocol) -> [GameMove]?",
+            parameters: (state),
+            escapingParameters: (state),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.validMoves(matching: state))
+        
+    }
+    
+    
+    
+     func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
+        
+    return cuckoo_manager.call("autoPlayMoves(matching: GameStateProtocol) -> [GameMove]?",
+            parameters: (state),
+            escapingParameters: (state),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.autoPlayMoves(matching: state))
+        
+    }
+    
+    
+    
+     func effect(onExecuting move: GameMove, in state: GameStateProtocol) -> GameMove? {
+        
+    return cuckoo_manager.call("effect(onExecuting: GameMove, in: GameStateProtocol) -> GameMove?",
+            parameters: (move, state),
+            escapingParameters: (move, state),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.effect(onExecuting: move, in: state))
+        
+    }
+    
+    
+    
+     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+        
+    return cuckoo_manager.call("execute(_: GameMove, in: GameStateProtocol) -> [GameUpdate]?",
+            parameters: (move, state),
+            escapingParameters: (move, state),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.execute(move, in: state))
+        
+    }
+    
+
+	 struct __StubbingProxy_MoveMatcherProtocol: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    func validMoves<M1: Cuckoo.Matchable>(matching state: M1) -> Cuckoo.ProtocolStubFunction<(GameStateProtocol), [GameMove]?> where M1.MatchedType == GameStateProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockMoveMatcherProtocol.self, method: "validMoves(matching: GameStateProtocol) -> [GameMove]?", parameterMatchers: matchers))
+	    }
+	    
+	    func autoPlayMoves<M1: Cuckoo.Matchable>(matching state: M1) -> Cuckoo.ProtocolStubFunction<(GameStateProtocol), [GameMove]?> where M1.MatchedType == GameStateProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockMoveMatcherProtocol.self, method: "autoPlayMoves(matching: GameStateProtocol) -> [GameMove]?", parameterMatchers: matchers))
+	    }
+	    
+	    func effect<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(onExecuting move: M1, in state: M2) -> Cuckoo.ProtocolStubFunction<(GameMove, GameStateProtocol), GameMove?> where M1.MatchedType == GameMove, M2.MatchedType == GameStateProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(GameMove, GameStateProtocol)>] = [wrap(matchable: move) { $0.0 }, wrap(matchable: state) { $0.1 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockMoveMatcherProtocol.self, method: "effect(onExecuting: GameMove, in: GameStateProtocol) -> GameMove?", parameterMatchers: matchers))
+	    }
+	    
+	    func execute<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ move: M1, in state: M2) -> Cuckoo.ProtocolStubFunction<(GameMove, GameStateProtocol), [GameUpdate]?> where M1.MatchedType == GameMove, M2.MatchedType == GameStateProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(GameMove, GameStateProtocol)>] = [wrap(matchable: move) { $0.0 }, wrap(matchable: state) { $0.1 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockMoveMatcherProtocol.self, method: "execute(_: GameMove, in: GameStateProtocol) -> [GameUpdate]?", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	 struct __VerificationProxy_MoveMatcherProtocol: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	
+	    
+	    @discardableResult
+	    func validMoves<M1: Cuckoo.Matchable>(matching state: M1) -> Cuckoo.__DoNotUse<(GameStateProtocol), [GameMove]?> where M1.MatchedType == GameStateProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
+	        return cuckoo_manager.verify("validMoves(matching: GameStateProtocol) -> [GameMove]?", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func autoPlayMoves<M1: Cuckoo.Matchable>(matching state: M1) -> Cuckoo.__DoNotUse<(GameStateProtocol), [GameMove]?> where M1.MatchedType == GameStateProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
+	        return cuckoo_manager.verify("autoPlayMoves(matching: GameStateProtocol) -> [GameMove]?", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func effect<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(onExecuting move: M1, in state: M2) -> Cuckoo.__DoNotUse<(GameMove, GameStateProtocol), GameMove?> where M1.MatchedType == GameMove, M2.MatchedType == GameStateProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(GameMove, GameStateProtocol)>] = [wrap(matchable: move) { $0.0 }, wrap(matchable: state) { $0.1 }]
+	        return cuckoo_manager.verify("effect(onExecuting: GameMove, in: GameStateProtocol) -> GameMove?", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func execute<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ move: M1, in state: M2) -> Cuckoo.__DoNotUse<(GameMove, GameStateProtocol), [GameUpdate]?> where M1.MatchedType == GameMove, M2.MatchedType == GameStateProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(GameMove, GameStateProtocol)>] = [wrap(matchable: move) { $0.0 }, wrap(matchable: state) { $0.1 }]
+	        return cuckoo_manager.verify("execute(_: GameMove, in: GameStateProtocol) -> [GameUpdate]?", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+ class MoveMatcherProtocolStub: MoveMatcherProtocol {
+    
+
+    
+
+    
+     func validMoves(matching state: GameStateProtocol) -> [GameMove]?  {
+        return DefaultValueRegistry.defaultValue(for: ([GameMove]?).self)
+    }
+    
+     func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]?  {
+        return DefaultValueRegistry.defaultValue(for: ([GameMove]?).self)
+    }
+    
+     func effect(onExecuting move: GameMove, in state: GameStateProtocol) -> GameMove?  {
+        return DefaultValueRegistry.defaultValue(for: (GameMove?).self)
+    }
+    
+     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]?  {
+        return DefaultValueRegistry.defaultValue(for: ([GameUpdate]?).self)
     }
     
 }

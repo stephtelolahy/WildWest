@@ -23,7 +23,8 @@ class GameConfiguration {
     }
     
     var moveMatchers: [MoveMatcherProtocol] {
-        [StartGameMatcher()]
+        [StartGameMatcher(),
+         StartTurnMatcher()]
         /*
         [EndTurnExecutor(),
          StartTurnExecutor(),

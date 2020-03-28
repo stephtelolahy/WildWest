@@ -18,5 +18,5 @@ enum Score {
     static let weakAttackUnknown = 0
     static let helpTeammate = 1
     static let helpEnemy = -3
-    static let helpUnknown = 0
+    static let helpUnknown = -2
 }

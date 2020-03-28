@@ -1,17 +1,17 @@
 //
-//  StartTurnMatcherTests.swift
+//  StartTurnTests.swift
 //  WildWestTests
 //
-//  Created by Hugues Stéphano TELOLAHY on 3/16/20.
+//  Created by Hugues Stephano Telolahy on 28/03/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
 import XCTest
 
-class StartTurnMatcherTests: XCTestCase {
-    
+class StartTurnTests: XCTestCase {
+
     private let sut = StartTurnMatcher()
-    
+
     func test_ShouldStartTurn_IfChallengeIsStartTurn() {
         // Given
         let player1 = MockPlayerProtocol()
@@ -27,7 +27,7 @@ class StartTurnMatcherTests: XCTestCase {
         let moves = sut.autoPlayMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .startTurn, actorId: "p1")])
+        XCTAssertEqual(moves, [GameMove(name: MoveName("startTurn"), actorId: "p1")])
     }
     
     func test_CannotStartTurn_IfPlayingJail() {
@@ -66,22 +66,16 @@ class StartTurnMatcherTests: XCTestCase {
         XCTAssertNil(moves)
     }
     
-    func test_CannotStartTurn_IfHealth_IsZero() {
+    func test_Pull2CardsFromDeck_IfStartingTurn() {
         // Given
-        let player1 = MockPlayerProtocol()
-            .identified(by: "p1")
-            .noCardsInPlay()
-            .health(is: 0)
         let mockState = MockGameStateProtocol()
-            .currentTurn(is: "p1")
-            .challenge(is: .startTurn)
-            .players(are: player1)
+        let move = GameMove(name: MoveName("startTurn"), actorId: "p1")
         
         // When
-        let moves = sut.autoPlayMoves(matching: mockState)
+        let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertNil(moves)
+        XCTAssertEqual(updates, [.playerPullFromDeck("p1", 2),
+                                 .setChallenge(nil)])
     }
-    
 }

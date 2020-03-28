@@ -33,9 +33,24 @@ class GameEngineTests: XCTestCase {
                          updateDelay: 0)
     }
     
+    func test_ExecuteAutoPlayMove_IfStartingGame() {
+        // Given
+        let move = GameMove(name: MoveName("dummy"))
+        Cuckoo.stub(mockMoveMatcher) { mock in
+            when(mock.autoPlayMoves(matching: any())).thenReturn([move])
+        }
+        
+        // When
+        sut.start()
+        
+        // Assert
+        verify(mockMoveMatcher, atLeastOnce()).autoPlayMoves(matching: state(equalTo: mockState))
+        verify(mockMoveMatcher).execute(equal(to: move), in: state(equalTo: mockState))
+    }
+    
     func test_ExecuteGameUpdates_IfExecutingMove() {
         // Given
-        let move = GameMove(name: .startTurn)
+        let move = GameMove(name: MoveName("dummy"))
         let update: GameUpdate = .playerPullFromDeck("p1", 2)
         Cuckoo.stub(mockMoveMatcher) { mock in
             when(mock.execute(equal(to: move), in: state(equalTo: mockState))).thenReturn([update])
@@ -50,7 +65,7 @@ class GameEngineTests: XCTestCase {
     
     func test_AddExecutedMoves_IfExecutingMove() {
         // Given
-        let move = GameMove(name: .startTurn)
+        let move = GameMove(name: MoveName("dummy"))
         
         // When
         sut.execute(move)
@@ -61,7 +76,7 @@ class GameEngineTests: XCTestCase {
     
     func test_SetValidMoves_IfExecutingMove() {
         // Given
-        let move = GameMove(name: .startTurn)
+        let move = GameMove(name: MoveName("dummy"))
         let validMove = GameMove(name: .play, actorId: "p1")
         Cuckoo.stub(mockMoveMatcher) { mock in
             when(mock.validMoves(matching: state(equalTo: mockState))).thenReturn([validMove])
@@ -80,7 +95,7 @@ class GameEngineTests: XCTestCase {
     
     func test_DoNotGenerateActions_IfGameIsOver() {
         // Given
-        let move = GameMove(name: .startTurn)
+        let move = GameMove(name: MoveName("dummy"))
         Cuckoo.stub(mockState) { mock in
             when(mock.outcome.get).thenReturn(.outlawWin)
         }

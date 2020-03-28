@@ -1,8 +1,8 @@
 //
-//  GameMoveProtocol.swift
+//  GameMove.swift
 //  WildWest
 //
-//  Created by Hugues Stéphano TELOLAHY on 3/16/20.
+//  Created by Hugues Stephano Telolahy on 28/03/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
@@ -32,7 +32,6 @@ struct MoveName: RawRepresentable, Equatable {
 }
 
 extension MoveName {
-    static let startTurn = MoveName("startTurn")    // phase1: start turn drawing 2 cards
     static let play = MoveName("play")              // phase2: play a hand card
     static let endTurn = MoveName("endTurn")        // phase3: end turn discarding excess cards
     static let choose = MoveName("choose")          // reaction move: choose one card from general store
@@ -47,31 +46,4 @@ struct TargetCard: Equatable {
 enum TargetCardSource: Equatable {
     case randomHand
     case inPlay(String)
-}
-
-/// Function matching state to moves
-protocol MoveMatcherProtocol {
-    func validMoves(matching state: GameStateProtocol) -> [GameMove]?
-    func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]?
-    func effect(onExecuting move: GameMove, in state: GameStateProtocol) -> GameMove?
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]?
-}
-
-extension MoveMatcherProtocol {
-    
-    func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
-        nil
-    }
-    
-    func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
-        nil
-    }
-    
-    func effect(onExecuting move: GameMove, in state: GameStateProtocol) -> GameMove? {
-        nil
-    }
-    
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        nil
-    }
 }
