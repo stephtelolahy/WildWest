@@ -11,6 +11,7 @@ struct PlayerItem {
     let isControlled: Bool
     let isTurn: Bool
     let isAttacked: Bool
+    let isHelped: Bool
     let isEliminated: Bool
     let score: Int?
 }
@@ -39,17 +40,17 @@ class PlayersAdapter: PlayersAdapterProtocol {
                                   isControlled: false,
                                   isTurn: false,
                                   isAttacked: false,
+                                  isHelped: false,
                                   isEliminated: true,
                                   score: antiSheriffScore[playerId])
             }
             
             if let player = state.players.first(where: { $0.identifier == playerId }) {
-                let isTurn = player.identifier == state.turn
-                let isAttacked = state.isPlayerAttacked(playerId)
                 return PlayerItem(player: player,
                                   isControlled: player.identifier == controlledPlayerId,
-                                  isTurn: isTurn,
-                                  isAttacked: isAttacked,
+                                  isTurn: player.identifier == state.turn,
+                                  isAttacked: state.isPlayerAttacked(playerId),
+                                  isHelped: state.isPlayerHelped(playerId),
                                   isEliminated: false,
                                   score: antiSheriffScore[playerId])
             }
@@ -116,6 +117,32 @@ private extension GameStateProtocol {
                 return targetId == playerId
                 
             case let .weakAttack(_, targetId):
+                return targetId == playerId
+                
+            default:
+                return false
+            }
+        }
+        
+        return false
+    }
+    
+    func isPlayerHelped(_ playerId: String) -> Bool {
+        if let challenge = self.challenge {
+            switch challenge {
+            case let .generalStore(playerIds):
+                return playerIds.contains(playerId)
+                
+            default:
+                return false
+            }
+        }
+        
+        let classifier = MoveClassifier()
+        if let lastMove = executedMoves.last {
+            let classification = classifier.classify(lastMove)
+            switch classification {
+            case let .help(_, targetId):
                 return targetId == playerId
                 
             default:

@@ -66,6 +66,8 @@ class PlayerCell: UICollectionViewCell {
         
         if item.isAttacked {
             backgroundColor = UIColor.orange
+        } else if item.isHelped {
+            backgroundColor = UIColor.blue.withAlphaComponent(0.4)
         } else if item.isTurn {
             backgroundColor = UIColor.green.withAlphaComponent(0.4)
         } else if item.isControlled {

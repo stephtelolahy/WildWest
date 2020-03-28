@@ -83,7 +83,7 @@ class MenuViewController: UIViewController {
         let engine = GameEngine(database: database,
                                 moveMatchers: config.moveMatchers,
                                 updateExecutor: GameUpdateExecutor(),
-                                updateDelay: 1.0)
+                                updateDelay: 0.5)
         
         var controlledPlayerId: String?
         if playAsSheriffSwitch.isOn {
