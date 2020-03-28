@@ -7,6 +7,7 @@
 //
 
 class PassMatcher: MoveMatcherProtocol {
+    
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         switch state.challenge {
         case let .shoot(targetIds, _, _):
@@ -25,9 +26,7 @@ class PassMatcher: MoveMatcherProtocol {
             return nil
         }
     }
-}
-
-class PassExecutor: MoveExecutorProtocol {
+    
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .pass = move.name,
             let actorId = move.actorId,

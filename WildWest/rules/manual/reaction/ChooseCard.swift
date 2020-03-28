@@ -1,12 +1,13 @@
 //
-//  ChooseGeneralStoreCard.swift
+//  ChooseCard.swift
 //  WildWest
 //
-//  Created by Hugues Stephano Telolahy on 21/03/2020.
+//  Created by Hugues Stephano Telolahy on 28/03/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-class ChooseGeneralStoreCardMatcher: MoveMatcherProtocol {
+class ChooseCardMatcher: MoveMatcherProtocol {
+    
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard case let .generalStore(playerIds) = state.challenge,
             let actorId = playerIds.first else {
@@ -17,9 +18,7 @@ class ChooseGeneralStoreCardMatcher: MoveMatcherProtocol {
             GameMove(name: .choose, actorId: actorId, cardId: $0.identifier)
         }
     }
-}
-
-class ChooseGeneralStoreCardExecutor: MoveExecutorProtocol {
+    
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .choose = move.name,
             let actorId = move.actorId,

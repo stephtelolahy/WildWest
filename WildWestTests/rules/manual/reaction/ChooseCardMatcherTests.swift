@@ -1,17 +1,17 @@
 //
-//  ChooseGeneralStoreCardMatcherTests.swift
+//  ChooseCardMatcherTests.swift
 //  WildWestTests
 //
-//  Created by Hugues Stephano Telolahy on 21/03/2020.
+//  Created by Hugues Stephano Telolahy on 28/03/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
 import XCTest
 import Cuckoo
 
-class ChooseGeneralStoreCardMatcherTests: XCTestCase {
-    
-    private let sut = ChooseGeneralStoreCardMatcher()
+class ChooseCardMatcherTests: XCTestCase {
+
+    private let sut = ChooseCardMatcher()
     
     func test_CanSelectCard_IfChallengeIsGeneralStore() {
         // Given
@@ -47,5 +47,33 @@ class ChooseGeneralStoreCardMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .choose, actorId: "p1", cardId: "c1")])
+    }
+
+    func test_PickOneCardFromGeneralStore_IfChoosingCard() {
+        // Given
+        let mockState = MockGameStateProtocol()
+            .challenge(is: .generalStore(["p1", "p2"]))
+        let move = GameMove(name: .choose, actorId: "p1", cardId: "c1")
+        
+        // When
+        let updates = sut.execute(move, in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates, [.playerPullFromGeneralStore("p1", "c1"),
+                                 .setChallenge(.generalStore(["p2"]))])
+    }
+    
+    func test_RemoveChallenge_IfChoosingLastCard() {
+        // Given
+        let mockState = MockGameStateProtocol()
+            .challenge(is: .generalStore(["p1"]))
+        let move = GameMove(name: .choose, actorId: "p1", cardId: "c1")
+        
+        // When
+        let updates = sut.execute(move, in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates, [.playerPullFromGeneralStore("p1", "c1"),
+                                 .setChallenge(nil)])
     }
 }

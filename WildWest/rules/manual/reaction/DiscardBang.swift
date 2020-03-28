@@ -7,6 +7,7 @@
 //
 
 class DiscardBangOnDuelMatcher: MoveMatcherProtocol {
+    
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard case let .duel(playerIds, _) = state.challenge,
             let actor = state.players.first(where: { $0.identifier == playerIds.first }),
@@ -21,26 +22,7 @@ class DiscardBangOnDuelMatcher: MoveMatcherProtocol {
                      cardName: $0.name)
         }
     }
-}
-
-class DiscardBangOnIndiansMatcher: MoveMatcherProtocol {
-    func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
-        guard case let .indians(targetIds, _) = state.challenge,
-            let actor = state.players.first(where: { $0.identifier == targetIds.first }),
-            let cards = actor.handCards(named: .bang) else {
-                return nil
-        }
-        
-        return cards.map {
-            GameMove(name: .discard,
-                     actorId: actor.identifier,
-                     cardId: $0.identifier,
-                     cardName: $0.name)
-        }
-    }
-}
-
-class DiscardBangOnDuelExecutor: MoveExecutorProtocol {
+    
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .discard = move.name,
             case .bang = move.cardName,
@@ -56,7 +38,23 @@ class DiscardBangOnDuelExecutor: MoveExecutorProtocol {
     }
 }
 
-class DiscardBangOnIndiansExecutor: MoveExecutorProtocol {
+class DiscardBangOnIndiansMatcher: MoveMatcherProtocol {
+    
+    func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
+        guard case let .indians(targetIds, _) = state.challenge,
+            let actor = state.players.first(where: { $0.identifier == targetIds.first }),
+            let cards = actor.handCards(named: .bang) else {
+                return nil
+        }
+        
+        return cards.map {
+            GameMove(name: .discard,
+                     actorId: actor.identifier,
+                     cardId: $0.identifier,
+                     cardName: $0.name)
+        }
+    }
+    
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .discard = move.name,
             case .bang = move.cardName,

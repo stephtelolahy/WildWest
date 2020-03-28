@@ -7,6 +7,7 @@
 //
 
 class DiscardMissedMatcher: MoveMatcherProtocol {
+    
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard case let .shoot(targetIds, _, _) = state.challenge,
             let actor = state.players.first(where: { $0.identifier == targetIds.first }),
@@ -21,9 +22,7 @@ class DiscardMissedMatcher: MoveMatcherProtocol {
                      cardName: $0.name)
         }
     }
-}
-
-class DiscardMissedExecutor: MoveExecutorProtocol {
+    
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .discard = move.name,
             case .missed = move.cardName,

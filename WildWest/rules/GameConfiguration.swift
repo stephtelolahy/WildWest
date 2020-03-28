@@ -33,6 +33,7 @@ class GameConfiguration {
             StayInJailMatcher(),
             UseBarrelMatcher(),
             FailBarelMatcher(),
+            
             // manual play
             BeerMatcher(),
             SaloonMatcher(),
@@ -48,18 +49,21 @@ class GameConfiguration {
             GatlingMatcher(),
             IndiansMatcher(),
             DuelMatcher(),
+            
             // manual reaction
+            DiscardMissedMatcher(),
+            DiscardBangOnDuelMatcher(),
+            DiscardBangOnIndiansMatcher(),
+            DiscardBeerMatcher(),
+            PassMatcher(),
+            ChooseCardMatcher(),
             
             // Effect
         ]
         /*
         [EndTurnMatcher(),
-         ChooseGeneralStoreCardMatcher(),
-         DiscardMissedMatcher(),
-         DiscardBangOnDuelMatcher(),
-         DiscardBangOnIndiansMatcher(),
-         DiscardBeerMatcher(),
-         PassMatcher(),
+         
+         
          EliminateExecutor(calculator: OutcomeCalculator()),
          GainRewardOnEliminatingOutlawMatcher(),
          PenalizeSheriffOnEliminatingDeputyMatcher()]
