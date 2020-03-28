@@ -21,8 +21,8 @@ class BangMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        let maxShoots = calculator.maximumNumberOfShoots(of: actor)
-        guard maxShoots == 0 || state.bangsPlayed < maxShoots  else {
+        let bangLimits = actor.bangLimitsPerTurn
+        guard bangLimits == 0 || state.bangsPlayed < bangLimits  else {
             return nil
         }
         

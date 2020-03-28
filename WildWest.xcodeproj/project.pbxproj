@@ -91,6 +91,7 @@
 		332DFE0E242F1BFC009C35E6 /* StartGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332DFE0D242F1BFC009C35E6 /* StartGameTests.swift */; };
 		332DFE10242F1C1F009C35E6 /* StartTurnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332DFE0F242F1C1F009C35E6 /* StartTurnTests.swift */; };
 		33318D6D24275AAE0055C6C5 /* StatsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33318D6C24275AAE0055C6C5 /* StatsBuilder.swift */; };
+		3333463D242FD59900A97FD5 /* Player+RangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3333463C242FD59900A97FD5 /* Player+RangeTests.swift */; };
 		333800F9242F20A6003F7327 /* ResolveDynamite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33911EED242616580023C6AF /* ResolveDynamite.swift */; };
 		333800FA242F20A6003F7327 /* ResolveDynamite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33911EED242616580023C6AF /* ResolveDynamite.swift */; };
 		333800FC242F21A0003F7327 /* ResolveDynamiteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333800FB242F21A0003F7327 /* ResolveDynamiteTests.swift */; };
@@ -287,6 +288,7 @@
 		33318D6524274E3B0055C6C5 /* PenalizeSheriffOnEliminatingDeputy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenalizeSheriffOnEliminatingDeputy.swift; sourceTree = "<group>"; };
 		33318D68242750130055C6C5 /* PenalizeSheriffOnEliminatingDeputyMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenalizeSheriffOnEliminatingDeputyMatcherTests.swift; sourceTree = "<group>"; };
 		33318D6C24275AAE0055C6C5 /* StatsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsBuilder.swift; sourceTree = "<group>"; };
+		3333463C242FD59900A97FD5 /* Player+RangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+RangeTests.swift"; sourceTree = "<group>"; };
 		333800FB242F21A0003F7327 /* ResolveDynamiteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveDynamiteTests.swift; sourceTree = "<group>"; };
 		333800FF242F2348003F7327 /* ResolveJailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveJailTests.swift; sourceTree = "<group>"; };
 		3338B2E5242FCCDA0097BA57 /* GameState+OutcomeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameState+OutcomeTests.swift"; sourceTree = "<group>"; };
@@ -593,6 +595,7 @@
 				33D477EC23E55AFA00E232D9 /* RangeCalculatorTests.swift */,
 				ADD4DB6F2420A8F2001BBD48 /* GameMoveExtensionTests.swift */,
 				3338B2E5242FCCDA0097BA57 /* GameState+OutcomeTests.swift */,
+				3333463C242FD59900A97FD5 /* Player+RangeTests.swift */,
 			);
 			path = helpers;
 			sourceTree = "<group>";
@@ -1400,6 +1403,7 @@
 				3390F90C24253932001057A7 /* MoveClassifier.swift in Sources */,
 				AD52B99423B175110013240B /* Card.swift in Sources */,
 				3328FCCB242F2B5600A82255 /* BangMatcherTests.swift in Sources */,
+				3333463D242FD59900A97FD5 /* Player+RangeTests.swift in Sources */,
 				3328FCF1242F309400A82255 /* EndTurn.swift in Sources */,
 				33E4412224077D8000B2848E /* Score.swift in Sources */,
 				33EE1B9E242F188D00A1E4F7 /* GameMove.swift in Sources */,

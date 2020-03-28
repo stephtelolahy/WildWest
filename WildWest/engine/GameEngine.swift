@@ -46,8 +46,8 @@ class GameEngine: GameEngineProtocol, Subscribable {
         commandSubject.onNext(move)
     }
     
-    func observeAs(playerId: String?) -> Observable<GameStateProtocol> {
-        stateSubject.map { $0.hidingRoles(except: playerId) }
+    func state(observedBy playerId: String?) -> Observable<GameStateProtocol> {
+        stateSubject.map { $0.observed(by: playerId) }
     }
 }
 

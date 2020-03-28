@@ -27,7 +27,7 @@ class AIPlayerAgent: AIPlayerAgentProtocol, Subscribable {
     }
     
     func start() {
-        sub(engine.observeAs(playerId: playerId).subscribe(onNext: { [weak self] state in
+        sub(engine.state(observedBy: playerId).subscribe(onNext: { [weak self] state in
             self?.processState(state)
         }))
     }

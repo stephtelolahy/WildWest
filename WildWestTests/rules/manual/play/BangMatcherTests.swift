@@ -24,6 +24,7 @@ class BangMatcherTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
             .holding(MockCardProtocol().named(.bang).identified(by: "c1"))
+            .noCardsInPlay()
         let mockPlayer2 = MockPlayerProtocol().identified(by: "p2")
         let mockPlayer3 = MockPlayerProtocol().identified(by: "p3")
         let mockState = MockGameStateProtocol()
@@ -35,7 +36,6 @@ class BangMatcherTests: XCTestCase {
             when(mock.distance(from: "p1", to: "p2", in: state(equalTo: mockState))).thenReturn(1)
             when(mock.distance(from: "p1", to: "p3", in: state(equalTo: mockState))).thenReturn(0)
             when(mock.reachableDistance(of: player(equalTo: mockPlayer1))).thenReturn(5)
-            when(mock.maximumNumberOfShoots(of: player(equalTo: mockPlayer1))).thenReturn(1)
         }
         
         // When
@@ -53,6 +53,7 @@ class BangMatcherTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
             .holding(MockCardProtocol().named(.bang).identified(by: "c1"))
+            .noCardsInPlay()
         let mockPlayer2 = MockPlayerProtocol().identified(by: "p2")
         let mockPlayer3 = MockPlayerProtocol().identified(by: "p3")
         let mockState = MockGameStateProtocol()
@@ -64,7 +65,6 @@ class BangMatcherTests: XCTestCase {
             when(mock.distance(from: "p1", to: "p2", in: state(equalTo: mockState))).thenReturn(2)
             when(mock.distance(from: "p1", to: "p3", in: state(equalTo: mockState))).thenReturn(3)
             when(mock.reachableDistance(of: player(equalTo: mockPlayer1))).thenReturn(1)
-            when(mock.maximumNumberOfShoots(of: player(equalTo: mockPlayer1))).thenReturn(0)
         }
         
         // When
@@ -79,17 +79,18 @@ class BangMatcherTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
             .holding(MockCardProtocol().named(.bang).identified(by: "c1"))
+            .noCardsInPlay()
         let mockPlayer2 = MockPlayerProtocol().identified(by: "p2")
         let mockPlayer3 = MockPlayerProtocol().identified(by: "p3")
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
             .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
+            .bangsPlayed(is: 0)
         Cuckoo.stub(mockCalculator) { mock in
             when(mock.distance(from: "p1", to: "p2", in: state(equalTo: mockState))).thenReturn(4)
             when(mock.distance(from: "p1", to: "p3", in: state(equalTo: mockState))).thenReturn(3)
             when(mock.reachableDistance(of: player(equalTo: mockPlayer1))).thenReturn(5)
-            when(mock.maximumNumberOfShoots(of: player(equalTo: mockPlayer1))).thenReturn(0)
         }
         
         // When
@@ -105,6 +106,7 @@ class BangMatcherTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
             .holding(MockCardProtocol().named(.bang).identified(by: "c1"))
+            .noCardsInPlay()
         let mockPlayer2 = MockPlayerProtocol().identified(by: "p2")
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
@@ -114,7 +116,6 @@ class BangMatcherTests: XCTestCase {
         Cuckoo.stub(mockCalculator) { mock in
             when(mock.distance(from: "p1", to: "p2", in: state(equalTo: mockState))).thenReturn(1)
             when(mock.reachableDistance(of: player(equalTo: mockPlayer1))).thenReturn(1)
-            when(mock.maximumNumberOfShoots(of: player(equalTo: mockPlayer1))).thenReturn(1)
         }
         
         // When

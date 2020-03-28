@@ -61,7 +61,7 @@ class GameViewController: UIViewController, Subscribable {
             return
         }
         
-        sub(engine.observeAs(playerId: controlledPlayerId).subscribe(onNext: { [weak self] state in
+        sub(engine.state(observedBy: controlledPlayerId).subscribe(onNext: { [weak self] state in
             self?.update(with: state)
         }))
         

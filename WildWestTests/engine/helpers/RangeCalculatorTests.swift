@@ -194,22 +194,4 @@ class RangeCalculatorTests: XCTestCase {
         // Assert
         XCTAssertEqual(sut.reachableDistance(of: mockPlayer), 5)
     }
-    
-    func test_DefaultMaxNumberOfShootsIs1() {
-        // Given
-        let mockPlayer = MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub())
-        
-        // When
-        // Assert
-        XCTAssertEqual(sut.maximumNumberOfShoots(of: mockPlayer), 1)
-    }
-    
-    func test_IllimitedNumberOfShoots_IfPlayingVolcanic() {
-        // Given
-        let mockPlayer = MockPlayerProtocol().playing(MockCardProtocol().named(.volcanic))
-        
-        // When
-        // Assert
-        XCTAssertEqual(sut.maximumNumberOfShoots(of: mockPlayer), 0)
-    }
 }

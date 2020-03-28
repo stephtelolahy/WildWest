@@ -11,5 +11,5 @@ import RxSwift
 protocol GameEngineProtocol {
     func start()
     func queue(_ move: GameMove)
-    func observeAs(playerId: String?) -> Observable<GameStateProtocol>
+    func state(observedBy playerId: String?) -> Observable<GameStateProtocol>
 }

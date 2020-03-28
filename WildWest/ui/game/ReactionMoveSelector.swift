@@ -31,7 +31,7 @@ class ReactionMoveSelector: ReactionMoveSelectorProtocol {
         }
         
         let choices = moves.map { [$0.name.rawValue, $0.cardId].compactMap { $0 }.joined(separator: " ") }
-        viewController.selectWithoutCancel(title: challenge.instruction, choices: choices) { index in
+        viewController.selectWithoutCancel(title: challenge.description, choices: choices) { index in
             completion(moves[index])
         }
     }

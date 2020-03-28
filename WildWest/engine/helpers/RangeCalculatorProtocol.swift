@@ -9,5 +9,4 @@
 protocol RangeCalculatorProtocol {
     func distance(from playerId: String, to otherId: String, in state: GameStateProtocol) -> Int
     func reachableDistance(of player: PlayerProtocol) -> Int
-    func maximumNumberOfShoots(of player: PlayerProtocol) -> Int
 }

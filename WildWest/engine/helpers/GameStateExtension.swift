@@ -33,9 +33,17 @@ extension GameStateProtocol {
         return players[nextPlayerIndex].identifier
     }
     
-    func hidingRoles(except playerId: String?) -> GameStateProtocol {
-        let updatedPlayers = players.map {
-            $0.hidingRole(where: $0.identifier != playerId && $0.role != .sheriff && outcome == nil)
+    func observed(by playerId: String?) -> GameStateProtocol {
+        let updatedPlayers = players.map { player -> PlayerProtocol in
+            let shouldHideRole = player.identifier != playerId && player.role != .sheriff && outcome == nil
+            let role: Role? = shouldHideRole ? nil : player.role
+            return Player(role: role,
+                          ability: player.ability,
+                          maxHealth: player.maxHealth,
+                          imageName: player.imageName,
+                          health: player.health,
+                          hand: player.hand,
+                          inPlay: player.inPlay)
         }
         return GameState(players: updatedPlayers,
                          deck: deck,
@@ -50,17 +58,5 @@ extension GameStateProtocol {
                          validMoves: validMoves,
                          executedMoves: executedMoves,
                          eliminated: eliminated)
-    }
-}
-
-private extension PlayerProtocol {
-    func hidingRole(where condition: Bool) -> PlayerProtocol {
-        Player(role: condition ? nil : role,
-               ability: ability,
-               maxHealth: maxHealth,
-               imageName: imageName,
-               health: health,
-               hand: hand,
-               inPlay: inPlay)
     }
 }

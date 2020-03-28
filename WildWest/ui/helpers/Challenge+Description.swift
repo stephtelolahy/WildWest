@@ -8,7 +8,7 @@
 
 extension Challenge {
     
-    var instruction: String {
+    var description: String {
         switch self {
         case .dynamiteExploded:
             return "dynamite exploded"

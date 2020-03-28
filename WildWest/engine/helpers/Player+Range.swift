@@ -8,7 +8,7 @@
 
 extension PlayerProtocol {
     
-    func bangLimitsPerTurn() -> Int {
+    var bangLimitsPerTurn: Int {
         if inPlay.contains(where: { $0.name == .volcanic }) {
             return 0
         } else {
