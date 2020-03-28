@@ -28,6 +28,9 @@
 		333800F9242F20A6003F7327 /* ResolveDynamite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33911EED242616580023C6AF /* ResolveDynamite.swift */; };
 		333800FA242F20A6003F7327 /* ResolveDynamite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33911EED242616580023C6AF /* ResolveDynamite.swift */; };
 		333800FC242F21A0003F7327 /* ResolveDynamiteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333800FB242F21A0003F7327 /* ResolveDynamiteTests.swift */; };
+		333800FD242F22CC003F7327 /* ResolveJail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C45DDD23EB15E900B62508 /* ResolveJail.swift */; };
+		333800FE242F22CD003F7327 /* ResolveJail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C45DDD23EB15E900B62508 /* ResolveJail.swift */; };
+		33380100242F2348003F7327 /* ResolveJailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333800FF242F2348003F7327 /* ResolveJailTests.swift */; };
 		333E8757242D5B3B00EAE8FC /* Big Bomb-SoundBible.com-1219802495.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 333E8756242D5B3B00EAE8FC /* Big Bomb-SoundBible.com-1219802495.mp3 */; };
 		335BED692429334F009184A3 /* MoveSoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335BED682429334F009184A3 /* MoveSoundPlayer.swift */; };
 		335BED6A24293358009184A3 /* MoveSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335E614240B5F48000B89EB /* MoveSelector.swift */; };
@@ -214,6 +217,7 @@
 		33318D6C24275AAE0055C6C5 /* StatsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsBuilder.swift; sourceTree = "<group>"; };
 		3335E614240B5F48000B89EB /* MoveSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveSelector.swift; sourceTree = "<group>"; };
 		333800FB242F21A0003F7327 /* ResolveDynamiteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveDynamiteTests.swift; sourceTree = "<group>"; };
+		333800FF242F2348003F7327 /* ResolveJailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveJailTests.swift; sourceTree = "<group>"; };
 		333B233F2425ECA600685454 /* CatBalouMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBalouMatcherTests.swift; sourceTree = "<group>"; };
 		333B23412425ECB400685454 /* CatBalouExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBalouExecutorTests.swift; sourceTree = "<group>"; };
 		333B23482425F31700685454 /* EndTurnMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTurnMatcherTests.swift; sourceTree = "<group>"; };
@@ -241,8 +245,6 @@
 		336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDatabaseProtocol.swift; sourceTree = "<group>"; };
 		3383CFCD242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Metal Clang-SoundBible.com-19572601.mp3"; sourceTree = "<group>"; };
 		3383CFCF242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Ta Da-SoundBible.com-1884170640.mp3"; sourceTree = "<group>"; };
-		3383CFD1242D4DA500777E61 /* ResolveJailMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveJailMatcherTests.swift; sourceTree = "<group>"; };
-		3383CFD3242D4DB700777E61 /* ResolveJailExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveJailExecutorTests.swift; sourceTree = "<group>"; };
 		338A5FBF242BC8CE00766541 /* flyby-Conor-1500306612.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "flyby-Conor-1500306612.mp3"; sourceTree = "<group>"; };
 		338A5FC1242BC9A900766541 /* shotgun-old_school-RA_The_Sun_God-1129942741.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "shotgun-old_school-RA_The_Sun_God-1129942741.mp3"; sourceTree = "<group>"; };
 		338FAD15242543030096B488 /* InstructionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionBuilder.swift; sourceTree = "<group>"; };
@@ -774,10 +776,9 @@
 				332DFE0D242F1BFC009C35E6 /* StartGameTests.swift */,
 				332DFE0F242F1C1F009C35E6 /* StartTurnTests.swift */,
 				333800FB242F21A0003F7327 /* ResolveDynamiteTests.swift */,
+				333800FF242F2348003F7327 /* ResolveJailTests.swift */,
 				33FD755324267C5400C8622F /* ResolveBarrelMatcherTests.swift */,
 				33FD755524267C7200C8622F /* ResolveBarrelExecutorTests.swift */,
-				3383CFD1242D4DA500777E61 /* ResolveJailMatcherTests.swift */,
-				3383CFD3242D4DB700777E61 /* ResolveJailExecutorTests.swift */,
 			);
 			path = autoplay;
 			sourceTree = "<group>";
@@ -1175,6 +1176,7 @@
 				3301BEF423F962F000B4364D /* RandomAIWithRole.swift in Sources */,
 				33A4381223E4BD3200C39DD6 /* ArrayExtension.swift in Sources */,
 				336AA6F023F1450800328837 /* GameDatabaseProtocol.swift in Sources */,
+				333800FD242F22CC003F7327 /* ResolveJail.swift in Sources */,
 				335BED692429334F009184A3 /* MoveSoundPlayer.swift in Sources */,
 				33E4411D24077CA000B2848E /* ActionCell.swift in Sources */,
 				ADD4DB6E24209E4D001BBD48 /* MoveDescriptor.swift in Sources */,
@@ -1227,6 +1229,7 @@
 				AD6A958F24202D1500D0F937 /* GameConfiguration.swift in Sources */,
 				AD49F86823BA054D00543F59 /* Figure.swift in Sources */,
 				AD52B99D23B17A310013240B /* GameState.swift in Sources */,
+				33380100242F2348003F7327 /* ResolveJailTests.swift in Sources */,
 				339A294A23EFEFE7002C5CD8 /* ChallengeExtension.swift in Sources */,
 				3301BEF523F962F000B4364D /* RandomAIWithRole.swift in Sources */,
 				33EE1B99242E90DD00A1E4F7 /* StartGame.swift in Sources */,
@@ -1274,6 +1277,7 @@
 				ADD4DB732420AA2B001BBD48 /* GameMoveExtension.swift in Sources */,
 				AD7F34BF23D79893001B4072 /* MockGameStateProtocolExtension.swift in Sources */,
 				AD7F34BD23D79879001B4072 /* MockPlayerProtocolExtension.swift in Sources */,
+				333800FE242F22CD003F7327 /* ResolveJail.swift in Sources */,
 				33D477F423E57FDD00E232D9 /* MockFigureProtocolExtension.swift in Sources */,
 				3301E63923F7EEF700AB35C7 /* AIProtocol.swift in Sources */,
 				ADD035D023A96002003B2576 /* CardProtocol.swift in Sources */,

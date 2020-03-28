@@ -27,6 +27,8 @@ class GameConfiguration {
          StartTurnMatcher(),
          ExplodeDynamiteMatcher(),
          PassDynamiteMatcher(),
+         EscapeFromJailMatcher(),
+         StayInJailMatcher(),
         ]
         /*
         [EndTurnMatcher(),
@@ -42,8 +44,7 @@ class GameConfiguration {
          DynamiteMatcher(),
          
          PassDynamiteMatcher(),
-         EscapeFromJailMatcher(),
-         StayInJailMatcher(),
+         
          GeneralStoreMatcher(),
          ChooseGeneralStoreCardMatcher(),
          BangMatcher(),

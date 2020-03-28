@@ -6,7 +6,8 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-class StayInJailMatcher: AutoplayMoveMatcherProtocol {
+class StayInJailMatcher: MoveMatcherProtocol {
+    
     func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard case .startTurn = state.challenge,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
@@ -19,9 +20,7 @@ class StayInJailMatcher: AutoplayMoveMatcherProtocol {
         
         return [GameMove(name: .stayInJail, actorId: actor.identifier, cardId: card.identifier)]
     }
-}
-
-class StayInJailExecutor: MoveExecutorProtocol {
+    
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .stayInJail = move.name,
             let actorId = move.actorId,
@@ -36,7 +35,8 @@ class StayInJailExecutor: MoveExecutorProtocol {
     }
 }
 
-class EscapeFromJailMatcher: AutoplayMoveMatcherProtocol {
+class EscapeFromJailMatcher: MoveMatcherProtocol {
+    
     func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard case .startTurn = state.challenge,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
@@ -49,9 +49,7 @@ class EscapeFromJailMatcher: AutoplayMoveMatcherProtocol {
         
         return [GameMove(name: .escapeFromJail, actorId: actor.identifier, cardId: card.identifier)]
     }
-}
-
-class EscapeFromJailExecutor: MoveExecutorProtocol {
+    
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .escapeFromJail = move.name,
             let actorId = move.actorId,
@@ -62,4 +60,9 @@ class EscapeFromJailExecutor: MoveExecutorProtocol {
         return [.flipOverFirstDeckCard,
                 .playerDiscardInPlay(actorId, cardId)]
     }
+}
+
+private extension MoveName {
+    static let stayInJail = MoveName("stayInJail")
+    static let escapeFromJail = MoveName("escapeFromJail")
 }
