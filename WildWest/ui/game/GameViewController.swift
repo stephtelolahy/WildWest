@@ -21,6 +21,7 @@ class GameViewController: UIViewController, Subscribable {
     
     // MARK: IBOutlets
     
+    @IBOutlet private weak var endTurnButton: UIButton!
     @IBOutlet private weak var playersCollectionView: UICollectionView!
     @IBOutlet private weak var actionsCollectionView: UICollectionView!
     @IBOutlet private weak var messageTableView: UITableView!
@@ -38,6 +39,7 @@ class GameViewController: UIViewController, Subscribable {
     private var actionItems: [ActionItem] = []
     private var messages: [String] = []
     private var antiSheriffScore: [String: Int] = [:]
+    private var endTurnMoves: [GameMove] = []
     
     private lazy var playerAdapter = PlayersAdapter()
     private lazy var actionsAdapter = ActionsAdapter()
@@ -71,6 +73,12 @@ class GameViewController: UIViewController, Subscribable {
     
     @IBAction private func menuButtonTapped(_ sender: Any) {
         dismiss(animated: true)
+    }
+    
+    @IBAction private func endTurnTapped(_ sender: Any) {
+        playMoveSelector.selectMove(within: endTurnMoves) { [weak self] move in
+            self?.engine?.queue(move)
+        }
     }
 }
 
@@ -119,6 +127,14 @@ private extension GameViewController {
                 self?.engine?.queue(move)
             }
         }
+        
+        endTurnMoves = []
+        if let controlledPlayerId = self.controlledPlayerId,
+            let moves = state.validMoves[controlledPlayerId] {
+            endTurnMoves = moves.filter { $0.name == .endTurn }
+        }
+        
+        endTurnButton.isEnabled = !endTurnMoves.isEmpty
     }
     
     func showGameOver(outcome: GameOutcome) {

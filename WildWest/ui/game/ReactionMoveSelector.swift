@@ -30,8 +30,8 @@ class ReactionMoveSelector: ReactionMoveSelectorProtocol {
             return
         }
         
-        let choices = moves.map { $0.asComponents().joined(separator: " ") }
-        viewController.selectWithoutCancel(title: "Choose", choices: choices) { index in
+        let choices = moves.map { [$0.name.rawValue, $0.cardId].compactMap { $0 }.joined(separator: " ") }
+        viewController.selectWithoutCancel(title: challenge.instruction, choices: choices) { index in
             completion(moves[index])
         }
     }
@@ -41,7 +41,7 @@ private extension UIViewController {
     func selectWithoutCancel(title: String, choices: [String], completion: @escaping((Int) -> Void)) {
         let alertController = UIAlertController(title: title,
                                                 message: nil,
-                                                preferredStyle: .actionSheet)
+                                                preferredStyle: .alert)
         
         choices.forEach { choice in
             alertController.addAction(UIAlertAction(title: choice,

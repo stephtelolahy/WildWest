@@ -32,7 +32,7 @@ class InstructionBuilder: InstructionBuilderProtocol {
     }
 }
 
-private extension Challenge {
+extension Challenge {
     var instruction: String {
         switch self {
         case .dynamiteExploded:

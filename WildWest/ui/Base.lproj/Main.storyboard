@@ -122,9 +122,13 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_board" translatesAutoresizingMaskIntoConstraints="NO" id="Zz6-li-k9a">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAP-Di-VFz">
-                                <rect key="frame" x="339" y="16" width="20" height="22"/>
-                                <state key="normal" image="stop.circle" catalog="system"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAP-Di-VFz" userLabel="closeButton">
+                                <rect key="frame" x="327" y="14" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="wx8-FB-P72"/>
+                                    <constraint firstAttribute="width" constant="32" id="zZE-lH-i4L"/>
+                                </constraints>
+                                <state key="normal" image="ic_close"/>
                                 <connections>
                                     <action selector="menuButtonTapped:" destination="Yy6-0k-mhK" eventType="touchUpInside" id="IYI-iB-7dY"/>
                                 </connections>
@@ -299,7 +303,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="01_barile" translatesAutoresizingMaskIntoConstraints="NO" id="F8P-W3-OtS" userLabel="discardImageView">
-                                        <rect key="frame" x="58" y="0.0" width="54.5" height="84"/>
+                                        <rect key="frame" x="58" y="0.0" width="54.5" height="84.000000000000057"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="F8P-W3-OtS" secondAttribute="height" multiplier="250:389" id="yAr-Jz-kkr"/>
@@ -370,11 +374,23 @@
                                     <outlet property="delegate" destination="Yy6-0k-mhK" id="6PP-Y0-uVP"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="68M-B9-4Mh" userLabel="endTurnButton">
+                                <rect key="frame" x="297" y="487.5" width="64" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="68M-B9-4Mh" secondAttribute="height" multiplier="1:1" id="0zp-fJ-I0N"/>
+                                    <constraint firstAttribute="width" constant="64" id="L4g-Z2-BMG"/>
+                                </constraints>
+                                <state key="normal" image="ic_end_turn"/>
+                                <connections>
+                                    <action selector="endTurnTapped:" destination="Yy6-0k-mhK" eventType="touchUpInside" id="8OC-SC-SeH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Cuo-aq-X8E" firstAttribute="leading" secondItem="cXD-5P-evL" secondAttribute="leading" id="031-Jy-H79"/>
                             <constraint firstAttribute="bottom" secondItem="Zz6-li-k9a" secondAttribute="bottom" id="0yH-o0-LEa"/>
+                            <constraint firstItem="gAP-Di-VFz" firstAttribute="centerY" secondItem="H6O-tM-KGf" secondAttribute="centerY" id="3uM-ia-WYt"/>
                             <constraint firstItem="YnA-A3-EaS" firstAttribute="leading" secondItem="cXD-5P-evL" secondAttribute="leading" id="Bgg-xG-1fx"/>
                             <constraint firstItem="Cuo-aq-X8E" firstAttribute="trailing" secondItem="cXD-5P-evL" secondAttribute="trailing" id="DA0-Ud-BBO"/>
                             <constraint firstItem="Zz6-li-k9a" firstAttribute="top" secondItem="SPv-lk-pld" secondAttribute="top" id="NYk-8E-dzO"/>
@@ -383,6 +399,8 @@
                             <constraint firstItem="YnA-A3-EaS" firstAttribute="height" secondItem="l2k-9K-ciW" secondAttribute="height" multiplier="1.2" id="a2v-8a-Mff"/>
                             <constraint firstItem="cXD-5P-evL" firstAttribute="trailing" secondItem="gAP-Di-VFz" secondAttribute="trailing" constant="16" id="eeq-I1-JMV"/>
                             <constraint firstItem="H6O-tM-KGf" firstAttribute="leading" secondItem="cXD-5P-evL" secondAttribute="leading" constant="60" id="gKI-9M-6aJ"/>
+                            <constraint firstItem="cXD-5P-evL" firstAttribute="trailing" secondItem="68M-B9-4Mh" secondAttribute="trailing" constant="14" id="h0v-wv-P8a"/>
+                            <constraint firstItem="YnA-A3-EaS" firstAttribute="top" secondItem="68M-B9-4Mh" secondAttribute="bottom" constant="14" id="h2O-ll-0Jw"/>
                             <constraint firstItem="cXD-5P-evL" firstAttribute="bottom" secondItem="YnA-A3-EaS" secondAttribute="bottom" id="hKl-hn-yMd"/>
                             <constraint firstItem="cXD-5P-evL" firstAttribute="trailing" secondItem="iCj-xh-rDL" secondAttribute="trailing" id="hbd-NP-bYY"/>
                             <constraint firstAttribute="trailing" secondItem="Zz6-li-k9a" secondAttribute="trailing" id="hn4-da-oKH"/>
@@ -393,7 +411,6 @@
                             <constraint firstItem="l2k-9K-ciW" firstAttribute="width" secondItem="Cuo-aq-X8E" secondAttribute="width" multiplier="0.3" id="mxx-XI-pNg"/>
                             <constraint firstItem="Cuo-aq-X8E" firstAttribute="centerY" secondItem="SPv-lk-pld" secondAttribute="centerY" id="uvo-eG-iYH"/>
                             <constraint firstItem="iCj-xh-rDL" firstAttribute="top" secondItem="cXD-5P-evL" secondAttribute="top" constant="56" id="vf3-Gb-e0g"/>
-                            <constraint firstItem="gAP-Di-VFz" firstAttribute="top" secondItem="cXD-5P-evL" secondAttribute="top" constant="16" id="xaN-yR-kIv"/>
                             <constraint firstItem="l2k-9K-ciW" firstAttribute="centerY" secondItem="Cuo-aq-X8E" secondAttribute="centerY" id="yKV-fA-R8S"/>
                             <constraint firstItem="iCj-xh-rDL" firstAttribute="leading" secondItem="cXD-5P-evL" secondAttribute="leading" id="yd2-ta-YE1"/>
                         </constraints>
@@ -414,6 +431,7 @@
                     <connections>
                         <outlet property="actionsCollectionView" destination="YnA-A3-EaS" id="HoZ-WM-M1l"/>
                         <outlet property="discardImageView" destination="F8P-W3-OtS" id="OEd-7U-BS6"/>
+                        <outlet property="endTurnButton" destination="68M-B9-4Mh" id="91V-gZ-4V1"/>
                         <outlet property="messageTableView" destination="iCj-xh-rDL" id="Bv5-eY-6ye"/>
                         <outlet property="playersCollectionView" destination="Cuo-aq-X8E" id="Ffa-eb-FVY"/>
                         <outlet property="titleLabel" destination="H6O-tM-KGf" id="I0Y-yZ-IzN"/>
@@ -429,7 +447,8 @@
         <image name="01_barile" width="125" height="194.5"/>
         <image name="bg_board" width="400" height="600"/>
         <image name="bg_splash" width="104" height="58.5"/>
+        <image name="ic_close" width="48" height="48"/>
+        <image name="ic_end_turn" width="128" height="128"/>
         <image name="ic_play" width="557" height="291"/>
-        <image name="stop.circle" catalog="system" width="64" height="60"/>
     </resources>
 </document>
