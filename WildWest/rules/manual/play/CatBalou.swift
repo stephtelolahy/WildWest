@@ -8,12 +8,6 @@
 
 class CatBalouMatcher: MoveMatcherProtocol {
     
-    private let calculator: RangeCalculatorProtocol
-    
-    init(calculator: RangeCalculatorProtocol) {
-        self.calculator = calculator
-    }
-    
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
@@ -22,7 +16,7 @@ class CatBalouMatcher: MoveMatcherProtocol {
         }
         
         let otherPlayers = state.players.filter { $0.identifier != actor.identifier }
-        guard let targetCards = state.targetCards(from: otherPlayers) else {
+        guard let targetCards = otherPlayers.targetableCards() else {
             return nil
         }
         

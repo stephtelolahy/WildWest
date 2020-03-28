@@ -1,8 +1,8 @@
 //
-//  ChallengeExtension.swift
+//  Challenge+Damage.swift
 //  WildWest
 //
-//  Created by Hugues Stephano Telolahy on 09/02/2020.
+//  Created by Hugues Stephano Telolahy on 29/03/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 

@@ -10,13 +10,7 @@ import XCTest
 
 class CatBalouMatcherTests: XCTestCase {
     
-    private var sut: CatBalouMatcher!
-    private var mockCalculator: MockRangeCalculatorProtocol!
-    
-    override func setUp() {
-        mockCalculator = MockRangeCalculatorProtocol()
-        sut = CatBalouMatcher(calculator: mockCalculator)
-    }
+    private let sut = CatBalouMatcher()
     
     func test_CanPlayCatBalouToDiscardOtherHand_IfYourTurnAndOwnCard() {
         // Given

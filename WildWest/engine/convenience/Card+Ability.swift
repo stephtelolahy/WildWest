@@ -1,8 +1,8 @@
 //
-//  CardExtension.swift
+//  Card+Ability.swift
 //  WildWest
 //
-//  Created by Hugues Stéphano TELOLAHY on 1/22/20.
+//  Created by Hugues Stephano Telolahy on 29/03/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 

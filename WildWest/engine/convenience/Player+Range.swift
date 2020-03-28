@@ -19,4 +19,12 @@ extension PlayerProtocol {
         
         return 1
     }
+    
+    var gunRange: Int {
+        guard let weapon = inPlay.first(where: { $0.name.isGun }) else {
+            return 1
+        }
+        
+        return weapon.name.reachableDistance
+    }
 }

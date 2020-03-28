@@ -11,33 +11,22 @@ import Cuckoo
 
 class BangMatcherTests: XCTestCase {
     
-    private var sut: BangMatcher!
-    private var mockCalculator: MockRangeCalculatorProtocol!
-    
-    override func setUp() {
-        mockCalculator = MockRangeCalculatorProtocol()
-        sut = BangMatcher(calculator: mockCalculator)
-    }
+    private let sut = BangMatcher()
     
     func test_CanPlayBang_IfYourTurnAndOwnCardAndOtherIsAtRangeOf1() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
             .holding(MockCardProtocol().named(.bang).identified(by: "c1"))
-            .noCardsInPlay()
+            .playing(MockCardProtocol().named(.winchester))
             .ability(is: .bartCassidy)
-        let mockPlayer2 = MockPlayerProtocol().identified(by: "p2")
-        let mockPlayer3 = MockPlayerProtocol().identified(by: "p3")
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
             .currentTurn(is: "p1")
-            .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
+            .players(are: mockPlayer1,
+                     MockPlayerProtocol().identified(by: "p2").noCardsInPlay(),
+                     MockPlayerProtocol().identified(by: "p3").noCardsInPlay())
             .bangsPlayed(is: 0)
-        Cuckoo.stub(mockCalculator) { mock in
-            when(mock.distance(from: "p1", to: "p2", in: state(equalTo: mockState))).thenReturn(1)
-            when(mock.distance(from: "p1", to: "p3", in: state(equalTo: mockState))).thenReturn(0)
-            when(mock.reachableDistance(of: player(equalTo: mockPlayer1))).thenReturn(5)
-        }
         
         // When
         let moves = sut.validMoves(matching: mockState)
@@ -56,18 +45,13 @@ class BangMatcherTests: XCTestCase {
             .holding(MockCardProtocol().named(.bang).identified(by: "c1"))
             .noCardsInPlay()
             .ability(is: .bartCassidy)
-        let mockPlayer2 = MockPlayerProtocol().identified(by: "p2")
-        let mockPlayer3 = MockPlayerProtocol().identified(by: "p3")
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
             .currentTurn(is: "p1")
-            .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
+            .players(are: mockPlayer1,
+                     MockPlayerProtocol().identified(by: "p2").playing(MockCardProtocol().named(.mustang)),
+                     MockPlayerProtocol().identified(by: "p3").playing(MockCardProtocol().named(.mustang)))
             .bangsPlayed(is: 0)
-        Cuckoo.stub(mockCalculator) { mock in
-            when(mock.distance(from: "p1", to: "p2", in: state(equalTo: mockState))).thenReturn(2)
-            when(mock.distance(from: "p1", to: "p3", in: state(equalTo: mockState))).thenReturn(3)
-            when(mock.reachableDistance(of: player(equalTo: mockPlayer1))).thenReturn(1)
-        }
         
         // When
         let moves = sut.validMoves(matching: mockState)
@@ -76,25 +60,20 @@ class BangMatcherTests: XCTestCase {
         XCTAssertNil(moves)
     }
     
-    func test_CanPlayShoot_IfOtherIsReachableUsingGunRange() {
+    func test_CanPlayBang_IfOtherIsReachableUsingGunRange() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
             .holding(MockCardProtocol().named(.bang).identified(by: "c1"))
-            .noCardsInPlay()
+            .playing(MockCardProtocol().named(.winchester))
             .ability(is: .bartCassidy)
-        let mockPlayer2 = MockPlayerProtocol().identified(by: "p2")
-        let mockPlayer3 = MockPlayerProtocol().identified(by: "p3")
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
             .currentTurn(is: "p1")
-            .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
+            .players(are: mockPlayer1,
+                     MockPlayerProtocol().identified(by: "p2").playing(MockCardProtocol().named(.mustang)),
+                     MockPlayerProtocol().identified(by: "p3").playing(MockCardProtocol().named(.mustang)))
             .bangsPlayed(is: 0)
-        Cuckoo.stub(mockCalculator) { mock in
-            when(mock.distance(from: "p1", to: "p2", in: state(equalTo: mockState))).thenReturn(4)
-            when(mock.distance(from: "p1", to: "p3", in: state(equalTo: mockState))).thenReturn(3)
-            when(mock.reachableDistance(of: player(equalTo: mockPlayer1))).thenReturn(5)
-        }
         
         // When
         let moves = sut.validMoves(matching: mockState)
@@ -117,10 +96,6 @@ class BangMatcherTests: XCTestCase {
             .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2)
             .bangsPlayed(is: 1)
-        Cuckoo.stub(mockCalculator) { mock in
-            when(mock.distance(from: "p1", to: "p2", in: state(equalTo: mockState))).thenReturn(1)
-            when(mock.reachableDistance(of: player(equalTo: mockPlayer1))).thenReturn(1)
-        }
         
         // When
         let moves = sut.validMoves(matching: mockState)

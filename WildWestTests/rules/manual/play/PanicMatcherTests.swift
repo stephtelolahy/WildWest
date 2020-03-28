@@ -11,13 +11,7 @@ import Cuckoo
 
 class PanicMatcherTests: XCTestCase {
     
-    private var sut: PanicMatcher!
-    private var mockCalculator: MockRangeCalculatorProtocol!
-    
-    override func setUp() {
-        mockCalculator = MockRangeCalculatorProtocol()
-        sut = PanicMatcher(calculator: mockCalculator)
-    }
+    private let sut = PanicMatcher()
     
     func test_CanPlayPanic_IfYourTurnAndOwnCardAndDistanceIs1() {
         // Given
@@ -33,18 +27,13 @@ class PanicMatcherTests: XCTestCase {
         
         let mockPlayer3 = MockPlayerProtocol()
             .identified(by: "p3")
-            .playing(MockCardProtocol().identified(by: "c3"))
             .noCardsInHand()
+            .playing(MockCardProtocol().identified(by: "c3").named(.volcanic))
         
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
             .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
-        
-        Cuckoo.stub(mockCalculator) { mock in
-            when(mock.distance(from: "p1", to: "p2", in: any())).thenReturn(1)
-            when(mock.distance(from: "p1", to: "p3", in: any())).thenReturn(0)
-        }
         
         // When
         let moves = sut.validMoves(matching: mockState)
@@ -63,25 +52,13 @@ class PanicMatcherTests: XCTestCase {
             .holding(MockCardProtocol().named(.panic).identified(by: "c1"))
             .noCardsInPlay()
         
-        let mockPlayer2 = MockPlayerProtocol()
-            .identified(by: "p2")
-            .holding(MockCardProtocol().identified(by: "c2"))
-            .noCardsInPlay()
-        
-        let mockPlayer3 = MockPlayerProtocol()
-            .identified(by: "p3")
-            .playing(MockCardProtocol().identified(by: "c3"))
-            .noCardsInHand()
-        
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
             .currentTurn(is: "p1")
-            .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
-        
-        Cuckoo.stub(mockCalculator) { mock in
-            when(mock.distance(from: "p1", to: "p2", in: any())).thenReturn(2)
-            when(mock.distance(from: "p1", to: "p3", in: any())).thenReturn(3)
-        }
+            .players(are: mockPlayer1,
+                     MockPlayerProtocol().identified(by: "p2").noCardsInHand().noCardsInPlay(),
+                     MockPlayerProtocol().identified(by: "p3").holding(MockCardProtocol()).noCardsInPlay(),
+                     MockPlayerProtocol().identified(by: "p4").noCardsInHand().noCardsInPlay())
         
         // When
         let moves = sut.validMoves(matching: mockState)
@@ -106,10 +83,6 @@ class PanicMatcherTests: XCTestCase {
             .challenge(is: nil)
             .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2)
-        
-        Cuckoo.stub(mockCalculator) { mock in
-            when(mock.distance(from: "p1", to: "p2", in: any())).thenReturn(1)
-        }
         
         // When
         let moves = sut.validMoves(matching: mockState)

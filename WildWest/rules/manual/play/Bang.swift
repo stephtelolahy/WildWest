@@ -8,12 +8,6 @@
 
 class BangMatcher: MoveMatcherProtocol {
     
-    private let calculator: RangeCalculatorProtocol
-    
-    init(calculator: RangeCalculatorProtocol) {
-        self.calculator = calculator
-    }
-    
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
@@ -26,10 +20,9 @@ class BangMatcher: MoveMatcherProtocol {
             return nil
         }
         
-        let reachableDistance = calculator.reachableDistance(of: actor)
         let otherPlayers = state.players.filter {
             $0.identifier != actor.identifier
-                && calculator.distance(from: actor.identifier, to: $0.identifier, in: state) <= reachableDistance
+                && state.distance(from: actor.identifier, to: $0.identifier) <= actor.gunRange
         }
         
         guard !otherPlayers.isEmpty else {
