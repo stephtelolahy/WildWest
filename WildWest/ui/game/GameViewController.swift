@@ -9,8 +9,7 @@
 import UIKit
 import RxSwift
 
-class GameViewController: UIViewController,
-Subscribable, MoveSelector, ActionsAdapter, InstructionBuilder, StatsBuilder {
+class GameViewController: UIViewController, Subscribable, MoveSelector {
     
     // MARK: Constants
     
@@ -37,11 +36,14 @@ Subscribable, MoveSelector, ActionsAdapter, InstructionBuilder, StatsBuilder {
     private var playerItems: [PlayerItem?] = []
     private var actionItems: [ActionItem] = []
     private var messages: [String] = []
-    private var antiSheriffScore: [AgressivityStat] = []
+    private var antiSheriffScore: [String: Int] = [:]
     
     private lazy var playerAdapter = PlayersAdapter()
+    private lazy var actionsAdapter = ActionsAdapter()
     private lazy var moveDescriptor = MoveDescriptor()
     private lazy var moveSoundPlayer = MoveSoundPlayer()
+    private lazy var statsBuilder = StatsBuilder()
+    private lazy var instructionBuilder = InstructionBuilder()
     
     // MARK: Lifecycle
     
@@ -65,7 +67,7 @@ Subscribable, MoveSelector, ActionsAdapter, InstructionBuilder, StatsBuilder {
     // MARK: IBAction
     
     @IBAction private func menuButtonTapped(_ sender: Any) {
-        showStats()
+        dismiss(animated: true)
     }
 }
 
@@ -78,9 +80,12 @@ private extension GameViewController {
             playerIndexes = playerAdapter.buildIndexes(playerIds: playerIds, controlledId: controlledPlayerId)
         }
         
-        antiSheriffScore = buildAntiSheriffScore(state: state)
+        antiSheriffScore = statsBuilder.buildAntiSheriffScore(state: state)
         
-        playerItems = playerAdapter.buildItems(state: state, for: controlledPlayerId, playerIndexes: playerIndexes)
+        playerItems = playerAdapter.buildItems(state: state,
+                                               for: controlledPlayerId,
+                                               playerIndexes: playerIndexes,
+                                               antiSheriffScore: antiSheriffScore)
         playersCollectionView.reloadData()
         
         if let topDiscardPile = state.discardPile.first {
@@ -96,9 +101,9 @@ private extension GameViewController {
             moveSoundPlayer.playSound(for: lastMove)
         }
         
-        actionItems = buildActions(state: state, for: controlledPlayerId)
+        actionItems = actionsAdapter.buildActions(state: state, for: controlledPlayerId)
         actionsCollectionView.reloadData()
-        titleLabel.text = buildInstruction(state: state, for: controlledPlayerId)
+        titleLabel.text = instructionBuilder.buildInstruction(state: state, for: controlledPlayerId)
         
         if let outcome = state.outcome {
             showGameOver(outcome: outcome)
@@ -115,23 +120,6 @@ private extension GameViewController {
                                                 handler: { [weak self] _ in
                                                     self?.dismiss(animated: true)
         }))
-        
-        present(alertController, animated: true)
-    }
-    
-    func showStats() {
-        
-        let message = antiSheriffScore
-            .map { "\($0.source) : \($0.value)" }
-            .joined(separator: "\n")
-        
-        let alertController = UIAlertController(title: "Anti-Sheriff Stats",
-                                                message: message,
-                                                preferredStyle: .alert)
-        
-        alertController.addAction(UIAlertAction(title: "OK",
-                                                style: .cancel,
-                                                handler: nil))
         
         present(alertController, animated: true)
     }

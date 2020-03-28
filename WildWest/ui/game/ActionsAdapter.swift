@@ -11,11 +11,11 @@ struct ActionItem {
     let actions: [GameMove]
 }
 
-protocol ActionsAdapter {
+protocol ActionsAdapterProtocol {
     func buildActions(state: GameStateProtocol, for controlledPlayerId: String?) -> [ActionItem]
 }
 
-extension ActionsAdapter {
+class ActionsAdapter: ActionsAdapterProtocol {
     func buildActions(state: GameStateProtocol, for controlledPlayerId: String?) -> [ActionItem] {
         guard let controlledPlayerId = controlledPlayerId,
             let player = state.players.first(where: { $0.identifier == controlledPlayerId }) else {

@@ -122,8 +122,9 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_board" translatesAutoresizingMaskIntoConstraints="NO" id="Zz6-li-k9a">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAP-Di-VFz">
-                                <rect key="frame" x="334" y="16" width="25" height="24"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAP-Di-VFz">
+                                <rect key="frame" x="339" y="16" width="20" height="22"/>
+                                <state key="normal" image="stop.circle" catalog="system"/>
                                 <connections>
                                     <action selector="menuButtonTapped:" destination="Yy6-0k-mhK" eventType="touchUpInside" id="IYI-iB-7dY"/>
                                 </connections>
@@ -298,7 +299,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="01_barile" translatesAutoresizingMaskIntoConstraints="NO" id="F8P-W3-OtS" userLabel="discardImageView">
-                                        <rect key="frame" x="49" y="0.0" width="45" height="70"/>
+                                        <rect key="frame" x="49" y="0.0" width="45" height="70.000000000000057"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="F8P-W3-OtS" secondAttribute="height" multiplier="250:389" id="yAr-Jz-kkr"/>
@@ -431,5 +432,6 @@
         <image name="bg_board" width="400" height="600"/>
         <image name="bg_splash" width="104" height="58.5"/>
         <image name="ic_play" width="557" height="291"/>
+        <image name="stop.circle" catalog="system" width="64" height="60"/>
     </resources>
 </document>

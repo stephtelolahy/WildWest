@@ -12,20 +12,23 @@ struct PlayerItem {
     let isTurn: Bool
     let isActive: Bool
     let isEliminated: Bool
+    let score: Int?
 }
 
 protocol PlayersAdapterProtocol {
     func buildIndexes(playerIds: [String], controlledId: String?) -> [Int: String]
     func buildItems(state: GameStateProtocol,
                     for controlledPlayerId: String?,
-                    playerIndexes: [Int: String]) -> [PlayerItem?]
+                    playerIndexes: [Int: String],
+                    antiSheriffScore: [String: Int]) -> [PlayerItem?]
 }
 
 class PlayersAdapter: PlayersAdapterProtocol {
     
     func buildItems(state: GameStateProtocol,
                     for controlledPlayerId: String?,
-                    playerIndexes: [Int: String]) -> [PlayerItem?] {
+                    playerIndexes: [Int: String],
+                    antiSheriffScore: [String: Int]) -> [PlayerItem?] {
         Array(0..<9).map { index in
             guard let playerId = playerIndexes[index] else {
                 return nil
@@ -36,7 +39,8 @@ class PlayersAdapter: PlayersAdapterProtocol {
                                   isControlled: false,
                                   isTurn: false,
                                   isActive: false,
-                                  isEliminated: true)
+                                  isEliminated: true,
+                                  score: antiSheriffScore[playerId])
             }
             
             if let player = state.players.first(where: { $0.identifier == playerId }) {
@@ -46,7 +50,8 @@ class PlayersAdapter: PlayersAdapterProtocol {
                                   isControlled: player.identifier == controlledPlayerId,
                                   isTurn: isTurn,
                                   isActive: isActive,
-                                  isEliminated: false)
+                                  isEliminated: false,
+                                  score: antiSheriffScore[playerId])
             }
             
             return nil
