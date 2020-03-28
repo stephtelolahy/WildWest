@@ -6,7 +6,8 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-class UseBarrelMatcher: AutoplayMoveMatcherProtocol {
+class UseBarrelMatcher: MoveMatcherProtocol {
+    
     func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
         let maxBarrelsResolved = 1
         guard case let .shoot(targetIds, _, _) = state.challenge,
@@ -20,9 +21,7 @@ class UseBarrelMatcher: AutoplayMoveMatcherProtocol {
         
         return [GameMove(name: .useBarrel, actorId: actor.identifier)]
     }
-}
-
-class UseBarrelExecutor: MoveExecutorProtocol {
+    
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .useBarrel = move.name,
             let actorId = move.actorId else {
@@ -34,7 +33,8 @@ class UseBarrelExecutor: MoveExecutorProtocol {
     }
 }
 
-class FailBarelMatcher: AutoplayMoveMatcherProtocol {
+class FailBarelMatcher: MoveMatcherProtocol {
+    
     func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
         let maxBarrelsResolved = 1
         guard case let .shoot(targetIds, _, _) = state.challenge,
@@ -48,9 +48,7 @@ class FailBarelMatcher: AutoplayMoveMatcherProtocol {
         
         return [GameMove(name: .failBarrel, actorId: actor.identifier)]
     }
-}
-
-class FailBarelExecutor: MoveExecutorProtocol {
+    
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .failBarrel = move.name else {
             return nil
@@ -58,4 +56,9 @@ class FailBarelExecutor: MoveExecutorProtocol {
         
         return  [.flipOverFirstDeckCard]
     }
+}
+
+private extension MoveName {
+    static let useBarrel = MoveName("useBarrel")
+    static let failBarrel = MoveName("failBarrel")
 }

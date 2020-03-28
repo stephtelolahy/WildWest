@@ -29,6 +29,8 @@ class GameConfiguration {
          PassDynamiteMatcher(),
          EscapeFromJailMatcher(),
          StayInJailMatcher(),
+         UseBarrelMatcher(),
+         FailBarelMatcher(),
         ]
         /*
         [EndTurnMatcher(),
@@ -52,8 +54,7 @@ class GameConfiguration {
          IndiansMatcher(),
          DuelMatcher(),
          DiscardMissedMatcher(),
-         UseBarrelMatcher(),
-         FailBarelMatcher(),
+         
          DiscardBangOnDuelMatcher(),
          DiscardBangOnIndiansMatcher(),
          DiscardBeerMatcher(),

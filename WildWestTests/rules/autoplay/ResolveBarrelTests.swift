@@ -1,12 +1,13 @@
 //
-//  ResolveBarrelMatcherTests.swift
+//  ResolveBarrelTests.swift
 //  WildWestTests
 //
-//  Created by Hugues Stephano Telolahy on 21/03/2020.
+//  Created by Hugues Stephano Telolahy on 28/03/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
 import XCTest
+import Cuckoo
 
 class UseBarrelMatcherTests: XCTestCase {
     
@@ -50,7 +51,25 @@ class UseBarrelMatcherTests: XCTestCase {
         let moves = sut.autoPlayMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .useBarrel, actorId: "p1")])
+        XCTAssertEqual(moves, [GameMove(name: MoveName("useBarrel"), actorId: "p1")])
+    }
+    
+    func test_ResolveShootChallenge_IfReturnHeartFromDeck() {
+        // Given
+        let mockState = MockGameStateProtocol()
+        Cuckoo.stub(mockState) { mock in
+            when(mock.challenge.get).thenReturn(.shoot(["p1"], .bang, "px"))
+            when(mock.barrelsResolved.get).thenReturn(0)
+        }
+        
+        let move = GameMove(name: MoveName("useBarrel"), actorId: "p1")
+        
+        // When
+        let updates = sut.execute(move, in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates, [.flipOverFirstDeckCard,
+                                 .setChallenge(nil)])
     }
 }
 
@@ -76,6 +95,24 @@ class FailBarelMatcherTests: XCTestCase {
         let moves = sut.autoPlayMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .failBarrel, actorId: "p1")])
+        XCTAssertEqual(moves, [GameMove(name: MoveName("failBarrel"), actorId: "p1")])
+    }
+    
+    func test_DoNotResolveShootChallenge_IfReturnNonHeartFromDeck() {
+        // Given
+        let mockState = MockGameStateProtocol()
+        Cuckoo.stub(mockState) { mock in
+            when(mock.challenge.get).thenReturn(.shoot(["p1"], .bang, "px"))
+            when(mock.barrelsResolved.get).thenReturn(0)
+        }
+        
+        let move = GameMove(name: MoveName("failBarrel"), actorId: "p1")
+        
+        // When
+        let updates = sut.execute(move, in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates, [.flipOverFirstDeckCard])
     }
 }
+

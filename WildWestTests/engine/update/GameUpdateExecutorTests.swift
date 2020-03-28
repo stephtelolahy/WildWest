@@ -1,15 +1,15 @@
 //
-//  GameUpdateTests.swift
+//  GameUpdateExecutorTests.swift
 //  WildWestTests
 //
-//  Created by Hugues Stephano Telolahy on 10/02/2020.
+//  Created by Hugues Stephano Telolahy on 28/03/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
 import XCTest
 import Cuckoo
 
-class GameUpdateTests: XCTestCase {
+class GameUpdateExecutorTests: XCTestCase {
     
     private let sut = GameUpdateExecutor()
     private let mockDatabase = MockGameDatabaseProtocol()
@@ -380,4 +380,5 @@ class GameUpdateTests: XCTestCase {
         verify(mockDatabase).addDamageEvent(equal(to: expectedEvent))
         verifyNoMoreInteractions(mockDatabase)
     }
+    
 }

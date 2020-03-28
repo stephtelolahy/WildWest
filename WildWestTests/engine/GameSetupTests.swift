@@ -10,7 +10,7 @@ import XCTest
 
 class GameSetupTests: XCTestCase {
     
-    private let sut: GameSetupProtocol = GameSetup()
+    private let sut = GameSetup()
     
     func test_Roles_For4Players() {
         // Given
