@@ -60,7 +60,7 @@ class GameConfiguration {
             ChooseCardMatcher(),
             
             // Effect
-            EliminateMatcher(calculator: OutcomeCalculator()),
+            EliminateMatcher(),
             GainRewardOnEliminatingOutlawMatcher(),
             PenalizeSheriffOnEliminatingDeputyMatcher()
         ]

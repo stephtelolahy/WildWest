@@ -11,13 +11,7 @@ import Cuckoo
 
 class EliminateMatcherTests: XCTestCase {
 
-    private var sut: EliminateMatcher!
-    private var mockCalculator: MockOutcomeCalculatorProtocol!
-
-    override func setUp() {
-        mockCalculator = MockOutcomeCalculatorProtocol().withEnabledDefaultImplementation(OutcomeCalculatorProtocolStub())
-        sut = EliminateMatcher(calculator: mockCalculator)
-    }
+    private let sut = EliminateMatcher()
     
     func test_ShouldEliminateActorAfterPass_IfHealthIsZero() {
         // Given
@@ -39,6 +33,7 @@ class EliminateMatcherTests: XCTestCase {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
+            .role(is: .renegade)
             .withEnabledDefaultImplementation(PlayerProtocolStub())
         let mockPlayer2 = MockPlayerProtocol()
             .identified(by: "p2")
@@ -63,6 +58,7 @@ class EliminateMatcherTests: XCTestCase {
         let mockCard4 = MockCardProtocol().identified(by: "c4")
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
+            .role(is: .renegade)
             .holding(mockCard1, mockCard2)
             .playing(mockCard3, mockCard4)
         let mockPlayer2 = MockPlayerProtocol()
@@ -88,6 +84,7 @@ class EliminateMatcherTests: XCTestCase {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
+            .role(is: .outlaw)
             .withEnabledDefaultImplementation(PlayerProtocolStub())
         let mockPlayer2 = MockPlayerProtocol()
             .identified(by: "p2")
@@ -117,9 +114,7 @@ class EliminateMatcherTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1, mockPlayer2)
             .currentTurn(is: "p2")
-        Cuckoo.stub(mockCalculator) { mock in
-            when(mock.outcome(for: any())).thenReturn(.sheriffWin)
-        }
+        
         let move = GameMove(name: .eliminate, actorId: "p1")
         
         // When

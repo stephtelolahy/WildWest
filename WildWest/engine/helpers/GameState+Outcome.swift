@@ -1,13 +1,15 @@
 //
-//  OutcomeCalculator.swift
+//  GameState+Outcome.swift
 //  WildWest
 //
-//  Created by Hugues Stephano Telolahy on 14/02/2020.
+//  Created by Hugues Stephano Telolahy on 28/03/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-class OutcomeCalculator: OutcomeCalculatorProtocol {
-    func outcome(for remainingRoles: [Role]) -> GameOutcome? {
+extension GameStateProtocol {
+    
+    func claculateOutcome() -> GameOutcome? {
+        let remainingRoles = players.map { $0.role }
         let allOutlawsAreEliminated = remainingRoles.filter { $0 == .outlaw || $0 == .renegade }.isEmpty
         if allOutlawsAreEliminated {
             return .sheriffWin

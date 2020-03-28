@@ -29,7 +29,7 @@ class ResourcesTests_Figures: XCTestCase {
         XCTAssertTrue(figures.contains { $0.ability == .joudonais && $0.bullets == 4 })
         XCTAssertTrue(figures.contains { $0.ability == .kitCarlson && $0.bullets == 4 })
         XCTAssertTrue(figures.contains { $0.ability == .luckyDuke && $0.bullets == 4 })
-        XCTAssertTrue(figures.contains { $0.ability == .paulRegret && $0.bullets == 4 })
+        XCTAssertTrue(figures.contains { $0.ability == .paulRegret && $0.bullets == 3 })
         XCTAssertTrue(figures.contains { $0.ability == .pedroRamirez && $0.bullets == 4 })
         XCTAssertTrue(figures.contains { $0.ability == .roseDoolan && $0.bullets == 4 })
         XCTAssertTrue(figures.contains { $0.ability == .sidKetchum && $0.bullets == 4 })

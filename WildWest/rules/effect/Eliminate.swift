@@ -8,12 +8,6 @@
 
 class EliminateMatcher: MoveMatcherProtocol {
     
-    private let calculator: OutcomeCalculatorProtocol
-    
-    init(calculator: OutcomeCalculatorProtocol) {
-        self.calculator = calculator
-    }
-    
     func effect(onExecuting move: GameMove, in state: GameStateProtocol) -> GameMove? {
         guard case .pass = move.name,
             let actorId = move.actorId,
@@ -41,8 +35,7 @@ class EliminateMatcher: MoveMatcherProtocol {
             updates.append(.setChallenge(.startTurn))
         }
         
-        let remainingRoles = state.players.filter { $0.identifier != actorId }.compactMap { $0.role }
-        if let outcome = calculator.outcome(for: remainingRoles) {
+        if let outcome = state.claculateOutcome() {
             updates.append(.setOutcome(outcome))
         }
         
