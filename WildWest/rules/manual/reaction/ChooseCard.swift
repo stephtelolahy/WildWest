@@ -30,3 +30,7 @@ class ChooseCardMatcher: MoveMatcherProtocol {
                 .setChallenge(state.challenge?.removing(actorId))]
     }
 }
+
+extension MoveName {
+    static let choose = MoveName("choose")
+}

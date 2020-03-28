@@ -27,6 +27,6 @@ class StartGameMatcher: MoveMatcherProtocol {
     }
 }
 
-private extension MoveName {
+extension MoveName {
     static let startGame = MoveName("startGame")
 }

@@ -51,7 +51,7 @@ class UseBarrelMatcherTests: XCTestCase {
         let moves = sut.autoPlayMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: MoveName("useBarrel"), actorId: "p1")])
+        XCTAssertEqual(moves, [GameMove(name: .useBarrel, actorId: "p1")])
     }
     
     func test_ResolveShootChallenge_IfReturnHeartFromDeck() {
@@ -62,7 +62,7 @@ class UseBarrelMatcherTests: XCTestCase {
             when(mock.barrelsResolved.get).thenReturn(0)
         }
         
-        let move = GameMove(name: MoveName("useBarrel"), actorId: "p1")
+        let move = GameMove(name: .useBarrel, actorId: "p1")
         
         // When
         let updates = sut.execute(move, in: mockState)
@@ -95,7 +95,7 @@ class FailBarelMatcherTests: XCTestCase {
         let moves = sut.autoPlayMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: MoveName("failBarrel"), actorId: "p1")])
+        XCTAssertEqual(moves, [GameMove(name: .failBarrel, actorId: "p1")])
     }
     
     func test_DoNotResolveShootChallenge_IfReturnNonHeartFromDeck() {
@@ -106,7 +106,7 @@ class FailBarelMatcherTests: XCTestCase {
             when(mock.barrelsResolved.get).thenReturn(0)
         }
         
-        let move = GameMove(name: MoveName("failBarrel"), actorId: "p1")
+        let move = GameMove(name: .failBarrel, actorId: "p1")
         
         // When
         let updates = sut.execute(move, in: mockState)

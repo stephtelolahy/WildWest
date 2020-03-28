@@ -6,7 +6,8 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-class GainRewardOnEliminatingOutlawMatcher: EffectMatcherProtocol {
+class GainRewardOnEliminatingOutlawMatcher: MoveMatcherProtocol {
+    
     func effect(onExecuting move: GameMove, in state: GameStateProtocol) -> GameMove? {
         guard case .eliminate = move.name,
             let actor = state.eliminated.first(where: { $0.identifier == move.actorId }),
@@ -20,9 +21,7 @@ class GainRewardOnEliminatingOutlawMatcher: EffectMatcherProtocol {
         
         return GameMove(name: .gainRewardOnEliminatingOutlaw, actorId: offenderId)
     }
-}
-
-class GainRewardOnEliminatingOutlawExecutor: MoveExecutorProtocol {
+    
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .gainRewardOnEliminatingOutlaw = move.name,
             let actorId = move.actorId else {
@@ -31,4 +30,8 @@ class GainRewardOnEliminatingOutlawExecutor: MoveExecutorProtocol {
         
         return [.playerPullFromDeck(actorId, 3)]
     }
+}
+
+extension MoveName {
+    static let gainRewardOnEliminatingOutlaw = MoveName("gainRewardOnEliminatingOutlaw")
 }

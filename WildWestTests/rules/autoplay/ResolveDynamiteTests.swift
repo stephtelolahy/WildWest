@@ -28,13 +28,13 @@ class ExplodeDynamiteMatcherTests: XCTestCase {
         let moves = sut.autoPlayMoves(matching: mockState)
         
         // assert
-        XCTAssertEqual(moves, [GameMove(name: MoveName("explodeDynamite"), actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(moves, [GameMove(name: .explodeDynamite, actorId: "p1", cardId: "c1")])
     }
     
     func test_DiscardDynamiteAndSetExplodeChallenge_IfExplodes() {
         // Given
         let mockState = MockGameStateProtocol()
-        let move = GameMove(name: MoveName("explodeDynamite"), actorId: "p1", cardId: "c1")
+        let move = GameMove(name: .explodeDynamite, actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(move, in: mockState)
@@ -65,7 +65,7 @@ class PassDynamiteMatcherTests: XCTestCase {
         let moves = sut.autoPlayMoves(matching: mockState)
         
         // assert
-        XCTAssertEqual(moves, [GameMove(name: MoveName("passDynamite"), actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(moves, [GameMove(name: .passDynamite, actorId: "p1", cardId: "c1")])
     }
     
     func test_PassDynamiteToNextPlayer_IfDoesNotExplode() {
@@ -78,7 +78,7 @@ class PassDynamiteMatcherTests: XCTestCase {
                 MockPlayerProtocol().identified(by: "p2")
             ])
         }
-        let move = GameMove(name: MoveName("passDynamite"), actorId: "p1", cardId: "c1")
+        let move = GameMove(name: .passDynamite, actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(move, in: mockState)

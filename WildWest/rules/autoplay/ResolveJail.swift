@@ -62,7 +62,7 @@ class EscapeFromJailMatcher: MoveMatcherProtocol {
     }
 }
 
-private extension MoveName {
+extension MoveName {
     static let stayInJail = MoveName("stayInJail")
     static let escapeFromJail = MoveName("escapeFromJail")
 }

@@ -7,7 +7,8 @@
 //
 // swiftlint:disable type_name
 
-class PenalizeSheriffOnEliminatingDeputyMatcher: EffectMatcherProtocol {
+class PenalizeSheriffOnEliminatingDeputyMatcher: MoveMatcherProtocol {
+    
     func effect(onExecuting move: GameMove, in state: GameStateProtocol) -> GameMove? {
         guard case .eliminate = move.name,
             let actor = state.eliminated.first(where: { $0.identifier == move.actorId }),
@@ -22,9 +23,7 @@ class PenalizeSheriffOnEliminatingDeputyMatcher: EffectMatcherProtocol {
         
         return GameMove(name: .penalizeSheriffOnEliminatingDeputy, actorId: offenderId)
     }
-}
-
-class PenalizeSheriffOnEliminatingDeputyExecutor: MoveExecutorProtocol {
+    
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .penalizeSheriffOnEliminatingDeputy = move.name,
             let actorId = move.actorId,
@@ -37,4 +36,8 @@ class PenalizeSheriffOnEliminatingDeputyExecutor: MoveExecutorProtocol {
         actor.inPlay.forEach { updates.append(.playerDiscardInPlay(actorId, $0.identifier)) }
         return updates
     }
+}
+
+extension MoveName {
+    static let penalizeSheriffOnEliminatingDeputy = MoveName("penalizeSheriffOnEliminatingDeputy")
 }

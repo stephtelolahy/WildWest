@@ -21,14 +21,14 @@ class StartGameTests: XCTestCase {
         let moves = sut.autoPlayMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: MoveName("startGame"))])
+        XCTAssertEqual(moves, [GameMove(name: .startGame)])
     }
     
     func test_SetTurn_IfStartingGame() {
         // Given
         let mockState = MockGameStateProtocol()
             .players(are: MockPlayerProtocol().identified(by: "p1").role(is: .sheriff))
-        let move = GameMove(name: MoveName("startGame"))
+        let move = GameMove(name: .startGame)
         
         // When
         let updates = sut.execute(move, in: mockState)

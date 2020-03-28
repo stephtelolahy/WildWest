@@ -58,7 +58,7 @@ class FailBarelMatcher: MoveMatcherProtocol {
     }
 }
 
-private extension MoveName {
+extension MoveName {
     static let useBarrel = MoveName("useBarrel")
     static let failBarrel = MoveName("failBarrel")
 }

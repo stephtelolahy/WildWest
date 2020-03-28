@@ -6,7 +6,14 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-class EliminateMatcher: EffectMatcherProtocol {
+class EliminateMatcher: MoveMatcherProtocol {
+    
+    private let calculator: OutcomeCalculatorProtocol
+    
+    init(calculator: OutcomeCalculatorProtocol) {
+        self.calculator = calculator
+    }
+    
     func effect(onExecuting move: GameMove, in state: GameStateProtocol) -> GameMove? {
         guard case .pass = move.name,
             let actorId = move.actorId,
@@ -16,15 +23,6 @@ class EliminateMatcher: EffectMatcherProtocol {
         }
         
         return GameMove(name: .eliminate, actorId: actorId)
-    }
-}
-
-class EliminateExecutor: MoveExecutorProtocol {
-    
-    private let calculator: OutcomeCalculatorProtocol
-    
-    init(calculator: OutcomeCalculatorProtocol) {
-        self.calculator = calculator
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
@@ -50,4 +48,8 @@ class EliminateExecutor: MoveExecutorProtocol {
         
         return updates
     }
+}
+
+extension MoveName {
+    static let eliminate = MoveName("eliminate")
 }

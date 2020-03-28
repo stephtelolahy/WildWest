@@ -27,7 +27,7 @@ class StayInJailMatcherTests: XCTestCase {
         let moves = sut.autoPlayMoves(matching: mockState)
         
         // assert
-        XCTAssertEqual(moves, [GameMove(name: MoveName("stayInJail"), actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(moves, [GameMove(name: .stayInJail, actorId: "p1", cardId: "c1")])
     }
     
     func test_CannotResolveJail_IfPlayingDynamite() {
@@ -53,7 +53,7 @@ class StayInJailMatcherTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .players(are: MockPlayerProtocol().identified(by: "p1"), MockPlayerProtocol().identified(by: "p2"))
             .currentTurn(is: "p1")
-        let move = GameMove(name: MoveName("stayInJail"), actorId: "p1", cardId: "c1")
+        let move = GameMove(name: .stayInJail, actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(move, in: mockState)
@@ -85,13 +85,13 @@ class EscapeFromJailMatcherTests: XCTestCase {
         let moves = sut.autoPlayMoves(matching: mockState)
         
         // assert
-        XCTAssertEqual(moves, [GameMove(name: MoveName("escapeFromJail"), actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(moves, [GameMove(name: .escapeFromJail, actorId: "p1", cardId: "c1")])
     }
     
     func test_DiscardJail_IfEscapeFromJail() {
         // Given
         let mockState = MockGameStateProtocol()
-        let move = GameMove(name: MoveName("escapeFromJail"), actorId: "p1", cardId: "c1")
+        let move = GameMove(name: .escapeFromJail, actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(move, in: mockState)

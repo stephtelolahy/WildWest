@@ -40,3 +40,7 @@ class EndTurnMatcher: MoveMatcherProtocol {
         return updates
     }
 }
+
+extension MoveName {
+    static let endTurn = MoveName("endTurn")
+}

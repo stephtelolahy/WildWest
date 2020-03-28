@@ -60,14 +60,9 @@ class GameConfiguration {
             ChooseCardMatcher(),
             
             // Effect
+            EliminateMatcher(calculator: OutcomeCalculator()),
+            GainRewardOnEliminatingOutlawMatcher(),
+            PenalizeSheriffOnEliminatingDeputyMatcher()
         ]
-        /*
-        [EndTurnMatcher(),
-         
-         
-         EliminateExecutor(calculator: OutcomeCalculator()),
-         GainRewardOnEliminatingOutlawMatcher(),
-         PenalizeSheriffOnEliminatingDeputyMatcher()]
-         */
     }
 }

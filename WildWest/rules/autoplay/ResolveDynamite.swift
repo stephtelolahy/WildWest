@@ -59,7 +59,7 @@ class PassDynamiteMatcher: MoveMatcherProtocol {
     }
 }
 
-private extension MoveName {
+extension MoveName {
     static let explodeDynamite = MoveName("explodeDynamite")
     static let passDynamite = MoveName("passDynamite")
 }

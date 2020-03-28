@@ -27,7 +27,7 @@ class StartTurnTests: XCTestCase {
         let moves = sut.autoPlayMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: MoveName("startTurn"), actorId: "p1")])
+        XCTAssertEqual(moves, [GameMove(name: .startTurn, actorId: "p1")])
     }
     
     func test_CannotStartTurn_IfPlayingJail() {
@@ -69,7 +69,7 @@ class StartTurnTests: XCTestCase {
     func test_Pull2CardsFromDeck_IfStartingTurn() {
         // Given
         let mockState = MockGameStateProtocol()
-        let move = GameMove(name: MoveName("startTurn"), actorId: "p1")
+        let move = GameMove(name: .startTurn, actorId: "p1")
         
         // When
         let updates = sut.execute(move, in: mockState)

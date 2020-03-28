@@ -40,4 +40,16 @@ class GainRewardOnEliminatingOutlawMatcherTests: XCTestCase {
         // Assert
         XCTAssertNil(effect)
     }
+    
+    func test_Pull3Cards_IfRewardedOnEliminatingOutlaw() {
+        // Given
+        let mockState = MockGameStateProtocol()
+        let move = GameMove(name: .gainRewardOnEliminatingOutlaw, actorId: "p1")
+        
+        // When
+        let updates = sut.execute(move, in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates, [.playerPullFromDeck("p1", 3)])
+    }
 }

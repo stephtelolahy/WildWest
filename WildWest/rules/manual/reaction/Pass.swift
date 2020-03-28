@@ -39,3 +39,7 @@ class PassMatcher: MoveMatcherProtocol {
                 .setChallenge(challenge.removing(actorId))]
     }
 }
+
+extension MoveName {
+    static let pass = MoveName("pass")
+}

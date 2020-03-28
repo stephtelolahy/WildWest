@@ -32,11 +32,8 @@ struct MoveName: RawRepresentable, Equatable {
 }
 
 extension MoveName {
-    static let play = MoveName("play")              // phase2: play a hand card
-    static let endTurn = MoveName("endTurn")        // phase3: end turn discarding excess cards
-    static let discard = MoveName("discard")        // reaction move: discard card to cancel attacked
-    static let pass = MoveName("pass")              // reaction move: do nothing while attacked
-    static let choose = MoveName("choose")          // reaction move: choose one card from general store
+    static let play = MoveName("play")
+    static let discard = MoveName("discard")
 }
 
 struct TargetCard: Equatable {
