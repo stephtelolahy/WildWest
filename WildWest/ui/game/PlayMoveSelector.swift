@@ -81,14 +81,3 @@ private extension UIViewController {
         present(alertController, animated: true)
     }
 }
-
-extension TargetCard {
-    var description: String {
-        switch source {
-        case .randomHand:
-            return "\(ownerId)'s random hand"
-        case let .inPlay(targetCardId):
-            return "\(ownerId)'s \(targetCardId)"
-        }
-    }
-}
