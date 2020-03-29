@@ -23,7 +23,7 @@ class StartGameMatcher: MoveMatcherProtocol {
         }
         
         return [.setTurn(sheriff.identifier),
-                .setChallenge(.startTurn)]
+                .setChallenge(Challenge(name: .startTurn))]
     }
 }
 

@@ -32,7 +32,7 @@ class EliminateMatcher: MoveMatcherProtocol {
         updates.append(.eliminatePlayer(actorId))
         if actorId == state.turn {
             updates.append(.setTurn(state.nextTurn))
-            updates.append(.setChallenge(.startTurn))
+            updates.append(.setChallenge(Challenge(name: .startTurn)))
         }
         
         if let outcome = state.claculateOutcome() {

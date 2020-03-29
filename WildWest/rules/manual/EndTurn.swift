@@ -36,7 +36,7 @@ class EndTurnMatcher: MoveMatcherProtocol {
             cardIds.forEach { updates.append(.playerDiscardHand(actorId, $0)) }
         }
         updates.append(.setTurn(state.nextTurn))
-        updates.append(.setChallenge(.startTurn))
+        updates.append(.setChallenge(Challenge(name: .startTurn)))
         return updates
     }
 }

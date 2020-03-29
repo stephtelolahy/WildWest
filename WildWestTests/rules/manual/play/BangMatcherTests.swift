@@ -112,6 +112,6 @@ class BangMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .setChallenge(.shoot(["p2"], .bang, "p1"))])
+                                 .setChallenge(Challenge(name: .bang, actorId: "p1", targetIds: ["p2"]))])
     }
 }

@@ -9,28 +9,24 @@
 extension Challenge {
     
     var description: String {
-        switch self {
+        switch name {
         case .dynamiteExploded:
             return "dynamite exploded"
             
-        case let .duel(_, offenderId):
-            return "duel by \(offenderId)"
+        case .duel:
+            return "duel by \(actorId ?? "")"
             
-        case let .shoot(_, cardName, offenderId):
-            switch cardName {
-            case .bang:
-                return "bang by \(offenderId)"
-            case .gatling:
-                return "gatling by \(offenderId)"
-            default:
-                return "shoot by \(offenderId)"
-            }
+        case .bang:
+            return "bang by \(actorId ?? "")"
             
-        case let .indians(_, offenderId):
-            return "indians by \(offenderId)"
+        case .gatling:
+            return "gatling by \(actorId ?? "")"
+            
+        case .indians:
+            return "indians by \(actorId ?? "")"
             
         case .generalStore:
-            return "choose card from general store"
+            return "general store by \(actorId ?? "")"
             
         default:
             fatalError("Illegal state")

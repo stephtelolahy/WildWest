@@ -9,9 +9,9 @@
 import XCTest
 
 class GeneralStoreMatcherTests: XCTestCase {
-
+    
     private let sut = GeneralStoreMatcher()
-
+    
     func test_CanPlayGeneralStore_IfYourTurnAndOwnCard() {
         // Given
         let mockCard = MockCardProtocol()
@@ -48,6 +48,6 @@ class GeneralStoreMatcherTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
                                  .setupGeneralStore(4),
-                                 .setChallenge(.generalStore(["p1", "p2", "p3", "p4"]))])
+                                 .setChallenge(Challenge(name: .generalStore, actorId: "p1", targetIds: ["p1", "p2", "p3", "p4"]))])
     }
 }

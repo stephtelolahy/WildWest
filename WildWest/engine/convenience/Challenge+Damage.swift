@@ -9,14 +9,8 @@
 extension Challenge {
     
     var damage: Int {
-        switch self {
-        case .shoot:
-            return 1
-            
-        case .indians:
-            return 1
-            
-        case .duel:
+        switch name {
+        case .bang, .gatling, .indians, .duel:
             return 1
             
         case .dynamiteExploded:
@@ -28,49 +22,30 @@ extension Challenge {
     }
     
     func removing(_ playerId: String) -> Challenge? {
-        switch self {
-        case let .shoot(playerIds, cardName, source):
-            let remainingIds = playerIds.filter { $0 != playerId }
+        switch name {
+        case .bang, .gatling, .indians, .generalStore:
+            let remainingIds = targetIds?.filter { $0 != playerId } ?? []
             if remainingIds.isEmpty {
                 return nil
             } else {
-                return .shoot(remainingIds, cardName, source)
+                return Challenge(name: name, actorId: actorId, targetIds: remainingIds)
             }
             
-        case let .indians(playerIds, source):
-            let remainingIds = playerIds.filter { $0 != playerId }
-            if remainingIds.isEmpty {
-                return nil
-            } else {
-                return .indians(remainingIds, source)
-            }
-            
-        case let .generalStore(playerIds):
-            let remainingIds = playerIds.filter { $0 != playerId }
-            if remainingIds.isEmpty {
-                return nil
-            } else {
-                return .generalStore(remainingIds)
-            }
+        case .duel:
+            return nil
             
         case .dynamiteExploded:
-            return .startTurn
+            return Challenge(name: .startTurn)
             
         default:
-            return nil
+            fatalError("Illegal state")
         }
     }
     
     var damageSource: DamageSource? {
-        switch self {
-        case let .shoot(_, _, sourceId):
-            return .byPlayer(sourceId)
-            
-        case let .duel(_, sourceId):
-            return .byPlayer(sourceId)
-            
-        case let .indians(_, sourceId):
-            return .byPlayer(sourceId)
+        switch name {
+        case .bang, .gatling, .duel, .indians:
+            return .byPlayer(actorId!)
             
         case .dynamiteExploded:
             return .byDynamite
@@ -78,5 +53,15 @@ extension Challenge {
         default:
             fatalError("Illegal state")
         }
+    }
+    
+    func permutingTargets() -> Challenge? {
+        guard case .duel = name,
+            let targetIds = self.targetIds else {
+                return self
+        }
+        
+        let permutedIds = [targetIds[1], targetIds[0]]
+        return Challenge(name: name, actorId: actorId, targetIds: permutedIds)
     }
 }

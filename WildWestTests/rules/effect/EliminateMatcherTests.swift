@@ -100,7 +100,7 @@ class EliminateMatcherTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates, [.eliminatePlayer("p1"),
                                  .setTurn("p2"),
-                                 .setChallenge(.startTurn)])
+                                 .setChallenge(Challenge(name: .startTurn))])
     }
     
     func test_SetOutcomeIfGameIsOver() {

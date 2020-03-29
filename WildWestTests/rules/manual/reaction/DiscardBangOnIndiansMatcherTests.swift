@@ -21,7 +21,7 @@ class DiscardBangOnIndiansMatcherTests: XCTestCase {
             .holding(mockCard)
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
-            .challenge(is: .indians(["p1", "p2"], "px"))
+            .challenge(is: Challenge(name: .indians, actorId: "px", targetIds: ["p1", "p2"]))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
@@ -34,7 +34,7 @@ class DiscardBangOnIndiansMatcherTests: XCTestCase {
     func test_RemoveActorFromIndiansChallenge_IfDiscardingBang() {
         // Given
         let mockState = MockGameStateProtocol()
-            .challenge(is: .indians(["p1", "p2", "p3"], "px"))
+            .challenge(is: Challenge(name: .indians, actorId: "px", targetIds: ["p1", "p2", "p3"]))
         let move = GameMove(name: .discard, actorId: "p1", cardId: "c1", cardName: .bang)
         
         // When
@@ -42,7 +42,7 @@ class DiscardBangOnIndiansMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .setChallenge(.indians(["p2", "p3"], "px"))
+                                 .setChallenge(Challenge(name: .indians, actorId: "px", targetIds: ["p2", "p3"]))
         ])
     }
 

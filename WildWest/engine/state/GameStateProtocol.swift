@@ -15,6 +15,7 @@ protocol GameStateProtocol {
     var bangsPlayed: Int { get }
     @available(*, deprecated)
     var barrelsResolved: Int { get }
+    @available(*, deprecated)
     var generalStore: [CardProtocol] { get }
     var eliminated: [PlayerProtocol] { get }
     var outcome: GameOutcome? { get }
@@ -29,14 +30,21 @@ enum GameOutcome: String, Equatable {
     renegadeWin
 }
 
-enum Challenge: Equatable {
+struct Challenge: Equatable {
+    let name: ChallengeName
+    var actorId: String?
+    var targetIds: [String]?
+}
+
+enum ChallengeName: String {
     case startTurn
+    case bang
+    case duel
+    case gatling
+    case indians
+    case generalStore
     case dynamiteExploded
-    @available(*, deprecated)
-    case shoot([String], CardName, String)
-    case indians([String], String)
-    case duel([String], String)
-    case generalStore([String])
+    case discardExcessCards
 }
 
 struct DamageEvent: Equatable {

@@ -9,7 +9,8 @@
 class StayInJailMatcher: MoveMatcherProtocol {
     
     func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
-        guard case .startTurn = state.challenge,
+        guard let challenge = state.challenge,
+            case .startTurn = challenge.name,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
             actor.inPlay.filter({ $0.name == .dynamite }).isEmpty,
             let card = actor.inPlay.first(where: { $0.name == .jail }),
@@ -31,14 +32,15 @@ class StayInJailMatcher: MoveMatcherProtocol {
         return [.flipOverFirstDeckCard,
                 .playerDiscardInPlay(actorId, cardId),
                 .setTurn(state.nextTurn),
-                .setChallenge(.startTurn)]
+                .setChallenge(Challenge(name: .startTurn))]
     }
 }
 
 class EscapeFromJailMatcher: MoveMatcherProtocol {
     
     func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
-        guard case .startTurn = state.challenge,
+        guard let challenge = state.challenge,
+            case .startTurn = challenge.name,
             let actor = state.players.first(where: { $0.identifier == state.turn }),
             actor.inPlay.filter({ $0.name == .dynamite }).isEmpty,
             let card = actor.inPlay.first(where: { $0.name == .jail }),

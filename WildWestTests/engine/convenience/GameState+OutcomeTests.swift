@@ -28,7 +28,7 @@ class GameState_OutcomeTests: XCTestCase {
         XCTAssertEqual(sut.claculateOutcome(), .outlawWin)
     }
     
-    func test_RenegateWins_IfIsLastNotEliminated() {
+    func test_RenegateWins_IfIsLastAlive() {
         // Given
         Cuckoo.stub(sut) { mock in
             when(mock.players.get).thenReturn([
@@ -60,9 +60,37 @@ class GameState_OutcomeTests: XCTestCase {
         Cuckoo.stub(sut) { mock in
             when(mock.players.get).thenReturn([
                 MockPlayerProtocol().role(is: .sheriff),
-                MockPlayerProtocol().role(is: .renegade),
+                MockPlayerProtocol().role(is: .outlaw),
                 MockPlayerProtocol().role(is: .deputy),
                 MockPlayerProtocol().role(is: .renegade),
+            ])
+        }
+        
+        // When
+        // Assert
+        XCTAssertNil(sut.claculateOutcome())
+    }
+    
+    func test_NoOutcome_IfRenegadeAlive() {
+        // Given
+        Cuckoo.stub(sut) { mock in
+            when(mock.players.get).thenReturn([
+                MockPlayerProtocol().role(is: .sheriff),
+                MockPlayerProtocol().role(is: .renegade),
+            ])
+        }
+        
+        // When
+        // Assert
+        XCTAssertNil(sut.claculateOutcome())
+    }
+    
+    func test_NoOutcome_IfOutlawAlive() {
+        // Given
+        Cuckoo.stub(sut) { mock in
+            when(mock.players.get).thenReturn([
+                MockPlayerProtocol().role(is: .sheriff),
+                MockPlayerProtocol().role(is: .outlaw),
             ])
         }
         

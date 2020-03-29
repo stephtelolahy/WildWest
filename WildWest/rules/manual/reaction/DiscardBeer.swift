@@ -14,15 +14,9 @@ class DiscardBeerMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        switch challenge {
-        case let .shoot(targetIds, _, _):
-            return matchDiscardBeer(actorId: targetIds.first, challenge: challenge, in: state)
-            
-        case let .indians(targetIds, _):
-            return matchDiscardBeer(actorId: targetIds.first, challenge: challenge, in: state)
-            
-        case let .duel(playerIds, _):
-            return matchDiscardBeer(actorId: playerIds.first, challenge: challenge, in: state)
+        switch challenge.name {
+        case .bang, .gatling, .duel, .indians:
+            return matchDiscardBeer(actorId: challenge.targetIds?.first, challenge: challenge, in: state)
             
         case .dynamiteExploded:
             return matchDiscardBeer(actorId: state.turn, challenge: challenge, in: state)
@@ -60,12 +54,13 @@ class DiscardBeerMatcher: MoveMatcherProtocol {
         guard case .discard = move.name,
             case .beer = move.cardName,
             let actorId = move.actorId,
+            let challenge = state.challenge,
             let cardsToDiscardIds = move.discardIds else {
                 return nil
         }
         
         var updates: [GameUpdate] = cardsToDiscardIds.map { .playerDiscardHand(actorId, $0) }
-        updates.append(.setChallenge(state.challenge?.removing(actorId)))
+        updates.append(.setChallenge(challenge.removing(actorId)))
         return updates
     }
 }

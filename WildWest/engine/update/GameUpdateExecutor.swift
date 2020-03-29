@@ -17,11 +17,15 @@ class GameUpdateExecutor: UpdateExecutorProtocol {
             
         case let .setChallenge(challenge):
             database.setChallenge(challenge)
-            if case let .shoot(_, cardName, _) = challenge {
-                if case .bang = cardName {
+            if let challenge = challenge {
+                if case .bang = challenge.name {
                     database.setBangsPlayed(database.state.bangsPlayed + 1)
+                    database.setBarrelsResolved(0)
                 }
-                database.setBarrelsResolved(0)
+                
+                if case .gatling = challenge.name {
+                    database.setBarrelsResolved(0)
+                }
             }
             
         case let .playerGainHealth(playerId, points):

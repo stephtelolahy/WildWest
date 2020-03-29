@@ -35,7 +35,7 @@ class StartGameTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.setTurn("p1"),
-                                 .setChallenge(.startTurn)])
+                                 .setChallenge(Challenge(name: .startTurn))])
     }
     
 }

@@ -1389,6 +1389,8 @@ import Cuckoo
     
     
     
+    @available(*, deprecated)
+    
      var generalStore: [CardProtocol] {
         get {
             return cuckoo_manager.getter("generalStore",
@@ -1521,6 +1523,8 @@ import Cuckoo
 	    }
 	    
 	    
+	    @available(*, deprecated)
+	    
 	    var generalStore: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [CardProtocol]> {
 	        return .init(manager: cuckoo_manager, name: "generalStore")
 	    }
@@ -1602,6 +1606,8 @@ import Cuckoo
 	        return .init(manager: cuckoo_manager, name: "barrelsResolved", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
+	    
+	    @available(*, deprecated)
 	    
 	    var generalStore: Cuckoo.VerifyReadOnlyProperty<[CardProtocol]> {
 	        return .init(manager: cuckoo_manager, name: "generalStore", callMatcher: callMatcher, sourceLocation: sourceLocation)
@@ -1697,6 +1703,8 @@ import Cuckoo
         
     }
     
+    
+    @available(*, deprecated)
     
      var generalStore: [CardProtocol] {
         get {

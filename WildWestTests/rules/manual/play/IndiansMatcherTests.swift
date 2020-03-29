@@ -9,9 +9,9 @@
 import XCTest
 
 class IndiansMatcherTests: XCTestCase {
-
+    
     private let sut = IndiansMatcher()
-
+    
     func test_CanPlayIndians_IfYourTurnAndOwnCard() {
         // Given
         let mockCard = MockCardProtocol()
@@ -47,6 +47,6 @@ class IndiansMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .setChallenge(.indians(["p2", "p3", "p4"], "p1"))])
+                                 .setChallenge(Challenge(name: .indians, actorId: "p1", targetIds: ["p2", "p3", "p4"]))])
     }
 }

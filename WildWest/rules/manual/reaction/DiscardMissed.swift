@@ -9,8 +9,9 @@
 class DiscardMissedMatcher: MoveMatcherProtocol {
     
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
-        guard case let .shoot(targetIds, _, _) = state.challenge,
-            let actor = state.players.first(where: { $0.identifier == targetIds.first }),
+        guard let challenge = state.challenge,
+            (challenge.name == .bang || challenge.name == .gatling),
+            let actor = state.players.first(where: { $0.identifier == challenge.targetIds?.first }),
             let cards = actor.handCards(named: .missed) else {
                 return nil
         }
@@ -26,12 +27,13 @@ class DiscardMissedMatcher: MoveMatcherProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .discard = move.name,
             case .missed = move.cardName,
+            let challenge = state.challenge,
             let actorId = move.actorId,
             let cardId = move.cardId else {
                 return nil
         }
         
         return [.playerDiscardHand(actorId, cardId),
-                .setChallenge(state.challenge?.removing(actorId))]
+                .setChallenge(challenge.removing(actorId))]
     }
 }

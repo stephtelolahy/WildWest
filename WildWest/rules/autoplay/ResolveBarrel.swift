@@ -9,8 +9,9 @@
 class UseBarrelMatcher: MoveMatcherProtocol {
     
     func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
-        guard case let .shoot(targetIds, _, _) = state.challenge,
-            let actor = state.players.first(where: { $0.identifier == targetIds.first }),
+        guard let challenge = state.challenge,
+            (challenge.name == .bang || challenge.name == .gatling),
+            let actor = state.players.first(where: { $0.identifier == challenge.targetIds?.first }),
             state.barrelsResolved < actor.barrelsCount,
             let topDeckCard = state.deck.first,
             topDeckCard.makeBarrelSuccessful else {
@@ -22,20 +23,22 @@ class UseBarrelMatcher: MoveMatcherProtocol {
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .useBarrel = move.name,
+            let challenge = state.challenge,
             let actorId = move.actorId else {
                 return nil
         }
         
         return  [.flipOverFirstDeckCard,
-                 .setChallenge(state.challenge?.removing(actorId))]
+                 .setChallenge(challenge.removing(actorId))]
     }
 }
 
 class FailBarelMatcher: MoveMatcherProtocol {
     
     func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
-        guard case let .shoot(targetIds, _, _) = state.challenge,
-            let actor = state.players.first(where: { $0.identifier == targetIds.first }),
+        guard let challenge = state.challenge,
+            (challenge.name == .bang || challenge.name == .gatling),
+            let actor = state.players.first(where: { $0.identifier == challenge.targetIds?.first }),
             state.barrelsResolved < actor.barrelsCount,
             let topDeckCard = state.deck.first,
             !topDeckCard.makeBarrelSuccessful else {

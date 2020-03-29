@@ -36,6 +36,6 @@ class GeneralStoreMatcher: MoveMatcherProtocol {
         let playerIds = Array(0..<playersCount).map { state.players[(actorIndex + $0) % playersCount].identifier }
         return [.playerDiscardHand(actorId, cardId),
                 .setupGeneralStore(playersCount),
-                .setChallenge(.generalStore(playerIds))]
+                .setChallenge(Challenge(name: .generalStore, actorId: actorId, targetIds: playerIds))]
     }
 }

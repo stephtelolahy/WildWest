@@ -35,6 +35,6 @@ class IndiansMatcher: MoveMatcherProtocol {
         let playersCount = state.players.count
         let targetIds = Array(1..<playersCount).map { state.players[(actorIndex + $0) % playersCount].identifier }
         return [.playerDiscardHand(actorId, cardId),
-                .setChallenge(.indians(targetIds, actorId))]
+                .setChallenge(Challenge(name: .indians, actorId: actorId, targetIds: targetIds))]
     }
 }

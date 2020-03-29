@@ -97,7 +97,7 @@ class EndTurnMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.setTurn("p2"),
-                                 .setChallenge(.startTurn)])
+                                 .setChallenge(Challenge(name: .startTurn))])
     }
     
     func test_ChangeTurnToFirstPlayer_IfLastPlayerJustEndedTurn() {
@@ -114,7 +114,7 @@ class EndTurnMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.setTurn("p1"),
-                                 .setChallenge(.startTurn)])
+                                 .setChallenge(Challenge(name: .startTurn))])
     }
     
     func test_DiscardExcessCards_IfEndingTurn() {
@@ -133,6 +133,6 @@ class EndTurnMatcherTests: XCTestCase {
         XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
                                  .playerDiscardHand("p1", "c2"),
                                  .setTurn("p2"),
-                                 .setChallenge(.startTurn)])
+                                 .setChallenge(Challenge(name: .startTurn))])
     }
 }

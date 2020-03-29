@@ -229,13 +229,13 @@ class GameUpdateExecutorTests: XCTestCase {
     
     func test_SetChallenge_IfSettingChallenge() {
         // Given
-        let update = GameUpdate.setChallenge(.startTurn)
+        let update = GameUpdate.setChallenge(Challenge(name: .startTurn))
         
         // When
         sut.execute(update, in: mockDatabase)
         
         // Assert
-        verify(mockDatabase).setChallenge(equal(to: .startTurn))
+        verify(mockDatabase).setChallenge(equal(to: Challenge(name: .startTurn)))
         verifyNoMoreInteractions(mockDatabase)
     }
     
@@ -245,7 +245,7 @@ class GameUpdateExecutorTests: XCTestCase {
         Cuckoo.stub(mockDatabase) { mock in
             when(mock.state.get).thenReturn(mockState)
         }
-        let update = GameUpdate.setChallenge(.shoot(["p1"], .bang, "px"))
+        let update = GameUpdate.setChallenge(Challenge(name: .bang, actorId: "px", targetIds: ["p1"]))
         
         // When
         sut.execute(update, in: mockDatabase)
@@ -256,7 +256,7 @@ class GameUpdateExecutorTests: XCTestCase {
     
     func test_ResetBarrelsResolved_IfSettingShootChallenge() {
         // Given
-        let update = GameUpdate.setChallenge(.shoot(["p1"], .gatling, "px"))
+        let update = GameUpdate.setChallenge(Challenge(name: .gatling, actorId: "px", targetIds: ["p1"]))
         
         // When
         sut.execute(update, in: mockDatabase)

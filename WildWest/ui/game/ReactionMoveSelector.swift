@@ -22,9 +22,9 @@ class ReactionMoveSelector: ReactionMoveSelectorProtocol {
     
     func selectMove(within moves: [GameMove], challenge: Challenge, completion: @escaping (GameMove) -> Void) {
         
-        if case .generalStore = challenge {
+        if case .generalStore = challenge.name {
             let cardIds = moves.compactMap { $0.cardId }
-            viewController.selectWithoutCancel(title: "Choose card", choices: cardIds) { index in
+            viewController.selectWithoutCancel(title: challenge.description, choices: cardIds) { index in
                 completion(moves[index])
             }
             return
