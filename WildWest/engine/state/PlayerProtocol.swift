@@ -9,12 +9,11 @@
 protocol PlayerProtocol {
     var identifier: String { get }
     var role: Role? { get }
-    var ability: Ability { get }
+    var figure: FigureProtocol { get }
     var maxHealth: Int { get }
     var health: Int { get }
     var hand: [CardProtocol] { get }
     var inPlay: [CardProtocol] { get }
-    var imageName: String { get }
 }
 
 enum Role: String, Codable {

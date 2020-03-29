@@ -10,4 +10,5 @@ protocol FigureProtocol {
     var ability: Ability { get }
     var bullets: Int { get }
     var imageName: String { get }
+    var description: String { get }
 }

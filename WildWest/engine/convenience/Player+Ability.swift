@@ -9,7 +9,7 @@
 extension PlayerProtocol {
     
     var bangLimitsPerTurn: Int {
-        if ability == .willyTheKid {
+        if figure.ability == .willyTheKid {
             return 0
         }
         
@@ -35,7 +35,7 @@ extension PlayerProtocol {
             result += 1
         }
         
-        if ability == .roseDoolan {
+        if figure.ability == .roseDoolan {
             result += 1
         }
         
@@ -49,7 +49,7 @@ extension PlayerProtocol {
             result += 1
         }
         
-        if ability == .paulRegret {
+        if figure.ability == .paulRegret {
             result += 1
         }
         
@@ -63,7 +63,7 @@ extension PlayerProtocol {
             result += 1
         }
         
-        if ability == .joudonais {
+        if figure.ability == .joudonais {
             result += 1
         }
         

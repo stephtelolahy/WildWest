@@ -67,14 +67,18 @@ extension MockPlayerProtocol {
     }
     
     func ability(is ability: Ability) -> MockPlayerProtocol {
+        let figure = Figure(ability: ability, bullets: 4, imageName: "", description: "")
         Cuckoo.stub(self) { mock in
-            when(mock.ability.get).thenReturn(ability)
+            when(mock.figure.get).thenReturn(figure)
         }
         return self
     }
     
     func withDefault() -> MockPlayerProtocol {
-        DefaultValueRegistry.register(value: .bartCassidy, forType: Ability.self)
+        let defaultFigure = Figure(ability: .bartCassidy, bullets: 4, imageName: "", description: "")
+        Cuckoo.stub(self) { mock in
+            when(mock.figure.get).thenReturn(defaultFigure)
+        }
         return self.withEnabledDefaultImplementation(PlayerProtocolStub())
     }
 }

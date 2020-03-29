@@ -49,6 +49,7 @@ class GameViewController: UIViewController, Subscribable {
     private lazy var instructionBuilder = InstructionBuilder()
     private lazy var playMoveSelector = PlayMoveSelector(viewController: self)
     private lazy var reactionMoveSelector = ReactionMoveSelector(viewController: self)
+    private lazy var playerDescriptor = PlayerDescriptor(viewController: self)
     
     // MARK: Lifecycle
     
@@ -223,6 +224,11 @@ extension GameViewController: UICollectionViewDelegate {
     }
     
     private func playersCollectionViewDidSelectItem(at indexPath: IndexPath) {
+        guard let player = playerItems[indexPath.row]?.player else {
+            return
+        }
+        
+        playerDescriptor.display(player)
     }
     
     private func actionsCollectionViewDidSelectItem(at indexPath: IndexPath) {

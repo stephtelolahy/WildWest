@@ -9,23 +9,20 @@
 class Player: PlayerProtocol {
     
     let role: Role?
-    let ability: Ability
+    let figure: FigureProtocol
     let maxHealth: Int
-    let imageName: String
     var health: Int
     var hand: [CardProtocol]
     var inPlay: [CardProtocol]
     
     init(role: Role?,
-         ability: Ability,
+         figure: FigureProtocol,
          maxHealth: Int,
-         imageName: String,
          health: Int,
          hand: [CardProtocol],
          inPlay: [CardProtocol]) {
         self.role = role
-        self.ability = ability
-        self.imageName = imageName
+        self.figure = figure
         self.maxHealth = maxHealth
         self.health = health
         self.hand = hand
@@ -33,6 +30,6 @@ class Player: PlayerProtocol {
     }
     
     var identifier: String {
-        ability.rawValue
+        figure.ability.rawValue
     }
 }
