@@ -15,7 +15,7 @@ class PassMatcherTests: XCTestCase {
     func test_CanPass_IfChallengedByShoot() {
         // Given
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .gatling, actorId: "px", targetIds: ["p1", "p2"]))
+            .challenge(is: Challenge(name: .gatling, targetIds: ["p1", "p2"]))
         
         // When
         let moves = sut.validMoves(matching: mockState)
@@ -27,7 +27,7 @@ class PassMatcherTests: XCTestCase {
     func test_CanPass_IfChallengedByIndians() {
         // Given
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .indians, actorId: "px", targetIds: ["p1", "p2"]))
+            .challenge(is: Challenge(name: .indians, targetIds: ["p1", "p2"]))
         
         // When
         let moves = sut.validMoves(matching: mockState)
@@ -39,7 +39,7 @@ class PassMatcherTests: XCTestCase {
     func test_CanPass_IfChallengedByDuel() {
         // Given
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .duel, actorId: "p2", targetIds: ["p1", "p2"]))
+            .challenge(is: Challenge(name: .duel, targetIds: ["p1", "p2"]))
         
         // When
         let moves = sut.validMoves(matching: mockState)
@@ -66,8 +66,9 @@ class PassMatcherTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
+            .currentTurn(is: "px")
             .players(are: mockPlayer1)
-            .challenge(is: Challenge(name: .bang, actorId: "px", targetIds: ["p1"]))
+            .challenge(is: Challenge(name: .bang, targetIds: ["p1"]))
         let move = GameMove(name: .pass, actorId: "p1")
         
         // When
@@ -83,6 +84,7 @@ class PassMatcherTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
+            .currentTurn(is: "p1")
             .players(are: mockPlayer1)
             .challenge(is: Challenge(name: .dynamiteExploded))
         let move = GameMove(name: .pass, actorId: "p1")
@@ -100,7 +102,8 @@ class PassMatcherTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .gatling, actorId: "px", targetIds: ["p1", "p2", "p3"]))
+            .currentTurn(is: "px")
+            .challenge(is: Challenge(name: .gatling, targetIds: ["p1", "p2", "p3"]))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         let move = GameMove(name: .pass, actorId: "p1")
         
@@ -109,7 +112,7 @@ class PassMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.playerLooseHealth("p1", 1, .byPlayer("px")),
-                                 .setChallenge(Challenge(name: .gatling, actorId: "px", targetIds: ["p2", "p3"]))])
+                                 .setChallenge(Challenge(name: .gatling, targetIds: ["p2", "p3"]))])
     }
     
     func test_RemoveActorFromIndiansChallenge_IfPassing() {
@@ -117,7 +120,8 @@ class PassMatcherTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .indians, actorId: "px", targetIds: ["p1", "p2", "p3"]))
+            .currentTurn(is: "px")
+            .challenge(is: Challenge(name: .indians, targetIds: ["p1", "p2", "p3"]))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         let move = GameMove(name: .pass, actorId: "p1")
         
@@ -126,7 +130,7 @@ class PassMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.playerLooseHealth("p1", 1, .byPlayer("px")),
-                                 .setChallenge(Challenge(name: .indians, actorId: "px", targetIds: ["p2", "p3"]))])
+                                 .setChallenge(Challenge(name: .indians, targetIds: ["p2", "p3"]))])
     }
     
     func test_RemoveDuelChallenge_IfPassing() {
@@ -134,7 +138,8 @@ class PassMatcherTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .duel, actorId: "p2", targetIds: ["p1", "p2"]))
+            .currentTurn(is: "p2")
+            .challenge(is: Challenge(name: .duel, targetIds: ["p1", "p2"]))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         let move = GameMove(name: .pass, actorId: "p1")
         

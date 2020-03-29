@@ -52,7 +52,8 @@ class GameConfiguration {
             EndTurnMatcher(),
             
             // manual reaction
-            DiscardMissedMatcher(),
+            DiscardMissedOnBangMatcher(),
+            DiscardMissedOnGatlingMatcher(),
             DiscardBangOnDuelMatcher(),
             DiscardBangOnIndiansMatcher(),
             DiscardBeerMatcher(),

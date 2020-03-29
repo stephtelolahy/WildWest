@@ -23,7 +23,7 @@ class UseBarrelMatcherTests: XCTestCase {
             .identified(by: "p1")
             .withDefault()
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .bang, actorId: "px", targetIds: ["p1"]))
+            .challenge(is: Challenge(name: .bang, targetIds: ["p1"]))
             .players(are: mockPlayer1)
             .barrelsResolved(is: 1)
         
@@ -44,7 +44,7 @@ class UseBarrelMatcherTests: XCTestCase {
             .identified(by: "p1")
             .withDefault()
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .bang, actorId: "px", targetIds: ["p1"]))
+            .challenge(is: Challenge(name: .bang, targetIds: ["p1"]))
             .players(are: mockPlayer1)
             .barrelsResolved(is: 0)
             .topDeck(is: MockCardProtocol().suit(is: .hearts))
@@ -60,7 +60,7 @@ class UseBarrelMatcherTests: XCTestCase {
         // Given
         let mockState = MockGameStateProtocol()
         Cuckoo.stub(mockState) { mock in
-            when(mock.challenge.get).thenReturn(Challenge(name: .bang, actorId: "px", targetIds: ["p1"]))
+            when(mock.challenge.get).thenReturn(Challenge(name: .bang, targetIds: ["p1"]))
             when(mock.barrelsResolved.get).thenReturn(0)
         }
         
@@ -89,7 +89,7 @@ class FailBarelMatcherTests: XCTestCase {
             .identified(by: "p1")
             .withDefault()
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .bang, actorId: "px", targetIds: ["p1"]))
+            .challenge(is: Challenge(name: .bang, targetIds: ["p1"]))
             .players(are: mockPlayer1)
             .barrelsResolved(is: 0)
             .topDeck(is: MockCardProtocol().suit(is: .clubs))
@@ -105,7 +105,7 @@ class FailBarelMatcherTests: XCTestCase {
         // Given
         let mockState = MockGameStateProtocol()
         Cuckoo.stub(mockState) { mock in
-            when(mock.challenge.get).thenReturn(Challenge(name: .bang, actorId: "px", targetIds: ["p1"]))
+            when(mock.challenge.get).thenReturn(Challenge(name: .bang, targetIds: ["p1"]))
             when(mock.barrelsResolved.get).thenReturn(0)
         }
         

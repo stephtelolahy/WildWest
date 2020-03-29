@@ -11,7 +11,7 @@ class ChooseCardMatcher: MoveMatcherProtocol {
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard let challenge = state.challenge,
             case .generalStore = challenge.name,
-            let actorId = challenge.targetIds?.first else {
+            let actorId = challenge.actorId(in: state) else {
                 return nil
         }
         

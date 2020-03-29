@@ -93,10 +93,10 @@ private extension GameStateProtocol {
         if let challenge = self.challenge {
             switch challenge.name {
             case .bang, .gatling, .indians:
-                return challenge.targetIds?.contains(playerId) ?? false
+                return challenge.targetIds.contains(playerId)
                 
             case .duel:
-                return challenge.targetIds?.first == playerId
+                return challenge.targetIds.first == playerId
                 
             case .dynamiteExploded:
                 return turn == playerId
@@ -128,7 +128,7 @@ private extension GameStateProtocol {
         if let challenge = self.challenge {
             switch challenge.name {
             case .generalStore:
-                return  challenge.targetIds?.contains(playerId) ?? false
+                return  challenge.targetIds.contains(playerId)
                 
             default:
                 return false

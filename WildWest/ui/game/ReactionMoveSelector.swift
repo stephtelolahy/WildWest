@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ReactionMoveSelectorProtocol {
-    func selectMove(within moves: [GameMove], challenge: Challenge, completion: @escaping (GameMove) -> Void)
+    func selectMove(within moves: [GameMove], state: GameStateProtocol, completion: @escaping (GameMove) -> Void)
 }
 
 class ReactionMoveSelector: ReactionMoveSelectorProtocol {
@@ -20,20 +20,22 @@ class ReactionMoveSelector: ReactionMoveSelectorProtocol {
         self.viewController = viewController
     }
     
-    func selectMove(within moves: [GameMove], challenge: Challenge, completion: @escaping (GameMove) -> Void) {
+    func selectMove(within moves: [GameMove], state: GameStateProtocol, completion: @escaping (GameMove) -> Void) {
+        guard let challenge = state.challenge else {
+            return
+        }
         
+        var choices: [String] = []
         switch challenge.name {
         case .generalStore, .discardExcessCards:
-            let cardIds = moves.compactMap { $0.cardId }
-            viewController.selectWithoutCancel(title: challenge.description, choices: cardIds) { index in
-                completion(moves[index])
-            }
+            choices = moves.compactMap { $0.cardId }
             
         default:
-            let choices = moves.map { [$0.name.rawValue, $0.cardId].compactMap { $0 }.joined(separator: " ") }
-            viewController.selectWithoutCancel(title: challenge.description, choices: choices) { index in
-                completion(moves[index])
-            }
+            choices = moves.map { [$0.name.rawValue, $0.cardId].compactMap { $0 }.joined(separator: " ") }
+        }
+        
+        viewController.selectWithoutCancel(title: challenge.description(in: state), choices: choices) { index in
+            completion(moves[index])
         }
     }
 }

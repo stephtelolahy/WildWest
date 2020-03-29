@@ -11,7 +11,8 @@ class DiscardBangOnDuelMatcher: MoveMatcherProtocol {
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard let challenge = state.challenge,
             case .duel = challenge.name,
-            let actor = state.players.first(where: { $0.identifier == challenge.targetIds?.first }),
+            let actorId = challenge.actorId(in: state),
+            let actor = state.players.first(where: { $0.identifier == actorId }),
             let cards = actor.handCards(named: .bang) else {
                 return nil
         }
@@ -40,7 +41,8 @@ class DiscardBangOnIndiansMatcher: MoveMatcherProtocol {
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard let challenge = state.challenge,
             case .indians = challenge.name,
-            let actor = state.players.first(where: { $0.identifier == challenge.targetIds?.first }),
+            let actorId = challenge.actorId(in: state),
+            let actor = state.players.first(where: { $0.identifier == actorId }),
             let cards = actor.handCards(named: .bang) else {
                 return nil
         }

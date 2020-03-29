@@ -47,6 +47,6 @@ class GatlingMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.playerDiscardHand("p2", "c2"),
-                                 .setChallenge(Challenge(name: .gatling, actorId: "p2", targetIds: ["p3", "p4", "p1"]))])
+                                 .setChallenge(Challenge(name: .gatling, targetIds: ["p3", "p4", "p1"]))])
     }
 }

@@ -104,6 +104,6 @@ class EndTurnMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .discardExcessCards, actorId: "p1"))])
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .discardExcessCards))])
     }
 }

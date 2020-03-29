@@ -28,6 +28,6 @@ class InstructionBuilder: InstructionBuilderProtocol {
             return "play any card"
         }
         
-        return challenge.description
+        return challenge.description(in: state)
     }
 }

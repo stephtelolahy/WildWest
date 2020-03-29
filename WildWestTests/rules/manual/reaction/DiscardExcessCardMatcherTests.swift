@@ -15,7 +15,8 @@ class DiscardExcessCardMatcherTests: XCTestCase {
     func test_CanDiscardOneCard_IfChallengedByDiscardExcessCard() {
         // Given
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .discardExcessCards, actorId: "p1"))
+            .currentTurn(is: "p1")
+            .challenge(is: Challenge(name: .discardExcessCards))
             .players(are: MockPlayerProtocol()
                 .identified(by: "p1")
                 .holding(MockCardProtocol().identified(by: "c1"),

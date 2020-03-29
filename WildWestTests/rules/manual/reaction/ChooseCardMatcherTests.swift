@@ -16,7 +16,7 @@ class ChooseCardMatcherTests: XCTestCase {
     func test_CanSelectCard_IfChallengeIsGeneralStore() {
         // Given
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .generalStore, actorId: "px", targetIds: ["p1", "p2"]))
+            .challenge(is: Challenge(name: .generalStore, targetIds: ["p1", "p2"]))
             .players(are: MockPlayerProtocol().identified(by: "p1"))
         Cuckoo.stub(mockState) { mock in
             let card1 = MockCardProtocol().identified(by: "c1")
@@ -35,7 +35,7 @@ class ChooseCardMatcherTests: XCTestCase {
     func test_CanSelectLastCard_IfChallengeIsGeneralStore() {
         // Given
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .generalStore, actorId: "px", targetIds: ["p1"]))
+            .challenge(is: Challenge(name: .generalStore, targetIds: ["p1"]))
             .players(are: MockPlayerProtocol().identified(by: "p1"))
         Cuckoo.stub(mockState) { mock in
             let card1 = MockCardProtocol().identified(by: "c1")
@@ -52,7 +52,7 @@ class ChooseCardMatcherTests: XCTestCase {
     func test_PickOneCardFromGeneralStore_IfChoosingCard() {
         // Given
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .generalStore, actorId: "px", targetIds: ["p1", "p2"]))
+            .challenge(is: Challenge(name: .generalStore,targetIds: ["p1", "p2"]))
         let move = GameMove(name: .choose, actorId: "p1", cardId: "c1")
         
         // When
@@ -60,13 +60,13 @@ class ChooseCardMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.playerPullFromGeneralStore("p1", "c1"),
-                                 .setChallenge(Challenge(name: .generalStore, actorId: "px", targetIds: ["p2"]))])
+                                 .setChallenge(Challenge(name: .generalStore, targetIds: ["p2"]))])
     }
     
     func test_RemoveChallenge_IfChoosingLastCard() {
         // Given
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .generalStore, actorId: "px", targetIds: ["p1"]))
+            .challenge(is: Challenge(name: .generalStore, targetIds: ["p1"]))
         let move = GameMove(name: .choose, actorId: "p1", cardId: "c1")
         
         // When

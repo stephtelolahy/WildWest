@@ -21,7 +21,7 @@ class DiscardBangOnDuelMatcherTests: XCTestCase {
             .holding(mockCard)
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .duel, actorId: "p2", targetIds: ["p1", "p2"]))
+            .challenge(is: Challenge(name: .duel, targetIds: ["p1", "p2"]))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
@@ -34,7 +34,7 @@ class DiscardBangOnDuelMatcherTests: XCTestCase {
     func test_SwitchTargetOfDuelChallenge_IfDiscardingBang() {
         // Given
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .duel, actorId: "p2", targetIds: ["p1", "p2"]))
+            .challenge(is: Challenge(name: .duel, targetIds: ["p1", "p2"]))
         let move = GameMove(name: .discard, actorId: "p1", cardId: "c1", cardName: .bang)
         
         // When
@@ -42,6 +42,6 @@ class DiscardBangOnDuelMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .setChallenge(Challenge(name: .duel, actorId: "p2", targetIds: ["p2", "p1"]))])
+                                 .setChallenge(Challenge(name: .duel, targetIds: ["p2", "p1"]))])
     }
 }

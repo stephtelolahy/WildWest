@@ -41,18 +41,13 @@ class PlayMoveSelector: PlayMoveSelectorProtocol {
             return
         }
         
-        if moves.contains(where: { $0.discardIds != nil }) {
-            let cardsCombinations = moves.compactMap { $0.discardIds?.joined(separator: ", ") }
-            viewController.select(title: "Select cards", choices: cardsCombinations) { index in
-                completion(moves[index])
-            }
+        if  moves.count == 1,
+            let uniqueMove = moves.first {
+            completion(uniqueMove)
             return
         }
         
-        if let firstMove = moves.first {
-            completion(firstMove)
-            return
-        }
+        fatalError("Illegal state")
     }
 }
 

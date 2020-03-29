@@ -11,7 +11,8 @@ class UseBarrelMatcher: MoveMatcherProtocol {
     func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard let challenge = state.challenge,
             (challenge.name == .bang || challenge.name == .gatling),
-            let actor = state.players.first(where: { $0.identifier == challenge.targetIds?.first }),
+            let actorId = challenge.actorId(in: state),
+            let actor = state.players.first(where: { $0.identifier == actorId }),
             state.barrelsResolved < actor.barrelsCount,
             let topDeckCard = state.deck.first,
             topDeckCard.makeBarrelSuccessful else {
@@ -38,7 +39,8 @@ class FailBarelMatcher: MoveMatcherProtocol {
     func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard let challenge = state.challenge,
             (challenge.name == .bang || challenge.name == .gatling),
-            let actor = state.players.first(where: { $0.identifier == challenge.targetIds?.first }),
+            let actorId = challenge.actorId(in: state),
+            let actor = state.players.first(where: { $0.identifier == actorId }),
             state.barrelsResolved < actor.barrelsCount,
             let topDeckCard = state.deck.first,
             !topDeckCard.makeBarrelSuccessful else {

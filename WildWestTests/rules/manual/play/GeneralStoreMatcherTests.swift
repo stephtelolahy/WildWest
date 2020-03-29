@@ -48,6 +48,6 @@ class GeneralStoreMatcherTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
                                  .setupGeneralStore(4),
-                                 .setChallenge(Challenge(name: .generalStore, actorId: "p1", targetIds: ["p1", "p2", "p3", "p4"]))])
+                                 .setChallenge(Challenge(name: .generalStore, targetIds: ["p1", "p2", "p3", "p4"]))])
     }
 }

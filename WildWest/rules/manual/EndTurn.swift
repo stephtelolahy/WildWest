@@ -24,7 +24,7 @@ class EndTurnMatcher: MoveMatcherProtocol {
         }
         
         guard actor.hand.count <= actor.health else {
-            return [.setChallenge(Challenge(name: .discardExcessCards, actorId: actor.identifier))]
+            return [.setChallenge(Challenge(name: .discardExcessCards))]
         }
         
         return [.setTurn(state.nextTurn),

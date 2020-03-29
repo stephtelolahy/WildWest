@@ -29,30 +29,3 @@ enum GameOutcome: String, Equatable {
     outlawWin,
     renegadeWin
 }
-
-struct Challenge: Equatable {
-    let name: ChallengeName
-    var actorId: String?
-    var targetIds: [String]?
-}
-
-enum ChallengeName: String {
-    case startTurn
-    case bang
-    case duel
-    case gatling
-    case indians
-    case generalStore
-    case dynamiteExploded
-    case discardExcessCards
-}
-
-struct DamageEvent: Equatable {
-    let playerId: String
-    let source: DamageSource
-}
-
-enum DamageSource: Equatable {
-    case byDynamite
-    case byPlayer(String)
-}

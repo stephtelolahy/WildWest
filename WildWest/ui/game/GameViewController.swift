@@ -121,10 +121,10 @@ private extension GameViewController {
             showGameOver(outcome: outcome)
         }
         
-        if let challenge = state.challenge,
+        if state.challenge != nil,
             let controlledPlayerId = self.controlledPlayerId,
             let reactionMoves = state.validMoves[controlledPlayerId] {
-            reactionMoveSelector.selectMove(within: reactionMoves, challenge: challenge) { [weak self] move in
+            reactionMoveSelector.selectMove(within: reactionMoves, state: state) { [weak self] move in
                 self?.engine?.queue(move)
             }
         }

@@ -60,7 +60,12 @@ extension GameEngine {
         // apply updates
         print("\n*** \(String(describing: move)) ***")
         
-        let updatesQueue = moveMatchers.compactMap { $0.execute(move, in: database.state) }.flatMap { $0 }
+        let matchers = moveMatchers.filter({ $0.execute(move, in: database.state) != nil })
+        guard matchers.count == 1 else {
+            fatalError("Illegal multiple move matchers (\(matchers.count)")
+        }
+        
+        let updatesQueue = matchers.compactMap { $0.execute(move, in: database.state) }.flatMap { $0 }
         
         updatesQueue.forEach { update in
             print("> \(String(describing: update))")
@@ -94,8 +99,8 @@ extension GameEngine {
             .flatMap { $0 }
             .groupedByActor()
         
-        guard validMoves.keys.count <= 1 else {
-            fatalError("Illegal multiple active players (\(validMoves.keys.count))")
+        guard validMoves.keys.count == 1 else {
+            fatalError("Illegal active players (\(validMoves.keys.count))")
         }
         
         database.setValidMoves(validMoves)

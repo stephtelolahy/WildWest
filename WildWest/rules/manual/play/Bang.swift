@@ -50,6 +50,6 @@ class BangMatcher: MoveMatcherProtocol {
         }
         
         return [.playerDiscardHand(actorId, cardId),
-                .setChallenge(Challenge(name: .bang, actorId: actorId, targetIds: [targetId]))]
+                .setChallenge(Challenge(name: .bang, targetIds: [targetId]))]
     }
 }

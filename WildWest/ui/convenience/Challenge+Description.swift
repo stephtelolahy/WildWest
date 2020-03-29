@@ -8,25 +8,25 @@
 
 extension Challenge {
     
-    var description: String {
+    func description(in state: GameStateProtocol) -> String {
         switch name {
         case .dynamiteExploded:
             return "dynamite exploded"
             
         case .duel:
-            return "duel by \(actorId ?? "")"
+            return "duel by \(state.turn ?? "")"
             
         case .bang:
-            return "bang by \(actorId ?? "")"
+            return "bang by \(state.turn ?? "")"
             
         case .gatling:
-            return "gatling by \(actorId ?? "")"
+            return "gatling by \(state.turn ?? "")"
             
         case .indians:
-            return "indians by \(actorId ?? "")"
+            return "indians by \(state.turn ?? "")"
             
         case .generalStore:
-            return "general store by \(actorId ?? "")"
+            return "general store by \(state.turn ?? "")"
             
         case .discardExcessCards:
             return "discard excess cards"

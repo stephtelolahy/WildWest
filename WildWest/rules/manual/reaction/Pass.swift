@@ -14,11 +14,8 @@ class PassMatcher: MoveMatcherProtocol {
         }
         
         switch challenge.name {
-        case .bang, .gatling, .duel, .indians:
-            return [GameMove(name: .pass, actorId: challenge.targetIds?.first)]
-            
-        case .dynamiteExploded:
-            return [GameMove(name: .pass, actorId: state.turn)]
+        case .bang, .gatling, .duel, .indians, .dynamiteExploded:
+            return [GameMove(name: .pass, actorId: challenge.actorId(in: state))]
             
         default:
             return nil
@@ -27,9 +24,9 @@ class PassMatcher: MoveMatcherProtocol {
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .pass = move.name,
-            let actorId = move.actorId,
             let challenge = state.challenge,
-            let damageSource = challenge.damageSource else {
+            let actorId = move.actorId,
+            let damageSource = challenge.damageSource(in: state) else {
                 return nil
         }
         
