@@ -1,5 +1,5 @@
 //
-//  GameState+Observer.swift
+//  GameState+Observed.swift
 //  WildWest
 //
 //  Created by Hugues Stephano Telolahy on 29/03/2020.
@@ -35,3 +35,4 @@ extension GameStateProtocol {
                          eliminated: eliminated)
     }
 }
+

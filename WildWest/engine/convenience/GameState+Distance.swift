@@ -20,13 +20,9 @@ extension GameStateProtocol {
         let leftDistance = (pIndex > oIndex) ? (pIndex - oIndex) : (pIndex + count - oIndex)
         var distance = min(rightDistance, leftDistance)
         
-        if players[pIndex].inPlay.contains(where: { $0.name == .scope }) {
-            distance -= 1
-        }
+        distance -= players[pIndex].scopeCount
         
-        if players[oIndex].inPlay.contains(where: { $0.name == .mustang }) {
-            distance += 1
-        }
+        distance += players[oIndex].mustangCount
         
         return distance
     }

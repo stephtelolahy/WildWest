@@ -14,6 +14,7 @@ struct GameMove: Equatable {
     var cardName: CardName?             // name of played card
     var targetId: String?               // identifier of targeted player
     var targetCard: TargetCard?         // identifier of targeted card
+    @available(*, deprecated)
     var discardIds: [String]?           // identifiers of discarded hand cards
 }
 
