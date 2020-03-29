@@ -28,14 +28,14 @@ class DiscardBangOnIndiansMatcherTests: XCTestCase {
         let moves = sut.validMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .discard, actorId: "p1", cardId: "c1", cardName: .bang)])
+        XCTAssertEqual(moves, [GameMove(name: .discard, actorId: "p1", cardId: "c1")])
     }
     
     func test_RemoveActorFromIndiansChallenge_IfDiscardingBang() {
         // Given
         let mockState = MockGameStateProtocol()
             .challenge(is: Challenge(name: .indians, actorId: "px", targetIds: ["p1", "p2", "p3"]))
-        let move = GameMove(name: .discard, actorId: "p1", cardId: "c1", cardName: .bang)
+        let move = GameMove(name: .discard, actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(move, in: mockState)

@@ -28,6 +28,9 @@ extension Challenge {
         case .generalStore:
             return "general store by \(actorId ?? "")"
             
+        case .discardExcessCards:
+            return "discard excess cards"
+            
         default:
             fatalError("Illegal state")
         }

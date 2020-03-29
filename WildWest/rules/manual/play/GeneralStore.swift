@@ -19,7 +19,7 @@ class GeneralStoreMatcher: MoveMatcherProtocol {
             GameMove(name: .play,
                      actorId: actor.identifier,
                      cardId: $0.identifier,
-                     cardName: .generalStore)
+                     cardName: $0.name)
         }
     }
     

@@ -28,7 +28,7 @@ class DiscardMissedMatcherTests: XCTestCase {
         let moves = sut.validMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .discard, actorId: "p1", cardId: "c1", cardName: .missed)])
+        XCTAssertEqual(moves, [GameMove(name: .discard, actorId: "p1", cardId: "c1")])
     }
     
     func test_DiscardCardAndRemoveShootChallenge_IfPlayingMissed() {
@@ -48,7 +48,7 @@ class DiscardMissedMatcherTests: XCTestCase {
         // Given
         let mockState = MockGameStateProtocol()
             .challenge(is: Challenge(name: .gatling, actorId: "px", targetIds: ["p1", "p2", "p3"]))
-        let move = GameMove(name: .discard, actorId: "p1", cardId: "c1", cardName: .missed)
+        let move = GameMove(name: .discard, actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(move, in: mockState)

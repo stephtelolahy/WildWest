@@ -22,17 +22,18 @@ class ReactionMoveSelector: ReactionMoveSelectorProtocol {
     
     func selectMove(within moves: [GameMove], challenge: Challenge, completion: @escaping (GameMove) -> Void) {
         
-        if case .generalStore = challenge.name {
+        switch challenge.name {
+        case .generalStore, .discardExcessCards:
             let cardIds = moves.compactMap { $0.cardId }
             viewController.selectWithoutCancel(title: challenge.description, choices: cardIds) { index in
                 completion(moves[index])
             }
-            return
-        }
-        
-        let choices = moves.map { [$0.name.rawValue, $0.cardId].compactMap { $0 }.joined(separator: " ") }
-        viewController.selectWithoutCancel(title: challenge.description, choices: choices) { index in
-            completion(moves[index])
+            
+        default:
+            let choices = moves.map { [$0.name.rawValue, $0.cardId].compactMap { $0 }.joined(separator: " ") }
+            viewController.selectWithoutCancel(title: challenge.description, choices: choices) { index in
+                completion(moves[index])
+            }
         }
     }
 }

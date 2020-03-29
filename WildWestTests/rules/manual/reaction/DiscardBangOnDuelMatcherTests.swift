@@ -28,7 +28,7 @@ class DiscardBangOnDuelMatcherTests: XCTestCase {
         let moves = sut.validMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .discard, actorId: "p1", cardId: "c1", cardName: .bang)])
+        XCTAssertEqual(moves, [GameMove(name: .discard, actorId: "p1", cardId: "c1")])
     }
     
     func test_SwitchTargetOfDuelChallenge_IfDiscardingBang() {
