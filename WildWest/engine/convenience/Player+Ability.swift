@@ -29,11 +29,17 @@ extension PlayerProtocol {
     }
     
     var scopeCount: Int {
+        var result = 0
+        
         if inPlay.contains(where: { $0.name == .scope }) {
-            return 1
+            result += 1
         }
         
-        return 0
+        if ability == .roseDoolan {
+            result += 1
+        }
+        
+        return result
     }
     
     var mustangCount: Int {
