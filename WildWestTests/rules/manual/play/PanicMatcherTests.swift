@@ -18,17 +18,17 @@ class PanicMatcherTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
             .holding(MockCardProtocol().named(.panic).identified(by: "c1"))
-            .noCardsInPlay()
+            .withDefault()
         
         let mockPlayer2 = MockPlayerProtocol()
             .identified(by: "p2")
             .holding(MockCardProtocol().identified(by: "c2"))
-            .noCardsInPlay()
+            .withDefault()
         
         let mockPlayer3 = MockPlayerProtocol()
             .identified(by: "p3")
-            .noCardsInHand()
             .playing(MockCardProtocol().identified(by: "c3").named(.volcanic))
+            .withDefault()
         
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
@@ -50,15 +50,15 @@ class PanicMatcherTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
             .holding(MockCardProtocol().named(.panic).identified(by: "c1"))
-            .noCardsInPlay()
+            .withDefault()
         
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
             .currentTurn(is: "p1")
             .players(are: mockPlayer1,
-                     MockPlayerProtocol().identified(by: "p2").noCardsInHand().noCardsInPlay(),
-                     MockPlayerProtocol().identified(by: "p3").holding(MockCardProtocol()).noCardsInPlay(),
-                     MockPlayerProtocol().identified(by: "p4").noCardsInHand().noCardsInPlay())
+                     MockPlayerProtocol().identified(by: "p2").withDefault(),
+                     MockPlayerProtocol().identified(by: "p3").holding(MockCardProtocol()).withDefault(),
+                     MockPlayerProtocol().identified(by: "p4").withDefault())
         
         // When
         let moves = sut.validMoves(matching: mockState)

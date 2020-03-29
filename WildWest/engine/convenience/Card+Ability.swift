@@ -24,7 +24,7 @@ extension CardName {
         return equipments.contains(self)
     }
     
-    var reachableDistance: Int {
+    var range: Int {
         switch self {
         case .schofield:
             return 2

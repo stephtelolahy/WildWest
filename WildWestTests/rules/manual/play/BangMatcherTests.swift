@@ -19,13 +19,13 @@ class BangMatcherTests: XCTestCase {
             .identified(by: "p1")
             .holding(MockCardProtocol().named(.bang).identified(by: "c1"))
             .playing(MockCardProtocol().named(.winchester))
-            .ability(is: .bartCassidy)
+            .withDefault()
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
             .currentTurn(is: "p1")
             .players(are: mockPlayer1,
-                     MockPlayerProtocol().identified(by: "p2").noCardsInPlay(),
-                     MockPlayerProtocol().identified(by: "p3").noCardsInPlay())
+                     MockPlayerProtocol().identified(by: "p2").withDefault(),
+                     MockPlayerProtocol().identified(by: "p3").withDefault())
             .bangsPlayed(is: 0)
         
         // When
@@ -43,14 +43,13 @@ class BangMatcherTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
             .holding(MockCardProtocol().named(.bang).identified(by: "c1"))
-            .noCardsInPlay()
-            .ability(is: .bartCassidy)
+            .withDefault()
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
             .currentTurn(is: "p1")
             .players(are: mockPlayer1,
-                     MockPlayerProtocol().identified(by: "p2").playing(MockCardProtocol().named(.mustang)),
-                     MockPlayerProtocol().identified(by: "p3").playing(MockCardProtocol().named(.mustang)))
+                     MockPlayerProtocol().identified(by: "p2").playing(MockCardProtocol().named(.mustang)).withDefault(),
+                     MockPlayerProtocol().identified(by: "p3").playing(MockCardProtocol().named(.mustang)).withDefault())
             .bangsPlayed(is: 0)
         
         // When
@@ -66,13 +65,13 @@ class BangMatcherTests: XCTestCase {
             .identified(by: "p1")
             .holding(MockCardProtocol().named(.bang).identified(by: "c1"))
             .playing(MockCardProtocol().named(.winchester))
-            .ability(is: .bartCassidy)
+            .withDefault()
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
             .currentTurn(is: "p1")
             .players(are: mockPlayer1,
-                     MockPlayerProtocol().identified(by: "p2").playing(MockCardProtocol().named(.mustang)),
-                     MockPlayerProtocol().identified(by: "p3").playing(MockCardProtocol().named(.mustang)))
+                     MockPlayerProtocol().identified(by: "p2").playing(MockCardProtocol().named(.mustang)).withDefault(),
+                     MockPlayerProtocol().identified(by: "p3").playing(MockCardProtocol().named(.mustang)).withDefault())
             .bangsPlayed(is: 0)
         
         // When
@@ -88,8 +87,7 @@ class BangMatcherTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
             .holding(MockCardProtocol().named(.bang).identified(by: "c1"))
-            .noCardsInPlay()
-            .ability(is: .bartCassidy)
+            .withDefault()
         let mockPlayer2 = MockPlayerProtocol().identified(by: "p2")
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)

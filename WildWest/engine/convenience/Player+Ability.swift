@@ -25,7 +25,7 @@ extension PlayerProtocol {
             return 1
         }
         
-        return weapon.name.reachableDistance
+        return weapon.name.range
     }
     
     var scopeCount: Int {
@@ -37,11 +37,17 @@ extension PlayerProtocol {
     }
     
     var mustangCount: Int {
+        var result = 0
+        
         if inPlay.contains(where: { $0.name == .mustang }) {
-            return 1
+            result += 1
         }
         
-        return 0
+        if ability == .paulRegret {
+            result += 1
+        }
+        
+        return result
     }
     
     var barrelsCount: Int {

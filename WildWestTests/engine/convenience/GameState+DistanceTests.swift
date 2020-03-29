@@ -22,11 +22,11 @@ class GameState_DistanceTests: XCTestCase {
     
     func test_ReturnLowestDistance_IfCalculatingRangeToOther() {
         // Given
-        let mockPlayer1 = MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p1")
-        let mockPlayer2 = MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p2")
-        let mockPlayer3 = MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p3")
-        let mockPlayer4 = MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p4")
-        let mockPlayer5 = MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p5")
+        let mockPlayer1 = MockPlayerProtocol().withDefault().identified(by: "p1")
+        let mockPlayer2 = MockPlayerProtocol().withDefault().identified(by: "p2")
+        let mockPlayer3 = MockPlayerProtocol().withDefault().identified(by: "p3")
+        let mockPlayer4 = MockPlayerProtocol().withDefault().identified(by: "p4")
+        let mockPlayer5 = MockPlayerProtocol().withDefault().identified(by: "p5")
         let sut = MockGameStateProtocol().players(are: mockPlayer1, mockPlayer2, mockPlayer3, mockPlayer4, mockPlayer5)
         
         // When
@@ -60,13 +60,13 @@ class GameState_DistanceTests: XCTestCase {
     func test_ReduceRangeToOthers_IfPlayingScope() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
-            .withEnabledDefaultImplementation(PlayerProtocolStub())
+            .withDefault()
             .identified(by: "p1")
             .playing(MockCardProtocol().named(.scope))
-        let mockPlayer2 = MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p2")
-        let mockPlayer3 = MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p3")
-        let mockPlayer4 = MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p4")
-        let mockPlayer5 = MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p5")
+        let mockPlayer2 = MockPlayerProtocol().withDefault().identified(by: "p2")
+        let mockPlayer3 = MockPlayerProtocol().withDefault().identified(by: "p3")
+        let mockPlayer4 = MockPlayerProtocol().withDefault().identified(by: "p4")
+        let mockPlayer5 = MockPlayerProtocol().withDefault().identified(by: "p5")
         let sut = MockGameStateProtocol().players(are: mockPlayer1, mockPlayer2, mockPlayer3, mockPlayer4, mockPlayer5)
         
         // When
@@ -85,13 +85,13 @@ class GameState_DistanceTests: XCTestCase {
     func test_IncrementRangeFromOthers_IfPlayingMustang() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
-            .withEnabledDefaultImplementation(PlayerProtocolStub())
+            .withDefault()
             .identified(by: "p1")
             .playing(MockCardProtocol().named(.mustang))
-        let mockPlayer2 = MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p2")
-        let mockPlayer3 = MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p3")
-        let mockPlayer4 = MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p4")
-        let mockPlayer5 = MockPlayerProtocol().withEnabledDefaultImplementation(PlayerProtocolStub()).identified(by: "p5")
+        let mockPlayer2 = MockPlayerProtocol().withDefault().identified(by: "p2")
+        let mockPlayer3 = MockPlayerProtocol().withDefault().identified(by: "p3")
+        let mockPlayer4 = MockPlayerProtocol().withDefault().identified(by: "p4")
+        let mockPlayer5 = MockPlayerProtocol().withDefault().identified(by: "p5")
         let sut = MockGameStateProtocol().players(are: mockPlayer1, mockPlayer2, mockPlayer3, mockPlayer4, mockPlayer5)
         
         // When

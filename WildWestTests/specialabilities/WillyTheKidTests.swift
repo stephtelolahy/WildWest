@@ -10,7 +10,7 @@ import XCTest
 
 class WillyTheKidTests: XCTestCase {
     
-    func test_UnlimitedBangsPerTurn_IfFigureIsWillyTheKid() {
+    func test_WillyTheKidHasNoLimitOnBangsPerTurn() {
         // Given
         let sut = MockPlayerProtocol()
             .ability(is: .willyTheKid)

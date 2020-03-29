@@ -72,4 +72,9 @@ extension MockPlayerProtocol {
         }
         return self
     }
+    
+    func withDefault() -> MockPlayerProtocol {
+        DefaultValueRegistry.register(value: .bartCassidy, forType: Ability.self)
+        return self.withEnabledDefaultImplementation(PlayerProtocolStub())
+    }
 }

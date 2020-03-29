@@ -24,8 +24,8 @@ class RandomAI: AIProtocol {
             let cardName = move.cardName,
             cardName.isGun,
             let actor = state.players.first(where: { $0.identifier == move.actorId }) {
-            let currentGunRange = actor.inPlay.first(where: { $0.name.isGun })?.name.reachableDistance ?? 0
-            let handGunRange = cardName.reachableDistance
+            let currentGunRange = actor.inPlay.first(where: { $0.name.isGun })?.name.range ?? 0
+            let handGunRange = cardName.range
             return handGunRange - currentGunRange
         }
         

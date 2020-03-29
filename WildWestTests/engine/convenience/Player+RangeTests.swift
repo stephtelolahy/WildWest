@@ -13,8 +13,7 @@ class Player_RangeTests: XCTestCase {
     func test_DefaultBangsLimitPerTurnIs1() {
         // Given
         let sut = MockPlayerProtocol()
-            .noCardsInPlay()
-            .ability(is: .bartCassidy)
+            .withDefault()
         
         // When
         // Assert
@@ -24,25 +23,25 @@ class Player_RangeTests: XCTestCase {
     func test_UnlimitedBangsPerTurn_IfPlayingVolcanic() {
         // Given
         let sut = MockPlayerProtocol()
+            .withDefault()
             .playing(MockCardProtocol().named(.volcanic))
-            .ability(is: .bartCassidy)
         
         // When
         // Assert
         XCTAssertEqual(sut.bangLimitsPerTurn, 0)
     }
     
-    func test_ReachableDistanceOfDefaultGunIs1() {
+    func test_RangeOfDefaultGunIs1() {
         // Given
         let sut = MockPlayerProtocol()
-            .noCardsInPlay()
+            .withDefault()
         
         // When
         // Assert
         XCTAssertEqual(sut.gunRange, 1)
     }
     
-    func test_ReachableDistanceOfVolcanicIs1() {
+    func test_RangeOfVolcanicIs1() {
         // Given
         let sut = MockPlayerProtocol()
             .playing(MockCardProtocol().named(.volcanic))
@@ -52,7 +51,7 @@ class Player_RangeTests: XCTestCase {
         XCTAssertEqual(sut.gunRange, 1)
     }
     
-    func test_ReachableDistanceOfSchofieldIs2() {
+    func test_RangeOfSchofieldIs2() {
         // Given
         let sut = MockPlayerProtocol()
             .playing(MockCardProtocol().named(.schofield))
@@ -62,7 +61,7 @@ class Player_RangeTests: XCTestCase {
         XCTAssertEqual(sut.gunRange, 2)
     }
     
-    func test_ReachableDistanceOfRemingtonIs3() {
+    func test_RangeOfRemingtonIs3() {
         // Given
         let sut = MockPlayerProtocol()
             .playing(MockCardProtocol().named(.remington))
@@ -72,7 +71,7 @@ class Player_RangeTests: XCTestCase {
         XCTAssertEqual(sut.gunRange, 3)
     }
     
-    func test_ReachableDistanceOfCarabineIs4() {
+    func test_RangeOfCarabineIs4() {
         // Given
         let sut = MockPlayerProtocol()
             .playing(MockCardProtocol().named(.revCarbine))
@@ -82,7 +81,7 @@ class Player_RangeTests: XCTestCase {
         XCTAssertEqual(sut.gunRange, 4)
     }
     
-    func test_ReachableDistanceOfWinchesterIs5() {
+    func test_RangeOfWinchesterIs5() {
         // Given
         let sut = MockPlayerProtocol()
             .playing(MockCardProtocol().named(.winchester))
