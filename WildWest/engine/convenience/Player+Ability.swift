@@ -57,6 +57,16 @@ extension PlayerProtocol {
     }
     
     var barrelsCount: Int {
-        0
+        var result = 0
+        
+        if inPlay.contains(where: { $0.name == .barrel }) {
+            result += 1
+        }
+        
+        if ability == .joudonais {
+            result += 1
+        }
+        
+        return result
     }
 }

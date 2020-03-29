@@ -14,6 +14,7 @@ class GameState: GameStateProtocol {
     var turn: String?
     var challenge: Challenge?
     var bangsPlayed: Int
+    
     var barrelsResolved: Int
     var damageEvents: [DamageEvent]
     var generalStore: [CardProtocol]

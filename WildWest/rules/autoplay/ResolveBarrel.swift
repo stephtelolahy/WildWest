@@ -9,11 +9,9 @@
 class UseBarrelMatcher: MoveMatcherProtocol {
     
     func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
-        let maxBarrelsResolved = 1
         guard case let .shoot(targetIds, _, _) = state.challenge,
             let actor = state.players.first(where: { $0.identifier == targetIds.first }),
-            actor.inPlay.contains(where: { $0.name == .barrel }),
-            state.barrelsResolved < maxBarrelsResolved,
+            state.barrelsResolved < actor.barrelsCount,
             let topDeckCard = state.deck.first,
             topDeckCard.makeBarrelSuccessful else {
                 return nil
@@ -36,11 +34,9 @@ class UseBarrelMatcher: MoveMatcherProtocol {
 class FailBarelMatcher: MoveMatcherProtocol {
     
     func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
-        let maxBarrelsResolved = 1
         guard case let .shoot(targetIds, _, _) = state.challenge,
             let actor = state.players.first(where: { $0.identifier == targetIds.first }),
-            actor.inPlay.contains(where: { $0.name == .barrel }),
-            state.barrelsResolved < maxBarrelsResolved,
+            state.barrelsResolved < actor.barrelsCount,
             let topDeckCard = state.deck.first,
             !topDeckCard.makeBarrelSuccessful else {
                 return nil

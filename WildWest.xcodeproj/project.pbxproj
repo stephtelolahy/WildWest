@@ -156,6 +156,7 @@
 		337D7FD5243072130078F749 /* GameState+Observed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D7FD3243072130078F749 /* GameState+Observed.swift */; };
 		337D7FD7243073FD0078F749 /* PaulRegretTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D7FD6243073FD0078F749 /* PaulRegretTests.swift */; };
 		337D7FD924307C4F0078F749 /* RoseDolanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D7FD824307C4F0078F749 /* RoseDolanTests.swift */; };
+		337D7FDB243080A60078F749 /* JourdonaisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D7FDA243080A60078F749 /* JourdonaisTests.swift */; };
 		3383CFCE242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3383CFCD242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 */; };
 		3383CFD0242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3383CFCF242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 */; };
 		338A5FC0242BC8CE00766541 /* flyby-Conor-1500306612.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 338A5FBF242BC8CE00766541 /* flyby-Conor-1500306612.mp3 */; };
@@ -334,6 +335,7 @@
 		337D7FD3243072130078F749 /* GameState+Observed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameState+Observed.swift"; sourceTree = "<group>"; };
 		337D7FD6243073FD0078F749 /* PaulRegretTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaulRegretTests.swift; sourceTree = "<group>"; };
 		337D7FD824307C4F0078F749 /* RoseDolanTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoseDolanTests.swift; sourceTree = "<group>"; };
+		337D7FDA243080A60078F749 /* JourdonaisTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourdonaisTests.swift; sourceTree = "<group>"; };
 		3383CFCD242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Metal Clang-SoundBible.com-19572601.mp3"; sourceTree = "<group>"; };
 		3383CFCF242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Ta Da-SoundBible.com-1884170640.mp3"; sourceTree = "<group>"; };
 		338A5FBF242BC8CE00766541 /* flyby-Conor-1500306612.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "flyby-Conor-1500306612.mp3"; sourceTree = "<group>"; };
@@ -514,6 +516,7 @@
 				3333463F242FDF8A00A97FD5 /* WillyTheKidTests.swift */,
 				337D7FD6243073FD0078F749 /* PaulRegretTests.swift */,
 				337D7FD824307C4F0078F749 /* RoseDolanTests.swift */,
+				337D7FDA243080A60078F749 /* JourdonaisTests.swift */,
 			);
 			path = specialabilities;
 			sourceTree = "<group>";
@@ -1335,6 +1338,7 @@
 				339CA27B242578C900D43128 /* GameUpdateExecutor.swift in Sources */,
 				3338B2E6242FCCDA0097BA57 /* GameState+OutcomeTests.swift in Sources */,
 				3328FCB4242F29B200A82255 /* Gatling.swift in Sources */,
+				337D7FDB243080A60078F749 /* JourdonaisTests.swift in Sources */,
 				33D964B523DDDB1E007295E7 /* GameEngine.swift in Sources */,
 				AD7F34B923D79841001B4072 /* MockCardProtocolExtension.swift in Sources */,
 				AD7EAFBF23D7846D00FE23D5 /* GameSetupTests.swift in Sources */,

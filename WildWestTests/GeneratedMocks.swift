@@ -1341,6 +1341,8 @@ import Cuckoo
     
     
     
+    @available(*, deprecated)
+    
      var barrelsResolved: Int {
         get {
             return cuckoo_manager.getter("barrelsResolved",
@@ -1480,6 +1482,8 @@ import Cuckoo
 	    }
 	    
 	    
+	    @available(*, deprecated)
+	    
 	    var barrelsResolved: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, Int> {
 	        return .init(manager: cuckoo_manager, name: "barrelsResolved")
 	    }
@@ -1559,6 +1563,8 @@ import Cuckoo
 	        return .init(manager: cuckoo_manager, name: "bangsPlayed", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
+	    
+	    @available(*, deprecated)
 	    
 	    var barrelsResolved: Cuckoo.VerifyReadOnlyProperty<Int> {
 	        return .init(manager: cuckoo_manager, name: "barrelsResolved", callMatcher: callMatcher, sourceLocation: sourceLocation)
@@ -1649,6 +1655,8 @@ import Cuckoo
         
     }
     
+    
+    @available(*, deprecated)
     
      var barrelsResolved: Int {
         get {
