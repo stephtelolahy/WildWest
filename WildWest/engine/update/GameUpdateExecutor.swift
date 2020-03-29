@@ -102,9 +102,6 @@ class GameUpdateExecutor: UpdateExecutorProtocol {
             if let player = database.removePlayer(playerId) {
                 database.addEliminated(player)
             }
-            
-        case let .setOutcome(outcome):
-            database.setOutcome(outcome)
         }
     }
 }

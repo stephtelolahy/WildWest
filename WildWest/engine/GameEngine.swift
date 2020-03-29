@@ -70,7 +70,8 @@ extension GameEngine {
         database.addExecutedMove(move)
         
         // check if game over
-        guard database.state.outcome == nil else {
+        if let outcome = database.state.claculateOutcome() {
+            database.setOutcome(outcome)
             return
         }
         

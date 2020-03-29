@@ -35,10 +35,6 @@ class EliminateMatcher: MoveMatcherProtocol {
             updates.append(.setChallenge(Challenge(name: .startTurn)))
         }
         
-        if let outcome = state.claculateOutcome() {
-            updates.append(.setOutcome(outcome))
-        }
-        
         return updates
     }
 }

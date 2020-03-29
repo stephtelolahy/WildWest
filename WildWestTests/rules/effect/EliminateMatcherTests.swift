@@ -102,26 +102,4 @@ class EliminateMatcherTests: XCTestCase {
                                  .setTurn("p2"),
                                  .setChallenge(Challenge(name: .startTurn))])
     }
-    
-    func test_SetOutcomeIfGameIsOver() {
-        // Given
-        let mockPlayer1 = MockPlayerProtocol()
-            .identified(by: "p1")
-            .withDefault()
-        let mockPlayer2 = MockPlayerProtocol()
-            .identified(by: "p2")
-            .role(is: .sheriff)
-        let mockState = MockGameStateProtocol()
-            .players(are: mockPlayer1, mockPlayer2)
-            .currentTurn(is: "p2")
-        
-        let move = GameMove(name: .eliminate, actorId: "p1")
-        
-        // When
-        let updates = sut.execute(move, in: mockState)
-        
-        // Assert
-        XCTAssertEqual(updates, [.eliminatePlayer("p1"),
-                                 .setOutcome(.sheriffWin)])
-    }
 }

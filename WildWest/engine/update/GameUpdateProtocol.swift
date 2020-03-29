@@ -23,7 +23,6 @@ enum GameUpdate: Equatable {
     case playerPassInPlayOfOther(String, String, String)
     case playerPullFromGeneralStore(String, String)
     case setupGeneralStore(Int)
-    case setOutcome(GameOutcome)
 }
 
 // Define database transaction on executing a GameUpdate
