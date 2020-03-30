@@ -20,7 +20,6 @@ class MoveDescriptor: MoveDescriptorProtocol {
     
     private let emojis: [String: String] =
         [
-            "Discard": "😝",
             "Bang": "🔫",
             "Beer": "🍺",
             "CatBalou": "❌",
@@ -56,6 +55,7 @@ class MoveDescriptor: MoveDescriptorProtocol {
             "useBarrel": "😝",
             "failBarrel": "😞",
             "explodeDynamite": "💥",
-            "passDynamite": "💣"
+            "passDynamite": "💣",
+            "startGame": ""
         ]
 }

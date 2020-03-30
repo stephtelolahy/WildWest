@@ -86,11 +86,11 @@ class MenuViewController: UIViewController {
                                 updateDelay: 0.5)
         
         var controlledPlayerId: String?
-//        if playAsSheriffSwitch.isOn {
-//            controlledPlayerId = state.players.first(where: { $0.role == .sheriff })?.identifier
-//        } else {
-//            controlledPlayerId = state.players.first(where: { $0.role != .sheriff })?.identifier
-//        }
+        if playAsSheriffSwitch.isOn {
+            controlledPlayerId = state.players.first(where: { $0.role == .sheriff })?.identifier
+        } else {
+            controlledPlayerId = state.players.first(where: { $0.role != .sheriff })?.identifier
+        }
         
         let aiPlayers = database.state.players.filter { $0.identifier != controlledPlayerId }
         let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,

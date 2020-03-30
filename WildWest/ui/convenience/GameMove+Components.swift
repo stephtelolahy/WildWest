@@ -11,7 +11,7 @@ extension GameMove {
     func asComponents() -> [String] {
         [actorId,
          name.rawValue,
-         cardName?.rawValue,
+         cardId,
          targetId,
          targetCard?.description]
             .compactMap { $0 }
@@ -21,13 +21,14 @@ extension GameMove {
 extension Dictionary where Key == String, Value == String {
     
     func value(matching move: GameMove) -> String {
-        for component in move.asComponents() {
+        let components = move.asComponents()
+        for component in components {
             let filtered = self.filter { component.lowercased().contains($0.key.lowercased()) }
             if let match = filtered.first {
                 return match.value
             }
         }
         
-        return ""
+        fatalError("No values matching \(components.joined(separator: ", "))")
     }
 }
