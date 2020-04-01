@@ -26,14 +26,13 @@ class PenalizeSheriffOnEliminatingDeputyMatcher: MoveMatcherProtocol {
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .penalizeSheriffOnEliminatingDeputy = move.name,
-            let actorId = move.actorId,
-            let actor = state.players.first(where: { $0.identifier == actorId }) else {
+            let actor = state.players.first(where: { $0.identifier == move.actorId }) else {
                 return nil
         }
         
         var updates: [GameUpdate] = []
-        actor.hand.forEach { updates.append(.playerDiscardHand(actorId, $0.identifier)) }
-        actor.inPlay.forEach { updates.append(.playerDiscardInPlay(actorId, $0.identifier)) }
+        actor.hand.forEach { updates.append(.playerDiscardHand(move.actorId, $0.identifier)) }
+        actor.inPlay.forEach { updates.append(.playerDiscardInPlay(move.actorId, $0.identifier)) }
         return updates
     }
 }

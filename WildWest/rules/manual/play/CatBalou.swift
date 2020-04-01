@@ -35,13 +35,12 @@ class CatBalouMatcher: MoveMatcherProtocol {
         guard case .play = move.name,
             case .catBalou = move.cardName,
             let cardId = move.cardId,
-            let actorId = move.actorId,
             let targetCard = move.targetCard else {
                 return nil
         }
         
         var updates: [GameUpdate] = []
-        updates.append(.playerDiscardHand(actorId, cardId))
+        updates.append(.playerDiscardHand(move.actorId, cardId))
         switch targetCard.source {
         case .randomHand:
             if let player = state.players.first(where: { $0.identifier == targetCard.ownerId }),

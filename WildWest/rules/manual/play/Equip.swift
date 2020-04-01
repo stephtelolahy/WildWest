@@ -34,18 +34,17 @@ class EquipMatcher: MoveMatcherProtocol {
         guard case .play = move.name,
             let cardName = move.cardName,
             (cardName.isEquipment || cardName.isGun),
-            let actorId = move.actorId,
             let cardId = move.cardId,
-            let actor = state.players.first(where: { $0.identifier == actorId }) else {
+            let actor = state.players.first(where: { $0.identifier == move.actorId }) else {
                 return nil
         }
         
         var updates: [GameUpdate] = []
         if cardName.isGun,
             let currentGun = actor.inPlay.first(where: { $0.name.isGun }) {
-            updates.append(.playerDiscardInPlay(actorId, currentGun.identifier))
+            updates.append(.playerDiscardInPlay(move.actorId, currentGun.identifier))
         }
-        updates.append(.playerPutInPlay(actorId, cardId))
+        updates.append(.playerPutInPlay(move.actorId, cardId))
         return updates
     }
 }

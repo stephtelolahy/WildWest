@@ -26,12 +26,11 @@ class DiscardBangOnDuelMatcher: MoveMatcherProtocol {
         guard case .discard = move.name,
             let challenge = state.challenge,
             case .duel = challenge.name,
-            let cardId = move.cardId,
-            let actorId = move.actorId else {
+            let cardId = move.cardId else {
                 return nil
         }
         
-        return [.playerDiscardHand(actorId, cardId),
+        return [.playerDiscardHand(move.actorId, cardId),
                 .setChallenge(challenge.permutingTargets())]
     }
 }
@@ -56,12 +55,11 @@ class DiscardBangOnIndiansMatcher: MoveMatcherProtocol {
         guard case .discard = move.name,
             let challenge = state.challenge,
             case .indians = challenge.name,
-            let cardId = move.cardId,
-            let actorId = move.actorId else {
+            let cardId = move.cardId else {
                 return nil
         }
         
-        return [.playerDiscardHand(actorId, cardId),
-                .setChallenge(challenge.removing(actorId))]
+        return [.playerDiscardHand(move.actorId, cardId),
+                .setChallenge(challenge.removing(move.actorId))]
     }
 }

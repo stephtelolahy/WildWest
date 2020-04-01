@@ -40,21 +40,20 @@ class PanicMatcher: MoveMatcherProtocol {
         guard case .play = move.name,
             case .panic = move.cardName,
             let cardId = move.cardId,
-            let actorId = move.actorId,
             let targetCard = move.targetCard else {
                 return nil
         }
         
         var updates: [GameUpdate] = []
-        updates.append(.playerDiscardHand(actorId, cardId))
+        updates.append(.playerDiscardHand(move.actorId, cardId))
         switch targetCard.source {
         case .randomHand:
             if let player = state.players.first(where: { $0.identifier == targetCard.ownerId }),
                 let card = player.hand.randomElement() {
-                updates.append(.playerPullFromOtherHand(actorId, targetCard.ownerId, card.identifier))
+                updates.append(.playerPullFromOtherHand(move.actorId, targetCard.ownerId, card.identifier))
             }
         case let .inPlay(targetCardId):
-            updates.append(.playerPullFromOtherInPlay(actorId, targetCard.ownerId, targetCardId))
+            updates.append(.playerPullFromOtherInPlay(move.actorId, targetCard.ownerId, targetCardId))
         }
         return updates
     }

@@ -22,14 +22,13 @@ class ChooseCardMatcher: MoveMatcherProtocol {
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .choose = move.name,
-            let actorId = move.actorId,
             let challenge = state.challenge,
             let cardId = move.cardId else {
                 return nil
         }
         
-        return [.playerPullFromGeneralStore(actorId, cardId),
-                .setChallenge(challenge.removing(actorId))]
+        return [.playerPullFromGeneralStore(move.actorId, cardId),
+                .setChallenge(challenge.removing(move.actorId))]
     }
 }
 

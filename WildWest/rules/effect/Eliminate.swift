@@ -10,27 +10,25 @@ class EliminateMatcher: MoveMatcherProtocol {
     
     func effect(onExecuting move: GameMove, in state: GameStateProtocol) -> GameMove? {
         guard case .pass = move.name,
-            let actorId = move.actorId,
-            let actor = state.players.first(where: { $0.identifier == actorId }),
+            let actor = state.players.first(where: { $0.identifier == move.actorId }),
             actor.health == 0 else {
                 return nil
         }
         
-        return GameMove(name: .eliminate, actorId: actorId)
+        return GameMove(name: .eliminate, actorId: move.actorId)
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .eliminate = move.name,
-            let actorId = move.actorId,
-            let actor = state.players.first(where: { $0.identifier == actorId }) else {
+            let actor = state.players.first(where: { $0.identifier == move.actorId }) else {
                 return nil
         }
         
         var updates: [GameUpdate] = []
-        actor.hand.forEach { updates.append(.playerDiscardHand(actorId, $0.identifier)) }
-        actor.inPlay.forEach { updates.append(.playerDiscardInPlay(actorId, $0.identifier)) }
-        updates.append(.eliminatePlayer(actorId))
-        if actorId == state.turn {
+        actor.hand.forEach { updates.append(.playerDiscardHand(move.actorId, $0.identifier)) }
+        actor.inPlay.forEach { updates.append(.playerDiscardInPlay(move.actorId, $0.identifier)) }
+        updates.append(.eliminatePlayer(move.actorId))
+        if move.actorId == state.turn {
             updates.append(.setTurn(state.nextTurn))
             updates.append(.setChallenge(Challenge(name: .startTurn)))
         }

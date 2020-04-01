@@ -26,15 +26,14 @@ class IndiansMatcher: MoveMatcherProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
             case .indians = move.cardName,
-            let actorId = move.actorId,
             let cardId = move.cardId,
-            let actorIndex = state.players.firstIndex(where: { $0.identifier == actorId }) else {
+            let actorIndex = state.players.firstIndex(where: { $0.identifier == move.actorId }) else {
                 return nil
         }
         
         let playersCount = state.players.count
         let targetIds = Array(1..<playersCount).map { state.players[(actorIndex + $0) % playersCount].identifier }
-        return [.playerDiscardHand(actorId, cardId),
+        return [.playerDiscardHand(move.actorId, cardId),
                 .setChallenge(Challenge(name: .indians, targetIds: targetIds))]
     }
 }

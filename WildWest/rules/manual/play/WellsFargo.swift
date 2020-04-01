@@ -26,12 +26,11 @@ class WellsFargoMatcher: MoveMatcherProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
             case .wellsFargo = move.cardName,
-            let cardId = move.cardId,
-            let actorId = move.actorId else {
+            let cardId = move.cardId else {
                 return nil
         }
         
-        return [.playerDiscardHand(actorId, cardId),
-                .playerPullFromDeck(actorId, 3)]
+        return [.playerDiscardHand(move.actorId, cardId),
+                .playerPullFromDeck(move.actorId, 3)]
     }
 }

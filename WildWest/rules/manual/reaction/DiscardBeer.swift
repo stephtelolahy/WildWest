@@ -44,12 +44,11 @@ class DiscardBeerMatcher: MoveMatcherProtocol {
         guard case .discard = move.name,
             let cardId = move.cardId,
             let challenge = state.challenge,
-            case .dynamiteExploded = challenge.name,
-            let actorId = move.actorId else {
+            case .dynamiteExploded = challenge.name else {
                 return nil
         }
         
-        return [.playerDiscardHand(actorId, cardId),
-                .setChallenge(challenge.removingOneDamage(for: actorId))]
+        return [.playerDiscardHand(move.actorId, cardId),
+                .setChallenge(challenge.removingOneDamage(for: move.actorId))]
     }
 }

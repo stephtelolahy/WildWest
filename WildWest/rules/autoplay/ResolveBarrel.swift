@@ -24,13 +24,12 @@ class UseBarrelMatcher: MoveMatcherProtocol {
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .useBarrel = move.name,
-            let challenge = state.challenge,
-            let actorId = move.actorId else {
+            let challenge = state.challenge else {
                 return nil
         }
         
         return  [.flipOverFirstDeckCard,
-                 .setChallenge(challenge.removing(actorId))]
+                 .setChallenge(challenge.removing(move.actorId))]
     }
 }
 

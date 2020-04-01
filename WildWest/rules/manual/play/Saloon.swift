@@ -27,13 +27,12 @@ class SaloonMatcher: MoveMatcherProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
             case .saloon = move.cardName,
-            let cardId = move.cardId,
-            let actorId = move.actorId else {
+            let cardId = move.cardId else {
                 return nil
         }
         
         var updates: [GameUpdate] = []
-        updates.append(.playerDiscardHand(actorId, cardId))
+        updates.append(.playerDiscardHand(move.actorId, cardId))
         let damagedPlayers = state.players.filter { $0.health < $0.maxHealth }
         damagedPlayers.forEach {
             updates.append(.playerGainHealth($0.identifier, 1))

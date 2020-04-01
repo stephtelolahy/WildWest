@@ -26,15 +26,14 @@ class GeneralStoreMatcher: MoveMatcherProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
             case .generalStore = move.cardName,
-            let actorId = move.actorId,
             let cardId = move.cardId,
-            let actorIndex = state.players.firstIndex(where: { $0.identifier == actorId }) else {
+            let actorIndex = state.players.firstIndex(where: { $0.identifier == move.actorId }) else {
                 return nil
         }
         
         let playersCount = state.players.count
         let playerIds = Array(0..<playersCount).map { state.players[(actorIndex + $0) % playersCount].identifier }
-        return [.playerDiscardHand(actorId, cardId),
+        return [.playerDiscardHand(move.actorId, cardId),
                 .setupGeneralStore(playersCount),
                 .setChallenge(Challenge(name: .generalStore, targetIds: playerIds))]
     }

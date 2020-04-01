@@ -28,12 +28,11 @@ class BeerMatcher: MoveMatcherProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
             case .beer = move.cardName,
-            let cardId = move.cardId,
-            let actorId = move.actorId else {
+            let cardId = move.cardId else {
                 return nil
         }
         
-        return [.playerDiscardHand(actorId, cardId),
-                .playerGainHealth(actorId, 1)]
+        return [.playerDiscardHand(move.actorId, cardId),
+                .playerGainHealth(move.actorId, 1)]
     }
 }

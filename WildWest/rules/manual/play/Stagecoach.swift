@@ -26,12 +26,11 @@ class StagecoachMatcher: MoveMatcherProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
             case .stagecoach = move.cardName,
-            let cardId = move.cardId,
-            let actorId = move.actorId else {
+            let cardId = move.cardId else {
                 return nil
         }
         
-        return [.playerDiscardHand(actorId, cardId),
-                .playerPullFromDeck(actorId, 2)]
+        return [.playerDiscardHand(move.actorId, cardId),
+                .playerPullFromDeck(move.actorId, 2)]
     }
 }

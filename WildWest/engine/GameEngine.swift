@@ -58,23 +58,10 @@ extension GameEngine {
         database.setValidMoves([:])
         
         // apply updates
-        print("\n*** \(String(describing: move)) ***")
-        
-        let matchers = moveMatchers.filter({ $0.execute(move, in: database.state) != nil })
-        guard matchers.count == 1 else {
-            fatalError("Illegal multiple move matchers (\(matchers.count)")
-        }
-        
-        let updatesQueue = matchers.compactMap { $0.execute(move, in: database.state) }.flatMap { $0 }
-        
-        updatesQueue.forEach { update in
-            print("> \(String(describing: update))")
-            updateExecutor.execute(update, in: database)
-        }
-        
+        applyUpdates(for: move)
         database.addExecutedMove(move)
         
-        // check if game over
+        // check game over
         if let outcome = database.state.claculateOutcome() {
             database.setOutcome(outcome)
             return
@@ -104,5 +91,21 @@ extension GameEngine {
         }
         
         database.setValidMoves(validMoves)
+    }
+    
+    private func applyUpdates(for move: GameMove) {
+        print("\n*** \(String(describing: move)) ***")
+        
+        let matchers = moveMatchers.filter({ $0.execute(move, in: database.state) != nil })
+        guard matchers.count == 1,
+            let executor = matchers.first,
+            let updatesQueue = executor.execute(move, in: database.state) else {
+                fatalError("Illegal move executors (\(matchers.count)")
+        }
+        
+        updatesQueue.forEach { update in
+            print("> \(String(describing: update))")
+            updateExecutor.execute(update, in: database)
+        }
     }
 }

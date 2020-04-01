@@ -35,7 +35,7 @@ class GameEngineTests: XCTestCase {
     
     func test_ExecuteAutoPlayMove_IfStartingGame() {
         // Given
-        let move = GameMove(name: MoveName("dummy"))
+        let move = GameMove(name: MoveName("dummy"), actorId: "p1")
         Cuckoo.stub(mockMoveMatcher) { mock in
             when(mock.autoPlayMoves(matching: state(equalTo: mockState))).thenReturn([move])
             when(mock.execute(equal(to: move), in: state(equalTo: mockState))).thenReturn([])
@@ -51,7 +51,7 @@ class GameEngineTests: XCTestCase {
     
     func test_ExecuteGameUpdates_IfExecutingMove() {
         // Given
-        let move = GameMove(name: MoveName("dummy"))
+        let move = GameMove(name: MoveName("dummy"), actorId: "p1")
         let update: GameUpdate = .playerPullFromDeck("p1", 2)
         Cuckoo.stub(mockMoveMatcher) { mock in
             when(mock.execute(equal(to: move), in: state(equalTo: mockState))).thenReturn([update])
@@ -66,7 +66,7 @@ class GameEngineTests: XCTestCase {
     
     func test_AddExecutedMoves_IfExecutingMove() {
         // Given
-        let move = GameMove(name: MoveName("dummy"))
+        let move = GameMove(name: MoveName("dummy"), actorId: "p1")
         Cuckoo.stub(mockMoveMatcher) { mock in
             when(mock.execute(equal(to: move), in: state(equalTo: mockState))).thenReturn([])
         }
@@ -80,7 +80,7 @@ class GameEngineTests: XCTestCase {
     
     func test_SetValidMoves_IfExecutingMove() {
         // Given
-        let move = GameMove(name: MoveName("dummy"))
+        let move = GameMove(name: MoveName("dummy"), actorId: "p1")
         let validMove = GameMove(name: .play, actorId: "p1")
         Cuckoo.stub(mockMoveMatcher) { mock in
             when(mock.validMoves(matching: state(equalTo: mockState))).thenReturn([validMove])
@@ -102,7 +102,7 @@ class GameEngineTests: XCTestCase {
     
     func test_DoNotGenerateActions_IfGameIsOver() {
         // Given
-        let move = GameMove(name: MoveName("dummy"))
+        let move = GameMove(name: MoveName("dummy"), actorId: "p1")
         Cuckoo.stub(mockMoveMatcher) { mock in
             when(mock.execute(equal(to: move), in: state(equalTo: mockState))).thenReturn([])
         }
@@ -122,7 +122,7 @@ class GameEngineTests: XCTestCase {
     
     func test_SetOutcomeIfGameIsOver() {
         // Given
-        let move = GameMove(name: MoveName("dummy"))
+        let move = GameMove(name: MoveName("dummy"), actorId: "p1")
         let validMove = GameMove(name: .play, actorId: "p1")
         Cuckoo.stub(mockMoveMatcher) { mock in
             when(mock.validMoves(matching: state(equalTo: mockState))).thenReturn([validMove])

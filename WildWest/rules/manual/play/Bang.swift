@@ -43,13 +43,12 @@ class BangMatcher: MoveMatcherProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
             case .bang = move.cardName,
-            let actorId = move.actorId,
             let cardId = move.cardId,
             let targetId = move.targetId else {
                 return nil
         }
         
-        return [.playerDiscardHand(actorId, cardId),
+        return [.playerDiscardHand(move.actorId, cardId),
                 .setChallenge(Challenge(name: .bang, targetIds: [targetId]))]
     }
 }

@@ -26,13 +26,12 @@ class DiscardMissedOnBangMatcher: MoveMatcherProtocol {
         guard case .discard = move.name,
             let challenge = state.challenge,
             case .bang = challenge.name,
-            let actorId = move.actorId,
             let cardId = move.cardId else {
                 return nil
         }
         
-        return [.playerDiscardHand(actorId, cardId),
-                .setChallenge(challenge.removing(actorId))]
+        return [.playerDiscardHand(move.actorId, cardId),
+                .setChallenge(challenge.removing(move.actorId))]
     }
 }
 
@@ -56,12 +55,11 @@ class DiscardMissedOnGatlingMatcher: MoveMatcherProtocol {
         guard case .discard = move.name,
             let challenge = state.challenge,
             case .gatling = challenge.name,
-            let actorId = move.actorId,
             let cardId = move.cardId else {
                 return nil
         }
         
-        return [.playerDiscardHand(actorId, cardId),
-                .setChallenge(challenge.removing(actorId))]
+        return [.playerDiscardHand(move.actorId, cardId),
+                .setChallenge(challenge.removing(move.actorId))]
     }
 }

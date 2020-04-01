@@ -27,11 +27,10 @@ class DynamiteMatcher: MoveMatcherProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
             case .dynamite = move.cardName,
-            let actorId = move.actorId,
             let cardId = move.cardId else {
                 return nil
         }
         
-        return [.playerPutInPlay(actorId, cardId)]
+        return [.playerPutInPlay(move.actorId, cardId)]
     }
 }

@@ -20,12 +20,11 @@ class StartTurnMatcher: MoveMatcherProtocol {
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .startTurn = move.name,
-            let actorId = move.actorId else {
-                return nil
+        guard case .startTurn = move.name else {
+            return nil
         }
         
-        return [.playerPullFromDeck(actorId, 2),
+        return [.playerPullFromDeck(move.actorId, 2),
                 .setChallenge(nil)]
     }
 }

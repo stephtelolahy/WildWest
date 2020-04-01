@@ -23,12 +23,11 @@ class GainRewardOnEliminatingOutlawMatcher: MoveMatcherProtocol {
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .gainRewardOnEliminatingOutlaw = move.name,
-            let actorId = move.actorId else {
+        guard case .gainRewardOnEliminatingOutlaw = move.name else {
             return nil
         }
         
-        return [.playerPullFromDeck(actorId, 3)]
+        return [.playerPullFromDeck(move.actorId, 3)]
     }
 }
 

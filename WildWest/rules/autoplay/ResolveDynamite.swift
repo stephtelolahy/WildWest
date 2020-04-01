@@ -23,14 +23,13 @@ class ExplodeDynamiteMatcher: MoveMatcherProtocol {
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .explodeDynamite = move.name,
-            let actorId = move.actorId,
             let cardId = move.cardId else {
                 return nil
         }
         
         return  [.flipOverFirstDeckCard,
                  .setChallenge(Challenge(name: .dynamiteExploded)),
-                 .playerDiscardInPlay(actorId, cardId)]
+                 .playerDiscardInPlay(move.actorId, cardId)]
     }
 }
 
@@ -51,13 +50,12 @@ class PassDynamiteMatcher: MoveMatcherProtocol {
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .passDynamite = move.name,
-            let actorId = move.actorId,
             let cardId = move.cardId else {
                 return nil
         }
         
         return  [.flipOverFirstDeckCard,
-                 .playerPassInPlayOfOther(actorId, state.nextTurn, cardId)]
+                 .playerPassInPlayOfOther(move.actorId, state.nextTurn, cardId)]
     }
 }
 

@@ -34,13 +34,12 @@ class DuelMatcher: MoveMatcherProtocol {
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
             case .duel = move.cardName,
-            let actorId = move.actorId,
             let cardId = move.cardId,
             let targetId = move.targetId else {
                 return nil
         }
         
-        return [.playerDiscardHand(actorId, cardId),
-                .setChallenge(Challenge(name: .duel, targetIds: [targetId, actorId]))]
+        return [.playerDiscardHand(move.actorId, cardId),
+                .setChallenge(Challenge(name: .duel, targetIds: [targetId, move.actorId]))]
     }
 }

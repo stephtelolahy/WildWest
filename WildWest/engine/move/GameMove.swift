@@ -6,11 +6,12 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-/// A concrete action performed by a player or the game itself
+/// A concrete action performed by a player
 struct GameMove: Equatable {
     let name: MoveName                  // move type
-    var actorId: String?                // identifier of player performing move
+    var actorId: String                 // playr identifier
     var cardId: String?                 // identifier of played/chosen card
+    @available(*, deprecated)
     var cardName: CardName?             // name of played card
     var targetId: String?               // identifier of targeted player
     var targetCard: TargetCard?         // identifier of targeted card
