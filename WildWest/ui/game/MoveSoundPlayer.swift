@@ -21,8 +21,12 @@ class MoveSoundPlayer: MoveSoundPlayerProtocol {
         sfxPlayers = sfxPlayers.filter { $0.isPlaying }
         
         let fileName = sfx.value(matching: move)
-        guard let path = Bundle.main.path(forResource: "\(fileName).mp3", ofType: nil) else {
+        guard !fileName.isEmpty else {
             return
+        }
+        
+        guard let path = Bundle.main.path(forResource: "\(fileName).mp3", ofType: nil) else {
+            fatalError("File not found \(fileName).mp3")
         }
         
         let url = URL(fileURLWithPath: path)
