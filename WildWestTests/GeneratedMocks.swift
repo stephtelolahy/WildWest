@@ -86,21 +86,6 @@ import Cuckoo
     
     
     
-     func setBarrelsResolved(_ barrelsResolved: Int)  {
-        
-    return cuckoo_manager.call("setBarrelsResolved(_: Int)",
-            parameters: (barrelsResolved),
-            escapingParameters: (barrelsResolved),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.setBarrelsResolved(barrelsResolved))
-        
-    }
-    
-    
-    
      func addExecutedMove(_ move: GameMove)  {
         
     return cuckoo_manager.call("addExecutedMove(_: GameMove)",
@@ -353,11 +338,6 @@ import Cuckoo
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "setBangsPlayed(_: Int)", parameterMatchers: matchers))
 	    }
 	    
-	    func setBarrelsResolved<M1: Cuckoo.Matchable>(_ barrelsResolved: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(Int)> where M1.MatchedType == Int {
-	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: barrelsResolved) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "setBarrelsResolved(_: Int)", parameterMatchers: matchers))
-	    }
-	    
 	    func addExecutedMove<M1: Cuckoo.Matchable>(_ move: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(GameMove)> where M1.MatchedType == GameMove {
 	        let matchers: [Cuckoo.ParameterMatcher<(GameMove)>] = [wrap(matchable: move) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "addExecutedMove(_: GameMove)", parameterMatchers: matchers))
@@ -470,12 +450,6 @@ import Cuckoo
 	    func setBangsPlayed<M1: Cuckoo.Matchable>(_ bangsPlayed: M1) -> Cuckoo.__DoNotUse<(Int), Void> where M1.MatchedType == Int {
 	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: bangsPlayed) { $0 }]
 	        return cuckoo_manager.verify("setBangsPlayed(_: Int)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
-	    func setBarrelsResolved<M1: Cuckoo.Matchable>(_ barrelsResolved: M1) -> Cuckoo.__DoNotUse<(Int), Void> where M1.MatchedType == Int {
-	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: barrelsResolved) { $0 }]
-	        return cuckoo_manager.verify("setBarrelsResolved(_: Int)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
@@ -594,10 +568,6 @@ import Cuckoo
     }
     
      func setBangsPlayed(_ bangsPlayed: Int)   {
-        return DefaultValueRegistry.defaultValue(for: (Void).self)
-    }
-    
-     func setBarrelsResolved(_ barrelsResolved: Int)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
@@ -1373,24 +1343,6 @@ import Cuckoo
     
     
     
-    @available(*, deprecated)
-    
-     var barrelsResolved: Int {
-        get {
-            return cuckoo_manager.getter("barrelsResolved",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.barrelsResolved)
-        }
-        
-    }
-    
-    
-    
-    @available(*, deprecated)
-    
      var generalStore: [CardProtocol] {
         get {
             return cuckoo_manager.getter("generalStore",
@@ -1516,15 +1468,6 @@ import Cuckoo
 	    }
 	    
 	    
-	    @available(*, deprecated)
-	    
-	    var barrelsResolved: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, Int> {
-	        return .init(manager: cuckoo_manager, name: "barrelsResolved")
-	    }
-	    
-	    
-	    @available(*, deprecated)
-	    
 	    var generalStore: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [CardProtocol]> {
 	        return .init(manager: cuckoo_manager, name: "generalStore")
 	    }
@@ -1599,15 +1542,6 @@ import Cuckoo
 	        return .init(manager: cuckoo_manager, name: "bangsPlayed", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
-	    
-	    @available(*, deprecated)
-	    
-	    var barrelsResolved: Cuckoo.VerifyReadOnlyProperty<Int> {
-	        return .init(manager: cuckoo_manager, name: "barrelsResolved", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
-	    @available(*, deprecated)
 	    
 	    var generalStore: Cuckoo.VerifyReadOnlyProperty<[CardProtocol]> {
 	        return .init(manager: cuckoo_manager, name: "generalStore", callMatcher: callMatcher, sourceLocation: sourceLocation)
@@ -1693,18 +1627,6 @@ import Cuckoo
         
     }
     
-    
-    @available(*, deprecated)
-    
-     var barrelsResolved: Int {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (Int).self)
-        }
-        
-    }
-    
-    
-    @available(*, deprecated)
     
      var generalStore: [CardProtocol] {
         get {

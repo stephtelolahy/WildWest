@@ -25,7 +25,6 @@ extension GameStateProtocol {
                          turn: turn,
                          challenge: challenge,
                          bangsPlayed: bangsPlayed,
-                         barrelsResolved: barrelsResolved,
                          damageEvents: damageEvents,
                          generalStore: generalStore,
                          outcome: outcome,

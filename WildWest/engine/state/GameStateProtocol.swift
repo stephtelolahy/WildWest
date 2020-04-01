@@ -13,9 +13,6 @@ protocol GameStateProtocol {
     var turn: String? { get }
     var challenge: Challenge? { get }
     var bangsPlayed: Int { get }
-    @available(*, deprecated)
-    var barrelsResolved: Int { get }
-    @available(*, deprecated)
     var generalStore: [CardProtocol] { get }
     var eliminated: [PlayerProtocol] { get }
     var outcome: GameOutcome? { get }

@@ -23,9 +23,8 @@ class UseBarrelMatcherTests: XCTestCase {
             .identified(by: "p1")
             .withDefault()
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .bang, targetIds: ["p1"]))
+            .challenge(is: Challenge(name: .bang, targetIds: ["p1"], barrelsResolved: 1))
             .players(are: mockPlayer1)
-            .barrelsResolved(is: 1)
         
         // When
         let moves = sut.autoPlayMoves(matching: mockState)
@@ -44,9 +43,8 @@ class UseBarrelMatcherTests: XCTestCase {
             .identified(by: "p1")
             .withDefault()
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .bang, targetIds: ["p1"]))
+            .challenge(is: Challenge(name: .bang, targetIds: ["p1"], barrelsResolved: 0))
             .players(are: mockPlayer1)
-            .barrelsResolved(is: 0)
             .topDeck(is: MockCardProtocol().suit(is: .hearts))
         
         // When
@@ -60,8 +58,7 @@ class UseBarrelMatcherTests: XCTestCase {
         // Given
         let mockState = MockGameStateProtocol()
         Cuckoo.stub(mockState) { mock in
-            when(mock.challenge.get).thenReturn(Challenge(name: .bang, targetIds: ["p1"]))
-            when(mock.barrelsResolved.get).thenReturn(0)
+            when(mock.challenge.get).thenReturn(Challenge(name: .bang, targetIds: ["p1"], barrelsResolved: 0))
         }
         
         let move = GameMove(name: .useBarrel, actorId: "p1")
@@ -89,9 +86,8 @@ class FailBarelMatcherTests: XCTestCase {
             .identified(by: "p1")
             .withDefault()
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .bang, targetIds: ["p1"]))
+            .challenge(is: Challenge(name: .bang, targetIds: ["p1"], barrelsResolved: 0))
             .players(are: mockPlayer1)
-            .barrelsResolved(is: 0)
             .topDeck(is: MockCardProtocol().suit(is: .clubs))
         
         // When
@@ -105,8 +101,7 @@ class FailBarelMatcherTests: XCTestCase {
         // Given
         let mockState = MockGameStateProtocol()
         Cuckoo.stub(mockState) { mock in
-            when(mock.challenge.get).thenReturn(Challenge(name: .bang, targetIds: ["p1"]))
-            when(mock.barrelsResolved.get).thenReturn(0)
+            when(mock.challenge.get).thenReturn(Challenge(name: .bang, targetIds: ["p1"], barrelsResolved: 0))
         }
         
         let move = GameMove(name: .failBarrel, actorId: "p1")
@@ -115,7 +110,8 @@ class FailBarelMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.flipOverFirstDeckCard])
+        XCTAssertEqual(updates, [.flipOverFirstDeckCard,
+                                 .setChallenge(Challenge(name: .bang, targetIds: ["p1"], barrelsResolved: 1))])
     }
 }
 

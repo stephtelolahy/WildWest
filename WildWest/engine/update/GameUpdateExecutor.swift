@@ -20,11 +20,6 @@ class GameUpdateExecutor: UpdateExecutorProtocol {
             if let challenge = challenge {
                 if case .bang = challenge.name {
                     database.setBangsPlayed(database.state.bangsPlayed + 1)
-                    database.setBarrelsResolved(0)
-                }
-                
-                if case .gatling = challenge.name {
-                    database.setBarrelsResolved(0)
                 }
             }
             
@@ -96,7 +91,6 @@ class GameUpdateExecutor: UpdateExecutorProtocol {
         case .flipOverFirstDeckCard:
             let card = database.deckRemoveFirst()
             database.addDiscard(card)
-            database.setBarrelsResolved(database.state.barrelsResolved + 1)
             
         case let .eliminatePlayer(playerId):
             if let player = database.removePlayer(playerId) {

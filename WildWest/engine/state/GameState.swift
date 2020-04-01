@@ -14,8 +14,6 @@ class GameState: GameStateProtocol {
     var turn: String?
     var challenge: Challenge?
     var bangsPlayed: Int
-    
-    var barrelsResolved: Int
     var damageEvents: [DamageEvent]
     var generalStore: [CardProtocol]
     var eliminated: [PlayerProtocol]
@@ -29,7 +27,6 @@ class GameState: GameStateProtocol {
          turn: String?,
          challenge: Challenge?,
          bangsPlayed: Int,
-         barrelsResolved: Int,
          damageEvents: [DamageEvent],
          generalStore: [CardProtocol],
          outcome: GameOutcome?,
@@ -42,7 +39,6 @@ class GameState: GameStateProtocol {
         self.turn = turn
         self.challenge = challenge
         self.bangsPlayed = bangsPlayed
-        self.barrelsResolved = barrelsResolved
         self.damageEvents = damageEvents
         self.generalStore = generalStore
         self.outcome = outcome

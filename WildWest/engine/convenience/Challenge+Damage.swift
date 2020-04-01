@@ -8,10 +8,11 @@
 
 extension Challenge {
     
-    init(name: ChallengeName, targetIds: [String] = [], damage: Int? = nil) {
+    init(name: ChallengeName, targetIds: [String] = [], damage: Int? = nil, barrelsResolved: Int = 0) {
         self.name = name
         self.targetIds = targetIds
         self.damage = damage ?? Self.initialDamage(for: name)
+        self.barrelsResolved = barrelsResolved
     }
     
     private static func initialDamage(for name: ChallengeName) -> Int {
@@ -92,4 +93,12 @@ extension Challenge {
             return state.turn
         }
     }
+    
+    func incrementingBarrelsResolved() -> Challenge {
+        Challenge(name: name,
+                  targetIds: targetIds,
+                  damage: damage,
+                  barrelsResolved: barrelsResolved + 1)
+    }
+    
 }

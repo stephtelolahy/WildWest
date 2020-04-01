@@ -36,10 +36,6 @@ class MemoryCachedDataBase: GameDatabaseProtocol {
         mutableState.bangsPlayed = bangsPlayed
     }
     
-    func setBarrelsResolved(_ barrelsResolved: Int) {
-        mutableState.barrelsResolved = barrelsResolved
-    }
-    
     func addExecutedMove(_ move: GameMove) {
         mutableState.executedMoves.append(move)
     }

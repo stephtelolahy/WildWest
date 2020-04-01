@@ -30,6 +30,6 @@ class GatlingMatcher: MoveMatcherProtocol {
         }
         
         return [.playerDiscardHand(move.actorId, cardId),
-                .setChallenge(Challenge(name: .gatling, targetIds: state.otherPlayerIds(move.actorId)))]
+                .setChallenge(Challenge(name: .gatling, targetIds: state.otherPlayerIds(move.actorId), barrelsResolved: 0))]
     }
 }

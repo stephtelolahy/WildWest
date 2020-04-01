@@ -112,7 +112,7 @@ class GameSetupTests: XCTestCase {
         XCTAssertTrue(state.damageEvents.isEmpty)
         // Flags are reset to 0
         XCTAssertEqual(state.bangsPlayed, 0)
-        XCTAssertEqual(state.barrelsResolved, 0)
+        // No challenge
         XCTAssertNil(state.challenge)
     }
 }

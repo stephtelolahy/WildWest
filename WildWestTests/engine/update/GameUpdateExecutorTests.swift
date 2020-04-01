@@ -254,17 +254,6 @@ class GameUpdateExecutorTests: XCTestCase {
         verify(mockDatabase).setBangsPlayed(1)
     }
     
-    func test_ResetBarrelsResolved_IfSettingShootChallenge() {
-        // Given
-        let update = GameUpdate.setChallenge(Challenge(name: .gatling, targetIds: ["p1"]))
-        
-        // When
-        sut.execute(update, in: mockDatabase)
-        
-        // Assert
-        verify(mockDatabase).setBarrelsResolved(0)
-    }
-    
     // MARK: - FlipOverFirstDeck
     
     func test_DiscardFlippedCard_IfRevealingFromDeck() {
@@ -283,22 +272,6 @@ class GameUpdateExecutorTests: XCTestCase {
         // Assert
         verify(mockDatabase).deckRemoveFirst()
         verify(mockDatabase).addDiscard(card(equalTo: mockCard))
-    }
-    
-    func test_IncrementBarrelsResolved_IfFlipOverFirstDeckCard() {
-        // Given
-        let mockState = MockGameStateProtocol().barrelsResolved(is: 0)
-        Cuckoo.stub(mockDatabase) { mock in
-            when(mock.state.get).thenReturn(mockState)
-            when(mock.deckRemoveFirst()).thenReturn(MockCardProtocol())
-        }
-        let update = GameUpdate.flipOverFirstDeckCard
-        
-        // When
-        sut.execute(update, in: mockDatabase)
-        
-        // Assert
-        verify(mockDatabase).setBarrelsResolved(1)
     }
     
     // MARK: - EliminatePlayer
