@@ -11,5 +11,24 @@ struct FigureDto: Codable {
     let bullets: Int
     let imageName: String
     let description: String
-    let abilities: [AbilityName: Bool]?
+    let abilities: [String: Bool]?
+}
+
+class FigureMapper {
+    
+    func map(dto: FigureDto) -> Figure {
+        let abilitiesDto = dto.abilities ?? [:]
+        var abilitities: [AbilityName: Bool] = [:]
+        abilitiesDto.forEach { key, value in
+            if let name = AbilityName(rawValue: key) {
+                abilitities[name] = value
+            }
+        }
+        
+        return Figure(name: dto.name,
+                      bullets: dto.bullets,
+                      imageName: dto.imageName,
+                      description: dto.description,
+                      abilities: abilitities)
+    }
 }

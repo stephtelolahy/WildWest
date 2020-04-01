@@ -197,6 +197,7 @@
 		33BD0ACF24350D7D003E75EE /* Player+AbilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BD0ACE24350D7D003E75EE /* Player+AbilityTests.swift */; };
 		33BD0AD524351131003E75EE /* FigureDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BD0AD424351131003E75EE /* FigureDto.swift */; };
 		33BD0AD624351131003E75EE /* FigureDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BD0AD424351131003E75EE /* FigureDto.swift */; };
+		33BD0ADE24351871003E75EE /* esourcesTests+SpecialAbilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BD0ADD24351871003E75EE /* esourcesTests+SpecialAbilities.swift */; };
 		33BE9106242F4F23001A9570 /* PlayMoveSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BE9105242F4F23001A9570 /* PlayMoveSelector.swift */; };
 		33BE9108242F5046001A9570 /* ReactionMoveSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BE9107242F5046001A9570 /* ReactionMoveSelector.swift */; };
 		33C52DDD242F24D3009EF4DA /* ResolveBarrel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C45DD123EB11EB00B62508 /* ResolveBarrel.swift */; };
@@ -305,7 +306,6 @@
 		33318D68242750130055C6C5 /* PenalizeSheriffOnEliminatingDeputyMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenalizeSheriffOnEliminatingDeputyMatcherTests.swift; sourceTree = "<group>"; };
 		33318D6C24275AAE0055C6C5 /* StatsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsBuilder.swift; sourceTree = "<group>"; };
 		3333463C242FD59900A97FD5 /* Player+RangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+RangeTests.swift"; sourceTree = "<group>"; };
-		3333463F242FDF8A00A97FD5 /* WillyTheKidTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WillyTheKidTests.swift; sourceTree = "<group>"; };
 		33334641242FEDCD00A97FD5 /* GameState+Distance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameState+Distance.swift"; sourceTree = "<group>"; };
 		33334644242FEE7F00A97FD5 /* GameMove+Grouping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameMove+Grouping.swift"; sourceTree = "<group>"; };
 		33334647242FF65500A97FD5 /* GameState+DistanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameState+DistanceTests.swift"; sourceTree = "<group>"; };
@@ -345,9 +345,6 @@
 		337408D324306C3400E5809B /* Player+Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+Cards.swift"; sourceTree = "<group>"; };
 		337D7FD0243071AE0078F749 /* Player+Ability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+Ability.swift"; sourceTree = "<group>"; };
 		337D7FD3243072130078F749 /* GameState+Observed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameState+Observed.swift"; sourceTree = "<group>"; };
-		337D7FD6243073FD0078F749 /* PaulRegretTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaulRegretTests.swift; sourceTree = "<group>"; };
-		337D7FD824307C4F0078F749 /* RoseDolanTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoseDolanTests.swift; sourceTree = "<group>"; };
-		337D7FDA243080A60078F749 /* JourdonaisTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourdonaisTests.swift; sourceTree = "<group>"; };
 		337D7FDC2430879F0078F749 /* PlayerDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDescriptor.swift; sourceTree = "<group>"; };
 		3383CFCD242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Metal Clang-SoundBible.com-19572601.mp3"; sourceTree = "<group>"; };
 		3383CFCF242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Ta Da-SoundBible.com-1884170640.mp3"; sourceTree = "<group>"; };
@@ -383,6 +380,7 @@
 		33BAE349242E7D210098B41F /* DelaySubject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelaySubject.swift; sourceTree = "<group>"; };
 		33BD0ACE24350D7D003E75EE /* Player+AbilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+AbilityTests.swift"; sourceTree = "<group>"; };
 		33BD0AD424351131003E75EE /* FigureDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FigureDto.swift; sourceTree = "<group>"; };
+		33BD0ADD24351871003E75EE /* esourcesTests+SpecialAbilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "esourcesTests+SpecialAbilities.swift"; sourceTree = "<group>"; };
 		33BE9105242F4F23001A9570 /* PlayMoveSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayMoveSelector.swift; sourceTree = "<group>"; };
 		33BE9107242F5046001A9570 /* ReactionMoveSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionMoveSelector.swift; sourceTree = "<group>"; };
 		33C45DD123EB11EB00B62508 /* ResolveBarrel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveBarrel.swift; sourceTree = "<group>"; };
@@ -527,17 +525,6 @@
 			path = update;
 			sourceTree = "<group>";
 		};
-		3333463E242FDF7300A97FD5 /* specialabilities */ = {
-			isa = PBXGroup;
-			children = (
-				3333463F242FDF8A00A97FD5 /* WillyTheKidTests.swift */,
-				337D7FD6243073FD0078F749 /* PaulRegretTests.swift */,
-				337D7FD824307C4F0078F749 /* RoseDolanTests.swift */,
-				337D7FDA243080A60078F749 /* JourdonaisTests.swift */,
-			);
-			path = specialabilities;
-			sourceTree = "<group>";
-		};
 		3338B2EA242FD0480097BA57 /* convenience */ = {
 			isa = PBXGroup;
 			children = (
@@ -646,6 +633,7 @@
 			children = (
 				33D964AB23DD9049007295E7 /* ResourcesTests+Cards.swift */,
 				33D964AD23DD907E007295E7 /* ResourcesTests+Figures.swift */,
+				33BD0ADD24351871003E75EE /* esourcesTests+SpecialAbilities.swift */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -986,7 +974,6 @@
 				33FB59B52427F68100090D23 /* ui */,
 				AD7EAFBD23D7846000FE23D5 /* engine */,
 				ADB2D8C62420149F00AD0C11 /* rules */,
-				3333463E242FDF7300A97FD5 /* specialabilities */,
 				338A4D1223E7F59E005698FD /* resources */,
 				33EC5D3223E6F93F00E14890 /* cuckoo */,
 				AD208A6623C6809B0082AC98 /* extensions */,
@@ -1435,6 +1422,7 @@
 				330FDED3242F38DF00284FE7 /* GainRewardOnEliminatingOutlawMatcherTests.swift in Sources */,
 				3328FCEA242F2F0200A82255 /* PassMatcherTests.swift in Sources */,
 				3328FCBF242F2B5600A82255 /* PanicMatcherTests.swift in Sources */,
+				33BD0ADE24351871003E75EE /* esourcesTests+SpecialAbilities.swift in Sources */,
 				330FDED1242F38DF00284FE7 /* EliminateMatcherTests.swift in Sources */,
 				33BD0AD624351131003E75EE /* FigureDto.swift in Sources */,
 				33EE1BA1242F18C200A1E4F7 /* MoveMatcherProtocol.swift in Sources */,

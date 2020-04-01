@@ -16,11 +16,8 @@ class ResourcesTests_Figures: XCTestCase {
         return sut.allFigures
     }()
     
-    func test_Load16PFigures() {
-        XCTAssertEqual(figures.count, 16)
-    }
-    
     func test_AllFiguresAreAvailable() {
+        XCTAssertEqual(figures.count, 16)
         XCTAssertTrue(figures.contains { $0.name == .bartCassidy && $0.bullets == 4 })
         XCTAssertTrue(figures.contains { $0.name == .blackJack && $0.bullets == 4 })
         XCTAssertTrue(figures.contains { $0.name == .calamityJanet && $0.bullets == 4 })

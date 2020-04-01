@@ -33,7 +33,10 @@
         "name": "joudonais",
         "bullets": 4,
         "imageName": "01_jourdonnais",
-        "description": "he is considered to have a Barrel card in play at all times; he can \"draw!\" when he is the target of a BANG!, and on a Heart he is missed. If he has another real Barrel card in play, he can count both of them, giving him two chances to cancel the BANG! before playing a Missed! card."
+        "description": "he is considered to have a Barrel card in play at all times; he can \"draw!\" when he is the target of a BANG!, and on a Heart he is missed. If he has another real Barrel card in play, he can count both of them, giving him two chances to cancel the BANG! before playing a Missed! card.",
+        "abilities": {
+            "hasBarrelAllTimes": true
+        }
     },
     {
         "name": "kitCarlson",
@@ -51,7 +54,10 @@
         "name": "paulRegret",
         "bullets": 3,
         "imageName": "01_paulregret",
-        "description": "he is considered to have a Mustang card in play at all times; all other players must add 1 to the distance to him. If he has another real Mustang card in play, he can count both of them, increasing all distances to him by a total of 2)."
+        "description": "he is considered to have a Mustang card in play at all times; all other players must add 1 to the distance to him. If he has another real Mustang card in play, he can count both of them, increasing all distances to him by a total of 2).",
+        "abilities": {
+            "hasMustangAllTimes": true
+        }
     },
     {
         "name": "pedroRamirez",
@@ -63,7 +69,10 @@
         "name": "roseDoolan",
         "bullets": 4,
         "imageName": "01_rosedoolan",
-        "description": "she is considered to have an Appaloosa card in play at all times; she sees the other players at a distance decreased by 1. If she has another real Appaloosa card in play, she can count both of them, reducing her distance to all other players by a total of 2."
+        "description": "she is considered to have an Appaloosa card in play at all times; she sees the other players at a distance decreased by 1. If she has another real Appaloosa card in play, she can count both of them, reducing her distance to all other players by a total of 2.",
+        "abilities": {
+            "hasScopeAllTimes": true
+        }
     },
     {
         "name": "sidKetchum",
@@ -93,7 +102,10 @@
         "name": "willyTheKid",
         "bullets": 4,
         "imageName": "01_willythekid",
-        "description": "he can play any number of BANG! cards during his turn."
+        "description": "he can play any number of BANG! cards during his turn.",
+        "abilities": {
+            "hasNoLimitOnBangsPerTurn": true
+        }
     }
 ]
 
