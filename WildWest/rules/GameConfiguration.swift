@@ -19,7 +19,14 @@ class GameConfiguration {
     }
     
     var allFigures: [FigureProtocol] {
-        jsonReader.load([Figure].self, file: "figures")
+        jsonReader.load([FigureDto].self, file: "figures")
+            .compactMap { dto in
+                Figure(name: dto.name,
+                       bullets: dto.bullets,
+                       imageName: dto.imageName,
+                       description: dto.description,
+                       abilities: [:])
+        }
     }
     
     var moveMatchers: [MoveMatcherProtocol] {

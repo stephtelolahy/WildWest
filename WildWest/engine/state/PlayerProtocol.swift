@@ -16,28 +16,9 @@ protocol PlayerProtocol {
     var inPlay: [CardProtocol] { get }
 }
 
-enum Role: String, Codable {
+enum Role: String {
     case sheriff,
     outlaw,
     renegade,
     deputy
-}
-
-enum Ability: String, Codable {
-    case bartCassidy,
-    blackJack,
-    calamityJanet,
-    elGringo,
-    jesseJones,
-    joudonais,
-    kitCarlson,
-    luckyDuke,
-    paulRegret,
-    pedroRamirez,
-    roseDoolan,
-    sidKetchum,
-    slabTheKiller,
-    suzyLafayette,
-    vultureSam,
-    willyTheKid
 }

@@ -21,22 +21,22 @@ class ResourcesTests_Figures: XCTestCase {
     }
     
     func test_AllFiguresAreAvailable() {
-        XCTAssertTrue(figures.contains { $0.ability == .bartCassidy && $0.bullets == 4 })
-        XCTAssertTrue(figures.contains { $0.ability == .blackJack && $0.bullets == 4 })
-        XCTAssertTrue(figures.contains { $0.ability == .calamityJanet && $0.bullets == 4 })
-        XCTAssertTrue(figures.contains { $0.ability == .elGringo && $0.bullets == 3 })
-        XCTAssertTrue(figures.contains { $0.ability == .jesseJones && $0.bullets == 4 })
-        XCTAssertTrue(figures.contains { $0.ability == .joudonais && $0.bullets == 4 })
-        XCTAssertTrue(figures.contains { $0.ability == .kitCarlson && $0.bullets == 4 })
-        XCTAssertTrue(figures.contains { $0.ability == .luckyDuke && $0.bullets == 4 })
-        XCTAssertTrue(figures.contains { $0.ability == .paulRegret && $0.bullets == 3 })
-        XCTAssertTrue(figures.contains { $0.ability == .pedroRamirez && $0.bullets == 4 })
-        XCTAssertTrue(figures.contains { $0.ability == .roseDoolan && $0.bullets == 4 })
-        XCTAssertTrue(figures.contains { $0.ability == .sidKetchum && $0.bullets == 4 })
-        XCTAssertTrue(figures.contains { $0.ability == .slabTheKiller && $0.bullets == 4 })
-        XCTAssertTrue(figures.contains { $0.ability == .suzyLafayette && $0.bullets == 4 })
-        XCTAssertTrue(figures.contains { $0.ability == .vultureSam && $0.bullets == 4 })
-        XCTAssertTrue(figures.contains { $0.ability == .willyTheKid && $0.bullets == 4 })
+        XCTAssertTrue(figures.contains { $0.name == .bartCassidy && $0.bullets == 4 })
+        XCTAssertTrue(figures.contains { $0.name == .blackJack && $0.bullets == 4 })
+        XCTAssertTrue(figures.contains { $0.name == .calamityJanet && $0.bullets == 4 })
+        XCTAssertTrue(figures.contains { $0.name == .elGringo && $0.bullets == 3 })
+        XCTAssertTrue(figures.contains { $0.name == .jesseJones && $0.bullets == 4 })
+        XCTAssertTrue(figures.contains { $0.name == .joudonais && $0.bullets == 4 })
+        XCTAssertTrue(figures.contains { $0.name == .kitCarlson && $0.bullets == 4 })
+        XCTAssertTrue(figures.contains { $0.name == .luckyDuke && $0.bullets == 4 })
+        XCTAssertTrue(figures.contains { $0.name == .paulRegret && $0.bullets == 3 })
+        XCTAssertTrue(figures.contains { $0.name == .pedroRamirez && $0.bullets == 4 })
+        XCTAssertTrue(figures.contains { $0.name == .roseDoolan && $0.bullets == 4 })
+        XCTAssertTrue(figures.contains { $0.name == .sidKetchum && $0.bullets == 4 })
+        XCTAssertTrue(figures.contains { $0.name == .slabTheKiller && $0.bullets == 4 })
+        XCTAssertTrue(figures.contains { $0.name == .suzyLafayette && $0.bullets == 4 })
+        XCTAssertTrue(figures.contains { $0.name == .vultureSam && $0.bullets == 4 })
+        XCTAssertTrue(figures.contains { $0.name == .willyTheKid && $0.bullets == 4 })
     }
     
     func test_AllFiguresHaveValidImage() {

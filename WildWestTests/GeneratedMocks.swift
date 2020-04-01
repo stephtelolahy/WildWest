@@ -1067,14 +1067,14 @@ import Cuckoo
     
     
     
-     var ability: Ability {
+     var name: FigureName {
         get {
-            return cuckoo_manager.getter("ability",
+            return cuckoo_manager.getter("name",
                 superclassCall:
                     
                     Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                     ,
-                defaultCall: __defaultImplStub!.ability)
+                defaultCall: __defaultImplStub!.name)
         }
         
     }
@@ -1121,6 +1121,20 @@ import Cuckoo
         
     }
     
+    
+    
+     var abilities: [AbilityName: Bool] {
+        get {
+            return cuckoo_manager.getter("abilities",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.abilities)
+        }
+        
+    }
+    
 
     
 
@@ -1134,8 +1148,8 @@ import Cuckoo
 	    }
 	    
 	    
-	    var ability: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockFigureProtocol, Ability> {
-	        return .init(manager: cuckoo_manager, name: "ability")
+	    var name: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockFigureProtocol, FigureName> {
+	        return .init(manager: cuckoo_manager, name: "name")
 	    }
 	    
 	    
@@ -1154,6 +1168,11 @@ import Cuckoo
 	    }
 	    
 	    
+	    var abilities: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockFigureProtocol, [AbilityName: Bool]> {
+	        return .init(manager: cuckoo_manager, name: "abilities")
+	    }
+	    
+	    
 	}
 
 	 struct __VerificationProxy_FigureProtocol: Cuckoo.VerificationProxy {
@@ -1169,8 +1188,8 @@ import Cuckoo
 	
 	    
 	    
-	    var ability: Cuckoo.VerifyReadOnlyProperty<Ability> {
-	        return .init(manager: cuckoo_manager, name: "ability", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var name: Cuckoo.VerifyReadOnlyProperty<FigureName> {
+	        return .init(manager: cuckoo_manager, name: "name", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	    
@@ -1188,6 +1207,11 @@ import Cuckoo
 	        return .init(manager: cuckoo_manager, name: "description", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
+	    
+	    var abilities: Cuckoo.VerifyReadOnlyProperty<[AbilityName: Bool]> {
+	        return .init(manager: cuckoo_manager, name: "abilities", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
 	
 	    
 	}
@@ -1196,9 +1220,9 @@ import Cuckoo
  class FigureProtocolStub: FigureProtocol {
     
     
-     var ability: Ability {
+     var name: FigureName {
         get {
-            return DefaultValueRegistry.defaultValue(for: (Ability).self)
+            return DefaultValueRegistry.defaultValue(for: (FigureName).self)
         }
         
     }
@@ -1223,6 +1247,14 @@ import Cuckoo
      var description: String {
         get {
             return DefaultValueRegistry.defaultValue(for: (String).self)
+        }
+        
+    }
+    
+    
+     var abilities: [AbilityName: Bool] {
+        get {
+            return DefaultValueRegistry.defaultValue(for: ([AbilityName: Bool]).self)
         }
         
     }

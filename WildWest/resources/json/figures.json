@@ -1,96 +1,96 @@
 [
     {
-        "ability": "bartCassidy",
+        "name": "bartCassidy",
         "bullets": 4,
         "imageName": "01_bartcassidy",
         "description": "each time he loses a life point, he immediately draws a card from the deck."
     },
     {
-        "ability": "blackJack",
+        "name": "blackJack",
         "bullets": 4,
         "imageName": "01_blackjack",
         "description": "during the phase 1 of his turn, he must show the second card he draws: if it's Heart or Diamonds (just like a \"draw!\", he draws one additional card (without revealing it)."
     },
     {
-        "ability": "calamityJanet",
+        "name": "calamityJanet",
         "bullets": 4,
         "imageName": "01_calamityjanet",
         "description": "she can use BANG! cards as Missed! cards and vice versa. If she plays a Missed! card as a BANG!, she cannot play another BANG! card that turn (unless she has a Volcanic in play)."
     },
     {
-        "ability": "elGringo",
+        "name": "elGringo",
         "bullets": 3,
         "imageName": "01_elgringo",
         "description": "each time he loses a life point due to a card played by another player, he draws a random card from the hands of that player (one card for each life point). If that player has no more cards, too bad! Note that Dynamite damages are not caused by any player."
     },
     {
-        "ability": "jesseJones",
+        "name": "jesseJones",
         "bullets": 4,
         "imageName": "01_jessejones",
         "description": "during phase 1 of his turn, he may choose to draw the first card from the deck, or randomly from the hand of any other player. Then he draws the second card from the deck."
     },
     {
-        "ability": "joudonais",
+        "name": "joudonais",
         "bullets": 4,
         "imageName": "01_jourdonnais",
         "description": "he is considered to have a Barrel card in play at all times; he can \"draw!\" when he is the target of a BANG!, and on a Heart he is missed. If he has another real Barrel card in play, he can count both of them, giving him two chances to cancel the BANG! before playing a Missed! card."
     },
     {
-        "ability": "kitCarlson",
+        "name": "kitCarlson",
         "bullets": 4,
         "imageName": "01_kitcarlson",
         "description": "during the phase 1 of his turn, he looks at the top three cards of the deck: he chooses 2 to draw, and puts the other one back on the top of the deck, face down."
     },
     {
-        "ability": "luckyDuke",
+        "name": "luckyDuke",
         "bullets": 4,
         "imageName": "01_luckyduke",
         "description": "each time he is required to \"draw!\", he flips the top two cards from the deck, and chooses the result he prefers. Discard both cards afterwards."
     },
     {
-        "ability": "paulRegret",
+        "name": "paulRegret",
         "bullets": 3,
         "imageName": "01_paulregret",
         "description": "he is considered to have a Mustang card in play at all times; all other players must add 1 to the distance to him. If he has another real Mustang card in play, he can count both of them, increasing all distances to him by a total of 2)."
     },
     {
-        "ability": "pedroRamirez",
+        "name": "pedroRamirez",
         "bullets": 4,
         "imageName": "01_pedroramirez",
         "description": "during the first phase of his turn, he may choose to draw the first card from the top of the discard pile or from the deck. Then, he draws the second card from the deck."
     },
     {
-        "ability": "roseDoolan",
+        "name": "roseDoolan",
         "bullets": 4,
         "imageName": "01_rosedoolan",
         "description": "she is considered to have an Appaloosa card in play at all times; she sees the other players at a distance decreased by 1. If she has another real Appaloosa card in play, she can count both of them, reducing her distance to all other players by a total of 2."
     },
     {
-        "ability": "sidKetchum",
+        "name": "sidKetchum",
         "bullets": 4,
         "imageName": "01_sidketchum",
         "description": "at any time, he may discard 2 cards from his hand to regain one life point. If he is willing and able, he can use this ability more than once at a time. But remember: you cannot have more life points than your starting amount!"
     },
     {
-        "ability": "slabTheKiller",
+        "name": "slabTheKiller",
         "bullets": 4,
         "imageName": "01_slab",
         "description": "players trying to cancel his BANG! cards need to play 2 Missed! cards. The Barrel effect, if successfully used, only counts as one Missed!."
     },
     {
-        "ability": "suzyLafayette",
+        "name": "suzyLafayette",
         "bullets": 4,
         "imageName": "01_suzylafayette",
         "description": "as soon as she has no cards in her hand, she draws a card from the draw pile."
     },
     {
-        "ability": "vultureSam",
+        "name": "vultureSam",
         "bullets": 4,
         "imageName": "01_vulturesam",
         "description": "whenever a character is eliminated from the game, Sam takes all the cards that player had in his hand and in play, and adds them to his hand."
     },
     {
-        "ability": "willyTheKid",
+        "name": "willyTheKid",
         "bullets": 4,
         "imageName": "01_willythekid",
         "description": "he can play any number of BANG! cards during his turn."

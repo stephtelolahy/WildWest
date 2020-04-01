@@ -43,7 +43,7 @@ class PlayerCell: UICollectionViewCell {
         }
         
         let player = item.player
-        nameLabel.text = "\(player.figure.ability.rawValue.uppercased())\n\(item.score?.description ?? "")"
+        nameLabel.text = "\(player.figure.name.rawValue.uppercased())\n\(item.score?.description ?? "")"
         figureImageView.alpha = !item.isEliminated ? 1.0 : 0.4
         equipmentLabel.text = player.inPlay.map { "[\($0.name.rawValue)]" }.joined(separator: "\n")
         if let role = item.player.role {

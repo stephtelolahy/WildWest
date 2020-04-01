@@ -30,6 +30,6 @@ class Player: PlayerProtocol {
     }
     
     var identifier: String {
-        figure.ability.rawValue
+        figure.name.rawValue
     }
 }
