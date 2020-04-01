@@ -18,7 +18,7 @@ protocol ActionsAdapterProtocol {
 class ActionsAdapter: ActionsAdapterProtocol {
     func buildActions(state: GameStateProtocol, for controlledPlayerId: String?) -> [ActionItem] {
         guard let controlledPlayerId = controlledPlayerId,
-            let player = state.players.first(where: { $0.identifier == controlledPlayerId }) else {
+            let player = state.player(controlledPlayerId) else {
                 return []
         }
         

@@ -67,7 +67,13 @@ class GameSetupTests: XCTestCase {
         // Given
         let roles: [Role] = [.sheriff, .outlaw, .outlaw, .renegade]
         let cards: [CardProtocol] = Array(1...80).map { MockCardProtocol().identified(by: "c\($0)") }
-        let figures: [FigureProtocol] = Array(1...4).map { _ in MockFigureProtocol().named(.bartCassidy).bullets(is: 4).imageName(is: "") }
+        let figureNames: [FigureName] = [.bartCassidy, .blackJack, .calamityJanet, .elGringo]
+        let figures: [FigureProtocol] = Array(0...3).map {
+            MockFigureProtocol()
+                .named(figureNames[$0])
+                .bullets(is: 4)
+                .imageName(is: "")
+        }
         
         // When
         let state = sut.setupGame(roles: roles, figures: figures, cards: cards)
@@ -78,7 +84,7 @@ class GameSetupTests: XCTestCase {
         // ShuffleRolesBetweenPlayers
         XCTAssertEqual(state.players.map { $0.role }, roles)
         // ShuffleCharactersBetweenPlayers
-        XCTAssertTrue(state.players.allSatisfy { figures.map { $0.ability }.contains($0.ability) })
+        XCTAssertTrue(state.players.allSatisfy { figures.map { $0.name }.contains($0.figure.name) })
         // PlayerInitialInPlayIsEmpty
         XCTAssertTrue(state.players.allSatisfy { $0.inPlay.isEmpty })
         // PlayerHandCardsEqualsToHealthPoints
@@ -106,7 +112,7 @@ class GameSetupTests: XCTestCase {
         XCTAssertTrue(state.damageEvents.isEmpty)
         // Flags are reset to 0
         XCTAssertEqual(state.bangsPlayed, 0)
-        XCTAssertEqual(state.barrelsResolved, 0)
+        // No challenge
         XCTAssertNil(state.challenge)
     }
 }

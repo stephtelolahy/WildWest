@@ -9,8 +9,9 @@
 class StayInJailMatcher: MoveMatcherProtocol {
     
     func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
-        guard case .startTurn = state.challenge,
-            let actor = state.players.first(where: { $0.identifier == state.turn }),
+        guard let challenge = state.challenge,
+            case .startTurn = challenge.name,
+            let actor = state.player(state.turn),
             actor.inPlay.filter({ $0.name == .dynamite }).isEmpty,
             let card = actor.inPlay.first(where: { $0.name == .jail }),
             let topDeckCard = state.deck.first,
@@ -23,23 +24,23 @@ class StayInJailMatcher: MoveMatcherProtocol {
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .stayInJail = move.name,
-            let actorId = move.actorId,
             let cardId = move.cardId else {
                 return nil
         }
         
         return [.flipOverFirstDeckCard,
-                .playerDiscardInPlay(actorId, cardId),
+                .playerDiscardInPlay(move.actorId, cardId),
                 .setTurn(state.nextTurn),
-                .setChallenge(.startTurn)]
+                .setChallenge(Challenge(name: .startTurn))]
     }
 }
 
 class EscapeFromJailMatcher: MoveMatcherProtocol {
     
     func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
-        guard case .startTurn = state.challenge,
-            let actor = state.players.first(where: { $0.identifier == state.turn }),
+        guard let challenge = state.challenge,
+            case .startTurn = challenge.name,
+            let actor = state.player(state.turn),
             actor.inPlay.filter({ $0.name == .dynamite }).isEmpty,
             let card = actor.inPlay.first(where: { $0.name == .jail }),
             let topDeckCard = state.deck.first,
@@ -52,13 +53,12 @@ class EscapeFromJailMatcher: MoveMatcherProtocol {
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .escapeFromJail = move.name,
-            let actorId = move.actorId,
             let cardId = move.cardId else {
                 return nil
         }
         
         return [.flipOverFirstDeckCard,
-                .playerDiscardInPlay(actorId, cardId)]
+                .playerDiscardInPlay(move.actorId, cardId)]
     }
 }
 

@@ -229,13 +229,13 @@ class GameUpdateExecutorTests: XCTestCase {
     
     func test_SetChallenge_IfSettingChallenge() {
         // Given
-        let update = GameUpdate.setChallenge(.startTurn)
+        let update = GameUpdate.setChallenge(Challenge(name: .startTurn))
         
         // When
         sut.execute(update, in: mockDatabase)
         
         // Assert
-        verify(mockDatabase).setChallenge(equal(to: .startTurn))
+        verify(mockDatabase).setChallenge(equal(to: Challenge(name: .startTurn)))
         verifyNoMoreInteractions(mockDatabase)
     }
     
@@ -245,24 +245,13 @@ class GameUpdateExecutorTests: XCTestCase {
         Cuckoo.stub(mockDatabase) { mock in
             when(mock.state.get).thenReturn(mockState)
         }
-        let update = GameUpdate.setChallenge(.shoot(["p1"], .bang, "px"))
+        let update = GameUpdate.setChallenge(Challenge(name: .bang, targetIds: ["p1"]))
         
         // When
         sut.execute(update, in: mockDatabase)
         
         // Assert
         verify(mockDatabase).setBangsPlayed(1)
-    }
-    
-    func test_ResetBarrelsResolved_IfSettingShootChallenge() {
-        // Given
-        let update = GameUpdate.setChallenge(.shoot(["p1"], .gatling, "px"))
-        
-        // When
-        sut.execute(update, in: mockDatabase)
-        
-        // Assert
-        verify(mockDatabase).setBarrelsResolved(0)
     }
     
     // MARK: - FlipOverFirstDeck
@@ -283,22 +272,6 @@ class GameUpdateExecutorTests: XCTestCase {
         // Assert
         verify(mockDatabase).deckRemoveFirst()
         verify(mockDatabase).addDiscard(card(equalTo: mockCard))
-    }
-    
-    func test_IncrementBarrelsResolved_IfFlipOverFirstDeckCard() {
-        // Given
-        let mockState = MockGameStateProtocol().barrelsResolved(is: 0)
-        Cuckoo.stub(mockDatabase) { mock in
-            when(mock.state.get).thenReturn(mockState)
-            when(mock.deckRemoveFirst()).thenReturn(MockCardProtocol())
-        }
-        let update = GameUpdate.flipOverFirstDeckCard
-        
-        // When
-        sut.execute(update, in: mockDatabase)
-        
-        // Assert
-        verify(mockDatabase).setBarrelsResolved(1)
     }
     
     // MARK: - EliminatePlayer

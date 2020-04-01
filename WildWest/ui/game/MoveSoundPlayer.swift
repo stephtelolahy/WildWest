@@ -21,8 +21,12 @@ class MoveSoundPlayer: MoveSoundPlayerProtocol {
         sfxPlayers = sfxPlayers.filter { $0.isPlaying }
         
         let fileName = sfx.value(matching: move)
-        guard let path = Bundle.main.path(forResource: "\(fileName).mp3", ofType: nil) else {
+        guard !fileName.isEmpty else {
             return
+        }
+        
+        guard let path = Bundle.main.path(forResource: "\(fileName).mp3", ofType: nil) else {
+            fatalError("File not found \(fileName).mp3")
         }
         
         let url = URL(fileURLWithPath: path)
@@ -62,7 +66,6 @@ class MoveSoundPlayer: MoveSoundPlayerProtocol {
             "Resolve": "Slide Closed-SoundBible.com-1521580537",
             "Saloon": "Slurping 2-SoundBible.com-1269549524",
             "Stagecoach": "Horse Galloping-SoundBible.com-1451398148",
-            "StartTurn": "🔥",
             "WellsFargo": "Horse Galloping-SoundBible.com-1451398148",
             "Eliminate": "Pain-SoundBible.com-1883168362",
             "Reward": "Horse Galloping-SoundBible.com-1451398148",
@@ -72,6 +75,8 @@ class MoveSoundPlayer: MoveSoundPlayerProtocol {
             "useBarrel": "Western Ricochet-SoundBible.com-1725886901",
             "failBarrel": "Metal Clang-SoundBible.com-19572601",
             "explodeDynamite": "Big Bomb-SoundBible.com-1219802495",
-            "passDynamite": "Fuse Burning-SoundBible.com-1372982430"
+            "passDynamite": "Fuse Burning-SoundBible.com-1372982430",
+            "StartTurn": "",
+            "startGame": ""
         ]
 }

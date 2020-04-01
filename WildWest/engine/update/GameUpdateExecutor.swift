@@ -17,21 +17,20 @@ class GameUpdateExecutor: UpdateExecutorProtocol {
             
         case let .setChallenge(challenge):
             database.setChallenge(challenge)
-            if case let .shoot(_, cardName, _) = challenge {
-                if case .bang = cardName {
+            if let challenge = challenge {
+                if case .bang = challenge.name {
                     database.setBangsPlayed(database.state.bangsPlayed + 1)
                 }
-                database.setBarrelsResolved(0)
             }
             
         case let .playerGainHealth(playerId, points):
-            if let player = database.state.players.first(where: { $0.identifier == playerId }) {
+            if let player = database.state.player(playerId) {
                 let health = player.health + points
                 database.playerSetHealth(playerId, health)
             }
             
         case let .playerLooseHealth(playerId, points, source):
-            if let player = database.state.players.first(where: { $0.identifier == playerId }) {
+            if let player = database.state.player(playerId) {
                 let health = max(0, player.health - points)
                 database.playerSetHealth(playerId, health)
                 database.addDamageEvent(DamageEvent(playerId: playerId, source: source))
@@ -92,15 +91,11 @@ class GameUpdateExecutor: UpdateExecutorProtocol {
         case .flipOverFirstDeckCard:
             let card = database.deckRemoveFirst()
             database.addDiscard(card)
-            database.setBarrelsResolved(database.state.barrelsResolved + 1)
             
         case let .eliminatePlayer(playerId):
             if let player = database.removePlayer(playerId) {
                 database.addEliminated(player)
             }
-            
-        case let .setOutcome(outcome):
-            database.setOutcome(outcome)
         }
     }
 }

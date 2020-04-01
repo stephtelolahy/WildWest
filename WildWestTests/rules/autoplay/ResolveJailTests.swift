@@ -20,7 +20,7 @@ class StayInJailMatcherTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
             .currentTurn(is: "p1")
-            .challenge(is: .startTurn)
+            .challenge(is: Challenge(name: .startTurn))
             .topDeck(is: MockCardProtocol().suit(is: .spades))
         
         // When
@@ -39,7 +39,7 @@ class StayInJailMatcherTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
             .currentTurn(is: "p1")
-            .challenge(is: .startTurn)
+            .challenge(is: Challenge(name: .startTurn))
         
         // When
         let moves = sut.autoPlayMoves(matching: mockState)
@@ -62,7 +62,7 @@ class StayInJailMatcherTests: XCTestCase {
         XCTAssertEqual(updates, [.flipOverFirstDeckCard,
                                  .playerDiscardInPlay("p1", "c1"),
                                  .setTurn("p2"),
-                                 .setChallenge(.startTurn)])
+                                 .setChallenge(Challenge(name: .startTurn))])
     }
 }
 
@@ -78,7 +78,7 @@ class EscapeFromJailMatcherTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
             .currentTurn(is: "p1")
-            .challenge(is: .startTurn)
+            .challenge(is: Challenge(name: .startTurn))
             .topDeck(is: MockCardProtocol().suit(is: .hearts))
         
         // When

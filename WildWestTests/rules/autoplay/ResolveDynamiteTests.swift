@@ -21,7 +21,7 @@ class ExplodeDynamiteMatcherTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
             .currentTurn(is: "p1")
-            .challenge(is: .startTurn)
+            .challenge(is: Challenge(name: .startTurn))
             .topDeck(is: MockCardProtocol().value(is: "2").suit(is: .spades))
         
         // When
@@ -41,7 +41,7 @@ class ExplodeDynamiteMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.flipOverFirstDeckCard,
-                                 .setChallenge(.dynamiteExploded),
+                                 .setChallenge(Challenge(name: .dynamiteExploded)),
                                  .playerDiscardInPlay("p1", "c1")])
     }
 }
@@ -58,7 +58,7 @@ class PassDynamiteMatcherTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
             .currentTurn(is: "p1")
-            .challenge(is: .startTurn)
+            .challenge(is: Challenge(name: .startTurn))
             .topDeck(is: MockCardProtocol().value(is: "2").suit(is: .diamonds))
         
         // When

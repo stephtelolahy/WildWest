@@ -1,8 +1,8 @@
 //
-//  PlayerExtension.swift
+//  Player+Cards.swift
 //  WildWest
 //
-//  Created by Hugues Stéphano TELOLAHY on 1/2/20.
+//  Created by Hugues Stephano Telolahy on 29/03/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
@@ -24,5 +24,9 @@ extension PlayerProtocol {
         }
         
         return cards
+    }
+    
+    func handCard(_ cardId: String?) -> CardProtocol? {
+        hand.first(where: { $0.identifier == cardId })
     }
 }

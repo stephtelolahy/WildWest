@@ -22,14 +22,14 @@ class DiscardBeerMatcherTests: XCTestCase {
             .identified(by: "p1")
             .health(is: 1)
         let mockState = MockGameStateProtocol()
-            .challenge(is: .shoot(["p1", "p2"], .gatling, "px"))
+            .challenge(is: Challenge(name: .gatling, targetIds: ["p1", "p2"]))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
         let moves = sut.validMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .discard, actorId: "p1", cardName: .beer, discardIds: ["c1"])])
+        XCTAssertEqual(moves, [GameMove(name: .discard, actorId: "p1", cardId: "c1")])
     }
     
     func test_CanDiscardBeer_IfIsTargetOfIndiansAndWillBeEliminated() {
@@ -42,14 +42,14 @@ class DiscardBeerMatcherTests: XCTestCase {
             .identified(by: "p1")
             .health(is: 1)
         let mockState = MockGameStateProtocol()
-            .challenge(is: .indians(["p1", "p2"], "px"))
+            .challenge(is: Challenge(name: .indians, targetIds: ["p1", "p2"]))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
         let moves = sut.validMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .discard, actorId: "p1", cardName: .beer, discardIds: ["c1"])])
+        XCTAssertEqual(moves, [GameMove(name: .discard, actorId: "p1", cardId: "c1")])
     }
     
     func test_CanDiscardBeer_IfIsTargetOfDuelAndWillBeEliminated() {
@@ -62,35 +62,35 @@ class DiscardBeerMatcherTests: XCTestCase {
             .identified(by: "p1")
             .health(is: 1)
         let mockState = MockGameStateProtocol()
-            .challenge(is: .duel(["p1", "p2"], "p2"))
+            .challenge(is: Challenge(name: .duel, targetIds: ["p1", "p2"]))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
         
         // When
         let moves = sut.validMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .discard, actorId: "p1", cardName: .beer, discardIds: ["c1"])])
+        XCTAssertEqual(moves, [GameMove(name: .discard, actorId: "p1", cardId: "c1")])
     }
     
     func test_CanDiscardBeer_IfDynamiteExplodedAndWillBeEliminated() {
         // Given
         let mockCard1 = MockCardProtocol().named(.beer).identified(by: "c1")
         let mockCard2 = MockCardProtocol().named(.beer).identified(by: "c2")
-        let mockCard3 = MockCardProtocol().named(.beer).identified(by: "c3")
         let mockPlayer1 = MockPlayerProtocol()
-            .holding(mockCard1, mockCard2, mockCard3)
+            .holding(mockCard1, mockCard2)
             .identified(by: "p1")
             .health(is: 1)
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
             .currentTurn(is: "p1")
-            .challenge(is: .dynamiteExploded)
+            .challenge(is: Challenge(name: .dynamiteExploded))
         
         // When
         let moves = sut.validMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .discard, actorId: "p1", cardName: .beer, discardIds: ["c1", "c2", "c3"])])
+        XCTAssertEqual(moves, [GameMove(name: .discard, actorId: "p1", cardId: "c1"),
+                               GameMove(name: .discard, actorId: "p1", cardId: "c2")])
     }
     
     func test_CannotDiscardBeer_IfThereAreTwoPlayersLeft() {
@@ -103,7 +103,7 @@ class DiscardBeerMatcherTests: XCTestCase {
             .identified(by: "p1")
             .health(is: 1)
         let mockState = MockGameStateProtocol()
-            .challenge(is: .shoot(["p1", "p2"], .gatling, "px"))
+            .challenge(is: Challenge(name: .gatling, targetIds: ["p1", "p2"]))
             .players(are: mockPlayer1, MockPlayerProtocol())
         
         // When
@@ -113,60 +113,33 @@ class DiscardBeerMatcherTests: XCTestCase {
         XCTAssertNil(moves)
     }
     
-    func test_RemoveActorFromShootChallenge_IfDiscardingBeer() {
+    func test_ReduceDamage_IfDiscardBeerOnDynamiteExploded() {
         // Given
         let mockState = MockGameStateProtocol()
-            .challenge(is: .shoot(["p1", "p2", "p3"], .gatling, "px"))
-        let move = GameMove(name: .discard, actorId: "p1", cardName: .beer, discardIds: ["c1"])
+            .currentTurn(is: "p1")
+            .challenge(is: Challenge(name: .dynamiteExploded, damage: 3))
+        let move = GameMove(name: .discard, actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .setChallenge(.shoot(["p2", "p3"], .gatling, "px"))])
-    }
-    
-    func test_RemoveActorFromIndiansChallenge_IfDiscardingBeer() {
-        // Given
-        let mockState = MockGameStateProtocol()
-            .challenge(is: .indians(["p1", "p2", "p3"], "px"))
-        let move = GameMove(name: .discard, actorId: "p1", cardName: .beer, discardIds: ["c1"])
-        
-        // When
-        let updates = sut.execute(move, in: mockState)
-        
-        // Assert
-        XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .setChallenge(.indians(["p2", "p3"], "px"))])
-    }
-    
-    func test_RemoveDuelChallenge_IfDiscardingBeer() {
-        // Given
-        let mockState = MockGameStateProtocol()
-            .challenge(is: .duel(["p1", "p2"], "p1"))
-        let move = GameMove(name: .discard, actorId: "p1", cardName: .beer, discardIds: ["c1"])
-        
-        // When
-        let updates = sut.execute(move, in: mockState)
-        
-        // Assert
-        XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .setChallenge(nil)])
+                                 .setChallenge(Challenge(name: .dynamiteExploded, damage: 2))])
     }
     
     func test_TriggerStartTurnChallenge_IfDiscardBeerOnDynamiteExploded() {
         // Given
         let mockState = MockGameStateProtocol()
-            .challenge(is: .dynamiteExploded)
-        let move = GameMove(name: .discard, actorId: "p1", cardName: .beer, discardIds: ["c1", "c2"])
+            .currentTurn(is: "p1")
+            .challenge(is: Challenge(name: .dynamiteExploded, damage: 1))
+        let move = GameMove(name: .discard, actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .playerDiscardHand("p1", "c2"),
-                                 .setChallenge(.startTurn)])
+                                 .setChallenge(Challenge(name: .startTurn))])
     }
 }

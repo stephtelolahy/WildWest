@@ -69,8 +69,8 @@ private enum PlayerRelationship {
 
 private extension GameStateProtocol {
     func relationship(of sourceId: String, to targetId: String) -> PlayerRelationship {
-        guard let target = players.first(where: { $0.identifier == targetId }),
-            let source = players.first(where: { $0.identifier == sourceId }) else {
+        guard let target = player(targetId),
+            let source = player(sourceId) else {
                 return .unknown
         }
         

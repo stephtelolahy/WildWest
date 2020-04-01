@@ -15,27 +15,28 @@ class StartGameTests: XCTestCase {
     func test_ShouldStartGame_IfTurnIsEmpty() {
         // Given
         let mockState = MockGameStateProtocol()
+            .players(are: MockPlayerProtocol().role(is: .sheriff).identified(by: "p1"))
             .currentTurn(is: nil)
         
         // When
         let moves = sut.autoPlayMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .startGame)])
+        XCTAssertEqual(moves, [GameMove(name: .startGame, actorId: "p1")])
     }
     
     func test_SetTurn_IfStartingGame() {
         // Given
         let mockState = MockGameStateProtocol()
             .players(are: MockPlayerProtocol().identified(by: "p1").role(is: .sheriff))
-        let move = GameMove(name: .startGame)
+        let move = GameMove(name: .startGame, actorId: "p1")
         
         // When
         let updates = sut.execute(move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setTurn("p1"),
-                                 .setChallenge(.startTurn)])
+                                 .setChallenge(Challenge(name: .startTurn))])
     }
     
 }

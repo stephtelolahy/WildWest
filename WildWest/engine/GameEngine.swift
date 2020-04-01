@@ -46,8 +46,8 @@ class GameEngine: GameEngineProtocol, Subscribable {
         commandSubject.onNext(move)
     }
     
-    func observeAs(playerId: String?) -> Observable<GameStateProtocol> {
-        stateSubject.map { $0.hidingRoles(except: playerId) }
+    func state(observedBy playerId: String?) -> Observable<GameStateProtocol> {
+        stateSubject.map { $0.observed(by: playerId) }
     }
 }
 
@@ -58,19 +58,12 @@ extension GameEngine {
         database.setValidMoves([:])
         
         // apply updates
-        print("\n*** \(String(describing: move)) ***")
-        
-        let updatesQueue = moveMatchers.compactMap { $0.execute(move, in: database.state) }.flatMap { $0 }
-        
-        updatesQueue.forEach { update in
-            print("> \(String(describing: update))")
-            updateExecutor.execute(update, in: database)
-        }
-        
+        applyUpdates(for: move)
         database.addExecutedMove(move)
         
-        // check if game over
-        guard database.state.outcome == nil else {
+        // check game over
+        if let outcome = database.state.claculateOutcome() {
+            database.setOutcome(outcome)
             return
         }
         
@@ -93,10 +86,26 @@ extension GameEngine {
             .flatMap { $0 }
             .groupedByActor()
         
-        guard validMoves.keys.count <= 1 else {
-            fatalError("Illegal multiple active players (\(validMoves.keys.count))")
+        guard validMoves.keys.count == 1 else {
+            fatalError("Illegal active players (\(validMoves.keys.count))")
         }
         
         database.setValidMoves(validMoves)
+    }
+    
+    private func applyUpdates(for move: GameMove) {
+        print("\n*** \(String(describing: move)) ***")
+        
+        let matchers = moveMatchers.filter({ $0.execute(move, in: database.state) != nil })
+        guard matchers.count == 1,
+            let executor = matchers.first,
+            let updatesQueue = executor.execute(move, in: database.state) else {
+                fatalError("Illegal move executors (\(matchers.count)")
+        }
+        
+        updatesQueue.forEach { update in
+            print("> \(String(describing: update))")
+            updateExecutor.execute(update, in: database)
+        }
     }
 }

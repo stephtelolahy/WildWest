@@ -31,7 +31,7 @@ class BeerMatcherTests: XCTestCase {
         let moves = sut.validMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .beer)])
+        XCTAssertEqual(moves, [GameMove(name: .play, actorId: "p1", cardId: "c1")])
     }
     
     func test_CannotPlayBeer_IfMaxHealth() {
@@ -76,8 +76,12 @@ class BeerMatcherTests: XCTestCase {
     
     func test_GainLifePoint_IfPlayingBeer() {
         // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .holding(MockCardProtocol().named(.beer).identified(by: "c1"))
         let mockState = MockGameStateProtocol()
-        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .beer)
+            .players(are: mockPlayer1)
+        let move = GameMove(name: .play, actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(move, in: mockState)

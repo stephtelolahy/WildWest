@@ -10,34 +10,25 @@ class EndTurnMatcher: MoveMatcherProtocol {
     
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
-            let actor = state.players.first(where: { $0.identifier == state.turn }) else {
+            let actor = state.player(state.turn) else {
                 return nil
         }
         
-        let haveExcessCards = actor.hand.count > actor.health
-        guard haveExcessCards else {
-            return [GameMove(name: .endTurn, actorId: actor.identifier)]
-        }
-        
-        let cardsToDiscardCount = actor.hand.count - actor.health
-        let handCardIds = actor.hand.map { $0.identifier }
-        let cardsCombinations = handCardIds.combine(by: cardsToDiscardCount)
-        return cardsCombinations.map { GameMove(name: .endTurn, actorId: actor.identifier, discardIds: $0) }
+        return [GameMove(name: .endTurn, actorId: actor.identifier)]
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .endTurn = move.name,
-            let actorId = move.actorId else {
+            let actor = state.player(move.actorId) else {
             return nil
         }
         
-        var updates: [GameUpdate] = []
-        if let cardIds = move.discardIds {
-            cardIds.forEach { updates.append(.playerDiscardHand(actorId, $0)) }
+        guard actor.hand.count <= actor.health else {
+            return [.setChallenge(Challenge(name: .discardExcessCards))]
         }
-        updates.append(.setTurn(state.nextTurn))
-        updates.append(.setChallenge(.startTurn))
-        return updates
+        
+        return [.setTurn(state.nextTurn),
+                .setChallenge(Challenge(name: .startTurn))]
     }
 }
 

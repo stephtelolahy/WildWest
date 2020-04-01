@@ -10,32 +10,27 @@ class GeneralStoreMatcher: MoveMatcherProtocol {
     
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
-            let actor = state.players.first(where: { $0.identifier == state.turn }),
+            let actor = state.player(state.turn),
             let cards = actor.handCards(named: .generalStore) else {
                 return nil
         }
         
         return cards.map {
-            GameMove(name: .play,
-                     actorId: actor.identifier,
-                     cardId: $0.identifier,
-                     cardName: .generalStore)
+            GameMove(name: .play, actorId: actor.identifier, cardId: $0.identifier)
         }
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
-            case .generalStore = move.cardName,
-            let actorId = move.actorId,
             let cardId = move.cardId,
-            let actorIndex = state.players.firstIndex(where: { $0.identifier == actorId }) else {
+            let actor = state.player(move.actorId),
+            let card = actor.handCard(cardId),
+            case .generalStore = card.name else {
                 return nil
         }
         
-        let playersCount = state.players.count
-        let playerIds = Array(0..<playersCount).map { state.players[(actorIndex + $0) % playersCount].identifier }
-        return [.playerDiscardHand(actorId, cardId),
-                .setupGeneralStore(playersCount),
-                .setChallenge(.generalStore(playerIds))]
+        return [.playerDiscardHand(move.actorId, cardId),
+                .setupGeneralStore(state.players.count),
+                .setChallenge(Challenge(name: .generalStore, targetIds: state.allPlayerIds(move.actorId)))]
     }
 }

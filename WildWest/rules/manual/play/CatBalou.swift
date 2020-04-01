@@ -8,49 +8,40 @@
 
 class CatBalouMatcher: MoveMatcherProtocol {
     
-    private let calculator: RangeCalculatorProtocol
-    
-    init(calculator: RangeCalculatorProtocol) {
-        self.calculator = calculator
-    }
-    
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
-            let actor = state.players.first(where: { $0.identifier == state.turn }),
+            let actor = state.player(state.turn),
             let cards = actor.handCards(named: .catBalou) else {
                 return nil
         }
         
         let otherPlayers = state.players.filter { $0.identifier != actor.identifier }
-        guard let targetCards = state.targetCards(from: otherPlayers) else {
+        guard let targetCards = otherPlayers.targetableCards() else {
             return nil
         }
         
         return cards.map { card in
             targetCards.map {
-                GameMove(name: .play,
-                         actorId: actor.identifier,
-                         cardId: card.identifier,
-                         cardName: card.name,
-                         targetCard: $0)
+                GameMove(name: .play, actorId: actor.identifier, cardId: card.identifier, targetCard: $0)
             }
         }.flatMap { $0 }
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
-            case .catBalou = move.cardName,
             let cardId = move.cardId,
-            let actorId = move.actorId,
+            let actor = state.player(move.actorId),
+            let card = actor.handCard(cardId),
+            case .catBalou = card.name,
             let targetCard = move.targetCard else {
                 return nil
         }
         
         var updates: [GameUpdate] = []
-        updates.append(.playerDiscardHand(actorId, cardId))
+        updates.append(.playerDiscardHand(move.actorId, cardId))
         switch targetCard.source {
         case .randomHand:
-            if let player = state.players.first(where: { $0.identifier == targetCard.ownerId }),
+            if let player = state.player(targetCard.ownerId),
                 let card = player.hand.randomElement() {
                 updates.append(.playerDiscardHand(targetCard.ownerId, card.identifier))
             }

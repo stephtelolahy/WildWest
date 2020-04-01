@@ -45,7 +45,7 @@ class PlayersAdapter: PlayersAdapterProtocol {
                                   score: antiSheriffScore[playerId])
             }
             
-            if let player = state.players.first(where: { $0.identifier == playerId }) {
+            if let player = state.player(playerId) {
                 return PlayerItem(player: player,
                                   isControlled: player.identifier == controlledPlayerId,
                                   isTurn: player.identifier == state.turn,
@@ -91,15 +91,12 @@ private extension GameStateProtocol {
     
     func isPlayerAttacked(_ playerId: String) -> Bool {
         if let challenge = self.challenge {
-            switch challenge {
-            case let .duel(playerIds, _):
-                return playerIds.first == playerId
+            switch challenge.name {
+            case .bang, .gatling, .indians:
+                return challenge.targetIds.contains(playerId)
                 
-            case let .indians(targetIds, _):
-                return targetIds.contains(playerId)
-                
-            case let .shoot(targetIds, _, _):
-                return targetIds.contains(playerId)
+            case .duel:
+                return challenge.targetIds.first == playerId
                 
             case .dynamiteExploded:
                 return turn == playerId
@@ -129,9 +126,9 @@ private extension GameStateProtocol {
     
     func isPlayerHelped(_ playerId: String) -> Bool {
         if let challenge = self.challenge {
-            switch challenge {
-            case let .generalStore(playerIds):
-                return playerIds.contains(playerId)
+            switch challenge.name {
+            case .generalStore:
+                return  challenge.targetIds.contains(playerId)
                 
             default:
                 return false

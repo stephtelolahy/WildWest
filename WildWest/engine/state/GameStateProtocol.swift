@@ -13,7 +13,6 @@ protocol GameStateProtocol {
     var turn: String? { get }
     var challenge: Challenge? { get }
     var bangsPlayed: Int { get }
-    var barrelsResolved: Int { get }
     var generalStore: [CardProtocol] { get }
     var eliminated: [PlayerProtocol] { get }
     var outcome: GameOutcome? { get }
@@ -26,23 +25,4 @@ enum GameOutcome: String, Equatable {
     case sheriffWin,
     outlawWin,
     renegadeWin
-}
-
-enum Challenge: Equatable {
-    case startTurn
-    case dynamiteExploded
-    case shoot([String], CardName, String)
-    case indians([String], String)
-    case duel([String], String)
-    case generalStore([String])
-}
-
-struct DamageEvent: Equatable {
-    let playerId: String
-    let source: DamageSource
-}
-
-enum DamageSource: Equatable {
-    case byDynamite
-    case byPlayer(String)
 }

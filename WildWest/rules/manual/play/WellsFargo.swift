@@ -10,28 +10,26 @@ class WellsFargoMatcher: MoveMatcherProtocol {
     
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
-            let actor = state.players.first(where: { $0.identifier == state.turn }),
+            let actor = state.player(state.turn),
             let cards = actor.handCards(named: .wellsFargo) else {
                 return nil
         }
         
         return cards.map {
-            GameMove(name: .play,
-                     actorId: actor.identifier,
-                     cardId: $0.identifier,
-                     cardName: $0.name)
+            GameMove(name: .play, actorId: actor.identifier, cardId: $0.identifier)
         }
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
-            case .wellsFargo = move.cardName,
             let cardId = move.cardId,
-            let actorId = move.actorId else {
+            let actor = state.player(move.actorId),
+            let card = actor.handCard(cardId),
+            case .wellsFargo = card.name else {
                 return nil
         }
         
-        return [.playerDiscardHand(actorId, cardId),
-                .playerPullFromDeck(actorId, 3)]
+        return [.playerDiscardHand(move.actorId, cardId),
+                .playerPullFromDeck(move.actorId, 3)]
     }
 }

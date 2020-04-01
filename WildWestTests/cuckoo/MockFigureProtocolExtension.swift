@@ -9,9 +9,9 @@
 import Cuckoo
 
 extension MockFigureProtocol {
-    func named(_ value: Ability) -> MockFigureProtocol {
+    func named(_ value: FigureName) -> MockFigureProtocol {
         Cuckoo.stub(self) { mock in
-            when(mock.ability.get).thenReturn(value)
+            when(mock.name.get).thenReturn(value)
         }
         return self
     }

@@ -49,6 +49,7 @@ class GameViewController: UIViewController, Subscribable {
     private lazy var instructionBuilder = InstructionBuilder()
     private lazy var playMoveSelector = PlayMoveSelector(viewController: self)
     private lazy var reactionMoveSelector = ReactionMoveSelector(viewController: self)
+    private lazy var playerDescriptor = PlayerDescriptor(viewController: self)
     
     // MARK: Lifecycle
     
@@ -61,7 +62,7 @@ class GameViewController: UIViewController, Subscribable {
             return
         }
         
-        sub(engine.observeAs(playerId: controlledPlayerId).subscribe(onNext: { [weak self] state in
+        sub(engine.state(observedBy: controlledPlayerId).subscribe(onNext: { [weak self] state in
             self?.update(with: state)
         }))
         
@@ -120,10 +121,10 @@ private extension GameViewController {
             showGameOver(outcome: outcome)
         }
         
-        if let challenge = state.challenge,
+        if state.challenge != nil,
             let controlledPlayerId = self.controlledPlayerId,
             let reactionMoves = state.validMoves[controlledPlayerId] {
-            reactionMoveSelector.selectMove(within: reactionMoves, challenge: challenge) { [weak self] move in
+            reactionMoveSelector.selectMove(within: reactionMoves, state: state) { [weak self] move in
                 self?.engine?.queue(move)
             }
         }
@@ -223,6 +224,11 @@ extension GameViewController: UICollectionViewDelegate {
     }
     
     private func playersCollectionViewDidSelectItem(at indexPath: IndexPath) {
+        guard let player = playerItems[indexPath.row]?.player else {
+            return
+        }
+        
+        playerDescriptor.display(player)
     }
     
     private func actionsCollectionViewDidSelectItem(at indexPath: IndexPath) {

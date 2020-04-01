@@ -9,8 +9,9 @@
 class ChooseCardMatcher: MoveMatcherProtocol {
     
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
-        guard case let .generalStore(playerIds) = state.challenge,
-            let actorId = playerIds.first else {
+        guard let challenge = state.challenge,
+            case .generalStore = challenge.name,
+            let actorId = challenge.actorId(in: state) else {
                 return nil
         }
         
@@ -21,13 +22,13 @@ class ChooseCardMatcher: MoveMatcherProtocol {
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .choose = move.name,
-            let actorId = move.actorId,
+            let challenge = state.challenge,
             let cardId = move.cardId else {
                 return nil
         }
         
-        return [.playerPullFromGeneralStore(actorId, cardId),
-                .setChallenge(state.challenge?.removing(actorId))]
+        return [.playerPullFromGeneralStore(move.actorId, cardId),
+                .setChallenge(challenge.removing(move.actorId))]
     }
 }
 

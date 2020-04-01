@@ -9,36 +9,16 @@
 protocol PlayerProtocol {
     var identifier: String { get }
     var role: Role? { get }
-    var ability: Ability { get }
+    var figure: FigureProtocol { get }
     var maxHealth: Int { get }
     var health: Int { get }
     var hand: [CardProtocol] { get }
     var inPlay: [CardProtocol] { get }
-    var imageName: String { get }
 }
 
-enum Role: String, Codable {
+enum Role: String {
     case sheriff,
     outlaw,
     renegade,
     deputy
-}
-
-enum Ability: String, Codable {
-    case bartCassidy,
-    blackJack,
-    calamityJanet,
-    elGringo,
-    jesseJones,
-    joudonais,
-    kitCarlson,
-    luckyDuke,
-    paulRegret,
-    pedroRamirez,
-    roseDoolan,
-    sidKetchum,
-    slabTheKiller,
-    suzyLafayette,
-    vultureSam,
-    willyTheKid
 }

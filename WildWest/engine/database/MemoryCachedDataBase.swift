@@ -36,10 +36,6 @@ class MemoryCachedDataBase: GameDatabaseProtocol {
         mutableState.bangsPlayed = bangsPlayed
     }
     
-    func setBarrelsResolved(_ barrelsResolved: Int) {
-        mutableState.barrelsResolved = barrelsResolved
-    }
-    
     func addExecutedMove(_ move: GameMove) {
         mutableState.executedMoves.append(move)
     }
@@ -86,28 +82,28 @@ class MemoryCachedDataBase: GameDatabaseProtocol {
     /// Player
     
     func playerSetHealth(_ playerId: String, _ health: Int) {
-        player(playerId)?.health = health
+        mutablePlayer(playerId)?.health = health
     }
     
     func playerAddHand(_ playerId: String, _ card: CardProtocol) {
-        player(playerId)?.hand.append(card)
+        mutablePlayer(playerId)?.hand.append(card)
     }
     
     func playerRemoveHand(_ playerId: String, _ cardId: String) -> CardProtocol? {
-        player(playerId)?.hand.removeFirst(where: { $0.identifier == cardId })
+        mutablePlayer(playerId)?.hand.removeFirst(where: { $0.identifier == cardId })
     }
     
     func playerAddInPlay(_ playerId: String, _ card: CardProtocol) {
-        player(playerId)?.inPlay.append(card)
+        mutablePlayer(playerId)?.inPlay.append(card)
     }
     
     func playerRemoveInPlay(_ playerId: String, _ cardId: String) -> CardProtocol? {
-        player(playerId)?.inPlay.removeFirst(where: { $0.identifier == cardId })
+        mutablePlayer(playerId)?.inPlay.removeFirst(where: { $0.identifier == cardId })
     }
 }
 
 private extension MemoryCachedDataBase {
-    func player(_ playerId: String) -> Player? {
-        mutableState.players.first(where: { $0.identifier == playerId }) as? Player
+    func mutablePlayer(_ playerId: String) -> Player? {
+        mutableState.player(playerId) as? Player
     }
 }

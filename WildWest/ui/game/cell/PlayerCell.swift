@@ -43,7 +43,7 @@ class PlayerCell: UICollectionViewCell {
         }
         
         let player = item.player
-        nameLabel.text = "\(player.ability.rawValue.uppercased())\n\(item.score?.description ?? "")"
+        nameLabel.text = "\(player.figure.name.rawValue.uppercased())\n\(item.score?.description ?? "")"
         figureImageView.alpha = !item.isEliminated ? 1.0 : 0.4
         equipmentLabel.text = player.inPlay.map { "[\($0.name.rawValue)]" }.joined(separator: "\n")
         if let role = item.player.role {
@@ -55,7 +55,7 @@ class PlayerCell: UICollectionViewCell {
             + Array(player.health..<player.maxHealth).map { _ in "░" }
             + Array(0..<player.health).map { _ in "■" }.joined()
         handLabel.text = "[] \(player.hand.count)"
-        figureImageView.image = UIImage(named: player.imageName)
+        figureImageView.image = UIImage(named: player.figure.imageName)
     }
     
     private func updateBackground() {

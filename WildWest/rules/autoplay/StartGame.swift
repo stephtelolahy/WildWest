@@ -9,21 +9,21 @@
 class StartGameMatcher: MoveMatcherProtocol {
     
     func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
-        guard state.turn == nil else {
-            return nil
-        }
-        
-        return [GameMove(name: .startGame)]
-    }
-    
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .startGame = move.name,
+        guard state.turn == nil,
             let sheriff = state.players.first(where: { $0.role == .sheriff }) else {
                 return nil
         }
         
-        return [.setTurn(sheriff.identifier),
-                .setChallenge(.startTurn)]
+        return [GameMove(name: .startGame, actorId: sheriff.identifier)]
+    }
+    
+    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+        guard case .startGame = move.name else {
+            return nil
+        }
+        
+        return [.setTurn(move.actorId),
+                .setChallenge(Challenge(name: .startTurn))]
     }
 }
 

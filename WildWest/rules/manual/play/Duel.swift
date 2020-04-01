@@ -10,7 +10,7 @@ class DuelMatcher: MoveMatcherProtocol {
     
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
-            let actor = state.players.first(where: { $0.identifier == state.turn }),
+            let actor = state.player(state.turn),
             let cards = actor.handCards(named: .duel) else {
                 return nil
         }
@@ -22,25 +22,22 @@ class DuelMatcher: MoveMatcherProtocol {
         
         return cards.map { card in
             otherPlayers.map {
-                GameMove(name: .play,
-                         actorId: actor.identifier,
-                         cardId: card.identifier,
-                         cardName: card.name,
-                         targetId: $0.identifier)
+                GameMove(name: .play, actorId: actor.identifier, cardId: card.identifier, targetId: $0.identifier)
             }
         }.flatMap { $0 }
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
-            case .duel = move.cardName,
-            let actorId = move.actorId,
             let cardId = move.cardId,
+            let actor = state.player(move.actorId),
+            let card = actor.handCard(cardId),
+            case .duel = card.name,
             let targetId = move.targetId else {
                 return nil
         }
         
-        return [.playerDiscardHand(actorId, cardId),
-                .setChallenge(.duel([targetId, actorId], actorId))]
+        return [.playerDiscardHand(move.actorId, cardId),
+                .setChallenge(Challenge(name: .duel, targetIds: [targetId, move.actorId]))]
     }
 }

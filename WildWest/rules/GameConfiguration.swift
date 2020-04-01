@@ -19,7 +19,8 @@ class GameConfiguration {
     }
     
     var allFigures: [FigureProtocol] {
-        jsonReader.load([Figure].self, file: "figures")
+        jsonReader.load([FigureDto].self, file: "figures")
+            .map { FigureMapper().map(dto: $0) }
     }
     
     var moveMatchers: [MoveMatcherProtocol] {
@@ -39,28 +40,30 @@ class GameConfiguration {
             SaloonMatcher(),
             StagecoachMatcher(),
             WellsFargoMatcher(),
-            PanicMatcher(calculator: RangeCalculator()),
-            CatBalouMatcher(calculator: RangeCalculator()),
+            PanicMatcher(),
+            CatBalouMatcher(),
             EquipMatcher(),
             DynamiteMatcher(),
             JailMatcher(),
             GeneralStoreMatcher(),
-            BangMatcher(calculator: RangeCalculator()),
+            BangMatcher(),
             GatlingMatcher(),
             IndiansMatcher(),
             DuelMatcher(),
             EndTurnMatcher(),
             
             // manual reaction
-            DiscardMissedMatcher(),
+            DiscardMissedOnBangMatcher(),
+            DiscardMissedOnGatlingMatcher(),
             DiscardBangOnDuelMatcher(),
             DiscardBangOnIndiansMatcher(),
             DiscardBeerMatcher(),
             PassMatcher(),
             ChooseCardMatcher(),
+            DiscardExcessCardMatcher(),
             
             // Effect
-            EliminateMatcher(calculator: OutcomeCalculator()),
+            EliminateMatcher(),
             GainRewardOnEliminatingOutlawMatcher(),
             PenalizeSheriffOnEliminatingDeputyMatcher()
         ]

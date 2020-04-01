@@ -14,58 +14,41 @@ class DiscardBeerMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        switch challenge {
-        case let .shoot(targetIds, _, _):
-            return matchDiscardBeer(actorId: targetIds.first, challenge: challenge, in: state)
-            
-        case let .indians(targetIds, _):
-            return matchDiscardBeer(actorId: targetIds.first, challenge: challenge, in: state)
-            
-        case let .duel(playerIds, _):
-            return matchDiscardBeer(actorId: playerIds.first, challenge: challenge, in: state)
-            
-        case .dynamiteExploded:
-            return matchDiscardBeer(actorId: state.turn, challenge: challenge, in: state)
+        var actorId: String?
+        switch challenge.name {
+        case .bang, .gatling, .duel, .indians, .dynamiteExploded:
+            actorId = challenge.actorId(in: state)
             
         default:
             return nil
         }
-    }
-    
-    private func matchDiscardBeer(actorId: String?, challenge: Challenge, in state: GameStateProtocol) -> [GameMove]? {
-        guard let actor = state.players.first(where: { $0.identifier == actorId }) else {
-            return nil
-        }
         
-        let damage = challenge.damage
-        let willBeEliminated = actor.health - damage <= 0
-        guard willBeEliminated else {
-            return nil
-        }
-        
-        let requiredBeers = damage - actor.health + 1
-        guard let cards = actor.handCards(named: .beer),
-            cards.count >= requiredBeers else {
+        guard let actor = state.player(actorId),
+            (actor.health - challenge.damage) <= 0,
+            let beers = actor.handCards(named: .beer) else {
                 return nil
         }
         
-        let cardsToDiscardIds = cards.prefix(requiredBeers).map { $0.identifier }
-        return [GameMove(name: .discard,
-                         actorId: actorId,
-                         cardName: .beer,
-                         discardIds: cardsToDiscardIds)]
+        return beers.map {
+            GameMove(name: .discard, actorId: actor.identifier, cardId: $0.identifier)
+        }
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+        // Matching with challenge .bang is handle by DiscardMissedOnBangMatcher
+        // Matching with challenge .gatling is handle by DiscardMissedOnGatlingMatcher
+        // Matching with challenge .duel is handled by DiscardBangOnDuelMatcher
+        // Matching with challenge .indians is handled by DiscardBangOnIndiansMatcher
+        
+        // Here is only matching with challenge .dynamiteExploded
         guard case .discard = move.name,
-            case .beer = move.cardName,
-            let actorId = move.actorId,
-            let cardsToDiscardIds = move.discardIds else {
+            let cardId = move.cardId,
+            let challenge = state.challenge,
+            case .dynamiteExploded = challenge.name else {
                 return nil
         }
         
-        var updates: [GameUpdate] = cardsToDiscardIds.map { .playerDiscardHand(actorId, $0) }
-        updates.append(.setChallenge(state.challenge?.removing(actorId)))
-        return updates
+        return [.playerDiscardHand(move.actorId, cardId),
+                .setChallenge(challenge.removingOneDamage(for: move.actorId))]
     }
 }

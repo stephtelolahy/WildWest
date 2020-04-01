@@ -7,31 +7,33 @@
 //
 
 class MoveClassifier: MoveClassifierProtocol {
+    
     func classify(_ move: GameMove) -> MoveClassification {
-        if case .play = move.name,
-            let actorId = move.actorId,
-            [CardName.bang, CardName.duel].contains(move.cardName),
-            let targetId = move.targetId {
-            return .strongAttack(actorId: actorId, targetId: targetId)
+        guard case .play = move.name,
+            let cardId = move.cardId else {
+                return .none
         }
         
         if case .play = move.name,
-            let actorId = move.actorId,
-            case .jail = move.cardName,
+            (cardId.contains("bang") || cardId.contains("duel")),
             let targetId = move.targetId {
-            return .weakAttack(actorId: actorId, targetId: targetId)
+            return .strongAttack(actorId: move.actorId, targetId: targetId)
         }
         
         if case .play = move.name,
-            let actorId = move.actorId,
-            [CardName.panic, CardName.catBalou].contains(move.cardName),
+            cardId.contains("jail"),
+            let targetId = move.targetId {
+            return .weakAttack(actorId: move.actorId, targetId: targetId)
+        }
+        
+        if case .play = move.name,
+            (cardId.contains("panic") || cardId.contains("cardName")),
             let targetCard = move.targetCard {
-            
             if case let .inPlay(cardId) = targetCard.source,
                 cardId.contains("jail") {
-                return .help(actorId: actorId, targetId: targetCard.ownerId)
+                return .help(actorId: move.actorId, targetId: targetCard.ownerId)
             } else {
-                return .weakAttack(actorId: actorId, targetId: targetCard.ownerId)
+                return .weakAttack(actorId: move.actorId, targetId: targetCard.ownerId)
             }
         }
         

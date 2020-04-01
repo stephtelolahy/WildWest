@@ -6,10 +6,10 @@
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
 
-struct Figure: FigureProtocol, Codable {
-    
-    let ability: Ability
+struct Figure: FigureProtocol, Equatable {
+    let name: FigureName
     let bullets: Int
     let imageName: String
     let description: String
+    let abilities: [AbilityName: Bool]
 }

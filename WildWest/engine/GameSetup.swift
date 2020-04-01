@@ -24,9 +24,8 @@ class GameSetup: GameSetupProtocol {
             let health = role == .sheriff ? figure.bullets + 1 : figure.bullets
             let hand: [CardProtocol] = Array(1...health).map { _ in deck.removeFirst() }
             return Player(role: role,
-                          ability: figure.ability,
+                          figure: figure,
                           maxHealth: health,
-                          imageName: figure.imageName,
                           health: health,
                           hand: hand,
                           inPlay: [])
@@ -38,7 +37,6 @@ class GameSetup: GameSetupProtocol {
                          turn: nil,
                          challenge: nil,
                          bangsPlayed: 0,
-                         barrelsResolved: 0,
                          damageEvents: [],
                          generalStore: [],
                          outcome: nil,

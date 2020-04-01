@@ -9,8 +9,9 @@
 class StartTurnMatcher: MoveMatcherProtocol {
     
     func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
-        guard case .startTurn = state.challenge,
-            let actor = state.players.first(where: { $0.identifier == state.turn }),
+        guard let challenge = state.challenge,
+            case .startTurn = challenge.name,
+            let actor = state.player(state.turn),
             !actor.inPlay.contains(where: { $0.name == .jail || $0.name == .dynamite }) else {
                 return nil
         }
@@ -19,12 +20,11 @@ class StartTurnMatcher: MoveMatcherProtocol {
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .startTurn = move.name,
-            let actorId = move.actorId else {
-                return nil
+        guard case .startTurn = move.name else {
+            return nil
         }
         
-        return [.playerPullFromDeck(actorId, 2),
+        return [.playerPullFromDeck(move.actorId, 2),
                 .setChallenge(nil)]
     }
 }
