@@ -10,7 +10,7 @@ class EndTurnMatcher: MoveMatcherProtocol {
     
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
-            let actor = state.players.first(where: { $0.identifier == state.turn }) else {
+            let actor = state.player(state.turn) else {
                 return nil
         }
         
@@ -19,7 +19,7 @@ class EndTurnMatcher: MoveMatcherProtocol {
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .endTurn = move.name,
-            let actor = state.players.first(where: { $0.identifier == move.actorId }) else {
+            let actor = state.player(move.actorId) else {
             return nil
         }
         

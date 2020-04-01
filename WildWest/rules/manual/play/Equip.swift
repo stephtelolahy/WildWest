@@ -10,7 +10,7 @@ class EquipMatcher: MoveMatcherProtocol {
     
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
-            let actor = state.players.first(where: { $0.identifier == state.turn }) else {
+            let actor = state.player(state.turn) else {
                 return nil
         }
         
@@ -35,7 +35,7 @@ class EquipMatcher: MoveMatcherProtocol {
             let cardName = move.cardName,
             (cardName.isEquipment || cardName.isGun),
             let cardId = move.cardId,
-            let actor = state.players.first(where: { $0.identifier == move.actorId }) else {
+            let actor = state.player(move.actorId) else {
                 return nil
         }
         

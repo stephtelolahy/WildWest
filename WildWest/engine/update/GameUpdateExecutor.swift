@@ -29,13 +29,13 @@ class GameUpdateExecutor: UpdateExecutorProtocol {
             }
             
         case let .playerGainHealth(playerId, points):
-            if let player = database.state.players.first(where: { $0.identifier == playerId }) {
+            if let player = database.state.player(playerId) {
                 let health = player.health + points
                 database.playerSetHealth(playerId, health)
             }
             
         case let .playerLooseHealth(playerId, points, source):
-            if let player = database.state.players.first(where: { $0.identifier == playerId }) {
+            if let player = database.state.player(playerId) {
                 let health = max(0, player.health - points)
                 database.playerSetHealth(playerId, health)
                 database.addDamageEvent(DamageEvent(playerId: playerId, source: source))

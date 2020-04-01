@@ -12,7 +12,7 @@ class UseBarrelMatcher: MoveMatcherProtocol {
         guard let challenge = state.challenge,
             (challenge.name == .bang || challenge.name == .gatling),
             let actorId = challenge.actorId(in: state),
-            let actor = state.players.first(where: { $0.identifier == actorId }),
+            let actor = state.player(actorId),
             state.barrelsResolved < actor.barrelsCount,
             let topDeckCard = state.deck.first,
             topDeckCard.makeBarrelSuccessful else {
@@ -39,7 +39,7 @@ class FailBarelMatcher: MoveMatcherProtocol {
         guard let challenge = state.challenge,
             (challenge.name == .bang || challenge.name == .gatling),
             let actorId = challenge.actorId(in: state),
-            let actor = state.players.first(where: { $0.identifier == actorId }),
+            let actor = state.player(actorId),
             state.barrelsResolved < actor.barrelsCount,
             let topDeckCard = state.deck.first,
             !topDeckCard.makeBarrelSuccessful else {

@@ -11,7 +11,7 @@ class ExplodeDynamiteMatcher: MoveMatcherProtocol {
     func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard let challenge = state.challenge,
             case .startTurn = challenge.name,
-            let actor = state.players.first(where: { $0.identifier == state.turn }),
+            let actor = state.player(state.turn),
             let card = actor.inPlay.first(where: { $0.name == .dynamite }),
             let topDeckCard = state.deck.first,
             topDeckCard.makeDynamiteExplode else {
@@ -38,7 +38,7 @@ class PassDynamiteMatcher: MoveMatcherProtocol {
     func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard let challenge = state.challenge,
             case .startTurn = challenge.name,
-            let actor = state.players.first(where: { $0.identifier == state.turn }),
+            let actor = state.player(state.turn),
             let card = actor.inPlay.first(where: { $0.name == .dynamite }),
             let topDeckCard = state.deck.first,
             !topDeckCard.makeDynamiteExplode else {

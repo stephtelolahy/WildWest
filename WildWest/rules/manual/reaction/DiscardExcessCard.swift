@@ -11,7 +11,7 @@ class DiscardExcessCardMatcher: MoveMatcherProtocol {
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard let challenge = state.challenge,
             case .discardExcessCards = challenge.name,
-            let actor = state.players.first(where: { $0.identifier == state.turn }) else {
+            let actor = state.player(state.turn) else {
                 return nil
         }
         
@@ -25,7 +25,7 @@ class DiscardExcessCardMatcher: MoveMatcherProtocol {
             let challenge = state.challenge,
             case .discardExcessCards = challenge.name,
             let cardId = move.cardId,
-            let actor = state.players.first(where: { $0.identifier == state.turn }) else {
+            let actor = state.player(state.turn) else {
                 return nil
         }
         

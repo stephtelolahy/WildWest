@@ -23,7 +23,7 @@ class DiscardBeerMatcher: MoveMatcherProtocol {
             return nil
         }
         
-        guard let actor = state.players.first(where: { $0.identifier == actorId }),
+        guard let actor = state.player(actorId),
             (actor.health - challenge.damage) <= 0,
             let beers = actor.handCards(named: .beer) else {
                 return nil

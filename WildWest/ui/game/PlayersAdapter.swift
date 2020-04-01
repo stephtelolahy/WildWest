@@ -45,7 +45,7 @@ class PlayersAdapter: PlayersAdapterProtocol {
                                   score: antiSheriffScore[playerId])
             }
             
-            if let player = state.players.first(where: { $0.identifier == playerId }) {
+            if let player = state.player(playerId) {
                 return PlayerItem(player: player,
                                   isControlled: player.identifier == controlledPlayerId,
                                   isTurn: player.identifier == state.turn,

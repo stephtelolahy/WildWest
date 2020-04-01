@@ -10,7 +10,7 @@ class SaloonMatcher: MoveMatcherProtocol {
     
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
-            let actor = state.players.first(where: { $0.identifier == state.turn }),
+            let actor = state.player(state.turn),
             let cards = actor.handCards(named: .saloon),
             state.players.contains(where: { $0.health < $0.maxHealth }) else {
                 return nil

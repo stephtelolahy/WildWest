@@ -23,7 +23,7 @@ class RandomAI: AIProtocol {
         if case .play = move.name,
             let cardName = move.cardName,
             cardName.isGun,
-            let actor = state.players.first(where: { $0.identifier == move.actorId }) {
+            let actor = state.player(move.actorId) {
             let currentGunRange = actor.inPlay.first(where: { $0.name.isGun })?.name.range ?? 0
             let handGunRange = cardName.range
             return handGunRange - currentGunRange

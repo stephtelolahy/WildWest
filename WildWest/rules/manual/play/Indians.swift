@@ -10,7 +10,7 @@ class IndiansMatcher: MoveMatcherProtocol {
     
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
-            let actor = state.players.first(where: { $0.identifier == state.turn }),
+            let actor = state.player(state.turn),
             let cards = actor.handCards(named: .indians) else {
                 return nil
         }

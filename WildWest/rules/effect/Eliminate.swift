@@ -10,7 +10,7 @@ class EliminateMatcher: MoveMatcherProtocol {
     
     func effect(onExecuting move: GameMove, in state: GameStateProtocol) -> GameMove? {
         guard case .pass = move.name,
-            let actor = state.players.first(where: { $0.identifier == move.actorId }),
+            let actor = state.player(move.actorId),
             actor.health == 0 else {
                 return nil
         }
@@ -20,7 +20,7 @@ class EliminateMatcher: MoveMatcherProtocol {
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .eliminate = move.name,
-            let actor = state.players.first(where: { $0.identifier == move.actorId }) else {
+            let actor = state.player(move.actorId) else {
                 return nil
         }
         
