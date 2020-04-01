@@ -16,8 +16,4 @@ extension GameStateProtocol {
         let nextPlayerIndex = (turnIndex + 1) % players.count
         return players[nextPlayerIndex].identifier
     }
-    
-    func player(_ playerId: String?) -> PlayerProtocol? {
-        players.first(where: { $0.identifier == playerId })
-    }
 }

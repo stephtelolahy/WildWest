@@ -16,24 +16,20 @@ class GatlingMatcher: MoveMatcherProtocol {
         }
         
         return cards.map {
-            GameMove(name: .play,
-                     actorId: actor.identifier,
-                     cardId: $0.identifier,
-                     cardName: $0.name)
+            GameMove(name: .play, actorId: actor.identifier, cardId: $0.identifier)
         }
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
-            case .gatling = move.cardName,
             let cardId = move.cardId,
-            let actorIndex = state.players.firstIndex(where: { $0.identifier == move.actorId }) else {
+            let actor = state.player(move.actorId),
+            let card = actor.handCard(cardId),
+            case .gatling = card.name else {
                 return nil
         }
         
-        let playersCount = state.players.count
-        let targetIds = Array(1..<playersCount).map { state.players[(actorIndex + $0) % playersCount].identifier }
         return [.playerDiscardHand(move.actorId, cardId),
-                .setChallenge(Challenge(name: .gatling, targetIds: targetIds))]
+                .setChallenge(Challenge(name: .gatling, targetIds: state.otherPlayerIds(move.actorId)))]
     }
 }

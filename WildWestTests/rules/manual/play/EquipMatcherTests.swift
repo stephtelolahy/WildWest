@@ -34,8 +34,8 @@ class EquipMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(moves, [
-            GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .schofield),
-            GameMove(name: .play, actorId: "p1", cardId: "c2", cardName: .scope)
+            GameMove(name: .play, actorId: "p1", cardId: "c1"),
+            GameMove(name: .play, actorId: "p1", cardId: "c2")
         ])
     }
     
@@ -86,7 +86,7 @@ class EquipMatcherTests: XCTestCase {
             .noCardsInPlay()
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer)
-        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .schofield)
+        let move = GameMove(name: .play, actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(move, in: mockState)
@@ -103,7 +103,7 @@ class EquipMatcherTests: XCTestCase {
             .playing(MockCardProtocol().identified(by: "c2").named(.volcanic))
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer)
-        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .schofield)
+        let move = GameMove(name: .play, actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(move, in: mockState)

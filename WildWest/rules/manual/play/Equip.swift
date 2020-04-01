@@ -23,24 +23,21 @@ class EquipMatcher: MoveMatcherProtocol {
         }
         
         return cards.map {
-            GameMove(name: .play,
-                     actorId: actor.identifier,
-                     cardId: $0.identifier,
-                     cardName: $0.name)
+            GameMove(name: .play, actorId: actor.identifier, cardId: $0.identifier)
         }
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
-            let cardName = move.cardName,
-            (cardName.isEquipment || cardName.isGun),
             let cardId = move.cardId,
-            let actor = state.player(move.actorId) else {
+            let actor = state.player(move.actorId),
+            let card = actor.handCard(cardId),
+            (card.name.isEquipment || card.name.isGun) else {
                 return nil
         }
         
         var updates: [GameUpdate] = []
-        if cardName.isGun,
+        if card.name.isGun,
             let currentGun = actor.inPlay.first(where: { $0.name.isGun }) {
             updates.append(.playerDiscardInPlay(move.actorId, currentGun.identifier))
         }

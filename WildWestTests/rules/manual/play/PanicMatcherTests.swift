@@ -40,8 +40,8 @@ class PanicMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(moves, [
-            GameMove(name:.play, actorId: "p1", cardId: "c1", cardName: .panic, targetCard: TargetCard(ownerId: "p2", source: .randomHand)),
-            GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .panic, targetCard: TargetCard(ownerId: "p3", source: .inPlay("c3")))
+            GameMove(name:.play, actorId: "p1", cardId: "c1", targetCard: TargetCard(ownerId: "p2", source: .randomHand)),
+            GameMove(name: .play, actorId: "p1", cardId: "c1", targetCard: TargetCard(ownerId: "p3", source: .inPlay("c3")))
         ])
     }
     
@@ -93,12 +93,14 @@ class PanicMatcherTests: XCTestCase {
     
     func test_PullOtherPlayerHandCard_IfPlayingPanic() {
         // Given
+        let mockPlayer1 = MockPlayerProtocol().identified(by: "p1")
+            .holding(MockCardProtocol().named(.panic).identified(by: "c1"))
         let mockPlayer2 = MockPlayerProtocol()
             .identified(by: "p2")
             .holding(MockCardProtocol().identified(by: "c2"))
         let mockState = MockGameStateProtocol()
-            .players(are: mockPlayer2)
-        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .panic, targetCard: TargetCard(ownerId: "p2", source: .randomHand))
+            .players(are: mockPlayer1, mockPlayer2)
+        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", targetCard: TargetCard(ownerId: "p2", source: .randomHand))
         
         // When
         let updates = sut.execute(move, in: mockState)
@@ -110,8 +112,14 @@ class PanicMatcherTests: XCTestCase {
     
     func test_PullOtherPlayerInPlayCard_IfPlayingPanic() {
         // Given
+        let mockPlayer1 = MockPlayerProtocol().identified(by: "p1")
+            .holding(MockCardProtocol().named(.panic).identified(by: "c1"))
+        let mockPlayer2 = MockPlayerProtocol()
+            .identified(by: "p2")
+            .playing(MockCardProtocol().identified(by: "c2"))
         let mockState = MockGameStateProtocol()
-        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .panic, targetCard: TargetCard(ownerId: "p2", source: .inPlay("c2")))
+            .players(are: mockPlayer1, mockPlayer2)
+        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", targetCard: TargetCard(ownerId: "p2", source: .inPlay("c2")))
         
         // When
         let updates = sut.execute(move, in: mockState)

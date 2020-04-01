@@ -15,10 +15,10 @@ class PanicMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        let reachableDistance = 1
+        let panicDistance = 1
         let otherPlayers = state.players.filter {
             $0.identifier != actor.identifier
-                && state.distance(from: actor.identifier, to: $0.identifier) <= reachableDistance
+                && state.distance(from: actor.identifier, to: $0.identifier) <= panicDistance
         }
         
         guard let targetCards = otherPlayers.targetableCards() else {
@@ -27,19 +27,17 @@ class PanicMatcher: MoveMatcherProtocol {
         
         return cards.map { card in
             targetCards.map {
-                GameMove(name: .play,
-                         actorId: actor.identifier,
-                         cardId: card.identifier,
-                         cardName: card.name,
-                         targetCard: $0)
+                GameMove(name: .play, actorId: actor.identifier, cardId: card.identifier, targetCard: $0)
             }
         }.flatMap { $0 }
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
-            case .panic = move.cardName,
             let cardId = move.cardId,
+            let actor = state.player(move.actorId),
+            let card = actor.handCard(cardId),
+            case .panic = card.name,
             let targetCard = move.targetCard else {
                 return nil
         }

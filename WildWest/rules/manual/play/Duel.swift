@@ -22,19 +22,17 @@ class DuelMatcher: MoveMatcherProtocol {
         
         return cards.map { card in
             otherPlayers.map {
-                GameMove(name: .play,
-                         actorId: actor.identifier,
-                         cardId: card.identifier,
-                         cardName: card.name,
-                         targetId: $0.identifier)
+                GameMove(name: .play, actorId: actor.identifier, cardId: card.identifier, targetId: $0.identifier)
             }
         }.flatMap { $0 }
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
-            case .duel = move.cardName,
             let cardId = move.cardId,
+            let actor = state.player(move.actorId),
+            let card = actor.handCard(cardId),
+            case .duel = card.name,
             let targetId = move.targetId else {
                 return nil
         }

@@ -29,18 +29,20 @@ class GeneralStoreMatcherTests: XCTestCase {
         let moves = sut.validMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves,  [GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .generalStore)])
+        XCTAssertEqual(moves,  [GameMove(name: .play, actorId: "p1", cardId: "c1")])
     }
     
     func test_SetChallengeToGeneralStoreAndSetChoosableCards_IfPlayingGeneralStore() {
         // Given
+        let mockPlayer1 = MockPlayerProtocol().identified(by: "p1")
+            .holding(MockCardProtocol().named(.generalStore).identified(by: "c1"))
+        let mockPlayer2 = MockPlayerProtocol().identified(by: "p2")
+        let mockPlayer3 = MockPlayerProtocol().identified(by: "p3")
+        let mockPlayer4 = MockPlayerProtocol().identified(by: "p4")
         let mockState = MockGameStateProtocol()
-            .players(are: MockPlayerProtocol().identified(by: "p3"),
-                     MockPlayerProtocol().identified(by: "p4"),
-                     MockPlayerProtocol().identified(by: "p1"),
-                     MockPlayerProtocol().identified(by: "p2"))
+            .players(are: mockPlayer1, mockPlayer2, mockPlayer3, mockPlayer4)
         
-        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .generalStore)
+        let move = GameMove(name: .play, actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(move, in: mockState)

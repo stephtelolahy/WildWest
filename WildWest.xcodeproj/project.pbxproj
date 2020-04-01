@@ -23,6 +23,8 @@
 		330FDED1242F38DF00284FE7 /* EliminateMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33318D5A242744EA0055C6C5 /* EliminateMatcherTests.swift */; };
 		330FDED3242F38DF00284FE7 /* GainRewardOnEliminatingOutlawMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33318D6124274BDF0055C6C5 /* GainRewardOnEliminatingOutlawMatcherTests.swift */; };
 		330FDED5242F38DF00284FE7 /* PenalizeSheriffOnEliminatingDeputyMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33318D68242750130055C6C5 /* PenalizeSheriffOnEliminatingDeputyMatcherTests.swift */; };
+		331231012434FC890080B696 /* GameState+Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331231002434FC890080B696 /* GameState+Player.swift */; };
+		331231022434FC890080B696 /* GameState+Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331231002434FC890080B696 /* GameState+Player.swift */; };
 		3320A340242FC9EF002CD5AE /* GameState+Outcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3320A33F242FC9EF002CD5AE /* GameState+Outcome.swift */; };
 		3320A341242FC9EF002CD5AE /* GameState+Outcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3320A33F242FC9EF002CD5AE /* GameState+Outcome.swift */; };
 		3324018E23DBA6C800B92439 /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */; };
@@ -288,6 +290,7 @@
 		3302E51B23F8E34C004FE76E /* RandomAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomAI.swift; sourceTree = "<group>"; };
 		3308D7E22425E58000ECE83C /* PanicMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanicMatcherTests.swift; sourceTree = "<group>"; };
 		3309D7172408DC3000713E15 /* Eliminate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Eliminate.swift; sourceTree = "<group>"; };
+		331231002434FC890080B696 /* GameState+Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameState+Player.swift"; sourceTree = "<group>"; };
 		3320A33F242FC9EF002CD5AE /* GameState+Outcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameState+Outcome.swift"; sourceTree = "<group>"; };
 		3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		332499B223DB9F650082EF09 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -651,6 +654,7 @@
 				3320A33F242FC9EF002CD5AE /* GameState+Outcome.swift */,
 				33334641242FEDCD00A97FD5 /* GameState+Distance.swift */,
 				337408CD24306BCF00E5809B /* GameState+Turn.swift */,
+				331231002434FC890080B696 /* GameState+Player.swift */,
 				337D7FD3243072130078F749 /* GameState+Observed.swift */,
 				337D7FD0243071AE0078F749 /* Player+Ability.swift */,
 				3333465224306B0000A97FD5 /* Player+TargetCard.swift */,
@@ -1251,6 +1255,7 @@
 				33D477F123E57DE500E232D9 /* FigureProtocol.swift in Sources */,
 				3328FCD5242F2D1100A82255 /* DiscardBang.swift in Sources */,
 				3395258323E37D07003DE948 /* GameSetupProtocol.swift in Sources */,
+				331231012434FC890080B696 /* GameState+Player.swift in Sources */,
 				AD49F86723BA054400543F59 /* Figure.swift in Sources */,
 				3328FCDE242F2D1F00A82255 /* ChooseCard.swift in Sources */,
 				AD6A958E24202B0200D0F937 /* GameConfiguration.swift in Sources */,
@@ -1346,6 +1351,7 @@
 				332DFE10242F1C1F009C35E6 /* StartTurnTests.swift in Sources */,
 				33FB59B72427F69100090D23 /* PlayersAdapterTests.swift in Sources */,
 				3391F84524310DC9008B4C61 /* DiscardExcessCardMatcherTests.swift in Sources */,
+				331231022434FC890080B696 /* GameState+Player.swift in Sources */,
 				3328FCAD242F29B200A82255 /* Stagecoach.swift in Sources */,
 				AD6A958F24202D1500D0F937 /* GameConfiguration.swift in Sources */,
 				AD49F86823BA054D00543F59 /* Figure.swift in Sources */,

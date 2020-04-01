@@ -21,11 +21,13 @@ class RandomAI: AIProtocol {
         
         // prefer play larger range gun
         if case .play = move.name,
-            let cardName = move.cardName,
-            cardName.isGun,
-            let actor = state.player(move.actorId) {
-            let currentGunRange = actor.inPlay.first(where: { $0.name.isGun })?.name.range ?? 0
-            let handGunRange = cardName.range
+            let cardId = move.cardId,
+            let actor = state.player(move.actorId),
+            let card = actor.handCard(cardId),
+            card.name.isGun {
+            let currentGun = actor.inPlay.first(where: { $0.name.isGun })
+            let currentGunRange = currentGun?.name.range ?? 0
+            let handGunRange = card.name.range
             return handGunRange - currentGunRange
         }
         

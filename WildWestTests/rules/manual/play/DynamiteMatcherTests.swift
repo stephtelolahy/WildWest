@@ -30,7 +30,7 @@ class DynamiteMatcherTests: XCTestCase {
         let moves = sut.validMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .dynamite)])
+        XCTAssertEqual(moves, [GameMove(name: .play, actorId: "p1", cardId: "c1")])
     }
     
     func test_CannotPlayDynamite_IfAlreadyPlayingDynamite() {
@@ -62,7 +62,7 @@ class DynamiteMatcherTests: XCTestCase {
             .noCardsInPlay()
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer)
-        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .dynamite)
+        let move = GameMove(name: .play, actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(move, in: mockState)

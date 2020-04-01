@@ -33,8 +33,8 @@ class BangMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(moves, [
-            GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .bang, targetId: "p2"),
-            GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .bang, targetId: "p3")
+            GameMove(name: .play, actorId: "p1", cardId: "c1", targetId: "p2"),
+            GameMove(name: .play, actorId: "p1", cardId: "c1", targetId: "p3")
         ])
     }
     
@@ -78,8 +78,8 @@ class BangMatcherTests: XCTestCase {
         let moves = sut.validMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .bang, targetId: "p2"),
-                               GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .bang, targetId: "p3")])
+        XCTAssertEqual(moves, [GameMove(name: .play, actorId: "p1", cardId: "c1", targetId: "p2"),
+                               GameMove(name: .play, actorId: "p1", cardId: "c1", targetId: "p3")])
     }
     
     func test_CannotPlayShoot_IfReachedLimitPerTurn() {
@@ -104,8 +104,12 @@ class BangMatcherTests: XCTestCase {
     
     func test_DiscardCardAndTriggerBangChallenge_IfPlayingBang() {
         // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .holding(MockCardProtocol().named(.bang).identified(by: "c1"))
         let mockState = MockGameStateProtocol()
-        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .bang, targetId: "p2")
+            .players(are: mockPlayer1)
+        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", targetId: "p2")
         
         // When
         let updates = sut.execute(move, in: mockState)

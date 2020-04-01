@@ -22,19 +22,17 @@ class CatBalouMatcher: MoveMatcherProtocol {
         
         return cards.map { card in
             targetCards.map {
-                GameMove(name: .play,
-                         actorId: actor.identifier,
-                         cardId: card.identifier,
-                         cardName: card.name,
-                         targetCard: $0)
+                GameMove(name: .play, actorId: actor.identifier, cardId: card.identifier, targetCard: $0)
             }
         }.flatMap { $0 }
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .play = move.name,
-            case .catBalou = move.cardName,
             let cardId = move.cardId,
+            let actor = state.player(move.actorId),
+            let card = actor.handCard(cardId),
+            case .catBalou = card.name,
             let targetCard = move.targetCard else {
                 return nil
         }

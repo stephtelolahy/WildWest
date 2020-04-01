@@ -29,18 +29,19 @@ class IndiansMatcherTests: XCTestCase {
         let moves = sut.validMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .indians)])
+        XCTAssertEqual(moves, [GameMove(name: .play, actorId: "p1", cardId: "c1")])
     }
     
     func test_DiscardCardAndSetChallengeToIndiansAllOtherPlayersRightDirection_IfPlayingIndians() {
         // Given
         let mockPlayer1 = MockPlayerProtocol().identified(by: "p1")
+            .holding(MockCardProtocol().named(.indians).identified(by: "c1"))
         let mockPlayer2 = MockPlayerProtocol().identified(by: "p2")
         let mockPlayer3 = MockPlayerProtocol().identified(by: "p3")
         let mockPlayer4 = MockPlayerProtocol().identified(by: "p4")
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer4, mockPlayer1, mockPlayer2, mockPlayer3)
-        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .indians)
+        let move = GameMove(name: .play, actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(move, in: mockState)

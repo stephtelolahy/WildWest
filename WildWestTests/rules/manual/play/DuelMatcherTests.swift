@@ -31,15 +31,20 @@ class DuelMatcherTests: XCTestCase {
         let moves = sut.validMoves(matching: mockState)
         
         XCTAssertEqual(moves, [
-            GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .duel, targetId: "p2"),
-            GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .duel, targetId: "p3")
+            GameMove(name: .play, actorId: "p1", cardId: "c1", targetId: "p2"),
+            GameMove(name: .play, actorId: "p1", cardId: "c1", targetId: "p3")
         ])
     }
     
     func test_TriggerDuelChallenge_IfPlayingDuel() {
         // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .holding(MockCardProtocol().named(.duel).identified(by: "c1"))
+        let mockPlayer2 = MockPlayerProtocol().identified(by: "p2")
         let mockState = MockGameStateProtocol()
-        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", cardName: .duel, targetId: "p2")
+            .players(are: mockPlayer1, mockPlayer2)
+        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", targetId: "p2")
         
         // When
         let updates = sut.execute(move, in: mockState)

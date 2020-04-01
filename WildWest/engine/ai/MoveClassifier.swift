@@ -7,23 +7,28 @@
 //
 
 class MoveClassifier: MoveClassifierProtocol {
+    
     func classify(_ move: GameMove) -> MoveClassification {
+        guard case .play = move.name,
+            let cardId = move.cardId else {
+                return .none
+        }
+        
         if case .play = move.name,
-            [CardName.bang, CardName.duel].contains(move.cardName),
+            (cardId.contains("bang") || cardId.contains("duel")),
             let targetId = move.targetId {
             return .strongAttack(actorId: move.actorId, targetId: targetId)
         }
         
         if case .play = move.name,
-            case .jail = move.cardName,
+            cardId.contains("jail"),
             let targetId = move.targetId {
             return .weakAttack(actorId: move.actorId, targetId: targetId)
         }
         
         if case .play = move.name,
-            [CardName.panic, CardName.catBalou].contains(move.cardName),
+            (cardId.contains("panic") || cardId.contains("cardName")),
             let targetCard = move.targetCard {
-            
             if case let .inPlay(cardId) = targetCard.source,
                 cardId.contains("jail") {
                 return .help(actorId: move.actorId, targetId: targetCard.ownerId)
