@@ -31,9 +31,10 @@ class ExplodeDynamiteMatcherTests: XCTestCase {
         XCTAssertEqual(moves, [GameMove(name: .explodeDynamite, actorId: "p1", cardId: "c1")])
     }
     
-    func test_DiscardDynamiteAndSetExplodeChallenge_IfExplodes() {
+    func test_SetChallengeDamageTo3_IfDynamiteExplodes_OnHealthIs4() {
         // Given
         let mockState = MockGameStateProtocol()
+            .players(are: MockPlayerProtocol().identified(by: "p1").health(is: 4))
         let move = GameMove(name: .explodeDynamite, actorId: "p1", cardId: "c1")
         
         // When
@@ -41,7 +42,54 @@ class ExplodeDynamiteMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.flipOverFirstDeckCard,
-                                 .setChallenge(Challenge(name: .dynamiteExploded)),
+                                 .setChallenge(Challenge(name: .dynamiteExploded, damage: 3)),
+                                 .playerDiscardInPlay("p1", "c1")])
+    }
+    
+    func test_SetChallengeDamageTo3_IfDynamiteExplodes_OnHealthIs1() {
+        // Given
+        let mockState = MockGameStateProtocol()
+            .players(are: MockPlayerProtocol().identified(by: "p1").health(is: 1))
+        let move = GameMove(name: .explodeDynamite, actorId: "p1", cardId: "c1")
+        
+        // When
+        let updates = sut.execute(move, in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates, [.flipOverFirstDeckCard,
+                                 .setChallenge(Challenge(name: .dynamiteExploded, damage: 3)),
+                                 .playerDiscardInPlay("p1", "c1")])
+    }
+    
+    func test_Deal2Damages_IfDynamiteExplodes_OnHealthIs3() {
+        // Given
+        let mockState = MockGameStateProtocol()
+            .players(are: MockPlayerProtocol().identified(by: "p1").health(is: 3))
+        let move = GameMove(name: .explodeDynamite, actorId: "p1", cardId: "c1")
+        
+        // When
+        let updates = sut.execute(move, in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates, [.flipOverFirstDeckCard,
+                                 .setChallenge(Challenge(name: .dynamiteExploded, damage: 1)),
+                                 .playerLooseHealth("p1", 2, .byDynamite),
+                                 .playerDiscardInPlay("p1", "c1")])
+    }
+    
+    func test_Deal1Damages_IfDynamiteExplodes_OnHealthIs2() {
+        // Given
+        let mockState = MockGameStateProtocol()
+            .players(are: MockPlayerProtocol().identified(by: "p1").health(is: 2))
+        let move = GameMove(name: .explodeDynamite, actorId: "p1", cardId: "c1")
+        
+        // When
+        let updates = sut.execute(move, in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates, [.flipOverFirstDeckCard,
+                                 .setChallenge(Challenge(name: .dynamiteExploded, damage: 2)),
+                                 .playerLooseHealth("p1", 1, .byDynamite),
                                  .playerDiscardInPlay("p1", "c1")])
     }
 }

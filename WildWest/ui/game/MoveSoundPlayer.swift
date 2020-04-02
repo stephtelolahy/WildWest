@@ -68,7 +68,7 @@ class MoveSoundPlayer: MoveSoundPlayerProtocol {
             "Stagecoach": "Horse Galloping-SoundBible.com-1451398148",
             "WellsFargo": "Horse Galloping-SoundBible.com-1451398148",
             "Eliminate": "Pain-SoundBible.com-1883168362",
-            "Reward": "Horse Galloping-SoundBible.com-1451398148",
+            "gainRewardOnEliminatingOutlaw": "Horse Galloping-SoundBible.com-1451398148",
             "Penalize": "Slap-SoundMaster13-49669815",
             "stayInJail": "Slide Closed-SoundBible.com-1521580537",
             "escapeFromJail": "Ta Da-SoundBible.com-1884170640",

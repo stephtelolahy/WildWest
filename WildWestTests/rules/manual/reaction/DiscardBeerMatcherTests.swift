@@ -93,6 +93,27 @@ class DiscardBeerMatcherTests: XCTestCase {
         XCTAssertEqual(moves, [GameMove(name: .discard, actorId: "p1", cardId: "c1")])
     }
     
+    func test_CannotDiscardBeer_IfDynamiteExplodes_OnHealthIs4() {
+        // Given
+        let mockCard = MockCardProtocol()
+            .named(.beer)
+            .identified(by: "c1")
+        let mockPlayer1 = MockPlayerProtocol()
+            .holding(mockCard)
+            .identified(by: "p1")
+            .health(is: 4)
+        let mockState = MockGameStateProtocol()
+            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
+            .currentTurn(is: "p1")
+            .challenge(is: Challenge(name: .dynamiteExploded))
+        
+        // When
+        let moves = sut.validMoves(matching: mockState)
+        
+        // Assert
+        XCTAssertNil(moves)
+    }
+    
     func test_CannotDiscardBeer_IfThereAreTwoPlayersLeft() {
         // Given
         let mockCard = MockCardProtocol()

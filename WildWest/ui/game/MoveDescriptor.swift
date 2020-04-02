@@ -48,7 +48,7 @@ class MoveDescriptor: MoveDescriptorProtocol {
             "StartTurn": "🔥",
             "WellsFargo": "💰",
             "Eliminate": "☠️",
-            "Reward": "🎁",
+            "gainRewardOnEliminatingOutlaw": "🎁",
             "Penalize": "⚠️",
             "stayInJail": "😞",
             "escapeFromJail": "😅",
