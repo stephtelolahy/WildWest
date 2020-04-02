@@ -37,8 +37,7 @@ class GameEngine: GameEngineProtocol, Subscribable {
             self.stateSubject.onNext(self.database.state)
         }))
         
-        moveMatchers.compactMap { $0.autoPlayMoves(matching: database.state) }
-            .flatMap { $0 }
+        moveMatchers.compactMap { $0.autoPlayMove(matching: database.state) }
             .forEach { queue($0) }
     }
     
@@ -75,7 +74,7 @@ extension GameEngine {
         }
         
         // check autoPlay moves
-        let autoPlays = moveMatchers.compactMap { $0.autoPlayMoves(matching: database.state) }.flatMap { $0 }
+        let autoPlays = moveMatchers.compactMap { $0.autoPlayMove(matching: database.state) }
         if !autoPlays.isEmpty {
             autoPlays.forEach { commandSubject.onNext($0) }
             return

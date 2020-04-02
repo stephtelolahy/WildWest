@@ -37,7 +37,7 @@ class GameEngineTests: XCTestCase {
         // Given
         let move = GameMove(name: MoveName("dummy"), actorId: "p1")
         Cuckoo.stub(mockMoveMatcher) { mock in
-            when(mock.autoPlayMoves(matching: state(equalTo: mockState))).thenReturn([move])
+            when(mock.autoPlayMove(matching: state(equalTo: mockState))).thenReturn(move)
             when(mock.execute(equal(to: move), in: state(equalTo: mockState))).thenReturn([])
         }
         
@@ -45,7 +45,7 @@ class GameEngineTests: XCTestCase {
         sut.start()
         
         // Assert
-        verify(mockMoveMatcher, atLeastOnce()).autoPlayMoves(matching: state(equalTo: mockState))
+        verify(mockMoveMatcher, atLeastOnce()).autoPlayMove(matching: state(equalTo: mockState))
         verify(mockMoveMatcher, atLeastOnce()).execute(equal(to: move), in: state(equalTo: mockState))
     }
     
@@ -116,7 +116,7 @@ class GameEngineTests: XCTestCase {
         // Assert
         verify(mockDatabase).setValidMoves(equal(to: [:]))
         verify(mockMoveMatcher, never()).effect(onExecuting: any(), in: any())
-        verify(mockMoveMatcher, never()).autoPlayMoves(matching: any())
+        verify(mockMoveMatcher, never()).autoPlayMove(matching: any())
         verify(mockMoveMatcher, never()).validMoves(matching: any())
     }
     
@@ -138,7 +138,7 @@ class GameEngineTests: XCTestCase {
         sut.execute(move)
         
         // Assert
-        verify(mockMoveMatcher, never()).autoPlayMoves(matching: any())
+        verify(mockMoveMatcher, never()).autoPlayMove(matching: any())
         verify(mockMoveMatcher, never()).effect(onExecuting: any(), in: any())
     }
 }

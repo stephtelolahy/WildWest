@@ -8,7 +8,7 @@
 
 class ExplodeDynamiteMatcher: MoveMatcherProtocol {
     
-    func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
+    func autoPlayMove(matching state: GameStateProtocol) -> GameMove? {
         guard let challenge = state.challenge,
             case .startTurn = challenge.name,
             let actor = state.player(state.turn),
@@ -18,7 +18,7 @@ class ExplodeDynamiteMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        return [GameMove(name: .explodeDynamite, actorId: actor.identifier, cardId: card.identifier)]
+        return GameMove(name: .explodeDynamite, actorId: actor.identifier, cardId: card.identifier)
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
@@ -50,7 +50,7 @@ class ExplodeDynamiteMatcher: MoveMatcherProtocol {
 
 class PassDynamiteMatcher: MoveMatcherProtocol {
     
-    func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
+    func autoPlayMove(matching state: GameStateProtocol) -> GameMove? {
         guard let challenge = state.challenge,
             case .startTurn = challenge.name,
             let actor = state.player(state.turn),
@@ -60,7 +60,7 @@ class PassDynamiteMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        return [GameMove(name: .passDynamite, actorId: actor.identifier, cardId: card.identifier)]
+        return GameMove(name: .passDynamite, actorId: actor.identifier, cardId: card.identifier)
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {

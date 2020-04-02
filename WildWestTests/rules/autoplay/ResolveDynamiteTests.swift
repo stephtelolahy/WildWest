@@ -25,10 +25,10 @@ class ExplodeDynamiteMatcherTests: XCTestCase {
             .topDeck(is: MockCardProtocol().value(is: "2").suit(is: .spades))
         
         // When
-        let moves = sut.autoPlayMoves(matching: mockState)
+        let move = sut.autoPlayMove(matching: mockState)
         
         // assert
-        XCTAssertEqual(moves, [GameMove(name: .explodeDynamite, actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(move, GameMove(name: .explodeDynamite, actorId: "p1", cardId: "c1"))
     }
     
     func test_SetChallengeDamageTo3_IfDynamiteExplodes_OnHealthIs4() {
@@ -110,10 +110,10 @@ class PassDynamiteMatcherTests: XCTestCase {
             .topDeck(is: MockCardProtocol().value(is: "2").suit(is: .diamonds))
         
         // When
-        let moves = sut.autoPlayMoves(matching: mockState)
+        let move = sut.autoPlayMove(matching: mockState)
         
         // assert
-        XCTAssertEqual(moves, [GameMove(name: .passDynamite, actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(move, GameMove(name: .passDynamite, actorId: "p1", cardId: "c1"))
     }
     
     func test_PassDynamiteToNextPlayer_IfDoesNotExplode() {
