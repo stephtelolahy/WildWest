@@ -78,6 +78,6 @@ class MoveSoundPlayer: MoveSoundPlayerProtocol {
             "passDynamite": "Fuse Burning-SoundBible.com-1372982430",
             "StartTurn": "",
             "startGame": "",
-            "drawsACardOnLoseHealth": "Slide Closed-SoundBible.com-1521580537"
+            "drawsCardOnLoseHealth": "Slide Closed-SoundBible.com-1521580537"
         ]
 }

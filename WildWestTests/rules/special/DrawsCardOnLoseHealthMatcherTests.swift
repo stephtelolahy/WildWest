@@ -1,5 +1,5 @@
 //
-//  DrawsACardOnLoseHealthMatcherTests.swift
+//  DrawsCardOnLoseHealthMatcherTests.swift
 //  WildWestTests
 //
 //  Created by Hugues Stephano Telolahy on 02/04/2020.
@@ -8,15 +8,15 @@
 
 import XCTest
 
-class DrawsACardOnLoseHealthMatcherTests: XCTestCase {
+class DrawsCardOnLoseHealthMatcherTests: XCTestCase {
     
-    private let sut = DrawsACardOnLoseHealthMatcher()
+    private let sut = DrawsCardOnLoseHealthMatcher()
     
     func test_ShouldDrawsACardOnLoseHealth() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
-            .abilities(are: [.drawsACardOnLoseHealth: true])
+            .abilities(are: [.drawsCardOnLoseHealth: true])
             .health(is: 2)
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
@@ -26,7 +26,7 @@ class DrawsACardOnLoseHealthMatcherTests: XCTestCase {
         let effect = sut.effect(onExecuting: move, in: mockState)
         
         // Assert
-        XCTAssertEqual(effect, GameMove(name: .drawsACardOnLoseHealth, actorId: "p1"))
+        XCTAssertEqual(effect, GameMove(name: .drawsCardOnLoseHealth, actorId: "p1"))
     }
     
     
@@ -34,7 +34,7 @@ class DrawsACardOnLoseHealthMatcherTests: XCTestCase {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
-            .abilities(are: [.drawsACardOnLoseHealth: true])
+            .abilities(are: [.drawsCardOnLoseHealth: true])
             .health(is: 0)
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
@@ -51,11 +51,11 @@ class DrawsACardOnLoseHealthMatcherTests: XCTestCase {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
-            .abilities(are: [.drawsACardOnLoseHealth: true])
+            .abilities(are: [.drawsCardOnLoseHealth: true])
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
             .damageEvents(are: DamageEvent(playerId: "p1", source: .byPlayer("p1")))
-        let move = GameMove(name: .drawsACardOnLoseHealth, actorId: "p1")
+        let move = GameMove(name: .drawsCardOnLoseHealth, actorId: "p1")
         
         // When
         let updates = sut.execute(move, in: mockState)
@@ -68,11 +68,11 @@ class DrawsACardOnLoseHealthMatcherTests: XCTestCase {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
-            .abilities(are: [.drawsACardOnLoseHealth: true])
+            .abilities(are: [.drawsCardOnLoseHealth: true])
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
             .damageEvents(are: DamageEvent(playerId: "p1", source: .byDynamite))
-        let move = GameMove(name: .drawsACardOnLoseHealth, actorId: "p1")
+        let move = GameMove(name: .drawsCardOnLoseHealth, actorId: "p1")
         
         // When
         let updates = sut.execute(move, in: mockState)

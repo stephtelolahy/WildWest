@@ -1,12 +1,12 @@
 //
-//  DrawsACardOnLoseHealth.swift
+//  DrawsCardOnLoseHealth.swift
 //  WildWest
 //
 //  Created by Hugues Stephano Telolahy on 02/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-class DrawsACardOnLoseHealthMatcher: MoveMatcherProtocol {
+class DrawsCardOnLoseHealthMatcher: MoveMatcherProtocol {
     func effect(onExecuting move: GameMove, in state: GameStateProtocol) -> GameMove? {
         guard case .pass = move.name,
             let actor = state.player(move.actorId),
@@ -14,11 +14,11 @@ class DrawsACardOnLoseHealthMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        return GameMove(name: .drawsACardOnLoseHealth, actorId: move.actorId)
+        return GameMove(name: .drawsCardOnLoseHealth, actorId: move.actorId)
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .drawsACardOnLoseHealth = move.name,
+        guard case .drawsCardOnLoseHealth = move.name,
             let damageEvent = state.damageEvents.last,
             damageEvent.playerId == move.actorId else {
                 return nil
@@ -40,5 +40,5 @@ private extension DamageEvent {
 }
 
 extension MoveName {
-    static let drawsACardOnLoseHealth = MoveName("drawsACardOnLoseHealth")
+    static let drawsCardOnLoseHealth = MoveName("drawsCardOnLoseHealth")
 }
