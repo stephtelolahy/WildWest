@@ -21,8 +21,8 @@ class PlayerDescriptor: PlayerDescriptorProtocol {
     }
     
     func display(_ player: PlayerProtocol) {
-        let alertController = UIAlertController(title: player.figure.name.rawValue.uppercased(),
-                                                message: player.figure.description,
+        let alertController = UIAlertController(title: player.figureName.rawValue.uppercased(),
+                                                message: player.description,
                                                 preferredStyle: .alert)
         
         alertController.addAction(UIAlertAction(title: "Close",

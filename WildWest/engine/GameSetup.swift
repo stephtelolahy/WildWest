@@ -24,7 +24,10 @@ class GameSetup: GameSetupProtocol {
             let health = role == .sheriff ? figure.bullets + 1 : figure.bullets
             let hand: [CardProtocol] = Array(1...health).map { _ in deck.removeFirst() }
             return Player(role: role,
-                          figure: figure,
+                          figureName: figure.name,
+                          imageName: figure.imageName,
+                          description: figure.description,
+                          abilities: figure.abilities,
                           maxHealth: health,
                           health: health,
                           hand: hand,

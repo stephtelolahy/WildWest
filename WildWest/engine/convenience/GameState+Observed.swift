@@ -13,7 +13,10 @@ extension GameStateProtocol {
             let shouldHideRole = player.identifier != playerId && player.role != .sheriff && outcome == nil
             let role: Role? = shouldHideRole ? nil : player.role
             return Player(role: role,
-                          figure: player.figure,
+                          figureName: player.figureName,
+                          imageName: player.imageName,
+                          description: player.description,
+                          abilities: player.abilities,
                           maxHealth: player.maxHealth,
                           health: player.health,
                           hand: player.hand,

@@ -1767,14 +1767,56 @@ import Cuckoo
     
     
     
-     var figure: FigureProtocol {
+     var figureName: FigureName {
         get {
-            return cuckoo_manager.getter("figure",
+            return cuckoo_manager.getter("figureName",
                 superclassCall:
                     
                     Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                     ,
-                defaultCall: __defaultImplStub!.figure)
+                defaultCall: __defaultImplStub!.figureName)
+        }
+        
+    }
+    
+    
+    
+     var imageName: String {
+        get {
+            return cuckoo_manager.getter("imageName",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.imageName)
+        }
+        
+    }
+    
+    
+    
+     var description: String {
+        get {
+            return cuckoo_manager.getter("description",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.description)
+        }
+        
+    }
+    
+    
+    
+     var abilities: [AbilityName: Bool] {
+        get {
+            return cuckoo_manager.getter("abilities",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.abilities)
         }
         
     }
@@ -1858,8 +1900,23 @@ import Cuckoo
 	    }
 	    
 	    
-	    var figure: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, FigureProtocol> {
-	        return .init(manager: cuckoo_manager, name: "figure")
+	    var figureName: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, FigureName> {
+	        return .init(manager: cuckoo_manager, name: "figureName")
+	    }
+	    
+	    
+	    var imageName: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, String> {
+	        return .init(manager: cuckoo_manager, name: "imageName")
+	    }
+	    
+	    
+	    var description: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, String> {
+	        return .init(manager: cuckoo_manager, name: "description")
+	    }
+	    
+	    
+	    var abilities: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, [AbilityName: Bool]> {
+	        return .init(manager: cuckoo_manager, name: "abilities")
 	    }
 	    
 	    
@@ -1908,8 +1965,23 @@ import Cuckoo
 	    }
 	    
 	    
-	    var figure: Cuckoo.VerifyReadOnlyProperty<FigureProtocol> {
-	        return .init(manager: cuckoo_manager, name: "figure", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var figureName: Cuckoo.VerifyReadOnlyProperty<FigureName> {
+	        return .init(manager: cuckoo_manager, name: "figureName", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var imageName: Cuckoo.VerifyReadOnlyProperty<String> {
+	        return .init(manager: cuckoo_manager, name: "imageName", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var description: Cuckoo.VerifyReadOnlyProperty<String> {
+	        return .init(manager: cuckoo_manager, name: "description", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var abilities: Cuckoo.VerifyReadOnlyProperty<[AbilityName: Bool]> {
+	        return .init(manager: cuckoo_manager, name: "abilities", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	    
@@ -1956,9 +2028,33 @@ import Cuckoo
     }
     
     
-     var figure: FigureProtocol {
+     var figureName: FigureName {
         get {
-            return DefaultValueRegistry.defaultValue(for: (FigureProtocol).self)
+            return DefaultValueRegistry.defaultValue(for: (FigureName).self)
+        }
+        
+    }
+    
+    
+     var imageName: String {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (String).self)
+        }
+        
+    }
+    
+    
+     var description: String {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (String).self)
+        }
+        
+    }
+    
+    
+     var abilities: [AbilityName: Bool] {
+        get {
+            return DefaultValueRegistry.defaultValue(for: ([AbilityName: Bool]).self)
         }
         
     }

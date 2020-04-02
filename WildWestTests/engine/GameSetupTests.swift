@@ -72,7 +72,7 @@ class GameSetupTests: XCTestCase {
             MockFigureProtocol()
                 .named(figureNames[$0])
                 .bullets(is: 4)
-                .imageName(is: "")
+                .withEnabledDefaultImplementation(FigureProtocolStub())
         }
         
         // When
@@ -84,7 +84,7 @@ class GameSetupTests: XCTestCase {
         // ShuffleRolesBetweenPlayers
         XCTAssertEqual(state.players.map { $0.role }, roles)
         // ShuffleCharactersBetweenPlayers
-        XCTAssertTrue(state.players.allSatisfy { figures.map { $0.name }.contains($0.figure.name) })
+        XCTAssertTrue(state.players.allSatisfy { figures.map { $0.name }.contains($0.figureName) })
         // PlayerInitialInPlayIsEmpty
         XCTAssertTrue(state.players.allSatisfy { $0.inPlay.isEmpty })
         // PlayerHandCardsEqualsToHealthPoints
