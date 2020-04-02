@@ -14,6 +14,9 @@ class MenuViewController: UIViewController {
     @IBOutlet private weak var playersCountStepper: UIStepper!
     @IBOutlet private weak var playersCountLabel: UILabel!
     @IBOutlet private weak var playAsSheriffSwitch: UISwitch!
+    @IBOutlet private weak var figureLabel: UILabel!
+    @IBOutlet private weak var figureButton: UIButton!
+    @IBOutlet private weak var roleLabel: UILabel!
     
     private var audioPlayer: AVAudioPlayer?
     
@@ -21,10 +24,14 @@ class MenuViewController: UIViewController {
     private var allCards: [CardProtocol] = []
     private var allMatchers: [MoveMatcherProtocol] = []
     
+    private var preferredFigure: FigureName?
+    private var playersCount: Int { Int(playersCountStepper.value) }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         playersCountStepper.value = 5
         updatePlayersLabel()
+        updateFigureImage()
         
         let jsonReader = JsonReader(bundle: Bundle.main)
         let config = GameConfiguration(jsonReader: jsonReader)
@@ -44,27 +51,37 @@ class MenuViewController: UIViewController {
     }
     
     @IBAction private func playButtonTapped(_ sender: Any) {
-        showFigureSelector(figures: allFigures.map { $0.name }) { [weak self] preferredFigure in
-            self?.startGame(preferredFigure: preferredFigure)
-        }
+        startGame()
     }
     
     @IBAction private func stepperValueChanged(_ sender: Any) {
         updatePlayersLabel()
     }
+    
+    @IBAction private func figureButtonTapped(_ sender: Any) {
+        showFigureSelector(figures: allFigures.map { $0.name }) { [weak self] figure in
+            self?.preferredFigure = figure
+            self?.updateFigureImage()
+        }
+    }
+    
 }
 
 private extension MenuViewController {
-    
-    var playersCount: Int {
-        Int(playersCountStepper.value)
-    }
     
     func updatePlayersLabel() {
         playersCountLabel.text = "\(playersCount) players"
     }
     
-    func startGame(preferredFigure: FigureName?) {
+    func updateFigureImage() {
+        if let figure = allFigures.first(where: { $0.name == preferredFigure }) {
+            figureButton.setImage(UIImage(named: figure.imageName), for: .normal)
+        } else {
+            figureButton.setImage(#imageLiteral(resourceName: "01_random"), for: .normal)
+        }
+    }
+    
+    func startGame() {
         
         let gameSetup = GameSetup()
         
@@ -74,7 +91,7 @@ private extension MenuViewController {
         }
         
         var figures = allFigures.shuffled()
-        if let preferredFigure = preferredFigure {
+        if let preferredFigure = self.preferredFigure {
             figures = figures.starting(with: preferredFigure)
         }
         
