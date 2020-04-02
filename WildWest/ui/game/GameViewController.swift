@@ -149,7 +149,7 @@ private extension GameViewController {
                                                     self?.dismiss(animated: true)
         }))
         
-        present(alertController, animated: true)
+        forcePresent(alertController, animated: true)
     }
 }
 

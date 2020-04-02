@@ -113,6 +113,7 @@
 		3338B2EF242FD1240097BA57 /* TargetCard+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3338B2EE242FD1240097BA57 /* TargetCard+Description.swift */; };
 		3338B2F0242FD1240097BA57 /* TargetCard+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3338B2EE242FD1240097BA57 /* TargetCard+Description.swift */; };
 		333E8757242D5B3B00EAE8FC /* Big Bomb-SoundBible.com-1219802495.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 333E8756242D5B3B00EAE8FC /* Big Bomb-SoundBible.com-1219802495.mp3 */; };
+		334673E62436267500FFBB82 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334673E52436267500FFBB82 /* UIViewController+Alert.swift */; };
 		3356CF0E243237320071B04F /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3356CF0D243237320071B04F /* Challenge.swift */; };
 		3356CF0F243237320071B04F /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3356CF0D243237320071B04F /* Challenge.swift */; };
 		3356CF11243237500071B04F /* DamageEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3356CF10243237500071B04F /* DamageEvent.swift */; };
@@ -318,6 +319,7 @@
 		333B233F2425ECA600685454 /* CatBalouMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBalouMatcherTests.swift; sourceTree = "<group>"; };
 		333B23482425F31700685454 /* EndTurnMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTurnMatcherTests.swift; sourceTree = "<group>"; };
 		333E8756242D5B3B00EAE8FC /* Big Bomb-SoundBible.com-1219802495.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Big Bomb-SoundBible.com-1219802495.mp3"; sourceTree = "<group>"; };
+		334673E52436267500FFBB82 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		3351B58524269386004F18C3 /* Pass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pass.swift; sourceTree = "<group>"; };
 		3351B58824269A24004F18C3 /* PassMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassMatcherTests.swift; sourceTree = "<group>"; };
 		3356CF0D243237320071B04F /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
@@ -834,6 +836,7 @@
 				33A4381123E4BD3200C39DD6 /* ArrayExtension.swift */,
 				ADE91ACC23B9FE2300F7316B /* JsonReader.swift */,
 				33BAE349242E7D210098B41F /* DelaySubject.swift */,
+				334673E52436267500FFBB82 /* UIViewController+Alert.swift */,
 			);
 			path = misc;
 			sourceTree = "<group>";
@@ -1280,6 +1283,7 @@
 				3328FCD6242F2D1100A82255 /* DiscardBeer.swift in Sources */,
 				3391F84224310D86008B4C61 /* DiscardExcessCard.swift in Sources */,
 				3356CF11243237500071B04F /* DamageEvent.swift in Sources */,
+				334673E62436267500FFBB82 /* UIViewController+Alert.swift in Sources */,
 				337408D424306C3400E5809B /* Player+Cards.swift in Sources */,
 				3328FCA7242F29B100A82255 /* Jail.swift in Sources */,
 				33E4411D24077CA000B2848E /* ActionCell.swift in Sources */,
