@@ -3,7 +3,10 @@
         "name": "bartCassidy",
         "bullets": 4,
         "imageName": "01_bartcassidy",
-        "description": "each time he loses a life point, he immediately draws a card from the deck."
+        "description": "each time he loses a life point, he immediately draws a card from the deck.",
+        "abilities": {
+            "drawsACardOnLoseHealth": true
+        }
     },
     {
         "name": "blackJack",

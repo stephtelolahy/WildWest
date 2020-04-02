@@ -77,6 +77,7 @@ class MoveSoundPlayer: MoveSoundPlayerProtocol {
             "explodeDynamite": "Big Bomb-SoundBible.com-1219802495",
             "passDynamite": "Fuse Burning-SoundBible.com-1372982430",
             "StartTurn": "",
-            "startGame": ""
+            "startGame": "",
+            "drawsACardOnLoseHealth": "Slide Closed-SoundBible.com-1521580537"
         ]
 }

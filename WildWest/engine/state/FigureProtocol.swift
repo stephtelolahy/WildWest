@@ -38,4 +38,5 @@ enum AbilityName: String, Codable {
     case hasMustangAllTimes
     case hasScopeAllTimes
     case hasNoLimitOnBangsPerTurn
+    case drawsACardOnLoseHealth
 }

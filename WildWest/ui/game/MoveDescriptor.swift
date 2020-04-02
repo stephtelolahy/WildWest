@@ -56,6 +56,7 @@ class MoveDescriptor: MoveDescriptorProtocol {
             "failBarrel": "😞",
             "explodeDynamite": "💥",
             "passDynamite": "💣",
-            "startGame": ""
+            "startGame": "",
+            "drawsACardOnLoseHealth": "💰"
         ]
 }

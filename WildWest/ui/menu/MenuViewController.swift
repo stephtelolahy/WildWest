@@ -207,10 +207,10 @@ private extension Array where Element == FigureProtocol {
     }
 }
 
-private extension Array where Element == Role {
-    func starting(with role: Role) -> [Role] {
+private extension Array where Element: Equatable {
+    func starting(with element: Element) -> [Element] {
         var array = self
-        while array.first != role {
+        while array.first != element {
             array = array.shuffled()
         }
         return array

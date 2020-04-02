@@ -74,10 +74,11 @@ class DiscardBeerMatcherTests: XCTestCase {
     
     func test_CanDiscardBeer_IfDynamiteExplodedAndWillBeEliminated() {
         // Given
-        let mockCard1 = MockCardProtocol().named(.beer).identified(by: "c1")
-        let mockCard2 = MockCardProtocol().named(.beer).identified(by: "c2")
+        let mockCard = MockCardProtocol()
+            .named(.beer)
+            .identified(by: "c1")
         let mockPlayer1 = MockPlayerProtocol()
-            .holding(mockCard1, mockCard2)
+            .holding(mockCard)
             .identified(by: "p1")
             .health(is: 1)
         let mockState = MockGameStateProtocol()
@@ -89,8 +90,7 @@ class DiscardBeerMatcherTests: XCTestCase {
         let moves = sut.validMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .discard, actorId: "p1", cardId: "c1"),
-                               GameMove(name: .discard, actorId: "p1", cardId: "c2")])
+        XCTAssertEqual(moves, [GameMove(name: .discard, actorId: "p1", cardId: "c1")])
     }
     
     func test_CannotDiscardBeer_IfThereAreTwoPlayersLeft() {

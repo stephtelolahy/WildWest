@@ -165,6 +165,9 @@
 		337D7FD4243072130078F749 /* GameState+Observed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D7FD3243072130078F749 /* GameState+Observed.swift */; };
 		337D7FD5243072130078F749 /* GameState+Observed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D7FD3243072130078F749 /* GameState+Observed.swift */; };
 		337D7FDD2430879F0078F749 /* PlayerDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D7FDC2430879F0078F749 /* PlayerDescriptor.swift */; };
+		3380B037243641A20040F027 /* DrawsACardOnLoseHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3380B036243641A20040F027 /* DrawsACardOnLoseHealth.swift */; };
+		3380B038243641A20040F027 /* DrawsACardOnLoseHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3380B036243641A20040F027 /* DrawsACardOnLoseHealth.swift */; };
+		3380B03B243642070040F027 /* DrawsACardOnLoseHealthMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3380B03A243642070040F027 /* DrawsACardOnLoseHealthMatcherTests.swift */; };
 		3383CFCE242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3383CFCD242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 */; };
 		3383CFD0242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3383CFCF242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 */; };
 		338A5FC0242BC8CE00766541 /* flyby-Conor-1500306612.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 338A5FBF242BC8CE00766541 /* flyby-Conor-1500306612.mp3 */; };
@@ -354,6 +357,8 @@
 		337D7FD0243071AE0078F749 /* Player+Ability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+Ability.swift"; sourceTree = "<group>"; };
 		337D7FD3243072130078F749 /* GameState+Observed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameState+Observed.swift"; sourceTree = "<group>"; };
 		337D7FDC2430879F0078F749 /* PlayerDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDescriptor.swift; sourceTree = "<group>"; };
+		3380B036243641A20040F027 /* DrawsACardOnLoseHealth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawsACardOnLoseHealth.swift; sourceTree = "<group>"; };
+		3380B03A243642070040F027 /* DrawsACardOnLoseHealthMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawsACardOnLoseHealthMatcherTests.swift; sourceTree = "<group>"; };
 		3383CFCD242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Metal Clang-SoundBible.com-19572601.mp3"; sourceTree = "<group>"; };
 		3383CFCF242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Ta Da-SoundBible.com-1884170640.mp3"; sourceTree = "<group>"; };
 		338A5FBF242BC8CE00766541 /* flyby-Conor-1500306612.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "flyby-Conor-1500306612.mp3"; sourceTree = "<group>"; };
@@ -606,6 +611,22 @@
 			path = database;
 			sourceTree = "<group>";
 		};
+		3380B0352436418C0040F027 /* special */ = {
+			isa = PBXGroup;
+			children = (
+				3380B036243641A20040F027 /* DrawsACardOnLoseHealth.swift */,
+			);
+			path = special;
+			sourceTree = "<group>";
+		};
+		3380B039243641F40040F027 /* special */ = {
+			isa = PBXGroup;
+			children = (
+				3380B03A243642070040F027 /* DrawsACardOnLoseHealthMatcherTests.swift */,
+			);
+			path = special;
+			sourceTree = "<group>";
+		};
 		3385A1F423F9352800CD9660 /* game */ = {
 			isa = PBXGroup;
 			children = (
@@ -701,6 +722,7 @@
 				AD374E51242146180025FD4A /* autoplay */,
 				AD374E502421460B0025FD4A /* manual */,
 				AD374E52242146720025FD4A /* effect */,
+				3380B0352436418C0040F027 /* special */,
 			);
 			path = rules;
 			sourceTree = "<group>";
@@ -940,6 +962,7 @@
 				AD374E4E242145DF0025FD4A /* autoplay */,
 				AD374E4D242145CA0025FD4A /* manual */,
 				333B234C2425F4E300685454 /* effect */,
+				3380B039243641F40040F027 /* special */,
 			);
 			path = rules;
 			sourceTree = "<group>";
@@ -1337,6 +1360,7 @@
 				3395258023E37CCE003DE948 /* GameEngineProtocol.swift in Sources */,
 				33BE9108242F5046001A9570 /* ReactionMoveSelector.swift in Sources */,
 				3328FCA4242F29B100A82255 /* WellsFargo.swift in Sources */,
+				3380B037243641A20040F027 /* DrawsACardOnLoseHealth.swift in Sources */,
 				3328FCA5242F29B100A82255 /* Equip.swift in Sources */,
 				AD52B99323B175110013240B /* Card.swift in Sources */,
 				334673EB2436328000FFBB82 /* UserPreferences.swift in Sources */,
@@ -1467,8 +1491,10 @@
 				3328FCCD242F2B5600A82255 /* GatlingMatcherTests.swift in Sources */,
 				3328FCC3242F2B5600A82255 /* EquipMatcherTests.swift in Sources */,
 				3302E51D23F8E34C004FE76E /* RandomAI.swift in Sources */,
+				3380B03B243642070040F027 /* DrawsACardOnLoseHealthMatcherTests.swift in Sources */,
 				33FB59B82427F6D000090D23 /* PlayersAdapter.swift in Sources */,
 				3328FCDC242F2D1100A82255 /* Pass.swift in Sources */,
+				3380B038243641A20040F027 /* DrawsACardOnLoseHealth.swift in Sources */,
 				3391F84324310D86008B4C61 /* DiscardExcessCard.swift in Sources */,
 				3328FCB0242F29B200A82255 /* Dynamite.swift in Sources */,
 				337D7FD2243071AE0078F749 /* Player+Ability.swift in Sources */,
