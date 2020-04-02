@@ -12,7 +12,7 @@ class DrawsCardOnLoseHealthMatcherTests: XCTestCase {
     
     private let sut = DrawsCardOnLoseHealthMatcher()
     
-    func test_ShouldDrawsACardOnLoseHealth() {
+    func test_ShouldDrawsCardOnLoseHealth() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
@@ -29,8 +29,7 @@ class DrawsCardOnLoseHealthMatcherTests: XCTestCase {
         XCTAssertEqual(effect, GameMove(name: .drawsCardOnLoseHealth, actorId: "p1"))
     }
     
-    
-    func test_ShouldNotDrawsACardIfEliminated() {
+    func test_CannotDrawCardIfEliminated() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
@@ -51,7 +50,6 @@ class DrawsCardOnLoseHealthMatcherTests: XCTestCase {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
-            .abilities(are: [.drawsCardOnLoseHealth: true])
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
             .damageEvents(are: DamageEvent(playerId: "p1", source: .byPlayer("p1")))
@@ -68,7 +66,6 @@ class DrawsCardOnLoseHealthMatcherTests: XCTestCase {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
-            .abilities(are: [.drawsCardOnLoseHealth: true])
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
             .damageEvents(are: DamageEvent(playerId: "p1", source: .byDynamite))

@@ -68,7 +68,8 @@ class GameConfiguration {
             PenalizeSheriffOnEliminatingDeputyMatcher(),
             
             // Special
-            DrawsCardOnLoseHealthMatcher()
+            DrawsCardOnLoseHealthMatcher(),
+            DrawsCardFromPlayerDamagedHimMatcher()
         ]
     }
 }
