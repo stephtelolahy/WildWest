@@ -5,6 +5,7 @@
 //  Created by Hugues Stephano Telolahy on 01/03/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
+// swiftlint:disable implicitly_unwrapped_optional
 
 import UIKit
 import AVFoundation
@@ -20,24 +21,29 @@ class MenuViewController: UIViewController {
     
     private var audioPlayer: AVAudioPlayer?
     
-    private var allFigures: [FigureProtocol] = []
-    private var allCards: [CardProtocol] = []
-    private var allMatchers: [MoveMatcherProtocol] = []
-    
-    private var preferredFigure: FigureName?
-    private var playersCount: Int { Int(playersCountStepper.value) }
+    private var allFigures: [FigureProtocol]!
+    private var allCards: [CardProtocol]!
+    private var allMatchers: [MoveMatcherProtocol]!
+    private var userPreferences: UserPreferences!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        playersCountStepper.value = 5
-        updatePlayersLabel()
-        updateFigureImage()
         
         let jsonReader = JsonReader(bundle: Bundle.main)
         let config = GameConfiguration(jsonReader: jsonReader)
+        
         allFigures = config.allFigures
         allCards = config.allCards
         allMatchers = config.moveMatchers
+        
+        userPreferences = UserPreferences()
+        
+        playersCountStepper.value = Double(userPreferences.playersCount)
+        updatePlayersLabel()
+        
+        updateFigureImage()
+        
+        playAsSheriffSwitch.isOn = userPreferences.playAsSheriff
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,19 +61,35 @@ class MenuViewController: UIViewController {
     }
     
     @IBAction private func stepperValueChanged(_ sender: Any) {
+        userPreferences.playersCount = Int(playersCountStepper.value)
         updatePlayersLabel()
     }
     
     @IBAction private func figureButtonTapped(_ sender: Any) {
         showFigureSelector(figures: allFigures.map { $0.name }) { [weak self] figure in
-            self?.preferredFigure = figure
+            self?.userPreferences.preferredFigure = figure?.rawValue ?? ""
             self?.updateFigureImage()
         }
     }
     
+    @IBAction private func playAsSheriffValueChanged(_ sender: Any) {
+        userPreferences.playAsSheriff = playAsSheriffSwitch.isOn
+    }
 }
 
 private extension MenuViewController {
+    
+    var preferredFigure: FigureName? {
+        allFigures.map { $0.name }.first(where: { $0.rawValue == userPreferences.preferredFigure })
+    }
+    
+    var playersCount: Int {
+        userPreferences.playersCount
+    }
+    
+    var playAsSheriff: Bool {
+        userPreferences.playAsSheriff
+    }
     
     func updatePlayersLabel() {
         playersCountLabel.text = "\(playersCount) players"
@@ -76,8 +98,10 @@ private extension MenuViewController {
     func updateFigureImage() {
         if let figure = allFigures.first(where: { $0.name == preferredFigure }) {
             figureButton.setImage(UIImage(named: figure.imageName), for: .normal)
+            figureLabel.text = "Play as \(figure.name.rawValue)"
         } else {
             figureButton.setImage(#imageLiteral(resourceName: "01_random"), for: .normal)
+            figureLabel.text = "Play as random"
         }
     }
     
@@ -86,7 +110,7 @@ private extension MenuViewController {
         let gameSetup = GameSetup()
         
         var roles = gameSetup.roles(for: playersCount).shuffled()
-        if playAsSheriffSwitch.isOn {
+        if playAsSheriff {
             roles = roles.starting(with: .sheriff)
         }
         

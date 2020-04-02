@@ -92,6 +92,9 @@
                                                     </label>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Ea-KQ-obZ">
                                                         <rect key="frame" x="152" y="0.0" width="51" height="31"/>
+                                                        <connections>
+                                                            <action selector="playAsSheriffValueChanged:" destination="8GX-Wa-ifS" eventType="valueChanged" id="ba3-VO-aWt"/>
+                                                        </connections>
                                                     </switch>
                                                 </subviews>
                                             </stackView>

@@ -114,6 +114,10 @@
 		3338B2F0242FD1240097BA57 /* TargetCard+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3338B2EE242FD1240097BA57 /* TargetCard+Description.swift */; };
 		333E8757242D5B3B00EAE8FC /* Big Bomb-SoundBible.com-1219802495.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 333E8756242D5B3B00EAE8FC /* Big Bomb-SoundBible.com-1219802495.mp3 */; };
 		334673E62436267500FFBB82 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334673E52436267500FFBB82 /* UIViewController+Alert.swift */; };
+		334673E82436314E00FFBB82 /* UserDefaultsStored.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334673E72436314E00FFBB82 /* UserDefaultsStored.swift */; };
+		334673E92436314E00FFBB82 /* UserDefaultsStored.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334673E72436314E00FFBB82 /* UserDefaultsStored.swift */; };
+		334673EB2436328000FFBB82 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334673EA2436328000FFBB82 /* UserPreferences.swift */; };
+		334673EC2436328000FFBB82 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334673EA2436328000FFBB82 /* UserPreferences.swift */; };
 		3356CF0E243237320071B04F /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3356CF0D243237320071B04F /* Challenge.swift */; };
 		3356CF0F243237320071B04F /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3356CF0D243237320071B04F /* Challenge.swift */; };
 		3356CF11243237500071B04F /* DamageEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3356CF10243237500071B04F /* DamageEvent.swift */; };
@@ -320,6 +324,8 @@
 		333B23482425F31700685454 /* EndTurnMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTurnMatcherTests.swift; sourceTree = "<group>"; };
 		333E8756242D5B3B00EAE8FC /* Big Bomb-SoundBible.com-1219802495.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Big Bomb-SoundBible.com-1219802495.mp3"; sourceTree = "<group>"; };
 		334673E52436267500FFBB82 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
+		334673E72436314E00FFBB82 /* UserDefaultsStored.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStored.swift; sourceTree = "<group>"; };
+		334673EA2436328000FFBB82 /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		3351B58524269386004F18C3 /* Pass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pass.swift; sourceTree = "<group>"; };
 		3351B58824269A24004F18C3 /* PassMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassMatcherTests.swift; sourceTree = "<group>"; };
 		3356CF0D243237320071B04F /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
@@ -780,6 +786,7 @@
 			isa = PBXGroup;
 			children = (
 				33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */,
+				334673EA2436328000FFBB82 /* UserPreferences.swift */,
 			);
 			path = menu;
 			sourceTree = "<group>";
@@ -837,6 +844,7 @@
 				ADE91ACC23B9FE2300F7316B /* JsonReader.swift */,
 				33BAE349242E7D210098B41F /* DelaySubject.swift */,
 				334673E52436267500FFBB82 /* UIViewController+Alert.swift */,
+				334673E72436314E00FFBB82 /* UserDefaultsStored.swift */,
 			);
 			path = misc;
 			sourceTree = "<group>";
@@ -1275,6 +1283,7 @@
 				3328FCA8242F29B100A82255 /* GeneralStore.swift in Sources */,
 				333800FD242F22CC003F7327 /* ResolveJail.swift in Sources */,
 				3328FC9B242F294000A82255 /* Beer.swift in Sources */,
+				334673E82436314E00FFBB82 /* UserDefaultsStored.swift in Sources */,
 				33334642242FEDCD00A97FD5 /* GameState+Distance.swift in Sources */,
 				335BED692429334F009184A3 /* MoveSoundPlayer.swift in Sources */,
 				3328FCAB242F29B100A82255 /* Indians.swift in Sources */,
@@ -1330,6 +1339,7 @@
 				3328FCA4242F29B100A82255 /* WellsFargo.swift in Sources */,
 				3328FCA5242F29B100A82255 /* Equip.swift in Sources */,
 				AD52B99323B175110013240B /* Card.swift in Sources */,
+				334673EB2436328000FFBB82 /* UserPreferences.swift in Sources */,
 				3328FCAC242F29B100A82255 /* Duel.swift in Sources */,
 				3338B2EF242FD1240097BA57 /* TargetCard+Description.swift in Sources */,
 				335BED7F2429394D009184A3 /* GameMove+Components.swift in Sources */,
@@ -1393,6 +1403,7 @@
 				33F94AB723F0580800D1BCFE /* GameUpdateProtocol.swift in Sources */,
 				3328FCC9242F2B5600A82255 /* GeneralStoreMatcherTests.swift in Sources */,
 				3328FCDA242F2D1100A82255 /* DiscardBang.swift in Sources */,
+				334673EC2436328000FFBB82 /* UserPreferences.swift in Sources */,
 				AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */,
 				330FDECE242F384D00284FE7 /* Eliminate.swift in Sources */,
 				33D964AC23DD9049007295E7 /* ResourcesTests+Cards.swift in Sources */,
@@ -1409,6 +1420,7 @@
 				3328FCAF242F29B200A82255 /* Equip.swift in Sources */,
 				3328FCE4242F2F0200A82255 /* DiscardBangOnDuelMatcherTests.swift in Sources */,
 				33C52DE2242F25C4009EF4DA /* ResolveBarrelTests.swift in Sources */,
+				334673E92436314E00FFBB82 /* UserDefaultsStored.swift in Sources */,
 				3328FC9C242F294100A82255 /* Beer.swift in Sources */,
 				3328FCB6242F29B200A82255 /* Duel.swift in Sources */,
 				3333465424306B0000A97FD5 /* Player+TargetCard.swift in Sources */,
