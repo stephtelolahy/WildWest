@@ -16,6 +16,7 @@ class DrawsCardFromPlayerDamagedHimMatcher: MoveMatcherProtocol {
             let damageEvent = state.damageEvents.last,
             damageEvent.playerId == move.actorId,
             case let .byPlayer(offenderId) = damageEvent.source,
+            offenderId != move.actorId,
             let offender = state.player(offenderId),
             let card = offender.hand.randomElement() else {
                 return nil

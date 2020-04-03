@@ -54,6 +54,25 @@ class DrawsCardFromPlayerDamagedHimMatcherTests: XCTestCase {
         XCTAssertNil(effect)
     }
     
+    func test_CannotDrawsCardFromPlayerDamagedHimIfHimself() {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .abilities(are: [.drawsCardFromPlayerDamagedHim: true])
+            .health(is: 2)
+            .holding(MockCardProtocol().identified(by: "c1"))
+        let mockState = MockGameStateProtocol()
+            .players(are: mockPlayer1)
+            .damageEvents(are: DamageEvent(playerId: "p1", source: .byPlayer("p1")))
+        let move = GameMove(name: .pass, actorId: "p1")
+        
+        // When
+        let effect = sut.effect(onExecuting: move, in: mockState)
+        
+        // Assert
+        XCTAssertNil(effect)
+    }
+    
     func test_DrawsACardOnOffenderHand() {
         // Given
         let mockState = MockGameStateProtocol()
