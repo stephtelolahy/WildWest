@@ -20,15 +20,15 @@ extension GameStateProtocol {
                           maxHealth: player.maxHealth,
                           health: player.health,
                           hand: player.hand,
-                          inPlay: player.inPlay)
+                          inPlay: player.inPlay,
+                          bangsPlayed: player.bangsPlayed,
+                          lastDamage: player.lastDamage)
         }
         return GameState(players: updatedPlayers,
                          deck: deck,
                          discardPile: discardPile,
                          turn: turn,
                          challenge: challenge,
-                         bangsPlayed: bangsPlayed,
-                         damageEvents: damageEvents,
                          generalStore: generalStore,
                          outcome: outcome,
                          validMoves: validMoves,

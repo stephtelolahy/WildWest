@@ -76,4 +76,18 @@ extension MockPlayerProtocol {
         }
         return self
     }
+    
+    func bangsPlayed(is shoots: Int) -> MockPlayerProtocol {
+        Cuckoo.stub(self) { mock in
+            when(mock.bangsPlayed.get).thenReturn(shoots)
+        }
+        return self
+    }
+    
+    func lastDamage(is event: DamageEvent) -> MockPlayerProtocol {
+        Cuckoo.stub(self) { mock in
+            when(mock.lastDamage.get).thenReturn(event)
+        }
+        return self
+    }
 }

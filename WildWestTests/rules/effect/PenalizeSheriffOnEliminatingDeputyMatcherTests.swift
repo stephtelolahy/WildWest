@@ -9,15 +9,18 @@
 import XCTest
 
 class PenalizeSheriffOnEliminatingDeputyMatcherTests: XCTestCase {
-
+    
     private let sut = PenalizeSheriffOnEliminatingDeputyMatcher()
-
+    
     func test_ShouldPenalizeSheriff_IfEliminatingDeputy() {
         // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .role(is: .deputy)
+            .lastDamage(is: DamageEvent(damage: 1, source: .byPlayer("p2")))
         let mockState = MockGameStateProtocol()
             .players(are: MockPlayerProtocol().identified(by: "p2").role(is: .sheriff))
-            .eliminated(are: MockPlayerProtocol().identified(by: "p1").role(is: .deputy))
-            .damageEvents(are: DamageEvent(playerId: "p1", source: .byPlayer("p2")))
+            .eliminated(are: mockPlayer1)
         let move = GameMove(name: .eliminate, actorId: "p1")
         
         // When

@@ -91,6 +91,10 @@ class GameSetupTests: XCTestCase {
         XCTAssertTrue(state.players.allSatisfy { $0.hand.count == $0.health })
         // Each player has maximal health
         XCTAssertTrue(state.players.allSatisfy { $0.health == $0.maxHealth })
+        // Initial damage is nil
+        XCTAssertTrue(state.players.allSatisfy { $0.lastDamage == nil })
+        // Bangs played is 0
+        XCTAssertTrue(state.players.allSatisfy { $0.bangsPlayed == 0 })
         // InitialDeckContainsShuffleCards
         let distributedCardIds = state.players.map { $0.hand }.flatMap { $0 }.map { $0.identifier }
         let remainingCardIds = cards.map { $0.identifier }.filter { !distributedCardIds.contains($0) }
@@ -109,9 +113,6 @@ class GameSetupTests: XCTestCase {
         XCTAssertTrue(state.validMoves.isEmpty)
         // Executed moves is empty
         XCTAssertTrue(state.executedMoves.isEmpty)
-        XCTAssertTrue(state.damageEvents.isEmpty)
-        // Flags are reset to 0
-        XCTAssertEqual(state.bangsPlayed, 0)
         // No challenge
         XCTAssertNil(state.challenge)
     }

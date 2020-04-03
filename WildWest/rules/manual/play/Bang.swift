@@ -16,7 +16,7 @@ class BangMatcher: MoveMatcherProtocol {
         }
         
         let bangLimits = actor.bangLimitsPerTurn
-        guard bangLimits == 0 || state.bangsPlayed < bangLimits  else {
+        guard bangLimits == 0 || actor.bangsPlayed < bangLimits  else {
             return nil
         }
         

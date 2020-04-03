@@ -17,6 +17,8 @@ class Player: PlayerProtocol {
     var health: Int
     var hand: [CardProtocol]
     var inPlay: [CardProtocol]
+    var bangsPlayed: Int
+    var lastDamage: DamageEvent?
     
     init(role: Role?,
          figureName: FigureName,
@@ -26,7 +28,9 @@ class Player: PlayerProtocol {
          maxHealth: Int,
          health: Int,
          hand: [CardProtocol],
-         inPlay: [CardProtocol]) {
+         inPlay: [CardProtocol],
+         bangsPlayed: Int,
+         lastDamage: DamageEvent?) {
         self.role = role
         self.figureName = figureName
         self.imageName = imageName
@@ -36,6 +40,8 @@ class Player: PlayerProtocol {
         self.health = health
         self.hand = hand
         self.inPlay = inPlay
+        self.bangsPlayed = bangsPlayed
+        self.lastDamage = lastDamage
     }
     
     var identifier: String {

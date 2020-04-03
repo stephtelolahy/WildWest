@@ -50,9 +50,9 @@ class DrawsCardOnLoseHealthMatcherTests: XCTestCase {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
+            .lastDamage(is: DamageEvent(damage: 1, source: .byPlayer("p1")))
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
-            .damageEvents(are: DamageEvent(playerId: "p1", source: .byPlayer("p1")))
         let move = GameMove(name: .drawsCardOnLoseHealth, actorId: "p1")
         
         // When
@@ -66,9 +66,9 @@ class DrawsCardOnLoseHealthMatcherTests: XCTestCase {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
+            .lastDamage(is: DamageEvent(damage: 3, source: .byDynamite))
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
-            .damageEvents(are: DamageEvent(playerId: "p1", source: .byDynamite))
         let move = GameMove(name: .drawsCardOnLoseHealth, actorId: "p1")
         
         // When

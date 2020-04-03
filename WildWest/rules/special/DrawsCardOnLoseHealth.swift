@@ -20,23 +20,12 @@ class DrawsCardOnLoseHealthMatcher: MoveMatcherProtocol {
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .drawsCardOnLoseHealth = move.name,
-            let damageEvent = state.damageEvents.last,
-            damageEvent.playerId == move.actorId else {
+            let actor = state.player(move.actorId),
+            let damageEvent = actor.lastDamage else {
                 return nil
         }
         
         return [.playerPullFromDeck(move.actorId, damageEvent.damage)]
-    }
-}
-
-private extension DamageEvent {
-    var damage: Int {
-        switch source {
-        case .byPlayer:
-            return 1
-        case .byDynamite:
-            return 3
-        }
     }
 }
 

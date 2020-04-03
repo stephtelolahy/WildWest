@@ -18,12 +18,12 @@ class DrawsCardFromPlayerDamagedHimMatcherTests: XCTestCase {
             .identified(by: "p1")
             .abilities(are: [.drawsCardFromPlayerDamagedHim: true])
             .health(is: 2)
+            .lastDamage(is: DamageEvent(damage: 1, source: .byPlayer("p2")))
         let mockPlayer2 = MockPlayerProtocol()
             .identified(by: "p2")
             .holding(MockCardProtocol().identified(by: "c2"))
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1, mockPlayer2)
-            .damageEvents(are: DamageEvent(playerId: "p1", source: .byPlayer("p2")))
         let move = GameMove(name: .pass, actorId: "p1")
         
         // When
@@ -39,12 +39,12 @@ class DrawsCardFromPlayerDamagedHimMatcherTests: XCTestCase {
             .identified(by: "p1")
             .abilities(are: [.drawsCardFromPlayerDamagedHim: true])
             .health(is: 2)
+            .lastDamage(is: DamageEvent(damage: 1, source: .byPlayer("p1")))
         let mockPlayer2 = MockPlayerProtocol()
             .identified(by: "p2")
             .noCardsInHand()
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1, mockPlayer2)
-            .damageEvents(are: DamageEvent(playerId: "p1", source: .byPlayer("p2")))
         let move = GameMove(name: .pass, actorId: "p1")
         
         // When
@@ -60,10 +60,10 @@ class DrawsCardFromPlayerDamagedHimMatcherTests: XCTestCase {
             .identified(by: "p1")
             .abilities(are: [.drawsCardFromPlayerDamagedHim: true])
             .health(is: 2)
+            .lastDamage(is: DamageEvent(damage: 1, source: .byPlayer("p1")))
             .holding(MockCardProtocol().identified(by: "c1"))
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
-            .damageEvents(are: DamageEvent(playerId: "p1", source: .byPlayer("p1")))
         let move = GameMove(name: .pass, actorId: "p1")
         
         // When

@@ -32,7 +32,9 @@ class GameSetup: GameSetupProtocol {
                           maxHealth: health,
                           health: health,
                           hand: hand,
-                          inPlay: [])
+                          inPlay: [],
+                          bangsPlayed: 0,
+                          lastDamage: nil)
         }
         
         return GameState(players: players,
@@ -40,8 +42,6 @@ class GameSetup: GameSetupProtocol {
                          discardPile: [],
                          turn: nil,
                          challenge: nil,
-                         bangsPlayed: 0,
-                         damageEvents: [],
                          generalStore: [],
                          outcome: nil,
                          validMoves: [:],

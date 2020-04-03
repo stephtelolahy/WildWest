@@ -17,6 +17,8 @@ protocol PlayerProtocol {
     var health: Int { get }
     var hand: [CardProtocol] { get }
     var inPlay: [CardProtocol] { get }
+    var bangsPlayed: Int { get }
+    var lastDamage: DamageEvent? { get }
 }
 
 enum Role: String {

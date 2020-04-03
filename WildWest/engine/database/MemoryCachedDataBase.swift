@@ -32,10 +32,6 @@ class MemoryCachedDataBase: GameDatabaseProtocol {
         mutableState.challenge = challenge
     }
     
-    func setBangsPlayed(_ bangsPlayed: Int) {
-        mutableState.bangsPlayed = bangsPlayed
-    }
-    
     func addExecutedMove(_ move: GameMove) {
         mutableState.executedMoves.append(move)
     }
@@ -54,10 +50,6 @@ class MemoryCachedDataBase: GameDatabaseProtocol {
     
     func setOutcome(_ outcome: GameOutcome) {
         mutableState.outcome = outcome
-    }
-    
-    func addDamageEvent(_ event: DamageEvent) {
-        mutableState.damageEvents.append(event)
     }
     
     /// Deck
@@ -99,6 +91,14 @@ class MemoryCachedDataBase: GameDatabaseProtocol {
     
     func playerRemoveInPlay(_ playerId: String, _ cardId: String) -> CardProtocol? {
         mutablePlayer(playerId)?.inPlay.removeFirst(where: { $0.identifier == cardId })
+    }
+    
+    func playerSetBangsPlayed(_ playerId: String, _ bangsPlayed: Int) {
+        mutablePlayer(playerId)?.bangsPlayed = bangsPlayed
+    }
+    
+    func playerSetDamageEvent(_ playerId: String, _ event: DamageEvent) {
+        mutablePlayer(playerId)?.lastDamage = event
     }
 }
 

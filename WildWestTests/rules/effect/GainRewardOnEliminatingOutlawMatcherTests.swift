@@ -14,10 +14,13 @@ class GainRewardOnEliminatingOutlawMatcherTests: XCTestCase {
     
     func test_ShouldGainReward_IfEliminatingOutlaw() {
         // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .role(is: .outlaw)
+            .lastDamage(is: DamageEvent(damage: 1, source: .byPlayer("p2")))
         let mockState = MockGameStateProtocol()
             .players(are: MockPlayerProtocol().identified(by: "p2"))
-            .eliminated(are: MockPlayerProtocol().identified(by: "p1").role(is: .outlaw))
-            .damageEvents(are: DamageEvent(playerId: "p1", source: .byPlayer("p2")))
+            .eliminated(are: mockPlayer1)
         let move = GameMove(name: .eliminate, actorId: "p1")
         
         // When
@@ -29,9 +32,12 @@ class GainRewardOnEliminatingOutlawMatcherTests: XCTestCase {
     
     func test_ShouldNotGainReward_IfOutlawIsEliminatedByDynamite() {
         // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .role(is: .outlaw)
+            .lastDamage(is: DamageEvent(damage: 2, source: .byDynamite))
         let mockState = MockGameStateProtocol()
-            .eliminated(are: MockPlayerProtocol().identified(by: "p1").role(is: .outlaw))
-            .damageEvents(are: DamageEvent(playerId: "p1", source: .byDynamite))
+            .eliminated(are: mockPlayer1)
         let move = GameMove(name: .eliminate, actorId: "p1")
         
         // When
