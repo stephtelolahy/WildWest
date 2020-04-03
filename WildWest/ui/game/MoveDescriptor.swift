@@ -58,6 +58,7 @@ class MoveDescriptor: MoveDescriptorProtocol {
             "passDynamite": "💣",
             "startGame": "",
             "drawsCardOnLoseHealth": "💰",
-            "drawsCardFromPlayerDamagedHim": "‼️"
+            "drawsCardFromPlayerDamagedHim": "‼️",
+            "discardExcessCards": "❌"
         ]
 }
