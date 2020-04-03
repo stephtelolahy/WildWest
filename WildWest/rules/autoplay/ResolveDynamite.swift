@@ -33,13 +33,14 @@ class ExplodeDynamiteMatcher: MoveMatcherProtocol {
         updates.append(.flipOverFirstDeckCard)
         
         let dynamiteDamage = 3
-        let immediateDamage = (actor.health <= dynamiteDamage) ? actor.health - 1 : 0
-        let remainingDamage = dynamiteDamage - immediateDamage
-        
-        updates.append(.setChallenge(Challenge(name: .dynamiteExploded, damage: remainingDamage)))
-        
+        let immediateDamage = actor.health <= dynamiteDamage ? actor.health - 1 : dynamiteDamage
         if immediateDamage > 0 {
             updates.append(.playerLooseHealth(actor.identifier, immediateDamage, .byDynamite))
+        }
+        
+        let remainingDamage = dynamiteDamage - immediateDamage
+        if remainingDamage > 0 {
+            updates.append(.setChallenge(Challenge(name: .dynamiteExploded, damage: remainingDamage)))
         }
         
         updates.append(.playerDiscardInPlay(move.actorId, cardId))
