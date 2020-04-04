@@ -9,8 +9,11 @@
 extension GameStateProtocol {
     
     func observed(by playerId: String?) -> GameStateProtocol {
-        let updatedPlayers = players.map { player -> PlayerProtocol in
-            let shouldHideRole = player.identifier != playerId && player.role != .sheriff && outcome == nil
+        let updatedPlayers = allPlayers.map { player -> PlayerProtocol in
+            let shouldHideRole = player.health > 0
+                && player.identifier != playerId
+                && player.role != .sheriff
+                && outcome == nil
             let role: Role? = shouldHideRole ? nil : player.role
             return Player(role: role,
                           figureName: player.figureName,
@@ -24,7 +27,7 @@ extension GameStateProtocol {
                           bangsPlayed: player.bangsPlayed,
                           lastDamage: player.lastDamage)
         }
-        return GameState(players: updatedPlayers,
+        return GameState(allPlayers: updatedPlayers,
                          deck: deck,
                          discardPile: discardPile,
                          turn: turn,
@@ -32,7 +35,6 @@ extension GameStateProtocol {
                          generalStore: generalStore,
                          outcome: outcome,
                          validMoves: validMoves,
-                         executedMoves: executedMoves,
-                         eliminated: eliminated)
+                         executedMoves: executedMoves)
     }
 }

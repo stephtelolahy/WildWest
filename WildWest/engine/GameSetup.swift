@@ -37,7 +37,7 @@ class GameSetup: GameSetupProtocol {
                           lastDamage: nil)
         }
         
-        return GameState(players: players,
+        return GameState(allPlayers: players,
                          deck: deck,
                          discardPile: [],
                          turn: nil,
@@ -45,7 +45,6 @@ class GameSetup: GameSetupProtocol {
                          generalStore: [],
                          outcome: nil,
                          validMoves: [:],
-                         executedMoves: [],
-                         eliminated: [])
+                         executedMoves: [])
     }
 }

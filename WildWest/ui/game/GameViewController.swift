@@ -12,13 +12,6 @@ import RxSwift
 
 class GameViewController: UIViewController, Subscribable {
     
-    // MARK: Constants
-    
-    private enum Constants {
-        static let spacing: CGFloat = 4.0
-        static let ratio: CGFloat = 250.0 / 389.0
-    }
-    
     // MARK: IBOutlets
     
     @IBOutlet private weak var endTurnButton: UIButton!
@@ -57,8 +50,6 @@ class GameViewController: UIViewController, Subscribable {
         
         let layout = playersCollectionView.collectionViewLayout as? GameCollectionViewLayout
         layout?.delegate = self
-        
-        actionsCollectionView.setItemSpacing(Constants.spacing)
         
         guard let engine = self.engine else {
             return
@@ -156,11 +147,7 @@ extension GameViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell",
-                                                       for: indexPath) as? MessageCell else {
-                                                        return UITableViewCell()
-        }
-        
+        let cell = tableView.dequeueReusableCell(with: MessageCell.self, for: indexPath)
         cell.update(with: messages[indexPath.row])
         return cell
     }
@@ -228,25 +215,6 @@ extension GameViewController: UICollectionViewDelegate {
         playMoveSelector.selectMove(within: moves) { [weak self] move in
             self?.engine?.queue(move)
         }
-    }
-}
-
-extension GameViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == playersCollectionView {
-            fatalError("Illegal state")
-        } else {
-            return actionCellSize(collectionView)
-        }
-    }
-    
-    private func actionCellSize(_ collectionView: UICollectionView) -> CGSize {
-        let height: CGFloat = collectionView.bounds.height - 2 * Constants.spacing
-        let width: CGFloat = height * Constants.ratio
-        return CGSize(width: width, height: height)
     }
 }
 

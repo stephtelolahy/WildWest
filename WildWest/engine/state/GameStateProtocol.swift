@@ -8,12 +8,12 @@
 
 protocol GameStateProtocol {
     var players: [PlayerProtocol] { get }
+    var allPlayers: [PlayerProtocol] { get }
     var deck: [CardProtocol] { get }
     var discardPile: [CardProtocol] { get }
     var turn: String? { get }
     var challenge: Challenge? { get }
     var generalStore: [CardProtocol] { get }
-    var eliminated: [PlayerProtocol] { get }
     var outcome: GameOutcome? { get }
     var validMoves: [String: [GameMove]] { get }
     var executedMoves: [GameMove] { get }

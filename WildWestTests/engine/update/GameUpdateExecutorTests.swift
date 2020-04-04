@@ -276,24 +276,6 @@ class GameUpdateExecutorTests: XCTestCase {
         verify(mockDatabase).addDiscard(card(equalTo: mockCard))
     }
     
-    // MARK: - EliminatePlayer
-    
-    func test_RemoveFromActivePlayers_IfEliminating() {
-        // Given
-        let mockPlayer = MockPlayerProtocol()
-        Cuckoo.stub(mockDatabase) { mock in
-            when(mock.removePlayer("p1")).thenReturn(mockPlayer)
-        }
-        let update = GameUpdate.eliminatePlayer("p1")
-        
-        // When
-        sut.execute(update, in: mockDatabase)
-        
-        // Assert
-        verify(mockDatabase).removePlayer("p1")
-        verify(mockDatabase).addEliminated(player(equalTo: mockPlayer))
-    }
-    
     // MARK: - GainLifePoints
     
     func test_playerSetHealth_IfGainLifePoints() {

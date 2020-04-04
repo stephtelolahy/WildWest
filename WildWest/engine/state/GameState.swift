@@ -8,18 +8,17 @@
 
 class GameState: GameStateProtocol {
     
-    var players: [PlayerProtocol]
+    var allPlayers: [PlayerProtocol]
     var deck: [CardProtocol]
     var discardPile: [CardProtocol]
     var turn: String?
     var challenge: Challenge?
     var generalStore: [CardProtocol]
-    var eliminated: [PlayerProtocol]
     var outcome: GameOutcome?
     var validMoves: [String: [GameMove]]
     var executedMoves: [GameMove]
     
-    init(players: [PlayerProtocol],
+    init(allPlayers: [PlayerProtocol],
          deck: [CardProtocol],
          discardPile: [CardProtocol],
          turn: String?,
@@ -27,9 +26,8 @@ class GameState: GameStateProtocol {
          generalStore: [CardProtocol],
          outcome: GameOutcome?,
          validMoves: [String: [GameMove]],
-         executedMoves: [GameMove],
-         eliminated: [PlayerProtocol]) {
-        self.players = players
+         executedMoves: [GameMove]) {
+        self.allPlayers = allPlayers
         self.deck = deck
         self.discardPile = discardPile
         self.turn = turn
@@ -38,6 +36,9 @@ class GameState: GameStateProtocol {
         self.outcome = outcome
         self.executedMoves = executedMoves
         self.validMoves = validMoves
-        self.eliminated = eliminated
+    }
+    
+    var players: [PlayerProtocol] {
+        allPlayers.filter { $0.health > 0 }
     }
 }

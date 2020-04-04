@@ -11,7 +11,7 @@ class PenalizeSheriffOnEliminatingDeputyMatcher: MoveMatcherProtocol {
     
     func effect(onExecuting move: GameMove, in state: GameStateProtocol) -> GameMove? {
         guard case .eliminate = move.name,
-            let actor = state.eliminated.first(where: { $0.identifier == move.actorId }),
+            let actor = state.allPlayers.first(where: { $0.identifier == move.actorId }),
             actor.role == .deputy,
             let damageEvent = actor.lastDamage,
             case let .byPlayer(offenderId) = damageEvent.source,

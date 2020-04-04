@@ -93,11 +93,6 @@ class GameUpdateExecutor: UpdateExecutorProtocol {
         case .flipOverFirstDeckCard:
             let card = database.deckRemoveFirst()
             database.addDiscard(card)
-            
-        case let .eliminatePlayer(playerId):
-            if let player = database.removePlayer(playerId) {
-                database.addEliminated(player)
-            }
         }
     }
 }

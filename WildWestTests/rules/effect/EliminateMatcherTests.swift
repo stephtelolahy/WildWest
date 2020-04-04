@@ -10,7 +10,7 @@ import XCTest
 import Cuckoo
 
 class EliminateMatcherTests: XCTestCase {
-
+    
     private let sut = EliminateMatcher()
     
     func test_ShouldEliminateActorAfterPass_IfHealthIsZero() {
@@ -29,7 +29,7 @@ class EliminateMatcherTests: XCTestCase {
         XCTAssertEqual(effect, GameMove(name: .eliminate, actorId: "p1"))
     }
     
-    func test_EliminatePlayer_IfEliminating() {
+    func test_DoNothing_IfPlayerEliminatedWithoutCards() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
@@ -47,7 +47,7 @@ class EliminateMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.eliminatePlayer("p1")])
+        XCTAssertEqual(updates, [])
     }
     
     func test_DiscardAllCards_IfPlayerEliminated() {
@@ -76,8 +76,7 @@ class EliminateMatcherTests: XCTestCase {
         XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
                                  .playerDiscardHand("p1", "c2"),
                                  .playerDiscardInPlay("p1", "c3"),
-                                 .playerDiscardInPlay("p1", "c4"),
-                                 .eliminatePlayer("p1")])
+                                 .playerDiscardInPlay("p1", "c4")])
     }
     
     func test_TriggerNextPlayerStartTurnChallenge_IfTurnPlayerIsEliminated() {
@@ -98,8 +97,7 @@ class EliminateMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.eliminatePlayer("p1"),
-                                 .setTurn("p2"),
+        XCTAssertEqual(updates, [.setTurn("p2"),
                                  .setChallenge(Challenge(name: .startTurn))])
     }
 }

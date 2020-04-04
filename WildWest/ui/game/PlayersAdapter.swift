@@ -26,7 +26,7 @@ class PlayersAdapter: PlayersAdapterProtocol {
     func buildItems(state: GameStateProtocol,
                     for controlledPlayerId: String?,
                     antiSheriffScore: [String: Int]) -> [PlayerItem] {
-        state.players.map {
+        state.allPlayers.map {
             PlayerItem(player: $0,
                        isControlled: $0.identifier == controlledPlayerId,
                        isTurn: $0.identifier == state.turn,

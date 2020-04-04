@@ -116,36 +116,6 @@ import Cuckoo
     
     
     
-     func removePlayer(_ playerId: String) -> PlayerProtocol? {
-        
-    return cuckoo_manager.call("removePlayer(_: String) -> PlayerProtocol?",
-            parameters: (playerId),
-            escapingParameters: (playerId),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.removePlayer(playerId))
-        
-    }
-    
-    
-    
-     func addEliminated(_ player: PlayerProtocol)  {
-        
-    return cuckoo_manager.call("addEliminated(_: PlayerProtocol)",
-            parameters: (player),
-            escapingParameters: (player),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.addEliminated(player))
-        
-    }
-    
-    
-    
      func deckRemoveFirst() -> CardProtocol {
         
     return cuckoo_manager.call("deckRemoveFirst() -> CardProtocol",
@@ -348,16 +318,6 @@ import Cuckoo
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "setOutcome(_: GameOutcome)", parameterMatchers: matchers))
 	    }
 	    
-	    func removePlayer<M1: Cuckoo.Matchable>(_ playerId: M1) -> Cuckoo.ProtocolStubFunction<(String), PlayerProtocol?> where M1.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: playerId) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "removePlayer(_: String) -> PlayerProtocol?", parameterMatchers: matchers))
-	    }
-	    
-	    func addEliminated<M1: Cuckoo.Matchable>(_ player: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(PlayerProtocol)> where M1.MatchedType == PlayerProtocol {
-	        let matchers: [Cuckoo.ParameterMatcher<(PlayerProtocol)>] = [wrap(matchable: player) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "addEliminated(_: PlayerProtocol)", parameterMatchers: matchers))
-	    }
-	    
 	    func deckRemoveFirst() -> Cuckoo.ProtocolStubFunction<(), CardProtocol> {
 	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "deckRemoveFirst() -> CardProtocol", parameterMatchers: matchers))
@@ -465,18 +425,6 @@ import Cuckoo
 	    }
 	    
 	    @discardableResult
-	    func removePlayer<M1: Cuckoo.Matchable>(_ playerId: M1) -> Cuckoo.__DoNotUse<(String), PlayerProtocol?> where M1.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: playerId) { $0 }]
-	        return cuckoo_manager.verify("removePlayer(_: String) -> PlayerProtocol?", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
-	    func addEliminated<M1: Cuckoo.Matchable>(_ player: M1) -> Cuckoo.__DoNotUse<(PlayerProtocol), Void> where M1.MatchedType == PlayerProtocol {
-	        let matchers: [Cuckoo.ParameterMatcher<(PlayerProtocol)>] = [wrap(matchable: player) { $0 }]
-	        return cuckoo_manager.verify("addEliminated(_: PlayerProtocol)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
 	    func deckRemoveFirst() -> Cuckoo.__DoNotUse<(), CardProtocol> {
 	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
 	        return cuckoo_manager.verify("deckRemoveFirst() -> CardProtocol", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
@@ -576,14 +524,6 @@ import Cuckoo
     }
     
      func setOutcome(_ outcome: GameOutcome)   {
-        return DefaultValueRegistry.defaultValue(for: (Void).self)
-    }
-    
-     func removePlayer(_ playerId: String) -> PlayerProtocol?  {
-        return DefaultValueRegistry.defaultValue(for: (PlayerProtocol?).self)
-    }
-    
-     func addEliminated(_ player: PlayerProtocol)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
@@ -1305,6 +1245,20 @@ import Cuckoo
     
     
     
+     var allPlayers: [PlayerProtocol] {
+        get {
+            return cuckoo_manager.getter("allPlayers",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.allPlayers)
+        }
+        
+    }
+    
+    
+    
      var deck: [CardProtocol] {
         get {
             return cuckoo_manager.getter("deck",
@@ -1375,20 +1329,6 @@ import Cuckoo
     
     
     
-     var eliminated: [PlayerProtocol] {
-        get {
-            return cuckoo_manager.getter("eliminated",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.eliminated)
-        }
-        
-    }
-    
-    
-    
      var outcome: GameOutcome? {
         get {
             return cuckoo_manager.getter("outcome",
@@ -1447,6 +1387,11 @@ import Cuckoo
 	    }
 	    
 	    
+	    var allPlayers: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [PlayerProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "allPlayers")
+	    }
+	    
+	    
 	    var deck: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [CardProtocol]> {
 	        return .init(manager: cuckoo_manager, name: "deck")
 	    }
@@ -1469,11 +1414,6 @@ import Cuckoo
 	    
 	    var generalStore: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [CardProtocol]> {
 	        return .init(manager: cuckoo_manager, name: "generalStore")
-	    }
-	    
-	    
-	    var eliminated: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [PlayerProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "eliminated")
 	    }
 	    
 	    
@@ -1512,6 +1452,11 @@ import Cuckoo
 	    }
 	    
 	    
+	    var allPlayers: Cuckoo.VerifyReadOnlyProperty<[PlayerProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "allPlayers", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
 	    var deck: Cuckoo.VerifyReadOnlyProperty<[CardProtocol]> {
 	        return .init(manager: cuckoo_manager, name: "deck", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
@@ -1534,11 +1479,6 @@ import Cuckoo
 	    
 	    var generalStore: Cuckoo.VerifyReadOnlyProperty<[CardProtocol]> {
 	        return .init(manager: cuckoo_manager, name: "generalStore", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
-	    var eliminated: Cuckoo.VerifyReadOnlyProperty<[PlayerProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "eliminated", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	    
@@ -1565,6 +1505,14 @@ import Cuckoo
     
     
      var players: [PlayerProtocol] {
+        get {
+            return DefaultValueRegistry.defaultValue(for: ([PlayerProtocol]).self)
+        }
+        
+    }
+    
+    
+     var allPlayers: [PlayerProtocol] {
         get {
             return DefaultValueRegistry.defaultValue(for: ([PlayerProtocol]).self)
         }
@@ -1607,14 +1555,6 @@ import Cuckoo
      var generalStore: [CardProtocol] {
         get {
             return DefaultValueRegistry.defaultValue(for: ([CardProtocol]).self)
-        }
-        
-    }
-    
-    
-     var eliminated: [PlayerProtocol] {
-        get {
-            return DefaultValueRegistry.defaultValue(for: ([PlayerProtocol]).self)
         }
         
     }

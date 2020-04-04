@@ -17,10 +17,13 @@ class GainRewardOnEliminatingOutlawMatcherTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
             .role(is: .outlaw)
+            .health(is: 0)
             .lastDamage(is: DamageEvent(damage: 1, source: .byPlayer("p2")))
+        let mockPlayer2 = MockPlayerProtocol()
+            .identified(by: "p2")
+            .health(is: 2)
         let mockState = MockGameStateProtocol()
-            .players(are: MockPlayerProtocol().identified(by: "p2"))
-            .eliminated(are: mockPlayer1)
+            .allPlayers(are: mockPlayer1, mockPlayer2)
         let move = GameMove(name: .eliminate, actorId: "p1")
         
         // When
@@ -35,9 +38,10 @@ class GainRewardOnEliminatingOutlawMatcherTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
             .role(is: .outlaw)
+            .health(is: 0)
             .lastDamage(is: DamageEvent(damage: 2, source: .byDynamite))
         let mockState = MockGameStateProtocol()
-            .eliminated(are: mockPlayer1)
+            .allPlayers(are: mockPlayer1)
         let move = GameMove(name: .eliminate, actorId: "p1")
         
         // When

@@ -12,8 +12,7 @@ protocol StatsBuilderProtocol {
 
 class StatsBuilder: StatsBuilderProtocol {
     func buildAntiSheriffScore(state: GameStateProtocol) -> [String: Int] {
-        let allPlayers = state.players + state.eliminated
-        guard let sheriffId = allPlayers.first(where: { $0.role == .sheriff })?.identifier else {
+        guard let sheriffId = state.allPlayers.first(where: { $0.role == .sheriff })?.identifier else {
             return [:]
         }
         

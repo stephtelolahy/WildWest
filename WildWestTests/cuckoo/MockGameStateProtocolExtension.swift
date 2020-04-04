@@ -17,9 +17,10 @@ extension MockGameStateProtocol {
         return self
     }
     
-    func eliminated(are players: PlayerProtocol...) -> MockGameStateProtocol {
+    func allPlayers(are players: PlayerProtocol...) -> MockGameStateProtocol {
         Cuckoo.stub(self) { mock in
-            when(mock.eliminated.get).thenReturn(players)
+            when(mock.allPlayers.get).thenReturn(players)
+            when(mock.players.get).thenReturn(players.filter { $0.health > 0 })
         }
         return self
     }
