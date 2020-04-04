@@ -18,7 +18,10 @@
         "name": "calamityJanet",
         "bullets": 4,
         "imageName": "01_calamityjanet",
-        "description": "she can use BANG! cards as Missed! cards and vice versa. If she plays a Missed! card as a BANG!, she cannot play another BANG! card that turn (unless she has a Volcanic in play)."
+        "description": "she can use BANG! cards as Missed! cards and vice versa. If she plays a Missed! card as a BANG!, she cannot play another BANG! card that turn (unless she has a Volcanic in play).",
+        "abilities": {
+            "canPlayBangAsMissAndViceVersa": true
+        }
     },
     {
         "name": "elGringo",

@@ -53,8 +53,7 @@ class GameConfiguration {
             EndTurnMatcher(),
             
             // manual reaction
-            DiscardMissedOnBangMatcher(),
-            DiscardMissedOnGatlingMatcher(),
+            DiscardMissedMatcher(),
             DiscardBangOnDuelMatcher(),
             DiscardBangOnIndiansMatcher(),
             DiscardBeerMatcher(),
@@ -70,7 +69,9 @@ class GameConfiguration {
             // Special
             DrawsCardOnLoseHealthMatcher(),
             DrawsCardFromPlayerDamagedHimMatcher(),
-            DrawsCardWhenHandIsEmptyMatcher()
+            DrawsCardWhenHandIsEmptyMatcher(),
+            BangWithMissedMatcher(),
+            MissWithBangMatcher()
         ]
     }
 }

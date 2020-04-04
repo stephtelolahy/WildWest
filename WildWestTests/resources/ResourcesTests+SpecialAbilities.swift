@@ -1,15 +1,15 @@
 //
-//  esourcesTests+SpecialAbilities.swift
+//  ResourcesTests+SpecialAbilities.swift
 //  WildWestTests
 //
-//  Created by Hugues Stephano Telolahy on 01/04/2020.
+//  Created by Hugues Stephano Telolahy on 04/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
 import XCTest
 
-class esourcesTests_SpecialAbilities: XCTestCase {
-    
+class ResourcesTests_SpecialAbilities: XCTestCase {
+
     private lazy var figures: [FigureProtocol] = {
         let jsonReader = JsonReader(bundle: Bundle(for: type(of: self)))
         let sut = GameConfiguration(jsonReader: jsonReader)
@@ -71,4 +71,13 @@ class esourcesTests_SpecialAbilities: XCTestCase {
         let figure = try XCTUnwrap(figures.first(where: { $0.name == .suzyLafayette }))
         XCTAssertEqual(figure.abilities[.drawsCardWhenHandIsEmpty], true)
     }
+    
+    func test_CalamityJanet_CanPlayBangAsMissAndViceVersa() throws {
+        // Given
+        // When
+        // Assert
+        let figure = try XCTUnwrap(figures.first(where: { $0.name == .calamityJanet }))
+        XCTAssertEqual(figure.abilities[.canPlayBangAsMissAndViceVersa], true)
+    }
+
 }
