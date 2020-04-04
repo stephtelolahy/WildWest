@@ -27,6 +27,10 @@ class GameEngine: GameEngineProtocol, Subscribable {
         self.commandSubject = DelaySubject(delay: updateDelay)
     }
     
+    var allPlayersCount: Int {
+        database.state.players.count
+    }
+    
     func start() {
         sub(commandSubject.observable.subscribe(onNext: { [weak self] move in
             guard let self = self else {

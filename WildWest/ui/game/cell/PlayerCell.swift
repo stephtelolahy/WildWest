@@ -27,30 +27,16 @@ class PlayerCell: UICollectionViewCell {
     
     private var item: PlayerItem?
     
-    func update(with item: PlayerItem?) {
+    func update(with item: PlayerItem) {
         self.item = item
         updateBackground()
         
-        guard let item = item else {
-            figureImageView.image = nil
-            nameLabel.text = nil
-            roleLabel.text = nil
-            healthLabel.text = nil
-            handLabel.text = nil
-            equipmentLabel.text = nil
-            figureImageView.alpha = 0.0
-            return
-        }
-        
         let player = item.player
         nameLabel.text = "\(player.figureName.rawValue.uppercased())\n\(item.score?.description ?? "")"
-        figureImageView.alpha = !item.isEliminated ? 1.0 : 0.4
+        let isEliminated = player.health == 0
+        figureImageView.alpha = !isEliminated ? 1.0 : 0.4
         equipmentLabel.text = player.inPlay.map { "[\($0.name.rawValue)]" }.joined(separator: "\n")
-        if let role = item.player.role {
-            roleLabel.text = role.rawValue
-        } else {
-            roleLabel.text = ""
-        }
+        roleLabel.text = item.player.role?.rawValue ?? ""
         healthLabel.text = ""
             + Array(player.health..<player.maxHealth).map { _ in "░" }
             + Array(0..<player.health).map { _ in "■" }.joined()
@@ -65,15 +51,13 @@ class PlayerCell: UICollectionViewCell {
         }
         
         if item.isAttacked {
-            backgroundColor = UIColor.orange
+            backgroundColor = UIColor.red
         } else if item.isHelped {
             backgroundColor = UIColor.blue.withAlphaComponent(0.4)
         } else if item.isTurn {
-            backgroundColor = UIColor.green.withAlphaComponent(0.4)
-        } else if item.isControlled {
-            backgroundColor = UIColor.white.withAlphaComponent(0.4)
+            backgroundColor = UIColor.orange
         } else {
-            backgroundColor = .clear
+            backgroundColor = UIColor.brown.withAlphaComponent(0.4)
         }
     }
 }

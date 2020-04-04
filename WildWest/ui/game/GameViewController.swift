@@ -34,8 +34,7 @@ class GameViewController: UIViewController, Subscribable {
     var aiAgents: [AIPlayerAgentProtocol] = []
     var controlledPlayerId: String?
     
-    private var playerIndexes: [Int: String] = [:]
-    private var playerItems: [PlayerItem?] = []
+    private var playerItems: [PlayerItem] = []
     private var actionItems: [ActionItem] = []
     private var messages: [String] = []
     private var antiSheriffScore: [String: Int] = [:]
@@ -55,7 +54,10 @@ class GameViewController: UIViewController, Subscribable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        playersCollectionView.setItemSpacing(Constants.spacing)
+        
+        let layout = playersCollectionView.collectionViewLayout as? GameCollectionViewLayout
+        layout?.delegate = self
+        
         actionsCollectionView.setItemSpacing(Constants.spacing)
         
         guard let engine = self.engine else {
@@ -87,16 +89,10 @@ private extension GameViewController {
     
     func update(with state: GameStateProtocol) {
         
-        if playerIndexes.isEmpty {
-            let playerIds = state.players.map { $0.identifier }
-            playerIndexes = playerAdapter.buildIndexes(playerIds: playerIds, controlledId: controlledPlayerId)
-        }
-        
         antiSheriffScore = statsBuilder.buildAntiSheriffScore(state: state)
         
         playerItems = playerAdapter.buildItems(state: state,
                                                for: controlledPlayerId,
-                                               playerIndexes: playerIndexes,
                                                antiSheriffScore: antiSheriffScore)
         playersCollectionView.reloadData()
         
@@ -224,11 +220,7 @@ extension GameViewController: UICollectionViewDelegate {
     }
     
     private func playersCollectionViewDidSelectItem(at indexPath: IndexPath) {
-        guard let player = playerItems[indexPath.row]?.player else {
-            return
-        }
-        
-        playerDescriptor.display(player)
+        playerDescriptor.display(playerItems[indexPath.row].player)
     }
     
     private func actionsCollectionViewDidSelectItem(at indexPath: IndexPath) {
@@ -245,23 +237,26 @@ extension GameViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == playersCollectionView {
-            return playerCellSize(collectionView)
+            fatalError("Illegal state")
         } else {
             return actionCellSize(collectionView)
         }
-    }
-    
-    private func playerCellSize(_ collectionView: UICollectionView) -> CGSize {
-        let totalHeight = collectionView.bounds.height - 4 * Constants.spacing
-        let height = totalHeight / 3
-        let totalWidth = collectionView.bounds.width - 4 * Constants.spacing
-        let width = totalWidth / 3
-        return CGSize(width: width, height: height)
     }
     
     private func actionCellSize(_ collectionView: UICollectionView) -> CGSize {
         let height: CGFloat = collectionView.bounds.height - 2 * Constants.spacing
         let width: CGFloat = height * Constants.ratio
         return CGSize(width: width, height: height)
+    }
+}
+
+extension GameViewController: GameCollectionViewLayoutDelegate {
+    
+    func numberOfItemsForGameCollectionViewLayout(layout: GameCollectionViewLayout) -> Int {
+        guard let engine = self.engine else {
+            return 0
+        }
+        
+        return engine.allPlayersCount
     }
 }

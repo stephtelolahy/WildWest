@@ -41,8 +41,7 @@ class PlayMoveSelector: PlayMoveSelectorProtocol {
             return
         }
         
-        if  moves.count == 1,
-            let uniqueMove = moves.first {
+        if let uniqueMove = moves.first {
             completion(uniqueMove)
             return
         }
