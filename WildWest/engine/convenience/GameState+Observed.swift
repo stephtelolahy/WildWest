@@ -13,19 +13,22 @@ extension GameStateProtocol {
             let shouldHideRole = player.identifier != playerId && player.role != .sheriff && outcome == nil
             let role: Role? = shouldHideRole ? nil : player.role
             return Player(role: role,
-                          figure: player.figure,
+                          figureName: player.figureName,
+                          imageName: player.imageName,
+                          description: player.description,
+                          abilities: player.abilities,
                           maxHealth: player.maxHealth,
                           health: player.health,
                           hand: player.hand,
-                          inPlay: player.inPlay)
+                          inPlay: player.inPlay,
+                          bangsPlayed: player.bangsPlayed,
+                          lastDamage: player.lastDamage)
         }
         return GameState(players: updatedPlayers,
                          deck: deck,
                          discardPile: discardPile,
                          turn: turn,
                          challenge: challenge,
-                         bangsPlayed: bangsPlayed,
-                         damageEvents: damageEvents,
                          generalStore: generalStore,
                          outcome: outcome,
                          validMoves: validMoves,

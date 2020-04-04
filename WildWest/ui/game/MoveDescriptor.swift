@@ -48,7 +48,7 @@ class MoveDescriptor: MoveDescriptorProtocol {
             "StartTurn": "🔥",
             "WellsFargo": "💰",
             "Eliminate": "☠️",
-            "Reward": "🎁",
+            "gainRewardOnEliminatingOutlaw": "🎁",
             "Penalize": "⚠️",
             "stayInJail": "😞",
             "escapeFromJail": "😅",
@@ -56,6 +56,9 @@ class MoveDescriptor: MoveDescriptorProtocol {
             "failBarrel": "😞",
             "explodeDynamite": "💥",
             "passDynamite": "💣",
-            "startGame": ""
+            "startGame": "",
+            "drawsCardOnLoseHealth": "💰",
+            "drawsCardFromPlayerDamagedHim": "‼️",
+            "discardExcessCards": "❌"
         ]
 }

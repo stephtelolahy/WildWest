@@ -210,7 +210,7 @@ class GameUpdateExecutorTests: XCTestCase {
         sut.execute(update, in: mockDatabase)
         
         // Assert
-        verify(mockDatabase).setBangsPlayed(0)
+        verify(mockDatabase).playerSetBangsPlayed("p1", 0)
     }
     
     // MARK: - SetChallenge
@@ -241,7 +241,9 @@ class GameUpdateExecutorTests: XCTestCase {
     
     func test_IncrementBangsPlayed_IfSettingBangChallenge() {
         // Given
-        let mockState = MockGameStateProtocol().bangsPlayed(is: 0)
+        let mockState = MockGameStateProtocol()
+            .currentTurn(is: "px")
+            .players(are: MockPlayerProtocol().identified(by: "px").bangsPlayed(is: 0))
         Cuckoo.stub(mockDatabase) { mock in
             when(mock.state.get).thenReturn(mockState)
         }
@@ -251,7 +253,7 @@ class GameUpdateExecutorTests: XCTestCase {
         sut.execute(update, in: mockDatabase)
         
         // Assert
-        verify(mockDatabase).setBangsPlayed(1)
+        verify(mockDatabase).playerSetBangsPlayed("px", 1)
     }
     
     // MARK: - FlipOverFirstDeck
@@ -329,8 +331,8 @@ class GameUpdateExecutorTests: XCTestCase {
         // Assert
         verify(mockDatabase).state.get()
         verify(mockDatabase).playerSetHealth("p1", 2)
-        let expectedEvent = DamageEvent(playerId: "p1", source: .byPlayer("p2"))
-        verify(mockDatabase).addDamageEvent(equal(to: expectedEvent))
+        let expectedEvent = DamageEvent(damage: 1, source: .byPlayer("p2"))
+        verify(mockDatabase).playerSetDamageEvent("p1", equal(to: expectedEvent))
         verifyNoMoreInteractions(mockDatabase)
     }
     
@@ -349,8 +351,8 @@ class GameUpdateExecutorTests: XCTestCase {
         // Assert
         verify(mockDatabase).state.get()
         verify(mockDatabase).playerSetHealth("p1", 0)
-        let expectedEvent = DamageEvent(playerId: "p1", source: .byDynamite)
-        verify(mockDatabase).addDamageEvent(equal(to: expectedEvent))
+        let expectedEvent = DamageEvent(damage: 3, source: .byDynamite)
+        verify(mockDatabase).playerSetDamageEvent("p1", equal(to: expectedEvent))
         verifyNoMoreInteractions(mockDatabase)
     }
     

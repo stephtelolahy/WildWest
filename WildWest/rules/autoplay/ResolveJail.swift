@@ -8,7 +8,7 @@
 
 class StayInJailMatcher: MoveMatcherProtocol {
     
-    func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
+    func autoPlayMove(matching state: GameStateProtocol) -> GameMove? {
         guard let challenge = state.challenge,
             case .startTurn = challenge.name,
             let actor = state.player(state.turn),
@@ -19,7 +19,7 @@ class StayInJailMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        return [GameMove(name: .stayInJail, actorId: actor.identifier, cardId: card.identifier)]
+        return GameMove(name: .stayInJail, actorId: actor.identifier, cardId: card.identifier)
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
@@ -37,7 +37,7 @@ class StayInJailMatcher: MoveMatcherProtocol {
 
 class EscapeFromJailMatcher: MoveMatcherProtocol {
     
-    func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
+    func autoPlayMove(matching state: GameStateProtocol) -> GameMove? {
         guard let challenge = state.challenge,
             case .startTurn = challenge.name,
             let actor = state.player(state.turn),
@@ -48,7 +48,7 @@ class EscapeFromJailMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        return [GameMove(name: .escapeFromJail, actorId: actor.identifier, cardId: card.identifier)]
+        return GameMove(name: .escapeFromJail, actorId: actor.identifier, cardId: card.identifier)
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {

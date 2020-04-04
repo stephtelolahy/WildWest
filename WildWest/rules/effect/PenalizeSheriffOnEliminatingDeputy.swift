@@ -13,8 +13,7 @@ class PenalizeSheriffOnEliminatingDeputyMatcher: MoveMatcherProtocol {
         guard case .eliminate = move.name,
             let actor = state.eliminated.first(where: { $0.identifier == move.actorId }),
             actor.role == .deputy,
-            let damageEvent = state.damageEvents.last,
-            damageEvent.playerId == actor.identifier,
+            let damageEvent = actor.lastDamage,
             case let .byPlayer(offenderId) = damageEvent.source,
             let offender = state.player(offenderId),
             case .sheriff = offender.role else {

@@ -26,8 +26,8 @@ class DiscardExcessCardMatcherTests: XCTestCase {
         let moves = sut.validMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .discard, actorId: "p1", cardId: "c1"),
-                               GameMove(name: .discard, actorId: "p1", cardId: "c2")])
+        XCTAssertEqual(moves, [GameMove(name: .discardExcessCards, actorId: "p1", cardId: "c1"),
+                               GameMove(name: .discardExcessCards, actorId: "p1", cardId: "c2")])
     }
     
     func test_DiscardCardAndChangeTurn_IfExecutingDiscardExcessCard() {
@@ -42,7 +42,7 @@ class DiscardExcessCardMatcherTests: XCTestCase {
             .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2)
             .challenge(is: Challenge(name: .discardExcessCards))
-        let move = GameMove(name: .discard, actorId: "p1", cardId: "c1")
+        let move = GameMove(name: .discardExcessCards, actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(move, in: mockState)
@@ -66,7 +66,7 @@ class DiscardExcessCardMatcherTests: XCTestCase {
             .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2)
             .challenge(is: Challenge(name: .discardExcessCards))
-        let move = GameMove(name: .discard, actorId: "p1", cardId: "c1")
+        let move = GameMove(name: .discardExcessCards, actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(move, in: mockState)

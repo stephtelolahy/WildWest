@@ -12,8 +12,7 @@ class GainRewardOnEliminatingOutlawMatcher: MoveMatcherProtocol {
         guard case .eliminate = move.name,
             let actor = state.eliminated.first(where: { $0.identifier == move.actorId }),
             actor.role == .outlaw,
-            let damageEvent = state.damageEvents.last,
-            damageEvent.playerId == actor.identifier,
+            let damageEvent = actor.lastDamage,
             case let .byPlayer(offenderId) = damageEvent.source,
             state.players.contains(where: { $0.identifier == offenderId }) else {
                 return nil

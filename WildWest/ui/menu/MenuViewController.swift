@@ -5,6 +5,7 @@
 //  Created by Hugues Stephano Telolahy on 01/03/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
+// swiftlint:disable implicitly_unwrapped_optional
 
 import UIKit
 import AVFoundation
@@ -14,23 +15,35 @@ class MenuViewController: UIViewController {
     @IBOutlet private weak var playersCountStepper: UIStepper!
     @IBOutlet private weak var playersCountLabel: UILabel!
     @IBOutlet private weak var playAsSheriffSwitch: UISwitch!
+    @IBOutlet private weak var figureLabel: UILabel!
+    @IBOutlet private weak var figureButton: UIButton!
+    @IBOutlet private weak var roleLabel: UILabel!
     
     private var audioPlayer: AVAudioPlayer?
     
-    private var allFigures: [FigureProtocol] = []
-    private var allCards: [CardProtocol] = []
-    private var allMatchers: [MoveMatcherProtocol] = []
+    private var allFigures: [FigureProtocol]!
+    private var allCards: [CardProtocol]!
+    private var allMatchers: [MoveMatcherProtocol]!
+    private var userPreferences: UserPreferences!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        playersCountStepper.value = 5
-        updatePlayersLabel()
         
         let jsonReader = JsonReader(bundle: Bundle.main)
         let config = GameConfiguration(jsonReader: jsonReader)
+        
         allFigures = config.allFigures
         allCards = config.allCards
         allMatchers = config.moveMatchers
+        
+        userPreferences = UserPreferences()
+        
+        playersCountStepper.value = Double(userPreferences.playersCount)
+        updatePlayersLabel()
+        
+        updateFigureImage()
+        
+        playAsSheriffSwitch.isOn = userPreferences.playAsSheriff
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,37 +57,65 @@ class MenuViewController: UIViewController {
     }
     
     @IBAction private func playButtonTapped(_ sender: Any) {
-        showFigureSelector(figures: allFigures.map { $0.name }) { [weak self] preferredFigure in
-            self?.startGame(preferredFigure: preferredFigure)
-        }
+        startGame()
     }
     
     @IBAction private func stepperValueChanged(_ sender: Any) {
+        userPreferences.playersCount = Int(playersCountStepper.value)
         updatePlayersLabel()
+    }
+    
+    @IBAction private func figureButtonTapped(_ sender: Any) {
+        showFigureSelector(figures: allFigures.map { $0.name }) { [weak self] figure in
+            self?.userPreferences.preferredFigure = figure?.rawValue ?? ""
+            self?.updateFigureImage()
+        }
+    }
+    
+    @IBAction private func playAsSheriffValueChanged(_ sender: Any) {
+        userPreferences.playAsSheriff = playAsSheriffSwitch.isOn
     }
 }
 
 private extension MenuViewController {
     
+    var preferredFigure: FigureName? {
+        allFigures.map { $0.name }.first(where: { $0.rawValue == userPreferences.preferredFigure })
+    }
+    
     var playersCount: Int {
-        Int(playersCountStepper.value)
+        userPreferences.playersCount
+    }
+    
+    var playAsSheriff: Bool {
+        userPreferences.playAsSheriff
     }
     
     func updatePlayersLabel() {
         playersCountLabel.text = "\(playersCount) players"
     }
     
-    func startGame(preferredFigure: FigureName?) {
+    func updateFigureImage() {
+        if let figure = allFigures.first(where: { $0.name == preferredFigure }) {
+            figureButton.setImage(UIImage(named: figure.imageName), for: .normal)
+            figureLabel.text = "Play as \(figure.name.rawValue)"
+        } else {
+            figureButton.setImage(#imageLiteral(resourceName: "01_random"), for: .normal)
+            figureLabel.text = "Play as random"
+        }
+    }
+    
+    func startGame() {
         
         let gameSetup = GameSetup()
         
         var roles = gameSetup.roles(for: playersCount).shuffled()
-        if playAsSheriffSwitch.isOn {
+        if playAsSheriff {
             roles = roles.starting(with: .sheriff)
         }
         
         var figures = allFigures.shuffled()
-        if let preferredFigure = preferredFigure {
+        if let preferredFigure = self.preferredFigure {
             figures = figures.starting(with: preferredFigure)
         }
         
@@ -166,10 +207,10 @@ private extension Array where Element == FigureProtocol {
     }
 }
 
-private extension Array where Element == Role {
-    func starting(with role: Role) -> [Role] {
+private extension Array where Element: Equatable {
+    func starting(with element: Element) -> [Element] {
         var array = self
-        while array.first != role {
+        while array.first != element {
             array = array.shuffled()
         }
         return array

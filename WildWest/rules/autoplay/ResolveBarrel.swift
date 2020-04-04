@@ -8,7 +8,7 @@
 
 class UseBarrelMatcher: MoveMatcherProtocol {
     
-    func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
+    func autoPlayMove(matching state: GameStateProtocol) -> GameMove? {
         guard let challenge = state.challenge,
             (challenge.name == .bang || challenge.name == .gatling),
             let actorId = challenge.actorId(in: state),
@@ -19,7 +19,7 @@ class UseBarrelMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        return [GameMove(name: .useBarrel, actorId: actor.identifier)]
+        return GameMove(name: .useBarrel, actorId: actor.identifier)
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
@@ -35,7 +35,7 @@ class UseBarrelMatcher: MoveMatcherProtocol {
 
 class FailBarelMatcher: MoveMatcherProtocol {
     
-    func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
+    func autoPlayMove(matching state: GameStateProtocol) -> GameMove? {
         guard let challenge = state.challenge,
             (challenge.name == .bang || challenge.name == .gatling),
             let actorId = challenge.actorId(in: state),
@@ -46,7 +46,7 @@ class FailBarelMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        return [GameMove(name: .failBarrel, actorId: actor.identifier)]
+        return GameMove(name: .failBarrel, actorId: actor.identifier)
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {

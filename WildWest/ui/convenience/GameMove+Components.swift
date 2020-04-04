@@ -23,7 +23,7 @@ extension Dictionary where Key == String, Value == String {
     func value(matching move: GameMove) -> String {
         let components = move.asComponents()
         for component in components {
-            let filtered = self.filter { component.lowercased().contains($0.key.lowercased()) }
+            let filtered = self.filter { component.lowercased().starts(with: $0.key.lowercased()) }
             if let match = filtered.first {
                 return match.value
             }

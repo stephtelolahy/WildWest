@@ -7,7 +7,7 @@
 //
 
 struct DamageEvent: Equatable {
-    let playerId: String
+    let damage: Int
     let source: DamageSource
 }
 

@@ -19,10 +19,10 @@ class StartGameTests: XCTestCase {
             .currentTurn(is: nil)
         
         // When
-        let moves = sut.autoPlayMoves(matching: mockState)
+        let move = sut.autoPlayMove(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .startGame, actorId: "p1")])
+        XCTAssertEqual(move, GameMove(name: .startGame, actorId: "p1"))
     }
     
     func test_SetTurn_IfStartingGame() {

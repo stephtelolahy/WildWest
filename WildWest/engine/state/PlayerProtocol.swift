@@ -9,11 +9,16 @@
 protocol PlayerProtocol {
     var identifier: String { get }
     var role: Role? { get }
-    var figure: FigureProtocol { get }
+    var figureName: FigureName { get }
+    var imageName: String { get }
+    var description: String { get }
+    var abilities: [AbilityName: Bool] { get }
     var maxHealth: Int { get }
     var health: Int { get }
     var hand: [CardProtocol] { get }
     var inPlay: [CardProtocol] { get }
+    var bangsPlayed: Int { get }
+    var lastDamage: DamageEvent? { get }
 }
 
 enum Role: String {

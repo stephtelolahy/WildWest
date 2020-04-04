@@ -21,36 +21,36 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1ml-If-Dys">
-                                <rect key="frame" x="65.5" y="133.5" width="244.5" height="400"/>
+                                <rect key="frame" x="67.5" y="133.5" width="240" height="400"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_splash" translatesAutoresizingMaskIntoConstraints="NO" id="nUc-dp-SOW" userLabel="logo">
-                                        <rect key="frame" x="70" y="0.0" width="104" height="104"/>
+                                        <rect key="frame" x="68" y="0.0" width="104" height="104"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="nUc-dp-SOW" secondAttribute="height" multiplier="1:1" id="iTc-HC-HH9"/>
                                         </constraints>
                                     </imageView>
-                                    <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Western Card Game\ by Stéphano T." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQg-zg-mUN">
-                                        <rect key="frame" x="0.0" y="148" width="244.5" height="20"/>
+                                    <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Western Card Game by Stéphano T." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQg-zg-mUN">
+                                        <rect key="frame" x="0.0" y="121.5" width="240" height="20"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="TgM-gl-AKs">
-                                        <rect key="frame" x="32" y="212" width="180.5" height="92"/>
+                                        <rect key="frame" x="19.5" y="159" width="201" height="171"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="y3J-eS-E6e">
-                                                <rect key="frame" x="0.0" y="0.0" width="180.5" height="32"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="201" height="32"/>
                                                 <subviews>
                                                     <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X players" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W7q-8B-UEd">
-                                                        <rect key="frame" x="0.0" y="6" width="57.5" height="20"/>
+                                                        <rect key="frame" x="0.0" y="6" width="78" height="20"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="20"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="7" minimumValue="4" maximumValue="7" translatesAutoresizingMaskIntoConstraints="NO" id="dkh-y9-bbs">
-                                                        <rect key="frame" x="86.5" y="0.0" width="94" height="32"/>
+                                                        <rect key="frame" x="107" y="0.0" width="94" height="32"/>
                                                         <connections>
                                                             <action selector="stepperValueChanged:" destination="8GX-Wa-ifS" eventType="valueChanged" id="v0n-ag-ZtQ"/>
                                                         </connections>
@@ -58,24 +58,50 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="QhL-NB-RAp">
-                                                <rect key="frame" x="0.0" y="61" width="180.5" height="31"/>
+                                                <rect key="frame" x="0.0" y="61" width="201" height="50"/>
                                                 <subviews>
-                                                    <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Play as Sheriff" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sPL-GZ-GWU">
-                                                        <rect key="frame" x="0.0" y="0.0" width="102.5" height="31"/>
+                                                    <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Play as BartCassidy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sPL-GZ-GWU">
+                                                        <rect key="frame" x="0.0" y="0.0" width="122" height="50"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="20"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LQx-hJ-6sV">
-                                                        <rect key="frame" x="131.5" y="0.0" width="51" height="31"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTm-YG-Cdb">
+                                                        <rect key="frame" x="151" y="0.0" width="50" height="50"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="50" id="MKo-lU-ZE4"/>
+                                                            <constraint firstAttribute="width" constant="50" id="zVp-1d-7Wn"/>
+                                                        </constraints>
+                                                        <state key="normal" image="01_bartcassidy"/>
+                                                        <connections>
+                                                            <action selector="figureButtonTapped:" destination="8GX-Wa-ifS" eventType="touchUpInside" id="uwx-qk-jvp"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="dbv-g7-PwJ">
+                                                <rect key="frame" x="0.0" y="140" width="201" height="31"/>
+                                                <subviews>
+                                                    <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Play as Sheriff" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZBx-XG-ZKw">
+                                                        <rect key="frame" x="0.0" y="0.0" width="123" height="31"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="20"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Ea-KQ-obZ">
+                                                        <rect key="frame" x="152" y="0.0" width="51" height="31"/>
+                                                        <connections>
+                                                            <action selector="playAsSheriffValueChanged:" destination="8GX-Wa-ifS" eventType="valueChanged" id="ba3-VO-aWt"/>
+                                                        </connections>
                                                     </switch>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s8o-qf-BAQ">
-                                        <rect key="frame" x="72" y="348" width="100" height="52"/>
+                                        <rect key="frame" x="70" y="348" width="100" height="52"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="cJz-6l-Jdk"/>
                                             <constraint firstAttribute="width" secondItem="s8o-qf-BAQ" secondAttribute="height" multiplier="557:291" id="d4G-rt-8LJ"/>
@@ -102,9 +128,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="h6d-G1-qO8"/>
                     <connections>
-                        <outlet property="playAsSheriffSwitch" destination="LQx-hJ-6sV" id="7Ud-hO-Vl2"/>
+                        <outlet property="figureButton" destination="xTm-YG-Cdb" id="lIm-LX-2HX"/>
+                        <outlet property="figureLabel" destination="sPL-GZ-GWU" id="Zeu-fq-rBJ"/>
+                        <outlet property="playAsSheriffSwitch" destination="3Ea-KQ-obZ" id="nA3-EE-sTl"/>
                         <outlet property="playersCountLabel" destination="W7q-8B-UEd" id="KXc-Hi-f35"/>
                         <outlet property="playersCountStepper" destination="dkh-y9-bbs" id="x8n-SB-vOh"/>
+                        <outlet property="roleLabel" destination="ZBx-XG-ZKw" id="Ia7-vd-hxn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4YQ-gS-3Ah" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -445,6 +474,7 @@
     <resources>
         <image name="01_back" width="160" height="247"/>
         <image name="01_barile" width="125" height="194.5"/>
+        <image name="01_bartcassidy" width="81" height="90"/>
         <image name="bg_board" width="400" height="600"/>
         <image name="bg_splash" width="104" height="58.5"/>
         <image name="ic_close" width="48" height="48"/>

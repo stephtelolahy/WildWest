@@ -9,27 +9,42 @@
 class Player: PlayerProtocol {
     
     let role: Role?
-    let figure: FigureProtocol
+    let figureName: FigureName
+    let imageName: String
+    let description: String
+    let abilities: [AbilityName: Bool]
     let maxHealth: Int
     var health: Int
     var hand: [CardProtocol]
     var inPlay: [CardProtocol]
+    var bangsPlayed: Int
+    var lastDamage: DamageEvent?
     
     init(role: Role?,
-         figure: FigureProtocol,
+         figureName: FigureName,
+         imageName: String,
+         description: String,
+         abilities: [AbilityName: Bool],
          maxHealth: Int,
          health: Int,
          hand: [CardProtocol],
-         inPlay: [CardProtocol]) {
+         inPlay: [CardProtocol],
+         bangsPlayed: Int,
+         lastDamage: DamageEvent?) {
         self.role = role
-        self.figure = figure
+        self.figureName = figureName
+        self.imageName = imageName
+        self.description = description
+        self.abilities = abilities
         self.maxHealth = maxHealth
         self.health = health
         self.hand = hand
         self.inPlay = inPlay
+        self.bangsPlayed = bangsPlayed
+        self.lastDamage = lastDamage
     }
     
     var identifier: String {
-        figure.name.rawValue
+        figureName.rawValue
     }
 }

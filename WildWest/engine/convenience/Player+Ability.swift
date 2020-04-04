@@ -9,7 +9,7 @@
 extension PlayerProtocol {
     
     var bangLimitsPerTurn: Int {
-        if figure.abilities[.hasNoLimitOnBangsPerTurn] == true {
+        if abilities[.hasNoLimitOnBangsPerTurn] == true {
             return 0
         }
         
@@ -35,7 +35,7 @@ extension PlayerProtocol {
             result += 1
         }
         
-        if figure.abilities[.hasScopeAllTimes] == true {
+        if abilities[.hasScopeAllTimes] == true {
             result += 1
         }
         
@@ -49,7 +49,7 @@ extension PlayerProtocol {
             result += 1
         }
         
-        if figure.abilities[.hasMustangAllTimes] == true {
+        if abilities[.hasMustangAllTimes] == true {
             result += 1
         }
         
@@ -63,7 +63,7 @@ extension PlayerProtocol {
             result += 1
         }
         
-        if figure.abilities[.hasBarrelAllTimes] == true {
+        if abilities[.hasBarrelAllTimes] == true {
             result += 1
         }
         

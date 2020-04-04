@@ -57,6 +57,6 @@ private extension UIViewController {
             }))
         }
         
-        present(alertController, animated: true)
+        forcePresent(alertController, animated: true)
     }
 }

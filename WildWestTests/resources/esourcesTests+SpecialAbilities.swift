@@ -47,5 +47,21 @@ class esourcesTests_SpecialAbilities: XCTestCase {
         let figure = try XCTUnwrap(figures.first(where: { $0.name == .paulRegret }))
         XCTAssertEqual(figure.abilities[.hasMustangAllTimes], true)
     }
+    
+    func test_BatCassidyDrawsACard_OnLoseHealth() throws {
+        // Given
+        // When
+        // Assert
+        let figure = try XCTUnwrap(figures.first(where: { $0.name == .bartCassidy }))
+        XCTAssertEqual(figure.abilities[.drawsCardOnLoseHealth], true)
+    }
+    
+    func test_Elgringo_OnDrawsCardFromPlayerDamagedHim() throws {
+        // Given
+        // When
+        // Assert
+        let figure = try XCTUnwrap(figures.first(where: { $0.name == .elGringo }))
+        XCTAssertEqual(figure.abilities[.drawsCardFromPlayerDamagedHim], true)
+    }
 
 }

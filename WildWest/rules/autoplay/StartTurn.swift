@@ -8,7 +8,7 @@
 
 class StartTurnMatcher: MoveMatcherProtocol {
     
-    func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
+    func autoPlayMove(matching state: GameStateProtocol) -> GameMove? {
         guard let challenge = state.challenge,
             case .startTurn = challenge.name,
             let actor = state.player(state.turn),
@@ -16,7 +16,7 @@ class StartTurnMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        return [GameMove(name: .startTurn, actorId: actor.identifier)]
+        return GameMove(name: .startTurn, actorId: actor.identifier)
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {

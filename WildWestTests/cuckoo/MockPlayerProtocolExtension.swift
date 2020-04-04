@@ -67,17 +67,26 @@ extension MockPlayerProtocol {
     }
     
     func withDefault() -> MockPlayerProtocol {
-        let defaultFigure = Figure(name: .bartCassidy, bullets: 4, imageName: "", description: "", abilities: [:])
-        Cuckoo.stub(self) { mock in
-            when(mock.figure.get).thenReturn(defaultFigure)
-        }
-        return self.withEnabledDefaultImplementation(PlayerProtocolStub())
+        return withEnabledDefaultImplementation(PlayerProtocolStub())
     }
     
     func abilities(are dictionary: [AbilityName: Bool]) -> MockPlayerProtocol {
-        let figure = Figure(name: .bartCassidy, bullets: 4, imageName: "", description: "", abilities: dictionary)
         Cuckoo.stub(self) { mock in
-            when(mock.figure.get).thenReturn(figure)
+            when(mock.abilities.get).thenReturn(dictionary)
+        }
+        return self
+    }
+    
+    func bangsPlayed(is shoots: Int) -> MockPlayerProtocol {
+        Cuckoo.stub(self) { mock in
+            when(mock.bangsPlayed.get).thenReturn(shoots)
+        }
+        return self
+    }
+    
+    func lastDamage(is event: DamageEvent) -> MockPlayerProtocol {
+        Cuckoo.stub(self) { mock in
+            when(mock.lastDamage.get).thenReturn(event)
         }
         return self
     }

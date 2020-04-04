@@ -12,13 +12,11 @@ protocol GameStateProtocol {
     var discardPile: [CardProtocol] { get }
     var turn: String? { get }
     var challenge: Challenge? { get }
-    var bangsPlayed: Int { get }
     var generalStore: [CardProtocol] { get }
     var eliminated: [PlayerProtocol] { get }
     var outcome: GameOutcome? { get }
     var validMoves: [String: [GameMove]] { get }
     var executedMoves: [GameMove] { get }
-    var damageEvents: [DamageEvent] { get }
 }
 
 enum GameOutcome: String, Equatable {

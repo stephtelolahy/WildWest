@@ -16,12 +16,12 @@ class DiscardExcessCardMatcher: MoveMatcherProtocol {
         }
         
         return actor.hand.map {
-            GameMove(name: .discard, actorId: actor.identifier, cardId: $0.identifier)
+            GameMove(name: .discardExcessCards, actorId: actor.identifier, cardId: $0.identifier)
         }
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .discard = move.name,
+        guard case .discardExcessCards = move.name,
             let challenge = state.challenge,
             case .discardExcessCards = challenge.name,
             let cardId = move.cardId,
@@ -37,4 +37,8 @@ class DiscardExcessCardMatcher: MoveMatcherProtocol {
                 .setTurn(state.nextTurn),
                 .setChallenge(Challenge(name: .startTurn))]
     }
+}
+
+extension MoveName {
+    static let discardExcessCards = MoveName("discardExcessCards")
 }

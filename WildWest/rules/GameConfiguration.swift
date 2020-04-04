@@ -65,7 +65,11 @@ class GameConfiguration {
             // Effect
             EliminateMatcher(),
             GainRewardOnEliminatingOutlawMatcher(),
-            PenalizeSheriffOnEliminatingDeputyMatcher()
+            PenalizeSheriffOnEliminatingDeputyMatcher(),
+            
+            // Special
+            DrawsCardOnLoseHealthMatcher(),
+            DrawsCardFromPlayerDamagedHimMatcher()
         ]
     }
 }

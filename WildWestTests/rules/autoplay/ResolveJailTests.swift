@@ -24,10 +24,10 @@ class StayInJailMatcherTests: XCTestCase {
             .topDeck(is: MockCardProtocol().suit(is: .spades))
         
         // When
-        let moves = sut.autoPlayMoves(matching: mockState)
+        let move = sut.autoPlayMove(matching: mockState)
         
         // assert
-        XCTAssertEqual(moves, [GameMove(name: .stayInJail, actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(move, GameMove(name: .stayInJail, actorId: "p1", cardId: "c1"))
     }
     
     func test_CannotResolveJail_IfPlayingDynamite() {
@@ -42,7 +42,7 @@ class StayInJailMatcherTests: XCTestCase {
             .challenge(is: Challenge(name: .startTurn))
         
         // When
-        let moves = sut.autoPlayMoves(matching: mockState)
+        let moves = sut.autoPlayMove(matching: mockState)
         
         // assert
         XCTAssertNil(moves)
@@ -82,10 +82,10 @@ class EscapeFromJailMatcherTests: XCTestCase {
             .topDeck(is: MockCardProtocol().suit(is: .hearts))
         
         // When
-        let moves = sut.autoPlayMoves(matching: mockState)
+        let move = sut.autoPlayMove(matching: mockState)
         
         // assert
-        XCTAssertEqual(moves, [GameMove(name: .escapeFromJail, actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(move, GameMove(name: .escapeFromJail, actorId: "p1", cardId: "c1"))
     }
     
     func test_DiscardJail_IfEscapeFromJail() {

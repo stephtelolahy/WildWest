@@ -14,13 +14,11 @@ protocol GameDatabaseProtocol {
     // Flags
     func setTurn(_ turn: String)
     func setChallenge(_ challenge: Challenge?)
-    func setBangsPlayed(_ bangsPlayed: Int)
     func addExecutedMove(_ move: GameMove)
     func setValidMoves(_ moves: [String: [GameMove]])
     func setOutcome(_ outcome: GameOutcome)
     func removePlayer(_ playerId: String) -> PlayerProtocol?
     func addEliminated(_ player: PlayerProtocol)
-    func addDamageEvent(_ event: DamageEvent)
     
     /// Deck
     func deckRemoveFirst() -> CardProtocol
@@ -34,4 +32,6 @@ protocol GameDatabaseProtocol {
     func playerRemoveHand(_ playerId: String, _ cardId: String) -> CardProtocol?
     func playerAddInPlay(_ playerId: String, _ card: CardProtocol)
     func playerRemoveInPlay(_ playerId: String, _ cardId: String) -> CardProtocol?
+    func playerSetBangsPlayed(_ playerId: String, _ bangsPlayed: Int)
+    func playerSetDamageEvent(_ playerId: String, _ event: DamageEvent)
 }

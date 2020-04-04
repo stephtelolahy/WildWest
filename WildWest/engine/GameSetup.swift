@@ -9,11 +9,12 @@
 class GameSetup: GameSetupProtocol {
     
     func roles(for playersCount: Int) -> [Role] {
-        guard playersCount >= 4 && playersCount <= 7 else {
+        let order: [Role] = [.sheriff, .outlaw, .outlaw, .renegade, .deputy, .outlaw, .deputy]
+        
+        guard playersCount <= order.count else {
             return []
         }
         
-        let order: [Role] = [.sheriff, .outlaw, .outlaw, .renegade, .deputy, .outlaw, .deputy]
         return Array(order.prefix(playersCount))
     }
     
@@ -24,11 +25,16 @@ class GameSetup: GameSetupProtocol {
             let health = role == .sheriff ? figure.bullets + 1 : figure.bullets
             let hand: [CardProtocol] = Array(1...health).map { _ in deck.removeFirst() }
             return Player(role: role,
-                          figure: figure,
+                          figureName: figure.name,
+                          imageName: figure.imageName,
+                          description: figure.description,
+                          abilities: figure.abilities,
                           maxHealth: health,
                           health: health,
                           hand: hand,
-                          inPlay: [])
+                          inPlay: [],
+                          bangsPlayed: 0,
+                          lastDamage: nil)
         }
         
         return GameState(players: players,
@@ -36,8 +42,6 @@ class GameSetup: GameSetupProtocol {
                          discardPile: [],
                          turn: nil,
                          challenge: nil,
-                         bangsPlayed: 0,
-                         damageEvents: [],
                          generalStore: [],
                          outcome: nil,
                          validMoves: [:],

@@ -26,7 +26,6 @@ class BangMatcherTests: XCTestCase {
             .players(are: mockPlayer1,
                      MockPlayerProtocol().identified(by: "p2").withDefault(),
                      MockPlayerProtocol().identified(by: "p3").withDefault())
-            .bangsPlayed(is: 0)
         
         // When
         let moves = sut.validMoves(matching: mockState)
@@ -50,7 +49,6 @@ class BangMatcherTests: XCTestCase {
             .players(are: mockPlayer1,
                      MockPlayerProtocol().identified(by: "p2").playing(MockCardProtocol().named(.mustang)).withDefault(),
                      MockPlayerProtocol().identified(by: "p3").playing(MockCardProtocol().named(.mustang)).withDefault())
-            .bangsPlayed(is: 0)
         
         // When
         let moves = sut.validMoves(matching: mockState)
@@ -72,7 +70,6 @@ class BangMatcherTests: XCTestCase {
             .players(are: mockPlayer1,
                      MockPlayerProtocol().identified(by: "p2").playing(MockCardProtocol().named(.mustang)).withDefault(),
                      MockPlayerProtocol().identified(by: "p3").playing(MockCardProtocol().named(.mustang)).withDefault())
-            .bangsPlayed(is: 0)
         
         // When
         let moves = sut.validMoves(matching: mockState)
@@ -87,13 +84,13 @@ class BangMatcherTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
             .holding(MockCardProtocol().named(.bang).identified(by: "c1"))
+            .bangsPlayed(is: 1)
             .withDefault()
         let mockPlayer2 = MockPlayerProtocol().identified(by: "p2")
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
             .currentTurn(is: "p1")
             .players(are: mockPlayer1, mockPlayer2)
-            .bangsPlayed(is: 1)
         
         // When
         let moves = sut.validMoves(matching: mockState)

@@ -8,13 +8,13 @@
 
 class StartGameMatcher: MoveMatcherProtocol {
     
-    func autoPlayMoves(matching state: GameStateProtocol) -> [GameMove]? {
+    func autoPlayMove(matching state: GameStateProtocol) -> GameMove? {
         guard state.turn == nil,
             let sheriff = state.players.first(where: { $0.role == .sheriff }) else {
                 return nil
         }
         
-        return [GameMove(name: .startGame, actorId: sheriff.identifier)]
+        return GameMove(name: .startGame, actorId: sheriff.identifier)
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
