@@ -175,18 +175,11 @@ by Stéphano T.</string>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ILd-SS-hgA" userLabel="name Label">
-                                                    <rect key="frame" x="58.5" y="111.5" width="28" height="16"/>
+                                                <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ILd-SS-hgA" userLabel="name Label">
+                                                    <rect key="frame" x="58.5" y="19" width="28" height="16"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="16"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="###" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RyI-Pr-kap">
-                                                    <rect key="frame" x="0.0" y="19" width="109" height="16"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="16"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[]3" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZDs-Cy-7BZ">
@@ -210,26 +203,30 @@ by Stéphano T.</string>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="###" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RyI-Pr-kap">
+                                                    <rect key="frame" x="63.5" y="111.5" width="18" height="16"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="BGV-60-VS0" firstAttribute="width" secondItem="YdZ-er-2Pm" secondAttribute="width" multiplier="0.5" id="0UM-HK-kxK"/>
-                                            <constraint firstItem="ILd-SS-hgA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YdZ-er-2Pm" secondAttribute="leading" constant="2" id="3jW-bn-TAP"/>
-                                            <constraint firstItem="RyI-Pr-kap" firstAttribute="leading" secondItem="YdZ-er-2Pm" secondAttribute="leading" id="3w0-eI-IMo"/>
+                                            <constraint firstItem="BGV-60-VS0" firstAttribute="top" secondItem="ILd-SS-hgA" secondAttribute="bottom" constant="2" id="1W1-v8-zCc"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SSO-eg-But" secondAttribute="trailing" constant="8" id="8YK-yl-upA"/>
+                                            <constraint firstItem="ILd-SS-hgA" firstAttribute="centerX" secondItem="YdZ-er-2Pm" secondAttribute="centerX" id="9TY-JM-aEe"/>
+                                            <constraint firstItem="RyI-Pr-kap" firstAttribute="top" secondItem="BGV-60-VS0" secondAttribute="bottom" constant="2" id="A4H-Sk-NM7"/>
                                             <constraint firstItem="BGV-60-VS0" firstAttribute="leading" secondItem="ZDs-Cy-7BZ" secondAttribute="trailing" constant="2" id="CdY-1P-FE8"/>
-                                            <constraint firstItem="ILd-SS-hgA" firstAttribute="top" secondItem="BGV-60-VS0" secondAttribute="bottom" constant="2" id="IxT-Sb-pEC"/>
                                             <constraint firstItem="0DL-RG-Swb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YdZ-er-2Pm" secondAttribute="leading" symbolic="YES" id="Kv0-OB-Xa0"/>
-                                            <constraint firstItem="BGV-60-VS0" firstAttribute="top" secondItem="RyI-Pr-kap" secondAttribute="bottom" constant="2" id="Q7H-Zp-Lov"/>
                                             <constraint firstItem="SSO-eg-But" firstAttribute="top" secondItem="BGV-60-VS0" secondAttribute="top" id="Rut-P8-gGT"/>
                                             <constraint firstItem="BGV-60-VS0" firstAttribute="centerY" secondItem="YdZ-er-2Pm" secondAttribute="centerY" id="SDO-4n-gxz"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ILd-SS-hgA" secondAttribute="trailing" constant="2" id="Sxa-gg-IYZ"/>
                                             <constraint firstItem="0DL-RG-Swb" firstAttribute="centerY" secondItem="YdZ-er-2Pm" secondAttribute="centerY" id="awn-sC-iEp"/>
-                                            <constraint firstItem="ILd-SS-hgA" firstAttribute="centerX" secondItem="YdZ-er-2Pm" secondAttribute="centerX" id="cff-d8-FPP"/>
                                             <constraint firstAttribute="trailing" secondItem="0DL-RG-Swb" secondAttribute="trailing" constant="2" id="dLQ-zg-BXB"/>
                                             <constraint firstItem="ZDs-Cy-7BZ" firstAttribute="leading" secondItem="YdZ-er-2Pm" secondAttribute="leading" id="idh-Fu-0UK"/>
-                                            <constraint firstItem="RyI-Pr-kap" firstAttribute="trailing" secondItem="BGV-60-VS0" secondAttribute="trailing" id="jB7-X5-0WI"/>
+                                            <constraint firstItem="RyI-Pr-kap" firstAttribute="centerX" secondItem="YdZ-er-2Pm" secondAttribute="centerX" id="ooQ-Ye-ZGw"/>
                                             <constraint firstItem="SSO-eg-But" firstAttribute="leading" secondItem="YdZ-er-2Pm" secondAttribute="leading" id="pxO-fg-hcc"/>
                                             <constraint firstItem="ZDs-Cy-7BZ" firstAttribute="bottom" secondItem="BGV-60-VS0" secondAttribute="bottom" id="rst-OM-Ual"/>
                                             <constraint firstItem="BGV-60-VS0" firstAttribute="centerX" secondItem="YdZ-er-2Pm" secondAttribute="centerX" id="wER-fW-GTU"/>
@@ -284,7 +281,7 @@ by Stéphano T.</string>
                             </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YnA-A3-EaS" userLabel="handCollectionView">
                                 <rect key="frame" x="453.5" y="262.5" width="213.5" height="112.5"/>
-                                <color key="backgroundColor" red="0.61453908680000002" green="0.53420722480000005" blue="0.4313486218" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.75559097529999997" green="0.67946600909999999" blue="0.55683469770000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="8" minimumInteritemSpacing="8" id="t6I-k1-1v1" customClass="HandCollectionViewLayout" customModule="WildWest" customModuleProvider="target">
                                     <size key="itemSize" width="120" height="92.5"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -354,7 +351,7 @@ by Stéphano T.</string>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="iCj-xh-rDL">
                                         <rect key="frame" x="0.0" y="20" width="213.5" height="92.5"/>
-                                        <color key="backgroundColor" red="0.61453908680000002" green="0.53420722480000005" blue="0.4313486218" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.75559097529999997" green="0.67946600909999999" blue="0.55683469770000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MessageCell" id="Z7O-3O-qgz" customClass="MessageCell" customModule="WildWest" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="213.5" height="38"/>
