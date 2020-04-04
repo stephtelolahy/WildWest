@@ -1231,20 +1231,6 @@ import Cuckoo
     
     
     
-     var players: [PlayerProtocol] {
-        get {
-            return cuckoo_manager.getter("players",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.players)
-        }
-        
-    }
-    
-    
-    
      var allPlayers: [PlayerProtocol] {
         get {
             return cuckoo_manager.getter("allPlayers",
@@ -1253,6 +1239,20 @@ import Cuckoo
                     Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                     ,
                 defaultCall: __defaultImplStub!.allPlayers)
+        }
+        
+    }
+    
+    
+    
+     var players: [PlayerProtocol] {
+        get {
+            return cuckoo_manager.getter("players",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.players)
         }
         
     }
@@ -1382,13 +1382,13 @@ import Cuckoo
 	    }
 	    
 	    
-	    var players: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [PlayerProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "players")
+	    var allPlayers: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [PlayerProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "allPlayers")
 	    }
 	    
 	    
-	    var allPlayers: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [PlayerProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "allPlayers")
+	    var players: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [PlayerProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "players")
 	    }
 	    
 	    
@@ -1447,13 +1447,13 @@ import Cuckoo
 	
 	    
 	    
-	    var players: Cuckoo.VerifyReadOnlyProperty<[PlayerProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "players", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var allPlayers: Cuckoo.VerifyReadOnlyProperty<[PlayerProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "allPlayers", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	    
-	    var allPlayers: Cuckoo.VerifyReadOnlyProperty<[PlayerProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "allPlayers", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var players: Cuckoo.VerifyReadOnlyProperty<[PlayerProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "players", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	    
@@ -1504,7 +1504,7 @@ import Cuckoo
  class GameStateProtocolStub: GameStateProtocol {
     
     
-     var players: [PlayerProtocol] {
+     var allPlayers: [PlayerProtocol] {
         get {
             return DefaultValueRegistry.defaultValue(for: ([PlayerProtocol]).self)
         }
@@ -1512,7 +1512,7 @@ import Cuckoo
     }
     
     
-     var allPlayers: [PlayerProtocol] {
+     var players: [PlayerProtocol] {
         get {
             return DefaultValueRegistry.defaultValue(for: ([PlayerProtocol]).self)
         }

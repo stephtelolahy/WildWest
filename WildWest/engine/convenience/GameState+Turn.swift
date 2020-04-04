@@ -9,11 +9,15 @@
 extension GameStateProtocol {
     
     var nextTurn: String {
-        guard let turnIndex = players.firstIndex(where: { $0.identifier == turn }) else {
-            return ""
+        guard let turnIndex = allPlayers.firstIndex(where: { $0.identifier == turn }) else {
+            fatalError("player ot found")
         }
         
-        let nextPlayerIndex = (turnIndex + 1) % players.count
-        return players[nextPlayerIndex].identifier
+        var nextIndex = turnIndex
+        repeat {
+            nextIndex = (nextIndex + 1) % allPlayers.count
+        } while allPlayers[nextIndex].health == 0
+        
+        return allPlayers[nextIndex].identifier
     }
 }

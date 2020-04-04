@@ -96,6 +96,6 @@ class MemoryCachedDataBase: GameDatabaseProtocol {
 
 private extension MemoryCachedDataBase {
     func mutablePlayer(_ playerId: String) -> Player? {
-        mutableState.player(playerId) as? Player
+        mutableState.allPlayers.first(where: { $0.identifier == playerId }) as? Player
     }
 }

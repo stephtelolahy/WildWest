@@ -11,7 +11,6 @@ class DrawsCardFromPlayerDamagedHimMatcher: MoveMatcherProtocol {
     func effect(onExecuting move: GameMove, in state: GameStateProtocol) -> GameMove? {
         guard case .pass = move.name,
             let actor = state.player(move.actorId),
-            actor.health > 0,
             actor.abilities[.drawsCardFromPlayerDamagedHim] == true,
             let damageEvent = actor.lastDamage,
             case let .byPlayer(offenderId) = damageEvent.source,

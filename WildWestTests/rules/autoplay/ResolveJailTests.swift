@@ -50,8 +50,10 @@ class StayInJailMatcherTests: XCTestCase {
     
     func test_SkipTurn_IfStayInJail() {
         // Given
+        let mockPlayer1 = MockPlayerProtocol().identified(by: "p1").health(is: 1)
+        let mockPlayer2 = MockPlayerProtocol().identified(by: "p2").health(is: 1)
         let mockState = MockGameStateProtocol()
-            .players(are: MockPlayerProtocol().identified(by: "p1"), MockPlayerProtocol().identified(by: "p2"))
+            .allPlayers(are: mockPlayer1, mockPlayer2)
             .currentTurn(is: "p1")
         let move = GameMove(name: .stayInJail, actorId: "p1", cardId: "c1")
         

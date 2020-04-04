@@ -7,8 +7,8 @@
 //
 
 protocol GameStateProtocol {
-    var players: [PlayerProtocol] { get }
     var allPlayers: [PlayerProtocol] { get }
+    var players: [PlayerProtocol] { get }
     var deck: [CardProtocol] { get }
     var discardPile: [CardProtocol] { get }
     var turn: String? { get }

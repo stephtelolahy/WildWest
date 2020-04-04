@@ -54,10 +54,12 @@ class EndTurnMatcherTests: XCTestCase {
             .identified(by: "p1")
             .health(is: 2)
             .noCardsInHand()
-        let mockPlayer2 = MockPlayerProtocol().identified(by: "p2")
+        let mockPlayer2 = MockPlayerProtocol()
+            .identified(by: "p2")
+            .health(is: 2)
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p1")
-            .players(are: mockPlayer1, mockPlayer2)
+            .allPlayers(are: mockPlayer1, mockPlayer2)
         let move = GameMove(name: .endTurn, actorId: "p1")
         
         // When
@@ -76,9 +78,10 @@ class EndTurnMatcherTests: XCTestCase {
             .noCardsInHand()
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
+            .health(is: 1)
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p2")
-            .players(are: mockPlayer1, mockPlayer2)
+            .allPlayers(are: mockPlayer1, mockPlayer2)
         let move = GameMove(name: .endTurn, actorId: "p2")
         
         // When

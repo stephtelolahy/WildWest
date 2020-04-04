@@ -29,23 +29,6 @@ class DrawsCardOnLoseHealthMatcherTests: XCTestCase {
         XCTAssertEqual(effect, GameMove(name: .drawsCardOnLoseHealth, actorId: "p1"))
     }
     
-    func test_CannotDrawCardIfEliminated() {
-        // Given
-        let mockPlayer1 = MockPlayerProtocol()
-            .identified(by: "p1")
-            .abilities(are: [.drawsCardOnLoseHealth: true])
-            .health(is: 0)
-        let mockState = MockGameStateProtocol()
-            .players(are: mockPlayer1)
-        let move = GameMove(name: .pass, actorId: "p1")
-        
-        // When
-        let effect = sut.effect(onExecuting: move, in: mockState)
-        
-        // Assert
-        XCTAssertNil(effect)
-    }
-    
     func test_DrawsACardOnLoseHealthByPlayer() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()

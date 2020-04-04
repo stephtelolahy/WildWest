@@ -10,8 +10,7 @@ class DrawsCardOnLoseHealthMatcher: MoveMatcherProtocol {
     func effect(onExecuting move: GameMove, in state: GameStateProtocol) -> GameMove? {
         guard case .pass = move.name,
             let actor = state.player(move.actorId),
-            actor.abilities[.drawsCardOnLoseHealth] == true,
-            actor.health > 0 else {
+            actor.abilities[.drawsCardOnLoseHealth] == true else {
                 return nil
         }
         
