@@ -59,6 +59,7 @@ class MoveDescriptor: MoveDescriptorProtocol {
             "startGame": "",
             "drawsCardOnLoseHealth": "💰",
             "drawsCardFromPlayerDamagedHim": "‼️",
+            "drawsCardWhenHandIsEmpty": "💰",
             "discardExcessCards": "❌"
         ]
 }
