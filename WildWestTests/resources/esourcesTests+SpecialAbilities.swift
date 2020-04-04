@@ -9,7 +9,7 @@
 import XCTest
 
 class esourcesTests_SpecialAbilities: XCTestCase {
-
+    
     private lazy var figures: [FigureProtocol] = {
         let jsonReader = JsonReader(bundle: Bundle(for: type(of: self)))
         let sut = GameConfiguration(jsonReader: jsonReader)
@@ -23,7 +23,7 @@ class esourcesTests_SpecialAbilities: XCTestCase {
         let figure = try XCTUnwrap(figures.first(where: { $0.name == .willyTheKid }))
         XCTAssertEqual(figure.abilities[.hasNoLimitOnBangsPerTurn], true)
     }
-
+    
     func test_JourdonaisHasABarrel_AtAllTimes() throws {
         // Given
         // When
@@ -63,5 +63,12 @@ class esourcesTests_SpecialAbilities: XCTestCase {
         let figure = try XCTUnwrap(figures.first(where: { $0.name == .elGringo }))
         XCTAssertEqual(figure.abilities[.drawsCardFromPlayerDamagedHim], true)
     }
-
+    
+    func test_SuzzyLafayette_SrawsCardWhenHandIsEmpty() throws {
+        // Given
+        // When
+        // Assert
+        let figure = try XCTUnwrap(figures.first(where: { $0.name == .suzyLafayette }))
+        XCTAssertEqual(figure.abilities[.drawsCardWhenHandIsEmpty], true)
+    }
 }

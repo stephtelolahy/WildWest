@@ -9,7 +9,7 @@
 
 class UserPreferences {
     
-    @UserDefaultsStored("preferred_figure", defaultValue: "")
+    @UserDefaultsStored("preferred_figure", defaultValue: "suzyLafayette")
     var preferredFigure: String
     
     @UserDefaultsStored("players_count", defaultValue: 5)

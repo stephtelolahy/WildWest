@@ -179,7 +179,7 @@ by Stéphano T.</string>
                                                     <rect key="frame" x="58.5" y="19" width="28" height="16"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="16"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[]3" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZDs-Cy-7BZ">
@@ -196,13 +196,6 @@ by Stéphano T.</string>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="role" textAlignment="right" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SSO-eg-But">
-                                                    <rect key="frame" x="0.0" y="37" width="19.5" height="16"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="16"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="###" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RyI-Pr-kap">
                                                     <rect key="frame" x="63.5" y="111.5" width="18" height="16"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -210,24 +203,30 @@ by Stéphano T.</string>
                                                     <color key="textColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zvZ-fr-1si">
+                                                    <rect key="frame" x="6.5" y="37" width="29" height="29"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="zvZ-fr-1si" secondAttribute="height" multiplier="1:1" id="OVo-EO-9V8"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="BGV-60-VS0" firstAttribute="width" secondItem="YdZ-er-2Pm" secondAttribute="width" multiplier="0.5" id="0UM-HK-kxK"/>
                                             <constraint firstItem="BGV-60-VS0" firstAttribute="top" secondItem="ILd-SS-hgA" secondAttribute="bottom" constant="2" id="1W1-v8-zCc"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SSO-eg-But" secondAttribute="trailing" constant="8" id="8YK-yl-upA"/>
                                             <constraint firstItem="ILd-SS-hgA" firstAttribute="centerX" secondItem="YdZ-er-2Pm" secondAttribute="centerX" id="9TY-JM-aEe"/>
                                             <constraint firstItem="RyI-Pr-kap" firstAttribute="top" secondItem="BGV-60-VS0" secondAttribute="bottom" constant="2" id="A4H-Sk-NM7"/>
                                             <constraint firstItem="BGV-60-VS0" firstAttribute="leading" secondItem="ZDs-Cy-7BZ" secondAttribute="trailing" constant="2" id="CdY-1P-FE8"/>
+                                            <constraint firstItem="BGV-60-VS0" firstAttribute="leading" secondItem="zvZ-fr-1si" secondAttribute="trailing" constant="1" id="Eiz-Of-Uk3"/>
                                             <constraint firstItem="0DL-RG-Swb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YdZ-er-2Pm" secondAttribute="leading" symbolic="YES" id="Kv0-OB-Xa0"/>
-                                            <constraint firstItem="SSO-eg-But" firstAttribute="top" secondItem="BGV-60-VS0" secondAttribute="top" id="Rut-P8-gGT"/>
                                             <constraint firstItem="BGV-60-VS0" firstAttribute="centerY" secondItem="YdZ-er-2Pm" secondAttribute="centerY" id="SDO-4n-gxz"/>
+                                            <constraint firstItem="zvZ-fr-1si" firstAttribute="height" secondItem="BGV-60-VS0" secondAttribute="height" multiplier="0.4" id="VMg-W7-mpH"/>
                                             <constraint firstItem="0DL-RG-Swb" firstAttribute="centerY" secondItem="YdZ-er-2Pm" secondAttribute="centerY" id="awn-sC-iEp"/>
                                             <constraint firstAttribute="trailing" secondItem="0DL-RG-Swb" secondAttribute="trailing" constant="2" id="dLQ-zg-BXB"/>
                                             <constraint firstItem="ZDs-Cy-7BZ" firstAttribute="leading" secondItem="YdZ-er-2Pm" secondAttribute="leading" id="idh-Fu-0UK"/>
+                                            <constraint firstItem="zvZ-fr-1si" firstAttribute="top" secondItem="BGV-60-VS0" secondAttribute="top" id="obf-GC-uSR"/>
                                             <constraint firstItem="RyI-Pr-kap" firstAttribute="centerX" secondItem="YdZ-er-2Pm" secondAttribute="centerX" id="ooQ-Ye-ZGw"/>
-                                            <constraint firstItem="SSO-eg-But" firstAttribute="leading" secondItem="YdZ-er-2Pm" secondAttribute="leading" id="pxO-fg-hcc"/>
                                             <constraint firstItem="ZDs-Cy-7BZ" firstAttribute="bottom" secondItem="BGV-60-VS0" secondAttribute="bottom" id="rst-OM-Ual"/>
                                             <constraint firstItem="BGV-60-VS0" firstAttribute="centerX" secondItem="YdZ-er-2Pm" secondAttribute="centerX" id="wER-fW-GTU"/>
                                         </constraints>
@@ -242,7 +241,7 @@ by Stéphano T.</string>
                                             <outlet property="handLabel" destination="ZDs-Cy-7BZ" id="UKR-sp-U5i"/>
                                             <outlet property="healthLabel" destination="RyI-Pr-kap" id="iRa-W7-qV7"/>
                                             <outlet property="nameLabel" destination="ILd-SS-hgA" id="RWW-yK-pui"/>
-                                            <outlet property="roleLabel" destination="SSO-eg-But" id="hzh-f4-zIK"/>
+                                            <outlet property="roleImageView" destination="zvZ-fr-1si" id="skx-1z-6Vo"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

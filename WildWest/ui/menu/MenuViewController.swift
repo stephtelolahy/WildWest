@@ -29,6 +29,8 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        figureButton.addBrownRoundedBorder()
+        
         let jsonReader = JsonReader(bundle: Bundle.main)
         let config = GameConfiguration(jsonReader: jsonReader)
         

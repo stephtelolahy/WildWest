@@ -13,16 +13,13 @@ class PlayerCell: UICollectionViewCell {
     @IBOutlet private weak var figureImageView: UIImageView!
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var equipmentLabel: UILabel!
-    @IBOutlet private weak var roleLabel: UILabel!
+    @IBOutlet private weak var roleImageView: UIImageView!
     @IBOutlet private weak var healthLabel: UILabel!
     @IBOutlet private weak var handLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        figureImageView.layer.cornerRadius = 8
-        figureImageView.layer.borderColor = UIColor.brown.cgColor
-        figureImageView.layer.borderWidth = 4
-        figureImageView.clipsToBounds = true
+        figureImageView.addBrownRoundedBorder()
     }
     
     private var item: PlayerItem?
@@ -32,11 +29,11 @@ class PlayerCell: UICollectionViewCell {
         updateBackground()
         
         let player = item.player
-        nameLabel.text = "\(player.figureName.rawValue.uppercased())\n\(item.score?.description ?? "")"
+        nameLabel.text = "\(player.figureName.rawValue.uppercased()) \(item.score?.description ?? "")"
         let isEliminated = player.health == 0
         figureImageView.alpha = !isEliminated ? 1.0 : 0.4
         equipmentLabel.text = player.inPlay.map { "[\($0.name.rawValue)]" }.joined(separator: "\n")
-        roleLabel.text = item.player.role?.rawValue ?? ""
+        roleImageView.image = item.player.role?.image()
         healthLabel.text = ""
             + Array(player.health..<player.maxHealth).map { _ in "░" }
             + Array(0..<player.health).map { _ in "■" }.joined()
@@ -59,5 +56,29 @@ class PlayerCell: UICollectionViewCell {
         } else {
             backgroundColor = UIColor.brown.withAlphaComponent(0.4)
         }
+    }
+}
+
+private extension Role {
+    func image() -> UIImage {
+        switch self {
+        case .sheriff:
+            return #imageLiteral(resourceName: "01_sceriffo")
+        case .outlaw:
+            return #imageLiteral(resourceName: "01_fuorilegge")
+        case .renegade:
+            return #imageLiteral(resourceName: "01_rinnegato")
+        case .deputy:
+            return #imageLiteral(resourceName: "01_vice")
+        }
+    }
+}
+
+extension UIView {
+    func addBrownRoundedBorder() {
+        layer.cornerRadius = 8
+        layer.borderColor = UIColor.brown.cgColor
+        layer.borderWidth = 4
+        clipsToBounds = true
     }
 }
