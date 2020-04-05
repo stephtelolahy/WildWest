@@ -81,11 +81,14 @@ class MenuViewController: UIViewController {
     @IBAction private func contactButtonTapped(_ sender: Any) {
         let email = "stephano.telolahy@gmail.com"
         if let url = URL(string: "mailto:\(email)") {
-          if #available(iOS 10.0, *) {
-            UIApplication.shared.open(url)
-          } else {
-            UIApplication.shared.openURL(url)
-          }
+            openUrl(url)
+        }
+    }
+    
+    @IBAction private func logoButtonTapped(_ sender: Any) {
+        let rulesUrl = "http://www.dvgiochi.net/bang/bang_rules.pdf"
+        if let url = URL(string: rulesUrl) {
+            openUrl(url)
         }
     }
 }
@@ -227,5 +230,15 @@ private extension Array where Element: Equatable {
             array = array.shuffled()
         }
         return array
+    }
+}
+
+private extension UIViewController {
+    func openUrl(_ url: URL) {
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
     }
 }

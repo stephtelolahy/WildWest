@@ -30,12 +30,16 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_splash" translatesAutoresizingMaskIntoConstraints="NO" id="nUc-dp-SOW" userLabel="logo">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1y-7b-hgX" userLabel="logoButton">
                                                 <rect key="frame" x="0.0" y="40" width="217.5" height="58.5"/>
-                                            </imageView>
+                                                <state key="normal" image="bg_splash"/>
+                                                <connections>
+                                                    <action selector="logoButtonTapped:" destination="8GX-Wa-ifS" eventType="touchUpInside" id="WCH-V7-0Gi"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s8o-qf-BAQ">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s8o-qf-BAQ" userLabel="playButton">
                                         <rect key="frame" x="83.5" y="163" width="100" height="52"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="cJz-6l-Jdk"/>
@@ -46,7 +50,7 @@
                                             <action selector="playButtonTapped:" destination="8GX-Wa-ifS" eventType="touchUpInside" id="fna-Vk-lga"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CXM-Fz-dnZ">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CXM-Fz-dnZ" userLabel="emailButton">
                                         <rect key="frame" x="52.5" y="314" width="162" height="29"/>
                                         <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="17"/>
                                         <state key="normal" title="stephano.telolahy@gmail.com"/>
