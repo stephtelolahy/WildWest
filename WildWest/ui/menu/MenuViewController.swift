@@ -29,6 +29,8 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        figureButton.addBrownRoundedBorder()
+        
         let jsonReader = JsonReader(bundle: Bundle.main)
         let config = GameConfiguration(jsonReader: jsonReader)
         
@@ -57,7 +59,7 @@ class MenuViewController: UIViewController {
     }
     
     @IBAction private func playButtonTapped(_ sender: Any) {
-        startGame()
+        createGame()
     }
     
     @IBAction private func stepperValueChanged(_ sender: Any) {
@@ -105,7 +107,7 @@ private extension MenuViewController {
         }
     }
     
-    func startGame() {
+    func createGame() {
         
         let gameSetup = GameSetup()
         

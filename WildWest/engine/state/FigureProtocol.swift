@@ -40,4 +40,6 @@ enum AbilityName: String, Codable {
     case hasNoLimitOnBangsPerTurn
     case drawsCardOnLoseHealth
     case drawsCardFromPlayerDamagedHim
+    case drawsCardWhenHandIsEmpty
+    case canPlayBangAsMissAndViceVersa
 }

@@ -40,14 +40,6 @@ class MemoryCachedDataBase: GameDatabaseProtocol {
         mutableState.validMoves = moves
     }
     
-    func removePlayer(_ playerId: String) -> PlayerProtocol? {
-        mutableState.players.removeFirst(where: { $0.identifier == playerId })
-    }
-    
-    func addEliminated(_ player: PlayerProtocol) {
-        mutableState.eliminated.append(player)
-    }
-    
     func setOutcome(_ outcome: GameOutcome) {
         mutableState.outcome = outcome
     }
@@ -104,6 +96,6 @@ class MemoryCachedDataBase: GameDatabaseProtocol {
 
 private extension MemoryCachedDataBase {
     func mutablePlayer(_ playerId: String) -> Player? {
-        mutableState.player(playerId) as? Player
+        mutableState.allPlayers.first(where: { $0.identifier == playerId }) as? Player
     }
 }

@@ -118,14 +118,11 @@ class PassDynamiteMatcherTests: XCTestCase {
     
     func test_PassDynamiteToNextPlayer_IfDoesNotExplode() {
         // Given
+        let mockPlayer1 = MockPlayerProtocol().identified(by: "p1").health(is: 1)
+        let mockPlayer2 = MockPlayerProtocol().identified(by: "p2").health(is: 1)
         let mockState = MockGameStateProtocol()
-        Cuckoo.stub(mockState) { mock in
-            when(mock.turn.get).thenReturn("p1")
-            when(mock.players.get).thenReturn([
-                MockPlayerProtocol().identified(by: "p1"),
-                MockPlayerProtocol().identified(by: "p2")
-            ])
-        }
+            .currentTurn(is: "p1")
+            .allPlayers(are: mockPlayer1, mockPlayer2)
         let move = GameMove(name: .passDynamite, actorId: "p1", cardId: "c1")
         
         // When

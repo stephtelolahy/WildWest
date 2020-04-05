@@ -77,8 +77,8 @@ class MoveSoundPlayer: MoveSoundPlayerProtocol {
             "explodeDynamite": "Big Bomb-SoundBible.com-1219802495",
             "passDynamite": "Fuse Burning-SoundBible.com-1372982430",
             "StartTurn": "",
-            "startGame": "",
             "drawsCardOnLoseHealth": "Slide Closed-SoundBible.com-1521580537",
+            "drawsCardWhenHandIsEmpty": "Slide Closed-SoundBible.com-1521580537",
             "drawsCardFromPlayerDamagedHim": "Slap-SoundMaster13-49669815",
             "discardExcessCards": "flyby-Conor-1500306612"
         ]

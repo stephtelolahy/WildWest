@@ -26,7 +26,6 @@ class GameConfiguration {
     var moveMatchers: [MoveMatcherProtocol] {
         [
             // auto play
-            StartGameMatcher(),
             StartTurnMatcher(),
             ExplodeDynamiteMatcher(),
             PassDynamiteMatcher(),
@@ -53,8 +52,7 @@ class GameConfiguration {
             EndTurnMatcher(),
             
             // manual reaction
-            DiscardMissedOnBangMatcher(),
-            DiscardMissedOnGatlingMatcher(),
+            DiscardMissedMatcher(),
             DiscardBangOnDuelMatcher(),
             DiscardBangOnIndiansMatcher(),
             DiscardBeerMatcher(),
@@ -69,7 +67,10 @@ class GameConfiguration {
             
             // Special
             DrawsCardOnLoseHealthMatcher(),
-            DrawsCardFromPlayerDamagedHimMatcher()
+            DrawsCardFromPlayerDamagedHimMatcher(),
+            DrawsCardWhenHandIsEmptyMatcher(),
+            BangWithMissedMatcher(),
+            MissWithBangMatcher()
         ]
     }
 }

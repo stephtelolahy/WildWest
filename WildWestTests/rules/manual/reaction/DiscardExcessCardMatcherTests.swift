@@ -37,10 +37,12 @@ class DiscardExcessCardMatcherTests: XCTestCase {
             .health(is: 1)
             .holding(MockCardProtocol().identified(by: "c1"),
                      MockCardProtocol().identified(by: "c2"))
-        let mockPlayer2 = MockPlayerProtocol().identified(by: "p2")
+        let mockPlayer2 = MockPlayerProtocol()
+            .identified(by: "p2")
+            .health(is: 1)
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p1")
-            .players(are: mockPlayer1, mockPlayer2)
+            .allPlayers(are: mockPlayer1, mockPlayer2)
             .challenge(is: Challenge(name: .discardExcessCards))
         let move = GameMove(name: .discardExcessCards, actorId: "p1", cardId: "c1")
         

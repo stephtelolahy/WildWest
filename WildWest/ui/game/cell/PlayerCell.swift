@@ -13,44 +13,27 @@ class PlayerCell: UICollectionViewCell {
     @IBOutlet private weak var figureImageView: UIImageView!
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var equipmentLabel: UILabel!
-    @IBOutlet private weak var roleLabel: UILabel!
+    @IBOutlet private weak var roleImageView: UIImageView!
     @IBOutlet private weak var healthLabel: UILabel!
     @IBOutlet private weak var handLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        figureImageView.layer.cornerRadius = 8
-        figureImageView.layer.borderColor = UIColor.brown.cgColor
-        figureImageView.layer.borderWidth = 4
-        figureImageView.clipsToBounds = true
+        figureImageView.addBrownRoundedBorder()
     }
     
     private var item: PlayerItem?
     
-    func update(with item: PlayerItem?) {
+    func update(with item: PlayerItem) {
         self.item = item
         updateBackground()
         
-        guard let item = item else {
-            figureImageView.image = nil
-            nameLabel.text = nil
-            roleLabel.text = nil
-            healthLabel.text = nil
-            handLabel.text = nil
-            equipmentLabel.text = nil
-            figureImageView.alpha = 0.0
-            return
-        }
-        
         let player = item.player
-        nameLabel.text = "\(player.figureName.rawValue.uppercased())\n\(item.score?.description ?? "")"
-        figureImageView.alpha = !item.isEliminated ? 1.0 : 0.4
+        nameLabel.text = "\(player.figureName.rawValue.uppercased()) \(item.score?.description ?? "")"
+        let isEliminated = player.health == 0
+        figureImageView.alpha = !isEliminated ? 1.0 : 0.4
         equipmentLabel.text = player.inPlay.map { "[\($0.name.rawValue)]" }.joined(separator: "\n")
-        if let role = item.player.role {
-            roleLabel.text = role.rawValue
-        } else {
-            roleLabel.text = ""
-        }
+        roleImageView.image = item.player.role?.image()
         healthLabel.text = ""
             + Array(player.health..<player.maxHealth).map { _ in "░" }
             + Array(0..<player.health).map { _ in "■" }.joined()
@@ -65,15 +48,37 @@ class PlayerCell: UICollectionViewCell {
         }
         
         if item.isAttacked {
-            backgroundColor = UIColor.orange
+            backgroundColor = UIColor.red
         } else if item.isHelped {
             backgroundColor = UIColor.blue.withAlphaComponent(0.4)
         } else if item.isTurn {
-            backgroundColor = UIColor.green.withAlphaComponent(0.4)
-        } else if item.isControlled {
-            backgroundColor = UIColor.white.withAlphaComponent(0.4)
+            backgroundColor = UIColor.orange
         } else {
-            backgroundColor = .clear
+            backgroundColor = UIColor.brown.withAlphaComponent(0.4)
         }
+    }
+}
+
+private extension Role {
+    func image() -> UIImage {
+        switch self {
+        case .sheriff:
+            return #imageLiteral(resourceName: "01_sceriffo")
+        case .outlaw:
+            return #imageLiteral(resourceName: "01_fuorilegge")
+        case .renegade:
+            return #imageLiteral(resourceName: "01_rinnegato")
+        case .deputy:
+            return #imageLiteral(resourceName: "01_vice")
+        }
+    }
+}
+
+extension UIView {
+    func addBrownRoundedBorder() {
+        layer.cornerRadius = 8
+        layer.borderColor = UIColor.brown.cgColor
+        layer.borderWidth = 4
+        clipsToBounds = true
     }
 }

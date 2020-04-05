@@ -11,7 +11,7 @@ extension GameMove {
     func asComponents() -> [String] {
         [actorId,
          name.rawValue,
-         cardId,
+         cardId?.extractCardName(),
          targetId,
          targetCard?.description]
             .compactMap { $0 }
@@ -30,5 +30,11 @@ extension Dictionary where Key == String, Value == String {
         }
         
         fatalError("No values matching \(components.joined(separator: ", "))")
+    }
+}
+
+extension String {
+    func extractCardName() -> String {
+        components(separatedBy: "-").first ?? self
     }
 }

@@ -71,7 +71,7 @@ class PassDynamiteMatcher: MoveMatcherProtocol {
         }
         
         return  [.flipOverFirstDeckCard,
-                 .playerPassInPlayOfOther(move.actorId, state.nextTurn, cardId)]
+                 .playerPassInPlayOfOther(move.actorId, state.nextPlayer(after: move.actorId), cardId)]
     }
 }
 

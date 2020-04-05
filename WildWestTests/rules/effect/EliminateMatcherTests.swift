@@ -10,7 +10,7 @@ import XCTest
 import Cuckoo
 
 class EliminateMatcherTests: XCTestCase {
-
+    
     private let sut = EliminateMatcher()
     
     func test_ShouldEliminateActorAfterPass_IfHealthIsZero() {
@@ -19,7 +19,7 @@ class EliminateMatcherTests: XCTestCase {
             .identified(by: "p1")
             .health(is: 0)
         let mockState = MockGameStateProtocol()
-            .players(are: player1)
+            .allPlayers(are: player1)
         let move = GameMove(name: .pass, actorId: "p1")
         
         // When
@@ -29,17 +29,13 @@ class EliminateMatcherTests: XCTestCase {
         XCTAssertEqual(effect, GameMove(name: .eliminate, actorId: "p1"))
     }
     
-    func test_EliminatePlayer_IfEliminating() {
+    func test_DoNothing_IfPlayerEliminatedWithoutCards() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
-            .role(is: .renegade)
             .withDefault()
-        let mockPlayer2 = MockPlayerProtocol()
-            .identified(by: "p2")
-            .role(is: .sheriff)
         let mockState = MockGameStateProtocol()
-            .players(are: mockPlayer1, mockPlayer2)
+            .allPlayers(are: mockPlayer1)
             .currentTurn(is: "p2")
         let move = GameMove(name: .eliminate, actorId: "p1")
         
@@ -47,25 +43,18 @@ class EliminateMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.eliminatePlayer("p1")])
+        XCTAssertEqual(updates, [])
     }
     
     func test_DiscardAllCards_IfPlayerEliminated() {
         // Given
-        let mockCard1 = MockCardProtocol().identified(by: "c1")
-        let mockCard2 = MockCardProtocol().identified(by: "c2")
-        let mockCard3 = MockCardProtocol().identified(by: "c3")
-        let mockCard4 = MockCardProtocol().identified(by: "c4")
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
-            .role(is: .renegade)
-            .holding(mockCard1, mockCard2)
-            .playing(mockCard3, mockCard4)
-        let mockPlayer2 = MockPlayerProtocol()
-            .identified(by: "p2")
-            .role(is: .sheriff)
+            .holding(MockCardProtocol().identified(by: "c1"))
+            .playing(MockCardProtocol().identified(by: "c2"))
+            .health(is: 0)
         let mockState = MockGameStateProtocol()
-            .players(are: mockPlayer1, mockPlayer2)
+            .allPlayers(are: mockPlayer1)
             .currentTurn(is: "p2")
         let move = GameMove(name: .eliminate, actorId: "p1")
         
@@ -74,32 +63,27 @@ class EliminateMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .playerDiscardHand("p1", "c2"),
-                                 .playerDiscardInPlay("p1", "c3"),
-                                 .playerDiscardInPlay("p1", "c4"),
-                                 .eliminatePlayer("p1")])
+                                 .playerDiscardInPlay("p1", "c2")])
     }
     
     func test_TriggerNextPlayerStartTurnChallenge_IfTurnPlayerIsEliminated() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
-            .role(is: .outlaw)
             .withDefault()
         let mockPlayer2 = MockPlayerProtocol()
             .identified(by: "p2")
-            .role(is: .sheriff)
+            .health(is: 2)
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p1")
-            .players(are: mockPlayer1, mockPlayer2)
+            .allPlayers(are: mockPlayer1, mockPlayer2)
         let move = GameMove(name: .eliminate, actorId: "p1")
         
         // When
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.eliminatePlayer("p1"),
-                                 .setTurn("p2"),
+        XCTAssertEqual(updates, [.setTurn("p2"),
                                  .setChallenge(Challenge(name: .startTurn))])
     }
 }

@@ -27,7 +27,7 @@ class MoveClassifier: MoveClassifierProtocol {
         }
         
         if case .play = move.name,
-            (cardId.contains("panic") || cardId.contains("cardName")),
+            (cardId.contains("panic") || cardId.contains("catBalou")),
             let targetCard = move.targetCard {
             if case let .inPlay(cardId) = targetCard.source,
                 cardId.contains("jail") {

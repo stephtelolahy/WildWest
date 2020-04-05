@@ -27,7 +27,7 @@ class EndTurnMatcher: MoveMatcherProtocol {
             return [.setChallenge(Challenge(name: .discardExcessCards))]
         }
         
-        return [.setTurn(state.nextTurn),
+        return [.setTurn(state.nextPlayer(after: move.actorId)),
                 .setChallenge(Challenge(name: .startTurn))]
     }
 }

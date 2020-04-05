@@ -50,7 +50,10 @@ open class DelaySubject<Element> where Element: Any {
                 self.observable.onNext(self.queue.remove(at: 0))
             }
         } else {
-            // TODO: Fallback on earlier versions
+            while !queue.isEmpty {
+                observable.onNext(queue.remove(at: 0))
+            }
+            running = false
         }
     }
 }

@@ -9,30 +9,34 @@
 extension GameStateProtocol {
     
     func observed(by playerId: String?) -> GameStateProtocol {
-        let updatedPlayers = players.map { player -> PlayerProtocol in
-            let shouldHideRole = player.identifier != playerId && player.role != .sheriff && outcome == nil
-            let role: Role? = shouldHideRole ? nil : player.role
-            return Player(role: role,
-                          figureName: player.figureName,
-                          imageName: player.imageName,
-                          description: player.description,
-                          abilities: player.abilities,
-                          maxHealth: player.maxHealth,
-                          health: player.health,
-                          hand: player.hand,
-                          inPlay: player.inPlay,
-                          bangsPlayed: player.bangsPlayed,
-                          lastDamage: player.lastDamage)
-        }
-        return GameState(players: updatedPlayers,
-                         deck: deck,
-                         discardPile: discardPile,
-                         turn: turn,
-                         challenge: challenge,
-                         generalStore: generalStore,
-                         outcome: outcome,
-                         validMoves: validMoves,
-                         executedMoves: executedMoves,
-                         eliminated: eliminated)
+        GameState(allPlayers: allPlayers.map { $0.observed(by: playerId, in: self) },
+                  deck: deck,
+                  discardPile: discardPile,
+                  turn: turn,
+                  challenge: challenge,
+                  generalStore: generalStore,
+                  outcome: outcome,
+                  validMoves: validMoves,
+                  executedMoves: executedMoves)
+    }
+}
+
+private extension PlayerProtocol {
+    func observed(by playerId: String?, in state: GameStateProtocol) -> PlayerProtocol {
+        let shouldHideRole = health > 0
+            && identifier != playerId
+            && role != .sheriff
+            && state.outcome == nil
+        return Player(role: shouldHideRole ? nil : role,
+                      figureName: figureName,
+                      imageName: imageName,
+                      description: description,
+                      abilities: abilities,
+                      maxHealth: maxHealth,
+                      health: health,
+                      hand: hand,
+                      inPlay: inPlay,
+                      bangsPlayed: bangsPlayed,
+                      lastDamage: lastDamage)
     }
 }

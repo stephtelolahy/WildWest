@@ -19,9 +19,8 @@ class GameUpdateExecutor: UpdateExecutorProtocol {
             database.setChallenge(challenge)
             if let challenge = challenge {
                 if case .bang = challenge.name,
-                    let actorId = database.state.turn,
-                    let actor = database.state.player(actorId) {
-                    database.playerSetBangsPlayed(actorId, actor.bangsPlayed + 1)
+                    let actor = database.state.player(database.state.turn) {
+                    database.playerSetBangsPlayed(actor.identifier, actor.bangsPlayed + 1)
                 }
             }
             
@@ -86,18 +85,12 @@ class GameUpdateExecutor: UpdateExecutorProtocol {
             
         case let .setupGeneralStore(cardsCount):
             Array(1...cardsCount)
-                .map { _ in database.deckRemoveFirst() }
-                .compactMap { $0 }
+                .compactMap { _ in database.deckRemoveFirst() }
                 .forEach { database.addGeneralStore($0) }
             
         case .flipOverFirstDeckCard:
             let card = database.deckRemoveFirst()
             database.addDiscard(card)
-            
-        case let .eliminatePlayer(playerId):
-            if let player = database.removePlayer(playerId) {
-                database.addEliminated(player)
-            }
         }
     }
 }

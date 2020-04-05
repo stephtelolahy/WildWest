@@ -29,23 +29,6 @@ class DrawsCardOnLoseHealthMatcherTests: XCTestCase {
         XCTAssertEqual(effect, GameMove(name: .drawsCardOnLoseHealth, actorId: "p1"))
     }
     
-    func test_CannotDrawCardIfEliminated() {
-        // Given
-        let mockPlayer1 = MockPlayerProtocol()
-            .identified(by: "p1")
-            .abilities(are: [.drawsCardOnLoseHealth: true])
-            .health(is: 0)
-        let mockState = MockGameStateProtocol()
-            .players(are: mockPlayer1)
-        let move = GameMove(name: .pass, actorId: "p1")
-        
-        // When
-        let effect = sut.effect(onExecuting: move, in: mockState)
-        
-        // Assert
-        XCTAssertNil(effect)
-    }
-    
     func test_DrawsACardOnLoseHealthByPlayer() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
@@ -60,21 +43,5 @@ class DrawsCardOnLoseHealthMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.playerPullFromDeck("p1", 1)])
-    }
-    
-    func test_Draws3CardsOnLoseHealthByDynamite() {
-        // Given
-        let mockPlayer1 = MockPlayerProtocol()
-            .identified(by: "p1")
-            .lastDamage(is: DamageEvent(damage: 3, source: .byDynamite))
-        let mockState = MockGameStateProtocol()
-            .players(are: mockPlayer1)
-        let move = GameMove(name: .drawsCardOnLoseHealth, actorId: "p1")
-        
-        // When
-        let updates = sut.execute(move, in: mockState)
-        
-        // Assert
-        XCTAssertEqual(updates, [.playerPullFromDeck("p1", 3)])
     }
 }

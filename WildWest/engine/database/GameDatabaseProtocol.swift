@@ -17,8 +17,6 @@ protocol GameDatabaseProtocol {
     func addExecutedMove(_ move: GameMove)
     func setValidMoves(_ moves: [String: [GameMove]])
     func setOutcome(_ outcome: GameOutcome)
-    func removePlayer(_ playerId: String) -> PlayerProtocol?
-    func addEliminated(_ player: PlayerProtocol)
     
     /// Deck
     func deckRemoveFirst() -> CardProtocol

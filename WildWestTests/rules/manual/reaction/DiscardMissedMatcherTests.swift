@@ -10,7 +10,7 @@ import XCTest
 
 class DiscardMissedOnBangMatcherTests: XCTestCase {
     
-    private let sut = DiscardMissedOnBangMatcher()
+    private let sut = DiscardMissedMatcher()
     
     func test_CanPlayMissed_IfIsTargetOfBangAndHoldingMissedCard() {
         // Given
@@ -44,13 +44,8 @@ class DiscardMissedOnBangMatcherTests: XCTestCase {
         XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
                                  .setChallenge(nil)])
     }
-}
-
-class DiscardMissedOnGatlingMatcherTests: XCTestCase {
     
-    private let sut = DiscardMissedOnGatlingMatcher()
-    
-    func test_CanPlayMissed_IfIsTargetOfBangAndHoldingMissedCard() {
+    func test_CanPlayMissed_IfIsTargetOfGatlingAndHoldingMissedCard() {
         // Given
         let mockCard = MockCardProtocol()
             .named(.missed)
