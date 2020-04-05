@@ -65,7 +65,7 @@ extension Challenge {
     func damageSource(in state: GameStateProtocol) -> DamageSource? {
         switch name {
         case .bang, .gatling, .duel, .indians:
-            return .byPlayer(state.turn!)
+            return .byPlayer(state.turn)
             
         case .dynamiteExploded:
             return .byDynamite

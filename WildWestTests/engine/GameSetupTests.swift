@@ -104,8 +104,7 @@ class GameSetupTests: XCTestCase {
         XCTAssertTrue(state.discardPile.isEmpty)
         // PlayerInitialHealthIsEqualToFigureBullets
         XCTAssertTrue(state.players.filter { $0.role != .sheriff }.allSatisfy { $0.health == 4 })
-        // Turn is empty
-        XCTAssertNil(state.turn)
+        
         // SheriffHasOneAdditionalHealth
         let sheriff = state.players.first { $0.role == .sheriff }!
         XCTAssertEqual(sheriff.health, 5)
@@ -113,7 +112,9 @@ class GameSetupTests: XCTestCase {
         XCTAssertTrue(state.validMoves.isEmpty)
         // Executed moves is empty
         XCTAssertTrue(state.executedMoves.isEmpty)
-        // No challenge
-        XCTAssertNil(state.challenge)
+        // Turn is sheriff
+        XCTAssertEqual(state.turn, sheriff.identifier)
+        // Challenge sheriff start turn
+        XCTAssertEqual(state.challenge, Challenge(name: .startTurn))
     }
 }

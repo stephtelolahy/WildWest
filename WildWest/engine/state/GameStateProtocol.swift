@@ -11,7 +11,7 @@ protocol GameStateProtocol {
     var players: [PlayerProtocol] { get }
     var deck: [CardProtocol] { get }
     var discardPile: [CardProtocol] { get }
-    var turn: String? { get }
+    var turn: String { get }
     var challenge: Challenge? { get }
     var generalStore: [CardProtocol] { get }
     var outcome: GameOutcome? { get }

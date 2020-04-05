@@ -5,6 +5,7 @@
 //  Created by Hugues Stéphano TELOLAHY on 12/30/19.
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
+// swiftlint:disable function_body_length
 
 class GameSetup: GameSetupProtocol {
     
@@ -37,11 +38,15 @@ class GameSetup: GameSetupProtocol {
                           lastDamage: nil)
         }
         
+        guard let sheriff = players.first(where: { $0.role == .sheriff }) else {
+            fatalError("Sheriff not found")
+        }
+        
         return GameState(allPlayers: players,
                          deck: deck,
                          discardPile: [],
-                         turn: nil,
-                         challenge: nil,
+                         turn: sheriff.identifier,
+                         challenge: Challenge(name: .startTurn),
                          generalStore: [],
                          outcome: nil,
                          validMoves: [:],

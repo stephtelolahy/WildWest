@@ -1287,7 +1287,7 @@ import Cuckoo
     
     
     
-     var turn: String? {
+     var turn: String {
         get {
             return cuckoo_manager.getter("turn",
                 superclassCall:
@@ -1402,7 +1402,7 @@ import Cuckoo
 	    }
 	    
 	    
-	    var turn: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, String?> {
+	    var turn: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, String> {
 	        return .init(manager: cuckoo_manager, name: "turn")
 	    }
 	    
@@ -1467,7 +1467,7 @@ import Cuckoo
 	    }
 	    
 	    
-	    var turn: Cuckoo.VerifyReadOnlyProperty<String?> {
+	    var turn: Cuckoo.VerifyReadOnlyProperty<String> {
 	        return .init(manager: cuckoo_manager, name: "turn", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
@@ -1536,9 +1536,9 @@ import Cuckoo
     }
     
     
-     var turn: String? {
+     var turn: String {
         get {
-            return DefaultValueRegistry.defaultValue(for: (String?).self)
+            return DefaultValueRegistry.defaultValue(for: (String).self)
         }
         
     }

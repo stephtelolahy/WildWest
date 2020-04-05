@@ -26,7 +26,6 @@ class GameConfiguration {
     var moveMatchers: [MoveMatcherProtocol] {
         [
             // auto play
-            StartGameMatcher(),
             StartTurnMatcher(),
             ExplodeDynamiteMatcher(),
             PassDynamiteMatcher(),

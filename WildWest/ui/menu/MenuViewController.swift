@@ -59,7 +59,7 @@ class MenuViewController: UIViewController {
     }
     
     @IBAction private func playButtonTapped(_ sender: Any) {
-        startGame()
+        createGame()
     }
     
     @IBAction private func stepperValueChanged(_ sender: Any) {
@@ -107,7 +107,7 @@ private extension MenuViewController {
         }
     }
     
-    func startGame() {
+    func createGame() {
         
         let gameSetup = GameSetup()
         

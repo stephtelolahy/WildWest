@@ -14,19 +14,19 @@ extension Challenge {
             return "dynamite exploded (-\(damage))"
             
         case .duel:
-            return "duel by \(state.turn ?? "")"
+            return "duel by \(state.turn)"
             
         case .bang:
-            return "bang by \(state.turn ?? "")"
+            return "bang by \(state.turn)"
             
         case .gatling:
-            return "gatling by \(state.turn ?? "")"
+            return "gatling by \(state.turn)"
             
         case .indians:
-            return "indians by \(state.turn ?? "")"
+            return "indians by \(state.turn)"
             
         case .generalStore:
-            return "general store by \(state.turn ?? "")"
+            return "general store by \(state.turn)"
             
         case .discardExcessCards:
             return "discard excess cards"

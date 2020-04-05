@@ -25,7 +25,7 @@ extension MockGameStateProtocol {
         return self
     }
     
-    func currentTurn(is playerId: String?) -> MockGameStateProtocol {
+    func currentTurn(is playerId: String) -> MockGameStateProtocol {
         Cuckoo.stub(self) { mock in
             when(mock.turn.get).thenReturn(playerId)
         }

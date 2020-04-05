@@ -19,9 +19,8 @@ class GameUpdateExecutor: UpdateExecutorProtocol {
             database.setChallenge(challenge)
             if let challenge = challenge {
                 if case .bang = challenge.name,
-                    let actorId = database.state.turn,
-                    let actor = database.state.player(actorId) {
-                    database.playerSetBangsPlayed(actorId, actor.bangsPlayed + 1)
+                    let actor = database.state.player(database.state.turn) {
+                    database.playerSetBangsPlayed(actor.identifier, actor.bangsPlayed + 1)
                 }
             }
             
