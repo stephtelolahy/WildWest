@@ -36,8 +36,6 @@ class HandCollectionViewLayout: UICollectionViewFlowLayout {
                                          right: 0.0)
         if #available(iOS 11.0, *) {
             self.sectionInsetReference = .fromSafeArea
-        } else {
-            // TODO: Fallback on earlier versions
         }
     }
 }
