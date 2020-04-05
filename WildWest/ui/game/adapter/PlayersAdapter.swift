@@ -8,7 +8,6 @@
 
 struct PlayerItem {
     let player: PlayerProtocol
-    let isControlled: Bool
     let isTurn: Bool
     let isAttacked: Bool
     let isHelped: Bool
@@ -17,22 +16,19 @@ struct PlayerItem {
 
 protocol PlayersAdapterProtocol {
     func buildItems(state: GameStateProtocol,
-                    for controlledPlayerId: String?,
-                    antiSheriffScore: [String: Int]) -> [PlayerItem]
+                    scores: [String: Int]) -> [PlayerItem]
 }
 
 class PlayersAdapter: PlayersAdapterProtocol {
     
     func buildItems(state: GameStateProtocol,
-                    for controlledPlayerId: String?,
-                    antiSheriffScore: [String: Int]) -> [PlayerItem] {
+                    scores: [String: Int]) -> [PlayerItem] {
         state.allPlayers.map {
             PlayerItem(player: $0,
-                       isControlled: $0.identifier == controlledPlayerId,
                        isTurn: $0.identifier == state.turn,
                        isAttacked: state.isPlayerAttacked($0.identifier),
                        isHelped: state.isPlayerHelped($0.identifier),
-                       score: antiSheriffScore[$0.identifier])
+                       score: scores[$0.identifier])
         }
     }
 }

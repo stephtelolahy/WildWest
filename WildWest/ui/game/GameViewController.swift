@@ -30,7 +30,7 @@ class GameViewController: UIViewController, Subscribable {
     private var playerItems: [PlayerItem] = []
     private var actionItems: [ActionItem] = []
     private var messages: [String] = []
-    private var antiSheriffScore: [String: Int] = [:]
+    private var scores: [String: Int] = [:]
     private var endTurnMoves: [GameMove] = []
     
     private lazy var playerAdapter = PlayersAdapter()
@@ -80,11 +80,9 @@ private extension GameViewController {
     
     func update(with state: GameStateProtocol) {
         
-        antiSheriffScore = statsBuilder.buildAntiSheriffScore(state: state)
+        scores = statsBuilder.buildScore(state: state)
         
-        playerItems = playerAdapter.buildItems(state: state,
-                                               for: controlledPlayerId,
-                                               antiSheriffScore: antiSheriffScore)
+        playerItems = playerAdapter.buildItems(state: state, scores: scores)
         playersCollectionView.reloadData()
         
         if let topDiscardPile = state.discardPile.first {

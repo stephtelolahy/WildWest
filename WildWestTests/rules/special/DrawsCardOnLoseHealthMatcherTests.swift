@@ -44,20 +44,4 @@ class DrawsCardOnLoseHealthMatcherTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates, [.playerPullFromDeck("p1", 1)])
     }
-    
-    func test_Draws3CardsOnLoseHealthByDynamite() {
-        // Given
-        let mockPlayer1 = MockPlayerProtocol()
-            .identified(by: "p1")
-            .lastDamage(is: DamageEvent(damage: 3, source: .byDynamite))
-        let mockState = MockGameStateProtocol()
-            .players(are: mockPlayer1)
-        let move = GameMove(name: .drawsCardOnLoseHealth, actorId: "p1")
-        
-        // When
-        let updates = sut.execute(move, in: mockState)
-        
-        // Assert
-        XCTAssertEqual(updates, [.playerPullFromDeck("p1", 3)])
-    }
 }

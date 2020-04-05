@@ -86,8 +86,7 @@ class GameUpdateExecutor: UpdateExecutorProtocol {
             
         case let .setupGeneralStore(cardsCount):
             Array(1...cardsCount)
-                .map { _ in database.deckRemoveFirst() }
-                .compactMap { $0 }
+                .compactMap { _ in database.deckRemoveFirst() }
                 .forEach { database.addGeneralStore($0) }
             
         case .flipOverFirstDeckCard:

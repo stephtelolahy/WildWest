@@ -28,7 +28,7 @@ class EliminateMatcher: MoveMatcherProtocol {
         actor.hand.forEach { updates.append(.playerDiscardHand(move.actorId, $0.identifier)) }
         actor.inPlay.forEach { updates.append(.playerDiscardInPlay(move.actorId, $0.identifier)) }
         if move.actorId == state.turn {
-            updates.append(.setTurn(state.nextTurn))
+            updates.append(.setTurn(state.nextPlayer(after: move.actorId)))
             updates.append(.setChallenge(Challenge(name: .startTurn)))
         }
         
