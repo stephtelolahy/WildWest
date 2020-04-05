@@ -143,14 +143,14 @@ private extension MenuViewController {
         let engine = GameEngine(database: database,
                                 moveMatchers: allMatchers,
                                 updateExecutor: GameUpdateExecutor(),
-                                updateDelay: 0.5)
+                                updateDelay: userPreferences.updateDelay)
         
         let controlledPlayerId = state.players.first?.identifier
         let aiPlayers = database.state.players.filter { $0.identifier != controlledPlayerId }
         let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
                                                      ai: RandomAIWithRole(),
                                                      engine: engine,
-                                                     delay: 0.5)
+                                                     delay: userPreferences.updateDelay)
         }
         
         presentGame(engine: engine, controlledPlayerId: controlledPlayerId, aiAgents: aiAgents)
