@@ -34,7 +34,7 @@ class MenuViewController: UIViewController {
         let jsonReader = JsonReader(bundle: Bundle.main)
         let config = GameConfiguration(jsonReader: jsonReader)
         
-        allFigures = config.allFigures
+        allFigures = config.allFigures.filter { !$0.abilities.isEmpty }
         allCards = config.allCards
         allMatchers = config.moveMatchers
         
@@ -76,6 +76,17 @@ class MenuViewController: UIViewController {
     
     @IBAction private func playAsSheriffValueChanged(_ sender: Any) {
         userPreferences.playAsSheriff = playAsSheriffSwitch.isOn
+    }
+    
+    @IBAction private func contactButtonTapped(_ sender: Any) {
+        let email = "stephano.telolahy@gmail.com"
+        if let url = URL(string: "mailto:\(email)") {
+          if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url)
+          } else {
+            UIApplication.shared.openURL(url)
+          }
+        }
     }
 }
 

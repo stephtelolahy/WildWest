@@ -20,14 +20,23 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1ml-If-Dys" userLabel="menuStackView">
                                 <rect key="frame" x="16" y="16" width="267" height="343"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_splash" translatesAutoresizingMaskIntoConstraints="NO" id="nUc-dp-SOW" userLabel="logo">
-                                        <rect key="frame" x="81.5" y="0.0" width="104" height="104"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="nUc-dp-SOW" secondAttribute="height" multiplier="1:1" id="iTc-HC-HH9"/>
-                                        </constraints>
-                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="osg-8j-chw">
+                                        <rect key="frame" x="24.5" y="0.0" width="217.5" height="98.5"/>
+                                        <subviews>
+                                            <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The unofficial clone of the Western Card Game" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQg-zg-mUN">
+                                                <rect key="frame" x="0.0" y="0.0" width="217.5" height="40"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_splash" translatesAutoresizingMaskIntoConstraints="NO" id="nUc-dp-SOW" userLabel="logo">
+                                                <rect key="frame" x="0.0" y="40" width="217.5" height="58.5"/>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s8o-qf-BAQ">
-                                        <rect key="frame" x="83.5" y="161.5" width="100" height="52"/>
+                                        <rect key="frame" x="83.5" y="163" width="100" height="52"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="cJz-6l-Jdk"/>
                                             <constraint firstAttribute="width" secondItem="s8o-qf-BAQ" secondAttribute="height" multiplier="557:291" id="d4G-rt-8LJ"/>
@@ -37,15 +46,14 @@
                                             <action selector="playButtonTapped:" destination="8GX-Wa-ifS" eventType="touchUpInside" id="fna-Vk-lga"/>
                                         </connections>
                                     </button>
-                                    <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQg-zg-mUN">
-                                        <rect key="frame" x="59.5" y="303" width="148" height="40"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <string key="text">The Western Card Game
-by Stéphano T.</string>
-                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="20"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CXM-Fz-dnZ">
+                                        <rect key="frame" x="52.5" y="314" width="162" height="29"/>
+                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="17"/>
+                                        <state key="normal" title="stephano.telolahy@gmail.com"/>
+                                        <connections>
+                                            <action selector="contactButtonTapped:" destination="8GX-Wa-ifS" eventType="touchUpInside" id="QZ4-fZ-HfO"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="TgM-gl-AKs" userLabel="settingsStackView">
