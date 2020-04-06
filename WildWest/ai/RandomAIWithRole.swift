@@ -75,6 +75,6 @@ private extension GameStateProtocol {
         }
         
         let targetRole = target.role ?? Role.estimatedRole(for: targetId, scores: scores)
-        return sourceRole.relationShip(to: targetRole)
+        return sourceRole.relationShip(to: targetRole, playersCount: players.count)
     }
 }

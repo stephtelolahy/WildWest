@@ -82,12 +82,7 @@ private extension Role {
     func renegadeRelationShip(to role: Role, playersCount: Int) -> Relationship {
         switch role {
         case .sheriff:
-            if playersCount == 2 {
-                return .enemy
-            } else {
-                return .teammate
-            }
-            
+            return playersCount > 2 ? .teammate : .enemy
         default:
             return .unknown
         }
