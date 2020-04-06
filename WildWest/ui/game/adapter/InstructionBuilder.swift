@@ -20,14 +20,18 @@ class InstructionBuilder: InstructionBuilderProtocol {
             return "viewing game"
         }
         
-        guard state.validMoves[controlledPlayerId] != nil else {
+        guard let moves = state.validMoves[controlledPlayerId] else {
             return "waiting others to play"
         }
         
-        guard let challenge = state.challenge else {
-            return "play any card"
+        if moves.allSatisfy({ $0.name == .endTurn }) {
+            return "end turn"
         }
         
-        return challenge.description(in: state)
+        if let challenge = state.challenge {
+            return challenge.name.rawValue
+        }
+        
+        return "play any card"
     }
 }

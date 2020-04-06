@@ -34,7 +34,7 @@ class MenuViewController: UIViewController {
         let jsonReader = JsonReader(bundle: Bundle.main)
         let config = GameConfiguration(jsonReader: jsonReader)
         
-        allFigures = config.allFigures
+        allFigures = config.allFigures.filter { !$0.abilities.isEmpty }
         allCards = config.allCards
         allMatchers = config.moveMatchers
         
@@ -76,6 +76,20 @@ class MenuViewController: UIViewController {
     
     @IBAction private func playAsSheriffValueChanged(_ sender: Any) {
         userPreferences.playAsSheriff = playAsSheriffSwitch.isOn
+    }
+    
+    @IBAction private func contactButtonTapped(_ sender: Any) {
+        let email = "stephano.telolahy@gmail.com"
+        if let url = URL(string: "mailto:\(email)") {
+            openUrl(url)
+        }
+    }
+    
+    @IBAction private func logoButtonTapped(_ sender: Any) {
+        let rulesUrl = "http://www.dvgiochi.net/bang/bang_rules.pdf"
+        if let url = URL(string: rulesUrl) {
+            openUrl(url)
+        }
     }
 }
 
@@ -129,14 +143,14 @@ private extension MenuViewController {
         let engine = GameEngine(database: database,
                                 moveMatchers: allMatchers,
                                 updateExecutor: GameUpdateExecutor(),
-                                updateDelay: 0.5)
+                                updateDelay: userPreferences.updateDelay)
         
         let controlledPlayerId = state.players.first?.identifier
         let aiPlayers = database.state.players.filter { $0.identifier != controlledPlayerId }
         let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
                                                      ai: RandomAIWithRole(),
                                                      engine: engine,
-                                                     delay: 0.5)
+                                                     delay: userPreferences.updateDelay)
         }
         
         presentGame(engine: engine, controlledPlayerId: controlledPlayerId, aiAgents: aiAgents)
@@ -216,5 +230,15 @@ private extension Array where Element: Equatable {
             array = array.shuffled()
         }
         return array
+    }
+}
+
+private extension UIViewController {
+    func openUrl(_ url: URL) {
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
     }
 }
