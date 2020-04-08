@@ -73,14 +73,14 @@ extension GameEngine {
         // check effects
         let effects = moveMatchers.compactMap { $0.effect(onExecuting: move, in: database.state) }
         if !effects.isEmpty {
-            effects.forEach { commandSubject.onNext($0) }
+            effects.forEach { queue($0) }
             return
         }
         
         // check autoPlay moves
         let autoPlays = moveMatchers.compactMap { $0.autoPlayMove(matching: database.state) }
         if !autoPlays.isEmpty {
-            autoPlays.forEach { commandSubject.onNext($0) }
+            autoPlays.forEach { queue($0) }
             return
         }
         

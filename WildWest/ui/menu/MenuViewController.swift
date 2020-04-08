@@ -149,8 +149,7 @@ private extension MenuViewController {
         let aiPlayers = database.state.players.filter { $0.identifier != controlledPlayerId }
         let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
                                                      ai: RandomAIWithRole(),
-                                                     engine: engine,
-                                                     delay: userPreferences.updateDelay)
+                                                     engine: engine)
         }
         
         presentGame(engine: engine, controlledPlayerId: controlledPlayerId, aiAgents: aiAgents)
