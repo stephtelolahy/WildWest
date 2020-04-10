@@ -101,18 +101,24 @@ private extension GameEngine {
     
     func observeCommandQueue() {
         sub(commandSubject.observable.subscribe(onNext: { [weak self] move in
-            guard let self = self else { return }
-            
-            self.execute(move)
-            
-            self.emitState()
-            self.emitExecutedMove(move)
-            if self.commandSubject.queue.isEmpty {
-                self.emitValidMoves()
-            } else {
-                self.emmitEmptyMoves()
-            }
+            self?.handleMove(move)
         }))
+    }
+    
+    func handleMove(_ move: GameMove) {
+        execute(move)
+        
+        emitState()
+        
+        emitExecutedMove(move)
+        
+        guard commandSubject.queue.isEmpty,
+            database.state.outcome == nil else {
+                emmitEmptyMoves()
+                return
+        }
+        
+        emitValidMoves()
     }
     
     func emitExecutedMove(_ move: GameMove) {
