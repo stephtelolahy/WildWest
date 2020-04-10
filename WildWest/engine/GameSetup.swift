@@ -5,7 +5,6 @@
 //  Created by Hugues Stéphano TELOLAHY on 12/30/19.
 //  Copyright © 2019 creativeGames. All rights reserved.
 //
-// swiftlint:disable function_body_length
 
 class GameSetup: GameSetupProtocol {
     
@@ -48,8 +47,6 @@ class GameSetup: GameSetupProtocol {
                          turn: sheriff.identifier,
                          challenge: Challenge(name: .startTurn),
                          generalStore: [],
-                         outcome: nil,
-                         validMoves: [:],
-                         executedMoves: [])
+                         outcome: nil)
     }
 }

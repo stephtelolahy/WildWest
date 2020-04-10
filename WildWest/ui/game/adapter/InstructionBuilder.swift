@@ -7,24 +7,24 @@
 //
 
 protocol InstructionBuilderProtocol {
-    func buildInstruction(state: GameStateProtocol, for controlledPlayerId: String?) -> String
+    func buildInstruction(state: GameStateProtocol, validMoves: [GameMove], for controlledPlayerId: String?) -> String
 }
 
 class InstructionBuilder: InstructionBuilderProtocol {
-    func buildInstruction(state: GameStateProtocol, for controlledPlayerId: String?) -> String {
+    func buildInstruction(state: GameStateProtocol, validMoves: [GameMove], for controlledPlayerId: String?) -> String {
         if let outcome = state.outcome {
             return outcome.rawValue
         }
         
-        guard let controlledPlayerId = controlledPlayerId else {
+        guard controlledPlayerId != nil else {
             return "viewing game"
         }
         
-        guard let moves = state.validMoves[controlledPlayerId] else {
+        guard !validMoves.isEmpty else {
             return "waiting others to play"
         }
         
-        if moves.allSatisfy({ $0.name == .endTurn }) {
+        if validMoves.allSatisfy({ $0.name == .endTurn }) {
             return "end turn"
         }
         

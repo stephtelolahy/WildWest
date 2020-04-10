@@ -11,6 +11,9 @@ import RxSwift
 class GameEngine: GameEngineProtocol, Subscribable {
     
     private let stateSubject: BehaviorSubject<GameStateProtocol>
+    private let executedMoveSubject: PublishSubject<GameMove>
+    private let validMovesSubject: PublishSubject<[String: [GameMove]]>
+    
     private let commandSubject: DelaySubject<GameMove>
     private let database: GameDatabaseProtocol
     private let updateExecutor: UpdateExecutorProtocol
@@ -21,28 +24,25 @@ class GameEngine: GameEngineProtocol, Subscribable {
          updateExecutor: UpdateExecutorProtocol,
          updateDelay: TimeInterval) {
         self.database = database
-        self.stateSubject = BehaviorSubject(value: database.state)
         self.moveMatchers = moveMatchers
         self.updateExecutor = updateExecutor
-        self.commandSubject = DelaySubject(delay: updateDelay)
+        stateSubject = BehaviorSubject(value: database.state)
+        executedMoveSubject = PublishSubject()
+        validMovesSubject = PublishSubject()
+        commandSubject = DelaySubject(delay: updateDelay)
     }
     
     var allPlayersCount: Int {
         database.state.players.count
     }
     
+    var executedMove: Observable<GameMove> {
+        executedMoveSubject
+    }
+    
     func start() {
-        sub(commandSubject.observable.subscribe(onNext: { [weak self] move in
-            guard let self = self else {
-                return
-            }
-            
-            self.execute(move)
-            self.stateSubject.onNext(self.database.state)
-        }))
-        
-        moveMatchers.compactMap { $0.autoPlayMove(matching: database.state) }
-            .forEach { queue($0) }
+        observeCommandQueue()
+        moveMatchers.compactMap { $0.autoPlayMove(matching: database.state) }.forEach { queue($0) }
     }
     
     func queue(_ move: GameMove) {
@@ -52,53 +52,17 @@ class GameEngine: GameEngineProtocol, Subscribable {
     func state(observedBy playerId: String?) -> Observable<GameStateProtocol> {
         stateSubject.map { $0.observed(by: playerId) }
     }
+    
+    func validMoves(for playerId: String?) -> Observable<[GameMove]> {
+        validMovesSubject.map { $0[playerId ?? ""] ?? [] }
+    }
 }
 
 extension GameEngine {
     
     func execute(_ move: GameMove) {
-        // no move is allowed during update
-        database.setValidMoves([:])
         
-        // apply updates
-        applyUpdates(for: move)
-        database.addExecutedMove(move)
-        
-        // check game over
-        if let outcome = database.state.claculateOutcome() {
-            database.setOutcome(outcome)
-            return
-        }
-        
-        // check effects
-        let effects = moveMatchers.compactMap { $0.effect(onExecuting: move, in: database.state) }
-        if !effects.isEmpty {
-            effects.forEach { queue($0) }
-            return
-        }
-        
-        // check autoPlay moves
-        let autoPlays = moveMatchers.compactMap { $0.autoPlayMove(matching: database.state) }
-        if !autoPlays.isEmpty {
-            autoPlays.forEach { queue($0) }
-            return
-        }
-        
-        // finally generate valid moves
-        let validMoves = moveMatchers.compactMap { $0.validMoves(matching: database.state) }
-            .flatMap { $0 }
-            .groupedByActor()
-        
-        guard validMoves.keys.count == 1 else {
-            fatalError("Illegal active players (\(validMoves.keys.count))")
-        }
-        
-        database.setValidMoves(validMoves)
-    }
-    
-    private func applyUpdates(for move: GameMove) {
         print("\n*** \(String(describing: move)) ***")
-        
         let matchers = moveMatchers.filter({ $0.execute(move, in: database.state) != nil })
         guard matchers.count == 1,
             let executor = matchers.first,
@@ -110,5 +74,69 @@ extension GameEngine {
             print("> \(String(describing: update))")
             updateExecutor.execute(update, in: database)
         }
+        
+        // check game over
+        if let outcome = database.state.claculateOutcome() {
+            database.setOutcome(outcome)
+            return
+        }
+        
+        // queue effects
+        let effects = moveMatchers.compactMap { $0.effect(onExecuting: move, in: database.state) }
+        if !effects.isEmpty {
+            effects.forEach { commandSubject.onNext($0) }
+            return
+        }
+        
+        // queue autoPlay
+        let autoPlays = moveMatchers.compactMap { $0.autoPlayMove(matching: database.state) }
+        if !autoPlays.isEmpty {
+            autoPlays.forEach { commandSubject.onNext($0) }
+            return
+        }
+    }
+    
+}
+
+private extension GameEngine {
+    
+    func observeCommandQueue() {
+        sub(commandSubject.observable.subscribe(onNext: { [weak self] move in
+            guard let self = self else { return }
+            
+            self.execute(move)
+            
+            self.emitExecutedMove(move)
+            self.emitState()
+            if self.commandSubject.queue.isEmpty {
+                self.emitValidMoves()
+            } else {
+                self.emmitEmptyMoves()
+            }
+        }))
+    }
+    
+    func emitExecutedMove(_ move: GameMove) {
+        executedMoveSubject.onNext(move)
+    }
+    
+    func emitValidMoves() {
+        let validMoves = moveMatchers.compactMap { $0.validMoves(matching: database.state) }
+            .flatMap { $0 }
+            .groupedByActor()
+        
+        guard validMoves.keys.count <= 1 else {
+            fatalError("Illegal active players (\(validMoves.keys.count))")
+        }
+        
+        validMovesSubject.onNext(validMoves)
+    }
+    
+    func emmitEmptyMoves() {
+        validMovesSubject.onNext([:])
+    }
+    
+    func emitState() {
+        stateSubject.onNext(database.state)
     }
 }

@@ -5,7 +5,6 @@
 //  Created by Hugues Stephano Telolahy on 24/01/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-// swiftlint:disable function_body_length
 
 import UIKit
 import RxSwift
@@ -24,14 +23,14 @@ class GameViewController: UIViewController, Subscribable {
     // MARK: Properties
     
     var engine: GameEngineProtocol?
-    var aiAgents: [AIPlayerAgentProtocol] = []
+    var aiAgents: [AIPlayerAgentProtocol]?
     var controlledPlayerId: String?
     
     private var playerItems: [PlayerItem] = []
     private var actionItems: [ActionItem] = []
     private var messages: [String] = []
-    private var scores: [String: Int] = [:]
     private var endTurnMoves: [GameMove] = []
+    private var latestState: GameStateProtocol?
     
     private lazy var playerAdapter = PlayersAdapter()
     private lazy var actionsAdapter = ActionsAdapter()
@@ -56,11 +55,19 @@ class GameViewController: UIViewController, Subscribable {
         }
         
         sub(engine.state(observedBy: controlledPlayerId).subscribe(onNext: { [weak self] state in
-            self?.update(with: state)
+            self?.processState(state)
+        }))
+        
+        sub(engine.validMoves(for: controlledPlayerId).subscribe(onNext: { [weak self] moves in
+            self?.processValidMoves(moves)
+        }))
+        
+        sub(engine.executedMove.subscribe(onNext: { [weak self] move in
+            self?.processExecutedMove(move)
         }))
         
         engine.start()
-        aiAgents.forEach { $0.start() }
+        aiAgents?.forEach { $0.start() }
     }
     
     // MARK: IBAction
@@ -78,11 +85,10 @@ class GameViewController: UIViewController, Subscribable {
 
 private extension GameViewController {
     
-    func update(with state: GameStateProtocol) {
+    func processState(_ state: GameStateProtocol) {
+        latestState = state
         
-        scores = statsBuilder.buildScore(state: state)
-        
-        playerItems = playerAdapter.buildItems(state: state, scores: scores)
+        playerItems = playerAdapter.buildItems(state: state, scores: statsBuilder.scores)
         playersCollectionView.reloadData()
         
         if let topDiscardPile = state.discardPile.first {
@@ -91,35 +97,42 @@ private extension GameViewController {
             discardImageView.image = nil
         }
         
-        if let lastMove = state.executedMoves.last {
-            messages.append(moveDescriptor.description(for: lastMove))
-            messageTableView.reloadDataSwollingAtBottom()
-            
-            moveSoundPlayer.playSound(for: lastMove)
-        }
-        
-        actionItems = actionsAdapter.buildActions(state: state, for: controlledPlayerId)
-        actionsCollectionView.reloadData()
-        titleLabel.text = instructionBuilder.buildInstruction(state: state, for: controlledPlayerId)
-        
         if let outcome = state.outcome {
             showGameOver(outcome: outcome)
         }
+    }
+    
+    func processExecutedMove(_ move: GameMove) {
+        guard let state = latestState else {
+            return
+        }
+        
+        statsBuilder.updateScores(state: state, move: move)
+        
+        messages.append(moveDescriptor.description(for: move))
+        messageTableView.reloadDataSwollingAtBottom()
+        
+        moveSoundPlayer.playSound(for: move)
+    }
+    
+    func processValidMoves(_ moves: [GameMove]) {
+        guard let state = latestState else {
+            return
+        }
+        
+        titleLabel.text = instructionBuilder.buildInstruction(state: state, validMoves: moves, for: controlledPlayerId)
+        
+        actionItems = actionsAdapter.buildActions(state: state, validMoves: moves, for: controlledPlayerId)
+        actionsCollectionView.reloadData()
         
         if state.challenge != nil,
-            let controlledPlayerId = self.controlledPlayerId,
-            let reactionMoves = state.validMoves[controlledPlayerId] {
-            reactionMoveSelector.selectMove(within: reactionMoves, state: state) { [weak self] move in
+            !moves.isEmpty {
+            reactionMoveSelector.selectMove(within: moves, state: state) { [weak self] move in
                 self?.engine?.queue(move)
             }
         }
         
-        endTurnMoves = []
-        if let controlledPlayerId = self.controlledPlayerId,
-            let moves = state.validMoves[controlledPlayerId] {
-            endTurnMoves = moves.filter { $0.name == .endTurn }
-        }
-        
+        endTurnMoves = moves.filter { $0.name == .endTurn }
         endTurnButton.isEnabled = !endTurnMoves.isEmpty
     }
     

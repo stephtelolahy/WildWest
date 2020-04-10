@@ -14,8 +14,6 @@ protocol GameDatabaseProtocol {
     // Flags
     func setTurn(_ turn: String)
     func setChallenge(_ challenge: Challenge?)
-    func addExecutedMove(_ move: GameMove)
-    func setValidMoves(_ moves: [String: [GameMove]])
     func setOutcome(_ outcome: GameOutcome)
     
     /// Deck

@@ -32,14 +32,6 @@ class MemoryCachedDataBase: GameDatabaseProtocol {
         mutableState.challenge = challenge
     }
     
-    func addExecutedMove(_ move: GameMove) {
-        mutableState.executedMoves.append(move)
-    }
-    
-    func setValidMoves(_ moves: [String: [GameMove]]) {
-        mutableState.validMoves = moves
-    }
-    
     func setOutcome(_ outcome: GameOutcome) {
         mutableState.outcome = outcome
     }

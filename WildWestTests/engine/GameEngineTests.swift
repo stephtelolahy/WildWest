@@ -64,42 +64,6 @@ class GameEngineTests: XCTestCase {
         verify(mockUpdateExecutor).execute(equal(to: update), in: database(equalTo: mockDatabase))
     }
     
-    func test_AddExecutedMoves_IfExecutingMove() {
-        // Given
-        let move = GameMove(name: MoveName("dummy"), actorId: "p1")
-        Cuckoo.stub(mockMoveMatcher) { mock in
-            when(mock.execute(equal(to: move), in: state(equalTo: mockState))).thenReturn([])
-        }
-        
-        // When
-        sut.execute(move)
-        
-        // Assert
-        verify(mockDatabase).addExecutedMove(equal(to: move))
-    }
-    
-    func test_SetValidMoves_IfExecutingMove() {
-        // Given
-        let move = GameMove(name: MoveName("dummy"), actorId: "p1")
-        let validMove = GameMove(name: .play, actorId: "p1")
-        Cuckoo.stub(mockMoveMatcher) { mock in
-            when(mock.validMoves(matching: state(equalTo: mockState))).thenReturn([validMove])
-            when(mock.execute(equal(to: move), in: state(equalTo: mockState))).thenReturn([])
-        }
-        Cuckoo.stub(mockState) { mock in
-            when(mock.players.get).thenReturn([
-                MockPlayerProtocol().role(is: .sheriff),
-                MockPlayerProtocol().role(is: .outlaw)
-            ])
-        }
-        
-        // When
-        sut.execute(move)
-        
-        // Assert
-        verify(mockDatabase).setValidMoves(equal(to: ["p1": [validMove]]))
-    }
-    
     func test_DoNotGenerateActions_IfGameIsOver() {
         // Given
         let move = GameMove(name: MoveName("dummy"), actorId: "p1")
@@ -114,7 +78,6 @@ class GameEngineTests: XCTestCase {
         sut.execute(move)
         
         // Assert
-        verify(mockDatabase).setValidMoves(equal(to: [:]))
         verify(mockMoveMatcher, never()).effect(onExecuting: any(), in: any())
         verify(mockMoveMatcher, never()).autoPlayMove(matching: any())
         verify(mockMoveMatcher, never()).validMoves(matching: any())

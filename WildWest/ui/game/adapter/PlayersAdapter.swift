@@ -51,7 +51,8 @@ private extension GameStateProtocol {
                 return false
             }
         }
-        
+        // TODO: display attacked status
+        /*
         let classifier = MoveClassifier()
         if let lastMove = executedMoves.last {
             let classification = classifier.classify(lastMove)
@@ -66,7 +67,7 @@ private extension GameStateProtocol {
                 return false
             }
         }
-        
+        */
         return false
     }
     
@@ -80,7 +81,8 @@ private extension GameStateProtocol {
                 return false
             }
         }
-        
+        // TODO: display helped status
+        /*
         let classifier = MoveClassifier()
         if let lastMove = executedMoves.last {
             let classification = classifier.classify(lastMove)
@@ -92,7 +94,7 @@ private extension GameStateProtocol {
                 return false
             }
         }
-        
+        */
         return false
     }
 }

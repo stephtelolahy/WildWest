@@ -13,9 +13,9 @@ import RxSwift
 open class DelaySubject<Element> where Element: Any {
     
     let observable: PublishSubject<Element>
+    var queue: [Element]
     
     private let delay: TimeInterval
-    private var queue: [Element]
     private var running: Bool
     
     init(delay: TimeInterval) {
