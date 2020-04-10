@@ -95,7 +95,6 @@ extension GameEngine {
             return
         }
     }
-    
 }
 
 private extension GameEngine {
@@ -106,8 +105,8 @@ private extension GameEngine {
             
             self.execute(move)
             
-            self.emitExecutedMove(move)
             self.emitState()
+            self.emitExecutedMove(move)
             if self.commandSubject.queue.isEmpty {
                 self.emitValidMoves()
             } else {

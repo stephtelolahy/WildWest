@@ -8,7 +8,7 @@
 
 class DrawsCardWhenHandIsEmptyMatcher: MoveMatcherProtocol {
     
-    func autoPlayMove(matching state: GameStateProtocol) -> GameMove? {
+    func effect(onExecuting move: GameMove, in state: GameStateProtocol) -> GameMove? {
         guard let actor = state.players.first(where: {
             $0.hand.isEmpty && $0.abilities[.drawsCardWhenHandIsEmpty] == true }) else {
             return nil
