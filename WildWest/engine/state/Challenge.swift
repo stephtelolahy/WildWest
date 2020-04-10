@@ -6,6 +6,7 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
+// Challenge is a prior state waiting for reaction
 struct Challenge: Equatable {
     let name: ChallengeName
     let targetIds: [String]

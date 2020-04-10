@@ -20,6 +20,11 @@ class MoveClassifier: MoveClassifierProtocol {
             return .strongAttack(actorId: move.actorId, targetId: targetId)
         }
         
+        if case .bangWithMissed = move.name,
+            let targetId = move.targetId {
+            return .strongAttack(actorId: move.actorId, targetId: targetId)
+        }
+        
         if case .play = move.name,
             cardId.contains("jail"),
             let targetId = move.targetId {

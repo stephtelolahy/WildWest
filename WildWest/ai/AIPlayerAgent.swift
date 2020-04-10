@@ -17,13 +17,11 @@ class AIPlayerAgent: AIPlayerAgentProtocol, Subscribable {
     let engine: GameEngineProtocol
     let playerId: String
     let ai: AIProtocol
-    let delay: Double
     
-    init(playerId: String, ai: AIProtocol, engine: GameEngineProtocol, delay: Double) {
+    init(playerId: String, ai: AIProtocol, engine: GameEngineProtocol) {
         self.playerId = playerId
         self.ai = ai
         self.engine = engine
-        self.delay = delay
     }
     
     func start() {
@@ -38,8 +36,6 @@ class AIPlayerAgent: AIPlayerAgentProtocol, Subscribable {
                 return
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
-            self?.engine.queue(move)
-        }
+        engine.queue(move)
     }
 }
