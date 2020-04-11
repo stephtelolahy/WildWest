@@ -12,7 +12,7 @@ protocol GameEngineProtocol {
     var allPlayersCount: Int { get }
     
     func state(observedBy playerId: String?) -> Observable<GameStateProtocol>
-    func validMoves(for playerId: String?) -> Observable<[GameMove]>
+    func validMoves(for playerId: String) -> Observable<[GameMove]>
     func executedMove() -> Observable<GameMove>
     
     func start()

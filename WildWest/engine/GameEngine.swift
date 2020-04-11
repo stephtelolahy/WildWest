@@ -53,8 +53,8 @@ class GameEngine: GameEngineProtocol, Subscribable {
         executedMoveSubject
     }
     
-    func validMoves(for playerId: String?) -> Observable<[GameMove]> {
-        validMovesSubject.map { $0[playerId ?? ""] ?? [] }
+    func validMoves(for playerId: String) -> Observable<[GameMove]> {
+        validMovesSubject.map { $0[playerId] ?? [] }
     }
 }
 

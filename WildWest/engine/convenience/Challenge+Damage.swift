@@ -11,11 +11,11 @@ extension Challenge {
     init(name: ChallengeName, targetIds: [String] = [], damage: Int? = nil, barrelsResolved: Int = 0) {
         self.name = name
         self.targetIds = targetIds
-        self.damage = damage ?? Self.initialDamage(for: name)
+        self.damage = damage ?? Self.defaultDamage(for: name)
         self.barrelsResolved = barrelsResolved
     }
     
-    private static func initialDamage(for name: ChallengeName) -> Int {
+    private static func defaultDamage(for name: ChallengeName) -> Int {
         switch name {
         case .bang, .gatling, .indians, .duel:
             return 1

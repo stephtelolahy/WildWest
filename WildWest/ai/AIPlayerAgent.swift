@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 protocol AIPlayerAgentProtocol {
-    func start()
+    func observeState()
 }
 
 class AIPlayerAgent: AIPlayerAgentProtocol, Subscribable {
@@ -28,7 +28,7 @@ class AIPlayerAgent: AIPlayerAgentProtocol, Subscribable {
         self.engine = engine
     }
     
-    func start() {
+    func observeState() {
         sub(engine.state(observedBy: playerId).subscribe(onNext: { [weak self] state in
             self?.processState(state)
         }))

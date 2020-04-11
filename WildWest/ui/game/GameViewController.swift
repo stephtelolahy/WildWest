@@ -58,16 +58,22 @@ class GameViewController: UIViewController, Subscribable {
             self?.processState(state)
         }))
         
-        sub(engine.validMoves(for: controlledPlayerId).subscribe(onNext: { [weak self] moves in
-            self?.processValidMoves(moves)
-        }))
-        
         sub(engine.executedMove().subscribe(onNext: { [weak self] move in
             self?.processExecutedMove(move)
         }))
         
-        engine.start()
-        aiAgents?.forEach { $0.start() }
+        if let controlledPlayerId = self.controlledPlayerId {
+            sub(engine.validMoves(for: controlledPlayerId).subscribe(onNext: { [weak self] moves in
+                self?.processValidMoves(moves)
+            }))
+        }
+        
+        aiAgents?.forEach { $0.observeState() }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        engine?.start()
     }
     
     // MARK: IBAction
