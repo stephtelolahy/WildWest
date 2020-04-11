@@ -15,5 +15,7 @@ end
 target 'WildWestTests' do
   inherit! :search_paths
   shared_pods
+  pod 'RxBlocking'
+  pod 'RxTest'
   pod 'Cuckoo'
 end
