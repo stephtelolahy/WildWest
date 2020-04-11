@@ -51,22 +51,6 @@ private extension GameStateProtocol {
                 return false
             }
         }
-        
-        let classifier = MoveClassifier()
-        if let lastMove = executedMoves.last {
-            let classification = classifier.classify(lastMove)
-            switch classification {
-            case let .strongAttack(_, targetId):
-                return targetId == playerId
-                
-            case let .weakAttack(_, targetId):
-                return targetId == playerId
-                
-            default:
-                return false
-            }
-        }
-        
         return false
     }
     
@@ -80,19 +64,6 @@ private extension GameStateProtocol {
                 return false
             }
         }
-        
-        let classifier = MoveClassifier()
-        if let lastMove = executedMoves.last {
-            let classification = classifier.classify(lastMove)
-            switch classification {
-            case let .help(_, targetId):
-                return targetId == playerId
-                
-            default:
-                return false
-            }
-        }
-        
         return false
     }
 }

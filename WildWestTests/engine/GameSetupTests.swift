@@ -108,10 +108,6 @@ class GameSetupTests: XCTestCase {
         // SheriffHasOneAdditionalHealth
         let sheriff = state.players.first { $0.role == .sheriff }!
         XCTAssertEqual(sheriff.health, 5)
-        // Valid moves is empty
-        XCTAssertTrue(state.validMoves.isEmpty)
-        // Executed moves is empty
-        XCTAssertTrue(state.executedMoves.isEmpty)
         // Turn is sheriff
         XCTAssertEqual(state.turn, sheriff.identifier)
         // Challenge sheriff start turn

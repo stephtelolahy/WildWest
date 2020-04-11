@@ -52,8 +52,6 @@ class GameCollectionViewLayout: UICollectionViewLayout {
                 return
         }
         
-        assert(collectionView != nil)
-        
         let cellFrames = GameLayoutBuilder().buildLayout(for: numberOfItems,
                                                          size: collectionViewContentSize,
                                                          padding: cellPadding)

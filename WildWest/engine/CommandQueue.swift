@@ -1,32 +1,38 @@
 //
-//  DelaySubject.swift
+//  CommandQueue.swift
 //  WildWest
 //
-//  Created by Hugues Stephano Telolahy on 27/03/2020.
+//  Created by Hugues Stephano Telolahy on 11/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-import Foundation
 import RxSwift
 
-/// A king of PublishSubject emmiting value every fixed interval
-open class DelaySubject<Element> where Element: Any {
+class DelayedCommandQueue: CommandQueueProtocol {
     
-    let observable: PublishSubject<Element>
-    
+    private let observable: PublishSubject<GameMove>
+    private var queue: [GameMove]
     private let delay: TimeInterval
-    private var queue: [Element]
     private var running: Bool
     
     init(delay: TimeInterval) {
         self.delay = delay
-        self.queue = []
-        self.running = false
-        self.observable = PublishSubject()
+        queue = []
+        running = false
+        observable = PublishSubject()
     }
     
-    func onNext(_ value: Element) {
-        queue.append(value)
+    var isEmpty: Bool {
+        queue.isEmpty
+    }
+    
+    func pull() -> Observable<GameMove> {
+        observable
+    }
+    
+    func add(_ element: GameMove) {
+        
+        queue.append(element)
         
         guard !running else {
             return

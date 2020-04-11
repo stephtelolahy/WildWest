@@ -7,43 +7,42 @@
 //
 
 protocol StatsBuilderProtocol {
-    func buildScore(state: GameStateProtocol) -> [String: Int]
+    var scores: [String: Int] { get }
+    
+    func updateScores(state: GameStateProtocol, move: GameMove)
 }
 
 class StatsBuilder: StatsBuilderProtocol {
-    func buildScore(state: GameStateProtocol) -> [String: Int] {
+    
+    var scores: [String: Int] = [:]
+    
+    private let classifier = MoveClassifier()
+    
+    func updateScores(state: GameStateProtocol, move: GameMove) {
         guard let sheriffId = state.allPlayers.first(where: { $0.role == .sheriff })?.identifier else {
-            return [:]
+            return
         }
         
-        var stats: [String: Int] = [:]
-        let classifier = MoveClassifier()
-        
-        state.executedMoves.forEach { move in
-            
-            let classification = classifier.classify(move)
-            switch classification {
-            case let .strongAttack(actorId, targetId):
-                if targetId == sheriffId {
-                    stats.append(Score.strongAttackEnemy, forKey: actorId)
-                }
-                
-            case let .weakAttack(actorId, targetId):
-                if targetId == sheriffId {
-                    stats.append(Score.weakAttackEnemy, forKey: actorId)
-                }
-                
-            case let .help(actorId, targetId):
-                if targetId == sheriffId {
-                    stats.append(Score.helpEnemy, forKey: actorId)
-                }
-                
-            default:
-                break
+        let classification = classifier.classify(move)
+        switch classification {
+        case let .strongAttack(actorId, targetId):
+            if targetId == sheriffId {
+                scores.append(Score.strongAttackEnemy, forKey: actorId)
             }
+            
+        case let .weakAttack(actorId, targetId):
+            if targetId == sheriffId {
+                scores.append(Score.weakAttackEnemy, forKey: actorId)
+            }
+            
+        case let .help(actorId, targetId):
+            if targetId == sheriffId {
+                scores.append(Score.helpEnemy, forKey: actorId)
+            }
+            
+        default:
+            break
         }
-        
-        return stats
     }
 }
 

@@ -15,9 +15,7 @@ extension GameStateProtocol {
                   turn: turn,
                   challenge: challenge,
                   generalStore: generalStore,
-                  outcome: outcome,
-                  validMoves: validMoves,
-                  executedMoves: executedMoves)
+                  outcome: outcome)
     }
 }
 

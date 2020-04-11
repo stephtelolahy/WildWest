@@ -12,20 +12,23 @@ struct ActionItem {
 }
 
 protocol ActionsAdapterProtocol {
-    func buildActions(state: GameStateProtocol, for controlledPlayerId: String?) -> [ActionItem]
+    func buildActions(state: GameStateProtocol,
+                      validMoves: [GameMove],
+                      for controlledPlayerId: String?) -> [ActionItem]
 }
 
 class ActionsAdapter: ActionsAdapterProtocol {
-    func buildActions(state: GameStateProtocol, for controlledPlayerId: String?) -> [ActionItem] {
+    func buildActions(state: GameStateProtocol,
+                      validMoves: [GameMove],
+                      for controlledPlayerId: String?) -> [ActionItem] {
         guard let controlledPlayerId = controlledPlayerId,
             let player = state.player(controlledPlayerId) else {
                 return []
         }
         
-        let playerMoves = state.validMoves[controlledPlayerId] ?? []
         return player.hand.map { card in
-            ActionItem(card: card,
-                       moves: playerMoves.filter { $0.cardId == card.identifier })
+            let moves = validMoves.filter { $0.cardId == card.identifier }
+            return ActionItem(card: card, moves: moves)
         }
     }
 }

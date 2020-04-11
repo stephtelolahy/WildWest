@@ -15,8 +15,6 @@ protocol GameStateProtocol {
     var challenge: Challenge? { get }
     var generalStore: [CardProtocol] { get }
     var outcome: GameOutcome? { get }
-    var validMoves: [String: [GameMove]] { get }
-    var executedMoves: [GameMove] { get }
 }
 
 enum GameOutcome: String, Equatable {

@@ -10,13 +10,17 @@ import Foundation
 import RxSwift
 
 protocol AIPlayerAgentProtocol {
-    func start()
+    func observeState()
 }
 
 class AIPlayerAgent: AIPlayerAgentProtocol, Subscribable {
-    let engine: GameEngineProtocol
-    let playerId: String
-    let ai: AIProtocol
+    
+    private let engine: GameEngineProtocol
+    private let playerId: String
+    private let ai: AIProtocol
+    
+    private let statsBuilder = StatsBuilder()
+    private var latestState: GameStateProtocol?
     
     init(playerId: String, ai: AIProtocol, engine: GameEngineProtocol) {
         self.playerId = playerId
@@ -24,16 +28,42 @@ class AIPlayerAgent: AIPlayerAgentProtocol, Subscribable {
         self.engine = engine
     }
     
-    func start() {
+    func observeState() {
         sub(engine.state(observedBy: playerId).subscribe(onNext: { [weak self] state in
             self?.processState(state)
         }))
+        
+        sub(engine.executedMove().subscribe(onNext: { [weak self] move in
+            self?.processExecutedMove(move)
+        }))
+        
+        sub(engine.validMoves(for: playerId).subscribe(onNext: { [weak self] moves in
+            self?.processValidMoves(moves)
+        }))
+    }
+}
+
+private extension AIPlayerAgent {
+    
+    func processState(_ state: GameStateProtocol) {
+        latestState = state
     }
     
-    private func processState(_ state: GameStateProtocol) {
-        guard let moves = state.validMoves[playerId],
-            let move = ai.bestMove(among: moves, in: state) else {
-                return
+    func processExecutedMove(_ move: GameMove) {
+        guard let state = latestState else {
+            return
+        }
+        
+        statsBuilder.updateScores(state: state, move: move)
+    }
+    
+    func processValidMoves(_ moves: [GameMove]) {
+        guard let state = latestState else {
+            return
+        }
+        
+        guard let move = ai.bestMove(among: moves, in: state, scores: statsBuilder.scores) else {
+            return
         }
         
         engine.queue(move)
