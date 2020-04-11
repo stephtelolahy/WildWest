@@ -14,22 +14,22 @@ class GameEngine: GameEngineProtocol, Subscribable {
     private let executedMoveSubject: PublishSubject<GameMove>
     private let validMovesSubject: PublishSubject<[String: [GameMove]]>
     
-    private let commandSubject: DelaySubject<GameMove>
     private let database: GameDatabaseProtocol
     private let updateExecutor: UpdateExecutorProtocol
     private let moveMatchers: [MoveMatcherProtocol]
+    private let commandQueue: CommandQueueProtocol
     
     init(database: GameDatabaseProtocol,
          moveMatchers: [MoveMatcherProtocol],
          updateExecutor: UpdateExecutorProtocol,
-         updateDelay: TimeInterval) {
+         commandQueue: CommandQueueProtocol) {
         self.database = database
         self.moveMatchers = moveMatchers
         self.updateExecutor = updateExecutor
+        self.commandQueue = commandQueue
         stateSubject = BehaviorSubject(value: database.state)
         executedMoveSubject = PublishSubject()
         validMovesSubject = PublishSubject()
-        commandSubject = DelaySubject(delay: updateDelay)
     }
     
     var allPlayersCount: Int {
@@ -46,7 +46,7 @@ class GameEngine: GameEngineProtocol, Subscribable {
     }
     
     func queue(_ move: GameMove) {
-        commandSubject.onNext(move)
+        commandQueue.add(move)
     }
     
     func state(observedBy playerId: String?) -> Observable<GameStateProtocol> {
@@ -58,7 +58,7 @@ class GameEngine: GameEngineProtocol, Subscribable {
     }
 }
 
-extension GameEngine {
+extension GameEngine: InternalGameEngineProtocol {
     
     func execute(_ move: GameMove) {
         
@@ -84,23 +84,32 @@ extension GameEngine {
         // queue effects
         let effects = moveMatchers.compactMap { $0.effect(onExecuting: move, in: database.state) }
         if !effects.isEmpty {
-            effects.forEach { commandSubject.onNext($0) }
+            effects.forEach { commandQueue.add($0) }
             return
         }
         
         // queue autoPlay
         let autoPlays = moveMatchers.compactMap { $0.autoPlayMove(matching: database.state) }
         if !autoPlays.isEmpty {
-            autoPlays.forEach { commandSubject.onNext($0) }
+            autoPlays.forEach { commandQueue.add($0) }
             return
         }
+    }
+    
+    func emmitState(_ state: GameStateProtocol) {
+    }
+    
+    func emmitExecutedMove(_ move: GameMove) {
+    }
+    
+    func emmitValidMoves(_ moves: [String: [GameMove]]) {
     }
 }
 
 private extension GameEngine {
     
     func observeCommandQueue() {
-        sub(commandSubject.observable.subscribe(onNext: { [weak self] move in
+        sub(commandQueue.pull().subscribe(onNext: { [weak self] move in
             self?.handleMove(move)
         }))
     }
@@ -112,7 +121,7 @@ private extension GameEngine {
         
         emitExecutedMove(move)
         
-        guard commandSubject.queue.isEmpty,
+        guard commandQueue.isEmpty,
             database.state.outcome == nil else {
                 emmitEmptyMoves()
                 return

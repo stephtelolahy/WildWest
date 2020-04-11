@@ -171,6 +171,7 @@
 		337D7FD4243072130078F749 /* GameState+Observed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D7FD3243072130078F749 /* GameState+Observed.swift */; };
 		337D7FD5243072130078F749 /* GameState+Observed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D7FD3243072130078F749 /* GameState+Observed.swift */; };
 		337D7FDD2430879F0078F749 /* PlayerDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D7FDC2430879F0078F749 /* PlayerDescriptor.swift */; };
+		337EE056244222F300E64A86 /* InternalGameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337EE055244222F300E64A86 /* InternalGameEngineTests.swift */; };
 		3380B037243641A20040F027 /* DrawsCardOnLoseHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3380B036243641A20040F027 /* DrawsCardOnLoseHealth.swift */; };
 		3380B038243641A20040F027 /* DrawsCardOnLoseHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3380B036243641A20040F027 /* DrawsCardOnLoseHealth.swift */; };
 		3380B03E24367D890040F027 /* DrawsCardOnLoseHealthMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3380B03C24367D890040F027 /* DrawsCardOnLoseHealthMatcherTests.swift */; };
@@ -217,8 +218,6 @@
 		33BAE346242E74CD0098B41F /* MemoryCachedDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BAE345242E74CD0098B41F /* MemoryCachedDataBase.swift */; };
 		33BAE347242E74CD0098B41F /* MemoryCachedDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BAE345242E74CD0098B41F /* MemoryCachedDataBase.swift */; };
 		33BAE348242E7C960098B41F /* Subscribable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A733ED23DC4A5300E9B2AD /* Subscribable.swift */; };
-		33BAE34A242E7D210098B41F /* DelaySubject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BAE349242E7D210098B41F /* DelaySubject.swift */; };
-		33BAE34B242E7D210098B41F /* DelaySubject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BAE349242E7D210098B41F /* DelaySubject.swift */; };
 		33BC9D4724390DCB00058F9D /* PlayBangAsMissAndViceVersa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BC9D4624390DCB00058F9D /* PlayBangAsMissAndViceVersa.swift */; };
 		33BC9D4824390DCB00058F9D /* PlayBangAsMissAndViceVersa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BC9D4624390DCB00058F9D /* PlayBangAsMissAndViceVersa.swift */; };
 		33BC9D4A24390EEB00058F9D /* PlayBangAsMissAndViceVersaMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BC9D4924390EEB00058F9D /* PlayBangAsMissAndViceVersaMatcherTests.swift */; };
@@ -378,6 +377,7 @@
 		337D7FD0243071AE0078F749 /* Player+Ability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+Ability.swift"; sourceTree = "<group>"; };
 		337D7FD3243072130078F749 /* GameState+Observed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameState+Observed.swift"; sourceTree = "<group>"; };
 		337D7FDC2430879F0078F749 /* PlayerDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDescriptor.swift; sourceTree = "<group>"; };
+		337EE055244222F300E64A86 /* InternalGameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalGameEngineTests.swift; sourceTree = "<group>"; };
 		3380B036243641A20040F027 /* DrawsCardOnLoseHealth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawsCardOnLoseHealth.swift; sourceTree = "<group>"; };
 		3380B03C24367D890040F027 /* DrawsCardOnLoseHealthMatcherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawsCardOnLoseHealthMatcherTests.swift; sourceTree = "<group>"; };
 		3380B03F2436800F0040F027 /* DrawsCardFromPlayerDamagedHim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawsCardFromPlayerDamagedHim.swift; sourceTree = "<group>"; };
@@ -418,7 +418,6 @@
 		33B896C624384B180005FF21 /* GameLayoutBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLayoutBuilderTests.swift; sourceTree = "<group>"; };
 		33B896C9243862AB0005FF21 /* GameCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionViewLayout.swift; sourceTree = "<group>"; };
 		33BAE345242E74CD0098B41F /* MemoryCachedDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCachedDataBase.swift; sourceTree = "<group>"; };
-		33BAE349242E7D210098B41F /* DelaySubject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelaySubject.swift; sourceTree = "<group>"; };
 		33BC9D4624390DCB00058F9D /* PlayBangAsMissAndViceVersa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayBangAsMissAndViceVersa.swift; sourceTree = "<group>"; };
 		33BC9D4924390EEB00058F9D /* PlayBangAsMissAndViceVersaMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayBangAsMissAndViceVersaMatcherTests.swift; sourceTree = "<group>"; };
 		33BD0ACE24350D7D003E75EE /* Player+AbilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+AbilityTests.swift"; sourceTree = "<group>"; };
@@ -934,7 +933,6 @@
 				33A733ED23DC4A5300E9B2AD /* Subscribable.swift */,
 				33A4381123E4BD3200C39DD6 /* ArrayExtension.swift */,
 				ADE91ACC23B9FE2300F7316B /* JsonReader.swift */,
-				33BAE349242E7D210098B41F /* DelaySubject.swift */,
 				334673E52436267500FFBB82 /* UIViewController+Alert.swift */,
 				334673E72436314E00FFBB82 /* UserDefaultsStored.swift */,
 			);
@@ -1019,6 +1017,7 @@
 				AD7EAFBE23D7846D00FE23D5 /* GameSetupTests.swift */,
 				33F2505C23DDDBCC00A0FDD1 /* GameEngineTests.swift */,
 				337C2CC32442194C00C2BCBE /* DelayedCommandQueueTests.swift */,
+				337EE055244222F300E64A86 /* InternalGameEngineTests.swift */,
 				3309D7062408D1BE00713E15 /* update */,
 				338A4D1123E7F589005698FD /* convenience */,
 			);
@@ -1427,7 +1426,6 @@
 				330FDECD242F384C00284FE7 /* PenalizeSheriffOnEliminatingDeputy.swift in Sources */,
 				3328FCF0242F309400A82255 /* EndTurn.swift in Sources */,
 				3301BEFA23F9A79B00B4364D /* AIPlayerAgent.swift in Sources */,
-				33BAE34A242E7D210098B41F /* DelaySubject.swift in Sources */,
 				337408CB24306BAB00E5809B /* Challenge+Damage.swift in Sources */,
 				33E4412424077DAB00B2848E /* UITableViewExtension.swift in Sources */,
 				3328FCAA242F29B100A82255 /* Gatling.swift in Sources */,
@@ -1497,7 +1495,6 @@
 				3328FCB5242F29B200A82255 /* Indians.swift in Sources */,
 				3328FCB1242F29B200A82255 /* Jail.swift in Sources */,
 				33BAE347242E74CD0098B41F /* MemoryCachedDataBase.swift in Sources */,
-				33BAE34B242E7D210098B41F /* DelaySubject.swift in Sources */,
 				33334648242FF65500A97FD5 /* GameState+DistanceTests.swift in Sources */,
 				33BAE348242E7C960098B41F /* Subscribable.swift in Sources */,
 				3328FCE8242F2F0200A82255 /* DiscardBeerMatcherTests.swift in Sources */,
@@ -1554,6 +1551,7 @@
 				333800FA242F20A6003F7327 /* ResolveDynamite.swift in Sources */,
 				330FDED0242F384D00284FE7 /* PenalizeSheriffOnEliminatingDeputy.swift in Sources */,
 				3328FCE2242F2F0200A82255 /* DiscardMissedMatcherTests.swift in Sources */,
+				337EE056244222F300E64A86 /* InternalGameEngineTests.swift in Sources */,
 				AD98FA872421552C00AF4D7C /* GameEngineTests.swift in Sources */,
 				337408D224306C1200E5809B /* Card+Ability.swift in Sources */,
 				3328FCED242F2F0D00A82255 /* ChooseCardMatcherTests.swift in Sources */,

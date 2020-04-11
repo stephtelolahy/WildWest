@@ -20,14 +20,14 @@ class DelayedCommandQueueTests: XCTestCase {
         let move = GameMove(name: MoveName("m1"), actorId: "px")
         
         let scheduler = TestScheduler(initialClock: 0)
-        let commandObserver = scheduler.createObserver(GameMove.self)
-        sut.pull().subscribe(commandObserver).disposed(by: disposeBag)
+        let observer = scheduler.createObserver(GameMove.self)
+        sut.pull().subscribe(observer).disposed(by: disposeBag)
         
         // When
         sut.add(move)
         
         // Assert
-        XCTAssertEqual(commandObserver.events, [Recorded.next(0, move)])
+        XCTAssertEqual(observer.events, [Recorded.next(0, move)])
         XCTAssertEqual(sut.isEmpty, true)
     }
     
@@ -54,5 +54,25 @@ class DelayedCommandQueueTests: XCTestCase {
         // Assert
         wait(for: [expectation], timeout: 1.0)
         XCTAssertEqual(emmitedMoves, [move1, move2, move3])
+        XCTAssertEqual(sut.isEmpty, true)
+    }
+    
+    func test_EmmitToMultipleObservers() {
+        // Given
+        let move = GameMove(name: MoveName("m1"), actorId: "px")
+        
+        let scheduler = TestScheduler(initialClock: 0)
+        let observer1 = scheduler.createObserver(GameMove.self)
+        let observer2 = scheduler.createObserver(GameMove.self)
+        sut.pull().subscribe(observer1).disposed(by: disposeBag)
+        sut.pull().subscribe(observer2).disposed(by: disposeBag)
+        
+        // When
+        sut.add(move)
+        
+        // Assert
+        XCTAssertEqual(observer1.events, [Recorded.next(0, move)])
+        XCTAssertEqual(observer2.events, [Recorded.next(0, move)])
+        XCTAssertEqual(sut.isEmpty, true)
     }
 }

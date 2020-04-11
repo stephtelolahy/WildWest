@@ -201,36 +201,6 @@ import RxSwift
     
     
     
-     func start()  {
-        
-    return cuckoo_manager.call("start()",
-            parameters: (),
-            escapingParameters: (),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.start())
-        
-    }
-    
-    
-    
-     func queue(_ move: GameMove)  {
-        
-    return cuckoo_manager.call("queue(_: GameMove)",
-            parameters: (move),
-            escapingParameters: (move),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.queue(move))
-        
-    }
-    
-    
-    
      func state(observedBy playerId: String?) -> Observable<GameStateProtocol> {
         
     return cuckoo_manager.call("state(observedBy: String?) -> Observable<GameStateProtocol>",
@@ -274,6 +244,36 @@ import RxSwift
         
     }
     
+    
+    
+     func start()  {
+        
+    return cuckoo_manager.call("start()",
+            parameters: (),
+            escapingParameters: (),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.start())
+        
+    }
+    
+    
+    
+     func queue(_ move: GameMove)  {
+        
+    return cuckoo_manager.call("queue(_: GameMove)",
+            parameters: (move),
+            escapingParameters: (move),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.queue(move))
+        
+    }
+    
 
 	 struct __StubbingProxy_GameEngineProtocol: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
@@ -288,16 +288,6 @@ import RxSwift
 	    }
 	    
 	    
-	    func start() -> Cuckoo.ProtocolStubNoReturnFunction<()> {
-	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameEngineProtocol.self, method: "start()", parameterMatchers: matchers))
-	    }
-	    
-	    func queue<M1: Cuckoo.Matchable>(_ move: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(GameMove)> where M1.MatchedType == GameMove {
-	        let matchers: [Cuckoo.ParameterMatcher<(GameMove)>] = [wrap(matchable: move) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameEngineProtocol.self, method: "queue(_: GameMove)", parameterMatchers: matchers))
-	    }
-	    
 	    func state<M1: Cuckoo.OptionalMatchable>(observedBy playerId: M1) -> Cuckoo.ProtocolStubFunction<(String?), Observable<GameStateProtocol>> where M1.OptionalMatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String?)>] = [wrap(matchable: playerId) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameEngineProtocol.self, method: "state(observedBy: String?) -> Observable<GameStateProtocol>", parameterMatchers: matchers))
@@ -311,6 +301,16 @@ import RxSwift
 	    func executedMove() -> Cuckoo.ProtocolStubFunction<(), Observable<GameMove>> {
 	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameEngineProtocol.self, method: "executedMove() -> Observable<GameMove>", parameterMatchers: matchers))
+	    }
+	    
+	    func start() -> Cuckoo.ProtocolStubNoReturnFunction<()> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameEngineProtocol.self, method: "start()", parameterMatchers: matchers))
+	    }
+	    
+	    func queue<M1: Cuckoo.Matchable>(_ move: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(GameMove)> where M1.MatchedType == GameMove {
+	        let matchers: [Cuckoo.ParameterMatcher<(GameMove)>] = [wrap(matchable: move) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameEngineProtocol.self, method: "queue(_: GameMove)", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -335,18 +335,6 @@ import RxSwift
 	
 	    
 	    @discardableResult
-	    func start() -> Cuckoo.__DoNotUse<(), Void> {
-	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return cuckoo_manager.verify("start()", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
-	    func queue<M1: Cuckoo.Matchable>(_ move: M1) -> Cuckoo.__DoNotUse<(GameMove), Void> where M1.MatchedType == GameMove {
-	        let matchers: [Cuckoo.ParameterMatcher<(GameMove)>] = [wrap(matchable: move) { $0 }]
-	        return cuckoo_manager.verify("queue(_: GameMove)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
 	    func state<M1: Cuckoo.OptionalMatchable>(observedBy playerId: M1) -> Cuckoo.__DoNotUse<(String?), Observable<GameStateProtocol>> where M1.OptionalMatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String?)>] = [wrap(matchable: playerId) { $0 }]
 	        return cuckoo_manager.verify("state(observedBy: String?) -> Observable<GameStateProtocol>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
@@ -362,6 +350,18 @@ import RxSwift
 	    func executedMove() -> Cuckoo.__DoNotUse<(), Observable<GameMove>> {
 	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
 	        return cuckoo_manager.verify("executedMove() -> Observable<GameMove>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func start() -> Cuckoo.__DoNotUse<(), Void> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return cuckoo_manager.verify("start()", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func queue<M1: Cuckoo.Matchable>(_ move: M1) -> Cuckoo.__DoNotUse<(GameMove), Void> where M1.MatchedType == GameMove {
+	        let matchers: [Cuckoo.ParameterMatcher<(GameMove)>] = [wrap(matchable: move) { $0 }]
+	        return cuckoo_manager.verify("queue(_: GameMove)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -381,14 +381,6 @@ import RxSwift
     
 
     
-     func start()   {
-        return DefaultValueRegistry.defaultValue(for: (Void).self)
-    }
-    
-     func queue(_ move: GameMove)   {
-        return DefaultValueRegistry.defaultValue(for: (Void).self)
-    }
-    
      func state(observedBy playerId: String?) -> Observable<GameStateProtocol>  {
         return DefaultValueRegistry.defaultValue(for: (Observable<GameStateProtocol>).self)
     }
@@ -399,6 +391,14 @@ import RxSwift
     
      func executedMove() -> Observable<GameMove>  {
         return DefaultValueRegistry.defaultValue(for: (Observable<GameMove>).self)
+    }
+    
+     func start()   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func queue(_ move: GameMove)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
 }
@@ -427,6 +427,21 @@ import RxSwift
 
     
 
+    
+    
+    
+     func execute(_ move: GameMove)  {
+        
+    return cuckoo_manager.call("execute(_: GameMove)",
+            parameters: (move),
+            escapingParameters: (move),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.execute(move))
+        
+    }
     
     
     
@@ -482,6 +497,11 @@ import RxSwift
 	    }
 	    
 	    
+	    func execute<M1: Cuckoo.Matchable>(_ move: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(GameMove)> where M1.MatchedType == GameMove {
+	        let matchers: [Cuckoo.ParameterMatcher<(GameMove)>] = [wrap(matchable: move) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockInternalGameEngineProtocol.self, method: "execute(_: GameMove)", parameterMatchers: matchers))
+	    }
+	    
 	    func emmitState<M1: Cuckoo.Matchable>(_ state: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(GameStateProtocol)> where M1.MatchedType == GameStateProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockInternalGameEngineProtocol.self, method: "emmitState(_: GameStateProtocol)", parameterMatchers: matchers))
@@ -514,6 +534,12 @@ import RxSwift
 	
 	    
 	    @discardableResult
+	    func execute<M1: Cuckoo.Matchable>(_ move: M1) -> Cuckoo.__DoNotUse<(GameMove), Void> where M1.MatchedType == GameMove {
+	        let matchers: [Cuckoo.ParameterMatcher<(GameMove)>] = [wrap(matchable: move) { $0 }]
+	        return cuckoo_manager.verify("execute(_: GameMove)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
 	    func emmitState<M1: Cuckoo.Matchable>(_ state: M1) -> Cuckoo.__DoNotUse<(GameStateProtocol), Void> where M1.MatchedType == GameStateProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
 	        return cuckoo_manager.verify("emmitState(_: GameStateProtocol)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
@@ -539,6 +565,10 @@ import RxSwift
 
     
 
+    
+     func execute(_ move: GameMove)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
     
      func emmitState(_ state: GameStateProtocol)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
