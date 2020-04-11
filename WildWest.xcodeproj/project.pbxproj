@@ -171,7 +171,7 @@
 		337D7FD4243072130078F749 /* GameState+Observed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D7FD3243072130078F749 /* GameState+Observed.swift */; };
 		337D7FD5243072130078F749 /* GameState+Observed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D7FD3243072130078F749 /* GameState+Observed.swift */; };
 		337D7FDD2430879F0078F749 /* PlayerDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D7FDC2430879F0078F749 /* PlayerDescriptor.swift */; };
-		337EE056244222F300E64A86 /* InternalGameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337EE055244222F300E64A86 /* InternalGameEngineTests.swift */; };
+		337EE05824422A3800E64A86 /* GameEngine+ObservingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337EE05724422A3800E64A86 /* GameEngine+ObservingTests.swift */; };
 		3380B037243641A20040F027 /* DrawsCardOnLoseHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3380B036243641A20040F027 /* DrawsCardOnLoseHealth.swift */; };
 		3380B038243641A20040F027 /* DrawsCardOnLoseHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3380B036243641A20040F027 /* DrawsCardOnLoseHealth.swift */; };
 		3380B03E24367D890040F027 /* DrawsCardOnLoseHealthMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3380B03C24367D890040F027 /* DrawsCardOnLoseHealthMatcherTests.swift */; };
@@ -377,7 +377,7 @@
 		337D7FD0243071AE0078F749 /* Player+Ability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+Ability.swift"; sourceTree = "<group>"; };
 		337D7FD3243072130078F749 /* GameState+Observed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameState+Observed.swift"; sourceTree = "<group>"; };
 		337D7FDC2430879F0078F749 /* PlayerDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDescriptor.swift; sourceTree = "<group>"; };
-		337EE055244222F300E64A86 /* InternalGameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalGameEngineTests.swift; sourceTree = "<group>"; };
+		337EE05724422A3800E64A86 /* GameEngine+ObservingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameEngine+ObservingTests.swift"; sourceTree = "<group>"; };
 		3380B036243641A20040F027 /* DrawsCardOnLoseHealth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawsCardOnLoseHealth.swift; sourceTree = "<group>"; };
 		3380B03C24367D890040F027 /* DrawsCardOnLoseHealthMatcherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawsCardOnLoseHealthMatcherTests.swift; sourceTree = "<group>"; };
 		3380B03F2436800F0040F027 /* DrawsCardFromPlayerDamagedHim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawsCardFromPlayerDamagedHim.swift; sourceTree = "<group>"; };
@@ -1016,8 +1016,8 @@
 			children = (
 				AD7EAFBE23D7846D00FE23D5 /* GameSetupTests.swift */,
 				33F2505C23DDDBCC00A0FDD1 /* GameEngineTests.swift */,
+				337EE05724422A3800E64A86 /* GameEngine+ObservingTests.swift */,
 				337C2CC32442194C00C2BCBE /* DelayedCommandQueueTests.swift */,
-				337EE055244222F300E64A86 /* InternalGameEngineTests.swift */,
 				3309D7062408D1BE00713E15 /* update */,
 				338A4D1123E7F589005698FD /* convenience */,
 			);
@@ -1477,6 +1477,7 @@
 				33380100242F2348003F7327 /* ResolveJailTests.swift in Sources */,
 				3301BEF523F962F000B4364D /* RandomAIWithRole.swift in Sources */,
 				339CA27B242578C900D43128 /* GameUpdateExecutor.swift in Sources */,
+				337EE05824422A3800E64A86 /* GameEngine+ObservingTests.swift in Sources */,
 				3338B2E6242FCCDA0097BA57 /* GameState+OutcomeTests.swift in Sources */,
 				3398B0D5243B9AED00EB670A /* Role+Relationship.swift in Sources */,
 				3328FCB4242F29B200A82255 /* Gatling.swift in Sources */,
@@ -1551,7 +1552,6 @@
 				333800FA242F20A6003F7327 /* ResolveDynamite.swift in Sources */,
 				330FDED0242F384D00284FE7 /* PenalizeSheriffOnEliminatingDeputy.swift in Sources */,
 				3328FCE2242F2F0200A82255 /* DiscardMissedMatcherTests.swift in Sources */,
-				337EE056244222F300E64A86 /* InternalGameEngineTests.swift in Sources */,
 				AD98FA872421552C00AF4D7C /* GameEngineTests.swift in Sources */,
 				337408D224306C1200E5809B /* Card+Ability.swift in Sources */,
 				3328FCED242F2F0D00A82255 /* ChooseCardMatcherTests.swift in Sources */,

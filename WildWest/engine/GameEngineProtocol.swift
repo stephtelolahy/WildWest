@@ -14,13 +14,14 @@ protocol GameEngineProtocol {
     func state(observedBy playerId: String?) -> Observable<GameStateProtocol>
     func validMoves(for playerId: String?) -> Observable<[GameMove]>
     func executedMove() -> Observable<GameMove>
+    
     func start()
     func queue(_ move: GameMove)
 }
 
 protocol InternalGameEngineProtocol {
     func execute(_ move: GameMove)
-    func emmitState(_ state: GameStateProtocol)
-    func emmitExecutedMove(_ move: GameMove)
-    func emmitValidMoves(_ moves: [String: [GameMove]])
+    func emitState(_ state: GameStateProtocol)
+    func emitExecutedMove(_ move: GameMove)
+    func emitValidMoves(_ moves: [String: [GameMove]])
 }

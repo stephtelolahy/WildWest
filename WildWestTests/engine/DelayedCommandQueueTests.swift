@@ -15,7 +15,7 @@ class DelayedCommandQueueTests: XCTestCase {
     private let sut = DelayedCommandQueue(delay: 0.5)
     private let disposeBag = DisposeBag()
     
-    func test_EmmitSingleAddedMove() {
+    func test_EmitSingleAddedMove() {
         // Given
         let move = GameMove(name: MoveName("m1"), actorId: "px")
         
@@ -27,21 +27,21 @@ class DelayedCommandQueueTests: XCTestCase {
         sut.add(move)
         
         // Assert
-        XCTAssertEqual(observer.events, [Recorded.next(0, move)])
+        XCTAssertRecordedElements(observer.events, [move])
         XCTAssertEqual(sut.isEmpty, true)
     }
     
-    func test_EmmitMultipleAddedMoves() {
+    func test_EmitMultipleAddedMoves() {
         // Given
         let move1 = GameMove(name: MoveName("m1"), actorId: "px")
         let move2 = GameMove(name: MoveName("m2"), actorId: "px")
         let move3 = GameMove(name: MoveName("m3"), actorId: "px")
         
-        let expectation = XCTestExpectation(description: "Emmit all moves")
-        var emmitedMoves: [GameMove] = []
+        let expectation = XCTestExpectation(description: "Emit all moves")
+        var emitedMoves: [GameMove] = []
         sut.pull().subscribe(onNext: { move in
-            emmitedMoves.append(move)
-            if emmitedMoves.count == 3 {
+            emitedMoves.append(move)
+            if emitedMoves.count == 3 {
                 expectation.fulfill()
             }
         }).disposed(by: disposeBag)
@@ -53,11 +53,11 @@ class DelayedCommandQueueTests: XCTestCase {
         
         // Assert
         wait(for: [expectation], timeout: 1.0)
-        XCTAssertEqual(emmitedMoves, [move1, move2, move3])
+        XCTAssertEqual(emitedMoves, [move1, move2, move3])
         XCTAssertEqual(sut.isEmpty, true)
     }
     
-    func test_EmmitToMultipleObservers() {
+    func test_EmitToMultipleObservers() {
         // Given
         let move = GameMove(name: MoveName("m1"), actorId: "px")
         
@@ -71,8 +71,8 @@ class DelayedCommandQueueTests: XCTestCase {
         sut.add(move)
         
         // Assert
-        XCTAssertEqual(observer1.events, [Recorded.next(0, move)])
-        XCTAssertEqual(observer2.events, [Recorded.next(0, move)])
+        XCTAssertRecordedElements(observer1.events, [move])
+        XCTAssertRecordedElements(observer2.events, [move])
         XCTAssertEqual(sut.isEmpty, true)
     }
 }

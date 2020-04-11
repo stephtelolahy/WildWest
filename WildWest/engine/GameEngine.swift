@@ -36,10 +36,6 @@ class GameEngine: GameEngineProtocol, Subscribable {
         database.state.players.count
     }
     
-    func executedMove() -> Observable<GameMove> {
-        executedMoveSubject
-    }
-    
     func start() {
         observeCommandQueue()
         moveMatchers.compactMap { $0.autoPlayMove(matching: database.state) }.forEach { queue($0) }
@@ -51,6 +47,10 @@ class GameEngine: GameEngineProtocol, Subscribable {
     
     func state(observedBy playerId: String?) -> Observable<GameStateProtocol> {
         stateSubject.map { $0.observed(by: playerId) }
+    }
+    
+    func executedMove() -> Observable<GameMove> {
+        executedMoveSubject
     }
     
     func validMoves(for playerId: String?) -> Observable<[GameMove]> {
@@ -96,13 +96,16 @@ extension GameEngine: InternalGameEngineProtocol {
         }
     }
     
-    func emmitState(_ state: GameStateProtocol) {
+    func emitState(_ state: GameStateProtocol) {
+        stateSubject.onNext(state)
     }
     
-    func emmitExecutedMove(_ move: GameMove) {
+    func emitExecutedMove(_ move: GameMove) {
+        executedMoveSubject.onNext(move)
     }
     
-    func emmitValidMoves(_ moves: [String: [GameMove]]) {
+    func emitValidMoves(_ moves: [String: [GameMove]]) {
+        validMovesSubject.onNext(moves)
     }
 }
 
@@ -110,31 +113,23 @@ private extension GameEngine {
     
     func observeCommandQueue() {
         sub(commandQueue.pull().subscribe(onNext: { [weak self] move in
-            self?.handleMove(move)
+            self?.processCommand(move)
         }))
     }
     
-    func handleMove(_ move: GameMove) {
+    func processCommand(_ move: GameMove) {
         execute(move)
-        
-        emitState()
-        
+        emitState(database.state)
         emitExecutedMove(move)
-        
+        emitValidMoves(validMoves())
+    }
+    
+    func validMoves() -> [String: [GameMove]] {
         guard commandQueue.isEmpty,
             database.state.outcome == nil else {
-                emmitEmptyMoves()
-                return
+                return [:]
         }
         
-        emitValidMoves()
-    }
-    
-    func emitExecutedMove(_ move: GameMove) {
-        executedMoveSubject.onNext(move)
-    }
-    
-    func emitValidMoves() {
         let validMoves = moveMatchers.compactMap { $0.validMoves(matching: database.state) }
             .flatMap { $0 }
             .groupedByActor()
@@ -143,14 +138,6 @@ private extension GameEngine {
             fatalError("Illegal active players (\(validMoves.keys.count))")
         }
         
-        validMovesSubject.onNext(validMoves)
-    }
-    
-    func emmitEmptyMoves() {
-        validMovesSubject.onNext([:])
-    }
-    
-    func emitState() {
-        stateSubject.onNext(database.state)
+        return validMoves
     }
 }

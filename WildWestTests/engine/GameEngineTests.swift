@@ -51,9 +51,20 @@ class GameEngineTests: XCTestCase {
         verify(mockCommandQueue).add(equal(to: move))
     }
     
-    func test_ApplyUpdates_IfExecutingMove() {
+    func test_QueueMove() {
         // Given
-        let move = GameMove(name: MoveName("dummy"), actorId: "p1")
+        let move = GameMove(name: MoveName("m1"), actorId: "p1")
+        
+        // When
+        sut.queue(move)
+        
+        // Assert
+        verify(mockCommandQueue).add(equal(to: move))
+    }
+    
+    func test_UpdateState_OnExecutingMove() {
+        // Given
+        let move = GameMove(name: MoveName("m1"), actorId: "p1")
         let update: GameUpdate = .playerPullFromDeck("p1", 2)
         Cuckoo.stub(mockMoveMatcher) { mock in
             when(mock.execute(equal(to: move), in: state(equalTo: mockState))).thenReturn([update])
@@ -68,7 +79,7 @@ class GameEngineTests: XCTestCase {
     
     func test_SetOutcome_IfGameIsOverOnExecutingMove() {
         // Given
-        let move = GameMove(name: MoveName("dummy"), actorId: "p1")
+        let move = GameMove(name: MoveName("m1"), actorId: "p1")
         Cuckoo.stub(mockMoveMatcher) { mock in
             when(mock.execute(equal(to: move), in: state(equalTo: mockState))).thenReturn([])
         }
@@ -83,5 +94,51 @@ class GameEngineTests: XCTestCase {
         
         // Assert
         verify(mockDatabase).setOutcome(equal(to: .sheriffWin))
+    }
+    
+    func test_QueueEffects_IfMatchingOnExecutingMove() {
+        // Given
+        let move = GameMove(name: MoveName("m1"), actorId: "p1")
+        let effect = GameMove(name: MoveName("m2"), actorId: "p2")
+        let update: GameUpdate = .playerPullFromDeck("p1", 2)
+        Cuckoo.stub(mockMoveMatcher) { mock in
+            when(mock.execute(equal(to: move), in: state(equalTo: mockState))).thenReturn([update])
+            when(mock.effect(onExecuting: equal(to: move), in: state(equalTo: mockState))).thenReturn(effect)
+        }
+        Cuckoo.stub(mockState) { mock in
+            when(mock.players.get).thenReturn([
+                MockPlayerProtocol().role(is: .sheriff),
+                MockPlayerProtocol().role(is: .outlaw)
+            ])
+        }
+        
+        // When
+        sut.execute(move)
+        
+        // Assert
+        verify(mockCommandQueue).add(equal(to: effect))
+    }
+    
+    func test_QueueAutoPlay_IfMatchingOnExecutingMove() {
+        // Given
+        let move = GameMove(name: MoveName("m1"), actorId: "p1")
+        let autoplay = GameMove(name: MoveName("m2"), actorId: "p2")
+        let update: GameUpdate = .playerPullFromDeck("p1", 2)
+        Cuckoo.stub(mockMoveMatcher) { mock in
+            when(mock.execute(equal(to: move), in: state(equalTo: mockState))).thenReturn([update])
+            when(mock.autoPlayMove(matching: state(equalTo: mockState))).thenReturn(autoplay)
+        }
+        Cuckoo.stub(mockState) { mock in
+            when(mock.players.get).thenReturn([
+                MockPlayerProtocol().role(is: .sheriff),
+                MockPlayerProtocol().role(is: .outlaw)
+            ])
+        }
+        
+        // When
+        sut.execute(move)
+        
+        // Assert
+        verify(mockCommandQueue).add(equal(to: autoplay))
     }
 }
