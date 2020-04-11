@@ -62,7 +62,7 @@ class GameViewController: UIViewController, Subscribable {
             self?.processValidMoves(moves)
         }))
         
-        sub(engine.executedMove.subscribe(onNext: { [weak self] move in
+        sub(engine.executedMove().subscribe(onNext: { [weak self] move in
             self?.processExecutedMove(move)
         }))
         

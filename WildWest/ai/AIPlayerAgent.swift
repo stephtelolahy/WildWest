@@ -33,7 +33,7 @@ class AIPlayerAgent: AIPlayerAgentProtocol, Subscribable {
             self?.processState(state)
         }))
         
-        sub(engine.executedMove.subscribe(onNext: { [weak self] move in
+        sub(engine.executedMove().subscribe(onNext: { [weak self] move in
             self?.processExecutedMove(move)
         }))
         

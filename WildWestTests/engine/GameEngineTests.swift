@@ -34,19 +34,20 @@ class GameEngineTests: XCTestCase {
     }
     
     func test_ExecuteAutoPlayMove_IfStartingGame() {
+        /*
         // Given
         let move = GameMove(name: MoveName("dummy"), actorId: "p1")
         Cuckoo.stub(mockMoveMatcher) { mock in
             when(mock.autoPlayMove(matching: state(equalTo: mockState))).thenReturn(move)
-            when(mock.execute(equal(to: move), in: state(equalTo: mockState))).thenReturn([])
         }
         
         // When
         sut.start()
         
         // Assert
-        verify(mockMoveMatcher, atLeastOnce()).autoPlayMove(matching: state(equalTo: mockState))
-        verify(mockMoveMatcher, atLeastOnce()).execute(equal(to: move), in: state(equalTo: mockState))
+        // TODO: assert add in moves queue
+        */
+        XCTFail()
     }
     
     func test_ExecuteGameUpdates_IfExecutingMove() {
@@ -64,31 +65,10 @@ class GameEngineTests: XCTestCase {
         verify(mockUpdateExecutor).execute(equal(to: update), in: database(equalTo: mockDatabase))
     }
     
-    func test_DoNotGenerateActions_IfGameIsOver() {
-        // Given
-        let move = GameMove(name: MoveName("dummy"), actorId: "p1")
-        Cuckoo.stub(mockMoveMatcher) { mock in
-            when(mock.execute(equal(to: move), in: state(equalTo: mockState))).thenReturn([])
-        }
-        Cuckoo.stub(mockState) { mock in
-            when(mock.outcome.get).thenReturn(.outlawWin)
-        }
-        
-        // When
-        sut.execute(move)
-        
-        // Assert
-        verify(mockMoveMatcher, never()).effect(onExecuting: any(), in: any())
-        verify(mockMoveMatcher, never()).autoPlayMove(matching: any())
-        verify(mockMoveMatcher, never()).validMoves(matching: any())
-    }
-    
     func test_SetOutcomeIfGameIsOver() {
         // Given
         let move = GameMove(name: MoveName("dummy"), actorId: "p1")
-        let validMove = GameMove(name: .play, actorId: "p1")
         Cuckoo.stub(mockMoveMatcher) { mock in
-            when(mock.validMoves(matching: state(equalTo: mockState))).thenReturn([validMove])
             when(mock.execute(equal(to: move), in: state(equalTo: mockState))).thenReturn([])
         }
         Cuckoo.stub(mockState) { mock in
@@ -101,7 +81,6 @@ class GameEngineTests: XCTestCase {
         sut.execute(move)
         
         // Assert
-        verify(mockMoveMatcher, never()).autoPlayMove(matching: any())
-        verify(mockMoveMatcher, never()).effect(onExecuting: any(), in: any())
+        verify(mockDatabase).setOutcome(equal(to: .sheriffWin))
     }
 }

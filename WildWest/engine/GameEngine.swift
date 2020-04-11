@@ -36,7 +36,7 @@ class GameEngine: GameEngineProtocol, Subscribable {
         database.state.players.count
     }
     
-    var executedMove: Observable<GameMove> {
+    func executedMove() -> Observable<GameMove> {
         executedMoveSubject
     }
     
