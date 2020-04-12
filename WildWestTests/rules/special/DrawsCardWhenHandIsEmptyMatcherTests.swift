@@ -22,7 +22,7 @@ class DrawsCardWhenHandIsEmptyMatcherTests: XCTestCase {
             .players(are: mockPlayer1)
         
         // When
-        let move = sut.effect(onExecuting: GameMove(name: .play, actorId: "px"), in: mockState)
+        let move = sut.autoPlayMove(matching: mockState)
         
         // Assert
         XCTAssertEqual(move, GameMove(name: .drawsCardWhenHandIsEmpty, actorId: "p1"))
