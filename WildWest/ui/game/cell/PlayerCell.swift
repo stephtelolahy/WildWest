@@ -47,12 +47,12 @@ class PlayerCell: UICollectionViewCell {
             return
         }
         
-        if item.isAttacked {
+        if item.isTurn {
+            backgroundColor = UIColor.orange
+        } else if item.isAttacked {
             backgroundColor = UIColor.red
         } else if item.isHelped {
             backgroundColor = UIColor.blue.withAlphaComponent(0.4)
-        } else if item.isTurn {
-            backgroundColor = UIColor.orange
         } else {
             backgroundColor = UIColor.brown.withAlphaComponent(0.4)
         }
