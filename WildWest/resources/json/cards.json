@@ -103,379 +103,379 @@
     },
     {
         "name": "bang",
-        "imageName": "01_bang",
+        "imageName": "bang_a_spades",
         "value": "A",
         "suit": "spades"
     },
     {
         "name": "bang",
-        "imageName": "01_bang",
+        "imageName": "bang_2_diamonds",
         "value": "2",
         "suit": "diamonds"
     },
     {
         "name": "bang",
-        "imageName": "01_bang",
+        "imageName": "bang_3_diamonds",
         "value": "3",
         "suit": "diamonds"
     },
     {
         "name": "bang",
-        "imageName": "01_bang",
+        "imageName": "bang_4_diamonds",
         "value": "4",
         "suit": "diamonds"
     },
     {
         "name": "bang",
-        "imageName": "01_bang",
+        "imageName": "bang_5_diamonds",
         "value": "5",
         "suit": "diamonds"
     },
     {
         "name": "bang",
-        "imageName": "01_bang",
+        "imageName": "bang_6_diamonds",
         "value": "6",
         "suit": "diamonds"
     },
     {
         "name": "bang",
-        "imageName": "01_bang",
+        "imageName": "bang_7_diamonds",
         "value": "7",
         "suit": "diamonds"
     },
     {
         "name": "bang",
-        "imageName": "01_bang",
+        "imageName": "bang_8_diamonds",
         "value": "8",
         "suit": "diamonds"
     },
     {
         "name": "bang",
-        "imageName": "01_bang",
+        "imageName": "bang_9_diamonds",
         "value": "9",
         "suit": "diamonds"
     },
     {
         "name": "bang",
-        "imageName": "01_bang",
+        "imageName": "bang_10_diamonds",
         "value": "10",
         "suit": "diamonds"
     },
     {
         "name": "bang",
-        "imageName": "01_bang",
+        "imageName": "bang_j_diamonds",
         "value": "J",
         "suit": "diamonds"
     },
     {
         "name": "bang",
-        "imageName": "01_bang",
+        "imageName": "bang_q_diamonds",
         "value": "Q",
         "suit": "diamonds"
     },
     {
         "name": "bang",
-        "imageName": "01_bang",
+        "imageName": "bang_k_diamonds",
         "value": "K",
         "suit": "diamonds"
     },
     {
         "name": "bang",
-        "imageName": "01_bang",
+        "imageName": "bang_a_diamonds",
         "value": "A",
         "suit": "diamonds"
     },
     {
         "name": "bang",
-        "imageName": "01_bang",
+        "imageName": "bang_2_clubs",
         "value": "2",
         "suit": "clubs"
     },
     {
         "name": "bang",
-        "imageName": "01_bang",
+        "imageName": "bang_3_clubs",
         "value": "3",
         "suit": "clubs"
     },
     {
         "name": "bang",
-        "imageName": "01_bang",
+        "imageName": "bang_4_clubs",
         "value": "4",
         "suit": "clubs"
     },
     {
         "name": "bang",
-        "imageName": "01_bang",
+        "imageName": "bang_5_clubs",
         "value": "5",
         "suit": "clubs"
     },
     {
         "name": "bang",
-        "imageName": "01_bang",
+        "imageName": "bang_6_clubs",
         "value": "6",
         "suit": "clubs"
     },
     {
         "name": "bang",
-        "imageName": "01_bang",
+        "imageName": "bang_7_clubs",
         "value": "7",
         "suit": "clubs"
     },
     {
         "name": "bang",
-        "imageName": "01_bang",
+        "imageName": "bang_8_clubs",
         "value": "8",
         "suit": "clubs"
     },
     {
         "name": "bang",
-        "imageName": "01_bang",
+        "imageName": "bang_9_clubs",
         "value": "9",
         "suit": "clubs"
     },
     {
         "name": "bang",
-        "imageName": "01_bang",
+        "imageName": "bang_q_hearts",
         "value": "Q",
         "suit": "hearts"
     },
     {
         "name": "bang",
-        "imageName": "01_bang",
+        "imageName": "bang_k_hearts",
         "value": "K",
         "suit": "hearts"
     },
     {
         "name": "bang",
-        "imageName": "01_bang",
+        "imageName": "bang_a_hearts",
         "value": "A",
         "suit": "hearts"
     },
     {
         "name": "missed",
-        "imageName": "01_mancato",
+        "imageName": "missed_10_clubs",
         "value": "10",
         "suit": "clubs"
     },
     {
         "name": "missed",
-        "imageName": "01_mancato",
+        "imageName": "missed_j_clubs",
         "value": "J",
         "suit": "clubs"
     },
     {
         "name": "missed",
-        "imageName": "01_mancato",
+        "imageName": "missed_q_clubs",
         "value": "Q",
         "suit": "clubs"
     },
     {
         "name": "missed",
-        "imageName": "01_mancato",
+        "imageName": "missed_k_clubs",
         "value": "K",
         "suit": "clubs"
     },
     {
         "name": "missed",
-        "imageName": "01_mancato",
+        "imageName": "missed_a_clubs",
         "value": "A",
         "suit": "clubs"
     },
     {
         "name": "missed",
-        "imageName": "01_mancato",
+        "imageName": "missed_2_spades",
         "value": "2",
         "suit": "spades"
     },
     {
         "name": "missed",
-        "imageName": "01_mancato",
+        "imageName": "missed_3_spades",
         "value": "3",
         "suit": "spades"
     },
     {
         "name": "missed",
-        "imageName": "01_mancato",
+        "imageName": "missed_4_spades",
         "value": "4",
         "suit": "spades"
     },
     {
         "name": "missed",
-        "imageName": "01_mancato",
+        "imageName": "missed_5_spades",
         "value": "5",
         "suit": "spades"
     },
     {
         "name": "missed",
-        "imageName": "01_mancato",
+        "imageName": "missed_6_spades",
         "value": "6",
         "suit": "spades"
     },
     {
         "name": "missed",
-        "imageName": "01_mancato",
+        "imageName": "missed_7_spades",
         "value": "7",
         "suit": "spades"
     },
     {
         "name": "missed",
-        "imageName": "01_mancato",
+        "imageName": "missed_8_spades",
         "value": "8",
         "suit": "spades"
     },
     {
         "name": "beer",
-        "imageName": "01_birra",
+        "imageName": "beer_6_hearts",
         "value": "6",
         "suit": "hearts"
     },
     {
         "name": "beer",
-        "imageName": "01_birra",
+        "imageName": "beer_7_hearts",
         "value": "7",
         "suit": "hearts"
     },
     {
         "name": "beer",
-        "imageName": "01_birra",
+        "imageName": "beer_8_hearts",
         "value": "8",
         "suit": "hearts"
     },
     {
         "name": "beer",
-        "imageName": "01_birra",
+        "imageName": "beer_9_hearts",
         "value": "9",
         "suit": "hearts"
     },
     {
         "name": "beer",
-        "imageName": "01_birra",
+        "imageName": "beer_10_hearts",
         "value": "10",
         "suit": "hearts"
     },
     {
         "name": "beer",
-        "imageName": "01_birra",
+        "imageName": "beer_j_hearts",
         "value": "J",
         "suit": "hearts"
     },
     {
         "name": "catBalou",
-        "imageName": "01_catbalou",
+        "imageName": "catbalou_k_hearts",
         "value": "K",
         "suit": "hearts"
     },
     {
         "name": "catBalou",
-        "imageName": "01_catbalou",
+        "imageName": "catbalou_9_diamonds",
         "value": "9",
         "suit": "diamonds"
     },
     {
         "name": "catBalou",
-        "imageName": "01_catbalou",
+        "imageName": "catbalou_10_diamonds",
         "value": "10",
         "suit": "diamonds"
     },
     {
         "name": "catBalou",
-        "imageName": "01_catbalou",
+        "imageName": "catbalou_j_diamonds",
         "value": "J",
         "suit": "diamonds"
     },
     {
         "name": "duel",
-        "imageName": "01_duello",
+        "imageName": "duel_q_diamonds",
         "value": "Q",
         "suit": "diamonds"
     },
     {
         "name": "duel",
-        "imageName": "01_duello",
+        "imageName": "duel_j_spades",
         "value": "J",
         "suit": "spades"
     },
     {
         "name": "duel",
-        "imageName": "01_duello",
+        "imageName": "duel_8_clubs",
         "value": "8",
         "suit": "clubs"
     },
     {
         "name": "gatling",
-        "imageName": "01_gatling",
+        "imageName": "gatling_10_hearts",
         "value": "10",
         "suit": "hearts"
     },
     {
         "name": "generalStore",
-        "imageName": "01_emporio",
+        "imageName": "generalstore_9_clubs",
         "value": "9",
         "suit": "clubs"
     },
     {
         "name": "generalStore",
-        "imageName": "01_emporio",
+        "imageName": "generalstore_q_spades",
         "value": "Q",
         "suit": "spades"
     },
     {
         "name": "indians",
-        "imageName": "01_indiani",
+        "imageName": "indians_k_diamonds",
         "value": "K",
         "suit": "diamonds"
     },
     {
         "name": "indians",
-        "imageName": "01_indiani",
+        "imageName": "indians_a_diamonds",
         "value": "A",
         "suit": "diamonds"
     },
     {
         "name": "panic",
-        "imageName": "01_panico",
+        "imageName": "panic_j_hearts",
         "value": "J",
         "suit": "hearts"
     },
     {
         "name": "panic",
-        "imageName": "01_panico",
+        "imageName": "panic_q_hearts",
         "value": "Q",
         "suit": "hearts"
     },
     {
         "name": "panic",
-        "imageName": "01_panico",
+        "imageName": "panic_a_hearts",
         "value": "A",
         "suit": "hearts"
     },
     {
         "name": "panic",
-        "imageName": "01_panico",
+        "imageName": "panic_8_diamonds",
         "value": "8",
         "suit": "diamonds"
     },
     {
         "name": "saloon",
-        "imageName": "01_saloon",
+        "imageName": "saloon_5_hearts",
         "value": "5",
         "suit": "hearts"
     },
     {
         "name": "stagecoach",
-        "imageName": "01_diligenza",
+        "imageName": "stagecoach_9_spades",
         "value": "9",
         "suit": "spades"
     },
     {
         "name": "stagecoach",
-        "imageName": "01_diligenza",
+        "imageName": "stagecoach_9_spades",
         "value": "9",
         "suit": "spades"
     },
     {
         "name": "wellsFargo",
-        "imageName": "01_wellsfargo",
+        "imageName": "wellsfargo_3_hearts",
         "value": "3",
         "suit": "hearts"
     }
