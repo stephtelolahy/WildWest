@@ -1,103 +1,103 @@
 [
     {
         "name": "barrel",
-        "imageName": "01_barile",
+        "imageName": "barrel_q_spades",
         "value": "Q",
         "suit": "spades"
     },
     {
         "name": "barrel",
-        "imageName": "01_barile",
+        "imageName": "barrel_k_spades",
         "value": "K",
         "suit": "spades"
     },
     {
         "name": "scope",
-        "imageName": "01_mirino",
+        "imageName": "scope_a_spades",
         "value": "A",
         "suit": "spades"
     },
     {
         "name": "mustang",
-        "imageName": "01_mustang",
+        "imageName": "mustang_8_hearts",
         "value": "8",
         "suit": "hearts"
     },
     {
         "name": "mustang",
-        "imageName": "01_mustang",
+        "imageName": "mustang_9_hearts",
         "value": "9",
         "suit": "hearts"
     },
     {
         "name": "jail",
-        "imageName": "01_prigione",
+        "imageName": "jail_j_spades",
         "value": "J",
         "suit": "spades"
     },
     {
         "name": "jail",
-        "imageName": "01_prigione",
+        "imageName": "jail_10_spades",
         "value": "10",
         "suit": "spades"
     },
     {
         "name": "jail",
-        "imageName": "01_prigione",
+        "imageName": "jail_4_hearts",
         "value": "4",
         "suit": "hearts"
     },
     {
         "name": "dynamite",
-        "imageName": "01_dinamite",
+        "imageName": "dynamite_2_hearts",
         "value": "2",
         "suit": "hearts"
     },
     {
         "name": "schofield",
-        "imageName": "01_schofield",
+        "imageName": "schofield_k_spades",
         "value": "K",
         "suit": "spades"
     },
     {
         "name": "schofield",
-        "imageName": "01_schofield",
+        "imageName": "schofield_j_clubs",
         "value": "J",
         "suit": "clubs"
     },
     {
         "name": "schofield",
-        "imageName": "01_schofield",
+        "imageName": "schofield_q_clubs",
         "value": "Q",
         "suit": "clubs"
     },
     {
         "name": "volcanic",
-        "imageName": "01_volcanic",
+        "imageName": "volcanic_10_spades",
         "value": "10",
         "suit": "spades"
     },
     {
         "name": "volcanic",
-        "imageName": "01_volcanic",
+        "imageName": "volcanic_10_clubs",
         "value": "10",
         "suit": "clubs"
     },
     {
         "name": "remington",
-        "imageName": "01_remington",
+        "imageName": "remington_k_clubs",
         "value": "K",
         "suit": "clubs"
     },
     {
         "name": "winchester",
-        "imageName": "01_winchester",
+        "imageName": "winchester_8_spades",
         "value": "8",
         "suit": "spades"
     },
     {
         "name": "revCarbine",
-        "imageName": "01_carabine",
+        "imageName": "carabine_a_clubs",
         "value": "A",
         "suit": "clubs"
     },
