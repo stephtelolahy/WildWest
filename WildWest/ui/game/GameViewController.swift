@@ -39,7 +39,8 @@ class GameViewController: UIViewController, Subscribable {
     private lazy var statsBuilder = StatsBuilder()
     private lazy var instructionBuilder = InstructionBuilder()
     private lazy var playMoveSelector = PlayMoveSelector(viewController: self)
-    private lazy var reactionMoveSelector = ReactionMoveSelector(viewController: self)
+//    private lazy var reactionMoveSelector = ReactionMoveSelector(viewController: self)
+    private lazy var reactionMoveSelector = AssistedReactionMoveSelector(ai: RandomAI())
     private lazy var playerDescriptor = PlayerDescriptor(viewController: self)
     
     // MARK: Lifecycle
