@@ -119,8 +119,8 @@ private extension GameEngine {
     
     func processCommand(_ move: GameMove) {
         execute(move)
-        emitState(database.state)
         emitExecutedMove(move)
+        emitState(database.state)
         emitValidMoves(validMoves())
     }
     

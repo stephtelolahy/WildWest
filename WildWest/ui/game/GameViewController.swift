@@ -39,9 +39,17 @@ class GameViewController: UIViewController, Subscribable {
     private lazy var statsBuilder = StatsBuilder()
     private lazy var instructionBuilder = InstructionBuilder()
     private lazy var playMoveSelector = PlayMoveSelector(viewController: self)
-//    private lazy var reactionMoveSelector = ReactionMoveSelector(viewController: self)
-    private lazy var reactionMoveSelector = AssistedReactionMoveSelector(ai: RandomAI())
+    
+    private lazy var reactionMoveSelector: ReactionMoveSelectorProtocol = {
+        if UserPreferences.shared.assistedMode {
+            return AssistedReactionMoveSelector(ai: RandomAI())
+        } else {
+            return ReactionMoveSelector(viewController: self)
+        }
+    }()
+    
     private lazy var playerDescriptor = PlayerDescriptor(viewController: self)
+    private lazy var moveAnimator = MoveAnimator(viewController: self)
     
     // MARK: Lifecycle
     
@@ -120,6 +128,8 @@ private extension GameViewController {
         messageTableView.reloadDataSwollingAtBottom()
         
         moveSoundPlayer.playSound(for: move)
+        
+        moveAnimator.animate(move: move, in: state)
     }
     
     func processValidMoves(_ moves: [GameMove]) {

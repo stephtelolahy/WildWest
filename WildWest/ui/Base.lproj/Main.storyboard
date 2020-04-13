@@ -21,7 +21,7 @@
                                 <rect key="frame" x="16" y="16" width="267" height="343"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="osg-8j-chw">
-                                        <rect key="frame" x="24.5" y="0.0" width="217.5" height="157"/>
+                                        <rect key="frame" x="24.5" y="0.0" width="217.5" height="98.5"/>
                                         <subviews>
                                             <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The unofficial clone of the Western Card Game" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQg-zg-mUN">
                                                 <rect key="frame" x="0.0" y="0.0" width="217.5" height="40"/>
@@ -31,7 +31,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1y-7b-hgX" userLabel="logoButton">
-                                                <rect key="frame" x="0.0" y="40" width="217.5" height="117"/>
+                                                <rect key="frame" x="0.0" y="40" width="217.5" height="58.5"/>
                                                 <state key="normal" image="bg_splash"/>
                                                 <connections>
                                                     <action selector="logoButtonTapped:" destination="8GX-Wa-ifS" eventType="touchUpInside" id="WCH-V7-0Gi"/>
@@ -40,7 +40,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s8o-qf-BAQ" userLabel="playButton">
-                                        <rect key="frame" x="83.5" y="177.5" width="100" height="52"/>
+                                        <rect key="frame" x="83.5" y="163" width="100" height="52"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="cJz-6l-Jdk"/>
                                             <constraint firstAttribute="width" secondItem="s8o-qf-BAQ" secondAttribute="height" multiplier="557:291" id="d4G-rt-8LJ"/>

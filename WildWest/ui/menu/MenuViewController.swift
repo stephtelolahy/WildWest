@@ -38,7 +38,7 @@ class MenuViewController: UIViewController {
         allCards = config.allCards
         allMatchers = config.moveMatchers
         
-        userPreferences = UserPreferences()
+        userPreferences = UserPreferences.shared
         
         playersCountStepper.value = Double(userPreferences.playersCount)
         updatePlayersLabel()
