@@ -12,6 +12,7 @@ class GameEngine: GameEngineProtocol, Subscribable {
     
     private let stateSubject: BehaviorSubject<GameStateProtocol>
     private let executedMoveSubject: PublishSubject<GameMove>
+    private let executedUpdatesSubject: PublishSubject<GameUpdate>
     private let validMovesSubject: PublishSubject<[String: [GameMove]]>
     
     private let database: GameDatabaseProtocol
@@ -29,11 +30,12 @@ class GameEngine: GameEngineProtocol, Subscribable {
         self.commandQueue = commandQueue
         stateSubject = BehaviorSubject(value: database.state)
         executedMoveSubject = PublishSubject()
+        executedUpdatesSubject = PublishSubject()
         validMovesSubject = PublishSubject()
     }
     
-    var allPlayersCount: Int {
-        database.state.players.count
+    var allPlayers: [PlayerProtocol] {
+        database.state.players
     }
     
     func start() {
@@ -51,6 +53,10 @@ class GameEngine: GameEngineProtocol, Subscribable {
     
     func executedMove() -> Observable<GameMove> {
         executedMoveSubject
+    }
+    
+    func executedUpdates() -> Observable<GameUpdate> {
+        executedUpdatesSubject
     }
     
     func validMoves(for playerId: String) -> Observable<[GameMove]> {
@@ -72,6 +78,7 @@ extension GameEngine: InternalGameEngineProtocol {
         
         updatesQueue.forEach { update in
             print("> \(String(describing: update))")
+            executedUpdatesSubject.onNext(update)
             updateExecutor.execute(update, in: database)
         }
         

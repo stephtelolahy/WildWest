@@ -444,6 +444,7 @@
                     </view>
                     <connections>
                         <outlet property="actionsCollectionView" destination="YnA-A3-EaS" id="HoZ-WM-M1l"/>
+                        <outlet property="deckImageView" destination="DFl-Ga-f06" id="JbT-N7-Ky2"/>
                         <outlet property="discardImageView" destination="F8P-W3-OtS" id="OEd-7U-BS6"/>
                         <outlet property="endTurnButton" destination="68M-B9-4Mh" id="91V-gZ-4V1"/>
                         <outlet property="messageTableView" destination="iCj-xh-rDL" id="Bv5-eY-6ye"/>

@@ -18,7 +18,7 @@ class UserPreferences {
     @UserDefaultsStored("play_as_sheriff", defaultValue: true)
     var playAsSheriff: Bool
     
-    @UserDefaultsStored("update_delay", defaultValue: 1.2)
+    @UserDefaultsStored("update_delay", defaultValue: 1.0)
     var updateDelay: Double
     
     @UserDefaultsStored("assisted_mode", defaultValue: true)

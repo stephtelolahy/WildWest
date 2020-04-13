@@ -9,11 +9,12 @@
 import RxSwift
 
 protocol GameEngineProtocol {
-    var allPlayersCount: Int { get }
+    var allPlayers: [PlayerProtocol] { get }
     
     func state(observedBy playerId: String?) -> Observable<GameStateProtocol>
     func validMoves(for playerId: String) -> Observable<[GameMove]>
     func executedMove() -> Observable<GameMove>
+    func executedUpdates() -> Observable<GameUpdate>
     
     func start()
     func queue(_ move: GameMove)

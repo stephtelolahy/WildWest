@@ -18,14 +18,19 @@ class AIPlayerAgent: AIPlayerAgentProtocol, Subscribable {
     private let engine: GameEngineProtocol
     private let playerId: String
     private let ai: AIProtocol
+    private let statsBuilder: StatsBuilderProtocol
     
-    private let statsBuilder = StatsBuilder()
     private var latestState: GameStateProtocol?
     
     init(playerId: String, ai: AIProtocol, engine: GameEngineProtocol) {
         self.playerId = playerId
         self.ai = ai
         self.engine = engine
+        
+        guard let sheriff = engine.allPlayers.first(where: { $0.role == .sheriff }) else {
+            fatalError("Illegal state")
+        }
+        statsBuilder = StatsBuilder(sheriffId: sheriff.identifier, classifier: MoveClassifier())
     }
     
     func observeState() {
@@ -50,11 +55,7 @@ private extension AIPlayerAgent {
     }
     
     func processExecutedMove(_ move: GameMove) {
-        guard let state = latestState else {
-            return
-        }
-        
-        statsBuilder.updateScores(state: state, move: move)
+        statsBuilder.updateOnExecuting(move)
     }
     
     func processValidMoves(_ moves: [GameMove]) {

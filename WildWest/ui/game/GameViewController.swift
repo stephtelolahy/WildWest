@@ -19,6 +19,7 @@ class GameViewController: UIViewController, Subscribable {
     @IBOutlet private weak var messageTableView: UITableView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var discardImageView: UIImageView!
+    @IBOutlet private weak var deckImageView: UIImageView!
     
     // MARK: Properties
     
@@ -32,11 +33,18 @@ class GameViewController: UIViewController, Subscribable {
     private var endTurnMoves: [GameMove] = []
     private var latestState: GameStateProtocol?
     
+    private lazy var statsBuilder: StatsBuilderProtocol = {
+        guard let sheriff = engine?.allPlayers.first(where: { $0.role == .sheriff }) else {
+            fatalError("Illegal state")
+        }
+        
+        return StatsBuilder(sheriffId: sheriff.identifier, classifier: MoveClassifier())
+    }()
+    
     private lazy var playerAdapter = PlayersAdapter()
     private lazy var actionsAdapter = ActionsAdapter()
     private lazy var moveDescriptor = MoveDescriptor()
     private lazy var moveSoundPlayer = MoveSoundPlayer()
-    private lazy var statsBuilder = StatsBuilder()
     private lazy var instructionBuilder = InstructionBuilder()
     private lazy var playMoveSelector = PlayMoveSelector(viewController: self)
     
@@ -49,7 +57,10 @@ class GameViewController: UIViewController, Subscribable {
     }()
     
     private lazy var playerDescriptor = PlayerDescriptor(viewController: self)
-    private lazy var moveAnimator = MoveAnimator(viewController: self)
+    
+    private lazy var updateAnimator = UpdateAnimator(viewController: self,
+                                                     cardPositions: buildCardPositions(),
+                                                     cardSize: buildCardSize())
     
     // MARK: Lifecycle
     
@@ -69,6 +80,10 @@ class GameViewController: UIViewController, Subscribable {
         
         sub(engine.executedMove().subscribe(onNext: { [weak self] move in
             self?.processExecutedMove(move)
+        }))
+        
+        sub(engine.executedUpdates().subscribe(onNext: { [weak self] update in
+            self?.processExecutedUpdate(update)
         }))
         
         if let controlledPlayerId = self.controlledPlayerId {
@@ -118,18 +133,20 @@ private extension GameViewController {
     }
     
     func processExecutedMove(_ move: GameMove) {
-        guard let state = latestState else {
-            return
-        }
-        
-        statsBuilder.updateScores(state: state, move: move)
+        statsBuilder.updateOnExecuting(move)
         
         messages.append(moveDescriptor.description(for: move))
         messageTableView.reloadDataSwollingAtBottom()
         
         moveSoundPlayer.playSound(for: move)
+    }
+    
+    func processExecutedUpdate(_ update: GameUpdate) {
+        guard let state = latestState else {
+            return
+        }
         
-        moveAnimator.animate(move: move, in: state)
+        updateAnimator.animate(update, in: state)
     }
     
     func processValidMoves(_ moves: [GameMove]) {
@@ -253,6 +270,45 @@ extension GameViewController: GameCollectionViewLayoutDelegate {
             return 0
         }
         
-        return engine.allPlayersCount
+        return engine.allPlayers.count
+    }
+}
+
+private extension GameViewController {
+    
+    func buildCardPositions() -> [CardPlace: CGPoint] {
+        guard let engine = self.engine else {
+            return [:]
+        }
+        
+        var result: [CardPlace: CGPoint] = [:]
+        
+        guard let discardCenter = discardImageView.superview?.convert(discardImageView.center, to: view),
+            let deckCenter = deckImageView.superview?.convert(deckImageView.center, to: view)  else {
+                fatalError("Illegal state")
+        }
+        
+        result[.deck] = deckCenter
+        result[.discard] = discardCenter
+        
+        let playerIds = engine.allPlayers.map { $0.identifier }
+        for (index, playerId) in playerIds.enumerated() {
+            guard let cell = playersCollectionView.cellForItem(at: IndexPath(row: index, section: 0)),
+                let cellCenter = cell.superview?.convert(cell.center, to: view) else {
+                    fatalError("Illegal state")
+            }
+            
+            let handPosition = cellCenter
+            let inPlayPosition = cellCenter.applying(CGAffineTransform(translationX: cell.bounds.size.height / 2, y: 0))
+            
+            result[.hand(playerId)] = handPosition
+            result[.inPlay(playerId)] = inPlayPosition
+        }
+        
+        return result
+    }
+    
+    func buildCardSize() -> CGSize {
+        discardImageView.bounds.size
     }
 }

@@ -183,14 +183,14 @@ import RxSwift
     
     
     
-     var allPlayersCount: Int {
+     var allPlayers: [PlayerProtocol] {
         get {
-            return cuckoo_manager.getter("allPlayersCount",
+            return cuckoo_manager.getter("allPlayers",
                 superclassCall:
                     
                     Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                     ,
-                defaultCall: __defaultImplStub!.allPlayersCount)
+                defaultCall: __defaultImplStub!.allPlayers)
         }
         
     }
@@ -283,8 +283,8 @@ import RxSwift
 	    }
 	    
 	    
-	    var allPlayersCount: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameEngineProtocol, Int> {
-	        return .init(manager: cuckoo_manager, name: "allPlayersCount")
+	    var allPlayers: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameEngineProtocol, [PlayerProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "allPlayers")
 	    }
 	    
 	    
@@ -328,8 +328,8 @@ import RxSwift
 	
 	    
 	    
-	    var allPlayersCount: Cuckoo.VerifyReadOnlyProperty<Int> {
-	        return .init(manager: cuckoo_manager, name: "allPlayersCount", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var allPlayers: Cuckoo.VerifyReadOnlyProperty<[PlayerProtocol]> {
+	        return .init(manager: cuckoo_manager, name: "allPlayers", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	
@@ -370,9 +370,9 @@ import RxSwift
  class GameEngineProtocolStub: GameEngineProtocol {
     
     
-     var allPlayersCount: Int {
+     var allPlayers: [PlayerProtocol] {
         get {
-            return DefaultValueRegistry.defaultValue(for: (Int).self)
+            return DefaultValueRegistry.defaultValue(for: ([PlayerProtocol]).self)
         }
         
     }
