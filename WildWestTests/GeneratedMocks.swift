@@ -156,6 +156,189 @@ import RxSwift
 }
 
 
+
+ class MockEventQueueProtocol: EventQueueProtocol, Cuckoo.ProtocolMock {
+    
+     typealias MocksType = EventQueueProtocol
+    
+     typealias Stubbing = __StubbingProxy_EventQueueProtocol
+     typealias Verification = __VerificationProxy_EventQueueProtocol
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: EventQueueProtocol?
+
+     func enableDefaultImplementation(_ stub: EventQueueProtocol) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+    
+    
+     var isEmpty: Bool {
+        get {
+            return cuckoo_manager.getter("isEmpty",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.isEmpty)
+        }
+        
+    }
+    
+
+    
+
+    
+    
+    
+     func pull() -> Observable<Any> {
+        
+    return cuckoo_manager.call("pull() -> Observable<Any>",
+            parameters: (),
+            escapingParameters: (),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.pull())
+        
+    }
+    
+    
+    
+     func add(_ element: Any)  {
+        
+    return cuckoo_manager.call("add(_: Any)",
+            parameters: (element),
+            escapingParameters: (element),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.add(element))
+        
+    }
+    
+    
+    
+     func push(_ element: Any)  {
+        
+    return cuckoo_manager.call("push(_: Any)",
+            parameters: (element),
+            escapingParameters: (element),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.push(element))
+        
+    }
+    
+
+	 struct __StubbingProxy_EventQueueProtocol: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    var isEmpty: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockEventQueueProtocol, Bool> {
+	        return .init(manager: cuckoo_manager, name: "isEmpty")
+	    }
+	    
+	    
+	    func pull() -> Cuckoo.ProtocolStubFunction<(), Observable<Any>> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return .init(stub: cuckoo_manager.createStub(for: MockEventQueueProtocol.self, method: "pull() -> Observable<Any>", parameterMatchers: matchers))
+	    }
+	    
+	    func add<M1: Cuckoo.Matchable>(_ element: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(Any)> where M1.MatchedType == Any {
+	        let matchers: [Cuckoo.ParameterMatcher<(Any)>] = [wrap(matchable: element) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockEventQueueProtocol.self, method: "add(_: Any)", parameterMatchers: matchers))
+	    }
+	    
+	    func push<M1: Cuckoo.Matchable>(_ element: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(Any)> where M1.MatchedType == Any {
+	        let matchers: [Cuckoo.ParameterMatcher<(Any)>] = [wrap(matchable: element) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockEventQueueProtocol.self, method: "push(_: Any)", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	 struct __VerificationProxy_EventQueueProtocol: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	    
+	    var isEmpty: Cuckoo.VerifyReadOnlyProperty<Bool> {
+	        return .init(manager: cuckoo_manager, name: "isEmpty", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	
+	    
+	    @discardableResult
+	    func pull() -> Cuckoo.__DoNotUse<(), Observable<Any>> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return cuckoo_manager.verify("pull() -> Observable<Any>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func add<M1: Cuckoo.Matchable>(_ element: M1) -> Cuckoo.__DoNotUse<(Any), Void> where M1.MatchedType == Any {
+	        let matchers: [Cuckoo.ParameterMatcher<(Any)>] = [wrap(matchable: element) { $0 }]
+	        return cuckoo_manager.verify("add(_: Any)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func push<M1: Cuckoo.Matchable>(_ element: M1) -> Cuckoo.__DoNotUse<(Any), Void> where M1.MatchedType == Any {
+	        let matchers: [Cuckoo.ParameterMatcher<(Any)>] = [wrap(matchable: element) { $0 }]
+	        return cuckoo_manager.verify("push(_: Any)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+ class EventQueueProtocolStub: EventQueueProtocol {
+    
+    
+     var isEmpty: Bool {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (Bool).self)
+        }
+        
+    }
+    
+
+    
+
+    
+     func pull() -> Observable<Any>  {
+        return DefaultValueRegistry.defaultValue(for: (Observable<Any>).self)
+    }
+    
+     func add(_ element: Any)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     func push(_ element: Any)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+}
+
+
 import Cuckoo
 @testable import WildWest
 

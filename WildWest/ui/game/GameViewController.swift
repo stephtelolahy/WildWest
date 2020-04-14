@@ -108,7 +108,7 @@ class GameViewController: UIViewController, Subscribable {
     
     @IBAction private func endTurnTapped(_ sender: Any) {
         playMoveSelector.selectMove(within: endTurnMoves) { [weak self] move in
-            self?.engine?.queue(move)
+            self?.engine?.execute(move)
         }
     }
 }
@@ -161,7 +161,7 @@ private extension GameViewController {
         if state.challenge != nil,
             !moves.isEmpty {
             reactionMoveSelector.selectMove(within: moves, state: state) { [weak self] move in
-                self?.engine?.queue(move)
+                self?.engine?.execute(move)
             }
         }
         
@@ -253,7 +253,7 @@ extension GameViewController: UICollectionViewDelegate {
     private func actionsCollectionViewDidSelectItem(at indexPath: IndexPath) {
         let moves = actionItems[indexPath.row].moves
         playMoveSelector.selectMove(within: moves) { [weak self] move in
-            self?.engine?.queue(move)
+            self?.engine?.execute(move)
         }
     }
 }

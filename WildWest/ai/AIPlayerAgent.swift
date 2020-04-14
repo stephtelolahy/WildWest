@@ -67,6 +67,6 @@ private extension AIPlayerAgent {
             return
         }
         
-        engine.queue(move)
+        engine.execute(move)
     }
 }

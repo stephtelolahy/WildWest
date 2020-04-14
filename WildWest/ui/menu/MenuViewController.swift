@@ -143,7 +143,7 @@ private extension MenuViewController {
         let engine = GameEngine(database: database,
                                 moveMatchers: allMatchers,
                                 updateExecutor: GameUpdateExecutor(),
-                                commandQueue: DelayedCommandQueue(delay: userPreferences.updateDelay))
+                                eventQueue: DelayedEventQueue(delay: userPreferences.updateDelay))
         
         let controlledPlayerId = state.players.first?.identifier
         let aiPlayers = database.state.players.filter { $0.identifier != controlledPlayerId }

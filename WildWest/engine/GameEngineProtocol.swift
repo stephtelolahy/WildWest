@@ -17,12 +17,12 @@ protocol GameEngineProtocol {
     func executedUpdates() -> Observable<GameUpdate>
     
     func start()
-    func queue(_ move: GameMove)
+    func execute(_ move: GameMove)
 }
 
 protocol InternalGameEngineProtocol {
-    func execute(_ move: GameMove)
     func emitState(_ state: GameStateProtocol)
+    func emitUpdate(_ update: GameUpdate)
     func emitExecutedMove(_ move: GameMove)
     func emitValidMoves(_ moves: [String: [GameMove]])
 }

@@ -11,26 +11,26 @@ import RxSwift
 class GameEngine: GameEngineProtocol, Subscribable {
     
     private let stateSubject: BehaviorSubject<GameStateProtocol>
+    private let updatesSubject: PublishSubject<GameUpdate>
     private let executedMoveSubject: PublishSubject<GameMove>
-    private let executedUpdatesSubject: PublishSubject<GameUpdate>
     private let validMovesSubject: PublishSubject<[String: [GameMove]]>
     
     private let database: GameDatabaseProtocol
     private let updateExecutor: UpdateExecutorProtocol
     private let moveMatchers: [MoveMatcherProtocol]
-    private let commandQueue: CommandQueueProtocol
+    private let eventQueue: EventQueueProtocol
     
     init(database: GameDatabaseProtocol,
          moveMatchers: [MoveMatcherProtocol],
          updateExecutor: UpdateExecutorProtocol,
-         commandQueue: CommandQueueProtocol) {
+         eventQueue: EventQueueProtocol) {
         self.database = database
         self.moveMatchers = moveMatchers
         self.updateExecutor = updateExecutor
-        self.commandQueue = commandQueue
+        self.eventQueue = eventQueue
         stateSubject = BehaviorSubject(value: database.state)
         executedMoveSubject = PublishSubject()
-        executedUpdatesSubject = PublishSubject()
+        updatesSubject = PublishSubject()
         validMovesSubject = PublishSubject()
     }
     
@@ -39,12 +39,12 @@ class GameEngine: GameEngineProtocol, Subscribable {
     }
     
     func start() {
-        observeCommandQueue()
-        moveMatchers.compactMap { $0.autoPlayMove(matching: database.state) }.forEach { queue($0) }
+        observeEventQueue()
+        moveMatchers.compactMap { $0.autoPlayMove(matching: database.state) }.forEach { execute($0) }
     }
     
-    func queue(_ move: GameMove) {
-        commandQueue.add(move)
+    func execute(_ move: GameMove) {
+        eventQueue.add(GameEvent(move: move))
     }
     
     func state(observedBy playerId: String?) -> Observable<GameStateProtocol> {
@@ -56,7 +56,7 @@ class GameEngine: GameEngineProtocol, Subscribable {
     }
     
     func executedUpdates() -> Observable<GameUpdate> {
-        executedUpdatesSubject
+        updatesSubject
     }
     
     func validMoves(for playerId: String) -> Observable<[GameMove]> {
@@ -66,45 +66,12 @@ class GameEngine: GameEngineProtocol, Subscribable {
 
 extension GameEngine: InternalGameEngineProtocol {
     
-    func execute(_ move: GameMove) {
-        
-        print("\n*** \(String(describing: move)) ***")
-        let matchers = moveMatchers.filter({ $0.execute(move, in: database.state) != nil })
-        guard matchers.count == 1,
-            let executor = matchers.first,
-            let updatesQueue = executor.execute(move, in: database.state) else {
-                fatalError("Illegal move executors (\(matchers.count)")
-        }
-        
-        updatesQueue.forEach { update in
-            print("> \(String(describing: update))")
-            executedUpdatesSubject.onNext(update)
-            updateExecutor.execute(update, in: database)
-        }
-        
-        // check game over
-        if let outcome = database.state.claculateOutcome() {
-            database.setOutcome(outcome)
-            return
-        }
-        
-        // queue effects
-        let effects = moveMatchers.compactMap { $0.effect(onExecuting: move, in: database.state) }
-        if !effects.isEmpty {
-            effects.forEach { commandQueue.add($0) }
-            return
-        }
-        
-        // queue autoPlay
-        let autoPlays = moveMatchers.compactMap { $0.autoPlayMove(matching: database.state) }
-        if !autoPlays.isEmpty {
-            autoPlays.forEach { commandQueue.add($0) }
-            return
-        }
-    }
-    
     func emitState(_ state: GameStateProtocol) {
         stateSubject.onNext(state)
+    }
+    
+    func emitUpdate(_ update: GameUpdate) {
+        updatesSubject.onNext(update)
     }
     
     func emitExecutedMove(_ move: GameMove) {
@@ -118,33 +85,118 @@ extension GameEngine: InternalGameEngineProtocol {
 
 private extension GameEngine {
     
-    func observeCommandQueue() {
-        sub(commandQueue.pull().subscribe(onNext: { [weak self] move in
-            self?.processCommand(move)
+    func observeEventQueue() {
+        sub(eventQueue.pop().subscribe(onNext: { [weak self] event in
+            self?.processEvent(event)
         }))
     }
     
-    func processCommand(_ move: GameMove) {
-        execute(move)
-        emitExecutedMove(move)
-        emitState(database.state)
-        emitValidMoves(validMoves())
+    func processEvent(_ event: GameEvent) {
+        if let remainingUdates = event.remainingUdates {
+            processMove(event.move, updates: remainingUdates)
+            
+        } else {
+            preExecuteMove(event.move)
+            
+            let updates = moveMatchers.updates(executing: event.move, in: database.state)
+            processMove(event.move, updates: updates)
+        }
     }
     
-    func validMoves() -> [String: [GameMove]] {
-        guard commandQueue.isEmpty,
-            database.state.outcome == nil else {
-                return [:]
+    func preExecuteMove(_ move: GameMove) {
+        print("\n*** \(String(describing: move)) ***")
+        
+        emitExecutedMove(move)
+        
+        emitValidMoves([:])
+    }
+    
+    func processMove(_ move: GameMove, updates: [GameUpdate]) {
+        
+        guard !updates.isEmpty else {
+            postExecuteMove(move)
+            return
         }
         
-        let validMoves = moveMatchers.compactMap { $0.validMoves(matching: database.state) }
+        let firstUpdate = updates[0]
+        processUpdate(firstUpdate)
+        
+        let remainingUdates = Array(updates[1..<updates.count])
+        guard !remainingUdates.isEmpty else {
+            postExecuteMove(move)
+            return
+        }
+        
+        eventQueue.push(GameEvent(move: move, remainingUdates: remainingUdates))
+    }
+    
+    func processUpdate(_ update: GameUpdate) {
+        print("> \(String(describing: update))")
+        
+        emitUpdate(update)
+        
+        updateExecutor.execute(update, in: database)
+        
+        emitState(database.state)
+    }
+    
+    func postExecuteMove(_ move: GameMove) {
+        // emit game over
+        if let outcome = database.state.claculateOutcome() {
+            database.setOutcome(outcome)
+            emitState(database.state)
+            return
+        }
+        
+        // queue effects
+        let effects = moveMatchers.compactMap { $0.effect(onExecuting: move, in: database.state) }
+        if !effects.isEmpty {
+            effects.forEach { eventQueue.add(GameEvent(move: $0)) }
+            return
+        }
+        
+        // queue autoPlay
+        let autoPlays = moveMatchers.compactMap { $0.autoPlayMove(matching: database.state) }
+        if !autoPlays.isEmpty {
+            autoPlays.forEach { eventQueue.add(GameEvent(move: $0)) }
+            return
+        }
+        
+        // emit valid moves
+        if eventQueue.isEmpty {
+            let validMoves = moveMatchers.validMoves(matching: database.state)
+            emitValidMoves(validMoves)
+        }
+        
+    }
+}
+
+private extension Array where Element == MoveMatcherProtocol {
+    
+    func validMoves(matching state: GameStateProtocol) -> [String: [GameMove]] {
+        guard state.outcome == nil else {
+            return [:]
+        }
+        
+        let moves = self.compactMap { $0.validMoves(matching: state) }
             .flatMap { $0 }
             .groupedByActor()
         
-        guard validMoves.keys.count <= 1 else {
-            fatalError("Illegal active players (\(validMoves.keys.count))")
+        guard moves.keys.count <= 1 else {
+            fatalError("Illegal active players (\(moves.keys.count))")
         }
         
-        return validMoves
+        return moves
+    }
+    
+    func updates(executing move: GameMove, in state: GameStateProtocol) -> [GameUpdate] {
+        let matchers = self.filter({ $0.execute(move, in: state) != nil })
+        guard matchers.count == 1,
+            let executor = matchers.first,
+            let updates = executor.execute(move, in: state) else {
+                fatalError("Illegal move executors (\(matchers.count)")
+        }
+        
+        return updates
     }
 }
