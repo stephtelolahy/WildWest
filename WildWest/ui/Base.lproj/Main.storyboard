@@ -18,10 +18,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1ml-If-Dys" userLabel="menuStackView">
-                                <rect key="frame" x="16" y="16" width="267" height="343"/>
+                                <rect key="frame" x="200" y="16" width="267" height="343"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="osg-8j-chw">
-                                        <rect key="frame" x="24.5" y="0.0" width="217.5" height="98.5"/>
+                                        <rect key="frame" x="25" y="0.0" width="217.5" height="98.5"/>
                                         <subviews>
                                             <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The unofficial clone of the Western Card Game" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQg-zg-mUN">
                                                 <rect key="frame" x="0.0" y="0.0" width="217.5" height="40"/>
@@ -60,29 +60,29 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="TgM-gl-AKs" userLabel="settingsStackView">
-                                <rect key="frame" x="450" y="102" width="201" height="171"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="TgM-gl-AKs" userLabel="settingsStackView">
+                                <rect key="frame" x="451" y="115" width="200" height="145"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="y3J-eS-E6e">
-                                        <rect key="frame" x="0.0" y="0.0" width="201" height="32"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="y3J-eS-E6e">
+                                        <rect key="frame" x="32.5" y="0.0" width="167.5" height="32"/>
                                         <subviews>
                                             <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X players" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W7q-8B-UEd">
-                                                <rect key="frame" x="0.0" y="6" width="78" height="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="57.5" height="32"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="7" minimumValue="4" maximumValue="7" translatesAutoresizingMaskIntoConstraints="NO" id="dkh-y9-bbs">
-                                                <rect key="frame" x="107" y="0.0" width="94" height="32"/>
+                                                <rect key="frame" x="73.5" y="0.0" width="94" height="32"/>
                                                 <connections>
                                                     <action selector="stepperValueChanged:" destination="8GX-Wa-ifS" eventType="valueChanged" id="v0n-ag-ZtQ"/>
                                                 </connections>
                                             </stepper>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="QhL-NB-RAp">
-                                        <rect key="frame" x="0.0" y="61" width="201" height="50"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="QhL-NB-RAp">
+                                        <rect key="frame" x="12" y="48" width="188" height="50"/>
                                         <subviews>
                                             <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Play as BartCassidy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sPL-GZ-GWU">
                                                 <rect key="frame" x="0.0" y="0.0" width="122" height="50"/>
@@ -92,7 +92,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTm-YG-Cdb">
-                                                <rect key="frame" x="151" y="0.0" width="50" height="50"/>
+                                                <rect key="frame" x="138" y="0.0" width="50" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="MKo-lU-ZE4"/>
                                                     <constraint firstAttribute="width" constant="50" id="zVp-1d-7Wn"/>
@@ -104,18 +104,18 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="dbv-g7-PwJ">
-                                        <rect key="frame" x="0.0" y="140" width="201" height="31"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="dbv-g7-PwJ">
+                                        <rect key="frame" x="45.5" y="114" width="154.5" height="31"/>
                                         <subviews>
                                             <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Play as Sheriff" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZBx-XG-ZKw">
-                                                <rect key="frame" x="0.0" y="0.0" width="123" height="31"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="89.5" height="31"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Ea-KQ-obZ">
-                                                <rect key="frame" x="152" y="0.0" width="51" height="31"/>
+                                                <rect key="frame" x="105.5" y="0.0" width="51" height="31"/>
                                                 <connections>
                                                     <action selector="playAsSheriffValueChanged:" destination="8GX-Wa-ifS" eventType="valueChanged" id="ba3-VO-aWt"/>
                                                 </connections>
@@ -128,10 +128,11 @@
                         <color key="backgroundColor" red="0.79855585100000004" green="0.71098977330000002" blue="0.56859511139999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="tm4-HU-FPt" firstAttribute="trailing" secondItem="TgM-gl-AKs" secondAttribute="trailing" constant="16" id="GWX-II-LBP"/>
+                            <constraint firstItem="TgM-gl-AKs" firstAttribute="width" secondItem="q5r-gt-aD8" secondAttribute="width" multiplier="0.3" id="HlG-do-ZPu"/>
                             <constraint firstItem="1ml-If-Dys" firstAttribute="top" secondItem="tm4-HU-FPt" secondAttribute="top" constant="16" id="LxR-V0-xGg"/>
                             <constraint firstItem="1ml-If-Dys" firstAttribute="width" secondItem="q5r-gt-aD8" secondAttribute="width" multiplier="0.4" id="d36-4L-lZR"/>
-                            <constraint firstItem="1ml-If-Dys" firstAttribute="leading" secondItem="tm4-HU-FPt" secondAttribute="leading" constant="16" id="kTB-8i-Baf"/>
-                            <constraint firstItem="TgM-gl-AKs" firstAttribute="centerY" secondItem="q5r-gt-aD8" secondAttribute="centerY" id="llv-KY-RMB"/>
+                            <constraint firstItem="1ml-If-Dys" firstAttribute="centerX" secondItem="q5r-gt-aD8" secondAttribute="centerX" id="oF7-VV-hRB"/>
+                            <constraint firstItem="TgM-gl-AKs" firstAttribute="centerY" secondItem="q5r-gt-aD8" secondAttribute="centerY" id="sq7-dj-eTb"/>
                             <constraint firstItem="tm4-HU-FPt" firstAttribute="bottom" secondItem="1ml-If-Dys" secondAttribute="bottom" constant="16" id="yIx-z5-Viy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tm4-HU-FPt"/>
@@ -278,7 +279,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bang_6_diamonds" translatesAutoresizingMaskIntoConstraints="NO" id="F8P-W3-OtS" userLabel="discardImageView">
-                                        <rect key="frame" x="64" y="0.0" width="60.5" height="94"/>
+                                        <rect key="frame" x="64" y="0.0" width="60.5" height="94.000000000000114"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="F8P-W3-OtS" secondAttribute="height" multiplier="250:389" id="yAr-Jz-kkr"/>
@@ -308,7 +309,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="duel_j_spades" translatesAutoresizingMaskIntoConstraints="NO" id="tTs-aA-G8g">
-                                                    <rect key="frame" x="0.0" y="0.0" width="120" height="92.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="120" height="92.500000000000114"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="tTs-aA-G8g" secondAttribute="height" multiplier="250:389" id="fzm-xH-YHr"/>

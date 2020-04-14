@@ -5,6 +5,10 @@
 //  Created by Hugues Stephano Telolahy on 13/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
+// swiftlint:disable type_body_length
+// swiftlint:disable cyclomatic_complexity
+// swiftlint:disable function_body_length
+// swiftlint:disable todo
 
 import UIKit
 
@@ -33,11 +37,7 @@ class UpdateAnimator: UpdateAnimatorProtocol {
         self.cardSize = cardSize
     }
     
-    // swiftlint:disable cyclomatic_complexity
-    // swiftlint:disable function_body_length
-    // swiftlint:disable todo
     func animate(_ update: GameUpdate, in state: GameStateProtocol) {
-        // TODO: use current didscard pile as placeholder target card during animation
         switch update {
         case let .setTurn(turn):
             break // TODO: implement
@@ -49,6 +49,9 @@ class UpdateAnimator: UpdateAnimatorProtocol {
             break // TODO: implement
             
         case let .playerLooseHealth(playerId, points, source):
+            break // TODO: implement
+            
+        case let .setupGeneralStore(cardsCount):
             break // TODO: implement
             
         case let .playerPullFromDeck(playerId, cardsCount):
@@ -105,9 +108,6 @@ class UpdateAnimator: UpdateAnimatorProtocol {
                     fatalError("Illegal state")
             }
             animateCard(image, from: .deck, to: .hand(playerId))
-            
-        case let .setupGeneralStore(cardsCount):
-            break // TODO: implement
             
         case .flipOverFirstDeckCard:
             guard let card = state.deck.first,
