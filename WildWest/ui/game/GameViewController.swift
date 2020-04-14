@@ -175,11 +175,7 @@ private extension GameViewController {
                                                 message: outcome.rawValue,
                                                 preferredStyle: .alert)
         
-        alertController.addAction(UIAlertAction(title: "OK",
-                                                style: .cancel,
-                                                handler: { [weak self] _ in
-                                                    self?.dismiss(animated: true)
-        }))
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
         
         forcePresent(alertController, animated: true)
     }
