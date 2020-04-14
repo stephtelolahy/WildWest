@@ -121,11 +121,7 @@ private extension GameViewController {
         playerItems = playerAdapter.buildItems(state: state, scores: statsBuilder.scores)
         playersCollectionView.reloadData()
         
-        if let topDiscardPile = state.discardPile.first {
-            discardImageView.image = UIImage(named: topDiscardPile.imageName)
-        } else {
-            discardImageView.image = nil
-        }
+        discardImageView.image = state.topDiscardImage
         
         if let outcome = state.outcome {
             showGameOver(outcome: outcome)

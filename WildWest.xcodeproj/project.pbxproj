@@ -220,6 +220,7 @@
 		33BAE346242E74CD0098B41F /* MemoryCachedDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BAE345242E74CD0098B41F /* MemoryCachedDataBase.swift */; };
 		33BAE347242E74CD0098B41F /* MemoryCachedDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BAE345242E74CD0098B41F /* MemoryCachedDataBase.swift */; };
 		33BAE348242E7C960098B41F /* Subscribable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A733ED23DC4A5300E9B2AD /* Subscribable.swift */; };
+		33BBE7572445CA77006C9B17 /* GameState+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BBE7562445CA77006C9B17 /* GameState+Image.swift */; };
 		33BC633F2444D0FF00760F25 /* UIViewController+CardAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BC633E2444D0FF00760F25 /* UIViewController+CardAnimation.swift */; };
 		33BC9D4724390DCB00058F9D /* PlayBangAsMissAndViceVersa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BC9D4624390DCB00058F9D /* PlayBangAsMissAndViceVersa.swift */; };
 		33BC9D4824390DCB00058F9D /* PlayBangAsMissAndViceVersa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BC9D4624390DCB00058F9D /* PlayBangAsMissAndViceVersa.swift */; };
@@ -423,6 +424,7 @@
 		33B896C624384B180005FF21 /* GameLayoutBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLayoutBuilderTests.swift; sourceTree = "<group>"; };
 		33B896C9243862AB0005FF21 /* GameCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionViewLayout.swift; sourceTree = "<group>"; };
 		33BAE345242E74CD0098B41F /* MemoryCachedDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCachedDataBase.swift; sourceTree = "<group>"; };
+		33BBE7562445CA77006C9B17 /* GameState+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameState+Image.swift"; sourceTree = "<group>"; };
 		33BC633E2444D0FF00760F25 /* UIViewController+CardAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+CardAnimation.swift"; sourceTree = "<group>"; };
 		33BC9D4624390DCB00058F9D /* PlayBangAsMissAndViceVersa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayBangAsMissAndViceVersa.swift; sourceTree = "<group>"; };
 		33BC9D4924390EEB00058F9D /* PlayBangAsMissAndViceVersaMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayBangAsMissAndViceVersaMatcherTests.swift; sourceTree = "<group>"; };
@@ -611,6 +613,7 @@
 				335BED7E2429394D009184A3 /* GameMove+Components.swift */,
 				3338B2EB242FD0600097BA57 /* Challenge+Description.swift */,
 				3338B2EE242FD1240097BA57 /* TargetCard+Description.swift */,
+				33BBE7562445CA77006C9B17 /* GameState+Image.swift */,
 			);
 			path = convenience;
 			sourceTree = "<group>";
@@ -1411,6 +1414,7 @@
 				337408D424306C3400E5809B /* Player+Cards.swift in Sources */,
 				3328FCA7242F29B100A82255 /* Jail.swift in Sources */,
 				33E4411D24077CA000B2848E /* ActionCell.swift in Sources */,
+				33BBE7572445CA77006C9B17 /* GameState+Image.swift in Sources */,
 				337C2CC12442183800C2BCBE /* CommandQueue.swift in Sources */,
 				337C2CBE2442174D00C2BCBE /* CommandQueueProtocol.swift in Sources */,
 				337D7FD4243072130078F749 /* GameState+Observed.swift in Sources */,
