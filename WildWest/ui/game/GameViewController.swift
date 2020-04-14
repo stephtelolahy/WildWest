@@ -42,7 +42,7 @@ class GameViewController: UIViewController, Subscribable {
     }()
     
     private lazy var playerAdapter = PlayersAdapter()
-    private lazy var actionsAdapter = ActionsAdapter()
+    private lazy var actionsAdapter = ActionsAdapter(playerId: controlledPlayerId)
     private lazy var moveDescriptor = MoveDescriptor()
     private lazy var moveSoundPlayer = MoveSoundPlayer()
     private lazy var instructionBuilder = InstructionBuilder()
@@ -121,7 +121,12 @@ private extension GameViewController {
         playerItems = playerAdapter.buildItems(state: state, scores: statsBuilder.scores)
         playersCollectionView.reloadData()
         
+        actionItems = actionsAdapter.buildActions(state: state)
+        actionsCollectionView.reloadData()
+        
         discardImageView.image = state.topDiscardImage
+        
+        titleLabel.text = instructionBuilder.buildInstruction(state: state, for: controlledPlayerId)
         
         if let outcome = state.outcome {
             showGameOver(outcome: outcome)
@@ -129,12 +134,12 @@ private extension GameViewController {
     }
     
     func processExecutedMove(_ move: GameMove) {
-        statsBuilder.updateOnExecuting(move)
-        
         messages.append(moveDescriptor.description(for: move))
-        messageTableView.reloadDataSwollingAtBottom()
+        messageTableView.reloadDataScrollingAtBottom()
         
         moveSoundPlayer.playSound(for: move)
+        
+        statsBuilder.updateOnExecuting(move)
     }
     
     func processExecutedUpdate(_ update: GameUpdate) {
@@ -150,9 +155,7 @@ private extension GameViewController {
             return
         }
         
-        titleLabel.text = instructionBuilder.buildInstruction(state: state, validMoves: moves, for: controlledPlayerId)
-        
-        actionItems = actionsAdapter.buildActions(state: state, validMoves: moves, for: controlledPlayerId)
+        actionItems = actionsAdapter.buildActions(validMoves: moves)
         actionsCollectionView.reloadData()
         
         if state.challenge != nil,

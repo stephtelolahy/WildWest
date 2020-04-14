@@ -15,7 +15,7 @@ extension UIViewController {
                      size: CGSize,
                      from source: CGPoint,
                      to target: CGPoint,
-                     duration: Double,
+                     duration: TimeInterval,
                      completion: ((Bool) -> Void)? = nil) {
         
         let targetFrame = CGRect(x: target.x - size.width / 2,
@@ -44,7 +44,7 @@ extension UIViewController {
 
 private extension UIView {
     func animate(to target: CGPoint,
-                 duration: Double,
+                 duration: TimeInterval,
                  completion: ((Bool) -> Void)?) {
         
         let animationOptions: UIView.AnimationOptions = .curveEaseOut

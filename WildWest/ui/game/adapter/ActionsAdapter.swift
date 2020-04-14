@@ -12,16 +12,33 @@ struct ActionItem {
 }
 
 protocol ActionsAdapterProtocol {
-    func buildActions(state: GameStateProtocol,
-                      validMoves: [GameMove],
-                      for controlledPlayerId: String?) -> [ActionItem]
+    func buildActions(validMoves: [GameMove]) -> [ActionItem]
+    func buildActions(state: GameStateProtocol) -> [ActionItem]
 }
 
 class ActionsAdapter: ActionsAdapterProtocol {
-    func buildActions(state: GameStateProtocol,
-                      validMoves: [GameMove],
-                      for controlledPlayerId: String?) -> [ActionItem] {
-        guard let controlledPlayerId = controlledPlayerId,
+    
+    private let playerId: String?
+    private var validMoves: [GameMove] = []
+    private var latestState: GameStateProtocol?
+    
+    init(playerId: String?) {
+        self.playerId = playerId
+    }
+    
+    func buildActions(validMoves: [GameMove]) -> [ActionItem] {
+        self.validMoves = validMoves
+        return buildActions()
+    }
+    
+    func buildActions(state: GameStateProtocol) -> [ActionItem] {
+        self.latestState = state
+        return buildActions()
+    }
+    
+    private func buildActions() -> [ActionItem] {
+        guard let controlledPlayerId = playerId,
+            let state = latestState,
             let player = state.player(controlledPlayerId) else {
                 return []
         }

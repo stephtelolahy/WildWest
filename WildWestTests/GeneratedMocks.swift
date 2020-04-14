@@ -246,6 +246,21 @@ import RxSwift
     
     
     
+     func executedUpdates() -> Observable<GameUpdate> {
+        
+    return cuckoo_manager.call("executedUpdates() -> Observable<GameUpdate>",
+            parameters: (),
+            escapingParameters: (),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.executedUpdates())
+        
+    }
+    
+    
+    
      func start()  {
         
     return cuckoo_manager.call("start()",
@@ -303,6 +318,11 @@ import RxSwift
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameEngineProtocol.self, method: "executedMove() -> Observable<GameMove>", parameterMatchers: matchers))
 	    }
 	    
+	    func executedUpdates() -> Cuckoo.ProtocolStubFunction<(), Observable<GameUpdate>> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameEngineProtocol.self, method: "executedUpdates() -> Observable<GameUpdate>", parameterMatchers: matchers))
+	    }
+	    
 	    func start() -> Cuckoo.ProtocolStubNoReturnFunction<()> {
 	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameEngineProtocol.self, method: "start()", parameterMatchers: matchers))
@@ -353,6 +373,12 @@ import RxSwift
 	    }
 	    
 	    @discardableResult
+	    func executedUpdates() -> Cuckoo.__DoNotUse<(), Observable<GameUpdate>> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return cuckoo_manager.verify("executedUpdates() -> Observable<GameUpdate>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
 	    func start() -> Cuckoo.__DoNotUse<(), Void> {
 	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
 	        return cuckoo_manager.verify("start()", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
@@ -391,6 +417,10 @@ import RxSwift
     
      func executedMove() -> Observable<GameMove>  {
         return DefaultValueRegistry.defaultValue(for: (Observable<GameMove>).self)
+    }
+    
+     func executedUpdates() -> Observable<GameUpdate>  {
+        return DefaultValueRegistry.defaultValue(for: (Observable<GameUpdate>).self)
     }
     
      func start()   {

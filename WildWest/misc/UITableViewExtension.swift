@@ -11,7 +11,7 @@ import UIKit
 
 extension UITableView {
     
-    func reloadDataSwollingAtBottom() {
+    func reloadDataScrollingAtBottom() {
         reloadData()
         guard numberOfSections > 0 else {
             return

@@ -591,7 +591,6 @@
 			children = (
 				33E4411624077CA000B2848E /* ActionsAdapter.swift */,
 				33E4411524077CA000B2848E /* PlayersAdapter.swift */,
-				335BED682429334F009184A3 /* MoveSoundPlayer.swift */,
 				ADD4DB6D24209E4D001BBD48 /* MoveDescriptor.swift */,
 				338FAD15242543030096B488 /* InstructionBuilder.swift */,
 			);
@@ -605,6 +604,14 @@
 				33BC633E2444D0FF00760F25 /* UIViewController+CardAnimation.swift */,
 			);
 			path = animator;
+			sourceTree = "<group>";
+		};
+		33275D4C2446283B00CDC7A6 /* sfx */ = {
+			isa = PBXGroup;
+			children = (
+				335BED682429334F009184A3 /* MoveSoundPlayer.swift */,
+			);
+			path = sfx;
 			sourceTree = "<group>";
 		};
 		3338B2EA242FD0480097BA57 /* convenience */ = {
@@ -708,6 +715,7 @@
 			children = (
 				332499B223DB9F650082EF09 /* GameViewController.swift */,
 				330E5AC62439E27300C358AF /* adapter */,
+				33275D4C2446283B00CDC7A6 /* sfx */,
 				33112E71244503F1009C706E /* animator */,
 				330E5AC52439E1E100C358AF /* views */,
 				33B896C82438628E0005FF21 /* layout */,
