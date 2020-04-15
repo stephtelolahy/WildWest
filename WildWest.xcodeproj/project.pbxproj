@@ -96,6 +96,8 @@
 		332B844E24390043005E5B21 /* DrawsCardWhenHandIsEmptyMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332B844D24390043005E5B21 /* DrawsCardWhenHandIsEmptyMatcherTests.swift */; };
 		332B845024390704005E5B21 /* ResourcesTests+SpecialAbilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332B844F24390704005E5B21 /* ResourcesTests+SpecialAbilities.swift */; };
 		332DFE10242F1C1F009C35E6 /* StartTurnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332DFE0F242F1C1F009C35E6 /* StartTurnTests.swift */; };
+		332F0497244716AA00BE2E4A /* UIImage+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332F0496244716AA00BE2E4A /* UIImage+Color.swift */; };
+		332F0499244716C100BE2E4A /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332F0498244716C100BE2E4A /* UIColor+Hex.swift */; };
 		33318D6D24275AAE0055C6C5 /* StatsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33318D6C24275AAE0055C6C5 /* StatsBuilder.swift */; };
 		3333463D242FD59900A97FD5 /* Player+RangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3333463C242FD59900A97FD5 /* Player+RangeTests.swift */; };
 		33334642242FEDCD00A97FD5 /* GameState+Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33334641242FEDCD00A97FD5 /* GameState+Distance.swift */; };
@@ -330,6 +332,8 @@
 		332B844D24390043005E5B21 /* DrawsCardWhenHandIsEmptyMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawsCardWhenHandIsEmptyMatcherTests.swift; sourceTree = "<group>"; };
 		332B844F24390704005E5B21 /* ResourcesTests+SpecialAbilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResourcesTests+SpecialAbilities.swift"; sourceTree = "<group>"; };
 		332DFE0F242F1C1F009C35E6 /* StartTurnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTurnTests.swift; sourceTree = "<group>"; };
+		332F0496244716AA00BE2E4A /* UIImage+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Color.swift"; sourceTree = "<group>"; };
+		332F0498244716C100BE2E4A /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		33318D5A242744EA0055C6C5 /* EliminateMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EliminateMatcherTests.swift; sourceTree = "<group>"; };
 		33318D5E2427494D0055C6C5 /* GainRewardOnEliminatingOutlaw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainRewardOnEliminatingOutlaw.swift; sourceTree = "<group>"; };
 		33318D6124274BDF0055C6C5 /* GainRewardOnEliminatingOutlawMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainRewardOnEliminatingOutlawMatcherTests.swift; sourceTree = "<group>"; };
@@ -963,6 +967,8 @@
 				ADE91ACC23B9FE2300F7316B /* JsonReader.swift */,
 				334673E52436267500FFBB82 /* UIViewController+Alert.swift */,
 				334673E72436314E00FFBB82 /* UserDefaultsStored.swift */,
+				332F0496244716AA00BE2E4A /* UIImage+Color.swift */,
+				332F0498244716C100BE2E4A /* UIColor+Hex.swift */,
 			);
 			path = misc;
 			sourceTree = "<group>";
@@ -1426,6 +1432,7 @@
 				337D7FD4243072130078F749 /* GameState+Observed.swift in Sources */,
 				3328FCA1242F299F00A82255 /* CatBalou.swift in Sources */,
 				ADD4DB6E24209E4D001BBD48 /* MoveDescriptor.swift in Sources */,
+				332F0499244716C100BE2E4A /* UIColor+Hex.swift in Sources */,
 				33FDD70C240BFB4B00BC3E14 /* MenuViewController.swift in Sources */,
 				33318D6D24275AAE0055C6C5 /* StatsBuilder.swift in Sources */,
 				337408D124306C1200E5809B /* Card+Ability.swift in Sources */,
@@ -1450,6 +1457,7 @@
 				332B844B2438FF35005E5B21 /* DrawsCardWhenHandIsEmpty.swift in Sources */,
 				332499B323DB9F650082EF09 /* GameViewController.swift in Sources */,
 				33AE6D2C244349910006E72F /* AssistedReactionMoveSelector.swift in Sources */,
+				332F0497244716AA00BE2E4A /* UIImage+Color.swift in Sources */,
 				3380B0402436800F0040F027 /* DrawsCardFromPlayerDamagedHim.swift in Sources */,
 				33334645242FEE7F00A97FD5 /* GameMove+Grouping.swift in Sources */,
 				33EE1B9A242E95C500A1E4F7 /* StartTurn.swift in Sources */,

@@ -417,7 +417,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.79855585100000004" green="0.71098977330000002" blue="0.56859511139999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.80000000000000004" green="0.70980392156862748" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="cXD-5P-evL" firstAttribute="trailing" secondItem="YnA-A3-EaS" secondAttribute="trailing" id="0XV-zH-Re0"/>
                             <constraint firstItem="l2k-9K-ciW" firstAttribute="height" secondItem="SPv-lk-pld" secondAttribute="height" multiplier="0.25" id="2ir-L9-cle"/>

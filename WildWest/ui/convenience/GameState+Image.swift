@@ -9,9 +9,10 @@
 import UIKit
 
 extension GameStateProtocol {
+    
     var topDiscardImage: UIImage? {
         guard let topDiscard = discardPile.first else {
-            return nil
+            return UIImage(color: .gold)
         }
         
         return UIImage(named: topDiscard.imageName)
