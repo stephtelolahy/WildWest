@@ -97,7 +97,6 @@ private extension GameEngine {
             
         } else {
             preExecuteMove(event.move)
-            
             let updates = moveMatchers.updates(executing: event.move, in: database.state)
             processMove(event.move, updates: updates)
         }
@@ -112,16 +111,20 @@ private extension GameEngine {
     }
     
     func processMove(_ move: GameMove, updates: [GameUpdate]) {
-        
         guard !updates.isEmpty else {
             postExecuteMove(move)
             return
         }
         
-        let firstUpdate = updates[0]
-        processUpdate(firstUpdate)
+        var actualUpdates = [updates[0]]
+        var remainingUdates = Array(updates[1..<updates.count])
         
-        let remainingUdates = Array(updates[1..<updates.count])
+        while remainingUdates.first?.isAnimatable == false {
+            actualUpdates.append(remainingUdates.remove(at: 0))
+        }
+        
+        actualUpdates.forEach { processUpdate($0) }
+        
         guard !remainingUdates.isEmpty else {
             postExecuteMove(move)
             return
@@ -198,5 +201,21 @@ private extension Array where Element == MoveMatcherProtocol {
         }
         
         return updates
+    }
+}
+
+private extension GameUpdate {
+    var isAnimatable: Bool {
+        switch self {
+        case .setTurn,
+             .setChallenge,
+             .playerGainHealth,
+             .playerLooseHealth,
+             .setupGeneralStore:
+            return false
+            
+        default:
+            return true
+        }
     }
 }

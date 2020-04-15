@@ -8,7 +8,6 @@
 // swiftlint:disable type_body_length
 // swiftlint:disable cyclomatic_complexity
 // swiftlint:disable function_body_length
-// swiftlint:disable todo
 
 import UIKit
 
@@ -39,21 +38,6 @@ class UpdateAnimator: UpdateAnimatorProtocol {
     
     func animate(_ update: GameUpdate, in state: GameStateProtocol) {
         switch update {
-        case let .setTurn(turn):
-            break // TODO: implement
-            
-        case let .setChallenge(challenge):
-            break // TODO: implement
-            
-        case let .playerGainHealth(playerId, points):
-            break // TODO: implement
-            
-        case let .playerLooseHealth(playerId, points, source):
-            break // TODO: implement
-            
-        case let .setupGeneralStore(cardsCount):
-            break // TODO: implement
-            
         case let .playerPullFromDeck(playerId):
             animateCard(from: .deck, to: .hand(playerId))
             
@@ -126,6 +110,9 @@ class UpdateAnimator: UpdateAnimatorProtocol {
             animateCard(sourceImage: UIImage(named: card.imageName),
                         from: .deck,
                         to: .discard)
+            
+        default:
+            break
         }
     }
 }
