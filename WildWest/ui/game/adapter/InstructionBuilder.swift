@@ -16,11 +16,11 @@ class InstructionBuilder: InstructionBuilderProtocol {
             return outcome.rawValue
         }
         
-        guard controlledPlayerId != nil else {
+        if controlledPlayerId == nil {
             return "viewing game"
         }
         
-        guard controlledPlayerId != state.turn else {
+        if controlledPlayerId != state.turn {
             return "waiting others to play"
         }
         
