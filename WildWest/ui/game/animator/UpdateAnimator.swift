@@ -54,7 +54,7 @@ class UpdateAnimator: UpdateAnimatorProtocol {
         case let .setupGeneralStore(cardsCount):
             break // TODO: implement
             
-        case let .playerPullFromDeck(playerId, cardsCount):
+        case let .playerPullFromDeck(playerId):
             animateCard(from: .deck, to: .hand(playerId))
             
         case let .playerDiscardHand(playerId, cardId):

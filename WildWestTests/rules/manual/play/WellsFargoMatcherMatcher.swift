@@ -46,6 +46,8 @@ class WellsFargoMatcherMatcher: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .playerPullFromDeck("p1", 3)])
+                                 .playerPullFromDeck("p1"),
+                                 .playerPullFromDeck("p1"),
+                                 .playerPullFromDeck("p1")])
     }
 }

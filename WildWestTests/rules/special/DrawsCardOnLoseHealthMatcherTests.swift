@@ -42,6 +42,6 @@ class DrawsCardOnLoseHealthMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerPullFromDeck("p1", 1)])
+        XCTAssertEqual(updates, [.playerPullFromDeck("p1")])
     }
 }

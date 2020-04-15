@@ -36,7 +36,7 @@ class DrawsCardWhenHandIsEmptyMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: MockGameStateProtocol())
         
         // Assert
-        XCTAssertEqual(updates, [.playerPullFromDeck("p1", 1)])
+        XCTAssertEqual(updates, [.playerPullFromDeck("p1")])
     }
 
 }

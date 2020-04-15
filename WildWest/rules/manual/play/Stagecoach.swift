@@ -30,6 +30,7 @@ class StagecoachMatcher: MoveMatcherProtocol {
         }
         
         return [.playerDiscardHand(move.actorId, cardId),
-                .playerPullFromDeck(move.actorId, 2)]
+                .playerPullFromDeck(move.actorId),
+                .playerPullFromDeck(move.actorId)]
     }
 }

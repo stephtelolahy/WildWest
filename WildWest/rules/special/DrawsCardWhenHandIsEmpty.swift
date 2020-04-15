@@ -22,7 +22,7 @@ class DrawsCardWhenHandIsEmptyMatcher: MoveMatcherProtocol {
             return nil
         }
         
-        return [.playerPullFromDeck(move.actorId, 1)]
+        return [.playerPullFromDeck(move.actorId)]
     }
 }
 

@@ -63,8 +63,7 @@ class StayInJailMatcherTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates, [.flipOverFirstDeckCard,
                                  .playerDiscardInPlay("p1", "c1"),
-                                 .setTurn("p2"),
-                                 .setChallenge(Challenge(name: .startTurn))])
+                                 .setTurn("p2")])
     }
 }
 
