@@ -19,6 +19,7 @@ class GameEngine_ObservingTests: XCTestCase {
     private var stateObservers: [TestableObserver<GameStateProtocol>]!
     private var executedMoveObservers: [TestableObserver<GameMove>]!
     private var validMovesObservers: [TestableObserver<[GameMove]>]!
+    private var updateObservers: [TestableObserver<GameUpdate>]!
     private let disposeBag = DisposeBag()
 
     override func setUp() {
@@ -36,7 +37,7 @@ class GameEngine_ObservingTests: XCTestCase {
         sut = GameEngine(database: mockDatabase,
                          moveMatchers: [],
                          updateExecutor: MockUpdateExecutorProtocol(),
-                         commandQueue: MockCommandQueueProtocol())
+                         eventQueue: MockEventQueueProtocol())
         
         let scheduler = TestScheduler(initialClock: 0)
         
@@ -55,6 +56,12 @@ class GameEngine_ObservingTests: XCTestCase {
         validMovesObservers = Array(1...7).map { index in
             let observer = scheduler.createObserver([GameMove].self)
             sut.validMoves(for: "p\(index)").subscribe(observer).disposed(by: disposeBag)
+            return observer
+        }
+        
+        updateObservers = Array(1...7).map { _ in
+            let observer = scheduler.createObserver(GameUpdate.self)
+            sut.executedUpdates().subscribe(observer).disposed(by: disposeBag)
             return observer
         }
     }
@@ -94,5 +101,16 @@ class GameEngine_ObservingTests: XCTestCase {
         
         // Assert
         validMovesObservers.forEach { XCTAssertEqual($0.events.count, 1) }
+    }
+    
+    func test_AllObserversReceiveEmitedUpdate() {
+        // Given
+        let update = GameUpdate.flipOverFirstDeckCard
+        
+        // When
+        sut.emitUpdate(update)
+        
+        // Assert
+        updateObservers.forEach { XCTAssertEqual($0.events.count, 1) }
     }
 }

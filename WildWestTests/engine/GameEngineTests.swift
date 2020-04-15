@@ -17,15 +17,15 @@ class GameEngineTests: XCTestCase {
     private var mockState: MockGameStateProtocol!
     private var mockMoveMatcher: MockMoveMatcherProtocol!
     private var mockUpdateExecutor: MockUpdateExecutorProtocol!
-    private var mockCommandQueue: MockCommandQueueProtocol!
+    private var mockEventQueue: MockEventQueueProtocol!
     
     override func setUp() {
         mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
         mockDatabase = MockGameDatabaseProtocol().withEnabledDefaultImplementation(GameDatabaseProtocolStub())
         mockMoveMatcher = MockMoveMatcherProtocol().withEnabledDefaultImplementation(MoveMatcherProtocolStub())
         mockUpdateExecutor = MockUpdateExecutorProtocol().withEnabledDefaultImplementation(UpdateExecutorProtocolStub())
-        mockCommandQueue = MockCommandQueueProtocol().withEnabledDefaultImplementation(CommandQueueProtocolStub())
-        DefaultValueRegistry.register(value: PublishSubject<GameMove>(), forType: Observable<GameMove>.self)
+        mockEventQueue = MockEventQueueProtocol().withEnabledDefaultImplementation(EventQueueProtocolStub())
+        DefaultValueRegistry.register(value: PublishSubject<GameEvent>(), forType: Observable<GameEvent>.self)
         
         Cuckoo.stub(mockDatabase) { mock in
             when(mock.state.get).thenReturn(mockState)
@@ -34,10 +34,10 @@ class GameEngineTests: XCTestCase {
         sut = GameEngine(database: mockDatabase,
                          moveMatchers: [mockMoveMatcher],
                          updateExecutor: mockUpdateExecutor,
-                         commandQueue: mockCommandQueue)
+                         eventQueue: mockEventQueue)
     }
     
-    func test_QueueAutoPlayMove_IfStartingGame() {
+    func test_ExecuteAutoPlayMove_IfStartingGame() {
         // Given
         let move = GameMove(name: MoveName("m1"), actorId: "p1")
         Cuckoo.stub(mockMoveMatcher) { mock in
@@ -48,20 +48,20 @@ class GameEngineTests: XCTestCase {
         sut.start()
         
         // Assert
-        verify(mockCommandQueue).add(equal(to: move))
+        verify(mockEventQueue).add(equal(to: GameEvent(move: move)))
     }
     
-    func test_QueueMove() {
+    func test_QueueMove_IfExecuting() {
         // Given
         let move = GameMove(name: MoveName("m1"), actorId: "p1")
         
         // When
-        sut.queue(move)
+        sut.execute(move)
         
         // Assert
-        verify(mockCommandQueue).add(equal(to: move))
+        verify(mockEventQueue).add(equal(to: GameEvent(move: move)))
     }
-    
+    /*
     func test_UpdateState_OnExecutingMove() {
         // Given
         let move = GameMove(name: MoveName("m1"), actorId: "p1")
@@ -116,7 +116,7 @@ class GameEngineTests: XCTestCase {
         sut.execute(move)
         
         // Assert
-        verify(mockCommandQueue).add(equal(to: effect))
+        verify(mockEventQueue).add(equal(to: GameEvent(move: effect)))
     }
     
     func test_QueueAutoPlay_IfMatchingOnExecutingMove() {
@@ -139,6 +139,7 @@ class GameEngineTests: XCTestCase {
         sut.execute(move)
         
         // Assert
-        verify(mockCommandQueue).add(equal(to: autoplay))
+        verify(mockEventQueue).add(equal(to: GameEvent(move: autoplay)))
     }
+    */
 }
