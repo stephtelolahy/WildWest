@@ -154,6 +154,11 @@ private extension GameEngine {
             return
         }
         
+        // wait until all queued moves executed
+        guard eventQueue.isEmpty else {
+            return
+        }
+        
         // queue autoPlay
         let autoPlays = moveMatchers.compactMap { $0.autoPlayMove(matching: database.state) }
         if !autoPlays.isEmpty {
@@ -162,10 +167,8 @@ private extension GameEngine {
         }
         
         // emit valid moves
-        if eventQueue.isEmpty {
-            let validMoves = moveMatchers.validMoves(matching: database.state)
-            emitValidMoves(validMoves)
-        }
+        let validMoves = moveMatchers.validMoves(matching: database.state)
+        emitValidMoves(validMoves)
     }
 }
 

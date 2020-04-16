@@ -29,7 +29,6 @@ class MemoryCachedDataBase: GameDatabaseProtocol {
     }
     
     func setChallenge(_ challenge: Challenge?) {
-        assert(mutableState.challenge != challenge, "Duplicate challenge")
         mutableState.challenge = challenge
     }
     
