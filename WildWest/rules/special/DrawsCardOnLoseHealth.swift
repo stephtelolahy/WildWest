@@ -8,10 +8,22 @@
 
 class DrawsCardOnLoseHealthMatcher: MoveMatcherProtocol {
     func effect(onExecuting move: GameMove, in state: GameStateProtocol) -> GameMove? {
-        guard case .pass = move.name,
-            let actor = state.player(move.actorId),
-            actor.abilities[.drawsCardOnLoseHealth] == true else {
-                return nil
+        switch move.name {
+        case .pass:
+            guard let actor = state.player(move.actorId),
+                actor.abilities[.drawsCardOnLoseHealth] == true else {
+                    return nil
+            }
+            
+        case .explodeDynamite:
+            guard let actor = state.player(move.actorId),
+                actor.abilities[.drawsCardOnLoseHealth] == true,
+                case .startTurn = state.challenge?.name else { // no remaining damage
+                    return nil
+            }
+            
+        default:
+            return nil
         }
         
         return GameMove(name: .drawsCardOnLoseHealth, actorId: move.actorId)
