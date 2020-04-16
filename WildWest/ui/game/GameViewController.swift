@@ -19,6 +19,7 @@ class GameViewController: UIViewController, Subscribable {
     @IBOutlet private weak var messageTableView: UITableView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var discardImageView: UIImageView!
+    @IBOutlet private weak var deckImageView: UIImageView!
     
     // MARK: Properties
     
@@ -32,16 +33,34 @@ class GameViewController: UIViewController, Subscribable {
     private var endTurnMoves: [GameMove] = []
     private var latestState: GameStateProtocol?
     
+    private lazy var statsBuilder: StatsBuilderProtocol = {
+        guard let sheriff = engine?.allPlayers.first(where: { $0.role == .sheriff }) else {
+            fatalError("Illegal state")
+        }
+        
+        return StatsBuilder(sheriffId: sheriff.identifier, classifier: MoveClassifier())
+    }()
+    
     private lazy var playerAdapter = PlayersAdapter()
-    private lazy var actionsAdapter = ActionsAdapter()
+    private lazy var actionsAdapter = ActionsAdapter(playerId: controlledPlayerId)
     private lazy var moveDescriptor = MoveDescriptor()
     private lazy var moveSoundPlayer = MoveSoundPlayer()
-    private lazy var statsBuilder = StatsBuilder()
     private lazy var instructionBuilder = InstructionBuilder()
     private lazy var playMoveSelector = PlayMoveSelector(viewController: self)
-//    private lazy var reactionMoveSelector = ReactionMoveSelector(viewController: self)
-    private lazy var reactionMoveSelector = AssistedReactionMoveSelector(ai: RandomAI())
+    
+    private lazy var reactionMoveSelector: ReactionMoveSelectorProtocol = {
+        if UserPreferences.shared.assistedMode {
+            return AssistedReactionMoveSelector(ai: RandomAI())
+        } else {
+            return ReactionMoveSelector(viewController: self)
+        }
+    }()
+    
     private lazy var playerDescriptor = PlayerDescriptor(viewController: self)
+    
+    private lazy var updateAnimator = UpdateAnimator(viewController: self,
+                                                     cardPositions: buildCardPositions(),
+                                                     cardSize: buildCardSize())
     
     // MARK: Lifecycle
     
@@ -61,6 +80,10 @@ class GameViewController: UIViewController, Subscribable {
         
         sub(engine.executedMove().subscribe(onNext: { [weak self] move in
             self?.processExecutedMove(move)
+        }))
+        
+        sub(engine.executedUpdates().subscribe(onNext: { [weak self] update in
+            self?.processExecutedUpdate(update)
         }))
         
         if let controlledPlayerId = self.controlledPlayerId {
@@ -85,7 +108,7 @@ class GameViewController: UIViewController, Subscribable {
     
     @IBAction private func endTurnTapped(_ sender: Any) {
         playMoveSelector.selectMove(within: endTurnMoves) { [weak self] move in
-            self?.engine?.queue(move)
+            self?.engine?.execute(move)
         }
     }
 }
@@ -98,11 +121,12 @@ private extension GameViewController {
         playerItems = playerAdapter.buildItems(state: state, scores: statsBuilder.scores)
         playersCollectionView.reloadData()
         
-        if let topDiscardPile = state.discardPile.first {
-            discardImageView.image = UIImage(named: topDiscardPile.imageName)
-        } else {
-            discardImageView.image = nil
-        }
+        actionItems = actionsAdapter.buildActions(state: state)
+        actionsCollectionView.reloadData()
+        
+        discardImageView.image = state.topDiscardImage
+        
+        titleLabel.text = instructionBuilder.buildInstruction(state: state, for: controlledPlayerId)
         
         if let outcome = state.outcome {
             showGameOver(outcome: outcome)
@@ -110,16 +134,20 @@ private extension GameViewController {
     }
     
     func processExecutedMove(_ move: GameMove) {
+        messages.append(moveDescriptor.description(for: move))
+        messageTableView.reloadDataScrollingAtBottom()
+        
+        moveSoundPlayer.playSound(for: move)
+        
+        statsBuilder.updateOnExecuting(move)
+    }
+    
+    func processExecutedUpdate(_ update: GameUpdate) {
         guard let state = latestState else {
             return
         }
         
-        statsBuilder.updateScores(state: state, move: move)
-        
-        messages.append(moveDescriptor.description(for: move))
-        messageTableView.reloadDataSwollingAtBottom()
-        
-        moveSoundPlayer.playSound(for: move)
+        updateAnimator.animate(update, in: state)
     }
     
     func processValidMoves(_ moves: [GameMove]) {
@@ -127,15 +155,13 @@ private extension GameViewController {
             return
         }
         
-        titleLabel.text = instructionBuilder.buildInstruction(state: state, validMoves: moves, for: controlledPlayerId)
-        
-        actionItems = actionsAdapter.buildActions(state: state, validMoves: moves, for: controlledPlayerId)
+        actionItems = actionsAdapter.buildActions(validMoves: moves)
         actionsCollectionView.reloadData()
         
         if state.challenge != nil,
             !moves.isEmpty {
             reactionMoveSelector.selectMove(within: moves, state: state) { [weak self] move in
-                self?.engine?.queue(move)
+                self?.engine?.execute(move)
             }
         }
         
@@ -148,11 +174,7 @@ private extension GameViewController {
                                                 message: outcome.rawValue,
                                                 preferredStyle: .alert)
         
-        alertController.addAction(UIAlertAction(title: "OK",
-                                                style: .cancel,
-                                                handler: { [weak self] _ in
-                                                    self?.dismiss(animated: true)
-        }))
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
         
         forcePresent(alertController, animated: true)
     }
@@ -231,7 +253,7 @@ extension GameViewController: UICollectionViewDelegate {
     private func actionsCollectionViewDidSelectItem(at indexPath: IndexPath) {
         let moves = actionItems[indexPath.row].moves
         playMoveSelector.selectMove(within: moves) { [weak self] move in
-            self?.engine?.queue(move)
+            self?.engine?.execute(move)
         }
     }
 }
@@ -243,6 +265,45 @@ extension GameViewController: GameCollectionViewLayoutDelegate {
             return 0
         }
         
-        return engine.allPlayersCount
+        return engine.allPlayers.count
+    }
+}
+
+private extension GameViewController {
+    
+    func buildCardPositions() -> [CardPlace: CGPoint] {
+        guard let engine = self.engine else {
+            return [:]
+        }
+        
+        var result: [CardPlace: CGPoint] = [:]
+        
+        guard let discardCenter = discardImageView.superview?.convert(discardImageView.center, to: view),
+            let deckCenter = deckImageView.superview?.convert(deckImageView.center, to: view)  else {
+                fatalError("Illegal state")
+        }
+        
+        result[.deck] = deckCenter
+        result[.discard] = discardCenter
+        
+        let playerIds = engine.allPlayers.map { $0.identifier }
+        for (index, playerId) in playerIds.enumerated() {
+            guard let cell = playersCollectionView.cellForItem(at: IndexPath(row: index, section: 0)),
+                let cellCenter = cell.superview?.convert(cell.center, to: view) else {
+                    fatalError("Illegal state")
+            }
+            
+            let handPosition = cellCenter
+            let inPlayPosition = cellCenter.applying(CGAffineTransform(translationX: cell.bounds.size.height / 2, y: 0))
+            
+            result[.hand(playerId)] = handPosition
+            result[.inPlay(playerId)] = inPlayPosition
+        }
+        
+        return result
+    }
+    
+    func buildCardSize() -> CGSize {
+        discardImageView.bounds.size
     }
 }

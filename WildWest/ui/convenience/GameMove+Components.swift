@@ -33,7 +33,7 @@ extension Dictionary where Key == String, Value == String {
     }
 }
 
-extension String {
+private extension String {
     func extractCardName() -> String {
         components(separatedBy: "-").first ?? self
     }

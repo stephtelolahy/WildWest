@@ -10,9 +10,10 @@ enum GameUpdate: Equatable {
     case setTurn(String)
     case setChallenge(Challenge?)
     case flipOverFirstDeckCard
+    case setupGeneralStore(Int)
     case playerGainHealth(String, Int)
     case playerLooseHealth(String, Int, DamageSource)
-    case playerPullFromDeck(String, Int)
+    case playerPullFromDeck(String)
     case playerDiscardHand(String, String)
     case playerPutInPlay(String, String)
     case playerDiscardInPlay(String, String)
@@ -21,7 +22,6 @@ enum GameUpdate: Equatable {
     case playerPutInPlayOfOther(String, String, String)
     case playerPassInPlayOfOther(String, String, String)
     case playerPullFromGeneralStore(String, String)
-    case setupGeneralStore(Int)
 }
 
 // Define database transaction on executing a GameUpdate

@@ -37,11 +37,9 @@ class GameUpdateExecutor: UpdateExecutorProtocol {
                 database.playerSetDamageEvent(playerId, DamageEvent(damage: points, source: source))
             }
             
-        case let .playerPullFromDeck(playerId, cardsCount):
-            Array(1...cardsCount).forEach { _ in
-                let card = database.deckRemoveFirst()
-                database.playerAddHand(playerId, card)
-            }
+        case let .playerPullFromDeck(playerId):
+            let card = database.deckRemoveFirst()
+            database.playerAddHand(playerId, card)
             
         case let .playerDiscardHand(playerId, cardId):
             if let card = database.playerRemoveHand(playerId, cardId) {

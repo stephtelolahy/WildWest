@@ -26,7 +26,9 @@ class GainRewardOnEliminatingOutlawMatcher: MoveMatcherProtocol {
             return nil
         }
         
-        return [.playerPullFromDeck(move.actorId, 3)]
+        return [.playerPullFromDeck(move.actorId),
+                .playerPullFromDeck(move.actorId),
+                .playerPullFromDeck(move.actorId)]
     }
 }
 

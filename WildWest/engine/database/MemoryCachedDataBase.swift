@@ -29,6 +29,7 @@ class MemoryCachedDataBase: GameDatabaseProtocol {
     }
     
     func setChallenge(_ challenge: Challenge?) {
+        assert(mutableState.challenge != challenge)
         mutableState.challenge = challenge
     }
     

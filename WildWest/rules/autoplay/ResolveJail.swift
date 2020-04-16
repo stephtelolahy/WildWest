@@ -30,8 +30,7 @@ class StayInJailMatcher: MoveMatcherProtocol {
         
         return [.flipOverFirstDeckCard,
                 .playerDiscardInPlay(move.actorId, cardId),
-                .setTurn(state.nextPlayer(after: move.actorId)),
-                .setChallenge(Challenge(name: .startTurn))]
+                .setTurn(state.nextPlayer(after: move.actorId))]
     }
 }
 

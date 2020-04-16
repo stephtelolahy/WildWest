@@ -30,6 +30,8 @@ class WellsFargoMatcher: MoveMatcherProtocol {
         }
         
         return [.playerDiscardHand(move.actorId, cardId),
-                .playerPullFromDeck(move.actorId, 3)]
+                .playerPullFromDeck(move.actorId),
+                .playerPullFromDeck(move.actorId),
+                .playerPullFromDeck(move.actorId)]
     }
 }

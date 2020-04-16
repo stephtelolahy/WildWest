@@ -60,6 +60,8 @@ class GainRewardOnEliminatingOutlawMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerPullFromDeck("p1", 3)])
+        XCTAssertEqual(updates, [.playerPullFromDeck("p1"),
+                                 .playerPullFromDeck("p1"),
+                                 .playerPullFromDeck("p1")])
     }
 }

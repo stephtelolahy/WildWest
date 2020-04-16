@@ -29,4 +29,8 @@ extension PlayerProtocol {
     func handCard(_ cardId: String?) -> CardProtocol? {
         hand.first(where: { $0.identifier == cardId })
     }
+    
+    func inPlayCard(_ cardId: String?) -> CardProtocol? {
+        inPlay.first(where: { $0.identifier == cardId })
+    }
 }

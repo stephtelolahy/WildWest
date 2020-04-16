@@ -24,7 +24,7 @@ class DrawsCardOnLoseHealthMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        return [.playerPullFromDeck(move.actorId, damageEvent.damage)]
+        return Array(1...damageEvent.damage).map { _ in .playerPullFromDeck(move.actorId) }
     }
 }
 

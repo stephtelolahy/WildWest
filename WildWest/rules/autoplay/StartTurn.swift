@@ -24,7 +24,8 @@ class StartTurnMatcher: MoveMatcherProtocol {
             return nil
         }
         
-        return [.playerPullFromDeck(move.actorId, 2),
+        return [.playerPullFromDeck(move.actorId),
+                .playerPullFromDeck(move.actorId),
                 .setChallenge(nil)]
     }
 }

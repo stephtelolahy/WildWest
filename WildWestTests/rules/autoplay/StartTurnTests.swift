@@ -75,7 +75,8 @@ class StartTurnTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerPullFromDeck("p1", 2),
+        XCTAssertEqual(updates, [.playerPullFromDeck("p1"),
+                                 .playerPullFromDeck("p1"),
                                  .setChallenge(nil)])
     }
 }
