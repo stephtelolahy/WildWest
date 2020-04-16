@@ -92,17 +92,36 @@ private extension GameEngine {
     }
     
     func processEvent(_ event: GameEvent) {
-        if let remainingUdates = event.remainingUdates {
-            processMove(event.move, updates: remainingUdates)
-            
+        if let remainingUdates = event.updateGroups {
+            process(event.move, updateGroups: remainingUdates)
         } else {
-            preExecuteMove(event.move)
-            let updates = moveMatchers.updates(executing: event.move, in: database.state)
-            processMove(event.move, updates: updates)
+            preExecute(event.move)
+            let updates = moveMatchers.updates(onExecuting: event.move, in: database.state)
+            let updateGroups = updates.splitAnimatables()
+            process(event.move, updateGroups: updateGroups)
         }
     }
     
-    func preExecuteMove(_ move: GameMove) {
+    func process(_ move: GameMove, updateGroups: [[GameUpdate]]) {
+        guard !updateGroups.isEmpty else {
+            postExecute(move)
+            return
+        }
+        
+        let actualUpdates = updateGroups[0]
+        actualUpdates.forEach { execute($0) }
+        
+        let remainingUdates = Array(updateGroups[1..<updateGroups.count])
+        
+        guard !remainingUdates.isEmpty else {
+            postExecute(move)
+            return
+        }
+        
+        eventQueue.push(GameEvent(move: move, updateGroups: remainingUdates))
+    }
+    
+    func preExecute(_ move: GameMove) {
         print("\n*** \(String(describing: move)) ***")
         
         emitExecutedMove(move)
@@ -110,30 +129,7 @@ private extension GameEngine {
         emitValidMoves([:])
     }
     
-    func processMove(_ move: GameMove, updates: [GameUpdate]) {
-        guard !updates.isEmpty else {
-            postExecuteMove(move)
-            return
-        }
-        
-        var actualUpdates = [updates[0]]
-        var remainingUdates = Array(updates[1..<updates.count])
-        
-        while remainingUdates.first?.isAnimatable == false {
-            actualUpdates.append(remainingUdates.remove(at: 0))
-        }
-        
-        actualUpdates.forEach { processUpdate($0) }
-        
-        guard !remainingUdates.isEmpty else {
-            postExecuteMove(move)
-            return
-        }
-        
-        eventQueue.push(GameEvent(move: move, remainingUdates: remainingUdates))
-    }
-    
-    func processUpdate(_ update: GameUpdate) {
+    func execute(_ update: GameUpdate) {
         print("> \(String(describing: update))")
         
         emitUpdate(update)
@@ -143,7 +139,7 @@ private extension GameEngine {
         emitState(database.state)
     }
     
-    func postExecuteMove(_ move: GameMove) {
+    func postExecute(_ move: GameMove) {
         // emit game over
         if let outcome = database.state.claculateOutcome() {
             database.setOutcome(outcome)
@@ -170,7 +166,6 @@ private extension GameEngine {
             let validMoves = moveMatchers.validMoves(matching: database.state)
             emitValidMoves(validMoves)
         }
-        
     }
 }
 
@@ -192,7 +187,7 @@ private extension Array where Element == MoveMatcherProtocol {
         return moves
     }
     
-    func updates(executing move: GameMove, in state: GameStateProtocol) -> [GameUpdate] {
+    func updates(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameUpdate] {
         let matchers = self.filter({ $0.execute(move, in: state) != nil })
         guard matchers.count == 1,
             let executor = matchers.first,
@@ -201,21 +196,5 @@ private extension Array where Element == MoveMatcherProtocol {
         }
         
         return updates
-    }
-}
-
-private extension GameUpdate {
-    var isAnimatable: Bool {
-        switch self {
-        case .setTurn,
-             .setChallenge,
-             .playerGainHealth,
-             .playerLooseHealth,
-             .setupGeneralStore:
-            return false
-            
-        default:
-            return true
-        }
     }
 }

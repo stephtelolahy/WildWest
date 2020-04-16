@@ -18,5 +18,5 @@ protocol EventQueueProtocol {
 
 struct GameEvent: Equatable {
     let move: GameMove
-    var remainingUdates: [GameUpdate]?
+    var updateGroups: [[GameUpdate]]?
 }
