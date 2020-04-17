@@ -72,7 +72,7 @@ class UpdateAnimator: UpdateAnimatorProtocol {
                         to: .hand(playerId))
             
         case let .playerPullFromOtherInPlay(playerId, otherId, cardId):
-            guard let card = state.player(otherId)?.inPlayCard(cardId) else {
+            guard let card = state.allPlayers.first(where: { $0.identifier == otherId })?.inPlayCard(cardId) else {
                 fatalError("Illegal state")
             }
             animateCard(sourceImage: UIImage(named: card.imageName),

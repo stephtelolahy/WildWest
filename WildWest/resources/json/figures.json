@@ -114,7 +114,10 @@
         "name": "vultureSam",
         "bullets": 4,
         "imageName": "01_vulturesam",
-        "description": "whenever a character is eliminated from the game, Sam takes all the cards that player had in his hand and in play, and adds them to his hand."
+        "description": "whenever a character is eliminated from the game, Sam takes all the cards that player had in his hand and in play, and adds them to his hand.",
+        "abilities": {
+            "takesAllCardsFromEliminatedPlayers": true
+        }
     },
     {
         "name": "willyTheKid",

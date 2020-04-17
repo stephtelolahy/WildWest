@@ -21,7 +21,7 @@ class ResourcesTests_SpecialAbilities: XCTestCase {
         // When
         // Assert
         let figure = try XCTUnwrap(figures.first(where: { $0.name == .willyTheKid }))
-        XCTAssertEqual(figure.abilities[.hasNoLimitOnBangsPerTurn], true)
+        XCTAssertEqual(figure.abilities, [.hasNoLimitOnBangsPerTurn: true])
     }
     
     func test_JourdonaisHasABarrel_AtAllTimes() throws {
@@ -29,7 +29,7 @@ class ResourcesTests_SpecialAbilities: XCTestCase {
         // When
         // Assert
         let figure = try XCTUnwrap(figures.first(where: { $0.name == .joudonais }))
-        XCTAssertEqual(figure.abilities[.hasBarrelAllTimes], true)
+        XCTAssertEqual(figure.abilities, [.hasBarrelAllTimes: true])
     }
     
     func test_RoseDolanHasAScope_AtAllTimes() throws {
@@ -37,7 +37,7 @@ class ResourcesTests_SpecialAbilities: XCTestCase {
         // When
         // Assert
         let figure = try XCTUnwrap(figures.first(where: { $0.name == .roseDoolan }))
-        XCTAssertEqual(figure.abilities[.hasScopeAllTimes], true)
+        XCTAssertEqual(figure.abilities, [.hasScopeAllTimes: true])
     }
     
     func test_PaulRegretHasAMustang_AtAllTimes() throws {
@@ -45,7 +45,7 @@ class ResourcesTests_SpecialAbilities: XCTestCase {
         // When
         // Assert
         let figure = try XCTUnwrap(figures.first(where: { $0.name == .paulRegret }))
-        XCTAssertEqual(figure.abilities[.hasMustangAllTimes], true)
+        XCTAssertEqual(figure.abilities, [.hasMustangAllTimes: true])
     }
     
     func test_BatCassidyDrawsACard_OnLoseHealth() throws {
@@ -53,7 +53,7 @@ class ResourcesTests_SpecialAbilities: XCTestCase {
         // When
         // Assert
         let figure = try XCTUnwrap(figures.first(where: { $0.name == .bartCassidy }))
-        XCTAssertEqual(figure.abilities[.drawsCardOnLoseHealth], true)
+        XCTAssertEqual(figure.abilities, [.drawsCardOnLoseHealth: true])
     }
     
     func test_Elgringo_OnDrawsCardFromPlayerDamagedHim() throws {
@@ -61,7 +61,7 @@ class ResourcesTests_SpecialAbilities: XCTestCase {
         // When
         // Assert
         let figure = try XCTUnwrap(figures.first(where: { $0.name == .elGringo }))
-        XCTAssertEqual(figure.abilities[.drawsCardFromPlayerDamagedHim], true)
+        XCTAssertEqual(figure.abilities, [.drawsCardFromPlayerDamagedHim: true])
     }
     
     func test_SuzzyLafayette_SrawsCardWhenHandIsEmpty() throws {
@@ -69,7 +69,7 @@ class ResourcesTests_SpecialAbilities: XCTestCase {
         // When
         // Assert
         let figure = try XCTUnwrap(figures.first(where: { $0.name == .suzyLafayette }))
-        XCTAssertEqual(figure.abilities[.drawsCardWhenHandIsEmpty], true)
+        XCTAssertEqual(figure.abilities, [.drawsCardWhenHandIsEmpty: true])
     }
     
     func test_CalamityJanet_CanPlayBangAsMissAndViceVersa() throws {
@@ -77,7 +77,7 @@ class ResourcesTests_SpecialAbilities: XCTestCase {
         // When
         // Assert
         let figure = try XCTUnwrap(figures.first(where: { $0.name == .calamityJanet }))
-        XCTAssertEqual(figure.abilities[.canPlayBangAsMissAndViceVersa], true)
+        XCTAssertEqual(figure.abilities, [.canPlayBangAsMissAndViceVersa: true])
     }
     
     func test_BlackJack_DrawsAnotherCardIfSecondDrawIsRedSuit() throws {
@@ -85,7 +85,7 @@ class ResourcesTests_SpecialAbilities: XCTestCase {
         // When
         // Assert
         let figure = try XCTUnwrap(figures.first(where: { $0.name == .blackJack }))
-        XCTAssertEqual(figure.abilities[.drawsAnotherCardIfSecondDrawIsRedSuit], true)
+        XCTAssertEqual(figure.abilities, [.drawsAnotherCardIfSecondDrawIsRedSuit: true])
     }
 
     func test_StabTheKiller_OthersNeed2MissesToCounterHisBang() throws {
@@ -93,6 +93,14 @@ class ResourcesTests_SpecialAbilities: XCTestCase {
         // When
         // Assert
         let figure = try XCTUnwrap(figures.first(where: { $0.name == .slabTheKiller }))
-        XCTAssertEqual(figure.abilities[.othersNeed2MissesToCounterHisBang], true)
+        XCTAssertEqual(figure.abilities, [.othersNeed2MissesToCounterHisBang: true])
+    }
+    
+    func test_VultureSam_TakesAllCardsFromEliminatedPlayers() throws {
+        // Given
+        // When
+        // Assert
+        let figure = try XCTUnwrap(figures.first(where: { $0.name == .vultureSam }))
+        XCTAssertEqual(figure.abilities, [.takesAllCardsFromEliminatedPlayers: true])
     }
 }
