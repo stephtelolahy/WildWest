@@ -39,7 +39,13 @@ class MemoryCachedDataBase: GameDatabaseProtocol {
     /// Deck
     
     func deckRemoveFirst() -> CardProtocol {
-        mutableState.deck.removeFirst()
+        if mutableState.deck.isEmpty {
+            let cards = mutableState.discardPile
+            mutableState.deck = Array(cards[1..<cards.count]).shuffled()
+            mutableState.discardPile = Array(cards[0..<1])
+        }
+        
+        return mutableState.deck.removeFirst()
     }
     
     func addDiscard(_ card: CardProtocol) {
