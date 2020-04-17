@@ -79,6 +79,7 @@ class MoveSoundPlayer: MoveSoundPlayerProtocol {
             "StartTurn": "",
             "drawsCardOnLoseHealth": "Slide Closed-SoundBible.com-1521580537",
             "drawsCardWhenHandIsEmpty": "Slide Closed-SoundBible.com-1521580537",
+            "drawsAnotherCardIfSecondDrawIsRedSuit": "Slide Closed-SoundBible.com-1521580537",
             "drawsCardFromPlayerDamagedHim": "Slap-SoundMaster13-49669815",
             "discardExcessCards": "flyby-Conor-1500306612"
         ]

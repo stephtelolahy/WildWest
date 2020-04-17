@@ -79,5 +79,13 @@ class ResourcesTests_SpecialAbilities: XCTestCase {
         let figure = try XCTUnwrap(figures.first(where: { $0.name == .calamityJanet }))
         XCTAssertEqual(figure.abilities[.canPlayBangAsMissAndViceVersa], true)
     }
+    
+    func test_BlackJack_DrawsAnotherCardIfSecondDrawIsRedSuit() throws {
+        // Given
+        // When
+        // Assert
+        let figure = try XCTUnwrap(figures.first(where: { $0.name == .blackJack }))
+        XCTAssertEqual(figure.abilities[.drawsAnotherCardIfSecondDrawIsRedSuit], true)
+    }
 
 }
