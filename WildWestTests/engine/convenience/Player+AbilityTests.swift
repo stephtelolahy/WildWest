@@ -136,4 +136,44 @@ class Player_AbilityTests: XCTestCase {
         // Assert
         XCTAssertEqual(sut.barrelsCount, 2)
     }
+    
+    func test_CanBangWithBangCard() {
+        // Given
+        let sut = MockPlayerProtocol().withDefault()
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.bandCardNames, [.bang])
+    }
+    
+    func test_CanBangWithMissedCard_IfHavingAbility() {
+        // Given
+        let sut = MockPlayerProtocol()
+            .withDefault()
+            .abilities(are: [.canPlayBangAsMissAndViceVersa: true])
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.bandCardNames, [.bang, .missed])
+    }
+    
+    func test_CanMissedWithMissedCard() {
+        // Given
+        let sut = MockPlayerProtocol().withDefault()
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.missedCardNames, [.missed])
+    }
+    
+    func test_CanMissedWithBangCard_IfHavingAbility() {
+        // Given
+        let sut = MockPlayerProtocol()
+            .withDefault()
+            .abilities(are: [.canPlayBangAsMissAndViceVersa: true])
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.missedCardNames, [.missed, .bang])
+    }
 }

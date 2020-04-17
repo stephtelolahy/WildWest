@@ -14,13 +14,13 @@ class MoveClassifier: MoveClassifierProtocol {
                 return .none
         }
         
-        if case .play = move.name,
-            (cardId.contains("bang") || cardId.contains("duel")),
+        if case .bang = move.name,
             let targetId = move.targetId {
             return .strongAttack(actorId: move.actorId, targetId: targetId)
         }
         
-        if case .bangWithMissed = move.name,
+        if case .play = move.name,
+            cardId.contains("duel"),
             let targetId = move.targetId {
             return .strongAttack(actorId: move.actorId, targetId: targetId)
         }

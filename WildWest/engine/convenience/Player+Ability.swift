@@ -69,4 +69,24 @@ extension PlayerProtocol {
         
         return result
     }
+    
+    var bandCardNames: [CardName] {
+        var result: [CardName] = [.bang]
+        
+        if abilities[.canPlayBangAsMissAndViceVersa] == true {
+            result.append(.missed)
+        }
+        
+        return result
+    }
+    
+    var missedCardNames: [CardName] {
+        var result: [CardName] = [.missed]
+        
+        if abilities[.canPlayBangAsMissAndViceVersa] == true {
+            result.append(.bang)
+        }
+        
+        return result
+    }
 }

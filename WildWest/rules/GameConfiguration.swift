@@ -68,9 +68,7 @@ class GameConfiguration {
             // Special
             DrawsCardOnLoseHealthMatcher(),
             DrawsCardFromPlayerDamagedHimMatcher(),
-            DrawsCardWhenHandIsEmptyMatcher(),
-            BangWithMissedMatcher(),
-            MissWithBangMatcher()
+            DrawsCardWhenHandIsEmptyMatcher()
         ]
     }
 }
