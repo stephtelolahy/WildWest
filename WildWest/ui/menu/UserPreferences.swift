@@ -26,6 +26,9 @@ class UserPreferences {
     
     @UserDefaultsStored("simulation_mode", defaultValue: false)
     var simulationMode: Bool
+    
+    @UserDefaultsStored("enable_sound", defaultValue: true)
+    var enableSound: Bool
 }
 
 extension UserPreferences {

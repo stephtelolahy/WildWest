@@ -153,7 +153,12 @@ private extension MenuViewController {
     }
     
     func playThemeMusic() {
-        guard let path = Bundle.main.path(forResource: "Cowboy_Theme-Pavak-1711860633.mp3", ofType: nil) else {
+        guard UserPreferences.shared.enableSound else {
+            return
+        }
+        
+        let musicFile = "Cowboy_Theme-Pavak-1711860633.mp3"
+        guard let path = Bundle.main.path(forResource: musicFile, ofType: nil) else {
             return
         }
         
