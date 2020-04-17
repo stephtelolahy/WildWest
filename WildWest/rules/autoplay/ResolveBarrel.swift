@@ -29,7 +29,7 @@ class UseBarrelMatcher: MoveMatcherProtocol {
         }
         
         return  [.flipOverFirstDeckCard,
-                 .setChallenge(challenge.removing(move.actorId))]
+                 .setChallenge(challenge.countering(for: move.actorId))]
     }
 }
 

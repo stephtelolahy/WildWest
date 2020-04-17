@@ -31,7 +31,7 @@ class DiscardBangOnDuelMatcher: MoveMatcherProtocol {
         }
         
         return [.playerDiscardHand(move.actorId, cardId),
-                .setChallenge(challenge.permutingTargets())]
+                .setChallenge(challenge.swappingDuel())]
     }
 }
 
@@ -60,6 +60,6 @@ class DiscardBangOnIndiansMatcher: MoveMatcherProtocol {
         }
         
         return [.playerDiscardHand(move.actorId, cardId),
-                .setChallenge(challenge.removing(move.actorId))]
+                .setChallenge(challenge.countering(for: move.actorId))]
     }
 }
