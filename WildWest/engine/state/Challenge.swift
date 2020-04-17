@@ -11,7 +11,8 @@ struct Challenge: Equatable {
     let name: ChallengeName
     let targetIds: [String]
     let damage: Int
-    let barrelsResolved: Int
+    let counterNeeded: Int
+    let barrelsPlayed: Int
 }
 
 enum ChallengeName: String {

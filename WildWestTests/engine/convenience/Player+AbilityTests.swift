@@ -137,7 +137,7 @@ class Player_AbilityTests: XCTestCase {
         XCTAssertEqual(sut.barrelsCount, 2)
     }
     
-    func test_CanBangWithBangCard() {
+    func test_DefaultCanBangWithBangCard() {
         // Given
         let sut = MockPlayerProtocol().withDefault()
         
@@ -157,7 +157,7 @@ class Player_AbilityTests: XCTestCase {
         XCTAssertEqual(sut.bandCardNames, [.bang, .missed])
     }
     
-    func test_CanMissedWithMissedCard() {
+    func test_DefaultCanMissedWithMissedCard() {
         // Given
         let sut = MockPlayerProtocol().withDefault()
         
@@ -175,5 +175,25 @@ class Player_AbilityTests: XCTestCase {
         // When
         // Assert
         XCTAssertEqual(sut.missedCardNames, [.missed, .bang])
+    }
+    
+    func test_DefaultNeededMissesToCancelBangIs1() {
+        // Given
+        let sut = MockPlayerProtocol().withDefault()
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.neededMissesToCancelHisBang, 1)
+    }
+    
+    func test_NeededMissesToCancelBangIs12_IfHAvingAbility() {
+        // Given
+        let sut = MockPlayerProtocol()
+            .withDefault()
+            .abilities(are: [.othersNeed2MissesToCounterHisBang: true])
+        
+        // When
+        // Assert
+        XCTAssertEqual(sut.neededMissesToCancelHisBang, 2)
     }
 }

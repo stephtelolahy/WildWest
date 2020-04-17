@@ -88,4 +88,11 @@ class ResourcesTests_SpecialAbilities: XCTestCase {
         XCTAssertEqual(figure.abilities[.drawsAnotherCardIfSecondDrawIsRedSuit], true)
     }
 
+    func test_StabTheKiller_OthersNeed2MissesToCounterHisBang() throws {
+        // Given
+        // When
+        // Assert
+        let figure = try XCTUnwrap(figures.first(where: { $0.name == .slabTheKiller }))
+        XCTAssertEqual(figure.abilities[.othersNeed2MissesToCounterHisBang], true)
+    }
 }

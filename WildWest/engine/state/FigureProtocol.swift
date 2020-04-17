@@ -43,4 +43,5 @@ enum AbilityName: String, Codable {
     case drawsCardWhenHandIsEmpty
     case canPlayBangAsMissAndViceVersa
     case drawsAnotherCardIfSecondDrawIsRedSuit
+    case othersNeed2MissesToCounterHisBang
 }

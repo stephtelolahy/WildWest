@@ -11,11 +11,13 @@ extension Challenge {
     init(name: ChallengeName,
          targetIds: [String] = [],
          damage: Int? = nil,
+         counterNeeded: Int = 1,
          barrelsResolved: Int = 0) {
         self.name = name
         self.targetIds = targetIds
         self.damage = damage ?? Self.defaultDamage(for: name)
-        self.barrelsResolved = barrelsResolved
+        self.counterNeeded = counterNeeded
+        self.barrelsPlayed = barrelsResolved
     }
     
     private static func defaultDamage(for name: ChallengeName) -> Int {
@@ -63,7 +65,12 @@ extension Challenge {
 extension Challenge {
     
     func countering(for playerId: String) -> Challenge? {
-        removing(playerId)
+        let remainingCounter = counterNeeded - 1
+        if remainingCounter <= 0 {
+            return removing(playerId)
+        } else {
+            return Challenge(name: name, targetIds: targetIds, counterNeeded: remainingCounter)
+        }
     }
     
     func removing(_ playerId: String? = nil) -> Challenge? {
@@ -93,7 +100,7 @@ extension Challenge {
         }
         
         let remainingDamage = damage - 1
-        if remainingDamage == 0 {
+        if remainingDamage <= 0 {
             return removing()
         } else {
             return Challenge(name: name, damage: remainingDamage)
@@ -109,10 +116,11 @@ extension Challenge {
         return Challenge(name: name, targetIds: permutedIds)
     }
     
-    func incrementingBarrelsResolved() -> Challenge {
+    func incrementingBarrelsPlayed() -> Challenge {
         Challenge(name: name,
                   targetIds: targetIds,
                   damage: damage,
-                  barrelsResolved: barrelsResolved + 1)
+                  counterNeeded: counterNeeded,
+                  barrelsPlayed: barrelsPlayed + 1)
     }
 }

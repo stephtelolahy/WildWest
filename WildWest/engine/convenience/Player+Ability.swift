@@ -89,4 +89,12 @@ extension PlayerProtocol {
         
         return result
     }
+    
+    var neededMissesToCancelHisBang: Int {
+        if abilities[.othersNeed2MissesToCounterHisBang] == true {
+            return 2
+        }
+        
+        return 1
+    }
 }

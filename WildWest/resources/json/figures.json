@@ -96,7 +96,10 @@
         "name": "slabTheKiller",
         "bullets": 4,
         "imageName": "01_slab",
-        "description": "players trying to cancel his BANG! cards need to play 2 Missed! cards. The Barrel effect, if successfully used, only counts as one Missed!."
+        "description": "players trying to cancel his BANG! cards need to play 2 Missed! cards. The Barrel effect, if successfully used, only counts as one Missed!.",
+        "abilities": {
+            "othersNeed2MissesToCounterHisBang": true
+        }
     },
     {
         "name": "suzyLafayette",
