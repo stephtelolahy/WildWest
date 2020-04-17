@@ -23,6 +23,9 @@ class UserPreferences {
     
     @UserDefaultsStored("assisted_mode", defaultValue: true)
     var assistedMode: Bool
+    
+    @UserDefaultsStored("simulation_mode", defaultValue: false)
+    var simulationMode: Bool
 }
 
 extension UserPreferences {
