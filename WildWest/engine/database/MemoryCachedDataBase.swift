@@ -43,8 +43,7 @@ class MemoryCachedDataBase: GameDatabaseProtocol {
     }
     
     func addDiscard(_ card: CardProtocol) {
-        mutableState.deck.append(card)
-        mutableState.discardPile = [card]
+        mutableState.discardPile.insert(card, at: 0)
     }
     
     func addGeneralStore(_ card: CardProtocol) {

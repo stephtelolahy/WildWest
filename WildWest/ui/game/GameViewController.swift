@@ -20,6 +20,7 @@ class GameViewController: UIViewController, Subscribable {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var discardImageView: UIImageView!
     @IBOutlet private weak var deckImageView: UIImageView!
+    @IBOutlet private weak var deckCountLabel: UILabel!
     
     // MARK: Properties
     
@@ -125,6 +126,7 @@ private extension GameViewController {
         actionsCollectionView.reloadData()
         
         discardImageView.image = state.topDiscardImage
+        deckCountLabel.text = "[] \(state.deck.count)"
         
         titleLabel.text = instructionBuilder.buildInstruction(state: state, for: controlledPlayerId)
         
