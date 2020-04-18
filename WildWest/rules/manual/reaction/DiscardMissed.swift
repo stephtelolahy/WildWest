@@ -22,14 +22,13 @@ class DiscardMissedMatcher: MoveMatcherProtocol {
         }
         
         return cards.map {
-            GameMove(name: .discard, actorId: actor.identifier, cardId: $0.identifier)
+            GameMove(name: .missed, actorId: actor.identifier, cardId: $0.identifier)
         }
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .discard = move.name,
+        guard case .missed = move.name,
             let challenge = state.challenge,
-            (challenge.name == .bang || challenge.name == .gatling),
             let cardId = move.cardId else {
                 return nil
         }
@@ -37,4 +36,8 @@ class DiscardMissedMatcher: MoveMatcherProtocol {
         return [.playerDiscardHand(move.actorId, cardId),
                 .setChallenge(challenge.countering(for: move.actorId))]
     }
+}
+
+extension MoveName {
+    static let missed = MoveName("missed")
 }

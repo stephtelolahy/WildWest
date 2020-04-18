@@ -35,10 +35,10 @@ class DiscardBeerMatcher: MoveMatcherProtocol {
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        // Matching with challenge .bang is handle by DiscardMissedOnBangMatcher
-        // Matching with challenge .gatling is handle by DiscardMissedOnGatlingMatcher
-        // Matching with challenge .duel is handled by DiscardBangOnDuelMatcher
-        // Matching with challenge .indians is handled by DiscardBangOnIndiansMatcher
+        // TODO: Matching with challenge .bang
+        // TODO: Matching with challenge .gatling
+        // TODO: Matching with challenge .duel
+        // TODO: Matching with challenge .indians
         
         // Here is only matching with challenge .dynamiteExploded
         guard case .discard = move.name,
