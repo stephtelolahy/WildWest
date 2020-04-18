@@ -18,12 +18,12 @@ class DiscardBangOnDuelMatcher: MoveMatcherProtocol {
         }
         
         return cards.map {
-            GameMove(name: .discard, actorId: actor.identifier, cardId: $0.identifier)
+            GameMove(name: .discardBang, actorId: actor.identifier, cardId: $0.identifier)
         }
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .discard = move.name,
+        guard case .discardBang = move.name,
             let challenge = state.challenge,
             case .duel = challenge.name,
             let cardId = move.cardId else {
@@ -47,12 +47,12 @@ class DiscardBangOnIndiansMatcher: MoveMatcherProtocol {
         }
         
         return cards.map {
-            GameMove(name: .discard, actorId: actor.identifier, cardId: $0.identifier)
+            GameMove(name: .discardBang, actorId: actor.identifier, cardId: $0.identifier)
         }
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .discard = move.name,
+        guard case .discardBang = move.name,
             let challenge = state.challenge,
             case .indians = challenge.name,
             let cardId = move.cardId else {
@@ -62,4 +62,8 @@ class DiscardBangOnIndiansMatcher: MoveMatcherProtocol {
         return [.playerDiscardHand(move.actorId, cardId),
                 .setChallenge(challenge.countering(for: move.actorId))]
     }
+}
+
+extension MoveName {
+    static let discardBang = MoveName("discardBang")
 }
