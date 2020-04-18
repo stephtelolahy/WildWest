@@ -69,6 +69,7 @@ class StartTurnTests: XCTestCase {
     func test_Pull2CardsFromDeck_IfStartingTurn() {
         // Given
         let mockState = MockGameStateProtocol()
+            .players(are: MockPlayerProtocol().identified(by: "p1").withDefault())
         let move = GameMove(name: .startTurn, actorId: "p1")
         
         // When

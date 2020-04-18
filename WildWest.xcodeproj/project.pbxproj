@@ -26,8 +26,6 @@
 		33112E70244503EA009C706E /* UpdateAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33112E6F244503EA009C706E /* UpdateAnimator.swift */; };
 		331231012434FC890080B696 /* GameState+Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331231002434FC890080B696 /* GameState+Player.swift */; };
 		331231022434FC890080B696 /* GameState+Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331231002434FC890080B696 /* GameState+Player.swift */; };
-		331B4643244A101600F3634A /* DrawsAnotherCardIfSecondDrawIsRedSuit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331B4642244A101600F3634A /* DrawsAnotherCardIfSecondDrawIsRedSuit.swift */; };
-		331B4644244A101600F3634A /* DrawsAnotherCardIfSecondDrawIsRedSuit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331B4642244A101600F3634A /* DrawsAnotherCardIfSecondDrawIsRedSuit.swift */; };
 		331B4646244A11EC00F3634A /* DrawsAnotherCardIfSecondDrawIsRedSuitMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331B4645244A11EC00F3634A /* DrawsAnotherCardIfSecondDrawIsRedSuitMatcherTests.swift */; };
 		3320A340242FC9EF002CD5AE /* GameState+Outcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3320A33F242FC9EF002CD5AE /* GameState+Outcome.swift */; };
 		3320A341242FC9EF002CD5AE /* GameState+Outcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3320A33F242FC9EF002CD5AE /* GameState+Outcome.swift */; };
@@ -325,7 +323,6 @@
 		3309D7172408DC3000713E15 /* Eliminate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Eliminate.swift; sourceTree = "<group>"; };
 		33112E6F244503EA009C706E /* UpdateAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAnimator.swift; sourceTree = "<group>"; };
 		331231002434FC890080B696 /* GameState+Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameState+Player.swift"; sourceTree = "<group>"; };
-		331B4642244A101600F3634A /* DrawsAnotherCardIfSecondDrawIsRedSuit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawsAnotherCardIfSecondDrawIsRedSuit.swift; sourceTree = "<group>"; };
 		331B4645244A11EC00F3634A /* DrawsAnotherCardIfSecondDrawIsRedSuitMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawsAnotherCardIfSecondDrawIsRedSuitMatcherTests.swift; sourceTree = "<group>"; };
 		3320A33F242FC9EF002CD5AE /* GameState+Outcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameState+Outcome.swift"; sourceTree = "<group>"; };
 		3323C8D1244780420030E9B7 /* DelayedEventQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayedEventQueueTests.swift; sourceTree = "<group>"; };
@@ -703,7 +700,6 @@
 				3380B036243641A20040F027 /* DrawsCardOnLoseHealth.swift */,
 				3380B03F2436800F0040F027 /* DrawsCardFromPlayerDamagedHim.swift */,
 				332B844A2438FF35005E5B21 /* DrawsCardWhenHandIsEmpty.swift */,
-				331B4642244A101600F3634A /* DrawsAnotherCardIfSecondDrawIsRedSuit.swift */,
 			);
 			path = special;
 			sourceTree = "<group>";
@@ -1492,7 +1488,6 @@
 				330FDECB242F384C00284FE7 /* Eliminate.swift in Sources */,
 				ADD035CF23A96002003B2576 /* CardProtocol.swift in Sources */,
 				33BAE346242E74CD0098B41F /* MemoryCachedDataBase.swift in Sources */,
-				331B4643244A101600F3634A /* DrawsAnotherCardIfSecondDrawIsRedSuit.swift in Sources */,
 				33A733EE23DC4A5300E9B2AD /* Subscribable.swift in Sources */,
 				337D7FD1243071AE0078F749 /* Player+Ability.swift in Sources */,
 				33E4411C24077CA000B2848E /* ActionsAdapter.swift in Sources */,
@@ -1602,7 +1597,6 @@
 				33334646242FEE7F00A97FD5 /* GameMove+Grouping.swift in Sources */,
 				ADE91ACE23B9FE2300F7316B /* JsonReader.swift in Sources */,
 				333800FA242F20A6003F7327 /* ResolveDynamite.swift in Sources */,
-				331B4644244A101600F3634A /* DrawsAnotherCardIfSecondDrawIsRedSuit.swift in Sources */,
 				330FDED0242F384D00284FE7 /* PenalizeSheriffOnEliminatingDeputy.swift in Sources */,
 				3328FCE2242F2F0200A82255 /* DiscardMissedMatcherTests.swift in Sources */,
 				AD98FA872421552C00AF4D7C /* GameEngineTests.swift in Sources */,

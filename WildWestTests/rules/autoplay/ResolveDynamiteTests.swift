@@ -22,7 +22,7 @@ class ExplodeDynamiteMatcherTests: XCTestCase {
             .players(are: mockPlayer1)
             .currentTurn(is: "p1")
             .challenge(is: Challenge(name: .startTurn))
-            .topDeck(is: MockCardProtocol().value(is: "2").suit(is: .spades))
+            .deckCards(are: MockCardProtocol().value(is: "2").suit(is: .spades))
         
         // When
         let move = sut.autoPlayMove(matching: mockState)
@@ -107,7 +107,7 @@ class PassDynamiteMatcherTests: XCTestCase {
             .players(are: mockPlayer1)
             .currentTurn(is: "p1")
             .challenge(is: Challenge(name: .startTurn))
-            .topDeck(is: MockCardProtocol().value(is: "2").suit(is: .diamonds))
+            .deckCards(are: MockCardProtocol().value(is: "2").suit(is: .diamonds))
         
         // When
         let move = sut.autoPlayMove(matching: mockState)

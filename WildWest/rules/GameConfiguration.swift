@@ -68,8 +68,7 @@ class GameConfiguration {
             // Special
             DrawsCardOnLoseHealthMatcher(),
             DrawsCardFromPlayerDamagedHimMatcher(),
-            DrawsCardWhenHandIsEmptyMatcher(),
-            DrawsAnotherCardIfSecondDrawIsRedSuitMatcher()
+            DrawsCardWhenHandIsEmptyMatcher()
         ]
     }
 }

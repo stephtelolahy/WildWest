@@ -44,6 +44,20 @@ extension CardName {
     }
 }
 
+extension CardSuit {
+    
+    var isRed: Bool {
+        switch self {
+        case .hearts,
+             .diamonds:
+            return true
+            
+        default:
+            return false
+        }
+    }
+}
+
 extension CardProtocol {
     
     var makeEscapeFromJail: Bool {

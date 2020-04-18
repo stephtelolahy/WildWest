@@ -45,7 +45,7 @@ class UseBarrelMatcherTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .challenge(is: Challenge(name: .bang, targetIds: ["p1"], barrelsPlayed: 0))
             .players(are: mockPlayer1)
-            .topDeck(is: MockCardProtocol().suit(is: .hearts))
+            .deckCards(are: MockCardProtocol().suit(is: .hearts))
         
         // When
         let move = sut.autoPlayMove(matching: mockState)
@@ -88,7 +88,7 @@ class FailBarelMatcherTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .challenge(is: Challenge(name: .bang, targetIds: ["p1"], barrelsPlayed: 0))
             .players(are: mockPlayer1)
-            .topDeck(is: MockCardProtocol().suit(is: .clubs))
+            .deckCards(are: MockCardProtocol().suit(is: .clubs))
         
         // When
         let move = sut.autoPlayMove(matching: mockState)

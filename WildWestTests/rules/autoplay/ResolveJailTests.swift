@@ -21,7 +21,7 @@ class StayInJailMatcherTests: XCTestCase {
             .players(are: mockPlayer1)
             .currentTurn(is: "p1")
             .challenge(is: Challenge(name: .startTurn))
-            .topDeck(is: MockCardProtocol().suit(is: .spades))
+            .deckCards(are: MockCardProtocol().suit(is: .spades))
         
         // When
         let move = sut.autoPlayMove(matching: mockState)
@@ -80,7 +80,7 @@ class EscapeFromJailMatcherTests: XCTestCase {
             .players(are: mockPlayer1)
             .currentTurn(is: "p1")
             .challenge(is: Challenge(name: .startTurn))
-            .topDeck(is: MockCardProtocol().suit(is: .hearts))
+            .deckCards(are: MockCardProtocol().suit(is: .hearts))
         
         // When
         let move = sut.autoPlayMove(matching: mockState)
