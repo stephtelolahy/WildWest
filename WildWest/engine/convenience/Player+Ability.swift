@@ -97,4 +97,12 @@ extension PlayerProtocol {
         
         return 1
     }
+    
+    var flippedCardsCount: Int {
+        if abilities[.flips2CardsOnADrawAndChoose1] == true {
+            return 2
+        }
+        
+        return 1
+    }
 }

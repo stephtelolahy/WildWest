@@ -103,4 +103,12 @@ class ResourcesTests_SpecialAbilities: XCTestCase {
         let figure = try XCTUnwrap(figures.first(where: { $0.name == .vultureSam }))
         XCTAssertEqual(figure.abilities, [.takesAllCardsFromEliminatedPlayers: true])
     }
+    
+    func test_LuckyDuke_Flips2CardsOnADrawAndChoose1() throws {
+        // Given
+        // When
+        // Assert
+        let figure = try XCTUnwrap(figures.first(where: { $0.name == .luckyDuke }))
+        XCTAssertEqual(figure.abilities, [.flips2CardsOnADrawAndChoose1: true])
+    }
 }

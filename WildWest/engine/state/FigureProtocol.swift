@@ -45,4 +45,5 @@ enum AbilityName: String, Codable, CaseIterable {
     case drawsAnotherCardIfSecondDrawIsRedSuit
     case othersNeed2MissesToCounterHisBang
     case takesAllCardsFromEliminatedPlayers
+    case flips2CardsOnADrawAndChoose1
 }
