@@ -77,7 +77,7 @@ extension Challenge {
         }
     }
     
-    func removing(_ playerId: String? = nil) -> Challenge? {
+    func removing(_ playerId: String) -> Challenge? {
         switch name {
         case .bang, .gatling, .indians, .generalStore:
             let remainingIds = targetIds.filter { $0 != playerId }
@@ -102,26 +102,26 @@ extension Challenge {
         }
     }
     
-    func decrementingDamage() -> Challenge? {
-        guard case .dynamiteExploded = name else {
-            fatalError("Illegal state")
-        }
-        
+    func decrementingDamage(for playerId: String) -> Challenge? {
         let remainingDamage = damage - 1
         if remainingDamage <= 0 {
-            return removing()
+            return removing(playerId)
         } else {
-            return Challenge(name: name, damage: remainingDamage)
+            return Challenge(name: name,
+                             targetIds: targetIds,
+                             damage: remainingDamage,
+                             counterNeeded: counterNeeded,
+                             barrelsPlayed: barrelsPlayed)
         }
     }
     
-    func swappingDuel() -> Challenge? {
-        guard case .duel = name else {
+    func swappingTargets() -> Challenge? {
+        guard targetIds.count == 2 else {
             fatalError("Illegal state")
         }
         
-        let permutedIds = [targetIds[1], targetIds[0]]
-        return Challenge(name: name, targetIds: permutedIds)
+        return Challenge(name: name,
+                         targetIds: [targetIds[1], targetIds[0]])
     }
     
     func incrementingBarrelsPlayed() -> Challenge {

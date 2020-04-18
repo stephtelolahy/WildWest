@@ -31,7 +31,7 @@ class DiscardBangOnDuelMatcher: MoveMatcherProtocol {
         }
         
         return [.playerDiscardHand(move.actorId, cardId),
-                .setChallenge(challenge.swappingDuel())]
+                .setChallenge(challenge.swappingTargets())]
     }
 }
 

@@ -97,7 +97,25 @@ class PassMatcherTests: XCTestCase {
                                  .setChallenge(Challenge(name: .startTurn))])
     }
     
-    func test_RemoveActorFromShootChallenge_IfPassing() {
+    func test_RemoveActorFromBangChallenge_IfPassing() {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+        let mockState = MockGameStateProtocol()
+            .currentTurn(is: "px")
+            .challenge(is: Challenge(name: .bang, targetIds: ["p1"]))
+            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
+        let move = GameMove(name: .pass, actorId: "p1")
+        
+        // When
+        let updates = sut.execute(move, in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates, [.playerLooseHealth("p1", 1, .byPlayer("px")),
+                                 .setChallenge(nil)])
+    }
+    
+    func test_RemoveActorFromGatlingChallenge_IfPassing() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")

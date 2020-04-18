@@ -31,7 +31,6 @@ struct MoveName: RawRepresentable, Equatable {
 
 extension MoveName {
     static let play = MoveName("play")
-    static let discard = MoveName("discard")
 }
 
 struct TargetCard: Equatable {
