@@ -12,12 +12,12 @@ extension Challenge {
          targetIds: [String] = [],
          damage: Int? = nil,
          counterNeeded: Int = 1,
-         barrelsResolved: Int = 0) {
+         barrelsPlayed: Int = 0) {
         self.name = name
         self.targetIds = targetIds
         self.damage = damage ?? Self.defaultDamage(for: name)
         self.counterNeeded = counterNeeded
-        self.barrelsPlayed = barrelsResolved
+        self.barrelsPlayed = barrelsPlayed
     }
     
     private static func defaultDamage(for name: ChallengeName) -> Int {
@@ -69,7 +69,11 @@ extension Challenge {
         if remainingCounter <= 0 {
             return removing(playerId)
         } else {
-            return Challenge(name: name, targetIds: targetIds, counterNeeded: remainingCounter)
+            return Challenge(name: name,
+                             targetIds: targetIds,
+                             damage: damage,
+                             counterNeeded: remainingCounter,
+                             barrelsPlayed: barrelsPlayed)
         }
     }
     
@@ -80,7 +84,11 @@ extension Challenge {
             if remainingIds.isEmpty {
                 return nil
             } else {
-                return Challenge(name: name, targetIds: remainingIds)
+                return Challenge(name: name,
+                                 targetIds: remainingIds,
+                                 damage: damage,
+                                 counterNeeded: counterNeeded,
+                                 barrelsPlayed: barrelsPlayed)
             }
             
         case .duel:

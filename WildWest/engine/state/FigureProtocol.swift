@@ -33,7 +33,7 @@ enum FigureName: String, Codable {
     willyTheKid
 }
 
-enum AbilityName: String, Codable {
+enum AbilityName: String, Codable, CaseIterable {
     case hasBarrelAllTimes
     case hasMustangAllTimes
     case hasScopeAllTimes

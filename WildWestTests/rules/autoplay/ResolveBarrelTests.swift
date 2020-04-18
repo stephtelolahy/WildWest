@@ -23,7 +23,7 @@ class UseBarrelMatcherTests: XCTestCase {
             .identified(by: "p1")
             .withDefault()
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .bang, targetIds: ["p1"], barrelsResolved: 1))
+            .challenge(is: Challenge(name: .bang, targetIds: ["p1"], barrelsPlayed: 1))
             .players(are: mockPlayer1)
         
         // When
@@ -43,7 +43,7 @@ class UseBarrelMatcherTests: XCTestCase {
             .identified(by: "p1")
             .withDefault()
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .bang, targetIds: ["p1"], barrelsResolved: 0))
+            .challenge(is: Challenge(name: .bang, targetIds: ["p1"], barrelsPlayed: 0))
             .players(are: mockPlayer1)
             .topDeck(is: MockCardProtocol().suit(is: .hearts))
         
@@ -58,7 +58,7 @@ class UseBarrelMatcherTests: XCTestCase {
         // Given
         let mockState = MockGameStateProtocol()
         Cuckoo.stub(mockState) { mock in
-            when(mock.challenge.get).thenReturn(Challenge(name: .bang, targetIds: ["p1"], barrelsResolved: 0))
+            when(mock.challenge.get).thenReturn(Challenge(name: .bang, targetIds: ["p1"], barrelsPlayed: 0))
         }
         
         let move = GameMove(name: .useBarrel, actorId: "p1")
@@ -86,7 +86,7 @@ class FailBarelMatcherTests: XCTestCase {
             .identified(by: "p1")
             .withDefault()
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .bang, targetIds: ["p1"], barrelsResolved: 0))
+            .challenge(is: Challenge(name: .bang, targetIds: ["p1"], barrelsPlayed: 0))
             .players(are: mockPlayer1)
             .topDeck(is: MockCardProtocol().suit(is: .clubs))
         
@@ -101,7 +101,7 @@ class FailBarelMatcherTests: XCTestCase {
         // Given
         let mockState = MockGameStateProtocol()
         Cuckoo.stub(mockState) { mock in
-            when(mock.challenge.get).thenReturn(Challenge(name: .bang, targetIds: ["p1"], barrelsResolved: 0))
+            when(mock.challenge.get).thenReturn(Challenge(name: .bang, targetIds: ["p1"], barrelsPlayed: 0))
         }
         
         let move = GameMove(name: .failBarrel, actorId: "p1")
@@ -111,7 +111,7 @@ class FailBarelMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.flipOverFirstDeckCard,
-                                 .setChallenge(Challenge(name: .bang, targetIds: ["p1"], barrelsResolved: 1))])
+                                 .setChallenge(Challenge(name: .bang, targetIds: ["p1"], barrelsPlayed: 1))])
     }
 }
 
