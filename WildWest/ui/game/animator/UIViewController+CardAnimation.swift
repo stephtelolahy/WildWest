@@ -61,6 +61,37 @@ extension UIViewController {
             completion?(finished)
         })
     }
+    
+    func animateRevealThenMoveCard(sourceImage: UIImage?,
+                                   targetImage: UIImage?,
+                                   size: CGSize,
+                                   from source: CGPoint,
+                                   to target: CGPoint,
+                                   duration: TimeInterval,
+                                   completion: ((Bool) -> Void)? = nil) {
+        
+        let targetFrame = CGRect(x: target.x - size.width / 2,
+                                 y: target.y - size.height / 2,
+                                 width: size.width,
+                                 height: size.height)
+        let targetView = UIImageView(frame: targetFrame)
+        targetView.image = targetImage
+        view.addSubview(targetView)
+        
+        let sourceFrame = CGRect(x: source.x - size.width / 2,
+                                 y: source.y - size.height / 2,
+                                 width: size.width,
+                                 height: size.height)
+        let sourceView = UIImageView(frame: sourceFrame)
+        sourceView.image = sourceImage
+        view.addSubview(sourceView)
+        
+        sourceView.animateRevealThenMove(to: target, duration: duration, completion: { finished in
+            sourceView.removeFromSuperview()
+            targetView.removeFromSuperview()
+            completion?(finished)
+        })
+    }
 }
 
 private extension UIView {
@@ -88,14 +119,47 @@ private extension UIView {
                        completion: ((Bool) -> Void)?) {
         
         let scale: CGFloat = 1.4
+        let middle = CGPoint(x: center.x - bounds.width / 4,
+                             y: center.y)
+        let target = CGPoint(x: center.x + bounds.width / 4,
+                             y: center.y)
         UIView.animateKeyframes(withDuration: duration,
                                 delay: 0,
                                 options: .calculationModeCubic,
                                 animations: {
                                     UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.1) {
                                         self.transform = CGAffineTransform(scaleX: scale, y: scale)
+                                        self.center = middle
+                                    }
+                                    
+                                    UIView.addKeyframe(withRelativeStartTime: 0.9, relativeDuration: 0.1) {
+                                        self.center = target
                                     }
                                 },
+                                completion: completion)
+    }
+    
+    func animateRevealThenMove(to target: CGPoint,
+                               duration: TimeInterval,
+                               completion: ((Bool) -> Void)?) {
+        
+        let scale: CGFloat = 1.4
+        let middle = CGPoint(x: (center.x + target.x) / 2,
+                             y: (center.y + target.y) / 2)
+        UIView.animateKeyframes(withDuration: duration,
+                                delay: 0,
+                                options: .calculationModeCubic,
+                                animations: {
+                                    
+                                    UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.1) {
+                                        self.transform = CGAffineTransform(scaleX: scale, y: scale)
+                                        self.center = middle
+                                    }
+                                    
+                                    UIView.addKeyframe(withRelativeStartTime: 0.9, relativeDuration: 1.0) {
+                                        self.center = target
+                                    }
+        },
                                 completion: completion)
     }
 }

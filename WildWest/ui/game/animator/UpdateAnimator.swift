@@ -114,9 +114,10 @@ class UpdateAnimator: UpdateAnimatorProtocol {
             guard let card = state.deck.first else {
                 fatalError("Illegal state")
             }
-            animateMoveCard(sourceImage: UIImage(named: card.imageName),
-                            from: .deck,
-                            to: .discard)
+            animateRevealThenMoveCard(sourceImage: UIImage(named: card.imageName),
+                                      targetImage: state.topDiscardImage,
+                                      from: .deck,
+                                      to: .discard)
             
         default:
             break
@@ -152,6 +153,23 @@ private extension UpdateAnimator {
         viewController.animateRevealCard(image: image,
                                          size: cardSize,
                                          at: position,
-                                         duration: UserPreferences.shared.updateDelay * 0.6)
+                                         duration: UserPreferences.shared.updateDelay)
+    }
+    
+    func animateRevealThenMoveCard(sourceImage: UIImage? = #imageLiteral(resourceName: "01_back"),
+                                   targetImage: UIImage? = nil,
+                                   from source: CardPlace,
+                                   to target: CardPlace) {
+        guard let sourcePosition = cardPositions[source],
+            let targetPosition = cardPositions[target] else {
+                fatalError("Illegal state")
+        }
+        
+        viewController.animateRevealThenMoveCard(sourceImage: sourceImage,
+                                                 targetImage: targetImage,
+                                                 size: cardSize,
+                                                 from: sourcePosition,
+                                                 to: targetPosition,
+                                                 duration: UserPreferences.shared.updateDelay)
     }
 }
