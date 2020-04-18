@@ -97,7 +97,7 @@ private extension GameEngine {
         } else {
             preExecute(event.move)
             let updates = moveMatchers.updates(onExecuting: event.move, in: database.state)
-            let updateGroups = updates.splitAnimatables()
+            let updateGroups = updates.splitByExecutionTime()
             process(event.move, updateGroups: updateGroups)
         }
     }
