@@ -10,13 +10,14 @@
 import UIKit
 
 extension UIViewController {
-    func animateCard(sourceImage: UIImage?,
-                     targetImage: UIImage?,
-                     size: CGSize,
-                     from source: CGPoint,
-                     to target: CGPoint,
-                     duration: TimeInterval,
-                     completion: ((Bool) -> Void)? = nil) {
+    
+    func animateMoveCard(sourceImage: UIImage?,
+                         targetImage: UIImage?,
+                         size: CGSize,
+                         from source: CGPoint,
+                         to target: CGPoint,
+                         duration: TimeInterval,
+                         completion: ((Bool) -> Void)? = nil) {
         
         let targetFrame = CGRect(x: target.x - size.width / 2,
                                  y: target.y - size.height / 2,
@@ -34,18 +35,39 @@ extension UIViewController {
         sourceView.image = sourceImage
         view.addSubview(sourceView)
         
-        sourceView.animate(to: target, duration: duration, completion: { finished in
+        sourceView.animateMove(to: target, duration: duration, completion: { finished in
             sourceView.removeFromSuperview()
             targetView.removeFromSuperview()
+            completion?(finished)
+        })
+    }
+    
+    func animateRevealCard(image: UIImage?,
+                           size: CGSize,
+                           at position: CGPoint,
+                           duration: TimeInterval,
+                           completion: ((Bool) -> Void)? = nil) {
+        
+        let frame = CGRect(x: position.x - size.width / 2,
+                           y: position.y - size.height / 2,
+                           width: size.width,
+                           height: size.height)
+        let imageView = UIImageView(frame: frame)
+        imageView.image = image
+        view.addSubview(imageView)
+        
+        imageView.animateReveal(duration: duration, completion: { finished in
+            imageView.removeFromSuperview()
             completion?(finished)
         })
     }
 }
 
 private extension UIView {
-    func animate(to target: CGPoint,
-                 duration: TimeInterval,
-                 completion: ((Bool) -> Void)?) {
+    
+    func animateMove(to target: CGPoint,
+                     duration: TimeInterval,
+                     completion: ((Bool) -> Void)?) {
         
         let animationOptions: UIView.AnimationOptions = .curveEaseOut
         let keyframeAnimationOptions: UIView.KeyframeAnimationOptions =
@@ -57,6 +79,21 @@ private extension UIView {
                                 animations: {
                                     UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1.0) {
                                         self.center = target
+                                    }
+                                },
+                                completion: completion)
+    }
+    
+    func animateReveal(duration: TimeInterval,
+                       completion: ((Bool) -> Void)?) {
+        
+        let scale: CGFloat = 1.4
+        UIView.animateKeyframes(withDuration: duration,
+                                delay: 0,
+                                options: .calculationModeCubic,
+                                animations: {
+                                    UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.1) {
+                                        self.transform = CGAffineTransform(scaleX: scale, y: scale)
                                     }
                                 },
                                 completion: completion)
