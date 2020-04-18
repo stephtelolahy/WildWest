@@ -64,11 +64,11 @@ extension CardProtocol {
         suit == .hearts
     }
     
-    var makeDynamiteExplode: Bool {
-        suit == .spades && ["2", "3", "4", "5", "6", "7", "8", "9"].contains(value)
-    }
-    
     var makeBarrelSuccessful: Bool {
         suit == .hearts
+    }
+    
+    var makeDynamiteExplode: Bool {
+        suit == .spades && ["2", "3", "4", "5", "6", "7", "8", "9"].contains(value)
     }
 }

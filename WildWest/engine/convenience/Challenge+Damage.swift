@@ -86,9 +86,7 @@ extension Challenge {
             } else {
                 return Challenge(name: name,
                                  targetIds: remainingIds,
-                                 damage: damage,
-                                 counterNeeded: counterNeeded,
-                                 barrelsPlayed: barrelsPlayed)
+                                 damage: damage)
             }
             
         case .duel:
@@ -109,9 +107,7 @@ extension Challenge {
         } else {
             return Challenge(name: name,
                              targetIds: targetIds,
-                             damage: remainingDamage,
-                             counterNeeded: counterNeeded,
-                             barrelsPlayed: barrelsPlayed)
+                             damage: remainingDamage)
         }
     }
     

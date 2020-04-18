@@ -30,8 +30,7 @@ class GameConfiguration {
             ExplodeDynamiteMatcher(),
             PassDynamiteMatcher(),
             ResolveJailMatcher(),
-            UseBarrelMatcher(),
-            FailBarelMatcher(),
+            ResolveBarrelMatcher(),
             
             // manual play
             BeerMatcher(),
