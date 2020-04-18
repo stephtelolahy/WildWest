@@ -9,15 +9,16 @@
 import XCTest
 import Cuckoo
 
-class ExplodeDynamiteMatcherTests: XCTestCase {
+class ResolveDynamiteMatcherTests: XCTestCase {
     
-    private let sut = ExplodeDynamiteMatcher()
+    private let sut = ResolveDynamiteMatcher()
     
     func test_ShouldExplodeDynamite_BeforeStartingTurn() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
             .playing(MockCardProtocol().named(.dynamite).identified(by: "c1"))
+            .withDefault()
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
             .currentTurn(is: "p1")
@@ -92,17 +93,13 @@ class ExplodeDynamiteMatcherTests: XCTestCase {
                                  .setChallenge(Challenge(name: .dynamiteExploded, damage: 3)),
                                  .playerDiscardInPlay("p1", "c1")])
     }
-}
-
-class PassDynamiteMatcherTests: XCTestCase {
-    
-    private let sut = PassDynamiteMatcher()
     
     func test_ShouldPassDynamite_BeforeStartingTurn() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
             .playing(MockCardProtocol().named(.dynamite).identified(by: "c1"))
+            .withDefault()
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
             .currentTurn(is: "p1")

@@ -69,7 +69,7 @@ class ResolveBarrelMatcherTests: XCTestCase {
                                  .setChallenge(nil)])
     }
     
-    func test_RemoveGatlingChallengeAndResetBarrelsPlayed_IfReturnHeartFromDeck() {
+    func test_RemoveGatlingChallengeAndResetBarrelsPlayed_UsingBarrel() {
         // Given
         let mockState = MockGameStateProtocol()
             .challenge(is: Challenge(name: .gatling, targetIds: ["p1", "p2"], barrelsPlayed: 1))
@@ -202,6 +202,5 @@ class ResolveBarrelMatcherTests: XCTestCase {
                                  .setChallenge(nil)])
         
     }
-    
 }
 

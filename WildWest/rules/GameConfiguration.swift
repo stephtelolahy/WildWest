@@ -27,8 +27,7 @@ class GameConfiguration {
         [
             // auto play
             StartTurnMatcher(),
-            ExplodeDynamiteMatcher(),
-            PassDynamiteMatcher(),
+            ResolveDynamiteMatcher(),
             ResolveJailMatcher(),
             ResolveBarrelMatcher(),
             
