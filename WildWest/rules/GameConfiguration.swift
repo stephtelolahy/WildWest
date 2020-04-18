@@ -29,8 +29,7 @@ class GameConfiguration {
             StartTurnMatcher(),
             ExplodeDynamiteMatcher(),
             PassDynamiteMatcher(),
-            EscapeFromJailMatcher(),
-            StayInJailMatcher(),
+            ResolveJailMatcher(),
             UseBarrelMatcher(),
             FailBarelMatcher(),
             
