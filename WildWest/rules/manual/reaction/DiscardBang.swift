@@ -13,7 +13,7 @@ class DiscardBangOnDuelMatcher: MoveMatcherProtocol {
             case .duel = challenge.name,
             let actorId = challenge.actorId(in: state),
             let actor = state.player(actorId),
-            let cards = actor.handCards(named: .bang) else {
+            let cards = actor.hand.filterOrNil({ $0.name == .bang }) else {
                 return nil
         }
         
@@ -42,7 +42,7 @@ class DiscardBangOnIndiansMatcher: MoveMatcherProtocol {
             case .indians = challenge.name,
             let actorId = challenge.actorId(in: state),
             let actor = state.player(actorId),
-            let cards = actor.handCards(named: .bang) else {
+            let cards = actor.hand.filterOrNil({ $0.name == .bang }) else {
                 return nil
         }
         

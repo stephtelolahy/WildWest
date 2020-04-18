@@ -12,13 +12,9 @@ class DiscardMissedMatcher: MoveMatcherProtocol {
         guard let challenge = state.challenge,
             (challenge.name == .bang || challenge.name == .gatling),
             let actorId = challenge.actorId(in: state),
-            let actor = state.player(actorId) else {
+            let actor = state.player(actorId),
+            let cards = actor.hand.filterOrNil({ actor.missedCardNames.contains($0.name) }) else {
                 return nil
-        }
-        
-        let cards = actor.hand.filter { actor.missedCardNames.contains($0.name) }
-        guard !cards.isEmpty else {
-            return nil
         }
         
         return cards.map {

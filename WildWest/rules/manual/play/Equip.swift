@@ -14,11 +14,9 @@ class EquipMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        let cards = actor.hand.filter {
-            ($0.name.isEquipment || $0.name.isGun)
-                && actor.inPlayCards(named: $0.name) == nil
-        }
-        guard !cards.isEmpty else {
+        guard let cards = actor.hand.filterOrNil({ card in
+            (card.name.isEquipment || card.name.isGun) && !actor.inPlay.contains(where: { $0.name == card.name })
+        }) else {
             return nil
         }
         

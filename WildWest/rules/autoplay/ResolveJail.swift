@@ -40,7 +40,7 @@ class EscapeFromJailMatcher: MoveMatcherProtocol {
         guard let challenge = state.challenge,
             case .startTurn = challenge.name,
             let actor = state.player(state.turn),
-            actor.inPlay.filter({ $0.name == .dynamite }).isEmpty,
+            !actor.inPlay.contains(where: { $0.name == .dynamite }),
             let card = actor.inPlay.first(where: { $0.name == .jail }),
             let topDeckCard = state.deck.first,
             topDeckCard.makeEscapeFromJail else {

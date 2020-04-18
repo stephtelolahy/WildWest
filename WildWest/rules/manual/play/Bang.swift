@@ -10,13 +10,9 @@ class BangMatcher: MoveMatcherProtocol {
     
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
-            let actor = state.player(state.turn) else {
+            let actor = state.player(state.turn),
+            let cards = actor.hand.filterOrNil({ actor.bandCardNames.contains($0.name) }) else {
                 return nil
-        }
-        
-        let cards = actor.hand.filter { actor.bandCardNames.contains($0.name) }
-        guard !cards.isEmpty else {
-            return nil
         }
         
         let bangLimits = actor.bangLimitsPerTurn

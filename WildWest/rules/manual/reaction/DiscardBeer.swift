@@ -24,8 +24,8 @@ class DiscardBeerMatcher: MoveMatcherProtocol {
         }
         
         guard let actor = state.player(actorId),
-            (actor.health - challenge.damage) <= 0,
-            let beers = actor.handCards(named: .beer) else {
+            actor.health <= challenge.damage,
+            let beers = actor.hand.filterOrNil({ $0.name == .beer }) else {
                 return nil
         }
         

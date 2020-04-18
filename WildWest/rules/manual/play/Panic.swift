@@ -11,7 +11,7 @@ class PanicMatcher: MoveMatcherProtocol {
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
             let actor = state.player(state.turn),
-            let cards = actor.handCards(named: .panic) else {
+            let cards = actor.hand.filterOrNil({ $0.name == .panic }) else {
                 return nil
         }
         
