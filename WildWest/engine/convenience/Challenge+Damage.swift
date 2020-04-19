@@ -42,8 +42,11 @@ extension Challenge {
         case .bang, .duel, .gatling, .indians, .generalStore:
             return targetIds.first
             
-        case .startTurn, .discardExcessCards, .dynamiteExploded:
+        case .dynamiteExploded:
             return state.turn
+            
+        default:
+            fatalError("Illegal state")
         }
     }
     
