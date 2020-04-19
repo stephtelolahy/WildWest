@@ -8,11 +8,16 @@
 
 extension Challenge {
     
-    init(name: ChallengeName, targetIds: [String] = [], damage: Int? = nil, barrelsResolved: Int = 0) {
+    init(name: ChallengeName,
+         targetIds: [String] = [],
+         damage: Int? = nil,
+         counterNeeded: Int = 1,
+         barrelsPlayed: Int = 0) {
         self.name = name
         self.targetIds = targetIds
         self.damage = damage ?? Self.defaultDamage(for: name)
-        self.barrelsResolved = barrelsResolved
+        self.counterNeeded = counterNeeded
+        self.barrelsPlayed = barrelsPlayed
     }
     
     private static func defaultDamage(for name: ChallengeName) -> Int {
@@ -27,38 +32,21 @@ extension Challenge {
             return 0
         }
     }
+}
+
+// Custom Getters
+extension Challenge {
     
-    func removing(_ playerId: String) -> Challenge? {
+    func actorId(in state: GameStateProtocol) -> String? {
         switch name {
-        case .bang, .gatling, .indians, .generalStore:
-            let remainingIds = targetIds.filter { $0 != playerId }
-            if remainingIds.isEmpty {
-                return nil
-            } else {
-                return Challenge(name: name, targetIds: remainingIds)
-            }
-            
-        case .duel:
-            return nil
+        case .bang, .duel, .gatling, .indians, .generalStore:
+            return targetIds.first
             
         case .dynamiteExploded:
-            return Challenge(name: .startTurn)
+            return state.turn
             
         default:
             fatalError("Illegal state")
-        }
-    }
-    
-    func removingOneDamage(for playerId: String) -> Challenge? {
-        guard case .dynamiteExploded = name else {
-            fatalError("Illegal state")
-        }
-        
-        let remainingDamage = damage - 1
-        if remainingDamage == 0 {
-            return removing(playerId)
-        } else {
-            return Challenge(name: name, damage: remainingDamage)
         }
     }
     
@@ -74,31 +62,72 @@ extension Challenge {
             fatalError("Illegal state")
         }
     }
+}
+
+// Custom Updaters
+extension Challenge {
     
-    func permutingTargets() -> Challenge? {
-        guard case .duel = name else {
-            return self
+    func countering(for playerId: String) -> Challenge? {
+        let remainingCounter = counterNeeded - 1
+        if remainingCounter <= 0 {
+            return removing(playerId)
+        } else {
+            return Challenge(name: name,
+                             targetIds: targetIds,
+                             damage: damage,
+                             counterNeeded: remainingCounter,
+                             barrelsPlayed: barrelsPlayed)
+        }
+    }
+    
+    func removing(_ playerId: String) -> Challenge? {
+        switch name {
+        case .bang, .gatling, .indians, .generalStore:
+            let remainingIds = targetIds.filter { $0 != playerId }
+            if remainingIds.isEmpty {
+                return nil
+            } else {
+                return Challenge(name: name,
+                                 targetIds: remainingIds,
+                                 damage: damage)
+            }
+            
+        case .duel:
+            return nil
+            
+        case .dynamiteExploded:
+            return Challenge(name: .startTurn)
+            
+        default:
+            fatalError("Illegal state")
+        }
+    }
+    
+    func decrementingDamage(for playerId: String) -> Challenge? {
+        let remainingDamage = damage - 1
+        if remainingDamage <= 0 {
+            return removing(playerId)
+        } else {
+            return Challenge(name: name,
+                             targetIds: targetIds,
+                             damage: remainingDamage)
+        }
+    }
+    
+    func swappingTargets() -> Challenge? {
+        guard targetIds.count == 2 else {
+            fatalError("Illegal state")
         }
         
-        let permutedIds = [targetIds[1], targetIds[0]]
-        return Challenge(name: name, targetIds: permutedIds)
+        return Challenge(name: name,
+                         targetIds: [targetIds[1], targetIds[0]])
     }
     
-    func actorId(in state: GameStateProtocol) -> String? {
-        switch name {
-        case .bang, .duel, .gatling, .indians, .generalStore:
-            return targetIds.first
-            
-        case .startTurn, .discardExcessCards, .dynamiteExploded:
-            return state.turn
-        }
-    }
-    
-    func incrementingBarrelsResolved() -> Challenge {
+    func incrementingBarrelsPlayed() -> Challenge {
         Challenge(name: name,
                   targetIds: targetIds,
                   damage: damage,
-                  barrelsResolved: barrelsResolved + 1)
+                  counterNeeded: counterNeeded,
+                  barrelsPlayed: barrelsPlayed + 1)
     }
-    
 }

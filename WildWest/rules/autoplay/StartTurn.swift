@@ -12,7 +12,8 @@ class StartTurnMatcher: MoveMatcherProtocol {
         guard let challenge = state.challenge,
             case .startTurn = challenge.name,
             let actor = state.player(state.turn),
-            !actor.inPlay.contains(where: { $0.name == .jail || $0.name == .dynamite }) else {
+            !actor.inPlay.contains(where: { $0.name == .jail }),
+            !actor.inPlay.contains(where: { $0.name == .dynamite }) else {
                 return nil
         }
         
@@ -20,13 +21,39 @@ class StartTurnMatcher: MoveMatcherProtocol {
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .startTurn = move.name else {
-            return nil
+        guard case .startTurn = move.name,
+            let actor = state.player(move.actorId) else {
+                return nil
         }
         
-        return [.playerPullFromDeck(move.actorId),
-                .playerPullFromDeck(move.actorId),
-                .setChallenge(nil)]
+        if actor.abilities[.drawsAnotherCardIfSecondDrawIsRedSuit] == true {
+            return executeDrawsAnotherCardIfSecondDrawIsRedSuit(actorId: actor.identifier, in: state)
+        }
+        
+        return executeDefaultStartTurn(actorId: actor.identifier)
+    }
+    
+    private func executeDefaultStartTurn(actorId: String) -> [GameUpdate]? {
+        [.playerPullFromDeck(actorId),
+         .playerPullFromDeck(actorId),
+         .setChallenge(nil)]
+    }
+    
+    private func executeDrawsAnotherCardIfSecondDrawIsRedSuit(actorId: String,
+                                                              in state: GameStateProtocol) -> [GameUpdate]? {
+        let secondCard = state.deck[1]
+        
+        var updates: [GameUpdate] = [.playerPullFromDeck(actorId),
+                                     .playerPullFromDeck(actorId),
+                                     .playerRevealHandCard(actorId, secondCard.identifier)]
+        
+        if secondCard.suit.isRed {
+            updates.append(.playerPullFromDeck(actorId))
+        }
+        
+        updates.append(.setChallenge(nil))
+        
+        return updates
     }
 }
 

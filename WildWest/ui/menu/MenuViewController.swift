@@ -24,7 +24,6 @@ class MenuViewController: UIViewController {
     private var allFigures: [FigureProtocol]!
     private var allCards: [CardProtocol]!
     private var allMatchers: [MoveMatcherProtocol]!
-    private var userPreferences: UserPreferences!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,14 +37,12 @@ class MenuViewController: UIViewController {
         allCards = config.allCards
         allMatchers = config.moveMatchers
         
-        userPreferences = UserPreferences.shared
-        
-        playersCountStepper.value = Double(userPreferences.playersCount)
+        playersCountStepper.value = Double(UserPreferences.shared.playersCount)
         updatePlayersLabel()
         
         updateFigureImage()
         
-        playAsSheriffSwitch.isOn = userPreferences.playAsSheriff
+        playAsSheriffSwitch.isOn = UserPreferences.shared.playAsSheriff
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,19 +60,19 @@ class MenuViewController: UIViewController {
     }
     
     @IBAction private func stepperValueChanged(_ sender: Any) {
-        userPreferences.playersCount = Int(playersCountStepper.value)
+        UserPreferences.shared.playersCount = Int(playersCountStepper.value)
         updatePlayersLabel()
     }
     
     @IBAction private func figureButtonTapped(_ sender: Any) {
         showFigureSelector(figures: allFigures.map { $0.name }) { [weak self] figure in
-            self?.userPreferences.preferredFigure = figure?.rawValue ?? ""
+            UserPreferences.shared.preferredFigure = figure?.rawValue ?? ""
             self?.updateFigureImage()
         }
     }
     
     @IBAction private func playAsSheriffValueChanged(_ sender: Any) {
-        userPreferences.playAsSheriff = playAsSheriffSwitch.isOn
+        UserPreferences.shared.playAsSheriff = playAsSheriffSwitch.isOn
     }
     
     @IBAction private func contactButtonTapped(_ sender: Any) {
@@ -96,15 +93,15 @@ class MenuViewController: UIViewController {
 private extension MenuViewController {
     
     var preferredFigure: FigureName? {
-        allFigures.map { $0.name }.first(where: { $0.rawValue == userPreferences.preferredFigure })
+        allFigures.map { $0.name }.first(where: { $0.rawValue == UserPreferences.shared.preferredFigure })
     }
     
     var playersCount: Int {
-        userPreferences.playersCount
+        UserPreferences.shared.playersCount
     }
     
     var playAsSheriff: Bool {
-        userPreferences.playAsSheriff
+        UserPreferences.shared.playAsSheriff
     }
     
     func updatePlayersLabel() {
@@ -143,9 +140,9 @@ private extension MenuViewController {
         let engine = GameEngine(database: database,
                                 moveMatchers: allMatchers,
                                 updateExecutor: GameUpdateExecutor(),
-                                eventQueue: DelayedEventQueue(delay: userPreferences.updateDelay))
+                                eventQueue: DelayedEventQueue(delay: UserPreferences.shared.updateDelay))
         
-        let controlledPlayerId = state.players.first?.identifier
+        let controlledPlayerId: String? = UserPreferences.shared.simulationMode ? nil : state.players.first?.identifier
         let aiPlayers = database.state.players.filter { $0.identifier != controlledPlayerId }
         let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
                                                      ai: RandomAIWithRole(),
@@ -156,7 +153,12 @@ private extension MenuViewController {
     }
     
     func playThemeMusic() {
-        guard let path = Bundle.main.path(forResource: "Cowboy_Theme-Pavak-1711860633.mp3", ofType: nil) else {
+        guard UserPreferences.shared.enableSound else {
+            return
+        }
+        
+        let musicFile = "Cowboy_Theme-Pavak-1711860633.mp3"
+        guard let path = Bundle.main.path(forResource: musicFile, ofType: nil) else {
             return
         }
         

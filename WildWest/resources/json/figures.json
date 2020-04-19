@@ -12,7 +12,10 @@
         "name": "blackJack",
         "bullets": 4,
         "imageName": "01_blackjack",
-        "description": "during the phase 1 of his turn, he must show the second card he draws: if it's Heart or Diamonds (just like a \"draw!\", he draws one additional card (without revealing it)."
+        "description": "during the phase 1 of his turn, he must show the second card he draws: if it's Heart or Diamonds (just like a \"draw!\", he draws one additional card (without revealing it).",
+        "abilities": {
+            "drawsAnotherCardIfSecondDrawIsRedSuit": true
+        }
     },
     {
         "name": "calamityJanet",
@@ -57,7 +60,10 @@
         "name": "luckyDuke",
         "bullets": 4,
         "imageName": "01_luckyduke",
-        "description": "each time he is required to \"draw!\", he flips the top two cards from the deck, and chooses the result he prefers. Discard both cards afterwards."
+        "description": "each time he is required to \"draw!\", he flips the top two cards from the deck, and chooses the result he prefers. Discard both cards afterwards.",
+        "abilities": {
+            "flips2CardsOnADrawAndChoose1": true
+        }
     },
     {
         "name": "paulRegret",
@@ -93,7 +99,10 @@
         "name": "slabTheKiller",
         "bullets": 4,
         "imageName": "01_slab",
-        "description": "players trying to cancel his BANG! cards need to play 2 Missed! cards. The Barrel effect, if successfully used, only counts as one Missed!."
+        "description": "players trying to cancel his BANG! cards need to play 2 Missed! cards. The Barrel effect, if successfully used, only counts as one Missed!.",
+        "abilities": {
+            "othersNeed2MissesToCounterHisBang": true
+        }
     },
     {
         "name": "suzyLafayette",
@@ -108,7 +117,10 @@
         "name": "vultureSam",
         "bullets": 4,
         "imageName": "01_vulturesam",
-        "description": "whenever a character is eliminated from the game, Sam takes all the cards that player had in his hand and in play, and adds them to his hand."
+        "description": "whenever a character is eliminated from the game, Sam takes all the cards that player had in his hand and in play, and adds them to his hand.",
+        "abilities": {
+            "takesAllCardsFromEliminatedPlayers": true
+        }
     },
     {
         "name": "willyTheKid",

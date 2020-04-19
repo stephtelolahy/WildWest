@@ -6,62 +6,41 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-class StayInJailMatcher: MoveMatcherProtocol {
+class ResolveJailMatcher: MoveMatcherProtocol {
     
     func autoPlayMove(matching state: GameStateProtocol) -> GameMove? {
         guard let challenge = state.challenge,
             case .startTurn = challenge.name,
             let actor = state.player(state.turn),
-            actor.inPlay.filter({ $0.name == .dynamite }).isEmpty,
-            let card = actor.inPlay.first(where: { $0.name == .jail }),
-            let topDeckCard = state.deck.first,
-            !topDeckCard.makeEscapeFromJail else {
+            !actor.inPlay.contains(where: { $0.name == .dynamite }),
+            let card = actor.inPlay.first(where: { $0.name == .jail }) else {
                 return nil
         }
         
-        return GameMove(name: .stayInJail, actorId: actor.identifier, cardId: card.identifier)
+        let flippedCards = state.deck[0..<actor.flippedCardsCount]
+        let moveName: MoveName = flippedCards.contains(where: { $0.makeEscapeFromJail }) ? .escapeFromJail : .stayInJail
+        
+        return GameMove(name: moveName, actorId: actor.identifier, cardId: card.identifier)
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .stayInJail = move.name,
-            let cardId = move.cardId else {
+        guard move.name == .escapeFromJail || move.name == .stayInJail,
+            let cardId = move.cardId,
+            let actor = state.player(move.actorId) else {
                 return nil
         }
         
-        return [.flipOverFirstDeckCard,
-                .playerDiscardInPlay(move.actorId, cardId),
-                .setTurn(state.nextPlayer(after: move.actorId))]
-    }
-}
-
-class EscapeFromJailMatcher: MoveMatcherProtocol {
-    
-    func autoPlayMove(matching state: GameStateProtocol) -> GameMove? {
-        guard let challenge = state.challenge,
-            case .startTurn = challenge.name,
-            let actor = state.player(state.turn),
-            actor.inPlay.filter({ $0.name == .dynamite }).isEmpty,
-            let card = actor.inPlay.first(where: { $0.name == .jail }),
-            let topDeckCard = state.deck.first,
-            topDeckCard.makeEscapeFromJail else {
-                return nil
+        var updates: [GameUpdate] = Array(1...actor.flippedCardsCount).map { _ in .flipOverFirstDeckCard }
+        updates.append(.playerDiscardInPlay(move.actorId, cardId))
+        if move.name == .stayInJail {
+            updates.append(.setTurn(state.nextPlayer(after: move.actorId)))
         }
         
-        return GameMove(name: .escapeFromJail, actorId: actor.identifier, cardId: card.identifier)
-    }
-    
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .escapeFromJail = move.name,
-            let cardId = move.cardId else {
-                return nil
-        }
-        
-        return [.flipOverFirstDeckCard,
-                .playerDiscardInPlay(move.actorId, cardId)]
+        return updates
     }
 }
 
 extension MoveName {
-    static let stayInJail = MoveName("stayInJail")
     static let escapeFromJail = MoveName("escapeFromJail")
+    static let stayInJail = MoveName("stayInJail")
 }

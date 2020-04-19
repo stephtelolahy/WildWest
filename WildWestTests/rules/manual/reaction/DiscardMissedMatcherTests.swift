@@ -20,6 +20,7 @@ class DiscardMissedOnBangMatcherTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .holding(mockCard)
             .identified(by: "p1")
+            .withDefault()
         let mockState = MockGameStateProtocol()
             .challenge(is: Challenge(name: .bang, targetIds: ["p1"]))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
@@ -28,14 +29,14 @@ class DiscardMissedOnBangMatcherTests: XCTestCase {
         let moves = sut.validMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .discard, actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(moves, [GameMove(name: .missed, actorId: "p1", cardId: "c1")])
     }
     
     func test_RemoveActorFromBangChallenge_IfDiscardingMissed() {
         // Given
         let mockState = MockGameStateProtocol()
             .challenge(is: Challenge(name: .bang, targetIds: ["p1"]))
-        let move = GameMove(name: .discard, actorId: "p1", cardId: "c1")
+        let move = GameMove(name: .missed, actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(move, in: mockState)
@@ -53,6 +54,7 @@ class DiscardMissedOnBangMatcherTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .holding(mockCard)
             .identified(by: "p1")
+            .withDefault()
         let mockState = MockGameStateProtocol()
             .challenge(is: Challenge(name: .gatling, targetIds: ["p1", "p2", "p3"]))
             .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
@@ -61,20 +63,20 @@ class DiscardMissedOnBangMatcherTests: XCTestCase {
         let moves = sut.validMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .discard, actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(moves, [GameMove(name: .missed, actorId: "p1", cardId: "c1")])
     }
     
     func test_DiscardCardAndRemoveActorFromGatlingChallenge_IfPlayingMissed() {
         // Given
         let mockState = MockGameStateProtocol()
             .challenge(is: Challenge(name: .gatling, targetIds: ["p1", "p2", "p3"]))
-        let move = GameMove(name: .discard, actorId: "p1", cardId: "c1")
+        let move = GameMove(name: .missed, actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .setChallenge(Challenge(name: .gatling, targetIds: ["p2", "p3"], barrelsResolved: 0))])
+                                 .setChallenge(Challenge(name: .gatling, targetIds: ["p2", "p3"], barrelsPlayed: 0))])
     }
 }

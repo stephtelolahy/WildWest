@@ -27,12 +27,9 @@ class GameConfiguration {
         [
             // auto play
             StartTurnMatcher(),
-            ExplodeDynamiteMatcher(),
-            PassDynamiteMatcher(),
-            EscapeFromJailMatcher(),
-            StayInJailMatcher(),
-            UseBarrelMatcher(),
-            FailBarelMatcher(),
+            ResolveDynamiteMatcher(),
+            ResolveJailMatcher(),
+            ResolveBarrelMatcher(),
             
             // manual play
             BeerMatcher(),
@@ -68,9 +65,7 @@ class GameConfiguration {
             // Special
             DrawsCardOnLoseHealthMatcher(),
             DrawsCardFromPlayerDamagedHimMatcher(),
-            DrawsCardWhenHandIsEmptyMatcher(),
-            BangWithMissedMatcher(),
-            MissWithBangMatcher()
+            DrawsCardWhenHandIsEmptyMatcher()
         ]
     }
 }

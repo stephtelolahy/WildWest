@@ -9,9 +9,9 @@
 import XCTest
 import Cuckoo
 
-class UseBarrelMatcherTests: XCTestCase {
+class ResolveBarrelMatcherTests: XCTestCase {
     
-    private let sut = UseBarrelMatcher()
+    private let sut = ResolveBarrelMatcher()
     
     func test_CannotResolvedBarrelTwice() {
         // Given
@@ -23,7 +23,7 @@ class UseBarrelMatcherTests: XCTestCase {
             .identified(by: "p1")
             .withDefault()
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .bang, targetIds: ["p1"], barrelsResolved: 1))
+            .challenge(is: Challenge(name: .bang, targetIds: ["p1"], barrelsPlayed: 1))
             .players(are: mockPlayer1)
         
         // When
@@ -33,19 +33,18 @@ class UseBarrelMatcherTests: XCTestCase {
         XCTAssertNil(moves)
     }
     
-    func test_ShouldUseBarrel_IfIsTargetOfShootAndPlayingBarrel() {
+    func test_SuccessFulBarrel_IfIsTargetOfShootAndPlayingBarrel() {
         // Given
         let mockCard = MockCardProtocol()
             .named(.barrel)
-            .identified(by: "c1")
         let mockPlayer1 = MockPlayerProtocol()
             .playing(mockCard)
             .identified(by: "p1")
             .withDefault()
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .bang, targetIds: ["p1"], barrelsResolved: 0))
+            .challenge(is: Challenge(name: .bang, targetIds: ["p1"], barrelsPlayed: 0))
             .players(are: mockPlayer1)
-            .topDeck(is: MockCardProtocol().suit(is: .hearts))
+            .deckCards(are: MockCardProtocol().suit(is: .hearts))
         
         // When
         let move = sut.autoPlayMove(matching: mockState)
@@ -54,12 +53,11 @@ class UseBarrelMatcherTests: XCTestCase {
         XCTAssertEqual(move, GameMove(name: .useBarrel, actorId: "p1"))
     }
     
-    func test_ResolveShootChallenge_IfReturnHeartFromDeck() {
+    func test_RemoveBangChallenge_IfReturnHeartFromDeck() {
         // Given
         let mockState = MockGameStateProtocol()
-        Cuckoo.stub(mockState) { mock in
-            when(mock.challenge.get).thenReturn(Challenge(name: .bang, targetIds: ["p1"], barrelsResolved: 0))
-        }
+            .challenge(is: Challenge(name: .bang, targetIds: ["p1"], barrelsPlayed: 0))
+            .players(are: MockPlayerProtocol().identified(by: "p1").withDefault())
         
         let move = GameMove(name: .useBarrel, actorId: "p1")
         
@@ -70,25 +68,35 @@ class UseBarrelMatcherTests: XCTestCase {
         XCTAssertEqual(updates, [.flipOverFirstDeckCard,
                                  .setChallenge(nil)])
     }
-}
-
-class FailBarelMatcherTests: XCTestCase {
     
-    private let sut = FailBarelMatcher()
+    func test_RemoveGatlingChallengeAndResetBarrelsPlayed_UsingBarrel() {
+        // Given
+        let mockState = MockGameStateProtocol()
+            .challenge(is: Challenge(name: .gatling, targetIds: ["p1", "p2"], barrelsPlayed: 1))
+            .players(are: MockPlayerProtocol().identified(by: "p1").withDefault())
+        
+        let move = GameMove(name: .useBarrel, actorId: "p1")
+        
+        // When
+        let updates = sut.execute(move, in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates, [.flipOverFirstDeckCard,
+                                 .setChallenge(Challenge(name: .gatling, targetIds: ["p2"], barrelsPlayed: 0))])
+    }
     
     func test_FailBarrel_IfIsTargetOfShootAndPlayingBarrel() {
         // Given
         let mockCard = MockCardProtocol()
             .named(.barrel)
-            .identified(by: "c1")
         let mockPlayer1 = MockPlayerProtocol()
             .playing(mockCard)
             .identified(by: "p1")
             .withDefault()
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .bang, targetIds: ["p1"], barrelsResolved: 0))
+            .challenge(is: Challenge(name: .bang, targetIds: ["p1"], barrelsPlayed: 0))
             .players(are: mockPlayer1)
-            .topDeck(is: MockCardProtocol().suit(is: .clubs))
+            .deckCards(are: MockCardProtocol().suit(is: .clubs))
         
         // When
         let move = sut.autoPlayMove(matching: mockState)
@@ -100,9 +108,8 @@ class FailBarelMatcherTests: XCTestCase {
     func test_DoNotResolveShootChallenge_IfReturnNonHeartFromDeck() {
         // Given
         let mockState = MockGameStateProtocol()
-        Cuckoo.stub(mockState) { mock in
-            when(mock.challenge.get).thenReturn(Challenge(name: .bang, targetIds: ["p1"], barrelsResolved: 0))
-        }
+            .challenge(is: Challenge(name: .bang, targetIds: ["p1"], barrelsPlayed: 0))
+            .players(are: MockPlayerProtocol().identified(by: "p1").withDefault())
         
         let move = GameMove(name: .failBarrel, actorId: "p1")
         
@@ -111,7 +118,89 @@ class FailBarelMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.flipOverFirstDeckCard,
-                                 .setChallenge(Challenge(name: .bang, targetIds: ["p1"], barrelsResolved: 1))])
+                                 .setChallenge(Challenge(name: .bang, targetIds: ["p1"], barrelsPlayed: 1))])
+    }
+    
+    func test_SuccessFulBarrel_IfOneCardMakeItWorks_AndHavingAbility() {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .abilities(are: [.flips2CardsOnADrawAndChoose1: true])
+            .playing(MockCardProtocol().named(.barrel))
+        let mockState = MockGameStateProtocol()
+            .challenge(is: Challenge(name: .bang, targetIds: ["p1"], barrelsPlayed: 0))
+            .players(are: mockPlayer1)
+            .deckCards(are: MockCardProtocol().suit(is: .spades), MockCardProtocol().suit(is: .hearts))
+        
+        // When
+        let move = sut.autoPlayMove(matching: mockState)
+        
+        // Assert
+        XCTAssertEqual(move, GameMove(name: .useBarrel, actorId: "p1"))
+    }
+    
+    func test_FlipTwoCardsForBarrel_AndHavingAbility() {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .abilities(are: [.flips2CardsOnADrawAndChoose1: true])
+        let mockState = MockGameStateProtocol()
+            .challenge(is: Challenge(name: .bang, targetIds: ["p1"], barrelsPlayed: 0))
+            .players(are: mockPlayer1)
+        
+        let move = GameMove(name: .useBarrel, actorId: "p1")
+        
+        // When
+        let updates = sut.execute(move, in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates, [.flipOverFirstDeckCard,
+                                 .flipOverFirstDeckCard,
+                                 .setChallenge(nil)])
+    }
+    
+    func test_SuccessfulFirstBarrel_IfMissedRequiredIsTwo_AndHavingAbility() {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .abilities(are: [.hasBarrelAllTimes: true])
+            .playing(MockCardProtocol().named(.barrel))
+        let mockState = MockGameStateProtocol()
+            .challenge(is: Challenge(name: .bang, targetIds: ["p1"], counterNeeded: 2, barrelsPlayed: 0))
+            .players(are: mockPlayer1)
+            .deckCards(are: MockCardProtocol().suit(is: .hearts))
+        
+        // When
+        let move = sut.autoPlayMove(matching: mockState)
+        let updates = sut.execute(move!, in: mockState)
+        
+        // Assert
+        XCTAssertEqual(move, GameMove(name: .useBarrel, actorId: "p1"))
+        XCTAssertEqual(updates, [.flipOverFirstDeckCard,
+                                 .setChallenge(Challenge(name: .bang, targetIds: ["p1"], counterNeeded: 1, barrelsPlayed: 1))])
+        
+    }
+    
+    func test_SuccessfulSecondBarrel_IfMissedRequiredIsTwo_AndHavingAbility() {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .abilities(are: [.hasBarrelAllTimes: true])
+            .playing(MockCardProtocol().named(.barrel))
+        let mockState = MockGameStateProtocol()
+            .challenge(is: Challenge(name: .bang, targetIds: ["p1"], counterNeeded: 1, barrelsPlayed: 1))
+            .players(are: mockPlayer1)
+            .deckCards(are: MockCardProtocol().suit(is: .hearts))
+        
+        // When
+        let move = sut.autoPlayMove(matching: mockState)
+        let updates = sut.execute(move!, in: mockState)
+        
+        // Assert
+        XCTAssertEqual(move, GameMove(name: .useBarrel, actorId: "p1"))
+        XCTAssertEqual(updates, [.flipOverFirstDeckCard,
+                                 .setChallenge(nil)])
+        
     }
 }
 

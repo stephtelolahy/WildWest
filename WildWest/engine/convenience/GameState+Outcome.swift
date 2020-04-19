@@ -10,7 +10,7 @@ extension GameStateProtocol {
     
     func claculateOutcome() -> GameOutcome? {
         let remainingRoles = players.map { $0.role }
-        let allOutlawsAreEliminated = remainingRoles.filter { $0 == .outlaw || $0 == .renegade }.isEmpty
+        let allOutlawsAreEliminated = !remainingRoles.contains(where: { $0 == .outlaw || $0 == .renegade })
         if allOutlawsAreEliminated {
             return .sheriffWin
         }

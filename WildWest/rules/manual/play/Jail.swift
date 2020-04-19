@@ -11,17 +11,16 @@ class JailMatcher: MoveMatcherProtocol {
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
             let actor = state.player(state.turn),
-            let cards = actor.handCards(named: .jail) else {
+            let cards = actor.hand.filterOrNil({ $0.name == .jail }) else {
                 return nil
         }
         
         let otherPlayers = state.players.filter { player in
             guard player.identifier != actor.identifier,
                 player.role != .sheriff,
-                player.inPlayCards(named: .jail) == nil else {
+                !player.inPlay.contains(where: { $0.name == .jail }) else {
                     return false
             }
-            
             return true
         }
         

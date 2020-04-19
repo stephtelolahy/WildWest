@@ -20,6 +20,7 @@ class GameViewController: UIViewController, Subscribable {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var discardImageView: UIImageView!
     @IBOutlet private weak var deckImageView: UIImageView!
+    @IBOutlet private weak var deckCountLabel: UILabel!
     
     // MARK: Properties
     
@@ -32,6 +33,7 @@ class GameViewController: UIViewController, Subscribable {
     private var messages: [String] = []
     private var endTurnMoves: [GameMove] = []
     private var latestState: GameStateProtocol?
+    private var moveSoundPlayer: MoveSoundPlayerProtocol?
     
     private lazy var statsBuilder: StatsBuilderProtocol = {
         guard let sheriff = engine?.allPlayers.first(where: { $0.role == .sheriff }) else {
@@ -44,7 +46,6 @@ class GameViewController: UIViewController, Subscribable {
     private lazy var playerAdapter = PlayersAdapter()
     private lazy var actionsAdapter = ActionsAdapter(playerId: controlledPlayerId)
     private lazy var moveDescriptor = MoveDescriptor()
-    private lazy var moveSoundPlayer = MoveSoundPlayer()
     private lazy var instructionBuilder = InstructionBuilder()
     private lazy var playMoveSelector = PlayMoveSelector(viewController: self)
     
@@ -66,6 +67,10 @@ class GameViewController: UIViewController, Subscribable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if UserPreferences.shared.enableSound {
+            moveSoundPlayer = MoveSoundPlayer()
+        }
         
         let layout = playersCollectionView.collectionViewLayout as? GameCollectionViewLayout
         layout?.delegate = self
@@ -125,6 +130,7 @@ private extension GameViewController {
         actionsCollectionView.reloadData()
         
         discardImageView.image = state.topDiscardImage
+        deckCountLabel.text = "[] \(state.deck.count)"
         
         titleLabel.text = instructionBuilder.buildInstruction(state: state, for: controlledPlayerId)
         
@@ -137,7 +143,7 @@ private extension GameViewController {
         messages.append(moveDescriptor.description(for: move))
         messageTableView.reloadDataScrollingAtBottom()
         
-        moveSoundPlayer.playSound(for: move)
+        moveSoundPlayer?.playSound(for: move)
         
         statsBuilder.updateOnExecuting(move)
     }

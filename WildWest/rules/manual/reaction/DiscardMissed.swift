@@ -13,24 +13,27 @@ class DiscardMissedMatcher: MoveMatcherProtocol {
             (challenge.name == .bang || challenge.name == .gatling),
             let actorId = challenge.actorId(in: state),
             let actor = state.player(actorId),
-            let cards = actor.handCards(named: .missed) else {
+            let cards = actor.hand.filterOrNil({ actor.missedCardNames.contains($0.name) }) else {
                 return nil
         }
         
         return cards.map {
-            GameMove(name: .discard, actorId: actor.identifier, cardId: $0.identifier)
+            GameMove(name: .missed, actorId: actor.identifier, cardId: $0.identifier)
         }
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .discard = move.name,
+        guard case .missed = move.name,
             let challenge = state.challenge,
-            (challenge.name == .bang || challenge.name == .gatling),
             let cardId = move.cardId else {
                 return nil
         }
         
         return [.playerDiscardHand(move.actorId, cardId),
-                .setChallenge(challenge.removing(move.actorId))]
+                .setChallenge(challenge.countering(for: move.actorId))]
     }
+}
+
+extension MoveName {
+    static let missed = MoveName("missed")
 }

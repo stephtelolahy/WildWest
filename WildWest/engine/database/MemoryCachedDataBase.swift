@@ -29,7 +29,6 @@ class MemoryCachedDataBase: GameDatabaseProtocol {
     }
     
     func setChallenge(_ challenge: Challenge?) {
-        assert(mutableState.challenge != challenge)
         mutableState.challenge = challenge
     }
     
@@ -40,12 +39,18 @@ class MemoryCachedDataBase: GameDatabaseProtocol {
     /// Deck
     
     func deckRemoveFirst() -> CardProtocol {
-        mutableState.deck.removeFirst()
+        let minimumDeckSize = 2
+        if mutableState.deck.count <= minimumDeckSize {
+            let cards = mutableState.discardPile
+            mutableState.deck.append(contentsOf: Array(cards[1..<cards.count]).shuffled())
+            mutableState.discardPile = Array(cards[0..<1])
+        }
+        
+        return mutableState.deck.removeFirst()
     }
     
     func addDiscard(_ card: CardProtocol) {
-        mutableState.deck.append(card)
-        mutableState.discardPile = [card]
+        mutableState.discardPile.insert(card, at: 0)
     }
     
     func addGeneralStore(_ card: CardProtocol) {

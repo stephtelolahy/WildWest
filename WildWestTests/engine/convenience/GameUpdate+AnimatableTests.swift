@@ -10,30 +10,29 @@ import XCTest
 
 class GameUpdate_AnimatableTests: XCTestCase {
     
-    func test_SplitAnimatables() {
+    func test_SplitByExecutionTime() {
         // Given
-        let anim : GameUpdate = .flipOverFirstDeckCard
-        let notAnim : GameUpdate = .setChallenge(nil)
-        let empty: [GameUpdate] = []
+        let update1 : GameUpdate = .flipOverFirstDeckCard
+        let update0 : GameUpdate = .setChallenge(nil)
         
         // When
         // Assert
         
         // Empty group updates
-        XCTAssertEqual(empty.splitAnimatables(), [])
+        XCTAssertEqual([GameUpdate]().splitByExecutionTime(), [])
         
         // One group updates
-        XCTAssertEqual([notAnim, notAnim, notAnim].splitAnimatables(), [[notAnim, notAnim, notAnim]])
-        XCTAssertEqual([anim, notAnim, notAnim].splitAnimatables(), [[anim, notAnim, notAnim]])
-        XCTAssertEqual([notAnim, notAnim, anim].splitAnimatables(), [[notAnim, notAnim, anim]])
-        XCTAssertEqual([notAnim, anim, notAnim].splitAnimatables(), [[notAnim, anim, notAnim]])
+        XCTAssertEqual([update0, update0, update0].splitByExecutionTime(), [[update0, update0, update0]])
+        XCTAssertEqual([update1, update0, update0].splitByExecutionTime(), [[update1, update0, update0]])
+        XCTAssertEqual([update0, update0, update1].splitByExecutionTime(), [[update0, update0, update1]])
+        XCTAssertEqual([update0, update1, update0].splitByExecutionTime(), [[update0, update1, update0]])
         
         // Two group updates
-        XCTAssertEqual([anim, notAnim, anim].splitAnimatables(), [[anim, notAnim], [anim]])
-        XCTAssertEqual([anim, anim, notAnim].splitAnimatables(), [[anim], [anim, notAnim]])
-        XCTAssertEqual([notAnim, anim, anim].splitAnimatables(), [[notAnim, anim], [anim]])
+        XCTAssertEqual([update1, update0, update1].splitByExecutionTime(), [[update1, update0], [update1]])
+        XCTAssertEqual([update1, update1, update0].splitByExecutionTime(), [[update1], [update1, update0]])
+        XCTAssertEqual([update0, update1, update1].splitByExecutionTime(), [[update0, update1], [update1]])
         
         // Three group of updates
-        XCTAssertEqual([anim, anim, anim].splitAnimatables(), [[anim], [anim], [anim]])
+        XCTAssertEqual([update1, update1, update1].splitByExecutionTime(), [[update1], [update1], [update1]])
     }
 }

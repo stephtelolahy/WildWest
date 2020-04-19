@@ -97,7 +97,7 @@ private extension GameEngine {
         } else {
             preExecute(event.move)
             let updates = moveMatchers.updates(onExecuting: event.move, in: database.state)
-            let updateGroups = updates.splitAnimatables()
+            let updateGroups = updates.splitByExecutionTime()
             process(event.move, updateGroups: updateGroups)
         }
     }
@@ -154,6 +154,11 @@ private extension GameEngine {
             return
         }
         
+        // wait until all queued moves executed
+        guard eventQueue.isEmpty else {
+            return
+        }
+        
         // queue autoPlay
         let autoPlays = moveMatchers.compactMap { $0.autoPlayMove(matching: database.state) }
         if !autoPlays.isEmpty {
@@ -161,21 +166,20 @@ private extension GameEngine {
             return
         }
         
-        // emit valid moves
-        if eventQueue.isEmpty {
-            let validMoves = moveMatchers.validMoves(matching: database.state)
-            emitValidMoves(validMoves)
+        // wait until all queued moves executed
+        guard eventQueue.isEmpty else {
+            return
         }
+        
+        // emit valid moves
+        let validMoves = moveMatchers.validMoves(matching: database.state)
+        emitValidMoves(validMoves)
     }
 }
 
 private extension Array where Element == MoveMatcherProtocol {
     
     func validMoves(matching state: GameStateProtocol) -> [String: [GameMove]] {
-        guard state.outcome == nil else {
-            return [:]
-        }
-        
         let moves = self.compactMap { $0.validMoves(matching: state) }
             .flatMap { $0 }
             .groupedByActor()

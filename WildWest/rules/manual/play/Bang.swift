@@ -11,7 +11,7 @@ class BangMatcher: MoveMatcherProtocol {
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
             let actor = state.player(state.turn),
-            let cards = actor.handCards(named: .bang) else {
+            let cards = actor.hand.filterOrNil({ actor.bandCardNames.contains($0.name) }) else {
                 return nil
         }
         
@@ -31,22 +31,26 @@ class BangMatcher: MoveMatcherProtocol {
         
         return cards.map { card in
             otherPlayers.map {
-                GameMove(name: .play, actorId: actor.identifier, cardId: card.identifier, targetId: $0.identifier)
+                GameMove(name: .bang, actorId: actor.identifier, cardId: card.identifier, targetId: $0.identifier)
             }
         }.flatMap { $0 }
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .play = move.name,
+        guard case .bang = move.name,
             let cardId = move.cardId,
             let actor = state.player(move.actorId),
-            let card = actor.handCard(cardId),
-            case .bang = card.name,
             let targetId = move.targetId else {
                 return nil
         }
         
         return [.playerDiscardHand(move.actorId, cardId),
-                .setChallenge(Challenge(name: .bang, targetIds: [targetId]))]
+                .setChallenge(Challenge(name: .bang,
+                                        targetIds: [targetId],
+                                        counterNeeded: actor.neededMissesToCancelHisBang))]
     }
+}
+
+extension MoveName {
+    static let bang = MoveName("bang")
 }

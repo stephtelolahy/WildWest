@@ -8,34 +8,44 @@
 
 extension Array where Element == GameUpdate {
     
-    // Split array of GameUpdate into groups that could be animated simultaneously
-    func splitAnimatables() -> [[Element]] {
-        var array = self
+    func splitByExecutionTime() -> [[Element]] {
         var result: [[Element]] = []
-        while !array.isEmpty {
-            var current = [array.remove(at: 0)]
-            while (!array.isEmpty && array.first?.isAnimatable == false)
-                || (!current.contains(where: { $0.isAnimatable }) && array.first?.isAnimatable == true) {
-                current.append(array.remove(at: 0))
+        var current: [Element] = []
+        
+        for update in self {
+            if current.executionTime == 0 || update.executionTime == 0 {
+                current.append(update)
+            } else {
+                result.append(current)
+                current = [update]
             }
+        }
+        
+        if !current.isEmpty {
             result.append(current)
         }
+        
         return result
     }
+    
+    private var executionTime: Int {
+        reduce(0) { $0 + $1.executionTime }
+    }
+    
 }
 
 private extension GameUpdate {
-    var isAnimatable: Bool {
+    var executionTime: Int {
         switch self {
         case .setTurn,
              .setChallenge,
              .setupGeneralStore,
              .playerGainHealth,
              .playerLooseHealth:
-            return false
+            return 0
             
         default:
-            return true
+            return 1
         }
     }
 }

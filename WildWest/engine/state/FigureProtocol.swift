@@ -33,7 +33,7 @@ enum FigureName: String, Codable {
     willyTheKid
 }
 
-enum AbilityName: String, Codable {
+enum AbilityName: String, Codable, CaseIterable {
     case hasBarrelAllTimes
     case hasMustangAllTimes
     case hasScopeAllTimes
@@ -42,4 +42,8 @@ enum AbilityName: String, Codable {
     case drawsCardFromPlayerDamagedHim
     case drawsCardWhenHandIsEmpty
     case canPlayBangAsMissAndViceVersa
+    case drawsAnotherCardIfSecondDrawIsRedSuit
+    case othersNeed2MissesToCounterHisBang
+    case takesAllCardsFromEliminatedPlayers
+    case flips2CardsOnADrawAndChoose1
 }

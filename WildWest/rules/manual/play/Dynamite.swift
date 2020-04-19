@@ -11,8 +11,8 @@ class DynamiteMatcher: MoveMatcherProtocol {
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
             let actor = state.player(state.turn),
-            let cards = actor.handCards(named: .dynamite),
-            actor.inPlayCards(named: .dynamite) == nil else {
+            let cards = actor.hand.filterOrNil({ $0.name == .dynamite }),
+            !actor.inPlay.contains(where: { $0.name == .dynamite }) else {
                 return nil
         }
         

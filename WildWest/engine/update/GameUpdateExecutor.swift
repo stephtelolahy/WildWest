@@ -89,6 +89,9 @@ class GameUpdateExecutor: UpdateExecutorProtocol {
         case .flipOverFirstDeckCard:
             let card = database.deckRemoveFirst()
             database.addDiscard(card)
+            
+        default:
+            break
         }
     }
 }

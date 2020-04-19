@@ -69,4 +69,40 @@ extension PlayerProtocol {
         
         return result
     }
+    
+    var bandCardNames: [CardName] {
+        var result: [CardName] = [.bang]
+        
+        if abilities[.canPlayBangAsMissAndViceVersa] == true {
+            result.append(.missed)
+        }
+        
+        return result
+    }
+    
+    var missedCardNames: [CardName] {
+        var result: [CardName] = [.missed]
+        
+        if abilities[.canPlayBangAsMissAndViceVersa] == true {
+            result.append(.bang)
+        }
+        
+        return result
+    }
+    
+    var neededMissesToCancelHisBang: Int {
+        if abilities[.othersNeed2MissesToCounterHisBang] == true {
+            return 2
+        }
+        
+        return 1
+    }
+    
+    var flippedCardsCount: Int {
+        if abilities[.flips2CardsOnADrawAndChoose1] == true {
+            return 2
+        }
+        
+        return 1
+    }
 }

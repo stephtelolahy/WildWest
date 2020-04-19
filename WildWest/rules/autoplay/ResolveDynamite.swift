@@ -6,31 +6,43 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-class ExplodeDynamiteMatcher: MoveMatcherProtocol {
+class ResolveDynamiteMatcher: MoveMatcherProtocol {
     
     func autoPlayMove(matching state: GameStateProtocol) -> GameMove? {
         guard let challenge = state.challenge,
             case .startTurn = challenge.name,
             let actor = state.player(state.turn),
-            let card = actor.inPlay.first(where: { $0.name == .dynamite }),
-            let topDeckCard = state.deck.first,
-            topDeckCard.makeDynamiteExplode else {
+            let card = actor.inPlay.first(where: { $0.name == .dynamite }) else {
                 return nil
         }
         
-        return GameMove(name: .explodeDynamite, actorId: actor.identifier, cardId: card.identifier)
+        let flippedCards = state.deck[0..<actor.flippedCardsCount]
+        let moveName: MoveName =
+            flippedCards.contains(where: { !$0.makeDynamiteExplode }) ? .passDynamite : .explodeDynamite
+        
+        return GameMove(name: moveName, actorId: actor.identifier, cardId: card.identifier)
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .explodeDynamite = move.name,
-            let actor = state.player(move.actorId),
+        switch move.name {
+        case .explodeDynamite:
+            return executeExplodeDynamite(move, in: state)
+            
+        case .passDynamite:
+            return executePassDynamite(move, in: state)
+            
+        default:
+            return nil
+        }
+    }
+    
+    private func executeExplodeDynamite(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+        guard let actor = state.player(move.actorId),
             let cardId = move.cardId else {
                 return nil
         }
         
-        var updates: [GameUpdate] = []
-        
-        updates.append(.flipOverFirstDeckCard)
+        var updates: [GameUpdate] = Array(1...actor.flippedCardsCount).map { _ in .flipOverFirstDeckCard }
         
         let dynamiteDamage = 3
         let immediateDamage = actor.health <= dynamiteDamage ? actor.health - 1 : dynamiteDamage
@@ -47,31 +59,18 @@ class ExplodeDynamiteMatcher: MoveMatcherProtocol {
         
         return updates
     }
-}
-
-class PassDynamiteMatcher: MoveMatcherProtocol {
     
-    func autoPlayMove(matching state: GameStateProtocol) -> GameMove? {
-        guard let challenge = state.challenge,
-            case .startTurn = challenge.name,
-            let actor = state.player(state.turn),
-            let card = actor.inPlay.first(where: { $0.name == .dynamite }),
-            let topDeckCard = state.deck.first,
-            !topDeckCard.makeDynamiteExplode else {
-                return nil
-        }
-        
-        return GameMove(name: .passDynamite, actorId: actor.identifier, cardId: card.identifier)
-    }
-    
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .passDynamite = move.name,
+    private func executePassDynamite(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+        guard let actor = state.player(move.actorId),
             let cardId = move.cardId else {
-                return nil
+            return nil
         }
         
-        return  [.flipOverFirstDeckCard,
-                 .playerPassInPlayOfOther(move.actorId, state.nextPlayer(after: move.actorId), cardId)]
+        var updates: [GameUpdate] = Array(1...actor.flippedCardsCount).map { _ in .flipOverFirstDeckCard }
+        
+        updates.append(.playerPassInPlayOfOther(move.actorId, state.nextPlayer(after: move.actorId), cardId))
+        
+        return updates
     }
 }
 

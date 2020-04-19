@@ -44,17 +44,31 @@ extension CardName {
     }
 }
 
+extension CardSuit {
+    
+    var isRed: Bool {
+        switch self {
+        case .hearts,
+             .diamonds:
+            return true
+            
+        default:
+            return false
+        }
+    }
+}
+
 extension CardProtocol {
     
     var makeEscapeFromJail: Bool {
         suit == .hearts
     }
     
-    var makeDynamiteExplode: Bool {
-        suit == .spades && ["2", "3", "4", "5", "6", "7", "8", "9"].contains(value)
-    }
-    
     var makeBarrelSuccessful: Bool {
         suit == .hearts
+    }
+    
+    var makeDynamiteExplode: Bool {
+        suit == .spades && ["2", "3", "4", "5", "6", "7", "8", "9"].contains(value)
     }
 }

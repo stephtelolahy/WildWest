@@ -36,6 +36,7 @@ class DelayedEventQueue: EventQueueProtocol {
     }
     
     func add(_ element: GameEvent) {
+        assert(!queue.contains(element), "Duplicate events")
         queue.append(element)
         runIfNeeded()
     }

@@ -13,17 +13,17 @@ class DiscardBangOnDuelMatcher: MoveMatcherProtocol {
             case .duel = challenge.name,
             let actorId = challenge.actorId(in: state),
             let actor = state.player(actorId),
-            let cards = actor.handCards(named: .bang) else {
+            let cards = actor.hand.filterOrNil({ $0.name == .bang }) else {
                 return nil
         }
         
         return cards.map {
-            GameMove(name: .discard, actorId: actor.identifier, cardId: $0.identifier)
+            GameMove(name: .discardBang, actorId: actor.identifier, cardId: $0.identifier)
         }
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .discard = move.name,
+        guard case .discardBang = move.name,
             let challenge = state.challenge,
             case .duel = challenge.name,
             let cardId = move.cardId else {
@@ -31,7 +31,7 @@ class DiscardBangOnDuelMatcher: MoveMatcherProtocol {
         }
         
         return [.playerDiscardHand(move.actorId, cardId),
-                .setChallenge(challenge.permutingTargets())]
+                .setChallenge(challenge.swappingTargets())]
     }
 }
 
@@ -42,17 +42,17 @@ class DiscardBangOnIndiansMatcher: MoveMatcherProtocol {
             case .indians = challenge.name,
             let actorId = challenge.actorId(in: state),
             let actor = state.player(actorId),
-            let cards = actor.handCards(named: .bang) else {
+            let cards = actor.hand.filterOrNil({ $0.name == .bang }) else {
                 return nil
         }
         
         return cards.map {
-            GameMove(name: .discard, actorId: actor.identifier, cardId: $0.identifier)
+            GameMove(name: .discardBang, actorId: actor.identifier, cardId: $0.identifier)
         }
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .discard = move.name,
+        guard case .discardBang = move.name,
             let challenge = state.challenge,
             case .indians = challenge.name,
             let cardId = move.cardId else {
@@ -60,6 +60,10 @@ class DiscardBangOnIndiansMatcher: MoveMatcherProtocol {
         }
         
         return [.playerDiscardHand(move.actorId, cardId),
-                .setChallenge(challenge.removing(move.actorId))]
+                .setChallenge(challenge.countering(for: move.actorId))]
     }
+}
+
+extension MoveName {
+    static let discardBang = MoveName("discardBang")
 }

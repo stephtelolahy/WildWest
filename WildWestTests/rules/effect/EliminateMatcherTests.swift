@@ -66,6 +66,30 @@ class EliminateMatcherTests: XCTestCase {
                                  .playerDiscardInPlay("p1", "c2")])
     }
     
+    func test_AnotherPlayerTakesAllCards_IfPlayerEliminatedAndHavingAbility() {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .holding(MockCardProtocol().identified(by: "c1"))
+            .playing(MockCardProtocol().identified(by: "c2"))
+            .health(is: 0)
+        let mockPlayer2 = MockPlayerProtocol()
+            .identified(by: "p2")
+            .abilities(are: [.takesAllCardsFromEliminatedPlayers: true])
+            .health(is: 1)
+        let mockState = MockGameStateProtocol()
+            .allPlayers(are: mockPlayer1, mockPlayer2)
+            .currentTurn(is: "p2")
+        let move = GameMove(name: .eliminate, actorId: "p1")
+        
+        // When
+        let updates = sut.execute(move, in: mockState)
+        
+        // Assert
+        XCTAssertEqual(updates, [.playerPullFromOtherHand("p2", "p1", "c1"),
+                                 .playerPullFromOtherInPlay("p2", "p1", "c2")])
+    }
+    
     func test_TriggerNextPlayerStartTurnChallenge_IfTurnPlayerIsEliminated() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
@@ -74,6 +98,7 @@ class EliminateMatcherTests: XCTestCase {
         let mockPlayer2 = MockPlayerProtocol()
             .identified(by: "p2")
             .health(is: 2)
+            .withDefault()
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p1")
             .allPlayers(are: mockPlayer1, mockPlayer2)

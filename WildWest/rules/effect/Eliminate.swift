@@ -25,8 +25,21 @@ class EliminateMatcher: MoveMatcherProtocol {
         }
         
         var updates: [GameUpdate] = []
-        actor.hand.forEach { updates.append(.playerDiscardHand(move.actorId, $0.identifier)) }
-        actor.inPlay.forEach { updates.append(.playerDiscardInPlay(move.actorId, $0.identifier)) }
+        
+        if let rewardedPlayer = state.players.first(where: {
+            $0.abilities[.takesAllCardsFromEliminatedPlayers] == true }) {
+            actor.hand.forEach {
+                updates.append(.playerPullFromOtherHand(rewardedPlayer.identifier, move.actorId, $0.identifier))
+            }
+            actor.inPlay.forEach {
+                updates.append(.playerPullFromOtherInPlay(rewardedPlayer.identifier, move.actorId, $0.identifier))
+            }
+            
+        } else {
+            actor.hand.forEach { updates.append(.playerDiscardHand(move.actorId, $0.identifier)) }
+            actor.inPlay.forEach { updates.append(.playerDiscardInPlay(move.actorId, $0.identifier)) }
+        }
+        
         if move.actorId == state.turn {
             updates.append(.setTurn(state.nextPlayer(after: move.actorId)))
             updates.append(.setChallenge(Challenge(name: .startTurn)))

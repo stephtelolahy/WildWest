@@ -291,6 +291,13 @@
                                     <constraint firstItem="DFl-Ga-f06" firstAttribute="width" secondItem="F8P-W3-OtS" secondAttribute="width" id="6WP-px-Oyb"/>
                                 </constraints>
                             </stackView>
+                            <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[]3" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DPE-Sr-FGm">
+                                <rect key="frame" x="254" y="179.5" width="13.5" height="16"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YnA-A3-EaS" userLabel="handCollectionView">
                                 <rect key="frame" x="440" y="262.5" width="227" height="112.5"/>
                                 <color key="backgroundColor" red="0.75559097529999997" green="0.67946600909999999" blue="0.55683469770000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -424,6 +431,7 @@
                             <constraint firstItem="cXD-5P-evL" firstAttribute="bottom" secondItem="YnA-A3-EaS" secondAttribute="bottom" id="3mM-y9-BiC"/>
                             <constraint firstItem="iCj-xh-rDL" firstAttribute="height" secondItem="SPv-lk-pld" secondAttribute="height" multiplier="0.3" id="7xg-Ei-4GN"/>
                             <constraint firstItem="cXD-5P-evL" firstAttribute="bottom" secondItem="iCj-xh-rDL" secondAttribute="bottom" id="CxB-z1-cEN"/>
+                            <constraint firstItem="DPE-Sr-FGm" firstAttribute="centerY" secondItem="l2k-9K-ciW" secondAttribute="centerY" id="EUE-5T-9PX"/>
                             <constraint firstItem="Cuo-aq-X8E" firstAttribute="leading" secondItem="cXD-5P-evL" secondAttribute="leading" constant="40" id="JVr-9s-af5"/>
                             <constraint firstItem="Cuo-aq-X8E" firstAttribute="bottom" secondItem="cXD-5P-evL" secondAttribute="bottom" id="LJB-Ur-xby"/>
                             <constraint firstItem="l2k-9K-ciW" firstAttribute="centerY" secondItem="SPv-lk-pld" secondAttribute="centerY" id="OXH-v4-UyK"/>
@@ -431,6 +439,7 @@
                             <constraint firstItem="YnA-A3-EaS" firstAttribute="top" secondItem="68M-B9-4Mh" secondAttribute="bottom" constant="8" id="Qfm-k7-VP6"/>
                             <constraint firstItem="Cuo-aq-X8E" firstAttribute="top" secondItem="H6O-tM-KGf" secondAttribute="bottom" id="RNM-AN-5pQ"/>
                             <constraint firstItem="l2k-9K-ciW" firstAttribute="centerX" secondItem="SPv-lk-pld" secondAttribute="centerX" id="S6a-l8-Bom"/>
+                            <constraint firstItem="l2k-9K-ciW" firstAttribute="leading" secondItem="DPE-Sr-FGm" secondAttribute="trailing" constant="4" id="ZQp-D1-RUC"/>
                             <constraint firstItem="iCj-xh-rDL" firstAttribute="width" secondItem="SPv-lk-pld" secondAttribute="width" multiplier="0.34" id="bNk-aD-3o8"/>
                             <constraint firstItem="cXD-5P-evL" firstAttribute="trailing" secondItem="68M-B9-4Mh" secondAttribute="trailing" id="h0v-wv-P8a"/>
                             <constraint firstItem="gAP-Di-VFz" firstAttribute="centerX" secondItem="68M-B9-4Mh" secondAttribute="centerX" id="jlR-z9-iea"/>
@@ -440,11 +449,13 @@
                             <constraint firstItem="H6O-tM-KGf" firstAttribute="top" secondItem="cXD-5P-evL" secondAttribute="top" id="tis-nN-sqh"/>
                             <constraint firstItem="Cuo-aq-X8E" firstAttribute="trailing" secondItem="cXD-5P-evL" secondAttribute="trailing" constant="-40" id="wvt-Xt-cnA"/>
                             <constraint firstItem="YnA-A3-EaS" firstAttribute="width" secondItem="SPv-lk-pld" secondAttribute="width" multiplier="0.34" id="zFW-Nu-qia"/>
+                            <constraint firstItem="DPE-Sr-FGm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cXD-5P-evL" secondAttribute="leading" id="zkq-tz-2UZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cXD-5P-evL"/>
                     </view>
                     <connections>
                         <outlet property="actionsCollectionView" destination="YnA-A3-EaS" id="HoZ-WM-M1l"/>
+                        <outlet property="deckCountLabel" destination="DPE-Sr-FGm" id="sid-Pq-1xh"/>
                         <outlet property="deckImageView" destination="DFl-Ga-f06" id="JbT-N7-Ky2"/>
                         <outlet property="discardImageView" destination="F8P-W3-OtS" id="OEd-7U-BS6"/>
                         <outlet property="endTurnButton" destination="68M-B9-4Mh" id="91V-gZ-4V1"/>
