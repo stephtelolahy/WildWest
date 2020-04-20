@@ -33,6 +33,7 @@ class GameViewController: UIViewController, Subscribable {
     private var messages: [String] = []
     private var endTurnMoves: [GameMove] = []
     private var latestState: GameStateProtocol?
+    private var latestMove: GameMove?
     private var moveSoundPlayer: MoveSoundPlayerProtocol?
     
     private lazy var statsBuilder: StatsBuilderProtocol = {
@@ -123,7 +124,7 @@ private extension GameViewController {
     func processState(_ state: GameStateProtocol) {
         latestState = state
         
-        playerItems = playerAdapter.buildItems(state: state, scores: statsBuilder.scores)
+        playerItems = playerAdapter.buildItems(state: state, latestMove: latestMove, scores: statsBuilder.scores)
         playersCollectionView.reloadData()
         
         actionItems = actionsAdapter.buildActions(state: state)
@@ -140,6 +141,8 @@ private extension GameViewController {
     }
     
     func processExecutedMove(_ move: GameMove) {
+        latestMove = move
+        
         messages.append(moveDescriptor.description(for: move))
         messageTableView.reloadDataScrollingAtBottom()
         
