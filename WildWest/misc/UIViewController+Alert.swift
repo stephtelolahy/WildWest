@@ -39,8 +39,8 @@ extension UIViewController {
         
         if cancelable {
             alertController.addAction(UIAlertAction(title: "Cancel",
-            style: .cancel,
-            handler: nil))
+                                                    style: .cancel,
+                                                    handler: nil))
         }
         
         present(alertController, animated: true)

@@ -41,12 +41,16 @@ class PlayMoveSelector: PlayMoveSelectorProtocol {
             return
         }
         
-        if moves.count == 1 {
-            completion(moves[0])
+        if moves.count == 1,
+            let uniqueMove = moves.first,
+            uniqueMove.name == .play {
+            completion(uniqueMove)
             return
         }
         
-        // TODO: select multiple moves
-        fatalError("Illegal state")
+        let choices: [String] = moves.map { $0.cardId ?? $0.name.rawValue }
+        viewController.select(title: "Select", choices: choices) { index in
+            completion(moves[index])
+        }
     }
 }

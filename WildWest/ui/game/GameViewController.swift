@@ -14,6 +14,7 @@ class GameViewController: UIViewController, Subscribable {
     // MARK: IBOutlets
     
     @IBOutlet private weak var endTurnButton: UIButton!
+    @IBOutlet private weak var otherMovesButton: UIButton!
     @IBOutlet private weak var playersCollectionView: UICollectionView!
     @IBOutlet private weak var actionsCollectionView: UICollectionView!
     @IBOutlet private weak var messageTableView: UITableView!
@@ -32,9 +33,11 @@ class GameViewController: UIViewController, Subscribable {
     private var actionItems: [ActionItem] = []
     private var messages: [String] = []
     private var endTurnMove: GameMove?
+    private var otherMoves: [GameMove] = []
     private var latestState: GameStateProtocol?
     private var latestMove: GameMove?
     private var moveSoundPlayer: MoveSoundPlayerProtocol?
+    private var reactionMoveSelector: ReactionMoveSelectorProtocol?
     
     private lazy var statsBuilder: StatsBuilderProtocol = {
         guard let sheriff = engine?.allPlayers.first(where: { $0.role == .sheriff }) else {
@@ -50,14 +53,6 @@ class GameViewController: UIViewController, Subscribable {
     private lazy var instructionBuilder = InstructionBuilder()
     private lazy var playMoveSelector = PlayMoveSelector(viewController: self)
     
-    private lazy var reactionMoveSelector: ReactionMoveSelectorProtocol = {
-        if UserPreferences.shared.assistedMode {
-            return AssistedReactionMoveSelector(ai: RandomAI())
-        } else {
-            return ReactionMoveSelector(viewController: self)
-        }
-    }()
-    
     private lazy var playerDescriptor = PlayerDescriptor(viewController: self)
     
     private lazy var updateAnimator = UpdateAnimator(viewController: self,
@@ -71,6 +66,12 @@ class GameViewController: UIViewController, Subscribable {
         
         if UserPreferences.shared.enableSound {
             moveSoundPlayer = MoveSoundPlayer()
+        }
+        
+        if UserPreferences.shared.assistedMode {
+            reactionMoveSelector = AssistedReactionMoveSelector(ai: RandomAI())
+        } else {
+            reactionMoveSelector = ReactionMoveSelector(viewController: self)
         }
         
         let layout = playersCollectionView.collectionViewLayout as? GameCollectionViewLayout
@@ -119,6 +120,13 @@ class GameViewController: UIViewController, Subscribable {
         
         engine?.execute(move)
     }
+    
+    @IBAction private func otherMovesTapped(_ sender: Any) {
+        playMoveSelector.selectMove(within: otherMoves) { [weak self] move in
+            self?.engine?.execute(move)
+        }
+    }
+    
 }
 
 private extension GameViewController {
@@ -171,13 +179,17 @@ private extension GameViewController {
         
         if state.challenge != nil,
             !moves.isEmpty {
-            reactionMoveSelector.selectMove(within: moves, state: state) { [weak self] move in
+            reactionMoveSelector?.selectMove(within: moves, state: state) { [weak self] move in
                 self?.engine?.execute(move)
             }
         }
         
         endTurnMove = moves.first(where: { $0.name == .endTurn })
         endTurnButton.isEnabled = endTurnMove != nil
+        
+        let ownedCardIds: [String] = state.player(controlledPlayerId)?.hand.map { $0.identifier } ?? []
+        otherMoves = moves.filter({ !ownedCardIds.contains($0.cardId ?? "") && $0.name != .endTurn })
+        otherMovesButton.isEnabled = !otherMoves.isEmpty
     }
     
     func showGameOver(outcome: GameOutcome) {
