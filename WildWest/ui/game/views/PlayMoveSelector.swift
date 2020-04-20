@@ -25,7 +25,7 @@ class PlayMoveSelector: PlayMoveSelectorProtocol {
             return
         }
         
-        if moves.contains(where: { $0.targetId != nil }) {
+        if moves.allSatisfy({ $0.targetId != nil }) {
             let targetIds = moves.compactMap { $0.targetId }
             viewController.select(title: "Select player", choices: targetIds) { index in
                 completion(moves[index])
@@ -33,7 +33,7 @@ class PlayMoveSelector: PlayMoveSelectorProtocol {
             return
         }
         
-        if moves.contains(where: { $0.targetCard != nil }) {
+        if moves.allSatisfy({ $0.targetCard != nil }) {
             let targets = moves.compactMap { $0.targetCard?.description }
             viewController.select(title: "Select target card", choices: targets) { index in
                 completion(moves[index])
@@ -41,11 +41,12 @@ class PlayMoveSelector: PlayMoveSelectorProtocol {
             return
         }
         
-        if let uniqueMove = moves.first {
-            completion(uniqueMove)
+        if moves.count == 1 {
+            completion(moves[0])
             return
         }
         
+        // TODO: select multiple moves
         fatalError("Illegal state")
     }
 }

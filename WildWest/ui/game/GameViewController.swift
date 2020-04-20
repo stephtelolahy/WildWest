@@ -31,7 +31,7 @@ class GameViewController: UIViewController, Subscribable {
     private var playerItems: [PlayerItem] = []
     private var actionItems: [ActionItem] = []
     private var messages: [String] = []
-    private var endTurnMoves: [GameMove] = []
+    private var endTurnMove: GameMove?
     private var latestState: GameStateProtocol?
     private var latestMove: GameMove?
     private var moveSoundPlayer: MoveSoundPlayerProtocol?
@@ -113,9 +113,11 @@ class GameViewController: UIViewController, Subscribable {
     }
     
     @IBAction private func endTurnTapped(_ sender: Any) {
-        playMoveSelector.selectMove(within: endTurnMoves) { [weak self] move in
-            self?.engine?.execute(move)
+        guard let move = endTurnMove else {
+            return
         }
+        
+        engine?.execute(move)
     }
 }
 
@@ -174,8 +176,8 @@ private extension GameViewController {
             }
         }
         
-        endTurnMoves = moves.filter { $0.name == .endTurn }
-        endTurnButton.isEnabled = !endTurnMoves.isEmpty
+        endTurnMove = moves.first(where: { $0.name == .endTurn })
+        endTurnButton.isEnabled = endTurnMove != nil
     }
     
     func showGameOver(outcome: GameOutcome) {

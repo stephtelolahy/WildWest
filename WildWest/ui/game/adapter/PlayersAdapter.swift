@@ -25,12 +25,15 @@ class PlayersAdapter: PlayersAdapterProtocol {
     func buildItems(state: GameStateProtocol,
                     latestMove: GameMove?,
                     scores: [String: Int]) -> [PlayerItem] {
-        state.allPlayers.map {
-            PlayerItem(player: $0,
-                       isTurn: $0.identifier == state.turn,
-                       isAttacked: state.isPlayerAttacked($0.identifier) || latestMove?.isPlayerAttacked($0.identifier) == true,
-                       isHelped: state.isPlayerHelped($0.identifier) || latestMove?.isPlayerHelped($0.identifier) == true,
-                       score: scores[$0.identifier])
+        state.allPlayers.map { player in
+            let playerId = player.identifier
+            let isAttacked = state.isPlayerAttacked(playerId) || latestMove?.isPlayerAttacked(playerId) == true
+            let isHelped = state.isPlayerHelped(playerId) || latestMove?.isPlayerHelped(playerId) == true
+            return PlayerItem(player: player,
+                              isTurn: player.identifier == state.turn,
+                              isAttacked: isAttacked,
+                              isHelped: isHelped,
+                              score: scores[playerId])
         }
     }
 }
