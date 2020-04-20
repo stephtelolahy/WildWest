@@ -20,12 +20,12 @@ class InstructionBuilder: InstructionBuilderProtocol {
             return "viewing game"
         }
         
-        if controlledPlayerId != state.turn {
-            return "waiting others to play"
-        }
-        
         if let challenge = state.challenge {
             return challenge.name.rawValue
+        }
+        
+        if controlledPlayerId != state.turn {
+            return "waiting others to play"
         }
         
         return "play any card"

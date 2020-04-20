@@ -59,7 +59,6 @@ class MoveSoundPlayer: MoveSoundPlayerProtocol {
             "GeneralStore": "Horse Galloping-SoundBible.com-1451398148",
             "Indians": "Peacock-SoundBible.com-1698361099",
             "Jail": "Metal Latch-SoundBible.com-736691159",
-            "pass": "342229_christopherderp_hurt-1-male (online-audio-converter.com)",
             "Missed": "Western Ricochet-SoundBible.com-1725886901",
             "Panic": "Slap-SoundMaster13-49669815",
             "Dynamite": "Fuse Burning-SoundBible.com-1372982430",
@@ -81,6 +80,7 @@ class MoveSoundPlayer: MoveSoundPlayerProtocol {
             "drawsCardWhenHandIsEmpty": "Slide Closed-SoundBible.com-1521580537",
             "drawsAnotherCardIfSecondDrawIsRedSuit": "Slide Closed-SoundBible.com-1521580537",
             "drawsCardFromPlayerDamagedHim": "Slap-SoundMaster13-49669815",
-            "discardExcessCards": "flyby-Conor-1500306612"
+            "discardExcessCards": "flyby-Conor-1500306612",
+            "pass": "342229_christopherderp_hurt-1-male (online-audio-converter.com)"
         ]
 }

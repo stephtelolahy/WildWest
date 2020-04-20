@@ -21,7 +21,7 @@ class UserPreferences {
     @UserDefaultsStored("update_delay", defaultValue: 0.6)
     var updateDelay: Double
     
-    @UserDefaultsStored("assisted_mode", defaultValue: true)
+    @UserDefaultsStored("assisted_mode", defaultValue: false)
     var assistedMode: Bool
     
     @UserDefaultsStored("simulation_mode", defaultValue: false)

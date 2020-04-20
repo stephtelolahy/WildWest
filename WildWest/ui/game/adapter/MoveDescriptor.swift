@@ -38,7 +38,6 @@ class MoveDescriptor: MoveDescriptorProtocol {
             "GeneralStore": "💰",
             "Indians": "💢",
             "Jail": "🚧",
-            "pass": "❤️",
             "Missed": "😝",
             "Panic": "‼️",
             "Dynamite": "💣",
@@ -60,6 +59,7 @@ class MoveDescriptor: MoveDescriptorProtocol {
             "drawsCardFromPlayerDamagedHim": "‼️",
             "drawsCardWhenHandIsEmpty": "💰",
             "drawsAnotherCardIfSecondDrawIsRedSuit": "💰",
-            "discardExcessCards": "❌"
+            "discardExcessCards": "❌",
+            "pass": "❤️"
         ]
 }

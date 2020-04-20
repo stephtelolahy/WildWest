@@ -50,29 +50,3 @@ class PlayMoveSelector: PlayMoveSelectorProtocol {
         fatalError("Illegal state")
     }
 }
-
-private extension UIViewController {
-    
-    func select(title: String, choices: [String], completion: @escaping((Int) -> Void)) {
-        let alertController = UIAlertController(title: title,
-                                                message: nil,
-                                                preferredStyle: .alert)
-        
-        choices.forEach { choice in
-            alertController.addAction(UIAlertAction(title: choice,
-                                                    style: .default,
-                                                    handler: { _ in
-                                                        guard let index = choices.firstIndex(of: choice) else {
-                                                            return
-                                                        }
-                                                        completion(index)
-            }))
-        }
-        
-        alertController.addAction(UIAlertAction(title: "Cancel",
-                                                style: .cancel,
-                                                handler: nil))
-        
-        present(alertController, animated: true)
-    }
-}
