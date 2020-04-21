@@ -34,7 +34,7 @@ class CatBalouMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(moves, [
-            GameMove(name: .play, actorId: "p1", cardId: "c1", targetCard: TargetCard(ownerId: "p2", source: .randomHand))
+            GameMove(name: .catBalou, actorId: "p1", cardId: "c1", targetCard: TargetCard(ownerId: "p2", source: .randomHand))
         ])
     }
     
@@ -60,7 +60,7 @@ class CatBalouMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(moves, [
-            GameMove(name: .play, actorId: "p1", cardId: "c1", targetCard: TargetCard(ownerId: "p2", source: .inPlay("c2")))
+            GameMove(name: .catBalou, actorId: "p1", cardId: "c1", targetCard: TargetCard(ownerId: "p2", source: .inPlay("c2")))
         ])
     }
     
@@ -98,7 +98,7 @@ class CatBalouMatcherTests: XCTestCase {
             .holding(MockCardProtocol().identified(by: "c2"))
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1, mockPlayer2)
-        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", targetCard: TargetCard(ownerId: "p2", source: .randomHand))
+        let move = GameMove(name: .catBalou, actorId: "p1", cardId: "c1", targetCard: TargetCard(ownerId: "p2", source: .randomHand))
         
         // When
         let updates = sut.execute(move, in: mockState)
@@ -118,7 +118,7 @@ class CatBalouMatcherTests: XCTestCase {
             .playing(MockCardProtocol().identified(by: "c2"))
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1, mockPlayer2)
-        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", targetCard: TargetCard(ownerId: "p2", source: .inPlay("c2")))
+        let move = GameMove(name: .catBalou, actorId: "p1", cardId: "c1", targetCard: TargetCard(ownerId: "p2", source: .inPlay("c2")))
         
         // When
         let updates = sut.execute(move, in: mockState)
