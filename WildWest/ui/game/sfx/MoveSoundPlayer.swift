@@ -43,6 +43,7 @@ class MoveSoundPlayer: MoveSoundPlayerProtocol {
         [
             "Bang": "Gun_loud-Soundmaster_-88363983",
             "Beer": "Slurping 2-SoundBible.com-1269549524",
+            "discard2CardsFor1Life": "Slurping 2-SoundBible.com-1269549524",
             "CatBalou": "flyby-Conor-1500306612",
             "Choose": "Slide Closed-SoundBible.com-1521580537",
             "Duel": "shotgun-old_school-RA_The_Sun_God-1129942741",
@@ -59,7 +60,6 @@ class MoveSoundPlayer: MoveSoundPlayerProtocol {
             "GeneralStore": "Horse Galloping-SoundBible.com-1451398148",
             "Indians": "Peacock-SoundBible.com-1698361099",
             "Jail": "Metal Latch-SoundBible.com-736691159",
-            "pass": "342229_christopherderp_hurt-1-male (online-audio-converter.com)",
             "Missed": "Western Ricochet-SoundBible.com-1725886901",
             "Panic": "Slap-SoundMaster13-49669815",
             "Dynamite": "Fuse Burning-SoundBible.com-1372982430",
@@ -74,13 +74,14 @@ class MoveSoundPlayer: MoveSoundPlayerProtocol {
             "escapeFromJail": "Ta Da-SoundBible.com-1884170640",
             "useBarrel": "Western Ricochet-SoundBible.com-1725886901",
             "failBarrel": "Metal Clang-SoundBible.com-19572601",
-            "explodeDynamite": "Big Bomb-SoundBible.com-1219802495",
+            "dynamiteExploded": "Big Bomb-SoundBible.com-1219802495",
             "passDynamite": "Fuse Burning-SoundBible.com-1372982430",
             "StartTurn": "",
             "drawsCardOnLoseHealth": "Slide Closed-SoundBible.com-1521580537",
             "drawsCardWhenHandIsEmpty": "Slide Closed-SoundBible.com-1521580537",
             "drawsAnotherCardIfSecondDrawIsRedSuit": "Slide Closed-SoundBible.com-1521580537",
             "drawsCardFromPlayerDamagedHim": "Slap-SoundMaster13-49669815",
-            "discardExcessCards": "flyby-Conor-1500306612"
+            "discardExcessCards": "flyby-Conor-1500306612",
+            "pass": "342229_christopherderp_hurt-1-male (online-audio-converter.com)"
         ]
 }

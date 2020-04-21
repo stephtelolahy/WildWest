@@ -29,14 +29,14 @@ class ResolveDynamiteMatcherTests: XCTestCase {
         let move = sut.autoPlayMove(matching: mockState)
         
         // assert
-        XCTAssertEqual(move, GameMove(name: .explodeDynamite, actorId: "p1", cardId: "c1"))
+        XCTAssertEqual(move, GameMove(name: .dynamiteExploded, actorId: "p1", cardId: "c1"))
     }
     
     func test_Deal3Damages_IfDynamiteExplodes_OnHealthIs4() {
         // Given
         let mockState = MockGameStateProtocol()
             .players(are: MockPlayerProtocol().identified(by: "p1").health(is: 4).withDefault())
-        let move = GameMove(name: .explodeDynamite, actorId: "p1", cardId: "c1")
+        let move = GameMove(name: .dynamiteExploded, actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(move, in: mockState)
@@ -51,7 +51,7 @@ class ResolveDynamiteMatcherTests: XCTestCase {
         // Given
         let mockState = MockGameStateProtocol()
             .players(are: MockPlayerProtocol().identified(by: "p1").health(is: 3).withDefault())
-        let move = GameMove(name: .explodeDynamite, actorId: "p1", cardId: "c1")
+        let move = GameMove(name: .dynamiteExploded, actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(move, in: mockState)
@@ -67,7 +67,7 @@ class ResolveDynamiteMatcherTests: XCTestCase {
         // Given
         let mockState = MockGameStateProtocol()
             .players(are: MockPlayerProtocol().identified(by: "p1").health(is: 2).withDefault())
-        let move = GameMove(name: .explodeDynamite, actorId: "p1", cardId: "c1")
+        let move = GameMove(name: .dynamiteExploded, actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(move, in: mockState)
@@ -83,7 +83,7 @@ class ResolveDynamiteMatcherTests: XCTestCase {
         // Given
         let mockState = MockGameStateProtocol()
             .players(are: MockPlayerProtocol().identified(by: "p1").health(is: 1).withDefault())
-        let move = GameMove(name: .explodeDynamite, actorId: "p1", cardId: "c1")
+        let move = GameMove(name: .dynamiteExploded, actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(move, in: mockState)

@@ -18,15 +18,15 @@ class ResolveDynamiteMatcher: MoveMatcherProtocol {
         
         let flippedCards = state.deck[0..<actor.flippedCardsCount]
         let moveName: MoveName =
-            flippedCards.contains(where: { !$0.makeDynamiteExplode }) ? .passDynamite : .explodeDynamite
+            flippedCards.contains(where: { !$0.makeDynamiteExplode }) ? .passDynamite : .dynamiteExploded
         
         return GameMove(name: moveName, actorId: actor.identifier, cardId: card.identifier)
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         switch move.name {
-        case .explodeDynamite:
-            return executeExplodeDynamite(move, in: state)
+        case .dynamiteExploded:
+            return executeDynamiteExploded(move, in: state)
             
         case .passDynamite:
             return executePassDynamite(move, in: state)
@@ -36,7 +36,7 @@ class ResolveDynamiteMatcher: MoveMatcherProtocol {
         }
     }
     
-    private func executeExplodeDynamite(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+    private func executeDynamiteExploded(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard let actor = state.player(move.actorId),
             let cardId = move.cardId else {
                 return nil
@@ -75,6 +75,6 @@ class ResolveDynamiteMatcher: MoveMatcherProtocol {
 }
 
 extension MoveName {
-    static let explodeDynamite = MoveName("explodeDynamite")
+    static let dynamiteExploded = MoveName("dynamiteExploded")
     static let passDynamite = MoveName("passDynamite")
 }

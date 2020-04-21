@@ -16,19 +16,24 @@ struct PlayerItem {
 
 protocol PlayersAdapterProtocol {
     func buildItems(state: GameStateProtocol,
+                    latestMove: GameMove?,
                     scores: [String: Int]) -> [PlayerItem]
 }
 
 class PlayersAdapter: PlayersAdapterProtocol {
     
     func buildItems(state: GameStateProtocol,
+                    latestMove: GameMove?,
                     scores: [String: Int]) -> [PlayerItem] {
-        state.allPlayers.map {
-            PlayerItem(player: $0,
-                       isTurn: $0.identifier == state.turn,
-                       isAttacked: state.isPlayerAttacked($0.identifier),
-                       isHelped: state.isPlayerHelped($0.identifier),
-                       score: scores[$0.identifier])
+        state.allPlayers.map { player in
+            let playerId = player.identifier
+            let isAttacked = state.isPlayerAttacked(playerId) || latestMove?.isPlayerAttacked(playerId) == true
+            let isHelped = state.isPlayerHelped(playerId) || latestMove?.isPlayerHelped(playerId) == true
+            return PlayerItem(player: player,
+                              isTurn: player.identifier == state.turn,
+                              isAttacked: isAttacked,
+                              isHelped: isHelped,
+                              score: scores[playerId])
         }
     }
 }
@@ -65,5 +70,30 @@ private extension GameStateProtocol {
             }
         }
         return false
+    }
+}
+
+private extension GameMove {
+    func isPlayerAttacked(_ playerId: String) -> Bool {
+        switch MoveClassifier().classify(self) {
+        case let .strongAttack(_, targetId):
+            return targetId == playerId
+            
+        case let .weakAttack(_, targetId):
+            return targetId == playerId
+            
+        default:
+            return false
+        }
+    }
+    
+    func isPlayerHelped(_ playerId: String) -> Bool {
+        switch MoveClassifier().classify(self) {
+        case let .help(_, targetId):
+            return targetId == playerId
+            
+        default:
+            return false
+        }
     }
 }

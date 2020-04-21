@@ -22,6 +22,5 @@ enum ChallengeName: String {
     case gatling            // counter gatling (damage=1) with missed or beer if last life point
     case indians            // counter indians (damage=1) with bang or beer if last life point
     case generalStore       // choose card from general store
-    case dynamiteExploded   // avoid elimination after dynamite exploded (damage=1..3) with beer 
-    case discardExcessCards // discard cards until hand cards = life points
+    case dynamiteExploded   // avoid elimination after dynamite exploded (damage=1..3) with beer
 }

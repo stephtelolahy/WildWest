@@ -55,7 +55,6 @@ class GameConfiguration {
             DiscardBeerMatcher(),
             PassMatcher(),
             ChooseCardMatcher(),
-            DiscardExcessCardMatcher(),
             
             // Effect
             EliminateMatcher(),
@@ -65,7 +64,8 @@ class GameConfiguration {
             // Special
             DrawsCardOnLoseHealthMatcher(),
             DrawsCardFromPlayerDamagedHimMatcher(),
-            DrawsCardWhenHandIsEmptyMatcher()
+            DrawsCardWhenHandIsEmptyMatcher(),
+            Discard2CardsFor1LifeMatcher()
         ]
     }
 }

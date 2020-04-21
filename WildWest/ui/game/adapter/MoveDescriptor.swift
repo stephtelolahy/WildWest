@@ -22,6 +22,7 @@ class MoveDescriptor: MoveDescriptorProtocol {
         [
             "Bang": "🔫",
             "Beer": "🍺",
+            "discard2CardsFor1Life": "🍺",
             "CatBalou": "❌",
             "Choose": "💰",
             "Duel": "🔫",
@@ -38,7 +39,6 @@ class MoveDescriptor: MoveDescriptorProtocol {
             "GeneralStore": "💰",
             "Indians": "💢",
             "Jail": "🚧",
-            "pass": "❤️",
             "Missed": "😝",
             "Panic": "‼️",
             "Dynamite": "💣",
@@ -54,12 +54,13 @@ class MoveDescriptor: MoveDescriptorProtocol {
             "escapeFromJail": "😅",
             "useBarrel": "😝",
             "failBarrel": "😞",
-            "explodeDynamite": "💥",
+            "dynamiteExploded": "💥",
             "passDynamite": "💣",
             "drawsCardOnLoseHealth": "💰",
             "drawsCardFromPlayerDamagedHim": "‼️",
             "drawsCardWhenHandIsEmpty": "💰",
             "drawsAnotherCardIfSecondDrawIsRedSuit": "💰",
-            "discardExcessCards": "❌"
+            "discardExcessCards": "❌",
+            "pass": "❤️"
         ]
 }

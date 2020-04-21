@@ -13,6 +13,7 @@ struct GameMove: Equatable {
     var cardId: String?
     var targetId: String?
     var targetCard: TargetCard?
+    var discardIds: [String]?
 }
 
 struct MoveName: RawRepresentable, Equatable {

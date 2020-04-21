@@ -25,7 +25,7 @@ class PlayMoveSelector: PlayMoveSelectorProtocol {
             return
         }
         
-        if moves.contains(where: { $0.targetId != nil }) {
+        if moves.allSatisfy({ $0.targetId != nil }) {
             let targetIds = moves.compactMap { $0.targetId }
             viewController.select(title: "Select player", choices: targetIds) { index in
                 completion(moves[index])
@@ -33,7 +33,7 @@ class PlayMoveSelector: PlayMoveSelectorProtocol {
             return
         }
         
-        if moves.contains(where: { $0.targetCard != nil }) {
+        if moves.allSatisfy({ $0.targetCard != nil }) {
             let targets = moves.compactMap { $0.targetCard?.description }
             viewController.select(title: "Select target card", choices: targets) { index in
                 completion(moves[index])
@@ -41,37 +41,24 @@ class PlayMoveSelector: PlayMoveSelectorProtocol {
             return
         }
         
-        if let uniqueMove = moves.first {
+        if moves.allSatisfy({ $0.discardIds != nil }) {
+            let options = moves.compactMap { $0.discardIds?.joined(separator: ", ") }
+            viewController.select(title: "Select cards to discard", choices: options) { index in
+                completion(moves[index])
+            }
+            return
+        }
+        
+        if moves.count == 1,
+            let uniqueMove = moves.first,
+            uniqueMove.name == .play || uniqueMove.name == .endTurn {
             completion(uniqueMove)
             return
         }
         
-        fatalError("Illegal state")
-    }
-}
-
-private extension UIViewController {
-    
-    func select(title: String, choices: [String], completion: @escaping((Int) -> Void)) {
-        let alertController = UIAlertController(title: title,
-                                                message: nil,
-                                                preferredStyle: .alert)
-        
-        choices.forEach { choice in
-            alertController.addAction(UIAlertAction(title: choice,
-                                                    style: .default,
-                                                    handler: { _ in
-                                                        guard let index = choices.firstIndex(of: choice) else {
-                                                            return
-                                                        }
-                                                        completion(index)
-            }))
+        let choices: [String] = moves.map { $0.cardId ?? $0.name.rawValue }
+        viewController.select(title: moves[0].name.rawValue, choices: choices) { index in
+            completion(moves[index])
         }
-        
-        alertController.addAction(UIAlertAction(title: "Cancel",
-                                                style: .cancel,
-                                                handler: nil))
-        
-        present(alertController, animated: true)
     }
 }

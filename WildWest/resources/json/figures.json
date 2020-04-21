@@ -93,7 +93,10 @@
         "name": "sidKetchum",
         "bullets": 4,
         "imageName": "01_sidketchum",
-        "description": "at any time, he may discard 2 cards from his hand to regain one life point. If he is willing and able, he can use this ability more than once at a time. But remember: you cannot have more life points than your starting amount!"
+        "description": "at any time, he may discard 2 cards from his hand to regain one life point. If he is willing and able, he can use this ability more than once at a time. But remember: you cannot have more life points than your starting amount!",
+        "abilities": {
+            "canDiscard2CardsFor1Life": true
+        }
     },
     {
         "name": "slabTheKiller",

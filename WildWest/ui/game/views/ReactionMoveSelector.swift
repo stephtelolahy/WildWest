@@ -22,41 +22,12 @@ class ReactionMoveSelector: ReactionMoveSelectorProtocol {
     
     func selectMove(within moves: [GameMove], state: GameStateProtocol, completion: @escaping (GameMove) -> Void) {
         guard let challenge = state.challenge else {
-            return
+            fatalError("Illegal state")
         }
         
-        var choices: [String] = []
-        switch challenge.name {
-        case .generalStore, .discardExcessCards:
-            choices = moves.compactMap { $0.cardId }
-            
-        default:
-            choices = moves.map { [$0.name.rawValue, $0.cardId].compactMap { $0 }.joined(separator: " ") }
-        }
-        
-        viewController.selectWithoutCancel(title: challenge.description(in: state), choices: choices) { index in
+        let choices: [String] = moves.map { $0.cardId ?? $0.name.rawValue }
+        viewController.select(title: challenge.description(in: state), choices: choices, cancelable: false) { index in
             completion(moves[index])
         }
-    }
-}
-
-private extension UIViewController {
-    func selectWithoutCancel(title: String, choices: [String], completion: @escaping((Int) -> Void)) {
-        let alertController = UIAlertController(title: title,
-                                                message: nil,
-                                                preferredStyle: .alert)
-        
-        choices.forEach { choice in
-            alertController.addAction(UIAlertAction(title: choice,
-                                                    style: .default,
-                                                    handler: { _ in
-                                                        guard let index = choices.firstIndex(of: choice) else {
-                                                            return
-                                                        }
-                                                        completion(index)
-            }))
-        }
-        
-        forcePresent(alertController, animated: true)
     }
 }
