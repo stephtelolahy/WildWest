@@ -9,6 +9,7 @@
 
 import UIKit
 import AVFoundation
+import SafariServices
 
 class MenuViewController: UIViewController {
     
@@ -85,7 +86,14 @@ class MenuViewController: UIViewController {
     @IBAction private func logoButtonTapped(_ sender: Any) {
         let rulesUrl = "http://www.dvgiochi.net/bang/bang_rules.pdf"
         if let url = URL(string: rulesUrl) {
-            openUrl(url)
+            if #available(iOS 11.0, *) {
+                let config = SFSafariViewController.Configuration()
+                config.entersReaderIfAvailable = true
+                let safariViewController = SFSafariViewController(url: url, configuration: config)
+                present(safariViewController, animated: true)
+            } else {
+                openUrl(url)
+            }
         }
     }
 }

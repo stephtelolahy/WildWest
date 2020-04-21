@@ -824,8 +824,8 @@
 			isa = PBXGroup;
 			children = (
 				AD6A958D24202B0200D0F937 /* GameConfiguration.swift */,
-				AD374E51242146180025FD4A /* autoplay */,
 				AD374E502421460B0025FD4A /* manual */,
+				AD374E51242146180025FD4A /* autoplay */,
 				AD374E52242146720025FD4A /* effect */,
 				3380B0352436418C0040F027 /* special */,
 			);

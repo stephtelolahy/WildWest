@@ -75,6 +75,6 @@ class ResolveDynamiteMatcher: MoveMatcherProtocol {
 }
 
 extension MoveName {
-    static let dynamiteExploded = MoveName("dynamiteExploded")
     static let passDynamite = MoveName("passDynamite")
+    static let dynamiteExploded = MoveName("dynamiteExploded")
 }
