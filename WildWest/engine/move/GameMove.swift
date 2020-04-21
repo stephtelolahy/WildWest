@@ -30,10 +30,6 @@ struct MoveName: RawRepresentable, Equatable {
     var rawValue: String
 }
 
-extension MoveName {
-    static let play = MoveName("play")
-}
-
 struct TargetCard: Equatable {
     let ownerId: String
     let source: TargetCardSource
