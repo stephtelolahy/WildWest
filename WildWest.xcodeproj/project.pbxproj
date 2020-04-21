@@ -581,7 +581,7 @@
 			path = update;
 			sourceTree = "<group>";
 		};
-		330E5AC52439E1E100C358AF /* views */ = {
+		330E5AC52439E1E100C358AF /* selector */ = {
 			isa = PBXGroup;
 			children = (
 				33BE9105242F4F23001A9570 /* PlayMoveSelector.swift */,
@@ -589,7 +589,7 @@
 				33BE9107242F5046001A9570 /* ReactionMoveSelector.swift */,
 				33AE6D2B244349910006E72F /* AssistedReactionMoveSelector.swift */,
 			);
-			path = views;
+			path = selector;
 			sourceTree = "<group>";
 		};
 		330E5AC62439E27300C358AF /* adapter */ = {
@@ -597,8 +597,6 @@
 			children = (
 				33E4411624077CA000B2848E /* ActionsAdapter.swift */,
 				33E4411524077CA000B2848E /* PlayersAdapter.swift */,
-				ADD4DB6D24209E4D001BBD48 /* MoveDescriptor.swift */,
-				338FAD15242543030096B488 /* InstructionBuilder.swift */,
 			);
 			path = adapter;
 			sourceTree = "<group>";
@@ -722,11 +720,12 @@
 			children = (
 				332499B223DB9F650082EF09 /* GameViewController.swift */,
 				330E5AC62439E27300C358AF /* adapter */,
+				33E4411724077CA000B2848E /* cell */,
+				33B896C82438628E0005FF21 /* layout */,
+				33E84219244F973700CCE71F /* descriptor */,
 				33275D4C2446283B00CDC7A6 /* sfx */,
 				33112E71244503F1009C706E /* animator */,
-				330E5AC52439E1E100C358AF /* views */,
-				33B896C82438628E0005FF21 /* layout */,
-				33E4411724077CA000B2848E /* cell */,
+				330E5AC52439E1E100C358AF /* selector */,
 			);
 			path = game;
 			sourceTree = "<group>";
@@ -806,6 +805,15 @@
 				33E4411A24077CA000B2848E /* MessageCell.swift */,
 			);
 			path = cell;
+			sourceTree = "<group>";
+		};
+		33E84219244F973700CCE71F /* descriptor */ = {
+			isa = PBXGroup;
+			children = (
+				ADD4DB6D24209E4D001BBD48 /* MoveDescriptor.swift */,
+				338FAD15242543030096B488 /* InstructionBuilder.swift */,
+			);
+			path = descriptor;
 			sourceTree = "<group>";
 		};
 		33EC5D3223E6F93F00E14890 /* cuckoo */ = {
