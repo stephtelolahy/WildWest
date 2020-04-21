@@ -29,7 +29,7 @@ class GatlingMatcherTests: XCTestCase {
         let moves = sut.validMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .play, actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(moves, [GameMove(name: .gatling, actorId: "p1", cardId: "c1")])
     }
     
     func test_DiscardCardAndSetChallengeToShootAllOtherPlayersRightDirection_IfPlayingGatling() {
@@ -41,7 +41,7 @@ class GatlingMatcherTests: XCTestCase {
         let mockPlayer4 = MockPlayerProtocol().identified(by: "p4")
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3, mockPlayer4)
-        let move = GameMove(name: .play, actorId: "p2", cardId: "c2")
+        let move = GameMove(name: .gatling, actorId: "p2", cardId: "c2")
         
         // When
         let updates = sut.execute(move, in: mockState)
