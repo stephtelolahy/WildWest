@@ -139,7 +139,6 @@
 		335BED7A24293431009184A3 /* Slap-SoundMaster13-49669815.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED7424293430009184A3 /* Slap-SoundMaster13-49669815.mp3 */; };
 		335BED7C24293431009184A3 /* Cowboy_with_spurs-G-rant-1371954508.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED7624293430009184A3 /* Cowboy_with_spurs-G-rant-1371954508.mp3 */; };
 		335BED7D24293431009184A3 /* Gun_loud-Soundmaster_-88363983.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED7724293431009184A3 /* Gun_loud-Soundmaster_-88363983.mp3 */; };
-		335BED7F2429394D009184A3 /* GameMove+Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335BED7E2429394D009184A3 /* GameMove+Components.swift */; };
 		335BED8224293B65009184A3 /* Fuse Burning-SoundBible.com-1372982430.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED8124293B64009184A3 /* Fuse Burning-SoundBible.com-1372982430.mp3 */; };
 		335BED8324293B65009184A3 /* Fuse Burning-SoundBible.com-1372982430.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED8124293B64009184A3 /* Fuse Burning-SoundBible.com-1372982430.mp3 */; };
 		335BED8524293C2D009184A3 /* Slurping 2-SoundBible.com-1269549524.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED8424293C2D009184A3 /* Slurping 2-SoundBible.com-1269549524.mp3 */; };
@@ -237,6 +236,7 @@
 		33D9733D2448B69F00A9CCC0 /* GameUpdate+Animatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D9733C2448B69F00A9CCC0 /* GameUpdate+Animatable.swift */; };
 		33D9733E2448B69F00A9CCC0 /* GameUpdate+Animatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D9733C2448B69F00A9CCC0 /* GameUpdate+Animatable.swift */; };
 		33D973402448B72500A9CCC0 /* GameUpdate+AnimatableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D9733F2448B72500A9CCC0 /* GameUpdate+AnimatableTests.swift */; };
+		33D97B15244FA59F00B4F070 /* GameMove+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D97B14244FA59F00B4F070 /* GameMove+Description.swift */; };
 		33DA20B02446E0640082D1A0 /* EventQueueProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DA20AF2446E0640082D1A0 /* EventQueueProtocol.swift */; };
 		33DA20B12446E0640082D1A0 /* EventQueueProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DA20AF2446E0640082D1A0 /* EventQueueProtocol.swift */; };
 		33DA20B32446E0810082D1A0 /* DelayedEventQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DA20B22446E0810082D1A0 /* DelayedEventQueue.swift */; };
@@ -369,7 +369,6 @@
 		335BED7424293430009184A3 /* Slap-SoundMaster13-49669815.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Slap-SoundMaster13-49669815.mp3"; sourceTree = "<group>"; };
 		335BED7624293430009184A3 /* Cowboy_with_spurs-G-rant-1371954508.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Cowboy_with_spurs-G-rant-1371954508.mp3"; sourceTree = "<group>"; };
 		335BED7724293431009184A3 /* Gun_loud-Soundmaster_-88363983.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Gun_loud-Soundmaster_-88363983.mp3"; sourceTree = "<group>"; };
-		335BED7E2429394D009184A3 /* GameMove+Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameMove+Components.swift"; sourceTree = "<group>"; };
 		335BED8124293B64009184A3 /* Fuse Burning-SoundBible.com-1372982430.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Fuse Burning-SoundBible.com-1372982430.mp3"; sourceTree = "<group>"; };
 		335BED8424293C2D009184A3 /* Slurping 2-SoundBible.com-1269549524.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Slurping 2-SoundBible.com-1269549524.mp3"; sourceTree = "<group>"; };
 		335BED8824293D49009184A3 /* Cowboy_Theme-Pavak-1711860633.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Cowboy_Theme-Pavak-1711860633.mp3"; sourceTree = "<group>"; };
@@ -445,6 +444,7 @@
 		33D964B123DD9119007295E7 /* MatcherExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatcherExtension.swift; sourceTree = "<group>"; };
 		33D9733C2448B69F00A9CCC0 /* GameUpdate+Animatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameUpdate+Animatable.swift"; sourceTree = "<group>"; };
 		33D9733F2448B72500A9CCC0 /* GameUpdate+AnimatableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameUpdate+AnimatableTests.swift"; sourceTree = "<group>"; };
+		33D97B14244FA59F00B4F070 /* GameMove+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameMove+Description.swift"; sourceTree = "<group>"; };
 		33DA20AF2446E0640082D1A0 /* EventQueueProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventQueueProtocol.swift; sourceTree = "<group>"; };
 		33DA20B22446E0810082D1A0 /* DelayedEventQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayedEventQueue.swift; sourceTree = "<group>"; };
 		33DB41BB2438841A00B94E8A /* HandCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandCollectionViewLayout.swift; sourceTree = "<group>"; };
@@ -621,10 +621,10 @@
 		3338B2EA242FD0480097BA57 /* convenience */ = {
 			isa = PBXGroup;
 			children = (
-				335BED7E2429394D009184A3 /* GameMove+Components.swift */,
 				3338B2EB242FD0600097BA57 /* Challenge+Description.swift */,
 				3338B2EE242FD1240097BA57 /* TargetCard+Description.swift */,
 				33BBE7562445CA77006C9B17 /* GameState+Image.swift */,
+				33D97B14244FA59F00B4F070 /* GameMove+Description.swift */,
 			);
 			path = convenience;
 			sourceTree = "<group>";
@@ -1490,12 +1490,12 @@
 				334673EB2436328000FFBB82 /* UserPreferences.swift in Sources */,
 				3328FCAC242F29B100A82255 /* Duel.swift in Sources */,
 				3338B2EF242FD1240097BA57 /* TargetCard+Description.swift in Sources */,
-				335BED7F2429394D009184A3 /* GameMove+Components.swift in Sources */,
 				33BE9106242F4F23001A9570 /* PlayMoveSelector.swift in Sources */,
 				330FDECB242F384C00284FE7 /* Eliminate.swift in Sources */,
 				ADD035CF23A96002003B2576 /* CardProtocol.swift in Sources */,
 				33BAE346242E74CD0098B41F /* MemoryCachedDataBase.swift in Sources */,
 				33A733EE23DC4A5300E9B2AD /* Subscribable.swift in Sources */,
+				33D97B15244FA59F00B4F070 /* GameMove+Description.swift in Sources */,
 				337D7FD1243071AE0078F749 /* Player+Ability.swift in Sources */,
 				33E4411C24077CA000B2848E /* ActionsAdapter.swift in Sources */,
 				3398B0D4243B9AED00EB670A /* Role+Relationship.swift in Sources */,

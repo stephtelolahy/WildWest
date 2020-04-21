@@ -16,7 +16,7 @@ struct GameMove: Equatable {
     var discardIds: [String]?
 }
 
-struct MoveName: RawRepresentable, Equatable {
+struct MoveName: RawRepresentable, Equatable, Hashable {
     typealias RawValue = String
     
     init?(rawValue: String) {

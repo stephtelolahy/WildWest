@@ -20,8 +20,7 @@ class MoveSoundPlayer: MoveSoundPlayerProtocol {
         
         sfxPlayers = sfxPlayers.filter { $0.isPlaying }
         
-        let fileName = sfx.value(matching: move)
-        guard !fileName.isEmpty else {
+        guard let fileName = sfx[move.name.rawValue] else {
             return
         }
         
