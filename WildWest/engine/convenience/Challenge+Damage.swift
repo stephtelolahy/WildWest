@@ -8,7 +8,7 @@
 
 extension Challenge {
     
-    init(name: ChallengeName,
+    init(name: MoveName,
          targetIds: [String] = [],
          damage: Int? = nil,
          counterNeeded: Int = 1,
@@ -20,7 +20,7 @@ extension Challenge {
         self.barrelsPlayed = barrelsPlayed
     }
     
-    private static func defaultDamage(for name: ChallengeName) -> Int {
+    private static func defaultDamage(for name: MoveName) -> Int {
         switch name {
         case .bang, .gatling, .indians, .duel:
             return 1
