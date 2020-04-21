@@ -27,7 +27,7 @@ class PanicMatcher: MoveMatcherProtocol {
         
         return cards.map { card in
             targetCards.map {
-                GameMove(name: .play, actorId: actor.identifier, cardId: card.identifier, targetCard: $0)
+                GameMove(name: .panic, actorId: actor.identifier, cardId: card.identifier, targetCard: $0)
             }
         }.flatMap { $0 }
     }
@@ -55,4 +55,8 @@ class PanicMatcher: MoveMatcherProtocol {
         }
         return updates
     }
+}
+
+extension MoveName {
+    static let panic = MoveName("panic")
 }
