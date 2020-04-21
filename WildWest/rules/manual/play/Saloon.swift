@@ -17,16 +17,13 @@ class SaloonMatcher: MoveMatcherProtocol {
         }
         
         return cards.map {
-            GameMove(name: .play, actorId: actor.identifier, cardId: $0.identifier)
+            GameMove(name: .saloon, actorId: actor.identifier, cardId: $0.identifier)
         }
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .play = move.name,
-            let cardId = move.cardId,
-            let actor = state.player(move.actorId),
-            let card = actor.handCard(cardId),
-            case .saloon = card.name else {
+        guard case .saloon = move.name,
+            let cardId = move.cardId else {
                 return nil
         }
         
@@ -38,4 +35,8 @@ class SaloonMatcher: MoveMatcherProtocol {
         }
         return updates
     }    
+}
+
+extension MoveName {
+    static let saloon = MoveName("saloon")
 }

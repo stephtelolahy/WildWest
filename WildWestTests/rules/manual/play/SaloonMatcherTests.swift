@@ -31,7 +31,7 @@ class SaloonMatcherTests: XCTestCase {
         let moves = sut.validMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .play, actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(moves, [GameMove(name: .saloon, actorId: "p1", cardId: "c1")])
     }
     
     func test_CannotPlaySaloon_IfAllPlayersFullLife() {
@@ -73,7 +73,7 @@ class SaloonMatcherTests: XCTestCase {
             .maxHealth(is: 3)
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
-        let move = GameMove(name: .play, actorId: "p1", cardId: "c1")
+        let move = GameMove(name: .saloon, actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(move, in: mockState)
