@@ -17,19 +17,20 @@ class DynamiteMatcher: MoveMatcherProtocol {
         }
         
         return cards.map {
-            GameMove(name: .play, actorId: actor.identifier, cardId: $0.identifier)
+            GameMove(name: .dynamite, actorId: actor.identifier, cardId: $0.identifier)
         }
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .play = move.name,
-            let cardId = move.cardId,
-            let actor = state.player(move.actorId),
-            let card = actor.handCard(cardId),
-            case .dynamite = card.name else {
+        guard case .dynamite = move.name,
+            let cardId = move.cardId else {
                 return nil
         }
         
         return [.playerPutInPlay(move.actorId, cardId)]
     }
+}
+
+extension MoveName {
+    static let dynamite = MoveName("dynamite")
 }
