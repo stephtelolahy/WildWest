@@ -16,16 +16,13 @@ class StagecoachMatcher: MoveMatcherProtocol {
         }
         
         return cards.map {
-            GameMove(name: .play, actorId: actor.identifier, cardId: $0.identifier)
+            GameMove(name: .stagecoach, actorId: actor.identifier, cardId: $0.identifier)
         }
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .play = move.name,
-            let cardId = move.cardId,
-            let actor = state.player(move.actorId),
-            let card = actor.handCard(cardId),
-            case .stagecoach = card.name else {
+        guard case .stagecoach = move.name,
+            let cardId = move.cardId else {
                 return nil
         }
         
@@ -33,4 +30,8 @@ class StagecoachMatcher: MoveMatcherProtocol {
                 .playerPullFromDeck(move.actorId),
                 .playerPullFromDeck(move.actorId)]
     }
+}
+
+extension MoveName {
+    static let stagecoach = MoveName("stagecoach")
 }
