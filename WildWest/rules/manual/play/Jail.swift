@@ -30,21 +30,22 @@ class JailMatcher: MoveMatcherProtocol {
         
         return cards.map { card in
             otherPlayers.map {
-                GameMove(name: .play, actorId: actor.identifier, cardId: card.identifier, targetId: $0.identifier)
+                GameMove(name: .jail, actorId: actor.identifier, cardId: card.identifier, targetId: $0.identifier)
             }
         }.flatMap { $0 }
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .play = move.name,
+        guard case .jail = move.name,
             let cardId = move.cardId,
-            let actor = state.player(move.actorId),
-            let card = actor.handCard(cardId),
-            case .jail = card.name,
             let targetId = move.targetId else {
                 return nil
         }
         
         return [.playerPutInPlayOfOther(move.actorId, targetId, cardId)]
     }
+}
+
+extension MoveName {
+    static let jail = MoveName("jail")
 }
