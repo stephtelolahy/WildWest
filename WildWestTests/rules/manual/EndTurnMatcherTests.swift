@@ -35,17 +35,19 @@ class EndTurnMatcherTests: XCTestCase {
         let mockPlayer = MockPlayerProtocol()
             .identified(by: "p1")
             .health(is: 1)
-            .holding(MockCardProtocol(), MockCardProtocol(), MockCardProtocol())
+            .holding(MockCardProtocol().identified(by: "c1"),
+                     MockCardProtocol().identified(by: "c2"))
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
             .currentTurn(is: "p1")
-            .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
+            .players(are: mockPlayer, MockPlayerProtocol())
         
         // When
         let moves = sut.validMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .endTurn, actorId: "p1")])
+        XCTAssertEqual(moves, [GameMove(name: .endTurn, actorId: "p1", discardIds: ["c1"]),
+                               GameMove(name: .endTurn, actorId: "p1", discardIds: ["c2"])])
     }
     
     func test_ChangeTurnToNextPlayer_IfAPlayerJustEndedTurn() {
@@ -97,16 +99,21 @@ class EndTurnMatcherTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
             .health(is: 1)
-            .holding(MockCardProtocol(), MockCardProtocol(), MockCardProtocol())
+        let mockPlayer2 = MockPlayerProtocol()
+            .identified(by: "p2")
+            .health(is: 1)
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p1")
-            .players(are: mockPlayer1)
-        let move = GameMove(name: .endTurn, actorId: "p1")
+            .allPlayers(are: mockPlayer1, mockPlayer2)
+        let move = GameMove(name: .endTurn, actorId: "p1", discardIds: ["c1", "c2"])
         
         // When
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .discardExcessCards))])
+        XCTAssertEqual(updates, [.setTurn("p2"),
+                                 .playerDiscardHand("p1", "c1"),
+                                 .playerDiscardHand("p1", "c2"),
+                                 .setChallenge(Challenge(name: .startTurn))])
     }
 }

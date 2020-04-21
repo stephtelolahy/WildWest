@@ -28,9 +28,6 @@ extension Challenge {
         case .generalStore:
             return "general store by \(state.turn)"
             
-        case .discardExcessCards:
-            return "discard excess cards"
-            
         default:
             fatalError("Illegal state")
         }

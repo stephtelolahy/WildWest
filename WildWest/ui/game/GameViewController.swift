@@ -32,7 +32,7 @@ class GameViewController: UIViewController, Subscribable {
     private var playerItems: [PlayerItem] = []
     private var actionItems: [ActionItem] = []
     private var messages: [String] = []
-    private var endTurnMove: GameMove?
+    private var endTurnMoves: [GameMove] = []
     private var otherMoves: [GameMove] = []
     private var latestState: GameStateProtocol?
     private var latestMove: GameMove?
@@ -114,11 +114,9 @@ class GameViewController: UIViewController, Subscribable {
     }
     
     @IBAction private func endTurnTapped(_ sender: Any) {
-        guard let move = endTurnMove else {
-            return
+        playMoveSelector.selectMove(within: endTurnMoves) { [weak self] move in
+            self?.engine?.execute(move)
         }
-        
-        engine?.execute(move)
     }
     
     @IBAction private func otherMovesTapped(_ sender: Any) {
@@ -184,8 +182,8 @@ private extension GameViewController {
             }
         }
         
-        endTurnMove = moves.first(where: { $0.name == .endTurn })
-        endTurnButton.isEnabled = endTurnMove != nil
+        endTurnMoves = moves.filter({ $0.name == .endTurn })
+        endTurnButton.isEnabled = !endTurnMoves.isEmpty
         
         let ownedCardIds: [String] = state.player(controlledPlayerId)?.hand.map { $0.identifier } ?? []
         otherMoves = moves.filter({ !ownedCardIds.contains($0.cardId ?? "") && $0.name != .endTurn })

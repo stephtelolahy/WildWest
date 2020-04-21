@@ -51,13 +51,13 @@ class PlayMoveSelector: PlayMoveSelectorProtocol {
         
         if moves.count == 1,
             let uniqueMove = moves.first,
-            uniqueMove.name == .play {
+            uniqueMove.name == .play || uniqueMove.name == .endTurn {
             completion(uniqueMove)
             return
         }
         
         let choices: [String] = moves.map { $0.cardId ?? $0.name.rawValue }
-        viewController.select(title: "Select", choices: choices) { index in
+        viewController.select(title: moves[0].name.rawValue, choices: choices) { index in
             completion(moves[index])
         }
     }

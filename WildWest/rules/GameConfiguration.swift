@@ -55,7 +55,6 @@ class GameConfiguration {
             DiscardBeerMatcher(),
             PassMatcher(),
             ChooseCardMatcher(),
-            DiscardExcessCardMatcher(),
             
             // Effect
             EliminateMatcher(),

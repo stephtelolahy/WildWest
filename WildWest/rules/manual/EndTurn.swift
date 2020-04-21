@@ -14,21 +14,35 @@ class EndTurnMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        return [GameMove(name: .endTurn, actorId: actor.identifier)]
+        let discardCount = actor.hand.count - actor.health
+        
+        guard discardCount > 0 else {
+            return [GameMove(name: .endTurn, actorId: actor.identifier)]
+        }
+        
+        let cardCombinations = actor.hand.map { $0.identifier }.combine(by: discardCount)
+        return cardCombinations.map {
+            GameMove(name: .endTurn, actorId: actor.identifier, discardIds: $0)
+        }
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .endTurn = move.name,
             let actor = state.player(move.actorId) else {
-            return nil
+                return nil
         }
         
-        guard actor.hand.count <= actor.health else {
-            return [.setChallenge(Challenge(name: .discardExcessCards))]
+        var updates: [GameUpdate] = []
+        
+        updates.append(.setTurn(state.nextPlayer(after: move.actorId)))
+        
+        if let discardIds = move.discardIds {
+            discardIds.forEach { updates.append(.playerDiscardHand(actor.identifier, $0)) }
         }
         
-        return [.setTurn(state.nextPlayer(after: move.actorId)),
-                .setChallenge(Challenge(name: .startTurn))]
+        updates.append(.setChallenge(Challenge(name: .startTurn)))
+        
+        return updates
     }
 }
 
