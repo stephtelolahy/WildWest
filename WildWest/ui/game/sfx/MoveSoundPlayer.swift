@@ -74,7 +74,7 @@ class MoveSoundPlayer: MoveSoundPlayerProtocol {
             "escapeFromJail": "Ta Da-SoundBible.com-1884170640",
             "useBarrel": "Western Ricochet-SoundBible.com-1725886901",
             "failBarrel": "Metal Clang-SoundBible.com-19572601",
-            "explodeDynamite": "Big Bomb-SoundBible.com-1219802495",
+            "dynamiteExploded": "Big Bomb-SoundBible.com-1219802495",
             "passDynamite": "Fuse Burning-SoundBible.com-1372982430",
             "StartTurn": "",
             "drawsCardOnLoseHealth": "Slide Closed-SoundBible.com-1521580537",

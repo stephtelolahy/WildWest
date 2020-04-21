@@ -15,7 +15,7 @@ class DrawsCardOnLoseHealthMatcher: MoveMatcherProtocol {
                     return nil
             }
             
-        case .explodeDynamite:
+        case .dynamiteExploded:
             guard let actor = state.player(move.actorId),
                 actor.abilities[.drawsCardOnLoseHealth] == true,
                 state.challenge?.name != .dynamiteExploded else {
