@@ -22,6 +22,7 @@ class MoveDescriptor: MoveDescriptorProtocol {
         [
             "Bang": "🔫",
             "Beer": "🍺",
+            "discard2CardsFor1Life": "🍺",
             "CatBalou": "❌",
             "Choose": "💰",
             "Duel": "🔫",

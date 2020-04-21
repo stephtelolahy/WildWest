@@ -43,6 +43,7 @@ class MoveSoundPlayer: MoveSoundPlayerProtocol {
         [
             "Bang": "Gun_loud-Soundmaster_-88363983",
             "Beer": "Slurping 2-SoundBible.com-1269549524",
+            "discard2CardsFor1Life": "Slurping 2-SoundBible.com-1269549524",
             "CatBalou": "flyby-Conor-1500306612",
             "Choose": "Slide Closed-SoundBible.com-1521580537",
             "Duel": "shotgun-old_school-RA_The_Sun_God-1129942741",

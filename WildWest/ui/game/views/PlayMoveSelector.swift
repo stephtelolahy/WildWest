@@ -41,6 +41,14 @@ class PlayMoveSelector: PlayMoveSelectorProtocol {
             return
         }
         
+        if moves.allSatisfy({ $0.discardIds != nil }) {
+            let options = moves.compactMap { $0.discardIds?.joined(separator: ", ") }
+            viewController.select(title: "Select cards to discard", choices: options) { index in
+                completion(moves[index])
+            }
+            return
+        }
+        
         if moves.count == 1,
             let uniqueMove = moves.first,
             uniqueMove.name == .play {

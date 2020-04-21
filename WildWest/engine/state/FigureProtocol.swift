@@ -46,4 +46,5 @@ enum AbilityName: String, Codable, CaseIterable {
     case othersNeed2MissesToCounterHisBang
     case takesAllCardsFromEliminatedPlayers
     case flips2CardsOnADrawAndChoose1
+    case canDiscard2CardsFor1Life
 }
