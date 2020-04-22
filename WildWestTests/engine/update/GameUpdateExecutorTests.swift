@@ -281,7 +281,7 @@ class GameUpdateExecutorTests: XCTestCase {
     func test_playerSetHealth_IfGainLifePoints() {
         // Given
         let mockState = MockGameStateProtocol()
-            .players(are: MockPlayerProtocol().identified(by: "p1").health(is: 1))
+            .allPlayers(are: MockPlayerProtocol().identified(by: "p1").health(is: 1))
         Cuckoo.stub(mockDatabase) { mock in
             when(mock.state.get).thenReturn(mockState)
         }
@@ -301,7 +301,7 @@ class GameUpdateExecutorTests: XCTestCase {
     func test_AddDamageEvent_IfLooseLifePoints() {
         // Given
         let mockState = MockGameStateProtocol()
-            .players(are: MockPlayerProtocol().identified(by: "p1").health(is: 3))
+            .allPlayers(are: MockPlayerProtocol().identified(by: "p1").health(is: 3))
         Cuckoo.stub(mockDatabase) { mock in
             when(mock.state.get).thenReturn(mockState)
         }
@@ -321,7 +321,7 @@ class GameUpdateExecutorTests: XCTestCase {
     func test_SetZeroHealth_IfLooseMoreThanCurrentLifePoints() {
         // Given
         let mockState = MockGameStateProtocol()
-            .players(are: MockPlayerProtocol().identified(by: "p1").health(is: 1))
+            .allPlayers(are: MockPlayerProtocol().identified(by: "p1").health(is: 1))
         Cuckoo.stub(mockDatabase) { mock in
             when(mock.state.get).thenReturn(mockState)
         }

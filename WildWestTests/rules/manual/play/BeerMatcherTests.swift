@@ -25,7 +25,7 @@ class BeerMatcherTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
             .currentTurn(is: "p1")
-            .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
+            .allPlayers(are: mockPlayer, MockPlayerProtocol().health(is: 1), MockPlayerProtocol().health(is: 1))
         
         // When
         let moves = sut.validMoves(matching: mockState)
@@ -46,7 +46,7 @@ class BeerMatcherTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
             .currentTurn(is: "p1")
-            .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
+            .allPlayers(are: mockPlayer)
         
         // When
         let moves = sut.validMoves(matching: mockState)

@@ -1956,20 +1956,6 @@ import Cuckoo
     
     
     
-     var players: [PlayerProtocol] {
-        get {
-            return cuckoo_manager.getter("players",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.players)
-        }
-        
-    }
-    
-    
-    
      var deck: [CardProtocol] {
         get {
             return cuckoo_manager.getter("deck",
@@ -2070,11 +2056,6 @@ import Cuckoo
 	    }
 	    
 	    
-	    var players: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [PlayerProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "players")
-	    }
-	    
-	    
 	    var deck: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameStateProtocol, [CardProtocol]> {
 	        return .init(manager: cuckoo_manager, name: "deck")
 	    }
@@ -2125,11 +2106,6 @@ import Cuckoo
 	    }
 	    
 	    
-	    var players: Cuckoo.VerifyReadOnlyProperty<[PlayerProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "players", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
 	    var deck: Cuckoo.VerifyReadOnlyProperty<[CardProtocol]> {
 	        return .init(manager: cuckoo_manager, name: "deck", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
@@ -2168,14 +2144,6 @@ import Cuckoo
     
     
      var allPlayers: [PlayerProtocol] {
-        get {
-            return DefaultValueRegistry.defaultValue(for: ([PlayerProtocol]).self)
-        }
-        
-    }
-    
-    
-     var players: [PlayerProtocol] {
         get {
             return DefaultValueRegistry.defaultValue(for: ([PlayerProtocol]).self)
         }

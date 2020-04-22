@@ -731,6 +731,7 @@
 				33275D4C2446283B00CDC7A6 /* sfx */,
 				33112E71244503F1009C706E /* animator */,
 				330E5AC52439E1E100C358AF /* selector */,
+				3338B2EA242FD0480097BA57 /* convenience */,
 			);
 			path = game;
 			sourceTree = "<group>";
@@ -1143,7 +1144,6 @@
 			children = (
 				33FDD70A240BFB3800BC3E14 /* menu */,
 				3385A1F423F9352800CD9660 /* game */,
-				3338B2EA242FD0480097BA57 /* convenience */,
 				ADB7D2F6239EE03900653905 /* LaunchScreen.storyboard */,
 				ADB7D2F1239EE03800653905 /* Main.storyboard */,
 			);

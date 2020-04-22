@@ -8,6 +8,10 @@
 
 extension GameStateProtocol {
     
+    var players: [PlayerProtocol] {
+        allPlayers.filter { $0.health > 0 }
+    }
+    
     func player(_ playerId: String?) -> PlayerProtocol? {
         players.first(where: { $0.identifier == playerId })
     }

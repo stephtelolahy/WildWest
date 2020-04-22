@@ -7,21 +7,15 @@
 //
 
 import XCTest
-import Cuckoo
 
 class GameState_OutcomeTests: XCTestCase {
     
-    private let sut = MockGameStateProtocol()
-    
     func test_OutlawWins_IfSheriffIsEliminated() {
         // Given
-        Cuckoo.stub(sut) { mock in
-            when(mock.players.get).thenReturn([
-                MockPlayerProtocol().role(is: .renegade),
-                MockPlayerProtocol().role(is: .deputy),
-                MockPlayerProtocol().role(is: .outlaw),
-            ])
-        }
+        let sut = MockGameStateProtocol()
+            .players(are: MockPlayerProtocol().role(is: .renegade),
+                     MockPlayerProtocol().role(is: .deputy),
+                     MockPlayerProtocol().role(is: .outlaw))
         
         // When
         // Assert
@@ -30,11 +24,8 @@ class GameState_OutcomeTests: XCTestCase {
     
     func test_RenegateWins_IfIsLastAlive() {
         // Given
-        Cuckoo.stub(sut) { mock in
-            when(mock.players.get).thenReturn([
-                MockPlayerProtocol().role(is: .renegade)
-            ])
-        }
+        let sut = MockGameStateProtocol()
+            .players(are: MockPlayerProtocol().role(is: .renegade))
         
         // When
         // Assert
@@ -43,12 +34,9 @@ class GameState_OutcomeTests: XCTestCase {
     
     func test_SheriffWins_IfAllOutlawsAreEliminated() {
         // Given
-        Cuckoo.stub(sut) { mock in
-            when(mock.players.get).thenReturn([
-                MockPlayerProtocol().role(is: .sheriff),
-                MockPlayerProtocol().role(is: .deputy)
-            ])
-        }
+        let sut = MockGameStateProtocol()
+            .players(are: MockPlayerProtocol().role(is: .sheriff),
+                     MockPlayerProtocol().role(is: .deputy))
         
         // When
         // Assert
@@ -57,14 +45,11 @@ class GameState_OutcomeTests: XCTestCase {
     
     func test_NoOutcome_IfSheriffAndOutlawsAreNotEliminated() {
         // Given
-        Cuckoo.stub(sut) { mock in
-            when(mock.players.get).thenReturn([
-                MockPlayerProtocol().role(is: .sheriff),
-                MockPlayerProtocol().role(is: .outlaw),
-                MockPlayerProtocol().role(is: .deputy),
-                MockPlayerProtocol().role(is: .renegade),
-            ])
-        }
+        let sut = MockGameStateProtocol()
+            .players(are: MockPlayerProtocol().role(is: .sheriff),
+                     MockPlayerProtocol().role(is: .outlaw),
+                     MockPlayerProtocol().role(is: .deputy),
+                     MockPlayerProtocol().role(is: .renegade))
         
         // When
         // Assert
@@ -73,12 +58,9 @@ class GameState_OutcomeTests: XCTestCase {
     
     func test_NoOutcome_IfRenegadeAlive() {
         // Given
-        Cuckoo.stub(sut) { mock in
-            when(mock.players.get).thenReturn([
-                MockPlayerProtocol().role(is: .sheriff),
-                MockPlayerProtocol().role(is: .renegade),
-            ])
-        }
+        let sut = MockGameStateProtocol()
+            .players(are: MockPlayerProtocol().role(is: .sheriff),
+                     MockPlayerProtocol().role(is: .renegade))
         
         // When
         // Assert
@@ -87,12 +69,9 @@ class GameState_OutcomeTests: XCTestCase {
     
     func test_NoOutcome_IfOutlawAlive() {
         // Given
-        Cuckoo.stub(sut) { mock in
-            when(mock.players.get).thenReturn([
-                MockPlayerProtocol().role(is: .sheriff),
-                MockPlayerProtocol().role(is: .outlaw),
-            ])
-        }
+        let sut = MockGameStateProtocol()
+            .players(are: MockPlayerProtocol().role(is: .sheriff),
+                     MockPlayerProtocol().role(is: .outlaw))
         
         // When
         // Assert
