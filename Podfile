@@ -3,6 +3,7 @@ platform :ios, '9.3'
 
 def shared_pods
   pod 'RxSwift'
+  pod 'Firebase/Database'
 end
 
 target 'WildWest' do
