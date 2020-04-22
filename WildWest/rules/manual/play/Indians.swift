@@ -16,20 +16,21 @@ class IndiansMatcher: MoveMatcherProtocol {
         }
         
         return cards.map {
-            GameMove(name: .play, actorId: actor.identifier, cardId: $0.identifier)
+            GameMove(name: .indians, actorId: actor.identifier, cardId: $0.identifier)
         }
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .play = move.name,
-            let cardId = move.cardId,
-            let actor = state.player(move.actorId),
-            let card = actor.handCard(cardId),
-            case .indians = card.name else {
+        guard case .indians = move.name,
+            let cardId = move.cardId else {
                 return nil
         }
         
         return [.playerDiscardHand(move.actorId, cardId),
                 .setChallenge(Challenge(name: .indians, targetIds: state.otherPlayerIds(move.actorId)))]
     }
+}
+
+extension MoveName {
+    static let indians = MoveName("indians")
 }

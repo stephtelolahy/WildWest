@@ -20,7 +20,7 @@ class RandomAI: AIProtocol {
         }
         
         // prefer play larger range gun
-        if case .play = move.name,
+        if case .equip = move.name,
             let cardId = move.cardId,
             let actor = state.player(move.actorId),
             let card = actor.handCard(cardId),

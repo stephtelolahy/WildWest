@@ -18,20 +18,21 @@ class BeerMatcher: MoveMatcherProtocol {
         }
         
         return cards.map {
-            GameMove(name: .play, actorId: actor.identifier, cardId: $0.identifier)
+            GameMove(name: .beer, actorId: actor.identifier, cardId: $0.identifier)
         }
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .play = move.name,
-            let cardId = move.cardId,
-            let actor = state.player(move.actorId),
-            let card = actor.handCard(cardId),
-            case .beer = card.name else {
+        guard case .beer = move.name,
+            let cardId = move.cardId else {
                 return nil
         }
         
         return [.playerDiscardHand(move.actorId, cardId),
                 .playerGainHealth(move.actorId, 1)]
     }
+}
+
+extension MoveName {
+    static let beer = MoveName("beer")
 }

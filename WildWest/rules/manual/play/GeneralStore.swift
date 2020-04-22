@@ -16,16 +16,13 @@ class GeneralStoreMatcher: MoveMatcherProtocol {
         }
         
         return cards.map {
-            GameMove(name: .play, actorId: actor.identifier, cardId: $0.identifier)
+            GameMove(name: .generalStore, actorId: actor.identifier, cardId: $0.identifier)
         }
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .play = move.name,
-            let cardId = move.cardId,
-            let actor = state.player(move.actorId),
-            let card = actor.handCard(cardId),
-            case .generalStore = card.name else {
+        guard case .generalStore = move.name,
+            let cardId = move.cardId else {
                 return nil
         }
         
@@ -33,4 +30,8 @@ class GeneralStoreMatcher: MoveMatcherProtocol {
                 .setupGeneralStore(state.players.count),
                 .setChallenge(Challenge(name: .generalStore, targetIds: state.allPlayerIds(move.actorId)))]
     }
+}
+
+extension MoveName {
+    static let generalStore = MoveName("generalStore")
 }

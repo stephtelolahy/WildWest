@@ -31,8 +31,8 @@ class DuelMatcherTests: XCTestCase {
         let moves = sut.validMoves(matching: mockState)
         
         XCTAssertEqual(moves, [
-            GameMove(name: .play, actorId: "p1", cardId: "c1", targetId: "p2"),
-            GameMove(name: .play, actorId: "p1", cardId: "c1", targetId: "p3")
+            GameMove(name: .duel, actorId: "p1", cardId: "c1", targetId: "p2"),
+            GameMove(name: .duel, actorId: "p1", cardId: "c1", targetId: "p3")
         ])
     }
     
@@ -44,7 +44,7 @@ class DuelMatcherTests: XCTestCase {
         let mockPlayer2 = MockPlayerProtocol().identified(by: "p2")
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1, mockPlayer2)
-        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", targetId: "p2")
+        let move = GameMove(name: .duel, actorId: "p1", cardId: "c1", targetId: "p2")
         
         // When
         let updates = sut.execute(move, in: mockState)

@@ -29,7 +29,7 @@ class WellsFargoMatcherMatcher: XCTestCase {
         let moves = sut.validMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .play, actorId: "p1", cardId: "c1")])
+        XCTAssertEqual(moves, [GameMove(name: .wellsFargo, actorId: "p1", cardId: "c1")])
     }
     
     func test_Pull3Cards_IfPlayingWellsFargo() {
@@ -39,7 +39,7 @@ class WellsFargoMatcherMatcher: XCTestCase {
             .holding(MockCardProtocol().identified(by: "c1").named(.wellsFargo))
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
-        let move = GameMove(name: .play, actorId: "p1", cardId: "c1")
+        let move = GameMove(name: .wellsFargo, actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.execute(move, in: mockState)

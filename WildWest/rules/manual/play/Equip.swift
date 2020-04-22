@@ -21,16 +21,15 @@ class EquipMatcher: MoveMatcherProtocol {
         }
         
         return cards.map {
-            GameMove(name: .play, actorId: actor.identifier, cardId: $0.identifier)
+            GameMove(name: .equip, actorId: actor.identifier, cardId: $0.identifier)
         }
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
-        guard case .play = move.name,
+        guard case .equip = move.name,
             let cardId = move.cardId,
             let actor = state.player(move.actorId),
-            let card = actor.handCard(cardId),
-            (card.name.isEquipment || card.name.isGun) else {
+            let card = actor.handCard(cardId) else {
                 return nil
         }
         
@@ -42,4 +41,8 @@ class EquipMatcher: MoveMatcherProtocol {
         updates.append(.playerPutInPlay(move.actorId, cardId))
         return updates
     }
+}
+
+extension MoveName {
+    static let equip = MoveName("equip")
 }

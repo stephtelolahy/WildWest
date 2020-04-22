@@ -5,6 +5,7 @@
 //  Created by Hugues Stephano Telolahy on 28/03/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
+// swiftlint:disable function_body_length
 
 import UIKit
 
@@ -51,7 +52,9 @@ class PlayMoveSelector: PlayMoveSelectorProtocol {
         
         if moves.count == 1,
             let uniqueMove = moves.first,
-            uniqueMove.name == .play || uniqueMove.name == .endTurn {
+            uniqueMove.targetId == nil,
+            uniqueMove.targetCard == nil,
+            uniqueMove.discardIds == nil {
             completion(uniqueMove)
             return
         }

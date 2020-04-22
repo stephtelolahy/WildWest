@@ -30,7 +30,7 @@ class JailMatcherTests: XCTestCase {
         let moves = sut.validMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .play, actorId: "p1", cardId: "c1", targetId: "p2")])
+        XCTAssertEqual(moves, [GameMove(name: .jail, actorId: "p1", cardId: "c1", targetId: "p2")])
     }
     
     func test_CannotPlayJail_IfTargetPlayerIsSheriff() {
@@ -81,7 +81,7 @@ class JailMatcherTests: XCTestCase {
         let mockPlayer2 = MockPlayerProtocol().identified(by: "p2")
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1, mockPlayer2)
-        let move = GameMove(name: .play, actorId: "p1", cardId: "c1", targetId: "p2")
+        let move = GameMove(name: .jail, actorId: "p1", cardId: "c1", targetId: "p2")
         
         // When
         let updates = sut.execute(move, in: mockState)
