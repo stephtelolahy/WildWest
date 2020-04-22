@@ -15,7 +15,11 @@ protocol MoveDescriptorProtocol {
 class MoveDescriptor: MoveDescriptorProtocol {
     
     func description(for move: GameMove) -> String {
-        "\(emojis[move.name] ?? "") \(move.description)"
+        guard let emoji = emojis[move.name] else {
+            fatalError("Illegal state")
+        }
+        
+        return "\(emoji) \(move.description)"
     }
     
     private let emojis: [MoveName: String] =
