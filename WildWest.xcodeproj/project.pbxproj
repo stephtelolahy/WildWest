@@ -126,6 +126,7 @@
 		334673E92436314E00FFBB82 /* UserDefaultsStored.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334673E72436314E00FFBB82 /* UserDefaultsStored.swift */; };
 		334673EB2436328000FFBB82 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334673EA2436328000FFBB82 /* UserPreferences.swift */; };
 		334673EC2436328000FFBB82 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334673EA2436328000FFBB82 /* UserPreferences.swift */; };
+		33516CCA2450A79E003C99E2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33516CC92450A79E003C99E2 /* GoogleService-Info.plist */; };
 		3356CF0E243237320071B04F /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3356CF0D243237320071B04F /* Challenge.swift */; };
 		3356CF0F243237320071B04F /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3356CF0D243237320071B04F /* Challenge.swift */; };
 		3356CF11243237500071B04F /* DamageEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3356CF10243237500071B04F /* DamageEvent.swift */; };
@@ -359,6 +360,7 @@
 		334673E52436267500FFBB82 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		334673E72436314E00FFBB82 /* UserDefaultsStored.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStored.swift; sourceTree = "<group>"; };
 		334673EA2436328000FFBB82 /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
+		33516CC92450A79E003C99E2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3351B58524269386004F18C3 /* Pass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pass.swift; sourceTree = "<group>"; };
 		3351B58824269A24004F18C3 /* PassMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassMatcherTests.swift; sourceTree = "<group>"; };
 		3356CF0D243237320071B04F /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
@@ -1112,6 +1114,7 @@
 				ADB7D2EB239EE03800653905 /* AppDelegate.swift */,
 				ADB7D2F4239EE03900653905 /* Assets.xcassets */,
 				ADB7D2F9239EE03900653905 /* Info.plist */,
+				33516CC92450A79E003C99E2 /* GoogleService-Info.plist */,
 			);
 			path = WildWest;
 			sourceTree = "<group>";
@@ -1249,6 +1252,7 @@
 				3383CFD0242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 in Resources */,
 				339B4EFC2434A7D700E32965 /* 342229_christopherderp_hurt-1-male (online-audio-converter.com).mp3 in Resources */,
 				335BED95242941DA009184A3 /* Slide Closed-SoundBible.com-1521580537.mp3 in Resources */,
+				33516CCA2450A79E003C99E2 /* GoogleService-Info.plist in Resources */,
 				335BED7824293431009184A3 /* Western Ricochet-SoundBible.com-1725886901.mp3 in Resources */,
 				335BED8C24293FCA009184A3 /* Shotgun-SoundBible.com-862990674.mp3 in Resources */,
 				335BED7924293431009184A3 /* Horse Galloping-SoundBible.com-1451398148.mp3 in Resources */,
