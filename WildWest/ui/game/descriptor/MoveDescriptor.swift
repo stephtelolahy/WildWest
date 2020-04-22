@@ -38,7 +38,7 @@ class MoveDescriptor: MoveDescriptorProtocol {
             .gatling: "🔫",
             .indians: "💢",
             .duel: "🔫",
-            .missed: "😝",
+            .discardMissed: "😝",
             .discardBang: "🔫",
             .discardBeer: "🍺",
             .pass: "❤️",

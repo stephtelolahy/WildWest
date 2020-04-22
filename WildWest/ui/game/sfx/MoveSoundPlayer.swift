@@ -57,7 +57,7 @@ class MoveSoundPlayer: MoveSoundPlayerProtocol {
         .gatling: "Automatic Machine Gun-SoundBible.com-253461580",
         .indians: "Peacock-SoundBible.com-1698361099",
         .duel: "shotgun-old_school-RA_The_Sun_God-1129942741",
-        .missed: "Western Ricochet-SoundBible.com-1725886901",
+        .discardMissed: "Western Ricochet-SoundBible.com-1725886901",
         .discardBang: "Gun_loud-Soundmaster_-88363983",
         .discardBeer: "Slurping 2-SoundBible.com-1269549524",
         .pass: "342229_christopherderp_hurt-1-male (online-audio-converter.com)",

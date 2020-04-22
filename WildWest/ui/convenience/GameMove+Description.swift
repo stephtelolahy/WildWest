@@ -15,7 +15,7 @@ extension GameMove {
              targetCard?.description]
                 .compactMap { $0 }
         
-        if name == .equip, let cardId = cardId {
+        if name == .equip || name == .choose, let cardId = cardId {
             components.append(cardId)
         }
         
