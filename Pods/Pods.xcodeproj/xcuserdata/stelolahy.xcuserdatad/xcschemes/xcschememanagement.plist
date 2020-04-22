@@ -29,6 +29,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>FirebaseAnalyticsInterop-framework.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FirebaseAnalyticsInterop-library.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FirebaseAuthInterop-framework.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -69,6 +79,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>FirebaseCrashlytics-framework.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FirebaseCrashlytics-library.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FirebaseDatabase-framework.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -85,6 +105,16 @@
 			<false/>
 		</dict>
 		<key>FirebaseInstallations-library.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FirebaseInstanceID-framework.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FirebaseInstanceID-library.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
