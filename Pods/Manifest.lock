@@ -1,0 +1,36 @@
+PODS:
+  - Cuckoo (1.3.2):
+    - Cuckoo/Swift (= 1.3.2)
+  - Cuckoo/Swift (1.3.2)
+  - RxBlocking (5.1.0):
+    - RxSwift (~> 5)
+  - RxSwift (5.0.1)
+  - RxTest (5.1.0):
+    - RxSwift (~> 5)
+  - SwiftLint (0.39.1)
+
+DEPENDENCIES:
+  - Cuckoo
+  - RxBlocking
+  - RxSwift
+  - RxTest
+  - SwiftLint
+
+SPEC REPOS:
+  trunk:
+    - Cuckoo
+    - RxBlocking
+    - RxSwift
+    - RxTest
+    - SwiftLint
+
+SPEC CHECKSUMS:
+  Cuckoo: 57f71c6616b6b08cd9fe27f803da056fb619ff3e
+  RxBlocking: 5ef131267220f92ef68531dd6afeaf407cd6b41a
+  RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
+  RxTest: d5e1c9c1880de2751041fa485d476ce006967b31
+  SwiftLint: 55e96a4a4d537d4a3156859fc1c54bd24851a046
+
+PODFILE CHECKSUM: 3d4f5a9d4d3d490d12267a53b837d82fc896d92c
+
+COCOAPODS: 1.9.0
