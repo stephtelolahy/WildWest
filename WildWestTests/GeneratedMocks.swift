@@ -490,21 +490,6 @@ import RxSwift
     
     
     
-     func emitState(_ state: GameStateProtocol)  {
-        
-    return cuckoo_manager.call("emitState(_: GameStateProtocol)",
-            parameters: (state),
-            escapingParameters: (state),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.emitState(state))
-        
-    }
-    
-    
-    
      func emitUpdate(_ update: GameUpdate)  {
         
     return cuckoo_manager.call("emitUpdate(_: GameUpdate)",
@@ -557,11 +542,6 @@ import RxSwift
 	    }
 	    
 	    
-	    func emitState<M1: Cuckoo.Matchable>(_ state: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(GameStateProtocol)> where M1.MatchedType == GameStateProtocol {
-	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockInternalGameEngineProtocol.self, method: "emitState(_: GameStateProtocol)", parameterMatchers: matchers))
-	    }
-	    
 	    func emitUpdate<M1: Cuckoo.Matchable>(_ update: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(GameUpdate)> where M1.MatchedType == GameUpdate {
 	        let matchers: [Cuckoo.ParameterMatcher<(GameUpdate)>] = [wrap(matchable: update) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockInternalGameEngineProtocol.self, method: "emitUpdate(_: GameUpdate)", parameterMatchers: matchers))
@@ -594,12 +574,6 @@ import RxSwift
 	
 	    
 	    @discardableResult
-	    func emitState<M1: Cuckoo.Matchable>(_ state: M1) -> Cuckoo.__DoNotUse<(GameStateProtocol), Void> where M1.MatchedType == GameStateProtocol {
-	        let matchers: [Cuckoo.ParameterMatcher<(GameStateProtocol)>] = [wrap(matchable: state) { $0 }]
-	        return cuckoo_manager.verify("emitState(_: GameStateProtocol)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
 	    func emitUpdate<M1: Cuckoo.Matchable>(_ update: M1) -> Cuckoo.__DoNotUse<(GameUpdate), Void> where M1.MatchedType == GameUpdate {
 	        let matchers: [Cuckoo.ParameterMatcher<(GameUpdate)>] = [wrap(matchable: update) { $0 }]
 	        return cuckoo_manager.verify("emitUpdate(_: GameUpdate)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
@@ -625,10 +599,6 @@ import RxSwift
 
     
 
-    
-     func emitState(_ state: GameStateProtocol)   {
-        return DefaultValueRegistry.defaultValue(for: (Void).self)
-    }
     
      func emitUpdate(_ update: GameUpdate)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
@@ -772,6 +742,8 @@ import Cuckoo
 import Cuckoo
 @testable import WildWest
 
+import RxSwift
+
 
  class MockGameDatabaseProtocol: GameDatabaseProtocol, Cuckoo.ProtocolMock {
     
@@ -794,14 +766,14 @@ import Cuckoo
     
     
     
-     var state: GameStateProtocol {
+     var stateSubject: BehaviorSubject<GameStateProtocol> {
         get {
-            return cuckoo_manager.getter("state",
+            return cuckoo_manager.getter("stateSubject",
                 superclassCall:
                     
                     Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                     ,
-                defaultCall: __defaultImplStub!.state)
+                defaultCall: __defaultImplStub!.stateSubject)
         }
         
     }
@@ -1029,8 +1001,8 @@ import Cuckoo
 	    }
 	    
 	    
-	    var state: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameDatabaseProtocol, GameStateProtocol> {
-	        return .init(manager: cuckoo_manager, name: "state")
+	    var stateSubject: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameDatabaseProtocol, BehaviorSubject<GameStateProtocol>> {
+	        return .init(manager: cuckoo_manager, name: "stateSubject")
 	    }
 	    
 	    
@@ -1119,8 +1091,8 @@ import Cuckoo
 	
 	    
 	    
-	    var state: Cuckoo.VerifyReadOnlyProperty<GameStateProtocol> {
-	        return .init(manager: cuckoo_manager, name: "state", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var stateSubject: Cuckoo.VerifyReadOnlyProperty<BehaviorSubject<GameStateProtocol>> {
+	        return .init(manager: cuckoo_manager, name: "stateSubject", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	
@@ -1215,9 +1187,9 @@ import Cuckoo
  class GameDatabaseProtocolStub: GameDatabaseProtocol {
     
     
-     var state: GameStateProtocol {
+     var stateSubject: BehaviorSubject<GameStateProtocol> {
         get {
-            return DefaultValueRegistry.defaultValue(for: (GameStateProtocol).self)
+            return DefaultValueRegistry.defaultValue(for: (BehaviorSubject<GameStateProtocol>).self)
         }
         
     }

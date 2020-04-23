@@ -6,10 +6,13 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
+import RxSwift
+
 /// Accessor to state
 protocol GameDatabaseProtocol {
     
-    var state: GameStateProtocol { get }
+    // Observable
+    var stateSubject: BehaviorSubject<GameStateProtocol> { get }
     
     // Flags
     func setTurn(_ turn: String)

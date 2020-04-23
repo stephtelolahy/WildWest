@@ -8,6 +8,7 @@
 
 import XCTest
 import Cuckoo
+import RxSwift
 
 class GameUpdateExecutorTests: XCTestCase {
     
@@ -245,7 +246,7 @@ class GameUpdateExecutorTests: XCTestCase {
             .currentTurn(is: "px")
             .players(are: MockPlayerProtocol().identified(by: "px").bangsPlayed(is: 0))
         Cuckoo.stub(mockDatabase) { mock in
-            when(mock.state.get).thenReturn(mockState)
+            when(mock.stateSubject.get).thenReturn(BehaviorSubject(value: mockState))
         }
         let update = GameUpdate.setChallenge(Challenge(name: .bang, targetIds: ["p1"]))
         
@@ -264,7 +265,7 @@ class GameUpdateExecutorTests: XCTestCase {
         let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
         Cuckoo.stub(mockDatabase) { mock in
             when(mock.deckRemoveFirst()).thenReturn(mockCard)
-            when(mock.state.get).thenReturn(mockState)
+            when(mock.stateSubject.get).thenReturn(BehaviorSubject(value: mockState))
         }
         let update = GameUpdate.flipOverFirstDeckCard
         
@@ -283,7 +284,7 @@ class GameUpdateExecutorTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .allPlayers(are: MockPlayerProtocol().identified(by: "p1").health(is: 1))
         Cuckoo.stub(mockDatabase) { mock in
-            when(mock.state.get).thenReturn(mockState)
+            when(mock.stateSubject.get).thenReturn(BehaviorSubject(value: mockState))
         }
         let update = GameUpdate.playerGainHealth("p1", 1)
         
@@ -291,7 +292,7 @@ class GameUpdateExecutorTests: XCTestCase {
         sut.execute(update, in: mockDatabase)
         
         // Assert
-        verify(mockDatabase).state.get()
+        verify(mockDatabase).stateSubject.get()
         verify(mockDatabase).playerSetHealth("p1", 2)
         verifyNoMoreInteractions(mockDatabase)
     }
@@ -303,7 +304,7 @@ class GameUpdateExecutorTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .allPlayers(are: MockPlayerProtocol().identified(by: "p1").health(is: 3))
         Cuckoo.stub(mockDatabase) { mock in
-            when(mock.state.get).thenReturn(mockState)
+            when(mock.stateSubject.get).thenReturn(BehaviorSubject(value: mockState))
         }
         let update = GameUpdate.playerLooseHealth("p1", 1, .byPlayer("p2"))
         
@@ -311,7 +312,7 @@ class GameUpdateExecutorTests: XCTestCase {
         sut.execute(update, in: mockDatabase)
         
         // Assert
-        verify(mockDatabase).state.get()
+        verify(mockDatabase).stateSubject.get()
         verify(mockDatabase).playerSetHealth("p1", 2)
         let expectedEvent = DamageEvent(damage: 1, source: .byPlayer("p2"))
         verify(mockDatabase).playerSetDamageEvent("p1", equal(to: expectedEvent))
@@ -323,7 +324,7 @@ class GameUpdateExecutorTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .allPlayers(are: MockPlayerProtocol().identified(by: "p1").health(is: 1))
         Cuckoo.stub(mockDatabase) { mock in
-            when(mock.state.get).thenReturn(mockState)
+            when(mock.stateSubject.get).thenReturn(BehaviorSubject(value: mockState))
         }
         let update = GameUpdate.playerLooseHealth("p1", 3, .byDynamite)
         
@@ -331,7 +332,7 @@ class GameUpdateExecutorTests: XCTestCase {
         sut.execute(update, in: mockDatabase)
         
         // Assert
-        verify(mockDatabase).state.get()
+        verify(mockDatabase).stateSubject.get()
         verify(mockDatabase).playerSetHealth("p1", 0)
         let expectedEvent = DamageEvent(damage: 3, source: .byDynamite)
         verify(mockDatabase).playerSetDamageEvent("p1", equal(to: expectedEvent))

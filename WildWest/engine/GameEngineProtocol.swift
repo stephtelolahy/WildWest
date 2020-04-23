@@ -21,7 +21,6 @@ protocol GameEngineProtocol {
 }
 
 protocol InternalGameEngineProtocol {
-    func emitState(_ state: GameStateProtocol)
     func emitUpdate(_ update: GameUpdate)
     func emitExecutedMove(_ move: GameMove)
     func emitValidMoves(_ moves: [String: [GameMove]])

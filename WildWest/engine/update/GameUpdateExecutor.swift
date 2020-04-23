@@ -95,3 +95,12 @@ class GameUpdateExecutor: UpdateExecutorProtocol {
         }
     }
 }
+
+extension GameDatabaseProtocol {
+    var state: GameStateProtocol {
+        guard let value = try? stateSubject.value() else {
+            fatalError("Illegal state")
+        }
+        return value
+    }
+}
