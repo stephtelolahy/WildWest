@@ -30,7 +30,7 @@ class DiscardMissedMatcher: MoveMatcherProtocol {
         }
         
         return [.playerDiscardHand(move.actorId, cardId),
-                .setChallenge(challenge.countering(for: move.actorId))]
+                .setChallenge(challenge.countering(move.actorId))]
     }
 }
 

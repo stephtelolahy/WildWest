@@ -1,8 +1,8 @@
 //
-//  Challenge+Damage.swift
+//  Challenge+Updating.swift
 //  WildWest
 //
-//  Created by Hugues Stephano Telolahy on 29/03/2020.
+//  Created by Hugues Stephano Telolahy on 23/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
@@ -34,10 +34,9 @@ extension Challenge {
     }
 }
 
-// Custom Updaters
 extension Challenge {
     
-    func countering(for playerId: String) -> Challenge? {
+    func countering(_ playerId: String) -> Challenge? {
         let remainingCounter = counterNeeded - 1
         if remainingCounter <= 0 {
             return removing(playerId)
@@ -73,7 +72,7 @@ extension Challenge {
         }
     }
     
-    func decrementingDamage(for playerId: String) -> Challenge? {
+    func decrementingDamage(_ playerId: String) -> Challenge? {
         let remainingDamage = damage - 1
         if remainingDamage <= 0 {
             return removing(playerId)

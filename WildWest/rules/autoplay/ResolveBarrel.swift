@@ -34,7 +34,7 @@ class ResolveBarrelMatcher: MoveMatcherProtocol {
         
         var updatedChallenge: Challenge? = challenge.incrementingBarrelsPlayed()
         if move.name == .useBarrel {
-            updatedChallenge = updatedChallenge?.countering(for: move.actorId)
+            updatedChallenge = updatedChallenge?.countering(move.actorId)
         }
         updates.append(.setChallenge(updatedChallenge))
         

@@ -45,7 +45,7 @@ class DiscardBeerMatcher: MoveMatcherProtocol {
         }
         
         return [.playerDiscardHand(move.actorId, cardId),
-                .setChallenge(challenge.decrementingDamage(for: move.actorId))]
+                .setChallenge(challenge.decrementingDamage(move.actorId))]
     }
 }
 
