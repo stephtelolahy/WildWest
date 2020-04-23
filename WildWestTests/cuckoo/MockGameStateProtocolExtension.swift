@@ -11,8 +11,15 @@ import Cuckoo
 extension MockGameStateProtocol {
     
     func players(are players: PlayerProtocol...) -> MockGameStateProtocol {
+        let mockPlayers = players.map({ $0 as! MockPlayerProtocol })
+        mockPlayers.forEach { mockPlayer in
+            Cuckoo.stub(mockPlayer) { mock in
+                when(mock.health.get).thenReturn(4)
+            }
+        }
+        
         Cuckoo.stub(self) { mock in
-            when(mock.players.get).thenReturn(players)
+            when(mock.allPlayers.get).thenReturn(players)
         }
         return self
     }
@@ -20,7 +27,6 @@ extension MockGameStateProtocol {
     func allPlayers(are players: PlayerProtocol...) -> MockGameStateProtocol {
         Cuckoo.stub(self) { mock in
             when(mock.allPlayers.get).thenReturn(players)
-            when(mock.players.get).thenReturn(players.filter { $0.health > 0 })
         }
         return self
     }

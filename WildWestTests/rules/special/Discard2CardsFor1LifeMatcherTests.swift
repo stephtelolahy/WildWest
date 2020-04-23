@@ -23,7 +23,7 @@ class Discard2CardsFor1LifeMatcherTests: XCTestCase {
             .maxHealth(is: 4)
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p1")
-            .players(are: mockPlayer1)
+            .allPlayers(are: mockPlayer1)
             .challenge(is: nil)
         
         // When
@@ -43,7 +43,7 @@ class Discard2CardsFor1LifeMatcherTests: XCTestCase {
             .maxHealth(is: 4)
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p1")
-            .players(are: mockPlayer1)
+            .allPlayers(are: mockPlayer1)
             .challenge(is: nil)
         
         // When

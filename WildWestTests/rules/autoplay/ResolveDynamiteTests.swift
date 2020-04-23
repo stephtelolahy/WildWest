@@ -35,7 +35,7 @@ class ResolveDynamiteMatcherTests: XCTestCase {
     func test_Deal3Damages_IfDynamiteExplodes_OnHealthIs4() {
         // Given
         let mockState = MockGameStateProtocol()
-            .players(are: MockPlayerProtocol().identified(by: "p1").health(is: 4).withDefault())
+            .allPlayers(are: MockPlayerProtocol().identified(by: "p1").health(is: 4).withDefault())
         let move = GameMove(name: .dynamiteExploded, actorId: "p1", cardId: "c1")
         
         // When
@@ -50,7 +50,7 @@ class ResolveDynamiteMatcherTests: XCTestCase {
     func test_Deal2Damages_IfDynamiteExplodes_OnHealthIs3() {
         // Given
         let mockState = MockGameStateProtocol()
-            .players(are: MockPlayerProtocol().identified(by: "p1").health(is: 3).withDefault())
+            .allPlayers(are: MockPlayerProtocol().identified(by: "p1").health(is: 3).withDefault())
         let move = GameMove(name: .dynamiteExploded, actorId: "p1", cardId: "c1")
         
         // When
@@ -66,7 +66,7 @@ class ResolveDynamiteMatcherTests: XCTestCase {
     func test_Deal1Damages_IfDynamiteExplodes_OnHealthIs2() {
         // Given
         let mockState = MockGameStateProtocol()
-            .players(are: MockPlayerProtocol().identified(by: "p1").health(is: 2).withDefault())
+            .allPlayers(are: MockPlayerProtocol().identified(by: "p1").health(is: 2).withDefault())
         let move = GameMove(name: .dynamiteExploded, actorId: "p1", cardId: "c1")
         
         // When
@@ -82,7 +82,7 @@ class ResolveDynamiteMatcherTests: XCTestCase {
     func test_DoNotDealDamage_IfDynamiteExplodes_OnHealthIs1() {
         // Given
         let mockState = MockGameStateProtocol()
-            .players(are: MockPlayerProtocol().identified(by: "p1").health(is: 1).withDefault())
+            .allPlayers(are: MockPlayerProtocol().identified(by: "p1").health(is: 1).withDefault())
         let move = GameMove(name: .dynamiteExploded, actorId: "p1", cardId: "c1")
         
         // When
@@ -115,11 +115,11 @@ class ResolveDynamiteMatcherTests: XCTestCase {
     
     func test_PassDynamiteToNextPlayer_IfDoesNotExplode() {
         // Given
-        let mockPlayer1 = MockPlayerProtocol().identified(by: "p1").health(is: 1).withDefault()
-        let mockPlayer2 = MockPlayerProtocol().identified(by: "p2").health(is: 1)
+        let mockPlayer1 = MockPlayerProtocol().identified(by: "p1").withDefault()
+        let mockPlayer2 = MockPlayerProtocol().identified(by: "p2")
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p1")
-            .allPlayers(are: mockPlayer1, mockPlayer2)
+            .players(are: mockPlayer1, mockPlayer2)
         let move = GameMove(name: .passDynamite, actorId: "p1", cardId: "c1")
         
         // When

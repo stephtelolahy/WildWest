@@ -11,7 +11,7 @@ class ResolveBarrelMatcher: MoveMatcherProtocol {
     func autoPlayMove(matching state: GameStateProtocol) -> GameMove? {
         guard let challenge = state.challenge,
             (challenge.name == .bang || challenge.name == .gatling),
-            let actorId = challenge.actorId(in: state),
+            let actorId = challenge.targetIds.first,
             let actor = state.player(actorId),
             challenge.barrelsPlayed < actor.barrelsCount else {
                 return nil
@@ -34,7 +34,7 @@ class ResolveBarrelMatcher: MoveMatcherProtocol {
         
         var updatedChallenge: Challenge? = challenge.incrementingBarrelsPlayed()
         if move.name == .useBarrel {
-            updatedChallenge = updatedChallenge?.countering(for: move.actorId)
+            updatedChallenge = updatedChallenge?.countering(move.actorId)
         }
         updates.append(.setChallenge(updatedChallenge))
         

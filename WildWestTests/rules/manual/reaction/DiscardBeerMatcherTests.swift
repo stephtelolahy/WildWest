@@ -23,7 +23,7 @@ class DiscardBeerMatcherTests: XCTestCase {
             .health(is: 1)
         let mockState = MockGameStateProtocol()
             .challenge(is: Challenge(name: .gatling, targetIds: ["p1", "p2"]))
-            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
+            .allPlayers(are: mockPlayer1, MockPlayerProtocol().health(is: 1), MockPlayerProtocol().health(is: 1))
         
         // When
         let moves = sut.validMoves(matching: mockState)
@@ -43,7 +43,7 @@ class DiscardBeerMatcherTests: XCTestCase {
             .health(is: 1)
         let mockState = MockGameStateProtocol()
             .challenge(is: Challenge(name: .indians, targetIds: ["p1", "p2"]))
-            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
+            .allPlayers(are: mockPlayer1, MockPlayerProtocol().health(is: 1), MockPlayerProtocol().health(is: 1))
         
         // When
         let moves = sut.validMoves(matching: mockState)
@@ -63,7 +63,7 @@ class DiscardBeerMatcherTests: XCTestCase {
             .health(is: 1)
         let mockState = MockGameStateProtocol()
             .challenge(is: Challenge(name: .duel, targetIds: ["p1", "p2"]))
-            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
+            .allPlayers(are: mockPlayer1, MockPlayerProtocol().health(is: 1), MockPlayerProtocol().health(is: 1))
         
         // When
         let moves = sut.validMoves(matching: mockState)
@@ -82,7 +82,7 @@ class DiscardBeerMatcherTests: XCTestCase {
             .identified(by: "p1")
             .health(is: 1)
         let mockState = MockGameStateProtocol()
-            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
+            .allPlayers(are: mockPlayer1, MockPlayerProtocol().health(is: 1), MockPlayerProtocol().health(is: 1))
             .currentTurn(is: "p1")
             .challenge(is: Challenge(name: .dynamiteExploded))
         
@@ -103,7 +103,7 @@ class DiscardBeerMatcherTests: XCTestCase {
             .identified(by: "p1")
             .health(is: 4)
         let mockState = MockGameStateProtocol()
-            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
+            .allPlayers(are: mockPlayer1)
             .currentTurn(is: "p1")
             .challenge(is: Challenge(name: .dynamiteExploded))
         
@@ -123,9 +123,11 @@ class DiscardBeerMatcherTests: XCTestCase {
             .holding(mockCard)
             .identified(by: "p1")
             .health(is: 1)
+        let mockPlayer2 = MockPlayerProtocol()
+            .health(is: 1)
         let mockState = MockGameStateProtocol()
             .challenge(is: Challenge(name: .gatling, targetIds: ["p1", "p2"]))
-            .players(are: mockPlayer1, MockPlayerProtocol())
+            .allPlayers(are: mockPlayer1, mockPlayer2)
         
         // When
         let moves = sut.validMoves(matching: mockState)

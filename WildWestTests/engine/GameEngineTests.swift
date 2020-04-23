@@ -28,7 +28,7 @@ class GameEngineTests: XCTestCase {
         DefaultValueRegistry.register(value: PublishSubject<GameEvent>(), forType: Observable<GameEvent>.self)
         
         Cuckoo.stub(mockDatabase) { mock in
-            when(mock.state.get).thenReturn(mockState)
+            when(mock.stateSubject.get).thenReturn(BehaviorSubject(value: mockState))
         }
         
         sut = GameEngine(database: mockDatabase,

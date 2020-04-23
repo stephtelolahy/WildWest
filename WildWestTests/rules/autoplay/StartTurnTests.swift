@@ -17,7 +17,6 @@ class StartTurnTests: XCTestCase {
         let player1 = MockPlayerProtocol()
             .identified(by: "p1")
             .noCardsInPlay()
-            .health(is: 1)
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p1")
             .challenge(is: Challenge(name: .startTurn))
@@ -34,7 +33,6 @@ class StartTurnTests: XCTestCase {
         // Given
         let player1 = MockPlayerProtocol()
             .identified(by: "p1")
-            .health(is: 1)
             .playing(MockCardProtocol().named(.jail))
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p1")
@@ -52,7 +50,6 @@ class StartTurnTests: XCTestCase {
         // Given
         let player1 = MockPlayerProtocol()
             .identified(by: "p1")
-            .health(is: 1)
             .playing(MockCardProtocol().named(.dynamite))
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p1")

@@ -21,7 +21,7 @@ class EndTurnMatcherTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
             .currentTurn(is: "p1")
-            .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
+            .allPlayers(are: mockPlayer)
         
         // When
         let moves = sut.validMoves(matching: mockState)
@@ -40,7 +40,7 @@ class EndTurnMatcherTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
             .currentTurn(is: "p1")
-            .players(are: mockPlayer, MockPlayerProtocol())
+            .allPlayers(are: mockPlayer)
         
         // When
         let moves = sut.validMoves(matching: mockState)
@@ -94,7 +94,7 @@ class EndTurnMatcherTests: XCTestCase {
                                  .setChallenge(Challenge(name: .startTurn))])
     }
     
-    func test_SetDiscardExcessCardsChallenge_IfEndingTurnWithExcessCards() {
+    func test_DiscardExcessCards_IfEndingTurnWithExcessCards() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")

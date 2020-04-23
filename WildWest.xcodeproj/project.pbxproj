@@ -161,8 +161,6 @@
 		335BED9F2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */; };
 		336AA6F023F1450800328837 /* GameDatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */; };
 		336AA6F123F1450B00328837 /* GameDatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */; };
-		337408CB24306BAB00E5809B /* Challenge+Damage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337408CA24306BAB00E5809B /* Challenge+Damage.swift */; };
-		337408CC24306BAB00E5809B /* Challenge+Damage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337408CA24306BAB00E5809B /* Challenge+Damage.swift */; };
 		337408D124306C1200E5809B /* Card+Ability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337408D024306C1200E5809B /* Card+Ability.swift */; };
 		337408D224306C1200E5809B /* Card+Ability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337408D024306C1200E5809B /* Card+Ability.swift */; };
 		337408D424306C3400E5809B /* Player+Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337408D324306C3400E5809B /* Player+Cards.swift */; };
@@ -198,6 +196,8 @@
 		339B4EFC2434A7D700E32965 /* 342229_christopherderp_hurt-1-male (online-audio-converter.com).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 339B4EFB2434A7D700E32965 /* 342229_christopherderp_hurt-1-male (online-audio-converter.com).mp3 */; };
 		339CA27A242578C800D43128 /* GameUpdateExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1EF2A724214DE500F15BF8 /* GameUpdateExecutor.swift */; };
 		339CA27B242578C900D43128 /* GameUpdateExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1EF2A724214DE500F15BF8 /* GameUpdateExecutor.swift */; };
+		339E4A2224516B490079F088 /* Challenge+Updating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339E4A2124516B490079F088 /* Challenge+Updating.swift */; };
+		339E4A2324516B490079F088 /* Challenge+Updating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339E4A2124516B490079F088 /* Challenge+Updating.swift */; };
 		33A4381223E4BD3200C39DD6 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A4381123E4BD3200C39DD6 /* ArrayExtension.swift */; };
 		33A4381323E4BD3200C39DD6 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A4381123E4BD3200C39DD6 /* ArrayExtension.swift */; };
 		33A4381523E4BE8200C39DD6 /* ArrayExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A4381423E4BE8200C39DD6 /* ArrayExtensionTests.swift */; };
@@ -383,7 +383,6 @@
 		335BED9A2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Pain-SoundBible.com-1883168362.mp3"; sourceTree = "<group>"; };
 		335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Automatic Machine Gun-SoundBible.com-253461580.mp3"; sourceTree = "<group>"; };
 		336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDatabaseProtocol.swift; sourceTree = "<group>"; };
-		337408CA24306BAB00E5809B /* Challenge+Damage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Challenge+Damage.swift"; sourceTree = "<group>"; };
 		337408D024306C1200E5809B /* Card+Ability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+Ability.swift"; sourceTree = "<group>"; };
 		337408D324306C3400E5809B /* Player+Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+Cards.swift"; sourceTree = "<group>"; };
 		337D7FD0243071AE0078F749 /* Player+Ability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+Ability.swift"; sourceTree = "<group>"; };
@@ -418,6 +417,7 @@
 		339B4EFB2434A7D700E32965 /* 342229_christopherderp_hurt-1-male (online-audio-converter.com).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "342229_christopherderp_hurt-1-male (online-audio-converter.com).mp3"; sourceTree = "<group>"; };
 		339CA270242551A800D43128 /* StagecoachMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagecoachMatcherTests.swift; sourceTree = "<group>"; };
 		339CA27624256F4500D43128 /* WellsFargoMatcherMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WellsFargoMatcherMatcher.swift; sourceTree = "<group>"; };
+		339E4A2124516B490079F088 /* Challenge+Updating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Challenge+Updating.swift"; sourceTree = "<group>"; };
 		33A4381123E4BD3200C39DD6 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		33A4381423E4BE8200C39DD6 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
 		33A733ED23DC4A5300E9B2AD /* Subscribable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subscribable.swift; sourceTree = "<group>"; };
@@ -731,6 +731,7 @@
 				33275D4C2446283B00CDC7A6 /* sfx */,
 				33112E71244503F1009C706E /* animator */,
 				330E5AC52439E1E100C358AF /* selector */,
+				3338B2EA242FD0480097BA57 /* convenience */,
 			);
 			path = game;
 			sourceTree = "<group>";
@@ -777,9 +778,9 @@
 				3333465224306B0000A97FD5 /* Player+TargetCard.swift */,
 				337408D324306C3400E5809B /* Player+Cards.swift */,
 				337408D024306C1200E5809B /* Card+Ability.swift */,
-				337408CA24306BAB00E5809B /* Challenge+Damage.swift */,
 				33334644242FEE7F00A97FD5 /* GameMove+Grouping.swift */,
 				33D9733C2448B69F00A9CCC0 /* GameUpdate+Animatable.swift */,
+				339E4A2124516B490079F088 /* Challenge+Updating.swift */,
 			);
 			path = convenience;
 			sourceTree = "<group>";
@@ -1143,7 +1144,6 @@
 			children = (
 				33FDD70A240BFB3800BC3E14 /* menu */,
 				3385A1F423F9352800CD9660 /* game */,
-				3338B2EA242FD0480097BA57 /* convenience */,
 				ADB7D2F6239EE03900653905 /* LaunchScreen.storyboard */,
 				ADB7D2F1239EE03800653905 /* Main.storyboard */,
 			);
@@ -1500,7 +1500,6 @@
 				3328FCF0242F309400A82255 /* EndTurn.swift in Sources */,
 				33DA20B02446E0640082D1A0 /* EventQueueProtocol.swift in Sources */,
 				3301BEFA23F9A79B00B4364D /* AIPlayerAgent.swift in Sources */,
-				337408CB24306BAB00E5809B /* Challenge+Damage.swift in Sources */,
 				33E4412424077DAB00B2848E /* UITableViewExtension.swift in Sources */,
 				3328FCAA242F29B100A82255 /* Gatling.swift in Sources */,
 				3333465324306B0000A97FD5 /* Player+TargetCard.swift in Sources */,
@@ -1529,6 +1528,7 @@
 				3328FCA9242F29B100A82255 /* Bang.swift in Sources */,
 				33E4411E24077CA000B2848E /* PlayerCell.swift in Sources */,
 				33DA20B32446E0810082D1A0 /* DelayedEventQueue.swift in Sources */,
+				339E4A2224516B490079F088 /* Challenge+Updating.swift in Sources */,
 				33EF4079244F6ABB008FA490 /* Discard2CardsFor1Life.swift in Sources */,
 				33BD0AD524351131003E75EE /* FigureDto.swift in Sources */,
 			);
@@ -1549,7 +1549,6 @@
 				33BD0ACF24350D7D003E75EE /* Player+AbilityTests.swift in Sources */,
 				33EF407A244F6ABB008FA490 /* Discard2CardsFor1Life.swift in Sources */,
 				33334643242FEDCD00A97FD5 /* GameState+Distance.swift in Sources */,
-				337408CC24306BAB00E5809B /* Challenge+Damage.swift in Sources */,
 				AD52B99D23B17A310013240B /* GameState.swift in Sources */,
 				33C52DE0242F255B009EF4DA /* GameUpdateExecutorTests.swift in Sources */,
 				33380100242F2348003F7327 /* ResolveJailTests.swift in Sources */,
@@ -1614,6 +1613,7 @@
 				336AA6F123F1450B00328837 /* GameDatabaseProtocol.swift in Sources */,
 				ADD4DB702420A8F2001BBD48 /* GameMoveExtensionTests.swift in Sources */,
 				337408D524306C3400E5809B /* Player+Cards.swift in Sources */,
+				339E4A2324516B490079F088 /* Challenge+Updating.swift in Sources */,
 				33B896CB243862AB0005FF21 /* GameCollectionViewLayout.swift in Sources */,
 				330FDED5242F38DF00284FE7 /* PenalizeSheriffOnEliminatingDeputyMatcherTests.swift in Sources */,
 				3328FCD1242F2B5600A82255 /* DuelMatcherTests.swift in Sources */,

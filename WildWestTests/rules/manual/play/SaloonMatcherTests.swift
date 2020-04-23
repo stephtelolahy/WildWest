@@ -25,7 +25,7 @@ class SaloonMatcherTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
             .currentTurn(is: "p1")
-            .players(are: mockPlayer)
+            .allPlayers(are: mockPlayer)
         
         // When
         let moves = sut.validMoves(matching: mockState)
@@ -47,7 +47,7 @@ class SaloonMatcherTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
             .currentTurn(is: "p1")
-            .players(are: mockPlayer)
+            .allPlayers(are: mockPlayer)
         
         // When
         let moves = sut.validMoves(matching: mockState)
@@ -72,7 +72,7 @@ class SaloonMatcherTests: XCTestCase {
             .health(is: 3)
             .maxHealth(is: 3)
         let mockState = MockGameStateProtocol()
-            .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
+            .allPlayers(are: mockPlayer1, mockPlayer2, mockPlayer3)
         let move = GameMove(name: .saloon, actorId: "p1", cardId: "c1")
         
         // When

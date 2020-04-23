@@ -17,7 +17,6 @@ class DrawsCardOnLoseHealthMatcherTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
             .abilities(are: [.drawsCardOnLoseHealth: true])
-            .health(is: 2)
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
         let move = GameMove(name: .pass, actorId: "p1")

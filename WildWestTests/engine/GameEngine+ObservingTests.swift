@@ -12,25 +12,30 @@ import RxTest
 import RxSwift
 
 class GameEngine_ObservingTests: XCTestCase {
-
+    
     private var sut: GameEngine!
     private var mockState: MockGameStateProtocol!
+    private var mockStateSubject: BehaviorSubject<GameStateProtocol>!
     
     private var stateObservers: [TestableObserver<GameStateProtocol>]!
     private var executedMoveObservers: [TestableObserver<GameMove>]!
     private var validMovesObservers: [TestableObserver<[GameMove]>]!
     private var updateObservers: [TestableObserver<GameUpdate>]!
     private let disposeBag = DisposeBag()
-
+    
     override func setUp() {
         let mockDatabase = MockGameDatabaseProtocol()
         let mockPlayer1 = MockPlayerProtocol().identified(by: "p1").role(is: .sheriff).health(is: 5).withDefault()
         let mockPlayer2 = MockPlayerProtocol().identified(by: "p2").role(is: .outlaw).health(is: 4).withDefault()
+        
         mockState = MockGameStateProtocol()
             .withEnabledDefaultImplementation(GameStateProtocolStub())
             .allPlayers(are: mockPlayer1, mockPlayer2)
+        
+        mockStateSubject = BehaviorSubject(value: mockState)
+        
         Cuckoo.stub(mockDatabase) { mock in
-            when(mock.state.get).thenReturn(mockState)
+            when(mock.stateSubject.get).thenReturn(mockStateSubject)
         }
         DefaultValueRegistry.register(value: .bartCassidy, forType: FigureName.self)
         
@@ -76,8 +81,9 @@ class GameEngine_ObservingTests: XCTestCase {
     func test_AllObserversReceiveEmitedState() {
         // Given
         // When
-        sut.emitState(mockState)
-        sut.emitState(mockState)
+        
+        mockStateSubject.onNext(mockState)
+        mockStateSubject.onNext(mockState)
         
         // Assert
         stateObservers.forEach { XCTAssertEqual($0.events.count, 3) }

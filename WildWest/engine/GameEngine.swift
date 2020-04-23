@@ -10,7 +10,6 @@ import RxSwift
 
 class GameEngine: GameEngineProtocol, Subscribable {
     
-    private let stateSubject: BehaviorSubject<GameStateProtocol>
     private let updatesSubject: PublishSubject<GameUpdate>
     private let executedMoveSubject: PublishSubject<GameMove>
     private let validMovesSubject: PublishSubject<[String: [GameMove]]>
@@ -28,7 +27,6 @@ class GameEngine: GameEngineProtocol, Subscribable {
         self.moveMatchers = moveMatchers
         self.updateExecutor = updateExecutor
         self.eventQueue = eventQueue
-        stateSubject = BehaviorSubject(value: database.state)
         executedMoveSubject = PublishSubject()
         updatesSubject = PublishSubject()
         validMovesSubject = PublishSubject()
@@ -48,7 +46,7 @@ class GameEngine: GameEngineProtocol, Subscribable {
     }
     
     func state(observedBy playerId: String?) -> Observable<GameStateProtocol> {
-        stateSubject.map { $0.observed(by: playerId) }
+        database.stateSubject.map { $0.observed(by: playerId) }
     }
     
     func executedMove() -> Observable<GameMove> {
@@ -65,10 +63,6 @@ class GameEngine: GameEngineProtocol, Subscribable {
 }
 
 extension GameEngine: InternalGameEngineProtocol {
-    
-    func emitState(_ state: GameStateProtocol) {
-        stateSubject.onNext(state)
-    }
     
     func emitUpdate(_ update: GameUpdate) {
         updatesSubject.onNext(update)
@@ -131,19 +125,14 @@ private extension GameEngine {
     
     func execute(_ update: GameUpdate) {
         print("> \(String(describing: update))")
-        
         emitUpdate(update)
-        
         updateExecutor.execute(update, in: database)
-        
-        emitState(database.state)
     }
     
     func postExecute(_ move: GameMove) {
         // emit game over
         if let outcome = database.state.claculateOutcome() {
             database.setOutcome(outcome)
-            emitState(database.state)
             return
         }
         

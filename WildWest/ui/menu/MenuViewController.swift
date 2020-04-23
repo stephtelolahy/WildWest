@@ -151,7 +151,7 @@ private extension MenuViewController {
                                 eventQueue: DelayedEventQueue(delay: UserPreferences.shared.updateDelay))
         
         let controlledPlayerId: String? = UserPreferences.shared.simulationMode ? nil : state.players.first?.identifier
-        let aiPlayers = database.state.players.filter { $0.identifier != controlledPlayerId }
+        let aiPlayers = state.players.filter { $0.identifier != controlledPlayerId }
         let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
                                                      ai: RandomAIWithRole(),
                                                      engine: engine)
