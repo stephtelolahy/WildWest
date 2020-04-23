@@ -15,12 +15,8 @@ class MemoryCachedDataBase: GameDatabaseProtocol {
     private var mutableState: GameState
     
     init(state: GameStateProtocol) {
-        guard let gameState = state as? GameState else {
-            fatalError("Illegal state")
-        }
-        
-        mutableState = gameState
         stateSubject = BehaviorSubject(value: state)
+        mutableState = GameState.create(state: state)
     }
     
     // Flags
@@ -119,5 +115,33 @@ private extension MemoryCachedDataBase {
     
     func emitState() {
         stateSubject.onNext(mutableState)
+    }
+}
+
+private extension GameState {
+    static func create(state: GameStateProtocol) -> GameState {
+        GameState(allPlayers: state.allPlayers.map { Player.create(player: $0) },
+                  deck: state.deck,
+                  discardPile: state.discardPile,
+                  turn: state.turn,
+                  challenge: state.challenge,
+                  generalStore: state.generalStore,
+                  outcome: state.outcome)
+    }
+}
+
+private extension Player {
+    static func create(player: PlayerProtocol) -> Player {
+        Player(role: player.role,
+               figureName: player.figureName,
+               imageName: player.imageName,
+               description: player.description,
+               abilities: player.abilities,
+               maxHealth: player.maxHealth,
+               health: player.health,
+               hand: player.hand,
+               inPlay: player.inPlay,
+               bangsPlayed: player.bangsPlayed,
+               lastDamage: player.lastDamage)
     }
 }
