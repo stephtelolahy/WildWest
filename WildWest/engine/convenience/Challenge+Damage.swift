@@ -36,20 +36,6 @@ extension Challenge {
 
 // Custom Getters
 extension Challenge {
-    
-    func actorId(in state: GameStateProtocol) -> String? {
-        switch name {
-        case .bang, .duel, .gatling, .indians, .generalStore:
-            return targetIds.first
-            
-        case .dynamiteExploded:
-            return state.turn
-            
-        default:
-            fatalError("Illegal state")
-        }
-    }
-    
     func damageSource(in state: GameStateProtocol) -> DamageSource? {
         switch name {
         case .bang, .gatling, .duel, .indians:

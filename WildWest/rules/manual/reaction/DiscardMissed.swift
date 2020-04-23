@@ -11,7 +11,7 @@ class DiscardMissedMatcher: MoveMatcherProtocol {
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
         guard let challenge = state.challenge,
             (challenge.name == .bang || challenge.name == .gatling),
-            let actorId = challenge.actorId(in: state),
+            let actorId = challenge.targetIds.first,
             let actor = state.player(actorId),
             let cards = actor.hand.filterOrNil({ actor.missedCardNames.contains($0.name) }) else {
                 return nil

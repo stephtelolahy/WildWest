@@ -16,8 +16,11 @@ class DiscardBeerMatcher: MoveMatcherProtocol {
         
         var actorId: String?
         switch challenge.name {
-        case .bang, .gatling, .duel, .indians, .dynamiteExploded:
-            actorId = challenge.actorId(in: state)
+        case .bang, .duel, .gatling, .indians, .generalStore:
+            actorId = challenge.targetIds.first
+            
+        case .dynamiteExploded:
+            actorId = state.turn
             
         default:
             return nil

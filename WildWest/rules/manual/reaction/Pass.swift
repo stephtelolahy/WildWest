@@ -14,8 +14,11 @@ class PassMatcher: MoveMatcherProtocol {
         }
         
         switch challenge.name {
-        case .bang, .gatling, .duel, .indians, .dynamiteExploded:
-            return [GameMove(name: .pass, actorId: challenge.actorId(in: state)!)]
+        case .bang, .duel, .gatling, .indians, .generalStore:
+            return [GameMove(name: .pass, actorId: challenge.targetIds.first!)]
+            
+        case .dynamiteExploded:
+            return [GameMove(name: .pass, actorId: state.turn)]
             
         default:
             return nil
