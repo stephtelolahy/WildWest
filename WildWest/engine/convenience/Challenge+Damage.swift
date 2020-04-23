@@ -34,22 +34,6 @@ extension Challenge {
     }
 }
 
-// Custom Getters
-extension Challenge {
-    func damageSource(in state: GameStateProtocol) -> DamageSource? {
-        switch name {
-        case .bang, .gatling, .duel, .indians:
-            return .byPlayer(state.turn)
-            
-        case .dynamiteExploded:
-            return .byDynamite
-            
-        default:
-            fatalError("Illegal state")
-        }
-    }
-}
-
 // Custom Updaters
 extension Challenge {
     

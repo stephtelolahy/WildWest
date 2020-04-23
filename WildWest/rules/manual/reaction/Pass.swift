@@ -27,12 +27,23 @@ class PassMatcher: MoveMatcherProtocol {
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .pass = move.name,
-            let challenge = state.challenge,
-            let damageSource = challenge.damageSource(in: state) else {
+            let challenge = state.challenge else {
                 return nil
         }
         
-        return [.playerLooseHealth(move.actorId, challenge.damage, damageSource),
+        var damageSource: DamageSource?
+        switch challenge.name {
+        case .bang, .gatling, .duel, .indians:
+            damageSource = .byPlayer(state.turn)
+            
+        case .dynamiteExploded:
+            damageSource = .byDynamite
+            
+        default:
+            return nil
+        }
+        
+        return [.playerLooseHealth(move.actorId, challenge.damage, damageSource!),
                 .setChallenge(challenge.removing(move.actorId))]
     }
 }
