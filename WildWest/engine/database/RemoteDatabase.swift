@@ -1,20 +1,21 @@
 //
-//  FirebaseDatabase.swift
+//  RemoteDatabase.swift
 //  WildWest
 //
-//  Created by Hugues Stephano Telolahy on 22/04/2020.
+//  Created by Hugues Stephano Telolahy on 23/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
 import Firebase
 import RxSwift
 
-class FirebaseDatabase: GameDatabaseProtocol {
+class RemoteDatabase: GameDatabaseProtocol {
     
     let stateSubject: BehaviorSubject<GameStateProtocol>
     
     init(state: GameStateProtocol) {
         stateSubject = BehaviorSubject(value: state)
+        Database.database().addGame(state)
     }
     
     func setTurn(_ turn: String) {
@@ -72,5 +73,4 @@ class FirebaseDatabase: GameDatabaseProtocol {
     func playerSetDamageEvent(_ playerId: String, _ event: DamageEvent) {
         fatalError("Undefined")
     }
-    
 }

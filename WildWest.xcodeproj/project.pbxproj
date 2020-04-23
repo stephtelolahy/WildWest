@@ -29,6 +29,10 @@
 		331B4646244A11EC00F3634A /* DrawsAnotherCardIfSecondDrawIsRedSuitMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331B4645244A11EC00F3634A /* DrawsAnotherCardIfSecondDrawIsRedSuitMatcherTests.swift */; };
 		3320A340242FC9EF002CD5AE /* GameState+Outcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3320A33F242FC9EF002CD5AE /* GameState+Outcome.swift */; };
 		3320A341242FC9EF002CD5AE /* GameState+Outcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3320A33F242FC9EF002CD5AE /* GameState+Outcome.swift */; };
+		3322C4B3245236D500D7B297 /* RemoteDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4B2245236D500D7B297 /* RemoteDatabase.swift */; };
+		3322C4B62452379700D7B297 /* StateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4B52452379700D7B297 /* StateDto.swift */; };
+		3322C4BA245243E800D7B297 /* GameState+Encoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4B9245243E800D7B297 /* GameState+Encoding.swift */; };
+		3322C4BC2452452F00D7B297 /* Firebase+Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4BB2452452F00D7B297 /* Firebase+Transaction.swift */; };
 		3323C8D2244780420030E9B7 /* DelayedEventQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3323C8D1244780420030E9B7 /* DelayedEventQueueTests.swift */; };
 		3324018E23DBA6C800B92439 /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */; };
 		332499B323DB9F650082EF09 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332499B223DB9F650082EF09 /* GameViewController.swift */; };
@@ -127,7 +131,6 @@
 		334673EB2436328000FFBB82 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334673EA2436328000FFBB82 /* UserPreferences.swift */; };
 		334673EC2436328000FFBB82 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334673EA2436328000FFBB82 /* UserPreferences.swift */; };
 		33516CCA2450A79E003C99E2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33516CC92450A79E003C99E2 /* GoogleService-Info.plist */; };
-		33516CCD2450AB93003C99E2 /* FirebaseDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33516CCC2450AB93003C99E2 /* FirebaseDatabase.swift */; };
 		3356CF0E243237320071B04F /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3356CF0D243237320071B04F /* Challenge.swift */; };
 		3356CF0F243237320071B04F /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3356CF0D243237320071B04F /* Challenge.swift */; };
 		3356CF11243237500071B04F /* DamageEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3356CF10243237500071B04F /* DamageEvent.swift */; };
@@ -327,6 +330,10 @@
 		331231002434FC890080B696 /* GameState+Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameState+Player.swift"; sourceTree = "<group>"; };
 		331B4645244A11EC00F3634A /* DrawsAnotherCardIfSecondDrawIsRedSuitMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawsAnotherCardIfSecondDrawIsRedSuitMatcherTests.swift; sourceTree = "<group>"; };
 		3320A33F242FC9EF002CD5AE /* GameState+Outcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameState+Outcome.swift"; sourceTree = "<group>"; };
+		3322C4B2245236D500D7B297 /* RemoteDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDatabase.swift; sourceTree = "<group>"; };
+		3322C4B52452379700D7B297 /* StateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateDto.swift; sourceTree = "<group>"; };
+		3322C4B9245243E800D7B297 /* GameState+Encoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameState+Encoding.swift"; sourceTree = "<group>"; };
+		3322C4BB2452452F00D7B297 /* Firebase+Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firebase+Transaction.swift"; sourceTree = "<group>"; };
 		3323C8D1244780420030E9B7 /* DelayedEventQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayedEventQueueTests.swift; sourceTree = "<group>"; };
 		3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		332499B223DB9F650082EF09 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -362,7 +369,6 @@
 		334673E72436314E00FFBB82 /* UserDefaultsStored.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStored.swift; sourceTree = "<group>"; };
 		334673EA2436328000FFBB82 /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		33516CC92450A79E003C99E2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		33516CCC2450AB93003C99E2 /* FirebaseDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabase.swift; sourceTree = "<group>"; };
 		3351B58524269386004F18C3 /* Pass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pass.swift; sourceTree = "<group>"; };
 		3351B58824269A24004F18C3 /* PassMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassMatcherTests.swift; sourceTree = "<group>"; };
 		3356CF0D243237320071B04F /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
@@ -614,6 +620,16 @@
 			path = animator;
 			sourceTree = "<group>";
 		};
+		3322C4B42452378100D7B297 /* encoding */ = {
+			isa = PBXGroup;
+			children = (
+				3322C4BB2452452F00D7B297 /* Firebase+Transaction.swift */,
+				3322C4B9245243E800D7B297 /* GameState+Encoding.swift */,
+				3322C4B52452379700D7B297 /* StateDto.swift */,
+			);
+			path = encoding;
+			sourceTree = "<group>";
+		};
 		33275D4C2446283B00CDC7A6 /* sfx */ = {
 			isa = PBXGroup;
 			children = (
@@ -692,7 +708,8 @@
 			children = (
 				336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */,
 				33BAE345242E74CD0098B41F /* MemoryCachedDataBase.swift */,
-				33516CCC2450AB93003C99E2 /* FirebaseDatabase.swift */,
+				3322C4B2245236D500D7B297 /* RemoteDatabase.swift */,
+				3322C4B42452378100D7B297 /* encoding */,
 			);
 			path = database;
 			sourceTree = "<group>";
@@ -1420,6 +1437,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3322C4B3245236D500D7B297 /* RemoteDatabase.swift in Sources */,
+				3322C4B62452379700D7B297 /* StateDto.swift in Sources */,
 				338FAD16242543030096B488 /* InstructionBuilder.swift in Sources */,
 				ADE91AD423BA00DC00F7316B /* GameSetup.swift in Sources */,
 				3328FCA3242F29B100A82255 /* Stagecoach.swift in Sources */,
@@ -1445,6 +1464,7 @@
 				330FDECC242F384C00284FE7 /* GainRewardOnEliminatingOutlaw.swift in Sources */,
 				3301BEF423F962F000B4364D /* RandomAIWithRole.swift in Sources */,
 				3320A340242FC9EF002CD5AE /* GameState+Outcome.swift in Sources */,
+				3322C4BC2452452F00D7B297 /* Firebase+Transaction.swift in Sources */,
 				33A4381223E4BD3200C39DD6 /* ArrayExtension.swift in Sources */,
 				336AA6F023F1450800328837 /* GameDatabaseProtocol.swift in Sources */,
 				337D7FDD2430879F0078F749 /* PlayerDescriptor.swift in Sources */,
@@ -1511,7 +1531,7 @@
 				33D9733D2448B69F00A9CCC0 /* GameUpdate+Animatable.swift in Sources */,
 				3380B037243641A20040F027 /* DrawsCardOnLoseHealth.swift in Sources */,
 				3328FCA5242F29B100A82255 /* Equip.swift in Sources */,
-				33516CCD2450AB93003C99E2 /* FirebaseDatabase.swift in Sources */,
+				3322C4BA245243E800D7B297 /* GameState+Encoding.swift in Sources */,
 				AD52B99323B175110013240B /* Card.swift in Sources */,
 				334673EB2436328000FFBB82 /* UserPreferences.swift in Sources */,
 				3328FCAC242F29B100A82255 /* Duel.swift in Sources */,

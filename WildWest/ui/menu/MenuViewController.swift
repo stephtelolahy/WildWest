@@ -153,7 +153,7 @@ private extension MenuViewController {
     func startRemoteGame() {
         let state = createGame()
         
-        let database = FirebaseDatabase(state: state)
+        let database = RemoteDatabase(state: state)
         print(database)
     }
     
