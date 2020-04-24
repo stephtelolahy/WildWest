@@ -5,6 +5,7 @@
 //  Created by Hugues Stephano Telolahy on 21/03/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
+// swiftlint:disable implicitly_unwrapped_optional
 
 class PassMatcher: MoveMatcherProtocol {
     
@@ -27,11 +28,12 @@ class PassMatcher: MoveMatcherProtocol {
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .pass = move.name,
-            let challenge = state.challenge else {
+            let challenge = state.challenge,
+            let actor = state.player(move.actorId) else {
                 return nil
         }
         
-        var damageSource: DamageSource?
+        var damageSource: DamageSource!
         switch challenge.name {
         case .bang, .gatling, .duel, .indians:
             damageSource = .byPlayer(state.turn)
@@ -43,7 +45,9 @@ class PassMatcher: MoveMatcherProtocol {
             return nil
         }
         
-        return [.playerLooseHealth(move.actorId, challenge.damage, damageSource!),
+        let health = max(actor.health - challenge.damage, 0)
+        let damageEvent = DamageEvent(damage: challenge.damage, source: damageSource)
+        return [.playerLooseHealth(move.actorId, health, damageEvent),
                 .setChallenge(challenge.removing(move.actorId))]
     }
 }

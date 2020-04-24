@@ -173,7 +173,7 @@ class DiscardBeerMatcherTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "px")
             .challenge(is: Challenge(name: .bang, targetIds: ["p1"]))
-            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
+            .players(are: mockPlayer1)
         let move = GameMove(name: .discardBeer, actorId: "p1", cardId: "c1")
         
         // When
@@ -191,7 +191,7 @@ class DiscardBeerMatcherTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "px")
             .challenge(is: Challenge(name: .gatling, targetIds: ["p1", "p2", "p3"]))
-            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
+            .players(are: mockPlayer1)
         let move = GameMove(name: .discardBeer, actorId: "p1", cardId: "c1")
         
         // When
@@ -209,7 +209,7 @@ class DiscardBeerMatcherTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "px")
             .challenge(is: Challenge(name: .indians, targetIds: ["p1", "p2", "p3"]))
-            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
+            .players(are: mockPlayer1)
         let move = GameMove(name: .discardBeer, actorId: "p1", cardId: "c1")
         
         // When
@@ -227,7 +227,7 @@ class DiscardBeerMatcherTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p2")
             .challenge(is: Challenge(name: .duel, targetIds: ["p1", "p2"]))
-            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
+            .players(are: mockPlayer1)
         let move = GameMove(name: .discardBeer, actorId: "p1", cardId: "c1")
         
         // When

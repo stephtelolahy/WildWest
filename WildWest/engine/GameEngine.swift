@@ -191,3 +191,12 @@ private extension Array where Element == MoveMatcherProtocol {
         return updates
     }
 }
+
+private extension GameDatabaseProtocol {
+    var state: GameStateProtocol {
+        guard let value = try? stateSubject.value() else {
+            fatalError("Illegal state")
+        }
+        return value
+    }
+}

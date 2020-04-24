@@ -13,7 +13,7 @@ enum GameUpdate: Equatable {
     case setupGeneralStore(Int)
     case playerSetBangsPlayed(String, Int)
     case playerGainHealth(String, Int)
-    case playerLooseHealth(String, Int, DamageSource)
+    case playerLooseHealth(String, Int, DamageEvent)
     case playerPullFromDeck(String)
     case playerDiscardHand(String, String)
     case playerPutInPlay(String, String)

@@ -65,9 +65,10 @@ class PassMatcherTests: XCTestCase {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
+            .health(is: 4)
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "px")
-            .players(are: mockPlayer1)
+            .allPlayers(are: mockPlayer1)
             .challenge(is: Challenge(name: .bang, targetIds: ["p1"]))
         let move = GameMove(name: .pass, actorId: "p1")
         
@@ -75,7 +76,7 @@ class PassMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerLooseHealth("p1", 1, .byPlayer("px")),
+        XCTAssertEqual(updates, [.playerLooseHealth("p1", 3, DamageEvent(damage: 1, source: .byPlayer("px"))),
                                  .setChallenge(nil)])
     }
     
@@ -83,9 +84,10 @@ class PassMatcherTests: XCTestCase {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
+            .health(is: 4)
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p1")
-            .players(are: mockPlayer1)
+            .allPlayers(are: mockPlayer1)
             .challenge(is: Challenge(name: .dynamiteExploded))
         let move = GameMove(name: .pass, actorId: "p1")
         
@@ -93,7 +95,7 @@ class PassMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerLooseHealth("p1", 3, .byDynamite),
+        XCTAssertEqual(updates, [.playerLooseHealth("p1", 1, DamageEvent(damage: 3, source: .byDynamite)),
                                  .setChallenge(Challenge(name: .startTurn))])
     }
     
@@ -101,17 +103,18 @@ class PassMatcherTests: XCTestCase {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
+            .health(is: 4)
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "px")
             .challenge(is: Challenge(name: .bang, targetIds: ["p1"]))
-            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
+            .allPlayers(are: mockPlayer1)
         let move = GameMove(name: .pass, actorId: "p1")
         
         // When
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerLooseHealth("p1", 1, .byPlayer("px")),
+        XCTAssertEqual(updates, [.playerLooseHealth("p1", 3, DamageEvent(damage: 1, source: .byPlayer("px"))),
                                  .setChallenge(nil)])
     }
     
@@ -119,17 +122,18 @@ class PassMatcherTests: XCTestCase {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
+            .health(is: 4)
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "px")
             .challenge(is: Challenge(name: .gatling, targetIds: ["p1", "p2", "p3"]))
-            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
+            .allPlayers(are: mockPlayer1)
         let move = GameMove(name: .pass, actorId: "p1")
         
         // When
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerLooseHealth("p1", 1, .byPlayer("px")),
+        XCTAssertEqual(updates, [.playerLooseHealth("p1", 3, DamageEvent(damage: 1, source: .byPlayer("px"))),
                                  .setChallenge(Challenge(name: .gatling, targetIds: ["p2", "p3"]))])
     }
     
@@ -137,17 +141,18 @@ class PassMatcherTests: XCTestCase {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
+            .health(is: 4)
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "px")
             .challenge(is: Challenge(name: .indians, targetIds: ["p1", "p2", "p3"]))
-            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
+            .allPlayers(are: mockPlayer1)
         let move = GameMove(name: .pass, actorId: "p1")
         
         // When
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerLooseHealth("p1", 1, .byPlayer("px")),
+        XCTAssertEqual(updates, [.playerLooseHealth("p1", 3, DamageEvent(damage: 1, source: .byPlayer("px"))),
                                  .setChallenge(Challenge(name: .indians, targetIds: ["p2", "p3"]))])
     }
     
@@ -155,17 +160,18 @@ class PassMatcherTests: XCTestCase {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
+            .health(is: 4)
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p2")
             .challenge(is: Challenge(name: .duel, targetIds: ["p1", "p2"]))
-            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
+            .allPlayers(are: mockPlayer1)
         let move = GameMove(name: .pass, actorId: "p1")
         
         // When
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerLooseHealth("p1", 1, .byPlayer("p2")),
+        XCTAssertEqual(updates, [.playerLooseHealth("p1", 3, DamageEvent(damage: 1, source: .byPlayer("p2"))),
                                  .setChallenge(nil)])
     }
 }

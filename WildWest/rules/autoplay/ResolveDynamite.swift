@@ -47,7 +47,9 @@ class ResolveDynamiteMatcher: MoveMatcherProtocol {
         let dynamiteDamage = 3
         let immediateDamage = actor.health <= dynamiteDamage ? actor.health - 1 : dynamiteDamage
         if immediateDamage > 0 {
-            updates.append(.playerLooseHealth(actor.identifier, immediateDamage, .byDynamite))
+            let health = max(actor.health - immediateDamage, 0)
+            let damageEvent = DamageEvent(damage: immediateDamage, source: .byDynamite)
+            updates.append(.playerLooseHealth(actor.identifier, health, damageEvent))
         }
         
         let remainingDamage = dynamiteDamage - immediateDamage
@@ -63,7 +65,7 @@ class ResolveDynamiteMatcher: MoveMatcherProtocol {
     private func executePassDynamite(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard let actor = state.player(move.actorId),
             let cardId = move.cardId else {
-            return nil
+                return nil
         }
         
         var updates: [GameUpdate] = Array(1...actor.flippedCardsCount).map { _ in .flipOverFirstDeckCard }

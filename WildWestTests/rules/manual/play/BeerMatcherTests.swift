@@ -79,8 +79,9 @@ class BeerMatcherTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
             .holding(MockCardProtocol().named(.beer).identified(by: "c1"))
+            .health(is: 2)
         let mockState = MockGameStateProtocol()
-            .players(are: mockPlayer1)
+            .allPlayers(are: mockPlayer1)
         let move = GameMove(name: .beer, actorId: "p1", cardId: "c1")
         
         // When
@@ -88,7 +89,7 @@ class BeerMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .playerGainHealth("p1", 1)])
+                                 .playerGainHealth("p1", 3)])
     }
     
 }
