@@ -8,7 +8,7 @@
 
 import Foundation
 
-class GameLoop: GameLoopProtocol {
+class GameLoop: NSObject, GameLoopProtocol {
     
     private let delay: TimeInterval
     private let database: GameDatabaseProtocol
@@ -18,6 +18,7 @@ class GameLoop: GameLoopProtocol {
     private var completion: (() -> Void)?
     private var pendingMoves: [GameMove]
     private var pendingUpdates: [GameUpdate]
+    private var currentMove: GameMove?
     
     init(delay: TimeInterval,
          database: GameDatabaseProtocol,
@@ -37,19 +38,24 @@ class GameLoop: GameLoopProtocol {
     }
     
     func run() {
-        processMove()
+        //  ⚠️ Dispatch run to prevent RxSwift Reentrancy anomaly
+        DispatchQueue.main.async { [weak self] in
+            self?.processMove()
+        }
     }
 }
 
 private extension GameLoop {
     
+    @objc
     func processMove() {
         guard !pendingMoves.isEmpty else {
             complete()
             return
         }
         
-        let move = pendingMoves[0]
+        let move = pendingMoves.remove(at: 0)
+        currentMove = move
         
         print("\n*** \(String(describing: move)) ***")
         
@@ -62,6 +68,7 @@ private extension GameLoop {
         processUpdate()
     }
     
+    @objc
     func processUpdate() {
         guard !pendingUpdates.isEmpty else {
             postProcessMove()
@@ -77,19 +84,23 @@ private extension GameLoop {
         updateExecutor.execute(update, in: database)
         
         let waitDelay = update.executionTime * delay
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + waitDelay) { [weak self] in
-            self?.processUpdate()
-        }
+        perform(#selector(processUpdate), with: nil, afterDelay: waitDelay)
     }
     
     func postProcessMove() {
-        let move = pendingMoves.remove(at: 0)
+        guard let move = currentMove else {
+            fatalError("Illegal state")
+        }
         
+        postProcess(move)
+        perform(#selector(processMove), with: nil, afterDelay: delay)
+    }
+    
+    func postProcess(_ move: GameMove) {
         // emit game over
         if let outcome = database.state.claculateOutcome() {
             database.setOutcome(outcome)
-            complete()
+            pendingMoves.removeAll()
             return
         }
         
@@ -97,7 +108,6 @@ private extension GameLoop {
         let effects = moveMatchers.compactMap { $0.effect(onExecuting: move, in: database.state) }
         if !effects.isEmpty {
             pendingMoves.append(contentsOf: effects)
-            processMove()
             return
         }
         
@@ -110,25 +120,26 @@ private extension GameLoop {
         let autoPlays = moveMatchers.compactMap { $0.autoPlayMove(matching: database.state) }
         if !autoPlays.isEmpty {
             pendingMoves.append(contentsOf: autoPlays)
-            processMove()
             return
         }
-        
-        // wait until pendingMoves empty
-        guard pendingMoves.isEmpty else {
-            return
-        }
-        
-        // done
-        complete()
-        
-        // emit valid moves
-        let validMoves = moveMatchers.compactMap { $0.validMoves(matching: database.state) }.flatMap { $0 }
-        subjects.emitValidMoves(validMoves)
     }
     
     func complete() {
+        emitValidMoves()
         completion?()
+    }
+    
+    func emitValidMoves() {
+        guard database.state.outcome == nil else {
+            return
+        }
+        
+        let validMoves = moveMatchers.compactMap { $0.validMoves(matching: database.state) }.flatMap { $0 }
+        let subjects = self.subjects
+        // ⚠️ Dispatch emit valid moves after loop completed
+        DispatchQueue.main.async {
+            subjects.emitValidMoves(validMoves)
+        }
     }
 }
 
