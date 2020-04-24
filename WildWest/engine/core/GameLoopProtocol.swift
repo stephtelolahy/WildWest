@@ -7,5 +7,5 @@
 //
 
 protocol GameLoopProtocol {
-    func execute(move: GameMove)
+    func run()
 }

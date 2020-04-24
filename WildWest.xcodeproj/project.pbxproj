@@ -41,7 +41,6 @@
 		3322C4B62452379700D7B297 /* StateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4B52452379700D7B297 /* StateDto.swift */; };
 		3322C4BA245243E800D7B297 /* GameState+Encoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4B9245243E800D7B297 /* GameState+Encoding.swift */; };
 		3322C4BC2452452F00D7B297 /* Firebase+Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4BB2452452F00D7B297 /* Firebase+Transaction.swift */; };
-		3323C8D2244780420030E9B7 /* DelayedEventQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3323C8D1244780420030E9B7 /* DelayedEventQueueTests.swift */; };
 		3324018E23DBA6C800B92439 /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */; };
 		332499B323DB9F650082EF09 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332499B223DB9F650082EF09 /* GameViewController.swift */; };
 		3328FC9B242F294000A82255 /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5643423A4E09C00C1BD01 /* Beer.swift */; };
@@ -181,7 +180,6 @@
 		337D7FD4243072130078F749 /* GameState+Observed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D7FD3243072130078F749 /* GameState+Observed.swift */; };
 		337D7FD5243072130078F749 /* GameState+Observed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D7FD3243072130078F749 /* GameState+Observed.swift */; };
 		337D7FDD2430879F0078F749 /* PlayerDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D7FDC2430879F0078F749 /* PlayerDescriptor.swift */; };
-		337EE05824422A3800E64A86 /* GameEngine+ObservingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337EE05724422A3800E64A86 /* GameEngine+ObservingTests.swift */; };
 		3380B037243641A20040F027 /* DrawsCardOnLoseHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3380B036243641A20040F027 /* DrawsCardOnLoseHealth.swift */; };
 		3380B038243641A20040F027 /* DrawsCardOnLoseHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3380B036243641A20040F027 /* DrawsCardOnLoseHealth.swift */; };
 		3380B03E24367D890040F027 /* DrawsCardOnLoseHealthMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3380B03C24367D890040F027 /* DrawsCardOnLoseHealthMatcherTests.swift */; };
@@ -250,10 +248,6 @@
 		33D9733E2448B69F00A9CCC0 /* GameUpdate+Animatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D9733C2448B69F00A9CCC0 /* GameUpdate+Animatable.swift */; };
 		33D973402448B72500A9CCC0 /* GameUpdate+AnimatableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D9733F2448B72500A9CCC0 /* GameUpdate+AnimatableTests.swift */; };
 		33D97B15244FA59F00B4F070 /* GameMove+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D97B14244FA59F00B4F070 /* GameMove+Description.swift */; };
-		33DA20B02446E0640082D1A0 /* EventQueueProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DA20AF2446E0640082D1A0 /* EventQueueProtocol.swift */; };
-		33DA20B12446E0640082D1A0 /* EventQueueProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DA20AF2446E0640082D1A0 /* EventQueueProtocol.swift */; };
-		33DA20B32446E0810082D1A0 /* DelayedEventQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DA20B22446E0810082D1A0 /* DelayedEventQueue.swift */; };
-		33DA20B42446E0810082D1A0 /* DelayedEventQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DA20B22446E0810082D1A0 /* DelayedEventQueue.swift */; };
 		33DB41BC2438841A00B94E8A /* HandCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DB41BB2438841A00B94E8A /* HandCollectionViewLayout.swift */; };
 		33E4411B24077CA000B2848E /* PlayersAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E4411524077CA000B2848E /* PlayersAdapter.swift */; };
 		33E4411C24077CA000B2848E /* ActionsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E4411624077CA000B2848E /* ActionsAdapter.swift */; };
@@ -293,7 +287,6 @@
 		AD7F34B923D79841001B4072 /* MockCardProtocolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7F34B823D79841001B4072 /* MockCardProtocolExtension.swift */; };
 		AD7F34BD23D79879001B4072 /* MockPlayerProtocolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7F34BC23D79879001B4072 /* MockPlayerProtocolExtension.swift */; };
 		AD7F34BF23D79893001B4072 /* MockGameStateProtocolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7F34BE23D79893001B4072 /* MockGameStateProtocolExtension.swift */; };
-		AD98FA872421552C00AF4D7C /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F2505C23DDDBCC00A0FDD1 /* GameEngineTests.swift */; };
 		ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D2EB239EE03800653905 /* AppDelegate.swift */; };
 		ADB7D2F3239EE03800653905 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F1239EE03800653905 /* Main.storyboard */; };
 		ADB7D2F5239EE03900653905 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F4239EE03900653905 /* Assets.xcassets */; };
@@ -346,7 +339,6 @@
 		3322C4B52452379700D7B297 /* StateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateDto.swift; sourceTree = "<group>"; };
 		3322C4B9245243E800D7B297 /* GameState+Encoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameState+Encoding.swift"; sourceTree = "<group>"; };
 		3322C4BB2452452F00D7B297 /* Firebase+Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firebase+Transaction.swift"; sourceTree = "<group>"; };
-		3323C8D1244780420030E9B7 /* DelayedEventQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayedEventQueueTests.swift; sourceTree = "<group>"; };
 		3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		332499B223DB9F650082EF09 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		3328FCDD242F2D1F00A82255 /* ChooseCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCard.swift; sourceTree = "<group>"; };
@@ -467,8 +459,6 @@
 		33D9733C2448B69F00A9CCC0 /* GameUpdate+Animatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameUpdate+Animatable.swift"; sourceTree = "<group>"; };
 		33D9733F2448B72500A9CCC0 /* GameUpdate+AnimatableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameUpdate+AnimatableTests.swift"; sourceTree = "<group>"; };
 		33D97B14244FA59F00B4F070 /* GameMove+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameMove+Description.swift"; sourceTree = "<group>"; };
-		33DA20AF2446E0640082D1A0 /* EventQueueProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventQueueProtocol.swift; sourceTree = "<group>"; };
-		33DA20B22446E0810082D1A0 /* DelayedEventQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayedEventQueue.swift; sourceTree = "<group>"; };
 		33DB41BB2438841A00B94E8A /* HandCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandCollectionViewLayout.swift; sourceTree = "<group>"; };
 		33E4411524077CA000B2848E /* PlayersAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersAdapter.swift; sourceTree = "<group>"; };
 		33E4411624077CA000B2848E /* ActionsAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionsAdapter.swift; sourceTree = "<group>"; };
@@ -598,6 +588,8 @@
 		3307619E245355A600E8C2EF /* core */ = {
 			isa = PBXGroup;
 			children = (
+				3395257F23E37CCE003DE948 /* GameEngineProtocol.swift */,
+				33A733F723DC5AC300E9B2AD /* GameEngine.swift */,
 				3307619F245355D200E8C2EF /* GameLoopProtocol.swift */,
 				330761A22453560900E8C2EF /* GameLoop.swift */,
 				330761A524535C7200E8C2EF /* GameSubjectsProtocol.swift */,
@@ -733,6 +725,14 @@
 				335BED8824293D49009184A3 /* Cowboy_Theme-Pavak-1711860633.mp3 */,
 			);
 			path = music;
+			sourceTree = "<group>";
+		};
+		335EDB5924538CBB00C21A9C /* setup */ = {
+			isa = PBXGroup;
+			children = (
+				AD7EAFBE23D7846D00FE23D5 /* GameSetupTests.swift */,
+			);
+			path = setup;
 			sourceTree = "<group>";
 		};
 		3366493823F93EE000125483 /* database */ = {
@@ -990,10 +990,6 @@
 		AD36CDD723C51C27008D4EDB /* engine */ = {
 			isa = PBXGroup;
 			children = (
-				3395257F23E37CCE003DE948 /* GameEngineProtocol.swift */,
-				33A733F723DC5AC300E9B2AD /* GameEngine.swift */,
-				33DA20AF2446E0640082D1A0 /* EventQueueProtocol.swift */,
-				33DA20B22446E0810082D1A0 /* DelayedEventQueue.swift */,
 				3307619E245355A600E8C2EF /* core */,
 				3307619D2453557700E8C2EF /* setup */,
 				AD36CDD823C51C34008D4EDB /* state */,
@@ -1114,10 +1110,9 @@
 		AD7EAFBD23D7846000FE23D5 /* engine */ = {
 			isa = PBXGroup;
 			children = (
-				AD7EAFBE23D7846D00FE23D5 /* GameSetupTests.swift */,
 				33F2505C23DDDBCC00A0FDD1 /* GameEngineTests.swift */,
 				337EE05724422A3800E64A86 /* GameEngine+ObservingTests.swift */,
-				3323C8D1244780420030E9B7 /* DelayedEventQueueTests.swift */,
+				335EDB5924538CBB00C21A9C /* setup */,
 				3309D7062408D1BE00713E15 /* update */,
 				338A4D1123E7F589005698FD /* convenience */,
 			);
@@ -1403,7 +1398,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/engine/state/GameStateProtocol.swift\" \\\n\"${INPUT_DIR}/engine/state/PlayerProtocol.swift\" \\\n\"${INPUT_DIR}/engine/state/CardProtocol.swift\" \\\n\"${INPUT_DIR}/engine/state/FigureProtocol.swift\" \\\n\"${INPUT_DIR}/engine/database/GameDatabaseProtocol.swift\" \\\n\"${INPUT_DIR}/engine/update/GameUpdateProtocol.swift\" \\\n\"${INPUT_DIR}/engine/move/MoveMatcherProtocol.swift\" \\\n\"${INPUT_DIR}/engine/EventQueueProtocol.swift\" \\\n\"${INPUT_DIR}/engine/setup/GameSetupProtocol.swift\" \\\n\"${INPUT_DIR}/engine/core/GameLoop.swift\" \\\n\"${INPUT_DIR}/engine/core/GameSubjectsProtocol.swift\" \\\n\"${INPUT_DIR}/engine/GameEngineProtocol.swift\"\n\n";
+			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/engine/state/GameStateProtocol.swift\" \\\n\"${INPUT_DIR}/engine/state/PlayerProtocol.swift\" \\\n\"${INPUT_DIR}/engine/state/CardProtocol.swift\" \\\n\"${INPUT_DIR}/engine/state/FigureProtocol.swift\" \\\n\"${INPUT_DIR}/engine/database/GameDatabaseProtocol.swift\" \\\n\"${INPUT_DIR}/engine/update/GameUpdateProtocol.swift\" \\\n\"${INPUT_DIR}/engine/move/MoveMatcherProtocol.swift\" \\\n\"${INPUT_DIR}/engine/EventQueueProtocol.swift\" \\\n\"${INPUT_DIR}/engine/setup/GameSetupProtocol.swift\" \\\n\"${INPUT_DIR}/engine/core/GameLoop.swift\" \\\n\"${INPUT_DIR}/engine/core/GameSubjectsProtocol.swift\" \\\n\"${INPUT_DIR}/engine/core/GameEngineProtocol.swift\"\n";
 		};
 		AD8540A223A4291100568FE9 /* Run Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1553,7 +1548,6 @@
 				33EE1B9A242E95C500A1E4F7 /* StartTurn.swift in Sources */,
 				330FDECD242F384C00284FE7 /* PenalizeSheriffOnEliminatingDeputy.swift in Sources */,
 				3328FCF0242F309400A82255 /* EndTurn.swift in Sources */,
-				33DA20B02446E0640082D1A0 /* EventQueueProtocol.swift in Sources */,
 				3301BEFA23F9A79B00B4364D /* AIPlayerAgent.swift in Sources */,
 				33E4412424077DAB00B2848E /* UITableViewExtension.swift in Sources */,
 				3328FCAA242F29B100A82255 /* Gatling.swift in Sources */,
@@ -1583,7 +1577,6 @@
 				3398B0D4243B9AED00EB670A /* Role+Relationship.swift in Sources */,
 				3328FCA9242F29B100A82255 /* Bang.swift in Sources */,
 				33E4411E24077CA000B2848E /* PlayerCell.swift in Sources */,
-				33DA20B32446E0810082D1A0 /* DelayedEventQueue.swift in Sources */,
 				339E4A2224516B490079F088 /* Challenge+Updating.swift in Sources */,
 				33EF4079244F6ABB008FA490 /* Discard2CardsFor1Life.swift in Sources */,
 				33BD0AD524351131003E75EE /* FigureDto.swift in Sources */,
@@ -1608,11 +1601,9 @@
 				AD52B99D23B17A310013240B /* GameState.swift in Sources */,
 				33C52DE0242F255B009EF4DA /* GameUpdateExecutorTests.swift in Sources */,
 				33380100242F2348003F7327 /* ResolveJailTests.swift in Sources */,
-				33DA20B42446E0810082D1A0 /* DelayedEventQueue.swift in Sources */,
 				3301BEF523F962F000B4364D /* RandomAIWithRole.swift in Sources */,
 				33D973402448B72500A9CCC0 /* GameUpdate+AnimatableTests.swift in Sources */,
 				339CA27B242578C900D43128 /* GameUpdateExecutor.swift in Sources */,
-				337EE05824422A3800E64A86 /* GameEngine+ObservingTests.swift in Sources */,
 				3338B2E6242FCCDA0097BA57 /* GameState+OutcomeTests.swift in Sources */,
 				3398B0D5243B9AED00EB670A /* Role+Relationship.swift in Sources */,
 				3328FCB4242F29B200A82255 /* Gatling.swift in Sources */,
@@ -1622,7 +1613,6 @@
 				AD7F34B923D79841001B4072 /* MockCardProtocolExtension.swift in Sources */,
 				33B896C524384A770005FF21 /* GameLayoutBuilder.swift in Sources */,
 				AD7EAFBF23D7846D00FE23D5 /* GameSetupTests.swift in Sources */,
-				3323C8D2244780420030E9B7 /* DelayedEventQueueTests.swift in Sources */,
 				3328FCA0242F298300A82255 /* Panic.swift in Sources */,
 				ADD035D923A9604F003B2576 /* GameStateProtocol.swift in Sources */,
 				3328FCCF242F2B5600A82255 /* IndiansMatcherTests.swift in Sources */,
@@ -1637,7 +1627,6 @@
 				33BAE348242E7C960098B41F /* Subscribable.swift in Sources */,
 				3328FCE8242F2F0200A82255 /* DiscardBeerMatcherTests.swift in Sources */,
 				33A4381323E4BD3200C39DD6 /* ArrayExtension.swift in Sources */,
-				33DA20B12446E0640082D1A0 /* EventQueueProtocol.swift in Sources */,
 				3328FCB9242F2B5600A82255 /* SaloonMatcherTests.swift in Sources */,
 				33F94AB723F0580800D1BCFE /* GameUpdateProtocol.swift in Sources */,
 				3328FCC9242F2B5600A82255 /* GeneralStoreMatcherTests.swift in Sources */,
@@ -1693,7 +1682,6 @@
 				333800FA242F20A6003F7327 /* ResolveDynamite.swift in Sources */,
 				330FDED0242F384D00284FE7 /* PenalizeSheriffOnEliminatingDeputy.swift in Sources */,
 				3328FCE2242F2F0200A82255 /* DiscardMissedMatcherTests.swift in Sources */,
-				AD98FA872421552C00AF4D7C /* GameEngineTests.swift in Sources */,
 				337408D224306C1200E5809B /* Card+Ability.swift in Sources */,
 				3328FCED242F2F0D00A82255 /* ChooseCardMatcherTests.swift in Sources */,
 				33D964B223DD9119007295E7 /* MatcherExtension.swift in Sources */,

@@ -27,22 +27,22 @@ class AIPlayerAgent: AIPlayerAgentProtocol, Subscribable {
         self.ai = ai
         self.engine = engine
         
-        guard let sheriff = engine.allPlayers.first(where: { $0.role == .sheriff }) else {
+        guard let sheriff = engine.subjects.allPlayers.first(where: { $0.role == .sheriff }) else {
             fatalError("Illegal state")
         }
         statsBuilder = StatsBuilder(sheriffId: sheriff.identifier, classifier: MoveClassifier())
     }
     
     func observeState() {
-        sub(engine.state(observedBy: playerId).subscribe(onNext: { [weak self] state in
+        sub(engine.subjects.state(observedBy: playerId).subscribe(onNext: { [weak self] state in
             self?.processState(state)
         }))
         
-        sub(engine.executedMove().subscribe(onNext: { [weak self] move in
+        sub(engine.subjects.executedMove().subscribe(onNext: { [weak self] move in
             self?.processExecutedMove(move)
         }))
         
-        sub(engine.validMoves(for: playerId).subscribe(onNext: { [weak self] moves in
+        sub(engine.subjects.validMoves(for: playerId).subscribe(onNext: { [weak self] moves in
             self?.processValidMoves(moves)
         }))
     }

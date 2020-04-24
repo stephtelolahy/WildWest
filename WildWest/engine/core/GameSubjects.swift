@@ -25,6 +25,14 @@ class GameSubjects: GameSubjectsProtocol {
         self.validMovesSubject = validMovesSubject
     }
     
+    var allPlayers: [PlayerProtocol] {
+        guard let state = try? stateSubject.value() else {
+            fatalError("Illegal state")
+        }
+        
+        return state.players
+    }
+    
     func state(observedBy playerId: String?) -> Observable<GameStateProtocol> {
         stateSubject.map { $0.observed(by: playerId) }
     }

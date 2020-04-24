@@ -10,6 +10,7 @@
 import UIKit
 import AVFoundation
 import SafariServices
+import RxSwift
 
 class MenuViewController: UIViewController {
     
@@ -135,10 +136,16 @@ private extension MenuViewController {
         
         let database = MemoryCachedDataBase(state: state)
         
-        let engine = GameEngine(database: database,
+        let subjects = GameSubjects(stateSubject: database.stateSubject,
+                                    executedMoveSubject: PublishSubject(),
+                                    executedUpdateSubject: PublishSubject(),
+                                    validMovesSubject: PublishSubject())
+        
+        let engine = GameEngine(delay: UserPreferences.shared.updateDelay,
+                                database: database,
                                 moveMatchers: allMatchers,
                                 updateExecutor: GameUpdateExecutor(),
-                                eventQueue: DelayedEventQueue(delay: UserPreferences.shared.updateDelay))
+                                subjects: subjects)
         
         let controlledPlayerId: String? = UserPreferences.shared.simulationMode ? nil : state.players.first?.identifier
         let aiPlayers = state.players.filter { $0.identifier != controlledPlayerId }
@@ -203,7 +210,7 @@ private extension MenuViewController {
 
 private extension UIViewController {
     
-    func presentGame(engine: GameEngine, controlledPlayerId: String?, aiAgents: [AIPlayerAgent]) {
+    func presentGame(engine: GameEngineProtocol, controlledPlayerId: String?, aiAgents: [AIPlayerAgent]) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let gameViewController =
             storyboard.instantiateViewController(withIdentifier: "GameViewController") as? GameViewController else {

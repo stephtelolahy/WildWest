@@ -6,7 +6,7 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-import RxSwift
+import Foundation
 
 class GameLoop: GameLoopProtocol {
     
@@ -14,9 +14,8 @@ class GameLoop: GameLoopProtocol {
     private let database: GameDatabaseProtocol
     private let moveMatchers: [MoveMatcherProtocol]
     private let updateExecutor: UpdateExecutorProtocol
-    private let gameSubjects: GameSubjectsProtocol
-    
-    private var running: Bool
+    private let subjects: GameSubjectsProtocol
+    private var completion: (() -> Void)?
     private var pendingMoves: [GameMove]
     private var pendingUpdates: [GameUpdate]
     
@@ -24,41 +23,29 @@ class GameLoop: GameLoopProtocol {
          database: GameDatabaseProtocol,
          moveMatchers: [MoveMatcherProtocol],
          updateExecutor: UpdateExecutorProtocol,
-         gameSubjects: GameSubjectsProtocol) {
+         subjects: GameSubjectsProtocol,
+         move: GameMove,
+         completion: @escaping (() -> Void)) {
         self.delay = delay
         self.database = database
         self.moveMatchers = moveMatchers
         self.updateExecutor = updateExecutor
-        self.gameSubjects = gameSubjects
-        running = false
-        pendingMoves = []
+        self.subjects = subjects
+        self.completion = completion
+        pendingMoves = [move]
         pendingUpdates = []
     }
     
-    // MARK: GameLoopProtocol
-    
-    func execute(move: GameMove) {
-        guard !running,
-            pendingMoves.isEmpty,
-            pendingUpdates.isEmpty else {
-                fatalError("Illegal state")
-        }
-        
-        pendingMoves.append(move)
-        start()
+    func run() {
+        processMove()
     }
 }
 
 private extension GameLoop {
     
-    func start() {
-        running = true
-        processMove()
-    }
-    
     func processMove() {
         guard !pendingMoves.isEmpty else {
-            stop()
+            complete()
             return
         }
         
@@ -66,8 +53,8 @@ private extension GameLoop {
         
         print("\n*** \(String(describing: move)) ***")
         
-        gameSubjects.emitExecutedMove(move)
-        gameSubjects.emitValidMoves([])
+        subjects.emitExecutedMove(move)
+        subjects.emitValidMoves([])
         
         let updates = moveMatchers.compactMap({ $0.execute(move, in: database.state) }).flatMap { $0 }
         pendingUpdates.append(contentsOf: updates)
@@ -85,7 +72,7 @@ private extension GameLoop {
         
         print("> \(String(describing: update))")
         
-        gameSubjects.emitExecutedUpdate(update)
+        subjects.emitExecutedUpdate(update)
         
         updateExecutor.execute(update, in: database)
         
@@ -102,7 +89,7 @@ private extension GameLoop {
         // emit game over
         if let outcome = database.state.claculateOutcome() {
             database.setOutcome(outcome)
-            stop()
+            complete()
             return
         }
         
@@ -114,7 +101,7 @@ private extension GameLoop {
             return
         }
         
-        // wait until all pendingMoves empty
+        // wait until pendingMoves empty
         guard pendingMoves.isEmpty else {
             return
         }
@@ -127,18 +114,21 @@ private extension GameLoop {
             return
         }
         
-        // wait until all pendingMoves empty
+        // wait until pendingMoves empty
         guard pendingMoves.isEmpty else {
             return
         }
         
+        // done
+        complete()
+        
         // emit valid moves
         let validMoves = moveMatchers.compactMap { $0.validMoves(matching: database.state) }.flatMap { $0 }
-        gameSubjects.emitValidMoves(validMoves)
+        subjects.emitValidMoves(validMoves)
     }
     
-    func stop() {
-        running = false
+    func complete() {
+        completion?()
     }
 }
 

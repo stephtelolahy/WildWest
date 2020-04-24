@@ -41,7 +41,7 @@ class GameViewController: UIViewController, Subscribable {
     private var reactionMoveSelector: ReactionMoveSelectorProtocol?
     
     private lazy var statsBuilder: StatsBuilderProtocol = {
-        guard let sheriff = engine?.allPlayers.first(where: { $0.role == .sheriff }) else {
+        guard let sheriff = engine?.subjects.allPlayers.first(where: { $0.role == .sheriff }) else {
             fatalError("Illegal state")
         }
         
@@ -82,20 +82,20 @@ class GameViewController: UIViewController, Subscribable {
             return
         }
         
-        sub(engine.state(observedBy: controlledPlayerId).subscribe(onNext: { [weak self] state in
+        sub(engine.subjects.state(observedBy: controlledPlayerId).subscribe(onNext: { [weak self] state in
             self?.processState(state)
         }))
         
-        sub(engine.executedMove().subscribe(onNext: { [weak self] move in
+        sub(engine.subjects.executedMove().subscribe(onNext: { [weak self] move in
             self?.processExecutedMove(move)
         }))
         
-        sub(engine.executedUpdates().subscribe(onNext: { [weak self] update in
+        sub(engine.subjects.executedUpdate().subscribe(onNext: { [weak self] update in
             self?.processExecutedUpdate(update)
         }))
         
         if let controlledPlayerId = self.controlledPlayerId {
-            sub(engine.validMoves(for: controlledPlayerId).subscribe(onNext: { [weak self] moves in
+            sub(engine.subjects.validMoves(for: controlledPlayerId).subscribe(onNext: { [weak self] moves in
                 self?.processValidMoves(moves)
             }))
         }
@@ -105,7 +105,7 @@ class GameViewController: UIViewController, Subscribable {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        engine?.start()
+        engine?.startGame()
     }
     
     // MARK: IBAction
@@ -287,7 +287,7 @@ extension GameViewController: GameCollectionViewLayoutDelegate {
             return 0
         }
         
-        return engine.allPlayers.count
+        return engine.subjects.allPlayers.count
     }
 }
 
@@ -308,7 +308,7 @@ private extension GameViewController {
         result[.deck] = deckCenter
         result[.discard] = discardCenter
         
-        let playerIds = engine.allPlayers.map { $0.identifier }
+        let playerIds = engine.subjects.allPlayers.map { $0.identifier }
         for (index, playerId) in playerIds.enumerated() {
             guard let cell = playersCollectionView.cellForItem(at: IndexPath(row: index, section: 0)),
                 let cellCenter = cell.superview?.convert(cell.center, to: view) else {
