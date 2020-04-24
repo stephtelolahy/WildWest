@@ -23,7 +23,7 @@ class DiscardMissedOnBangMatcherTests: XCTestCase {
             .withDefault()
         let mockState = MockGameStateProtocol()
             .challenge(is: Challenge(name: .bang, targetIds: ["p1"]))
-            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
+            .players(are: mockPlayer1)
         
         // When
         let moves = sut.validMoves(matching: mockState)
@@ -57,7 +57,7 @@ class DiscardMissedOnBangMatcherTests: XCTestCase {
             .withDefault()
         let mockState = MockGameStateProtocol()
             .challenge(is: Challenge(name: .gatling, targetIds: ["p1", "p2", "p3"]))
-            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
+            .players(are: mockPlayer1)
         
         // When
         let moves = sut.validMoves(matching: mockState)

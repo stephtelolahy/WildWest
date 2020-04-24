@@ -201,17 +201,19 @@ class GameUpdateExecutorTests: XCTestCase {
         
         // Assert
         verify(mockDatabase).setTurn("p1")
+        verifyNoMoreInteractions(mockDatabase)
     }
     
-    func test_ResetBangsPlayed_IfSettingTurn() {
+    func test_SetPlayerBangsPlayed_IfSettingBangsPlayed() {
         // Given
-        let update = GameUpdate.setTurn("p1")
+        let update = GameUpdate.playerSetBangsPlayed("p1", 1)
         
         // When
         sut.execute(update, in: mockDatabase)
         
         // Assert
-        verify(mockDatabase).playerSetBangsPlayed("p1", 0)
+        verify(mockDatabase).playerSetBangsPlayed("p1", 1)
+        verifyNoMoreInteractions(mockDatabase)
     }
     
     // MARK: - SetChallenge
@@ -240,32 +242,13 @@ class GameUpdateExecutorTests: XCTestCase {
         verifyNoMoreInteractions(mockDatabase)
     }
     
-    func test_IncrementBangsPlayed_IfSettingBangChallenge() {
-        // Given
-        let mockState = MockGameStateProtocol()
-            .currentTurn(is: "px")
-            .players(are: MockPlayerProtocol().identified(by: "px").bangsPlayed(is: 0))
-        Cuckoo.stub(mockDatabase) { mock in
-            when(mock.stateSubject.get).thenReturn(BehaviorSubject(value: mockState))
-        }
-        let update = GameUpdate.setChallenge(Challenge(name: .bang, targetIds: ["p1"]))
-        
-        // When
-        sut.execute(update, in: mockDatabase)
-        
-        // Assert
-        verify(mockDatabase).playerSetBangsPlayed("px", 1)
-    }
-    
     // MARK: - FlipOverFirstDeck
     
     func test_DiscardFlippedCard_IfRevealingFromDeck() {
         // Given
         let mockCard = MockCardProtocol()
-        let mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
         Cuckoo.stub(mockDatabase) { mock in
             when(mock.deckRemoveFirst()).thenReturn(mockCard)
-            when(mock.stateSubject.get).thenReturn(BehaviorSubject(value: mockState))
         }
         let update = GameUpdate.flipOverFirstDeckCard
         
@@ -275,24 +258,19 @@ class GameUpdateExecutorTests: XCTestCase {
         // Assert
         verify(mockDatabase).deckRemoveFirst()
         verify(mockDatabase).addDiscard(card(equalTo: mockCard))
+        verifyNoMoreInteractions(mockDatabase)
     }
     
     // MARK: - GainLifePoints
     
     func test_playerSetHealth_IfGainLifePoints() {
         // Given
-        let mockState = MockGameStateProtocol()
-            .allPlayers(are: MockPlayerProtocol().identified(by: "p1").health(is: 1))
-        Cuckoo.stub(mockDatabase) { mock in
-            when(mock.stateSubject.get).thenReturn(BehaviorSubject(value: mockState))
-        }
-        let update = GameUpdate.playerGainHealth("p1", 1)
+        let update = GameUpdate.playerGainHealth("p1", 2)
         
         // When
         sut.execute(update, in: mockDatabase)
         
         // Assert
-        verify(mockDatabase).stateSubject.get()
         verify(mockDatabase).playerSetHealth("p1", 2)
         verifyNoMoreInteractions(mockDatabase)
     }
@@ -301,41 +279,15 @@ class GameUpdateExecutorTests: XCTestCase {
     
     func test_AddDamageEvent_IfLooseLifePoints() {
         // Given
-        let mockState = MockGameStateProtocol()
-            .allPlayers(are: MockPlayerProtocol().identified(by: "p1").health(is: 3))
-        Cuckoo.stub(mockDatabase) { mock in
-            when(mock.stateSubject.get).thenReturn(BehaviorSubject(value: mockState))
-        }
-        let update = GameUpdate.playerLooseHealth("p1", 1, .byPlayer("p2"))
+        let damageEvent = DamageEvent(damage: 1, source: .byPlayer("p2"))
+        let update = GameUpdate.playerLooseHealth("p1", 2, damageEvent)
         
         // When
         sut.execute(update, in: mockDatabase)
         
         // Assert
-        verify(mockDatabase).stateSubject.get()
         verify(mockDatabase).playerSetHealth("p1", 2)
-        let expectedEvent = DamageEvent(damage: 1, source: .byPlayer("p2"))
-        verify(mockDatabase).playerSetDamageEvent("p1", equal(to: expectedEvent))
-        verifyNoMoreInteractions(mockDatabase)
-    }
-    
-    func test_SetZeroHealth_IfLooseMoreThanCurrentLifePoints() {
-        // Given
-        let mockState = MockGameStateProtocol()
-            .allPlayers(are: MockPlayerProtocol().identified(by: "p1").health(is: 1))
-        Cuckoo.stub(mockDatabase) { mock in
-            when(mock.stateSubject.get).thenReturn(BehaviorSubject(value: mockState))
-        }
-        let update = GameUpdate.playerLooseHealth("p1", 3, .byDynamite)
-        
-        // When
-        sut.execute(update, in: mockDatabase)
-        
-        // Assert
-        verify(mockDatabase).stateSubject.get()
-        verify(mockDatabase).playerSetHealth("p1", 0)
-        let expectedEvent = DamageEvent(damage: 3, source: .byDynamite)
-        verify(mockDatabase).playerSetDamageEvent("p1", equal(to: expectedEvent))
+        verify(mockDatabase).playerSetDamageEvent("p1", equal(to: damageEvent))
         verifyNoMoreInteractions(mockDatabase)
     }
     

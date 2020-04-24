@@ -104,6 +104,7 @@ class BangMatcherTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
             .holding(MockCardProtocol().named(.bang).identified(by: "c1"))
+            .bangsPlayed(is: 0)
             .withDefault()
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
@@ -114,7 +115,8 @@ class BangMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .setChallenge(Challenge(name: .bang, targetIds: ["p2"], counterNeeded: 1, barrelsPlayed: 0))])
+                                 .setChallenge(Challenge(name: .bang, targetIds: ["p2"], counterNeeded: 1, barrelsPlayed: 0)),
+                                 .playerSetBangsPlayed("p1", 1)])
     }
     
     func test_Need2MissesToCancelHisBang_IfPlayingBangAndHAvingAbility() {
@@ -123,6 +125,7 @@ class BangMatcherTests: XCTestCase {
             .identified(by: "p1")
             .holding(MockCardProtocol().named(.bang).identified(by: "c1"))
             .abilities(are: [.othersNeed2MissesToCounterHisBang: true])
+            .bangsPlayed(is: 0)
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
         let move = GameMove(name: .bang, actorId: "p1", cardId: "c1", targetId: "p2")
@@ -132,6 +135,7 @@ class BangMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .setChallenge(Challenge(name: .bang, targetIds: ["p2"], counterNeeded: 2, barrelsPlayed: 0))])
+                                 .setChallenge(Challenge(name: .bang, targetIds: ["p2"], counterNeeded: 2, barrelsPlayed: 0)),
+                                 .playerSetBangsPlayed("p1", 1)])
     }
 }

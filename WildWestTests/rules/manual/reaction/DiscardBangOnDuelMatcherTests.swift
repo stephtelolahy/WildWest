@@ -22,7 +22,7 @@ class DiscardBangOnDuelMatcherTests: XCTestCase {
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
             .challenge(is: Challenge(name: .duel, targetIds: ["p1", "p2"]))
-            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
+            .players(are: mockPlayer1)
         
         // When
         let moves = sut.validMoves(matching: mockState)

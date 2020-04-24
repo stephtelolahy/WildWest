@@ -25,11 +25,12 @@ class Discard2CardsFor1LifeMatcher: MoveMatcherProtocol {
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .discard2CardsFor1Life = move.name,
-            let discardIds = move.discardIds else {
+            let discardIds = move.discardIds,
+            let actor = state.player(move.actorId) else {
                 return nil
         }
         
-        var updates: [GameUpdate] = [.playerGainHealth(move.actorId, 1)]
+        var updates: [GameUpdate] = [.playerGainHealth(move.actorId, actor.health + 1)]
         discardIds.forEach { updates.append(.playerDiscardHand(move.actorId, $0)) }
         return updates
     }

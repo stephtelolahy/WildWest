@@ -9,7 +9,7 @@
 import XCTest
 
 class DrawsAnotherCardIfSecondDrawIsRedSuitMatcherTests: XCTestCase {
-
+    
     private let sut = StartTurnMatcher()
     
     func test_DrawsAnotherCardIfSecondDrawIsRedSuit_IfHavingAbility() {
@@ -31,9 +31,10 @@ class DrawsAnotherCardIfSecondDrawIsRedSuitMatcherTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates, [.playerPullFromDeck("p1"),
                                  .playerPullFromDeck("p1"),
+                                 .setChallenge(nil),
+                                 .playerSetBangsPlayed("p1", 0),
                                  .playerRevealHandCard("p1", "c2"),
-                                 .playerPullFromDeck("p1"),
-                                 .setChallenge(nil)])
+                                 .playerPullFromDeck("p1")])
     }
     
     func test_DoNotDrawsAnotherCardIfSecondDrawIsNotRedSuit_IfHavingAbility() {
@@ -55,8 +56,9 @@ class DrawsAnotherCardIfSecondDrawIsRedSuitMatcherTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates, [.playerPullFromDeck("p1"),
                                  .playerPullFromDeck("p1"),
-                                 .playerRevealHandCard("p1", "c2"),
-                                 .setChallenge(nil)])
+                                 .setChallenge(nil),
+                                 .playerSetBangsPlayed("p1", 0),
+                                 .playerRevealHandCard("p1", "c2")])
     }
-
+    
 }

@@ -37,15 +37,21 @@ extension Array where Element == GameUpdate {
 private extension GameUpdate {
     var executionTime: Int {
         switch self {
-        case .setTurn,
-             .setChallenge,
-             .setupGeneralStore,
-             .playerGainHealth,
-             .playerLooseHealth:
-            return 0
+        case .playerPullFromDeck,
+             .playerDiscardHand,
+             .playerPutInPlay,
+             .playerRevealHandCard,
+             .playerDiscardInPlay,
+             .playerPullFromOtherHand,
+             .playerPullFromOtherInPlay,
+             .playerPutInPlayOfOther,
+             .playerPassInPlayOfOther,
+             .playerPullFromGeneralStore,
+             .flipOverFirstDeckCard:
+            return 1
             
         default:
-            return 1
+            return 0
         }
     }
 }

@@ -13,29 +13,19 @@ class GameUpdateExecutor: UpdateExecutorProtocol {
         switch update {
         case let .setTurn(turn):
             database.setTurn(turn)
-            database.playerSetBangsPlayed(turn, 0)
             
         case let .setChallenge(challenge):
             database.setChallenge(challenge)
-            if let challenge = challenge {
-                if case .bang = challenge.name,
-                    let actor = database.state.player(database.state.turn) {
-                    database.playerSetBangsPlayed(actor.identifier, actor.bangsPlayed + 1)
-                }
-            }
             
-        case let .playerGainHealth(playerId, points):
-            if let player = database.state.player(playerId) {
-                let health = player.health + points
-                database.playerSetHealth(playerId, health)
-            }
+        case let .playerSetBangsPlayed(playerId, count):
+            database.playerSetBangsPlayed(playerId, count)
             
-        case let .playerLooseHealth(playerId, points, source):
-            if let player = database.state.player(playerId) {
-                let health = max(0, player.health - points)
-                database.playerSetHealth(playerId, health)
-                database.playerSetDamageEvent(playerId, DamageEvent(damage: points, source: source))
-            }
+        case let .playerGainHealth(playerId, health):
+            database.playerSetHealth(playerId, health)
+            
+        case let .playerLooseHealth(playerId, health, damageEvent):
+            database.playerSetHealth(playerId, health)
+            database.playerSetDamageEvent(playerId, damageEvent)
             
         case let .playerPullFromDeck(playerId):
             let card = database.deckRemoveFirst()
@@ -82,9 +72,10 @@ class GameUpdateExecutor: UpdateExecutorProtocol {
             }
             
         case let .setupGeneralStore(cardsCount):
-            Array(1...cardsCount)
-                .compactMap { _ in database.deckRemoveFirst() }
-                .forEach { database.addGeneralStore($0) }
+            Array(1...cardsCount).forEach { _ in
+                let card = database.deckRemoveFirst()
+                database.addGeneralStore(card)
+            }
             
         case .flipOverFirstDeckCard:
             let card = database.deckRemoveFirst()
@@ -93,14 +84,5 @@ class GameUpdateExecutor: UpdateExecutorProtocol {
         default:
             break
         }
-    }
-}
-
-extension GameDatabaseProtocol {
-    var state: GameStateProtocol {
-        guard let value = try? stateSubject.value() else {
-            fatalError("Illegal state")
-        }
-        return value
     }
 }

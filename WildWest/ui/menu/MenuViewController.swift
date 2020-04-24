@@ -57,7 +57,11 @@ class MenuViewController: UIViewController {
     }
     
     @IBAction private func playButtonTapped(_ sender: Any) {
-        createGame()
+        startLocalGame()
+    }
+    
+    @IBAction private func onlineButtonTapped(_ sender: Any) {
+        startRemoteGame()
     }
     
     @IBAction private func stepperValueChanged(_ sender: Any) {
@@ -126,23 +130,9 @@ private extension MenuViewController {
         }
     }
     
-    func createGame() {
+    func startLocalGame() {
+        let state = createGame()
         
-        let gameSetup = GameSetup()
-        
-        var roles = gameSetup.roles(for: playersCount).shuffled()
-        if playAsSheriff {
-            roles = roles.starting(with: .sheriff)
-        }
-        
-        var figures = allFigures.shuffled()
-        if let preferredFigure = self.preferredFigure {
-            figures = figures.starting(with: preferredFigure)
-        }
-        
-        let state = gameSetup.setupGame(roles: roles,
-                                        figures: figures,
-                                        cards: allCards.shuffled())
         let database = MemoryCachedDataBase(state: state)
         
         let engine = GameEngine(database: database,
@@ -158,6 +148,31 @@ private extension MenuViewController {
         }
         
         presentGame(engine: engine, controlledPlayerId: controlledPlayerId, aiAgents: aiAgents)
+    }
+    
+    func startRemoteGame() {
+        let state = createGame()
+        
+        let database = RemoteDatabase(state: state)
+        print(database)
+    }
+    
+    func createGame() -> GameStateProtocol {
+        let gameSetup = GameSetup()
+        
+        var roles = gameSetup.roles(for: playersCount).shuffled()
+        if playAsSheriff {
+            roles = roles.starting(with: .sheriff)
+        }
+        
+        var figures = allFigures.shuffled()
+        if let preferredFigure = self.preferredFigure {
+            figures = figures.starting(with: preferredFigure)
+        }
+        
+        return gameSetup.setupGame(roles: roles,
+                                   figures: figures,
+                                   cards: allCards.shuffled())
     }
     
     func playThemeMusic() {
@@ -187,6 +202,7 @@ private extension MenuViewController {
 }
 
 private extension UIViewController {
+    
     func presentGame(engine: GameEngine, controlledPlayerId: String?, aiAgents: [AIPlayerAgent]) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let gameViewController =
