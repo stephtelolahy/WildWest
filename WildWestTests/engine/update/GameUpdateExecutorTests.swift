@@ -203,15 +203,15 @@ class GameUpdateExecutorTests: XCTestCase {
         verify(mockDatabase).setTurn("p1")
     }
     
-    func test_ResetBangsPlayed_IfSettingTurn() {
+    func test_SetPlayerBangsPlayed_IfSettingBangsPlayed() {
         // Given
-        let update = GameUpdate.setTurn("p1")
+        let update = GameUpdate.playerSetBangsPlayed("p1", 1)
         
         // When
         sut.execute(update, in: mockDatabase)
         
         // Assert
-        verify(mockDatabase).playerSetBangsPlayed("p1", 0)
+        verify(mockDatabase).playerSetBangsPlayed("p1", 1)
     }
     
     // MARK: - SetChallenge
@@ -238,23 +238,6 @@ class GameUpdateExecutorTests: XCTestCase {
         // Assert
         verify(mockDatabase).setChallenge(equal(to: Challenge(name: .startTurn)))
         verifyNoMoreInteractions(mockDatabase)
-    }
-    
-    func test_IncrementBangsPlayed_IfSettingBangChallenge() {
-        // Given
-        let mockState = MockGameStateProtocol()
-            .currentTurn(is: "px")
-            .players(are: MockPlayerProtocol().identified(by: "px").bangsPlayed(is: 0))
-        Cuckoo.stub(mockDatabase) { mock in
-            when(mock.stateSubject.get).thenReturn(BehaviorSubject(value: mockState))
-        }
-        let update = GameUpdate.setChallenge(Challenge(name: .bang, targetIds: ["p1"]))
-        
-        // When
-        sut.execute(update, in: mockDatabase)
-        
-        // Assert
-        verify(mockDatabase).playerSetBangsPlayed("px", 1)
     }
     
     // MARK: - FlipOverFirstDeck

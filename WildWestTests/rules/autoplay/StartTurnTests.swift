@@ -9,9 +9,9 @@
 import XCTest
 
 class StartTurnTests: XCTestCase {
-
+    
     private let sut = StartTurnMatcher()
-
+    
     func test_ShouldStartTurn_IfChallengeIsStartTurn() {
         // Given
         let player1 = MockPlayerProtocol()
@@ -75,6 +75,7 @@ class StartTurnTests: XCTestCase {
         // Assert
         XCTAssertEqual(updates, [.playerPullFromDeck("p1"),
                                  .playerPullFromDeck("p1"),
-                                 .setChallenge(nil)])
+                                 .setChallenge(nil),
+                                 .playerSetBangsPlayed("p1", 0)])
     }
 }

@@ -11,6 +11,7 @@ enum GameUpdate: Equatable {
     case setChallenge(Challenge?)
     case flipOverFirstDeckCard
     case setupGeneralStore(Int)
+    case playerSetBangsPlayed(String, Int)
     case playerGainHealth(String, Int)
     case playerLooseHealth(String, Int, DamageSource)
     case playerPullFromDeck(String)

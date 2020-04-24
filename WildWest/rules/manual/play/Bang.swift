@@ -47,7 +47,8 @@ class BangMatcher: MoveMatcherProtocol {
         return [.playerDiscardHand(move.actorId, cardId),
                 .setChallenge(Challenge(name: .bang,
                                         targetIds: [targetId],
-                                        counterNeeded: actor.neededMissesToCancelHisBang))]
+                                        counterNeeded: actor.neededMissesToCancelHisBang)),
+                .playerSetBangsPlayed(move.actorId, actor.bangsPlayed + 1)]
     }
 }
 

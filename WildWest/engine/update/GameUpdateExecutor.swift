@@ -13,16 +13,12 @@ class GameUpdateExecutor: UpdateExecutorProtocol {
         switch update {
         case let .setTurn(turn):
             database.setTurn(turn)
-            database.playerSetBangsPlayed(turn, 0)
             
         case let .setChallenge(challenge):
             database.setChallenge(challenge)
-            if let challenge = challenge {
-                if case .bang = challenge.name,
-                    let actor = database.state.player(database.state.turn) {
-                    database.playerSetBangsPlayed(actor.identifier, actor.bangsPlayed + 1)
-                }
-            }
+            
+        case let .playerSetBangsPlayed(playerId, count):
+            database.playerSetBangsPlayed(playerId, count)
             
         case let .playerGainHealth(playerId, points):
             if let player = database.state.player(playerId) {

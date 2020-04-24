@@ -26,32 +26,18 @@ class StartTurnMatcher: MoveMatcherProtocol {
                 return nil
         }
         
+        var updates: [GameUpdate] = [.playerPullFromDeck(move.actorId),
+                                     .playerPullFromDeck(move.actorId),
+                                     .setChallenge(nil),
+                                     .playerSetBangsPlayed(move.actorId, 0)]
+        
         if actor.abilities[.drawsAnotherCardIfSecondDrawIsRedSuit] == true {
-            return executeDrawsAnotherCardIfSecondDrawIsRedSuit(actorId: actor.identifier, in: state)
+            let secondCard = state.deck[1]
+            updates.append(.playerRevealHandCard(move.actorId, secondCard.identifier))
+            if secondCard.suit.isRed {
+                updates.append(.playerPullFromDeck(move.actorId))
+            }
         }
-        
-        return executeDefaultStartTurn(actorId: actor.identifier)
-    }
-    
-    private func executeDefaultStartTurn(actorId: String) -> [GameUpdate]? {
-        [.playerPullFromDeck(actorId),
-         .playerPullFromDeck(actorId),
-         .setChallenge(nil)]
-    }
-    
-    private func executeDrawsAnotherCardIfSecondDrawIsRedSuit(actorId: String,
-                                                              in state: GameStateProtocol) -> [GameUpdate]? {
-        let secondCard = state.deck[1]
-        
-        var updates: [GameUpdate] = [.playerPullFromDeck(actorId),
-                                     .playerPullFromDeck(actorId),
-                                     .playerRevealHandCard(actorId, secondCard.identifier)]
-        
-        if secondCard.suit.isRed {
-            updates.append(.playerPullFromDeck(actorId))
-        }
-        
-        updates.append(.setChallenge(nil))
         
         return updates
     }
