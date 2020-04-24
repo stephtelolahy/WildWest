@@ -618,126 +618,7 @@ import RxSwift
 import Cuckoo
 @testable import WildWest
 
-
- class MockGameSetupProtocol: GameSetupProtocol, Cuckoo.ProtocolMock {
-    
-     typealias MocksType = GameSetupProtocol
-    
-     typealias Stubbing = __StubbingProxy_GameSetupProtocol
-     typealias Verification = __VerificationProxy_GameSetupProtocol
-
-     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
-
-    
-    private var __defaultImplStub: GameSetupProtocol?
-
-     func enableDefaultImplementation(_ stub: GameSetupProtocol) {
-        __defaultImplStub = stub
-        cuckoo_manager.enableDefaultStubImplementation()
-    }
-    
-
-    
-
-    
-
-    
-    
-    
-     func roles(for playersCount: Int) -> [Role] {
-        
-    return cuckoo_manager.call("roles(for: Int) -> [Role]",
-            parameters: (playersCount),
-            escapingParameters: (playersCount),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.roles(for: playersCount))
-        
-    }
-    
-    
-    
-     func setupGame(roles: [Role], figures: [FigureProtocol], cards: [CardProtocol]) -> GameStateProtocol {
-        
-    return cuckoo_manager.call("setupGame(roles: [Role], figures: [FigureProtocol], cards: [CardProtocol]) -> GameStateProtocol",
-            parameters: (roles, figures, cards),
-            escapingParameters: (roles, figures, cards),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.setupGame(roles: roles, figures: figures, cards: cards))
-        
-    }
-    
-
-	 struct __StubbingProxy_GameSetupProtocol: Cuckoo.StubbingProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	
-	     init(manager: Cuckoo.MockManager) {
-	        self.cuckoo_manager = manager
-	    }
-	    
-	    
-	    func roles<M1: Cuckoo.Matchable>(for playersCount: M1) -> Cuckoo.ProtocolStubFunction<(Int), [Role]> where M1.MatchedType == Int {
-	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: playersCount) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameSetupProtocol.self, method: "roles(for: Int) -> [Role]", parameterMatchers: matchers))
-	    }
-	    
-	    func setupGame<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable>(roles: M1, figures: M2, cards: M3) -> Cuckoo.ProtocolStubFunction<([Role], [FigureProtocol], [CardProtocol]), GameStateProtocol> where M1.MatchedType == [Role], M2.MatchedType == [FigureProtocol], M3.MatchedType == [CardProtocol] {
-	        let matchers: [Cuckoo.ParameterMatcher<([Role], [FigureProtocol], [CardProtocol])>] = [wrap(matchable: roles) { $0.0 }, wrap(matchable: figures) { $0.1 }, wrap(matchable: cards) { $0.2 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameSetupProtocol.self, method: "setupGame(roles: [Role], figures: [FigureProtocol], cards: [CardProtocol]) -> GameStateProtocol", parameterMatchers: matchers))
-	    }
-	    
-	}
-
-	 struct __VerificationProxy_GameSetupProtocol: Cuckoo.VerificationProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	    private let callMatcher: Cuckoo.CallMatcher
-	    private let sourceLocation: Cuckoo.SourceLocation
-	
-	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
-	        self.cuckoo_manager = manager
-	        self.callMatcher = callMatcher
-	        self.sourceLocation = sourceLocation
-	    }
-	
-	    
-	
-	    
-	    @discardableResult
-	    func roles<M1: Cuckoo.Matchable>(for playersCount: M1) -> Cuckoo.__DoNotUse<(Int), [Role]> where M1.MatchedType == Int {
-	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: playersCount) { $0 }]
-	        return cuckoo_manager.verify("roles(for: Int) -> [Role]", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
-	    func setupGame<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable>(roles: M1, figures: M2, cards: M3) -> Cuckoo.__DoNotUse<([Role], [FigureProtocol], [CardProtocol]), GameStateProtocol> where M1.MatchedType == [Role], M2.MatchedType == [FigureProtocol], M3.MatchedType == [CardProtocol] {
-	        let matchers: [Cuckoo.ParameterMatcher<([Role], [FigureProtocol], [CardProtocol])>] = [wrap(matchable: roles) { $0.0 }, wrap(matchable: figures) { $0.1 }, wrap(matchable: cards) { $0.2 }]
-	        return cuckoo_manager.verify("setupGame(roles: [Role], figures: [FigureProtocol], cards: [CardProtocol]) -> GameStateProtocol", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	}
-}
-
- class GameSetupProtocolStub: GameSetupProtocol {
-    
-
-    
-
-    
-     func roles(for playersCount: Int) -> [Role]  {
-        return DefaultValueRegistry.defaultValue(for: ([Role]).self)
-    }
-    
-     func setupGame(roles: [Role], figures: [FigureProtocol], cards: [CardProtocol]) -> GameStateProtocol  {
-        return DefaultValueRegistry.defaultValue(for: (GameStateProtocol).self)
-    }
-    
-}
-
+import RxSwift
 
 import Cuckoo
 @testable import WildWest
@@ -1436,6 +1317,130 @@ import Cuckoo
     
      func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]?  {
         return DefaultValueRegistry.defaultValue(for: ([GameUpdate]?).self)
+    }
+    
+}
+
+
+import Cuckoo
+@testable import WildWest
+
+
+ class MockGameSetupProtocol: GameSetupProtocol, Cuckoo.ProtocolMock {
+    
+     typealias MocksType = GameSetupProtocol
+    
+     typealias Stubbing = __StubbingProxy_GameSetupProtocol
+     typealias Verification = __VerificationProxy_GameSetupProtocol
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: GameSetupProtocol?
+
+     func enableDefaultImplementation(_ stub: GameSetupProtocol) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+
+    
+
+    
+    
+    
+     func roles(for playersCount: Int) -> [Role] {
+        
+    return cuckoo_manager.call("roles(for: Int) -> [Role]",
+            parameters: (playersCount),
+            escapingParameters: (playersCount),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.roles(for: playersCount))
+        
+    }
+    
+    
+    
+     func setupGame(roles: [Role], figures: [FigureProtocol], cards: [CardProtocol]) -> GameStateProtocol {
+        
+    return cuckoo_manager.call("setupGame(roles: [Role], figures: [FigureProtocol], cards: [CardProtocol]) -> GameStateProtocol",
+            parameters: (roles, figures, cards),
+            escapingParameters: (roles, figures, cards),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.setupGame(roles: roles, figures: figures, cards: cards))
+        
+    }
+    
+
+	 struct __StubbingProxy_GameSetupProtocol: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    func roles<M1: Cuckoo.Matchable>(for playersCount: M1) -> Cuckoo.ProtocolStubFunction<(Int), [Role]> where M1.MatchedType == Int {
+	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: playersCount) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameSetupProtocol.self, method: "roles(for: Int) -> [Role]", parameterMatchers: matchers))
+	    }
+	    
+	    func setupGame<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable>(roles: M1, figures: M2, cards: M3) -> Cuckoo.ProtocolStubFunction<([Role], [FigureProtocol], [CardProtocol]), GameStateProtocol> where M1.MatchedType == [Role], M2.MatchedType == [FigureProtocol], M3.MatchedType == [CardProtocol] {
+	        let matchers: [Cuckoo.ParameterMatcher<([Role], [FigureProtocol], [CardProtocol])>] = [wrap(matchable: roles) { $0.0 }, wrap(matchable: figures) { $0.1 }, wrap(matchable: cards) { $0.2 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameSetupProtocol.self, method: "setupGame(roles: [Role], figures: [FigureProtocol], cards: [CardProtocol]) -> GameStateProtocol", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	 struct __VerificationProxy_GameSetupProtocol: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	
+	    
+	    @discardableResult
+	    func roles<M1: Cuckoo.Matchable>(for playersCount: M1) -> Cuckoo.__DoNotUse<(Int), [Role]> where M1.MatchedType == Int {
+	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: playersCount) { $0 }]
+	        return cuckoo_manager.verify("roles(for: Int) -> [Role]", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func setupGame<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable>(roles: M1, figures: M2, cards: M3) -> Cuckoo.__DoNotUse<([Role], [FigureProtocol], [CardProtocol]), GameStateProtocol> where M1.MatchedType == [Role], M2.MatchedType == [FigureProtocol], M3.MatchedType == [CardProtocol] {
+	        let matchers: [Cuckoo.ParameterMatcher<([Role], [FigureProtocol], [CardProtocol])>] = [wrap(matchable: roles) { $0.0 }, wrap(matchable: figures) { $0.1 }, wrap(matchable: cards) { $0.2 }]
+	        return cuckoo_manager.verify("setupGame(roles: [Role], figures: [FigureProtocol], cards: [CardProtocol]) -> GameStateProtocol", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+ class GameSetupProtocolStub: GameSetupProtocol {
+    
+
+    
+
+    
+     func roles(for playersCount: Int) -> [Role]  {
+        return DefaultValueRegistry.defaultValue(for: ([Role]).self)
+    }
+    
+     func setupGame(roles: [Role], figures: [FigureProtocol], cards: [CardProtocol]) -> GameStateProtocol  {
+        return DefaultValueRegistry.defaultValue(for: (GameStateProtocol).self)
     }
     
 }
