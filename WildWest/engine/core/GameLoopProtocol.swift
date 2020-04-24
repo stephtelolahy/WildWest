@@ -7,5 +7,5 @@
 //
 
 protocol GameLoopProtocol {
-    func start(move: GameMove, completed: @escaping () -> Void)
+    func execute(move: GameMove)
 }

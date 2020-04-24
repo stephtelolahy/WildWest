@@ -28,14 +28,14 @@ extension Array where Element == GameUpdate {
         return result
     }
     
-    private var executionTime: Int {
+    private var executionTime: Double {
         reduce(0) { $0 + $1.executionTime }
     }
     
 }
 
-private extension GameUpdate {
-    var executionTime: Int {
+extension GameUpdate {
+    var executionTime: Double {
         switch self {
         case .playerPullFromDeck,
              .playerDiscardHand,
