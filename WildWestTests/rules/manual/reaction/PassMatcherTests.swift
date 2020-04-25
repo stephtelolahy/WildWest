@@ -76,8 +76,8 @@ class PassMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerLooseHealth("p1", 3, DamageEvent(damage: 1, source: .byPlayer("px"))),
-                                 .setChallenge(nil)])
+        XCTAssertEqual(updates, [.setChallenge(nil),
+                                 .playerLooseHealth("p1", 3, DamageEvent(damage: 1, source: .byPlayer("px")))])
     }
     
     func test_TriggerStartTurnChallenge_IfPassingOnDynamiteExploded() {
@@ -95,8 +95,8 @@ class PassMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerLooseHealth("p1", 1, DamageEvent(damage: 3, source: .byDynamite)),
-                                 .setChallenge(Challenge(name: .startTurn))])
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .startTurn)),
+                                 .playerLooseHealth("p1", 1, DamageEvent(damage: 3, source: .byDynamite))])
     }
     
     func test_RemoveActorFromBangChallenge_IfPassing() {
@@ -114,8 +114,8 @@ class PassMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerLooseHealth("p1", 3, DamageEvent(damage: 1, source: .byPlayer("px"))),
-                                 .setChallenge(nil)])
+        XCTAssertEqual(updates, [.setChallenge(nil),
+                                 .playerLooseHealth("p1", 3, DamageEvent(damage: 1, source: .byPlayer("px")))])
     }
     
     func test_RemoveActorFromGatlingChallenge_IfPassing() {
@@ -133,8 +133,8 @@ class PassMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerLooseHealth("p1", 3, DamageEvent(damage: 1, source: .byPlayer("px"))),
-                                 .setChallenge(Challenge(name: .gatling, targetIds: ["p2", "p3"]))])
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .gatling, targetIds: ["p2", "p3"])),
+                                 .playerLooseHealth("p1", 3, DamageEvent(damage: 1, source: .byPlayer("px")))])
     }
     
     func test_RemoveActorFromIndiansChallenge_IfPassing() {
@@ -152,8 +152,8 @@ class PassMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerLooseHealth("p1", 3, DamageEvent(damage: 1, source: .byPlayer("px"))),
-                                 .setChallenge(Challenge(name: .indians, targetIds: ["p2", "p3"]))])
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .indians, targetIds: ["p2", "p3"])),
+                                 .playerLooseHealth("p1", 3, DamageEvent(damage: 1, source: .byPlayer("px")))])
     }
     
     func test_RemoveDuelChallenge_IfPassing() {
@@ -171,7 +171,7 @@ class PassMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerLooseHealth("p1", 3, DamageEvent(damage: 1, source: .byPlayer("p2"))),
-                                 .setChallenge(nil)])
+        XCTAssertEqual(updates, [.setChallenge(nil),
+                                 .playerLooseHealth("p1", 3, DamageEvent(damage: 1, source: .byPlayer("p2")))])
     }
 }

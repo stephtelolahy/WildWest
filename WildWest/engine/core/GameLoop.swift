@@ -66,8 +66,10 @@ private extension GameLoop {
         pendingUpdates.append(contentsOf: updates)
         
         let sequence = updates.map({ String(format: "%.0f", $0.executionTime) }).joined(separator: "-")
-        let warning = sequence.hasSuffix("-0") ? "⚠️ " : ""
-        print("\n\(warning)\(move.name.rawValue)\n\(sequence)")
+        let warning = sequence.hasSuffix("-0") && sequence.contains("1")
+        let warningText = warning ? "⚠️ " : ""
+        print("\n\(warningText)\(move.name.rawValue)\n\(sequence)")
+        assert(!warning)
         
         processUpdate()
     }
