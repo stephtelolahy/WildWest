@@ -47,7 +47,6 @@ class GameLoop: NSObject, GameLoopProtocol {
 
 private extension GameLoop {
     
-    @objc
     func processMove() {
         guard !pendingMoves.isEmpty else {
             complete()
@@ -57,7 +56,9 @@ private extension GameLoop {
         let move = pendingMoves.remove(at: 0)
         currentMove = move
         
-//        print("\n*** \(String(describing: move)) ***")
+        #if DEBUG
+        print("\n*** \(String(describing: move)) ***")
+        #endif
         
         subjects.emitExecutedMove(move)
         subjects.emitValidMoves([])
@@ -65,16 +66,17 @@ private extension GameLoop {
         let updates = moveMatchers.compactMap({ $0.execute(move, in: database.state) }).flatMap { $0 }
         pendingUpdates.append(contentsOf: updates)
         
+        #if DEBUG
         let sequence = updates.map({ String(format: "%.0f", $0.executionTime) }).joined(separator: "-")
         let warning = sequence.hasSuffix("-0") && sequence.contains("1")
-        let warningText = warning ? "⚠️ " : ""
-        print("\n\(warningText)\(move.name.rawValue)\n\(sequence)")
-        assert(!warning)
+        guard !warning else {
+            fatalError("\n⚠️\(move.name.rawValue)\n\(sequence)")
+        }
+        #endif
         
         processUpdate()
     }
     
-    @objc
     func processUpdate() {
         guard !pendingUpdates.isEmpty else {
             postExecuteMove()
@@ -83,14 +85,18 @@ private extension GameLoop {
         
         let update = pendingUpdates.remove(at: 0)
         
-        //print("> \(String(describing: update))")
+        #if DEBUG
+        print("> \(String(describing: update))")
+        #endif
         
         subjects.emitExecutedUpdate(update)
         
         updateExecutor.execute(update, in: database)
         
         let waitDelay = pendingUpdates.isEmpty ? 0 : update.executionTime * delay
-        perform(#selector(processUpdate), with: nil, afterDelay: waitDelay)
+        schedule(after: waitDelay) { [weak self] in
+            self?.processUpdate()
+        }
     }
     
     func postExecuteMove() {
@@ -99,7 +105,10 @@ private extension GameLoop {
         }
         
         postExecute(move)
-        perform(#selector(processMove), with: nil, afterDelay: delay)
+        
+        schedule(after: delay) { [weak self] in
+            self?.processMove()
+        }
     }
     
     func postExecute(_ move: GameMove) {
@@ -145,6 +154,17 @@ private extension GameLoop {
         // ⚠️ Dispatch emit valid moves after loop completed
         DispatchQueue.main.async {
             subjects.emitValidMoves(validMoves)
+        }
+    }
+    
+    func schedule(after waitDelay: TimeInterval, block: @escaping (() -> Void)) {
+        if #available(iOS 10.0, *) {
+            Timer.scheduledTimer(withTimeInterval: waitDelay, repeats: false) { [weak self] timer in
+                timer.invalidate()
+                block()
+            }
+        } else {
+            block()
         }
     }
 }
