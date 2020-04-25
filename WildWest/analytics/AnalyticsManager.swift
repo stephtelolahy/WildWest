@@ -15,7 +15,8 @@ class AnalyticsManager {
     func tagEventGameOver(_ state: GameStateProtocol) {
         Analytics.logEvent("game_over", parameters: [
             "outcome": state.outcomeText,
-            "winner": state.winner
+            "winner": state.winner,
+            "players_count": state.allPlayers.count
         ])
     }
 }
