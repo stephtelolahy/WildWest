@@ -35,7 +35,7 @@ class MenuViewController: UIViewController {
         
         allFigures = resources.allFigures.filter { !$0.abilities.isEmpty }
         
-        if UserPreferences.shared.simulationMode {
+        if UserPreferences.shared.allAbilitiesMode {
             var allAbilities: [AbilityName: Bool] = [:]
             AbilityName.allCases.forEach { allAbilities[$0] = true }
             allFigures = allFigures.map { Figure(name: $0.name,

@@ -159,7 +159,7 @@ private extension GameLoop {
     
     func schedule(after waitDelay: TimeInterval, block: @escaping (() -> Void)) {
         if #available(iOS 10.0, *) {
-            Timer.scheduledTimer(withTimeInterval: waitDelay, repeats: false) { [weak self] timer in
+            Timer.scheduledTimer(withTimeInterval: waitDelay, repeats: false) { timer in
                 timer.invalidate()
                 block()
             }
