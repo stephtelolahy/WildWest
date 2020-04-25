@@ -23,6 +23,8 @@ extension GameUpdate {
              .playerPassInPlayOfOther,
              .playerPullFromGeneralStore,
              .flipOverFirstDeckCard:
+            // Careful, after adding new animatable update,
+            // you should thing about sequencing the executing move
             return 1
             
         default:

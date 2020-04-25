@@ -39,8 +39,8 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Hu9-Gc-CJ7">
-                                        <rect key="frame" x="83.5" y="132.5" width="100" height="112.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Hu9-Gc-CJ7">
+                                        <rect key="frame" x="83.5" y="128.5" width="100" height="120.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s8o-qf-BAQ" userLabel="playButton">
                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="52.5"/>
@@ -54,7 +54,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pxZ-Dy-ZSi" userLabel="onlineButton">
-                                                <rect key="frame" x="0.0" y="60.5" width="100" height="52"/>
+                                                <rect key="frame" x="0.0" y="68.5" width="100" height="52"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="6vK-ab-ZPj"/>
                                                     <constraint firstAttribute="width" secondItem="pxZ-Dy-ZSi" secondAttribute="height" multiplier="557:291" id="rX6-eT-lpQ"/>
