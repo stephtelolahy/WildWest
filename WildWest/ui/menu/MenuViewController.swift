@@ -176,7 +176,10 @@ private extension MenuViewController {
     func startRemoteGame() {
         let state = createGame()
         
-        let firebaseProvider = FirebaseProvider()
+        let firebaseProvider = FirebaseProvider(dtoEncoder: DtoEncoder(),
+                                                dtoDecoder: DtoDecoder(allCards: allCards),
+                                                dictionaryEncoder: DictionaryEncoder(),
+                                                dictionaryDecoder: DictionaryDecoder())
         
         let key = firebaseProvider.createGame(state)
         print("Created remote game with id: \(key)")

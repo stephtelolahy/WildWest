@@ -7,11 +7,11 @@
 //
 
 struct StateDto: Codable {
-    let players: [PlayerDto]
-    let deck: [String]
-    let discardPile: [String]
-    let turn: String
-    let generalStore: [String]
+    let players: [PlayerDto]?
+    let deck: [String]?
+    let discardPile: [String]?
+    let turn: String?
+    let generalStore: [String]?
     let outcome: String?
     //var challenge: Challenge? { get }
 }

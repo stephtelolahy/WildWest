@@ -174,6 +174,7 @@
 		33734AED2454AB5F00A5D2DA /* DictionaryDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AEC2454AB5F00A5D2DA /* DictionaryDecoder.swift */; };
 		33734AF12454ABF200A5D2DA /* PlayerDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AF02454ABF200A5D2DA /* PlayerDto.swift */; };
 		33734AF52454AD7200A5D2DA /* DtoEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AF42454AD7200A5D2DA /* DtoEncoder.swift */; };
+		33734AF72454AF9A00A5D2DA /* DtoDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AF62454AF9A00A5D2DA /* DtoDecoder.swift */; };
 		337408D124306C1200E5809B /* Card+Ability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337408D024306C1200E5809B /* Card+Ability.swift */; };
 		337408D224306C1200E5809B /* Card+Ability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337408D024306C1200E5809B /* Card+Ability.swift */; };
 		337408D424306C3400E5809B /* Player+Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337408D324306C3400E5809B /* Player+Cards.swift */; };
@@ -403,6 +404,7 @@
 		33734AEC2454AB5F00A5D2DA /* DictionaryDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryDecoder.swift; sourceTree = "<group>"; };
 		33734AF02454ABF200A5D2DA /* PlayerDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDto.swift; sourceTree = "<group>"; };
 		33734AF42454AD7200A5D2DA /* DtoEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DtoEncoder.swift; sourceTree = "<group>"; };
+		33734AF62454AF9A00A5D2DA /* DtoDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DtoDecoder.swift; sourceTree = "<group>"; };
 		337408D024306C1200E5809B /* Card+Ability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+Ability.swift"; sourceTree = "<group>"; };
 		337408D324306C3400E5809B /* Player+Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+Cards.swift"; sourceTree = "<group>"; };
 		337D7FD0243071AE0078F749 /* Player+Ability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+Ability.swift"; sourceTree = "<group>"; };
@@ -752,6 +754,7 @@
 				33734AE82454AB3000A5D2DA /* DictionaryEncoder.swift */,
 				33734AEC2454AB5F00A5D2DA /* DictionaryDecoder.swift */,
 				33734AF42454AD7200A5D2DA /* DtoEncoder.swift */,
+				33734AF62454AF9A00A5D2DA /* DtoDecoder.swift */,
 			);
 			path = mapper;
 			sourceTree = "<group>";
@@ -1585,6 +1588,7 @@
 				33E4411F24077CA000B2848E /* MessageCell.swift in Sources */,
 				33C52DDD242F24D3009EF4DA /* ResolveBarrel.swift in Sources */,
 				33DB41BC2438841A00B94E8A /* HandCollectionViewLayout.swift in Sources */,
+				33734AF72454AF9A00A5D2DA /* DtoDecoder.swift in Sources */,
 				ADD035D823A9604F003B2576 /* GameStateProtocol.swift in Sources */,
 				ADE91ACD23B9FE2300F7316B /* JsonReader.swift in Sources */,
 				3328FCD4242F2D1100A82255 /* DiscardMissed.swift in Sources */,
