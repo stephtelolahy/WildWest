@@ -147,8 +147,7 @@ class DiscardBeerMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .setChallenge(Challenge(name: .dynamiteExploded, damage: 2))])
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .dynamiteExploded, damage: 2)), .playerDiscardHand("p1", "c1")])
     }
     
     func test_TriggerStartTurnChallenge_IfDiscardBeerOnDynamiteExploded() {
@@ -162,8 +161,8 @@ class DiscardBeerMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .setChallenge(Challenge(name: .startTurn))])
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .startTurn)),
+                                 .playerDiscardHand("p1", "c1")])
     }
     
     func test_RemoveActorFromBangChallenge_IfDiscardingBeer() {
@@ -180,8 +179,8 @@ class DiscardBeerMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .setChallenge(nil)])
+        XCTAssertEqual(updates, [.setChallenge(nil),
+                                 .playerDiscardHand("p1", "c1")])
     }
     
     func test_RemoveActorFromGatlingChallenge_IfDiscardingBeer() {
@@ -198,8 +197,8 @@ class DiscardBeerMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .setChallenge(Challenge(name: .gatling, targetIds: ["p2", "p3"]))])
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .gatling, targetIds: ["p2", "p3"])),
+                                 .playerDiscardHand("p1", "c1")])
     }
     
     func test_RemoveActorFromIndiansChallenge_IfDiscardingBeer() {
@@ -216,8 +215,8 @@ class DiscardBeerMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .setChallenge(Challenge(name: .indians, targetIds: ["p2", "p3"]))])
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .indians, targetIds: ["p2", "p3"])),
+                                 .playerDiscardHand("p1", "c1")])
     }
     
     func test_RemoveDuelChallenge_IfDiscardingBeer() {
@@ -234,7 +233,7 @@ class DiscardBeerMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .setChallenge(nil)])
+        XCTAssertEqual(updates, [.setChallenge(nil),
+                                 .playerDiscardHand("p1", "c1")])
     }
 }
