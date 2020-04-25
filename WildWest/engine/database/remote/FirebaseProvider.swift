@@ -12,13 +12,8 @@ import RxSwift
 import Firebase
 
 protocol FirebaseProviderProtocol {
-    
-    // Create game
-    // return gameId
     func createGame(_ state: GameStateProtocol) -> String
-    
-    // Observe game with given id
-    func observeGame(_ id: String, completion: @escaping ((BehaviorSubject<GameStateProtocol>) -> Void))
+    func getGame(_ id: String, completion: @escaping ((GameStateProtocol) -> Void))
 }
 
 class FirebaseProvider: FirebaseProviderProtocol {
@@ -59,9 +54,9 @@ class FirebaseProvider: FirebaseProviderProtocol {
         return key
     }
     
-    func observeGame(_ id: String, completion: @escaping ((BehaviorSubject<GameStateProtocol>) -> Void)) {
+    func getGame(_ id: String, completion: @escaping ((GameStateProtocol) -> Void)) {
         let rootRef = Database.database().reference()
-        rootRef.child("games").child(id).observe(.value, with: { snapshot in
+        rootRef.child("games").child(id).observeSingleEvent(of: .value, with: { snapshot in
             
             guard let value = snapshot.value as? [String: Any] else {
                 fatalError("Unable to create dictionary")

@@ -6,6 +6,7 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 // swiftlint:disable implicitly_unwrapped_optional
+// swiftlint:disable force_cast
 
 import UIKit
 import AVFoundation
@@ -148,9 +149,12 @@ private extension MenuViewController {
     func startLocalGame() {
         let state = createGame()
         
-        let database = MemoryCachedDataBase(state: state)
+        let stateSubject: BehaviorSubject<GameStateProtocol> = BehaviorSubject(value: state)
         
-        let subjects = GameSubjects(stateSubject: database.stateSubject,
+        let database = MemoryCachedDataBase(mutableState: state as! GameState,
+                                            stateSubject: stateSubject)
+        
+        let subjects = GameSubjects(stateSubject: stateSubject,
                                     executedMoveSubject: PublishSubject(),
                                     executedUpdateSubject: PublishSubject(),
                                     validMovesSubject: PublishSubject())
@@ -184,10 +188,15 @@ private extension MenuViewController {
         let key = firebaseProvider.createGame(state)
         print("Created remote game with id: \(key)")
         
-        firebaseProvider.observeGame(key) { subject in
-            self.sub(subject.subscribe(onNext: { state in
-                print(String(describing: state))
-            }))
+        joinRemoteGame(id: key, firebaseProvider: firebaseProvider)
+    }
+    
+    func joinRemoteGame(id: String, firebaseProvider: FirebaseProvider) {
+        
+        firebaseProvider.getGame(id) { initialState in
+            
+            // create remote database now
+            print(String(describing: initialState))
         }
     }
     

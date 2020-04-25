@@ -11,13 +11,12 @@ import RxSwift
 
 class MemoryCachedDataBase: GameDatabaseProtocol {
     
-    let stateSubject: BehaviorSubject<GameStateProtocol>
-    
+    internal let stateSubject: BehaviorSubject<GameStateProtocol>
     private var mutableState: GameState
     
-    init(state: GameStateProtocol) {
-        stateSubject = BehaviorSubject(value: state)
-        mutableState = state as! GameState
+    init(mutableState: GameState, stateSubject: BehaviorSubject<GameStateProtocol>) {
+        self.mutableState = mutableState
+        self.stateSubject = stateSubject
     }
     
     // MARK: - Flags
@@ -108,9 +107,6 @@ class MemoryCachedDataBase: GameDatabaseProtocol {
             self.mutablePlayer(playerId).lastDamage = event
         }
     }
-    
-    // MARK: - Player
-    
 }
 
 private extension MemoryCachedDataBase {
