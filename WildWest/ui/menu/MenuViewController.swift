@@ -30,12 +30,10 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        figureButton.addBrownRoundedBorder()
-        
         let jsonReader = JsonReader(bundle: Bundle.main)
-        let config = GameConfiguration(jsonReader: jsonReader)
+        let resources = GameResources(jsonReader: jsonReader)
         
-        allFigures = config.allFigures.filter { !$0.abilities.isEmpty }
+        allFigures = resources.allFigures.filter { !$0.abilities.isEmpty }
         
         if UserPreferences.shared.simulationMode {
             var allAbilities: [AbilityName: Bool] = [:]
@@ -48,8 +46,12 @@ class MenuViewController: UIViewController {
             }
         }
         
-        allCards = config.allCards
-        allMatchers = config.moveMatchers
+        allCards = resources.allCards
+        
+        let rules = GameRules()
+        allMatchers = rules.moveMatchers
+        
+        figureButton.addBrownRoundedBorder()
         
         playersCountStepper.value = Double(UserPreferences.shared.playersCount)
         updatePlayersLabel()
