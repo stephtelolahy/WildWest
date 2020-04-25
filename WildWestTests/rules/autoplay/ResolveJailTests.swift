@@ -63,8 +63,8 @@ class ResolveJailTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.flipOverFirstDeckCard,
-                                 .playerDiscardInPlay("p1", "c1"),
-                                 .setTurn("p2")])
+                                 .setTurn("p2"),
+                                 .playerDiscardInPlay("p1", "c1")])
     }
     
     func test_ShouldEscapeFromJail_BeforeStartingTurn() {

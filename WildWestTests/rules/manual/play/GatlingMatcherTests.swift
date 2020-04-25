@@ -47,7 +47,7 @@ class GatlingMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerDiscardHand("p2", "c2"),
-                                 .setChallenge(Challenge(name: .gatling, targetIds: ["p3", "p4", "p1"]))])
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .gatling, targetIds: ["p3", "p4", "p1"])),
+                                 .playerDiscardHand("p2", "c2")])
     }
 }

@@ -10,6 +10,7 @@
 import UIKit
 import AVFoundation
 import SafariServices
+import RxSwift
 
 class MenuViewController: UIViewController {
     
@@ -29,14 +30,28 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        figureButton.addBrownRoundedBorder()
-        
         let jsonReader = JsonReader(bundle: Bundle.main)
-        let config = GameConfiguration(jsonReader: jsonReader)
+        let resources = GameResources(jsonReader: jsonReader)
         
-        allFigures = config.allFigures.filter { !$0.abilities.isEmpty }
-        allCards = config.allCards
-        allMatchers = config.moveMatchers
+        allFigures = resources.allFigures.filter { !$0.abilities.isEmpty }
+        
+        if UserPreferences.shared.allAbilitiesMode {
+            var allAbilities: [AbilityName: Bool] = [:]
+            AbilityName.allCases.forEach { allAbilities[$0] = true }
+            allFigures = allFigures.map { Figure(name: $0.name,
+                                                 bullets: $0.bullets,
+                                                 imageName: $0.imageName,
+                                                 description: $0.description,
+                                                 abilities: allAbilities)
+            }
+        }
+        
+        allCards = resources.allCards
+        
+        let rules = GameRules()
+        allMatchers = rules.moveMatchers
+        
+        figureButton.addBrownRoundedBorder()
         
         playersCountStepper.value = Double(UserPreferences.shared.playersCount)
         updatePlayersLabel()
@@ -135,10 +150,16 @@ private extension MenuViewController {
         
         let database = MemoryCachedDataBase(state: state)
         
-        let engine = GameEngine(database: database,
+        let subjects = GameSubjects(stateSubject: database.stateSubject,
+                                    executedMoveSubject: PublishSubject(),
+                                    executedUpdateSubject: PublishSubject(),
+                                    validMovesSubject: PublishSubject())
+        
+        let engine = GameEngine(delay: UserPreferences.shared.updateDelay,
+                                database: database,
                                 moveMatchers: allMatchers,
                                 updateExecutor: GameUpdateExecutor(),
-                                eventQueue: DelayedEventQueue(delay: UserPreferences.shared.updateDelay))
+                                subjects: subjects)
         
         let controlledPlayerId: String? = UserPreferences.shared.simulationMode ? nil : state.players.first?.identifier
         let aiPlayers = state.players.filter { $0.identifier != controlledPlayerId }
@@ -203,7 +224,7 @@ private extension MenuViewController {
 
 private extension UIViewController {
     
-    func presentGame(engine: GameEngine, controlledPlayerId: String?, aiAgents: [AIPlayerAgent]) {
+    func presentGame(engine: GameEngineProtocol, controlledPlayerId: String?, aiAgents: [AIPlayerAgent]) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let gameViewController =
             storyboard.instantiateViewController(withIdentifier: "GameViewController") as? GameViewController else {

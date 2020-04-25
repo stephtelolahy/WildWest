@@ -1,19 +1,19 @@
 //
-//  GameEngine+ObservingTests.swift
+//  GameSubjectsTests.swift
 //  WildWestTests
 //
-//  Created by Hugues Stephano Telolahy on 11/04/2020.
+//  Created by Hugues Stephano Telolahy on 25/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
 import XCTest
-import Cuckoo
 import RxTest
 import RxSwift
+import Cuckoo
 
-class GameEngine_ObservingTests: XCTestCase {
+class GameSubjectsTests: XCTestCase {
     
-    private var sut: GameEngine!
+    private var sut: GameSubjectsProtocol!
     private var mockState: MockGameStateProtocol!
     private var mockStateSubject: BehaviorSubject<GameStateProtocol>!
     
@@ -24,25 +24,13 @@ class GameEngine_ObservingTests: XCTestCase {
     private let disposeBag = DisposeBag()
     
     override func setUp() {
-        let mockDatabase = MockGameDatabaseProtocol()
-        let mockPlayer1 = MockPlayerProtocol().identified(by: "p1").role(is: .sheriff).health(is: 5).withDefault()
-        let mockPlayer2 = MockPlayerProtocol().identified(by: "p2").role(is: .outlaw).health(is: 4).withDefault()
-        
-        mockState = MockGameStateProtocol()
-            .withEnabledDefaultImplementation(GameStateProtocolStub())
-            .allPlayers(are: mockPlayer1, mockPlayer2)
-        
+        mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
         mockStateSubject = BehaviorSubject(value: mockState)
         
-        Cuckoo.stub(mockDatabase) { mock in
-            when(mock.stateSubject.get).thenReturn(mockStateSubject)
-        }
-        DefaultValueRegistry.register(value: .bartCassidy, forType: FigureName.self)
-        
-        sut = GameEngine(database: mockDatabase,
-                         moveMatchers: [],
-                         updateExecutor: MockUpdateExecutorProtocol(),
-                         eventQueue: MockEventQueueProtocol())
+        sut = GameSubjects(stateSubject: mockStateSubject,
+                           executedMoveSubject: PublishSubject(),
+                           executedUpdateSubject: PublishSubject(),
+                           validMovesSubject: PublishSubject())
         
         let scheduler = TestScheduler(initialClock: 0)
         
@@ -66,7 +54,7 @@ class GameEngine_ObservingTests: XCTestCase {
         
         updateObservers = Array(1...7).map { _ in
             let observer = scheduler.createObserver(GameUpdate.self)
-            sut.executedUpdates().subscribe(observer).disposed(by: disposeBag)
+            sut.executedUpdate().subscribe(observer).disposed(by: disposeBag)
             return observer
         }
     }
@@ -103,7 +91,7 @@ class GameEngine_ObservingTests: XCTestCase {
         // Given
         let move = GameMove(name: MoveName("m1"), actorId: "p1")
         // When
-        sut.emitValidMoves(["p1":[move]])
+        sut.emitValidMoves([move])
         
         // Assert
         validMovesObservers.forEach { XCTAssertEqual($0.events.count, 1) }
@@ -114,7 +102,7 @@ class GameEngine_ObservingTests: XCTestCase {
         let update = GameUpdate.flipOverFirstDeckCard
         
         // When
-        sut.emitUpdate(update)
+        sut.emitExecutedUpdate(update)
         
         // Assert
         updateObservers.forEach { XCTAssertEqual($0.events.count, 1) }

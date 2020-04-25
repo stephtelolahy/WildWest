@@ -114,9 +114,9 @@ class BangMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .setChallenge(Challenge(name: .bang, targetIds: ["p2"], counterNeeded: 1, barrelsPlayed: 0)),
-                                 .playerSetBangsPlayed("p1", 1)])
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .bang, targetIds: ["p2"], counterNeeded: 1, barrelsPlayed: 0)),
+                                 .playerSetBangsPlayed("p1", 1),
+                                 .playerDiscardHand("p1", "c1"),])
     }
     
     func test_Need2MissesToCancelHisBang_IfPlayingBangAndHAvingAbility() {
@@ -134,8 +134,8 @@ class BangMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .setChallenge(Challenge(name: .bang, targetIds: ["p2"], counterNeeded: 2, barrelsPlayed: 0)),
-                                 .playerSetBangsPlayed("p1", 1)])
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .bang, targetIds: ["p2"], counterNeeded: 2, barrelsPlayed: 0)),
+                                 .playerSetBangsPlayed("p1", 1),
+                                 .playerDiscardHand("p1", "c1"),])
     }
 }

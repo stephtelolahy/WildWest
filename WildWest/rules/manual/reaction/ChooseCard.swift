@@ -27,8 +27,8 @@ class ChooseCardMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        return [.playerPullFromGeneralStore(move.actorId, cardId),
-                .setChallenge(challenge.removing(move.actorId))]
+        return [.setChallenge(challenge.removing(move.actorId)),
+                .playerPullFromGeneralStore(move.actorId, cardId)]
     }
 }
 

@@ -42,8 +42,8 @@ class DiscardMissedOnBangMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .setChallenge(nil)])
+        XCTAssertEqual(updates, [.setChallenge(nil),
+                                 .playerDiscardHand("p1", "c1")])
     }
     
     func test_CanPlayMissed_IfIsTargetOfGatlingAndHoldingMissedCard() {
@@ -76,7 +76,7 @@ class DiscardMissedOnBangMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .setChallenge(Challenge(name: .gatling, targetIds: ["p2", "p3"], barrelsPlayed: 0))])
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .gatling, targetIds: ["p2", "p3"], barrelsPlayed: 0)),
+                                 .playerDiscardHand("p1", "c1")])
     }
 }

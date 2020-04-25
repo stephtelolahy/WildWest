@@ -11,7 +11,7 @@ import RxSwift
 import Cuckoo
 
 class GameEngineTests: XCTestCase {
-    
+    /*
     private var sut: GameEngine!
     private var mockDatabase: MockGameDatabaseProtocol!
     private var mockState: MockGameStateProtocol!
@@ -61,7 +61,7 @@ class GameEngineTests: XCTestCase {
         // Assert
         verify(mockEventQueue).add(equal(to: GameEvent(move: move)))
     }
-    /*
+    
     func test_UpdateState_OnExecutingMove() {
         // Given
         let move = GameMove(name: MoveName("m1"), actorId: "p1")

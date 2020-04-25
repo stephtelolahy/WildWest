@@ -79,8 +79,8 @@ class SaloonMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .playerGainHealth("p1", 1),
-                                 .playerGainHealth("p2", 1)])
+        XCTAssertEqual(updates, [.playerGainHealth("p1", 1),
+                                 .playerGainHealth("p2", 1),
+                                 .playerDiscardHand("p1", "c1")])
     }
 }

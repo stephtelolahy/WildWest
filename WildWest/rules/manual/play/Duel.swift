@@ -34,8 +34,8 @@ class DuelMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        return [.playerDiscardHand(move.actorId, cardId),
-                .setChallenge(Challenge(name: .duel, targetIds: [targetId, move.actorId]))]
+        return [.setChallenge(Challenge(name: .duel, targetIds: [targetId, move.actorId])),
+                .playerDiscardHand(move.actorId, cardId)]
     }
 }
 

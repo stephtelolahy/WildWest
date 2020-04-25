@@ -29,8 +29,8 @@ class DiscardMissedMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        return [.playerDiscardHand(move.actorId, cardId),
-                .setChallenge(challenge.countering(move.actorId))]
+        return [.setChallenge(challenge.countering(move.actorId)),
+                .playerDiscardHand(move.actorId, cardId)]
     }
 }
 

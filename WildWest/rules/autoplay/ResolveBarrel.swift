@@ -30,13 +30,17 @@ class ResolveBarrelMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        var updates: [GameUpdate] = Array(1...actor.flippedCardsCount).map { _ in .flipOverFirstDeckCard }
+        var updates: [GameUpdate] = []
         
         var updatedChallenge: Challenge? = challenge.incrementingBarrelsPlayed()
         if move.name == .useBarrel {
             updatedChallenge = updatedChallenge?.countering(move.actorId)
         }
         updates.append(.setChallenge(updatedChallenge))
+        
+        Array(1...actor.flippedCardsCount).forEach { _  in
+            updates.append(.flipOverFirstDeckCard)
+        }
         
         return updates
     }

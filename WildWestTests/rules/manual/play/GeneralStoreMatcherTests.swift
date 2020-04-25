@@ -48,8 +48,8 @@ class GeneralStoreMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .generalStore, targetIds: ["p1", "p2", "p3", "p4"])),
                                  .setupGeneralStore(4),
-                                 .setChallenge(Challenge(name: .generalStore, targetIds: ["p1", "p2", "p3", "p4"]))])
+                                 .playerDiscardHand("p1", "c1")])
     }
 }

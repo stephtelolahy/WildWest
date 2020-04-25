@@ -29,10 +29,10 @@ class DrawsAnotherCardIfSecondDrawIsRedSuitMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerPullFromDeck("p1"),
-                                 .playerPullFromDeck("p1"),
-                                 .setChallenge(nil),
+        XCTAssertEqual(updates, [.setChallenge(nil),
                                  .playerSetBangsPlayed("p1", 0),
+                                 .playerPullFromDeck("p1"),
+                                 .playerPullFromDeck("p1"),
                                  .playerRevealHandCard("p1", "c2"),
                                  .playerPullFromDeck("p1")])
     }
@@ -54,10 +54,10 @@ class DrawsAnotherCardIfSecondDrawIsRedSuitMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerPullFromDeck("p1"),
-                                 .playerPullFromDeck("p1"),
-                                 .setChallenge(nil),
+        XCTAssertEqual(updates, [.setChallenge(nil),
                                  .playerSetBangsPlayed("p1", 0),
+                                 .playerPullFromDeck("p1"),
+                                 .playerPullFromDeck("p1"),
                                  .playerRevealHandCard("p1", "c2")])
     }
     

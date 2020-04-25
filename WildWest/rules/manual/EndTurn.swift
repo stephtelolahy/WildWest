@@ -35,12 +35,11 @@ class EndTurnMatcher: MoveMatcherProtocol {
         var updates: [GameUpdate] = []
         
         updates.append(.setTurn(state.nextPlayer(after: move.actorId)))
+        updates.append(.setChallenge(Challenge(name: .startTurn)))
         
         if let discardIds = move.discardIds {
             discardIds.forEach { updates.append(.playerDiscardHand(actor.identifier, $0)) }
         }
-        
-        updates.append(.setChallenge(Challenge(name: .startTurn)))
         
         return updates
     }

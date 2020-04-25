@@ -50,7 +50,7 @@ class DuelMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .setChallenge(Challenge(name: .duel, targetIds: ["p2", "p1"]))])
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .duel, targetIds: ["p2", "p1"])),
+                                 .playerDiscardHand("p1", "c1")])
     }
 }

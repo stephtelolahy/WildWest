@@ -44,8 +44,8 @@ class DiscardBeerMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        return [.playerDiscardHand(move.actorId, cardId),
-                .setChallenge(challenge.decrementingDamage(move.actorId))]
+        return [.setChallenge(challenge.decrementingDamage(move.actorId)),
+                .playerDiscardHand(move.actorId, cardId)]
     }
 }
 
