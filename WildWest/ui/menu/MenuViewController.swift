@@ -36,6 +36,18 @@ class MenuViewController: UIViewController {
         let config = GameConfiguration(jsonReader: jsonReader)
         
         allFigures = config.allFigures.filter { !$0.abilities.isEmpty }
+        
+        if UserPreferences.shared.simulationMode {
+            var allAbilities: [AbilityName: Bool] = [:]
+            AbilityName.allCases.forEach { allAbilities[$0] = true }
+            allFigures = allFigures.map { Figure(name: $0.name,
+                                                 bullets: $0.bullets,
+                                                 imageName: $0.imageName,
+                                                 description: $0.description,
+                                                 abilities: allAbilities)
+            }
+        }
+        
         allCards = config.allCards
         allMatchers = config.moveMatchers
         
