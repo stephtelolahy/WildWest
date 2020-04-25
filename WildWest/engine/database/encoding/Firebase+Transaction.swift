@@ -10,7 +10,7 @@ import Firebase
 
 extension Database {
     
-    func addGame(_ state: GameStateProtocol) {
+    func createGame(_ state: GameStateProtocol) {
         let rootRef = self.reference()
         let gamesRef = rootRef.child("games")
         let gameItemRef = gamesRef.childByAutoId()

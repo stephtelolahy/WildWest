@@ -5,6 +5,7 @@
 //  Created by Hugues Stephano Telolahy on 27/03/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
+// swiftlint:disable force_cast
 
 import RxSwift
 
@@ -16,101 +17,124 @@ class MemoryCachedDataBase: GameDatabaseProtocol {
     
     init(state: GameStateProtocol) {
         stateSubject = BehaviorSubject(value: state)
-        mutableState = GameState.create(state: state)
+        mutableState = state as! GameState
     }
     
-    // Flags
+    // MARK: - Flags
     
-    func setTurn(_ turn: String) {
-        mutableState.turn = turn
-        emitState()
-    }
-    
-    func setChallenge(_ challenge: Challenge?) {
-        mutableState.challenge = challenge
-        emitState()
-    }
-    
-    func setOutcome(_ outcome: GameOutcome) {
-        mutableState.outcome = outcome
-        emitState()
-    }
-    
-    /// Deck
-    
-    func deckRemoveFirst() -> CardProtocol {
-        let minimumDeckSize = 2
-        if mutableState.deck.count <= minimumDeckSize {
-            let cards = mutableState.discardPile
-            mutableState.deck.append(contentsOf: Array(cards[1..<cards.count]).shuffled())
-            mutableState.discardPile = Array(cards[0..<1])
+    func setTurn(_ turn: String) -> Completable {
+        createTransaction {
+            self.mutableState.turn = turn
         }
-        
-        let card = mutableState.deck.removeFirst()
-        emitState()
-        return card
     }
     
-    func addDiscard(_ card: CardProtocol) {
-        mutableState.discardPile.insert(card, at: 0)
-        emitState()
+    func setChallenge(_ challenge: Challenge?) -> Completable {
+        createTransaction {
+            self.mutableState.challenge = challenge
+        }
     }
     
-    func addGeneralStore(_ card: CardProtocol) {
-        mutableState.generalStore.append(card)
-        emitState()
+    func setOutcome(_ outcome: GameOutcome) -> Completable {
+        createTransaction {
+            self.mutableState.outcome = outcome
+        }
     }
     
-    func removeGeneralStore(_ cardId: String) -> CardProtocol? {
-        let card = mutableState.generalStore.removeFirst(where: { $0.identifier == cardId })
-        emitState()
-        return card
+    // MARK: - Deck
+    
+    func deckRemoveFirst() -> Single<CardProtocol> {
+        createCardTransaction {
+            self.mutableState.verifyDeckSize()
+            return self.mutableState.deck.removeFirst()
+        }
     }
     
-    /// Player
-    
-    func playerSetHealth(_ playerId: String, _ health: Int) {
-        mutablePlayer(playerId)?.health = health
-        emitState()
+    func addDiscard(_ card: CardProtocol) -> Completable {
+        createTransaction {
+            self.mutableState.discardPile.insert(card, at: 0)
+        }
     }
     
-    func playerAddHand(_ playerId: String, _ card: CardProtocol) {
-        mutablePlayer(playerId)?.hand.append(card)
-        emitState()
+    func addGeneralStore(_ card: CardProtocol) -> Completable {
+        createTransaction {
+            self.mutableState.generalStore.append(card)
+        }
     }
     
-    func playerRemoveHand(_ playerId: String, _ cardId: String) -> CardProtocol? {
-        let card = mutablePlayer(playerId)?.hand.removeFirst(where: { $0.identifier == cardId })
-        emitState()
-        return card
+    func removeGeneralStore(_ cardId: String) -> Single<CardProtocol> {
+        createCardTransaction {
+            self.mutableState.generalStore.removeFirst(where: { $0.identifier == cardId })!
+        }
     }
     
-    func playerAddInPlay(_ playerId: String, _ card: CardProtocol) {
-        mutablePlayer(playerId)?.inPlay.append(card)
-        emitState()
+    func playerSetHealth(_ playerId: String, _ health: Int) -> Completable {
+        createTransaction {
+            self.mutablePlayer(playerId).health = health
+        }
     }
     
-    func playerRemoveInPlay(_ playerId: String, _ cardId: String) -> CardProtocol? {
-        let card = mutablePlayer(playerId)?.inPlay.removeFirst(where: { $0.identifier == cardId })
-        emitState()
-        return card
+    func playerAddHand(_ playerId: String, _ card: CardProtocol) -> Completable {
+        createTransaction {
+            self.mutablePlayer(playerId).hand.append(card)
+        }
     }
     
-    func playerSetBangsPlayed(_ playerId: String, _ bangsPlayed: Int) {
-        mutablePlayer(playerId)?.bangsPlayed = bangsPlayed
-        emitState()
+    func playerRemoveHand(_ playerId: String, _ cardId: String) -> Single<CardProtocol> {
+        createCardTransaction {
+            self.mutablePlayer(playerId).hand.removeFirst(where: { $0.identifier == cardId })!
+        }
     }
     
-    func playerSetDamageEvent(_ playerId: String, _ event: DamageEvent) {
-        mutablePlayer(playerId)?.lastDamage = event
-        emitState()
+    func playerAddInPlay(_ playerId: String, _ card: CardProtocol) -> Completable {
+        createTransaction {
+            self.mutablePlayer(playerId).inPlay.append(card)
+        }
     }
+    
+    func playerRemoveInPlay(_ playerId: String, _ cardId: String) -> Single<CardProtocol> {
+        createCardTransaction {
+            self.mutablePlayer(playerId).inPlay.removeFirst(where: { $0.identifier == cardId })!
+        }
+    }
+    
+    func playerSetBangsPlayed(_ playerId: String, _ bangsPlayed: Int) -> Completable {
+        createTransaction {
+            self.mutablePlayer(playerId).bangsPlayed = bangsPlayed
+        }
+    }
+    
+    func playerSetDamageEvent(_ playerId: String, _ event: DamageEvent) -> Completable {
+        createTransaction {
+            self.mutablePlayer(playerId).lastDamage = event
+        }
+    }
+    
+    // MARK: - Player
+    
 }
 
 private extension MemoryCachedDataBase {
     
-    func mutablePlayer(_ playerId: String) -> Player? {
-        mutableState.allPlayers.first(where: { $0.identifier == playerId }) as? Player
+    func createTransaction(_ transaction: @escaping (() -> Void)) -> Completable {
+        Completable.create { completable in
+            transaction()
+            self.emitState()
+            completable(.completed)
+            return Disposables.create()
+        }
+    }
+    
+    func createCardTransaction(_ transaction: @escaping (() -> CardProtocol)) -> Single<CardProtocol> {
+        Single.create { single in
+            let card = transaction()
+            self.emitState()
+            single(.success(card))
+            return Disposables.create()
+        }
+    }
+    
+    func mutablePlayer(_ playerId: String) -> Player {
+        mutableState.allPlayers.first(where: { $0.identifier == playerId }) as! Player
     }
     
     func emitState() {
@@ -119,29 +143,13 @@ private extension MemoryCachedDataBase {
 }
 
 private extension GameState {
-    static func create(state: GameStateProtocol) -> GameState {
-        GameState(allPlayers: state.allPlayers.map { Player.create(player: $0) },
-                  deck: state.deck,
-                  discardPile: state.discardPile,
-                  turn: state.turn,
-                  challenge: state.challenge,
-                  generalStore: state.generalStore,
-                  outcome: state.outcome)
-    }
-}
-
-private extension Player {
-    static func create(player: PlayerProtocol) -> Player {
-        Player(role: player.role,
-               figureName: player.figureName,
-               imageName: player.imageName,
-               description: player.description,
-               abilities: player.abilities,
-               maxHealth: player.maxHealth,
-               health: player.health,
-               hand: player.hand,
-               inPlay: player.inPlay,
-               bangsPlayed: player.bangsPlayed,
-               lastDamage: player.lastDamage)
+    
+    func verifyDeckSize() {
+        let minimumDeckSize = 2
+        if deck.count <= minimumDeckSize {
+            let cards = discardPile
+            deck.append(contentsOf: Array(cards[1..<cards.count]).shuffled())
+            discardPile = Array(cards[0..<1])
+        }
     }
 }

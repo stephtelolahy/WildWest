@@ -6,6 +6,8 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
+import RxSwift
+
 enum GameUpdate: Equatable {
     case setTurn(String)
     case setChallenge(Challenge?)
@@ -26,7 +28,6 @@ enum GameUpdate: Equatable {
     case playerRevealHandCard(String, String)
 }
 
-// Define database transaction on executing a GameUpdate
 protocol UpdateExecutorProtocol {
-    func execute(_ update: GameUpdate, in database: GameDatabaseProtocol)
+    func execute(_ update: GameUpdate, in database: GameDatabaseProtocol) -> Completable
 }
