@@ -1,8 +1,6 @@
 import Cuckoo
 @testable import WildWest
 
-import RxSwift
-
 
  class MockGameEngineProtocol: GameEngineProtocol, Cuckoo.ProtocolMock {
     

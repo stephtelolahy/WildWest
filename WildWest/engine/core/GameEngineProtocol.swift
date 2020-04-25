@@ -6,8 +6,6 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-import RxSwift
-
 protocol GameEngineProtocol {
     var subjects: GameSubjectsProtocol { get }
     
