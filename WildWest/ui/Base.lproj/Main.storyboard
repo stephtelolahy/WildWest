@@ -420,7 +420,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="68M-B9-4Mh" userLabel="endTurnButton">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="68M-B9-4Mh" userLabel="endTurnButton">
                                 <rect key="frame" x="619" y="206.5" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="68M-B9-4Mh" secondAttribute="height" multiplier="1:1" id="0zp-fJ-I0N"/>
@@ -442,7 +442,7 @@
                                     <action selector="menuButtonTapped:" destination="Yy6-0k-mhK" eventType="touchUpInside" id="IYI-iB-7dY"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VPY-zg-TVx" userLabel="endTurnButton">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VPY-zg-TVx" userLabel="endTurnButton">
                                 <rect key="frame" x="619" y="142.5" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="Wke-XK-1Iw"/>
