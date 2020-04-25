@@ -70,7 +70,7 @@ private extension GameLoop {
         let sequence = updates.map({ String(format: "%.0f", $0.executionTime) }).joined(separator: "-")
         let warning = sequence.hasSuffix("-0") && sequence.contains("1")
         guard !warning else {
-            fatalError("\n⚠️\(move.name.rawValue)\n\(sequence)")
+            fatalError("Invalid update sequence \(move.name.rawValue): \(sequence)")
         }
         #endif
         

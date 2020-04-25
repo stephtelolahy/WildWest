@@ -112,8 +112,8 @@ class EndTurnMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.setTurn("p2"),
+                                 .setChallenge(Challenge(name: .startTurn)),
                                  .playerDiscardHand("p1", "c1"),
-                                 .playerDiscardHand("p1", "c2"),
-                                 .setChallenge(Challenge(name: .startTurn))])
+                                 .playerDiscardHand("p1", "c2")])
     }
 }
