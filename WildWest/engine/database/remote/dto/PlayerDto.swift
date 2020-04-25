@@ -1,27 +1,12 @@
 //
-//  StateDto.swift
+//  PlayerDto.swift
 //  WildWest
 //
-//  Created by Hugues Stephano Telolahy on 23/04/2020.
+//  Created by Hugues Stephano Telolahy on 25/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-struct StateDto: Codable {
-    let players: [PlayerDto]
-    let deck: [String]
-    let discardPile: [String]
-    let turn: String
-    let generalStore: [String]
-    let outcome: String?
-    //var challenge: Challenge? { get }
-}
-
-struct CardDto: Codable {
-    let name: String
-    let value: String
-    let suit: String
-    let imageName: String
-}
+import Foundation
 
 struct PlayerDto: Codable {
     let identifier: String

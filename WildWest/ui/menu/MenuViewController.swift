@@ -12,7 +12,7 @@ import AVFoundation
 import SafariServices
 import RxSwift
 
-class MenuViewController: UIViewController {
+class MenuViewController: UIViewController, Subscribable {
     
     @IBOutlet private weak var playersCountStepper: UIStepper!
     @IBOutlet private weak var playersCountLabel: UILabel!
@@ -171,12 +171,24 @@ private extension MenuViewController {
         presentGame(engine: engine, controlledPlayerId: controlledPlayerId, aiAgents: aiAgents)
     }
     
+    /////////////// FIREBASE ///////////////
+    
     func startRemoteGame() {
         let state = createGame()
         
-        let database = RemoteDatabase(state: state)
-        print(database)
+        let firebaseProvider = FirebaseProvider()
+        
+        let key = firebaseProvider.createGame(state)
+        print("Created remote game with id: \(key)")
+        
+        firebaseProvider.observeGame(key) { subject in
+            self.sub(subject.subscribe(onNext: { state in
+                print(String(describing: state))
+            }))
+        }
     }
+    
+    /////////////// FIREBASE ///////////////
     
     func createGame() -> GameStateProtocol {
         let gameSetup = GameSetup()
