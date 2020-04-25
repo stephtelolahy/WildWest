@@ -649,16 +649,6 @@
 			path = animator;
 			sourceTree = "<group>";
 		};
-		3322C4B42452378100D7B297 /* encoding */ = {
-			isa = PBXGroup;
-			children = (
-				3322C4BB2452452F00D7B297 /* Firebase+Transaction.swift */,
-				3322C4B9245243E800D7B297 /* GameState+Encoding.swift */,
-				3322C4B52452379700D7B297 /* StateDto.swift */,
-			);
-			path = encoding;
-			sourceTree = "<group>";
-		};
 		33275D4C2446283B00CDC7A6 /* sfx */ = {
 			isa = PBXGroup;
 			children = (
@@ -744,9 +734,8 @@
 			isa = PBXGroup;
 			children = (
 				336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */,
-				33BAE345242E74CD0098B41F /* MemoryCachedDataBase.swift */,
-				3322C4B2245236D500D7B297 /* RemoteDatabase.swift */,
-				3322C4B42452378100D7B297 /* encoding */,
+				33CC77DD24549EA800701BC8 /* memory */,
+				33CC77DE24549ED200701BC8 /* remote */,
 			);
 			path = database;
 			sourceTree = "<group>";
@@ -871,6 +860,25 @@
 				33BD0AD424351131003E75EE /* FigureDto.swift */,
 			);
 			path = dto;
+			sourceTree = "<group>";
+		};
+		33CC77DD24549EA800701BC8 /* memory */ = {
+			isa = PBXGroup;
+			children = (
+				33BAE345242E74CD0098B41F /* MemoryCachedDataBase.swift */,
+			);
+			path = memory;
+			sourceTree = "<group>";
+		};
+		33CC77DE24549ED200701BC8 /* remote */ = {
+			isa = PBXGroup;
+			children = (
+				3322C4B2245236D500D7B297 /* RemoteDatabase.swift */,
+				3322C4BB2452452F00D7B297 /* Firebase+Transaction.swift */,
+				3322C4B9245243E800D7B297 /* GameState+Encoding.swift */,
+				3322C4B52452379700D7B297 /* StateDto.swift */,
+			);
+			path = remote;
 			sourceTree = "<group>";
 		};
 		33E4411724077CA000B2848E /* cell */ = {
