@@ -26,8 +26,8 @@ class GeneralStoreMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        return [.setupGeneralStore(state.players.count),
-                .setChallenge(Challenge(name: .generalStore, targetIds: state.allPlayerIds(move.actorId))),
+        return [.setChallenge(Challenge(name: .generalStore, targetIds: state.allPlayerIds(move.actorId))),
+                .setupGeneralStore(state.players.count),
                 .playerDiscardHand(move.actorId, cardId)]
     }
 }

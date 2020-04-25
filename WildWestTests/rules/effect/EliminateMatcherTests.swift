@@ -108,7 +108,7 @@ class EliminateMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.setTurn("p2"),
-                                 .setChallenge(Challenge(name: .startTurn))])
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .startTurn)),
+                                 .setTurn("p2")])
     }
 }
