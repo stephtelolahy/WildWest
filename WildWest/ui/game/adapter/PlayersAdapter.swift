@@ -88,6 +88,10 @@ private extension GameMove {
     }
     
     func isPlayerHelped(_ playerId: String) -> Bool {
+        if case .saloon = name {
+            return true
+        }
+        
         switch MoveClassifier().classify(self) {
         case let .help(_, targetId):
             return targetId == playerId
