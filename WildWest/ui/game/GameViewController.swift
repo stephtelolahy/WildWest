@@ -146,6 +146,7 @@ private extension GameViewController {
         
         if let outcome = state.outcome {
             showGameOver(outcome: outcome)
+            AnalyticsManager.shared.tagEventGameOver(state)
         }
     }
     
