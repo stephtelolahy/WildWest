@@ -65,8 +65,8 @@ class ResolveBarrelMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.flipOverFirstDeckCard,
-                                 .setChallenge(nil)])
+        XCTAssertEqual(updates, [.setChallenge(nil),
+                                 .flipOverFirstDeckCard])
     }
     
     func test_RemoveGatlingChallengeAndResetBarrelsPlayed_UsingBarrel() {
@@ -81,8 +81,8 @@ class ResolveBarrelMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.flipOverFirstDeckCard,
-                                 .setChallenge(Challenge(name: .gatling, targetIds: ["p2"], barrelsPlayed: 0))])
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .gatling, targetIds: ["p2"], barrelsPlayed: 0)),
+                                 .flipOverFirstDeckCard])
     }
     
     func test_FailBarrel_IfIsTargetOfShootAndPlayingBarrel() {
@@ -117,8 +117,8 @@ class ResolveBarrelMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.flipOverFirstDeckCard,
-                                 .setChallenge(Challenge(name: .bang, targetIds: ["p1"], barrelsPlayed: 1))])
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .bang, targetIds: ["p1"], barrelsPlayed: 1)),
+                                 .flipOverFirstDeckCard])
     }
     
     func test_SuccessFulBarrel_IfOneCardMakeItWorks_AndHavingAbility() {
@@ -154,9 +154,9 @@ class ResolveBarrelMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.flipOverFirstDeckCard,
+        XCTAssertEqual(updates, [.setChallenge(nil),
                                  .flipOverFirstDeckCard,
-                                 .setChallenge(nil)])
+                                 .flipOverFirstDeckCard])
     }
     
     func test_SuccessfulFirstBarrel_IfMissedRequiredIsTwo_AndHavingAbility() {
@@ -176,8 +176,8 @@ class ResolveBarrelMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(move, GameMove(name: .useBarrel, actorId: "p1"))
-        XCTAssertEqual(updates, [.flipOverFirstDeckCard,
-                                 .setChallenge(Challenge(name: .bang, targetIds: ["p1"], counterNeeded: 1, barrelsPlayed: 1))])
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .bang, targetIds: ["p1"], counterNeeded: 1, barrelsPlayed: 1)),
+                                 .flipOverFirstDeckCard])
         
     }
     
@@ -198,8 +198,8 @@ class ResolveBarrelMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(move, GameMove(name: .useBarrel, actorId: "p1"))
-        XCTAssertEqual(updates, [.flipOverFirstDeckCard,
-                                 .setChallenge(nil)])
+        XCTAssertEqual(updates, [.setChallenge(nil),
+                                 .flipOverFirstDeckCard])
         
     }
 }
