@@ -71,7 +71,7 @@ private extension GameLoop {
     @objc
     func processUpdate() {
         guard !pendingUpdates.isEmpty else {
-            postProcessMove()
+            postExecuteMove()
             return
         }
         
@@ -87,16 +87,16 @@ private extension GameLoop {
         perform(#selector(processUpdate), with: nil, afterDelay: waitDelay)
     }
     
-    func postProcessMove() {
+    func postExecuteMove() {
         guard let move = currentMove else {
             fatalError("Illegal state")
         }
         
-        postProcess(move)
+        postExecute(move)
         perform(#selector(processMove), with: nil, afterDelay: delay)
     }
     
-    func postProcess(_ move: GameMove) {
+    func postExecute(_ move: GameMove) {
         // emit game over
         if let outcome = database.state.claculateOutcome() {
             database.setOutcome(outcome)
