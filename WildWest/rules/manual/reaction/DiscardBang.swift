@@ -30,8 +30,8 @@ class DiscardBangOnDuelMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        return [.playerDiscardHand(move.actorId, cardId),
-                .setChallenge(challenge.swappingTargets())]
+        return [.setChallenge(challenge.swappingTargets()),
+                .playerDiscardHand(move.actorId, cardId)]
     }
 }
 
@@ -59,8 +59,8 @@ class DiscardBangOnIndiansMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        return [.playerDiscardHand(move.actorId, cardId),
-                .setChallenge(challenge.countering(move.actorId))]
+        return [.setChallenge(challenge.countering(move.actorId)),
+                .playerDiscardHand(move.actorId, cardId)]
     }
 }
 

@@ -41,8 +41,7 @@ class DiscardBangOnIndiansMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .setChallenge(Challenge(name: .indians, targetIds: ["p2", "p3"]))
-        ])
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .indians, targetIds: ["p2", "p3"])),
+                                 .playerDiscardHand("p1", "c1")])
     }
 }
