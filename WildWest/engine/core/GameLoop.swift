@@ -83,7 +83,7 @@ private extension GameLoop {
         
         updateExecutor.execute(update, in: database)
         
-        let waitDelay = update.executionTime * delay
+        let waitDelay = pendingUpdates.isEmpty ? 0 : update.executionTime * delay
         perform(#selector(processUpdate), with: nil, afterDelay: waitDelay)
     }
     
