@@ -44,11 +44,11 @@ class BangMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        return [.playerDiscardHand(move.actorId, cardId),
-                .setChallenge(Challenge(name: .bang,
+        return [.setChallenge(Challenge(name: .bang,
                                         targetIds: [targetId],
                                         counterNeeded: actor.neededMissesToCancelHisBang)),
-                .playerSetBangsPlayed(move.actorId, actor.bangsPlayed + 1)]
+                .playerSetBangsPlayed(move.actorId, actor.bangsPlayed + 1),
+                .playerDiscardHand(move.actorId, cardId)]
     }
 }
 
