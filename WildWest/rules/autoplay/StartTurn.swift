@@ -26,10 +26,10 @@ class StartTurnMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        var updates: [GameUpdate] = [.playerPullFromDeck(move.actorId),
+        var updates: [GameUpdate] = [.setChallenge(nil),
+                                     .playerSetBangsPlayed(move.actorId, 0),
                                      .playerPullFromDeck(move.actorId),
-                                     .setChallenge(nil),
-                                     .playerSetBangsPlayed(move.actorId, 0)]
+                                     .playerPullFromDeck(move.actorId)]
         
         if actor.abilities[.drawsAnotherCardIfSecondDrawIsRedSuit] == true {
             let secondCard = state.deck[1]
