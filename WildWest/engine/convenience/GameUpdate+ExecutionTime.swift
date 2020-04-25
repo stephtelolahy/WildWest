@@ -23,10 +23,10 @@ extension GameUpdate {
              .playerPassInPlayOfOther,
              .playerPullFromGeneralStore,
              .flipOverFirstDeckCard:
-            return 1.0
+            return 1
             
         default:
-            return 0.0
+            return 0
         }
     }
 }

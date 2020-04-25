@@ -57,13 +57,17 @@ private extension GameLoop {
         let move = pendingMoves.remove(at: 0)
         currentMove = move
         
-        print("\n*** \(String(describing: move)) ***")
+//        print("\n*** \(String(describing: move)) ***")
         
         subjects.emitExecutedMove(move)
         subjects.emitValidMoves([])
         
         let updates = moveMatchers.compactMap({ $0.execute(move, in: database.state) }).flatMap { $0 }
         pendingUpdates.append(contentsOf: updates)
+        
+        let sequence = updates.map({ String(format: "%.0f", $0.executionTime) }).joined(separator: "-")
+        let warning = sequence.hasSuffix("-0") ? "⚠️ " : ""
+        print("\n\(warning)\(move.name.rawValue)\n\(sequence)")
         
         processUpdate()
     }
@@ -77,7 +81,7 @@ private extension GameLoop {
         
         let update = pendingUpdates.remove(at: 0)
         
-        print("> \(String(describing: update))")
+        //print("> \(String(describing: update))")
         
         subjects.emitExecutedUpdate(update)
         
