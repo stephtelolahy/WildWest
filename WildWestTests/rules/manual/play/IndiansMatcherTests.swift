@@ -47,7 +47,7 @@ class IndiansMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .setChallenge(Challenge(name: .indians, targetIds: ["p2", "p3", "p4"]))])
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .indians, targetIds: ["p2", "p3", "p4"])),
+                                 .playerDiscardHand("p1", "c1")])
     }
 }

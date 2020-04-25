@@ -26,8 +26,8 @@ class IndiansMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        return [.playerDiscardHand(move.actorId, cardId),
-                .setChallenge(Challenge(name: .indians, targetIds: state.otherPlayerIds(move.actorId)))]
+        return [.setChallenge(Challenge(name: .indians, targetIds: state.otherPlayerIds(move.actorId))),
+                .playerDiscardHand(move.actorId, cardId)]
     }
 }
 
