@@ -35,9 +35,12 @@ class FirebaseStateProvider: FirebaseStateProviderProtocol {
     
     func observe(completion: @escaping ((GameStateProtocol) -> Void)) {
         rootRef.child("games").child(gameId).observe(.value, with: { snapshot in
-            let state = self.mapper.decodeState(from: snapshot)
-            completion(state)
-            
+            do {
+                let state = try self.mapper.decodeState(from: snapshot)
+                completion(state)
+            } catch {
+                fatalError(error.localizedDescription)
+            }
         }) { error in
             fatalError(error.localizedDescription)
         }
@@ -50,8 +53,12 @@ class FirebaseStateProvider: FirebaseStateProviderProtocol {
     }
     
     func setChallenge(_ challenge: Challenge?, completion: @escaping FirebaseCompletion) {
-        let value = mapper.encodeChallenge(challenge)
-        rootRef.child("games/\(gameId)/challenge").setValue(value) { error, _ in
+        do {
+            let value = try mapper.encodeChallenge(challenge)
+            rootRef.child("games/\(gameId)/challenge").setValue(value) { error, _ in
+                completion(error)
+            }
+        } catch {
             completion(error)
         }
     }

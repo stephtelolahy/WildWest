@@ -29,17 +29,24 @@ class FirebaseProvider: FirebaseProviderProtocol {
     }
     
     func createGame(_ state: GameStateProtocol) -> String {
-        let key = keyGenerator.gameAutoId()
-        let value = mapper.encodeState(state)
-        rootRef.child("games/\(key)").setValue(value)
-        return key
+        do {
+            let key = keyGenerator.gameAutoId()
+            let value = try mapper.encodeState(state)
+            rootRef.child("games/\(key)").setValue(value)
+            return key
+        } catch {
+            fatalError(error.localizedDescription)
+        }
     }
     
     func getGame(_ id: String, completion: @escaping ((GameStateProtocol) -> Void)) {
         rootRef.child("games").child(id).observeSingleEvent(of: .value, with: { snapshot in
-            let state = self.mapper.decodeState(from: snapshot)
-            completion(state)
-            
+            do {
+                let state = try self.mapper.decodeState(from: snapshot)
+                completion(state)
+            } catch {
+                fatalError(error.localizedDescription)
+            }
         }) { error in
             fatalError(error.localizedDescription)
         }

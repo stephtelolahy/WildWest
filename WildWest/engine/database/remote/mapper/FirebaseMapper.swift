@@ -10,11 +10,11 @@ import Firebase
 
 protocol FirebaseMapperProtocol {
     
-    func decodeState(from snapshot: DataSnapshot) -> GameStateProtocol
+    func decodeState(from snapshot: DataSnapshot) throws -> GameStateProtocol
     func decodeCard(from snapthot: DataSnapshot) throws -> (String, CardProtocol)
     
-    func encodeState(_ state: GameStateProtocol) -> [String: Any]
-    func encodeChallenge(_ challenge: Challenge?) -> [String: Any]?
+    func encodeState(_ state: GameStateProtocol) throws -> [String: Any]
+    func encodeChallenge(_ challenge: Challenge?) throws -> [String: Any]?
 }
 
 class FirebaseMapper: FirebaseMapperProtocol {
@@ -35,19 +35,10 @@ class FirebaseMapper: FirebaseMapperProtocol {
         
     }
     
-    func decodeState(from snapshot: DataSnapshot) -> GameStateProtocol {
-        guard let value = snapshot.value as? [String: Any] else {
-            fatalError("Unable to create dictionary")
-        }
-        
-        guard let dto = try? self.dictionaryDecoder.decode(StateDto.self, from: value) else {
-            fatalError("Unable to create dto")
-        }
-        
-        guard let state = try? self.dtoDecoder.decode(dto: dto) else {
-            fatalError("Unable to create state")
-        }
-        
+    func decodeState(from snapshot: DataSnapshot) throws -> GameStateProtocol {
+        let value = try (snapshot.value as? [String: Any]).unwrap()
+        let dto = try self.dictionaryDecoder.decode(StateDto.self, from: value)
+        let state = try self.dtoDecoder.decode(dto: dto)
         return state
     }
     
@@ -59,24 +50,18 @@ class FirebaseMapper: FirebaseMapperProtocol {
         return (key, card)
     }
     
-    func encodeState(_ state: GameStateProtocol) -> [String: Any] {
+    func encodeState(_ state: GameStateProtocol) throws -> [String: Any] {
         let dto = dtoEncoder.encode(state: state)
-        guard let value = try? dictionaryEncoder.encode(dto) else {
-            fatalError("Unable to create value")
-        }
-        
+        let value = try dictionaryEncoder.encode(dto)
         return value
     }
     
-    func encodeChallenge(_ challenge: Challenge?) -> [String: Any]? {
+    func encodeChallenge(_ challenge: Challenge?) throws -> [String: Any]? {
         guard let dto = dtoEncoder.encode(challenge: challenge) else {
             return nil
         }
         
-        guard let value = try? dictionaryEncoder.encode(dto) else {
-            fatalError("Unable to encode challenge")
-        }
-        
+        let value = try dictionaryEncoder.encode(dto)
         return value
     }
 }

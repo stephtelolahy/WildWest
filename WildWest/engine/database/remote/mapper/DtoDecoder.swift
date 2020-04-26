@@ -27,11 +27,7 @@ class DtoDecoder {
     }
     
     func decode(card: String) throws -> CardProtocol {
-        guard let matchingCard = allCards.first(where: { $0.identifier == card }) else {
-            throw NSError(domain: "matching card not found", code: 0)
-        }
-        
-        return matchingCard
+        try allCards.first(where: { $0.identifier == card }).unwrap()
     }
 }
 
@@ -133,7 +129,7 @@ private extension DtoDecoder {
             return .byPlayer(playerId)
         }
         
-        throw NSError(domain: "matching damage source not found", code: 0)
+        throw NSError(domain: "invalid damageSource", code: 0)
     }
     
 }
