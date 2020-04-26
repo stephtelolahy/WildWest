@@ -16,8 +16,8 @@ struct PlayerDto: Codable {
     let abilities: [String: Bool]?
     let maxHealth: Int?
     let health: Int?
-    let hand: [String]?
-    let inPlay: [String]?
+    let hand: [String: Bool]?
+    let inPlay: [String: Bool]?
     let bangsPlayed: Int?
     let lastDamage: DamageEventDto?
 }

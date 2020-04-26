@@ -37,6 +37,20 @@ private extension DtoDecoder {
         return try cards.map { try decode(card: $0) }
     }
     
+    func decode(cards: [String: Bool]?) throws -> [CardProtocol] {
+        guard let cards = cards else {
+            return []
+        }
+        
+        var result: [CardProtocol] = []
+        try cards.forEach { key, _ in
+            let card = try decode(card: key)
+            result.append(card)
+        }
+        
+        return result
+    }
+    
     func decode(card: String) throws -> CardProtocol {
         guard let matchingCard = allCards.first(where: { $0.identifier == card }) else {
             throw NSError(domain: "matching card not found", code: 0)

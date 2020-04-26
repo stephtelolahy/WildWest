@@ -10,10 +10,10 @@ class DtoEncoder {
     
     func encode(state: GameStateProtocol) -> StateDto {
         StateDto(players: state.allPlayers.map { encode(player: $0) },
-                 deck: state.deck.map { encode(card: $0) },
-                 discardPile: state.discardPile.map { encode(card: $0) },
+                 deck: encode(cards: state.deck),
+                 discardPile: encode(cards: state.discardPile),
                  turn: state.turn,
-                 generalStore: state.generalStore.map { encode(card: $0) },
+                 generalStore: encode(cards: state.generalStore),
                  outcome: state.outcome?.rawValue,
                  challenge: encode(challenge: state.challenge))
     }
@@ -33,6 +33,27 @@ class DtoEncoder {
 
 private extension DtoEncoder {
     
+    func encode(cards: [CardProtocol]) -> [String]? {
+        guard !cards.isEmpty else {
+            return nil
+        }
+        
+        return cards.map { encode(card: $0) }
+    }
+    
+    func encode(cards: [CardProtocol]) -> [String: Bool]? {
+        guard !cards.isEmpty else {
+            return nil
+        }
+        
+        var result: [String: Bool] = [:]
+        cards.forEach { card in
+            let key = encode(card: card)
+            result[key] = true
+        }
+        return result
+    }
+    
     func encode(card: CardProtocol) -> String {
         card.identifier
     }
@@ -45,8 +66,8 @@ private extension DtoEncoder {
                   abilities: encode(abilities: player.abilities),
                   maxHealth: player.maxHealth,
                   health: player.health,
-                  hand: player.hand.map { encode(card: $0) },
-                  inPlay: player.inPlay.map { encode(card: $0) },
+                  hand: encode(cards: player.hand),
+                  inPlay: encode(cards: player.inPlay),
                   bangsPlayed: player.bangsPlayed,
                   lastDamage: encode(damageEvent: player.lastDamage))
     }
