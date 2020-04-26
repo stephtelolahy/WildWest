@@ -103,11 +103,6 @@ class GameViewController: UIViewController, Subscribable {
         aiAgents?.forEach { $0.observeState() }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        engine?.startGame()
-    }
-    
     // MARK: IBAction
     
     @IBAction private func menuButtonTapped(_ sender: Any) {
@@ -126,6 +121,10 @@ class GameViewController: UIViewController, Subscribable {
         }
     }
     
+    @IBAction private func startButtonTapped(_ sender: Any) {
+        (sender as? UIButton)?.isEnabled = false
+        engine?.startGame()
+    }
 }
 
 private extension GameViewController {
