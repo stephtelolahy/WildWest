@@ -16,6 +16,7 @@ typealias FirebaseCompletion = (Error?) -> Void
 protocol FirebaseStateProviderProtocol {
     func observe(completion: @escaping ((GameStateProtocol) -> Void))
     func setTurn(_ turn: String, completion: @escaping FirebaseCompletion)
+    func setChallenge(_ challenge: Challenge?, completion: @escaping FirebaseCompletion)
 }
 
 class FirebaseStateProvider: FirebaseStateProviderProtocol {
@@ -41,6 +42,13 @@ class FirebaseStateProvider: FirebaseStateProviderProtocol {
     
     func setTurn(_ turn: String, completion: @escaping FirebaseCompletion) {
         rootRef.child("games/\(gameId)/turn").setValue(turn) { error, _ in
+            completion(error)
+        }
+    }
+    
+    func setChallenge(_ challenge: Challenge?, completion: @escaping FirebaseCompletion) {
+        let value = mapper.encodeChallenge(challenge)
+        rootRef.child("games/\(gameId)/challenge").setValue(value) { error, _ in
             completion(error)
         }
     }

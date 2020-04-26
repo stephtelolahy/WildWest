@@ -34,7 +34,16 @@ class RemoteDatabase: GameDatabaseProtocol {
     }
     
     func setChallenge(_ challenge: Challenge?) -> Completable {
-        fatalError()
+        Completable.create { completable in
+            self.stateProvider.setChallenge(challenge) { error in
+                if let error = error {
+                    completable(.error(error))
+                } else {
+                    completable(.completed)
+                }
+            }
+            return Disposables.create()
+        }
     }
     
     func setOutcome(_ outcome: GameOutcome) -> Completable {

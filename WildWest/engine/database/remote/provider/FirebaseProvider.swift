@@ -26,9 +26,9 @@ class FirebaseProvider: FirebaseProviderProtocol {
     }
     
     func createGame(_ state: GameStateProtocol) -> String {
-        //        guard let key = rootRef.child("games").childByAutoId().key else {
-        //            fatalError("Unable to create games child")
-        //        }
+//        guard let key = rootRef.child("games").childByAutoId().key else {
+//            fatalError("Unable to create games child")
+//        }
         
         let key = "live"
         

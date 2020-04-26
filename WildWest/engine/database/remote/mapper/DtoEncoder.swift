@@ -17,6 +17,18 @@ class DtoEncoder {
                  outcome: state.outcome?.rawValue,
                  challenge: encode(challenge: state.challenge))
     }
+    
+    func encode(challenge: Challenge?) -> ChallengeDto? {
+        guard let challenge = challenge else {
+            return nil
+        }
+        
+        return ChallengeDto(name: challenge.name.rawValue,
+                            targetIds: challenge.targetIds,
+                            damage: challenge.damage,
+                            counterNeeded: challenge.counterNeeded,
+                            barrelsPlayed: challenge.barrelsPlayed)
+    }
 }
 
 private extension DtoEncoder {
@@ -46,18 +58,6 @@ private extension DtoEncoder {
             result[key.rawValue] = value
         }
         return result
-    }
-    
-    func encode(challenge: Challenge?) -> ChallengeDto? {
-        guard let challenge = challenge else {
-            return nil
-        }
-        
-        return ChallengeDto(name: challenge.name.rawValue,
-                            targetIds: challenge.targetIds,
-                            damage: challenge.damage,
-                            counterNeeded: challenge.counterNeeded,
-                            barrelsPlayed: challenge.barrelsPlayed)
     }
     
     func encode(damageEvent: DamageEvent?) -> DamageEventDto? {

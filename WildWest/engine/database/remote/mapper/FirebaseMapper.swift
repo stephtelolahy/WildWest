@@ -11,6 +11,7 @@ import Firebase
 protocol FirebaseMapperProtocol {
     func decodeState(from snapshot: DataSnapshot) -> GameStateProtocol
     func encodeState(_ state: GameStateProtocol) -> [String: Any]
+    func encodeChallenge(_ challenge: Challenge?) -> [String: Any]?
 }
 
 class FirebaseMapper: FirebaseMapperProtocol {
@@ -51,6 +52,18 @@ class FirebaseMapper: FirebaseMapperProtocol {
         let dto = dtoEncoder.encode(state: state)
         guard let value = try? dictionaryEncoder.encode(dto) else {
             fatalError("Unable to create value")
+        }
+        
+        return value
+    }
+    
+    func encodeChallenge(_ challenge: Challenge?) -> [String: Any]? {
+        guard let dto = dtoEncoder.encode(challenge: challenge) else {
+            return nil
+        }
+        
+        guard let value = try? dictionaryEncoder.encode(dto) else {
+            fatalError("Unable to encode challenge")
         }
         
         return value
