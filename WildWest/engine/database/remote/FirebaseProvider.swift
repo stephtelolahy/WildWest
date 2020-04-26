@@ -66,11 +66,11 @@ class FirebaseProvider: FirebaseProviderProtocol {
                 fatalError("Unable to create dto")
             }
             
-//            guard let state = self.dtoDecoder.map(dto: dto) else {
-//                fatalError("Unable to create state")
-//            }
-//
-//            completion(state)
+            guard let state = try? self.dtoDecoder.decode(dto: dto) else {
+                fatalError("Unable to create state")
+            }
+            
+            completion(state)
             
         }) { error in
             fatalError(error.localizedDescription)
