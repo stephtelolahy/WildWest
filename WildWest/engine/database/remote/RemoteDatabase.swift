@@ -5,6 +5,7 @@
 //  Created by Hugues Stephano Telolahy on 23/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
+// swiftlint:disable type_body_length
 
 import RxSwift
 
@@ -80,7 +81,16 @@ class RemoteDatabase: GameDatabaseProtocol {
     }
     
     func playerAddHand(_ playerId: String, _ card: CardProtocol) -> Completable {
-        fatalError()
+        Completable.create { completable in
+            self.stateAdapter.playerAddHand(playerId, card) { error in
+                if let error = error {
+                    completable(.error(error))
+                } else {
+                    completable(.completed)
+                }
+            }
+            return Disposables.create()
+        }
     }
     
     func playerRemoveHand(_ playerId: String, _ cardId: String) -> Single<CardProtocol> {
