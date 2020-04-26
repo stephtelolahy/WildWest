@@ -39,9 +39,11 @@ class FirebaseProvider: FirebaseProviderProtocol {
         let rootRef = Database.database().reference()
         let gamesRef = rootRef.child("games")
         
-        guard let key = gamesRef.childByAutoId().key else {
-            fatalError("Unable to create games child")
-        }
+//        guard let key = gamesRef.childByAutoId().key else {
+//            fatalError("Unable to create games child")
+//        }
+        
+        let key = "sample"
         
         let gameItemRef = gamesRef.child(key)
         

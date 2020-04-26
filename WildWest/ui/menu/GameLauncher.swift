@@ -133,7 +133,14 @@ private extension GameLauncher {
                                 updateExecutor: GameUpdateExecutor(),
                                 subjects: subjects)
         
-        navigator.toGame(engine: engine, controlledPlayerId: nil, aiAgents: nil)
+        let controlledPlayerId: String? = UserPreferences.shared.simulationMode ? nil : state.players.first?.identifier
+        let aiPlayers = state.players.filter { $0.identifier != controlledPlayerId }
+        let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
+                                                     ai: RandomAIWithRole(),
+                                                     engine: engine)
+        }
+        
+        navigator.toGame(engine: engine, controlledPlayerId: controlledPlayerId, aiAgents: aiAgents)
     }
 }
 
