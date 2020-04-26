@@ -420,45 +420,49 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="68M-B9-4Mh" userLabel="endTurnButton">
-                                <rect key="frame" x="619" y="206.5" width="48" height="48"/>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="68M-B9-4Mh" userLabel="endTurnButton">
+                                <rect key="frame" x="635" y="222.5" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="68M-B9-4Mh" secondAttribute="height" multiplier="1:1" id="0zp-fJ-I0N"/>
-                                    <constraint firstAttribute="width" constant="48" id="L4g-Z2-BMG"/>
+                                    <constraint firstAttribute="width" constant="32" id="L4g-Z2-BMG"/>
                                 </constraints>
+                                <color key="tintColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="ic_end_turn"/>
                                 <connections>
                                     <action selector="endTurnTapped:" destination="Yy6-0k-mhK" eventType="touchUpInside" id="8OC-SC-SeH"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAP-Di-VFz" userLabel="closeButton">
-                                <rect key="frame" x="627" y="16" width="32" height="32"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAP-Di-VFz" userLabel="closeButton">
+                                <rect key="frame" x="635" y="16" width="32" height="32"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" secondItem="gAP-Di-VFz" secondAttribute="height" multiplier="1:1" id="Q7u-zi-oe3"/>
                                     <constraint firstAttribute="height" constant="32" id="wx8-FB-P72"/>
-                                    <constraint firstAttribute="width" constant="32" id="zZE-lH-i4L"/>
                                 </constraints>
+                                <color key="tintColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="ic_close"/>
                                 <connections>
                                     <action selector="menuButtonTapped:" destination="Yy6-0k-mhK" eventType="touchUpInside" id="IYI-iB-7dY"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VPY-zg-TVx" userLabel="endTurnButton">
-                                <rect key="frame" x="619" y="142.5" width="48" height="48"/>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VPY-zg-TVx" userLabel="endTurnButton">
+                                <rect key="frame" x="635" y="174.5" width="32" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="48" id="Wke-XK-1Iw"/>
+                                    <constraint firstAttribute="width" constant="32" id="Wke-XK-1Iw"/>
                                     <constraint firstAttribute="width" secondItem="VPY-zg-TVx" secondAttribute="height" multiplier="1:1" id="z8C-Qz-Fdl"/>
                                 </constraints>
+                                <color key="tintColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="ic_more"/>
                                 <connections>
                                     <action selector="otherMovesTapped:" destination="Yy6-0k-mhK" eventType="touchUpInside" id="4Q7-LJ-TeV"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sYa-2T-f1U" userLabel="startButton">
-                                <rect key="frame" x="627" y="65" width="32" height="32"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sYa-2T-f1U" userLabel="startButton">
+                                <rect key="frame" x="635" y="65" width="32" height="32"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" secondItem="sYa-2T-f1U" secondAttribute="height" multiplier="1:1" id="S5K-OE-wem"/>
                                     <constraint firstAttribute="height" constant="32" id="th4-c3-QSy"/>
-                                    <constraint firstAttribute="width" constant="32" id="wQe-3e-KCu"/>
                                 </constraints>
+                                <color key="tintColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="ic_start"/>
                                 <connections>
                                     <action selector="startButtonTapped:" destination="Yy6-0k-mhK" eventType="touchUpInside" id="Agx-X6-bsN"/>
@@ -522,11 +526,11 @@
         <image name="bang_6_diamonds" width="250" height="389"/>
         <image name="bg_splash" width="104" height="58.5"/>
         <image name="duel_j_spades" width="250" height="389"/>
-        <image name="ic_close" width="128" height="128"/>
-        <image name="ic_end_turn" width="128" height="128"/>
-        <image name="ic_more" width="64" height="64"/>
+        <image name="ic_close" width="48" height="48"/>
+        <image name="ic_end_turn" width="48" height="48"/>
+        <image name="ic_more" width="48" height="48"/>
         <image name="ic_online" width="557" height="291"/>
         <image name="ic_play" width="557" height="291"/>
-        <image name="ic_start" width="128" height="128"/>
+        <image name="ic_start" width="48" height="48"/>
     </resources>
 </document>
