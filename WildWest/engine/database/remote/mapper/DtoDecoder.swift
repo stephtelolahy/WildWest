@@ -17,7 +17,7 @@ class DtoDecoder {
     }
     
     func decode(dto: StateDto) throws -> GameStateProtocol {
-        GameState(allPlayers: try dto.players.unwrap().map { try decode(player: $0) },
+        GameState(allPlayers: try decode(players: dto.players, order: dto.order),
                   deck: try decode(cards: dto.deck),
                   discardPile: try decode(cards: dto.discardPile),
                   turn: try dto.turn.unwrap(),
@@ -77,6 +77,14 @@ private extension DtoDecoder {
         }
         
         return try GameOutcome(rawValue: outcome).unwrap()
+    }
+    
+    func decode(players: [String: PlayerDto]?, order: [String]?) throws -> [PlayerProtocol] {
+        let playersDtos = try players.unwrap()
+        return try order.unwrap().map { key in
+            let dto = try playersDtos[key].unwrap()
+            return try self.decode(player: dto)
+        }
     }
     
     func decode(player: PlayerDto) throws -> PlayerProtocol {

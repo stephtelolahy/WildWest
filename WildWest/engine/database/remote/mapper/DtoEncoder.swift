@@ -9,7 +9,8 @@
 class DtoEncoder {
     
     func encode(state: GameStateProtocol) -> StateDto {
-        StateDto(players: state.allPlayers.map { encode(player: $0) },
+        StateDto(order: encode(players: state.allPlayers),
+                 players: encode(players: state.allPlayers),
                  deck: encode(cards: state.deck),
                  discardPile: encode(cards: state.discardPile),
                  turn: state.turn,
@@ -56,6 +57,19 @@ private extension DtoEncoder {
     
     func encode(card: CardProtocol) -> String {
         card.identifier
+    }
+    
+    func encode(players: [PlayerProtocol]) -> [String] {
+        players.map { $0.identifier }
+    }
+    
+    func encode(players: [PlayerProtocol]) -> [String: PlayerDto] {
+        var result: [String: PlayerDto] = [:]
+        players.forEach { player in
+            let dto = encode(player: player)
+            result[player.identifier] = dto
+        }
+        return result
     }
     
     func encode(player: PlayerProtocol) -> PlayerDto {
