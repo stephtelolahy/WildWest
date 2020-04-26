@@ -38,8 +38,7 @@ private extension DtoEncoder {
     }
     
     func encode(player: PlayerProtocol) -> PlayerDto {
-        PlayerDto(identifier: player.identifier,
-                  role: player.role!.rawValue,
+        PlayerDto(role: player.role!.rawValue,
                   figureName: player.figureName.rawValue,
                   imageName: player.imageName,
                   description: player.description,

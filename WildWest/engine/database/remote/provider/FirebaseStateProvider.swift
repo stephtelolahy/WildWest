@@ -55,9 +55,7 @@ class FirebaseStateProvider: FirebaseStateProviderProtocol {
     }
     
     func playerSetBangsPlayed(_ playerId: String, _ bangsPlayed: Int, completion: @escaping FirebaseCompletion) {
-        let playerIndex = 0
-        fatalError("get playerIndex")
-        rootRef.child("games/\(gameId)/players/\(playerIndex)/bangsPlayed").setValue(bangsPlayed) { error, _ in
+        rootRef.child("games/\(gameId)/players/\(playerId)/bangsPlayed").setValue(bangsPlayed) { error, _ in
             completion(error)
         }
     }
