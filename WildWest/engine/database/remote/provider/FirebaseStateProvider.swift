@@ -12,12 +12,14 @@ import RxSwift
 import Firebase
 
 typealias FirebaseCompletion = (Error?) -> Void
+typealias FirebaseCardCompletion = (CardProtocol?, Error?) -> Void
 
 protocol FirebaseStateProviderProtocol {
     func observe(completion: @escaping ((GameStateProtocol) -> Void))
     func setTurn(_ turn: String, completion: @escaping FirebaseCompletion)
     func setChallenge(_ challenge: Challenge?, completion: @escaping FirebaseCompletion)
     func playerSetBangsPlayed(_ playerId: String, _ bangsPlayed: Int, completion: @escaping FirebaseCompletion)
+    func deckRemoveFirst(completion: @escaping FirebaseCardCompletion)
 }
 
 class FirebaseStateProvider: FirebaseStateProviderProtocol {
@@ -58,5 +60,9 @@ class FirebaseStateProvider: FirebaseStateProviderProtocol {
         rootRef.child("games/\(gameId)/players/\(playerId)/bangsPlayed").setValue(bangsPlayed) { error, _ in
             completion(error)
         }
+    }
+    
+    func deckRemoveFirst(completion: @escaping FirebaseCardCompletion) {
+        fatalError()
     }
 }

@@ -51,7 +51,16 @@ class RemoteDatabase: GameDatabaseProtocol {
     }
     
     func deckRemoveFirst() -> Single<CardProtocol> {
-        fatalError()
+        Single.create { single in
+            self.stateProvider.deckRemoveFirst { card, error in
+                if let error = error {
+                    single(.error(error))
+                } else {
+                    single(.success(card!))
+                }
+            }
+            return Disposables.create()
+        }
     }
     
     func addDiscard(_ card: CardProtocol) -> Completable {
