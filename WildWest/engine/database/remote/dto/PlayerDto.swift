@@ -20,5 +20,15 @@ struct PlayerDto: Codable {
     let hand: [String]?
     let inPlay: [String]?
     let bangsPlayed: Int?
-    //var lastDamage: DamageEvent? { get }
+    let lastDamage: DamageEventDto?
+}
+
+struct DamageEventDto: Codable {
+    let damage: Int?
+    let source: DamageSourceDto?
+}
+
+struct DamageSourceDto: Codable {
+    let byDynamite: Bool?
+    let byPlayer: String?
 }

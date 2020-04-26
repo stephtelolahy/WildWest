@@ -14,7 +14,8 @@ class DtoEncoder {
                  discardPile: state.discardPile.map { self.map(card: $0) },
                  turn: state.turn,
                  generalStore: state.generalStore.map { self.map(card: $0) },
-                 outcome: state.outcome?.rawValue)
+                 outcome: state.outcome?.rawValue,
+                 challenge: map(challenge: state.challenge))
     }
 }
 
@@ -35,7 +36,8 @@ private extension DtoEncoder {
                   health: player.health,
                   hand: player.hand.map { self.map(card: $0) },
                   inPlay: player.inPlay.map { self.map(card: $0) },
-                  bangsPlayed: player.bangsPlayed)
+                  bangsPlayed: player.bangsPlayed,
+                  lastDamage: map(damageEvent: player.lastDamage))
     }
     
     func map(abilities: [AbilityName: Bool]) -> [String: Bool] {
@@ -44,5 +46,37 @@ private extension DtoEncoder {
             result[key.rawValue] = value
         }
         return result
+    }
+    
+    func map(challenge: Challenge?) -> ChallengeDto? {
+        guard let challenge = challenge else {
+            return nil
+        }
+        
+        return ChallengeDto(name: challenge.name.rawValue,
+                            targetIds: challenge.targetIds,
+                            damage: challenge.damage,
+                            counterNeeded: challenge.counterNeeded,
+                            barrelsPlayed: challenge.barrelsPlayed)
+    }
+    
+    func map(damageEvent: DamageEvent?) -> DamageEventDto? {
+        guard let damageEvent = damageEvent else {
+            return nil
+        }
+        
+        return DamageEventDto(damage: damageEvent.damage,
+                              source: map(damageSource: damageEvent.source))
+        
+    }
+    
+    func map(damageSource: DamageSource) -> DamageSourceDto? {
+        switch damageSource {
+        case .byDynamite:
+            return DamageSourceDto(byDynamite: true, byPlayer: nil)
+            
+        case let .byPlayer(playerId):
+            return DamageSourceDto(byDynamite: nil, byPlayer: playerId)
+        }
     }
 }

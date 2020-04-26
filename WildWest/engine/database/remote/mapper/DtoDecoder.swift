@@ -14,7 +14,7 @@ class DtoDecoder {
         self.allCards = allCards
     }
     
-    func map(dto: StateDto) -> GameStateProtocol {
+    func map(dto: StateDto) -> GameStateProtocol? {
         fatalError()
     }
 }

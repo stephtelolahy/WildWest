@@ -902,8 +902,8 @@
 		33CC77DE24549ED200701BC8 /* remote */ = {
 			isa = PBXGroup;
 			children = (
-				33DA58472454A05A0047D124 /* FirebaseProvider.swift */,
 				3322C4B2245236D500D7B297 /* RemoteDatabase.swift */,
+				33DA58472454A05A0047D124 /* FirebaseProvider.swift */,
 				33734AEE2454AB7600A5D2DA /* mapper */,
 				33734AEF2454AB9100A5D2DA /* dto */,
 			);

@@ -13,5 +13,13 @@ struct StateDto: Codable {
     let turn: String?
     let generalStore: [String]?
     let outcome: String?
-    //var challenge: Challenge? { get }
+    let challenge: ChallengeDto?
+}
+
+struct ChallengeDto: Codable {
+    let name: String?
+    let targetIds: [String]?
+    let damage: Int?
+    let counterNeeded: Int?
+    let barrelsPlayed: Int?
 }
