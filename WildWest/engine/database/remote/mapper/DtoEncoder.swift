@@ -8,39 +8,39 @@
 
 class DtoEncoder {
     
-    func map(state: GameStateProtocol) -> StateDto {
-        StateDto(players: state.allPlayers.map { self.map(player: $0) },
-                 deck: state.deck.map { self.map(card: $0) },
-                 discardPile: state.discardPile.map { self.map(card: $0) },
+    func encode(state: GameStateProtocol) -> StateDto {
+        StateDto(players: state.allPlayers.map { encode(player: $0) },
+                 deck: state.deck.map { encode(card: $0) },
+                 discardPile: state.discardPile.map { encode(card: $0) },
                  turn: state.turn,
-                 generalStore: state.generalStore.map { self.map(card: $0) },
+                 generalStore: state.generalStore.map { encode(card: $0) },
                  outcome: state.outcome?.rawValue,
-                 challenge: map(challenge: state.challenge))
+                 challenge: encode(challenge: state.challenge))
     }
 }
 
 private extension DtoEncoder {
     
-    func map(card: CardProtocol) -> String {
+    func encode(card: CardProtocol) -> String {
         card.identifier
     }
     
-    func map(player: PlayerProtocol) -> PlayerDto {
+    func encode(player: PlayerProtocol) -> PlayerDto {
         PlayerDto(identifier: player.identifier,
                   role: player.role!.rawValue,
                   figureName: player.figureName.rawValue,
                   imageName: player.imageName,
                   description: player.description,
-                  abilities: map(abilities: player.abilities),
+                  abilities: encode(abilities: player.abilities),
                   maxHealth: player.maxHealth,
                   health: player.health,
-                  hand: player.hand.map { self.map(card: $0) },
-                  inPlay: player.inPlay.map { self.map(card: $0) },
+                  hand: player.hand.map { encode(card: $0) },
+                  inPlay: player.inPlay.map { encode(card: $0) },
                   bangsPlayed: player.bangsPlayed,
-                  lastDamage: map(damageEvent: player.lastDamage))
+                  lastDamage: encode(damageEvent: player.lastDamage))
     }
     
-    func map(abilities: [AbilityName: Bool]) -> [String: Bool] {
+    func encode(abilities: [AbilityName: Bool]) -> [String: Bool] {
         var result: [String: Bool] = [:]
         abilities.forEach { key, value in
             result[key.rawValue] = value
@@ -48,7 +48,7 @@ private extension DtoEncoder {
         return result
     }
     
-    func map(challenge: Challenge?) -> ChallengeDto? {
+    func encode(challenge: Challenge?) -> ChallengeDto? {
         guard let challenge = challenge else {
             return nil
         }
@@ -60,17 +60,17 @@ private extension DtoEncoder {
                             barrelsPlayed: challenge.barrelsPlayed)
     }
     
-    func map(damageEvent: DamageEvent?) -> DamageEventDto? {
+    func encode(damageEvent: DamageEvent?) -> DamageEventDto? {
         guard let damageEvent = damageEvent else {
             return nil
         }
         
         return DamageEventDto(damage: damageEvent.damage,
-                              source: map(damageSource: damageEvent.source))
+                              source: encode(damageSource: damageEvent.source))
         
     }
     
-    func map(damageSource: DamageSource) -> DamageSourceDto? {
+    func encode(damageSource: DamageSource) -> DamageSourceDto? {
         switch damageSource {
         case .byDynamite:
             return DamageSourceDto(byDynamite: true, byPlayer: nil)

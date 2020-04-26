@@ -44,7 +44,7 @@ class FirebaseProvider: FirebaseProviderProtocol {
         
         let gameItemRef = gamesRef.child(key)
         
-        let dto = dtoEncoder.map(state: state)
+        let dto = dtoEncoder.encode(state: state)
         guard let value = try? dictionaryEncoder.encode(dto) else {
             fatalError("Unable to create value")
         }
@@ -65,8 +65,12 @@ class FirebaseProvider: FirebaseProviderProtocol {
             guard let dto = try? self.dictionaryDecoder.decode(StateDto.self, from: value) else {
                 fatalError("Unable to create dto")
             }
-
-            print(dto)
+            
+//            guard let state = self.dtoDecoder.map(dto: dto) else {
+//                fatalError("Unable to create state")
+//            }
+//
+//            completion(state)
             
         }) { error in
             fatalError(error.localizedDescription)
