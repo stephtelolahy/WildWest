@@ -1,5 +1,5 @@
 //
-//  FirebaseStateProvider.swift
+//  FirebaseStateAdapter.swift
 //  WildWest
 //
 //  Created by Hugues Stephano Telolahy on 26/04/2020.
@@ -14,7 +14,7 @@ import Firebase
 typealias FirebaseCompletion = (Error?) -> Void
 typealias FirebaseCardCompletion = (CardProtocol?, Error?) -> Void
 
-protocol FirebaseStateProviderProtocol {
+protocol FirebaseStateAdapterProtocol {
     func observe(completion: @escaping ((GameStateProtocol) -> Void))
     func setTurn(_ turn: String, completion: @escaping FirebaseCompletion)
     func setChallenge(_ challenge: Challenge?, completion: @escaping FirebaseCompletion)
@@ -22,7 +22,7 @@ protocol FirebaseStateProviderProtocol {
     func deckRemoveFirst(completion: @escaping FirebaseCardCompletion)
 }
 
-class FirebaseStateProvider: FirebaseStateProviderProtocol {
+class FirebaseStateAdapter: FirebaseStateAdapterProtocol {
     
     private let gameId: String
     private let mapper: FirebaseMapperProtocol

@@ -53,8 +53,8 @@ class GameLauncher {
                        dictionaryDecoder: DictionaryDecoder())
     }()
     
-    private lazy var firebaseProvider: FirebaseProviderProtocol = {
-        FirebaseProvider(mapper: firebaseMapper, keyGenerator: FirebaseKeyGenerator())
+    private lazy var firebaseAdapter: FirebaseAdapterProtocol = {
+        FirebaseAdapter(mapper: firebaseMapper, keyGenerator: FirebaseKeyGenerator())
     }()
     
     func startLocal() {
@@ -89,13 +89,13 @@ class GameLauncher {
     func startRemote() {
         let state = createGame()
         
-        let gameId = firebaseProvider.createGame(state)
+        let gameId = firebaseAdapter.createGame(state)
         
         joinRemoteGame(gameId)
     }
     
     func joinRemoteGame(_ id: String) {
-        firebaseProvider.getGame(id) { [weak self] initialState in
+        firebaseAdapter.getGame(id) { [weak self] initialState in
             self?.openRemoteGame(id, state: initialState)
         }
     }
@@ -122,11 +122,11 @@ private extension GameLauncher {
     func openRemoteGame(_ id: String, state: GameStateProtocol) {
         let stateSubject: BehaviorSubject<GameStateProtocol> = BehaviorSubject(value: state)
         
-        let stateProvider = FirebaseStateProvider(gameId: id,
-                                                  mapper: firebaseMapper)
+        let stateAdapter = FirebaseStateAdapter(gameId: id,
+                                                mapper: firebaseMapper)
         
         let database = RemoteDatabase(stateSubject: stateSubject,
-                                      stateProvider: stateProvider)
+                                      stateAdapter: stateAdapter)
         
         let subjects = GameSubjects(stateSubject: database.stateSubject,
                                     executedMoveSubject: PublishSubject(),

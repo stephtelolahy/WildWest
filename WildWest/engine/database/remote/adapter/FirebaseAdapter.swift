@@ -1,5 +1,5 @@
 //
-//  FirebaseProvider.swift
+//  FirebaseAdapter.swift
 //  WildWest
 //
 //  Created by Hugues Stephano Telolahy on 25/04/2020.
@@ -11,12 +11,12 @@
 import RxSwift
 import Firebase
 
-protocol FirebaseProviderProtocol {
+protocol FirebaseAdapterProtocol {
     func createGame(_ state: GameStateProtocol) -> String
     func getGame(_ id: String, completion: @escaping ((GameStateProtocol) -> Void))
 }
 
-class FirebaseProvider: FirebaseProviderProtocol {
+class FirebaseAdapter: FirebaseAdapterProtocol {
     
     private let mapper: FirebaseMapperProtocol
     private let keyGenerator: FirebaseKeyGeneratorProtocol

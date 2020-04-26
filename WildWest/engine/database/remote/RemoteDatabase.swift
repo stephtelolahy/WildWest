@@ -11,18 +11,18 @@ import RxSwift
 class RemoteDatabase: GameDatabaseProtocol {
     
     internal let stateSubject: BehaviorSubject<GameStateProtocol>
-    private let stateProvider: FirebaseStateProviderProtocol
+    private let stateAdapter: FirebaseStateAdapterProtocol
     
     init(stateSubject: BehaviorSubject<GameStateProtocol>,
-         stateProvider: FirebaseStateProviderProtocol) {
+         stateAdapter: FirebaseStateAdapterProtocol) {
         self.stateSubject = stateSubject
-        self.stateProvider = stateProvider
+        self.stateAdapter = stateAdapter
         observeStateChanges()
     }
     
     func setTurn(_ turn: String) -> Completable {
         Completable.create { completable in
-            self.stateProvider.setTurn(turn) { error in
+            self.stateAdapter.setTurn(turn) { error in
                 if let error = error {
                     completable(.error(error))
                 } else {
@@ -35,7 +35,7 @@ class RemoteDatabase: GameDatabaseProtocol {
     
     func setChallenge(_ challenge: Challenge?) -> Completable {
         Completable.create { completable in
-            self.stateProvider.setChallenge(challenge) { error in
+            self.stateAdapter.setChallenge(challenge) { error in
                 if let error = error {
                     completable(.error(error))
                 } else {
@@ -52,7 +52,7 @@ class RemoteDatabase: GameDatabaseProtocol {
     
     func deckRemoveFirst() -> Single<CardProtocol> {
         Single.create { single in
-            self.stateProvider.deckRemoveFirst { card, error in
+            self.stateAdapter.deckRemoveFirst { card, error in
                 if let error = error {
                     single(.error(error))
                 } else {
@@ -97,7 +97,7 @@ class RemoteDatabase: GameDatabaseProtocol {
     
     func playerSetBangsPlayed(_ playerId: String, _ bangsPlayed: Int) -> Completable {
         Completable.create { completable in
-            self.stateProvider.playerSetBangsPlayed(playerId, bangsPlayed) { error in
+            self.stateAdapter.playerSetBangsPlayed(playerId, bangsPlayed) { error in
                 if let error = error {
                     completable(.error(error))
                 } else {
@@ -116,7 +116,7 @@ class RemoteDatabase: GameDatabaseProtocol {
 private extension RemoteDatabase {
     
     func observeStateChanges() {
-        stateProvider.observe { [weak self] state in
+        stateAdapter.observe { [weak self] state in
             self?.stateSubject.onNext(state)
         }
     }
