@@ -14,6 +14,7 @@
 		3301E63923F7EEF700AB35C7 /* AIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3301E63723F7EEF700AB35C7 /* AIProtocol.swift */; };
 		3302E51C23F8E34C004FE76E /* RandomAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E51B23F8E34C004FE76E /* RandomAI.swift */; };
 		3302E51D23F8E34C004FE76E /* RandomAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E51B23F8E34C004FE76E /* RandomAI.swift */; };
+		33031E0D2455513000528158 /* ThemeMusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33031E0C2455513000528158 /* ThemeMusicPlayer.swift */; };
 		3304D9422453FF1C00731AE9 /* GameUpdate+ExecutionTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304D9412453FF1C00731AE9 /* GameUpdate+ExecutionTime.swift */; };
 		330761A0245355D200E8C2EF /* GameLoopProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3307619F245355D200E8C2EF /* GameLoopProtocol.swift */; };
 		330761A1245355D200E8C2EF /* GameLoopProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3307619F245355D200E8C2EF /* GameLoopProtocol.swift */; };
@@ -170,6 +171,9 @@
 		335BED9F2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */; };
 		336AA6F023F1450800328837 /* GameDatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */; };
 		336AA6F123F1450B00328837 /* GameDatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */; };
+		3372CB502454BB7C00C061C9 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372CB4F2454BB7C00C061C9 /* Navigator.swift */; };
+		3372CB522454BC7900C061C9 /* FigureSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372CB512454BC7900C061C9 /* FigureSelector.swift */; };
+		3372CB542454BF8E00C061C9 /* GameLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372CB532454BF8E00C061C9 /* GameLauncher.swift */; };
 		33734AE92454AB3000A5D2DA /* DictionaryEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AE82454AB3000A5D2DA /* DictionaryEncoder.swift */; };
 		33734AED2454AB5F00A5D2DA /* DictionaryDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AEC2454AB5F00A5D2DA /* DictionaryDecoder.swift */; };
 		33734AF12454ABF200A5D2DA /* PlayerDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AF02454ABF200A5D2DA /* PlayerDto.swift */; };
@@ -333,6 +337,7 @@
 		3301BEF923F9A79B00B4364D /* AIPlayerAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIPlayerAgent.swift; sourceTree = "<group>"; };
 		3301E63723F7EEF700AB35C7 /* AIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIProtocol.swift; sourceTree = "<group>"; };
 		3302E51B23F8E34C004FE76E /* RandomAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomAI.swift; sourceTree = "<group>"; };
+		33031E0C2455513000528158 /* ThemeMusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeMusicPlayer.swift; sourceTree = "<group>"; };
 		3304D9412453FF1C00731AE9 /* GameUpdate+ExecutionTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameUpdate+ExecutionTime.swift"; sourceTree = "<group>"; };
 		3307619F245355D200E8C2EF /* GameLoopProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLoopProtocol.swift; sourceTree = "<group>"; };
 		330761A22453560900E8C2EF /* GameLoop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLoop.swift; sourceTree = "<group>"; };
@@ -400,6 +405,9 @@
 		335BED9A2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Pain-SoundBible.com-1883168362.mp3"; sourceTree = "<group>"; };
 		335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Automatic Machine Gun-SoundBible.com-253461580.mp3"; sourceTree = "<group>"; };
 		336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDatabaseProtocol.swift; sourceTree = "<group>"; };
+		3372CB4F2454BB7C00C061C9 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
+		3372CB512454BC7900C061C9 /* FigureSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FigureSelector.swift; sourceTree = "<group>"; };
+		3372CB532454BF8E00C061C9 /* GameLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLauncher.swift; sourceTree = "<group>"; };
 		33734AE82454AB3000A5D2DA /* DictionaryEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryEncoder.swift; sourceTree = "<group>"; };
 		33734AEC2454AB5F00A5D2DA /* DictionaryDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryDecoder.swift; sourceTree = "<group>"; };
 		33734AF02454ABF200A5D2DA /* PlayerDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDto.swift; sourceTree = "<group>"; };
@@ -1032,6 +1040,10 @@
 			children = (
 				33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */,
 				334673EA2436328000FFBB82 /* UserPreferences.swift */,
+				3372CB4F2454BB7C00C061C9 /* Navigator.swift */,
+				3372CB512454BC7900C061C9 /* FigureSelector.swift */,
+				3372CB532454BF8E00C061C9 /* GameLauncher.swift */,
+				33031E0C2455513000528158 /* ThemeMusicPlayer.swift */,
 			);
 			path = menu;
 			sourceTree = "<group>";
@@ -1544,6 +1556,7 @@
 				AD52B99923B178CC0013240B /* Player.swift in Sources */,
 				3356CF0E243237320071B04F /* Challenge.swift in Sources */,
 				3324018E23DBA6C800B92439 /* UICollectionViewExtension.swift in Sources */,
+				33031E0D2455513000528158 /* ThemeMusicPlayer.swift in Sources */,
 				330761A624535C7200E8C2EF /* GameSubjectsProtocol.swift in Sources */,
 				3328FC9F242F298200A82255 /* Panic.swift in Sources */,
 				33112E70244503EA009C706E /* UpdateAnimator.swift in Sources */,
@@ -1610,6 +1623,7 @@
 				330FDECD242F384C00284FE7 /* PenalizeSheriffOnEliminatingDeputy.swift in Sources */,
 				3328FCF0242F309400A82255 /* EndTurn.swift in Sources */,
 				3301BEFA23F9A79B00B4364D /* AIPlayerAgent.swift in Sources */,
+				3372CB542454BF8E00C061C9 /* GameLauncher.swift in Sources */,
 				33E4412424077DAB00B2848E /* UITableViewExtension.swift in Sources */,
 				33B1566B245418B800746B61 /* GameRules.swift in Sources */,
 				3328FCAA242F29B100A82255 /* Gatling.swift in Sources */,
@@ -1632,12 +1646,14 @@
 				330FDECB242F384C00284FE7 /* Eliminate.swift in Sources */,
 				3304D9422453FF1C00731AE9 /* GameUpdate+ExecutionTime.swift in Sources */,
 				ADD035CF23A96002003B2576 /* CardProtocol.swift in Sources */,
+				3372CB522454BC7900C061C9 /* FigureSelector.swift in Sources */,
 				33BAE346242E74CD0098B41F /* MemoryCachedDataBase.swift in Sources */,
 				33A733EE23DC4A5300E9B2AD /* Subscribable.swift in Sources */,
 				33D97B15244FA59F00B4F070 /* GameMove+Description.swift in Sources */,
 				337D7FD1243071AE0078F749 /* Player+Ability.swift in Sources */,
 				33E4411C24077CA000B2848E /* ActionsAdapter.swift in Sources */,
 				3398B0D4243B9AED00EB670A /* Role+Relationship.swift in Sources */,
+				3372CB502454BB7C00C061C9 /* Navigator.swift in Sources */,
 				33734AED2454AB5F00A5D2DA /* DictionaryDecoder.swift in Sources */,
 				3328FCA9242F29B100A82255 /* Bang.swift in Sources */,
 				33E4411E24077CA000B2848E /* PlayerCell.swift in Sources */,
