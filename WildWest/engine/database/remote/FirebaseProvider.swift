@@ -14,6 +14,7 @@ import Firebase
 protocol FirebaseProviderProtocol {
     func createGame(_ state: GameStateProtocol) -> String
     func getGame(_ id: String, completion: @escaping ((GameStateProtocol) -> Void))
+    func observeGame(_ id: String, completion: @escaping ((GameStateProtocol) -> Void))
 }
 
 class FirebaseProvider: FirebaseProviderProtocol {
@@ -57,23 +58,40 @@ class FirebaseProvider: FirebaseProviderProtocol {
     func getGame(_ id: String, completion: @escaping ((GameStateProtocol) -> Void)) {
         let rootRef = Database.database().reference()
         rootRef.child("games").child(id).observeSingleEvent(of: .value, with: { snapshot in
-            
-            guard let value = snapshot.value as? [String: Any] else {
-                fatalError("Unable to create dictionary")
-            }
-            
-            guard let dto = try? self.dictionaryDecoder.decode(StateDto.self, from: value) else {
-                fatalError("Unable to create dto")
-            }
-            
-            guard let state = try? self.dtoDecoder.decode(dto: dto) else {
-                fatalError("Unable to create state")
-            }
-            
+            let state = self.decodeState(from: snapshot)
             completion(state)
             
         }) { error in
             fatalError(error.localizedDescription)
         }
+    }
+    
+    func observeGame(_ id: String, completion: @escaping ((GameStateProtocol) -> Void)) {
+        let rootRef = Database.database().reference()
+        rootRef.child("games").child(id).observe(.value, with: { snapshot in
+            let state = self.decodeState(from: snapshot)
+            completion(state)
+            
+        }) { error in
+            fatalError(error.localizedDescription)
+        }
+    }
+}
+
+private extension FirebaseProvider {
+    func decodeState(from snapshot: DataSnapshot) -> GameStateProtocol {
+        guard let value = snapshot.value as? [String: Any] else {
+            fatalError("Unable to create dictionary")
+        }
+        
+        guard let dto = try? self.dictionaryDecoder.decode(StateDto.self, from: value) else {
+            fatalError("Unable to create dto")
+        }
+        
+        guard let state = try? self.dtoDecoder.decode(dto: dto) else {
+            fatalError("Unable to create state")
+        }
+        
+        return state
     }
 }

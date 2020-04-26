@@ -95,27 +95,6 @@ class GameLauncher {
             self?.openRemoteGame(id, state: initialState)
         }
     }
-    
-    func openRemoteGame(_ id: String, state: GameStateProtocol) {
-        let stateSubject: BehaviorSubject<GameStateProtocol> = BehaviorSubject(value: state)
-        
-        let database = RemoteDatabase(stateSubject: stateSubject,
-                                      provider: firebaseProvider,
-                                      gameId: id)
-        
-        let subjects = GameSubjects(stateSubject: database.stateSubject,
-                                    executedMoveSubject: PublishSubject(),
-                                    executedUpdateSubject: PublishSubject(),
-                                    validMovesSubject: PublishSubject())
-        
-        let engine = GameEngine(delay: UserPreferences.shared.updateDelay,
-                                database: database,
-                                moveMatchers: GameRules().moveMatchers,
-                                updateExecutor: GameUpdateExecutor(),
-                                subjects: subjects)
-        
-        navigator.toGame(engine: engine, controlledPlayerId: nil, aiAgents: nil)
-    }
 }
 
 private extension GameLauncher {
@@ -134,6 +113,27 @@ private extension GameLauncher {
         return gameSetup.setupGame(roles: roles,
                                    figures: figures,
                                    cards: allCards.shuffled())
+    }
+    
+    func openRemoteGame(_ id: String, state: GameStateProtocol) {
+        let stateSubject: BehaviorSubject<GameStateProtocol> = BehaviorSubject(value: state)
+        
+        let database = RemoteDatabase(stateSubject: stateSubject,
+                                      firebaseProvider: firebaseProvider,
+                                      gameId: id)
+        
+        let subjects = GameSubjects(stateSubject: database.stateSubject,
+                                    executedMoveSubject: PublishSubject(),
+                                    executedUpdateSubject: PublishSubject(),
+                                    validMovesSubject: PublishSubject())
+        
+        let engine = GameEngine(delay: UserPreferences.shared.updateDelay,
+                                database: database,
+                                moveMatchers: GameRules().moveMatchers,
+                                updateExecutor: GameUpdateExecutor(),
+                                subjects: subjects)
+        
+        navigator.toGame(engine: engine, controlledPlayerId: nil, aiAgents: nil)
     }
 }
 

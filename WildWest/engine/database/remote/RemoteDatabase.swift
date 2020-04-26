@@ -11,14 +11,14 @@ import RxSwift
 class RemoteDatabase: GameDatabaseProtocol {
     
     internal let stateSubject: BehaviorSubject<GameStateProtocol>
-    private let provider: FirebaseProviderProtocol
+    private let firebaseProvider: FirebaseProviderProtocol
     private let gameId: String
     
     init(stateSubject: BehaviorSubject<GameStateProtocol>,
-         provider: FirebaseProviderProtocol,
+         firebaseProvider: FirebaseProviderProtocol,
          gameId: String) {
         self.stateSubject = stateSubject
-        self.provider = provider
+        self.firebaseProvider = firebaseProvider
         self.gameId = gameId
         observeStateChanges()
     }
@@ -82,6 +82,8 @@ class RemoteDatabase: GameDatabaseProtocol {
 
 private extension RemoteDatabase {
     func observeStateChanges() {
-        
+        firebaseProvider.observeGame(gameId) { [weak self] state in
+            self?.stateSubject.onNext(state)
+        }
     }
 }
