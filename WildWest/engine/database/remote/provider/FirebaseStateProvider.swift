@@ -17,6 +17,7 @@ protocol FirebaseStateProviderProtocol {
     func observe(completion: @escaping ((GameStateProtocol) -> Void))
     func setTurn(_ turn: String, completion: @escaping FirebaseCompletion)
     func setChallenge(_ challenge: Challenge?, completion: @escaping FirebaseCompletion)
+    func playerSetBangsPlayed(_ playerId: String, _ bangsPlayed: Int, completion: @escaping FirebaseCompletion)
 }
 
 class FirebaseStateProvider: FirebaseStateProviderProtocol {
@@ -49,6 +50,14 @@ class FirebaseStateProvider: FirebaseStateProviderProtocol {
     func setChallenge(_ challenge: Challenge?, completion: @escaping FirebaseCompletion) {
         let value = mapper.encodeChallenge(challenge)
         rootRef.child("games/\(gameId)/challenge").setValue(value) { error, _ in
+            completion(error)
+        }
+    }
+    
+    func playerSetBangsPlayed(_ playerId: String, _ bangsPlayed: Int, completion: @escaping FirebaseCompletion) {
+        let playerIndex = 0
+        fatalError("get playerIndex")
+        rootRef.child("games/\(gameId)/players/\(playerIndex)/bangsPlayed").setValue(bangsPlayed) { error, _ in
             completion(error)
         }
     }

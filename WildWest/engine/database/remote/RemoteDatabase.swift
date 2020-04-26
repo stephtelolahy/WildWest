@@ -87,7 +87,16 @@ class RemoteDatabase: GameDatabaseProtocol {
     }
     
     func playerSetBangsPlayed(_ playerId: String, _ bangsPlayed: Int) -> Completable {
-        fatalError()
+        Completable.create { completable in
+            self.stateProvider.playerSetBangsPlayed(playerId, bangsPlayed) { error in
+                if let error = error {
+                    completable(.error(error))
+                } else {
+                    completable(.completed)
+                }
+            }
+            return Disposables.create()
+        }
     }
     
     func playerSetDamageEvent(_ playerId: String, _ event: DamageEvent) -> Completable {
