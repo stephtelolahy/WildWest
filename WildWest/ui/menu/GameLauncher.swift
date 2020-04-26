@@ -46,11 +46,15 @@ class GameLauncher {
         return figures
     }()
     
+    private lazy var firebaseMapper: FirebaseMapperProtocol = {
+        FirebaseMapper(dtoEncoder: DtoEncoder(),
+                       dtoDecoder: DtoDecoder(allCards: allCards),
+                       dictionaryEncoder: DictionaryEncoder(),
+                       dictionaryDecoder: DictionaryDecoder())
+    }()
+    
     private lazy var firebaseProvider: FirebaseProviderProtocol = {
-        FirebaseProvider(dtoEncoder: DtoEncoder(),
-                         dtoDecoder: DtoDecoder(allCards: allCards),
-                         dictionaryEncoder: DictionaryEncoder(),
-                         dictionaryDecoder: DictionaryDecoder())
+        FirebaseProvider(mapper: firebaseMapper)
     }()
     
     func startLocal() {
@@ -118,9 +122,11 @@ private extension GameLauncher {
     func openRemoteGame(_ id: String, state: GameStateProtocol) {
         let stateSubject: BehaviorSubject<GameStateProtocol> = BehaviorSubject(value: state)
         
+        let stateProvider = FirebaseStateProvider(gameId: id,
+                                                  mapper: firebaseMapper)
+        
         let database = RemoteDatabase(stateSubject: stateSubject,
-                                      firebaseProvider: firebaseProvider,
-                                      gameId: id)
+                                      stateProvider: stateProvider)
         
         let subjects = GameSubjects(stateSubject: database.stateSubject,
                                     executedMoveSubject: PublishSubject(),
