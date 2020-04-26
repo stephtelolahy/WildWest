@@ -46,10 +46,14 @@ class GameLauncher {
         return figures
     }()
     
+    private lazy var firebaseProvider: FirebaseProviderProtocol = {
+        FirebaseProvider(dtoEncoder: DtoEncoder(),
+                         dtoDecoder: DtoDecoder(allCards: allCards),
+                         dictionaryEncoder: DictionaryEncoder(),
+                         dictionaryDecoder: DictionaryDecoder())
+    }()
+    
     func startLocal() {
-        
-        let rules = GameRules()
-        
         let state = createGame()
         
         let stateSubject: BehaviorSubject<GameStateProtocol> = BehaviorSubject(value: state)
@@ -64,7 +68,7 @@ class GameLauncher {
         
         let engine = GameEngine(delay: UserPreferences.shared.updateDelay,
                                 database: database,
-                                moveMatchers: rules.moveMatchers,
+                                moveMatchers: GameRules().moveMatchers,
                                 updateExecutor: GameUpdateExecutor(),
                                 subjects: subjects)
         
@@ -81,24 +85,36 @@ class GameLauncher {
     func startRemote() {
         let state = createGame()
         
-        let firebaseProvider = FirebaseProvider(dtoEncoder: DtoEncoder(),
-                                                dtoDecoder: DtoDecoder(allCards: allCards),
-                                                dictionaryEncoder: DictionaryEncoder(),
-                                                dictionaryDecoder: DictionaryDecoder())
+        let gameId = firebaseProvider.createGame(state)
         
-        let key = firebaseProvider.createGame(state)
-        print("Created remote game with id: \(key)")
-        
-        joinRemoteGame(id: key, firebaseProvider: firebaseProvider)
+        joinRemoteGame(gameId)
     }
     
-    func joinRemoteGame(id: String, firebaseProvider: FirebaseProvider) {
-        
-        firebaseProvider.getGame(id) { initialState in
-            
-            // create remote database now
-            print(String(describing: initialState))
+    func joinRemoteGame(_ id: String) {
+        firebaseProvider.getGame(id) { [weak self] initialState in
+            self?.openRemoteGame(id, state: initialState)
         }
+    }
+    
+    func openRemoteGame(_ id: String, state: GameStateProtocol) {
+        let stateSubject: BehaviorSubject<GameStateProtocol> = BehaviorSubject(value: state)
+        
+        let database = RemoteDatabase(stateSubject: stateSubject,
+                                      provider: firebaseProvider,
+                                      gameId: id)
+        
+        let subjects = GameSubjects(stateSubject: database.stateSubject,
+                                    executedMoveSubject: PublishSubject(),
+                                    executedUpdateSubject: PublishSubject(),
+                                    validMovesSubject: PublishSubject())
+        
+        let engine = GameEngine(delay: UserPreferences.shared.updateDelay,
+                                database: database,
+                                moveMatchers: GameRules().moveMatchers,
+                                updateExecutor: GameUpdateExecutor(),
+                                subjects: subjects)
+        
+        navigator.toGame(engine: engine, controlledPlayerId: nil, aiAgents: nil)
     }
 }
 

@@ -17,7 +17,7 @@ class Navigator {
         self.viewController = viewController
     }
     
-    func toGame(engine: GameEngineProtocol, controlledPlayerId: String?, aiAgents: [AIPlayerAgent]) {
+    func toGame(engine: GameEngineProtocol, controlledPlayerId: String?, aiAgents: [AIPlayerAgent]?) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let gameViewController =
             storyboard.instantiateViewController(withIdentifier: "GameViewController") as? GameViewController else {
