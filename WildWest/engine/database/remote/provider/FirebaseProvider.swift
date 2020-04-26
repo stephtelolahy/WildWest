@@ -19,22 +19,19 @@ protocol FirebaseProviderProtocol {
 class FirebaseProvider: FirebaseProviderProtocol {
     
     private let mapper: FirebaseMapperProtocol
+    private let keyGenerator: FirebaseKeyGeneratorProtocol
     private let rootRef = Database.database().reference()
     
-    init(mapper: FirebaseMapperProtocol) {
+    init(mapper: FirebaseMapperProtocol,
+         keyGenerator: FirebaseKeyGeneratorProtocol) {
         self.mapper = mapper
+        self.keyGenerator = keyGenerator
     }
     
     func createGame(_ state: GameStateProtocol) -> String {
-//        guard let key = rootRef.child("games").childByAutoId().key else {
-//            fatalError("Unable to create games child")
-//        }
-        
-        let key = "live"
-        
+        let key = keyGenerator.gameAutoId()
         let value = mapper.encodeState(state)
         rootRef.child("games/\(key)").setValue(value)
-        
         return key
     }
     

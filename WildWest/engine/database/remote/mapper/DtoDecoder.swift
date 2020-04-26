@@ -18,8 +18,8 @@ class DtoDecoder {
     
     func decode(dto: StateDto) throws -> GameStateProtocol {
         GameState(allPlayers: try decode(players: dto.players, order: dto.order),
-                  deck: try decode(cards: dto.deck),
-                  discardPile: try decode(cards: dto.discardPile),
+                  deck: try decode(orderedCards: dto.deck),
+                  discardPile: try decode(orderedCards: dto.discardPile).reversed(),
                   turn: try dto.turn.unwrap(),
                   challenge: try decode(challenge: dto.challenge),
                   generalStore: try decode(cards: dto.generalStore),
@@ -29,12 +29,13 @@ class DtoDecoder {
 
 private extension DtoDecoder {
     
-    func decode(cards: [String]?) throws -> [CardProtocol] {
-        guard let cards = cards else {
+    func decode(orderedCards: [String: String]?) throws -> [CardProtocol] {
+        guard let orderedCards = orderedCards else {
             return []
         }
         
-        return try cards.map { try decode(card: $0) }
+        let orderedKeys = orderedCards.keys.sorted()
+        return try orderedKeys.map { try decode(card: orderedCards[$0].unwrap()) }
     }
     
     func decode(cards: [String: Bool]?) throws -> [CardProtocol] {

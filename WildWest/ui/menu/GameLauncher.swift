@@ -47,14 +47,14 @@ class GameLauncher {
     }()
     
     private lazy var firebaseMapper: FirebaseMapperProtocol = {
-        FirebaseMapper(dtoEncoder: DtoEncoder(),
+        FirebaseMapper(dtoEncoder: DtoEncoder(keyGenerator: FirebaseKeyGenerator()),
                        dtoDecoder: DtoDecoder(allCards: allCards),
                        dictionaryEncoder: DictionaryEncoder(),
                        dictionaryDecoder: DictionaryDecoder())
     }()
     
     private lazy var firebaseProvider: FirebaseProviderProtocol = {
-        FirebaseProvider(mapper: firebaseMapper)
+        FirebaseProvider(mapper: firebaseMapper, keyGenerator: FirebaseKeyGenerator())
     }()
     
     func startLocal() {

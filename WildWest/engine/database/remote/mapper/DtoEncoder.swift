@@ -6,13 +6,21 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
+import Firebase
+
 class DtoEncoder {
+    
+    private let keyGenerator: FirebaseKeyGeneratorProtocol
+    
+    init(keyGenerator: FirebaseKeyGeneratorProtocol) {
+        self.keyGenerator = keyGenerator
+    }
     
     func encode(state: GameStateProtocol) -> StateDto {
         StateDto(order: encode(players: state.allPlayers),
                  players: encode(players: state.allPlayers),
-                 deck: encode(cards: state.deck),
-                 discardPile: encode(cards: state.discardPile),
+                 deck: encode(orderedCards: state.deck),
+                 discardPile: encode(orderedCards: state.discardPile.reversed()),
                  turn: state.turn,
                  generalStore: encode(cards: state.generalStore),
                  outcome: state.outcome?.rawValue,
@@ -34,12 +42,19 @@ class DtoEncoder {
 
 private extension DtoEncoder {
     
-    func encode(cards: [CardProtocol]) -> [String]? {
-        guard !cards.isEmpty else {
+    func encode(orderedCards: [CardProtocol]) -> [String: String]? {
+        guard !orderedCards.isEmpty else {
             return nil
         }
         
-        return cards.map { encode(card: $0) }
+        var result: [String: String] = [:]
+        
+        orderedCards.forEach { card in
+            let key = self.keyGenerator.cardAutoId()
+            result[key] = encode(card: card)
+        }
+        
+        return result
     }
     
     func encode(cards: [CardProtocol]) -> [String: Bool]? {

@@ -115,6 +115,7 @@
 		332F0497244716AA00BE2E4A /* UIImage+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332F0496244716AA00BE2E4A /* UIImage+Color.swift */; };
 		332F0499244716C100BE2E4A /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332F0498244716C100BE2E4A /* UIColor+Hex.swift */; };
 		33318D6D24275AAE0055C6C5 /* StatsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33318D6C24275AAE0055C6C5 /* StatsBuilder.swift */; };
+		3331A9CC2455F2AF0063885C /* FirebaseKeyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3331A9CB2455F2AF0063885C /* FirebaseKeyGenerator.swift */; };
 		3333463D242FD59900A97FD5 /* Player+RangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3333463C242FD59900A97FD5 /* Player+RangeTests.swift */; };
 		33334642242FEDCD00A97FD5 /* GameState+Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33334641242FEDCD00A97FD5 /* GameState+Distance.swift */; };
 		33334643242FEDCD00A97FD5 /* GameState+Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33334641242FEDCD00A97FD5 /* GameState+Distance.swift */; };
@@ -371,6 +372,7 @@
 		33318D6524274E3B0055C6C5 /* PenalizeSheriffOnEliminatingDeputy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenalizeSheriffOnEliminatingDeputy.swift; sourceTree = "<group>"; };
 		33318D68242750130055C6C5 /* PenalizeSheriffOnEliminatingDeputyMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenalizeSheriffOnEliminatingDeputyMatcherTests.swift; sourceTree = "<group>"; };
 		33318D6C24275AAE0055C6C5 /* StatsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsBuilder.swift; sourceTree = "<group>"; };
+		3331A9CB2455F2AF0063885C /* FirebaseKeyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseKeyGenerator.swift; sourceTree = "<group>"; };
 		3333463C242FD59900A97FD5 /* Player+RangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+RangeTests.swift"; sourceTree = "<group>"; };
 		33334641242FEDCD00A97FD5 /* GameState+Distance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameState+Distance.swift"; sourceTree = "<group>"; };
 		33334647242FF65500A97FD5 /* GameState+DistanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameState+DistanceTests.swift"; sourceTree = "<group>"; };
@@ -603,6 +605,7 @@
 			children = (
 				33DA58472454A05A0047D124 /* FirebaseProvider.swift */,
 				3306682F24558D34003B2263 /* FirebaseStateProvider.swift */,
+				3331A9CB2455F2AF0063885C /* FirebaseKeyGenerator.swift */,
 			);
 			path = provider;
 			sourceTree = "<group>";
@@ -1635,6 +1638,7 @@
 				3301BEFA23F9A79B00B4364D /* AIPlayerAgent.swift in Sources */,
 				3372CB542454BF8E00C061C9 /* GameLauncher.swift in Sources */,
 				33E4412424077DAB00B2848E /* UITableViewExtension.swift in Sources */,
+				3331A9CC2455F2AF0063885C /* FirebaseKeyGenerator.swift in Sources */,
 				33B1566B245418B800746B61 /* GameRules.swift in Sources */,
 				3328FCAA242F29B100A82255 /* Gatling.swift in Sources */,
 				3306683024558D34003B2263 /* FirebaseStateProvider.swift in Sources */,

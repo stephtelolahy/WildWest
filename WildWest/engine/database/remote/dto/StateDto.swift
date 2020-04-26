@@ -9,8 +9,8 @@
 struct StateDto: Codable {
     let order: [String]?
     let players: [String: PlayerDto]?
-    let deck: [String]?
-    let discardPile: [String]?
+    let deck: [String: String]?
+    let discardPile: [String: String]?
     let turn: String?
     let generalStore: [String: Bool]?
     let outcome: String?
