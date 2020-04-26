@@ -25,6 +25,14 @@ class DtoDecoder {
                   generalStore: try decode(cards: dto.generalStore),
                   outcome: try decode(outcome: dto.outcome))
     }
+    
+    func decode(card: String) throws -> CardProtocol {
+        guard let matchingCard = allCards.first(where: { $0.identifier == card }) else {
+            throw NSError(domain: "matching card not found", code: 0)
+        }
+        
+        return matchingCard
+    }
 }
 
 private extension DtoDecoder {
@@ -50,14 +58,6 @@ private extension DtoDecoder {
         }
         
         return result
-    }
-    
-    func decode(card: String) throws -> CardProtocol {
-        guard let matchingCard = allCards.first(where: { $0.identifier == card }) else {
-            throw NSError(domain: "matching card not found", code: 0)
-        }
-        
-        return matchingCard
     }
     
     func decode(challenge: ChallengeDto?) throws -> Challenge? {

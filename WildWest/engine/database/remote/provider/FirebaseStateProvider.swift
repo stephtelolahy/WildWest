@@ -63,6 +63,15 @@ class FirebaseStateProvider: FirebaseStateProviderProtocol {
     }
     
     func deckRemoveFirst(completion: @escaping FirebaseCardCompletion) {
-        fatalError()
+        rootRef.child("games/\(gameId)/deck").queryLimited(toFirst: 1).observeSingleEvent(of: .value) { snapshot in
+            do {
+                let (key, card) = try self.mapper.decodeCard(from: snapshot)
+                self.rootRef.child("games/\(self.gameId)/deck/\(key)").setValue(nil) { error, _ in
+                    completion(card, error)
+                }
+            } catch {
+                completion(nil, error)
+            }
+        }
     }
 }
