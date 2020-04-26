@@ -21,7 +21,16 @@ class RemoteDatabase: GameDatabaseProtocol {
     }
     
     func setTurn(_ turn: String) -> Completable {
-        fatalError()
+        Completable.create { completable in
+            self.stateProvider.setTurn(turn) { error in
+                if let error = error {
+                    completable(.error(error))
+                } else {
+                    completable(.completed)
+                }
+            }
+            return Disposables.create()
+        }
     }
     
     func setChallenge(_ challenge: Challenge?) -> Completable {
@@ -78,6 +87,7 @@ class RemoteDatabase: GameDatabaseProtocol {
 }
 
 private extension RemoteDatabase {
+    
     func observeStateChanges() {
         stateProvider.observe { [weak self] state in
             self?.stateSubject.onNext(state)

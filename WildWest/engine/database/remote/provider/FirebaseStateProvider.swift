@@ -11,15 +11,18 @@
 import RxSwift
 import Firebase
 
+typealias FirebaseCompletion = (Error?) -> Void
+
 protocol FirebaseStateProviderProtocol {
     func observe(completion: @escaping ((GameStateProtocol) -> Void))
-    func setTurn(_ turn: String) -> Completable
+    func setTurn(_ turn: String, completion: @escaping FirebaseCompletion)
 }
 
 class FirebaseStateProvider: FirebaseStateProviderProtocol {
     
     private let gameId: String
     private let mapper: FirebaseMapperProtocol
+    private let rootRef = Database.database().reference()
     
     init(gameId: String, mapper: FirebaseMapperProtocol) {
         self.gameId = gameId
@@ -27,7 +30,6 @@ class FirebaseStateProvider: FirebaseStateProviderProtocol {
     }
     
     func observe(completion: @escaping ((GameStateProtocol) -> Void)) {
-        let rootRef = Database.database().reference()
         rootRef.child("games").child(gameId).observe(.value, with: { snapshot in
             let state = self.mapper.decodeState(from: snapshot)
             completion(state)
@@ -37,7 +39,9 @@ class FirebaseStateProvider: FirebaseStateProviderProtocol {
         }
     }
     
-    func setTurn(_ turn: String) -> Completable {
-        fatalError()
+    func setTurn(_ turn: String, completion: @escaping FirebaseCompletion) {
+        rootRef.child("games/\(gameId)/turn").setValue(turn) { error, _ in
+            completion(error)
+        }
     }
 }

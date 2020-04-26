@@ -19,32 +19,26 @@ protocol FirebaseProviderProtocol {
 class FirebaseProvider: FirebaseProviderProtocol {
     
     private let mapper: FirebaseMapperProtocol
+    private let rootRef = Database.database().reference()
     
     init(mapper: FirebaseMapperProtocol) {
         self.mapper = mapper
     }
     
     func createGame(_ state: GameStateProtocol) -> String {
-        let rootRef = Database.database().reference()
-        let gamesRef = rootRef.child("games")
+        //        guard let key = rootRef.child("games").childByAutoId().key else {
+        //            fatalError("Unable to create games child")
+        //        }
         
-//        guard let key = gamesRef.childByAutoId().key else {
-//            fatalError("Unable to create games child")
-//        }
-        
-        let key = "sample"
-        
-        let gameItemRef = gamesRef.child(key)
+        let key = "live"
         
         let value = mapper.encodeState(state)
-        
-        gameItemRef.setValue(value)
+        rootRef.child("games/\(key)").setValue(value)
         
         return key
     }
     
     func getGame(_ id: String, completion: @escaping ((GameStateProtocol) -> Void)) {
-        let rootRef = Database.database().reference()
         rootRef.child("games").child(id).observeSingleEvent(of: .value, with: { snapshot in
             let state = self.mapper.decodeState(from: snapshot)
             completion(state)
