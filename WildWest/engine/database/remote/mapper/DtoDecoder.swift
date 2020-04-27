@@ -53,7 +53,7 @@ private extension DtoDecoder {
             result.append(card)
         }
         
-        return result
+        return result.sorted(by: { $0.identifier < $1.identifier })
     }
     
     func decode(challenge: ChallengeDto?) throws -> Challenge? {
