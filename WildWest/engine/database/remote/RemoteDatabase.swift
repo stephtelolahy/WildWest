@@ -52,6 +52,7 @@ class RemoteDatabase: GameDatabaseProtocol {
     }
     
     func deckRemoveFirst() -> Single<CardProtocol> {
+        // TODO: verify deck size
         Single.create { single in
             self.stateAdapter.deckRemoveFirst { card, error in
                 if let error = error {
@@ -94,7 +95,16 @@ class RemoteDatabase: GameDatabaseProtocol {
     }
     
     func playerRemoveHand(_ playerId: String, _ cardId: String) -> Single<CardProtocol> {
-        fatalError()
+        Single.create { single in
+            self.stateAdapter.playerRemoveHand(playerId, cardId) { card, error in
+                if let error = error {
+                    single(.error(error))
+                } else {
+                    single(.success(card!))
+                }
+            }
+            return Disposables.create()
+        }
     }
     
     func playerAddInPlay(_ playerId: String, _ card: CardProtocol) -> Completable {

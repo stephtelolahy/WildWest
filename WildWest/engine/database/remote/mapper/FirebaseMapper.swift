@@ -12,6 +12,7 @@ protocol FirebaseMapperProtocol {
     
     func decodeState(from snapshot: DataSnapshot) throws -> GameStateProtocol
     func decodeCard(from snapthot: DataSnapshot) throws -> (String, CardProtocol)
+    func decodeCard(from cardId: String) throws -> CardProtocol
     
     func encodeState(_ state: GameStateProtocol) throws -> [String: Any]
     func encodeChallenge(_ challenge: Challenge?) throws -> [String: Any]?
@@ -48,6 +49,10 @@ class FirebaseMapper: FirebaseMapperProtocol {
         let cardId = try dictionary.values.first.unwrap()
         let card = try dtoDecoder.decode(card: cardId)
         return (key, card)
+    }
+    
+    func decodeCard(from cardId: String) throws -> CardProtocol {
+        try dtoDecoder.decode(card: cardId)
     }
     
     func encodeState(_ state: GameStateProtocol) throws -> [String: Any] {
