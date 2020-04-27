@@ -8,7 +8,7 @@
 
 import Foundation
 
-class GameLoop: NSObject, GameLoopProtocol {
+class GameLoop: NSObject, GameLoopProtocol, Subscribable {
     
     private let delay: TimeInterval
     private let database: GameDatabaseProtocol
@@ -91,8 +91,14 @@ private extension GameLoop {
         
         subjects.emitExecutedUpdate(update)
         
-        updateExecutor.execute(update, in: database)
-        
+        sub(updateExecutor.execute(update, in: database).subscribe(onCompleted: { [ weak self] in
+            self?.wait(afterExecuting: update)
+        }, onError: { error in
+            fatalError(error.localizedDescription)
+        }))
+    }
+    
+    func wait(afterExecuting update: GameUpdate) {
         let waitDelay = pendingUpdates.isEmpty ? 0 : update.executionTime * delay
         schedule(after: waitDelay) { [weak self] in
             self?.processUpdate()
@@ -114,7 +120,7 @@ private extension GameLoop {
     func postExecute(_ move: GameMove) {
         // emit game over
         if let outcome = database.state.claculateOutcome() {
-            database.setOutcome(outcome)
+            sub(database.setOutcome(outcome).subscribe())
             pendingMoves.removeAll()
             return
         }
