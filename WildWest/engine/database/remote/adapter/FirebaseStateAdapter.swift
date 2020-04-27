@@ -23,6 +23,8 @@ protocol FirebaseStateAdapterProtocol {
     func playerAddHand(_ playerId: String, _ card: CardProtocol, _ completion: @escaping FirebaseCompletion)
     func playerRemoveHand(_ playerId: String, _ cardId: String, _ completion: @escaping FirebaseCardCompletion)
     func playerAddInPlay(_ playerId: String, _ card: CardProtocol, _ completion: @escaping FirebaseCompletion)
+    func setOutcome(_ outcome: GameOutcome, _ completion: @escaping FirebaseCompletion)
+    func addDiscard(_ card: CardProtocol, _ completion: @escaping FirebaseCompletion)
 }
 
 class FirebaseStateAdapter: FirebaseStateAdapterProtocol {
@@ -104,6 +106,18 @@ class FirebaseStateAdapter: FirebaseStateAdapterProtocol {
     
     func playerAddInPlay(_ playerId: String, _ card: CardProtocol, _ completion: @escaping FirebaseCompletion) {
         rootRef.child("games/\(gameId)/players/\(playerId)/inPlay/\(card.identifier)").setValue(true) { error, _ in
+            completion(error)
+        }
+    }
+    
+    func setOutcome(_ outcome: GameOutcome, _ completion: @escaping FirebaseCompletion) {
+        rootRef.child("games/\(gameId)/outcome").setValue(outcome.rawValue) { error, _ in
+            completion(error)
+        }
+    }
+    
+    func addDiscard(_ card: CardProtocol, _ completion: @escaping FirebaseCompletion) {
+        rootRef.child("games/\(gameId)/discardPile").childByAutoId().setValue(card.identifier) { error, _ in
             completion(error)
         }
     }

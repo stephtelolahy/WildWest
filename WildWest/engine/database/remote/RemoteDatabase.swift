@@ -33,7 +33,9 @@ class RemoteDatabase: GameDatabaseProtocol {
     }
     
     func setOutcome(_ outcome: GameOutcome) -> Completable {
-        fatalError()
+        Completable.firebaseTransaction { completion in
+            self.stateAdapter.setOutcome(outcome, completion)
+        }
     }
     
     func deckRemoveFirst() -> Single<CardProtocol> {
@@ -44,7 +46,9 @@ class RemoteDatabase: GameDatabaseProtocol {
     }
     
     func addDiscard(_ card: CardProtocol) -> Completable {
-        fatalError()
+        Completable.firebaseTransaction { completion in
+            self.stateAdapter.addDiscard(card, completion)
+        }
     }
     
     func addGeneralStore(_ card: CardProtocol) -> Completable {
