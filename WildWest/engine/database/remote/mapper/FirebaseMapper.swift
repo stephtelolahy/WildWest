@@ -13,10 +13,12 @@ protocol FirebaseMapperProtocol {
     func decodeState(from snapshot: DataSnapshot) throws -> GameStateProtocol
     func decodeCard(from snapthot: DataSnapshot) throws -> (String, CardProtocol)
     func decodeCard(from cardId: String) throws -> CardProtocol
+    func decodeCards(from snapshot: DataSnapshot) throws -> [CardProtocol]
     
     func encodeState(_ state: GameStateProtocol) throws -> [String: Any]
     func encodeChallenge(_ challenge: Challenge?) throws -> [String: Any]?
-    func encodeDamageEvent(_ damageEvent: DamageEvent) throws -> [String: Any]?
+    func encodeDamageEvent(_ damageEvent: DamageEvent) throws -> [String: Any]
+    func encodeOrderedCards(_ cards: [CardProtocol]) throws -> [String: Any]
 }
 
 class FirebaseMapper: FirebaseMapperProtocol {
@@ -56,6 +58,16 @@ class FirebaseMapper: FirebaseMapperProtocol {
         try dtoDecoder.decode(card: cardId)
     }
     
+    func decodeCards(from snapshot: DataSnapshot) throws -> [CardProtocol] {
+        let dictionary = try (snapshot.value as? [String: String]).unwrap()
+        let keys = dictionary.keys.sorted()
+        return try keys.map { key in
+            let cardId = try dictionary[key].unwrap()
+            let card = try dtoDecoder.decode(card: cardId)
+            return card
+        }
+    }
+    
     func encodeState(_ state: GameStateProtocol) throws -> [String: Any] {
         let dto = dtoEncoder.encode(state: state)
         let value = try dictionaryEncoder.encode(dto)
@@ -71,11 +83,14 @@ class FirebaseMapper: FirebaseMapperProtocol {
         return value
     }
     
-    func encodeDamageEvent(_ damageEvent: DamageEvent) throws -> [String: Any]? {
-        guard let dto = dtoEncoder.encode(damageEvent: damageEvent) else {
-            return nil
-        }
-        
+    func encodeDamageEvent(_ damageEvent: DamageEvent) throws -> [String: Any] {
+        let dto = try dtoEncoder.encode(damageEvent: damageEvent).unwrap()
+        let value = try dictionaryEncoder.encode(dto)
+        return value
+    }
+    
+    func encodeOrderedCards(_ cards: [CardProtocol]) throws -> [String: Any] {
+        let dto = dtoEncoder.encode(orderedCards: cards)
         let value = try dictionaryEncoder.encode(dto)
         return value
     }

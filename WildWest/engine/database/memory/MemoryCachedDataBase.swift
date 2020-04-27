@@ -47,7 +47,7 @@ class MemoryCachedDataBase: GameDatabaseProtocol {
     
     func deckRemoveFirst() -> Single<CardProtocol> {
         Completable.cardTransaction {
-            self.mutableState.verifyDeckSize()
+            self.mutableState.resetDeck(when: 2)
             let card = self.mutableState.deck.removeFirst()
             self.emitState()
             return card
@@ -140,12 +140,13 @@ private extension MemoryCachedDataBase {
 
 private extension GameState {
     
-    func verifyDeckSize() {
-        let minimumDeckSize = 2
-        if deck.count <= minimumDeckSize {
-            let cards = discardPile
-            deck.append(contentsOf: Array(cards[1..<cards.count]).shuffled())
-            discardPile = Array(cards[0..<1])
+    func resetDeck(when minSize: Int) {
+        guard deck.count <= minSize else {
+            return
         }
+        
+        let cards = discardPile
+        deck.append(contentsOf: Array(cards[1..<cards.count]).shuffled())
+        discardPile = Array(cards[0..<1])
     }
 }

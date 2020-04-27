@@ -31,6 +31,7 @@ protocol FirebaseStateAdapterProtocol {
     func addDiscard(_ card: CardProtocol, _ completion: @escaping FirebaseCompletion)
     func addGeneralStore(_ card: CardProtocol, _ completion: @escaping FirebaseCompletion)
     func removeGeneralStore(_ cardId: String, _ completion: @escaping FirebaseCardCompletion)
+    func resetDeck(when minSize: Int, _ completion: @escaping FirebaseCompletion)
 }
 
 class FirebaseStateAdapter: FirebaseStateAdapterProtocol {
@@ -172,4 +173,77 @@ class FirebaseStateAdapter: FirebaseStateAdapterProtocol {
             }
         }
     }
+    
+    func resetDeck(when minSize: Int, _ completion: @escaping FirebaseCompletion) {
+        let limit = UInt(minSize + 1)
+        rootRef.child("games/\(gameId)/deck").queryLimited(toFirst: limit).observeSingleEvent(of: .value) { snapshot in
+            do {
+                let dictionary = try (snapshot.value as? [String: String]).unwrap()
+                guard dictionary.keys.count <= minSize else {
+                    completion(nil)
+                    return
+                }
+                
+                let deckCards = try self.mapper.decodeCards(from: snapshot)
+                
+                self.rootRef.child("games/\(self.gameId)/discardPile").queryOrderedByKey().observeSingleEvent(of: .value) { snapshot in
+                    do {
+                        let cards = try self.mapper.decodeCards(from: snapshot)
+                        
+                        let deck = (deckCards + Array(cards[1..<cards.count])).shuffled()
+                        let discard = Array(cards[0..<1])
+                        
+                        self.setDeck(deck, discards: discard, completion)
+                        
+                    } catch {
+                        completion(error)
+                    }
+                }
+                
+            } catch {
+                completion(error)
+            }
+        }
+    }
+}
+
+private extension FirebaseStateAdapter {
+    
+    func setDeck(_ deckCards: [CardProtocol], discards: [CardProtocol], _ completion: @escaping FirebaseCompletion) {
+        setDeck(deckCards) { error in
+            if let error = error {
+                completion(error)
+                return
+            }
+            
+            self.setDiscardPile(discards) { error in
+                if let error = error {
+                    completion(error)
+                } else {
+                    completion(nil)
+                }
+            }
+        }
+    }
+    
+    func setDeck(_ cards: [CardProtocol], _ completion: @escaping FirebaseCompletion) {
+        do {
+            let value = try mapper.encodeOrderedCards(cards)
+            rootRef.child("games/\(gameId)/deck").setValue(value)
+            completion(nil)
+        } catch {
+            completion(error)
+        }
+    }
+    
+    func setDiscardPile(_ cards: [CardProtocol], _ completion: @escaping FirebaseCompletion) {
+        do {
+            let value = try mapper.encodeOrderedCards(cards.reversed())
+            rootRef.child("games/\(gameId)/discardPile").setValue(value)
+            completion(nil)
+        } catch {
+            completion(error)
+        }
+    }
+    
 }

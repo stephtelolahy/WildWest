@@ -48,9 +48,6 @@ class DtoEncoder {
                               source: encode(damageSource: damageEvent.source))
         
     }
-}
-
-private extension DtoEncoder {
     
     func encode(orderedCards: [CardProtocol]) -> [String: String]? {
         guard !orderedCards.isEmpty else {
@@ -66,6 +63,9 @@ private extension DtoEncoder {
         
         return result
     }
+}
+
+private extension DtoEncoder {
     
     func encode(cards: [CardProtocol]) -> [String: Bool]? {
         guard !cards.isEmpty else {
