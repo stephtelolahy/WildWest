@@ -38,7 +38,7 @@ class RemoteDatabase: GameDatabaseProtocol {
     
     func deckRemoveFirst() -> Single<CardProtocol> {
         // TODO: verify deck size
-        Single<CardProtocol>.firebaseCardTransaction { completion in
+        Completable.firebaseCardTransaction { completion in
             self.stateAdapter.deckRemoveFirst(completion)
         }
     }
@@ -66,7 +66,7 @@ class RemoteDatabase: GameDatabaseProtocol {
     }
     
     func playerRemoveHand(_ playerId: String, _ cardId: String) -> Single<CardProtocol> {
-        Single<CardProtocol>.firebaseCardTransaction { completion in
+        Completable.firebaseCardTransaction { completion in
             self.stateAdapter.playerRemoveHand(playerId, cardId, completion)
         }
     }

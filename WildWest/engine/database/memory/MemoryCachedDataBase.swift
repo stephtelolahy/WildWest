@@ -6,6 +6,7 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 // swiftlint:disable force_cast
+// swiftlint: disable type_body_length
 
 import RxSwift
 
@@ -22,112 +23,111 @@ class MemoryCachedDataBase: GameDatabaseProtocol {
     // MARK: - Flags
     
     func setTurn(_ turn: String) -> Completable {
-        createTransaction {
+        Completable.transaction {
             self.mutableState.turn = turn
+            self.emitState()
         }
     }
     
     func setChallenge(_ challenge: Challenge?) -> Completable {
-        createTransaction {
+        Completable.transaction {
             self.mutableState.challenge = challenge
+            self.emitState()
         }
     }
     
     func setOutcome(_ outcome: GameOutcome) -> Completable {
-        createTransaction {
+        Completable.transaction {
             self.mutableState.outcome = outcome
+            self.emitState()
         }
     }
     
     // MARK: - Deck
     
     func deckRemoveFirst() -> Single<CardProtocol> {
-        createCardTransaction {
+        Completable.cardTransaction {
             self.mutableState.verifyDeckSize()
-            return self.mutableState.deck.removeFirst()
+            let card = self.mutableState.deck.removeFirst()
+            self.emitState()
+            return card
         }
     }
     
     func addDiscard(_ card: CardProtocol) -> Completable {
-        createTransaction {
+        Completable.transaction {
             self.mutableState.discardPile.insert(card, at: 0)
+            self.emitState()
         }
     }
     
     func addGeneralStore(_ card: CardProtocol) -> Completable {
-        createTransaction {
+        Completable.transaction {
             self.mutableState.generalStore.append(card)
+            self.emitState()
         }
     }
     
     func removeGeneralStore(_ cardId: String) -> Single<CardProtocol> {
-        createCardTransaction {
-            self.mutableState.generalStore.removeFirst(where: { $0.identifier == cardId })!
+        Completable.cardTransaction {
+            let card = self.mutableState.generalStore.removeFirst(where: { $0.identifier == cardId })!
+            self.emitState()
+            return card
         }
     }
     
     func playerSetHealth(_ playerId: String, _ health: Int) -> Completable {
-        createTransaction {
+        Completable.transaction {
             self.mutablePlayer(playerId).health = health
+            self.emitState()
         }
     }
     
     func playerAddHand(_ playerId: String, _ card: CardProtocol) -> Completable {
-        createTransaction {
+        Completable.transaction {
             self.mutablePlayer(playerId).hand.append(card)
+            self.emitState()
         }
     }
     
     func playerRemoveHand(_ playerId: String, _ cardId: String) -> Single<CardProtocol> {
-        createCardTransaction {
-            self.mutablePlayer(playerId).hand.removeFirst(where: { $0.identifier == cardId })!
+        Completable.cardTransaction {
+            let card = self.mutablePlayer(playerId).hand.removeFirst(where: { $0.identifier == cardId })!
+            self.emitState()
+            return card
         }
     }
     
     func playerAddInPlay(_ playerId: String, _ card: CardProtocol) -> Completable {
-        createTransaction {
+        Completable.transaction {
             self.mutablePlayer(playerId).inPlay.append(card)
         }
     }
     
     func playerRemoveInPlay(_ playerId: String, _ cardId: String) -> Single<CardProtocol> {
-        createCardTransaction {
-            self.mutablePlayer(playerId).inPlay.removeFirst(where: { $0.identifier == cardId })!
+        Completable.cardTransaction {
+            let card = self.mutablePlayer(playerId).inPlay.removeFirst(where: { $0.identifier == cardId })!
+            self.emitState()
+            return card
         }
     }
     
     func playerSetBangsPlayed(_ playerId: String, _ bangsPlayed: Int) -> Completable {
-        createTransaction {
+        Completable.transaction {
             self.mutablePlayer(playerId).bangsPlayed = bangsPlayed
+            self.emitState()
         }
     }
     
     func playerSetDamageEvent(_ playerId: String, _ event: DamageEvent) -> Completable {
-        createTransaction {
+        Completable.transaction {
             self.mutablePlayer(playerId).lastDamage = event
+            self.emitState()
         }
     }
 }
 
 private extension MemoryCachedDataBase {
-    
-    func createTransaction(_ transaction: @escaping (() -> Void)) -> Completable {
-        Completable.create { completable in
-            transaction()
-            self.emitState()
-            completable(.completed)
-            return Disposables.create()
-        }
-    }
-    
-    func createCardTransaction(_ transaction: @escaping (() -> CardProtocol)) -> Single<CardProtocol> {
-        Single.create { single in
-            let card = transaction()
-            self.emitState()
-            single(.success(card))
-            return Disposables.create()
-        }
-    }
     
     func mutablePlayer(_ playerId: String) -> Player {
         mutableState.allPlayers.first(where: { $0.identifier == playerId }) as! Player
