@@ -5,7 +5,7 @@
 //  Created by Hugues Stephano Telolahy on 24/01/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-// swiftlint:disable type_body_length
+// swiftlint:disable implicitly_unwrapped_optional
 
 import UIKit
 import RxSwift
@@ -26,7 +26,7 @@ class GameViewController: UIViewController, Subscribable {
     
     // MARK: Properties
     
-    var engine: GameEngineProtocol?
+    var engine: GameEngineProtocol!
     var aiAgents: [AIPlayerAgentProtocol]?
     var controlledPlayerId: String?
     
@@ -40,22 +40,13 @@ class GameViewController: UIViewController, Subscribable {
     private var moveSoundPlayer: MoveSoundPlayerProtocol?
     private var reactionMoveSelector: ReactionMoveSelectorProtocol?
     
-    private lazy var statsBuilder: StatsBuilderProtocol = {
-        guard let sheriff = engine?.subjects.allPlayers.first(where: { $0.role == .sheriff }) else {
-            fatalError("Illegal state")
-        }
-        
-        return StatsBuilder(sheriffId: sheriff.identifier, classifier: MoveClassifier())
-    }()
-    
+    private lazy var statsBuilder = StatsBuilder(sheriffId: engine.subjects.sheriffId, classifier: MoveClassifier())
     private lazy var playerAdapter = PlayersAdapter()
     private lazy var actionsAdapter = ActionsAdapter(playerId: controlledPlayerId)
     private lazy var moveDescriptor = MoveDescriptor()
     private lazy var instructionBuilder = InstructionBuilder()
     private lazy var playMoveSelector = PlayMoveSelector(viewController: self)
-    
     private lazy var playerDescriptor = PlayerDescriptor(viewController: self)
-    
     private lazy var updateAnimator = UpdateAnimator(viewController: self,
                                                      cardPositions: buildCardPositions(),
                                                      cardSize: buildCardSize())
@@ -77,10 +68,6 @@ class GameViewController: UIViewController, Subscribable {
         
         let layout = playersCollectionView.collectionViewLayout as? GameCollectionViewLayout
         layout?.delegate = self
-        
-        guard let engine = self.engine else {
-            return
-        }
         
         sub(engine.subjects.state(observedBy: controlledPlayerId).subscribe(onNext: { [weak self] state in
             self?.processState(state)
@@ -111,19 +98,19 @@ class GameViewController: UIViewController, Subscribable {
     
     @IBAction private func endTurnTapped(_ sender: Any) {
         playMoveSelector.selectMove(within: endTurnMoves) { [weak self] move in
-            self?.engine?.execute(move)
+            self?.engine.execute(move)
         }
     }
     
     @IBAction private func otherMovesTapped(_ sender: Any) {
         playMoveSelector.selectMove(within: otherMoves) { [weak self] move in
-            self?.engine?.execute(move)
+            self?.engine.execute(move)
         }
     }
     
     @IBAction private func startButtonTapped(_ sender: Any) {
         (sender as? UIButton)?.isEnabled = false
-        engine?.startGame()
+        engine.startGame()
     }
 }
 
@@ -179,7 +166,7 @@ private extension GameViewController {
         if state.challenge != nil,
             !moves.isEmpty {
             reactionMoveSelector?.selectMove(within: moves, state: state) { [weak self] move in
-                self?.engine?.execute(move)
+                self?.engine.execute(move)
             }
         }
         
@@ -275,7 +262,7 @@ extension GameViewController: UICollectionViewDelegate {
     private func actionsCollectionViewDidSelectItem(at indexPath: IndexPath) {
         let moves = actionItems[indexPath.row].moves
         playMoveSelector.selectMove(within: moves) { [weak self] move in
-            self?.engine?.execute(move)
+            self?.engine.execute(move)
         }
     }
 }
@@ -283,11 +270,7 @@ extension GameViewController: UICollectionViewDelegate {
 extension GameViewController: GameCollectionViewLayoutDelegate {
     
     func numberOfItemsForGameCollectionViewLayout(layout: GameCollectionViewLayout) -> Int {
-        guard let engine = self.engine else {
-            return 0
-        }
-        
-        return engine.subjects.allPlayers.count
+        engine.subjects.playerIds.count
     }
 }
 
@@ -308,7 +291,7 @@ private extension GameViewController {
         result[.deck] = deckCenter
         result[.discard] = discardCenter
         
-        let playerIds = engine.subjects.allPlayers.map { $0.identifier }
+        let playerIds = engine.subjects.playerIds
         for (index, playerId) in playerIds.enumerated() {
             guard let cell = playersCollectionView.cellForItem(at: IndexPath(row: index, section: 0)),
                 let cellCenter = cell.superview?.convert(cell.center, to: view) else {

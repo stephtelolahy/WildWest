@@ -26,11 +26,7 @@ class AIPlayerAgent: AIPlayerAgentProtocol, Subscribable {
         self.playerId = playerId
         self.ai = ai
         self.engine = engine
-        
-        guard let sheriff = engine.subjects.allPlayers.first(where: { $0.role == .sheriff }) else {
-            fatalError("Illegal state")
-        }
-        statsBuilder = StatsBuilder(sheriffId: sheriff.identifier, classifier: MoveClassifier())
+        statsBuilder = StatsBuilder(sheriffId: engine.subjects.sheriffId, classifier: MoveClassifier())
     }
     
     func observeState() {

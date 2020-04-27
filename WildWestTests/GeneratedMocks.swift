@@ -186,14 +186,28 @@ import RxSwift
     
     
     
-     var allPlayers: [PlayerProtocol] {
+     var sheriffId: String {
         get {
-            return cuckoo_manager.getter("allPlayers",
+            return cuckoo_manager.getter("sheriffId",
                 superclassCall:
                     
                     Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                     ,
-                defaultCall: __defaultImplStub!.allPlayers)
+                defaultCall: __defaultImplStub!.sheriffId)
+        }
+        
+    }
+    
+    
+    
+     var playerIds: [String] {
+        get {
+            return cuckoo_manager.getter("playerIds",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.playerIds)
         }
         
     }
@@ -316,8 +330,13 @@ import RxSwift
 	    }
 	    
 	    
-	    var allPlayers: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameSubjectsProtocol, [PlayerProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "allPlayers")
+	    var sheriffId: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameSubjectsProtocol, String> {
+	        return .init(manager: cuckoo_manager, name: "sheriffId")
+	    }
+	    
+	    
+	    var playerIds: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameSubjectsProtocol, [String]> {
+	        return .init(manager: cuckoo_manager, name: "playerIds")
 	    }
 	    
 	    
@@ -371,8 +390,13 @@ import RxSwift
 	
 	    
 	    
-	    var allPlayers: Cuckoo.VerifyReadOnlyProperty<[PlayerProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "allPlayers", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var sheriffId: Cuckoo.VerifyReadOnlyProperty<String> {
+	        return .init(manager: cuckoo_manager, name: "sheriffId", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var playerIds: Cuckoo.VerifyReadOnlyProperty<[String]> {
+	        return .init(manager: cuckoo_manager, name: "playerIds", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	
@@ -425,9 +449,17 @@ import RxSwift
  class GameSubjectsProtocolStub: GameSubjectsProtocol {
     
     
-     var allPlayers: [PlayerProtocol] {
+     var sheriffId: String {
         get {
-            return DefaultValueRegistry.defaultValue(for: ([PlayerProtocol]).self)
+            return DefaultValueRegistry.defaultValue(for: (String).self)
+        }
+        
+    }
+    
+    
+     var playerIds: [String] {
+        get {
+            return DefaultValueRegistry.defaultValue(for: ([String]).self)
         }
         
     }
