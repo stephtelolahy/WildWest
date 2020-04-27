@@ -16,6 +16,7 @@ protocol FirebaseMapperProtocol {
     
     func encodeState(_ state: GameStateProtocol) throws -> [String: Any]
     func encodeChallenge(_ challenge: Challenge?) throws -> [String: Any]?
+    func encodeDamageEvent(_ damageEvent: DamageEvent) throws -> [String: Any]?
 }
 
 class FirebaseMapper: FirebaseMapperProtocol {
@@ -63,6 +64,15 @@ class FirebaseMapper: FirebaseMapperProtocol {
     
     func encodeChallenge(_ challenge: Challenge?) throws -> [String: Any]? {
         guard let dto = dtoEncoder.encode(challenge: challenge) else {
+            return nil
+        }
+        
+        let value = try dictionaryEncoder.encode(dto)
+        return value
+    }
+    
+    func encodeDamageEvent(_ damageEvent: DamageEvent) throws -> [String: Any]? {
+        guard let dto = dtoEncoder.encode(damageEvent: damageEvent) else {
             return nil
         }
         

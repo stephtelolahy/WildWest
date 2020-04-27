@@ -38,6 +38,16 @@ class DtoEncoder {
                             counterNeeded: challenge.counterNeeded,
                             barrelsPlayed: challenge.barrelsPlayed)
     }
+    
+    func encode(damageEvent: DamageEvent?) -> DamageEventDto? {
+        guard let damageEvent = damageEvent else {
+            return nil
+        }
+        
+        return DamageEventDto(damage: damageEvent.damage,
+                              source: encode(damageSource: damageEvent.source))
+        
+    }
 }
 
 private extension DtoEncoder {
@@ -107,16 +117,6 @@ private extension DtoEncoder {
             result[key.rawValue] = value
         }
         return result
-    }
-    
-    func encode(damageEvent: DamageEvent?) -> DamageEventDto? {
-        guard let damageEvent = damageEvent else {
-            return nil
-        }
-        
-        return DamageEventDto(damage: damageEvent.damage,
-                              source: encode(damageSource: damageEvent.source))
-        
     }
     
     func encode(damageSource: DamageSource) -> DamageSourceDto? {

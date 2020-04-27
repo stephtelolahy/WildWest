@@ -24,6 +24,9 @@ protocol FirebaseStateAdapterProtocol {
     func playerAddHand(_ playerId: String, _ card: CardProtocol, _ completion: @escaping FirebaseCompletion)
     func playerRemoveHand(_ playerId: String, _ cardId: String, _ completion: @escaping FirebaseCardCompletion)
     func playerAddInPlay(_ playerId: String, _ card: CardProtocol, _ completion: @escaping FirebaseCompletion)
+    func playerRemoveInPlay(_ playerId: String, _ cardId: String, _ completion: @escaping FirebaseCardCompletion)
+    func playerSetHealth(_ playerId: String, _ health: Int, _ completion: @escaping FirebaseCompletion)
+    func playerSetDamageEvent(_ playerId: String, _ event: DamageEvent, _ completion: @escaping FirebaseCompletion)
     func setOutcome(_ outcome: GameOutcome, _ completion: @escaping FirebaseCompletion)
     func addDiscard(_ card: CardProtocol, _ completion: @escaping FirebaseCompletion)
     func addGeneralStore(_ card: CardProtocol, _ completion: @escaping FirebaseCompletion)
@@ -109,6 +112,34 @@ class FirebaseStateAdapter: FirebaseStateAdapterProtocol {
     
     func playerAddInPlay(_ playerId: String, _ card: CardProtocol, _ completion: @escaping FirebaseCompletion) {
         rootRef.child("games/\(gameId)/players/\(playerId)/inPlay/\(card.identifier)").setValue(true) { error, _ in
+            completion(error)
+        }
+    }
+    
+    func playerRemoveInPlay(_ playerId: String, _ cardId: String, _ completion: @escaping FirebaseCardCompletion) {
+        rootRef.child("games/\(gameId)/players/\(playerId)/inPlay/\(cardId)").setValue(nil) { error, _ in
+            do {
+                let card: CardProtocol = try self.mapper.decodeCard(from: cardId)
+                completion(card, error)
+            } catch {
+                completion(nil, error)
+            }
+        }
+    }
+    
+    func playerSetHealth(_ playerId: String, _ health: Int, _ completion: @escaping FirebaseCompletion) {
+        rootRef.child("games/\(gameId)/players/\(playerId)/health").setValue(health) { error, _ in
+            completion(error)
+        }
+    }
+    
+    func playerSetDamageEvent(_ playerId: String, _ event: DamageEvent, _ completion: @escaping FirebaseCompletion) {
+        do {
+            let value = try mapper.encodeDamageEvent(event)
+            rootRef.child("games/\(gameId)/players/\(playerId)/lastDamage").setValue(value) { error, _ in
+                completion(error)
+            }
+        } catch {
             completion(error)
         }
     }

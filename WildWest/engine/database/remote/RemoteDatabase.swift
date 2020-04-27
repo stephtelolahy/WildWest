@@ -64,7 +64,9 @@ class RemoteDatabase: GameDatabaseProtocol {
     }
     
     func playerSetHealth(_ playerId: String, _ health: Int) -> Completable {
-        fatalError()
+        Completable.firebaseTransaction { completion in
+            self.stateAdapter.playerSetHealth(playerId, health, completion)
+        }
     }
     
     func playerAddHand(_ playerId: String, _ card: CardProtocol) -> Completable {
@@ -86,7 +88,9 @@ class RemoteDatabase: GameDatabaseProtocol {
     }
     
     func playerRemoveInPlay(_ playerId: String, _ cardId: String) -> Single<CardProtocol> {
-        fatalError()
+        Completable.firebaseCardTransaction { completion in
+            self.stateAdapter.playerRemoveInPlay(playerId, cardId, completion)
+        }
     }
     
     func playerSetBangsPlayed(_ playerId: String, _ bangsPlayed: Int) -> Completable {
@@ -96,7 +100,9 @@ class RemoteDatabase: GameDatabaseProtocol {
     }
     
     func playerSetDamageEvent(_ playerId: String, _ event: DamageEvent) -> Completable {
-        fatalError()
+        Completable.firebaseTransaction { completion in
+            self.stateAdapter.playerSetDamageEvent(playerId, event, completion)
+        }
     }
 }
 
