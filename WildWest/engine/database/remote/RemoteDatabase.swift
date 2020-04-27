@@ -52,11 +52,15 @@ class RemoteDatabase: GameDatabaseProtocol {
     }
     
     func addGeneralStore(_ card: CardProtocol) -> Completable {
-        fatalError()
+        Completable.firebaseTransaction { completion in
+            self.stateAdapter.addGeneralStore(card, completion)
+        }
     }
     
     func removeGeneralStore(_ cardId: String) -> Single<CardProtocol> {
-        fatalError()
+        Completable.firebaseCardTransaction { completion in
+            self.stateAdapter.removeGeneralStore(cardId, completion)
+        }
     }
     
     func playerSetHealth(_ playerId: String, _ health: Int) -> Completable {

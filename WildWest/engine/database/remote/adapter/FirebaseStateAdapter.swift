@@ -7,6 +7,7 @@
 //
 // swiftlint:disable multiple_closures_with_trailing_closure
 // swiftlint:disable multiline_arguments
+// swiftlint:disable type_body_length
 
 import RxSwift
 import Firebase
@@ -25,6 +26,8 @@ protocol FirebaseStateAdapterProtocol {
     func playerAddInPlay(_ playerId: String, _ card: CardProtocol, _ completion: @escaping FirebaseCompletion)
     func setOutcome(_ outcome: GameOutcome, _ completion: @escaping FirebaseCompletion)
     func addDiscard(_ card: CardProtocol, _ completion: @escaping FirebaseCompletion)
+    func addGeneralStore(_ card: CardProtocol, _ completion: @escaping FirebaseCompletion)
+    func removeGeneralStore(_ cardId: String, _ completion: @escaping FirebaseCardCompletion)
 }
 
 class FirebaseStateAdapter: FirebaseStateAdapterProtocol {
@@ -119,6 +122,23 @@ class FirebaseStateAdapter: FirebaseStateAdapterProtocol {
     func addDiscard(_ card: CardProtocol, _ completion: @escaping FirebaseCompletion) {
         rootRef.child("games/\(gameId)/discardPile").childByAutoId().setValue(card.identifier) { error, _ in
             completion(error)
+        }
+    }
+    
+    func addGeneralStore(_ card: CardProtocol, _ completion: @escaping FirebaseCompletion) {
+        rootRef.child("games/\(gameId)/generalStore/\(card.identifier)").setValue(true) { error, _ in
+            completion(error)
+        }
+    }
+    
+    func removeGeneralStore(_ cardId: String, _ completion: @escaping FirebaseCardCompletion) {
+        rootRef.child("games/\(gameId)/generalStore/\(cardId)").setValue(nil) { error, _ in
+            do {
+                let card: CardProtocol = try self.mapper.decodeCard(from: cardId)
+                completion(card, error)
+            } catch {
+                completion(nil, error)
+            }
         }
     }
 }
