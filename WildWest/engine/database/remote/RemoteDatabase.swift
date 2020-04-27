@@ -108,7 +108,16 @@ class RemoteDatabase: GameDatabaseProtocol {
     }
     
     func playerAddInPlay(_ playerId: String, _ card: CardProtocol) -> Completable {
-        fatalError()
+        Completable.create { completable in
+            self.stateAdapter.playerAddInPlay(playerId, card) { error in
+                if let error = error {
+                    completable(.error(error))
+                } else {
+                    completable(.completed)
+                }
+            }
+            return Disposables.create()
+        }
     }
     
     func playerRemoveInPlay(_ playerId: String, _ cardId: String) -> Single<CardProtocol> {
