@@ -5,7 +5,6 @@
 //  Created by Hugues Stephano Telolahy on 23/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-// swiftlint:disable type_body_length
 
 import RxSwift
 
@@ -22,28 +21,14 @@ class RemoteDatabase: GameDatabaseProtocol {
     }
     
     func setTurn(_ turn: String) -> Completable {
-        Completable.create { completable in
-            self.stateAdapter.setTurn(turn) { error in
-                if let error = error {
-                    completable(.error(error))
-                } else {
-                    completable(.completed)
-                }
-            }
-            return Disposables.create()
+        Completable.firebaseTransaction { completion in
+            self.stateAdapter.setTurn(turn, completion)
         }
     }
     
     func setChallenge(_ challenge: Challenge?) -> Completable {
-        Completable.create { completable in
-            self.stateAdapter.setChallenge(challenge) { error in
-                if let error = error {
-                    completable(.error(error))
-                } else {
-                    completable(.completed)
-                }
-            }
-            return Disposables.create()
+        Completable.firebaseTransaction { completion in
+            self.stateAdapter.setChallenge(challenge, completion)
         }
     }
     
@@ -53,15 +38,8 @@ class RemoteDatabase: GameDatabaseProtocol {
     
     func deckRemoveFirst() -> Single<CardProtocol> {
         // TODO: verify deck size
-        Single.create { single in
-            self.stateAdapter.deckRemoveFirst { card, error in
-                if let error = error {
-                    single(.error(error))
-                } else {
-                    single(.success(card!))
-                }
-            }
-            return Disposables.create()
+        Single<CardProtocol>.firebaseCardTransaction { completion in
+            self.stateAdapter.deckRemoveFirst(completion)
         }
     }
     
@@ -82,41 +60,20 @@ class RemoteDatabase: GameDatabaseProtocol {
     }
     
     func playerAddHand(_ playerId: String, _ card: CardProtocol) -> Completable {
-        Completable.create { completable in
-            self.stateAdapter.playerAddHand(playerId, card) { error in
-                if let error = error {
-                    completable(.error(error))
-                } else {
-                    completable(.completed)
-                }
-            }
-            return Disposables.create()
+        Completable.firebaseTransaction { completion in
+            self.stateAdapter.playerAddHand(playerId, card, completion)
         }
     }
     
     func playerRemoveHand(_ playerId: String, _ cardId: String) -> Single<CardProtocol> {
-        Single.create { single in
-            self.stateAdapter.playerRemoveHand(playerId, cardId) { card, error in
-                if let error = error {
-                    single(.error(error))
-                } else {
-                    single(.success(card!))
-                }
-            }
-            return Disposables.create()
+        Single<CardProtocol>.firebaseCardTransaction { completion in
+            self.stateAdapter.playerRemoveHand(playerId, cardId, completion)
         }
     }
     
     func playerAddInPlay(_ playerId: String, _ card: CardProtocol) -> Completable {
-        Completable.create { completable in
-            self.stateAdapter.playerAddInPlay(playerId, card) { error in
-                if let error = error {
-                    completable(.error(error))
-                } else {
-                    completable(.completed)
-                }
-            }
-            return Disposables.create()
+        Completable.firebaseTransaction { completion in
+            self.stateAdapter.playerAddInPlay(playerId, card, completion)
         }
     }
     
@@ -125,15 +82,8 @@ class RemoteDatabase: GameDatabaseProtocol {
     }
     
     func playerSetBangsPlayed(_ playerId: String, _ bangsPlayed: Int) -> Completable {
-        Completable.create { completable in
-            self.stateAdapter.playerSetBangsPlayed(playerId, bangsPlayed) { error in
-                if let error = error {
-                    completable(.error(error))
-                } else {
-                    completable(.completed)
-                }
-            }
-            return Disposables.create()
+        Completable.firebaseTransaction { completion in
+            self.stateAdapter.playerSetBangsPlayed(playerId, bangsPlayed, completion)
         }
     }
     

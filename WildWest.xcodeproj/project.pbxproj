@@ -171,6 +171,7 @@
 		335BED9C2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9A2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 */; };
 		335BED9E2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */; };
 		335BED9F2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */; };
+		33604AF4245735DA00439D45 /* Single+Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33604AF3245735DA00439D45 /* Single+Transaction.swift */; };
 		336AA6F023F1450800328837 /* GameDatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */; };
 		336AA6F123F1450B00328837 /* GameDatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */; };
 		3372CB502454BB7C00C061C9 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372CB4F2454BB7C00C061C9 /* Navigator.swift */; };
@@ -408,6 +409,7 @@
 		335BED9724294422009184A3 /* Peacock-SoundBible.com-1698361099.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Peacock-SoundBible.com-1698361099.mp3"; sourceTree = "<group>"; };
 		335BED9A2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Pain-SoundBible.com-1883168362.mp3"; sourceTree = "<group>"; };
 		335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Automatic Machine Gun-SoundBible.com-253461580.mp3"; sourceTree = "<group>"; };
+		33604AF3245735DA00439D45 /* Single+Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Single+Transaction.swift"; sourceTree = "<group>"; };
 		336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDatabaseProtocol.swift; sourceTree = "<group>"; };
 		3372CB4F2454BB7C00C061C9 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		3372CB512454BC7900C061C9 /* FigureSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FigureSelector.swift; sourceTree = "<group>"; };
@@ -759,12 +761,21 @@
 			path = setup;
 			sourceTree = "<group>";
 		};
+		33604AF52457378200439D45 /* rx+transaction */ = {
+			isa = PBXGroup;
+			children = (
+				33604AF3245735DA00439D45 /* Single+Transaction.swift */,
+			);
+			path = "rx+transaction";
+			sourceTree = "<group>";
+		};
 		3366493823F93EE000125483 /* database */ = {
 			isa = PBXGroup;
 			children = (
 				336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */,
 				33CC77DD24549EA800701BC8 /* memory */,
 				33CC77DE24549ED200701BC8 /* remote */,
+				33604AF52457378200439D45 /* rx+transaction */,
 			);
 			path = database;
 			sourceTree = "<group>";
@@ -1561,6 +1572,7 @@
 				331231012434FC890080B696 /* GameState+Player.swift in Sources */,
 				AD49F86723BA054400543F59 /* Figure.swift in Sources */,
 				3328FCDE242F2D1F00A82255 /* ChooseCard.swift in Sources */,
+				33604AF4245735DA00439D45 /* Single+Transaction.swift in Sources */,
 				33BC633F2444D0FF00760F25 /* UIViewController+CardAnimation.swift in Sources */,
 				ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */,
 				33B896CA243862AB0005FF21 /* GameCollectionViewLayout.swift in Sources */,

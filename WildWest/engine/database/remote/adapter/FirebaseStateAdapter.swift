@@ -16,13 +16,13 @@ typealias FirebaseCardCompletion = (CardProtocol?, Error?) -> Void
 
 protocol FirebaseStateAdapterProtocol {
     func observe(completion: @escaping ((GameStateProtocol) -> Void))
-    func setTurn(_ turn: String, completion: @escaping FirebaseCompletion)
-    func setChallenge(_ challenge: Challenge?, completion: @escaping FirebaseCompletion)
-    func playerSetBangsPlayed(_ playerId: String, _ bangsPlayed: Int, completion: @escaping FirebaseCompletion)
-    func deckRemoveFirst(completion: @escaping FirebaseCardCompletion)
-    func playerAddHand(_ playerId: String, _ card: CardProtocol, completion: @escaping FirebaseCompletion)
-    func playerRemoveHand(_ playerId: String, _ cardId: String, completion: @escaping FirebaseCardCompletion)
-    func playerAddInPlay(_ playerId: String, _ card: CardProtocol, completion: @escaping FirebaseCompletion)
+    func setTurn(_ turn: String, _ completion: @escaping FirebaseCompletion)
+    func setChallenge(_ challenge: Challenge?, _ completion: @escaping FirebaseCompletion)
+    func playerSetBangsPlayed(_ playerId: String, _ bangsPlayed: Int, _ completion: @escaping FirebaseCompletion)
+    func deckRemoveFirst(_ completion: @escaping FirebaseCardCompletion)
+    func playerAddHand(_ playerId: String, _ card: CardProtocol, _ completion: @escaping FirebaseCompletion)
+    func playerRemoveHand(_ playerId: String, _ cardId: String, _ completion: @escaping FirebaseCardCompletion)
+    func playerAddInPlay(_ playerId: String, _ card: CardProtocol, _ completion: @escaping FirebaseCompletion)
 }
 
 class FirebaseStateAdapter: FirebaseStateAdapterProtocol {
@@ -49,13 +49,13 @@ class FirebaseStateAdapter: FirebaseStateAdapterProtocol {
         }
     }
     
-    func setTurn(_ turn: String, completion: @escaping FirebaseCompletion) {
+    func setTurn(_ turn: String, _ completion: @escaping FirebaseCompletion) {
         rootRef.child("games/\(gameId)/turn").setValue(turn) { error, _ in
             completion(error)
         }
     }
     
-    func setChallenge(_ challenge: Challenge?, completion: @escaping FirebaseCompletion) {
+    func setChallenge(_ challenge: Challenge?, _ completion: @escaping FirebaseCompletion) {
         do {
             let value = try mapper.encodeChallenge(challenge)
             rootRef.child("games/\(gameId)/challenge").setValue(value) { error, _ in
@@ -66,13 +66,13 @@ class FirebaseStateAdapter: FirebaseStateAdapterProtocol {
         }
     }
     
-    func playerSetBangsPlayed(_ playerId: String, _ bangsPlayed: Int, completion: @escaping FirebaseCompletion) {
+    func playerSetBangsPlayed(_ playerId: String, _ bangsPlayed: Int, _ completion: @escaping FirebaseCompletion) {
         rootRef.child("games/\(gameId)/players/\(playerId)/bangsPlayed").setValue(bangsPlayed) { error, _ in
             completion(error)
         }
     }
     
-    func deckRemoveFirst(completion: @escaping FirebaseCardCompletion) {
+    func deckRemoveFirst(_ completion: @escaping FirebaseCardCompletion) {
         rootRef.child("games/\(gameId)/deck").queryLimited(toFirst: 1).observeSingleEvent(of: .value) { snapshot in
             do {
                 let (key, card) = try self.mapper.decodeCard(from: snapshot)
@@ -85,13 +85,13 @@ class FirebaseStateAdapter: FirebaseStateAdapterProtocol {
         }
     }
     
-    func playerAddHand(_ playerId: String, _ card: CardProtocol, completion: @escaping FirebaseCompletion) {
+    func playerAddHand(_ playerId: String, _ card: CardProtocol, _ completion: @escaping FirebaseCompletion) {
         rootRef.child("games/\(gameId)/players/\(playerId)/hand/\(card.identifier)").setValue(true) { error, _ in
             completion(error)
         }
     }
     
-    func playerRemoveHand(_ playerId: String, _ cardId: String, completion: @escaping FirebaseCardCompletion) {
+    func playerRemoveHand(_ playerId: String, _ cardId: String, _ completion: @escaping FirebaseCardCompletion) {
         rootRef.child("games/\(gameId)/players/\(playerId)/hand/\(cardId)").setValue(nil) { error, _ in
             do {
                 let card: CardProtocol = try self.mapper.decodeCard(from: cardId)
@@ -102,7 +102,7 @@ class FirebaseStateAdapter: FirebaseStateAdapterProtocol {
         }
     }
     
-    func playerAddInPlay(_ playerId: String, _ card: CardProtocol, completion: @escaping FirebaseCompletion) {
+    func playerAddInPlay(_ playerId: String, _ card: CardProtocol, _ completion: @escaping FirebaseCompletion) {
         rootRef.child("games/\(gameId)/players/\(playerId)/inPlay/\(card.identifier)").setValue(true) { error, _ in
             completion(error)
         }
