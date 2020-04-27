@@ -27,7 +27,7 @@ class GameSubjects: GameSubjectsProtocol {
     
     var sheriffId: String {
         guard let state = try? stateSubject.value(),
-            let sheriff = state.players.first(where: { $0.role == .sheriff }) else {
+            let sheriff = state.allPlayers.first(where: { $0.role == .sheriff }) else {
                 fatalError("Illegal state")
         }
         
