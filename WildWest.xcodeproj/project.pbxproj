@@ -610,9 +610,9 @@
 		3306682A24558640003B2263 /* adapter */ = {
 			isa = PBXGroup;
 			children = (
-				337F6F962458875E0044A211 /* FirebaseCompletion.swift */,
 				33DA58472454A05A0047D124 /* FirebaseAdapter.swift */,
 				3306682F24558D34003B2263 /* FirebaseStateAdapter.swift */,
+				337F6F962458875E0044A211 /* FirebaseCompletion.swift */,
 				3331A9CB2455F2AF0063885C /* FirebaseKeyGenerator.swift */,
 			);
 			path = adapter;

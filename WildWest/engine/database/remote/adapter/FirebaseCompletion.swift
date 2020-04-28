@@ -6,21 +6,12 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-enum Result {
-    case success
-    case error(Error)
-}
-
-enum CardResult {
-    case success(CardProtocol)
-    case error(Error)
-}
-
-enum StateResult {
-    case success(GameStateProtocol)
-    case error(Error)
+enum Result<T> {
+  case success(T)
+  case error(Error)
 }
 
 typealias FirebaseCompletion = (Error?) -> Void
 typealias FirebaseCardCompletion = (CardProtocol?, Error?) -> Void
-typealias FirebaseStateCompletion = (StateResult) -> Void
+typealias FirebaseStateCompletion = (Result<GameStateProtocol>) -> Void
+typealias FirebaseStringCompletion = (Result<String>) -> Void

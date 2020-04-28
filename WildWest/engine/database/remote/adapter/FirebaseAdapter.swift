@@ -12,8 +12,8 @@ import RxSwift
 import Firebase
 
 protocol FirebaseAdapterProtocol {
-    func createGame(_ state: GameStateProtocol) -> String
-    func getGame(_ id: String, completion: @escaping ((GameStateProtocol) -> Void))
+    func createGame(_ state: GameStateProtocol, _ completion: @escaping FirebaseStringCompletion)
+    func getGame(_ id: String, completion: @escaping FirebaseStateCompletion)
 }
 
 class FirebaseAdapter: FirebaseAdapterProtocol {
@@ -28,27 +28,33 @@ class FirebaseAdapter: FirebaseAdapterProtocol {
         self.keyGenerator = keyGenerator
     }
     
-    func createGame(_ state: GameStateProtocol) -> String {
+    func createGame(_ state: GameStateProtocol, _ completion: @escaping FirebaseStringCompletion) {
         do {
             let key = keyGenerator.gameAutoId()
             let value = try mapper.encodeState(state)
-            rootRef.child("games/\(key)").setValue(value)
-            return key
+            rootRef.child("games/\(key)").setValue(value) { error, _ in
+                if let error = error {
+                    completion(.error(error))
+                } else {
+                    completion(.success(key))
+                }
+            }
+            
         } catch {
-            fatalError(error.localizedDescription)
+            completion(.error(error))
         }
     }
     
-    func getGame(_ id: String, completion: @escaping ((GameStateProtocol) -> Void)) {
+    func getGame(_ id: String, completion: @escaping FirebaseStateCompletion) {
         rootRef.child("games").child(id).observeSingleEvent(of: .value, with: { snapshot in
             do {
                 let state = try self.mapper.decodeState(from: snapshot)
-                completion(state)
+                completion(.success(state))
             } catch {
-                fatalError(error.localizedDescription)
+                completion(.error(error))
             }
         }) { error in
-            fatalError(error.localizedDescription)
+            completion(.error(error))
         }
     }
 }

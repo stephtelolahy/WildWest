@@ -11,7 +11,7 @@ import SafariServices
 
 class Navigator {
     
-    private unowned var viewController: UIViewController
+    private unowned let viewController: UIViewController
     
     init(_ viewController: UIViewController) {
         self.viewController = viewController

@@ -71,6 +71,8 @@ class GameViewController: UIViewController, Subscribable {
         
         sub(engine.subjects.state(observedBy: controlledPlayerId).subscribe(onNext: { [weak self] state in
             self?.processState(state)
+        }, onError: { [weak self] error in
+            self?.presentAlert(title: "Error", message: error.localizedDescription)
         }))
         
         sub(engine.subjects.executedMove().subscribe(onNext: { [weak self] move in
@@ -179,13 +181,7 @@ private extension GameViewController {
     }
     
     func showGameOver(outcome: GameOutcome) {
-        let alertController = UIAlertController(title: "Game Over",
-                                                message: outcome.rawValue,
-                                                preferredStyle: .alert)
-        
-        alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
-        
-        forcePresent(alertController, animated: true)
+        presentAlert(title: "Game Over", message: outcome.rawValue)
     }
 }
 

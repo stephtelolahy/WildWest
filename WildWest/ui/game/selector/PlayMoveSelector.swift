@@ -15,7 +15,7 @@ protocol PlayMoveSelectorProtocol {
 
 class PlayMoveSelector: PlayMoveSelectorProtocol {
     
-    private unowned var viewController: UIViewController
+    private unowned let viewController: UIViewController
     
     init(viewController: UIViewController) {
         self.viewController = viewController

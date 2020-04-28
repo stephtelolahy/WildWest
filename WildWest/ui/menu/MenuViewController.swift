@@ -34,7 +34,7 @@ class MenuViewController: UIViewController, Subscribable {
     
     private lazy var navigator = Navigator(self)
     
-    private lazy var launcher = GameLauncher(navigator: navigator)
+    private lazy var launcher = GameLauncher(viewController: self)
     
     // MARK: - Lifecycle
     

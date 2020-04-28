@@ -12,10 +12,10 @@ import RxSwift
 
 class GameLauncher {
     
-    private let navigator: Navigator
+    private unowned let viewController: UIViewController
     
-    init(navigator: Navigator) {
-        self.navigator = navigator
+    init(viewController: UIViewController) {
+        self.viewController = viewController
     }
     
     private lazy var gameResources: GameResources = {
@@ -83,20 +83,31 @@ class GameLauncher {
                                                      engine: engine)
         }
         
-        navigator.toGame(engine: engine, controlledPlayerId: controlledPlayerId, aiAgents: aiAgents)
+        Navigator(viewController).toGame(engine: engine, controlledPlayerId: controlledPlayerId, aiAgents: aiAgents)
     }
     
     func startRemote() {
         let state = createGame()
-        
-        let gameId = firebaseAdapter.createGame(state)
-        
-        joinRemoteGame(gameId)
+        firebaseAdapter.createGame(state) { [weak self] result in
+            switch result {
+            case let .success(gameId):
+                self?.joinRemoteGame(gameId)
+                
+            case let .error(error):
+                self?.viewController.presentAlert(title: "Error", message: error.localizedDescription)
+            }
+        }
     }
     
     func joinRemoteGame(_ id: String) {
-        firebaseAdapter.getGame(id) { [weak self] initialState in
-            self?.openRemoteGame(id, state: initialState)
+        firebaseAdapter.getGame(id) { [weak self] result in
+            switch result {
+            case let .success(initialState):
+                self?.openRemoteGame(id, state: initialState)
+                
+            case let .error(error):
+                self?.viewController.presentAlert(title: "Error", message: error.localizedDescription)
+            }
         }
     }
 }
@@ -146,7 +157,7 @@ private extension GameLauncher {
                                                      engine: engine)
         }
         
-        navigator.toGame(engine: engine, controlledPlayerId: controlledPlayerId, aiAgents: aiAgents)
+        Navigator(viewController).toGame(engine: engine, controlledPlayerId: controlledPlayerId, aiAgents: aiAgents)
     }
 }
 
