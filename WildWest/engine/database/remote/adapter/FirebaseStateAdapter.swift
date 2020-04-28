@@ -12,11 +12,8 @@
 import RxSwift
 import Firebase
 
-typealias FirebaseCompletion = (Error?) -> Void
-typealias FirebaseCardCompletion = (CardProtocol?, Error?) -> Void
-
 protocol FirebaseStateAdapterProtocol {
-    func observe(completion: @escaping ((GameStateProtocol) -> Void))
+    func observeState(_ completion: @escaping FirebaseStateCompletion)
     func setTurn(_ turn: String, _ completion: @escaping FirebaseCompletion)
     func setChallenge(_ challenge: Challenge?, _ completion: @escaping FirebaseCompletion)
     func playerSetBangsPlayed(_ playerId: String, _ bangsPlayed: Int, _ completion: @escaping FirebaseCompletion)
@@ -45,16 +42,16 @@ class FirebaseStateAdapter: FirebaseStateAdapterProtocol {
         self.mapper = mapper
     }
     
-    func observe(completion: @escaping ((GameStateProtocol) -> Void)) {
+    func observeState(_ completion: @escaping FirebaseStateCompletion) {
         rootRef.child("games").child(gameId).observe(.value, with: { snapshot in
             do {
                 let state = try self.mapper.decodeState(from: snapshot)
-                completion(state)
+                completion(.success(state))
             } catch {
-                fatalError(error.localizedDescription)
+                completion(.error(error))
             }
         }) { error in
-            fatalError(error.localizedDescription)
+            completion(.error(error))
         }
     }
     
@@ -186,7 +183,8 @@ class FirebaseStateAdapter: FirebaseStateAdapterProtocol {
                 
                 let deckCards = try self.mapper.decodeCards(from: snapshot)
                 
-                self.rootRef.child("games/\(self.gameId)/discardPile").queryOrderedByKey().observeSingleEvent(of: .value) { snapshot in
+                let query = self.rootRef.child("games/\(self.gameId)/discardPile").queryOrderedByKey()
+                query.observeSingleEvent(of: .value) { snapshot in
                     do {
                         let cards = try self.mapper.decodeCards(from: snapshot)
                         

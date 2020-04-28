@@ -114,8 +114,14 @@ class RemoteDatabase: GameDatabaseProtocol {
 private extension RemoteDatabase {
     
     func observeStateChanges() {
-        stateAdapter.observe { [weak self] state in
-            self?.stateSubject.onNext(state)
+        stateAdapter.observeState { [weak self] result in
+            switch result {
+            case let .success(state):
+                self?.stateSubject.onNext(state)
+                
+            case let .error(error):
+                self?.stateSubject.onError(error)
+            }
         }
     }
 }
