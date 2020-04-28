@@ -39,7 +39,7 @@ class GameSubjects: GameSubjectsProtocol {
             fatalError("Illegal state")
         }
         
-        return state.players.map { $0.identifier }
+        return state.allPlayers.map { $0.identifier }
     }
     
     func state(observedBy playerId: String?) -> Observable<GameStateProtocol> {
