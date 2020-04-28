@@ -32,7 +32,7 @@ class FirebaseAdapter: FirebaseAdapterProtocol {
         do {
             let key = keyGenerator.gameAutoId()
             let value = try mapper.encodeState(state)
-            rootRef.child("games/\(key)").setValue(value) { error, _ in
+            rootRef.child("games/\(key)/state").setValue(value) { error, _ in
                 if let error = error {
                     completion(.error(error))
                 } else {
@@ -46,7 +46,7 @@ class FirebaseAdapter: FirebaseAdapterProtocol {
     }
     
     func getGame(_ id: String, completion: @escaping FirebaseStateCompletion) {
-        rootRef.child("games").child(id).observeSingleEvent(of: .value, with: { snapshot in
+        rootRef.child("games/\(id)/state").observeSingleEvent(of: .value, with: { snapshot in
             do {
                 let state = try self.mapper.decodeState(from: snapshot)
                 completion(.success(state))

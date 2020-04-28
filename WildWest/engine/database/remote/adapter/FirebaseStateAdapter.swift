@@ -33,17 +33,16 @@ protocol FirebaseStateAdapterProtocol {
 
 class FirebaseStateAdapter: FirebaseStateAdapterProtocol {
     
-    private let gameId: String
+    private let stateRef: DatabaseReference
     private let mapper: FirebaseMapperProtocol
-    private let rootRef = Database.database().reference()
     
     init(gameId: String, mapper: FirebaseMapperProtocol) {
-        self.gameId = gameId
+        stateRef = Database.database().reference().child("games/\(gameId)/state")
         self.mapper = mapper
     }
     
     func observeState(_ completion: @escaping FirebaseStateCompletion) {
-        rootRef.child("games").child(gameId).observe(.value, with: { snapshot in
+        stateRef.observe(.value, with: { snapshot in
             do {
                 let state = try self.mapper.decodeState(from: snapshot)
                 completion(.success(state))
@@ -56,7 +55,7 @@ class FirebaseStateAdapter: FirebaseStateAdapterProtocol {
     }
     
     func setTurn(_ turn: String, _ completion: @escaping FirebaseCompletion) {
-        rootRef.child("games/\(gameId)/turn").setValue(turn) { error, _ in
+        stateRef.child("turn").setValue(turn) { error, _ in
             completion(result(from: error))
         }
     }
@@ -64,7 +63,7 @@ class FirebaseStateAdapter: FirebaseStateAdapterProtocol {
     func setChallenge(_ challenge: Challenge?, _ completion: @escaping FirebaseCompletion) {
         do {
             let value = try mapper.encodeChallenge(challenge)
-            rootRef.child("games/\(gameId)/challenge").setValue(value) { error, _ in
+            stateRef.child("challenge").setValue(value) { error, _ in
                 completion(result(from: error))
             }
         } catch {
@@ -73,16 +72,16 @@ class FirebaseStateAdapter: FirebaseStateAdapterProtocol {
     }
     
     func playerSetBangsPlayed(_ playerId: String, _ bangsPlayed: Int, _ completion: @escaping FirebaseCompletion) {
-        rootRef.child("games/\(gameId)/players/\(playerId)/bangsPlayed").setValue(bangsPlayed) { error, _ in
+        stateRef.child("players/\(playerId)/bangsPlayed").setValue(bangsPlayed) { error, _ in
             completion(result(from: error))
         }
     }
     
     func deckRemoveFirst(_ completion: @escaping FirebaseCardCompletion) {
-        rootRef.child("games/\(gameId)/deck").queryLimited(toFirst: 1).observeSingleEvent(of: .value) { snapshot in
+        stateRef.child("deck").queryLimited(toFirst: 1).observeSingleEvent(of: .value) { snapshot in
             do {
                 let (key, card) = try self.mapper.decodeCard(from: snapshot)
-                self.rootRef.child("games/\(self.gameId)/deck/\(key)").setValue(nil) { error, _ in
+                self.stateRef.child("deck/\(key)").setValue(nil) { error, _ in
                     if let error = error {
                         completion(.error(error))
                     } else {
@@ -96,13 +95,13 @@ class FirebaseStateAdapter: FirebaseStateAdapterProtocol {
     }
     
     func playerAddHand(_ playerId: String, _ card: CardProtocol, _ completion: @escaping FirebaseCompletion) {
-        rootRef.child("games/\(gameId)/players/\(playerId)/hand/\(card.identifier)").setValue(true) { error, _ in
+        stateRef.child("players/\(playerId)/hand/\(card.identifier)").setValue(true) { error, _ in
             completion(result(from: error))
         }
     }
     
     func playerRemoveHand(_ playerId: String, _ cardId: String, _ completion: @escaping FirebaseCardCompletion) {
-        rootRef.child("games/\(gameId)/players/\(playerId)/hand/\(cardId)").setValue(nil) { error, _ in
+        stateRef.child("players/\(playerId)/hand/\(cardId)").setValue(nil) { error, _ in
             do {
                 let card: CardProtocol = try self.mapper.decodeCard(from: cardId)
                 completion(.success(card))
@@ -113,13 +112,13 @@ class FirebaseStateAdapter: FirebaseStateAdapterProtocol {
     }
     
     func playerAddInPlay(_ playerId: String, _ card: CardProtocol, _ completion: @escaping FirebaseCompletion) {
-        rootRef.child("games/\(gameId)/players/\(playerId)/inPlay/\(card.identifier)").setValue(true) { error, _ in
+        stateRef.child("players/\(playerId)/inPlay/\(card.identifier)").setValue(true) { error, _ in
             completion(result(from: error))
         }
     }
     
     func playerRemoveInPlay(_ playerId: String, _ cardId: String, _ completion: @escaping FirebaseCardCompletion) {
-        rootRef.child("games/\(gameId)/players/\(playerId)/inPlay/\(cardId)").setValue(nil) { error, _ in
+        stateRef.child("players/\(playerId)/inPlay/\(cardId)").setValue(nil) { error, _ in
             do {
                 let card: CardProtocol = try self.mapper.decodeCard(from: cardId)
                 completion(.success(card))
@@ -130,7 +129,7 @@ class FirebaseStateAdapter: FirebaseStateAdapterProtocol {
     }
     
     func playerSetHealth(_ playerId: String, _ health: Int, _ completion: @escaping FirebaseCompletion) {
-        rootRef.child("games/\(gameId)/players/\(playerId)/health").setValue(health) { error, _ in
+        stateRef.child("players/\(playerId)/health").setValue(health) { error, _ in
             completion(result(from: error))
         }
     }
@@ -138,7 +137,7 @@ class FirebaseStateAdapter: FirebaseStateAdapterProtocol {
     func playerSetDamageEvent(_ playerId: String, _ event: DamageEvent, _ completion: @escaping FirebaseCompletion) {
         do {
             let value = try mapper.encodeDamageEvent(event)
-            rootRef.child("games/\(gameId)/players/\(playerId)/lastDamage").setValue(value) { error, _ in
+            stateRef.child("players/\(playerId)/lastDamage").setValue(value) { error, _ in
                 completion(result(from: error))
             }
         } catch {
@@ -147,25 +146,25 @@ class FirebaseStateAdapter: FirebaseStateAdapterProtocol {
     }
     
     func setOutcome(_ outcome: GameOutcome, _ completion: @escaping FirebaseCompletion) {
-        rootRef.child("games/\(gameId)/outcome").setValue(outcome.rawValue) { error, _ in
+        stateRef.child("outcome").setValue(outcome.rawValue) { error, _ in
             completion(result(from: error))
         }
     }
     
     func addDiscard(_ card: CardProtocol, _ completion: @escaping FirebaseCompletion) {
-        rootRef.child("games/\(gameId)/discardPile").childByAutoId().setValue(card.identifier) { error, _ in
+        stateRef.child("discardPile").childByAutoId().setValue(card.identifier) { error, _ in
             completion(result(from: error))
         }
     }
     
     func addGeneralStore(_ card: CardProtocol, _ completion: @escaping FirebaseCompletion) {
-        rootRef.child("games/\(gameId)/generalStore/\(card.identifier)").setValue(true) { error, _ in
+        stateRef.child("generalStore/\(card.identifier)").setValue(true) { error, _ in
             completion(result(from: error))
         }
     }
     
     func removeGeneralStore(_ cardId: String, _ completion: @escaping FirebaseCardCompletion) {
-        rootRef.child("games/\(gameId)/generalStore/\(cardId)").setValue(nil) { error, _ in
+        stateRef.child("generalStore/\(cardId)").setValue(nil) { error, _ in
             do {
                 let card: CardProtocol = try self.mapper.decodeCard(from: cardId)
                 completion(.success(card))
@@ -177,7 +176,7 @@ class FirebaseStateAdapter: FirebaseStateAdapterProtocol {
     
     func resetDeck(when minSize: Int, _ completion: @escaping FirebaseCompletion) {
         let limit = UInt(minSize + 1)
-        rootRef.child("games/\(gameId)/deck").queryLimited(toFirst: limit).observeSingleEvent(of: .value) { snapshot in
+        stateRef.child("deck").queryLimited(toFirst: limit).observeSingleEvent(of: .value) { snapshot in
             do {
                 let dictionary = try (snapshot.value as? [String: String]).unwrap()
                 guard dictionary.keys.count <= minSize else {
@@ -187,8 +186,7 @@ class FirebaseStateAdapter: FirebaseStateAdapterProtocol {
                 
                 let deckCards = try self.mapper.decodeCards(from: snapshot)
                 
-                let query = self.rootRef.child("games/\(self.gameId)/discardPile").queryOrderedByKey()
-                query.observeSingleEvent(of: .value) { snapshot in
+                self.stateRef.child("discardPile").queryOrderedByKey().observeSingleEvent(of: .value) { snapshot in
                     do {
                         let cards = try self.mapper.decodeCards(from: snapshot)
                         
@@ -226,7 +224,7 @@ private extension FirebaseStateAdapter {
     func setDeck(_ cards: [CardProtocol], _ completion: @escaping FirebaseCompletion) {
         do {
             let value = try mapper.encodeOrderedCards(cards)
-            rootRef.child("games/\(gameId)/deck").setValue(value)
+            stateRef.child("deck").setValue(value)
             completion(.success)
         } catch {
             completion(.error(error))
@@ -236,7 +234,7 @@ private extension FirebaseStateAdapter {
     func setDiscardPile(_ cards: [CardProtocol], _ completion: @escaping FirebaseCompletion) {
         do {
             let value = try mapper.encodeOrderedCards(cards.reversed())
-            rootRef.child("games/\(gameId)/discardPile").setValue(value)
+            stateRef.child("discardPile").setValue(value)
             completion(.success)
         } catch {
             completion(.error(error))
