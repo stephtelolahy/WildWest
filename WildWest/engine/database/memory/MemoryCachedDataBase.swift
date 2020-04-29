@@ -111,6 +111,7 @@ class MemoryCachedDataBase: GameDatabaseProtocol {
     func playerAddInPlay(_ playerId: String, _ card: CardProtocol) -> Completable {
         Completable.transaction {
             self.mutablePlayer(playerId).inPlay.append(card)
+            self.emitState()
         }
     }
     
