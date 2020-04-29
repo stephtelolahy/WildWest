@@ -27,6 +27,7 @@ class GameViewController: UIViewController, Subscribable {
     // MARK: Properties
     
     var engine: GameEngineProtocol!
+    var subjects: GameSubjectsProtocol!
     var aiAgents: [AIPlayerAgentProtocol]?
     var controlledPlayerId: String?
     
@@ -40,7 +41,7 @@ class GameViewController: UIViewController, Subscribable {
     private var moveSoundPlayer: MoveSoundPlayerProtocol?
     private var reactionMoveSelector: ReactionMoveSelectorProtocol?
     
-    private lazy var statsBuilder = StatsBuilder(sheriffId: engine.subjects.sheriffId, classifier: MoveClassifier())
+    private lazy var statsBuilder = StatsBuilder(sheriffId: subjects.sheriffId, classifier: MoveClassifier())
     private lazy var playerAdapter = PlayersAdapter()
     private lazy var actionsAdapter = ActionsAdapter(playerId: controlledPlayerId)
     private lazy var moveDescriptor = MoveDescriptor()
@@ -69,22 +70,22 @@ class GameViewController: UIViewController, Subscribable {
         let layout = playersCollectionView.collectionViewLayout as? GameCollectionViewLayout
         layout?.delegate = self
         
-        sub(engine.subjects.state(observedBy: controlledPlayerId).subscribe(onNext: { [weak self] state in
+        sub(subjects.state(observedBy: controlledPlayerId).subscribe(onNext: { [weak self] state in
             self?.processState(state)
-        }, onError: { [weak self] error in
-            self?.presentAlert(title: "Error", message: error.localizedDescription)
+            }, onError: { [weak self] error in
+                self?.presentAlert(title: "Error", message: error.localizedDescription)
         }))
         
-        sub(engine.subjects.executedMove().subscribe(onNext: { [weak self] move in
+        sub(subjects.executedMove().subscribe(onNext: { [weak self] move in
             self?.processExecutedMove(move)
         }))
         
-        sub(engine.subjects.executedUpdate().subscribe(onNext: { [weak self] update in
+        sub(subjects.executedUpdate().subscribe(onNext: { [weak self] update in
             self?.processExecutedUpdate(update)
         }))
         
         if let controlledPlayerId = self.controlledPlayerId {
-            sub(engine.subjects.validMoves(for: controlledPlayerId).subscribe(onNext: { [weak self] moves in
+            sub(subjects.validMoves(for: controlledPlayerId).subscribe(onNext: { [weak self] moves in
                 self?.processValidMoves(moves)
             }))
         }
@@ -266,17 +267,13 @@ extension GameViewController: UICollectionViewDelegate {
 extension GameViewController: GameCollectionViewLayoutDelegate {
     
     func numberOfItemsForGameCollectionViewLayout(layout: GameCollectionViewLayout) -> Int {
-        engine.subjects.playerIds.count
+        subjects.playerIds.count
     }
 }
 
 private extension GameViewController {
     
     func buildCardPositions() -> [CardPlace: CGPoint] {
-        guard let engine = self.engine else {
-            return [:]
-        }
-        
         var result: [CardPlace: CGPoint] = [:]
         
         guard let discardCenter = discardImageView.superview?.convert(discardImageView.center, to: view),
@@ -287,7 +284,7 @@ private extension GameViewController {
         result[.deck] = deckCenter
         result[.discard] = discardCenter
         
-        let playerIds = engine.subjects.playerIds
+        let playerIds = subjects.playerIds
         for (index, playerId) in playerIds.enumerated() {
             guard let cell = playersCollectionView.cellForItem(at: IndexPath(row: index, section: 0)),
                 let cellCenter = cell.superview?.convert(cell.center, to: view) else {

@@ -7,8 +7,6 @@
 //
 
 protocol GameEngineProtocol {
-    var subjects: GameSubjectsProtocol { get }
-    
     func startGame()
     func execute(_ move: GameMove)
 }

@@ -10,8 +10,6 @@ import RxSwift
 
 class GameEngine: GameEngineProtocol {
     
-    let subjects: GameSubjectsProtocol
-    
     private let delay: TimeInterval
     private let database: GameDatabaseProtocol
     private let stateSubject: BehaviorSubject<GameStateProtocol>
@@ -31,7 +29,6 @@ class GameEngine: GameEngineProtocol {
         self.stateSubject = stateSubject
         self.moveMatchers = moveMatchers
         self.updateExecutor = updateExecutor
-        self.subjects = subjects
     }
     
     func startGame() {

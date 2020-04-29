@@ -16,29 +16,34 @@ protocol AIPlayerAgentProtocol {
 class AIPlayerAgent: AIPlayerAgentProtocol, Subscribable {
     
     private let engine: GameEngineProtocol
+    private let subjects: GameSubjectsProtocol!
     private let playerId: String
     private let ai: AIProtocol
     private let statsBuilder: StatsBuilderProtocol
     
     private var latestState: GameStateProtocol?
     
-    init(playerId: String, ai: AIProtocol, engine: GameEngineProtocol) {
+    init(playerId: String,
+         ai: AIProtocol,
+         engine: GameEngineProtocol,
+         subjects: GameSubjectsProtocol!) {
         self.playerId = playerId
         self.ai = ai
         self.engine = engine
-        statsBuilder = StatsBuilder(sheriffId: engine.subjects.sheriffId, classifier: MoveClassifier())
+        self.subjects = subjects
+        statsBuilder = StatsBuilder(sheriffId: subjects.sheriffId, classifier: MoveClassifier())
     }
     
     func observeState() {
-        sub(engine.subjects.state(observedBy: playerId).subscribe(onNext: { [weak self] state in
+        sub(subjects.state(observedBy: playerId).subscribe(onNext: { [weak self] state in
             self?.processState(state)
         }))
         
-        sub(engine.subjects.executedMove().subscribe(onNext: { [weak self] move in
+        sub(subjects.executedMove().subscribe(onNext: { [weak self] move in
             self?.processExecutedMove(move)
         }))
         
-        sub(engine.subjects.validMoves(for: playerId).subscribe(onNext: { [weak self] moves in
+        sub(subjects.validMoves(for: playerId).subscribe(onNext: { [weak self] moves in
             self?.processValidMoves(moves)
         }))
     }

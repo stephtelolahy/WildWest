@@ -87,10 +87,14 @@ class GameLauncher {
         let aiPlayers = state.players.filter { $0.identifier != controlledPlayerId }
         let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
                                                      ai: RandomAIWithRole(),
-                                                     engine: engine)
+                                                     engine: engine,
+                                                     subjects: subjects)
         }
         
-        Navigator(viewController).toGame(engine: engine, controlledPlayerId: controlledPlayerId, aiAgents: aiAgents)
+        Navigator(viewController).toGame(engine: engine,
+                                         subjects: subjects,
+                                         controlledPlayerId: controlledPlayerId,
+                                         aiAgents: aiAgents)
     }
     
     func startRemote() {
@@ -170,10 +174,14 @@ private extension GameLauncher {
         let aiPlayers = state.players.filter { $0.identifier != controlledPlayerId }
         let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
                                                      ai: RandomAIWithRole(),
-                                                     engine: engine)
+                                                     engine: engine,
+                                                     subjects: subjects)
         }
         
-        Navigator(viewController).toGame(engine: engine, controlledPlayerId: controlledPlayerId, aiAgents: aiAgents)
+        Navigator(viewController).toGame(engine: engine,
+                                         subjects: subjects,
+                                         controlledPlayerId: controlledPlayerId,
+                                         aiAgents: aiAgents)
     }
 }
 
