@@ -48,7 +48,16 @@ class FirebaseGameAdapter: FirebaseGameAdapterProtocol {
     }
     
     func observeValidMoves(_ completion: @escaping FirebaseMovesCompletion) {
-//        fatalError()
+        gameRef.child("validMoves").observe(.value, with: { snapshot in
+            do {
+                let moves = try self.mapper.decodeMoves(from: snapshot)
+                completion(.success(moves))
+            } catch {
+                completion(.error(error))
+            }
+        }) { error in
+            completion(.error(error))
+        }
     }
     
     func setExecutedUpdate(_ update: GameUpdate, _ completion: @escaping FirebaseCompletion) {
@@ -67,6 +76,13 @@ class FirebaseGameAdapter: FirebaseGameAdapterProtocol {
     }
     
     func setValidMoves(_ moves: [GameMove], _ completion: @escaping FirebaseCompletion) {
-//        fatalError()
+        do {
+            let value = try mapper.encodeMoves(moves)
+            gameRef.child("validMoves").setValue(value) { error, _ in
+                completion(result(from: error))
+            }
+        } catch {
+            completion(.error(error))
+        }
     }
 }

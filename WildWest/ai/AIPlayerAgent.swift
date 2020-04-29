@@ -16,7 +16,7 @@ protocol AIPlayerAgentProtocol {
 class AIPlayerAgent: AIPlayerAgentProtocol, Subscribable {
     
     private let engine: GameEngineProtocol
-    private let subjects: GameSubjectsProtocol!
+    private let subjects: GameSubjectsProtocol
     private let playerId: String
     private let ai: AIProtocol
     private let statsBuilder: StatsBuilderProtocol
@@ -26,7 +26,7 @@ class AIPlayerAgent: AIPlayerAgentProtocol, Subscribable {
     init(playerId: String,
          ai: AIProtocol,
          engine: GameEngineProtocol,
-         subjects: GameSubjectsProtocol!) {
+         subjects: GameSubjectsProtocol) {
         self.playerId = playerId
         self.ai = ai
         self.engine = engine

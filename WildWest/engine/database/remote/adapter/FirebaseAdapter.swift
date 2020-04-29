@@ -40,6 +40,9 @@ class FirebaseAdapter: FirebaseAdapterProtocol {
                 }
             }
             
+            rootRef.child("games/\(key)/executedMove").setValue(nil)
+            rootRef.child("games/\(key)/executedUpdate").setValue(nil)
+            
         } catch {
             completion(.error(error))
         }
