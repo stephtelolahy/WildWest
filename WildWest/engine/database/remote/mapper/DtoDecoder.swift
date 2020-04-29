@@ -16,18 +16,27 @@ class DtoDecoder {
         self.allCards = allCards
     }
     
-    func decode(dto: StateDto) throws -> GameStateProtocol {
-        GameState(allPlayers: try decode(players: dto.players, order: dto.order),
-                  deck: try decode(orderedCards: dto.deck),
-                  discardPile: try decode(orderedCards: dto.discardPile).reversed(),
-                  turn: try dto.turn.unwrap(),
-                  challenge: try decode(challenge: dto.challenge),
-                  generalStore: try decode(cards: dto.generalStore),
-                  outcome: try decode(outcome: dto.outcome))
+    func decode(state: StateDto) throws -> GameStateProtocol {
+        GameState(allPlayers: try decode(players: state.players, order: state.order),
+                  deck: try decode(orderedCards: state.deck),
+                  discardPile: try decode(orderedCards: state.discardPile).reversed(),
+                  turn: try state.turn.unwrap(),
+                  challenge: try decode(challenge: state.challenge),
+                  generalStore: try decode(cards: state.generalStore),
+                  outcome: try decode(outcome: state.outcome))
     }
     
     func decode(card: String) throws -> CardProtocol {
         try allCards.first(where: { $0.identifier == card }).unwrap()
+    }
+    
+    func decode(move: MoveDto) throws -> GameMove {
+        GameMove(name: MoveName(try move.name.unwrap()),
+                 actorId: try move.actorId.unwrap(),
+                 cardId: move.cardId,
+                 targetId: move.targetId,
+                 targetCard: try decode(targetCard: move.targetCard),
+                 discardIds: move.discardIds)
     }
 }
 
@@ -130,6 +139,27 @@ private extension DtoDecoder {
         }
         
         throw NSError(domain: "invalid damageSource", code: 0)
+    }
+    
+    func decode(targetCard: TargetCardDto?) throws -> TargetCard? {
+        guard let targetCard = targetCard else {
+            return nil
+        }
+        
+        return TargetCard(ownerId: try targetCard.ownerId.unwrap(),
+                          source: try decode(targetCardSource: try targetCard.source.unwrap()))
+    }
+    
+    func decode(targetCardSource: TargetCardSourceDto) throws -> TargetCardSource {
+        if targetCardSource.randomHand == true {
+            return .randomHand
+        }
+        
+        if let cardId = targetCardSource.inPlay {
+            return .inPlay(cardId)
+        }
+        
+        throw NSError(domain: "invalid targetCardSource", code: 0)
     }
     
 }

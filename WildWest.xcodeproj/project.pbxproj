@@ -172,6 +172,7 @@
 		335BED9C2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9A2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 */; };
 		335BED9E2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */; };
 		335BED9F2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */; };
+		335C03BE2459F5C200043F46 /* MoveDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335C03BD2459F5C200043F46 /* MoveDto.swift */; };
 		33604AF4245735DA00439D45 /* Single+Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33604AF3245735DA00439D45 /* Single+Transaction.swift */; };
 		336AA6F023F1450800328837 /* GameDatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */; };
 		336AA6F123F1450B00328837 /* GameDatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */; };
@@ -414,6 +415,7 @@
 		335BED9724294422009184A3 /* Peacock-SoundBible.com-1698361099.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Peacock-SoundBible.com-1698361099.mp3"; sourceTree = "<group>"; };
 		335BED9A2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Pain-SoundBible.com-1883168362.mp3"; sourceTree = "<group>"; };
 		335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Automatic Machine Gun-SoundBible.com-253461580.mp3"; sourceTree = "<group>"; };
+		335C03BD2459F5C200043F46 /* MoveDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveDto.swift; sourceTree = "<group>"; };
 		33604AF3245735DA00439D45 /* Single+Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Single+Transaction.swift"; sourceTree = "<group>"; };
 		336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDatabaseProtocol.swift; sourceTree = "<group>"; };
 		3372CB4F2454BB7C00C061C9 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
@@ -808,6 +810,7 @@
 			children = (
 				3322C4B52452379700D7B297 /* StateDto.swift */,
 				33734AF02454ABF200A5D2DA /* PlayerDto.swift */,
+				335C03BD2459F5C200043F46 /* MoveDto.swift */,
 			);
 			path = dto;
 			sourceTree = "<group>";
@@ -1594,6 +1597,7 @@
 				33031E0D2455513000528158 /* ThemeMusicPlayer.swift in Sources */,
 				330761A624535C7200E8C2EF /* GameSubjectsProtocol.swift in Sources */,
 				3328FC9F242F298200A82255 /* Panic.swift in Sources */,
+				335C03BE2459F5C200043F46 /* MoveDto.swift in Sources */,
 				33112E70244503EA009C706E /* UpdateAnimator.swift in Sources */,
 				330FDECC242F384C00284FE7 /* GainRewardOnEliminatingOutlaw.swift in Sources */,
 				3301BEF423F962F000B4364D /* RandomAIWithRole.swift in Sources */,

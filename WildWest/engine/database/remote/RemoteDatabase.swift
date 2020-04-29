@@ -159,7 +159,11 @@ private extension RemoteDatabase {
         gameAdapter.observeExecutedMove { [weak self] result in
             switch result {
             case let .success(move):
-                self?.executedMoveSubject.onNext(move)
+                if let move = move {
+                    self?.executedMoveSubject.onNext(move)
+                } else {
+                    print("No executed move")
+                }
                 
             case let .error(error):
                 self?.executedMoveSubject.onError(error)
