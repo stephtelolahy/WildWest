@@ -61,17 +61,24 @@ class GameLauncher {
         let state = createGame()
         
         let stateSubject: BehaviorSubject<GameStateProtocol> = BehaviorSubject(value: state)
+        let executedMoveSubject = PublishSubject<GameMove>()
+        let executedUpdateSubject = PublishSubject<GameUpdate>()
+        let validMovesSubject = PublishSubject<[GameMove]>()
         
         let database = MemoryCachedDataBase(mutableState: state as! GameState,
-                                            stateSubject: stateSubject)
+                                            stateSubject: stateSubject,
+                                            executedMoveSubject: executedMoveSubject,
+                                            executedUpdateSubject: executedUpdateSubject,
+                                            validMovesSubject: validMovesSubject)
         
         let subjects = GameSubjects(stateSubject: stateSubject,
-                                    executedMoveSubject: PublishSubject(),
-                                    executedUpdateSubject: PublishSubject(),
-                                    validMovesSubject: PublishSubject())
+                                    executedMoveSubject: executedMoveSubject,
+                                    executedUpdateSubject: executedUpdateSubject,
+                                    validMovesSubject: validMovesSubject)
         
         let engine = GameEngine(delay: UserPreferences.shared.updateDelay,
                                 database: database,
+                                stateSubject: stateSubject,
                                 moveMatchers: GameRules().moveMatchers,
                                 updateExecutor: GameUpdateExecutor(),
                                 subjects: subjects)
@@ -133,19 +140,28 @@ private extension GameLauncher {
     func openRemoteGame(_ id: String, state: GameStateProtocol) {
         let stateSubject: BehaviorSubject<GameStateProtocol> = BehaviorSubject(value: state)
         
-        let stateAdapter = FirebaseStateAdapter(gameId: id,
-                                                mapper: firebaseMapper)
+        let stateAdapter = FirebaseStateAdapter(gameId: id, mapper: firebaseMapper)
+        let gameAdapter = FirebaseGameAdapter(gameId: id, mapper: firebaseMapper)
         
-        let database = RemoteDatabase(stateSubject: stateSubject,
-                                      stateAdapter: stateAdapter)
+        let executedMoveSubject = PublishSubject<GameMove>()
+        let executedUpdateSubject = PublishSubject<GameUpdate>()
+        let validMovesSubject = PublishSubject<[GameMove]>()
         
-        let subjects = GameSubjects(stateSubject: database.stateSubject,
-                                    executedMoveSubject: PublishSubject(),
-                                    executedUpdateSubject: PublishSubject(),
-                                    validMovesSubject: PublishSubject())
+        let database = RemoteDatabase(stateAdapter: stateAdapter,
+                                      gameAdapter: gameAdapter,
+                                      stateSubject: stateSubject,
+                                      executedMoveSubject: executedMoveSubject,
+                                      executedUpdateSubject: executedUpdateSubject,
+                                      validMovesSubject: validMovesSubject)
+        
+        let subjects = GameSubjects(stateSubject: stateSubject,
+                                    executedMoveSubject: executedMoveSubject,
+                                    executedUpdateSubject: executedUpdateSubject,
+                                    validMovesSubject: validMovesSubject)
         
         let engine = GameEngine(delay: UserPreferences.shared.updateDelay,
                                 database: database,
+                                stateSubject: stateSubject,
                                 moveMatchers: GameRules().moveMatchers,
                                 updateExecutor: GameUpdateExecutor(),
                                 subjects: subjects)

@@ -12,12 +12,22 @@ import RxSwift
 
 class MemoryCachedDataBase: GameDatabaseProtocol {
     
-    internal let stateSubject: BehaviorSubject<GameStateProtocol>
     private var mutableState: GameState
+    private let stateSubject: BehaviorSubject<GameStateProtocol>
+    private let executedMoveSubject: PublishSubject<GameMove>
+    private let executedUpdateSubject: PublishSubject<GameUpdate>
+    private let validMovesSubject: PublishSubject<[GameMove]>
     
-    init(mutableState: GameState, stateSubject: BehaviorSubject<GameStateProtocol>) {
+    init(mutableState: GameState,
+         stateSubject: BehaviorSubject<GameStateProtocol>,
+         executedMoveSubject: PublishSubject<GameMove>,
+         executedUpdateSubject: PublishSubject<GameUpdate>,
+         validMovesSubject: PublishSubject<[GameMove]>) {
         self.mutableState = mutableState
         self.stateSubject = stateSubject
+        self.executedMoveSubject = executedMoveSubject
+        self.executedUpdateSubject = executedUpdateSubject
+        self.validMovesSubject = validMovesSubject
     }
     
     // MARK: - Flags
@@ -124,6 +134,20 @@ class MemoryCachedDataBase: GameDatabaseProtocol {
             self.mutablePlayer(playerId).lastDamage = event
             self.emitState()
         }
+    }
+    
+    // Events
+    
+    func setExecutedUpdate(_ update: GameUpdate) {
+        executedUpdateSubject.onNext(update)
+    }
+    
+    func setExecutedMove(_ move: GameMove) {
+        executedMoveSubject.onNext(move)
+    }
+    
+    func setValidMoves(_ moves: [GameMove]) {
+        validMovesSubject.onNext(moves)
     }
 }
 

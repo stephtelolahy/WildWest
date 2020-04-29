@@ -16,8 +16,4 @@ protocol GameSubjectsProtocol {
     func executedMove() -> Observable<GameMove>
     func executedUpdate() -> Observable<GameUpdate>
     func validMoves(for playerId: String) -> Observable<[GameMove]>
-    
-    func emitExecutedUpdate(_ update: GameUpdate)
-    func emitExecutedMove(_ move: GameMove)
-    func emitValidMoves(_ moves: [GameMove])
 }

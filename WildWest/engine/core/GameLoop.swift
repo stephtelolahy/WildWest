@@ -6,15 +6,15 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-import Foundation
+import RxSwift
 
 class GameLoop: NSObject, GameLoopProtocol, Subscribable {
     
     private let delay: TimeInterval
     private let database: GameDatabaseProtocol
+    private let stateSubject: BehaviorSubject<GameStateProtocol>
     private let moveMatchers: [MoveMatcherProtocol]
     private let updateExecutor: UpdateExecutorProtocol
-    private let subjects: GameSubjectsProtocol
     private var completion: (() -> Void)?
     private var pendingMoves: [GameMove]
     private var pendingUpdates: [GameUpdate]
@@ -22,16 +22,16 @@ class GameLoop: NSObject, GameLoopProtocol, Subscribable {
     
     init(delay: TimeInterval,
          database: GameDatabaseProtocol,
+         stateSubject: BehaviorSubject<GameStateProtocol>,
          moveMatchers: [MoveMatcherProtocol],
          updateExecutor: UpdateExecutorProtocol,
-         subjects: GameSubjectsProtocol,
          move: GameMove,
          completion: @escaping (() -> Void)) {
         self.delay = delay
         self.database = database
+        self.stateSubject = stateSubject
         self.moveMatchers = moveMatchers
         self.updateExecutor = updateExecutor
-        self.subjects = subjects
         self.completion = completion
         pendingMoves = [move]
         pendingUpdates = []
@@ -60,10 +60,10 @@ private extension GameLoop {
         print("\n*** \(String(describing: move)) ***")
         #endif
         
-        subjects.emitExecutedMove(move)
-        subjects.emitValidMoves([])
+        database.setExecutedMove(move)
+        database.setValidMoves([])
         
-        let updates = moveMatchers.compactMap({ $0.execute(move, in: database.state) }).flatMap { $0 }
+        let updates = moveMatchers.compactMap({ $0.execute(move, in: state) }).flatMap { $0 }
         pendingUpdates.append(contentsOf: updates)
         
         #if DEBUG
@@ -89,12 +89,12 @@ private extension GameLoop {
         print("> \(String(describing: update))")
         #endif
         
-        subjects.emitExecutedUpdate(update)
+        database.setExecutedUpdate(update)
         
         sub(updateExecutor.execute(update, in: database).subscribe(onCompleted: { [ weak self] in
             self?.wait(afterExecuting: update)
-        }, onError: { error in
-            fatalError(error.localizedDescription)
+            }, onError: { error in
+                fatalError(error.localizedDescription)
         }))
     }
     
@@ -119,14 +119,14 @@ private extension GameLoop {
     
     func postExecute(_ move: GameMove) {
         // emit game over
-        if let outcome = database.state.claculateOutcome() {
+        if let outcome = state.claculateOutcome() {
             sub(database.setOutcome(outcome).subscribe())
             pendingMoves.removeAll()
             return
         }
         
         // queue effects
-        let effects = moveMatchers.compactMap { $0.effect(onExecuting: move, in: database.state) }
+        let effects = moveMatchers.compactMap { $0.effect(onExecuting: move, in: state) }
         if !effects.isEmpty {
             pendingMoves.append(contentsOf: effects)
             return
@@ -138,7 +138,7 @@ private extension GameLoop {
         }
         
         // queue autoPlay
-        let autoPlays = moveMatchers.compactMap { $0.autoPlayMove(matching: database.state) }
+        let autoPlays = moveMatchers.compactMap { $0.autoPlayMove(matching: state) }
         if !autoPlays.isEmpty {
             pendingMoves.append(contentsOf: autoPlays)
             return
@@ -151,15 +151,15 @@ private extension GameLoop {
     }
     
     func emitValidMoves() {
-        guard database.state.outcome == nil else {
+        guard state.outcome == nil else {
             return
         }
         
-        let validMoves = moveMatchers.compactMap { $0.validMoves(matching: database.state) }.flatMap { $0 }
-        let subjects = self.subjects
+        let validMoves = moveMatchers.compactMap { $0.validMoves(matching: state) }.flatMap { $0 }
+        let database = self.database
         // ⚠️ Dispatch emit valid moves after loop completed
         DispatchQueue.main.async {
-            subjects.emitValidMoves(validMoves)
+            database.setValidMoves(validMoves)
         }
     }
     
@@ -175,7 +175,7 @@ private extension GameLoop {
     }
 }
 
-extension GameDatabaseProtocol {
+private extension GameLoop {
     var state: GameStateProtocol {
         guard let value = try? stateSubject.value() else {
             fatalError("Illegal state")

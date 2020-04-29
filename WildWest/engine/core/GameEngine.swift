@@ -6,7 +6,7 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-import Foundation
+import RxSwift
 
 class GameEngine: GameEngineProtocol {
     
@@ -14,6 +14,7 @@ class GameEngine: GameEngineProtocol {
     
     private let delay: TimeInterval
     private let database: GameDatabaseProtocol
+    private let stateSubject: BehaviorSubject<GameStateProtocol>
     private let moveMatchers: [MoveMatcherProtocol]
     private let updateExecutor: UpdateExecutorProtocol
     
@@ -21,19 +22,20 @@ class GameEngine: GameEngineProtocol {
     
     init(delay: TimeInterval,
          database: GameDatabaseProtocol,
+         stateSubject: BehaviorSubject<GameStateProtocol>,
          moveMatchers: [MoveMatcherProtocol],
          updateExecutor: UpdateExecutorProtocol,
          subjects: GameSubjectsProtocol) {
         self.delay = delay
         self.database = database
+        self.stateSubject = stateSubject
         self.moveMatchers = moveMatchers
         self.updateExecutor = updateExecutor
         self.subjects = subjects
-        
     }
     
     func startGame() {
-        let moves = moveMatchers.compactMap { $0.autoPlayMove(matching: database.state) }
+        let moves = moveMatchers.compactMap { $0.autoPlayMove(matching: state) }
         
         guard moves.count == 1 else {
             fatalError("Illegal state")
@@ -49,12 +51,21 @@ class GameEngine: GameEngineProtocol {
         
         let loop = GameLoop(delay: delay,
                             database: database,
+                            stateSubject: stateSubject,
                             moveMatchers: moveMatchers,
                             updateExecutor: updateExecutor,
-                            subjects: subjects,
                             move: move,
                             completion: { [weak self] in self?.currentLoop = nil })
         currentLoop = loop
         loop.run()
+    }
+}
+
+private extension GameEngine {
+    var state: GameStateProtocol {
+        guard let value = try? stateSubject.value() else {
+            fatalError("Illegal state")
+        }
+        return value
     }
 }

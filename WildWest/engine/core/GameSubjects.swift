@@ -57,16 +57,4 @@ class GameSubjects: GameSubjectsProtocol {
     func validMoves(for playerId: String) -> Observable<[GameMove]> {
         validMovesSubject.map { $0.filter({ $0.actorId == playerId }) }
     }
-    
-    func emitExecutedUpdate(_ update: GameUpdate) {
-        executedUpdateSubject.onNext(update)
-    }
-    
-    func emitExecutedMove(_ move: GameMove) {
-        executedMoveSubject.onNext(move)
-    }
-    
-    func emitValidMoves(_ moves: [GameMove]) {
-        validMovesSubject.onNext(moves)
-    }
 }
