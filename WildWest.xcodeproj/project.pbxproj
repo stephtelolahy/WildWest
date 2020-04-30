@@ -46,6 +46,7 @@
 		3322C4B62452379700D7B297 /* StateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4B52452379700D7B297 /* StateDto.swift */; };
 		3324018E23DBA6C800B92439 /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */; };
 		332499B323DB9F650082EF09 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332499B223DB9F650082EF09 /* GameViewController.swift */; };
+		3327EB1B2459E10400483FC5 /* FirebaseGameAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3327EB1A2459E10400483FC5 /* FirebaseGameAdapter.swift */; };
 		3328FC9B242F294000A82255 /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5643423A4E09C00C1BD01 /* Beer.swift */; };
 		3328FC9C242F294100A82255 /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5643423A4E09C00C1BD01 /* Beer.swift */; };
 		3328FC9D242F294900A82255 /* Saloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE91AC523B9F84200F7316B /* Saloon.swift */; };
@@ -171,6 +172,7 @@
 		335BED9C2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9A2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 */; };
 		335BED9E2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */; };
 		335BED9F2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */; };
+		335C03BE2459F5C200043F46 /* MoveDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335C03BD2459F5C200043F46 /* MoveDto.swift */; };
 		33604AF4245735DA00439D45 /* Single+Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33604AF3245735DA00439D45 /* Single+Transaction.swift */; };
 		336AA6F023F1450800328837 /* GameDatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */; };
 		336AA6F123F1450B00328837 /* GameDatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */; };
@@ -191,6 +193,7 @@
 		337D7FD4243072130078F749 /* GameState+Observed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D7FD3243072130078F749 /* GameState+Observed.swift */; };
 		337D7FD5243072130078F749 /* GameState+Observed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D7FD3243072130078F749 /* GameState+Observed.swift */; };
 		337D7FDD2430879F0078F749 /* PlayerDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D7FDC2430879F0078F749 /* PlayerDescriptor.swift */; };
+		337F6F972458875E0044A211 /* FirebaseCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337F6F962458875E0044A211 /* FirebaseCompletion.swift */; };
 		3380B037243641A20040F027 /* DrawsCardOnLoseHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3380B036243641A20040F027 /* DrawsCardOnLoseHealth.swift */; };
 		3380B038243641A20040F027 /* DrawsCardOnLoseHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3380B036243641A20040F027 /* DrawsCardOnLoseHealth.swift */; };
 		3380B03E24367D890040F027 /* DrawsCardOnLoseHealthMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3380B03C24367D890040F027 /* DrawsCardOnLoseHealthMatcherTests.swift */; };
@@ -360,6 +363,7 @@
 		3322C4B52452379700D7B297 /* StateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateDto.swift; sourceTree = "<group>"; };
 		3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		332499B223DB9F650082EF09 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		3327EB1A2459E10400483FC5 /* FirebaseGameAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseGameAdapter.swift; sourceTree = "<group>"; };
 		3328FCDD242F2D1F00A82255 /* ChooseCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCard.swift; sourceTree = "<group>"; };
 		3328FCEC242F2F0D00A82255 /* ChooseCardMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCardMatcherTests.swift; sourceTree = "<group>"; };
 		3328FCEE242F2F8000A82255 /* DiscardBangOnIndiansMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardBangOnIndiansMatcherTests.swift; sourceTree = "<group>"; };
@@ -411,6 +415,7 @@
 		335BED9724294422009184A3 /* Peacock-SoundBible.com-1698361099.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Peacock-SoundBible.com-1698361099.mp3"; sourceTree = "<group>"; };
 		335BED9A2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Pain-SoundBible.com-1883168362.mp3"; sourceTree = "<group>"; };
 		335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Automatic Machine Gun-SoundBible.com-253461580.mp3"; sourceTree = "<group>"; };
+		335C03BD2459F5C200043F46 /* MoveDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveDto.swift; sourceTree = "<group>"; };
 		33604AF3245735DA00439D45 /* Single+Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Single+Transaction.swift"; sourceTree = "<group>"; };
 		336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDatabaseProtocol.swift; sourceTree = "<group>"; };
 		3372CB4F2454BB7C00C061C9 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
@@ -426,6 +431,7 @@
 		337D7FD0243071AE0078F749 /* Player+Ability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+Ability.swift"; sourceTree = "<group>"; };
 		337D7FD3243072130078F749 /* GameState+Observed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameState+Observed.swift"; sourceTree = "<group>"; };
 		337D7FDC2430879F0078F749 /* PlayerDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDescriptor.swift; sourceTree = "<group>"; };
+		337F6F962458875E0044A211 /* FirebaseCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseCompletion.swift; sourceTree = "<group>"; };
 		3380B036243641A20040F027 /* DrawsCardOnLoseHealth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawsCardOnLoseHealth.swift; sourceTree = "<group>"; };
 		3380B03C24367D890040F027 /* DrawsCardOnLoseHealthMatcherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawsCardOnLoseHealthMatcherTests.swift; sourceTree = "<group>"; };
 		3380B03F2436800F0040F027 /* DrawsCardFromPlayerDamagedHim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawsCardFromPlayerDamagedHim.swift; sourceTree = "<group>"; };
@@ -609,7 +615,9 @@
 			isa = PBXGroup;
 			children = (
 				33DA58472454A05A0047D124 /* FirebaseAdapter.swift */,
+				3327EB1A2459E10400483FC5 /* FirebaseGameAdapter.swift */,
 				3306682F24558D34003B2263 /* FirebaseStateAdapter.swift */,
+				337F6F962458875E0044A211 /* FirebaseCompletion.swift */,
 				3331A9CB2455F2AF0063885C /* FirebaseKeyGenerator.swift */,
 			);
 			path = adapter;
@@ -802,6 +810,7 @@
 			children = (
 				3322C4B52452379700D7B297 /* StateDto.swift */,
 				33734AF02454ABF200A5D2DA /* PlayerDto.swift */,
+				335C03BD2459F5C200043F46 /* MoveDto.swift */,
 			);
 			path = dto;
 			sourceTree = "<group>";
@@ -1588,6 +1597,7 @@
 				33031E0D2455513000528158 /* ThemeMusicPlayer.swift in Sources */,
 				330761A624535C7200E8C2EF /* GameSubjectsProtocol.swift in Sources */,
 				3328FC9F242F298200A82255 /* Panic.swift in Sources */,
+				335C03BE2459F5C200043F46 /* MoveDto.swift in Sources */,
 				33112E70244503EA009C706E /* UpdateAnimator.swift in Sources */,
 				330FDECC242F384C00284FE7 /* GainRewardOnEliminatingOutlaw.swift in Sources */,
 				3301BEF423F962F000B4364D /* RandomAIWithRole.swift in Sources */,
@@ -1649,6 +1659,7 @@
 				3380B0402436800F0040F027 /* DrawsCardFromPlayerDamagedHim.swift in Sources */,
 				330761A32453560900E8C2EF /* GameLoop.swift in Sources */,
 				33EE1B9A242E95C500A1E4F7 /* StartTurn.swift in Sources */,
+				3327EB1B2459E10400483FC5 /* FirebaseGameAdapter.swift in Sources */,
 				330FDECD242F384C00284FE7 /* PenalizeSheriffOnEliminatingDeputy.swift in Sources */,
 				3328FCF0242F309400A82255 /* EndTurn.swift in Sources */,
 				3301BEFA23F9A79B00B4364D /* AIPlayerAgent.swift in Sources */,
@@ -1680,6 +1691,7 @@
 				ADD035CF23A96002003B2576 /* CardProtocol.swift in Sources */,
 				3372CB522454BC7900C061C9 /* FigureSelector.swift in Sources */,
 				33BAE346242E74CD0098B41F /* MemoryCachedDataBase.swift in Sources */,
+				337F6F972458875E0044A211 /* FirebaseCompletion.swift in Sources */,
 				33A733EE23DC4A5300E9B2AD /* Subscribable.swift in Sources */,
 				33D97B15244FA59F00B4F070 /* GameMove+Description.swift in Sources */,
 				3306682E245588B9003B2263 /* FirebaseMapper.swift in Sources */,

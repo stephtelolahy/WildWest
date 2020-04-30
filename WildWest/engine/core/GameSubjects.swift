@@ -25,12 +25,21 @@ class GameSubjects: GameSubjectsProtocol {
         self.validMovesSubject = validMovesSubject
     }
     
-    var allPlayers: [PlayerProtocol] {
+    var sheriffId: String {
+        guard let state = try? stateSubject.value(),
+            let sheriff = state.allPlayers.first(where: { $0.role == .sheriff }) else {
+                fatalError("Sheriff not found")
+        }
+        
+        return sheriff.identifier
+    }
+    
+    var playerIds: [String] {
         guard let state = try? stateSubject.value() else {
             fatalError("Illegal state")
         }
         
-        return state.players
+        return state.allPlayers.map { $0.identifier }
     }
     
     func state(observedBy playerId: String?) -> Observable<GameStateProtocol> {
@@ -47,17 +56,5 @@ class GameSubjects: GameSubjectsProtocol {
     
     func validMoves(for playerId: String) -> Observable<[GameMove]> {
         validMovesSubject.map { $0.filter({ $0.actorId == playerId }) }
-    }
-    
-    func emitExecutedUpdate(_ update: GameUpdate) {
-        executedUpdateSubject.onNext(update)
-    }
-    
-    func emitExecutedMove(_ move: GameMove) {
-        executedMoveSubject.onNext(move)
-    }
-    
-    func emitValidMoves(_ moves: [GameMove]) {
-        validMovesSubject.onNext(moves)
     }
 }

@@ -5,19 +5,36 @@
 //  Created by Hugues Stephano Telolahy on 23/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
+// swiftlint:disable type_body_length
 
 import RxSwift
 
 class RemoteDatabase: GameDatabaseProtocol {
     
-    internal let stateSubject: BehaviorSubject<GameStateProtocol>
     private let stateAdapter: FirebaseStateAdapterProtocol
+    private let gameAdapter: FirebaseGameAdapterProtocol
+    private let stateSubject: BehaviorSubject<GameStateProtocol>
+    private let executedMoveSubject: PublishSubject<GameMove>
+    private let executedUpdateSubject: PublishSubject<GameUpdate>
+    private let validMovesSubject: PublishSubject<[GameMove]>
     
-    init(stateSubject: BehaviorSubject<GameStateProtocol>,
-         stateAdapter: FirebaseStateAdapterProtocol) {
-        self.stateSubject = stateSubject
+    init(stateAdapter: FirebaseStateAdapterProtocol,
+         gameAdapter: FirebaseGameAdapterProtocol,
+         stateSubject: BehaviorSubject<GameStateProtocol>,
+         executedMoveSubject: PublishSubject<GameMove>,
+         executedUpdateSubject: PublishSubject<GameUpdate>,
+         validMovesSubject: PublishSubject<[GameMove]>) {
         self.stateAdapter = stateAdapter
+        self.gameAdapter = gameAdapter
+        self.stateSubject = stateSubject
+        self.executedMoveSubject = executedMoveSubject
+        self.executedUpdateSubject = executedUpdateSubject
+        self.validMovesSubject = validMovesSubject
+        
         observeStateChanges()
+        observeExecutedMoveChanges()
+        observeExecutedUpdateChanges()
+        observeValidMovesChanges()
     }
     
     func setTurn(_ turn: String) -> Completable {
@@ -39,10 +56,15 @@ class RemoteDatabase: GameDatabaseProtocol {
     }
     
     func deckRemoveFirst() -> Single<CardProtocol> {
-        // TODO: verify deck size
-        Completable.firebaseCardTransaction { completion in
+        let verifyDeckSize = Completable.firebaseTransaction { completion in
+            self.stateAdapter.resetDeck(when: 2, completion)
+        }
+        
+        let deckRemoveFirst = Completable.firebaseCardTransaction { completion in
             self.stateAdapter.deckRemoveFirst(completion)
         }
+        
+        return verifyDeckSize.andThen(deckRemoveFirst)
     }
     
     func addDiscard(_ card: CardProtocol) -> Completable {
@@ -104,13 +126,72 @@ class RemoteDatabase: GameDatabaseProtocol {
             self.stateAdapter.playerSetDamageEvent(playerId, event, completion)
         }
     }
+    
+    // Events
+    func setExecutedUpdate(_ update: GameUpdate) {
+        gameAdapter.setExecutedUpdate(update) { _ in }
+    }
+    
+    func setExecutedMove(_ move: GameMove) {
+        gameAdapter.setExecutedMove(move) { _ in }
+    }
+    
+    func setValidMoves(_ moves: [GameMove]) {
+        gameAdapter.setValidMoves(moves) { _ in }
+    }
 }
 
 private extension RemoteDatabase {
     
     func observeStateChanges() {
-        stateAdapter.observe { [weak self] state in
-            self?.stateSubject.onNext(state)
+        stateAdapter.observeState { [weak self] result in
+            switch result {
+            case let .success(state):
+                self?.stateSubject.onNext(state)
+                
+            case let .error(error):
+                self?.stateSubject.onError(error)
+            }
+        }
+    }
+    
+    func observeExecutedMoveChanges() {
+        gameAdapter.observeExecutedMove { [weak self] result in
+            switch result {
+            case let .success(move):
+                if let move = move {
+                    self?.executedMoveSubject.onNext(move)
+                } else {
+                    print("No executed move")
+                }
+                
+            case let .error(error):
+                self?.executedMoveSubject.onError(error)
+            }
+        }
+    }
+    
+    func observeExecutedUpdateChanges() {
+        gameAdapter.observeExecutedUpdate { [weak self] result in
+            switch result {
+            case let .success(update):
+                self?.executedUpdateSubject.onNext(update)
+                
+            case let .error(error):
+                self?.executedUpdateSubject.onError(error)
+            }
+        }
+    }
+    
+    func observeValidMovesChanges() {
+        gameAdapter.observeValidMoves { [weak self] result in
+            switch result {
+            case let .success(moves):
+                self?.validMovesSubject.onNext(moves)
+                
+            case let .error(error):
+                self?.validMovesSubject.onError(error)
+            }
         }
     }
 }

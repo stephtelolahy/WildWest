@@ -14,7 +14,7 @@ protocol ReactionMoveSelectorProtocol {
 
 class ReactionMoveSelector: ReactionMoveSelectorProtocol {
     
-    private unowned var viewController: UIViewController
+    private unowned let viewController: UIViewController
     
     init(viewController: UIViewController) {
         self.viewController = viewController

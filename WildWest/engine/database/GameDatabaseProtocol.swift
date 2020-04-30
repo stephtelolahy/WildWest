@@ -10,9 +10,6 @@ import RxSwift
 
 protocol GameDatabaseProtocol {
     
-    // Observable
-    var stateSubject: BehaviorSubject<GameStateProtocol> { get }
-    
     // Flags
     func setTurn(_ turn: String) -> Completable
     func setChallenge(_ challenge: Challenge?) -> Completable
@@ -32,4 +29,9 @@ protocol GameDatabaseProtocol {
     func playerRemoveInPlay(_ playerId: String, _ cardId: String) -> Single<CardProtocol>
     func playerSetBangsPlayed(_ playerId: String, _ bangsPlayed: Int) -> Completable
     func playerSetDamageEvent(_ playerId: String, _ event: DamageEvent) -> Completable
+    
+    // Events
+    func setExecutedUpdate(_ update: GameUpdate)
+    func setExecutedMove(_ move: GameMove)
+    func setValidMoves(_ moves: [GameMove])
 }

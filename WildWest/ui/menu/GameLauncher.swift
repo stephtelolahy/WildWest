@@ -12,10 +12,10 @@ import RxSwift
 
 class GameLauncher {
     
-    private let navigator: Navigator
+    private unowned let viewController: UIViewController
     
-    init(navigator: Navigator) {
-        self.navigator = navigator
+    init(viewController: UIViewController) {
+        self.viewController = viewController
     }
     
     private lazy var gameResources: GameResources = {
@@ -61,17 +61,24 @@ class GameLauncher {
         let state = createGame()
         
         let stateSubject: BehaviorSubject<GameStateProtocol> = BehaviorSubject(value: state)
+        let executedMoveSubject = PublishSubject<GameMove>()
+        let executedUpdateSubject = PublishSubject<GameUpdate>()
+        let validMovesSubject = PublishSubject<[GameMove]>()
         
         let database = MemoryCachedDataBase(mutableState: state as! GameState,
-                                            stateSubject: stateSubject)
+                                            stateSubject: stateSubject,
+                                            executedMoveSubject: executedMoveSubject,
+                                            executedUpdateSubject: executedUpdateSubject,
+                                            validMovesSubject: validMovesSubject)
         
         let subjects = GameSubjects(stateSubject: stateSubject,
-                                    executedMoveSubject: PublishSubject(),
-                                    executedUpdateSubject: PublishSubject(),
-                                    validMovesSubject: PublishSubject())
+                                    executedMoveSubject: executedMoveSubject,
+                                    executedUpdateSubject: executedUpdateSubject,
+                                    validMovesSubject: validMovesSubject)
         
         let engine = GameEngine(delay: UserPreferences.shared.updateDelay,
                                 database: database,
+                                stateSubject: stateSubject,
                                 moveMatchers: GameRules().moveMatchers,
                                 updateExecutor: GameUpdateExecutor(),
                                 subjects: subjects)
@@ -80,23 +87,38 @@ class GameLauncher {
         let aiPlayers = state.players.filter { $0.identifier != controlledPlayerId }
         let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
                                                      ai: RandomAIWithRole(),
-                                                     engine: engine)
+                                                     engine: engine,
+                                                     subjects: subjects)
         }
         
-        navigator.toGame(engine: engine, controlledPlayerId: controlledPlayerId, aiAgents: aiAgents)
+        Navigator(viewController).toGame(engine: engine,
+                                         subjects: subjects,
+                                         controlledPlayerId: controlledPlayerId,
+                                         aiAgents: aiAgents)
     }
     
     func startRemote() {
         let state = createGame()
-        
-        let gameId = firebaseAdapter.createGame(state)
-        
-        joinRemoteGame(gameId)
+        firebaseAdapter.createGame(state) { [weak self] result in
+            switch result {
+            case let .success(gameId):
+                self?.joinRemoteGame(gameId)
+                
+            case let .error(error):
+                self?.viewController.presentAlert(title: "Error", message: error.localizedDescription)
+            }
+        }
     }
     
     func joinRemoteGame(_ id: String) {
-        firebaseAdapter.getGame(id) { [weak self] initialState in
-            self?.openRemoteGame(id, state: initialState)
+        firebaseAdapter.getGame(id) { [weak self] result in
+            switch result {
+            case let .success(initialState):
+                self?.openRemoteGame(id, state: initialState)
+                
+            case let .error(error):
+                self?.viewController.presentAlert(title: "Error", message: error.localizedDescription)
+            }
         }
     }
 }
@@ -122,19 +144,28 @@ private extension GameLauncher {
     func openRemoteGame(_ id: String, state: GameStateProtocol) {
         let stateSubject: BehaviorSubject<GameStateProtocol> = BehaviorSubject(value: state)
         
-        let stateAdapter = FirebaseStateAdapter(gameId: id,
-                                                mapper: firebaseMapper)
+        let stateAdapter = FirebaseStateAdapter(gameId: id, mapper: firebaseMapper)
+        let gameAdapter = FirebaseGameAdapter(gameId: id, mapper: firebaseMapper)
         
-        let database = RemoteDatabase(stateSubject: stateSubject,
-                                      stateAdapter: stateAdapter)
+        let executedMoveSubject = PublishSubject<GameMove>()
+        let executedUpdateSubject = PublishSubject<GameUpdate>()
+        let validMovesSubject = PublishSubject<[GameMove]>()
         
-        let subjects = GameSubjects(stateSubject: database.stateSubject,
-                                    executedMoveSubject: PublishSubject(),
-                                    executedUpdateSubject: PublishSubject(),
-                                    validMovesSubject: PublishSubject())
+        let database = RemoteDatabase(stateAdapter: stateAdapter,
+                                      gameAdapter: gameAdapter,
+                                      stateSubject: stateSubject,
+                                      executedMoveSubject: executedMoveSubject,
+                                      executedUpdateSubject: executedUpdateSubject,
+                                      validMovesSubject: validMovesSubject)
+        
+        let subjects = GameSubjects(stateSubject: stateSubject,
+                                    executedMoveSubject: executedMoveSubject,
+                                    executedUpdateSubject: executedUpdateSubject,
+                                    validMovesSubject: validMovesSubject)
         
         let engine = GameEngine(delay: UserPreferences.shared.updateDelay,
                                 database: database,
+                                stateSubject: stateSubject,
                                 moveMatchers: GameRules().moveMatchers,
                                 updateExecutor: GameUpdateExecutor(),
                                 subjects: subjects)
@@ -143,10 +174,14 @@ private extension GameLauncher {
         let aiPlayers = state.players.filter { $0.identifier != controlledPlayerId }
         let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
                                                      ai: RandomAIWithRole(),
-                                                     engine: engine)
+                                                     engine: engine,
+                                                     subjects: subjects)
         }
         
-        navigator.toGame(engine: engine, controlledPlayerId: controlledPlayerId, aiAgents: aiAgents)
+        Navigator(viewController).toGame(engine: engine,
+                                         subjects: subjects,
+                                         controlledPlayerId: controlledPlayerId,
+                                         aiAgents: aiAgents)
     }
 }
 

@@ -12,12 +12,22 @@ import RxSwift
 
 class MemoryCachedDataBase: GameDatabaseProtocol {
     
-    internal let stateSubject: BehaviorSubject<GameStateProtocol>
     private var mutableState: GameState
+    private let stateSubject: BehaviorSubject<GameStateProtocol>
+    private let executedMoveSubject: PublishSubject<GameMove>
+    private let executedUpdateSubject: PublishSubject<GameUpdate>
+    private let validMovesSubject: PublishSubject<[GameMove]>
     
-    init(mutableState: GameState, stateSubject: BehaviorSubject<GameStateProtocol>) {
+    init(mutableState: GameState,
+         stateSubject: BehaviorSubject<GameStateProtocol>,
+         executedMoveSubject: PublishSubject<GameMove>,
+         executedUpdateSubject: PublishSubject<GameUpdate>,
+         validMovesSubject: PublishSubject<[GameMove]>) {
         self.mutableState = mutableState
         self.stateSubject = stateSubject
+        self.executedMoveSubject = executedMoveSubject
+        self.executedUpdateSubject = executedUpdateSubject
+        self.validMovesSubject = validMovesSubject
     }
     
     // MARK: - Flags
@@ -47,7 +57,7 @@ class MemoryCachedDataBase: GameDatabaseProtocol {
     
     func deckRemoveFirst() -> Single<CardProtocol> {
         Completable.cardTransaction {
-            self.mutableState.verifyDeckSize()
+            self.mutableState.resetDeck(when: 2)
             let card = self.mutableState.deck.removeFirst()
             self.emitState()
             return card
@@ -101,6 +111,7 @@ class MemoryCachedDataBase: GameDatabaseProtocol {
     func playerAddInPlay(_ playerId: String, _ card: CardProtocol) -> Completable {
         Completable.transaction {
             self.mutablePlayer(playerId).inPlay.append(card)
+            self.emitState()
         }
     }
     
@@ -125,6 +136,20 @@ class MemoryCachedDataBase: GameDatabaseProtocol {
             self.emitState()
         }
     }
+    
+    // Events
+    
+    func setExecutedUpdate(_ update: GameUpdate) {
+        executedUpdateSubject.onNext(update)
+    }
+    
+    func setExecutedMove(_ move: GameMove) {
+        executedMoveSubject.onNext(move)
+    }
+    
+    func setValidMoves(_ moves: [GameMove]) {
+        validMovesSubject.onNext(moves)
+    }
 }
 
 private extension MemoryCachedDataBase {
@@ -140,12 +165,13 @@ private extension MemoryCachedDataBase {
 
 private extension GameState {
     
-    func verifyDeckSize() {
-        let minimumDeckSize = 2
-        if deck.count <= minimumDeckSize {
-            let cards = discardPile
-            deck.append(contentsOf: Array(cards[1..<cards.count]).shuffled())
-            discardPile = Array(cards[0..<1])
+    func resetDeck(when minSize: Int) {
+        guard deck.count <= minSize else {
+            return
         }
+        
+        let cards = discardPile
+        deck.append(contentsOf: Array(cards[1..<cards.count]).shuffled())
+        discardPile = Array(cards[0..<1])
     }
 }

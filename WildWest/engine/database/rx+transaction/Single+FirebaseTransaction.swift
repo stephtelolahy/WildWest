@@ -12,11 +12,12 @@ extension Single {
     
     static func firebaseTransaction(_ function: @escaping ((@escaping FirebaseCompletion) -> Void)) -> Completable {
         Completable.create { completable in
-            let completion: FirebaseCompletion = { error in
-                if let error = error {
-                    completable(.error(error))
-                } else {
+            let completion: FirebaseCompletion = { result in
+                switch result {
+                case .success:
                     completable(.completed)
+                case let .error(error):
+                    completable(.error(error))
                 }
             }
             function(completion)
@@ -27,11 +28,12 @@ extension Single {
     static func firebaseCardTransaction(_ function: @escaping ((@escaping FirebaseCardCompletion) -> Void))
         -> Single<CardProtocol> {
             Single.create { single in
-                let completion: FirebaseCardCompletion = { card, error in
-                    if let error = error {
+                let completion: FirebaseCardCompletion = { result in
+                    switch result {
+                    case let .success(card):
+                        single(.success(card))
+                    case let .error(error):
                         single(.error(error))
-                    } else {
-                        single(.success(card!))
                     }
                 }
                 function(completion)

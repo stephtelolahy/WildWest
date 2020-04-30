@@ -24,7 +24,7 @@ protocol UpdateAnimatorProtocol {
 
 class UpdateAnimator: UpdateAnimatorProtocol {
     
-    private unowned var viewController: UIViewController
+    private unowned let viewController: UIViewController
     private let cardPositions: [CardPlace: CGPoint]
     private let cardSize: CGSize
     

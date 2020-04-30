@@ -48,9 +48,6 @@ class DtoEncoder {
                               source: encode(damageSource: damageEvent.source))
         
     }
-}
-
-private extension DtoEncoder {
     
     func encode(orderedCards: [CardProtocol]) -> [String: String]? {
         guard !orderedCards.isEmpty else {
@@ -66,6 +63,18 @@ private extension DtoEncoder {
         
         return result
     }
+    
+    func encode(move: GameMove) -> MoveDto {
+        MoveDto(name: move.name.rawValue,
+                actorId: move.actorId,
+                cardId: move.cardId,
+                targetId: move.targetId,
+                targetCard: encode(targetCard: move.targetCard),
+                discardIds: move.discardIds)
+    }
+}
+
+private extension DtoEncoder {
     
     func encode(cards: [CardProtocol]) -> [String: Bool]? {
         guard !cards.isEmpty else {
@@ -126,6 +135,25 @@ private extension DtoEncoder {
             
         case let .byPlayer(playerId):
             return DamageSourceDto(byDynamite: nil, byPlayer: playerId)
+        }
+    }
+    
+    func encode(targetCard: TargetCard?) -> TargetCardDto? {
+        guard let targetCard = targetCard else {
+            return nil
+        }
+        
+        return TargetCardDto(ownerId: targetCard.ownerId,
+                             source: encode(targetCardSource: targetCard.source))
+    }
+    
+    func encode(targetCardSource: TargetCardSource) -> TargetCardSourceDto {
+        switch targetCardSource {
+        case .randomHand:
+            return TargetCardSourceDto(randomHand: true, inPlay: nil)
+            
+        case let .inPlay(cardId):
+            return TargetCardSourceDto(randomHand: nil, inPlay: cardId)
         }
     }
 }
