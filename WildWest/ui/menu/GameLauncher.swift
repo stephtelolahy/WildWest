@@ -42,13 +42,17 @@ class GameLauncher {
     
     func startLocal() {
         let state = createGame()
-        joinLocalGame(state: state)
+        let controlledId: String? = !userPreferences.simulationMode ? state.players.first?.identifier : nil
+        joinLocalGame(state: state, as: controlledId)
     }
     
     func startRemote() {
         let gameId = "live"
         getOrCreateRemoteGame(id: gameId) { [weak self] state in
-            self?.joinRemoteGame(id: gameId, state: state)
+            let playerIds = state.allPlayers.map { $0.identifier }
+            self?.viewController.select(title: "Choose player", choices: playerIds) { index in
+                self?.joinRemoteGame(id: gameId, state: state, as: playerIds[index])
+            }
         }
     }
 }
@@ -63,9 +67,7 @@ private extension GameLauncher {
                            preferredFigure: userPreferences.preferredFigure)
     }
     
-    func joinLocalGame(state: GameStateProtocol) {
-        let controlledId: String? = !userPreferences.simulationMode ? state.players.first?.identifier : nil
-        
+    func joinLocalGame(state: GameStateProtocol, as controlledId: String?) {
         let environment = builder.createLocalEnvironment(state: state,
                                                          controlledId: controlledId,
                                                          updateDelay: userPreferences.updateDelay)
@@ -94,9 +96,7 @@ private extension GameLauncher {
         }
     }
     
-    func joinRemoteGame(id: String, state: GameStateProtocol) {
-        let controlledId = state.allPlayers.map { $0.identifier }.randomElement()
-        
+    func joinRemoteGame(id: String, state: GameStateProtocol, as controlledId: String?) {
         let environment = builder.createRemoteEnvironment(gameId: id,
                                                           state: state,
                                                           controlledId: controlledId,

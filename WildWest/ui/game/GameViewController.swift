@@ -16,6 +16,7 @@ class GameViewController: UIViewController, Subscribable {
     
     @IBOutlet private weak var endTurnButton: UIButton!
     @IBOutlet private weak var otherMovesButton: UIButton!
+    @IBOutlet private weak var startButton: UIButton!
     @IBOutlet private weak var playersCollectionView: UICollectionView!
     @IBOutlet private weak var actionsCollectionView: UICollectionView!
     @IBOutlet private weak var messageTableView: UITableView!
@@ -81,6 +82,8 @@ class GameViewController: UIViewController, Subscribable {
         let layout = playersCollectionView.collectionViewLayout as? GameCollectionViewLayout
         layout?.delegate = self
         
+        startButton.isEnabled = environment.enableStart
+        
         sub(subjects.state(observedBy: controlledPlayerId).subscribe(onNext: { [weak self] state in
             self?.processState(state)
             }, onError: { [weak self] error in
@@ -121,8 +124,8 @@ class GameViewController: UIViewController, Subscribable {
     }
     
     @IBAction private func startButtonTapped(_ sender: Any) {
-        (sender as? UIButton)?.isEnabled = false
         engine.startGame()
+        startButton.isEnabled = false
     }
 }
 
