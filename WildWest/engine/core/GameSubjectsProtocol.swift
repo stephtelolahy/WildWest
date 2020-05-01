@@ -10,8 +10,8 @@ import RxSwift
 
 protocol GameSubjectsProtocol {
     var sheriffId: String { get }
-    var playerIds: [String] { get }
     
+    func playerIds(observedBy playerId: String?) -> [String]
     func state(observedBy playerId: String?) -> Observable<GameStateProtocol>
     func executedMove() -> Observable<GameMove>
     func executedUpdate() -> Observable<GameUpdate>

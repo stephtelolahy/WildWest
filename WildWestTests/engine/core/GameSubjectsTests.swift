@@ -15,7 +15,11 @@ class GameSubjectsTests: XCTestCase {
     
     private var sut: GameSubjectsProtocol!
     private var mockState: MockGameStateProtocol!
-    private var mockStateSubject: BehaviorSubject<GameStateProtocol>!
+    
+    private var stateSubject: BehaviorSubject<GameStateProtocol>!
+    private var executedMoveSubject: PublishSubject<GameMove>!
+    private var executedUpdateSubject: PublishSubject<GameUpdate>!
+    private var validMovesSubject: PublishSubject<[GameMove]>!
     
     private var stateObservers: [TestableObserver<GameStateProtocol>]!
     private var executedMoveObservers: [TestableObserver<GameMove>]!
@@ -24,13 +28,18 @@ class GameSubjectsTests: XCTestCase {
     private let disposeBag = DisposeBag()
     
     override func setUp() {
-        mockState = MockGameStateProtocol().withEnabledDefaultImplementation(GameStateProtocolStub())
-        mockStateSubject = BehaviorSubject(value: mockState)
+        mockState = MockGameStateProtocol()
+            .withEnabledDefaultImplementation(GameStateProtocolStub())
         
-        sut = GameSubjects(stateSubject: mockStateSubject,
-                           executedMoveSubject: PublishSubject(),
-                           executedUpdateSubject: PublishSubject(),
-                           validMovesSubject: PublishSubject())
+        stateSubject = BehaviorSubject(value: mockState)
+        executedMoveSubject = PublishSubject()
+        executedUpdateSubject = PublishSubject()
+        validMovesSubject = PublishSubject()
+        
+        sut = GameSubjects(stateSubject: stateSubject,
+                           executedMoveSubject: executedMoveSubject,
+                           executedUpdateSubject: executedUpdateSubject,
+                           validMovesSubject: validMovesSubject)
         
         let scheduler = TestScheduler(initialClock: 0)
         
@@ -69,19 +78,17 @@ class GameSubjectsTests: XCTestCase {
     func test_AllObserversReceiveEmitedState() {
         // Given
         // When
-        
-        mockStateSubject.onNext(mockState)
-        mockStateSubject.onNext(mockState)
+        stateSubject.onNext(mockState)
         
         // Assert
-        stateObservers.forEach { XCTAssertEqual($0.events.count, 3) }
+        stateObservers.forEach { XCTAssertEqual($0.events.count, 2) }
     }
     
     func test_AllObserversReceiveEmitedExecutedMove() {
         // Given
         let move = GameMove(name: MoveName("m1"), actorId: "p1")
         // When
-        sut.emitExecutedMove(move)
+        executedMoveSubject.onNext(move)
         
         // Assert
         executedMoveObservers.forEach { XCTAssertEqual($0.events.count, 1) }
@@ -91,7 +98,7 @@ class GameSubjectsTests: XCTestCase {
         // Given
         let move = GameMove(name: MoveName("m1"), actorId: "p1")
         // When
-        sut.emitValidMoves([move])
+        validMovesSubject.onNext([move])
         
         // Assert
         validMovesObservers.forEach { XCTAssertEqual($0.events.count, 1) }
@@ -102,7 +109,7 @@ class GameSubjectsTests: XCTestCase {
         let update = GameUpdate.flipOverFirstDeckCard
         
         // When
-        sut.emitExecutedUpdate(update)
+        executedUpdateSubject.onNext(update)
         
         // Assert
         updateObservers.forEach { XCTAssertEqual($0.events.count, 1) }

@@ -267,7 +267,7 @@ extension GameViewController: UICollectionViewDelegate {
 extension GameViewController: GameCollectionViewLayoutDelegate {
     
     func numberOfItemsForGameCollectionViewLayout(layout: GameCollectionViewLayout) -> Int {
-        subjects.playerIds.count
+        subjects.playerIds(observedBy: controlledPlayerId).count
     }
 }
 
@@ -284,7 +284,7 @@ private extension GameViewController {
         result[.deck] = deckCenter
         result[.discard] = discardCenter
         
-        let playerIds = subjects.playerIds
+        let playerIds = subjects.playerIds(observedBy: controlledPlayerId)
         for (index, playerId) in playerIds.enumerated() {
             guard let cell = playersCollectionView.cellForItem(at: IndexPath(row: index, section: 0)),
                 let cellCenter = cell.superview?.convert(cell.center, to: view) else {
