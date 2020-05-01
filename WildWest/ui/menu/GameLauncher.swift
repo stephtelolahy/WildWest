@@ -128,9 +128,12 @@ private extension GameLauncher {
     func createGame() -> GameStateProtocol {
         let gameSetup = GameSetup()
         
-        let roles = gameSetup.roles(for: UserPreferences.shared.playersCount)
+        var roles = gameSetup.roles(for: UserPreferences.shared.playersCount)
             .shuffled()
-            .starting(withSheriff: UserPreferences.shared.playAsSheriff)
+        
+        if UserPreferences.shared.playAsSheriff {
+            roles = roles.starting(with: .sheriff)
+        }
         
         let figures = allFigures
             .shuffled()
@@ -192,16 +195,5 @@ private extension Array where Element == FigureProtocol {
         }
         
         return filter { $0.name.rawValue == name } + filter { $0.name.rawValue != name }
-    }
-}
-
-private extension Array where Element == Role {
-    func starting(withSheriff: Bool) -> [Role] {
-        var roles = self
-        while (roles.first == .sheriff) != withSheriff {
-            roles = roles.shuffled()
-        }
-        
-        return roles
     }
 }

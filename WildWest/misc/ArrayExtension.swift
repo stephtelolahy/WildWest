@@ -32,13 +32,41 @@ extension Array where Element: Equatable {
         }
         return result
     }
+
+    func starting(with element: Element?) -> [Element] {
+        guard let element = element,
+            let elementIndex = firstIndex(of: element) else {
+                return self
+        }
+
+        var result: [Element] = []
+        (0..<count).forEach { position in
+            let index = (position + elementIndex) % count
+            result.append(self[index])
+        }
+        return result
+    }
 }
 
 extension Array {
+    
     mutating func removeFirst(where shouldBeRemoved: (Element) -> Bool) -> Element? {
         guard let index = self.firstIndex(where: { shouldBeRemoved($0) }) else {
             return nil
         }
         return self.remove(at: index)
+    }
+    
+    func starting(where shouldBeFirst: (Element) -> Bool) -> [Element] {
+        guard let elementIndex = self.firstIndex(where: { shouldBeFirst($0) }) else {
+            return self
+        }
+        
+        var result: [Element] = []
+        (0..<count).forEach { position in
+            let index = (position + elementIndex) % count
+            result.append(self[index])
+        }
+        return result
     }
 }

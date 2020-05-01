@@ -28,7 +28,13 @@ class GameSubjectsTests: XCTestCase {
     private let disposeBag = DisposeBag()
     
     override func setUp() {
+        DefaultValueRegistry.register(value: FigureName.jesseJones, forType: FigureName.self)
+        let mockPlayer1 = MockPlayerProtocol().identified(by: "p1").role(is: .sheriff).withDefault()
+        let mockPlayer2 = MockPlayerProtocol().identified(by: "p2").role(is: .outlaw).withDefault()
+        let mockPlayer3 = MockPlayerProtocol().identified(by: "p3").role(is: .renegade).withDefault()
+        let mockPlayer4 = MockPlayerProtocol().identified(by: "p4").role(is: .deputy).withDefault()
         mockState = MockGameStateProtocol()
+            .players(are: mockPlayer1, mockPlayer2, mockPlayer3, mockPlayer4)
             .withEnabledDefaultImplementation(GameStateProtocolStub())
         
         stateSubject = BehaviorSubject(value: mockState)
@@ -43,29 +49,41 @@ class GameSubjectsTests: XCTestCase {
         
         let scheduler = TestScheduler(initialClock: 0)
         
-        stateObservers = Array(1...7).map { index in
+        stateObservers = Array(1...4).map { index in
             let observer = scheduler.createObserver(GameStateProtocol.self)
             sut.state(observedBy: "p\(index)").subscribe(observer).disposed(by: disposeBag)
             return observer
         }
         
-        executedMoveObservers = Array(1...7).map { _ in
+        executedMoveObservers = Array(1...4).map { _ in
             let observer = scheduler.createObserver(GameMove.self)
             sut.executedMove().subscribe(observer).disposed(by: disposeBag)
             return observer
         }
         
-        validMovesObservers = Array(1...7).map { index in
+        validMovesObservers = Array(1...4).map { index in
             let observer = scheduler.createObserver([GameMove].self)
             sut.validMoves(for: "p\(index)").subscribe(observer).disposed(by: disposeBag)
             return observer
         }
         
-        updateObservers = Array(1...7).map { _ in
+        updateObservers = Array(1...4).map { _ in
             let observer = scheduler.createObserver(GameUpdate.self)
             sut.executedUpdate().subscribe(observer).disposed(by: disposeBag)
             return observer
         }
+    }
+    
+    func test_PlayersOrdersObservedBy() {
+        // Given
+        // When
+        // Assert
+        
+        XCTAssertEqual(sut.playerIds(observedBy: nil), ["p1", "p2", "p3", "p4"])
+        XCTAssertEqual(sut.playerIds(observedBy: "p1"), ["p1", "p2", "p3", "p4"])
+        XCTAssertEqual(sut.playerIds(observedBy: "p2"), ["p2", "p3", "p4", "p1"])
+        XCTAssertEqual(sut.playerIds(observedBy: "p3"), ["p3", "p4", "p1", "p2"])
+        XCTAssertEqual(sut.playerIds(observedBy: "p4"), ["p4", "p1", "p2", "p3"])
     }
     
     func test_AllObserversReveiceInitialState() throws {
@@ -73,6 +91,10 @@ class GameSubjectsTests: XCTestCase {
         // When
         // Assert
         stateObservers.forEach { XCTAssertEqual($0.events.count, 1) }
+        XCTAssertEqual(stateObservers[0].events.first?.value.event.element?.allPlayers.map { $0.identifier }, ["p1", "p2", "p3", "p4"])
+        XCTAssertEqual(stateObservers[1].events.first?.value.event.element?.allPlayers.map { $0.identifier }, ["p2", "p3", "p4", "p1"])
+        XCTAssertEqual(stateObservers[2].events.first?.value.event.element?.allPlayers.map { $0.identifier }, ["p3", "p4", "p1", "p2"])
+        XCTAssertEqual(stateObservers[3].events.first?.value.event.element?.allPlayers.map { $0.identifier }, ["p4", "p1", "p2", "p3"])
     }
     
     func test_AllObserversReceiveEmitedState() {
