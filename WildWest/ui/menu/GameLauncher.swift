@@ -109,18 +109,6 @@ class GameLauncher {
             }
         }
     }
-    
-    func joinRemoteGame(_ id: String) {
-        firebaseAdapter.getGame(id) { [weak self] result in
-            switch result {
-            case let .success(initialState):
-                self?.openRemoteGame(id, state: initialState)
-                
-            case let .error(error):
-                self?.viewController.presentAlert(title: "Error", message: error.localizedDescription)
-            }
-        }
-    }
 }
 
 private extension GameLauncher {
@@ -144,7 +132,19 @@ private extension GameLauncher {
                                    cards: allCards.shuffled())
     }
     
-    func openRemoteGame(_ id: String, state: GameStateProtocol) {
+    func joinRemoteGame(_ id: String) {
+        firebaseAdapter.getGame(id) { [weak self] result in
+            switch result {
+            case let .success(initialState):
+                self?.setupRemoteGame(id, state: initialState)
+                
+            case let .error(error):
+                self?.viewController.presentAlert(title: "Error", message: error.localizedDescription)
+            }
+        }
+    }
+    
+    func setupRemoteGame(_ id: String, state: GameStateProtocol) {
         let stateSubject: BehaviorSubject<GameStateProtocol> = BehaviorSubject(value: state)
         
         let stateAdapter = FirebaseStateAdapter(gameId: id, mapper: firebaseMapper)
@@ -174,17 +174,11 @@ private extension GameLauncher {
                                 subjects: subjects)
         
         let controlledPlayerId: String? = UserPreferences.shared.simulationMode ? nil : state.players.first?.identifier
-        let aiPlayers = state.players.filter { $0.identifier != controlledPlayerId }
-        let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
-                                                     ai: RandomAIWithRole(),
-                                                     engine: engine,
-                                                     subjects: subjects)
-        }
         
         Navigator(viewController).toGame(engine: engine,
                                          subjects: subjects,
                                          controlledPlayerId: controlledPlayerId,
-                                         aiAgents: aiAgents)
+                                         aiAgents: nil)
     }
 }
 
