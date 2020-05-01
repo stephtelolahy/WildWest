@@ -194,7 +194,9 @@ private extension GameViewController {
     }
     
     func showGameOver(outcome: GameOutcome) {
-        presentAlert(title: "Game Over", message: outcome.rawValue)
+        presentAlert(title: "Game Over", message: outcome.rawValue) { [weak self] in
+            self?.dismiss(animated: true)
+        }
     }
 }
 
