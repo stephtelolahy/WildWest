@@ -6,7 +6,6 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 // swiftlint:disable force_cast
-// swiftlint:disable type_body_length
 
 import RxSwift
 

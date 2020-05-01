@@ -5,7 +5,6 @@
 //  Created by Hugues Stephano Telolahy on 28/03/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-// swiftlint:disable function_body_length
 
 import UIKit
 

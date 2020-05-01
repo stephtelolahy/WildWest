@@ -18,7 +18,31 @@ struct GameEnvironment {
 
 class GameEnvironmentBuilder {
     
-    func createLocalEnvironment(state: GameStateProtocol, controlledId: String?) -> GameEnvironment {
+    func createGame(playersCount: Int,
+                    cards: [CardProtocol],
+                    figures: [FigureProtocol],
+                    preferredRole: Role?,
+                    preferredFigure: String?) -> GameStateProtocol {
+        let gameSetup = GameSetup()
+        
+        let shuffledRoles = gameSetup.roles(for: playersCount)
+            .shuffled()
+            .starting(with: preferredRole)
+        
+        let shuffledFigures = figures
+            .shuffled()
+            .starting(where: { $0.name.rawValue == preferredFigure })
+        
+        let shuffledCards = cards.shuffled()
+        
+        return gameSetup.setupGame(roles: shuffledRoles,
+                                   figures: shuffledFigures,
+                                   cards: shuffledCards)
+    }
+    
+    func createLocalEnvironment(state: GameStateProtocol,
+                                controlledId: String?,
+                                updateDelay: TimeInterval) -> GameEnvironment {
         let stateSubject: BehaviorSubject<GameStateProtocol> = BehaviorSubject(value: state)
         let executedMoveSubject = PublishSubject<GameMove>()
         let executedUpdateSubject = PublishSubject<GameUpdate>()
@@ -35,16 +59,14 @@ class GameEnvironmentBuilder {
                                     executedUpdateSubject: executedUpdateSubject,
                                     validMovesSubject: validMovesSubject)
         
-        let engine = GameEngine(delay: UserPreferences.shared.updateDelay,
+        let engine = GameEngine(delay: updateDelay,
                                 database: database,
                                 stateSubject: stateSubject,
                                 moveMatchers: GameRules().moveMatchers,
                                 updateExecutor: GameUpdateExecutor(),
                                 subjects: subjects)
         
-        let controlledPlayerId: String? = UserPreferences.shared.simulationMode ? nil : state.players.first?.identifier
-        
-        let aiPlayers = state.players.filter { $0.identifier != controlledPlayerId }
+        let aiPlayers = state.players.filter { $0.identifier != controlledId }
         let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
                                                      ai: RandomAIWithRole(),
                                                      engine: engine,
@@ -55,11 +77,11 @@ class GameEnvironmentBuilder {
         
         return GameEnvironment(engine: engine,
                                subjects: subjects,
-                               controlledId: controlledPlayerId,
+                               controlledId: controlledId,
                                aiAgents: aiAgents)
     }
     
-    func createRemoteEnvironment(gameId: String, state: GameStateProtocol) -> GameEnvironment {
+    func createRemoteEnvironment(gameId: String, state: GameStateProtocol, controlledId: String?) -> GameEnvironment {
         fatalError()
     }
 }

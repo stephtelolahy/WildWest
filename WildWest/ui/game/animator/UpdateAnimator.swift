@@ -5,7 +5,6 @@
 //  Created by Hugues Stephano Telolahy on 13/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-// swiftlint:disable type_body_length
 // swiftlint:disable cyclomatic_complexity
 // swiftlint:disable function_body_length
 
@@ -27,13 +26,16 @@ class UpdateAnimator: UpdateAnimatorProtocol {
     private unowned let viewController: UIViewController
     private let cardPositions: [CardPlace: CGPoint]
     private let cardSize: CGSize
+    private let updateDelay: TimeInterval
     
     init(viewController: UIViewController,
          cardPositions: [CardPlace: CGPoint],
-         cardSize: CGSize) {
+         cardSize: CGSize,
+         updateDelay: TimeInterval) {
         self.viewController = viewController
         self.cardPositions = cardPositions
         self.cardSize = cardSize
+        self.updateDelay = updateDelay
     }
     
     func animate(_ update: GameUpdate, in state: GameStateProtocol) {
@@ -141,7 +143,7 @@ private extension UpdateAnimator {
                                        size: cardSize,
                                        from: sourcePosition,
                                        to: targetPosition,
-                                       duration: UserPreferences.shared.updateDelay * 0.6)
+                                       duration: updateDelay * 0.6)
     }
     
     func animateRevealCard(image: UIImage?,
@@ -153,7 +155,7 @@ private extension UpdateAnimator {
         viewController.animateRevealCard(image: image,
                                          size: cardSize,
                                          at: position,
-                                         duration: UserPreferences.shared.updateDelay)
+                                         duration: updateDelay)
     }
     
     func animateRevealThenMoveCard(sourceImage: UIImage? = #imageLiteral(resourceName: "01_back"),
@@ -170,6 +172,6 @@ private extension UpdateAnimator {
                                                  size: cardSize,
                                                  from: sourcePosition,
                                                  to: targetPosition,
-                                                 duration: UserPreferences.shared.updateDelay)
+                                                 duration: updateDelay)
     }
 }

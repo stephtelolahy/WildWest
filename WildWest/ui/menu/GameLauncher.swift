@@ -13,7 +13,9 @@ class GameLauncher {
     
     private unowned let viewController: UIViewController
     
-    private lazy var environmentBuilder = GameEnvironmentBuilder()
+    private lazy var userPreferences = UserPreferences()
+    
+    private lazy var builder = GameEnvironmentBuilder()
     
     init(viewController: UIViewController) {
         self.viewController = viewController
@@ -25,27 +27,9 @@ class GameLauncher {
         return resources
     }()
     
-    private lazy var allCards: [CardProtocol] = {
-        gameResources.allCards
-    }()
+    private lazy var allCards: [CardProtocol] = gameResources.allCards
     
-    private lazy var allFigures: [FigureProtocol] = {
-        var figures = gameResources.allFigures
-            .filter { !$0.abilities.isEmpty }
-        
-        if UserPreferences.shared.allAbilitiesMode {
-            var allAbilities: [AbilityName: Bool] = [:]
-            AbilityName.allCases.forEach { allAbilities[$0] = true }
-            figures = figures.map { Figure(name: $0.name,
-                                           bullets: $0.bullets,
-                                           imageName: $0.imageName,
-                                           description: $0.description,
-                                           abilities: allAbilities)
-            }
-        }
-        
-        return figures
-    }()
+    private lazy var allFigures: [FigureProtocol] = gameResources.allFigures.filter { !$0.abilities.isEmpty }
     
     private lazy var firebaseMapper: FirebaseMapperProtocol = {
         FirebaseMapper(dtoEncoder: DtoEncoder(keyGenerator: FirebaseKeyGenerator()),
@@ -59,13 +43,23 @@ class GameLauncher {
     }()
     
     func startLocal() {
-        let state = createGame()
-        let controlledId: String? = !UserPreferences.shared.simulationMode ? state.players.first?.identifier : nil
-        let environment = environmentBuilder.createLocalEnvironment(state: state, controlledId: controlledId)
+        let state = builder.createGame(playersCount: userPreferences.playersCount,
+                                       cards: allCards,
+                                       figures: allFigures,
+                                       preferredRole: userPreferences.playAsSheriff ? .sheriff : nil,
+                                       preferredFigure: userPreferences.preferredFigure)
+        
+        let controlledId: String? = !userPreferences.simulationMode ? state.players.first?.identifier : nil
+        
+        let environment = builder.createLocalEnvironment(state: state,
+                                                         controlledId: controlledId,
+                                                         updateDelay: userPreferences.updateDelay)
+        
         Navigator(viewController).toGame(environment: environment)
     }
     
     func startRemote() {
+        /*
         let state = createGame()
         firebaseAdapter.createGame(state) { [weak self] result in
             switch result {
@@ -76,29 +70,11 @@ class GameLauncher {
                 self?.viewController.presentAlert(title: "Error", message: error.localizedDescription)
             }
         }
+ */
     }
 }
-
+/*
 private extension GameLauncher {
-    
-    func createGame() -> GameStateProtocol {
-        let gameSetup = GameSetup()
-        
-        var roles = gameSetup.roles(for: UserPreferences.shared.playersCount)
-            .shuffled()
-        
-        if UserPreferences.shared.playAsSheriff {
-            roles = roles.starting(with: .sheriff)
-        }
-        
-        let figures = allFigures
-            .shuffled()
-            .starting(with: UserPreferences.shared.preferredFigure)
-        
-        return gameSetup.setupGame(roles: roles,
-                                   figures: figures,
-                                   cards: allCards.shuffled())
-    }
     
     func joinRemoteGame(_ id: String) {
         firebaseAdapter.getGame(id) { [weak self] result in
@@ -143,19 +119,10 @@ private extension GameLauncher {
         
         let controlledPlayerId: String? = UserPreferences.shared.simulationMode ? nil : state.players.first?.identifier
         
-//        Navigator(viewController).toGame(engine: engine,
-//                                         subjects: subjects,
-//                                         controlledPlayerId: controlledPlayerId,
-//                                         aiAgents: nil)
+        Navigator(viewController).toGame(engine: engine,
+                                         subjects: subjects,
+                                         controlledPlayerId: controlledPlayerId,
+                                         aiAgents: nil)
     }
 }
-
-private extension Array where Element == FigureProtocol {
-    func starting(with name: String) -> [FigureProtocol] {
-        guard contains(where: { $0.name.rawValue == name }) else {
-            return self
-        }
-        
-        return filter { $0.name.rawValue == name } + filter { $0.name.rawValue != name }
-    }
-}
+*/

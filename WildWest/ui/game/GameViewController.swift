@@ -47,9 +47,8 @@ class GameViewController: UIViewController, Subscribable {
     private var otherMoves: [GameMove] = []
     private var latestState: GameStateProtocol?
     private var latestMove: GameMove?
-    private var moveSoundPlayer: MoveSoundPlayerProtocol?
-    private var reactionMoveSelector: ReactionMoveSelectorProtocol?
     
+    private lazy var userPreferences = UserPreferences()
     private lazy var statsBuilder = StatsBuilder(sheriffId: subjects.sheriffId, classifier: MoveClassifier())
     private lazy var playerAdapter = PlayersAdapter()
     private lazy var actionsAdapter = ActionsAdapter(playerId: controlledPlayerId)
@@ -59,22 +58,25 @@ class GameViewController: UIViewController, Subscribable {
     private lazy var playerDescriptor = PlayerDescriptor(viewController: self)
     private lazy var updateAnimator = UpdateAnimator(viewController: self,
                                                      cardPositions: buildCardPositions(),
-                                                     cardSize: buildCardSize())
+                                                     cardSize: buildCardSize(),
+                                                     updateDelay: userPreferences.updateDelay)
+    
+    private lazy var moveSoundPlayer: MoveSoundPlayerProtocol? = {
+        userPreferences.enableSound ? MoveSoundPlayer() : nil
+    }()
+    
+    private lazy var reactionMoveSelector: ReactionMoveSelectorProtocol? = {
+        if userPreferences.assistedMode {
+            return AssistedReactionMoveSelector(ai: RandomAI())
+        } else {
+            return ReactionMoveSelector(viewController: self)
+        }
+    }()
     
     // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if UserPreferences.shared.enableSound {
-            moveSoundPlayer = MoveSoundPlayer()
-        }
-        
-        if UserPreferences.shared.assistedMode {
-            reactionMoveSelector = AssistedReactionMoveSelector(ai: RandomAI())
-        } else {
-            reactionMoveSelector = ReactionMoveSelector(viewController: self)
-        }
         
         let layout = playersCollectionView.collectionViewLayout as? GameCollectionViewLayout
         layout?.delegate = self
