@@ -17,20 +17,14 @@ class Navigator {
         self.viewController = viewController
     }
     
-    func toGame(engine: GameEngineProtocol,
-                subjects: GameSubjectsProtocol,
-                controlledPlayerId: String?,
-                aiAgents: [AIPlayerAgent]?) {
+    func toGame(environment: GameEnvironment) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let gameViewController =
             storyboard.instantiateViewController(withIdentifier: "GameViewController") as? GameViewController else {
                 return
         }
         
-        gameViewController.engine = engine
-        gameViewController.subjects = subjects
-        gameViewController.controlledPlayerId = controlledPlayerId
-        gameViewController.aiAgents = aiAgents
+        gameViewController.environment = environment
         viewController.present(gameViewController, animated: true)
     }
     

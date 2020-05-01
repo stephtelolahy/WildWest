@@ -26,10 +26,19 @@ class GameViewController: UIViewController, Subscribable {
     
     // MARK: Properties
     
-    var engine: GameEngineProtocol!
-    var subjects: GameSubjectsProtocol!
-    var aiAgents: [AIPlayerAgentProtocol]?
-    var controlledPlayerId: String?
+    var environment: GameEnvironment!
+    
+    private var engine: GameEngineProtocol {
+        environment.engine
+    }
+    
+    private var subjects: GameSubjectsProtocol {
+        environment.subjects
+    }
+    
+    private var controlledPlayerId: String? {
+        environment.controlledId
+    }
     
     private var playerItems: [PlayerItem] = []
     private var actionItems: [ActionItem] = []
@@ -89,8 +98,6 @@ class GameViewController: UIViewController, Subscribable {
                 self?.processValidMoves(moves)
             }))
         }
-        
-        aiAgents?.forEach { $0.observeState() }
     }
     
     // MARK: IBAction

@@ -5,7 +5,6 @@
 //  Created by Hugues Stephano Telolahy on 25/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-// swiftlint:disable force_cast
 
 import UIKit
 import RxSwift
@@ -13,6 +12,8 @@ import RxSwift
 class GameLauncher {
     
     private unowned let viewController: UIViewController
+    
+    private lazy var environmentBuilder = GameEnvironmentBuilder()
     
     init(viewController: UIViewController) {
         self.viewController = viewController
@@ -59,42 +60,9 @@ class GameLauncher {
     
     func startLocal() {
         let state = createGame()
-        
-        let stateSubject: BehaviorSubject<GameStateProtocol> = BehaviorSubject(value: state)
-        let executedMoveSubject = PublishSubject<GameMove>()
-        let executedUpdateSubject = PublishSubject<GameUpdate>()
-        let validMovesSubject = PublishSubject<[GameMove]>()
-        
-        let database = MemoryCachedDataBase(mutableState: state as! GameState,
-                                            stateSubject: stateSubject,
-                                            executedMoveSubject: executedMoveSubject,
-                                            executedUpdateSubject: executedUpdateSubject,
-                                            validMovesSubject: validMovesSubject)
-        
-        let subjects = GameSubjects(stateSubject: stateSubject,
-                                    executedMoveSubject: executedMoveSubject,
-                                    executedUpdateSubject: executedUpdateSubject,
-                                    validMovesSubject: validMovesSubject)
-        
-        let engine = GameEngine(delay: UserPreferences.shared.updateDelay,
-                                database: database,
-                                stateSubject: stateSubject,
-                                moveMatchers: GameRules().moveMatchers,
-                                updateExecutor: GameUpdateExecutor(),
-                                subjects: subjects)
-        
-        let controlledPlayerId: String? = UserPreferences.shared.simulationMode ? nil : state.players.first?.identifier
-        let aiPlayers = state.players.filter { $0.identifier != controlledPlayerId }
-        let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
-                                                     ai: RandomAIWithRole(),
-                                                     engine: engine,
-                                                     subjects: subjects)
-        }
-        
-        Navigator(viewController).toGame(engine: engine,
-                                         subjects: subjects,
-                                         controlledPlayerId: controlledPlayerId,
-                                         aiAgents: aiAgents)
+        let controlledId: String? = !UserPreferences.shared.simulationMode ? state.players.first?.identifier : nil
+        let environment = environmentBuilder.createLocalEnvironment(state: state, controlledId: controlledId)
+        Navigator(viewController).toGame(environment: environment)
     }
     
     func startRemote() {
@@ -175,10 +143,10 @@ private extension GameLauncher {
         
         let controlledPlayerId: String? = UserPreferences.shared.simulationMode ? nil : state.players.first?.identifier
         
-        Navigator(viewController).toGame(engine: engine,
-                                         subjects: subjects,
-                                         controlledPlayerId: controlledPlayerId,
-                                         aiAgents: nil)
+//        Navigator(viewController).toGame(engine: engine,
+//                                         subjects: subjects,
+//                                         controlledPlayerId: controlledPlayerId,
+//                                         aiAgents: nil)
     }
 }
 
