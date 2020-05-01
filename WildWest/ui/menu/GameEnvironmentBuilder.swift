@@ -13,7 +13,7 @@ struct GameEnvironment {
     let engine: GameEngine
     let subjects: GameSubjects
     let controlledId: String?
-    let aiAgents: [AIPlayerAgent]
+    let aiAgents: [AIPlayerAgent]?
 }
 
 class GameEnvironmentBuilder {
@@ -81,7 +81,43 @@ class GameEnvironmentBuilder {
                                aiAgents: aiAgents)
     }
     
-    func createRemoteEnvironment(gameId: String, state: GameStateProtocol, controlledId: String?) -> GameEnvironment {
-        fatalError()
+    func createRemoteEnvironment(gameId: String,
+                                 state: GameStateProtocol,
+                                 controlledId: String?,
+                                 updateDelay: TimeInterval,
+                                 firebaseMapper: FirebaseMapperProtocol) -> GameEnvironment {
+        
+        let stateSubject: BehaviorSubject<GameStateProtocol> = BehaviorSubject(value: state)
+        
+        let stateAdapter = FirebaseStateAdapter(gameId: gameId, mapper: firebaseMapper)
+        let gameAdapter = FirebaseGameAdapter(gameId: gameId, mapper: firebaseMapper)
+        
+        let executedMoveSubject = PublishSubject<GameMove>()
+        let executedUpdateSubject = PublishSubject<GameUpdate>()
+        let validMovesSubject = PublishSubject<[GameMove]>()
+        
+        let database = RemoteDatabase(stateAdapter: stateAdapter,
+                                      gameAdapter: gameAdapter,
+                                      stateSubject: stateSubject,
+                                      executedMoveSubject: executedMoveSubject,
+                                      executedUpdateSubject: executedUpdateSubject,
+                                      validMovesSubject: validMovesSubject)
+        
+        let subjects = GameSubjects(stateSubject: stateSubject,
+                                    executedMoveSubject: executedMoveSubject,
+                                    executedUpdateSubject: executedUpdateSubject,
+                                    validMovesSubject: validMovesSubject)
+        
+        let engine = GameEngine(delay: updateDelay,
+                                database: database,
+                                stateSubject: stateSubject,
+                                moveMatchers: GameRules().moveMatchers,
+                                updateExecutor: GameUpdateExecutor(),
+                                subjects: subjects)
+        
+        return GameEnvironment(engine: engine,
+                               subjects: subjects,
+                               controlledId: controlledId,
+                               aiAgents: nil)
     }
 }

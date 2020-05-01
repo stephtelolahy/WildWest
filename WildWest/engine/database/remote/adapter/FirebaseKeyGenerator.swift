@@ -9,17 +9,12 @@
 import Firebase
 
 protocol FirebaseKeyGeneratorProtocol {
-    func gameAutoId() -> String
     func cardAutoId() -> String
 }
 
 class FirebaseKeyGenerator: FirebaseKeyGeneratorProtocol {
     
     private let rootRef = Database.database().reference()
-    
-    func gameAutoId() -> String {
-        "live"
-    }
     
     func cardAutoId() -> String {
         guard let key = rootRef.child("games/live/deck").childByAutoId().key else {

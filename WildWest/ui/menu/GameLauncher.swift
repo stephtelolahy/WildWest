@@ -38,17 +38,32 @@ class GameLauncher {
                        dictionaryDecoder: DictionaryDecoder())
     }()
     
-    private lazy var firebaseAdapter: FirebaseAdapterProtocol = {
-        FirebaseAdapter(mapper: firebaseMapper, keyGenerator: FirebaseKeyGenerator())
-    }()
+    private lazy var firebaseAdapter: FirebaseAdapterProtocol = FirebaseAdapter(mapper: firebaseMapper)
     
     func startLocal() {
-        let state = builder.createGame(playersCount: userPreferences.playersCount,
-                                       cards: allCards,
-                                       figures: allFigures,
-                                       preferredRole: userPreferences.playAsSheriff ? .sheriff : nil,
-                                       preferredFigure: userPreferences.preferredFigure)
-        
+        let state = createGame()
+        joinLocalGame(state: state)
+    }
+    
+    func startRemote() {
+        let gameId = "live"
+        getOrCreateRemoteGame(id: gameId) { [weak self] state in
+            self?.joinRemoteGame(id: gameId, state: state)
+        }
+    }
+}
+
+private extension GameLauncher {
+    
+    func createGame() -> GameStateProtocol {
+        builder.createGame(playersCount: userPreferences.playersCount,
+                           cards: allCards,
+                           figures: allFigures,
+                           preferredRole: userPreferences.playAsSheriff ? .sheriff : nil,
+                           preferredFigure: userPreferences.preferredFigure)
+    }
+    
+    func joinLocalGame(state: GameStateProtocol) {
         let controlledId: String? = !userPreferences.simulationMode ? state.players.first?.identifier : nil
         
         let environment = builder.createLocalEnvironment(state: state,
@@ -58,71 +73,36 @@ class GameLauncher {
         Navigator(viewController).toGame(environment: environment)
     }
     
-    func startRemote() {
-        /*
-        let state = createGame()
-        firebaseAdapter.createGame(state) { [weak self] result in
-            switch result {
-            case let .success(gameId):
-                self?.joinRemoteGame(gameId)
+    func getOrCreateRemoteGame(id: String, complection: @escaping ((GameStateProtocol) -> Void)) {
+        firebaseAdapter.getGame(id) { result in
+            if case let .success(state) = result,
+                state.outcome == nil {
+                complection(state)
                 
-            case let .error(error):
-                self?.viewController.presentAlert(title: "Error", message: error.localizedDescription)
-            }
-        }
- */
-    }
-}
-/*
-private extension GameLauncher {
-    
-    func joinRemoteGame(_ id: String) {
-        firebaseAdapter.getGame(id) { [weak self] result in
-            switch result {
-            case let .success(initialState):
-                self?.setupRemoteGame(id, state: initialState)
-                
-            case let .error(error):
-                self?.viewController.presentAlert(title: "Error", message: error.localizedDescription)
+            } else {
+                let state = self.createGame()
+                self.firebaseAdapter.createGame(id: id, state: state) { [weak self] result in
+                    switch result {
+                    case .success:
+                        complection(state)
+                        
+                    case let .error(error):
+                        self?.viewController.presentAlert(title: "Error", message: error.localizedDescription)
+                    }
+                }
             }
         }
     }
     
-    func setupRemoteGame(_ id: String, state: GameStateProtocol) {
-        let stateSubject: BehaviorSubject<GameStateProtocol> = BehaviorSubject(value: state)
+    func joinRemoteGame(id: String, state: GameStateProtocol) {
+        let controlledId = state.allPlayers.map { $0.identifier }.randomElement()
         
-        let stateAdapter = FirebaseStateAdapter(gameId: id, mapper: firebaseMapper)
-        let gameAdapter = FirebaseGameAdapter(gameId: id, mapper: firebaseMapper)
+        let environment = builder.createRemoteEnvironment(gameId: id,
+                                                          state: state,
+                                                          controlledId: controlledId,
+                                                          updateDelay: userPreferences.updateDelay,
+                                                          firebaseMapper: firebaseMapper)
         
-        let executedMoveSubject = PublishSubject<GameMove>()
-        let executedUpdateSubject = PublishSubject<GameUpdate>()
-        let validMovesSubject = PublishSubject<[GameMove]>()
-        
-        let database = RemoteDatabase(stateAdapter: stateAdapter,
-                                      gameAdapter: gameAdapter,
-                                      stateSubject: stateSubject,
-                                      executedMoveSubject: executedMoveSubject,
-                                      executedUpdateSubject: executedUpdateSubject,
-                                      validMovesSubject: validMovesSubject)
-        
-        let subjects = GameSubjects(stateSubject: stateSubject,
-                                    executedMoveSubject: executedMoveSubject,
-                                    executedUpdateSubject: executedUpdateSubject,
-                                    validMovesSubject: validMovesSubject)
-        
-        let engine = GameEngine(delay: UserPreferences.shared.updateDelay,
-                                database: database,
-                                stateSubject: stateSubject,
-                                moveMatchers: GameRules().moveMatchers,
-                                updateExecutor: GameUpdateExecutor(),
-                                subjects: subjects)
-        
-        let controlledPlayerId: String? = UserPreferences.shared.simulationMode ? nil : state.players.first?.identifier
-        
-        Navigator(viewController).toGame(engine: engine,
-                                         subjects: subjects,
-                                         controlledPlayerId: controlledPlayerId,
-                                         aiAgents: nil)
+        Navigator(viewController).toGame(environment: environment)
     }
 }
-*/

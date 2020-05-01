@@ -12,37 +12,32 @@ import RxSwift
 import Firebase
 
 protocol FirebaseAdapterProtocol {
-    func createGame(_ state: GameStateProtocol, _ completion: @escaping FirebaseStringCompletion)
+    func createGame(id: String, state: GameStateProtocol, _ completion: @escaping FirebaseCompletion)
     func getGame(_ id: String, completion: @escaping FirebaseStateCompletion)
 }
 
 class FirebaseAdapter: FirebaseAdapterProtocol {
     
     private let mapper: FirebaseMapperProtocol
-    private let keyGenerator: FirebaseKeyGeneratorProtocol
     private let rootRef = Database.database().reference()
     
-    init(mapper: FirebaseMapperProtocol,
-         keyGenerator: FirebaseKeyGeneratorProtocol) {
+    init(mapper: FirebaseMapperProtocol) {
         self.mapper = mapper
-        self.keyGenerator = keyGenerator
     }
     
-    func createGame(_ state: GameStateProtocol, _ completion: @escaping FirebaseStringCompletion) {
+    func createGame(id: String, state: GameStateProtocol, _ completion: @escaping FirebaseCompletion) {
         do {
-            let key = keyGenerator.gameAutoId()
+            rootRef.child("games/\(id)/executedMove").setValue(nil)
+            rootRef.child("games/\(id)/executedUpdate").setValue(nil)
+            
             let value = try mapper.encodeState(state)
-            rootRef.child("games/\(key)/state").setValue(value) { error, _ in
+            rootRef.child("games/\(id)/state").setValue(value) { error, _ in
                 if let error = error {
                     completion(.error(error))
                 } else {
-                    completion(.success(key))
+                    completion(.success)
                 }
             }
-            
-            rootRef.child("games/\(key)/executedMove").setValue(nil)
-            rootRef.child("games/\(key)/executedUpdate").setValue(nil)
-            
         } catch {
             completion(.error(error))
         }

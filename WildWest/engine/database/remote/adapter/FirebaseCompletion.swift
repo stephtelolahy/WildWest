@@ -17,7 +17,6 @@ enum Result<T> {
 }
 
 typealias FirebaseCompletion = (EmptyResult) -> Void
-typealias FirebaseStringCompletion = (Result<String>) -> Void
 typealias FirebaseCardCompletion = (Result<CardProtocol>) -> Void
 typealias FirebaseStateCompletion = (Result<GameStateProtocol>) -> Void
 typealias FirebaseUpdateCompletion = (Result<GameUpdate>) -> Void
