@@ -16,7 +16,6 @@ class GameViewController: UIViewController, Subscribable {
     
     @IBOutlet private weak var endTurnButton: UIButton!
     @IBOutlet private weak var otherMovesButton: UIButton!
-    @IBOutlet private weak var startButton: UIButton!
     @IBOutlet private weak var playersCollectionView: UICollectionView!
     @IBOutlet private weak var actionsCollectionView: UICollectionView!
     @IBOutlet private weak var messageTableView: UITableView!
@@ -82,8 +81,6 @@ class GameViewController: UIViewController, Subscribable {
         let layout = playersCollectionView.collectionViewLayout as? GameCollectionViewLayout
         layout?.delegate = self
         
-        startButton.isEnabled = environment.enableStart
-        
         sub(subjects.state(observedBy: controlledPlayerId).subscribe(onNext: { [weak self] state in
             self?.processState(state)
             }, onError: { [weak self] error in
@@ -105,6 +102,14 @@ class GameViewController: UIViewController, Subscribable {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if environment.allowStart {
+            engine.startGame()
+        }
+    }
+    
     // MARK: IBAction
     
     @IBAction private func menuButtonTapped(_ sender: Any) {
@@ -121,11 +126,6 @@ class GameViewController: UIViewController, Subscribable {
         playMoveSelector.selectMove(within: otherMoves) { [weak self] move in
             self?.engine.execute(move)
         }
-    }
-    
-    @IBAction private func startButtonTapped(_ sender: Any) {
-        engine.startGame()
-        startButton.isEnabled = false
     }
 }
 

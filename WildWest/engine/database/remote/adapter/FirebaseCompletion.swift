@@ -22,6 +22,7 @@ typealias FirebaseStateCompletion = (Result<GameStateProtocol>) -> Void
 typealias FirebaseUpdateCompletion = (Result<GameUpdate>) -> Void
 typealias FirebaseOptionalMoveCompletion = (Result<GameMove?>) -> Void
 typealias FirebaseMovesCompletion = (Result<[GameMove]>) -> Void
+typealias FirebaseBooleanCompletion = (Result<Bool>) -> Void
 
 func result(from error: Error?) -> EmptyResult {
     if let error = error {

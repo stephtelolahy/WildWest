@@ -49,9 +49,9 @@ class GameLauncher {
     func startRemote() {
         let gameId = "live"
         getOrCreateRemoteGame(id: gameId) { [weak self] state in
-            let playerIds = state.allPlayers.map { $0.identifier }
-            self?.viewController.select(title: "Choose player", choices: playerIds) { index in
-                self?.joinRemoteGame(id: gameId, state: state, as: playerIds[index])
+            let choices = state.allPlayers.map { "\($0.identifier) - \($0.role!.rawValue)" }
+            self?.viewController.select(title: "Choose player", choices: choices) { index in
+                self?.joinRemoteGame(id: gameId, state: state, as: state.allPlayers[index].identifier)
             }
         }
     }
@@ -75,18 +75,18 @@ private extension GameLauncher {
         Navigator(viewController).toGame(environment: environment)
     }
     
-    func getOrCreateRemoteGame(id: String, complection: @escaping ((GameStateProtocol) -> Void)) {
-        firebaseAdapter.getGame(id) { result in
-            if case let .success(state) = result,
-                state.outcome == nil {
-                complection(state)
+    func getOrCreateRemoteGame(id: String, completion: @escaping ((GameStateProtocol) -> Void)) {
+        firebaseAdapter.getPendingGame(id) { result in
+            switch result {
+            case let .success(state):
+                completion(state)
                 
-            } else {
+            case .error:
                 let state = self.createGame()
                 self.firebaseAdapter.createGame(id: id, state: state) { [weak self] result in
                     switch result {
                     case .success:
-                        complection(state)
+                        completion(state)
                         
                     case let .error(error):
                         self?.viewController.presentAlert(title: "Error", message: error.localizedDescription)
@@ -102,6 +102,11 @@ private extension GameLauncher {
                                                           controlledId: controlledId,
                                                           updateDelay: userPreferences.updateDelay,
                                                           firebaseMapper: firebaseMapper)
+        
+        // Sheriff will start game
+        if state.player(environment.controlledId)!.role == .sheriff {
+            FirebaseGameAdapter(gameId: "live", mapper: firebaseMapper).setStarted { _ in }
+        }
         
         Navigator(viewController).toGame(environment: environment)
     }

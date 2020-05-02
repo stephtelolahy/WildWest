@@ -14,7 +14,7 @@ struct GameEnvironment {
     let subjects: GameSubjects
     let controlledId: String?
     let aiAgents: [AIPlayerAgent]?
-    let enableStart: Bool
+    let allowStart: Bool
 }
 
 class GameEnvironmentBuilder {
@@ -80,7 +80,7 @@ class GameEnvironmentBuilder {
                                subjects: subjects,
                                controlledId: controlledId,
                                aiAgents: aiAgents,
-                               enableStart: true)
+                               allowStart: true)
     }
     
     func createRemoteEnvironment(gameId: String,
@@ -123,6 +123,6 @@ class GameEnvironmentBuilder {
                                subjects: subjects,
                                controlledId: controlledId,
                                aiAgents: nil,
-                               enableStart: controlledRoleIsSheriff)
+                               allowStart: controlledRoleIsSheriff)
     }
 }
