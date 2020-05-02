@@ -48,7 +48,8 @@ class PassMatcher: MoveMatcherProtocol {
         let health = max(actor.health - challenge.damage, 0)
         let damageEvent = DamageEvent(damage: challenge.damage, source: damageSource)
         return [.setChallenge(challenge.removing(move.actorId)),
-                .playerLooseHealth(move.actorId, health, damageEvent)]
+                .playerSetDamage(move.actorId, damageEvent),
+                .playerSetHealth(move.actorId, health)]
     }
 }
 

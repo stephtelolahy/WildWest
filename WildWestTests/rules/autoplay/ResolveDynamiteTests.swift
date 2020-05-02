@@ -43,7 +43,8 @@ class ResolveDynamiteMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.flipOverFirstDeckCard,
-                                 .playerLooseHealth("p1", 1, DamageEvent(damage: 3, source: .byDynamite)),
+                                 .playerSetDamage("p1", DamageEvent(damage: 3, source: .byDynamite)),
+                                 .playerSetHealth("p1", 1),
                                  .playerDiscardInPlay("p1", "c1")])
     }
     
@@ -58,7 +59,8 @@ class ResolveDynamiteMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.flipOverFirstDeckCard,
-                                 .playerLooseHealth("p1", 1, DamageEvent(damage: 2, source: .byDynamite)),
+                                 .playerSetDamage("p1", DamageEvent(damage: 2, source: .byDynamite)),
+                                 .playerSetHealth("p1", 1),
                                  .setChallenge(Challenge(name: .dynamiteExploded, damage: 1)),
                                  .playerDiscardInPlay("p1", "c1")])
     }
@@ -74,7 +76,8 @@ class ResolveDynamiteMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.flipOverFirstDeckCard,
-                                 .playerLooseHealth("p1", 1, DamageEvent(damage: 1, source: .byDynamite)),
+                                 .playerSetDamage("p1", DamageEvent(damage: 1, source: .byDynamite)),
+                                 .playerSetHealth("p1", 1),
                                  .setChallenge(Challenge(name: .dynamiteExploded, damage: 2)),
                                  .playerDiscardInPlay("p1", "c1")])
     }

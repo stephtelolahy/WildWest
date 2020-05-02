@@ -15,8 +15,8 @@ struct UpdateDto: Codable {
     var setupGeneralStore: Int?
     var playerPullFromDeck: String?
     var playerSetBangsPlayed: PlayerSetBangsPlayedDto?
-    var playerGainHealth: PlayerGainHealthDto?
-    var playerLooseHealth: PlayerLooseHealthDto?
+    var playerSetHealth: PlayerSetHealthDto?
+    var playerSetDamage: PlayerSetDamageDto?
     var playerDiscardHand: PlayerManipulatesCardDto?
     var playerPutInPlay: PlayerManipulatesCardDto?
     var playerDiscardInPlay: PlayerManipulatesCardDto?
@@ -33,15 +33,14 @@ struct PlayerSetBangsPlayedDto: Codable {
     let count: Int?
 }
 
-struct PlayerGainHealthDto: Codable {
+struct PlayerSetHealthDto: Codable {
     let playerId: String?
     let health: Int?
 }
 
-struct PlayerLooseHealthDto: Codable {
+struct PlayerSetDamageDto: Codable {
     let playerId: String?
-    let health: Int?
-    let damageEvent: DamageEventDto?
+    let damage: DamageEventDto?
 }
 
 struct PlayerManipulatesCardDto: Codable {

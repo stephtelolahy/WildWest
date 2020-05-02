@@ -30,7 +30,7 @@ class Discard2CardsFor1LifeMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        var updates: [GameUpdate] = [.playerGainHealth(move.actorId, actor.health + 1)]
+        var updates: [GameUpdate] = [.playerSetHealth(move.actorId, actor.health + 1)]
         discardIds.forEach { updates.append(.playerDiscardHand(move.actorId, $0)) }
         return updates
     }

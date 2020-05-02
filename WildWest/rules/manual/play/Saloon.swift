@@ -30,7 +30,7 @@ class SaloonMatcher: MoveMatcherProtocol {
         var updates: [GameUpdate] = []
         let damagedPlayers = state.players.filter { $0.health < $0.maxHealth }
         damagedPlayers.forEach {
-            updates.append(.playerGainHealth($0.identifier, $0.health + 1))
+            updates.append(.playerSetHealth($0.identifier, $0.health + 1))
         }
         updates.append(.playerDiscardHand(move.actorId, cardId))
         return updates
