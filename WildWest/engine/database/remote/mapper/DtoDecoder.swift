@@ -16,7 +16,7 @@ class DtoDecoder {
         self.allCards = allCards
     }
     
-    func decode(state: StateDto) throws -> GameStateProtocol {
+    func decode(state: GameStateDto) throws -> GameStateProtocol {
         GameState(allPlayers: try decode(players: state.players, order: state.order),
                   deck: try decode(orderedCards: state.deck),
                   discardPile: try decode(orderedCards: state.discardPile).reversed(),
@@ -30,7 +30,7 @@ class DtoDecoder {
         try allCards.first(where: { $0.identifier == card }).unwrap()
     }
     
-    func decode(move: MoveDto) throws -> GameMove {
+    func decode(move: GameMoveDto) throws -> GameMove {
         GameMove(name: MoveName(try move.name.unwrap()),
                  actorId: try move.actorId.unwrap(),
                  cardId: move.cardId,
@@ -39,7 +39,7 @@ class DtoDecoder {
                  discardIds: move.discardIds)
     }
     
-    func decode(update: UpdateDto) throws -> GameUpdate {
+    func decode(update: GameUpdateDto) throws -> GameUpdate {
         fatalError()
     }
 }

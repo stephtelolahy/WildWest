@@ -1,5 +1,5 @@
 //
-//  UpdateDto.swift
+//  GameUpdateDto.swift
 //  WildWest
 //
 //  Created by Hugues Stephano Telolahy on 02/05/2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct UpdateDto: Codable {
+struct GameUpdateDto: Codable {
     var setTurn: String?
     var setChallenge: ChallengeDto?
     var flipOverFirstDeckCard: Bool?

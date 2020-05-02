@@ -16,15 +16,15 @@ class DtoEncoder {
         self.keyGenerator = keyGenerator
     }
     
-    func encode(state: GameStateProtocol) -> StateDto {
-        StateDto(order: encode(orderOf: state.allPlayers),
-                 players: encode(players: state.allPlayers),
-                 deck: encode(orderedCards: state.deck),
-                 discardPile: encode(orderedCards: state.discardPile.reversed()),
-                 turn: state.turn,
-                 generalStore: encode(cards: state.generalStore),
-                 outcome: state.outcome?.rawValue,
-                 challenge: encode(challenge: state.challenge))
+    func encode(state: GameStateProtocol) -> GameStateDto {
+        GameStateDto(order: encode(orderOf: state.allPlayers),
+                     players: encode(players: state.allPlayers),
+                     deck: encode(orderedCards: state.deck),
+                     discardPile: encode(orderedCards: state.discardPile.reversed()),
+                     turn: state.turn,
+                     generalStore: encode(cards: state.generalStore),
+                     outcome: state.outcome?.rawValue,
+                     challenge: encode(challenge: state.challenge))
     }
     
     func encode(challenge: Challenge?) -> ChallengeDto? {
@@ -64,16 +64,16 @@ class DtoEncoder {
         return result
     }
     
-    func encode(move: GameMove) -> MoveDto {
-        MoveDto(name: move.name.rawValue,
-                actorId: move.actorId,
-                cardId: move.cardId,
-                targetId: move.targetId,
-                targetCard: encode(targetCard: move.targetCard),
-                discardIds: move.discardIds)
+    func encode(move: GameMove) -> GameMoveDto {
+        GameMoveDto(name: move.name.rawValue,
+                    actorId: move.actorId,
+                    cardId: move.cardId,
+                    targetId: move.targetId,
+                    targetCard: encode(targetCard: move.targetCard),
+                    discardIds: move.discardIds)
     }
     
-    func encode(update: GameUpdate) -> UpdateDto {
+    func encode(update: GameUpdate) -> GameUpdateDto {
         fatalError()
     }
 }

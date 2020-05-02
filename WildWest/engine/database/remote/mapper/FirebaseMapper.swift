@@ -47,7 +47,7 @@ class FirebaseMapper: FirebaseMapperProtocol {
     
     func decodeState(from snapshot: DataSnapshot) throws -> GameStateProtocol {
         let value = try (snapshot.value as? [String: Any]).unwrap()
-        let dto = try self.dictionaryDecoder.decode(StateDto.self, from: value)
+        let dto = try self.dictionaryDecoder.decode(GameStateDto.self, from: value)
         let state = try self.dtoDecoder.decode(state: dto)
         return state
     }
@@ -79,7 +79,7 @@ class FirebaseMapper: FirebaseMapperProtocol {
             return nil
         }
         
-        let dto = try self.dictionaryDecoder.decode(MoveDto.self, from: value)
+        let dto = try self.dictionaryDecoder.decode(GameMoveDto.self, from: value)
         let move = try self.dtoDecoder.decode(move: dto)
         return move
     }
@@ -90,7 +90,7 @@ class FirebaseMapper: FirebaseMapperProtocol {
         }
         
         return try values.map { value in
-            let dto = try self.dictionaryDecoder.decode(MoveDto.self, from: value)
+            let dto = try self.dictionaryDecoder.decode(GameMoveDto.self, from: value)
             let move = try self.dtoDecoder.decode(move: dto)
             return move
         }
@@ -101,7 +101,7 @@ class FirebaseMapper: FirebaseMapperProtocol {
             return nil
         }
         
-        let dto = try self.dictionaryDecoder.decode(UpdateDto.self, from: value)
+        let dto = try self.dictionaryDecoder.decode(GameUpdateDto.self, from: value)
         let update = try self.dtoDecoder.decode(update: dto)
         return update
     }
