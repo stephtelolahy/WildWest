@@ -103,11 +103,6 @@ private extension GameLauncher {
                                                           updateDelay: userPreferences.updateDelay,
                                                           firebaseMapper: firebaseMapper)
         
-        // Sheriff will start game
-        if state.player(environment.controlledId)!.role == .sheriff {
-            FirebaseGameAdapter(gameId: "live", mapper: firebaseMapper).setStarted { _ in }
-        }
-        
         Navigator(viewController).toGame(environment: environment)
     }
 }

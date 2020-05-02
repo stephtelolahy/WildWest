@@ -5,14 +5,14 @@
 //  Created by Hugues Stephano Telolahy on 25/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-
-import Firebase
+// swiftlint:disable cyclomatic_complexity
+// swiftlint:disable function_body_length
 
 class DtoEncoder {
     
-    private let keyGenerator: FirebaseKeyGeneratorProtocol
+    private let keyGenerator: KeyGeneratorProtocol
     
-    init(keyGenerator: FirebaseKeyGeneratorProtocol) {
+    init(keyGenerator: KeyGeneratorProtocol) {
         self.keyGenerator = keyGenerator
     }
     
@@ -74,7 +74,73 @@ class DtoEncoder {
     }
     
     func encode(update: GameUpdate) -> GameUpdateDto {
-        fatalError()
+        switch update {
+        case let .setTurn(turn):
+            return GameUpdateDto(setTurn: turn)
+            
+        case let .setChallenge(challenge):
+            if let challenge = challenge {
+                return GameUpdateDto(setChallenge: encode(challenge: challenge))
+            } else {
+                return GameUpdateDto(removeChallenge: true)
+            }
+        case let .playerSetBangsPlayed(playerId, count):
+            let arg = PlayerSetBangsPlayedDto(playerId: playerId, count: count)
+            return GameUpdateDto(playerSetBangsPlayed: arg)
+            
+        case let .playerSetHealth(playerId, health):
+            let arg = PlayerSetHealthDto(playerId: playerId, health: health)
+            return GameUpdateDto(playerSetHealth: arg)
+            
+        case let .playerSetDamage(playerId, damageEvent):
+            let arg = PlayerSetDamageDto(playerId: playerId, event: encode(damageEvent: damageEvent))
+            return GameUpdateDto(playerSetDamage: arg)
+            
+        case let .playerPullFromDeck(playerId):
+            return GameUpdateDto(playerPullFromDeck: playerId)
+            
+        case let .playerDiscardHand(playerId, cardId):
+            let arg = PlayerManipulatesCardDto(playerId: playerId, cardId: cardId)
+            return GameUpdateDto(playerDiscardHand: arg)
+            
+        case let .playerPutInPlay(playerId, cardId):
+            let arg = PlayerManipulatesCardDto(playerId: playerId, cardId: cardId)
+            return GameUpdateDto(playerPutInPlay: arg)
+            
+        case let .playerDiscardInPlay(playerId, cardId):
+            let arg = PlayerManipulatesCardDto(playerId: playerId, cardId: cardId)
+            return GameUpdateDto(playerDiscardInPlay: arg)
+            
+        case let .playerPullFromOtherHand(playerId, otherId, cardId):
+            let arg = PlayerManipulatesOtherCardDto(playerId: playerId, otherId: otherId, cardId: cardId)
+            return GameUpdateDto(playerPullFromOtherHand: arg)
+            
+        case let .playerPullFromOtherInPlay(playerId, otherId, cardId):
+            let arg = PlayerManipulatesOtherCardDto(playerId: playerId, otherId: otherId, cardId: cardId)
+            return GameUpdateDto(playerPullFromOtherInPlay: arg)
+            
+        case let .playerPutInPlayOfOther(playerId, otherId, cardId):
+            let arg = PlayerManipulatesOtherCardDto(playerId: playerId, otherId: otherId, cardId: cardId)
+            return GameUpdateDto(playerPutInPlayOfOther: arg)
+            
+        case let .playerPassInPlayOfOther(playerId, otherId, cardId):
+            let arg = PlayerManipulatesOtherCardDto(playerId: playerId, otherId: otherId, cardId: cardId)
+            return GameUpdateDto(playerPassInPlayOfOther: arg)
+            
+        case let .playerPullFromGeneralStore(playerId, cardId):
+            let arg = PlayerManipulatesCardDto(playerId: playerId, cardId: cardId)
+            return GameUpdateDto(playerPullFromGeneralStore: arg)
+            
+        case let .playerRevealHandCard(playerId, cardId):
+            let arg = PlayerManipulatesCardDto(playerId: playerId, cardId: cardId)
+            return GameUpdateDto(playerRevealHandCard: arg)
+            
+        case let .setupGeneralStore(cardsCount):
+            return GameUpdateDto(setupGeneralStore: cardsCount)
+            
+        case .flipOverFirstDeckCard:
+            return GameUpdateDto(flipOverFirstDeckCard: true)
+        }
     }
 }
 

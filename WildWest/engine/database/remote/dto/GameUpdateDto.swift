@@ -11,6 +11,7 @@ import Foundation
 struct GameUpdateDto: Codable {
     var setTurn: String?
     var setChallenge: ChallengeDto?
+    var removeChallenge: Bool?
     var flipOverFirstDeckCard: Bool?
     var setupGeneralStore: Int?
     var playerPullFromDeck: String?
@@ -40,7 +41,7 @@ struct PlayerSetHealthDto: Codable {
 
 struct PlayerSetDamageDto: Codable {
     let playerId: String?
-    let damage: DamageEventDto?
+    let event: DamageEventDto?
 }
 
 struct PlayerManipulatesCardDto: Codable {

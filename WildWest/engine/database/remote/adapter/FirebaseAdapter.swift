@@ -47,13 +47,11 @@ class FirebaseAdapter: FirebaseAdapterProtocol {
     func getPendingGame(_ id: String, completion: @escaping FirebaseStateCompletion) {
         rootRef.child("games/\(id)/started").observeSingleEvent(of: .value, with: { snapshot in
             let value = snapshot.value as? Bool
-            if value == true {
-                completion(.error(NSError(domain: "Game already started", code: 0)))
-                return
+            if value == false {
+                self.getGame(id, completion: completion)
+            } else {
+                completion(.error(NSError(domain: "Game is not pending", code: 0)))
             }
-            
-            self.getGame(id, completion: completion)
-            
         }) { error in
             completion(.error(error))
         }

@@ -5,6 +5,9 @@
 //  Created by Hugues Stephano Telolahy on 25/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
+// swiftlint:disable function_body_length
+// swiftlint:disable cyclomatic_complexity
+// swiftlint:disable type_body_length
 
 import Foundation
 
@@ -40,7 +43,130 @@ class DtoDecoder {
     }
     
     func decode(update: GameUpdateDto) throws -> GameUpdate {
-        fatalError()
+        if let turn = update.setTurn {
+            return .setTurn(turn)
+        }
+        
+        if let arg = update.setChallenge,
+            let challenge = try decode(challenge: arg) {
+            return .setChallenge(challenge)
+        }
+        
+        if update.removeChallenge == true {
+            return .setChallenge(nil)
+        }
+        
+        if update.flipOverFirstDeckCard == true {
+            return .flipOverFirstDeckCard
+        }
+        
+        if let cardsCount = update.setupGeneralStore {
+            return .setupGeneralStore(cardsCount)
+        }
+        
+        if let playerId = update.playerPullFromDeck {
+            return .playerPullFromDeck(playerId)
+        }
+        
+        if let arg = update.playerSetBangsPlayed,
+            let playerId = arg.playerId,
+            let count = arg.count {
+            return .playerSetBangsPlayed(playerId, count)
+        }
+        
+        if let arg = update.playerSetHealth,
+            let playerId = arg.playerId,
+            let health = arg.health {
+            return .playerSetHealth(playerId, health)
+        }
+        
+        if let arg = update.playerSetDamage,
+            let playerId = arg.playerId,
+            let eventDto = arg.event,
+            let event = try decode(damageEvent: eventDto) {
+            return .playerSetDamage(playerId, event)
+        }
+        
+        if let arg = update.playerDiscardHand,
+            let playerId = arg.playerId,
+            let cardId = arg.cardId {
+            return .playerDiscardHand(playerId, cardId)
+        }
+        
+        if let arg = update.playerPutInPlay,
+            let playerId = arg.playerId,
+            let cardId = arg.cardId {
+            return .playerPutInPlay(playerId, cardId)
+        }
+        
+        if let arg = update.playerDiscardInPlay,
+            let playerId = arg.playerId,
+            let cardId = arg.cardId {
+            return .playerDiscardInPlay(playerId, cardId)
+        }
+        
+        if let arg = update.playerPullFromGeneralStore,
+            let playerId = arg.playerId,
+            let cardId = arg.cardId {
+            return .playerPullFromGeneralStore(playerId, cardId)
+        }
+        
+        if let arg = update.playerRevealHandCard,
+            let playerId = arg.playerId,
+            let cardId = arg.cardId {
+            return .playerRevealHandCard(playerId, cardId)
+        }
+        
+        if let arg = update.playerPullFromOtherHand,
+            let playerId = arg.playerId,
+            let otherId = arg.otherId,
+            let cardId = arg.cardId {
+            return .playerPullFromOtherHand(playerId, otherId, cardId)
+        }
+        
+        if let arg = update.playerPullFromOtherInPlay,
+            let playerId = arg.playerId,
+            let otherId = arg.otherId,
+            let cardId = arg.cardId {
+            return .playerPullFromOtherInPlay(playerId, otherId, cardId)
+        }
+        
+        if let arg = update.playerPutInPlayOfOther,
+            let playerId = arg.playerId,
+            let otherId = arg.otherId,
+            let cardId = arg.cardId {
+            return .playerPutInPlayOfOther(playerId, otherId, cardId)
+        }
+        
+        if let arg = update.playerPassInPlayOfOther,
+            let playerId = arg.playerId,
+            let otherId = arg.otherId,
+            let cardId = arg.cardId {
+            return .playerPassInPlayOfOther(playerId, otherId, cardId)
+        }
+        
+        throw NSError(domain: "invalid GameUpdateDto", code: 0)
+    }
+    
+    func decode(damageEvent: DamageEventDto?) throws -> DamageEvent? {
+        guard let damageEvent = damageEvent else {
+            return nil
+        }
+        
+        return DamageEvent(damage: try damageEvent.damage.unwrap(),
+                           source: try decode(damageSource: try damageEvent.source.unwrap()))
+    }
+    
+    func decode(challenge: ChallengeDto?) throws -> Challenge? {
+        guard let challenge = challenge else {
+            return nil
+        }
+        
+        return try Challenge(name: MoveName(challenge.name.unwrap()),
+                             targetIds: challenge.targetIds ?? [],
+                             damage: try challenge.damage.unwrap(),
+                             counterNeeded: try challenge.counterNeeded.unwrap(),
+                             barrelsPlayed: try challenge.barrelsPlayed.unwrap())
     }
 }
 
@@ -67,18 +193,6 @@ private extension DtoDecoder {
         }
         
         return result.sorted(by: { $0.identifier < $1.identifier })
-    }
-    
-    func decode(challenge: ChallengeDto?) throws -> Challenge? {
-        guard let challenge = challenge else {
-            return nil
-        }
-        
-        return try Challenge(name: MoveName(challenge.name.unwrap()),
-                             targetIds: challenge.targetIds ?? [],
-                             damage: try challenge.damage.unwrap(),
-                             counterNeeded: try challenge.counterNeeded.unwrap(),
-                             barrelsPlayed: try challenge.barrelsPlayed.unwrap())
     }
     
     func decode(outcome: String?) throws -> GameOutcome? {
@@ -123,15 +237,6 @@ private extension DtoDecoder {
             result[ability] = value
         }
         return result
-    }
-    
-    func decode(damageEvent: DamageEventDto?) throws -> DamageEvent? {
-        guard let damageEvent = damageEvent else {
-            return nil
-        }
-        
-        return DamageEvent(damage: try damageEvent.damage.unwrap(),
-                           source: try decode(damageSource: try damageEvent.source.unwrap()))
     }
     
     func decode(damageSource: DamageSourceDto) throws -> DamageSource {
