@@ -23,6 +23,6 @@ struct TargetCardDto: Codable {
 }
 
 struct TargetCardSourceDto: Codable {
-    let randomHand: Bool?
-    let inPlay: String?
+    var randomHand: Bool?
+    var inPlay: String?
 }

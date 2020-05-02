@@ -17,7 +17,7 @@ class DtoEncoder {
     }
     
     func encode(state: GameStateProtocol) -> StateDto {
-        StateDto(order: encode(players: state.allPlayers),
+        StateDto(order: encode(orderOf: state.allPlayers),
                  players: encode(players: state.allPlayers),
                  deck: encode(orderedCards: state.deck),
                  discardPile: encode(orderedCards: state.discardPile.reversed()),
@@ -72,6 +72,10 @@ class DtoEncoder {
                 targetCard: encode(targetCard: move.targetCard),
                 discardIds: move.discardIds)
     }
+    
+    func encode(update: GameUpdate) -> UpdateDto {
+        fatalError()
+    }
 }
 
 private extension DtoEncoder {
@@ -93,7 +97,7 @@ private extension DtoEncoder {
         card.identifier
     }
     
-    func encode(players: [PlayerProtocol]) -> [String] {
+    func encode(orderOf players: [PlayerProtocol]) -> [String] {
         players.map { $0.identifier }
     }
     
@@ -132,10 +136,10 @@ private extension DtoEncoder {
     func encode(damageSource: DamageSource) -> DamageSourceDto? {
         switch damageSource {
         case .byDynamite:
-            return DamageSourceDto(byDynamite: true, byPlayer: nil)
+            return DamageSourceDto(byDynamite: true)
             
         case let .byPlayer(playerId):
-            return DamageSourceDto(byDynamite: nil, byPlayer: playerId)
+            return DamageSourceDto(byPlayer: playerId)
         }
     }
     
@@ -151,10 +155,10 @@ private extension DtoEncoder {
     func encode(targetCardSource: TargetCardSource) -> TargetCardSourceDto {
         switch targetCardSource {
         case .randomHand:
-            return TargetCardSourceDto(randomHand: true, inPlay: nil)
+            return TargetCardSourceDto(randomHand: true)
             
         case let .inPlay(cardId):
-            return TargetCardSourceDto(randomHand: nil, inPlay: cardId)
+            return TargetCardSourceDto(inPlay: cardId)
         }
     }
 }

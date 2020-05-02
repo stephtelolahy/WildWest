@@ -38,6 +38,10 @@ class DtoDecoder {
                  targetCard: try decode(targetCard: move.targetCard),
                  discardIds: move.discardIds)
     }
+    
+    func decode(update: UpdateDto) throws -> GameUpdate {
+        fatalError()
+    }
 }
 
 private extension DtoDecoder {
@@ -139,7 +143,7 @@ private extension DtoDecoder {
             return .byPlayer(playerId)
         }
         
-        throw NSError(domain: "invalid damageSource", code: 0)
+        throw NSError(domain: "invalid DamageSourceDto", code: 0)
     }
     
     func decode(targetCard: TargetCardDto?) throws -> TargetCard? {
@@ -160,7 +164,7 @@ private extension DtoDecoder {
             return .inPlay(cardId)
         }
         
-        throw NSError(domain: "invalid targetCardSource", code: 0)
+        throw NSError(domain: "invalid TargetCardSourceDto", code: 0)
     }
     
 }

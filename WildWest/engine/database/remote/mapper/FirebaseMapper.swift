@@ -16,6 +16,7 @@ protocol FirebaseMapperProtocol {
     func decodeCards(from snapshot: DataSnapshot) throws -> [CardProtocol]
     func decodeMove(from snapshot: DataSnapshot) throws -> GameMove?
     func decodeMoves(from snapshot: DataSnapshot) throws -> [GameMove]
+    func decodeUpdate(from snapshot: DataSnapshot) throws -> GameUpdate?
     
     func encodeState(_ state: GameStateProtocol) throws -> [String: Any]
     func encodeChallenge(_ challenge: Challenge?) throws -> [String: Any]?
@@ -23,6 +24,7 @@ protocol FirebaseMapperProtocol {
     func encodeOrderedCards(_ cards: [CardProtocol]) throws -> [String: Any]
     func encodeMove(_ move: GameMove) throws -> [String: Any]
     func encodeMoves(_ moves: [GameMove]) throws -> [[String: Any]]
+    func encodeUpdate(_ update: GameUpdate) throws -> [String: Any]
 }
 
 class FirebaseMapper: FirebaseMapperProtocol {
@@ -94,6 +96,16 @@ class FirebaseMapper: FirebaseMapperProtocol {
         }
     }
     
+    func decodeUpdate(from snapshot: DataSnapshot) throws -> GameUpdate? {
+        guard let value = snapshot.value as? [String: Any] else {
+            return nil
+        }
+        
+        let dto = try self.dictionaryDecoder.decode(UpdateDto.self, from: value)
+        let update = try self.dtoDecoder.decode(update: dto)
+        return update
+    }
+    
     func encodeState(_ state: GameStateProtocol) throws -> [String: Any] {
         let dto = dtoEncoder.encode(state: state)
         let value = try dictionaryEncoder.encode(dto)
@@ -129,5 +141,11 @@ class FirebaseMapper: FirebaseMapperProtocol {
     
     func encodeMoves(_ moves: [GameMove]) throws -> [[String: Any]] {
         try moves.map { try encodeMove($0) }
+    }
+    
+    func encodeUpdate(_ update: GameUpdate) throws -> [String: Any] {
+        let dto = dtoEncoder.encode(update: update)
+        let value = try dictionaryEncoder.encode(dto)
+        return value
     }
 }

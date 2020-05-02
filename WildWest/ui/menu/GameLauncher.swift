@@ -49,7 +49,7 @@ class GameLauncher {
     func startRemote() {
         let gameId = "live"
         getOrCreateRemoteGame(id: gameId) { [weak self] state in
-            let choices = state.allPlayers.map { "\($0.identifier) - \($0.role!.rawValue)" }
+            let choices = state.allPlayers.map { "\($0.identifier) \($0.role == .sheriff ? "*" : "")" }
             self?.viewController.select(title: "Choose player", choices: choices) { index in
                 self?.joinRemoteGame(id: gameId, state: state, as: state.allPlayers[index].identifier)
             }

@@ -29,6 +29,6 @@ struct DamageEventDto: Codable {
 }
 
 struct DamageSourceDto: Codable {
-    let byDynamite: Bool?
-    let byPlayer: String?
+    var byDynamite: Bool?
+    var byPlayer: String?
 }
