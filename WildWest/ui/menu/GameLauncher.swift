@@ -5,7 +5,6 @@
 //  Created by Hugues Stephano Telolahy on 25/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-// swiftlint:disable force_cast
 
 import UIKit
 import RxSwift
@@ -13,6 +12,10 @@ import RxSwift
 class GameLauncher {
     
     private unowned let viewController: UIViewController
+    
+    private lazy var userPreferences = UserPreferences()
+    
+    private lazy var builder = GameEnvironmentBuilder()
     
     init(viewController: UIViewController) {
         self.viewController = viewController
@@ -24,27 +27,9 @@ class GameLauncher {
         return resources
     }()
     
-    private lazy var allCards: [CardProtocol] = {
-        gameResources.allCards
-    }()
+    private lazy var allCards: [CardProtocol] = gameResources.allCards
     
-    private lazy var allFigures: [FigureProtocol] = {
-        var figures = gameResources.allFigures
-            .filter { !$0.abilities.isEmpty }
-        
-        if UserPreferences.shared.allAbilitiesMode {
-            var allAbilities: [AbilityName: Bool] = [:]
-            AbilityName.allCases.forEach { allAbilities[$0] = true }
-            figures = figures.map { Figure(name: $0.name,
-                                           bullets: $0.bullets,
-                                           imageName: $0.imageName,
-                                           description: $0.description,
-                                           abilities: allAbilities)
-            }
-        }
-        
-        return figures
-    }()
+    private lazy var allFigures: [FigureProtocol] = gameResources.allFigures.filter { !$0.abilities.isEmpty }
     
     private lazy var firebaseMapper: FirebaseMapperProtocol = {
         FirebaseMapper(dtoEncoder: DtoEncoder(keyGenerator: FirebaseKeyGenerator()),
@@ -53,71 +38,20 @@ class GameLauncher {
                        dictionaryDecoder: DictionaryDecoder())
     }()
     
-    private lazy var firebaseAdapter: FirebaseAdapterProtocol = {
-        FirebaseAdapter(mapper: firebaseMapper, keyGenerator: FirebaseKeyGenerator())
-    }()
+    private lazy var firebaseAdapter: FirebaseAdapterProtocol = FirebaseAdapter(mapper: firebaseMapper)
     
     func startLocal() {
         let state = createGame()
-        
-        let stateSubject: BehaviorSubject<GameStateProtocol> = BehaviorSubject(value: state)
-        let executedMoveSubject = PublishSubject<GameMove>()
-        let executedUpdateSubject = PublishSubject<GameUpdate>()
-        let validMovesSubject = PublishSubject<[GameMove]>()
-        
-        let database = MemoryCachedDataBase(mutableState: state as! GameState,
-                                            stateSubject: stateSubject,
-                                            executedMoveSubject: executedMoveSubject,
-                                            executedUpdateSubject: executedUpdateSubject,
-                                            validMovesSubject: validMovesSubject)
-        
-        let subjects = GameSubjects(stateSubject: stateSubject,
-                                    executedMoveSubject: executedMoveSubject,
-                                    executedUpdateSubject: executedUpdateSubject,
-                                    validMovesSubject: validMovesSubject)
-        
-        let engine = GameEngine(delay: UserPreferences.shared.updateDelay,
-                                database: database,
-                                stateSubject: stateSubject,
-                                moveMatchers: GameRules().moveMatchers,
-                                updateExecutor: GameUpdateExecutor(),
-                                subjects: subjects)
-        
-        let controlledPlayerId: String? = UserPreferences.shared.simulationMode ? nil : state.players.first?.identifier
-        let aiPlayers = state.players.filter { $0.identifier != controlledPlayerId }
-        let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
-                                                     ai: RandomAIWithRole(),
-                                                     engine: engine,
-                                                     subjects: subjects)
-        }
-        
-        Navigator(viewController).toGame(engine: engine,
-                                         subjects: subjects,
-                                         controlledPlayerId: controlledPlayerId,
-                                         aiAgents: aiAgents)
+        let controlledId: String? = !userPreferences.simulationMode ? state.players.first?.identifier : nil
+        joinLocalGame(state: state, as: controlledId)
     }
     
     func startRemote() {
-        let state = createGame()
-        firebaseAdapter.createGame(state) { [weak self] result in
-            switch result {
-            case let .success(gameId):
-                self?.joinRemoteGame(gameId)
-                
-            case let .error(error):
-                self?.viewController.presentAlert(title: "Error", message: error.localizedDescription)
-            }
-        }
-    }
-    
-    func joinRemoteGame(_ id: String) {
-        firebaseAdapter.getGame(id) { [weak self] result in
-            switch result {
-            case let .success(initialState):
-                self?.openRemoteGame(id, state: initialState)
-                
-            case let .error(error):
-                self?.viewController.presentAlert(title: "Error", message: error.localizedDescription)
+        let gameId = "live"
+        getOrCreateRemoteGame(id: gameId) { [weak self] state in
+            let choices = state.allPlayers.map { "\($0.identifier) - \($0.role!.rawValue)" }
+            self?.viewController.select(title: "Choose player", choices: choices) { index in
+                self?.joinRemoteGame(id: gameId, state: state, as: state.allPlayers[index].identifier)
             }
         }
     }
@@ -126,82 +60,54 @@ class GameLauncher {
 private extension GameLauncher {
     
     func createGame() -> GameStateProtocol {
-        let gameSetup = GameSetup()
-        
-        let roles = gameSetup.roles(for: UserPreferences.shared.playersCount)
-            .shuffled()
-            .starting(withSheriff: UserPreferences.shared.playAsSheriff)
-        
-        let figures = allFigures
-            .shuffled()
-            .starting(with: UserPreferences.shared.preferredFigure)
-        
-        return gameSetup.setupGame(roles: roles,
-                                   figures: figures,
-                                   cards: allCards.shuffled())
+        builder.createGame(playersCount: userPreferences.playersCount,
+                           cards: allCards,
+                           figures: allFigures,
+                           preferredRole: userPreferences.playAsSheriff ? .sheriff : nil,
+                           preferredFigure: userPreferences.preferredFigure)
     }
     
-    func openRemoteGame(_ id: String, state: GameStateProtocol) {
-        let stateSubject: BehaviorSubject<GameStateProtocol> = BehaviorSubject(value: state)
+    func joinLocalGame(state: GameStateProtocol, as controlledId: String?) {
+        let environment = builder.createLocalEnvironment(state: state,
+                                                         controlledId: controlledId,
+                                                         updateDelay: userPreferences.updateDelay)
         
-        let stateAdapter = FirebaseStateAdapter(gameId: id, mapper: firebaseMapper)
-        let gameAdapter = FirebaseGameAdapter(gameId: id, mapper: firebaseMapper)
-        
-        let executedMoveSubject = PublishSubject<GameMove>()
-        let executedUpdateSubject = PublishSubject<GameUpdate>()
-        let validMovesSubject = PublishSubject<[GameMove]>()
-        
-        let database = RemoteDatabase(stateAdapter: stateAdapter,
-                                      gameAdapter: gameAdapter,
-                                      stateSubject: stateSubject,
-                                      executedMoveSubject: executedMoveSubject,
-                                      executedUpdateSubject: executedUpdateSubject,
-                                      validMovesSubject: validMovesSubject)
-        
-        let subjects = GameSubjects(stateSubject: stateSubject,
-                                    executedMoveSubject: executedMoveSubject,
-                                    executedUpdateSubject: executedUpdateSubject,
-                                    validMovesSubject: validMovesSubject)
-        
-        let engine = GameEngine(delay: UserPreferences.shared.updateDelay,
-                                database: database,
-                                stateSubject: stateSubject,
-                                moveMatchers: GameRules().moveMatchers,
-                                updateExecutor: GameUpdateExecutor(),
-                                subjects: subjects)
-        
-        let controlledPlayerId: String? = UserPreferences.shared.simulationMode ? nil : state.players.first?.identifier
-        let aiPlayers = state.players.filter { $0.identifier != controlledPlayerId }
-        let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
-                                                     ai: RandomAIWithRole(),
-                                                     engine: engine,
-                                                     subjects: subjects)
-        }
-        
-        Navigator(viewController).toGame(engine: engine,
-                                         subjects: subjects,
-                                         controlledPlayerId: controlledPlayerId,
-                                         aiAgents: aiAgents)
+        Navigator(viewController).toGame(environment: environment)
     }
-}
-
-private extension Array where Element == FigureProtocol {
-    func starting(with name: String) -> [FigureProtocol] {
-        guard contains(where: { $0.name.rawValue == name }) else {
-            return self
+    
+    func getOrCreateRemoteGame(id: String, completion: @escaping ((GameStateProtocol) -> Void)) {
+        firebaseAdapter.getPendingGame(id) { result in
+            switch result {
+            case let .success(state):
+                completion(state)
+                
+            case .error:
+                let state = self.createGame()
+                self.firebaseAdapter.createGame(id: id, state: state) { [weak self] result in
+                    switch result {
+                    case .success:
+                        completion(state)
+                        
+                    case let .error(error):
+                        self?.viewController.presentAlert(title: "Error", message: error.localizedDescription)
+                    }
+                }
+            }
         }
-        
-        return filter { $0.name.rawValue == name } + filter { $0.name.rawValue != name }
     }
-}
-
-private extension Array where Element == Role {
-    func starting(withSheriff: Bool) -> [Role] {
-        var roles = self
-        while (roles.first == .sheriff) != withSheriff {
-            roles = roles.shuffled()
+    
+    func joinRemoteGame(id: String, state: GameStateProtocol, as controlledId: String?) {
+        let environment = builder.createRemoteEnvironment(gameId: id,
+                                                          state: state,
+                                                          controlledId: controlledId,
+                                                          updateDelay: userPreferences.updateDelay,
+                                                          firebaseMapper: firebaseMapper)
+        
+        // Sheriff will start game
+        if state.player(environment.controlledId)!.role == .sheriff {
+            FirebaseGameAdapter(gameId: "live", mapper: firebaseMapper).setStarted { _ in }
         }
         
-        return roles
+        Navigator(viewController).toGame(environment: environment)
     }
 }

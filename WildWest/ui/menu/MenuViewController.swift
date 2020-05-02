@@ -22,13 +22,17 @@ class MenuViewController: UIViewController, Subscribable {
     
     // MARK: - Properties
     
+    private lazy var userPreferences = UserPreferences()
+    
     private lazy var allFigures: [FigureProtocol] = {
         let jsonReader = JsonReader(bundle: Bundle.main)
         let resources = GameResources(jsonReader: jsonReader)
-        return resources.allFigures
+        return resources.allFigures.filter { !$0.abilities.isEmpty }
     }()
     
-    private lazy var musicPlayer = ThemeMusicPlayer()
+    private lazy var musicPlayer: ThemeMusicPlayer? = {
+        userPreferences.enableSound ? ThemeMusicPlayer() : nil
+    }()
     
     private lazy var figureSelector = FigureSelector(viewController: self)
     
@@ -41,22 +45,20 @@ class MenuViewController: UIViewController, Subscribable {
     override func viewDidLoad() {
         super.viewDidLoad()
         figureButton.addBrownRoundedBorder()
-        playersCountStepper.value = Double(UserPreferences.shared.playersCount)
+        playersCountStepper.value = Double(userPreferences.playersCount)
         updatePlayersLabel()
         updateFigureImage()
-        playAsSheriffSwitch.isOn = UserPreferences.shared.playAsSheriff
+        playAsSheriffSwitch.isOn = userPreferences.playAsSheriff
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if UserPreferences.shared.enableSound {
-            musicPlayer.play()
-        }
+        musicPlayer?.play()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        musicPlayer.stop()
+        musicPlayer?.stop()
     }
     
     // MARK: - IBActions
@@ -70,19 +72,19 @@ class MenuViewController: UIViewController, Subscribable {
     }
     
     @IBAction private func stepperValueChanged(_ sender: Any) {
-        UserPreferences.shared.playersCount = Int(playersCountStepper.value)
+        userPreferences.playersCount = Int(playersCountStepper.value)
         updatePlayersLabel()
     }
     
     @IBAction private func figureButtonTapped(_ sender: Any) {
         figureSelector.selectFigure(within: allFigures.map { $0.name }) { [weak self] figure in
-            UserPreferences.shared.preferredFigure = figure?.rawValue ?? ""
+            self?.userPreferences.preferredFigure = figure?.rawValue ?? ""
             self?.updateFigureImage()
         }
     }
     
     @IBAction private func playAsSheriffValueChanged(_ sender: Any) {
-        UserPreferences.shared.playAsSheriff = playAsSheriffSwitch.isOn
+        userPreferences.playAsSheriff = playAsSheriffSwitch.isOn
     }
     
     @IBAction private func contactButtonTapped(_ sender: Any) {
@@ -99,11 +101,11 @@ class MenuViewController: UIViewController, Subscribable {
 private extension MenuViewController {
     
     func updatePlayersLabel() {
-        playersCountLabel.text = "\(UserPreferences.shared.playersCount) players"
+        playersCountLabel.text = "\(userPreferences.playersCount) players"
     }
     
     func updateFigureImage() {
-        if let figure = allFigures.first(where: { $0.name.rawValue == UserPreferences.shared.preferredFigure }) {
+        if let figure = allFigures.first(where: { $0.name.rawValue == userPreferences.preferredFigure }) {
             figureButton.setImage(UIImage(named: figure.imageName), for: .normal)
             figureLabel.text = "Play as \(figure.name.rawValue)"
         } else {

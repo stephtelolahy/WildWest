@@ -9,13 +9,16 @@
 extension GameStateProtocol {
     
     func observed(by playerId: String?) -> GameStateProtocol {
-        GameState(allPlayers: allPlayers.map { $0.observed(by: playerId, in: self) },
-                  deck: deck,
-                  discardPile: discardPile,
-                  turn: turn,
-                  challenge: challenge,
-                  generalStore: generalStore,
-                  outcome: outcome)
+        let players = allPlayers
+            .map { $0.observed(by: playerId, in: self) }
+            .starting(where: { $0.identifier == playerId })
+        return GameState(allPlayers: players,
+                         deck: deck,
+                         discardPile: discardPile,
+                         turn: turn,
+                         challenge: challenge,
+                         generalStore: generalStore,
+                         outcome: outcome)
     }
 }
 
@@ -25,7 +28,8 @@ private extension PlayerProtocol {
             && identifier != playerId
             && role != .sheriff
             && state.outcome == nil
-        return Player(role: shouldHideRole ? nil : role,
+        return Player(identifier: identifier,
+                      role: shouldHideRole ? nil : role,
                       figureName: figureName,
                       imageName: imageName,
                       description: description,

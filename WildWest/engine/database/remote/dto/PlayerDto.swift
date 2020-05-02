@@ -9,6 +9,7 @@
 import Foundation
 
 struct PlayerDto: Codable {
+    let identifier: String?
     let role: String?
     let figureName: String?
     let imageName: String?

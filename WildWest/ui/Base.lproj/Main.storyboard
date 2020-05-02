@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8GX-Wa-ifS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8GX-Wa-ifS">
     <device id="retina4_7" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -456,25 +456,11 @@
                                     <action selector="otherMovesTapped:" destination="Yy6-0k-mhK" eventType="touchUpInside" id="4Q7-LJ-TeV"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sYa-2T-f1U" userLabel="startButton">
-                                <rect key="frame" x="635" y="65" width="32" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="sYa-2T-f1U" secondAttribute="height" multiplier="1:1" id="S5K-OE-wem"/>
-                                    <constraint firstAttribute="height" constant="32" id="th4-c3-QSy"/>
-                                </constraints>
-                                <color key="tintColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" image="ic_start"/>
-                                <connections>
-                                    <action selector="startButtonTapped:" destination="Yy6-0k-mhK" eventType="touchUpInside" id="Agx-X6-bsN"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.80000000000000004" green="0.70980392156862748" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="cXD-5P-evL" firstAttribute="trailing" secondItem="YnA-A3-EaS" secondAttribute="trailing" id="0XV-zH-Re0"/>
-                            <constraint firstItem="sYa-2T-f1U" firstAttribute="centerX" secondItem="gAP-Di-VFz" secondAttribute="centerX" id="2H6-cN-hLa"/>
                             <constraint firstItem="l2k-9K-ciW" firstAttribute="height" secondItem="SPv-lk-pld" secondAttribute="height" multiplier="0.25" id="2ir-L9-cle"/>
-                            <constraint firstItem="sYa-2T-f1U" firstAttribute="top" secondItem="gAP-Di-VFz" secondAttribute="bottom" constant="17" id="3Vj-cS-eNq"/>
                             <constraint firstItem="cXD-5P-evL" firstAttribute="bottom" secondItem="YnA-A3-EaS" secondAttribute="bottom" id="3mM-y9-BiC"/>
                             <constraint firstItem="68M-B9-4Mh" firstAttribute="top" secondItem="VPY-zg-TVx" secondAttribute="bottom" constant="16" id="5sG-Kw-I6O"/>
                             <constraint firstItem="iCj-xh-rDL" firstAttribute="height" secondItem="SPv-lk-pld" secondAttribute="height" multiplier="0.3" id="7xg-Ei-4GN"/>
@@ -531,6 +517,5 @@
         <image name="ic_more" width="48" height="48"/>
         <image name="ic_online" width="557" height="291"/>
         <image name="ic_play" width="557" height="291"/>
-        <image name="ic_start" width="48" height="48"/>
     </resources>
 </document>

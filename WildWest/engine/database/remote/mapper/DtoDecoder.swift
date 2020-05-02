@@ -94,7 +94,8 @@ private extension DtoDecoder {
     }
     
     func decode(player: PlayerDto) throws -> PlayerProtocol {
-        Player(role: try Role(rawValue: try player.role.unwrap()).unwrap(),
+        Player(identifier: try player.identifier.unwrap(),
+               role: try Role(rawValue: try player.role.unwrap()).unwrap(),
                figureName: try FigureName(rawValue: try player.figureName.unwrap()).unwrap(),
                imageName: try player.imageName.unwrap(),
                description: try player.description.unwrap(),

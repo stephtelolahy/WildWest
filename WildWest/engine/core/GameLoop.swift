@@ -170,7 +170,9 @@ private extension GameLoop {
                 block()
             }
         } else {
-            block()
+            DispatchQueue.main.asyncAfter(deadline: .now() + waitDelay) {
+                block()
+            }
         }
     }
 }

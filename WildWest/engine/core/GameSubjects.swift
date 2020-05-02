@@ -34,12 +34,14 @@ class GameSubjects: GameSubjectsProtocol {
         return sheriff.identifier
     }
     
-    var playerIds: [String] {
+    func playerIds(observedBy playerId: String?) -> [String] {
         guard let state = try? stateSubject.value() else {
             fatalError("Illegal state")
         }
         
-        return state.allPlayers.map { $0.identifier }
+        return state.allPlayers
+            .map { $0.identifier }
+            .starting(with: playerId)
     }
     
     func state(observedBy playerId: String?) -> Observable<GameStateProtocol> {

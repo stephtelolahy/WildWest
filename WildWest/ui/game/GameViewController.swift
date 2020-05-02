@@ -26,10 +26,19 @@ class GameViewController: UIViewController, Subscribable {
     
     // MARK: Properties
     
-    var engine: GameEngineProtocol!
-    var subjects: GameSubjectsProtocol!
-    var aiAgents: [AIPlayerAgentProtocol]?
-    var controlledPlayerId: String?
+    var environment: GameEnvironment!
+    
+    private var engine: GameEngineProtocol {
+        environment.engine
+    }
+    
+    private var subjects: GameSubjectsProtocol {
+        environment.subjects
+    }
+    
+    private var controlledPlayerId: String? {
+        environment.controlledId
+    }
     
     private var playerItems: [PlayerItem] = []
     private var actionItems: [ActionItem] = []
@@ -38,9 +47,8 @@ class GameViewController: UIViewController, Subscribable {
     private var otherMoves: [GameMove] = []
     private var latestState: GameStateProtocol?
     private var latestMove: GameMove?
-    private var moveSoundPlayer: MoveSoundPlayerProtocol?
-    private var reactionMoveSelector: ReactionMoveSelectorProtocol?
     
+    private lazy var userPreferences = UserPreferences()
     private lazy var statsBuilder = StatsBuilder(sheriffId: subjects.sheriffId, classifier: MoveClassifier())
     private lazy var playerAdapter = PlayersAdapter()
     private lazy var actionsAdapter = ActionsAdapter(playerId: controlledPlayerId)
@@ -50,22 +58,25 @@ class GameViewController: UIViewController, Subscribable {
     private lazy var playerDescriptor = PlayerDescriptor(viewController: self)
     private lazy var updateAnimator = UpdateAnimator(viewController: self,
                                                      cardPositions: buildCardPositions(),
-                                                     cardSize: buildCardSize())
+                                                     cardSize: buildCardSize(),
+                                                     updateDelay: userPreferences.updateDelay)
+    
+    private lazy var moveSoundPlayer: MoveSoundPlayerProtocol? = {
+        userPreferences.enableSound ? MoveSoundPlayer() : nil
+    }()
+    
+    private lazy var reactionMoveSelector: ReactionMoveSelectorProtocol? = {
+        if userPreferences.assistedMode {
+            return AssistedReactionMoveSelector(ai: RandomAI())
+        } else {
+            return ReactionMoveSelector(viewController: self)
+        }
+    }()
     
     // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if UserPreferences.shared.enableSound {
-            moveSoundPlayer = MoveSoundPlayer()
-        }
-        
-        if UserPreferences.shared.assistedMode {
-            reactionMoveSelector = AssistedReactionMoveSelector(ai: RandomAI())
-        } else {
-            reactionMoveSelector = ReactionMoveSelector(viewController: self)
-        }
         
         let layout = playersCollectionView.collectionViewLayout as? GameCollectionViewLayout
         layout?.delegate = self
@@ -89,8 +100,14 @@ class GameViewController: UIViewController, Subscribable {
                 self?.processValidMoves(moves)
             }))
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        aiAgents?.forEach { $0.observeState() }
+        if environment.allowStart {
+            engine.startGame()
+        }
     }
     
     // MARK: IBAction
@@ -109,11 +126,6 @@ class GameViewController: UIViewController, Subscribable {
         playMoveSelector.selectMove(within: otherMoves) { [weak self] move in
             self?.engine.execute(move)
         }
-    }
-    
-    @IBAction private func startButtonTapped(_ sender: Any) {
-        (sender as? UIButton)?.isEnabled = false
-        engine.startGame()
     }
 }
 
@@ -182,7 +194,9 @@ private extension GameViewController {
     }
     
     func showGameOver(outcome: GameOutcome) {
-        presentAlert(title: "Game Over", message: outcome.rawValue)
+        presentAlert(title: "Game Over", message: outcome.rawValue) { [weak self] in
+            self?.dismiss(animated: true)
+        }
     }
 }
 
@@ -267,7 +281,7 @@ extension GameViewController: UICollectionViewDelegate {
 extension GameViewController: GameCollectionViewLayoutDelegate {
     
     func numberOfItemsForGameCollectionViewLayout(layout: GameCollectionViewLayout) -> Int {
-        subjects.playerIds.count
+        subjects.playerIds(observedBy: controlledPlayerId).count
     }
 }
 
@@ -284,7 +298,7 @@ private extension GameViewController {
         result[.deck] = deckCenter
         result[.discard] = discardCenter
         
-        let playerIds = subjects.playerIds
+        let playerIds = subjects.playerIds(observedBy: controlledPlayerId)
         for (index, playerId) in playerIds.enumerated() {
             guard let cell = playersCollectionView.cellForItem(at: IndexPath(row: index, section: 0)),
                 let cellCenter = cell.superview?.convert(cell.center, to: view) else {
