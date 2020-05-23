@@ -154,6 +154,7 @@
 		33515802245D899D00C46888 /* DictionaryEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AE82454AB3000A5D2DA /* DictionaryEncoder.swift */; };
 		33515803245D89A000C46888 /* DictionaryDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AEC2454AB5F00A5D2DA /* DictionaryDecoder.swift */; };
 		33516CCA2450A79E003C99E2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33516CC92450A79E003C99E2 /* GoogleService-Info.plist */; };
+		335632DB2479726D0004F371 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335632DA2479726D0004F371 /* SignInViewController.swift */; };
 		3356CF0E243237320071B04F /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3356CF0D243237320071B04F /* Challenge.swift */; };
 		3356CF0F243237320071B04F /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3356CF0D243237320071B04F /* Challenge.swift */; };
 		3356CF11243237500071B04F /* DamageEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3356CF10243237500071B04F /* DamageEvent.swift */; };
@@ -414,6 +415,7 @@
 		33516CC92450A79E003C99E2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3351B58524269386004F18C3 /* Pass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pass.swift; sourceTree = "<group>"; };
 		3351B58824269A24004F18C3 /* PassMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassMatcherTests.swift; sourceTree = "<group>"; };
+		335632DA2479726D0004F371 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		3356CF0D243237320071B04F /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
 		3356CF10243237500071B04F /* DamageEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DamageEvent.swift; sourceTree = "<group>"; };
 		335BED682429334F009184A3 /* MoveSoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveSoundPlayer.swift; sourceTree = "<group>"; };
@@ -743,6 +745,14 @@
 				335157F8245D860600C46888 /* DtoEncodingTests.swift */,
 			);
 			path = database;
+			sourceTree = "<group>";
+		};
+		335632D9247972530004F371 /* signin */ = {
+			isa = PBXGroup;
+			children = (
+				335632DA2479726D0004F371 /* SignInViewController.swift */,
+			);
+			path = signin;
 			sourceTree = "<group>";
 		};
 		335BED7024293418009184A3 /* sfx */ = {
@@ -1322,6 +1332,7 @@
 		ADE91AD223BA005000F7316B /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				335632D9247972530004F371 /* signin */,
 				33FDD70A240BFB3800BC3E14 /* menu */,
 				3385A1F423F9352800CD9660 /* game */,
 				ADB7D2F6239EE03900653905 /* LaunchScreen.storyboard */,
@@ -1662,6 +1673,7 @@
 				3328FCD7242F2D1100A82255 /* Pass.swift in Sources */,
 				3338B2EC242FD0600097BA57 /* Challenge+Description.swift in Sources */,
 				3328FCD6242F2D1100A82255 /* DiscardBeer.swift in Sources */,
+				335632DB2479726D0004F371 /* SignInViewController.swift in Sources */,
 				3356CF11243237500071B04F /* DamageEvent.swift in Sources */,
 				334673E62436267500FFBB82 /* UIViewController+Alert.swift in Sources */,
 				337408D424306C3400E5809B /* Player+Cards.swift in Sources */,

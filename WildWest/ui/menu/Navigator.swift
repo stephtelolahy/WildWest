@@ -17,6 +17,16 @@ class Navigator {
         self.viewController = viewController
     }
     
+    func toMenu() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let menuViewController =
+            storyboard.instantiateViewController(withIdentifier: "MenuViewController") as? MenuViewController else {
+                return
+        }
+        
+        viewController.present(menuViewController, animated: true)
+    }
+    
     func toGame(environment: GameEnvironment) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let gameViewController =
