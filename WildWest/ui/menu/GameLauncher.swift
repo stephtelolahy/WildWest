@@ -43,15 +43,27 @@ class GameLauncher {
     func startLocal() {
         let state = createGame()
         let controlledId: String? = !userPreferences.simulationMode ? state.players.first?.identifier : nil
-        joinLocalGame(state: state, as: controlledId)
+        let environment = builder.createLocalEnvironment(state: state,
+                                                         controlledId: controlledId,
+                                                         updateDelay: userPreferences.updateDelay)
+        Navigator(viewController).toGame(environment: environment)
     }
     
     func startRemote() {
         let gameId = "live"
-        getOrCreateRemoteGame(id: gameId) { [weak self] state in
-            let choices = state.allPlayers.map { "\($0.identifier) - \($0.role!.rawValue)" }
-            self?.viewController.select(title: "Choose player", choices: choices) { index in
-                self?.joinRemoteGame(id: gameId, state: state, as: state.allPlayers[index].identifier)
+        getOrCreateRemoteGame(id: gameId) { state in
+            
+            let choices = state.allPlayers.map { "\($0.identifier) \($0.role == .sheriff ? "*" : "")" }
+            self.viewController.select(title: "Choose player", choices: choices) { index in
+                
+                let controlledId = state.allPlayers[index].identifier
+                let environment = self.builder.createRemoteEnvironment(gameId: gameId,
+                                                                       state: state,
+                                                                       controlledId: controlledId,
+                                                                       updateDelay: self.userPreferences.updateDelay,
+                                                                       firebaseMapper: self.firebaseMapper)
+                
+                Navigator(self.viewController).toGame(environment: environment)
             }
         }
     }
@@ -60,19 +72,27 @@ class GameLauncher {
 private extension GameLauncher {
     
     func createGame() -> GameStateProtocol {
-        builder.createGame(playersCount: userPreferences.playersCount,
-                           cards: allCards,
-                           figures: allFigures,
-                           preferredRole: userPreferences.playAsSheriff ? .sheriff : nil,
-                           preferredFigure: userPreferences.preferredFigure)
-    }
-    
-    func joinLocalGame(state: GameStateProtocol, as controlledId: String?) {
-        let environment = builder.createLocalEnvironment(state: state,
-                                                         controlledId: controlledId,
-                                                         updateDelay: userPreferences.updateDelay)
+        let playersCount = userPreferences.playersCount
+        let cards = allCards
+        let figures = allFigures
+        let preferredRole: Role? = userPreferences.playAsSheriff ? .sheriff : nil
+        let preferredFigure = userPreferences.preferredFigure
         
-        Navigator(viewController).toGame(environment: environment)
+        let gameSetup = GameSetup()
+        
+        let shuffledRoles = gameSetup.roles(for: playersCount)
+            .shuffled()
+            .starting(with: preferredRole)
+        
+        let shuffledFigures = figures
+            .shuffled()
+            .starting(where: { $0.name.rawValue == preferredFigure })
+        
+        let shuffledCards = cards.shuffled()
+        
+        return gameSetup.setupGame(roles: shuffledRoles,
+                                   figures: shuffledFigures,
+                                   cards: shuffledCards)
     }
     
     func getOrCreateRemoteGame(id: String, completion: @escaping ((GameStateProtocol) -> Void)) {
@@ -94,20 +114,5 @@ private extension GameLauncher {
                 }
             }
         }
-    }
-    
-    func joinRemoteGame(id: String, state: GameStateProtocol, as controlledId: String?) {
-        let environment = builder.createRemoteEnvironment(gameId: id,
-                                                          state: state,
-                                                          controlledId: controlledId,
-                                                          updateDelay: userPreferences.updateDelay,
-                                                          firebaseMapper: firebaseMapper)
-        
-        // Sheriff will start game
-        if state.player(environment.controlledId)!.role == .sheriff {
-            FirebaseGameAdapter(gameId: "live", mapper: firebaseMapper).setStarted { _ in }
-        }
-        
-        Navigator(viewController).toGame(environment: environment)
     }
 }

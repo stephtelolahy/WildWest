@@ -955,6 +955,100 @@ import Cuckoo
 @testable import WildWest
 
 
+ class MockKeyGeneratorProtocol: KeyGeneratorProtocol, Cuckoo.ProtocolMock {
+    
+     typealias MocksType = KeyGeneratorProtocol
+    
+     typealias Stubbing = __StubbingProxy_KeyGeneratorProtocol
+     typealias Verification = __VerificationProxy_KeyGeneratorProtocol
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: KeyGeneratorProtocol?
+
+     func enableDefaultImplementation(_ stub: KeyGeneratorProtocol) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+
+    
+
+    
+    
+    
+     func cardAutoId() -> String {
+        
+    return cuckoo_manager.call("cardAutoId() -> String",
+            parameters: (),
+            escapingParameters: (),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.cardAutoId())
+        
+    }
+    
+
+	 struct __StubbingProxy_KeyGeneratorProtocol: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    func cardAutoId() -> Cuckoo.ProtocolStubFunction<(), String> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return .init(stub: cuckoo_manager.createStub(for: MockKeyGeneratorProtocol.self, method: "cardAutoId() -> String", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	 struct __VerificationProxy_KeyGeneratorProtocol: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	
+	    
+	    @discardableResult
+	    func cardAutoId() -> Cuckoo.__DoNotUse<(), String> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return cuckoo_manager.verify("cardAutoId() -> String", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+ class KeyGeneratorProtocolStub: KeyGeneratorProtocol {
+    
+
+    
+
+    
+     func cardAutoId() -> String  {
+        return DefaultValueRegistry.defaultValue(for: (String).self)
+    }
+    
+}
+
+
+import Cuckoo
+@testable import WildWest
+
+
  class MockMoveMatcherProtocol: MoveMatcherProtocol, Cuckoo.ProtocolMock {
     
      typealias MocksType = MoveMatcherProtocol

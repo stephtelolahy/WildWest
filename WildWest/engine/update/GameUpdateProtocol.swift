@@ -14,8 +14,8 @@ enum GameUpdate: Equatable {
     case flipOverFirstDeckCard
     case setupGeneralStore(Int)
     case playerSetBangsPlayed(String, Int)
-    case playerGainHealth(String, Int)
-    case playerLooseHealth(String, Int, DamageEvent)
+    case playerSetHealth(String, Int)
+    case playerSetDamage(String, DamageEvent)
     case playerPullFromDeck(String)
     case playerDiscardHand(String, String)
     case playerPutInPlay(String, String)

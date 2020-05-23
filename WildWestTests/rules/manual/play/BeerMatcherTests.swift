@@ -88,7 +88,7 @@ class BeerMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerGainHealth("p1", 3),
+        XCTAssertEqual(updates, [.playerSetHealth("p1", 3),
                                  .playerDiscardHand("p1", "c1")])
     }
     

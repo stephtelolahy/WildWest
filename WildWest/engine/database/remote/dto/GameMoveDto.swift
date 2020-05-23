@@ -1,5 +1,5 @@
 //
-//  MoveDto.swift
+//  GameMoveDto.swift
 //  WildWest
 //
 //  Created by Hugues Stephano Telolahy on 29/04/2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct MoveDto: Codable {
+struct GameMoveDto: Codable {
     let name: String?
     let actorId: String?
     let cardId: String?
@@ -23,6 +23,6 @@ struct TargetCardDto: Codable {
 }
 
 struct TargetCardSourceDto: Codable {
-    let randomHand: Bool?
-    let inPlay: String?
+    var randomHand: Bool?
+    var inPlay: String?
 }

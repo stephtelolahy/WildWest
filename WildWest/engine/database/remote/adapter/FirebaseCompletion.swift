@@ -20,7 +20,7 @@ typealias FirebaseCompletion = (EmptyResult) -> Void
 typealias FirebaseCardCompletion = (Result<CardProtocol>) -> Void
 typealias FirebaseStateCompletion = (Result<GameStateProtocol>) -> Void
 typealias FirebaseUpdateCompletion = (Result<GameUpdate>) -> Void
-typealias FirebaseOptionalMoveCompletion = (Result<GameMove?>) -> Void
+typealias FirebaseMoveCompletion = (Result<GameMove>) -> Void
 typealias FirebaseMovesCompletion = (Result<[GameMove]>) -> Void
 typealias FirebaseBooleanCompletion = (Result<Bool>) -> Void
 

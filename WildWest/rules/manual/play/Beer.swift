@@ -29,7 +29,7 @@ class BeerMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        return [.playerGainHealth(move.actorId, actor.health + 1),
+        return [.playerSetHealth(move.actorId, actor.health + 1),
                 .playerDiscardHand(move.actorId, cardId)]
     }
 }

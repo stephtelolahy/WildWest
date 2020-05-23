@@ -265,7 +265,7 @@ class GameUpdateExecutorTests: XCTestCase {
     
     func test_playerSetHealth_IfGainLifePoints() {
         // Given
-        let update = GameUpdate.playerGainHealth("p1", 2)
+        let update = GameUpdate.playerSetHealth("p1", 2)
         
         // When
         sut.execute(update, in: mockDatabase)

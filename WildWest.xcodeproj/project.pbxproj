@@ -43,7 +43,7 @@
 		3320A340242FC9EF002CD5AE /* GameState+Outcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3320A33F242FC9EF002CD5AE /* GameState+Outcome.swift */; };
 		3320A341242FC9EF002CD5AE /* GameState+Outcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3320A33F242FC9EF002CD5AE /* GameState+Outcome.swift */; };
 		3322C4B3245236D500D7B297 /* RemoteDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4B2245236D500D7B297 /* RemoteDatabase.swift */; };
-		3322C4B62452379700D7B297 /* StateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4B52452379700D7B297 /* StateDto.swift */; };
+		3322C4B62452379700D7B297 /* GameStateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4B52452379700D7B297 /* GameStateDto.swift */; };
 		3324018E23DBA6C800B92439 /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */; };
 		332499B323DB9F650082EF09 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332499B223DB9F650082EF09 /* GameViewController.swift */; };
 		3327EB1B2459E10400483FC5 /* FirebaseGameAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3327EB1A2459E10400483FC5 /* FirebaseGameAdapter.swift */; };
@@ -134,12 +134,25 @@
 		3338B2ED242FD0600097BA57 /* Challenge+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3338B2EB242FD0600097BA57 /* Challenge+Description.swift */; };
 		3338B2EF242FD1240097BA57 /* TargetCard+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3338B2EE242FD1240097BA57 /* TargetCard+Description.swift */; };
 		3338B2F0242FD1240097BA57 /* TargetCard+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3338B2EE242FD1240097BA57 /* TargetCard+Description.swift */; };
+		333E692D245D557A00DEF93B /* GameUpdateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333E692C245D557A00DEF93B /* GameUpdateDto.swift */; };
 		333E8757242D5B3B00EAE8FC /* Big Bomb-SoundBible.com-1219802495.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 333E8756242D5B3B00EAE8FC /* Big Bomb-SoundBible.com-1219802495.mp3 */; };
 		334673E62436267500FFBB82 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334673E52436267500FFBB82 /* UIViewController+Alert.swift */; };
 		334673E82436314E00FFBB82 /* UserDefaultsStored.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334673E72436314E00FFBB82 /* UserDefaultsStored.swift */; };
 		334673E92436314E00FFBB82 /* UserDefaultsStored.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334673E72436314E00FFBB82 /* UserDefaultsStored.swift */; };
 		334673EB2436328000FFBB82 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334673EA2436328000FFBB82 /* UserPreferences.swift */; };
 		334673EC2436328000FFBB82 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334673EA2436328000FFBB82 /* UserPreferences.swift */; };
+		335157F6245D855E00C46888 /* DtoEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AF42454AD7200A5D2DA /* DtoEncoder.swift */; };
+		335157F7245D856500C46888 /* DtoDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AF62454AF9A00A5D2DA /* DtoDecoder.swift */; };
+		335157F9245D860600C46888 /* DtoEncodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335157F8245D860600C46888 /* DtoEncodingTests.swift */; };
+		335157FA245D888F00C46888 /* GameStateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4B52452379700D7B297 /* GameStateDto.swift */; };
+		335157FB245D889900C46888 /* PlayerDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AF02454ABF200A5D2DA /* PlayerDto.swift */; };
+		335157FC245D88AD00C46888 /* GameMoveDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335C03BD2459F5C200043F46 /* GameMoveDto.swift */; };
+		335157FD245D88B100C46888 /* GameUpdateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333E692C245D557A00DEF93B /* GameUpdateDto.swift */; };
+		335157FE245D88BE00C46888 /* OptionalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33031E0E24555D5F00528158 /* OptionalExtension.swift */; };
+		33515800245D892700C46888 /* KeyGeneratorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335157FF245D892700C46888 /* KeyGeneratorProtocol.swift */; };
+		33515801245D892700C46888 /* KeyGeneratorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335157FF245D892700C46888 /* KeyGeneratorProtocol.swift */; };
+		33515802245D899D00C46888 /* DictionaryEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AE82454AB3000A5D2DA /* DictionaryEncoder.swift */; };
+		33515803245D89A000C46888 /* DictionaryDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AEC2454AB5F00A5D2DA /* DictionaryDecoder.swift */; };
 		33516CCA2450A79E003C99E2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33516CC92450A79E003C99E2 /* GoogleService-Info.plist */; };
 		3356CF0E243237320071B04F /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3356CF0D243237320071B04F /* Challenge.swift */; };
 		3356CF0F243237320071B04F /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3356CF0D243237320071B04F /* Challenge.swift */; };
@@ -172,7 +185,7 @@
 		335BED9C2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9A2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 */; };
 		335BED9E2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */; };
 		335BED9F2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */; };
-		335C03BE2459F5C200043F46 /* MoveDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335C03BD2459F5C200043F46 /* MoveDto.swift */; };
+		335C03BE2459F5C200043F46 /* GameMoveDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335C03BD2459F5C200043F46 /* GameMoveDto.swift */; };
 		33604AF4245735DA00439D45 /* Single+Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33604AF3245735DA00439D45 /* Single+Transaction.swift */; };
 		336AA6F023F1450800328837 /* GameDatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */; };
 		336AA6F123F1450B00328837 /* GameDatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */; };
@@ -249,7 +262,6 @@
 		33B896CA243862AB0005FF21 /* GameCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B896C9243862AB0005FF21 /* GameCollectionViewLayout.swift */; };
 		33B896CB243862AB0005FF21 /* GameCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B896C9243862AB0005FF21 /* GameCollectionViewLayout.swift */; };
 		33BAE346242E74CD0098B41F /* MemoryCachedDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BAE345242E74CD0098B41F /* MemoryCachedDataBase.swift */; };
-		33BAE347242E74CD0098B41F /* MemoryCachedDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BAE345242E74CD0098B41F /* MemoryCachedDataBase.swift */; };
 		33BAE348242E7C960098B41F /* Subscribable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A733ED23DC4A5300E9B2AD /* Subscribable.swift */; };
 		33BBE7572445CA77006C9B17 /* GameState+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BBE7562445CA77006C9B17 /* GameState+Image.swift */; };
 		33BC633F2444D0FF00760F25 /* UIViewController+CardAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BC633E2444D0FF00760F25 /* UIViewController+CardAnimation.swift */; };
@@ -361,7 +373,7 @@
 		331B4645244A11EC00F3634A /* DrawsAnotherCardIfSecondDrawIsRedSuitMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawsAnotherCardIfSecondDrawIsRedSuitMatcherTests.swift; sourceTree = "<group>"; };
 		3320A33F242FC9EF002CD5AE /* GameState+Outcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameState+Outcome.swift"; sourceTree = "<group>"; };
 		3322C4B2245236D500D7B297 /* RemoteDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDatabase.swift; sourceTree = "<group>"; };
-		3322C4B52452379700D7B297 /* StateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateDto.swift; sourceTree = "<group>"; };
+		3322C4B52452379700D7B297 /* GameStateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateDto.swift; sourceTree = "<group>"; };
 		3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		332499B223DB9F650082EF09 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		3327EB1A2459E10400483FC5 /* FirebaseGameAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseGameAdapter.swift; sourceTree = "<group>"; };
@@ -392,10 +404,13 @@
 		3338B2EE242FD1240097BA57 /* TargetCard+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TargetCard+Description.swift"; sourceTree = "<group>"; };
 		333B233F2425ECA600685454 /* CatBalouMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBalouMatcherTests.swift; sourceTree = "<group>"; };
 		333B23482425F31700685454 /* EndTurnMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTurnMatcherTests.swift; sourceTree = "<group>"; };
+		333E692C245D557A00DEF93B /* GameUpdateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUpdateDto.swift; sourceTree = "<group>"; };
 		333E8756242D5B3B00EAE8FC /* Big Bomb-SoundBible.com-1219802495.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Big Bomb-SoundBible.com-1219802495.mp3"; sourceTree = "<group>"; };
 		334673E52436267500FFBB82 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		334673E72436314E00FFBB82 /* UserDefaultsStored.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStored.swift; sourceTree = "<group>"; };
 		334673EA2436328000FFBB82 /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
+		335157F8245D860600C46888 /* DtoEncodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DtoEncodingTests.swift; sourceTree = "<group>"; };
+		335157FF245D892700C46888 /* KeyGeneratorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyGeneratorProtocol.swift; sourceTree = "<group>"; };
 		33516CC92450A79E003C99E2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3351B58524269386004F18C3 /* Pass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pass.swift; sourceTree = "<group>"; };
 		3351B58824269A24004F18C3 /* PassMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassMatcherTests.swift; sourceTree = "<group>"; };
@@ -416,7 +431,7 @@
 		335BED9724294422009184A3 /* Peacock-SoundBible.com-1698361099.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Peacock-SoundBible.com-1698361099.mp3"; sourceTree = "<group>"; };
 		335BED9A2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Pain-SoundBible.com-1883168362.mp3"; sourceTree = "<group>"; };
 		335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Automatic Machine Gun-SoundBible.com-253461580.mp3"; sourceTree = "<group>"; };
-		335C03BD2459F5C200043F46 /* MoveDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveDto.swift; sourceTree = "<group>"; };
+		335C03BD2459F5C200043F46 /* GameMoveDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMoveDto.swift; sourceTree = "<group>"; };
 		33604AF3245735DA00439D45 /* Single+Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Single+Transaction.swift"; sourceTree = "<group>"; };
 		336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDatabaseProtocol.swift; sourceTree = "<group>"; };
 		3372CB4F2454BB7C00C061C9 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
@@ -722,6 +737,14 @@
 			path = effect;
 			sourceTree = "<group>";
 		};
+		335157F1245D851900C46888 /* database */ = {
+			isa = PBXGroup;
+			children = (
+				335157F8245D860600C46888 /* DtoEncodingTests.swift */,
+			);
+			path = database;
+			sourceTree = "<group>";
+		};
 		335BED7024293418009184A3 /* sfx */ = {
 			isa = PBXGroup;
 			children = (
@@ -800,6 +823,7 @@
 				3306682D245588B9003B2263 /* FirebaseMapper.swift */,
 				33734AE82454AB3000A5D2DA /* DictionaryEncoder.swift */,
 				33734AEC2454AB5F00A5D2DA /* DictionaryDecoder.swift */,
+				335157FF245D892700C46888 /* KeyGeneratorProtocol.swift */,
 				33734AF42454AD7200A5D2DA /* DtoEncoder.swift */,
 				33734AF62454AF9A00A5D2DA /* DtoDecoder.swift */,
 				33031E0E24555D5F00528158 /* OptionalExtension.swift */,
@@ -810,9 +834,10 @@
 		33734AEF2454AB9100A5D2DA /* dto */ = {
 			isa = PBXGroup;
 			children = (
-				3322C4B52452379700D7B297 /* StateDto.swift */,
+				3322C4B52452379700D7B297 /* GameStateDto.swift */,
 				33734AF02454ABF200A5D2DA /* PlayerDto.swift */,
-				335C03BD2459F5C200043F46 /* MoveDto.swift */,
+				335C03BD2459F5C200043F46 /* GameMoveDto.swift */,
+				333E692C245D557A00DEF93B /* GameUpdateDto.swift */,
 			);
 			path = dto;
 			sourceTree = "<group>";
@@ -1223,6 +1248,7 @@
 				33B1566324540EF400746B61 /* core */,
 				335EDB5924538CBB00C21A9C /* setup */,
 				3309D7062408D1BE00713E15 /* update */,
+				335157F1245D851900C46888 /* database */,
 				338A4D1123E7F589005698FD /* convenience */,
 			);
 			path = engine;
@@ -1508,7 +1534,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/engine/state/GameStateProtocol.swift\" \\\n\"${INPUT_DIR}/engine/state/PlayerProtocol.swift\" \\\n\"${INPUT_DIR}/engine/state/CardProtocol.swift\" \\\n\"${INPUT_DIR}/engine/state/FigureProtocol.swift\" \\\n\"${INPUT_DIR}/engine/database/GameDatabaseProtocol.swift\" \\\n\"${INPUT_DIR}/engine/update/GameUpdateProtocol.swift\" \\\n\"${INPUT_DIR}/engine/move/MoveMatcherProtocol.swift\" \\\n\"${INPUT_DIR}/engine/EventQueueProtocol.swift\" \\\n\"${INPUT_DIR}/engine/setup/GameSetupProtocol.swift\" \\\n\"${INPUT_DIR}/engine/core/GameLoop.swift\" \\\n\"${INPUT_DIR}/engine/core/GameSubjectsProtocol.swift\" \\\n\"${INPUT_DIR}/engine/core/GameEngineProtocol.swift\"\n";
+			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/engine/state/GameStateProtocol.swift\" \\\n\"${INPUT_DIR}/engine/state/PlayerProtocol.swift\" \\\n\"${INPUT_DIR}/engine/state/CardProtocol.swift\" \\\n\"${INPUT_DIR}/engine/state/FigureProtocol.swift\" \\\n\"${INPUT_DIR}/engine/database/GameDatabaseProtocol.swift\" \\\n\"${INPUT_DIR}/engine/update/GameUpdateProtocol.swift\" \\\n\"${INPUT_DIR}/engine/move/MoveMatcherProtocol.swift\" \\\n\"${INPUT_DIR}/engine/EventQueueProtocol.swift\" \\\n\"${INPUT_DIR}/engine/setup/GameSetupProtocol.swift\" \\\n\"${INPUT_DIR}/engine/core/GameLoop.swift\" \\\n\"${INPUT_DIR}/engine/core/GameSubjectsProtocol.swift\" \\\n\"${INPUT_DIR}/engine/core/GameEngineProtocol.swift\" \\\n\"${INPUT_DIR}/engine/database/remote/mapper/KeyGeneratorProtocol.swift\"\n";
 		};
 		AD8540A223A4291100568FE9 /* Run Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1576,7 +1602,7 @@
 			files = (
 				33734AE92454AB3000A5D2DA /* DictionaryEncoder.swift in Sources */,
 				3322C4B3245236D500D7B297 /* RemoteDatabase.swift in Sources */,
-				3322C4B62452379700D7B297 /* StateDto.swift in Sources */,
+				3322C4B62452379700D7B297 /* GameStateDto.swift in Sources */,
 				338FAD16242543030096B488 /* InstructionBuilder.swift in Sources */,
 				ADE91AD423BA00DC00F7316B /* GameSetup.swift in Sources */,
 				3328FCA3242F29B100A82255 /* Stagecoach.swift in Sources */,
@@ -1600,7 +1626,7 @@
 				33031E0D2455513000528158 /* ThemeMusicPlayer.swift in Sources */,
 				330761A624535C7200E8C2EF /* GameSubjectsProtocol.swift in Sources */,
 				3328FC9F242F298200A82255 /* Panic.swift in Sources */,
-				335C03BE2459F5C200043F46 /* MoveDto.swift in Sources */,
+				335C03BE2459F5C200043F46 /* GameMoveDto.swift in Sources */,
 				33112E70244503EA009C706E /* UpdateAnimator.swift in Sources */,
 				330FDECC242F384C00284FE7 /* GainRewardOnEliminatingOutlaw.swift in Sources */,
 				3301BEF423F962F000B4364D /* RandomAIWithRole.swift in Sources */,
@@ -1656,6 +1682,7 @@
 				3301E63823F7EEF700AB35C7 /* AIProtocol.swift in Sources */,
 				3302E51C23F8E34C004FE76E /* RandomAI.swift in Sources */,
 				332B844B2438FF35005E5B21 /* DrawsCardWhenHandIsEmpty.swift in Sources */,
+				33515800245D892700C46888 /* KeyGeneratorProtocol.swift in Sources */,
 				332499B323DB9F650082EF09 /* GameViewController.swift in Sources */,
 				33AE6D2C244349910006E72F /* AssistedReactionMoveSelector.swift in Sources */,
 				332F0497244716AA00BE2E4A /* UIImage+Color.swift in Sources */,
@@ -1666,6 +1693,7 @@
 				330FDECD242F384C00284FE7 /* PenalizeSheriffOnEliminatingDeputy.swift in Sources */,
 				3328FCF0242F309400A82255 /* EndTurn.swift in Sources */,
 				3301BEFA23F9A79B00B4364D /* AIPlayerAgent.swift in Sources */,
+				333E692D245D557A00DEF93B /* GameUpdateDto.swift in Sources */,
 				3372CB542454BF8E00C061C9 /* GameLauncher.swift in Sources */,
 				33E4412424077DAB00B2848E /* UITableViewExtension.swift in Sources */,
 				3331A9CC2455F2AF0063885C /* FirebaseKeyGenerator.swift in Sources */,
@@ -1717,6 +1745,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3395258423E37D07003DE948 /* GameSetupProtocol.swift in Sources */,
+				33515803245D89A000C46888 /* DictionaryDecoder.swift in Sources */,
 				332DFE10242F1C1F009C35E6 /* StartTurnTests.swift in Sources */,
 				331231022434FC890080B696 /* GameState+Player.swift in Sources */,
 				3328FCAD242F29B200A82255 /* Stagecoach.swift in Sources */,
@@ -1731,6 +1760,7 @@
 				33380100242F2348003F7327 /* ResolveJailTests.swift in Sources */,
 				3301BEF523F962F000B4364D /* RandomAIWithRole.swift in Sources */,
 				339CA27B242578C900D43128 /* GameUpdateExecutor.swift in Sources */,
+				335157FE245D88BE00C46888 /* OptionalExtension.swift in Sources */,
 				3338B2E6242FCCDA0097BA57 /* GameState+OutcomeTests.swift in Sources */,
 				3398B0D5243B9AED00EB670A /* Role+Relationship.swift in Sources */,
 				3328FCB4242F29B200A82255 /* Gatling.swift in Sources */,
@@ -1739,6 +1769,7 @@
 				33EF407C244F6AF6008FA490 /* Discard2CardsFor1LifeMatcherTests.swift in Sources */,
 				AD7F34B923D79841001B4072 /* MockCardProtocolExtension.swift in Sources */,
 				33B896C524384A770005FF21 /* GameLayoutBuilder.swift in Sources */,
+				33515802245D899D00C46888 /* DictionaryEncoder.swift in Sources */,
 				AD7EAFBF23D7846D00FE23D5 /* GameSetupTests.swift in Sources */,
 				3328FCA0242F298300A82255 /* Panic.swift in Sources */,
 				ADD035D923A9604F003B2576 /* GameStateProtocol.swift in Sources */,
@@ -1749,7 +1780,6 @@
 				3380B0412436800F0040F027 /* DrawsCardFromPlayerDamagedHim.swift in Sources */,
 				3328FCB5242F29B200A82255 /* Indians.swift in Sources */,
 				3328FCB1242F29B200A82255 /* Jail.swift in Sources */,
-				33BAE347242E74CD0098B41F /* MemoryCachedDataBase.swift in Sources */,
 				33334648242FF65500A97FD5 /* GameState+DistanceTests.swift in Sources */,
 				33BAE348242E7C960098B41F /* Subscribable.swift in Sources */,
 				3328FCE8242F2F0200A82255 /* DiscardBeerMatcherTests.swift in Sources */,
@@ -1788,14 +1818,19 @@
 				336AA6F123F1450B00328837 /* GameDatabaseProtocol.swift in Sources */,
 				337408D524306C3400E5809B /* Player+Cards.swift in Sources */,
 				339E4A2324516B490079F088 /* Challenge+Updating.swift in Sources */,
+				335157FC245D88AD00C46888 /* GameMoveDto.swift in Sources */,
 				33B896CB243862AB0005FF21 /* GameCollectionViewLayout.swift in Sources */,
 				330761A42453560900E8C2EF /* GameLoop.swift in Sources */,
+				335157F7245D856500C46888 /* DtoDecoder.swift in Sources */,
+				335157FB245D889900C46888 /* PlayerDto.swift in Sources */,
+				33515801245D892700C46888 /* KeyGeneratorProtocol.swift in Sources */,
 				330FDED5242F38DF00284FE7 /* PenalizeSheriffOnEliminatingDeputyMatcherTests.swift in Sources */,
 				3328FCD1242F2B5600A82255 /* DuelMatcherTests.swift in Sources */,
 				3328FCB7242F2B5600A82255 /* BeerMatcherTests.swift in Sources */,
 				33D477F223E57DE500E232D9 /* FigureProtocol.swift in Sources */,
 				3328FCC7242F2B5600A82255 /* JailMatcherTests.swift in Sources */,
 				330FDED3242F38DF00284FE7 /* GainRewardOnEliminatingOutlawMatcherTests.swift in Sources */,
+				335157FA245D888F00C46888 /* GameStateDto.swift in Sources */,
 				3380B043243682B80040F027 /* DrawsCardFromPlayerDamagedHimMatcherTests.swift in Sources */,
 				3328FCEA242F2F0200A82255 /* PassMatcherTests.swift in Sources */,
 				3328FCBF242F2B5600A82255 /* PanicMatcherTests.swift in Sources */,
@@ -1803,6 +1838,7 @@
 				33BD0AD624351131003E75EE /* FigureDto.swift in Sources */,
 				33EE1BA1242F18C200A1E4F7 /* MoveMatcherProtocol.swift in Sources */,
 				3338B2F0242FD1240097BA57 /* TargetCard+Description.swift in Sources */,
+				335157FD245D88B100C46888 /* GameUpdateDto.swift in Sources */,
 				3328FCDB242F2D1100A82255 /* DiscardBeer.swift in Sources */,
 				ADD035D623A96034003B2576 /* PlayerProtocol.swift in Sources */,
 				ADE91ACE23B9FE2300F7316B /* JsonReader.swift in Sources */,
@@ -1840,11 +1876,13 @@
 				3328FCF2242F333600A82255 /* EndTurnMatcherTests.swift in Sources */,
 				AD52B99A23B178CC0013240B /* Player.swift in Sources */,
 				ADE91AD523BA00DC00F7316B /* GameSetup.swift in Sources */,
+				335157F9245D860600C46888 /* DtoEncodingTests.swift in Sources */,
 				3356CF12243237500071B04F /* DamageEvent.swift in Sources */,
 				3328FCD9242F2D1100A82255 /* DiscardMissed.swift in Sources */,
 				3390F90C24253932001057A7 /* MoveClassifier.swift in Sources */,
 				3398B0D8243B9BF900EB670A /* Role+RelationshipTests.swift in Sources */,
 				33B1566524540F0200746B61 /* GameSubjectsTests.swift in Sources */,
+				335157F6245D855E00C46888 /* DtoEncoder.swift in Sources */,
 				AD52B99423B175110013240B /* Card.swift in Sources */,
 				3328FCCB242F2B5600A82255 /* BangMatcherTests.swift in Sources */,
 				3333463D242FD59900A97FD5 /* Player+RangeTests.swift in Sources */,

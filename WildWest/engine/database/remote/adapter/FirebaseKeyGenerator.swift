@@ -8,11 +8,7 @@
 
 import Firebase
 
-protocol FirebaseKeyGeneratorProtocol {
-    func cardAutoId() -> String
-}
-
-class FirebaseKeyGenerator: FirebaseKeyGeneratorProtocol {
+class FirebaseKeyGenerator: KeyGeneratorProtocol {
     
     private let rootRef = Database.database().reference()
     

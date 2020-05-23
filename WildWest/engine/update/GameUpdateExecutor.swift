@@ -23,12 +23,11 @@ class GameUpdateExecutor: UpdateExecutorProtocol {
         case let .playerSetBangsPlayed(playerId, count):
             return database.playerSetBangsPlayed(playerId, count)
             
-        case let .playerGainHealth(playerId, health):
+        case let .playerSetHealth(playerId, health):
             return database.playerSetHealth(playerId, health)
             
-        case let .playerLooseHealth(playerId, health, damageEvent):
-            return database.playerSetHealth(playerId, health)
-                .andThen(database.playerSetDamageEvent(playerId, damageEvent))
+        case let .playerSetDamage(playerId, damageEvent):
+            return database.playerSetDamageEvent(playerId, damageEvent)
             
         case let .playerPullFromDeck(playerId):
             return database.deckRemoveFirst()

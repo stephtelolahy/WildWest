@@ -19,28 +19,6 @@ struct GameEnvironment {
 
 class GameEnvironmentBuilder {
     
-    func createGame(playersCount: Int,
-                    cards: [CardProtocol],
-                    figures: [FigureProtocol],
-                    preferredRole: Role?,
-                    preferredFigure: String?) -> GameStateProtocol {
-        let gameSetup = GameSetup()
-        
-        let shuffledRoles = gameSetup.roles(for: playersCount)
-            .shuffled()
-            .starting(with: preferredRole)
-        
-        let shuffledFigures = figures
-            .shuffled()
-            .starting(where: { $0.name.rawValue == preferredFigure })
-        
-        let shuffledCards = cards.shuffled()
-        
-        return gameSetup.setupGame(roles: shuffledRoles,
-                                   figures: shuffledFigures,
-                                   cards: shuffledCards)
-    }
-    
     func createLocalEnvironment(state: GameStateProtocol,
                                 controlledId: String?,
                                 updateDelay: TimeInterval) -> GameEnvironment {
@@ -118,6 +96,10 @@ class GameEnvironmentBuilder {
                                 subjects: subjects)
         
         let controlledRoleIsSheriff = state.player(controlledId)?.role == .sheriff
+        
+        if controlledRoleIsSheriff {
+            gameAdapter.setStarted { _ in }
+        }
         
         return GameEnvironment(engine: engine,
                                subjects: subjects,

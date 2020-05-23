@@ -13,7 +13,7 @@ import Firebase
 
 protocol FirebaseGameAdapterProtocol {
     func observeExecutedUpdate(_ completion: @escaping FirebaseUpdateCompletion)
-    func observeExecutedMove(_ completion: @escaping FirebaseOptionalMoveCompletion)
+    func observeExecutedMove(_ completion: @escaping FirebaseMoveCompletion)
     func observeValidMoves(_ completion: @escaping FirebaseMovesCompletion)
     func observeStarted(_ completion: @escaping FirebaseBooleanCompletion)
     
@@ -34,13 +34,26 @@ class FirebaseGameAdapter: FirebaseGameAdapterProtocol {
     }
     
     func observeExecutedUpdate(_ completion: @escaping FirebaseUpdateCompletion) {
-//        fatalError()
+        gameRef.child("executedUpdate").observe(.value, with: { snapshot in
+            do {
+                guard let update = try self.mapper.decodeUpdate(from: snapshot) else {
+                    return
+                }
+                completion(.success(update))
+            } catch {
+                completion(.error(error))
+            }
+        }) { error in
+            completion(.error(error))
+        }
     }
     
-    func observeExecutedMove(_ completion: @escaping FirebaseOptionalMoveCompletion) {
+    func observeExecutedMove(_ completion: @escaping FirebaseMoveCompletion) {
         gameRef.child("executedMove").observe(.value, with: { snapshot in
             do {
-                let move = try self.mapper.decodeMove(from: snapshot)
+                guard let move = try self.mapper.decodeMove(from: snapshot) else {
+                    return
+                }
                 completion(.success(move))
             } catch {
                 completion(.error(error))
@@ -77,7 +90,14 @@ class FirebaseGameAdapter: FirebaseGameAdapterProtocol {
     }
     
     func setExecutedUpdate(_ update: GameUpdate, _ completion: @escaping FirebaseCompletion) {
-//        fatalError()
+        do {
+            let value = try mapper.encodeUpdate(update)
+            gameRef.child("executedUpdate").setValue(value) { error, _ in
+                completion(result(from: error))
+            }
+        } catch {
+            completion(.error(error))
+        }
     }
     
     func setExecutedMove(_ move: GameMove, _ completion: @escaping FirebaseCompletion) {

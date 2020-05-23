@@ -77,7 +77,8 @@ class PassMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(nil),
-                                 .playerLooseHealth("p1", 3, DamageEvent(damage: 1, source: .byPlayer("px")))])
+                                 .playerSetDamage("p1", DamageEvent(damage: 1, source: .byPlayer("px"))),
+                                 .playerSetHealth("p1", 3)])
     }
     
     func test_TriggerStartTurnChallenge_IfPassingOnDynamiteExploded() {
@@ -96,7 +97,8 @@ class PassMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(Challenge(name: .startTurn)),
-                                 .playerLooseHealth("p1", 1, DamageEvent(damage: 3, source: .byDynamite))])
+                                 .playerSetDamage("p1", DamageEvent(damage: 3, source: .byDynamite)),
+                                 .playerSetHealth("p1", 1)])
     }
     
     func test_RemoveActorFromBangChallenge_IfPassing() {
@@ -115,7 +117,8 @@ class PassMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(nil),
-                                 .playerLooseHealth("p1", 3, DamageEvent(damage: 1, source: .byPlayer("px")))])
+                                 .playerSetDamage("p1", DamageEvent(damage: 1, source: .byPlayer("px"))),
+                                 .playerSetHealth("p1", 3)])
     }
     
     func test_RemoveActorFromGatlingChallenge_IfPassing() {
@@ -134,7 +137,8 @@ class PassMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(Challenge(name: .gatling, targetIds: ["p2", "p3"])),
-                                 .playerLooseHealth("p1", 3, DamageEvent(damage: 1, source: .byPlayer("px")))])
+                                 .playerSetDamage("p1", DamageEvent(damage: 1, source: .byPlayer("px"))),
+                                 .playerSetHealth("p1", 3)])
     }
     
     func test_RemoveActorFromIndiansChallenge_IfPassing() {
@@ -153,7 +157,8 @@ class PassMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(Challenge(name: .indians, targetIds: ["p2", "p3"])),
-                                 .playerLooseHealth("p1", 3, DamageEvent(damage: 1, source: .byPlayer("px")))])
+                                 .playerSetDamage("p1", DamageEvent(damage: 1, source: .byPlayer("px"))),
+                                 .playerSetHealth("p1", 3)])
     }
     
     func test_RemoveDuelChallenge_IfPassing() {
@@ -172,6 +177,7 @@ class PassMatcherTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(nil),
-                                 .playerLooseHealth("p1", 3, DamageEvent(damage: 1, source: .byPlayer("p2")))])
+                                 .playerSetDamage("p1", DamageEvent(damage: 1, source: .byPlayer("p2"))),
+                                 .playerSetHealth("p1", 3)])
     }
 }

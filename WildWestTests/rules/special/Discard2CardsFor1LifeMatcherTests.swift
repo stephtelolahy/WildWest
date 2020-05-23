@@ -66,7 +66,7 @@ class Discard2CardsFor1LifeMatcherTests: XCTestCase {
         let updates = sut.execute(move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerGainHealth("p1", 2),
+        XCTAssertEqual(updates, [.playerSetHealth("p1", 2),
                                  .playerDiscardHand("p1", "c1"),
                                  .playerDiscardHand("p1", "c2")])
     }

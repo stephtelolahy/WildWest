@@ -27,6 +27,10 @@ class FirebaseAdapter: FirebaseAdapterProtocol {
     
     func createGame(id: String, state: GameStateProtocol, _ completion: @escaping FirebaseCompletion) {
         do {
+            rootRef.child("games/\(id)/executedMove").setValue(nil)
+            rootRef.child("games/\(id)/executedUpdate").setValue(nil)
+            rootRef.child("games/\(id)/validMoves").setValue(nil)
+            rootRef.child("games/\(id)/started").setValue(false)
             let value = try mapper.encodeState(state)
             rootRef.child("games/\(id)/state").setValue(value) { error, _ in
                 if let error = error {
@@ -35,11 +39,6 @@ class FirebaseAdapter: FirebaseAdapterProtocol {
                     completion(.success)
                 }
             }
-            // TODO: execute as unique transaction
-            rootRef.child("games/\(id)/executedMove").setValue(nil)
-            rootRef.child("games/\(id)/executedUpdate").setValue(nil)
-            rootRef.child("games/\(id)/validMoves").setValue(nil)
-            rootRef.child("games/\(id)/started").setValue(false)
         } catch {
             completion(.error(error))
         }
@@ -47,20 +46,21 @@ class FirebaseAdapter: FirebaseAdapterProtocol {
     
     func getPendingGame(_ id: String, completion: @escaping FirebaseStateCompletion) {
         rootRef.child("games/\(id)/started").observeSingleEvent(of: .value, with: { snapshot in
-            let value = snapshot.value as? Bool
-            if value == true {
-                completion(.error(NSError(domain: "Game already started", code: 0)))
-                return
+            let started = snapshot.value as? Bool
+            if started == false {
+                self.getGame(id, completion: completion)
+            } else {
+                completion(.error(NSError(domain: "Already started game", code: 0)))
             }
-            
-            self.getGame(id, completion: completion)
-            
         }) { error in
             completion(.error(error))
         }
     }
+}
+
+private extension FirebaseAdapter {
     
-    private func getGame(_ id: String, completion: @escaping FirebaseStateCompletion) {
+    func getGame(_ id: String, completion: @escaping FirebaseStateCompletion) {
         rootRef.child("games/\(id)/state").observeSingleEvent(of: .value, with: { snapshot in
             do {
                 let state = try self.mapper.decodeState(from: snapshot)

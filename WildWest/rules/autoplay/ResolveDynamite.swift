@@ -49,7 +49,8 @@ class ResolveDynamiteMatcher: MoveMatcherProtocol {
         if immediateDamage > 0 {
             let health = max(actor.health - immediateDamage, 0)
             let damageEvent = DamageEvent(damage: immediateDamage, source: .byDynamite)
-            updates.append(.playerLooseHealth(actor.identifier, health, damageEvent))
+            updates.append(.playerSetDamage(actor.identifier, damageEvent))
+            updates.append(.playerSetHealth(actor.identifier, health))
         }
         
         let remainingDamage = dynamiteDamage - immediateDamage
