@@ -44,27 +44,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>FirebaseAnalyticsInterop-framework.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>FirebaseAnalyticsInterop-library.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>FirebaseAuth.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>FirebaseAuthInterop-framework.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>FirebaseAuthInterop-library.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -85,16 +65,6 @@
 			<false/>
 		</dict>
 		<key>FirebaseCoreDiagnostics-library.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>FirebaseCoreDiagnosticsInterop-framework.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>FirebaseCoreDiagnosticsInterop-library.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -185,16 +155,6 @@
 			<false/>
 		</dict>
 		<key>GoogleDataTransport-library.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>GoogleDataTransportCCTSupport-framework.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>GoogleDataTransportCCTSupport-library.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

@@ -12,6 +12,7 @@ import FirebaseUI
 class SignInViewController: UIViewController {
     
     @IBOutlet private weak var signInView: UIStackView!
+    
     private lazy var authUI = FUIAuth.defaultAuthUI()!
     
     override func viewDidLoad() {
