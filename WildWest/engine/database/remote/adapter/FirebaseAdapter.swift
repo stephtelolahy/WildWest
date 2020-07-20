@@ -5,15 +5,13 @@
 //  Created by Hugues Stephano Telolahy on 25/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-// swiftlint:disable multiple_closures_with_trailing_closure
-// swiftlint:disable multiline_arguments
 
 import RxSwift
 import Firebase
 
 protocol FirebaseAdapterProtocol {
-    func createGame(id: String, state: GameStateProtocol, _ completion: @escaping FirebaseCompletion)
-    func getPendingGame(_ id: String, completion: @escaping FirebaseStateCompletion)
+    func createGame(id: String, state: GameStateProtocol) -> Completable
+    func getPendingGame(_ id: String) -> Single<GameStateProtocol>
 }
 
 class FirebaseAdapter: FirebaseAdapterProtocol {
@@ -25,51 +23,25 @@ class FirebaseAdapter: FirebaseAdapterProtocol {
         self.mapper = mapper
     }
     
-    func createGame(id: String, state: GameStateProtocol, _ completion: @escaping FirebaseCompletion) {
-        do {
-            rootRef.child("games/\(id)/executedMove").setValue(nil)
-            rootRef.child("games/\(id)/executedUpdate").setValue(nil)
-            rootRef.child("games/\(id)/validMoves").setValue(nil)
-            rootRef.child("games/\(id)/started").setValue(false)
-            let value = try mapper.encodeState(state)
-            rootRef.child("games/\(id)/state").setValue(value) { error, _ in
-                if let error = error {
-                    completion(.error(error))
-                } else {
-                    completion(.success)
-                }
-            }
-        } catch {
-            completion(.error(error))
-        }
+    func createGame(id: String, state: GameStateProtocol) -> Completable {
+        rootRef.child("games/\(id)/state").rxSetValue({ try self.mapper.encodeState(state) })
+            .andThen(rootRef.child("games/\(id)/executedMove").rxSetValue({ nil }))
+            .andThen(rootRef.child("games/\(id)/executedUpdate").rxSetValue({ nil }))
+            .andThen(rootRef.child("games/\(id)/validMoves").rxSetValue({ nil }))
+            .andThen(rootRef.child("games/\(id)/started").rxSetValue({ false }))
     }
     
-    func getPendingGame(_ id: String, completion: @escaping FirebaseStateCompletion) {
-        rootRef.child("games/\(id)/started").observeSingleEvent(of: .value, with: { snapshot in
-            let started = snapshot.value as? Bool
-            if started == false {
-                self.getGame(id, completion: completion)
-            } else {
-                completion(.error(NSError(domain: "Already started game", code: 0)))
+    func getPendingGame(_ id: String) -> Single<GameStateProtocol> {
+        rootRef.child("games/\(id)/started").rxObserveSingleEvent({ $0.value as? Bool })
+        .map { started in
+            if started == true {
+                throw NSError(domain: "Game already started", code: 0)
             }
-        }) { error in
-            completion(.error(error))
         }
-    }
-}
-
-private extension FirebaseAdapter {
-    
-    func getGame(_ id: String, completion: @escaping FirebaseStateCompletion) {
-        rootRef.child("games/\(id)/state").observeSingleEvent(of: .value, with: { snapshot in
-            do {
-                let state = try self.mapper.decodeState(from: snapshot)
-                completion(.success(state))
-            } catch {
-                completion(.error(error))
+        .flatMap { _ in
+            self.rootRef.child("games/\(id)/state").rxObserveSingleEvent { snapshot in
+                try self.mapper.decodeState(from: snapshot)
             }
-        }) { error in
-            completion(.error(error))
         }
     }
 }

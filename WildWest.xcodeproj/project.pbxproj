@@ -218,6 +218,7 @@
 		338A5FC0242BC8CE00766541 /* flyby-Conor-1500306612.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 338A5FBF242BC8CE00766541 /* flyby-Conor-1500306612.mp3 */; };
 		338A5FC2242BC9AA00766541 /* shotgun-old_school-RA_The_Sun_God-1129942741.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 338A5FC1242BC9A900766541 /* shotgun-old_school-RA_The_Sun_God-1129942741.mp3 */; };
 		338FAD16242543030096B488 /* InstructionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338FAD15242543030096B488 /* InstructionBuilder.swift */; };
+		3390EEA424C640710089FC47 /* Single+Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3390EEA324C640710089FC47 /* Single+Firebase.swift */; };
 		3390F90B24253932001057A7 /* MoveClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3390F90A24253932001057A7 /* MoveClassifier.swift */; };
 		3390F90C24253932001057A7 /* MoveClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3390F90A24253932001057A7 /* MoveClassifier.swift */; };
 		3390F90E242539BA001057A7 /* MoveClassifierProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3390F90D242539BA001057A7 /* MoveClassifierProtocol.swift */; };
@@ -457,6 +458,7 @@
 		338A5FBF242BC8CE00766541 /* flyby-Conor-1500306612.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "flyby-Conor-1500306612.mp3"; sourceTree = "<group>"; };
 		338A5FC1242BC9A900766541 /* shotgun-old_school-RA_The_Sun_God-1129942741.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "shotgun-old_school-RA_The_Sun_God-1129942741.mp3"; sourceTree = "<group>"; };
 		338FAD15242543030096B488 /* InstructionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionBuilder.swift; sourceTree = "<group>"; };
+		3390EEA324C640710089FC47 /* Single+Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Single+Firebase.swift"; sourceTree = "<group>"; };
 		3390F90A24253932001057A7 /* MoveClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveClassifier.swift; sourceTree = "<group>"; };
 		3390F90D242539BA001057A7 /* MoveClassifierProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveClassifierProtocol.swift; sourceTree = "<group>"; };
 		33911EED242616580023C6AF /* ResolveDynamite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveDynamite.swift; sourceTree = "<group>"; };
@@ -809,6 +811,7 @@
 			children = (
 				33604AF3245735DA00439D45 /* Single+Transaction.swift */,
 				33B85A0024573D26008F47D8 /* Single+FirebaseTransaction.swift */,
+				3390EEA324C640710089FC47 /* Single+Firebase.swift */,
 			);
 			path = "rx+transaction";
 			sourceTree = "<group>";
@@ -1728,6 +1731,7 @@
 				3328FCAA242F29B100A82255 /* Gatling.swift in Sources */,
 				3333465324306B0000A97FD5 /* Player+TargetCard.swift in Sources */,
 				AD52B99C23B17A310013240B /* GameState.swift in Sources */,
+				3390EEA424C640710089FC47 /* Single+Firebase.swift in Sources */,
 				33F94AB623F0580800D1BCFE /* GameUpdateProtocol.swift in Sources */,
 				3395258023E37CCE003DE948 /* GameEngineProtocol.swift in Sources */,
 				33A6330024545B060023A2D2 /* AnalyticsManager.swift in Sources */,

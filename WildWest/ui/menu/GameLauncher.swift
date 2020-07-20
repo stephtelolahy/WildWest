@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class GameLauncher {
+class GameLauncher: Subscribable {
     
     private unowned let viewController: UIViewController
     
@@ -51,8 +51,8 @@ class GameLauncher {
     
     func startRemote() {
         let gameId = "live"
-        getOrCreateRemoteGame(id: gameId) { state in
-            
+        
+        sub(getOrCreateRemoteGame(id: gameId).subscribe(onSuccess: { state in
             let choices = state.allPlayers.map { "\($0.identifier) \($0.role == .sheriff ? "*" : "")" }
             self.viewController.select(title: "Choose player", choices: choices) { index in
                 
@@ -65,7 +65,9 @@ class GameLauncher {
                 
                 Navigator(self.viewController).toGame(environment: environment)
             }
-        }
+        }, onError: { error in
+            self.viewController.presentAlert(title: "Error", message: error.localizedDescription)
+        }))
     }
 }
 
@@ -95,24 +97,12 @@ private extension GameLauncher {
                                    cards: shuffledCards)
     }
     
-    func getOrCreateRemoteGame(id: String, completion: @escaping ((GameStateProtocol) -> Void)) {
-        firebaseAdapter.getPendingGame(id) { result in
-            switch result {
-            case let .success(state):
-                completion(state)
-                
-            case .error:
+    func getOrCreateRemoteGame(id: String) -> Single<GameStateProtocol> {
+        firebaseAdapter.getPendingGame(id)
+            .catchError { _ in
                 let state = self.createGame()
-                self.firebaseAdapter.createGame(id: id, state: state) { [weak self] result in
-                    switch result {
-                    case .success:
-                        completion(state)
-                        
-                    case let .error(error):
-                        self?.viewController.presentAlert(title: "Error", message: error.localizedDescription)
-                    }
-                }
+                return self.firebaseAdapter.createGame(id: id, state: state)
+                    .andThen(Single.just(state))
             }
-        }
     }
 }
