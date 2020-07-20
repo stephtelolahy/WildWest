@@ -10,10 +10,10 @@
 import RxSwift
 
 struct GameEnvironment {
-    let engine: GameEngine
-    let subjects: GameSubjects
+    let engine: GameEngineProtocol
+    let subjects: GameSubjectsProtocol
     let controlledId: String?
-    let aiAgents: [AIPlayerAgent]?
+    let aiAgents: [AIPlayerAgentProtocol]?
     let allowStart: Bool
 }
 

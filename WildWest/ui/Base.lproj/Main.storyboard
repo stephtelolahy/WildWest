@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8GX-Wa-ifS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wrF-Qs-JNN">
     <device id="retina4_7" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -9,10 +9,69 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Sign In View Controller-->
+        <scene sceneID="IcN-fy-eBp">
+            <objects>
+                <viewController id="wrF-Qs-JNN" customClass="SignInViewController" customModule="WildWest" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qEY-Tf-sZZ">
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="63" translatesAutoresizingMaskIntoConstraints="NO" id="YkU-MU-RBu">
+                                <rect key="frame" x="191" y="90.5" width="285.5" height="194"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Yrq-Mf-881">
+                                        <rect key="frame" x="0.0" y="0.0" width="285.5" height="78.5"/>
+                                        <subviews>
+                                            <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The unofficial clone of the Western Card Game" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Fp-S9-8pL">
+                                                <rect key="frame" x="0.0" y="0.0" width="285.5" height="20"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="flm-eh-92v" userLabel="logoButton">
+                                                <rect key="frame" x="0.0" y="20" width="285.5" height="58.5"/>
+                                                <state key="normal" image="bg_splash"/>
+                                                <connections>
+                                                    <action selector="logoButtonTapped:" destination="8GX-Wa-ifS" eventType="touchUpInside" id="LfN-nW-HLE"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jnK-cV-33g">
+                                        <rect key="frame" x="92.5" y="141.5" width="100" height="52.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="sp9-Lf-Bv0"/>
+                                            <constraint firstAttribute="width" secondItem="jnK-cV-33g" secondAttribute="height" multiplier="557:291" id="zIF-9U-Gpc"/>
+                                        </constraints>
+                                        <state key="normal" image="ic_sign_in"/>
+                                        <connections>
+                                            <action selector="signInTapped:" destination="wrF-Qs-JNN" eventType="touchUpInside" id="NrR-OM-FK2"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.81406706569999998" green="0.70718675850000001" blue="0.54898327589999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="YkU-MU-RBu" firstAttribute="centerX" secondItem="qEY-Tf-sZZ" secondAttribute="centerX" id="WtN-19-ae4"/>
+                            <constraint firstItem="YkU-MU-RBu" firstAttribute="centerY" secondItem="qEY-Tf-sZZ" secondAttribute="centerY" id="Yb8-zv-GOE"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="SOU-7t-1jH"/>
+                    </view>
+                    <connections>
+                        <outlet property="signInView" destination="YkU-MU-RBu" id="lKd-AC-Rje"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AL5-AQ-zvz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1223" y="850"/>
+        </scene>
         <!--Menu View Controller-->
         <scene sceneID="5co-p4-5HW">
             <objects>
-                <viewController id="8GX-Wa-ifS" customClass="MenuViewController" customModule="WildWest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MenuViewController" modalTransitionStyle="crossDissolve" id="8GX-Wa-ifS" customClass="MenuViewController" customModule="WildWest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="q5r-gt-aD8">
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -517,5 +576,6 @@
         <image name="ic_more" width="48" height="48"/>
         <image name="ic_online" width="557" height="291"/>
         <image name="ic_play" width="557" height="291"/>
+        <image name="ic_sign_in" width="557" height="291"/>
     </resources>
 </document>
