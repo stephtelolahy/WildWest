@@ -18,7 +18,6 @@
 		33031E0F24555D5F00528158 /* OptionalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33031E0E24555D5F00528158 /* OptionalExtension.swift */; };
 		3304D9422453FF1C00731AE9 /* GameUpdate+ExecutionTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304D9412453FF1C00731AE9 /* GameUpdate+ExecutionTime.swift */; };
 		3306682E245588B9003B2263 /* FirebaseMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3306682D245588B9003B2263 /* FirebaseMapper.swift */; };
-		3306683024558D34003B2263 /* FirebaseStateAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3306682F24558D34003B2263 /* FirebaseStateAdapter.swift */; };
 		330761A0245355D200E8C2EF /* GameLoopProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3307619F245355D200E8C2EF /* GameLoopProtocol.swift */; };
 		330761A1245355D200E8C2EF /* GameLoopProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3307619F245355D200E8C2EF /* GameLoopProtocol.swift */; };
 		330761A32453560900E8C2EF /* GameLoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330761A22453560900E8C2EF /* GameLoop.swift */; };
@@ -362,7 +361,6 @@
 		33031E0E24555D5F00528158 /* OptionalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalExtension.swift; sourceTree = "<group>"; };
 		3304D9412453FF1C00731AE9 /* GameUpdate+ExecutionTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameUpdate+ExecutionTime.swift"; sourceTree = "<group>"; };
 		3306682D245588B9003B2263 /* FirebaseMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseMapper.swift; sourceTree = "<group>"; };
-		3306682F24558D34003B2263 /* FirebaseStateAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStateAdapter.swift; sourceTree = "<group>"; };
 		3307619F245355D200E8C2EF /* GameLoopProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLoopProtocol.swift; sourceTree = "<group>"; };
 		330761A22453560900E8C2EF /* GameLoop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLoop.swift; sourceTree = "<group>"; };
 		330761A524535C7200E8C2EF /* GameSubjectsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSubjectsProtocol.swift; sourceTree = "<group>"; };
@@ -635,7 +633,6 @@
 			children = (
 				33DA58472454A05A0047D124 /* FirebaseAdapter.swift */,
 				3327EB1A2459E10400483FC5 /* FirebaseGameAdapter.swift */,
-				3306682F24558D34003B2263 /* FirebaseStateAdapter.swift */,
 				337F6F962458875E0044A211 /* FirebaseCompletion.swift */,
 				3331A9CB2455F2AF0063885C /* FirebaseKeyGenerator.swift */,
 			);
@@ -1729,7 +1726,6 @@
 				3331A9CC2455F2AF0063885C /* FirebaseKeyGenerator.swift in Sources */,
 				33B1566B245418B800746B61 /* GameRules.swift in Sources */,
 				3328FCAA242F29B100A82255 /* Gatling.swift in Sources */,
-				3306683024558D34003B2263 /* FirebaseStateAdapter.swift in Sources */,
 				3333465324306B0000A97FD5 /* Player+TargetCard.swift in Sources */,
 				AD52B99C23B17A310013240B /* GameState.swift in Sources */,
 				33F94AB623F0580800D1BCFE /* GameUpdateProtocol.swift in Sources */,

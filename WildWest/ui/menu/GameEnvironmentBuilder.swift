@@ -66,18 +66,13 @@ class GameEnvironmentBuilder {
                                  controlledId: String?,
                                  updateDelay: TimeInterval,
                                  firebaseMapper: FirebaseMapperProtocol) -> GameEnvironment {
-        
         let stateSubject: BehaviorSubject<GameStateProtocol> = BehaviorSubject(value: state)
-        
-        let stateAdapter = FirebaseStateAdapter(gameId: gameId, mapper: firebaseMapper)
-        let gameAdapter = FirebaseGameAdapter(gameId: gameId, mapper: firebaseMapper)
-        
         let executedMoveSubject = PublishSubject<GameMove>()
         let executedUpdateSubject = PublishSubject<GameUpdate>()
         let validMovesSubject = PublishSubject<[GameMove]>()
         
-        let database = RemoteDatabase(stateAdapter: stateAdapter,
-                                      gameAdapter: gameAdapter,
+        let gameAdapter: FirebaseGameAdapterProtocol = FirebaseGameAdapter(gameId: gameId, mapper: firebaseMapper)
+        let database = RemoteDatabase(gameAdapter: gameAdapter,
                                       stateSubject: stateSubject,
                                       executedMoveSubject: executedMoveSubject,
                                       executedUpdateSubject: executedUpdateSubject,

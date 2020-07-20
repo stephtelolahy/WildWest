@@ -10,20 +10,17 @@ import RxSwift
 
 class RemoteDatabase: GameDatabaseProtocol {
     
-    private let stateAdapter: FirebaseStateAdapterProtocol
     private let gameAdapter: FirebaseGameAdapterProtocol
     private let stateSubject: BehaviorSubject<GameStateProtocol>
     private let executedMoveSubject: PublishSubject<GameMove>
     private let executedUpdateSubject: PublishSubject<GameUpdate>
     private let validMovesSubject: PublishSubject<[GameMove]>
     
-    init(stateAdapter: FirebaseStateAdapterProtocol,
-         gameAdapter: FirebaseGameAdapterProtocol,
+    init(gameAdapter: FirebaseGameAdapterProtocol,
          stateSubject: BehaviorSubject<GameStateProtocol>,
          executedMoveSubject: PublishSubject<GameMove>,
          executedUpdateSubject: PublishSubject<GameUpdate>,
          validMovesSubject: PublishSubject<[GameMove]>) {
-        self.stateAdapter = stateAdapter
         self.gameAdapter = gameAdapter
         self.stateSubject = stateSubject
         self.executedMoveSubject = executedMoveSubject
@@ -38,29 +35,29 @@ class RemoteDatabase: GameDatabaseProtocol {
     
     func setTurn(_ turn: String) -> Completable {
         Completable.firebaseTransaction { completion in
-            self.stateAdapter.setTurn(turn, completion)
+            self.gameAdapter.setTurn(turn, completion)
         }
     }
     
     func setChallenge(_ challenge: Challenge?) -> Completable {
         Completable.firebaseTransaction { completion in
-            self.stateAdapter.setChallenge(challenge, completion)
+            self.gameAdapter.setChallenge(challenge, completion)
         }
     }
     
     func setOutcome(_ outcome: GameOutcome) -> Completable {
         Completable.firebaseTransaction { completion in
-            self.stateAdapter.setOutcome(outcome, completion)
+            self.gameAdapter.setOutcome(outcome, completion)
         }
     }
     
     func deckRemoveFirst() -> Single<CardProtocol> {
         let verifyDeckSize = Completable.firebaseTransaction { completion in
-            self.stateAdapter.resetDeck(when: 2, completion)
+            self.gameAdapter.resetDeck(when: 2, completion)
         }
         
         let deckRemoveFirst = Completable.firebaseCardTransaction { completion in
-            self.stateAdapter.deckRemoveFirst(completion)
+            self.gameAdapter.deckRemoveFirst(completion)
         }
         
         return verifyDeckSize.andThen(deckRemoveFirst)
@@ -68,61 +65,61 @@ class RemoteDatabase: GameDatabaseProtocol {
     
     func addDiscard(_ card: CardProtocol) -> Completable {
         Completable.firebaseTransaction { completion in
-            self.stateAdapter.addDiscard(card, completion)
+            self.gameAdapter.addDiscard(card, completion)
         }
     }
     
     func addGeneralStore(_ card: CardProtocol) -> Completable {
         Completable.firebaseTransaction { completion in
-            self.stateAdapter.addGeneralStore(card, completion)
+            self.gameAdapter.addGeneralStore(card, completion)
         }
     }
     
     func removeGeneralStore(_ cardId: String) -> Single<CardProtocol> {
         Completable.firebaseCardTransaction { completion in
-            self.stateAdapter.removeGeneralStore(cardId, completion)
+            self.gameAdapter.removeGeneralStore(cardId, completion)
         }
     }
     
     func playerSetHealth(_ playerId: String, _ health: Int) -> Completable {
         Completable.firebaseTransaction { completion in
-            self.stateAdapter.playerSetHealth(playerId, health, completion)
+            self.gameAdapter.playerSetHealth(playerId, health, completion)
         }
     }
     
     func playerAddHand(_ playerId: String, _ card: CardProtocol) -> Completable {
         Completable.firebaseTransaction { completion in
-            self.stateAdapter.playerAddHand(playerId, card, completion)
+            self.gameAdapter.playerAddHand(playerId, card, completion)
         }
     }
     
     func playerRemoveHand(_ playerId: String, _ cardId: String) -> Single<CardProtocol> {
         Completable.firebaseCardTransaction { completion in
-            self.stateAdapter.playerRemoveHand(playerId, cardId, completion)
+            self.gameAdapter.playerRemoveHand(playerId, cardId, completion)
         }
     }
     
     func playerAddInPlay(_ playerId: String, _ card: CardProtocol) -> Completable {
         Completable.firebaseTransaction { completion in
-            self.stateAdapter.playerAddInPlay(playerId, card, completion)
+            self.gameAdapter.playerAddInPlay(playerId, card, completion)
         }
     }
     
     func playerRemoveInPlay(_ playerId: String, _ cardId: String) -> Single<CardProtocol> {
         Completable.firebaseCardTransaction { completion in
-            self.stateAdapter.playerRemoveInPlay(playerId, cardId, completion)
+            self.gameAdapter.playerRemoveInPlay(playerId, cardId, completion)
         }
     }
     
     func playerSetBangsPlayed(_ playerId: String, _ bangsPlayed: Int) -> Completable {
         Completable.firebaseTransaction { completion in
-            self.stateAdapter.playerSetBangsPlayed(playerId, bangsPlayed, completion)
+            self.gameAdapter.playerSetBangsPlayed(playerId, bangsPlayed, completion)
         }
     }
     
     func playerSetDamageEvent(_ playerId: String, _ event: DamageEvent) -> Completable {
         Completable.firebaseTransaction { completion in
-            self.stateAdapter.playerSetDamageEvent(playerId, event, completion)
+            self.gameAdapter.playerSetDamageEvent(playerId, event, completion)
         }
     }
     
@@ -143,7 +140,7 @@ class RemoteDatabase: GameDatabaseProtocol {
 private extension RemoteDatabase {
     
     func observeStateChanges() {
-        stateAdapter.observeState { [weak self] result in
+        gameAdapter.observeState { [weak self] result in
             switch result {
             case let .success(state):
                 self?.stateSubject.onNext(state)
