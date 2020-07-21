@@ -50,23 +50,31 @@ class GameLauncher: Subscribable {
     }
     
     func startRemote() {
-        let gameId = "live"
-        sub(firebaseAdapter.getGame(gameId).subscribe(onSuccess: { state in
+        sub(match().subscribe(onSuccess: { gameId, state in
             let choices = state.allPlayers.map { "\($0.identifier) \($0.role == .sheriff ? "*" : "")" }
             self.viewController.select(title: "Choose player", choices: choices) { index in
-                
                 let controlledId = state.allPlayers[index].identifier
                 let environment = self.builder.createRemoteEnvironment(gameId: gameId,
                                                                        state: state,
                                                                        controlledId: controlledId,
                                                                        updateDelay: self.userPreferences.updateDelay,
                                                                        firebaseMapper: self.firebaseMapper)
-                
                 Navigator(self.viewController).toGame(environment: environment)
             }
         }, onError: { error in
             self.viewController.presentAlert(title: "Error", message: error.localizedDescription)
         }))
+    }
+    
+    func match() -> Single<(String, GameStateProtocol)> {
+        let gameId = "live"
+        return firebaseAdapter.getGame(gameId)
+            .map({ (gameId, $0) })
+            .catchError { _ in
+                let state = self.createGame()
+                return self.firebaseAdapter.createGame(id: gameId, state: state)
+                    .andThen(Single.just((gameId, state)))
+            }
     }
 }
 

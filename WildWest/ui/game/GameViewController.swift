@@ -14,6 +14,7 @@ class GameViewController: UIViewController, Subscribable {
     
     // MARK: IBOutlets
     
+    @IBOutlet private weak var startButton: UIButton!
     @IBOutlet private weak var endTurnButton: UIButton!
     @IBOutlet private weak var otherMovesButton: UIButton!
     @IBOutlet private weak var playersCollectionView: UICollectionView!
@@ -100,17 +101,17 @@ class GameViewController: UIViewController, Subscribable {
                 self?.processValidMoves(moves)
             }))
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         
-        if environment.allowStart {
-            engine.startGame()
-        }
+        startButton.isEnabled = environment.allowStart
     }
     
     // MARK: IBAction
+    
+    
+    @IBAction private func startButtonTapped(_ sender: Any) {
+        engine.startGame()
+        startButton.isEnabled = false
+    }
     
     @IBAction private func menuButtonTapped(_ sender: Any) {
         dismiss(animated: true)
