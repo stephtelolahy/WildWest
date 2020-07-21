@@ -14,13 +14,13 @@ class RemoteDatabase: GameDatabaseProtocol {
     private let stateSubject: BehaviorSubject<GameStateProtocol>
     private let executedMoveSubject: PublishSubject<GameMove>
     private let executedUpdateSubject: PublishSubject<GameUpdate>
-    private let validMovesSubject: PublishSubject<[GameMove]>
+    private let validMovesSubject: BehaviorSubject<[GameMove]>
     
     init(gameAdapter: FirebaseGameAdapterProtocol,
          stateSubject: BehaviorSubject<GameStateProtocol>,
          executedMoveSubject: PublishSubject<GameMove>,
          executedUpdateSubject: PublishSubject<GameUpdate>,
-         validMovesSubject: PublishSubject<[GameMove]>) {
+         validMovesSubject: BehaviorSubject<[GameMove]>) {
         self.gameAdapter = gameAdapter
         self.stateSubject = stateSubject
         self.executedMoveSubject = executedMoveSubject

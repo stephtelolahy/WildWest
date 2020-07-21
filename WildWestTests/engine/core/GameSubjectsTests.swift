@@ -19,7 +19,7 @@ class GameSubjectsTests: XCTestCase {
     private var stateSubject: BehaviorSubject<GameStateProtocol>!
     private var executedMoveSubject: PublishSubject<GameMove>!
     private var executedUpdateSubject: PublishSubject<GameUpdate>!
-    private var validMovesSubject: PublishSubject<[GameMove]>!
+    private var validMovesSubject: BehaviorSubject<[GameMove]>!
     
     private var stateObservers: [TestableObserver<GameStateProtocol>]!
     private var executedMoveObservers: [TestableObserver<GameMove>]!
@@ -40,7 +40,7 @@ class GameSubjectsTests: XCTestCase {
         stateSubject = BehaviorSubject(value: mockState)
         executedMoveSubject = PublishSubject()
         executedUpdateSubject = PublishSubject()
-        validMovesSubject = PublishSubject()
+        validMovesSubject = BehaviorSubject(value: [])
         
         sut = GameSubjects(stateSubject: stateSubject,
                            executedMoveSubject: executedMoveSubject,
@@ -123,7 +123,7 @@ class GameSubjectsTests: XCTestCase {
         validMovesSubject.onNext([move])
         
         // Assert
-        validMovesObservers.forEach { XCTAssertEqual($0.events.count, 1) }
+        validMovesObservers.forEach { XCTAssertEqual($0.events.count, 2) }
     }
     
     func test_AllObserversReceiveEmitedUpdate() {

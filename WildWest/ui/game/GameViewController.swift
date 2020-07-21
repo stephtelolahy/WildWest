@@ -107,7 +107,6 @@ class GameViewController: UIViewController, Subscribable {
     
     // MARK: IBAction
     
-    
     @IBAction private func startButtonTapped(_ sender: Any) {
         engine.startGame()
         startButton.isEnabled = false

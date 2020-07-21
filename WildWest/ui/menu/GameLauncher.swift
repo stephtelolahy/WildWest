@@ -59,7 +59,12 @@ class GameLauncher: Subscribable {
                                                                        controlledId: controlledId,
                                                                        updateDelay: self.userPreferences.updateDelay,
                                                                        firebaseMapper: self.firebaseMapper)
-                Navigator(self.viewController).toGame(environment: environment)
+                
+                // wait until executedMove and executedUpdate PublishSubjects emit lastest values
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    Navigator(self.viewController).toGame(environment: environment)
+                }
+                
             }
         }, onError: { error in
             self.viewController.presentAlert(title: "Error", message: error.localizedDescription)

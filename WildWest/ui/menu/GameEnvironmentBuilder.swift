@@ -25,7 +25,7 @@ class GameEnvironmentBuilder {
         let stateSubject: BehaviorSubject<GameStateProtocol> = BehaviorSubject(value: state)
         let executedMoveSubject = PublishSubject<GameMove>()
         let executedUpdateSubject = PublishSubject<GameUpdate>()
-        let validMovesSubject = PublishSubject<[GameMove]>()
+        let validMovesSubject = BehaviorSubject<[GameMove]>(value: [])
         
         let database = MemoryCachedDataBase(mutableState: state as! GameState,
                                             stateSubject: stateSubject,
@@ -69,7 +69,7 @@ class GameEnvironmentBuilder {
         let stateSubject: BehaviorSubject<GameStateProtocol> = BehaviorSubject(value: state)
         let executedMoveSubject = PublishSubject<GameMove>()
         let executedUpdateSubject = PublishSubject<GameUpdate>()
-        let validMovesSubject = PublishSubject<[GameMove]>()
+        let validMovesSubject = BehaviorSubject<[GameMove]>(value: [])
         
         let gameAdapter: FirebaseGameAdapterProtocol = FirebaseGameAdapter(gameId: gameId, mapper: firebaseMapper)
         let database = RemoteDatabase(gameAdapter: gameAdapter,

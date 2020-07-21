@@ -15,13 +15,13 @@ class MemoryCachedDataBase: GameDatabaseProtocol {
     private let stateSubject: BehaviorSubject<GameStateProtocol>
     private let executedMoveSubject: PublishSubject<GameMove>
     private let executedUpdateSubject: PublishSubject<GameUpdate>
-    private let validMovesSubject: PublishSubject<[GameMove]>
+    private let validMovesSubject: BehaviorSubject<[GameMove]>
     
     init(mutableState: GameState,
          stateSubject: BehaviorSubject<GameStateProtocol>,
          executedMoveSubject: PublishSubject<GameMove>,
          executedUpdateSubject: PublishSubject<GameUpdate>,
-         validMovesSubject: PublishSubject<[GameMove]>) {
+         validMovesSubject: BehaviorSubject<[GameMove]>) {
         self.mutableState = mutableState
         self.stateSubject = stateSubject
         self.executedMoveSubject = executedMoveSubject
