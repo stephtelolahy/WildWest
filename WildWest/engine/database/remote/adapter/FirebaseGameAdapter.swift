@@ -17,12 +17,10 @@ protocol FirebaseGameAdapterProtocol {
     func observeExecutedUpdate(_ completion: @escaping FirebaseUpdateCompletion)
     func observeExecutedMove(_ completion: @escaping FirebaseMoveCompletion)
     func observeValidMoves(_ completion: @escaping FirebaseMovesCompletion)
-    func observeStarted(_ completion: @escaping FirebaseBooleanCompletion)
     
     func setExecutedUpdate(_ update: GameUpdate, _ completion: @escaping FirebaseCompletion)
     func setExecutedMove(_ move: GameMove, _ completion: @escaping FirebaseCompletion)
     func setValidMoves(_ moves: [GameMove], _ completion: @escaping FirebaseCompletion)
-    func setStarted(_ completion: @escaping FirebaseCompletion)
     func setTurn(_ turn: String, _ completion: @escaping FirebaseCompletion)
     func setChallenge(_ challenge: Challenge?, _ completion: @escaping FirebaseCompletion)
     func playerSetBangsPlayed(_ playerId: String, _ bangsPlayed: Int, _ completion: @escaping FirebaseCompletion)
@@ -108,19 +106,6 @@ class FirebaseGameAdapter: FirebaseGameAdapterProtocol {
         }
     }
     
-    func observeStarted(_ completion: @escaping FirebaseBooleanCompletion) {
-        gameRef.child("started").observe(.value, with: { snapshot in
-            do {
-                let value = try (snapshot.value as? Bool).unwrap()
-                completion(.success(value))
-            } catch {
-                completion(.error(error))
-            }
-        }) { error in
-            completion(.error(error))
-        }
-    }
-    
     func setExecutedUpdate(_ update: GameUpdate, _ completion: @escaping FirebaseCompletion) {
         do {
             let value = try mapper.encodeUpdate(update)
@@ -151,12 +136,6 @@ class FirebaseGameAdapter: FirebaseGameAdapterProtocol {
             }
         } catch {
             completion(.error(error))
-        }
-    }
-    
-    func setStarted(_ completion: @escaping FirebaseCompletion) {
-        gameRef.child("started").setValue(true) { error, _ in
-            completion(result(from: error))
         }
     }
     

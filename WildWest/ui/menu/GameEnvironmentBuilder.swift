@@ -92,10 +92,6 @@ class GameEnvironmentBuilder {
         
         let controlledRoleIsSheriff = state.player(controlledId)?.role == .sheriff
         
-        if controlledRoleIsSheriff {
-            gameAdapter.setStarted { _ in }
-        }
-        
         return GameEnvironment(engine: engine,
                                subjects: subjects,
                                controlledId: controlledId,

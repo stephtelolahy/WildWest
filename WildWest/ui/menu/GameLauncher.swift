@@ -51,8 +51,7 @@ class GameLauncher: Subscribable {
     
     func startRemote() {
         let gameId = "live"
-        
-        sub(getOrCreateRemoteGame(id: gameId).subscribe(onSuccess: { state in
+        sub(firebaseAdapter.getGame(gameId).subscribe(onSuccess: { state in
             let choices = state.allPlayers.map { "\($0.identifier) \($0.role == .sheriff ? "*" : "")" }
             self.viewController.select(title: "Choose player", choices: choices) { index in
                 
@@ -95,14 +94,5 @@ private extension GameLauncher {
         return gameSetup.setupGame(roles: shuffledRoles,
                                    figures: shuffledFigures,
                                    cards: shuffledCards)
-    }
-    
-    func getOrCreateRemoteGame(id: String) -> Single<GameStateProtocol> {
-        firebaseAdapter.getPendingGame(id)
-            .catchError { _ in
-                let state = self.createGame()
-                return self.firebaseAdapter.createGame(id: id, state: state)
-                    .andThen(Single.just(state))
-            }
     }
 }
