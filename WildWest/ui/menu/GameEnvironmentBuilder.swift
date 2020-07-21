@@ -8,6 +8,7 @@
 // swiftlint:disable force_cast
 
 import RxSwift
+import Firebase
 
 struct GameEnvironment {
     let engine: GameEngineProtocol
@@ -71,8 +72,9 @@ class GameEnvironmentBuilder {
         let executedUpdateSubject = PublishSubject<GameUpdate>()
         let validMovesSubject = BehaviorSubject<[GameMove]>(value: [])
         
-        let gameAdapter: FirebaseGameAdapterProtocol = FirebaseGameAdapter(gameId: gameId, mapper: firebaseMapper)
-        let database = RemoteDatabase(gameAdapter: gameAdapter,
+        let gameRef = Database.database().reference().child("games/\(gameId)")
+        let database = RemoteDatabase(gameRef: gameRef,
+                                      mapper: firebaseMapper,
                                       stateSubject: stateSubject,
                                       executedMoveSubject: executedMoveSubject,
                                       executedUpdateSubject: executedUpdateSubject,

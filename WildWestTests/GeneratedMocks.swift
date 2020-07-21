@@ -980,16 +980,16 @@ import Cuckoo
     
     
     
-     func cardAutoId() -> String {
+     func autoId() -> String {
         
-    return cuckoo_manager.call("cardAutoId() -> String",
+    return cuckoo_manager.call("autoId() -> String",
             parameters: (),
             escapingParameters: (),
             superclassCall:
                 
                 Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
-            defaultCall: __defaultImplStub!.cardAutoId())
+            defaultCall: __defaultImplStub!.autoId())
         
     }
     
@@ -1002,9 +1002,9 @@ import Cuckoo
 	    }
 	    
 	    
-	    func cardAutoId() -> Cuckoo.ProtocolStubFunction<(), String> {
+	    func autoId() -> Cuckoo.ProtocolStubFunction<(), String> {
 	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return .init(stub: cuckoo_manager.createStub(for: MockKeyGeneratorProtocol.self, method: "cardAutoId() -> String", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockKeyGeneratorProtocol.self, method: "autoId() -> String", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -1024,9 +1024,9 @@ import Cuckoo
 	
 	    
 	    @discardableResult
-	    func cardAutoId() -> Cuckoo.__DoNotUse<(), String> {
+	    func autoId() -> Cuckoo.__DoNotUse<(), String> {
 	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return cuckoo_manager.verify("cardAutoId() -> String", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("autoId() -> String", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -1038,7 +1038,7 @@ import Cuckoo
     
 
     
-     func cardAutoId() -> String  {
+     func autoId() -> String  {
         return DefaultValueRegistry.defaultValue(for: (String).self)
     }
     

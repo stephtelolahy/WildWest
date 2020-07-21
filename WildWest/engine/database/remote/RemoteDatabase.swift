@@ -7,21 +7,25 @@
 //
 
 import RxSwift
+import Firebase
 
-class RemoteDatabase: GameDatabaseProtocol {
+class RemoteDatabase: GameDatabaseProtocol, Subscribable {
     
-    private let gameAdapter: FirebaseGameAdapterProtocol
     private let stateSubject: BehaviorSubject<GameStateProtocol>
     private let executedMoveSubject: PublishSubject<GameMove>
     private let executedUpdateSubject: PublishSubject<GameUpdate>
     private let validMovesSubject: BehaviorSubject<[GameMove]>
+    private let gameRef: DatabaseReference
+    private let mapper: FirebaseMapperProtocol
     
-    init(gameAdapter: FirebaseGameAdapterProtocol,
+    init(gameRef: DatabaseReference,
+         mapper: FirebaseMapperProtocol,
          stateSubject: BehaviorSubject<GameStateProtocol>,
          executedMoveSubject: PublishSubject<GameMove>,
          executedUpdateSubject: PublishSubject<GameUpdate>,
          validMovesSubject: BehaviorSubject<[GameMove]>) {
-        self.gameAdapter = gameAdapter
+        self.gameRef = gameRef
+        self.mapper = mapper
         self.stateSubject = stateSubject
         self.executedMoveSubject = executedMoveSubject
         self.executedUpdateSubject = executedUpdateSubject
@@ -33,157 +37,179 @@ class RemoteDatabase: GameDatabaseProtocol {
         observeValidMovesChanges()
     }
     
+    // MARK: - Flags
+    
     func setTurn(_ turn: String) -> Completable {
-        Completable.firebaseTransaction { completion in
-            self.gameAdapter.setTurn(turn, completion)
-        }
+        gameRef.child("state/turn")
+            .rxSetValue({ turn })
     }
     
     func setChallenge(_ challenge: Challenge?) -> Completable {
-        Completable.firebaseTransaction { completion in
-            self.gameAdapter.setChallenge(challenge, completion)
-        }
+        gameRef.child("state/challenge")
+            .rxSetValue({ try self.mapper.encodeChallenge(challenge) })
     }
     
     func setOutcome(_ outcome: GameOutcome) -> Completable {
-        Completable.firebaseTransaction { completion in
-            self.gameAdapter.setOutcome(outcome, completion)
-        }
+        gameRef.child("state/outcome")
+            .rxSetValue({ outcome.rawValue })
     }
     
+    // MARK: - Deck
+    
     func deckRemoveFirst() -> Single<CardProtocol> {
-        let verifyDeckSize = Completable.firebaseTransaction { completion in
-            self.gameAdapter.resetDeck(when: 2, completion)
-        }
-        
-        let deckRemoveFirst = Completable.firebaseCardTransaction { completion in
-            self.gameAdapter.deckRemoveFirst(completion)
-        }
-        
-        return verifyDeckSize.andThen(deckRemoveFirst)
+        resetDeck(when: 2)
+            .andThen(pullDeck())
     }
     
     func addDiscard(_ card: CardProtocol) -> Completable {
-        Completable.firebaseTransaction { completion in
-            self.gameAdapter.addDiscard(card, completion)
-        }
+        gameRef.child("state/discardPile").childByAutoId()
+            .rxSetValue({ card.identifier })
     }
     
+    // MARK: - General store
+    
     func addGeneralStore(_ card: CardProtocol) -> Completable {
-        Completable.firebaseTransaction { completion in
-            self.gameAdapter.addGeneralStore(card, completion)
-        }
+        gameRef.child("state/generalStore/\(card.identifier)")
+            .rxSetValue({ true })
     }
     
     func removeGeneralStore(_ cardId: String) -> Single<CardProtocol> {
-        Completable.firebaseCardTransaction { completion in
-            self.gameAdapter.removeGeneralStore(cardId, completion)
-        }
+        gameRef.child("state/generalStore/\(cardId)")
+            .rxSetValue({ nil })
+            .andThen(Single<CardProtocol>.create({ try self.mapper.decodeCard(from: cardId) }))
     }
     
+    // MARK: - Player
+    
     func playerSetHealth(_ playerId: String, _ health: Int) -> Completable {
-        Completable.firebaseTransaction { completion in
-            self.gameAdapter.playerSetHealth(playerId, health, completion)
-        }
+        gameRef.child("state/players/\(playerId)/health")
+            .rxSetValue({ health })
     }
     
     func playerAddHand(_ playerId: String, _ card: CardProtocol) -> Completable {
-        Completable.firebaseTransaction { completion in
-            self.gameAdapter.playerAddHand(playerId, card, completion)
-        }
+        gameRef.child("state/players/\(playerId)/hand/\(card.identifier)")
+            .rxSetValue({ true })
     }
     
     func playerRemoveHand(_ playerId: String, _ cardId: String) -> Single<CardProtocol> {
-        Completable.firebaseCardTransaction { completion in
-            self.gameAdapter.playerRemoveHand(playerId, cardId, completion)
-        }
+        gameRef.child("state/players/\(playerId)/hand/\(cardId)")
+            .rxSetValue({ nil })
+            .andThen(Single<CardProtocol>.create({ try self.mapper.decodeCard(from: cardId) }))
     }
     
     func playerAddInPlay(_ playerId: String, _ card: CardProtocol) -> Completable {
-        Completable.firebaseTransaction { completion in
-            self.gameAdapter.playerAddInPlay(playerId, card, completion)
-        }
+        gameRef.child("state/players/\(playerId)/inPlay/\(card.identifier)")
+            .rxSetValue({ true })
     }
     
     func playerRemoveInPlay(_ playerId: String, _ cardId: String) -> Single<CardProtocol> {
-        Completable.firebaseCardTransaction { completion in
-            self.gameAdapter.playerRemoveInPlay(playerId, cardId, completion)
-        }
+        gameRef.child("state/players/\(playerId)/inPlay/\(cardId)")
+            .rxSetValue({ nil })
+            .andThen(Single<CardProtocol>.create({ try self.mapper.decodeCard(from: cardId) }))
     }
     
     func playerSetBangsPlayed(_ playerId: String, _ bangsPlayed: Int) -> Completable {
-        Completable.firebaseTransaction { completion in
-            self.gameAdapter.playerSetBangsPlayed(playerId, bangsPlayed, completion)
-        }
+        gameRef.child("state/players/\(playerId)/bangsPlayed")
+            .rxSetValue({ bangsPlayed })
     }
     
     func playerSetDamageEvent(_ playerId: String, _ event: DamageEvent) -> Completable {
-        Completable.firebaseTransaction { completion in
-            self.gameAdapter.playerSetDamageEvent(playerId, event, completion)
-        }
+        gameRef.child("state/players/\(playerId)/lastDamage")
+            .rxSetValue({ try self.mapper.encodeDamageEvent(event) })
     }
     
-    // Events
+    // MARK: - Events
+    
     func setExecutedUpdate(_ update: GameUpdate) {
-        gameAdapter.setExecutedUpdate(update) { _ in }
+        sub(gameRef.child("executedUpdate")
+            .rxSetValue({ try self.mapper.encodeUpdate(update) })
+            .subscribe())
     }
     
     func setExecutedMove(_ move: GameMove) {
-        gameAdapter.setExecutedMove(move) { _ in }
+        sub(gameRef.child("executedMove")
+            .rxSetValue({ try self.mapper.encodeMove(move) })
+            .subscribe())
     }
     
     func setValidMoves(_ moves: [GameMove]) {
-        gameAdapter.setValidMoves(moves) { _ in }
+        sub(gameRef.child("validMoves")
+            .rxSetValue({ try self.mapper.encodeMoves(moves) })
+            .subscribe())
     }
 }
 
 private extension RemoteDatabase {
     
     func observeStateChanges() {
-        gameAdapter.observeState { [weak self] result in
-            switch result {
-            case let .success(state):
+        sub(gameRef.child("state")
+            .rxObserve({ try self.mapper.decodeState(from: $0) })
+            .subscribe(onNext: { [weak self] state in
                 self?.stateSubject.onNext(state)
-                
-            case let .error(error):
-                self?.stateSubject.onError(error)
-            }
-        }
+            }))
     }
     
     func observeExecutedMoveChanges() {
-        gameAdapter.observeExecutedMove { [weak self] result in
-            switch result {
-            case let .success(move):
+        sub(gameRef.child("executedMove")
+            .rxObserve({ try self.mapper.decodeMove(from: $0) })
+            .subscribe(onNext: { [weak self] move in
                 self?.executedMoveSubject.onNext(move)
-                
-            case let .error(error):
-                self?.executedMoveSubject.onError(error)
-            }
-        }
+            }))
     }
     
     func observeExecutedUpdateChanges() {
-        gameAdapter.observeExecutedUpdate { [weak self] result in
-            switch result {
-            case let .success(update):
+        sub(gameRef.child("executedUpdate")
+            .rxObserve({ try self.mapper.decodeUpdate(from: $0) })
+            .subscribe(onNext: { [weak self] update in
                 self?.executedUpdateSubject.onNext(update)
-                
-            case let .error(error):
-                self?.executedUpdateSubject.onError(error)
-            }
-        }
+            }))
     }
     
     func observeValidMovesChanges() {
-        gameAdapter.observeValidMoves { [weak self] result in
-            switch result {
-            case let .success(moves):
+        sub(gameRef.child("validMoves")
+            .rxObserve({ try self.mapper.decodeMoves(from: $0) })
+            .subscribe(onNext: { [weak self] moves in
                 self?.validMovesSubject.onNext(moves)
-                
-            case let .error(error):
-                self?.validMovesSubject.onError(error)
+            }))
+    }
+}
+
+private extension RemoteDatabase {
+    
+    func resetDeck(when minSize: Int) -> Completable {
+        
+        let queryDeck = gameRef.child("state/deck").queryLimited(toFirst: UInt(minSize + 1))
+            .rxObserveSingleEvent({ try self.mapper.decodeCards(from: $0) })
+        
+        let queryDiscardPile = gameRef.child("state/discardPile").queryOrderedByKey()
+            .rxObserveSingleEvent({ try self.mapper.decodeCards(from: $0) })
+        
+        return Single<Any>.zip(queryDeck, queryDiscardPile) { deckCards, discardCards in
+            
+            guard deckCards.count <= minSize else {
+                return Completable.empty()
             }
+            
+            let deck = (deckCards + Array(discardCards[1..<discardCards.count])).shuffled()
+            let discard = Array(discardCards[0..<1])
+            
+            let updateDeck = self.gameRef.child("state/deck")
+                .rxSetValue({ try self.mapper.encodeOrderedCards(deck) })
+            
+            let updateDiscardPile = self.gameRef.child("state/discardPile")
+                .rxSetValue({ try self.mapper.encodeOrderedCards(discard) })
+            
+            return Completable.zip(updateDeck, updateDiscardPile)
         }
+        .asCompletable()
+    }
+    
+    func pullDeck() -> Single<CardProtocol> {
+        gameRef.child("state/deck").queryLimited(toFirst: 1)
+            .rxObserveSingleEvent({ try self.mapper.decodeCard(from: $0) })
+            .flatMap { key, card in
+                self.gameRef.child("state/deck/\(key)").rxSetValue({ nil })
+                    .andThen(Single.just(card))
+            }
     }
 }

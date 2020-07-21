@@ -7,5 +7,5 @@
 //
 
 protocol KeyGeneratorProtocol {
-    func cardAutoId() -> String
+    func autoId() -> String
 }

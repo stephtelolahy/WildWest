@@ -38,7 +38,7 @@ class GameLauncher: Subscribable {
                        dictionaryDecoder: DictionaryDecoder())
     }()
     
-    private lazy var firebaseAdapter: FirebaseAdapterProtocol = FirebaseAdapter(mapper: firebaseMapper)
+    private lazy var matchingDatabase: MatchingDatabaseProtocol = MatchingDatabase(mapper: firebaseMapper)
     
     func startLocal() {
         let state = createGame()
@@ -73,11 +73,11 @@ class GameLauncher: Subscribable {
     
     func match() -> Single<(String, GameStateProtocol)> {
         let gameId = "live"
-        return firebaseAdapter.getGame(gameId)
+        return matchingDatabase.getGame(gameId)
             .map({ (gameId, $0) })
             .catchError { _ in
                 let state = self.createGame()
-                return self.firebaseAdapter.createGame(id: gameId, state: state)
+                return self.matchingDatabase.createGame(id: gameId, state: state)
                     .andThen(Single.just((gameId, state)))
             }
     }

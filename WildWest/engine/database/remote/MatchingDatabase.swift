@@ -1,20 +1,20 @@
 //
-//  FirebaseAdapter.swift
+//  MatchingDatabase.swift
 //  WildWest
 //
-//  Created by Hugues Stephano Telolahy on 25/04/2020.
+//  Created by Hugues Stephano Telolahy on 21/07/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
 import RxSwift
 import Firebase
 
-protocol FirebaseAdapterProtocol {
+protocol MatchingDatabaseProtocol {
     func createGame(id: String, state: GameStateProtocol) -> Completable
     func getGame(_ id: String) -> Single<GameStateProtocol>
 }
 
-class FirebaseAdapter: FirebaseAdapterProtocol {
+class MatchingDatabase: MatchingDatabaseProtocol {
     
     private let mapper: FirebaseMapperProtocol
     private let rootRef = Database.database().reference()
@@ -31,8 +31,6 @@ class FirebaseAdapter: FirebaseAdapterProtocol {
     }
     
     func getGame(_ id: String) -> Single<GameStateProtocol> {
-        rootRef.child("games/\(id)/state").rxObserveSingleEvent { snapshot in
-            try self.mapper.decodeState(from: snapshot)
-        }
+        rootRef.child("games/\(id)/state").rxObserveSingleEvent { try self.mapper.decodeState(from: $0) }
     }
 }

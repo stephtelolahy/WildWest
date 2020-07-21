@@ -1,12 +1,12 @@
 //
-//  Single+Firebase.swift
+//  DatabaseReference+Rx.swift
 //  WildWest
 //
-//  Created by Hugues Stephano Telolahy on 20/07/2020.
+//  Created by Hugues Stephano Telolahy on 21/07/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-// swiftlint:disable multiple_closures_with_trailing_closure
 // swiftlint:disable multiline_arguments
+// swiftlint:disable multiple_closures_with_trailing_closure
 
 import RxSwift
 import Firebase
@@ -30,6 +30,9 @@ extension DatabaseReference {
             return Disposables.create()
         }
     }
+}
+
+extension DatabaseQuery {
     
     func rxObserveSingleEvent<T>(_ decoding: @escaping ((DataSnapshot) throws -> T)) -> Single<T> {
         Single.create { single in
@@ -42,6 +45,22 @@ extension DatabaseReference {
                 }
             }) { error in
                 single(.error(error))
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func rxObserve<T>(_ decoding: @escaping ((DataSnapshot) throws -> T)) -> Observable<T> {
+        Observable.create { observer in
+            self.observe(.value, with: { snapshot in
+                do {
+                    let object = try decoding(snapshot)
+                    observer.on(.next(object))
+                } catch {
+                    // ignore decoding errors as we are counting on next emited value
+                }
+            }) { error in
+                observer.on(.error(error))
             }
             return Disposables.create()
         }
