@@ -177,31 +177,44 @@ private extension RemoteDatabase {
 private extension RemoteDatabase {
     
     func resetDeck(when minSize: Int) -> Completable {
+        var oldDeck: [CardProtocol] = []
+        var oldDiscard: [CardProtocol] = []
+        var newDeck: [CardProtocol] = []
+        var newDiscard: [CardProtocol] = []
         
         let queryDeck = gameRef.child("state/deck").queryLimited(toFirst: UInt(minSize + 1))
             .rxObserveSingleEvent({ try self.mapper.decodeCards(from: $0) })
+            .flatMapCompletable { cards in
+                guard cards.count <= minSize else {
+                    return Completable.error(NSError(domain: "enough cards", code: 0))
+                }
+                
+                oldDeck = cards
+                return Completable.empty()
+            }
         
         let queryDiscardPile = gameRef.child("state/discardPile").queryOrderedByKey()
             .rxObserveSingleEvent({ try self.mapper.decodeCards(from: $0) })
-        
-        return Single<Any>.zip(queryDeck, queryDiscardPile) { deckCards, discardCards in
-            
-            guard deckCards.count <= minSize else {
+            .flatMapCompletable { cards in
+                oldDiscard = cards.reversed()
+                newDiscard = Array(oldDiscard[0..<1])
+                newDeck = (oldDeck + Array(oldDiscard[1..<oldDiscard.count])).shuffled()
                 return Completable.empty()
             }
-            
-            let deck = (deckCards + Array(discardCards[1..<discardCards.count])).shuffled()
-            let discard = Array(discardCards[0..<1])
-            
-            let updateDeck = self.gameRef.child("state/deck")
-                .rxSetValue({ try self.mapper.encodeOrderedCards(deck) })
-            
-            let updateDiscardPile = self.gameRef.child("state/discardPile")
-                .rxSetValue({ try self.mapper.encodeOrderedCards(discard) })
-            
-            return Completable.zip(updateDeck, updateDiscardPile)
-        }
-        .asCompletable()
+        
+        let updateDeck = self.gameRef.child("state/deck")
+            .rxSetValue({ try self.mapper.encodeOrderedCards(newDeck) })
+        
+        let updateDiscardPile = self.gameRef.child("state/discardPile")
+            .rxSetValue({ try self.mapper.encodeOrderedCards(newDiscard) })
+        
+        let resetDeck = queryDeck
+            .andThen(queryDiscardPile)
+            .andThen(updateDeck)
+            .andThen(updateDiscardPile)
+        
+        return resetDeck
+            .catchError({ _ in Completable.empty() })
     }
     
     func pullDeck() -> Single<CardProtocol> {
