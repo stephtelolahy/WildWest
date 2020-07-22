@@ -616,9 +616,9 @@ import RxSwift
     
     
     
-     func setExecutedUpdate(_ update: GameUpdate)  {
+     func setExecutedUpdate(_ update: GameUpdate) -> Completable {
         
-    return cuckoo_manager.call("setExecutedUpdate(_: GameUpdate)",
+    return cuckoo_manager.call("setExecutedUpdate(_: GameUpdate) -> Completable",
             parameters: (update),
             escapingParameters: (update),
             superclassCall:
@@ -631,9 +631,9 @@ import RxSwift
     
     
     
-     func setExecutedMove(_ move: GameMove)  {
+     func setExecutedMove(_ move: GameMove) -> Completable {
         
-    return cuckoo_manager.call("setExecutedMove(_: GameMove)",
+    return cuckoo_manager.call("setExecutedMove(_: GameMove) -> Completable",
             parameters: (move),
             escapingParameters: (move),
             superclassCall:
@@ -646,9 +646,9 @@ import RxSwift
     
     
     
-     func setValidMoves(_ moves: [GameMove])  {
+     func setValidMoves(_ moves: [GameMove]) -> Completable {
         
-    return cuckoo_manager.call("setValidMoves(_: [GameMove])",
+    return cuckoo_manager.call("setValidMoves(_: [GameMove]) -> Completable",
             parameters: (moves),
             escapingParameters: (moves),
             superclassCall:
@@ -738,19 +738,19 @@ import RxSwift
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "playerSetDamageEvent(_: String, _: DamageEvent) -> Completable", parameterMatchers: matchers))
 	    }
 	    
-	    func setExecutedUpdate<M1: Cuckoo.Matchable>(_ update: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(GameUpdate)> where M1.MatchedType == GameUpdate {
+	    func setExecutedUpdate<M1: Cuckoo.Matchable>(_ update: M1) -> Cuckoo.ProtocolStubFunction<(GameUpdate), Completable> where M1.MatchedType == GameUpdate {
 	        let matchers: [Cuckoo.ParameterMatcher<(GameUpdate)>] = [wrap(matchable: update) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "setExecutedUpdate(_: GameUpdate)", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "setExecutedUpdate(_: GameUpdate) -> Completable", parameterMatchers: matchers))
 	    }
 	    
-	    func setExecutedMove<M1: Cuckoo.Matchable>(_ move: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(GameMove)> where M1.MatchedType == GameMove {
+	    func setExecutedMove<M1: Cuckoo.Matchable>(_ move: M1) -> Cuckoo.ProtocolStubFunction<(GameMove), Completable> where M1.MatchedType == GameMove {
 	        let matchers: [Cuckoo.ParameterMatcher<(GameMove)>] = [wrap(matchable: move) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "setExecutedMove(_: GameMove)", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "setExecutedMove(_: GameMove) -> Completable", parameterMatchers: matchers))
 	    }
 	    
-	    func setValidMoves<M1: Cuckoo.Matchable>(_ moves: M1) -> Cuckoo.ProtocolStubNoReturnFunction<([GameMove])> where M1.MatchedType == [GameMove] {
+	    func setValidMoves<M1: Cuckoo.Matchable>(_ moves: M1) -> Cuckoo.ProtocolStubFunction<([GameMove]), Completable> where M1.MatchedType == [GameMove] {
 	        let matchers: [Cuckoo.ParameterMatcher<([GameMove])>] = [wrap(matchable: moves) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "setValidMoves(_: [GameMove])", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "setValidMoves(_: [GameMove]) -> Completable", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -854,21 +854,21 @@ import RxSwift
 	    }
 	    
 	    @discardableResult
-	    func setExecutedUpdate<M1: Cuckoo.Matchable>(_ update: M1) -> Cuckoo.__DoNotUse<(GameUpdate), Void> where M1.MatchedType == GameUpdate {
+	    func setExecutedUpdate<M1: Cuckoo.Matchable>(_ update: M1) -> Cuckoo.__DoNotUse<(GameUpdate), Completable> where M1.MatchedType == GameUpdate {
 	        let matchers: [Cuckoo.ParameterMatcher<(GameUpdate)>] = [wrap(matchable: update) { $0 }]
-	        return cuckoo_manager.verify("setExecutedUpdate(_: GameUpdate)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("setExecutedUpdate(_: GameUpdate) -> Completable", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
-	    func setExecutedMove<M1: Cuckoo.Matchable>(_ move: M1) -> Cuckoo.__DoNotUse<(GameMove), Void> where M1.MatchedType == GameMove {
+	    func setExecutedMove<M1: Cuckoo.Matchable>(_ move: M1) -> Cuckoo.__DoNotUse<(GameMove), Completable> where M1.MatchedType == GameMove {
 	        let matchers: [Cuckoo.ParameterMatcher<(GameMove)>] = [wrap(matchable: move) { $0 }]
-	        return cuckoo_manager.verify("setExecutedMove(_: GameMove)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("setExecutedMove(_: GameMove) -> Completable", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
-	    func setValidMoves<M1: Cuckoo.Matchable>(_ moves: M1) -> Cuckoo.__DoNotUse<([GameMove]), Void> where M1.MatchedType == [GameMove] {
+	    func setValidMoves<M1: Cuckoo.Matchable>(_ moves: M1) -> Cuckoo.__DoNotUse<([GameMove]), Completable> where M1.MatchedType == [GameMove] {
 	        let matchers: [Cuckoo.ParameterMatcher<([GameMove])>] = [wrap(matchable: moves) { $0 }]
-	        return cuckoo_manager.verify("setValidMoves(_: [GameMove])", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("setValidMoves(_: [GameMove]) -> Completable", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -936,16 +936,16 @@ import RxSwift
         return DefaultValueRegistry.defaultValue(for: (Completable).self)
     }
     
-     func setExecutedUpdate(_ update: GameUpdate)   {
-        return DefaultValueRegistry.defaultValue(for: (Void).self)
+     func setExecutedUpdate(_ update: GameUpdate) -> Completable  {
+        return DefaultValueRegistry.defaultValue(for: (Completable).self)
     }
     
-     func setExecutedMove(_ move: GameMove)   {
-        return DefaultValueRegistry.defaultValue(for: (Void).self)
+     func setExecutedMove(_ move: GameMove) -> Completable  {
+        return DefaultValueRegistry.defaultValue(for: (Completable).self)
     }
     
-     func setValidMoves(_ moves: [GameMove])   {
-        return DefaultValueRegistry.defaultValue(for: (Void).self)
+     func setValidMoves(_ moves: [GameMove]) -> Completable  {
+        return DefaultValueRegistry.defaultValue(for: (Completable).self)
     }
     
 }

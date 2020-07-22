@@ -7,7 +7,6 @@
 //
 
 struct GameStateDto: Codable {
-    let order: [String]?
     let players: [String: PlayerDto]?
     let deck: [String: String]?
     let discardPile: [String: String]?
