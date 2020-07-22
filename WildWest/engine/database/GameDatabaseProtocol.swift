@@ -31,7 +31,7 @@ protocol GameDatabaseProtocol {
     func playerSetDamageEvent(_ playerId: String, _ event: DamageEvent) -> Completable
     
     // Events
-    func setExecutedUpdate(_ update: GameUpdate)
-    func setExecutedMove(_ move: GameMove)
-    func setValidMoves(_ moves: [GameMove])
+    func setExecutedUpdate(_ update: GameUpdate) -> Completable
+    func setExecutedMove(_ move: GameMove) -> Completable
+    func setValidMoves(_ moves: [GameMove]) -> Completable
 }
