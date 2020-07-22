@@ -8,8 +8,9 @@
 
 import UIKit
 import RxSwift
+import Firebase
 
-class GameLauncher {
+class GameLauncher: Subscribable {
     
     private unowned let viewController: UIViewController
     
@@ -38,7 +39,8 @@ class GameLauncher {
                        dictionaryDecoder: DictionaryDecoder())
     }()
     
-    private lazy var firebaseAdapter: FirebaseAdapterProtocol = FirebaseAdapter(mapper: firebaseMapper)
+    private lazy var matchingDatabase = MatchingDatabase(rootRef: Database.database().reference(),
+                                                         mapper: firebaseMapper)
     
     func startLocal() {
         let state = createGame()
@@ -50,12 +52,9 @@ class GameLauncher {
     }
     
     func startRemote() {
-        let gameId = "live"
-        getOrCreateRemoteGame(id: gameId) { state in
-            
+        sub(match().subscribe(onSuccess: { gameId, state in
             let choices = state.allPlayers.map { "\($0.identifier) \($0.role == .sheriff ? "*" : "")" }
             self.viewController.select(title: "Choose player", choices: choices) { index in
-                
                 let controlledId = state.allPlayers[index].identifier
                 let environment = self.builder.createRemoteEnvironment(gameId: gameId,
                                                                        state: state,
@@ -63,9 +62,26 @@ class GameLauncher {
                                                                        updateDelay: self.userPreferences.updateDelay,
                                                                        firebaseMapper: self.firebaseMapper)
                 
-                Navigator(self.viewController).toGame(environment: environment)
+                // wait until executedMove and executedUpdate PublishSubjects emit lastest values
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    Navigator(self.viewController).toGame(environment: environment)
+                }
+                
             }
-        }
+        }, onError: { error in
+            self.viewController.presentAlert(title: "Error", message: error.localizedDescription)
+        }))
+    }
+    
+    func match() -> Single<(String, GameStateProtocol)> {
+        let gameId = "live"
+        return matchingDatabase.getGame(gameId)
+            .map({ (gameId, $0) })
+            .catchError { _ in
+                let state = self.createGame()
+                return self.matchingDatabase.createGame(id: gameId, state: state)
+                    .andThen(Single.just((gameId, state)))
+            }
     }
 }
 
@@ -93,26 +109,5 @@ private extension GameLauncher {
         return gameSetup.setupGame(roles: shuffledRoles,
                                    figures: shuffledFigures,
                                    cards: shuffledCards)
-    }
-    
-    func getOrCreateRemoteGame(id: String, completion: @escaping ((GameStateProtocol) -> Void)) {
-        firebaseAdapter.getPendingGame(id) { result in
-            switch result {
-            case let .success(state):
-                completion(state)
-                
-            case .error:
-                let state = self.createGame()
-                self.firebaseAdapter.createGame(id: id, state: state) { [weak self] result in
-                    switch result {
-                    case .success:
-                        completion(state)
-                        
-                    case let .error(error):
-                        self?.viewController.presentAlert(title: "Error", message: error.localizedDescription)
-                    }
-                }
-            }
-        }
     }
 }

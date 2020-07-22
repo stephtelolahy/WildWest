@@ -93,8 +93,8 @@ private extension GameLoop {
         
         sub(updateExecutor.execute(update, in: database).subscribe(onCompleted: { [ weak self] in
             self?.wait(afterExecuting: update)
-            }, onError: { error in
-                fatalError(error.localizedDescription)
+        }, onError: { error in
+            fatalError(error.localizedDescription)
         }))
     }
     

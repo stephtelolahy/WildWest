@@ -8,6 +8,7 @@
 // swiftlint:disable force_cast
 
 import RxSwift
+import Firebase
 
 struct GameEnvironment {
     let engine: GameEngineProtocol
@@ -25,13 +26,13 @@ class GameEnvironmentBuilder {
         let stateSubject: BehaviorSubject<GameStateProtocol> = BehaviorSubject(value: state)
         let executedMoveSubject = PublishSubject<GameMove>()
         let executedUpdateSubject = PublishSubject<GameUpdate>()
-        let validMovesSubject = PublishSubject<[GameMove]>()
+        let validMovesSubject = BehaviorSubject<[GameMove]>(value: [])
         
-        let database = MemoryCachedDataBase(mutableState: state as! GameState,
-                                            stateSubject: stateSubject,
-                                            executedMoveSubject: executedMoveSubject,
-                                            executedUpdateSubject: executedUpdateSubject,
-                                            validMovesSubject: validMovesSubject)
+        let database = LocalGameDataBase(mutableState: state as! GameState,
+                                         stateSubject: stateSubject,
+                                         executedMoveSubject: executedMoveSubject,
+                                         executedUpdateSubject: executedUpdateSubject,
+                                         validMovesSubject: validMovesSubject)
         
         let subjects = GameSubjects(stateSubject: stateSubject,
                                     executedMoveSubject: executedMoveSubject,
@@ -66,22 +67,18 @@ class GameEnvironmentBuilder {
                                  controlledId: String?,
                                  updateDelay: TimeInterval,
                                  firebaseMapper: FirebaseMapperProtocol) -> GameEnvironment {
-        
         let stateSubject: BehaviorSubject<GameStateProtocol> = BehaviorSubject(value: state)
-        
-        let stateAdapter = FirebaseStateAdapter(gameId: gameId, mapper: firebaseMapper)
-        let gameAdapter = FirebaseGameAdapter(gameId: gameId, mapper: firebaseMapper)
-        
         let executedMoveSubject = PublishSubject<GameMove>()
         let executedUpdateSubject = PublishSubject<GameUpdate>()
-        let validMovesSubject = PublishSubject<[GameMove]>()
+        let validMovesSubject = BehaviorSubject<[GameMove]>(value: [])
         
-        let database = RemoteDatabase(stateAdapter: stateAdapter,
-                                      gameAdapter: gameAdapter,
-                                      stateSubject: stateSubject,
-                                      executedMoveSubject: executedMoveSubject,
-                                      executedUpdateSubject: executedUpdateSubject,
-                                      validMovesSubject: validMovesSubject)
+        let gameRef = Database.database().reference().child("games/\(gameId)")
+        let database = RemoteGameDatabase(gameRef: gameRef,
+                                          mapper: firebaseMapper,
+                                          stateSubject: stateSubject,
+                                          executedMoveSubject: executedMoveSubject,
+                                          executedUpdateSubject: executedUpdateSubject,
+                                          validMovesSubject: validMovesSubject)
         
         let subjects = GameSubjects(stateSubject: stateSubject,
                                     executedMoveSubject: executedMoveSubject,
@@ -97,14 +94,19 @@ class GameEnvironmentBuilder {
         
         let controlledRoleIsSheriff = state.player(controlledId)?.role == .sheriff
         
-        if controlledRoleIsSheriff {
-            gameAdapter.setStarted { _ in }
+        let aiPlayers = state.players.filter { $0.identifier != controlledId }
+        let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
+                                                     ai: RandomAIWithRole(),
+                                                     engine: engine,
+                                                     subjects: subjects)
         }
+        
+        aiAgents.forEach { $0.observeState() }
         
         return GameEnvironment(engine: engine,
                                subjects: subjects,
                                controlledId: controlledId,
-                               aiAgents: nil,
+                               aiAgents: aiAgents,
                                allowStart: controlledRoleIsSheriff)
     }
 }

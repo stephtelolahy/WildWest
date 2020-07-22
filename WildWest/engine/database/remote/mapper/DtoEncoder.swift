@@ -57,7 +57,7 @@ class DtoEncoder {
         var result: [String: String] = [:]
         
         orderedCards.forEach { card in
-            let key = self.keyGenerator.cardAutoId()
+            let key = self.keyGenerator.autoId()
             result[key] = encode(card: card)
         }
         

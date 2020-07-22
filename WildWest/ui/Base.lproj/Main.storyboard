@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wrF-Qs-JNN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wrF-Qs-JNN">
     <device id="retina4_7" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -515,10 +515,22 @@
                                     <action selector="otherMovesTapped:" destination="Yy6-0k-mhK" eventType="touchUpInside" id="4Q7-LJ-TeV"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rvo-zi-xqB" userLabel="closeButton">
+                                <rect key="frame" x="635" y="64" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="YS1-wn-06Q"/>
+                                </constraints>
+                                <color key="tintColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="ic_start"/>
+                                <connections>
+                                    <action selector="startButtonTapped:" destination="Yy6-0k-mhK" eventType="touchUpInside" id="Cel-7h-UeM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.80000000000000004" green="0.70980392156862748" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="cXD-5P-evL" firstAttribute="trailing" secondItem="YnA-A3-EaS" secondAttribute="trailing" id="0XV-zH-Re0"/>
+                            <constraint firstItem="rvo-zi-xqB" firstAttribute="trailing" secondItem="cXD-5P-evL" secondAttribute="trailing" id="2Z7-cY-Aww"/>
                             <constraint firstItem="l2k-9K-ciW" firstAttribute="height" secondItem="SPv-lk-pld" secondAttribute="height" multiplier="0.25" id="2ir-L9-cle"/>
                             <constraint firstItem="cXD-5P-evL" firstAttribute="bottom" secondItem="YnA-A3-EaS" secondAttribute="bottom" id="3mM-y9-BiC"/>
                             <constraint firstItem="68M-B9-4Mh" firstAttribute="top" secondItem="VPY-zg-TVx" secondAttribute="bottom" constant="16" id="5sG-Kw-I6O"/>
@@ -532,16 +544,18 @@
                             <constraint firstItem="YnA-A3-EaS" firstAttribute="top" secondItem="68M-B9-4Mh" secondAttribute="bottom" constant="8" id="Qfm-k7-VP6"/>
                             <constraint firstItem="Cuo-aq-X8E" firstAttribute="top" secondItem="H6O-tM-KGf" secondAttribute="bottom" id="RNM-AN-5pQ"/>
                             <constraint firstItem="l2k-9K-ciW" firstAttribute="centerX" secondItem="SPv-lk-pld" secondAttribute="centerX" id="S6a-l8-Bom"/>
-                            <constraint firstItem="VPY-zg-TVx" firstAttribute="centerX" secondItem="68M-B9-4Mh" secondAttribute="centerX" id="Vxw-SU-Aym"/>
+                            <constraint firstItem="rvo-zi-xqB" firstAttribute="width" secondItem="rvo-zi-xqB" secondAttribute="height" multiplier="1:1" id="TZN-T3-Vj2"/>
                             <constraint firstItem="l2k-9K-ciW" firstAttribute="leading" secondItem="DPE-Sr-FGm" secondAttribute="trailing" constant="4" id="ZQp-D1-RUC"/>
                             <constraint firstItem="iCj-xh-rDL" firstAttribute="width" secondItem="SPv-lk-pld" secondAttribute="width" multiplier="0.34" id="bNk-aD-3o8"/>
+                            <constraint firstItem="VPY-zg-TVx" firstAttribute="trailing" secondItem="cXD-5P-evL" secondAttribute="trailing" id="fcn-iD-Fqo"/>
                             <constraint firstItem="cXD-5P-evL" firstAttribute="trailing" secondItem="68M-B9-4Mh" secondAttribute="trailing" id="h0v-wv-P8a"/>
+                            <constraint firstItem="rvo-zi-xqB" firstAttribute="top" secondItem="gAP-Di-VFz" secondAttribute="bottom" constant="16" id="isi-3r-VlM"/>
                             <constraint firstItem="VPY-zg-TVx" firstAttribute="width" secondItem="VPY-zg-TVx" secondAttribute="height" multiplier="1:1" id="jW6-HJ-3xv"/>
-                            <constraint firstItem="gAP-Di-VFz" firstAttribute="centerX" secondItem="68M-B9-4Mh" secondAttribute="centerX" id="jlR-z9-iea"/>
                             <constraint firstItem="YnA-A3-EaS" firstAttribute="height" secondItem="SPv-lk-pld" secondAttribute="height" multiplier="0.3" id="kVQ-f5-V0s"/>
                             <constraint firstItem="gAP-Di-VFz" firstAttribute="top" secondItem="cXD-5P-evL" secondAttribute="top" constant="16" id="rnS-ZP-McH"/>
                             <constraint firstItem="iCj-xh-rDL" firstAttribute="leading" secondItem="cXD-5P-evL" secondAttribute="leading" id="srO-W5-GbJ"/>
                             <constraint firstItem="H6O-tM-KGf" firstAttribute="top" secondItem="cXD-5P-evL" secondAttribute="top" id="tis-nN-sqh"/>
+                            <constraint firstItem="gAP-Di-VFz" firstAttribute="trailing" secondItem="cXD-5P-evL" secondAttribute="trailing" id="wtJ-U9-DcO"/>
                             <constraint firstItem="Cuo-aq-X8E" firstAttribute="trailing" secondItem="cXD-5P-evL" secondAttribute="trailing" constant="-40" id="wvt-Xt-cnA"/>
                             <constraint firstItem="YnA-A3-EaS" firstAttribute="width" secondItem="SPv-lk-pld" secondAttribute="width" multiplier="0.34" id="zFW-Nu-qia"/>
                             <constraint firstItem="DPE-Sr-FGm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cXD-5P-evL" secondAttribute="leading" id="zkq-tz-2UZ"/>
@@ -557,6 +571,7 @@
                         <outlet property="messageTableView" destination="iCj-xh-rDL" id="Bv5-eY-6ye"/>
                         <outlet property="otherMovesButton" destination="VPY-zg-TVx" id="hGE-LG-kBY"/>
                         <outlet property="playersCollectionView" destination="Cuo-aq-X8E" id="Ffa-eb-FVY"/>
+                        <outlet property="startButton" destination="rvo-zi-xqB" id="VHI-8P-yx4"/>
                         <outlet property="titleLabel" destination="H6O-tM-KGf" id="I0Y-yZ-IzN"/>
                     </connections>
                 </viewController>
@@ -577,5 +592,6 @@
         <image name="ic_online" width="557" height="291"/>
         <image name="ic_play" width="557" height="291"/>
         <image name="ic_sign_in" width="557" height="291"/>
+        <image name="ic_start" width="48" height="48"/>
     </resources>
 </document>
