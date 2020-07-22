@@ -1,5 +1,5 @@
 //
-//  LocalDataBase.swift
+//  LocalGameDataBase.swift
 //  WildWest
 //
 //  Created by Hugues Stephano Telolahy on 27/03/2020.
@@ -9,7 +9,7 @@
 
 import RxSwift
 
-class LocalDataBase: GameDatabaseProtocol {
+class LocalGameDataBase: GameDatabaseProtocol {
     
     private var mutableState: GameState
     private let stateSubject: BehaviorSubject<GameStateProtocol>
@@ -155,7 +155,7 @@ class LocalDataBase: GameDatabaseProtocol {
     }
 }
 
-private extension LocalDataBase {
+private extension LocalGameDataBase {
     
     func mutablePlayer(_ playerId: String) -> Player {
         mutableState.allPlayers.first(where: { $0.identifier == playerId }) as! Player

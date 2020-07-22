@@ -17,9 +17,11 @@ protocol MatchingDatabaseProtocol {
 class MatchingDatabase: MatchingDatabaseProtocol {
     
     private let mapper: FirebaseMapperProtocol
-    private let rootRef = Database.database().reference()
+    private let rootRef: DatabaseReference
     
-    init(mapper: FirebaseMapperProtocol) {
+    init(rootRef: DatabaseReference,
+         mapper: FirebaseMapperProtocol) {
+        self.rootRef = rootRef
         self.mapper = mapper
     }
     

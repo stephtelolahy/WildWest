@@ -1,5 +1,5 @@
 //
-//  RemoteDatabase.swift
+//  RemoteGameDatabase.swift
 //  WildWest
 //
 //  Created by Hugues Stephano Telolahy on 23/04/2020.
@@ -9,7 +9,7 @@
 import RxSwift
 import Firebase
 
-class RemoteDatabase: GameDatabaseProtocol, Subscribable {
+class RemoteGameDatabase: GameDatabaseProtocol, Subscribable {
     
     private let stateSubject: BehaviorSubject<GameStateProtocol>
     private let executedMoveSubject: PublishSubject<GameMove>
@@ -139,7 +139,7 @@ class RemoteDatabase: GameDatabaseProtocol, Subscribable {
     }
 }
 
-private extension RemoteDatabase {
+private extension RemoteGameDatabase {
     
     func observeStateChanges() {
         sub(gameRef.child("state")
@@ -174,7 +174,7 @@ private extension RemoteDatabase {
     }
 }
 
-private extension RemoteDatabase {
+private extension RemoteGameDatabase {
     
     func resetDeck(when minSize: Int) -> Completable {
         var oldDeck: [CardProtocol] = []

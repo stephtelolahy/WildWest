@@ -28,11 +28,11 @@ class GameEnvironmentBuilder {
         let executedUpdateSubject = PublishSubject<GameUpdate>()
         let validMovesSubject = BehaviorSubject<[GameMove]>(value: [])
         
-        let database = LocalDataBase(mutableState: state as! GameState,
-                                     stateSubject: stateSubject,
-                                     executedMoveSubject: executedMoveSubject,
-                                     executedUpdateSubject: executedUpdateSubject,
-                                     validMovesSubject: validMovesSubject)
+        let database = LocalGameDataBase(mutableState: state as! GameState,
+                                         stateSubject: stateSubject,
+                                         executedMoveSubject: executedMoveSubject,
+                                         executedUpdateSubject: executedUpdateSubject,
+                                         validMovesSubject: validMovesSubject)
         
         let subjects = GameSubjects(stateSubject: stateSubject,
                                     executedMoveSubject: executedMoveSubject,
@@ -73,12 +73,12 @@ class GameEnvironmentBuilder {
         let validMovesSubject = BehaviorSubject<[GameMove]>(value: [])
         
         let gameRef = Database.database().reference().child("games/\(gameId)")
-        let database = RemoteDatabase(gameRef: gameRef,
-                                      mapper: firebaseMapper,
-                                      stateSubject: stateSubject,
-                                      executedMoveSubject: executedMoveSubject,
-                                      executedUpdateSubject: executedUpdateSubject,
-                                      validMovesSubject: validMovesSubject)
+        let database = RemoteGameDatabase(gameRef: gameRef,
+                                          mapper: firebaseMapper,
+                                          stateSubject: stateSubject,
+                                          executedMoveSubject: executedMoveSubject,
+                                          executedUpdateSubject: executedUpdateSubject,
+                                          validMovesSubject: validMovesSubject)
         
         let subjects = GameSubjects(stateSubject: stateSubject,
                                     executedMoveSubject: executedMoveSubject,

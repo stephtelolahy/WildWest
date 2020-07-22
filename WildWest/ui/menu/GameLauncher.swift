@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import Firebase
 
 class GameLauncher: Subscribable {
     
@@ -38,7 +39,8 @@ class GameLauncher: Subscribable {
                        dictionaryDecoder: DictionaryDecoder())
     }()
     
-    private lazy var matchingDatabase: MatchingDatabaseProtocol = MatchingDatabase(mapper: firebaseMapper)
+    private lazy var matchingDatabase = MatchingDatabase(rootRef: Database.database().reference(),
+                                                         mapper: firebaseMapper)
     
     func startLocal() {
         let state = createGame()
