@@ -28,11 +28,11 @@ class GameEnvironmentBuilder {
         let executedUpdateSubject = PublishSubject<GameUpdate>()
         let validMovesSubject = BehaviorSubject<[GameMove]>(value: [])
         
-        let database = MemoryCachedDataBase(mutableState: state as! GameState,
-                                            stateSubject: stateSubject,
-                                            executedMoveSubject: executedMoveSubject,
-                                            executedUpdateSubject: executedUpdateSubject,
-                                            validMovesSubject: validMovesSubject)
+        let database = LocalDataBase(mutableState: state as! GameState,
+                                     stateSubject: stateSubject,
+                                     executedMoveSubject: executedMoveSubject,
+                                     executedUpdateSubject: executedUpdateSubject,
+                                     validMovesSubject: validMovesSubject)
         
         let subjects = GameSubjects(stateSubject: stateSubject,
                                     executedMoveSubject: executedMoveSubject,
@@ -94,10 +94,19 @@ class GameEnvironmentBuilder {
         
         let controlledRoleIsSheriff = state.player(controlledId)?.role == .sheriff
         
+        let aiPlayers = state.players.filter { $0.identifier != controlledId }
+        let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
+                                                     ai: RandomAIWithRole(),
+                                                     engine: engine,
+                                                     subjects: subjects)
+        }
+        
+        aiAgents.forEach { $0.observeState() }
+        
         return GameEnvironment(engine: engine,
                                subjects: subjects,
                                controlledId: controlledId,
-                               aiAgents: nil,
+                               aiAgents: aiAgents,
                                allowStart: controlledRoleIsSheriff)
     }
 }

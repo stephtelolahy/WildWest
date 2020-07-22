@@ -258,7 +258,7 @@
 		33B896C724384B180005FF21 /* GameLayoutBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B896C624384B180005FF21 /* GameLayoutBuilderTests.swift */; };
 		33B896CA243862AB0005FF21 /* GameCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B896C9243862AB0005FF21 /* GameCollectionViewLayout.swift */; };
 		33B896CB243862AB0005FF21 /* GameCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B896C9243862AB0005FF21 /* GameCollectionViewLayout.swift */; };
-		33BAE346242E74CD0098B41F /* MemoryCachedDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BAE345242E74CD0098B41F /* MemoryCachedDataBase.swift */; };
+		33BAE346242E74CD0098B41F /* LocalDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BAE345242E74CD0098B41F /* LocalDataBase.swift */; };
 		33BAE348242E7C960098B41F /* Subscribable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A733ED23DC4A5300E9B2AD /* Subscribable.swift */; };
 		33BBE7572445CA77006C9B17 /* GameState+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BBE7562445CA77006C9B17 /* GameState+Image.swift */; };
 		33BC633F2444D0FF00760F25 /* UIViewController+CardAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BC633E2444D0FF00760F25 /* UIViewController+CardAnimation.swift */; };
@@ -488,7 +488,7 @@
 		33B896C324384A770005FF21 /* GameLayoutBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLayoutBuilder.swift; sourceTree = "<group>"; };
 		33B896C624384B180005FF21 /* GameLayoutBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLayoutBuilderTests.swift; sourceTree = "<group>"; };
 		33B896C9243862AB0005FF21 /* GameCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionViewLayout.swift; sourceTree = "<group>"; };
-		33BAE345242E74CD0098B41F /* MemoryCachedDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCachedDataBase.swift; sourceTree = "<group>"; };
+		33BAE345242E74CD0098B41F /* LocalDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataBase.swift; sourceTree = "<group>"; };
 		33BBE7562445CA77006C9B17 /* GameState+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameState+Image.swift"; sourceTree = "<group>"; };
 		33BC633E2444D0FF00760F25 /* UIViewController+CardAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+CardAnimation.swift"; sourceTree = "<group>"; };
 		33BD0ACE24350D7D003E75EE /* Player+AbilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+AbilityTests.swift"; sourceTree = "<group>"; };
@@ -792,7 +792,7 @@
 			isa = PBXGroup;
 			children = (
 				336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */,
-				33CC77DD24549EA800701BC8 /* memory */,
+				33CC77DD24549EA800701BC8 /* local */,
 				33CC77DE24549ED200701BC8 /* remote */,
 			);
 			path = database;
@@ -943,12 +943,12 @@
 			path = dto;
 			sourceTree = "<group>";
 		};
-		33CC77DD24549EA800701BC8 /* memory */ = {
+		33CC77DD24549EA800701BC8 /* local */ = {
 			isa = PBXGroup;
 			children = (
-				33BAE345242E74CD0098B41F /* MemoryCachedDataBase.swift */,
+				33BAE345242E74CD0098B41F /* LocalDataBase.swift */,
 			);
-			path = memory;
+			path = local;
 			sourceTree = "<group>";
 		};
 		33CC77DE24549ED200701BC8 /* remote */ = {
@@ -1724,7 +1724,7 @@
 				ADD035CF23A96002003B2576 /* CardProtocol.swift in Sources */,
 				3372CB522454BC7900C061C9 /* FigureSelector.swift in Sources */,
 				33B4F5B7245C3B3A00736993 /* GameEnvironmentBuilder.swift in Sources */,
-				33BAE346242E74CD0098B41F /* MemoryCachedDataBase.swift in Sources */,
+				33BAE346242E74CD0098B41F /* LocalDataBase.swift in Sources */,
 				33A733EE23DC4A5300E9B2AD /* Subscribable.swift in Sources */,
 				33D97B15244FA59F00B4F070 /* GameMove+Description.swift in Sources */,
 				3306682E245588B9003B2263 /* FirebaseMapper.swift in Sources */,
