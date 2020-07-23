@@ -142,16 +142,22 @@ class LocalGameDataBase: GameDatabaseProtocol {
     
     // MARK: - Events
     
-    func setExecutedUpdate(_ update: GameUpdate) {
-        executedUpdateSubject.onNext(update)
+    func setExecutedUpdate(_ update: GameUpdate) -> Completable {
+        Completable.create {
+            self.executedUpdateSubject.onNext(update)
+        }
     }
     
-    func setExecutedMove(_ move: GameMove) {
-        executedMoveSubject.onNext(move)
+    func setExecutedMove(_ move: GameMove) -> Completable {
+        Completable.create {
+            self.executedMoveSubject.onNext(move)
+        }
     }
     
-    func setValidMoves(_ moves: [GameMove]) {
-        validMovesSubject.onNext(moves)
+    func setValidMoves(_ moves: [GameMove]) -> Completable {
+        Completable.create {
+            self.validMovesSubject.onNext(moves)
+        }
     }
 }
 

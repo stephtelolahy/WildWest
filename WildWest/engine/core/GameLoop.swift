@@ -60,21 +60,16 @@ private extension GameLoop {
         print("\n*** \(String(describing: move)) ***")
         #endif
         
-        database.setExecutedMove(move)
-        database.setValidMoves([])
-        
         let updates = moveMatchers.compactMap({ $0.execute(move, in: state) }).flatMap { $0 }
         pendingUpdates.append(contentsOf: updates)
         
-        #if DEBUG
-        let sequence = updates.map({ String(format: "%.0f", $0.executionTime) }).joined(separator: "-")
-        let warning = sequence.hasSuffix("-0") && sequence.contains("1")
-        guard !warning else {
-            fatalError("Invalid update sequence \(move.name.rawValue): \(sequence)")
-        }
-        #endif
-        
-        processUpdate()
+        sub(database.setExecutedMove(move)
+            .andThen(database.setValidMoves([]))
+            .subscribe(onCompleted: { [weak self] in
+                self?.processUpdate()
+            }, onError: { error in
+                fatalError(error.localizedDescription)
+            }))
     }
     
     func processUpdate() {
@@ -89,13 +84,13 @@ private extension GameLoop {
         print("> \(String(describing: update))")
         #endif
         
-        database.setExecutedUpdate(update)
-        
-        sub(updateExecutor.execute(update, in: database).subscribe(onCompleted: { [ weak self] in
-            self?.wait(afterExecuting: update)
-        }, onError: { error in
-            fatalError(error.localizedDescription)
-        }))
+        sub(database.setExecutedUpdate(update)
+            .andThen(updateExecutor.execute(update, in: database))
+            .subscribe(onCompleted: { [weak self] in
+                self?.wait(afterExecuting: update)
+            }, onError: { error in
+                fatalError(error.localizedDescription)
+            }))
     }
     
     func wait(afterExecuting update: GameUpdate) {
@@ -159,7 +154,7 @@ private extension GameLoop {
         let database = self.database
         // ⚠️ Dispatch emit valid moves after loop completed
         DispatchQueue.main.async {
-            database.setValidMoves(validMoves)
+            _ = database.setValidMoves(validMoves).subscribe()
         }
     }
     

@@ -10,14 +10,17 @@ import Foundation
 import RxSwift
 
 protocol AIPlayerAgentProtocol {
+    var playerId: String { get }
+    
     func observeState()
 }
 
 class AIPlayerAgent: AIPlayerAgentProtocol, Subscribable {
     
+    let playerId: String
+    
     private let engine: GameEngineProtocol
     private let subjects: GameSubjectsProtocol
-    private let playerId: String
     private let ai: AIProtocol
     private let statsBuilder: StatsBuilderProtocol
     

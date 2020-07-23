@@ -120,22 +120,19 @@ class RemoteGameDatabase: GameDatabaseProtocol, Subscribable {
     
     // MARK: - Events
     
-    func setExecutedUpdate(_ update: GameUpdate) {
-        sub(gameRef.child("executedUpdate")
+    func setExecutedUpdate(_ update: GameUpdate) -> Completable {
+        gameRef.child("executedUpdate")
             .rxSetValue({ try self.mapper.encodeUpdate(update) })
-            .subscribe())
     }
     
-    func setExecutedMove(_ move: GameMove) {
-        sub(gameRef.child("executedMove")
+    func setExecutedMove(_ move: GameMove) -> Completable {
+        gameRef.child("executedMove")
             .rxSetValue({ try self.mapper.encodeMove(move) })
-            .subscribe())
     }
     
-    func setValidMoves(_ moves: [GameMove]) {
-        sub(gameRef.child("validMoves")
+    func setValidMoves(_ moves: [GameMove]) -> Completable {
+        gameRef.child("validMoves")
             .rxSetValue({ try self.mapper.encodeMoves(moves) })
-            .subscribe())
     }
 }
 
@@ -208,12 +205,10 @@ private extension RemoteGameDatabase {
         let updateDiscardPile = self.gameRef.child("state/discardPile")
             .rxSetValue({ try self.mapper.encodeOrderedCards(newDiscard) })
         
-        let resetDeck = queryDeck
+        return queryDeck
             .andThen(queryDiscardPile)
             .andThen(updateDeck)
             .andThen(updateDiscardPile)
-        
-        return resetDeck
             .catchError({ _ in Completable.empty() })
     }
     
