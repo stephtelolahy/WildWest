@@ -102,7 +102,7 @@ class GameViewController: UIViewController, Subscribable {
             }))
         }
         
-        startButton.isEnabled = environment.allowStart
+        startButton.isEnabled = playingSheriff()
     }
     
     // MARK: IBAction
@@ -317,5 +317,19 @@ private extension GameViewController {
     
     func buildCardSize() -> CGSize {
         discardImageView.bounds.size
+    }
+    
+    private func playingSheriff() -> Bool {
+        var playerIds: [String] = []
+        
+        if let controllerId = controlledPlayerId {
+            playerIds.append(controllerId)
+        }
+        
+        if let aiAgents = environment.aiAgents {
+            playerIds.append(contentsOf: aiAgents.map { $0.playerId })
+        }
+        
+        return playerIds.contains(where: { latestState?.player($0)?.role == .sheriff })
     }
 }

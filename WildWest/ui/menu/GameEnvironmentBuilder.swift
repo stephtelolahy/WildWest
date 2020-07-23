@@ -15,7 +15,6 @@ struct GameEnvironment {
     let subjects: GameSubjectsProtocol
     let controlledId: String?
     let aiAgents: [AIPlayerAgentProtocol]?
-    let allowStart: Bool
 }
 
 class GameEnvironmentBuilder {
@@ -58,8 +57,7 @@ class GameEnvironmentBuilder {
         return GameEnvironment(engine: engine,
                                subjects: subjects,
                                controlledId: controlledId,
-                               aiAgents: aiAgents,
-                               allowStart: true)
+                               aiAgents: aiAgents)
     }
     
     func createRemoteEnvironment(gameId: String,
@@ -92,21 +90,9 @@ class GameEnvironmentBuilder {
                                 updateExecutor: GameUpdateExecutor(),
                                 subjects: subjects)
         
-        let controlledRoleIsSheriff = state.player(controlledId)?.role == .sheriff
-        
-        let aiPlayers = state.players.filter { $0.identifier != controlledId }
-        let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
-                                                     ai: RandomAIWithRole(),
-                                                     engine: engine,
-                                                     subjects: subjects)
-        }
-        
-        aiAgents.forEach { $0.observeState() }
-        
         return GameEnvironment(engine: engine,
                                subjects: subjects,
                                controlledId: controlledId,
-                               aiAgents: aiAgents,
-                               allowStart: controlledRoleIsSheriff)
+                               aiAgents: nil)
     }
 }
