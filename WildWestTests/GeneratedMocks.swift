@@ -2,6 +2,100 @@ import Cuckoo
 @testable import WildWest
 
 
+ class MockKeyGeneratorProtocol: KeyGeneratorProtocol, Cuckoo.ProtocolMock {
+    
+     typealias MocksType = KeyGeneratorProtocol
+    
+     typealias Stubbing = __StubbingProxy_KeyGeneratorProtocol
+     typealias Verification = __VerificationProxy_KeyGeneratorProtocol
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: KeyGeneratorProtocol?
+
+     func enableDefaultImplementation(_ stub: KeyGeneratorProtocol) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+
+    
+
+    
+    
+    
+     func autoId() -> String {
+        
+    return cuckoo_manager.call("autoId() -> String",
+            parameters: (),
+            escapingParameters: (),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.autoId())
+        
+    }
+    
+
+	 struct __StubbingProxy_KeyGeneratorProtocol: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    func autoId() -> Cuckoo.ProtocolStubFunction<(), String> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return .init(stub: cuckoo_manager.createStub(for: MockKeyGeneratorProtocol.self, method: "autoId() -> String", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	 struct __VerificationProxy_KeyGeneratorProtocol: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	
+	    
+	    @discardableResult
+	    func autoId() -> Cuckoo.__DoNotUse<(), String> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return cuckoo_manager.verify("autoId() -> String", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+ class KeyGeneratorProtocolStub: KeyGeneratorProtocol {
+    
+
+    
+
+    
+     func autoId() -> String  {
+        return DefaultValueRegistry.defaultValue(for: (String).self)
+    }
+    
+}
+
+
+import Cuckoo
+@testable import WildWest
+
+
  class MockGameEngineProtocol: GameEngineProtocol, Cuckoo.ProtocolMock {
     
      typealias MocksType = GameEngineProtocol
@@ -946,100 +1040,6 @@ import RxSwift
     
      func setValidMoves(_ moves: [GameMove]) -> Completable  {
         return DefaultValueRegistry.defaultValue(for: (Completable).self)
-    }
-    
-}
-
-
-import Cuckoo
-@testable import WildWest
-
-
- class MockKeyGeneratorProtocol: KeyGeneratorProtocol, Cuckoo.ProtocolMock {
-    
-     typealias MocksType = KeyGeneratorProtocol
-    
-     typealias Stubbing = __StubbingProxy_KeyGeneratorProtocol
-     typealias Verification = __VerificationProxy_KeyGeneratorProtocol
-
-     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
-
-    
-    private var __defaultImplStub: KeyGeneratorProtocol?
-
-     func enableDefaultImplementation(_ stub: KeyGeneratorProtocol) {
-        __defaultImplStub = stub
-        cuckoo_manager.enableDefaultStubImplementation()
-    }
-    
-
-    
-
-    
-
-    
-    
-    
-     func autoId() -> String {
-        
-    return cuckoo_manager.call("autoId() -> String",
-            parameters: (),
-            escapingParameters: (),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.autoId())
-        
-    }
-    
-
-	 struct __StubbingProxy_KeyGeneratorProtocol: Cuckoo.StubbingProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	
-	     init(manager: Cuckoo.MockManager) {
-	        self.cuckoo_manager = manager
-	    }
-	    
-	    
-	    func autoId() -> Cuckoo.ProtocolStubFunction<(), String> {
-	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return .init(stub: cuckoo_manager.createStub(for: MockKeyGeneratorProtocol.self, method: "autoId() -> String", parameterMatchers: matchers))
-	    }
-	    
-	}
-
-	 struct __VerificationProxy_KeyGeneratorProtocol: Cuckoo.VerificationProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	    private let callMatcher: Cuckoo.CallMatcher
-	    private let sourceLocation: Cuckoo.SourceLocation
-	
-	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
-	        self.cuckoo_manager = manager
-	        self.callMatcher = callMatcher
-	        self.sourceLocation = sourceLocation
-	    }
-	
-	    
-	
-	    
-	    @discardableResult
-	    func autoId() -> Cuckoo.__DoNotUse<(), String> {
-	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return cuckoo_manager.verify("autoId() -> String", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	}
-}
-
- class KeyGeneratorProtocolStub: KeyGeneratorProtocol {
-    
-
-    
-
-    
-     func autoId() -> String  {
-        return DefaultValueRegistry.defaultValue(for: (String).self)
     }
     
 }
