@@ -42,10 +42,9 @@ extension GameStateProtocol {
         }
         
         let playersCount = allPlayers.count
-        guard let nextPlayer = Array(1..<playersCount)
-            .map({ allPlayers[(turnIndex + $0) % playersCount] })
-            .first(where: { $0.health > 0 }) else {
-                fatalError("Next player not found")
+        let sortedPlayers = Array(1..<playersCount).map { allPlayers[(turnIndex + $0) % playersCount] }
+        guard let nextPlayer = sortedPlayers.first(where: { $0.health > 0 }) else {
+            fatalError("Next player not found")
         }
         
         return nextPlayer.identifier

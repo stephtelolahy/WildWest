@@ -205,12 +205,10 @@ private extension RemoteGameDatabase {
         let updateDiscardPile = self.gameRef.child("state/discardPile")
             .rxSetValue({ try self.mapper.encodeOrderedCards(newDiscard) })
         
-        let resetDeck = queryDeck
+        return queryDeck
             .andThen(queryDiscardPile)
             .andThen(updateDeck)
             .andThen(updateDiscardPile)
-        
-        return resetDeck
             .catchError({ _ in Completable.empty() })
     }
     
