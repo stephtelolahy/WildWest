@@ -265,6 +265,7 @@
 		33C52DDE242F24D4009EF4DA /* ResolveBarrel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C45DD123EB11EB00B62508 /* ResolveBarrel.swift */; };
 		33C52DE0242F255B009EF4DA /* GameUpdateExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C52DDF242F255B009EF4DA /* GameUpdateExecutorTests.swift */; };
 		33C52DE2242F25C4009EF4DA /* ResolveBarrelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C52DE1242F25C4009EF4DA /* ResolveBarrelTests.swift */; };
+		33D3C3B324C9E24E00120D9A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 33D3C3B224C9E24E00120D9A /* README.md */; };
 		33D477F123E57DE500E232D9 /* FigureProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D477F023E57DE500E232D9 /* FigureProtocol.swift */; };
 		33D477F223E57DE500E232D9 /* FigureProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D477F023E57DE500E232D9 /* FigureProtocol.swift */; };
 		33D477F423E57FDD00E232D9 /* MockFigureProtocolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D477F323E57FDD00E232D9 /* MockFigureProtocolExtension.swift */; };
@@ -495,6 +496,7 @@
 		33C52DDF242F255B009EF4DA /* GameUpdateExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUpdateExecutorTests.swift; sourceTree = "<group>"; };
 		33C52DE1242F25C4009EF4DA /* ResolveBarrelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveBarrelTests.swift; sourceTree = "<group>"; };
 		33CD7E51242610A00072155C /* EquipMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipMatcherTests.swift; sourceTree = "<group>"; };
+		33D3C3B224C9E24E00120D9A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		33D477F023E57DE500E232D9 /* FigureProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FigureProtocol.swift; sourceTree = "<group>"; };
 		33D477F323E57FDD00E232D9 /* MockFigureProtocolExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFigureProtocolExtension.swift; sourceTree = "<group>"; };
 		33D964AB23DD9049007295E7 /* ResourcesTests+Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResourcesTests+Cards.swift"; sourceTree = "<group>"; };
@@ -1269,6 +1271,7 @@
 		ADB7D2DF239EE03800653905 = {
 			isa = PBXGroup;
 			children = (
+				33D3C3B224C9E24E00120D9A /* README.md */,
 				ADB7D2EA239EE03800653905 /* WildWest */,
 				ADB7D301239EE03900653905 /* WildWestTests */,
 				ADB7D2E9239EE03800653905 /* Products */,
@@ -1438,6 +1441,7 @@
 				335BED7A24293431009184A3 /* Slap-SoundMaster13-49669815.mp3 in Resources */,
 				3383CFD0242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 in Resources */,
 				339B4EFC2434A7D700E32965 /* 342229_christopherderp_hurt-1-male (online-audio-converter.com).mp3 in Resources */,
+				33D3C3B324C9E24E00120D9A /* README.md in Resources */,
 				335BED95242941DA009184A3 /* Slide Closed-SoundBible.com-1521580537.mp3 in Resources */,
 				33516CCA2450A79E003C99E2 /* GoogleService-Info.plist in Resources */,
 				335BED7824293431009184A3 /* Western Ricochet-SoundBible.com-1725886901.mp3 in Resources */,
