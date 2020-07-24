@@ -40,9 +40,7 @@ class GameEnvironmentBuilder {
         
         let engine = GameEngine(delay: updateDelay,
                                 database: database,
-                                stateSubject: stateSubject,
-                                moveMatchers: GameRules().moveMatchers,
-                                subjects: subjects)
+                                moveMatchers: GameRules().moveMatchers)
         
         let aiPlayers = state.players.filter { $0.identifier != controlledId }
         let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
@@ -84,9 +82,7 @@ class GameEnvironmentBuilder {
         
         let engine = GameEngine(delay: updateDelay,
                                 database: database,
-                                stateSubject: stateSubject,
-                                moveMatchers: GameRules().moveMatchers,
-                                subjects: subjects)
+                                moveMatchers: GameRules().moveMatchers)
         
         return GameEnvironment(engine: engine,
                                subjects: subjects,

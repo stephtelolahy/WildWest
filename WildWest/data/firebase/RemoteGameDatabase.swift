@@ -37,6 +37,13 @@ class RemoteGameDatabase: GameDatabaseProtocol, Subscribable {
         observeValidMovesChanges()
     }
     
+    var state: GameStateProtocol {
+        guard let value = try? stateSubject.value() else {
+            fatalError("Illegal state")
+        }
+        return value
+    }
+    
     // MARK: - Flags
     
     func setTurn(_ turn: String) -> Completable {

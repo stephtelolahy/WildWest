@@ -12,24 +12,21 @@ class GameEngine: GameEngineProtocol {
     
     private let delay: TimeInterval
     private let database: GameDatabaseProtocol
-    private let stateSubject: BehaviorSubject<GameStateProtocol>
     private let moveMatchers: [MoveMatcherProtocol]
     
     private var currentLoop: GameLoopProtocol?
     
     init(delay: TimeInterval,
          database: GameDatabaseProtocol,
-         stateSubject: BehaviorSubject<GameStateProtocol>,
-         moveMatchers: [MoveMatcherProtocol],
-         subjects: GameSubjectsProtocol) {
+         moveMatchers: [MoveMatcherProtocol]) {
         self.delay = delay
         self.database = database
-        self.stateSubject = stateSubject
         self.moveMatchers = moveMatchers
     }
     
-    func startGame() {
-        moveMatchers
+    func start() {
+        let state = database.state
+        return moveMatchers
             .compactMap { $0.autoPlayMove(matching: state) }
             .forEach { execute($0) }
     }
@@ -41,20 +38,10 @@ class GameEngine: GameEngineProtocol {
         
         let loop = GameLoop(delay: delay,
                             database: database,
-                            stateSubject: stateSubject,
                             moveMatchers: moveMatchers,
                             move: move,
                             completion: { [weak self] in self?.currentLoop = nil })
         currentLoop = loop
         loop.run()
-    }
-}
-
-private extension GameEngine {
-    var state: GameStateProtocol {
-        guard let value = try? stateSubject.value() else {
-            fatalError("Illegal state")
-        }
-        return value
     }
 }

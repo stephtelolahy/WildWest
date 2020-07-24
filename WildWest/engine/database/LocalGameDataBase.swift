@@ -29,6 +29,10 @@ class LocalGameDataBase: GameDatabaseProtocol {
         self.validMovesSubject = validMovesSubject
     }
     
+    var state: GameStateProtocol {
+        mutableState
+    }
+    
     // MARK: - Flags
     
     func setTurn(_ turn: String) -> Completable {

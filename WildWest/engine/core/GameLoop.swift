@@ -12,7 +12,6 @@ class GameLoop: NSObject, GameLoopProtocol, Subscribable {
     
     private let delay: TimeInterval
     private let database: GameDatabaseProtocol
-    private let stateSubject: BehaviorSubject<GameStateProtocol>
     private let moveMatchers: [MoveMatcherProtocol]
     private var completion: (() -> Void)?
     private var pendingMoves: [GameMove]
@@ -21,13 +20,11 @@ class GameLoop: NSObject, GameLoopProtocol, Subscribable {
     
     init(delay: TimeInterval,
          database: GameDatabaseProtocol,
-         stateSubject: BehaviorSubject<GameStateProtocol>,
          moveMatchers: [MoveMatcherProtocol],
          move: GameMove,
          completion: @escaping (() -> Void)) {
         self.delay = delay
         self.database = database
-        self.stateSubject = stateSubject
         self.moveMatchers = moveMatchers
         self.completion = completion
         pendingMoves = [move]
@@ -57,6 +54,7 @@ private extension GameLoop {
         print("\n*** \(String(describing: move)) ***")
         #endif
         
+        let state = database.state
         let updates = moveMatchers.compactMap({ $0.execute(move, in: state) }).flatMap { $0 }
         pendingUpdates.append(contentsOf: updates)
         
@@ -110,6 +108,8 @@ private extension GameLoop {
     }
     
     func postExecute(_ move: GameMove) {
+        let state = database.state
+        
         // emit game over
         if let outcome = state.claculateOutcome() {
             sub(database.setOutcome(outcome).subscribe())
@@ -143,6 +143,7 @@ private extension GameLoop {
     }
     
     func emitValidMoves() {
+        let state = database.state
         guard state.outcome == nil else {
             return
         }
@@ -166,14 +167,5 @@ private extension GameLoop {
                 block()
             }
         }
-    }
-}
-
-private extension GameLoop {
-    var state: GameStateProtocol {
-        guard let value = try? stateSubject.value() else {
-            fatalError("Illegal state")
-        }
-        return value
     }
 }
