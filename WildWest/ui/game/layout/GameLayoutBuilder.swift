@@ -15,6 +15,12 @@ class GameLayoutBuilder: GameLayoutBuilderProtocol {
     func buildLayout(for playersCount: Int, size: CGSize, padding: CGFloat) -> [Int: CGRect] {
         
         switch playersCount {
+        case 2:
+            return buildLayoutFor2Players(size: size, padding: padding)
+            
+        case 3:
+            return buildLayoutFor3Players(size: size, padding: padding)
+            
         case 4:
             return buildLayoutFor4Players(size: size, padding: padding)
             
@@ -34,6 +40,49 @@ class GameLayoutBuilder: GameLayoutBuilderProtocol {
 }
 
 private extension GameLayoutBuilder {
+    
+    func buildLayoutFor2Players(size: CGSize, padding: CGFloat) -> [Int: CGRect] {
+        var result: [Int: CGRect] = [:]
+        
+        let cellSize = CGSize(width: (size.width - padding * 5) / 4,
+                              height: (size.height - padding * 4) / 3)
+        
+        result[0] = CGRect(x: (size.width - cellSize.width) / 2,
+                           y: (size.height - cellSize.height - padding),
+                           width: cellSize.width,
+                           height: cellSize.height)
+        
+        result[1] = CGRect(x: (size.width - cellSize.width) / 2,
+                           y: padding,
+                           width: cellSize.width,
+                           height: cellSize.height)
+        
+        return result
+    }
+    
+    func buildLayoutFor3Players(size: CGSize, padding: CGFloat) -> [Int: CGRect] {
+        var result: [Int: CGRect] = [:]
+        
+        let cellSize = CGSize(width: (size.width - padding * 5) / 4,
+                              height: (size.height - padding * 4) / 3)
+        
+        result[0] = CGRect(x: (size.width - cellSize.width) / 2,
+                           y: (size.height - cellSize.height - padding),
+                           width: cellSize.width,
+                           height: cellSize.height)
+        
+        result[1] = CGRect(x: padding,
+                           y: (size.height - cellSize.height) / 2,
+                           width: cellSize.width,
+                           height: cellSize.height)
+        
+        result[2] = CGRect(x: (size.width - cellSize.width - padding),
+                           y: (size.height - cellSize.height) / 2,
+                           width: cellSize.width,
+                           height: cellSize.height)
+        
+        return result
+    }
     
     func buildLayoutFor4Players(size: CGSize, padding: CGFloat) -> [Int: CGRect] {
         var result: [Int: CGRect] = [:]
