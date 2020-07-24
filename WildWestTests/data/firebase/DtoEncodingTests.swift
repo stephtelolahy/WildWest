@@ -114,4 +114,53 @@ class DtoEncodingTests: XCTestCase {
             XCTAssertEqual(decoded, update)
         }
     }
+    
+    func test_UserInfoEncoding() throws {
+        // Given
+        let user = WUserInfo(id: "1", name: "user1", photoUrl: "https://photo1.png")
+        
+        // When
+        let encoded = encoder.encode(user: user)
+        let decoded = try decoder.decode(user: encoded)
+        
+        // Assert
+        XCTAssertEqual(decoded, user)
+    }
+    
+    func test_UserStatusIdleEncoding() throws {
+        // Given
+        let status = UserStatus.idle
+        
+        // When
+        let encoded = encoder.encode(status: status)
+        
+        // Assert
+        XCTAssertNil(encoded)
+    }
+    
+    func test_UserStatusWaitingEncoding() throws {
+        // Given
+        let status = UserStatus.waiting
+        
+        // When
+        // When
+        let encoded = encoder.encode(status: status)
+        let decoded = try decoder.decode(status: encoded!)
+        
+        // Assert
+        XCTAssertEqual(decoded, status)
+    }
+    
+    func test_UserStatusPlayingEncoding() throws {
+        // Given
+        let status = UserStatus.playing(gameId: "g1", playerId: "p1")
+        
+        // When
+        // When
+        let encoded = encoder.encode(status: status)
+        let decoded = try decoder.decode(status: encoded!)
+        
+        // Assert
+        XCTAssertEqual(decoded, status)
+    }
 }

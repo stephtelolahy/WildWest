@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseUI
 
-class SignInViewController: UIViewController {
+class SignInViewController: UIViewController, Subscribable {
     
     @IBOutlet private weak var signInView: UIStackView!
     
@@ -42,10 +42,15 @@ class SignInViewController: UIViewController {
 extension SignInViewController: FUIAuthDelegate {
     
     func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
-        print("didSignInWith error: \(error?.localizedDescription ?? "nil")")
-        
-        if error == nil {
-            Navigator(self).toMenu()
+        guard error == nil else {
+            print("didSignInWith error: \(error?.localizedDescription ?? "nil")")
+            return
         }
+        
+        sub(MatchingManager.shared.createUser().subscribe(onCompleted: {
+            Navigator(self).toMenu()
+        }, onError: { error in
+            fatalError(error.localizedDescription)
+        }))
     }
 }

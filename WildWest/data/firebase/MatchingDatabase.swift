@@ -12,12 +12,15 @@ import Firebase
 protocol MatchingDatabaseProtocol {
     func createGame(id: String, state: GameStateProtocol) -> Completable
     func getGame(_ id: String) -> Single<GameStateProtocol>
+    func createUser(_ user: WUserInfo) -> Completable
+    func observeUserStatus(_ id: String) -> Observable<UserStatus>
+    func setUserStatus(_ id: String, status: UserStatus) -> Completable
 }
 
 class MatchingDatabase: MatchingDatabaseProtocol {
     
-    private let mapper: FirebaseMapperProtocol
     private let rootRef: DatabaseReference
+    private let mapper: FirebaseMapperProtocol
     
     init(rootRef: DatabaseReference,
          mapper: FirebaseMapperProtocol) {
@@ -33,6 +36,27 @@ class MatchingDatabase: MatchingDatabaseProtocol {
     }
     
     func getGame(_ id: String) -> Single<GameStateProtocol> {
-        rootRef.child("games/\(id)/state").rxObserveSingleEvent { try self.mapper.decodeState(from: $0) }
+        rootRef.child("games/\(id)/state")
+            .rxObserveSingleEvent { try self.mapper.decodeState(from: $0) }
+    }
+    
+    func createUser(_ user: WUserInfo) -> Completable {
+        rootRef.child("users/\(user.id)")
+            .rxSetValue({ try self.mapper.encodeUser(user) })
+    }
+    
+    func getUser(_ id: String) -> Single<WUserInfo> {
+        rootRef.child("users/\(id)")
+            .rxObserveSingleEvent({ try self.mapper.decodeUser(from: $0) })
+    }
+    
+    func observeUserStatus(_ id: String) -> Observable<UserStatus> {
+        rootRef.child("users/\(id)/status")
+            .rxObserve({ try self.mapper.decodeUserStatus(from: $0) })
+    }
+    
+    func setUserStatus(_ id: String, status: UserStatus) -> Completable {
+        rootRef.child("users/\(id)/status")
+            .rxSetValue({ try self.mapper.encodeUserStatus(status) })
     }
 }

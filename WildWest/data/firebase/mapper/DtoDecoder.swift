@@ -168,6 +168,25 @@ class DtoDecoder {
                              counterNeeded: try challenge.counterNeeded.unwrap(),
                              barrelsPlayed: try challenge.barrelsPlayed.unwrap())
     }
+    
+    func decode(user: UserInfoDto) throws -> WUserInfo {
+        WUserInfo(id: try user.id.unwrap(),
+                  name: try user.name.unwrap(),
+                  photoUrl: try user.photoUrl.unwrap())
+    }
+    
+    func decode(status: UserStatusDto) throws -> UserStatus {
+        if status.waiting == true {
+            return .waiting
+        }
+        
+        if let gameId = status.gameId,
+            let playerId = status.playerId {
+            return .playing(gameId: gameId, playerId: playerId)
+        }
+        
+        return .idle
+    }
 }
 
 private extension DtoDecoder {

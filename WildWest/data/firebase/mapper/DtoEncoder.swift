@@ -141,6 +141,25 @@ class DtoEncoder {
             return GameUpdateDto(flipOverFirstDeckCard: true)
         }
     }
+    
+    func encode(user: WUserInfo) -> UserInfoDto {
+        UserInfoDto(id: user.id,
+                    name: user.name,
+                    photoUrl: user.photoUrl)
+    }
+    
+    func encode(status: UserStatus) -> UserStatusDto? {
+        switch status {
+        case let .playing(gameId, playerId):
+            return UserStatusDto(gameId: gameId, playerId: playerId)
+            
+        case .waiting:
+            return UserStatusDto(waiting: true)
+            
+        default:
+            return nil
+        }
+    }
 }
 
 private extension DtoEncoder {

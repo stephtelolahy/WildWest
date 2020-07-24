@@ -25,6 +25,11 @@ protocol FirebaseMapperProtocol {
     func encodeMove(_ move: GameMove) throws -> [String: Any]
     func encodeMoves(_ moves: [GameMove]) throws -> [[String: Any]]
     func encodeUpdate(_ update: GameUpdate) throws -> [String: Any]
+    
+    func encodeUser(_ user: WUserInfo) throws -> [String: Any]
+    func decodeUser(from snapshot: DataSnapshot) throws -> WUserInfo
+    func encodeUserStatus(_ status: UserStatus) throws -> [String: Any]?
+    func decodeUserStatus(from snapshot: DataSnapshot) throws -> UserStatus
 }
 
 class FirebaseMapper: FirebaseMapperProtocol {
@@ -141,5 +146,37 @@ class FirebaseMapper: FirebaseMapperProtocol {
         let dto = dtoEncoder.encode(update: update)
         let value = try dictionaryEncoder.encode(dto)
         return value
+    }
+    
+    func encodeUser(_ user: WUserInfo) throws -> [String: Any] {
+        let dto = dtoEncoder.encode(user: user)
+        let value = try dictionaryEncoder.encode(dto)
+        return value
+    }
+    
+    func decodeUser(from snapshot: DataSnapshot) throws -> WUserInfo {
+        let value = try (snapshot.value as? [String: Any]).unwrap()
+        let dto = try dictionaryDecoder.decode(UserInfoDto.self, from: value)
+        let user = try dtoDecoder.decode(user: dto)
+        return user
+    }
+    
+    func encodeUserStatus(_ status: UserStatus) throws -> [String: Any]? {
+        guard let dto = dtoEncoder.encode(status: status) else {
+            return nil
+        }
+        
+        let value = try dictionaryEncoder.encode(dto)
+        return value
+    }
+    
+    func decodeUserStatus(from snapshot: DataSnapshot) throws -> UserStatus {
+        guard let value = snapshot.value as? [String: Any] else {
+            return .idle
+        }
+        
+        let dto = try self.dictionaryDecoder.decode(UserStatusDto.self, from: value)
+        let status = try dtoDecoder.decode(status: dto)
+        return status
     }
 }
