@@ -52,27 +52,42 @@ private extension FlowController {
             self?.loadLocalGame()
         }
         
+        menuViewController.onPlayOnline = { [weak self] in
+            // TODO: add to waiting room
+        }
+        
         fade(to: menuViewController)
     }
     
     func loadWaitingRoom() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let waitingRoomViewController =
-            storyboard.instantiateViewController(withIdentifier: "WaitingRoomViewController") as? WaitingRoomViewController else {
-                return
+            storyboard.instantiateViewController(withIdentifier: "WaitingRoomViewController")
+                as? WaitingRoomViewController else {
+                    return
         }
         
         fade(to: waitingRoomViewController)
     }
     
     func loadLocalGame() {
+        loadGame(environment: GameLauncher().createLocalGame())
+    }
+    
+    func loadOnlineGame(_ gameId: String, _ playerId: String) {
+        GameLauncher().createRemoteGame(gameId: gameId, playerId: playerId) { [weak self] environment in
+            self?.loadGame(environment: environment)
+        }
+    }
+    
+    func loadGame(environment: GameEnvironment) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let gameViewController =
             storyboard.instantiateViewController(withIdentifier: "GameViewController") as? GameViewController else {
                 return
         }
         
-        gameViewController.environment = GameLauncher().createLocalGame()
+        gameViewController.environment = environment
         
         gameViewController.onCompleted = { [weak self] in
             self?.loadMenu()
@@ -81,30 +96,22 @@ private extension FlowController {
         fade(to: gameViewController)
     }
     
-    func loadOnlineGame(_ gameId: String, _ playerId: String) {
-        print("loadOnlineGame \(gameId), \(playerId)")
-    }
-    
     func observeUserStatus() {
         sub(matchingManager.observeUserStatus().subscribe(onNext: { [weak self] status in
-            self?.processUserStatus(status)
+            print("user status: \(String(describing: status))")
+            switch status {
+            case .waiting:
+                self?.loadWaitingRoom()
+                
+            case let .playing(gameId, playerId):
+                self?.loadOnlineGame(gameId, playerId)
+                
+            default:
+                self?.loadMenu()
+            }
         }, onError: { error in
             fatalError(error.localizedDescription)
         }))
-    }
-    
-    func processUserStatus(_ status: UserStatus) {
-        print("user status: \(String(describing: status))")
-        switch status {
-        case .waiting:
-            loadWaitingRoom()
-            
-        case let .playing(gameId, playerId):
-            loadOnlineGame(gameId, playerId)
-            
-        default:
-            loadMenu()
-        }
     }
 }
 

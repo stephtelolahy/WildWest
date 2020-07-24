@@ -124,6 +124,7 @@
 		33334648242FF65500A97FD5 /* GameState+DistanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33334647242FF65500A97FD5 /* GameState+DistanceTests.swift */; };
 		3333465324306B0000A97FD5 /* Player+TargetCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3333465224306B0000A97FD5 /* Player+TargetCard.swift */; };
 		3333465424306B0000A97FD5 /* Player+TargetCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3333465224306B0000A97FD5 /* Player+TargetCard.swift */; };
+		3337029124CB4879007E59A2 /* GameEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3337029024CB4879007E59A2 /* GameEnvironment.swift */; };
 		333800F9242F20A6003F7327 /* ResolveDynamite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33911EED242616580023C6AF /* ResolveDynamite.swift */; };
 		333800FA242F20A6003F7327 /* ResolveDynamite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33911EED242616580023C6AF /* ResolveDynamite.swift */; };
 		333800FC242F21A0003F7327 /* ResolveDynamiteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333800FB242F21A0003F7327 /* ResolveDynamiteTests.swift */; };
@@ -255,7 +256,6 @@
 		33B156692454188200746B61 /* GameResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B156672454188200746B61 /* GameResources.swift */; };
 		33B1566B245418B800746B61 /* GameRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B1566A245418B800746B61 /* GameRules.swift */; };
 		33B1566C245418B800746B61 /* GameRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B1566A245418B800746B61 /* GameRules.swift */; };
-		33B4F5B7245C3B3A00736993 /* GameEnvironmentBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B4F5B6245C3B3A00736993 /* GameEnvironmentBuilder.swift */; };
 		33B896C424384A770005FF21 /* GameLayoutBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B896C324384A770005FF21 /* GameLayoutBuilder.swift */; };
 		33B896C524384A770005FF21 /* GameLayoutBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B896C324384A770005FF21 /* GameLayoutBuilder.swift */; };
 		33B896C724384B180005FF21 /* GameLayoutBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B896C624384B180005FF21 /* GameLayoutBuilderTests.swift */; };
@@ -408,6 +408,7 @@
 		33334641242FEDCD00A97FD5 /* GameState+Distance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameState+Distance.swift"; sourceTree = "<group>"; };
 		33334647242FF65500A97FD5 /* GameState+DistanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameState+DistanceTests.swift"; sourceTree = "<group>"; };
 		3333465224306B0000A97FD5 /* Player+TargetCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+TargetCard.swift"; sourceTree = "<group>"; };
+		3337029024CB4879007E59A2 /* GameEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEnvironment.swift; sourceTree = "<group>"; };
 		333800FB242F21A0003F7327 /* ResolveDynamiteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveDynamiteTests.swift; sourceTree = "<group>"; };
 		333800FF242F2348003F7327 /* ResolveJailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveJailTests.swift; sourceTree = "<group>"; };
 		3338B2E5242FCCDA0097BA57 /* GameState+OutcomeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameState+OutcomeTests.swift"; sourceTree = "<group>"; };
@@ -504,7 +505,6 @@
 		33B1566424540F0200746B61 /* GameSubjectsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSubjectsTests.swift; sourceTree = "<group>"; };
 		33B156672454188200746B61 /* GameResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameResources.swift; sourceTree = "<group>"; };
 		33B1566A245418B800746B61 /* GameRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRules.swift; sourceTree = "<group>"; };
-		33B4F5B6245C3B3A00736993 /* GameEnvironmentBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEnvironmentBuilder.swift; sourceTree = "<group>"; };
 		33B896C324384A770005FF21 /* GameLayoutBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLayoutBuilder.swift; sourceTree = "<group>"; };
 		33B896C624384B180005FF21 /* GameLayoutBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLayoutBuilderTests.swift; sourceTree = "<group>"; };
 		33B896C9243862AB0005FF21 /* GameCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionViewLayout.swift; sourceTree = "<group>"; };
@@ -720,8 +720,8 @@
 		331A58A224C9D621004CADDB /* data */ = {
 			isa = PBXGroup;
 			children = (
-				33C922E224C9F82E00956151 /* matching */,
 				33C922DD24C9EF3000956151 /* model */,
+				33C922E224C9F82E00956151 /* matching */,
 				331A58A124C9D3F8004CADDB /* prefs */,
 				331A58A324C9D674004CADDB /* json */,
 				33CC77DE24549ED200701BC8 /* firebase */,
@@ -783,7 +783,7 @@
 			children = (
 				3346F33C24CB2F6F00FB0418 /* FlowController.swift */,
 				3372CB532454BF8E00C061C9 /* GameLauncher.swift */,
-				33B4F5B6245C3B3A00736993 /* GameEnvironmentBuilder.swift */,
+				3337029024CB4879007E59A2 /* GameEnvironment.swift */,
 				33639FD624CB3C8500F48727 /* Navigator.swift */,
 			);
 			path = navigation;
@@ -1757,6 +1757,7 @@
 				33318D6D24275AAE0055C6C5 /* StatsBuilder.swift in Sources */,
 				337408D124306C1200E5809B /* Card+Ability.swift in Sources */,
 				33A733F823DC5AC300E9B2AD /* GameEngine.swift in Sources */,
+				3337029124CB4879007E59A2 /* GameEnvironment.swift in Sources */,
 				33AFA25323DC201A00425BEB /* ClassNameProtocol.swift in Sources */,
 				33E4411B24077CA000B2848E /* PlayersAdapter.swift in Sources */,
 				3328FC9D242F294900A82255 /* Saloon.swift in Sources */,
@@ -1823,7 +1824,6 @@
 				3304D9422453FF1C00731AE9 /* GameUpdate+ExecutionTime.swift in Sources */,
 				ADD035CF23A96002003B2576 /* CardProtocol.swift in Sources */,
 				3372CB522454BC7900C061C9 /* FigureSelector.swift in Sources */,
-				33B4F5B7245C3B3A00736993 /* GameEnvironmentBuilder.swift in Sources */,
 				33BAE346242E74CD0098B41F /* LocalGameDataBase.swift in Sources */,
 				33A733EE23DC4A5300E9B2AD /* Subscribable.swift in Sources */,
 				33D97B15244FA59F00B4F070 /* GameMove+Description.swift in Sources */,
