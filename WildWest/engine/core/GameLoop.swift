@@ -12,9 +12,7 @@ class GameLoop: NSObject, GameLoopProtocol, Subscribable {
     
     private let delay: TimeInterval
     private let database: GameDatabaseProtocol
-    private let stateSubject: BehaviorSubject<GameStateProtocol>
     private let moveMatchers: [MoveMatcherProtocol]
-    private let updateExecutor: UpdateExecutorProtocol
     private var completion: (() -> Void)?
     private var pendingMoves: [GameMove]
     private var pendingUpdates: [GameUpdate]
@@ -22,16 +20,12 @@ class GameLoop: NSObject, GameLoopProtocol, Subscribable {
     
     init(delay: TimeInterval,
          database: GameDatabaseProtocol,
-         stateSubject: BehaviorSubject<GameStateProtocol>,
          moveMatchers: [MoveMatcherProtocol],
-         updateExecutor: UpdateExecutorProtocol,
          move: GameMove,
          completion: @escaping (() -> Void)) {
         self.delay = delay
         self.database = database
-        self.stateSubject = stateSubject
         self.moveMatchers = moveMatchers
-        self.updateExecutor = updateExecutor
         self.completion = completion
         pendingMoves = [move]
         pendingUpdates = []
@@ -60,6 +54,7 @@ private extension GameLoop {
         print("\n*** \(String(describing: move)) ***")
         #endif
         
+        let state = database.state
         let updates = moveMatchers.compactMap({ $0.execute(move, in: state) }).flatMap { $0 }
         pendingUpdates.append(contentsOf: updates)
         
@@ -85,7 +80,7 @@ private extension GameLoop {
         #endif
         
         sub(database.setExecutedUpdate(update)
-            .andThen(updateExecutor.execute(update, in: database))
+            .andThen(database.execute(update))
             .subscribe(onCompleted: { [weak self] in
                 self?.wait(afterExecuting: update)
             }, onError: { error in
@@ -113,6 +108,8 @@ private extension GameLoop {
     }
     
     func postExecute(_ move: GameMove) {
+        let state = database.state
+        
         // emit game over
         if let outcome = state.claculateOutcome() {
             sub(database.setOutcome(outcome).subscribe())
@@ -146,6 +143,7 @@ private extension GameLoop {
     }
     
     func emitValidMoves() {
+        let state = database.state
         guard state.outcome == nil else {
             return
         }
@@ -169,14 +167,5 @@ private extension GameLoop {
                 block()
             }
         }
-    }
-}
-
-private extension GameLoop {
-    var state: GameStateProtocol {
-        guard let value = try? stateSubject.value() else {
-            fatalError("Illegal state")
-        }
-        return value
     }
 }

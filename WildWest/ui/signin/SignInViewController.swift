@@ -9,28 +9,16 @@
 import UIKit
 import FirebaseUI
 
-class SignInViewController: UIViewController {
+class SignInViewController: UIViewController, Subscribable {
     
-    @IBOutlet private weak var signInView: UIStackView!
+    var onCompleted: (() -> Void)?
     
     private lazy var authUI = FUIAuth.defaultAuthUI()!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        signInView.isHidden = true
         authUI.delegate = self
         authUI.providers = [FUIGoogleAuth()]
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        guard Auth.auth().currentUser == nil else {
-            Navigator(self).toMenu()
-            return
-        }
-        
-        signInView.isHidden = false
     }
     
     @IBAction private func signInTapped(_ sender: Any) {
@@ -42,10 +30,15 @@ class SignInViewController: UIViewController {
 extension SignInViewController: FUIAuthDelegate {
     
     func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
-        print("didSignInWith error: \(error?.localizedDescription ?? "nil")")
-        
-        if error == nil {
-            Navigator(self).toMenu()
+        guard error == nil else {
+            print("didSignInWith error: \(error?.localizedDescription ?? "nil")")
+            return
         }
+        
+        sub(AppModules.shared.matchingManager.createUser().subscribe(onCompleted: { [weak self] in
+            self?.onCompleted?()
+        }, onError: { error in
+            fatalError(error.localizedDescription)
+        }))
     }
 }

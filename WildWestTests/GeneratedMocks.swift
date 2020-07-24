@@ -2,6 +2,100 @@ import Cuckoo
 @testable import WildWest
 
 
+ class MockKeyGeneratorProtocol: KeyGeneratorProtocol, Cuckoo.ProtocolMock {
+    
+     typealias MocksType = KeyGeneratorProtocol
+    
+     typealias Stubbing = __StubbingProxy_KeyGeneratorProtocol
+     typealias Verification = __VerificationProxy_KeyGeneratorProtocol
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: KeyGeneratorProtocol?
+
+     func enableDefaultImplementation(_ stub: KeyGeneratorProtocol) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+
+    
+
+    
+    
+    
+     func autoId() -> String {
+        
+    return cuckoo_manager.call("autoId() -> String",
+            parameters: (),
+            escapingParameters: (),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.autoId())
+        
+    }
+    
+
+	 struct __StubbingProxy_KeyGeneratorProtocol: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    func autoId() -> Cuckoo.ProtocolStubFunction<(), String> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return .init(stub: cuckoo_manager.createStub(for: MockKeyGeneratorProtocol.self, method: "autoId() -> String", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	 struct __VerificationProxy_KeyGeneratorProtocol: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	
+	    
+	    @discardableResult
+	    func autoId() -> Cuckoo.__DoNotUse<(), String> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return cuckoo_manager.verify("autoId() -> String", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+ class KeyGeneratorProtocolStub: KeyGeneratorProtocol {
+    
+
+    
+
+    
+     func autoId() -> String  {
+        return DefaultValueRegistry.defaultValue(for: (String).self)
+    }
+    
+}
+
+
+import Cuckoo
+@testable import WildWest
+
+
  class MockGameEngineProtocol: GameEngineProtocol, Cuckoo.ProtocolMock {
     
      typealias MocksType = GameEngineProtocol
@@ -27,16 +121,16 @@ import Cuckoo
     
     
     
-     func startGame()  {
+     func start()  {
         
-    return cuckoo_manager.call("startGame()",
+    return cuckoo_manager.call("start()",
             parameters: (),
             escapingParameters: (),
             superclassCall:
                 
                 Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
-            defaultCall: __defaultImplStub!.startGame())
+            defaultCall: __defaultImplStub!.start())
         
     }
     
@@ -64,9 +158,9 @@ import Cuckoo
 	    }
 	    
 	    
-	    func startGame() -> Cuckoo.ProtocolStubNoReturnFunction<()> {
+	    func start() -> Cuckoo.ProtocolStubNoReturnFunction<()> {
 	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return .init(stub: cuckoo_manager.createStub(for: MockGameEngineProtocol.self, method: "startGame()", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameEngineProtocol.self, method: "start()", parameterMatchers: matchers))
 	    }
 	    
 	    func execute<M1: Cuckoo.Matchable>(_ move: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(GameMove)> where M1.MatchedType == GameMove {
@@ -91,9 +185,9 @@ import Cuckoo
 	
 	    
 	    @discardableResult
-	    func startGame() -> Cuckoo.__DoNotUse<(), Void> {
+	    func start() -> Cuckoo.__DoNotUse<(), Void> {
 	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return cuckoo_manager.verify("startGame()", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("start()", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
@@ -111,7 +205,7 @@ import Cuckoo
     
 
     
-     func startGame()   {
+     func start()   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
@@ -400,6 +494,20 @@ import RxSwift
     
 
     
+    
+    
+     var state: GameStateProtocol {
+        get {
+            return cuckoo_manager.getter("state",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.state)
+        }
+        
+    }
+    
 
     
 
@@ -668,6 +776,11 @@ import RxSwift
 	    }
 	    
 	    
+	    var state: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockGameDatabaseProtocol, GameStateProtocol> {
+	        return .init(manager: cuckoo_manager, name: "state")
+	    }
+	    
+	    
 	    func setTurn<M1: Cuckoo.Matchable>(_ turn: M1) -> Cuckoo.ProtocolStubFunction<(String), Completable> where M1.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: turn) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "setTurn(_: String) -> Completable", parameterMatchers: matchers))
@@ -766,6 +879,11 @@ import RxSwift
 	        self.sourceLocation = sourceLocation
 	    }
 	
+	    
+	    
+	    var state: Cuckoo.VerifyReadOnlyProperty<GameStateProtocol> {
+	        return .init(manager: cuckoo_manager, name: "state", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
 	    
 	
 	    
@@ -876,6 +994,14 @@ import RxSwift
 
  class GameDatabaseProtocolStub: GameDatabaseProtocol {
     
+    
+     var state: GameStateProtocol {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (GameStateProtocol).self)
+        }
+        
+    }
+    
 
     
 
@@ -946,100 +1072,6 @@ import RxSwift
     
      func setValidMoves(_ moves: [GameMove]) -> Completable  {
         return DefaultValueRegistry.defaultValue(for: (Completable).self)
-    }
-    
-}
-
-
-import Cuckoo
-@testable import WildWest
-
-
- class MockKeyGeneratorProtocol: KeyGeneratorProtocol, Cuckoo.ProtocolMock {
-    
-     typealias MocksType = KeyGeneratorProtocol
-    
-     typealias Stubbing = __StubbingProxy_KeyGeneratorProtocol
-     typealias Verification = __VerificationProxy_KeyGeneratorProtocol
-
-     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
-
-    
-    private var __defaultImplStub: KeyGeneratorProtocol?
-
-     func enableDefaultImplementation(_ stub: KeyGeneratorProtocol) {
-        __defaultImplStub = stub
-        cuckoo_manager.enableDefaultStubImplementation()
-    }
-    
-
-    
-
-    
-
-    
-    
-    
-     func autoId() -> String {
-        
-    return cuckoo_manager.call("autoId() -> String",
-            parameters: (),
-            escapingParameters: (),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.autoId())
-        
-    }
-    
-
-	 struct __StubbingProxy_KeyGeneratorProtocol: Cuckoo.StubbingProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	
-	     init(manager: Cuckoo.MockManager) {
-	        self.cuckoo_manager = manager
-	    }
-	    
-	    
-	    func autoId() -> Cuckoo.ProtocolStubFunction<(), String> {
-	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return .init(stub: cuckoo_manager.createStub(for: MockKeyGeneratorProtocol.self, method: "autoId() -> String", parameterMatchers: matchers))
-	    }
-	    
-	}
-
-	 struct __VerificationProxy_KeyGeneratorProtocol: Cuckoo.VerificationProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	    private let callMatcher: Cuckoo.CallMatcher
-	    private let sourceLocation: Cuckoo.SourceLocation
-	
-	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
-	        self.cuckoo_manager = manager
-	        self.callMatcher = callMatcher
-	        self.sourceLocation = sourceLocation
-	    }
-	
-	    
-	
-	    
-	    @discardableResult
-	    func autoId() -> Cuckoo.__DoNotUse<(), String> {
-	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return cuckoo_manager.verify("autoId() -> String", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	}
-}
-
- class KeyGeneratorProtocolStub: KeyGeneratorProtocol {
-    
-
-    
-
-    
-     func autoId() -> String  {
-        return DefaultValueRegistry.defaultValue(for: (String).self)
     }
     
 }
@@ -2533,102 +2565,6 @@ import Cuckoo
 
     
 
-    
-}
-
-
-import Cuckoo
-@testable import WildWest
-
-import RxSwift
-
-
- class MockUpdateExecutorProtocol: UpdateExecutorProtocol, Cuckoo.ProtocolMock {
-    
-     typealias MocksType = UpdateExecutorProtocol
-    
-     typealias Stubbing = __StubbingProxy_UpdateExecutorProtocol
-     typealias Verification = __VerificationProxy_UpdateExecutorProtocol
-
-     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
-
-    
-    private var __defaultImplStub: UpdateExecutorProtocol?
-
-     func enableDefaultImplementation(_ stub: UpdateExecutorProtocol) {
-        __defaultImplStub = stub
-        cuckoo_manager.enableDefaultStubImplementation()
-    }
-    
-
-    
-
-    
-
-    
-    
-    
-     func execute(_ update: GameUpdate, in database: GameDatabaseProtocol) -> Completable {
-        
-    return cuckoo_manager.call("execute(_: GameUpdate, in: GameDatabaseProtocol) -> Completable",
-            parameters: (update, database),
-            escapingParameters: (update, database),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.execute(update, in: database))
-        
-    }
-    
-
-	 struct __StubbingProxy_UpdateExecutorProtocol: Cuckoo.StubbingProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	
-	     init(manager: Cuckoo.MockManager) {
-	        self.cuckoo_manager = manager
-	    }
-	    
-	    
-	    func execute<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ update: M1, in database: M2) -> Cuckoo.ProtocolStubFunction<(GameUpdate, GameDatabaseProtocol), Completable> where M1.MatchedType == GameUpdate, M2.MatchedType == GameDatabaseProtocol {
-	        let matchers: [Cuckoo.ParameterMatcher<(GameUpdate, GameDatabaseProtocol)>] = [wrap(matchable: update) { $0.0 }, wrap(matchable: database) { $0.1 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockUpdateExecutorProtocol.self, method: "execute(_: GameUpdate, in: GameDatabaseProtocol) -> Completable", parameterMatchers: matchers))
-	    }
-	    
-	}
-
-	 struct __VerificationProxy_UpdateExecutorProtocol: Cuckoo.VerificationProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	    private let callMatcher: Cuckoo.CallMatcher
-	    private let sourceLocation: Cuckoo.SourceLocation
-	
-	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
-	        self.cuckoo_manager = manager
-	        self.callMatcher = callMatcher
-	        self.sourceLocation = sourceLocation
-	    }
-	
-	    
-	
-	    
-	    @discardableResult
-	    func execute<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ update: M1, in database: M2) -> Cuckoo.__DoNotUse<(GameUpdate, GameDatabaseProtocol), Completable> where M1.MatchedType == GameUpdate, M2.MatchedType == GameDatabaseProtocol {
-	        let matchers: [Cuckoo.ParameterMatcher<(GameUpdate, GameDatabaseProtocol)>] = [wrap(matchable: update) { $0.0 }, wrap(matchable: database) { $0.1 }]
-	        return cuckoo_manager.verify("execute(_: GameUpdate, in: GameDatabaseProtocol) -> Completable", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	}
-}
-
- class UpdateExecutorProtocolStub: UpdateExecutorProtocol {
-    
-
-    
-
-    
-     func execute(_ update: GameUpdate, in database: GameDatabaseProtocol) -> Completable  {
-        return DefaultValueRegistry.defaultValue(for: (Completable).self)
-    }
     
 }
 

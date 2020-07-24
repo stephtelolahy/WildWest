@@ -7,6 +7,6 @@
 //
 
 protocol GameEngineProtocol {
-    func startGame()
+    func start()
     func execute(_ move: GameMove)
 }

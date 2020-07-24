@@ -29,6 +29,8 @@ class GameViewController: UIViewController, Subscribable {
     
     var environment: GameEnvironment!
     
+    var onQuit: (() -> Void)?
+    
     private var engine: GameEngineProtocol {
         environment.engine
     }
@@ -49,7 +51,7 @@ class GameViewController: UIViewController, Subscribable {
     private var latestState: GameStateProtocol?
     private var latestMove: GameMove?
     
-    private lazy var userPreferences = UserPreferences()
+    private lazy var userPreferences = AppModules.shared.userPreferences
     private lazy var statsBuilder = StatsBuilder(sheriffId: subjects.sheriffId, classifier: MoveClassifier())
     private lazy var playerAdapter = PlayersAdapter()
     private lazy var actionsAdapter = ActionsAdapter(playerId: controlledPlayerId)
@@ -108,12 +110,12 @@ class GameViewController: UIViewController, Subscribable {
     // MARK: IBAction
     
     @IBAction private func startButtonTapped(_ sender: Any) {
-        engine.startGame()
+        engine.start()
         startButton.isEnabled = false
     }
     
     @IBAction private func menuButtonTapped(_ sender: Any) {
-        dismiss(animated: true)
+        onQuit?()
     }
     
     @IBAction private func endTurnTapped(_ sender: Any) {
@@ -195,7 +197,7 @@ private extension GameViewController {
     
     func showGameOver(outcome: GameOutcome) {
         presentAlert(title: "Game Over", message: outcome.rawValue) { [weak self] in
-            self?.dismiss(animated: true)
+            self?.onQuit?()
         }
     }
 }

@@ -10,6 +10,8 @@ import RxSwift
 
 protocol GameDatabaseProtocol {
     
+    var state: GameStateProtocol { get }
+    
     // Flags
     func setTurn(_ turn: String) -> Completable
     func setChallenge(_ challenge: Challenge?) -> Completable
