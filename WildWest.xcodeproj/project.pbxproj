@@ -192,6 +192,7 @@
 		335BED9F2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */; };
 		335C03BE2459F5C200043F46 /* GameMoveDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335C03BD2459F5C200043F46 /* GameMoveDto.swift */; };
 		33639FD724CB3C8500F48727 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33639FD624CB3C8500F48727 /* Navigator.swift */; };
+		33639FDA24CB421D00F48727 /* WaitingRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33639FD924CB421D00F48727 /* WaitingRoomViewController.swift */; };
 		336AA6F023F1450800328837 /* GameDatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */; };
 		336AA6F123F1450B00328837 /* GameDatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */; };
 		3372CB522454BC7900C061C9 /* FigureSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372CB512454BC7900C061C9 /* FigureSelector.swift */; };
@@ -450,6 +451,7 @@
 		335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Automatic Machine Gun-SoundBible.com-253461580.mp3"; sourceTree = "<group>"; };
 		335C03BD2459F5C200043F46 /* GameMoveDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMoveDto.swift; sourceTree = "<group>"; };
 		33639FD624CB3C8500F48727 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
+		33639FD924CB421D00F48727 /* WaitingRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomViewController.swift; sourceTree = "<group>"; };
 		336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDatabaseProtocol.swift; sourceTree = "<group>"; };
 		3372CB512454BC7900C061C9 /* FigureSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FigureSelector.swift; sourceTree = "<group>"; };
 		3372CB532454BF8E00C061C9 /* GameLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLauncher.swift; sourceTree = "<group>"; };
@@ -853,6 +855,14 @@
 				AD7EAFBE23D7846D00FE23D5 /* GameSetupTests.swift */,
 			);
 			path = setup;
+			sourceTree = "<group>";
+		};
+		33639FD824CB41FD00F48727 /* waitingroom */ = {
+			isa = PBXGroup;
+			children = (
+				33639FD924CB421D00F48727 /* WaitingRoomViewController.swift */,
+			);
+			path = waitingroom;
 			sourceTree = "<group>";
 		};
 		3366493823F93EE000125483 /* database */ = {
@@ -1383,6 +1393,7 @@
 				3346F33924CB2F1B00FB0418 /* navigation */,
 				335632D9247972530004F371 /* signin */,
 				33FDD70A240BFB3800BC3E14 /* menu */,
+				33639FD824CB41FD00F48727 /* waitingroom */,
 				3385A1F423F9352800CD9660 /* game */,
 				ADB7D2F6239EE03900653905 /* LaunchScreen.storyboard */,
 				ADB7D2F1239EE03800653905 /* Main.storyboard */,
@@ -1731,6 +1742,7 @@
 				3356CF11243237500071B04F /* DamageEvent.swift in Sources */,
 				334673E62436267500FFBB82 /* UIViewController+Alert.swift in Sources */,
 				337408D424306C3400E5809B /* Player+Cards.swift in Sources */,
+				33639FDA24CB421D00F48727 /* WaitingRoomViewController.swift in Sources */,
 				3328FCA7242F29B100A82255 /* Jail.swift in Sources */,
 				33E4411D24077CA000B2848E /* ActionCell.swift in Sources */,
 				33734AF52454AD7200A5D2DA /* DtoEncoder.swift in Sources */,

@@ -48,8 +48,6 @@ class MenuViewController: UIViewController, Subscribable {
         updatePlayersLabel()
         updateFigureImage()
         playAsSheriffSwitch.isOn = userPreferences.playAsSheriff
-        
-        observeUserStatus()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -113,13 +111,5 @@ private extension MenuViewController {
             figureButton.setImage(#imageLiteral(resourceName: "01_random"), for: .normal)
             figureLabel.text = "Play as random"
         }
-    }
-    
-    func observeUserStatus() {
-        sub(AppModules.shared.matchingManager.observeUserStatus().subscribe(onNext: { status in
-            print("user status: \(String(describing: status))")
-        }, onError: { error in
-            fatalError(error.localizedDescription)
-        }))
     }
 }

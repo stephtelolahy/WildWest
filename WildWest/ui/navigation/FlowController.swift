@@ -11,10 +11,13 @@ import FirebaseUI
 
 class FlowController: UINavigationController, Subscribable {
     
+    private lazy var matchingManager = AppModules.shared.matchingManager
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if Auth.auth().currentUser != nil {
             loadMenu()
+            observeUserStatus()
         } else {
             loadSignIn()
         }
@@ -32,6 +35,7 @@ private extension FlowController {
         
         signInViewController.onCompleted = { [weak self] in
             self?.loadMenu()
+            self?.observeUserStatus()
         }
         
         fade(to: signInViewController)
@@ -51,6 +55,16 @@ private extension FlowController {
         fade(to: menuViewController)
     }
     
+    func loadWaitingRoom() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let waitingRoomViewController =
+            storyboard.instantiateViewController(withIdentifier: "WaitingRoomViewController") as? WaitingRoomViewController else {
+                return
+        }
+        
+        fade(to: waitingRoomViewController)
+    }
+    
     func loadLocalGame() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let gameViewController =
@@ -65,6 +79,32 @@ private extension FlowController {
         }
         
         fade(to: gameViewController)
+    }
+    
+    func loadOnlineGame(_ gameId: String, _ playerId: String) {
+        print("loadOnlineGame \(gameId), \(playerId)")
+    }
+    
+    func observeUserStatus() {
+        sub(matchingManager.observeUserStatus().subscribe(onNext: { [weak self] status in
+            self?.processUserStatus(status)
+        }, onError: { error in
+            fatalError(error.localizedDescription)
+        }))
+    }
+    
+    func processUserStatus(_ status: UserStatus) {
+        print("user status: \(String(describing: status))")
+        switch status {
+        case .waiting:
+            loadWaitingRoom()
+            
+        case let .playing(gameId, playerId):
+            loadOnlineGame(gameId, playerId)
+            
+        default:
+            loadMenu()
+        }
     }
 }
 
