@@ -3,8 +3,6 @@ platform :ios, '9.3'
 
 def shared_pods
   pod 'RxSwift'
-  pod 'Firebase/Analytics'
-  pod 'Firebase/Crashlytics'
   pod 'Firebase/Database'
 end
 
@@ -13,6 +11,8 @@ target 'WildWest' do
   use_frameworks!
   shared_pods
   
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Crashlytics'
   pod 'FirebaseUI/Auth'
   pod 'FirebaseUI/Google'
   pod 'FirebaseUI/Facebook'

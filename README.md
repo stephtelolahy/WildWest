@@ -1,6 +1,6 @@
 # WildWest
 
-WildWest is an unofficial clone of "Bang!", the Western card game designed by Emiliano Sciarra and released by Italian publisher DV Giochi.
+WildWest is the unofficial clone of "Bang!", the Western card game designed by Emiliano Sciarra and released by Italian publisher DV Giochi.
 
 ## Features 
 

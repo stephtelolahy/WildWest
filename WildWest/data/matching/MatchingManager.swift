@@ -7,6 +7,7 @@
 //
 
 import Firebase
+import FirebaseUI
 import RxSwift
 
 protocol MatchingManagerProtocol {
