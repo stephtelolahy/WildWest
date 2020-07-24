@@ -14,7 +14,6 @@ class GameEngine: GameEngineProtocol {
     private let database: GameDatabaseProtocol
     private let stateSubject: BehaviorSubject<GameStateProtocol>
     private let moveMatchers: [MoveMatcherProtocol]
-    private let updateExecutor: UpdateExecutorProtocol
     
     private var currentLoop: GameLoopProtocol?
     
@@ -22,23 +21,17 @@ class GameEngine: GameEngineProtocol {
          database: GameDatabaseProtocol,
          stateSubject: BehaviorSubject<GameStateProtocol>,
          moveMatchers: [MoveMatcherProtocol],
-         updateExecutor: UpdateExecutorProtocol,
          subjects: GameSubjectsProtocol) {
         self.delay = delay
         self.database = database
         self.stateSubject = stateSubject
         self.moveMatchers = moveMatchers
-        self.updateExecutor = updateExecutor
     }
     
     func startGame() {
-        let moves = moveMatchers.compactMap { $0.autoPlayMove(matching: state) }
-        
-        guard moves.count == 1 else {
-            fatalError("Illegal state")
-        }
-        
-        execute(moves[0])
+        moveMatchers
+            .compactMap { $0.autoPlayMove(matching: state) }
+            .forEach { execute($0) }
     }
     
     func execute(_ move: GameMove) {
@@ -50,7 +43,6 @@ class GameEngine: GameEngineProtocol {
                             database: database,
                             stateSubject: stateSubject,
                             moveMatchers: moveMatchers,
-                            updateExecutor: updateExecutor,
                             move: move,
                             completion: { [weak self] in self?.currentLoop = nil })
         currentLoop = loop

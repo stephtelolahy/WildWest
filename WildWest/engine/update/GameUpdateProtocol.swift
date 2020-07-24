@@ -27,7 +27,3 @@ enum GameUpdate: Equatable {
     case playerPullFromGeneralStore(String, String)
     case playerRevealHandCard(String, String)
 }
-
-protocol UpdateExecutorProtocol {
-    func execute(_ update: GameUpdate, in database: GameDatabaseProtocol) -> Completable
-}

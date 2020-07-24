@@ -42,7 +42,6 @@ class GameEnvironmentBuilder {
                                 database: database,
                                 stateSubject: stateSubject,
                                 moveMatchers: GameRules().moveMatchers,
-                                updateExecutor: GameUpdateExecutor(),
                                 subjects: subjects)
         
         let aiPlayers = state.players.filter { $0.identifier != controlledId }
@@ -87,7 +86,6 @@ class GameEnvironmentBuilder {
                                 database: database,
                                 stateSubject: stateSubject,
                                 moveMatchers: GameRules().moveMatchers,
-                                updateExecutor: GameUpdateExecutor(),
                                 subjects: subjects)
         
         return GameEnvironment(engine: engine,
