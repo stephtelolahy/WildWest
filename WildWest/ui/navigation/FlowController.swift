@@ -11,7 +11,7 @@ import FirebaseUI
 
 class FlowController: UINavigationController, Subscribable {
     
-    private lazy var matchingManager = AppModules.shared.matchingManager
+    private lazy var matchingManager: MatchingManagerProtocol = AppModules.shared.matchingManager
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +53,11 @@ private extension FlowController {
         }
         
         menuViewController.onPlayOnline = { [weak self] in
-            // TODO: add to waiting room
+            guard let self = self else {
+                return
+            }
+            
+            self.sub(self.matchingManager.requestGame().subscribe())
         }
         
         fade(to: menuViewController)
@@ -65,6 +69,14 @@ private extension FlowController {
             storyboard.instantiateViewController(withIdentifier: "WaitingRoomViewController")
                 as? WaitingRoomViewController else {
                     return
+        }
+        
+        waitingRoomViewController.onQuit = { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            self.sub(self.matchingManager.quitWaitingRoom().subscribe())
         }
         
         fade(to: waitingRoomViewController)

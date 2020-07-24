@@ -13,6 +13,8 @@ import RxSwift
 protocol MatchingManagerProtocol {
     func createUser() -> Completable
     func observeUserStatus() -> Observable<UserStatus>
+    func requestGame() -> Completable
+    func quitWaitingRoom() -> Completable
 }
 
 class MatchingManager: MatchingManagerProtocol {
@@ -35,10 +37,31 @@ class MatchingManager: MatchingManagerProtocol {
     }
     
     func observeUserStatus() -> Observable<UserStatus> {
+        database.observeUserStatus(currentUserId)
+    }
+    
+    func requestGame() -> Completable {
+        database.setUserStatus(currentUserId, status: .waiting)
+            .andThen(match())
+    }
+    
+    func quitWaitingRoom() -> Completable {
+        database.setUserStatus(currentUserId, status: .idle)
+    }
+}
+
+private extension MatchingManager {
+    
+    var currentUserId: String {
         guard let user = Auth.auth().currentUser else {
             fatalError("Missing user")
         }
         
-        return database.observeUserStatus(user.uid)
+        return user.uid
+    }
+    
+    func match() -> Completable {
+        // TODO: try matching
+        Completable.empty()
     }
 }

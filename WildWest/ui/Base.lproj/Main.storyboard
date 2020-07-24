@@ -608,12 +608,28 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ES-RK-EK1" userLabel="closeButton">
+                                <rect key="frame" x="317.5" y="311" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="418-xH-Ukx"/>
+                                    <constraint firstAttribute="width" secondItem="1ES-RK-EK1" secondAttribute="height" multiplier="1:1" id="zYG-HO-Guz"/>
+                                </constraints>
+                                <color key="tintColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="ic_close"/>
+                                <connections>
+                                    <action selector="menuButtonTapped:" destination="Yy6-0k-mhK" eventType="touchUpInside" id="hE4-wH-x6Q"/>
+                                    <action selector="quitButtonTapped:" destination="EqF-Go-7fO" eventType="touchUpInside" id="uLG-EC-KOk"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.81568627449999997" green="0.70588235290000001" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="9Zr-jY-W9V" firstAttribute="centerY" secondItem="pKR-Te-3vd" secondAttribute="centerY" id="3Oa-97-qRQ"/>
+                            <constraint firstItem="ooD-Qv-NMm" firstAttribute="bottom" secondItem="1ES-RK-EK1" secondAttribute="bottom" constant="32" id="FLi-Vz-gEu"/>
                             <constraint firstItem="r0F-xF-Q1x" firstAttribute="top" secondItem="9Zr-jY-W9V" secondAttribute="bottom" constant="32" id="I6E-5u-TbC"/>
+                            <constraint firstItem="1ES-RK-EK1" firstAttribute="width" secondItem="1ES-RK-EK1" secondAttribute="height" multiplier="1:1" id="cV2-Nb-8HP"/>
                             <constraint firstItem="9Zr-jY-W9V" firstAttribute="centerX" secondItem="pKR-Te-3vd" secondAttribute="centerX" id="gu5-39-n9v"/>
+                            <constraint firstItem="1ES-RK-EK1" firstAttribute="centerX" secondItem="pKR-Te-3vd" secondAttribute="centerX" id="h3I-Xn-iXE"/>
                             <constraint firstItem="r0F-xF-Q1x" firstAttribute="centerX" secondItem="pKR-Te-3vd" secondAttribute="centerX" id="jtp-bM-izX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ooD-Qv-NMm"/>

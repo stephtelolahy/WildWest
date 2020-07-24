@@ -9,4 +9,11 @@
 import UIKit
 
 class WaitingRoomViewController: UIViewController {
+    
+    var onQuit: (() -> Void)?
+    
+    @IBAction private func quitButtonTapped(_ sender: Any) {
+        onQuit?()
+    }
+    
 }
