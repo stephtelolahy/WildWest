@@ -22,6 +22,9 @@ class MenuViewController: UIViewController, Subscribable {
     
     // MARK: - Properties
     
+    var onPlayLocal: (() -> Void)?
+    var onPlayOnline: (() -> Void)?
+    
     private lazy var userPreferences = AppModules.shared.userPreferences
     
     private lazy var allFigures: [FigureProtocol] = {
@@ -35,10 +38,6 @@ class MenuViewController: UIViewController, Subscribable {
     }()
     
     private lazy var figureSelector = FigureSelector(viewController: self)
-    
-    private lazy var navigator = Navigator(self)
-    
-    private lazy var launcher = GameLauncher(viewController: self)
     
     // MARK: - Lifecycle
     
@@ -66,11 +65,11 @@ class MenuViewController: UIViewController, Subscribable {
     // MARK: - IBActions
     
     @IBAction private func playButtonTapped(_ sender: Any) {
-        launcher.startLocal()
+        onPlayLocal?()
     }
     
     @IBAction private func onlineButtonTapped(_ sender: Any) {
-        launcher.startRemote()
+        onPlayOnline?()
     }
     
     @IBAction private func stepperValueChanged(_ sender: Any) {
@@ -90,11 +89,11 @@ class MenuViewController: UIViewController, Subscribable {
     }
     
     @IBAction private func contactButtonTapped(_ sender: Any) {
-        navigator.toContactUs()
+        Navigator(self).toContactUs()
     }
     
     @IBAction private func logoButtonTapped(_ sender: Any) {
-        navigator.toRules()
+        Navigator(self).toRules()
     }
 }
 

@@ -2,7 +2,7 @@
 //  Navigator.swift
 //  WildWest
 //
-//  Created by Hugues Stephano Telolahy on 25/04/2020.
+//  Created by Hugues Stephano Telolahy on 24/07/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
@@ -15,27 +15,6 @@ class Navigator {
     
     init(_ viewController: UIViewController) {
         self.viewController = viewController
-    }
-    
-    func toMenu() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let menuViewController =
-            storyboard.instantiateViewController(withIdentifier: "MenuViewController") as? MenuViewController else {
-                return
-        }
-        
-        viewController.present(menuViewController, animated: true)
-    }
-    
-    func toGame(environment: GameEnvironment) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let gameViewController =
-            storyboard.instantiateViewController(withIdentifier: "GameViewController") as? GameViewController else {
-                return
-        }
-        
-        gameViewController.environment = environment
-        viewController.present(gameViewController, animated: true)
     }
     
     func toContactUs() {
@@ -59,7 +38,7 @@ class Navigator {
         }
     }
     
-    func openUrl(_ url: URL) {
+    private func openUrl(_ url: URL) {
         if #available(iOS 10.0, *) {
             UIApplication.shared.open(url)
         } else {

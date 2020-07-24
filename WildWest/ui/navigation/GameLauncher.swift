@@ -9,13 +9,7 @@
 import UIKit
 import RxSwift
 
-class GameLauncher: Subscribable {
-    
-    private unowned let viewController: UIViewController
-    
-    init(viewController: UIViewController) {
-        self.viewController = viewController
-    }
+class GameLauncher {
     
     private lazy var userPreferences = AppModules.shared.userPreferences
     
@@ -25,15 +19,14 @@ class GameLauncher: Subscribable {
         AppModules.shared.gameResources.allFigures.filter { !$0.abilities.isEmpty }
     }()
     
-    func startLocal() {
+    func createLocalGame() -> GameEnvironment {
         let state = createGame()
         let controlledId: String? = !userPreferences.simulationMode ? state.players.first?.identifier : nil
-        let environment = builder.createLocalEnvironment(state: state,
-                                                         controlledId: controlledId,
-                                                         updateDelay: userPreferences.updateDelay)
-        Navigator(viewController).toGame(environment: environment)
+        return builder.createLocalEnvironment(state: state,
+                                              controlledId: controlledId,
+                                              updateDelay: userPreferences.updateDelay)
     }
-    
+    /*
     func startRemote() {
         sub(match().subscribe(onSuccess: { gameId, state in
             let choices = state.allPlayers.map { "\($0.identifier) \($0.role == .sheriff ? "*" : "")" }
@@ -66,6 +59,7 @@ class GameLauncher: Subscribable {
                     .andThen(Single.just((gameId, state)))
             }
     }
+ */
 }
 
 private extension GameLauncher {
