@@ -10,4 +10,5 @@ struct UserInfoDto: Codable {
     let id: String?
     let name: String?
     let photoUrl: String?
+    let status: UserStatusDto?
 }

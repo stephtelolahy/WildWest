@@ -1,5 +1,5 @@
 //
-//  GameLauncher.swift
+//  GameBuilder.swift
 //  WildWest
 //
 //  Created by Hugues Stephano Telolahy on 25/04/2020.
@@ -11,20 +11,24 @@ import UIKit
 import RxSwift
 import Firebase
 
-class GameLauncher: Subscribable {
+class GameBuilder: Subscribable {
     
-    func createLocalGame() -> GameEnvironment {
-        let state = createGame()
+    func createLocalGameEnvironment() -> GameEnvironment {
+        let userPreferences = AppModules.shared.userPreferences
+        let state = createGame(for: userPreferences.playersCount,
+                               preferredFigure: userPreferences.preferredFigure,
+                               preferredRole: userPreferences.playAsSheriff ? .sheriff : nil)
         
-        let controlledId: String? =
-            !AppModules.shared.userPreferences.simulationMode ? state.players.first?.identifier : nil
+        let controlledId: String? = !userPreferences.simulationMode ? state.players.first?.identifier : nil
         
         return createLocalEnvironment(state: state,
                                       controlledId: controlledId,
-                                      updateDelay: AppModules.shared.userPreferences.updateDelay)
+                                      updateDelay: userPreferences.updateDelay)
     }
     
-    func createRemoteGame(gameId: String, playerId: String, completion: @escaping (GameEnvironment) -> Void) {
+    func createRemoteGameEnvironment(gameId: String,
+                                     playerId: String,
+                                     completion: @escaping (GameEnvironment) -> Void) {
         sub(AppModules.shared.matchingDatabase.getGame(gameId).subscribe(onSuccess: { state in
             
             let environment = self.createRemoteEnvironment(gameId: gameId,
@@ -42,17 +46,12 @@ class GameLauncher: Subscribable {
             fatalError(error.localizedDescription)
         }))
     }
-}
-
-private extension GameLauncher {
     
-    func createGame() -> GameStateProtocol {
-        let userPreferences = AppModules.shared.userPreferences
-        let playersCount = userPreferences.playersCount
+    func createGame(for playersCount: Int,
+                    preferredFigure: String? = nil,
+                    preferredRole: Role? = nil) -> GameStateProtocol {
         let cards = AppModules.shared.gameResources.allCards
         let figures = AppModules.shared.gameResources.allFigures.filter { !$0.abilities.isEmpty }
-        let preferredRole: Role? = userPreferences.playAsSheriff ? .sheriff : nil
-        let preferredFigure = userPreferences.preferredFigure
         
         let gameSetup = GameSetup()
         
@@ -70,6 +69,9 @@ private extension GameLauncher {
                                    figures: shuffledFigures,
                                    cards: shuffledCards)
     }
+}
+
+private extension GameBuilder {
     
     func createLocalEnvironment(state: GameStateProtocol,
                                 controlledId: String?,

@@ -29,7 +29,7 @@ class GameViewController: UIViewController, Subscribable {
     
     var environment: GameEnvironment!
     
-    var onCompleted: (() -> Void)?
+    var onQuit: (() -> Void)?
     
     private var engine: GameEngineProtocol {
         environment.engine
@@ -115,7 +115,7 @@ class GameViewController: UIViewController, Subscribable {
     }
     
     @IBAction private func menuButtonTapped(_ sender: Any) {
-        onCompleted?()
+        onQuit?()
     }
     
     @IBAction private func endTurnTapped(_ sender: Any) {
@@ -197,7 +197,7 @@ private extension GameViewController {
     
     func showGameOver(outcome: GameOutcome) {
         presentAlert(title: "Game Over", message: outcome.rawValue) { [weak self] in
-            self?.onCompleted?()
+            self?.onQuit?()
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  FlowController.swift
+//  NavigationController.swift
 //  WildWest
 //
 //  Created by Hugues Stephano Telolahy on 24/07/2020.
@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseUI
 
-class FlowController: UINavigationController, Subscribable {
+class NavigationController: UINavigationController, Subscribable {
     
     private lazy var matchingManager: MatchingManagerProtocol = AppModules.shared.matchingManager
     
@@ -24,7 +24,7 @@ class FlowController: UINavigationController, Subscribable {
     }
 }
 
-private extension FlowController {
+private extension NavigationController {
     
     func loadSignIn() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -83,11 +83,11 @@ private extension FlowController {
     }
     
     func loadLocalGame() {
-        loadGame(environment: GameLauncher().createLocalGame())
+        loadGame(environment: GameBuilder().createLocalGameEnvironment())
     }
     
     func loadOnlineGame(_ gameId: String, _ playerId: String) {
-        GameLauncher().createRemoteGame(gameId: gameId, playerId: playerId) { [weak self] environment in
+        GameBuilder().createRemoteGameEnvironment(gameId: gameId, playerId: playerId) { [weak self] environment in
             self?.loadGame(environment: environment)
         }
     }
@@ -101,8 +101,14 @@ private extension FlowController {
         
         gameViewController.environment = environment
         
-        gameViewController.onCompleted = { [weak self] in
+        gameViewController.onQuit = { [weak self] in
             self?.loadMenu()
+            
+            guard let self = self else {
+                return
+            }
+            
+            self.sub(self.matchingManager.quitGame().subscribe())
         }
         
         fade(to: gameViewController)

@@ -11,13 +11,20 @@ extension DtoEncoder {
     func encode(user: WUserInfo) -> UserInfoDto {
         UserInfoDto(id: user.id,
                     name: user.name,
-                    photoUrl: user.photoUrl)
+                    photoUrl: user.photoUrl,
+                    status: encode(status: user.status))
     }
     
     func decode(user: UserInfoDto) throws -> WUserInfo {
         WUserInfo(id: try user.id.unwrap(),
                   name: try user.name.unwrap(),
-                  photoUrl: try user.photoUrl.unwrap())
+                  photoUrl: try user.photoUrl.unwrap(),
+                  status: try decode(status: user.status))
+    }
+    
+    func decode(users: [String: UserInfoDto]) throws -> [WUserInfo] {
+        try Array(users.values)
+            .map { try decode(user: $0) }
     }
     
     func encode(status: UserStatus) -> UserStatusDto? {
@@ -33,13 +40,13 @@ extension DtoEncoder {
         }
     }
     
-    func decode(status: UserStatusDto) throws -> UserStatus {
-        if status.waiting == true {
+    func decode(status: UserStatusDto?) throws -> UserStatus {
+        if status?.waiting == true {
             return .waiting
         }
         
-        if let gameId = status.gameId,
-            let playerId = status.playerId {
+        if let gameId = status?.gameId,
+            let playerId = status?.playerId {
             return .playing(gameId: gameId, playerId: playerId)
         }
         
