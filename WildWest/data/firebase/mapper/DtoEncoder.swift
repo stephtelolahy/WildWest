@@ -5,47 +5,26 @@
 //  Created by Hugues Stephano Telolahy on 25/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-// swiftlint:disable cyclomatic_complexity
-// swiftlint:disable function_body_length
+
+import Foundation
 
 class DtoEncoder {
     
+    private let allCards: [CardProtocol]
     private let keyGenerator: KeyGeneratorProtocol
     
-    init(keyGenerator: KeyGeneratorProtocol) {
+    init(allCards: [CardProtocol],
+         keyGenerator: KeyGeneratorProtocol) {
+        self.allCards = allCards
         self.keyGenerator = keyGenerator
     }
     
-    func encode(state: GameStateProtocol) -> GameStateDto {
-        GameStateDto(players: encode(players: state.allPlayers),
-                     deck: encode(orderedCards: state.deck),
-                     discardPile: encode(orderedCards: state.discardPile.reversed()),
-                     turn: state.turn,
-                     generalStore: encode(cards: state.generalStore),
-                     outcome: state.outcome?.rawValue,
-                     challenge: encode(challenge: state.challenge))
+    func encode(card: CardProtocol) -> String {
+        card.identifier
     }
     
-    func encode(challenge: Challenge?) -> ChallengeDto? {
-        guard let challenge = challenge else {
-            return nil
-        }
-        
-        return ChallengeDto(name: challenge.name.rawValue,
-                            targetIds: challenge.targetIds,
-                            damage: challenge.damage,
-                            counterNeeded: challenge.counterNeeded,
-                            barrelsPlayed: challenge.barrelsPlayed)
-    }
-    
-    func encode(damageEvent: DamageEvent?) -> DamageEventDto? {
-        guard let damageEvent = damageEvent else {
-            return nil
-        }
-        
-        return DamageEventDto(damage: damageEvent.damage,
-                              source: encode(damageSource: damageEvent.source))
-        
+    func decode(card: String) throws -> CardProtocol {
+        try allCards.first(where: { $0.identifier == card }).unwrap()
     }
     
     func encode(orderedCards: [CardProtocol]) -> [String: String]? {
@@ -63,106 +42,14 @@ class DtoEncoder {
         return result
     }
     
-    func encode(move: GameMove) -> GameMoveDto {
-        GameMoveDto(name: move.name.rawValue,
-                    actorId: move.actorId,
-                    cardId: move.cardId,
-                    targetId: move.targetId,
-                    targetCard: encode(targetCard: move.targetCard),
-                    discardIds: move.discardIds)
-    }
-    
-    func encode(update: GameUpdate) -> GameUpdateDto {
-        switch update {
-        case let .setTurn(turn):
-            return GameUpdateDto(setTurn: turn)
-            
-        case let .setChallenge(challenge):
-            if let challenge = challenge {
-                return GameUpdateDto(setChallenge: encode(challenge: challenge))
-            } else {
-                return GameUpdateDto(removeChallenge: true)
-            }
-        case let .playerSetBangsPlayed(playerId, count):
-            let arg = PlayerSetBangsPlayedDto(playerId: playerId, count: count)
-            return GameUpdateDto(playerSetBangsPlayed: arg)
-            
-        case let .playerSetHealth(playerId, health):
-            let arg = PlayerSetHealthDto(playerId: playerId, health: health)
-            return GameUpdateDto(playerSetHealth: arg)
-            
-        case let .playerSetDamage(playerId, damageEvent):
-            let arg = PlayerSetDamageDto(playerId: playerId, event: encode(damageEvent: damageEvent))
-            return GameUpdateDto(playerSetDamage: arg)
-            
-        case let .playerPullFromDeck(playerId):
-            return GameUpdateDto(playerPullFromDeck: playerId)
-            
-        case let .playerDiscardHand(playerId, cardId):
-            let arg = PlayerManipulatesCardDto(playerId: playerId, cardId: cardId)
-            return GameUpdateDto(playerDiscardHand: arg)
-            
-        case let .playerPutInPlay(playerId, cardId):
-            let arg = PlayerManipulatesCardDto(playerId: playerId, cardId: cardId)
-            return GameUpdateDto(playerPutInPlay: arg)
-            
-        case let .playerDiscardInPlay(playerId, cardId):
-            let arg = PlayerManipulatesCardDto(playerId: playerId, cardId: cardId)
-            return GameUpdateDto(playerDiscardInPlay: arg)
-            
-        case let .playerPullFromOtherHand(playerId, otherId, cardId):
-            let arg = PlayerManipulatesOtherCardDto(playerId: playerId, otherId: otherId, cardId: cardId)
-            return GameUpdateDto(playerPullFromOtherHand: arg)
-            
-        case let .playerPullFromOtherInPlay(playerId, otherId, cardId):
-            let arg = PlayerManipulatesOtherCardDto(playerId: playerId, otherId: otherId, cardId: cardId)
-            return GameUpdateDto(playerPullFromOtherInPlay: arg)
-            
-        case let .playerPutInPlayOfOther(playerId, otherId, cardId):
-            let arg = PlayerManipulatesOtherCardDto(playerId: playerId, otherId: otherId, cardId: cardId)
-            return GameUpdateDto(playerPutInPlayOfOther: arg)
-            
-        case let .playerPassInPlayOfOther(playerId, otherId, cardId):
-            let arg = PlayerManipulatesOtherCardDto(playerId: playerId, otherId: otherId, cardId: cardId)
-            return GameUpdateDto(playerPassInPlayOfOther: arg)
-            
-        case let .playerPullFromGeneralStore(playerId, cardId):
-            let arg = PlayerManipulatesCardDto(playerId: playerId, cardId: cardId)
-            return GameUpdateDto(playerPullFromGeneralStore: arg)
-            
-        case let .playerRevealHandCard(playerId, cardId):
-            let arg = PlayerManipulatesCardDto(playerId: playerId, cardId: cardId)
-            return GameUpdateDto(playerRevealHandCard: arg)
-            
-        case let .setupGeneralStore(cardsCount):
-            return GameUpdateDto(setupGeneralStore: cardsCount)
-            
-        case .flipOverFirstDeckCard:
-            return GameUpdateDto(flipOverFirstDeckCard: true)
+    func decode(orderedCards: [String: String]?) throws -> [CardProtocol] {
+        guard let orderedCards = orderedCards else {
+            return []
         }
+        
+        let orderedKeys = orderedCards.keys.sorted()
+        return try orderedKeys.map { try decode(card: orderedCards[$0].unwrap()) }
     }
-    
-    func encode(user: WUserInfo) -> UserInfoDto {
-        UserInfoDto(id: user.id,
-                    name: user.name,
-                    photoUrl: user.photoUrl)
-    }
-    
-    func encode(status: UserStatus) -> UserStatusDto? {
-        switch status {
-        case let .playing(gameId, playerId):
-            return UserStatusDto(gameId: gameId, playerId: playerId)
-            
-        case .waiting:
-            return UserStatusDto(waiting: true)
-            
-        default:
-            return nil
-        }
-    }
-}
-
-private extension DtoEncoder {
     
     func encode(cards: [CardProtocol]) -> [String: Bool]? {
         guard !cards.isEmpty else {
@@ -177,69 +64,17 @@ private extension DtoEncoder {
         return result
     }
     
-    func encode(card: CardProtocol) -> String {
-        card.identifier
-    }
-    
-    func encode(players: [PlayerProtocol]) -> [String: PlayerDto] {
-        var result: [String: PlayerDto] = [:]
-        for (index, player) in players.enumerated() {
-            let dto = encode(player: player, index: index)
-            result[player.identifier] = dto
-        }
-        return result
-    }
-    
-    func encode(player: PlayerProtocol, index: Int) -> PlayerDto {
-        PlayerDto(identifier: player.identifier,
-                  index: index,
-                  role: player.role!.rawValue,
-                  figureName: player.figureName.rawValue,
-                  imageName: player.imageName,
-                  description: player.description,
-                  abilities: encode(abilities: player.abilities),
-                  maxHealth: player.maxHealth,
-                  health: player.health,
-                  hand: encode(cards: player.hand),
-                  inPlay: encode(cards: player.inPlay),
-                  bangsPlayed: player.bangsPlayed,
-                  lastDamage: encode(damageEvent: player.lastDamage))
-    }
-    
-    func encode(abilities: [AbilityName: Bool]) -> [String: Bool] {
-        var result: [String: Bool] = [:]
-        abilities.forEach { key, value in
-            result[key.rawValue] = value
-        }
-        return result
-    }
-    
-    func encode(damageSource: DamageSource) -> DamageSourceDto? {
-        switch damageSource {
-        case .byDynamite:
-            return DamageSourceDto(byDynamite: true)
-            
-        case let .byPlayer(playerId):
-            return DamageSourceDto(byPlayer: playerId)
-        }
-    }
-    
-    func encode(targetCard: TargetCard?) -> TargetCardDto? {
-        guard let targetCard = targetCard else {
-            return nil
+    func decode(cards: [String: Bool]?) throws -> [CardProtocol] {
+        guard let cards = cards else {
+            return []
         }
         
-        return TargetCardDto(ownerId: targetCard.ownerId,
-                             source: encode(targetCardSource: targetCard.source))
-    }
-    
-    func encode(targetCardSource: TargetCardSource) -> TargetCardSourceDto {
-        switch targetCardSource {
-        case .randomHand:
-            return TargetCardSourceDto(randomHand: true)
-            
-        case let .inPlay(cardId):
-            return TargetCardSourceDto(inPlay: cardId)
+        var result: [CardProtocol] = []
+        try cards.forEach { key, _ in
+            let card = try decode(card: key)
+            result.append(card)
         }
+        
+        return result.sorted(by: { $0.identifier < $1.identifier })
     }
 }

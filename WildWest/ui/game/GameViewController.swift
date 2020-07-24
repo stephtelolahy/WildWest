@@ -49,7 +49,7 @@ class GameViewController: UIViewController, Subscribable {
     private var latestState: GameStateProtocol?
     private var latestMove: GameMove?
     
-    private lazy var userPreferences = UserPreferences()
+    private lazy var userPreferences = AppModules.shared.userPreferences
     private lazy var statsBuilder = StatsBuilder(sheriffId: subjects.sheriffId, classifier: MoveClassifier())
     private lazy var playerAdapter = PlayersAdapter()
     private lazy var actionsAdapter = ActionsAdapter(playerId: controlledPlayerId)

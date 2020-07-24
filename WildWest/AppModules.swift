@@ -8,28 +8,30 @@
 
 import Firebase
 
-extension MatchingManager {
-    static let shared = DependecyResolver().createMatchingManager()
-}
-
-class DependecyResolver {
+class AppModules {
     
-    func createMatchingManager() -> MatchingManagerProtocol {
-        let database = MatchingDatabase(rootRef: Database.database().reference(),
-                                        mapper: firebaseMapper)
-        return MatchingManager(database: database)
-    }
+    static let shared = AppModules()
     
-    private lazy var firebaseMapper: FirebaseMapperProtocol = {
-        FirebaseMapper(dtoEncoder: DtoEncoder(keyGenerator: FirebaseKeyGenerator()),
-                       dtoDecoder: DtoDecoder(allCards: gameResources.allCards),
-                       dictionaryEncoder: DictionaryEncoder(),
-                       dictionaryDecoder: DictionaryDecoder())
+    lazy var userPreferences = UserPreferences()
+    
+    lazy var matchingManager: MatchingManagerProtocol = {
+        MatchingManager(database: matchingDatabase)
     }()
     
-    private lazy var gameResources: GameResources = {
-        let jsonReader = JsonReader(bundle: Bundle.main)
-        let resources = GameResources(jsonReader: jsonReader)
-        return resources
+    lazy var matchingDatabase: MatchingDatabaseProtocol = {
+        MatchingDatabase(rootRef: Database.database().reference(),
+                         mapper: firebaseMapper)
     }()
+    
+    lazy var firebaseMapper: FirebaseMapperProtocol = {
+        let dtoEncoder = DtoEncoder(allCards: gameResources.allCards,
+                                    keyGenerator: FirebaseKeyGenerator())
+        return FirebaseMapper(dtoEncoder: dtoEncoder,
+                              dictionaryEncoder: DictionaryEncoder())
+    }()
+    
+    lazy var gameResources: GameResources = {
+        GameResources(jsonReader: JsonReader(bundle: Bundle.main))
+    }()
+    
 }

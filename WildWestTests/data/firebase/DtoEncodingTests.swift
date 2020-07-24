@@ -10,13 +10,11 @@ import XCTest
 
 class DtoEncodingTests: XCTestCase {
     
-    private var encoder: DtoEncoder!
-    private var decoder: DtoDecoder!
+    private var sut: DtoEncoder!
     
     override func setUp() {
         let mockKeyGenerator = MockKeyGeneratorProtocol().withEnabledDefaultImplementation(KeyGeneratorProtocolStub())
-        encoder = DtoEncoder(keyGenerator: mockKeyGenerator)
-        decoder = DtoDecoder(allCards: [])
+        sut = DtoEncoder(allCards: [], keyGenerator: mockKeyGenerator)
     }
     
     func test_DamageEncoding() throws {
@@ -27,8 +25,8 @@ class DtoEncodingTests: XCTestCase {
         
         try events.forEach { event in
             // When
-            let encoded = encoder.encode(damageEvent: event)
-            let decoded = try decoder.decode(damageEvent: encoded)
+            let encoded = sut.encode(damageEvent: event)
+            let decoded = try sut.decode(damageEvent: encoded)
             
             // Assert
             XCTAssertEqual(decoded, event)
@@ -51,8 +49,8 @@ class DtoEncodingTests: XCTestCase {
         
         try challenges.forEach { challenge in
             // When
-            let encoded = encoder.encode(challenge: challenge)
-            let decoded = try decoder.decode(challenge: encoded)
+            let encoded = sut.encode(challenge: challenge)
+            let decoded = try sut.decode(challenge: encoded)
             
             // Assert
             XCTAssertEqual(decoded, challenge)
@@ -76,8 +74,8 @@ class DtoEncodingTests: XCTestCase {
         
         try moves.forEach { move in
             // When
-            let encoded = encoder.encode(move: move)
-            let decoded = try decoder.decode(move: encoded)
+            let encoded = sut.encode(move: move)
+            let decoded = try sut.decode(move: encoded)
             
             // Assert
             XCTAssertEqual(decoded, move)
@@ -107,8 +105,8 @@ class DtoEncodingTests: XCTestCase {
         
         try updates.forEach { update in
             // When
-            let encoded = encoder.encode(update: update)
-            let decoded = try decoder.decode(update: encoded)
+            let encoded = sut.encode(update: update)
+            let decoded = try sut.decode(update: encoded)
             
             // Assert
             XCTAssertEqual(decoded, update)
@@ -120,8 +118,8 @@ class DtoEncodingTests: XCTestCase {
         let user = WUserInfo(id: "1", name: "user1", photoUrl: "https://photo1.png")
         
         // When
-        let encoded = encoder.encode(user: user)
-        let decoded = try decoder.decode(user: encoded)
+        let encoded = sut.encode(user: user)
+        let decoded = try sut.decode(user: encoded)
         
         // Assert
         XCTAssertEqual(decoded, user)
@@ -132,7 +130,7 @@ class DtoEncodingTests: XCTestCase {
         let status = UserStatus.idle
         
         // When
-        let encoded = encoder.encode(status: status)
+        let encoded = sut.encode(status: status)
         
         // Assert
         XCTAssertNil(encoded)
@@ -144,8 +142,8 @@ class DtoEncodingTests: XCTestCase {
         
         // When
         // When
-        let encoded = encoder.encode(status: status)
-        let decoded = try decoder.decode(status: encoded!)
+        let encoded = sut.encode(status: status)
+        let decoded = try sut.decode(status: encoded!)
         
         // Assert
         XCTAssertEqual(decoded, status)
@@ -157,8 +155,8 @@ class DtoEncodingTests: XCTestCase {
         
         // When
         // When
-        let encoded = encoder.encode(status: status)
-        let decoded = try decoder.decode(status: encoded!)
+        let encoded = sut.encode(status: status)
+        let decoded = try sut.decode(status: encoded!)
         
         // Assert
         XCTAssertEqual(decoded, status)

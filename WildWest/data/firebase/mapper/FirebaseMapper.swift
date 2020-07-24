@@ -35,25 +35,19 @@ protocol FirebaseMapperProtocol {
 class FirebaseMapper: FirebaseMapperProtocol {
     
     private let dtoEncoder: DtoEncoder
-    private let dtoDecoder: DtoDecoder
     private let dictionaryEncoder: DictionaryEncoder
-    private let dictionaryDecoder: DictionaryDecoder
     
     init(dtoEncoder: DtoEncoder,
-         dtoDecoder: DtoDecoder,
-         dictionaryEncoder: DictionaryEncoder,
-         dictionaryDecoder: DictionaryDecoder) {
+         dictionaryEncoder: DictionaryEncoder) {
         self.dtoEncoder = dtoEncoder
-        self.dtoDecoder = dtoDecoder
         self.dictionaryEncoder = dictionaryEncoder
-        self.dictionaryDecoder = dictionaryDecoder
         
     }
     
     func decodeState(from snapshot: DataSnapshot) throws -> GameStateProtocol {
         let value = try (snapshot.value as? [String: Any]).unwrap()
-        let dto = try self.dictionaryDecoder.decode(GameStateDto.self, from: value)
-        let state = try self.dtoDecoder.decode(state: dto)
+        let dto = try self.dictionaryEncoder.decode(GameStateDto.self, from: value)
+        let state = try self.dtoEncoder.decode(state: dto)
         return state
     }
     
@@ -61,12 +55,12 @@ class FirebaseMapper: FirebaseMapperProtocol {
         let dictionary = try (snapthot.value as? [String: String]).unwrap()
         let key = try dictionary.keys.first.unwrap()
         let cardId = try dictionary.values.first.unwrap()
-        let card = try dtoDecoder.decode(card: cardId)
+        let card = try dtoEncoder.decode(card: cardId)
         return (key, card)
     }
     
     func decodeCard(from cardId: String) throws -> CardProtocol {
-        try dtoDecoder.decode(card: cardId)
+        try dtoEncoder.decode(card: cardId)
     }
     
     func decodeCards(from snapshot: DataSnapshot) throws -> [CardProtocol] {
@@ -74,15 +68,15 @@ class FirebaseMapper: FirebaseMapperProtocol {
         let keys = dictionary.keys.sorted()
         return try keys.map { key in
             let cardId = try dictionary[key].unwrap()
-            let card = try dtoDecoder.decode(card: cardId)
+            let card = try dtoEncoder.decode(card: cardId)
             return card
         }
     }
     
     func decodeMove(from snapshot: DataSnapshot) throws -> GameMove {
         let value = try (snapshot.value as? [String: Any]).unwrap()
-        let dto = try self.dictionaryDecoder.decode(GameMoveDto.self, from: value)
-        let move = try self.dtoDecoder.decode(move: dto)
+        let dto = try self.dictionaryEncoder.decode(GameMoveDto.self, from: value)
+        let move = try self.dtoEncoder.decode(move: dto)
         return move
     }
     
@@ -92,16 +86,16 @@ class FirebaseMapper: FirebaseMapperProtocol {
         }
         
         return try values.map { value in
-            let dto = try self.dictionaryDecoder.decode(GameMoveDto.self, from: value)
-            let move = try self.dtoDecoder.decode(move: dto)
+            let dto = try self.dictionaryEncoder.decode(GameMoveDto.self, from: value)
+            let move = try self.dtoEncoder.decode(move: dto)
             return move
         }
     }
     
     func decodeUpdate(from snapshot: DataSnapshot) throws -> GameUpdate {
         let value = try (snapshot.value as? [String: Any]).unwrap()
-        let dto = try self.dictionaryDecoder.decode(GameUpdateDto.self, from: value)
-        let update = try self.dtoDecoder.decode(update: dto)
+        let dto = try self.dictionaryEncoder.decode(GameUpdateDto.self, from: value)
+        let update = try self.dtoEncoder.decode(update: dto)
         return update
     }
     
@@ -156,8 +150,8 @@ class FirebaseMapper: FirebaseMapperProtocol {
     
     func decodeUser(from snapshot: DataSnapshot) throws -> WUserInfo {
         let value = try (snapshot.value as? [String: Any]).unwrap()
-        let dto = try dictionaryDecoder.decode(UserInfoDto.self, from: value)
-        let user = try dtoDecoder.decode(user: dto)
+        let dto = try dictionaryEncoder.decode(UserInfoDto.self, from: value)
+        let user = try dtoEncoder.decode(user: dto)
         return user
     }
     
@@ -175,8 +169,8 @@ class FirebaseMapper: FirebaseMapperProtocol {
             return .idle
         }
         
-        let dto = try self.dictionaryDecoder.decode(UserStatusDto.self, from: value)
-        let status = try dtoDecoder.decode(status: dto)
+        let dto = try self.dictionaryEncoder.decode(UserStatusDto.self, from: value)
+        let status = try dtoEncoder.decode(status: dto)
         return status
     }
 }

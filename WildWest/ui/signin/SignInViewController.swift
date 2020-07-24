@@ -47,7 +47,7 @@ extension SignInViewController: FUIAuthDelegate {
             return
         }
         
-        sub(MatchingManager.shared.createUser().subscribe(onCompleted: {
+        sub(AppModules.shared.matchingManager.createUser().subscribe(onCompleted: {
             Navigator(self).toMenu()
         }, onError: { error in
             fatalError(error.localizedDescription)

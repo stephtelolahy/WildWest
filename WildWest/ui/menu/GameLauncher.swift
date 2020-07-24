@@ -8,39 +8,22 @@
 
 import UIKit
 import RxSwift
-import Firebase
 
 class GameLauncher: Subscribable {
     
     private unowned let viewController: UIViewController
     
-    private lazy var userPreferences = UserPreferences()
-    
-    private lazy var builder = GameEnvironmentBuilder()
-    
     init(viewController: UIViewController) {
         self.viewController = viewController
     }
     
-    private lazy var gameResources: GameResources = {
-        let jsonReader = JsonReader(bundle: Bundle.main)
-        let resources = GameResources(jsonReader: jsonReader)
-        return resources
+    private lazy var userPreferences = AppModules.shared.userPreferences
+    
+    private lazy var builder = GameEnvironmentBuilder()
+    
+    private lazy var allFigures: [FigureProtocol] = {
+        AppModules.shared.gameResources.allFigures.filter { !$0.abilities.isEmpty }
     }()
-    
-    private lazy var allCards: [CardProtocol] = gameResources.allCards
-    
-    private lazy var allFigures: [FigureProtocol] = gameResources.allFigures.filter { !$0.abilities.isEmpty }
-    
-    private lazy var firebaseMapper: FirebaseMapperProtocol = {
-        FirebaseMapper(dtoEncoder: DtoEncoder(keyGenerator: FirebaseKeyGenerator()),
-                       dtoDecoder: DtoDecoder(allCards: allCards),
-                       dictionaryEncoder: DictionaryEncoder(),
-                       dictionaryDecoder: DictionaryDecoder())
-    }()
-    
-    private lazy var matchingDatabase = MatchingDatabase(rootRef: Database.database().reference(),
-                                                         mapper: firebaseMapper)
     
     func startLocal() {
         let state = createGame()
@@ -60,7 +43,7 @@ class GameLauncher: Subscribable {
                                                                        state: state,
                                                                        controlledId: controlledId,
                                                                        updateDelay: self.userPreferences.updateDelay,
-                                                                       firebaseMapper: self.firebaseMapper)
+                                                                       firebaseMapper: AppModules.shared.firebaseMapper)
                 
                 // wait until executedMove and executedUpdate PublishSubjects emit lastest values
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -75,11 +58,11 @@ class GameLauncher: Subscribable {
     
     func match() -> Single<(String, GameStateProtocol)> {
         let gameId = "live"
-        return matchingDatabase.getGame(gameId)
+        return AppModules.shared.matchingDatabase.getGame(gameId)
             .map({ (gameId, $0) })
             .catchError { _ in
                 let state = self.createGame()
-                return self.matchingDatabase.createGame(id: gameId, state: state)
+                return AppModules.shared.matchingDatabase.createGame(id: gameId, state: state)
                     .andThen(Single.just((gameId, state)))
             }
     }
@@ -89,7 +72,7 @@ private extension GameLauncher {
     
     func createGame() -> GameStateProtocol {
         let playersCount = userPreferences.playersCount
-        let cards = allCards
+        let cards = AppModules.shared.gameResources.allCards
         let figures = allFigures
         let preferredRole: Role? = userPreferences.playAsSheriff ? .sheriff : nil
         let preferredFigure = userPreferences.preferredFigure

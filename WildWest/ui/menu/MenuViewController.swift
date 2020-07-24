@@ -22,7 +22,7 @@ class MenuViewController: UIViewController, Subscribable {
     
     // MARK: - Properties
     
-    private lazy var userPreferences = UserPreferences()
+    private lazy var userPreferences = AppModules.shared.userPreferences
     
     private lazy var allFigures: [FigureProtocol] = {
         let jsonReader = JsonReader(bundle: Bundle.main)
@@ -117,7 +117,7 @@ private extension MenuViewController {
     }
     
     func observeUserStatus() {
-        sub(MatchingManager.shared.observeUserStatus().subscribe(onNext: { status in
+        sub(AppModules.shared.matchingManager.observeUserStatus().subscribe(onNext: { status in
             print("user status: \(String(describing: status))")
         }, onError: { error in
             fatalError(error.localizedDescription)
