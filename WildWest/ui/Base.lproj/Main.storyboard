@@ -602,17 +602,17 @@
                                 <rect key="frame" x="429.5" y="188.5" width="37" height="37"/>
                             </activityIndicatorView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="45" translatesAutoresizingMaskIntoConstraints="NO" id="fjW-WV-Mfy">
-                                <rect key="frame" x="368" y="257.5" width="160.5" height="117"/>
+                                <rect key="frame" x="378.5" y="257.5" width="139" height="117"/>
                                 <subviews>
-                                    <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Finding worthy opponents" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r0F-xF-Q1x">
-                                        <rect key="frame" x="0.0" y="0.0" width="160.5" height="20"/>
+                                    <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Looking for opponents" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r0F-xF-Q1x">
+                                        <rect key="frame" x="0.0" y="0.0" width="139" height="20"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sdP-9w-QTF" userLabel="playButton">
-                                        <rect key="frame" x="30" y="65" width="100" height="52"/>
+                                        <rect key="frame" x="19.5" y="65" width="100" height="52"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="Jbj-J6-zxc"/>
                                         </constraints>
@@ -712,6 +712,7 @@ name</string>
                     </view>
                     <navigationItem key="navigationItem" id="pFe-zd-y1m"/>
                     <connections>
+                        <outlet property="startButton" destination="sdP-9w-QTF" id="Ps0-ms-VT8"/>
                         <outlet property="userCollectionView" destination="C2Z-Ow-zzR" id="aDE-3c-STI"/>
                     </connections>
                 </viewController>

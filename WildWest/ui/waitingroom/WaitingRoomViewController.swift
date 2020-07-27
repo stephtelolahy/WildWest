@@ -13,11 +13,12 @@ class WaitingRoomViewController: UIViewController, Subscribable {
     // MARK: - IBOutlets
     
     @IBOutlet private weak var userCollectionView: UICollectionView!
+    @IBOutlet private weak var startButton: UIButton!
     
     // MARK: - Properties
     
     var onQuit: (() -> Void)?
-    var onStart: (() -> Void)?
+    var onStart: (([WUserInfo]) -> Void)?
     
     private var users: [WUserInfo] = []
     private lazy var manager: MatchingManagerProtocol = AppModules.shared.matchingManager
@@ -36,7 +37,7 @@ class WaitingRoomViewController: UIViewController, Subscribable {
     }
     
     @IBAction private func startButtonTapped(_ sender: Any) {
-        onStart?()
+        onStart?(users)
     }
     
     // MARK: - Private
@@ -45,6 +46,8 @@ class WaitingRoomViewController: UIViewController, Subscribable {
         sub(manager.observeWaitingUsers().subscribe(onNext: { [weak self] users in
             self?.users = users
             self?.userCollectionView.reloadData()
+            let minUsersCount = 2
+            self?.startButton.isHidden = users.count < minUsersCount
         }))
     }
 }

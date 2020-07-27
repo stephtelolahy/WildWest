@@ -16,8 +16,7 @@ class NavigationController: UINavigationController, Subscribable {
     override func viewDidLoad() {
         super.viewDidLoad()
         if Auth.auth().currentUser != nil {
-            loadMenu()
-            observeUserStatus()
+            handleSignInCompleted()
         } else {
             loadSignIn()
         }
@@ -25,6 +24,11 @@ class NavigationController: UINavigationController, Subscribable {
 }
 
 private extension NavigationController {
+    
+    func handleSignInCompleted() {
+        loadMenu()
+        observeUserStatus()
+    }
     
     func loadSignIn() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -34,8 +38,7 @@ private extension NavigationController {
         }
         
         signInViewController.onCompleted = { [weak self] in
-            self?.loadMenu()
-            self?.observeUserStatus()
+            self?.handleSignInCompleted()
         }
         
         fade(to: signInViewController)
@@ -77,6 +80,14 @@ private extension NavigationController {
             }
             
             self.sub(self.manager.quitWaitingRoom().subscribe())
+        }
+        
+        waitingRoomViewController.onStart = { [weak self] users in
+            guard let self = self else {
+                return
+            }
+            
+            self.sub(self.manager.createGame(users: users).subscribe())
         }
         
         fade(to: waitingRoomViewController)

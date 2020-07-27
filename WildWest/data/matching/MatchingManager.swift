@@ -11,12 +11,15 @@ import FirebaseUI
 import RxSwift
 
 protocol MatchingManagerProtocol {
+    var currentUserId: String { get }
+    
     func createUser() -> Completable
     func observeUserStatus() -> Observable<UserStatus>
     func addToWaitingRoom() -> Completable
     func quitWaitingRoom() -> Completable
     func quitGame() -> Completable
     func observeWaitingUsers() -> Observable<[WUserInfo]>
+    func createGame(users: [WUserInfo]) -> Completable
 }
 
 class MatchingManager: MatchingManagerProtocol {
@@ -25,6 +28,14 @@ class MatchingManager: MatchingManagerProtocol {
     
     init(database: MatchingDatabaseProtocol) {
         self.database = database
+    }
+    
+    var currentUserId: String {
+        guard let user = Auth.auth().currentUser else {
+            fatalError("Missing user")
+        }
+        
+        return user.uid
     }
     
     func createUser() -> Completable {
@@ -59,50 +70,17 @@ class MatchingManager: MatchingManagerProtocol {
         database.observeAllUsers()
             .map { $0.filter { $0.status == .waiting } }
     }
-}
-
-private extension MatchingManager {
     
-    var currentUserId: String {
-        guard let user = Auth.auth().currentUser else {
-            fatalError("Missing user")
-        }
+    func createGame(users: [WUserInfo]) -> Completable {
+        let state = GameBuilder().createGame(for: users.count)
+        let gameId = FirebaseKeyGenerator().autoId()
         
-        return user.uid
-    }
-    /*
-    // 1: get waiting users
-    // 2: create game
-    // 3: update playing users
-    func match() -> Completable {
-        getWaitingUsers(atLeast: 2)
-            .flatMapCompletable { users in
-                let state = GameBuilder().createGame(for: users.count)
-                let gameId = FirebaseKeyGenerator().autoId()
-                return self.database.createGame(id: gameId, state: state)
-                    .andThen(self.updatePlayingUsers(users: users, gameId: gameId, state: state))
-            }
-    }
-    
-    func getWaitingUsers(atLeast min: Int) -> Single<[WUserInfo]> {
-        database.getAllUsers()
-            .map { users in
-                let waitingUsers = users.filter { $0.status == .waiting }
-                guard waitingUsers.count >= min else {
-                    throw NSError(domain: "Not enouth waiting users", code: 0)
-                }
-                
-                return waitingUsers
-            }
-    }
-    
-    func updatePlayingUsers(users: [WUserInfo], gameId: String, state: GameStateProtocol) -> Completable {
         let playerIds = state.allPlayers.map { $0.identifier }
         let updates: [Completable] = users.enumerated().map { index, user in
             database.setUserStatus(user.id, status: .playing(gameId: gameId, playerId: playerIds[index]))
         }
-        return Completable.concat(updates)
+        
+        return database.createGame(id: gameId, state: state)
+            .andThen(Completable.concat(updates))
     }
- */
-    
 }
