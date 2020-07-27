@@ -48,6 +48,7 @@
 		3322C4B62452379700D7B297 /* GameStateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4B52452379700D7B297 /* GameStateDto.swift */; };
 		3324018E23DBA6C800B92439 /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */; };
 		332499B323DB9F650082EF09 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332499B223DB9F650082EF09 /* GameViewController.swift */; };
+		3328DEB524CEF0B900D09117 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3328DEB424CEF0B900D09117 /* UserCell.swift */; };
 		3328FC9B242F294000A82255 /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5643423A4E09C00C1BD01 /* Beer.swift */; };
 		3328FC9C242F294100A82255 /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5643423A4E09C00C1BD01 /* Beer.swift */; };
 		3328FC9D242F294900A82255 /* Saloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE91AC523B9F84200F7316B /* Saloon.swift */; };
@@ -388,6 +389,7 @@
 		3322C4B52452379700D7B297 /* GameStateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateDto.swift; sourceTree = "<group>"; };
 		3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		332499B223DB9F650082EF09 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		3328DEB424CEF0B900D09117 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		3328FCDD242F2D1F00A82255 /* ChooseCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCard.swift; sourceTree = "<group>"; };
 		3328FCEC242F2F0D00A82255 /* ChooseCardMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCardMatcherTests.swift; sourceTree = "<group>"; };
 		3328FCEE242F2F8000A82255 /* DiscardBangOnIndiansMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardBangOnIndiansMatcherTests.swift; sourceTree = "<group>"; };
@@ -757,6 +759,14 @@
 			path = sfx;
 			sourceTree = "<group>";
 		};
+		3328DEB324CEF0A000D09117 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				3328DEB424CEF0B900D09117 /* UserCell.swift */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
 		3338B2EA242FD0480097BA57 /* convenience */ = {
 			isa = PBXGroup;
 			children = (
@@ -859,6 +869,7 @@
 			isa = PBXGroup;
 			children = (
 				33639FD924CB421D00F48727 /* WaitingRoomViewController.swift */,
+				3328DEB324CEF0A000D09117 /* cell */,
 			);
 			path = waitingroom;
 			sourceTree = "<group>";
@@ -1722,6 +1733,7 @@
 				330FDECC242F384C00284FE7 /* GainRewardOnEliminatingOutlaw.swift in Sources */,
 				3301BEF423F962F000B4364D /* RandomAIWithRole.swift in Sources */,
 				3320A340242FC9EF002CD5AE /* GameState+Outcome.swift in Sources */,
+				3328DEB524CEF0B900D09117 /* UserCell.swift in Sources */,
 				33A4381223E4BD3200C39DD6 /* ArrayExtension.swift in Sources */,
 				336AA6F023F1450800328837 /* GameDatabaseProtocol.swift in Sources */,
 				337D7FDD2430879F0078F749 /* PlayerDescriptor.swift in Sources */,

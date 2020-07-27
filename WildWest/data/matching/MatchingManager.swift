@@ -13,9 +13,10 @@ import RxSwift
 protocol MatchingManagerProtocol {
     func createUser() -> Completable
     func observeUserStatus() -> Observable<UserStatus>
-    func requestGame() -> Completable
+    func addToWaitingRoom() -> Completable
     func quitWaitingRoom() -> Completable
     func quitGame() -> Completable
+    func observeWaitingUsers() -> Observable<[WUserInfo]>
 }
 
 class MatchingManager: MatchingManagerProtocol {
@@ -42,9 +43,8 @@ class MatchingManager: MatchingManagerProtocol {
         database.observeUserStatus(currentUserId)
     }
     
-    func requestGame() -> Completable {
+    func addToWaitingRoom() -> Completable {
         database.setUserStatus(currentUserId, status: .waiting)
-            .andThen(match())
     }
     
     func quitWaitingRoom() -> Completable {
@@ -53,6 +53,11 @@ class MatchingManager: MatchingManagerProtocol {
     
     func quitGame() -> Completable {
         database.setUserStatus(currentUserId, status: .idle)
+    }
+    
+    func observeWaitingUsers() -> Observable<[WUserInfo]> {
+        database.observeAllUsers()
+            .map { $0.filter { $0.status == .waiting } }
     }
 }
 
@@ -65,7 +70,7 @@ private extension MatchingManager {
         
         return user.uid
     }
-    
+    /*
     // 1: get waiting users
     // 2: create game
     // 3: update playing users
@@ -98,5 +103,6 @@ private extension MatchingManager {
         }
         return Completable.concat(updates)
     }
+ */
     
 }
