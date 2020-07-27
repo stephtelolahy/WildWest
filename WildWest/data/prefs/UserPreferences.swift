@@ -27,6 +27,6 @@ class UserPreferences {
     @UserDefaultsStored("simulation_mode", defaultValue: false)
     var simulationMode: Bool
     
-    @UserDefaultsStored("enable_sound", defaultValue: true)
+    @UserDefaultsStored("enable_sound", defaultValue: false)
     var enableSound: Bool
 }

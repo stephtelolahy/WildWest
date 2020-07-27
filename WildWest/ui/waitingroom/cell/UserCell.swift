@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class UserCell: UICollectionViewCell {
     
@@ -15,5 +16,7 @@ class UserCell: UICollectionViewCell {
     
     func update(with user: WUserInfo) {
         nameLabel.text = user.name
+        let url = URL(string: user.photoUrl)
+        photoImageView.kf.setImage(with: url)
     }
 }

@@ -238,7 +238,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xwt-WO-VS0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="484" y="858"/>
+            <point key="canvasLocation" x="1132" y="861"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="5RH-Er-B9e">
@@ -632,7 +632,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="C2Z-Ow-zzR" secondAttribute="height" multiplier="7:1" id="rTR-84-GkD"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="iF2-Rv-HLb">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="iF2-Rv-HLb">
                                     <size key="itemSize" width="100" height="100"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -640,24 +640,20 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserCell" id="jV4-rX-Yir" customClass="UserCell" customModule="WildWest" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="-2.5" width="94" height="116"/>
+                                        <rect key="frame" x="0.0" y="5.5" width="100" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hv5-Xh-sYg">
-                                            <rect key="frame" x="0.0" y="0.0" width="94" height="116"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6tl-0l-sW0">
-                                                    <rect key="frame" x="0.0" y="0.0" width="94" height="116"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lng-RK-hyL">
-                                                            <rect key="frame" x="0.0" y="0.0" width="94" height="84"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" secondItem="lng-RK-hyL" secondAttribute="height" multiplier="1:1" id="2on-Kl-WCv"/>
-                                                            </constraints>
+                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
                                                         </imageView>
-                                                        <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GLS-ri-0B9" userLabel="name Label">
-                                                            <rect key="frame" x="0.0" y="84" width="94" height="32"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GLS-ri-0B9" userLabel="name Label">
+                                                            <rect key="frame" x="0.0" y="50" width="100" height="50"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <string key="text">name
 name</string>
@@ -675,7 +671,7 @@ name</string>
                                                 <constraint firstAttribute="trailing" secondItem="6tl-0l-sW0" secondAttribute="trailing" id="jru-5X-WJU"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <color key="backgroundColor" red="0.92260223630000004" green="0.70065742730000002" blue="0.2822070122" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="nameLabel" destination="GLS-ri-0B9" id="YGq-me-fgJ"/>
                                             <outlet property="photoImageView" destination="lng-RK-hyL" id="cPh-Ca-rbi"/>
@@ -721,7 +717,7 @@ name</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5YS-D0-fGe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1162.5" y="859.4202898550725"/>
+            <point key="canvasLocation" x="1886" y="2357"/>
         </scene>
     </scenes>
     <resources>

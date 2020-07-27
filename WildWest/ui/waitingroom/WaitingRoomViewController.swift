@@ -62,3 +62,12 @@ extension WaitingRoomViewController: UICollectionViewDataSource {
         return cell
     }
 }
+
+extension WaitingRoomViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let height = collectionView.bounds.height
+        return CGSize(width: height, height: height)
+    }
+}
