@@ -18,15 +18,12 @@ class UserPreferences {
     @UserDefaultsStored("play_as_sheriff", defaultValue: true)
     var playAsSheriff: Bool
     
-    @UserDefaultsStored("update_delay", defaultValue: 0.6)
+    @UserDefaultsStored("update_delay", defaultValue: 0.8)
     var updateDelay: Double
     
-    @UserDefaultsStored("assisted_mode", defaultValue: true)
+    @UserDefaultsStored("assisted_mode", defaultValue: false)
     var assistedMode: Bool
     
-    @UserDefaultsStored("simulation_mode", defaultValue: false)
-    var simulationMode: Bool
-    
-    @UserDefaultsStored("enable_sound", defaultValue: false)
+    @UserDefaultsStored("enable_sound", defaultValue: true)
     var enableSound: Bool
 }
