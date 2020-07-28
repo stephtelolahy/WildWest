@@ -249,6 +249,7 @@
 		33A815ED23DB54350081A055 /* roles.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A815EC23DB54350081A055 /* roles.json */; };
 		33A815EE23DB54350081A055 /* roles.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A815EC23DB54350081A055 /* roles.json */; };
 		33AE6D2C244349910006E72F /* AssistedReactionMoveSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AE6D2B244349910006E72F /* AssistedReactionMoveSelector.swift */; };
+		33AF98F624D0964E00D626E9 /* DrawsFirstCardFromOtherPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AF98F524D0964E00D626E9 /* DrawsFirstCardFromOtherPlayerTests.swift */; };
 		33AFA25323DC201A00425BEB /* ClassNameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */; };
 		33B1566224540EA800746B61 /* GameUpdate+ExecutionTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304D9412453FF1C00731AE9 /* GameUpdate+ExecutionTime.swift */; };
 		33B1566524540F0200746B61 /* GameSubjectsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B1566424540F0200746B61 /* GameSubjectsTests.swift */; };
@@ -502,6 +503,7 @@
 		33A733F723DC5AC300E9B2AD /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		33A815EC23DB54350081A055 /* roles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = roles.json; sourceTree = "<group>"; };
 		33AE6D2B244349910006E72F /* AssistedReactionMoveSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistedReactionMoveSelector.swift; sourceTree = "<group>"; };
+		33AF98F524D0964E00D626E9 /* DrawsFirstCardFromOtherPlayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawsFirstCardFromOtherPlayerTests.swift; sourceTree = "<group>"; };
 		33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameProtocol.swift; sourceTree = "<group>"; };
 		33B1566424540F0200746B61 /* GameSubjectsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSubjectsTests.swift; sourceTree = "<group>"; };
 		33B156672454188200746B61 /* GameResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameResources.swift; sourceTree = "<group>"; };
@@ -933,6 +935,7 @@
 				332B844D24390043005E5B21 /* DrawsCardWhenHandIsEmptyMatcherTests.swift */,
 				33EF407B244F6AF6008FA490 /* Discard2CardsFor1LifeMatcherTests.swift */,
 				331B4645244A11EC00F3634A /* DrawsAnotherCardIfSecondDrawIsRedSuitMatcherTests.swift */,
+				33AF98F524D0964E00D626E9 /* DrawsFirstCardFromOtherPlayerTests.swift */,
 			);
 			path = special;
 			sourceTree = "<group>";
@@ -1930,6 +1933,7 @@
 				335157FC245D88AD00C46888 /* GameMoveDto.swift in Sources */,
 				330761A42453560900E8C2EF /* GameLoop.swift in Sources */,
 				335157FB245D889900C46888 /* PlayerDto.swift in Sources */,
+				33AF98F624D0964E00D626E9 /* DrawsFirstCardFromOtherPlayerTests.swift in Sources */,
 				33515801245D892700C46888 /* KeyGeneratorProtocol.swift in Sources */,
 				330FDED5242F38DF00284FE7 /* PenalizeSheriffOnEliminatingDeputyMatcherTests.swift in Sources */,
 				3346F32924CB1D7800FB0418 /* DtoEncoder+User.swift in Sources */,

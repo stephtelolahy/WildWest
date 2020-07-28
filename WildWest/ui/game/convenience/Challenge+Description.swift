@@ -29,7 +29,7 @@ extension Challenge {
             return "general store by \(state.turn)"
             
         default:
-            fatalError("Illegal state")
+            return name.rawValue
         }
     }
 }
