@@ -14,8 +14,8 @@ class AnalyticsManager {
     
     func tagEventGameOver(_ state: GameStateProtocol) {
         Analytics.logEvent("game_over", parameters: [
-            "outcome": state.outcomeText,
-            "winner": state.winner,
+            "outcome": state.outcomeText ?? "",
+            "winner": state.winner ?? "",
             "players_count": state.allPlayers.count
         ])
     }
@@ -23,28 +23,28 @@ class AnalyticsManager {
 
 private extension GameStateProtocol {
     
-    var outcomeText: String {
+    var outcomeText: String? {
         guard let outcome = self.outcome else {
-            fatalError("Illegal state")
+            return nil
         }
         
         return outcome.rawValue
     }
     
-    var winner: String {
+    var winner: String? {
         guard let outcome = self.outcome else {
-            fatalError("Illegal state")
+            return nil
         }
         
         switch outcome {
         case .sheriffWin:
-            return players.first(where: { $0.role == .sheriff })!.figureName.rawValue
+            return players.first(where: { $0.role == .sheriff })?.figureName.rawValue
             
         case .renegadeWin:
-            return players.first(where: { $0.role == .renegade })!.figureName.rawValue
+            return players.first(where: { $0.role == .renegade })?.figureName.rawValue
             
         case .outlawWin:
-            return players.first(where: { $0.role == .outlaw })!.figureName.rawValue
+            return players.first(where: { $0.role == .outlaw })?.figureName.rawValue
         }
     }
 }
