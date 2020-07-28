@@ -15,7 +15,7 @@ class PassMatcher: MoveMatcherProtocol {
         }
         
         switch challenge.name {
-        case .bang, .duel, .gatling, .indians, .generalStore:
+        case .bang, .duel, .gatling, .indians:
             return [GameMove(name: .pass, actorId: challenge.targetIds.first!)]
             
         case .dynamiteExploded:
@@ -35,7 +35,7 @@ class PassMatcher: MoveMatcherProtocol {
         
         var damageSource: DamageSource!
         switch challenge.name {
-        case .bang, .gatling, .duel, .indians:
+        case .bang, .duel, .gatling, .indians:
             damageSource = .byPlayer(state.turn)
             
         case .dynamiteExploded:

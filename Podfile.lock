@@ -122,6 +122,7 @@ PODS:
   - GTMSessionFetcher/Core (1.4.0)
   - GTMSessionFetcher/Full (1.4.0):
     - GTMSessionFetcher/Core (= 1.4.0)
+  - Kingfisher (4.10.1)
   - leveldb-library (1.22)
   - nanopb (1.30905.0):
     - nanopb/decode (= 1.30905.0)
@@ -146,6 +147,7 @@ DEPENDENCIES:
   - FirebaseUI/Google
   - FirebaseUI/OAuth
   - FirebaseUI/Phone
+  - Kingfisher
   - RxBlocking
   - RxSwift
   - RxTest
@@ -172,6 +174,7 @@ SPEC REPOS:
     - GoogleUtilities
     - GTMAppAuth
     - GTMSessionFetcher
+    - Kingfisher
     - leveldb-library
     - nanopb
     - PromisesObjC
@@ -200,6 +203,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: e121a3867449ce16b0e35ddf1797ea7a389ffdf2
   GTMAppAuth: 4deac854479704f348309e7b66189e604cf5e01e
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
+  Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
@@ -208,6 +212,6 @@ SPEC CHECKSUMS:
   RxTest: 711632d5644dffbeb62c936a521b5b008a1e1faa
   SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
 
-PODFILE CHECKSUM: 453b962e5b19f1621ee33fc19ed58b357bdf53fc
+PODFILE CHECKSUM: 9d91874024647e2dcf5381845db3b1f3fd30ff2f
 
 COCOAPODS: 1.9.3

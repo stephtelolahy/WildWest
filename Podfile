@@ -1,6 +1,8 @@
 # Uncomment the next line to define a global platform for your project
 platform :ios, '9.3'
 
+inhibit_all_warnings!
+
 def shared_pods
   pod 'RxSwift'
   pod 'Firebase/Database'
@@ -18,6 +20,8 @@ target 'WildWest' do
   pod 'FirebaseUI/Facebook'
   pod 'FirebaseUI/OAuth' # Used for Sign in with Apple, Twitter, etc
   pod 'FirebaseUI/Phone'
+  
+  pod 'Kingfisher'
   
   pod 'SwiftLint'
 end

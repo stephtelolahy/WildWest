@@ -11,13 +11,12 @@ import FirebaseUI
 
 class NavigationController: UINavigationController, Subscribable {
     
-    private lazy var matchingManager: MatchingManagerProtocol = AppModules.shared.matchingManager
+    private lazy var manager: MatchingManagerProtocol = AppModules.shared.matchingManager
     
     override func viewDidLoad() {
         super.viewDidLoad()
         if Auth.auth().currentUser != nil {
-            loadMenu()
-            observeUserStatus()
+            handleSignInCompleted()
         } else {
             loadSignIn()
         }
@@ -25,6 +24,11 @@ class NavigationController: UINavigationController, Subscribable {
 }
 
 private extension NavigationController {
+    
+    func handleSignInCompleted() {
+        loadMenu()
+        observeUserStatus()
+    }
     
     func loadSignIn() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -34,8 +38,7 @@ private extension NavigationController {
         }
         
         signInViewController.onCompleted = { [weak self] in
-            self?.loadMenu()
-            self?.observeUserStatus()
+            self?.handleSignInCompleted()
         }
         
         fade(to: signInViewController)
@@ -57,7 +60,7 @@ private extension NavigationController {
                 return
             }
             
-            self.sub(self.matchingManager.requestGame().subscribe())
+            self.sub(self.manager.addToWaitingRoom().subscribe())
         }
         
         fade(to: menuViewController)
@@ -76,7 +79,15 @@ private extension NavigationController {
                 return
             }
             
-            self.sub(self.matchingManager.quitWaitingRoom().subscribe())
+            self.sub(self.manager.quitWaitingRoom().subscribe())
+        }
+        
+        waitingRoomViewController.onStart = { [weak self] users in
+            guard let self = self else {
+                return
+            }
+            
+            self.sub(self.manager.createGame(users: users).subscribe())
         }
         
         fade(to: waitingRoomViewController)
@@ -108,14 +119,14 @@ private extension NavigationController {
                 return
             }
             
-            self.sub(self.matchingManager.quitGame().subscribe())
+            self.sub(self.manager.quitGame().subscribe())
         }
         
         fade(to: gameViewController)
     }
     
     func observeUserStatus() {
-        sub(matchingManager.observeUserStatus().subscribe(onNext: { [weak self] status in
+        sub(manager.observeUserStatus().subscribe(onNext: { [weak self] status in
             print("user status: \(String(describing: status))")
             switch status {
             case .waiting:

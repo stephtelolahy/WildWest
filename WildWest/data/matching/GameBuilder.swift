@@ -19,7 +19,7 @@ class GameBuilder: Subscribable {
                                preferredFigure: userPreferences.preferredFigure,
                                preferredRole: userPreferences.playAsSheriff ? .sheriff : nil)
         
-        let controlledId: String? = !userPreferences.simulationMode ? state.players.first?.identifier : nil
+        let controlledId = state.players.first?.identifier
         
         return createLocalEnvironment(state: state,
                                       controlledId: controlledId,

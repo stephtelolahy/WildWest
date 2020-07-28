@@ -48,6 +48,7 @@
 		3322C4B62452379700D7B297 /* GameStateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4B52452379700D7B297 /* GameStateDto.swift */; };
 		3324018E23DBA6C800B92439 /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */; };
 		332499B323DB9F650082EF09 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332499B223DB9F650082EF09 /* GameViewController.swift */; };
+		3328DEB524CEF0B900D09117 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3328DEB424CEF0B900D09117 /* UserCell.swift */; };
 		3328FC9B242F294000A82255 /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5643423A4E09C00C1BD01 /* Beer.swift */; };
 		3328FC9C242F294100A82255 /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5643423A4E09C00C1BD01 /* Beer.swift */; };
 		3328FC9D242F294900A82255 /* Saloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE91AC523B9F84200F7316B /* Saloon.swift */; };
@@ -316,7 +317,7 @@
 		33F94AB723F0580800D1BCFE /* GameUpdateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F94AB523F0580800D1BCFE /* GameUpdateProtocol.swift */; };
 		33FB59B82427F6D000090D23 /* PlayersAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E4411524077CA000B2848E /* PlayersAdapter.swift */; };
 		33FDD70C240BFB4B00BC3E14 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */; };
-		8DBD562D47470962F400716D /* libPods-WildWestTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 102E20EA2AD38505FB9CFBD5 /* libPods-WildWestTests.a */; };
+		4957C45E9A225C3516C9F979 /* libPods-WildWestTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B849B2790BBF383A4D5A4E1C /* libPods-WildWestTests.a */; };
 		AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */; };
 		AD49F86723BA054400543F59 /* Figure.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49F86623BA054400543F59 /* Figure.swift */; };
 		AD49F86823BA054D00543F59 /* Figure.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49F86623BA054400543F59 /* Figure.swift */; };
@@ -362,7 +363,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		102E20EA2AD38505FB9CFBD5 /* libPods-WildWestTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WildWestTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		15EFD4A90888EB671B9B5CF5 /* Pods-WildWestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.debug.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3301BEF323F962F000B4364D /* RandomAIWithRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomAIWithRole.swift; sourceTree = "<group>"; };
 		3301BEF923F9A79B00B4364D /* AIPlayerAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIPlayerAgent.swift; sourceTree = "<group>"; };
@@ -388,6 +388,7 @@
 		3322C4B52452379700D7B297 /* GameStateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateDto.swift; sourceTree = "<group>"; };
 		3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		332499B223DB9F650082EF09 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		3328DEB424CEF0B900D09117 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		3328FCDD242F2D1F00A82255 /* ChooseCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCard.swift; sourceTree = "<group>"; };
 		3328FCEC242F2F0D00A82255 /* ChooseCardMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCardMatcherTests.swift; sourceTree = "<group>"; };
 		3328FCEE242F2F8000A82255 /* DiscardBangOnIndiansMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardBangOnIndiansMatcherTests.swift; sourceTree = "<group>"; };
@@ -600,6 +601,7 @@
 		ADE91ACC23B9FE2300F7316B /* JsonReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonReader.swift; sourceTree = "<group>"; };
 		ADE91ACF23B9FF0700F7316B /* cards.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cards.json; sourceTree = "<group>"; };
 		ADE91AD323BA00DC00F7316B /* GameSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetup.swift; sourceTree = "<group>"; };
+		B849B2790BBF383A4D5A4E1C /* libPods-WildWestTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WildWestTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -615,7 +617,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DBD562D47470962F400716D /* libPods-WildWestTests.a in Frameworks */,
+				4957C45E9A225C3516C9F979 /* libPods-WildWestTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -757,6 +759,14 @@
 			path = sfx;
 			sourceTree = "<group>";
 		};
+		3328DEB324CEF0A000D09117 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				3328DEB424CEF0B900D09117 /* UserCell.swift */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
 		3338B2EA242FD0480097BA57 /* convenience */ = {
 			isa = PBXGroup;
 			children = (
@@ -859,6 +869,7 @@
 			isa = PBXGroup;
 			children = (
 				33639FD924CB421D00F48727 /* WaitingRoomViewController.swift */,
+				3328DEB324CEF0A000D09117 /* cell */,
 			);
 			path = waitingroom;
 			sourceTree = "<group>";
@@ -1405,7 +1416,7 @@
 			isa = PBXGroup;
 			children = (
 				8C300D3666EB3B530B73C9D4 /* Pods_WildWest.framework */,
-				102E20EA2AD38505FB9CFBD5 /* libPods-WildWestTests.a */,
+				B849B2790BBF383A4D5A4E1C /* libPods-WildWestTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1722,6 +1733,7 @@
 				330FDECC242F384C00284FE7 /* GainRewardOnEliminatingOutlaw.swift in Sources */,
 				3301BEF423F962F000B4364D /* RandomAIWithRole.swift in Sources */,
 				3320A340242FC9EF002CD5AE /* GameState+Outcome.swift in Sources */,
+				3328DEB524CEF0B900D09117 /* UserCell.swift in Sources */,
 				33A4381223E4BD3200C39DD6 /* ArrayExtension.swift in Sources */,
 				336AA6F023F1450800328837 /* GameDatabaseProtocol.swift in Sources */,
 				337D7FDD2430879F0078F749 /* PlayerDescriptor.swift in Sources */,
