@@ -143,7 +143,7 @@ class Player_AbilityTests: XCTestCase {
         
         // When
         // Assert
-        XCTAssertEqual(sut.bandCardNames, [.bang])
+        XCTAssertEqual(sut.bangCardNames, [.bang])
     }
     
     func test_CanBangWithMissedCard_IfHavingAbility() {
@@ -154,7 +154,7 @@ class Player_AbilityTests: XCTestCase {
         
         // When
         // Assert
-        XCTAssertEqual(sut.bandCardNames, [.bang, .missed])
+        XCTAssertEqual(sut.bangCardNames, [.bang, .missed])
     }
     
     func test_DefaultCanMissedWithMissedCard() {

@@ -70,7 +70,7 @@ extension PlayerProtocol {
         return result
     }
     
-    var bandCardNames: [CardName] {
+    var bangCardNames: [CardName] {
         var result: [CardName] = [.bang]
         
         if abilities[.canPlayBangAsMissAndViceVersa] == true {
