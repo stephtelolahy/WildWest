@@ -64,6 +64,10 @@ class MoveSoundPlayer: MoveSoundPlayerProtocol {
         .choose: "Slide Closed-SoundBible.com-1521580537",
         .endTurn: "Slide Closed-SoundBible.com-1521580537",
         .startTurn: "Slide Closed-SoundBible.com-1521580537",
+        .startTurnDrawAnotherCardIfRedSuit: "Slide Closed-SoundBible.com-1521580537",
+        .startTurnDraw3CardsAndKeep2: "Slide Closed-SoundBible.com-1521580537",
+        .startTurnDrawFirstCardFromOtherPlayer: "Slide Closed-SoundBible.com-1521580537",
+        .startTurnDrawFirstCardFromDiscard: "Slide Closed-SoundBible.com-1521580537",
         .passDynamite: "Fuse Burning-SoundBible.com-1372982430",
         .dynamiteExploded: "Big Bomb-SoundBible.com-1219802495",
         .stayInJail: "Slide Closed-SoundBible.com-1521580537",
@@ -79,20 +83,25 @@ class MoveSoundPlayer: MoveSoundPlayerProtocol {
         .discard2CardsFor1Life: "Slurping 2-SoundBible.com-1269549524"
     ]
     
-    private var equipSfx: [String: String] = [
-        "volcanic": "Shotgun-SoundBible.com-862990674",
-        "schofield": "Shotgun-SoundBible.com-862990674",
-        "remington": "Shotgun-SoundBible.com-862990674",
-        "winchester": "Shotgun-SoundBible.com-862990674",
-        "revCarbine": "Shotgun-SoundBible.com-862990674",
-        "barrel": "Cowboy_with_spurs-G-rant-1371954508",
-        "mustang": "Cowboy_with_spurs-G-rant-1371954508",
-        "scope": "Cowboy_with_spurs-G-rant-1371954508"
+    private var equipSfx: [CardName: String] = [
+        .volcanic: "Shotgun-SoundBible.com-862990674",
+        .schofield: "Shotgun-SoundBible.com-862990674",
+        .remington: "Shotgun-SoundBible.com-862990674",
+        .winchester: "Shotgun-SoundBible.com-862990674",
+        .revCarbine: "Shotgun-SoundBible.com-862990674",
+        .barrel: "Cowboy_with_spurs-G-rant-1371954508",
+        .mustang: "Cowboy_with_spurs-G-rant-1371954508",
+        .scope: "Cowboy_with_spurs-G-rant-1371954508"
     ]
 }
 
 private extension String {
-    func extractCardName() -> String {
-        components(separatedBy: "-").first ?? self
+    func extractCardName() -> CardName {
+        guard let rawValue = components(separatedBy: "-").first,
+            let name = CardName(rawValue: rawValue) else {
+                fatalError("Illegal state")
+        }
+        
+        return name
     }
 }

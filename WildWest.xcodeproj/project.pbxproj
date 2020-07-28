@@ -931,8 +931,8 @@
 				3380B03C24367D890040F027 /* DrawsCardOnLoseHealthMatcherTests.swift */,
 				3380B042243682B80040F027 /* DrawsCardFromPlayerDamagedHimMatcherTests.swift */,
 				332B844D24390043005E5B21 /* DrawsCardWhenHandIsEmptyMatcherTests.swift */,
-				331B4645244A11EC00F3634A /* DrawsAnotherCardIfSecondDrawIsRedSuitMatcherTests.swift */,
 				33EF407B244F6AF6008FA490 /* Discard2CardsFor1LifeMatcherTests.swift */,
+				331B4645244A11EC00F3634A /* DrawsAnotherCardIfSecondDrawIsRedSuitMatcherTests.swift */,
 			);
 			path = special;
 			sourceTree = "<group>";
