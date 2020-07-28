@@ -127,4 +127,12 @@ class ResourcesTests_SpecialAbilities: XCTestCase {
         let figure = try XCTUnwrap(figures.first(where: { $0.name == .jesseJones }))
         XCTAssertEqual(figure.abilities, [.onStartTurnCanDrawFirstCardFromPlayer: true])
     }
+    
+    func test_PedroRamirez_CanDrawFirstCardFromDiscard()  throws {
+        // Given
+        // When
+        // Assert
+        let figure = try XCTUnwrap(figures.first(where: { $0.name == .pedroRamirez }))
+        XCTAssertEqual(figure.abilities, [.onStartTurnCanDrawFirstCardFromDiscard: true])
+    }
 }

@@ -81,7 +81,10 @@
         "name": "pedroRamirez",
         "bullets": 4,
         "imageName": "01_pedroramirez",
-        "description": "during the first phase of his turn, he may choose to draw the first card from the top of the discard pile or from the deck. Then, he draws the second card from the deck."
+        "description": "during the first phase of his turn, he may choose to draw the first card from the top of the discard pile or from the deck. Then, he draws the second card from the deck.",
+        "abilities": {
+            "onStartTurnCanDrawFirstCardFromDiscard": true
+        }
     },
     {
         "name": "roseDoolan",

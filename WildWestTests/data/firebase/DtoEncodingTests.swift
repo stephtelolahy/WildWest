@@ -90,6 +90,7 @@ class DtoEncodingTests: XCTestCase {
                                      .flipOverFirstDeckCard,
                                      .setupGeneralStore(7),
                                      .playerPullFromDeck("p1"),
+                                     .playerPullFromDiscard("p1"),
                                      .playerSetBangsPlayed("p1", 1),
                                      .playerSetHealth("p1", 3),
                                      .playerSetDamage("p1", DamageEvent(damage: 2, source: .byDynamite)),

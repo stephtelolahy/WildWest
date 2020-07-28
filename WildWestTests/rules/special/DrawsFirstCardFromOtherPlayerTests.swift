@@ -28,12 +28,14 @@ class DrawsFirstCardFromOtherPlayerTests: XCTestCase {
             .players(are: player1, player2)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let autoPlayMove = sut.autoPlayMove(matching: mockState)
+        let validMoves = sut.validMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .startTurn, actorId: "p1"),
-                               GameMove(name: .startTurnDrawFirstCardFromOtherPlayer, actorId: "p1",targetCard: TargetCard(ownerId: "p2", source: .randomHand)),
-                               GameMove(name: .startTurnDrawFirstCardFromOtherPlayer, actorId: "p1",targetCard: TargetCard(ownerId: "p2", source: .inPlay("c2")))])
+        XCTAssertNil(autoPlayMove)
+        XCTAssertEqual(validMoves, [GameMove(name: .startTurn, actorId: "p1"),
+                                    GameMove(name: .startTurnDrawFirstCardFromOtherPlayer, actorId: "p1",targetCard: TargetCard(ownerId: "p2", source: .randomHand)),
+                                    GameMove(name: .startTurnDrawFirstCardFromOtherPlayer, actorId: "p1",targetCard: TargetCard(ownerId: "p2", source: .inPlay("c2")))])
     }
     
     func test_CannotStartTurnDrawsFirstCardFromOtherPlayer_IfHavingAbility() {
@@ -51,12 +53,13 @@ class DrawsFirstCardFromOtherPlayerTests: XCTestCase {
             .players(are: player1, player2)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let autoPlayMove = sut.autoPlayMove(matching: mockState)
+        let validMoves = sut.validMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GameMove(name: .startTurn, actorId: "p1")])
+        XCTAssertEqual(autoPlayMove, GameMove(name: .startTurn, actorId: "p1"))
+        XCTAssertNil(validMoves)
     }
-    
     
     func test_PullFromOtherHand_IfExecutingStartTurnDrawsFirstCardFromOtherPlayer() {
         // Given

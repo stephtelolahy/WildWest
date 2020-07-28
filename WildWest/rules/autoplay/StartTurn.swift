@@ -13,25 +13,16 @@ class StartTurnMatcher: MoveMatcherProtocol {
             case .startTurn = challenge.name,
             let actor = state.player(state.turn),
             !actor.inPlay.contains(where: { $0.name == .jail }),
-            !actor.inPlay.contains(where: { $0.name == .dynamite }) else {
+            !actor.inPlay.contains(where: { $0.name == .dynamite }),
+            let moves = startTurnMoves(for: actor, in: state) else {
                 return nil
         }
         
-        if actor.abilities[.onStartTurnDrawsAnotherCardIfRedSuit] == true {
-            return GameMove(name: .startTurnDrawAnotherCardIfRedSuit, actorId: actor.identifier)
-            
-        } else if actor.abilities[.onStartTurnDraws3CardsAndKeep2] == true {
+        guard moves.count == 1 else {
             return nil
-            
-        } else if actor.abilities[.onStartTurnCanDrawFirstCardFromPlayer] == true {
-            return nil
-            
-        } else if actor.abilities[.onStartTurnCanDrawFirstCardFromDiscard] == true {
-            return nil
-            
-        } else {
-            return GameMove(name: .startTurn, actorId: actor.identifier)
         }
+        
+        return moves.first
     }
     
     func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
@@ -39,51 +30,49 @@ class StartTurnMatcher: MoveMatcherProtocol {
             case .startTurn = challenge.name,
             let actor = state.player(state.turn),
             !actor.inPlay.contains(where: { $0.name == .jail }),
-            !actor.inPlay.contains(where: { $0.name == .dynamite }) else {
+            !actor.inPlay.contains(where: { $0.name == .dynamite }),
+            let moves = startTurnMoves(for: actor, in: state) else {
                 return nil
         }
         
-        if actor.abilities[.onStartTurnDrawsAnotherCardIfRedSuit] == true {
+        guard moves.count > 1 else {
             return nil
-            
-        } else if actor.abilities[.onStartTurnDraws3CardsAndKeep2] == true {
-            return createValidMovesDraws3CardsAndKeep2()
-            
-        } else if actor.abilities[.onStartTurnCanDrawFirstCardFromPlayer] == true {
-            return createValidMovesDrawFirstCardFromPlayer(state: state, actor: actor)
-            
-        } else if actor.abilities[.onStartTurnCanDrawFirstCardFromDiscard] == true {
-            return createValidMovesDrawFirstCardFromDiscard()
-            
-        } else {
-            return nil
-        }
-    }
-    
-    private func createValidMovesDrawFirstCardFromPlayer(state: GameStateProtocol,
-                                                         actor: PlayerProtocol) -> [GameMove]? {
-        var moves: [GameMove] = [GameMove(name: .startTurn, actorId: actor.identifier)]
-        
-        let otherPlayers = state.players.filter { $0.identifier != actor.identifier }
-        guard let targetCards = otherPlayers.targetableCards() else {
-            return moves
-        }
-        
-        targetCards.forEach {
-            moves.append(GameMove(name: .startTurnDrawFirstCardFromOtherPlayer,
-                                  actorId: actor.identifier,
-                                  targetCard: $0))
         }
         
         return moves
     }
     
-    private func createValidMovesDrawFirstCardFromDiscard() -> [GameMove]? {
-        nil
-    }
-    
-    private func createValidMovesDraws3CardsAndKeep2() -> [GameMove]? {
-        nil
+    private func startTurnMoves(for actor: PlayerProtocol, in state: GameStateProtocol) -> [GameMove]? {
+        var moves = [GameMove(name: .startTurn, actorId: actor.identifier)]
+        
+        if actor.abilities[.onStartTurnDrawsAnotherCardIfRedSuit] == true {
+            moves = [GameMove(name: .startTurnDrawAnotherCardIfRedSuit, actorId: actor.identifier)]
+        }
+        
+        if actor.abilities[.onStartTurnDraws3CardsAndKeep2] == true {
+            fatalError()
+        }
+        
+        if actor.abilities[.onStartTurnCanDrawFirstCardFromPlayer] == true {
+            let otherPlayers = state.players.filter { $0.identifier != actor.identifier }
+            if let targetCards = otherPlayers.targetableCards() {
+                targetCards.forEach {
+                    moves.append(GameMove(name: .startTurnDrawFirstCardFromOtherPlayer,
+                                          actorId: actor.identifier,
+                                          targetCard: $0))
+                }
+            }
+        }
+        
+        if actor.abilities[.onStartTurnCanDrawFirstCardFromDiscard] == true {
+            if let topDiscard = state.discardPile.first {
+                moves.append(GameMove(name: .startTurnDrawFirstCardFromDiscard,
+                                      actorId: actor.identifier,
+                                      cardId: topDiscard.identifier))
+            }
+        }
+        
+        return moves
     }
     
     func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
@@ -117,12 +106,12 @@ class StartTurnMatcher: MoveMatcherProtocol {
     
     private func executeStartTurnDrawAnotherCardIfRedSuit(_ move: GameMove,
                                                           in state: GameStateProtocol) -> [GameUpdate]? {
-        let secondCard = state.deck[1]
         var updates: [GameUpdate] = [.setChallenge(nil),
                                      .playerSetBangsPlayed(move.actorId, 0),
                                      .playerPullFromDeck(move.actorId),
-                                     .playerPullFromDeck(move.actorId),
-                                     .playerRevealHandCard(move.actorId, secondCard.identifier)]
+                                     .playerPullFromDeck(move.actorId)]
+        let secondCard = state.deck[1]
+        updates.append(.playerRevealHandCard(move.actorId, secondCard.identifier))
         if secondCard.suit.isRed {
             updates.append(.playerPullFromDeck(move.actorId))
         }
@@ -136,7 +125,10 @@ class StartTurnMatcher: MoveMatcherProtocol {
     
     private func executeStartTurnDrawFirstCardFromDiscard(_ move: GameMove,
                                                           in state: GameStateProtocol) -> [GameUpdate]? {
-        nil
+        [.setChallenge(nil),
+         .playerSetBangsPlayed(move.actorId, 0),
+         .playerPullFromDiscard(move.actorId),
+         .playerPullFromDeck(move.actorId)]
     }
     
     private func executeStartTurnDrawFirstCardFromOtherPlayer(_ move: GameMove,

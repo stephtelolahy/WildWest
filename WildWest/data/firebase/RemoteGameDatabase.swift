@@ -68,6 +68,15 @@ class RemoteGameDatabase: GameDatabaseProtocol, Subscribable {
             .andThen(pullDeck())
     }
     
+    func discardRemoveFirst() -> Single<CardProtocol> {
+        gameRef.child("state/discardPile").queryLimited(toLast: 1)
+            .rxObserveSingleEvent({ try self.mapper.decodeCard(from: $0) })
+            .flatMap { key, card in
+                self.gameRef.child("state/discardPile/\(key)").rxSetValue({ nil })
+                    .andThen(Single.just(card))
+            }
+    }
+    
     func addDiscard(_ card: CardProtocol) -> Completable {
         gameRef.child("state/discardPile").childByAutoId()
             .rxSetValue({ card.identifier })

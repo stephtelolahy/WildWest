@@ -13,6 +13,7 @@ extension GameUpdate {
     var executionTime: Double {
         switch self {
         case .playerPullFromDeck,
+             .playerPullFromDiscard,
              .playerDiscardHand,
              .playerPutInPlay,
              .playerRevealHandCard,

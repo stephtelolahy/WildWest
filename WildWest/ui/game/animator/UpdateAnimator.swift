@@ -43,6 +43,14 @@ class UpdateAnimator: UpdateAnimatorProtocol {
         case let .playerPullFromDeck(playerId):
             animateMoveCard(from: .deck, to: .hand(playerId))
             
+        case let .playerPullFromDiscard(playerId):
+            guard let card = state.discardPile.first else {
+                fatalError("Illegal state")
+            }
+            animateMoveCard(sourceImage: UIImage(named: card.imageName),
+                            from: .discard,
+                            to: .hand(playerId))
+            
         case let .playerDiscardHand(playerId, cardId):
             guard let card = state.allPlayers.first(where: { $0.identifier == playerId })?.handCard(cardId)  else {
                 fatalError("Illegal state")

@@ -574,6 +574,21 @@ import RxSwift
     
     
     
+     func discardRemoveFirst() -> Single<CardProtocol> {
+        
+    return cuckoo_manager.call("discardRemoveFirst() -> Single<CardProtocol>",
+            parameters: (),
+            escapingParameters: (),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.discardRemoveFirst())
+        
+    }
+    
+    
+    
      func addDiscard(_ card: CardProtocol) -> Completable {
         
     return cuckoo_manager.call("addDiscard(_: CardProtocol) -> Completable",
@@ -801,6 +816,11 @@ import RxSwift
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "deckRemoveFirst() -> Single<CardProtocol>", parameterMatchers: matchers))
 	    }
 	    
+	    func discardRemoveFirst() -> Cuckoo.ProtocolStubFunction<(), Single<CardProtocol>> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "discardRemoveFirst() -> Single<CardProtocol>", parameterMatchers: matchers))
+	    }
+	    
 	    func addDiscard<M1: Cuckoo.Matchable>(_ card: M1) -> Cuckoo.ProtocolStubFunction<(CardProtocol), Completable> where M1.MatchedType == CardProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(CardProtocol)>] = [wrap(matchable: card) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockGameDatabaseProtocol.self, method: "addDiscard(_: CardProtocol) -> Completable", parameterMatchers: matchers))
@@ -912,6 +932,12 @@ import RxSwift
 	    }
 	    
 	    @discardableResult
+	    func discardRemoveFirst() -> Cuckoo.__DoNotUse<(), Single<CardProtocol>> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return cuckoo_manager.verify("discardRemoveFirst() -> Single<CardProtocol>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
 	    func addDiscard<M1: Cuckoo.Matchable>(_ card: M1) -> Cuckoo.__DoNotUse<(CardProtocol), Completable> where M1.MatchedType == CardProtocol {
 	        let matchers: [Cuckoo.ParameterMatcher<(CardProtocol)>] = [wrap(matchable: card) { $0 }]
 	        return cuckoo_manager.verify("addDiscard(_: CardProtocol) -> Completable", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
@@ -1019,6 +1045,10 @@ import RxSwift
     }
     
      func deckRemoveFirst() -> Single<CardProtocol>  {
+        return DefaultValueRegistry.defaultValue(for: (Single<CardProtocol>).self)
+    }
+    
+     func discardRemoveFirst() -> Single<CardProtocol>  {
         return DefaultValueRegistry.defaultValue(for: (Single<CardProtocol>).self)
     }
     

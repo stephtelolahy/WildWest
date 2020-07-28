@@ -250,6 +250,7 @@
 		33A815EE23DB54350081A055 /* roles.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A815EC23DB54350081A055 /* roles.json */; };
 		33AE6D2C244349910006E72F /* AssistedReactionMoveSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AE6D2B244349910006E72F /* AssistedReactionMoveSelector.swift */; };
 		33AF98F624D0964E00D626E9 /* DrawsFirstCardFromOtherPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AF98F524D0964E00D626E9 /* DrawsFirstCardFromOtherPlayerTests.swift */; };
+		33AF98F824D0A6F800D626E9 /* DrawsFirstCardFromDiscardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AF98F724D0A6F800D626E9 /* DrawsFirstCardFromDiscardTests.swift */; };
 		33AFA25323DC201A00425BEB /* ClassNameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */; };
 		33B1566224540EA800746B61 /* GameUpdate+ExecutionTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304D9412453FF1C00731AE9 /* GameUpdate+ExecutionTime.swift */; };
 		33B1566524540F0200746B61 /* GameSubjectsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B1566424540F0200746B61 /* GameSubjectsTests.swift */; };
@@ -504,6 +505,7 @@
 		33A815EC23DB54350081A055 /* roles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = roles.json; sourceTree = "<group>"; };
 		33AE6D2B244349910006E72F /* AssistedReactionMoveSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistedReactionMoveSelector.swift; sourceTree = "<group>"; };
 		33AF98F524D0964E00D626E9 /* DrawsFirstCardFromOtherPlayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawsFirstCardFromOtherPlayerTests.swift; sourceTree = "<group>"; };
+		33AF98F724D0A6F800D626E9 /* DrawsFirstCardFromDiscardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawsFirstCardFromDiscardTests.swift; sourceTree = "<group>"; };
 		33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameProtocol.swift; sourceTree = "<group>"; };
 		33B1566424540F0200746B61 /* GameSubjectsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSubjectsTests.swift; sourceTree = "<group>"; };
 		33B156672454188200746B61 /* GameResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameResources.swift; sourceTree = "<group>"; };
@@ -936,6 +938,7 @@
 				33EF407B244F6AF6008FA490 /* Discard2CardsFor1LifeMatcherTests.swift */,
 				331B4645244A11EC00F3634A /* DrawsAnotherCardIfSecondDrawIsRedSuitMatcherTests.swift */,
 				33AF98F524D0964E00D626E9 /* DrawsFirstCardFromOtherPlayerTests.swift */,
+				33AF98F724D0A6F800D626E9 /* DrawsFirstCardFromDiscardTests.swift */,
 			);
 			path = special;
 			sourceTree = "<group>";
@@ -1874,6 +1877,7 @@
 				3301BEF523F962F000B4364D /* RandomAIWithRole.swift in Sources */,
 				335157FE245D88BE00C46888 /* OptionalExtension.swift in Sources */,
 				3338B2E6242FCCDA0097BA57 /* GameState+OutcomeTests.swift in Sources */,
+				33AF98F824D0A6F800D626E9 /* DrawsFirstCardFromDiscardTests.swift in Sources */,
 				3346F33524CB280500FB0418 /* DtoEncoder+State.swift in Sources */,
 				3398B0D5243B9AED00EB670A /* Role+Relationship.swift in Sources */,
 				3328FCB4242F29B200A82255 /* Gatling.swift in Sources */,

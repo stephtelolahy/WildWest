@@ -24,10 +24,12 @@ class DrawsAnotherCardIfSecondDrawIsRedSuitMatcherTests: XCTestCase {
             .players(are: player1)
         
         // When
-        let move = sut.autoPlayMove(matching: mockState)
+        let autoPlayMove = sut.autoPlayMove(matching: mockState)
+        let validMoves = sut.validMoves(matching: mockState)
         
         // Assert
-        XCTAssertEqual(move, GameMove(name: .startTurnDrawAnotherCardIfRedSuit, actorId: "p1"))
+        XCTAssertEqual(autoPlayMove, GameMove(name: .startTurnDrawAnotherCardIfRedSuit, actorId: "p1"))
+        XCTAssertNil(validMoves)
     }
     
     func test_DrawsAnotherCardIfSecondDrawIsRedSuit_IfHavingAbility() {

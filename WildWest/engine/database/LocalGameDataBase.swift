@@ -67,6 +67,14 @@ class LocalGameDataBase: GameDatabaseProtocol {
         }
     }
     
+    func discardRemoveFirst() -> Single<CardProtocol> {
+        Single<CardProtocol>.create {
+            let card = self.mutableState.discardPile.removeFirst()
+            self.emitState()
+            return card
+        }
+    }
+    
     func addDiscard(_ card: CardProtocol) -> Completable {
         Completable.create {
             self.mutableState.discardPile.insert(card, at: 0)
