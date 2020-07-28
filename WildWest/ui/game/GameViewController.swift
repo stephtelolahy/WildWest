@@ -18,7 +18,7 @@ class GameViewController: UIViewController, Subscribable {
     @IBOutlet private weak var endTurnButton: UIButton!
     @IBOutlet private weak var otherMovesButton: UIButton!
     @IBOutlet private weak var playersCollectionView: UICollectionView!
-    @IBOutlet private weak var actionsCollectionView: UICollectionView!
+    @IBOutlet private weak var handCollectionView: UICollectionView!
     @IBOutlet private weak var messageTableView: UITableView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var discardImageView: UIImageView!
@@ -44,7 +44,7 @@ class GameViewController: UIViewController, Subscribable {
     }
     
     private var playerItems: [PlayerItem] = []
-    private var actionItems: [ActionItem] = []
+    private var handItems: [HandItem] = []
     private var messages: [String] = []
     private var endTurnMoves: [GameMove] = []
     private var otherMoves: [GameMove] = []
@@ -54,7 +54,7 @@ class GameViewController: UIViewController, Subscribable {
     private lazy var userPreferences = AppModules.shared.userPreferences
     private lazy var statsBuilder = StatsBuilder(sheriffId: subjects.sheriffId, classifier: MoveClassifier())
     private lazy var playerAdapter = PlayersAdapter()
-    private lazy var actionsAdapter = ActionsAdapter(playerId: controlledPlayerId)
+    private lazy var handAdapter = HandAdapter(playerId: controlledPlayerId)
     private lazy var moveDescriptor = MoveDescriptor()
     private lazy var instructionBuilder = InstructionBuilder()
     private lazy var playMoveSelector = PlayMoveSelector(viewController: self)
@@ -139,8 +139,8 @@ private extension GameViewController {
         playerItems = playerAdapter.buildItems(state: state, latestMove: latestMove, scores: statsBuilder.scores)
         playersCollectionView.reloadData()
         
-        actionItems = actionsAdapter.buildActions(state: state)
-        actionsCollectionView.reloadData()
+        handItems = handAdapter.buildItems(validMoves: [], state: state)
+        handCollectionView.reloadData()
         
         discardImageView.image = state.topDiscardImage
         deckCountLabel.text = "[] \(state.deck.count)"
@@ -177,8 +177,8 @@ private extension GameViewController {
             return
         }
         
-        actionItems = actionsAdapter.buildActions(validMoves: moves)
-        actionsCollectionView.reloadData()
+        handItems = handAdapter.buildItems(validMoves: moves, state: latestState)
+        handCollectionView.reloadData()
         
         if state.challenge != nil,
             !moves.isEmpty {
@@ -187,11 +187,11 @@ private extension GameViewController {
             }
         }
         
-        endTurnMoves = moves.filter({ $0.name == .endTurn })
+        endTurnMoves = moves.filter { $0.name == .endTurn }
         endTurnButton.isEnabled = !endTurnMoves.isEmpty
         
         let ownedCardIds: [String] = state.player(controlledPlayerId)?.hand.map { $0.identifier } ?? []
-        otherMoves = moves.filter({ !ownedCardIds.contains($0.cardId ?? "") && $0.name != .endTurn })
+        otherMoves = moves.filter { !ownedCardIds.contains($0.cardId ?? "") && $0.name != .endTurn }
         otherMovesButton.isEnabled = !otherMoves.isEmpty
     }
     
@@ -222,7 +222,7 @@ extension GameViewController: UICollectionViewDataSource {
         if collectionView == playersCollectionView {
             return playersCollectionViewNumberOfItems()
         } else {
-            return actionsCollectionViewNumberOfItems()
+            return handCollectionViewNumberOfItems()
         }
     }
     
@@ -231,7 +231,7 @@ extension GameViewController: UICollectionViewDataSource {
         if collectionView == playersCollectionView {
             return playersCollectionView(collectionView, cellForItemAt: indexPath)
         } else {
-            return actionsCollectionView(collectionView, cellForItemAt: indexPath)
+            return handCollectionView(collectionView, cellForItemAt: indexPath)
         }
     }
     
@@ -239,8 +239,8 @@ extension GameViewController: UICollectionViewDataSource {
         playerItems.count
     }
     
-    private func actionsCollectionViewNumberOfItems() -> Int {
-        actionItems.count
+    private func handCollectionViewNumberOfItems() -> Int {
+        handItems.count
     }
     
     private func playersCollectionView(_ collectionView: UICollectionView,
@@ -250,10 +250,10 @@ extension GameViewController: UICollectionViewDataSource {
         return cell
     }
     
-    private func actionsCollectionView(_ collectionView: UICollectionView,
-                                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(with: ActionCell.self, for: indexPath)
-        cell.update(with: actionItems[indexPath.row])
+    private func handCollectionView(_ collectionView: UICollectionView,
+                                    cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(with: HandCell.self, for: indexPath)
+        cell.update(with: handItems[indexPath.row])
         return cell
     }
 }
@@ -264,7 +264,7 @@ extension GameViewController: UICollectionViewDelegate {
         if collectionView == playersCollectionView {
             playersCollectionViewDidSelectItem(at: indexPath)
         } else {
-            actionsCollectionViewDidSelectItem(at: indexPath)
+            handCollectionViewDidSelectItem(at: indexPath)
         }
     }
     
@@ -272,8 +272,8 @@ extension GameViewController: UICollectionViewDelegate {
         playerDescriptor.display(playerItems[indexPath.row].player)
     }
     
-    private func actionsCollectionViewDidSelectItem(at indexPath: IndexPath) {
-        let moves = actionItems[indexPath.row].moves
+    private func handCollectionViewDidSelectItem(at indexPath: IndexPath) {
+        let moves = handItems[indexPath.row].moves
         playMoveSelector.selectMove(within: moves) { [weak self] move in
             self?.engine.execute(move)
         }

@@ -168,7 +168,7 @@
 		3356CF12243237500071B04F /* DamageEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3356CF10243237500071B04F /* DamageEvent.swift */; };
 		335BED692429334F009184A3 /* MoveSoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335BED682429334F009184A3 /* MoveSoundPlayer.swift */; };
 		335BED6D24293358009184A3 /* StatsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33318D6C24275AAE0055C6C5 /* StatsBuilder.swift */; };
-		335BED6E24293358009184A3 /* ActionsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E4411624077CA000B2848E /* ActionsAdapter.swift */; };
+		335BED6E24293358009184A3 /* HandAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E4411624077CA000B2848E /* HandAdapter.swift */; };
 		335BED7824293431009184A3 /* Western Ricochet-SoundBible.com-1725886901.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED722429342F009184A3 /* Western Ricochet-SoundBible.com-1725886901.mp3 */; };
 		335BED7924293431009184A3 /* Horse Galloping-SoundBible.com-1451398148.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED732429342F009184A3 /* Horse Galloping-SoundBible.com-1451398148.mp3 */; };
 		335BED7A24293431009184A3 /* Slap-SoundMaster13-49669815.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED7424293430009184A3 /* Slap-SoundMaster13-49669815.mp3 */; };
@@ -295,8 +295,8 @@
 		33DC6E4E24CA9F5100072B51 /* UserInfoDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C922E724CA986300956151 /* UserInfoDto.swift */; };
 		33DC6E4F24CA9F5A00072B51 /* UserStatusDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C922E924CA987200956151 /* UserStatusDto.swift */; };
 		33E4411B24077CA000B2848E /* PlayersAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E4411524077CA000B2848E /* PlayersAdapter.swift */; };
-		33E4411C24077CA000B2848E /* ActionsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E4411624077CA000B2848E /* ActionsAdapter.swift */; };
-		33E4411D24077CA000B2848E /* ActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E4411824077CA000B2848E /* ActionCell.swift */; };
+		33E4411C24077CA000B2848E /* HandAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E4411624077CA000B2848E /* HandAdapter.swift */; };
+		33E4411D24077CA000B2848E /* HandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E4411824077CA000B2848E /* HandCell.swift */; };
 		33E4411E24077CA000B2848E /* PlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E4411924077CA000B2848E /* PlayerCell.swift */; };
 		33E4411F24077CA000B2848E /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E4411A24077CA000B2848E /* MessageCell.swift */; };
 		33E4412124077D8000B2848E /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E4412024077D8000B2848E /* Score.swift */; };
@@ -537,8 +537,8 @@
 		33D97B14244FA59F00B4F070 /* GameMove+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameMove+Description.swift"; sourceTree = "<group>"; };
 		33DB41BB2438841A00B94E8A /* HandCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandCollectionViewLayout.swift; sourceTree = "<group>"; };
 		33E4411524077CA000B2848E /* PlayersAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersAdapter.swift; sourceTree = "<group>"; };
-		33E4411624077CA000B2848E /* ActionsAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionsAdapter.swift; sourceTree = "<group>"; };
-		33E4411824077CA000B2848E /* ActionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionCell.swift; sourceTree = "<group>"; };
+		33E4411624077CA000B2848E /* HandAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandAdapter.swift; sourceTree = "<group>"; };
+		33E4411824077CA000B2848E /* HandCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandCell.swift; sourceTree = "<group>"; };
 		33E4411924077CA000B2848E /* PlayerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerCell.swift; sourceTree = "<group>"; };
 		33E4411A24077CA000B2848E /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		33E4412024077D8000B2848E /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
@@ -695,7 +695,7 @@
 		330E5AC62439E27300C358AF /* adapter */ = {
 			isa = PBXGroup;
 			children = (
-				33E4411624077CA000B2848E /* ActionsAdapter.swift */,
+				33E4411624077CA000B2848E /* HandAdapter.swift */,
 				33E4411524077CA000B2848E /* PlayersAdapter.swift */,
 			);
 			path = adapter;
@@ -1068,7 +1068,7 @@
 		33E4411724077CA000B2848E /* cell */ = {
 			isa = PBXGroup;
 			children = (
-				33E4411824077CA000B2848E /* ActionCell.swift */,
+				33E4411824077CA000B2848E /* HandCell.swift */,
 				33E4411924077CA000B2848E /* PlayerCell.swift */,
 				33E4411A24077CA000B2848E /* MessageCell.swift */,
 			);
@@ -1756,7 +1756,7 @@
 				337408D424306C3400E5809B /* Player+Cards.swift in Sources */,
 				33639FDA24CB421D00F48727 /* WaitingRoomViewController.swift in Sources */,
 				3328FCA7242F29B100A82255 /* Jail.swift in Sources */,
-				33E4411D24077CA000B2848E /* ActionCell.swift in Sources */,
+				33E4411D24077CA000B2848E /* HandCell.swift in Sources */,
 				33734AF52454AD7200A5D2DA /* DtoEncoder.swift in Sources */,
 				33BBE7572445CA77006C9B17 /* GameState+Image.swift in Sources */,
 				330761A924535D1800E8C2EF /* GameSubjects.swift in Sources */,
@@ -1842,7 +1842,7 @@
 				33C922E624CA982500956151 /* UserStatus.swift in Sources */,
 				3306682E245588B9003B2263 /* FirebaseMapper.swift in Sources */,
 				337D7FD1243071AE0078F749 /* Player+Ability.swift in Sources */,
-				33E4411C24077CA000B2848E /* ActionsAdapter.swift in Sources */,
+				33E4411C24077CA000B2848E /* HandAdapter.swift in Sources */,
 				3398B0D4243B9AED00EB670A /* Role+Relationship.swift in Sources */,
 				3328FCA9242F29B100A82255 /* Bang.swift in Sources */,
 				33E4411E24077CA000B2848E /* PlayerCell.swift in Sources */,
@@ -1885,7 +1885,7 @@
 				3328FCCF242F2B5600A82255 /* IndiansMatcherTests.swift in Sources */,
 				3328FCA2242F299F00A82255 /* CatBalou.swift in Sources */,
 				33A4381523E4BE8200C39DD6 /* ArrayExtensionTests.swift in Sources */,
-				335BED6E24293358009184A3 /* ActionsAdapter.swift in Sources */,
+				335BED6E24293358009184A3 /* HandAdapter.swift in Sources */,
 				3380B0412436800F0040F027 /* DrawsCardFromPlayerDamagedHim.swift in Sources */,
 				3328FCB5242F29B200A82255 /* Indians.swift in Sources */,
 				3328FCB1242F29B200A82255 /* Jail.swift in Sources */,

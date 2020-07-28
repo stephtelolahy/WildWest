@@ -1,5 +1,5 @@
 //
-//  ActionCell.swift
+//  HandCell.swift
 //  WildWest
 //
 //  Created by Hugues Stephano Telolahy on 04/02/2020.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ActionCell: UICollectionViewCell {
+class HandCell: UICollectionViewCell {
     
     // MARK: Outlets
     
@@ -22,7 +22,7 @@ class ActionCell: UICollectionViewCell {
         contentView.layer.cornerRadius = 2
     }
     
-    func update(with item: ActionItem) {
+    func update(with item: HandItem) {
         cardView.isHidden = !item.moves.isEmpty
         cardImageView.image = UIImage(named: item.card.imageName)
     }
