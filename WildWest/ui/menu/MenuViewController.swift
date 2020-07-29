@@ -30,7 +30,7 @@ class MenuViewController: UIViewController, Subscribable {
     private lazy var allFigures: [FigureProtocol] = {
         let jsonReader = JsonReader(bundle: Bundle.main)
         let resources = GameResources(jsonReader: jsonReader)
-        return resources.allFigures.filter { !$0.abilities.isEmpty }
+        return resources.allFigures
     }()
     
     private lazy var musicPlayer: ThemeMusicPlayer? = {

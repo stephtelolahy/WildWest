@@ -78,7 +78,7 @@ class RemoteGameDatabase: GameDatabaseProtocol, Subscribable {
     }
     
     func addDeck(_ card: CardProtocol) -> Completable {
-        gameRef.child("state/deck/0")
+        gameRef.child("state/deck/-0")
             .rxSetValue({ card.identifier })
     }
     

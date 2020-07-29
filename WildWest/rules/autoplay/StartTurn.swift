@@ -58,13 +58,11 @@ class StartTurnMatcher: MoveMatcherProtocol {
         }
         
         if actor.abilities[.onStartTurnCanDrawFirstCardFromPlayer] == true {
-            let otherPlayers = state.players.filter { $0.identifier != actor.identifier }
-            if let targetCards = otherPlayers.targetableCards() {
-                targetCards.forEach {
-                    moves.append(GameMove(name: .startTurnDrawFirstCardFromOtherPlayer,
-                                          actorId: actor.identifier,
-                                          targetCard: $0))
-                }
+            let otherPlayers = state.players.filter { $0.identifier != actor.identifier && !$0.hand.isEmpty }
+            otherPlayers.forEach {
+                moves.append(GameMove(name: .startTurnDrawFirstCardFromOtherPlayer,
+                                      actorId: actor.identifier,
+                                      targetCard: TargetCard(ownerId: $0.identifier, source: .randomHand)))
             }
         }
         
@@ -145,25 +143,16 @@ class StartTurnMatcher: MoveMatcherProtocol {
     
     private func executeStartTurnDrawFirstCardFromOtherPlayer(_ move: GameMove,
                                                               in state: GameStateProtocol) -> [GameUpdate]? {
-        guard let targetCard = move.targetCard else {
-            return nil
+        guard let targetCard = move.targetCard,
+            let player = state.player(targetCard.ownerId),
+            let card = player.hand.randomElement() else {
+                return nil
         }
         
-        var updates: [GameUpdate] = [.setChallenge(nil),
-                                     .playerSetBangsPlayed(move.actorId, 0)]
-        switch targetCard.source {
-        case .randomHand:
-            if let player = state.player(targetCard.ownerId),
-                let card = player.hand.randomElement() {
-                updates.append(.playerPullFromOtherHand(move.actorId, targetCard.ownerId, card.identifier))
-            }
-        case let .inPlay(targetCardId):
-            updates.append(.playerPullFromOtherInPlay(move.actorId, targetCard.ownerId, targetCardId))
-        }
-        
-        updates.append(.playerPullFromDeck(move.actorId))
-        
-        return updates
+        return [.setChallenge(nil),
+                .playerSetBangsPlayed(move.actorId, 0),
+                .playerPullFromOtherHand(move.actorId, targetCard.ownerId, card.identifier),
+                .playerPullFromDeck(move.actorId)]
     }
 }
 

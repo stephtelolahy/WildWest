@@ -133,7 +133,6 @@
 		333800FE242F22CD003F7327 /* ResolveJail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C45DDD23EB15E900B62508 /* ResolveJail.swift */; };
 		33380100242F2348003F7327 /* ResolveJailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333800FF242F2348003F7327 /* ResolveJailTests.swift */; };
 		3338B2E6242FCCDA0097BA57 /* GameState+OutcomeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3338B2E5242FCCDA0097BA57 /* GameState+OutcomeTests.swift */; };
-		3338B2EC242FD0600097BA57 /* Challenge+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3338B2EB242FD0600097BA57 /* Challenge+Description.swift */; };
 		3338B2EF242FD1240097BA57 /* TargetCard+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3338B2EE242FD1240097BA57 /* TargetCard+Description.swift */; };
 		333E692D245D557A00DEF93B /* GameUpdateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333E692C245D557A00DEF93B /* GameUpdateDto.swift */; };
 		333E8757242D5B3B00EAE8FC /* Big Bomb-SoundBible.com-1219802495.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 333E8756242D5B3B00EAE8FC /* Big Bomb-SoundBible.com-1219802495.mp3 */; };
@@ -416,7 +415,6 @@
 		333800FB242F21A0003F7327 /* ResolveDynamiteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveDynamiteTests.swift; sourceTree = "<group>"; };
 		333800FF242F2348003F7327 /* ResolveJailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolveJailTests.swift; sourceTree = "<group>"; };
 		3338B2E5242FCCDA0097BA57 /* GameState+OutcomeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameState+OutcomeTests.swift"; sourceTree = "<group>"; };
-		3338B2EB242FD0600097BA57 /* Challenge+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Challenge+Description.swift"; sourceTree = "<group>"; };
 		3338B2EE242FD1240097BA57 /* TargetCard+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TargetCard+Description.swift"; sourceTree = "<group>"; };
 		333B233F2425ECA600685454 /* CatBalouMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBalouMatcherTests.swift; sourceTree = "<group>"; };
 		333B23482425F31700685454 /* EndTurnMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTurnMatcherTests.swift; sourceTree = "<group>"; };
@@ -776,7 +774,6 @@
 		3338B2EA242FD0480097BA57 /* convenience */ = {
 			isa = PBXGroup;
 			children = (
-				3338B2EB242FD0600097BA57 /* Challenge+Description.swift */,
 				3338B2EE242FD1240097BA57 /* TargetCard+Description.swift */,
 				33BBE7562445CA77006C9B17 /* GameState+Image.swift */,
 				33D97B14244FA59F00B4F070 /* GameMove+Description.swift */,
@@ -1757,7 +1754,6 @@
 				335BED692429334F009184A3 /* MoveSoundPlayer.swift in Sources */,
 				3328FCAB242F29B100A82255 /* Indians.swift in Sources */,
 				3328FCD7242F2D1100A82255 /* Pass.swift in Sources */,
-				3338B2EC242FD0600097BA57 /* Challenge+Description.swift in Sources */,
 				3328FCD6242F2D1100A82255 /* DiscardBeer.swift in Sources */,
 				335632DB2479726D0004F371 /* SignInViewController.swift in Sources */,
 				3356CF11243237500071B04F /* DamageEvent.swift in Sources */,

@@ -21,9 +21,13 @@ extension UIViewController {
         present(viewControllerToPresent, animated: flag)
     }
     
-    func select(title: String, choices: [String], cancelable: Bool = true, completion: @escaping((Int) -> Void)) {
+    func select(title: String,
+                message: String? = nil,
+                choices: [String],
+                cancelable: Bool = true,
+                completion: @escaping((Int) -> Void)) {
         let alertController = UIAlertController(title: title,
-                                                message: nil,
+                                                message: message,
                                                 preferredStyle: .alert)
         
         choices.forEach { choice in

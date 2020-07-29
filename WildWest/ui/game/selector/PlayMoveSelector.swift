@@ -36,7 +36,9 @@ class PlayMoveSelector: PlayMoveSelectorProtocol {
         
         if moves.allSatisfy({ $0.name == moves[0].name && $0.cardId == moves[0].cardId }) {
             let choices: [String] = moves.map {
-                [$0.targetId, $0.targetCard?.description, $0.discardIds?.joined(separator: ", ")]
+                [$0.targetId,
+                 $0.targetCard?.description,
+                 $0.discardIds?.joined(separator: ", ")]
                     .compactMap { $0 }
                     .joined(separator: " ")
             }
@@ -47,7 +49,11 @@ class PlayMoveSelector: PlayMoveSelectorProtocol {
         }
         
         let choices: [String] = moves.map {
-            [$0.name.rawValue, $0.targetId, $0.targetCard?.description, $0.discardIds?.joined(separator: ", ")]
+            [$0.name.rawValue,
+             $0.cardId,
+             $0.targetId,
+             $0.targetCard?.description,
+             $0.discardIds?.joined(separator: ", ")]
                 .compactMap { $0 }
                 .joined(separator: " ")
         }
