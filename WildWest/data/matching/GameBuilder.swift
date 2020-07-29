@@ -51,7 +51,7 @@ class GameBuilder: Subscribable {
                     preferredFigure: String? = nil,
                     preferredRole: Role? = nil) -> GameStateProtocol {
         let cards = AppModules.shared.gameResources.allCards
-        let figures = AppModules.shared.gameResources.allFigures.filter { !$0.abilities.isEmpty }
+        let figures = AppModules.shared.gameResources.allFigures
         
         let gameSetup = GameSetup()
         

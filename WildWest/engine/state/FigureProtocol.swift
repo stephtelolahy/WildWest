@@ -42,9 +42,12 @@ enum AbilityName: String, Codable, CaseIterable {
     case drawsCardFromPlayerDamagedHim
     case drawsCardWhenHandIsEmpty
     case canPlayBangAsMissAndViceVersa
-    case drawsAnotherCardIfSecondDrawIsRedSuit
     case othersNeed2MissesToCounterHisBang
     case takesAllCardsFromEliminatedPlayers
     case flips2CardsOnADrawAndChoose1
     case canDiscard2CardsFor1Life
+    case onStartTurnDrawsAnotherCardIfRedSuit
+    case onStartTurnDraws3CardsAndKeep2
+    case onStartTurnCanDrawFirstCardFromPlayer
+    case onStartTurnCanDrawFirstCardFromDiscard
 }

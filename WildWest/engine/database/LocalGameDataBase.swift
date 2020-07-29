@@ -60,10 +60,25 @@ class LocalGameDataBase: GameDatabaseProtocol {
     
     func deckRemoveFirst() -> Single<CardProtocol> {
         Single<CardProtocol>.create {
-            self.mutableState.resetDeck(when: 2)
+            self.mutableState.resetDeck(when: 3)
             let card = self.mutableState.deck.removeFirst()
             self.emitState()
             return card
+        }
+    }
+    
+    func discardRemoveFirst() -> Single<CardProtocol> {
+        Single<CardProtocol>.create {
+            let card = self.mutableState.discardPile.removeFirst()
+            self.emitState()
+            return card
+        }
+    }
+    
+    func addDeck(_ card: CardProtocol) -> Completable {
+        Completable.create {
+            self.mutableState.deck.insert(card, at: 0)
+            self.emitState()
         }
     }
     

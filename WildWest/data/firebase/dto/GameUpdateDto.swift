@@ -15,10 +15,12 @@ struct GameUpdateDto: Codable {
     var flipOverFirstDeckCard: Bool?
     var setupGeneralStore: Int?
     var playerPullFromDeck: String?
+    var playerPullFromDiscard: String?
     var playerSetBangsPlayed: PlayerSetBangsPlayedDto?
     var playerSetHealth: PlayerSetHealthDto?
     var playerSetDamage: PlayerSetDamageDto?
     var playerDiscardHand: PlayerManipulatesCardDto?
+    var playerDiscardTopDeck: PlayerManipulatesCardDto?
     var playerPutInPlay: PlayerManipulatesCardDto?
     var playerDiscardInPlay: PlayerManipulatesCardDto?
     var playerPullFromGeneralStore: PlayerManipulatesCardDto?

@@ -45,9 +45,13 @@ extension MockGameStateProtocol {
         return self
     }
     
-    func topDiscardPile(is card: CardProtocol) -> MockGameStateProtocol {
+    func topDiscardPile(is card: CardProtocol?) -> MockGameStateProtocol {
         Cuckoo.stub(self) { mock in
-            when(mock.discardPile.get).thenReturn([card])
+            if let card = card {
+                when(mock.discardPile.get).thenReturn([card])
+            } else {
+                when(mock.discardPile.get).thenReturn([])
+            }
         }
         return self
     }

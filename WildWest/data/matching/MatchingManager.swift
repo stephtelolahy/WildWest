@@ -72,7 +72,8 @@ class MatchingManager: MatchingManagerProtocol {
     }
     
     func createGame(users: [WUserInfo]) -> Completable {
-        let state = GameBuilder().createGame(for: users.count)
+        let state = GameBuilder().createGame(for: users.count,
+                                             preferredFigure: AppModules.shared.userPreferences.preferredFigure)
         let gameId = FirebaseKeyGenerator().autoId()
         
         let playerIds = state.allPlayers.map { $0.identifier }

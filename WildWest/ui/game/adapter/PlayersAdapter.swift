@@ -21,7 +21,6 @@ protocol PlayersAdapterProtocol {
 }
 
 class PlayersAdapter: PlayersAdapterProtocol {
-    
     func buildItems(state: GameStateProtocol,
                     latestMove: GameMove?,
                     scores: [String: Int]) -> [PlayerItem] {
@@ -74,6 +73,7 @@ private extension GameStateProtocol {
 }
 
 private extension GameMove {
+    
     func isPlayerAttacked(_ playerId: String) -> Bool {
         switch MoveClassifier().classify(self) {
         case let .strongAttack(_, targetId):

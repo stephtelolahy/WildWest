@@ -64,8 +64,22 @@ class RemoteGameDatabase: GameDatabaseProtocol, Subscribable {
     // MARK: - Deck
     
     func deckRemoveFirst() -> Single<CardProtocol> {
-        resetDeck(when: 2)
+        resetDeck(when: 3)
             .andThen(pullDeck())
+    }
+    
+    func discardRemoveFirst() -> Single<CardProtocol> {
+        gameRef.child("state/discardPile").queryLimited(toLast: 1)
+            .rxObserveSingleEvent({ try self.mapper.decodeCard(from: $0) })
+            .flatMap { key, card in
+                self.gameRef.child("state/discardPile/\(key)").rxSetValue({ nil })
+                    .andThen(Single.just(card))
+            }
+    }
+    
+    func addDeck(_ card: CardProtocol) -> Completable {
+        gameRef.child("state/deck/-0")
+            .rxSetValue({ card.identifier })
     }
     
     func addDiscard(_ card: CardProtocol) -> Completable {

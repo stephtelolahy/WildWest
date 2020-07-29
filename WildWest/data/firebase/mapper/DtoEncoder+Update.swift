@@ -38,9 +38,16 @@ extension DtoEncoder {
         case let .playerPullFromDeck(playerId):
             return GameUpdateDto(playerPullFromDeck: playerId)
             
+        case let .playerPullFromDiscard(playerId):
+            return GameUpdateDto(playerPullFromDiscard: playerId)
+            
         case let .playerDiscardHand(playerId, cardId):
             let arg = PlayerManipulatesCardDto(playerId: playerId, cardId: cardId)
             return GameUpdateDto(playerDiscardHand: arg)
+            
+        case let .playerDiscardTopDeck(playerId, cardId):
+            let arg = PlayerManipulatesCardDto(playerId: playerId, cardId: cardId)
+            return GameUpdateDto(playerDiscardTopDeck: arg)
             
         case let .playerPutInPlay(playerId, cardId):
             let arg = PlayerManipulatesCardDto(playerId: playerId, cardId: cardId)
@@ -108,6 +115,10 @@ extension DtoEncoder {
             return .playerPullFromDeck(playerId)
         }
         
+        if let playerId = update.playerPullFromDiscard {
+            return .playerPullFromDiscard(playerId)
+        }
+        
         if let arg = update.playerSetBangsPlayed,
             let playerId = arg.playerId,
             let count = arg.count {
@@ -131,6 +142,12 @@ extension DtoEncoder {
             let playerId = arg.playerId,
             let cardId = arg.cardId {
             return .playerDiscardHand(playerId, cardId)
+        }
+        
+        if let arg = update.playerDiscardTopDeck,
+            let playerId = arg.playerId,
+            let cardId = arg.cardId {
+            return .playerDiscardTopDeck(playerId, cardId)
         }
         
         if let arg = update.playerPutInPlay,

@@ -17,6 +17,7 @@ class StartTurnTests: XCTestCase {
         let player1 = MockPlayerProtocol()
             .identified(by: "p1")
             .noCardsInPlay()
+            .withDefault()
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p1")
             .challenge(is: Challenge(name: .startTurn))
