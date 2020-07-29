@@ -20,6 +20,7 @@ struct GameUpdateDto: Codable {
     var playerSetHealth: PlayerSetHealthDto?
     var playerSetDamage: PlayerSetDamageDto?
     var playerDiscardHand: PlayerManipulatesCardDto?
+    var playerDiscardTopDeck: PlayerManipulatesCardDto?
     var playerPutInPlay: PlayerManipulatesCardDto?
     var playerDiscardInPlay: PlayerManipulatesCardDto?
     var playerPullFromGeneralStore: PlayerManipulatesCardDto?

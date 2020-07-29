@@ -25,7 +25,9 @@ class ReactionMoveSelector: ReactionMoveSelectorProtocol {
             fatalError("Illegal state")
         }
         
-        let choices: [String] = moves.map { $0.cardId ?? $0.targetCard?.description ??  $0.name.rawValue }
+        let choices: [String] = moves.map {
+            $0.cardId ?? $0.targetCard?.description ?? $0.discardIds?.joined(separator: ", ") ??  $0.name.rawValue
+        }
         viewController.select(title: challenge.description(in: state), choices: choices, cancelable: false) { index in
             completion(moves[index])
         }

@@ -64,7 +64,7 @@ class RemoteGameDatabase: GameDatabaseProtocol, Subscribable {
     // MARK: - Deck
     
     func deckRemoveFirst() -> Single<CardProtocol> {
-        resetDeck(when: 2)
+        resetDeck(when: 3)
             .andThen(pullDeck())
     }
     
@@ -75,6 +75,11 @@ class RemoteGameDatabase: GameDatabaseProtocol, Subscribable {
                 self.gameRef.child("state/discardPile/\(key)").rxSetValue({ nil })
                     .andThen(Single.just(card))
             }
+    }
+    
+    func addDeck(_ card: CardProtocol) -> Completable {
+        gameRef.child("state/deck/0")
+            .rxSetValue({ card.identifier })
     }
     
     func addDiscard(_ card: CardProtocol) -> Completable {

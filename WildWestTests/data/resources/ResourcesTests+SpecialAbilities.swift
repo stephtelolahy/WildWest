@@ -112,7 +112,7 @@ class ResourcesTests_SpecialAbilities: XCTestCase {
         XCTAssertEqual(figure.abilities, [.flips2CardsOnADrawAndChoose1: true])
     }
     
-    func test_SidKetchum_CanDiscard2CardsFor1Life()  throws {
+    func test_SidKetchum_CanDiscard2CardsFor1Life() throws {
         // Given
         // When
         // Assert
@@ -120,7 +120,7 @@ class ResourcesTests_SpecialAbilities: XCTestCase {
         XCTAssertEqual(figure.abilities, [.canDiscard2CardsFor1Life: true])
     }
     
-    func test_JesseJones_CanDrawFirstCardFromOtherPlayer()  throws {
+    func test_JesseJones_CanDrawFirstCardFromOtherPlayer() throws {
         // Given
         // When
         // Assert
@@ -128,11 +128,19 @@ class ResourcesTests_SpecialAbilities: XCTestCase {
         XCTAssertEqual(figure.abilities, [.onStartTurnCanDrawFirstCardFromPlayer: true])
     }
     
-    func test_PedroRamirez_CanDrawFirstCardFromDiscard()  throws {
+    func test_PedroRamirez_CanDrawFirstCardFromDiscard() throws {
         // Given
         // When
         // Assert
         let figure = try XCTUnwrap(figures.first(where: { $0.name == .pedroRamirez }))
         XCTAssertEqual(figure.abilities, [.onStartTurnCanDrawFirstCardFromDiscard: true])
+    }
+    
+    func test_KitCarlson_Draws3CardsAndKeep2() throws {
+        // Given
+        // When
+        // Assert
+        let figure = try XCTUnwrap(figures.first(where: { $0.name == .kitCarlson }))
+        XCTAssertEqual(figure.abilities, [.onStartTurnDraws3CardsAndKeep2: true])
     }
 }

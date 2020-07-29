@@ -50,7 +50,11 @@ class StartTurnMatcher: MoveMatcherProtocol {
         }
         
         if actor.abilities[.onStartTurnDraws3CardsAndKeep2] == true {
-            fatalError()
+            moves = Array(state.deck[0..<3]).map {
+                GameMove(name: .startTurnDraw3CardsAndKeep2,
+                         actorId: actor.identifier,
+                         discardIds: [$0.identifier])
+            }
         }
         
         if actor.abilities[.onStartTurnCanDrawFirstCardFromPlayer] == true {
@@ -120,7 +124,15 @@ class StartTurnMatcher: MoveMatcherProtocol {
     
     private func executeStartTurnDraw3CardsAndKeep2(_ move: GameMove,
                                                     in state: GameStateProtocol) -> [GameUpdate]? {
-        nil
+        var updates: [GameUpdate] = [.setChallenge(nil),
+                                     .playerSetBangsPlayed(move.actorId, 0),
+                                     .playerPullFromDeck(move.actorId),
+                                     .playerPullFromDeck(move.actorId),
+                                     .playerPullFromDeck(move.actorId)]
+        if let cardId = move.discardIds?.first {
+            updates.append(.playerDiscardTopDeck(move.actorId, cardId))
+        }
+        return updates
     }
     
     private func executeStartTurnDrawFirstCardFromDiscard(_ move: GameMove,

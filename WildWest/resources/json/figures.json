@@ -57,7 +57,10 @@
         "name": "kitCarlson",
         "bullets": 4,
         "imageName": "01_kitcarlson",
-        "description": "during the phase 1 of his turn, he looks at the top three cards of the deck: he chooses 2 to draw, and puts the other one back on the top of the deck, face down."
+        "description": "during the phase 1 of his turn, he looks at the top three cards of the deck: he chooses 2 to draw, and puts the other one back on the top of the deck, face down.",
+        "abilities": {
+            "onStartTurnDraws3CardsAndKeep2": true
+        }
     },
     {
         "name": "luckyDuke",

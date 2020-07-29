@@ -40,6 +40,10 @@ extension GameDatabaseProtocol {
             return playerRemoveHand(playerId, cardId)
                 .flatMapCompletable { self.addDiscard($0) }
             
+        case let .playerDiscardTopDeck(playerId, cardId):
+            return playerRemoveHand(playerId, cardId)
+                .flatMapCompletable { self.addDeck($0) }
+            
         case let .playerPutInPlay(playerId, cardId):
             return playerRemoveHand(playerId, cardId)
                 .flatMapCompletable { self.playerAddInPlay(playerId, $0) }
@@ -79,7 +83,7 @@ extension GameDatabaseProtocol {
             return deckRemoveFirst()
                 .flatMapCompletable { self.addDiscard($0) }
             
-        default:
+        case .playerRevealHandCard:
             return Completable.empty()
         }
     }

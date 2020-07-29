@@ -20,6 +20,7 @@ protocol GameDatabaseProtocol {
     /// Deck
     func deckRemoveFirst() -> Single<CardProtocol>
     func discardRemoveFirst() -> Single<CardProtocol>
+    func addDeck(_ card: CardProtocol) -> Completable
     func addDiscard(_ card: CardProtocol) -> Completable
     func addGeneralStore(_ card: CardProtocol) -> Completable
     func removeGeneralStore(_ cardId: String) -> Single<CardProtocol>

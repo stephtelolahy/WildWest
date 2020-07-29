@@ -60,6 +60,10 @@ class UpdateAnimator: UpdateAnimatorProtocol {
                             from: .hand(playerId),
                             to: .discard)
             
+        case let .playerDiscardTopDeck(playerId, _):
+            animateMoveCard(from: .hand(playerId),
+                            to: .deck)
+            
         case let .playerPutInPlay(playerId, cardId):
             guard let card = state.player(playerId)?.handCard(cardId) else {
                 fatalError("Illegal state")

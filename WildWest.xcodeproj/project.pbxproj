@@ -206,6 +206,7 @@
 		337408D224306C1200E5809B /* Card+Ability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337408D024306C1200E5809B /* Card+Ability.swift */; };
 		337408D424306C3400E5809B /* Player+Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337408D324306C3400E5809B /* Player+Cards.swift */; };
 		337408D524306C3400E5809B /* Player+Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337408D324306C3400E5809B /* Player+Cards.swift */; };
+		337C384C24D1D48500B4FE73 /* Draws3CardsAndKeep2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337C384B24D1D48500B4FE73 /* Draws3CardsAndKeep2Tests.swift */; };
 		337D7FD1243071AE0078F749 /* Player+Ability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D7FD0243071AE0078F749 /* Player+Ability.swift */; };
 		337D7FD2243071AE0078F749 /* Player+Ability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D7FD0243071AE0078F749 /* Player+Ability.swift */; };
 		337D7FD4243072130078F749 /* GameState+Observed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D7FD3243072130078F749 /* GameState+Observed.swift */; };
@@ -464,6 +465,7 @@
 		33734AF42454AD7200A5D2DA /* DtoEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DtoEncoder.swift; sourceTree = "<group>"; };
 		337408D024306C1200E5809B /* Card+Ability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+Ability.swift"; sourceTree = "<group>"; };
 		337408D324306C3400E5809B /* Player+Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+Cards.swift"; sourceTree = "<group>"; };
+		337C384B24D1D48500B4FE73 /* Draws3CardsAndKeep2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Draws3CardsAndKeep2Tests.swift; sourceTree = "<group>"; };
 		337D7FD0243071AE0078F749 /* Player+Ability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+Ability.swift"; sourceTree = "<group>"; };
 		337D7FD3243072130078F749 /* GameState+Observed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameState+Observed.swift"; sourceTree = "<group>"; };
 		337D7FDC2430879F0078F749 /* PlayerDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDescriptor.swift; sourceTree = "<group>"; };
@@ -689,9 +691,9 @@
 			isa = PBXGroup;
 			children = (
 				33BE9105242F4F23001A9570 /* PlayMoveSelector.swift */,
-				337D7FDC2430879F0078F749 /* PlayerDescriptor.swift */,
 				33BE9107242F5046001A9570 /* ReactionMoveSelector.swift */,
 				33AE6D2B244349910006E72F /* AssistedReactionMoveSelector.swift */,
+				337D7FDC2430879F0078F749 /* PlayerDescriptor.swift */,
 			);
 			path = selector;
 			sourceTree = "<group>";
@@ -939,6 +941,7 @@
 				331B4645244A11EC00F3634A /* DrawsAnotherCardIfSecondDrawIsRedSuitMatcherTests.swift */,
 				33AF98F524D0964E00D626E9 /* DrawsFirstCardFromOtherPlayerTests.swift */,
 				33AF98F724D0A6F800D626E9 /* DrawsFirstCardFromDiscardTests.swift */,
+				337C384B24D1D48500B4FE73 /* Draws3CardsAndKeep2Tests.swift */,
 			);
 			path = special;
 			sourceTree = "<group>";
@@ -1875,6 +1878,7 @@
 				AD52B99D23B17A310013240B /* GameState.swift in Sources */,
 				33380100242F2348003F7327 /* ResolveJailTests.swift in Sources */,
 				3301BEF523F962F000B4364D /* RandomAIWithRole.swift in Sources */,
+				337C384C24D1D48500B4FE73 /* Draws3CardsAndKeep2Tests.swift in Sources */,
 				335157FE245D88BE00C46888 /* OptionalExtension.swift in Sources */,
 				3338B2E6242FCCDA0097BA57 /* GameState+OutcomeTests.swift in Sources */,
 				33AF98F824D0A6F800D626E9 /* DrawsFirstCardFromDiscardTests.swift in Sources */,

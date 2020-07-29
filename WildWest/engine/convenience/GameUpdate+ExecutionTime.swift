@@ -15,6 +15,7 @@ extension GameUpdate {
         case .playerPullFromDeck,
              .playerPullFromDiscard,
              .playerDiscardHand,
+             .playerDiscardTopDeck,
              .playerPutInPlay,
              .playerRevealHandCard,
              .playerDiscardInPlay,

@@ -45,6 +45,12 @@ private extension NavigationController {
     }
     
     func loadMenu() {
+        // verify if already displaying menu
+        if let currentViewController = viewControllers.last,
+            currentViewController.isKind(of: MenuViewController.self) {
+            return
+        }
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let menuViewController =
             storyboard.instantiateViewController(withIdentifier: "MenuViewController") as? MenuViewController else {
