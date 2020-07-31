@@ -11,7 +11,7 @@ import FirebaseUI
 import RxSwift
 
 protocol MatchingManagerProtocol {
-    var currentUserId: String { get }
+    var currentUser: WUserInfo { get }
     
     func createUser() -> Completable
     func observeUserStatus() -> Observable<UserStatus>
@@ -30,12 +30,15 @@ class MatchingManager: MatchingManagerProtocol {
         self.database = database
     }
     
-    var currentUserId: String {
+    var currentUser: WUserInfo {
         guard let user = Auth.auth().currentUser else {
             fatalError("Missing user")
         }
         
-        return user.uid
+        return WUserInfo(id: user.uid,
+                         name: user.displayName ?? "",
+                         photoUrl: user.photoURL?.absoluteString ?? "",
+                         status: .idle)
     }
     
     func createUser() -> Completable {
@@ -51,19 +54,19 @@ class MatchingManager: MatchingManagerProtocol {
     }
     
     func observeUserStatus() -> Observable<UserStatus> {
-        database.observeUserStatus(currentUserId)
+        database.observeUserStatus(currentUser.id)
     }
     
     func addToWaitingRoom() -> Completable {
-        database.setUserStatus(currentUserId, status: .waiting)
+        database.setUserStatus(currentUser.id, status: .waiting)
     }
     
     func quitWaitingRoom() -> Completable {
-        database.setUserStatus(currentUserId, status: .idle)
+        database.setUserStatus(currentUser.id, status: .idle)
     }
     
     func quitGame() -> Completable {
-        database.setUserStatus(currentUserId, status: .idle)
+        database.setUserStatus(currentUser.id, status: .idle)
     }
     
     func observeWaitingUsers() -> Observable<[WUserInfo]> {

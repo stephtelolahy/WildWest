@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import Kingfisher
 
 class MenuViewController: UIViewController, Subscribable {
     
@@ -19,6 +20,8 @@ class MenuViewController: UIViewController, Subscribable {
     @IBOutlet private weak var figureLabel: UILabel!
     @IBOutlet private weak var figureButton: UIButton!
     @IBOutlet private weak var roleLabel: UILabel!
+    @IBOutlet private weak var avatarImageView: UIImageView!
+    @IBOutlet private weak var userNameLabel: UILabel!
     
     // MARK: - Properties
     
@@ -47,6 +50,7 @@ class MenuViewController: UIViewController, Subscribable {
         playersCountStepper.value = Double(userPreferences.playersCount)
         updatePlayersLabel()
         updateFigureImage()
+        updateUserView()
         playAsSheriffSwitch.isOn = userPreferences.playAsSheriff
     }
     
@@ -111,5 +115,11 @@ private extension MenuViewController {
             figureButton.setImage(#imageLiteral(resourceName: "01_random"), for: .normal)
             figureLabel.text = "Play as random"
         }
+    }
+    
+    func updateUserView() {
+        let user = AppModules.shared.matchingManager.currentUser
+        avatarImageView.kf.setImage(with: URL(string: user.photoUrl))
+        userNameLabel.text = user.name
     }
 }

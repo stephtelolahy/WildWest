@@ -16,7 +16,6 @@ class UserCell: UICollectionViewCell {
     
     func update(with user: WUserInfo) {
         nameLabel.text = user.name
-        let url = URL(string: user.photoUrl)
-        photoImageView.kf.setImage(with: url)
+        photoImageView.kf.setImage(with: URL(string: user.photoUrl))
     }
 }
