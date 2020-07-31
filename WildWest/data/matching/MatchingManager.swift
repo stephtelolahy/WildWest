@@ -37,20 +37,11 @@ class MatchingManager: MatchingManagerProtocol {
         
         return WUserInfo(id: user.uid,
                          name: user.displayName ?? "",
-                         photoUrl: user.photoURL?.absoluteString ?? "",
-                         status: .idle)
+                         photoUrl: user.photoURL?.absoluteString ?? "")
     }
     
     func createUser() -> Completable {
-        guard let user = Auth.auth().currentUser else {
-            fatalError("Missing user")
-        }
-        
-        let userInfo = WUserInfo(id: user.uid,
-                                 name: user.displayName ?? "",
-                                 photoUrl: user.photoURL?.absoluteString ?? "",
-                                 status: .idle)
-        return database.createUser(userInfo)
+        database.createUser(currentUser)
     }
     
     func observeUserStatus() -> Observable<UserStatus> {
@@ -70,8 +61,7 @@ class MatchingManager: MatchingManagerProtocol {
     }
     
     func observeWaitingUsers() -> Observable<[WUserInfo]> {
-        database.observeAllUsers()
-            .map { $0.filter { $0.status == .waiting } }
+        database.observeWaitingUsers()
     }
     
     func createGame(users: [WUserInfo]) -> Completable {
@@ -86,7 +76,7 @@ class MatchingManager: MatchingManagerProtocol {
         
         var usersDict: [String: WUserInfo] = [:]
         for (index, user) in users.enumerated() {
-          usersDict[playerIds[index]] = user
+            usersDict[playerIds[index]] = user
         }
         
         return database.createGame(id: gameId, state: state)

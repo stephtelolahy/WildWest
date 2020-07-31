@@ -11,15 +11,13 @@ extension DtoEncoder {
     func encode(user: WUserInfo) -> UserInfoDto {
         UserInfoDto(id: user.id,
                     name: user.name,
-                    photoUrl: user.photoUrl,
-                    status: encode(status: user.status))
+                    photoUrl: user.photoUrl)
     }
     
     func decode(user: UserInfoDto) throws -> WUserInfo {
         WUserInfo(id: try user.id.unwrap(),
                   name: try user.name.unwrap(),
-                  photoUrl: try user.photoUrl.unwrap(),
-                  status: try decode(status: user.status))
+                  photoUrl: try user.photoUrl.unwrap())
     }
     
     func decode(users: [String: UserInfoDto]) throws -> [WUserInfo] {

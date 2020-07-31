@@ -5,6 +5,7 @@
 //  Created by Hugues Stephano Telolahy on 26/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
+// swiftlint:disable type_body_length
 
 import Firebase
 
@@ -32,6 +33,8 @@ protocol FirebaseMapperProtocol {
     func decodeUserStatus(from snapshot: DataSnapshot) throws -> UserStatus
     
     func encodeGameUsers(_ users: [String: WUserInfo]) throws -> [String: Any]
+    
+    func decodeStatusDictionary(from snapshot: DataSnapshot) throws -> [String: UserStatus]
 }
 
 class FirebaseMapper: FirebaseMapperProtocol {
@@ -185,5 +188,17 @@ class FirebaseMapper: FirebaseMapperProtocol {
         let dto = Dictionary(uniqueKeysWithValues: users.map { key, value in (key, dtoEncoder.encode(user: value)) })
         let value = try dictionaryEncoder.encode(dto)
         return value
+    }
+    
+    func decodeStatusDictionary(from snapshot: DataSnapshot) throws -> [String: UserStatus] {
+        guard let dictionary = snapshot.value as? [String: [String: Any]] else {
+            return [:]
+        }
+        
+        return Dictionary(uniqueKeysWithValues: try dictionary.map { key, value in
+            let dto = try self.dictionaryEncoder.decode(UserStatusDto.self, from: value)
+            let status = try dtoEncoder.decode(status: dto)
+            return (key, status)
+        })
     }
 }
