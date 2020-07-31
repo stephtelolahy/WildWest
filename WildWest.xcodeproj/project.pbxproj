@@ -304,6 +304,7 @@
 		33E4412124077D8000B2848E /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E4412024077D8000B2848E /* Score.swift */; };
 		33E4412224077D8000B2848E /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E4412024077D8000B2848E /* Score.swift */; };
 		33E4412424077DAB00B2848E /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E4412324077DAB00B2848E /* UITableViewExtension.swift */; };
+		33EAD12224D48F200052A97C /* Role+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EAD12124D48F200052A97C /* Role+UIImage.swift */; };
 		33EE1B9A242E95C500A1E4F7 /* StartTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB2D8C32420147200AD0C11 /* StartTurn.swift */; };
 		33EE1B9B242E95C500A1E4F7 /* StartTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB2D8C32420147200AD0C11 /* StartTurn.swift */; };
 		33EE1B9D242F188D00A1E4F7 /* GameMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EE1B9C242F188D00A1E4F7 /* GameMove.swift */; };
@@ -547,6 +548,7 @@
 		33E4411A24077CA000B2848E /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		33E4412024077D8000B2848E /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		33E4412324077DAB00B2848E /* UITableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
+		33EAD12124D48F200052A97C /* Role+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Role+UIImage.swift"; sourceTree = "<group>"; };
 		33EC5D3A23E737E500E14890 /* DiscardBang.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardBang.swift; sourceTree = "<group>"; };
 		33EE1B9C242F188D00A1E4F7 /* GameMove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMove.swift; sourceTree = "<group>"; };
 		33EE1B9F242F18C200A1E4F7 /* MoveMatcherProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveMatcherProtocol.swift; sourceTree = "<group>"; };
@@ -1252,6 +1254,7 @@
 				332F0498244716C100BE2E4A /* UIColor+Hex.swift */,
 				33029EAA24C7459D002A5E54 /* RxExtensions.swift */,
 				33029EAC24C74B8F002A5E54 /* DatabaseReference+Rx.swift */,
+				33EAD12124D48F200052A97C /* Role+UIImage.swift */,
 			);
 			path = misc;
 			sourceTree = "<group>";
@@ -1758,6 +1761,7 @@
 				335632DB2479726D0004F371 /* SignInViewController.swift in Sources */,
 				3356CF11243237500071B04F /* DamageEvent.swift in Sources */,
 				334673E62436267500FFBB82 /* UIViewController+Alert.swift in Sources */,
+				33EAD12224D48F200052A97C /* Role+UIImage.swift in Sources */,
 				337408D424306C3400E5809B /* Player+Cards.swift in Sources */,
 				33639FDA24CB421D00F48727 /* WaitingRoomViewController.swift in Sources */,
 				3328FCA7242F29B100A82255 /* Jail.swift in Sources */,

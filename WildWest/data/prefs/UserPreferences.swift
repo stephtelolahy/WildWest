@@ -9,14 +9,32 @@
 
 class UserPreferences {
     
-    @UserDefaultsStored("preferred_figure", defaultValue: "suzyLafayette")
-    var preferredFigure: String
-    
     @UserDefaultsStored("players_count", defaultValue: 5)
     var playersCount: Int
     
-    @UserDefaultsStored("play_as_sheriff", defaultValue: true)
-    var playAsSheriff: Bool
+    var preferredRole: Role? {
+        get {
+            Role(rawValue: preferredRoleString)
+        }
+        set {
+            preferredRoleString = newValue?.rawValue ?? ""
+        }
+    }
+    
+    @UserDefaultsStored("preferred_role", defaultValue: Role.sheriff.rawValue)
+    private var preferredRoleString: String
+    
+    var preferredFigure: FigureName? {
+        get {
+            FigureName(rawValue: preferredFigureString)
+        }
+        set {
+            preferredFigureString = newValue?.rawValue ?? ""
+        }
+    }
+    
+    @UserDefaultsStored("preferred_figure", defaultValue: FigureName.suzyLafayette.rawValue)
+    var preferredFigureString: String
     
     @UserDefaultsStored("update_delay", defaultValue: 0.8)
     var updateDelay: Double

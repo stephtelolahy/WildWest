@@ -16,7 +16,7 @@ class MenuViewController: UIViewController, Subscribable {
     
     @IBOutlet private weak var playersCountStepper: UIStepper!
     @IBOutlet private weak var playersCountLabel: UILabel!
-    @IBOutlet private weak var playAsSheriffSwitch: UISwitch!
+    @IBOutlet private weak var roleButton: UIButton!
     @IBOutlet private weak var figureLabel: UILabel!
     @IBOutlet private weak var figureButton: UIButton!
     @IBOutlet private weak var roleLabel: UILabel!
@@ -50,8 +50,8 @@ class MenuViewController: UIViewController, Subscribable {
         playersCountStepper.value = Double(userPreferences.playersCount)
         updatePlayersLabel()
         updateFigureImage()
+        updateRoleImage()
         updateUserView()
-        playAsSheriffSwitch.isOn = userPreferences.playAsSheriff
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,13 +81,13 @@ class MenuViewController: UIViewController, Subscribable {
     
     @IBAction private func figureButtonTapped(_ sender: Any) {
         figureSelector.selectFigure(within: allFigures.map { $0.name }) { [weak self] figure in
-            self?.userPreferences.preferredFigure = figure?.rawValue ?? ""
+            self?.userPreferences.preferredFigure = figure
             self?.updateFigureImage()
         }
     }
     
-    @IBAction private func playAsSheriffValueChanged(_ sender: Any) {
-        userPreferences.playAsSheriff = playAsSheriffSwitch.isOn
+    @IBAction private func roleButtonTapped(_ sender: Any) {
+        // TODO: select role
     }
     
     @IBAction private func contactButtonTapped(_ sender: Any) {
@@ -108,12 +108,22 @@ private extension MenuViewController {
     }
     
     func updateFigureImage() {
-        if let figure = allFigures.first(where: { $0.name.rawValue == userPreferences.preferredFigure }) {
+        if let figure = allFigures.first(where: { $0.name == userPreferences.preferredFigure }) {
             figureButton.setImage(UIImage(named: figure.imageName), for: .normal)
             figureLabel.text = "Play as \(figure.name.rawValue)"
         } else {
             figureButton.setImage(#imageLiteral(resourceName: "01_random"), for: .normal)
             figureLabel.text = "Play as random"
+        }
+    }
+    
+    func updateRoleImage() {
+        if let role = userPreferences.preferredRole {
+            roleButton.setImage(role.image(), for: .normal)
+            roleLabel.text = role.rawValue
+        } else {
+            roleButton.setImage(#imageLiteral(resourceName: "01_random"), for: .normal)
+            roleLabel.text = "random"
         }
     }
     

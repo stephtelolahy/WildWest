@@ -21,7 +21,7 @@ protocol PlayerProtocol {
     var lastDamage: DamageEvent? { get }
 }
 
-enum Role: String {
+enum Role: String, CaseIterable {
     case sheriff,
     outlaw,
     renegade,
