@@ -71,15 +71,10 @@ private extension GameLayoutBuilder {
                            width: cellSize.width,
                            height: cellSize.height)
         
-        result[1] = CGRect(x: padding,
-                           y: (size.height - cellSize.height) / 2,
-                           width: cellSize.width,
-                           height: cellSize.height)
-        
-        result[2] = CGRect(x: (size.width - cellSize.width - padding),
-                           y: (size.height - cellSize.height) / 2,
-                           width: cellSize.width,
-                           height: cellSize.height)
+        let topItemsCount = 3
+        let topFrames = topItemsFrames(for: topItemsCount, size: size, padding: padding)
+        result[1] = topFrames[0]
+        result[2] = topFrames[2]
         
         return result
     }
