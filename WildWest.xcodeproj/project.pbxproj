@@ -305,6 +305,7 @@
 		33E4412224077D8000B2848E /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E4412024077D8000B2848E /* Score.swift */; };
 		33E4412424077DAB00B2848E /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E4412324077DAB00B2848E /* UITableViewExtension.swift */; };
 		33EAD12224D48F200052A97C /* Role+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EAD12124D48F200052A97C /* Role+UIImage.swift */; };
+		33EAD12624D499910052A97C /* RoleSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EAD12524D499910052A97C /* RoleSelector.swift */; };
 		33EE1B9A242E95C500A1E4F7 /* StartTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB2D8C32420147200AD0C11 /* StartTurn.swift */; };
 		33EE1B9B242E95C500A1E4F7 /* StartTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB2D8C32420147200AD0C11 /* StartTurn.swift */; };
 		33EE1B9D242F188D00A1E4F7 /* GameMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EE1B9C242F188D00A1E4F7 /* GameMove.swift */; };
@@ -549,6 +550,7 @@
 		33E4412024077D8000B2848E /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		33E4412324077DAB00B2848E /* UITableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
 		33EAD12124D48F200052A97C /* Role+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Role+UIImage.swift"; sourceTree = "<group>"; };
+		33EAD12524D499910052A97C /* RoleSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleSelector.swift; sourceTree = "<group>"; };
 		33EC5D3A23E737E500E14890 /* DiscardBang.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardBang.swift; sourceTree = "<group>"; };
 		33EE1B9C242F188D00A1E4F7 /* GameMove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMove.swift; sourceTree = "<group>"; };
 		33EE1B9F242F18C200A1E4F7 /* MoveMatcherProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveMatcherProtocol.swift; sourceTree = "<group>"; };
@@ -1197,6 +1199,7 @@
 				33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */,
 				3372CB512454BC7900C061C9 /* FigureSelector.swift */,
 				33031E0C2455513000528158 /* ThemeMusicPlayer.swift */,
+				33EAD12524D499910052A97C /* RoleSelector.swift */,
 			);
 			path = menu;
 			sourceTree = "<group>";
@@ -1773,6 +1776,7 @@
 				3328FCA1242F299F00A82255 /* CatBalou.swift in Sources */,
 				ADD4DB6E24209E4D001BBD48 /* MoveDescriptor.swift in Sources */,
 				332F0499244716C100BE2E4A /* UIColor+Hex.swift in Sources */,
+				33EAD12624D499910052A97C /* RoleSelector.swift in Sources */,
 				33B156682454188200746B61 /* GameResources.swift in Sources */,
 				33FDD70C240BFB4B00BC3E14 /* MenuViewController.swift in Sources */,
 				33318D6D24275AAE0055C6C5 /* StatsBuilder.swift in Sources */,

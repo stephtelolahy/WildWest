@@ -47,6 +47,7 @@ class MenuViewController: UIViewController, Subscribable {
     override func viewDidLoad() {
         super.viewDidLoad()
         figureButton.addBrownRoundedBorder()
+        roleButton.addBrownRoundedBorder()
         playersCountStepper.value = Double(userPreferences.playersCount)
         updatePlayersLabel()
         updateFigureImage()
@@ -87,7 +88,9 @@ class MenuViewController: UIViewController, Subscribable {
     }
     
     @IBAction private func roleButtonTapped(_ sender: Any) {
-        // TODO: select role
+        present(RoleSelector(completion: { [weak self] _ in
+            self?.updateRoleImage()
+        }), animated: true)
     }
     
     @IBAction private func contactButtonTapped(_ sender: Any) {
