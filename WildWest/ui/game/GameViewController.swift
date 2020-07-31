@@ -134,6 +134,9 @@ class GameViewController: UIViewController, Subscribable {
 private extension GameViewController {
     
     func processState(_ state: GameStateProtocol) {
+        #if DEBUG
+        print("!! state")
+        #endif
         latestState = state
         
         playerItems = playerAdapter.buildItems(state: state, latestMove: latestMove, scores: statsBuilder.scores)
@@ -154,6 +157,10 @@ private extension GameViewController {
     }
     
     func processExecutedMove(_ move: GameMove) {
+        #if DEBUG
+        print("\n*** \(String(describing: move)) ***")
+        #endif
+        
         latestMove = move
         
         messages.append(moveDescriptor.description(for: move))
@@ -165,6 +172,10 @@ private extension GameViewController {
     }
     
     func processExecutedUpdate(_ update: GameUpdate) {
+        #if DEBUG
+        print("> \(String(describing: update))")
+        #endif
+        
         guard let state = latestState else {
             return
         }
