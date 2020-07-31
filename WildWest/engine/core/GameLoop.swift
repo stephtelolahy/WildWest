@@ -50,10 +50,6 @@ private extension GameLoop {
         let move = pendingMoves.remove(at: 0)
         currentMove = move
         
-        #if DEBUG
-        print("\n*** \(String(describing: move)) ***")
-        #endif
-        
         let state = database.state
         let updates = moveMatchers.compactMap({ $0.execute(move, in: state) }).flatMap { $0 }
         pendingUpdates.append(contentsOf: updates)
@@ -74,10 +70,6 @@ private extension GameLoop {
         }
         
         let update = pendingUpdates.remove(at: 0)
-        
-        #if DEBUG
-        print("> \(String(describing: update))")
-        #endif
         
         sub(database.setExecutedUpdate(update)
             .andThen(database.execute(update))
