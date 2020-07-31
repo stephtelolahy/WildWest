@@ -12,15 +12,24 @@ struct PlayerItem {
     let isAttacked: Bool
     let isHelped: Bool
     let score: Int?
+    let user: WUserInfo?
 }
 
 protocol PlayersAdapterProtocol {
+    func setUsers(_ users: [String: WUserInfo])
     func buildItems(state: GameStateProtocol,
                     latestMove: GameMove?,
                     scores: [String: Int]) -> [PlayerItem]
 }
 
 class PlayersAdapter: PlayersAdapterProtocol {
+    
+    private var users: [String: WUserInfo] = [:]
+    
+    func setUsers(_ users: [String: WUserInfo]) {
+        self.users = users
+    }
+    
     func buildItems(state: GameStateProtocol,
                     latestMove: GameMove?,
                     scores: [String: Int]) -> [PlayerItem] {
@@ -32,7 +41,8 @@ class PlayersAdapter: PlayersAdapterProtocol {
                               isTurn: player.identifier == state.turn,
                               isAttacked: isAttacked,
                               isHelped: isHelped,
-                              score: scores[playerId])
+                              score: scores[playerId],
+                              user: users[player.identifier])
         }
     }
 }

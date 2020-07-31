@@ -302,6 +302,18 @@ name</string>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zvZ-fr-1si">
+                                                    <rect key="frame" x="6.3333333333333321" y="36.666666666666664" width="28.999999999999996" height="28.999999999999993"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="zvZ-fr-1si" secondAttribute="height" multiplier="1:1" id="OVo-EO-9V8"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hix-hs-lmJ">
+                                                    <rect key="frame" x="109.66666666666667" y="36.666666666666664" width="29.000000000000014" height="28.999999999999993"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="hix-hs-lmJ" secondAttribute="height" multiplier="1:1" id="D11-Qf-mI2"/>
+                                                    </constraints>
+                                                </imageView>
                                                 <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ILd-SS-hgA" userLabel="name Label">
                                                     <rect key="frame" x="58.666666666666664" y="18.666666666666668" width="27.666666666666664" height="16.000000000000004"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -330,12 +342,6 @@ name</string>
                                                     <color key="textColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zvZ-fr-1si">
-                                                    <rect key="frame" x="6.3333333333333321" y="36.666666666666664" width="28.999999999999996" height="28.999999999999993"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="zvZ-fr-1si" secondAttribute="height" multiplier="1:1" id="OVo-EO-9V8"/>
-                                                    </constraints>
-                                                </imageView>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -347,7 +353,9 @@ name</string>
                                             <constraint firstItem="BGV-60-VS0" firstAttribute="leading" secondItem="ZDs-Cy-7BZ" secondAttribute="trailing" constant="2" id="CdY-1P-FE8"/>
                                             <constraint firstItem="BGV-60-VS0" firstAttribute="leading" secondItem="zvZ-fr-1si" secondAttribute="trailing" constant="1" id="Eiz-Of-Uk3"/>
                                             <constraint firstItem="0DL-RG-Swb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YdZ-er-2Pm" secondAttribute="leading" symbolic="YES" id="Kv0-OB-Xa0"/>
+                                            <constraint firstItem="hix-hs-lmJ" firstAttribute="top" secondItem="BGV-60-VS0" secondAttribute="top" id="LaX-cV-5hw"/>
                                             <constraint firstItem="BGV-60-VS0" firstAttribute="centerY" secondItem="YdZ-er-2Pm" secondAttribute="centerY" id="SDO-4n-gxz"/>
+                                            <constraint firstItem="hix-hs-lmJ" firstAttribute="leading" secondItem="BGV-60-VS0" secondAttribute="trailing" constant="1" id="VIr-El-FdZ"/>
                                             <constraint firstItem="zvZ-fr-1si" firstAttribute="height" secondItem="BGV-60-VS0" secondAttribute="height" multiplier="0.4" id="VMg-W7-mpH"/>
                                             <constraint firstItem="0DL-RG-Swb" firstAttribute="centerY" secondItem="YdZ-er-2Pm" secondAttribute="centerY" id="awn-sC-iEp"/>
                                             <constraint firstAttribute="trailing" secondItem="0DL-RG-Swb" secondAttribute="trailing" constant="2" id="dLQ-zg-BXB"/>
@@ -355,6 +363,7 @@ name</string>
                                             <constraint firstItem="zvZ-fr-1si" firstAttribute="top" secondItem="BGV-60-VS0" secondAttribute="top" id="obf-GC-uSR"/>
                                             <constraint firstItem="RyI-Pr-kap" firstAttribute="centerX" secondItem="YdZ-er-2Pm" secondAttribute="centerX" id="ooQ-Ye-ZGw"/>
                                             <constraint firstItem="ZDs-Cy-7BZ" firstAttribute="bottom" secondItem="BGV-60-VS0" secondAttribute="bottom" id="rst-OM-Ual"/>
+                                            <constraint firstItem="hix-hs-lmJ" firstAttribute="height" secondItem="BGV-60-VS0" secondAttribute="height" multiplier="0.399083" id="ueL-vr-91g"/>
                                             <constraint firstItem="BGV-60-VS0" firstAttribute="centerX" secondItem="YdZ-er-2Pm" secondAttribute="centerX" id="wER-fW-GTU"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
@@ -363,6 +372,7 @@ name</string>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
+                                            <outlet property="avatarImageView" destination="hix-hs-lmJ" id="G9S-cn-f4H"/>
                                             <outlet property="equipmentLabel" destination="0DL-RG-Swb" id="DLz-hB-8Or"/>
                                             <outlet property="figureImageView" destination="BGV-60-VS0" id="dao-57-zAT"/>
                                             <outlet property="handLabel" destination="ZDs-Cy-7BZ" id="UKR-sp-U5i"/>
