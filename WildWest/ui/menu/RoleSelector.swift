@@ -16,20 +16,20 @@ class RoleSelector: UIAlertController {
     convenience init(completion: @escaping (Role?) -> Void) {
         self.init(title: "Choose role", message: nil, preferredStyle: .alert)
         roles.forEach { role in
-            self.addAction(UIAlertAction(title: role.rawValue,
-                                         style: .default,
-                                         handler: { _ in
-                                            self.preferences.preferredRole = role
-                                            completion(role)
-                                            
+            addAction(UIAlertAction(title: role.rawValue,
+                                    style: .default,
+                                    handler: { _ in
+                                        self.preferences.preferredRole = role
+                                        completion(role)
+                                        
             }))
         }
         
-        self.addAction(UIAlertAction(title: "Random",
-                                     style: .cancel,
-                                     handler: { _ in
-                                        self.preferences.preferredRole = nil
-                                        completion(nil)
+        addAction(UIAlertAction(title: "Random",
+                                style: .cancel,
+                                handler: { _ in
+                                    self.preferences.preferredRole = nil
+                                    completion(nil)
         }))
     }
 }

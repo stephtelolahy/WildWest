@@ -34,7 +34,7 @@ class UserPreferences {
     }
     
     @UserDefaultsStored("preferred_figure", defaultValue: FigureName.suzyLafayette.rawValue)
-    var preferredFigureString: String
+    private var preferredFigureString: String
     
     @UserDefaultsStored("update_delay", defaultValue: 0.8)
     var updateDelay: Double

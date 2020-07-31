@@ -1198,8 +1198,8 @@
 			children = (
 				33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */,
 				3372CB512454BC7900C061C9 /* FigureSelector.swift */,
-				33031E0C2455513000528158 /* ThemeMusicPlayer.swift */,
 				33EAD12524D499910052A97C /* RoleSelector.swift */,
+				33031E0C2455513000528158 /* ThemeMusicPlayer.swift */,
 			);
 			path = menu;
 			sourceTree = "<group>";
