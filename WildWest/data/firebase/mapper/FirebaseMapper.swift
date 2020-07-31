@@ -30,6 +30,8 @@ protocol FirebaseMapperProtocol {
     func decodeUsers(from snapshot: DataSnapshot) throws -> [WUserInfo]
     func encodeUserStatus(_ status: UserStatus) throws -> [String: Any]?
     func decodeUserStatus(from snapshot: DataSnapshot) throws -> UserStatus
+    
+    func encodeGameUsers(_ users: [String: WUserInfo]) throws -> [String: Any]
 }
 
 class FirebaseMapper: FirebaseMapperProtocol {
@@ -177,5 +179,11 @@ class FirebaseMapper: FirebaseMapperProtocol {
             let user = try dtoEncoder.decode(user: dto)
             return user
         }
+    }
+    
+    func encodeGameUsers(_ users: [String: WUserInfo]) throws -> [String: Any] {
+        let dto = Dictionary(uniqueKeysWithValues: users.map { key, value in (key, dtoEncoder.encode(user: value)) })
+        let value = try dictionaryEncoder.encode(dto)
+        return value
     }
 }

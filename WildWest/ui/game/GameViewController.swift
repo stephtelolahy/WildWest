@@ -105,6 +105,11 @@ class GameViewController: UIViewController, Subscribable {
         }
         
         startButton.isEnabled = playingSheriff()
+        
+        #if DEBUG
+        playerAdapter.setUsers(["pedroRamirez": AppModules.shared.matchingManager.currentUser])
+        playersCollectionView.reloadData()
+        #endif
     }
     
     // MARK: IBAction

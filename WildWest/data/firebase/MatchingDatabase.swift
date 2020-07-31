@@ -16,6 +16,7 @@ protocol MatchingDatabaseProtocol {
     func observeUserStatus(_ id: String) -> Observable<UserStatus>
     func setUserStatus(_ id: String, status: UserStatus) -> Completable
     func observeAllUsers() -> Observable<[WUserInfo]>
+    func setGameUsers(gameId: String, users: [String: WUserInfo]) -> Completable
 }
 
 class MatchingDatabase: MatchingDatabaseProtocol {
@@ -59,5 +60,10 @@ class MatchingDatabase: MatchingDatabaseProtocol {
     func observeAllUsers() -> Observable<[WUserInfo]> {
         rootRef.child("users")
             .rxObserve({ try self.mapper.decodeUsers(from: $0) })
+    }
+    
+    func setGameUsers(gameId: String, users: [String: WUserInfo]) -> Completable {
+        rootRef.child("games/\(gameId)/users")
+            .rxSetValue({ try self.mapper.encodeGameUsers(users) })
     }
 }

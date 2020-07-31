@@ -84,7 +84,13 @@ class MatchingManager: MatchingManagerProtocol {
             database.setUserStatus(user.id, status: .playing(gameId: gameId, playerId: playerIds[index]))
         }
         
+        var usersDict: [String: WUserInfo] = [:]
+        for (index, user) in users.enumerated() {
+          usersDict[playerIds[index]] = user
+        }
+        
         return database.createGame(id: gameId, state: state)
+            .andThen(database.setGameUsers(gameId: gameId, users: usersDict))
             .andThen(Completable.concat(updates))
     }
 }
