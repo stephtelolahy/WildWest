@@ -84,6 +84,10 @@ class GameViewController: UIViewController, Subscribable {
         let layout = playersCollectionView.collectionViewLayout as? GameCollectionViewLayout
         layout?.delegate = self
         
+        if let users = environment.gameUsers {
+            playerAdapter.setUsers(users)
+        }
+        
         sub(subjects.state(observedBy: controlledPlayerId).subscribe(onNext: { [weak self] state in
             self?.processState(state)
             }, onError: { [weak self] error in
@@ -105,11 +109,6 @@ class GameViewController: UIViewController, Subscribable {
         }
         
         startButton.isEnabled = playingSheriff()
-        
-        #if DEBUG
-        playerAdapter.setUsers(["pedroRamirez": AppModules.shared.matchingManager.currentUser])
-        playersCollectionView.reloadData()
-        #endif
     }
     
     // MARK: IBAction

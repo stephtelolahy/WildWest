@@ -11,4 +11,5 @@ struct GameEnvironment {
     let subjects: GameSubjectsProtocol
     let controlledId: String?
     let aiAgents: [AIPlayerAgentProtocol]?
+    var gameUsers: [String: WUserInfo]?
 }
