@@ -116,7 +116,7 @@ class DtoEncodingTests: XCTestCase {
     
     func test_UserInfoEncoding() throws {
         // Given
-        let user = WUserInfo(id: "1", name: "user1", photoUrl: "https://photo1.png", status: .idle)
+        let user = WUserInfo(id: "1", name: "user1", photoUrl: "https://photo1.png")
         
         // When
         let encoded = sut.encode(user: user)

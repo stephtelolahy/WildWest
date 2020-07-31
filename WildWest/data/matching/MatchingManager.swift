@@ -11,7 +11,7 @@ import FirebaseUI
 import RxSwift
 
 protocol MatchingManagerProtocol {
-    var currentUserId: String { get }
+    var currentUser: WUserInfo { get }
     
     func createUser() -> Completable
     func observeUserStatus() -> Observable<UserStatus>
@@ -30,45 +30,38 @@ class MatchingManager: MatchingManagerProtocol {
         self.database = database
     }
     
-    var currentUserId: String {
+    var currentUser: WUserInfo {
         guard let user = Auth.auth().currentUser else {
             fatalError("Missing user")
         }
         
-        return user.uid
+        return WUserInfo(id: user.uid,
+                         name: user.displayName ?? "",
+                         photoUrl: user.photoURL?.absoluteString ?? "")
     }
     
     func createUser() -> Completable {
-        guard let user = Auth.auth().currentUser else {
-            fatalError("Missing user")
-        }
-        
-        let userInfo = WUserInfo(id: user.uid,
-                                 name: user.displayName ?? "",
-                                 photoUrl: user.photoURL?.absoluteString ?? "",
-                                 status: .idle)
-        return database.createUser(userInfo)
+        database.createUser(currentUser)
     }
     
     func observeUserStatus() -> Observable<UserStatus> {
-        database.observeUserStatus(currentUserId)
+        database.observeUserStatus(currentUser.id)
     }
     
     func addToWaitingRoom() -> Completable {
-        database.setUserStatus(currentUserId, status: .waiting)
+        database.setUserStatus(currentUser.id, status: .waiting)
     }
     
     func quitWaitingRoom() -> Completable {
-        database.setUserStatus(currentUserId, status: .idle)
+        database.setUserStatus(currentUser.id, status: .idle)
     }
     
     func quitGame() -> Completable {
-        database.setUserStatus(currentUserId, status: .idle)
+        database.setUserStatus(currentUser.id, status: .idle)
     }
     
     func observeWaitingUsers() -> Observable<[WUserInfo]> {
-        database.observeAllUsers()
-            .map { $0.filter { $0.status == .waiting } }
+        database.observeWaitingUsers()
     }
     
     func createGame(users: [WUserInfo]) -> Completable {
@@ -81,7 +74,13 @@ class MatchingManager: MatchingManagerProtocol {
             database.setUserStatus(user.id, status: .playing(gameId: gameId, playerId: playerIds[index]))
         }
         
+        var usersDict: [String: WUserInfo] = [:]
+        for (index, user) in users.enumerated() {
+            usersDict[playerIds[index]] = user
+        }
+        
         return database.createGame(id: gameId, state: state)
+            .andThen(database.setGameUsers(gameId: gameId, users: usersDict))
             .andThen(Completable.concat(updates))
     }
 }

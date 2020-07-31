@@ -29,10 +29,19 @@ class GameBuilder: Subscribable {
     func createRemoteGameEnvironment(gameId: String,
                                      playerId: String,
                                      completion: @escaping (GameEnvironment) -> Void) {
-        sub(AppModules.shared.matchingDatabase.getGame(gameId).subscribe(onSuccess: { state in
-            
+        
+        let request: Single<(GameStateProtocol, [String: WUserInfo])> =
+            AppModules.shared.matchingDatabase.getGame(gameId)
+                .flatMap {  state in
+                    AppModules.shared.matchingDatabase.getGameUsers(gameId: gameId)
+                        .map { users in (state, users) }
+                }
+        
+        sub(request.subscribe(onSuccess: { data in
+            let (state, users) = data
             let environment = self.createRemoteEnvironment(gameId: gameId,
                                                            state: state,
+                                                           users: users,
                                                            controlledId: playerId,
                                                            updateDelay: AppModules.shared.userPreferences.updateDelay,
                                                            firebaseMapper: AppModules.shared.firebaseMapper)
@@ -113,6 +122,7 @@ private extension GameBuilder {
     
     func createRemoteEnvironment(gameId: String,
                                  state: GameStateProtocol,
+                                 users: [String: WUserInfo],
                                  controlledId: String?,
                                  updateDelay: TimeInterval,
                                  firebaseMapper: FirebaseMapperProtocol) -> GameEnvironment {
@@ -141,6 +151,7 @@ private extension GameBuilder {
         return GameEnvironment(engine: engine,
                                subjects: subjects,
                                controlledId: controlledId,
-                               aiAgents: nil)
+                               aiAgents: nil,
+                               gameUsers: users)
     }
 }

@@ -9,6 +9,7 @@
 import Foundation
 
 struct GameUpdateDto: Codable {
+    let timestamp: String = "\(Date().timeIntervalSince1970)"
     var setTurn: String?
     var setChallenge: ChallengeDto?
     var removeChallenge: Bool?

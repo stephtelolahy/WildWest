@@ -10,5 +10,4 @@ struct WUserInfo: Equatable {
     let id: String
     let name: String
     let photoUrl: String
-    let status: UserStatus
 }

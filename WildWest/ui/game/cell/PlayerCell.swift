@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class PlayerCell: UICollectionViewCell {
     
@@ -16,6 +17,7 @@ class PlayerCell: UICollectionViewCell {
     @IBOutlet private weak var roleImageView: UIImageView!
     @IBOutlet private weak var healthLabel: UILabel!
     @IBOutlet private weak var handLabel: UILabel!
+    @IBOutlet private weak var avatarImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,6 +41,12 @@ class PlayerCell: UICollectionViewCell {
             + Array(0..<player.health).map { _ in "■" }.joined()
         handLabel.text = "[] \(player.hand.count)"
         figureImageView.image = UIImage(named: player.imageName)
+        
+        if let user = item.user {
+            avatarImageView.kf.setImage(with: URL(string: user.photoUrl))
+        } else {
+            avatarImageView.image = nil
+        }
     }
     
     private func updateBackground() {

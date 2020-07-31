@@ -642,13 +642,13 @@
 		3301E63323F7EEB800AB35C7 /* ai */ = {
 			isa = PBXGroup;
 			children = (
+				3301BEF923F9A79B00B4364D /* AIPlayerAgent.swift */,
 				3301E63723F7EEF700AB35C7 /* AIProtocol.swift */,
-				33E4412024077D8000B2848E /* Score.swift */,
 				3302E51B23F8E34C004FE76E /* RandomAI.swift */,
 				3301BEF323F962F000B4364D /* RandomAIWithRole.swift */,
-				3301BEF923F9A79B00B4364D /* AIPlayerAgent.swift */,
 				3390F90D242539BA001057A7 /* MoveClassifierProtocol.swift */,
 				3390F90A24253932001057A7 /* MoveClassifier.swift */,
+				33E4412024077D8000B2848E /* Score.swift */,
 				3398B0D3243B9AED00EB670A /* Role+Relationship.swift */,
 				33318D6C24275AAE0055C6C5 /* StatsBuilder.swift */,
 			);
@@ -1053,8 +1053,8 @@
 			isa = PBXGroup;
 			children = (
 				33C922E324C9F83C00956151 /* MatchingManager.swift */,
-				3337029024CB4879007E59A2 /* GameEnvironment.swift */,
 				3372CB532454BF8E00C061C9 /* GameBuilder.swift */,
+				3337029024CB4879007E59A2 /* GameEnvironment.swift */,
 			);
 			path = matching;
 			sourceTree = "<group>";

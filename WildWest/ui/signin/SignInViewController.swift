@@ -31,7 +31,7 @@ extension SignInViewController: FUIAuthDelegate {
     
     func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
         guard error == nil else {
-            print("didSignInWith error: \(error?.localizedDescription ?? "nil")")
+            presentAlert(title: "Sign in failed", message: error?.localizedDescription ?? "")
             return
         }
         
