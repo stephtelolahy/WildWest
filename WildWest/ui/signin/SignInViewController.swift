@@ -8,13 +8,14 @@
 
 import UIKit
 import FirebaseUI
+import Resolver
 
 class SignInViewController: UIViewController, Subscribable {
     
     var onCompleted: (() -> Void)?
     
     private lazy var authUI = FUIAuth.defaultAuthUI()!
-    private lazy var manager = AppModules.shared.matchingManager
+    private lazy var manager: MatchingManagerProtocol = Resolver.resolve()
     
     override func viewDidLoad() {
         super.viewDidLoad()

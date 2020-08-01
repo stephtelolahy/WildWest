@@ -29,9 +29,9 @@ class MenuViewController: UIViewController, Subscribable {
     var onPlayLocal: (() -> Void)?
     var onPlayOnline: (() -> Void)?
     
-    private lazy var user = AppModules.shared.accountManager.currentUser
+    private lazy var accountManager: AccountManagerProtocol = Resolver.resolve()
     private lazy var preferences: UserPreferencesProtocol = Resolver.resolve()
-    private lazy var allFigures = AppModules.shared.gameResources.allFigures
+    private lazy var gameResources: GameResourcesProtocol = Resolver.resolve()
     private lazy var musicPlayer: ThemeMusicPlayer? = preferences.enableSound ? ThemeMusicPlayer() : nil
     
     // MARK: - Lifecycle
@@ -103,6 +103,7 @@ private extension MenuViewController {
     }
     
     func updateFigureImage() {
+        let allFigures = gameResources.allFigures
         if let figure = allFigures.first(where: { $0.name == preferences.preferredFigure }) {
             figureButton.setImage(UIImage(named: figure.imageName), for: .normal)
             figureLabel.text = "Play as \(figure.name.rawValue)"
@@ -123,7 +124,7 @@ private extension MenuViewController {
     }
     
     func updateUserView() {
-        guard let user = user else {
+        guard let user = accountManager.currentUser else {
             return
         }
         avatarImageView.kf.setImage(with: URL(string: user.photoUrl))

@@ -8,12 +8,13 @@
 
 import UIKit
 import FirebaseUI
+import Resolver
 
 class NavigationController: UINavigationController, Subscribable {
     
-    private lazy var matchingManager = AppModules.shared.matchingManager
-    private lazy var accountManager = AppModules.shared.accountManager
-    private lazy var gameBuilder = AppModules.shared.gameBuilder
+    private lazy var matchingManager: MatchingManagerProtocol = Resolver.resolve()
+    private lazy var accountManager: AccountManagerProtocol = Resolver.resolve()
+    private lazy var gameBuilder: GameBuilderProtocol = Resolver.resolve()
     
     override func viewDidLoad() {
         super.viewDidLoad()
