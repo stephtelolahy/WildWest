@@ -10,8 +10,6 @@ import Firebase
 
 class AnalyticsManager {
     
-    static let shared = AnalyticsManager()
-    
     func tagEventGameOver(_ state: GameStateProtocol) {
         Analytics.logEvent("game_over", parameters: [
             "outcome": state.outcomeText ?? "",

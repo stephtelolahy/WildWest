@@ -15,7 +15,7 @@ class AssistedReactionMoveSelector: ReactionMoveSelectorProtocol {
     }
     
     func selectMove(within moves: [GameMove], state: GameStateProtocol, completion: @escaping (GameMove) -> Void) {
-        guard let move = ai.bestMove(among: moves, in: state, scores: [:]) else {
+        guard let move = ai.bestMove(among: moves, in: state) else {
             return
         }
         

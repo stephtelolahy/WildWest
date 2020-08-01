@@ -20,8 +20,8 @@ class WaitingRoomViewController: UIViewController, Subscribable {
     var onQuit: (() -> Void)?
     var onStart: (([WUserInfo]) -> Void)?
     
+    private lazy var manager = AppModules.shared.matchingManager
     private var users: [WUserInfo] = []
-    private lazy var manager: MatchingManagerProtocol = AppModules.shared.matchingManager
     
     // MARK: - Lifecycle
     

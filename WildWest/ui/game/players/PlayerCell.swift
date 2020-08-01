@@ -69,21 +69,6 @@ class PlayerCell: UICollectionViewCell {
     }
 }
 
-private extension Role {
-    func image() -> UIImage {
-        switch self {
-        case .sheriff:
-            return #imageLiteral(resourceName: "01_sceriffo")
-        case .outlaw:
-            return #imageLiteral(resourceName: "01_fuorilegge")
-        case .renegade:
-            return #imageLiteral(resourceName: "01_rinnegato")
-        case .deputy:
-            return #imageLiteral(resourceName: "01_vice")
-        }
-    }
-}
-
 extension UIView {
     func addBrownRoundedBorder() {
         layer.cornerRadius = 8

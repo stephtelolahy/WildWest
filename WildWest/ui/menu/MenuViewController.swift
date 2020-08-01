@@ -16,7 +16,7 @@ class MenuViewController: UIViewController, Subscribable {
     
     @IBOutlet private weak var playersCountStepper: UIStepper!
     @IBOutlet private weak var playersCountLabel: UILabel!
-    @IBOutlet private weak var playAsSheriffSwitch: UISwitch!
+    @IBOutlet private weak var roleButton: UIButton!
     @IBOutlet private weak var figureLabel: UILabel!
     @IBOutlet private weak var figureButton: UIButton!
     @IBOutlet private weak var roleLabel: UILabel!
@@ -28,30 +28,21 @@ class MenuViewController: UIViewController, Subscribable {
     var onPlayLocal: (() -> Void)?
     var onPlayOnline: (() -> Void)?
     
-    private lazy var userPreferences = AppModules.shared.userPreferences
-    
-    private lazy var allFigures: [FigureProtocol] = {
-        let jsonReader = JsonReader(bundle: Bundle.main)
-        let resources = GameResources(jsonReader: jsonReader)
-        return resources.allFigures
-    }()
-    
-    private lazy var musicPlayer: ThemeMusicPlayer? = {
-        userPreferences.enableSound ? ThemeMusicPlayer() : nil
-    }()
-    
-    private lazy var figureSelector = FigureSelector(viewController: self)
+    private lazy var user = AppModules.shared.accountManager.currentUser
+    private lazy var preferences = AppModules.shared.userPreferences
+    private lazy var allFigures = AppModules.shared.gameResources.allFigures
+    private lazy var musicPlayer: ThemeMusicPlayer? = preferences.enableSound ? ThemeMusicPlayer() : nil
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         figureButton.addBrownRoundedBorder()
-        playersCountStepper.value = Double(userPreferences.playersCount)
-        updatePlayersLabel()
+        roleButton.addBrownRoundedBorder()
+        updatePlayersCount()
         updateFigureImage()
+        updateRoleImage()
         updateUserView()
-        playAsSheriffSwitch.isOn = userPreferences.playAsSheriff
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,19 +66,22 @@ class MenuViewController: UIViewController, Subscribable {
     }
     
     @IBAction private func stepperValueChanged(_ sender: Any) {
-        userPreferences.playersCount = Int(playersCountStepper.value)
-        updatePlayersLabel()
+        preferences.playersCount = Int(playersCountStepper.value)
+        updatePlayersCount()
     }
     
     @IBAction private func figureButtonTapped(_ sender: Any) {
-        figureSelector.selectFigure(within: allFigures.map { $0.name }) { [weak self] figure in
-            self?.userPreferences.preferredFigure = figure?.rawValue ?? ""
+        let figureSelector = FigureSelector(completion: { [weak self] _ in
             self?.updateFigureImage()
-        }
+        })
+        present(figureSelector, animated: true)
     }
     
-    @IBAction private func playAsSheriffValueChanged(_ sender: Any) {
-        userPreferences.playAsSheriff = playAsSheriffSwitch.isOn
+    @IBAction private func roleButtonTapped(_ sender: Any) {
+        let roleSelector = RoleSelector(completion: { [weak self] _ in
+            self?.updateRoleImage()
+        })
+        present(roleSelector, animated: true)
     }
     
     @IBAction private func contactButtonTapped(_ sender: Any) {
@@ -103,12 +97,12 @@ class MenuViewController: UIViewController, Subscribable {
 
 private extension MenuViewController {
     
-    func updatePlayersLabel() {
-        playersCountLabel.text = "\(userPreferences.playersCount) players"
+    func updatePlayersCount() {
+        playersCountLabel.text = "\(preferences.playersCount) players"
     }
     
     func updateFigureImage() {
-        if let figure = allFigures.first(where: { $0.name.rawValue == userPreferences.preferredFigure }) {
+        if let figure = allFigures.first(where: { $0.name == preferences.preferredFigure }) {
             figureButton.setImage(UIImage(named: figure.imageName), for: .normal)
             figureLabel.text = "Play as \(figure.name.rawValue)"
         } else {
@@ -117,8 +111,20 @@ private extension MenuViewController {
         }
     }
     
+    func updateRoleImage() {
+        if let role = preferences.preferredRole {
+            roleButton.setImage(role.image(), for: .normal)
+            roleLabel.text = role.rawValue
+        } else {
+            roleButton.setImage(#imageLiteral(resourceName: "01_random"), for: .normal)
+            roleLabel.text = "random"
+        }
+    }
+    
     func updateUserView() {
-        let user = AppModules.shared.matchingManager.currentUser
+        guard let user = user else {
+            return
+        }
         avatarImageView.kf.setImage(with: URL(string: user.photoUrl))
         userNameLabel.text = user.name
     }

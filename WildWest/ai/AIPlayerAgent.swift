@@ -29,12 +29,13 @@ class AIPlayerAgent: AIPlayerAgentProtocol, Subscribable {
     init(playerId: String,
          ai: AIProtocol,
          engine: GameEngineProtocol,
-         subjects: GameSubjectsProtocol) {
+         subjects: GameSubjectsProtocol,
+         statsBuilder: StatsBuilderProtocol) {
         self.playerId = playerId
         self.ai = ai
         self.engine = engine
         self.subjects = subjects
-        statsBuilder = StatsBuilder(sheriffId: subjects.sheriffId, classifier: MoveClassifier())
+        self.statsBuilder = statsBuilder
     }
     
     func observeState() {
@@ -59,7 +60,7 @@ private extension AIPlayerAgent {
     }
     
     func processExecutedMove(_ move: GameMove) {
-        statsBuilder.updateOnExecuting(move)
+        statsBuilder.updateScores(move)
     }
     
     func processValidMoves(_ moves: [GameMove]) {
@@ -67,7 +68,7 @@ private extension AIPlayerAgent {
             return
         }
         
-        guard let move = ai.bestMove(among: moves, in: state, scores: statsBuilder.scores) else {
+        guard let move = ai.bestMove(among: moves, in: state) else {
             return
         }
         

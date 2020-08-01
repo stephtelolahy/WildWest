@@ -8,36 +8,28 @@
 
 import UIKit
 
-class FigureSelector {
+class FigureSelector: UIAlertController {
     
-    private unowned let viewController: UIViewController
+    private lazy var preferences = AppModules.shared.userPreferences
+    private lazy var figures = AppModules.shared.gameResources.allFigures.map { $0.name }
     
-    init(viewController: UIViewController) {
-        self.viewController = viewController
-    }
-    
-    func selectFigure(within figures: [FigureName], completion: @escaping ((FigureName?) -> Void)) {
-        let alertController = UIAlertController(title: "Choose figure",
-                                                message: nil,
-                                                preferredStyle: .alert)
-        
+    convenience init(completion: @escaping (FigureName?) -> Void) {
+        self.init(title: "Choose figure", message: nil, preferredStyle: .alert)
         figures.forEach { figure in
-            alertController.addAction(UIAlertAction(title: figure.rawValue,
-                                                    style: .default,
-                                                    handler: { _ in
-                                                        guard let index = figures.firstIndex(of: figure) else {
-                                                            return
-                                                        }
-                                                        completion(figures[index])
+            addAction(UIAlertAction(title: figure.rawValue,
+                                    style: .default,
+                                    handler: { _ in
+                                        self.preferences.preferredFigure = figure
+                                        completion(figure)
+                                        
             }))
         }
         
-        alertController.addAction(UIAlertAction(title: "Random",
-                                                style: .cancel,
-                                                handler: { _ in
-                                                    completion(nil)
+        addAction(UIAlertAction(title: "Random",
+                                style: .cancel,
+                                handler: { _ in
+                                    self.preferences.preferredFigure = nil
+                                    completion(nil)
         }))
-        
-        viewController.present(alertController, animated: true)
     }
 }

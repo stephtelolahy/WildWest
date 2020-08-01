@@ -12,16 +12,21 @@ class AppModules {
     
     static let shared = AppModules()
     
-    lazy var userPreferences = UserPreferences()
+    lazy var userPreferences: UserPreferencesProtocol = UserPreferences()
     
-    lazy var matchingManager: MatchingManagerProtocol = {
-        MatchingManager(database: matchingDatabase)
-    }()
+    lazy var accountManager: AccountManagerProtocol = AccountManager()
     
-    lazy var matchingDatabase: MatchingDatabaseProtocol = {
-        MatchingDatabase(rootRef: Database.database().reference(),
-                         mapper: firebaseMapper)
-    }()
+    lazy var matchingManager: MatchingManagerProtocol = MatchingManager(accountManager: accountManager,
+                                                                        database: matchingDatabase,
+                                                                        gameBuilder: gameBuilder)
+    
+    lazy var gameBuilder: GameBuilderProtocol = GameBuilder(preferences: userPreferences,
+                                                            matchingDatabase: matchingDatabase,
+                                                            gameResources: gameResources,
+                                                            firebaseMapper: firebaseMapper)
+    
+    lazy var matchingDatabase: MatchingDatabaseProtocol = MatchingDatabase(rootRef: Database.database().reference(),
+                                                                           mapper: firebaseMapper)
     
     lazy var firebaseMapper: FirebaseMapperProtocol = {
         let dtoEncoder = DtoEncoder(allCards: gameResources.allCards,
@@ -30,8 +35,7 @@ class AppModules {
                               dictionaryEncoder: DictionaryEncoder())
     }()
     
-    lazy var gameResources: GameResources = {
-        GameResources(jsonReader: JsonReader(bundle: Bundle.main))
-    }()
+    lazy var gameResources: GameResourcesProtocol = GameResources(jsonReader: JsonReader(bundle: Bundle.main))
     
+    lazy var analyticsManager = AnalyticsManager()
 }

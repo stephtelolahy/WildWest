@@ -30,20 +30,6 @@ extension Role {
             return renegadeRelationShip(to: otherRole, playersCount: playersCount)
         }
     }
-    
-    static func estimatedRole(for playerId: String, scores: [String: Int]) -> Role? {
-        guard let score = scores[playerId] else {
-            return nil
-        }
-        
-        // if attacked sheriff at least once,
-        // then estimated role is outlaw
-        if score > 0 {
-            return .outlaw
-        }
-        
-        return nil
-    }
 }
 
 private extension Role {
