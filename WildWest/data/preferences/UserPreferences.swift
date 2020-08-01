@@ -7,7 +7,16 @@
 //
 // swiftlint:disable let_var_whitespace
 
-class UserPreferences {
+protocol UserPreferencesProtocol {
+    var playersCount: Int { get set }
+    var preferredRole: Role? { get set }
+    var preferredFigure: FigureName? { get set }
+    var updateDelay: Double { get }
+    var assistedMode: Bool { get }
+    var enableSound: Bool { get }
+}
+
+class UserPreferences: UserPreferencesProtocol {
     
     @UserDefaultsStored("players_count", defaultValue: 5)
     var playersCount: Int

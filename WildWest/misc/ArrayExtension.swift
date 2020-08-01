@@ -32,13 +32,13 @@ extension Array where Element: Equatable {
         }
         return result
     }
-
+    
     func starting(with element: Element?) -> [Element] {
         guard let element = element,
             let elementIndex = firstIndex(of: element) else {
                 return self
         }
-
+        
         var result: [Element] = []
         (0..<count).forEach { position in
             let index = (position + elementIndex) % count
@@ -66,6 +66,16 @@ extension Array {
         (0..<count).forEach { position in
             let index = (position + elementIndex) % count
             result.append(self[index])
+        }
+        return result
+    }
+}
+
+extension Array {
+    func filterOrNil(_ predicate: @escaping (Element) -> Bool) -> [Element]? {
+        let result = self.filter(predicate)
+        guard !result.isEmpty else {
+            return nil
         }
         return result
     }

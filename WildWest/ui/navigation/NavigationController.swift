@@ -11,12 +11,14 @@ import FirebaseUI
 
 class NavigationController: UINavigationController, Subscribable {
     
-    private lazy var manager: MatchingManagerProtocol = AppModules.shared.matchingManager
+    private lazy var matchingManager = AppModules.shared.matchingManager
+    private lazy var accountManager = AppModules.shared.accountManager
+    private lazy var gameBuilder = AppModules.shared.gameBuilder
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if Auth.auth().currentUser != nil {
-            handleSignInCompleted()
+        if accountManager.currentUser != nil {
+            observeUserStatus()
         } else {
             loadSignIn()
         }
@@ -25,30 +27,18 @@ class NavigationController: UINavigationController, Subscribable {
 
 private extension NavigationController {
     
-    func handleSignInCompleted() {
-        observeUserStatus()
-    }
-    
     func loadSignIn() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let signInViewController =
-            storyboard.instantiateViewController(withIdentifier: "SignInViewController") as? SignInViewController else {
-                return
-        }
+        let signInViewController = UIStoryboard.instantiate(SignInViewController.self, in: "Main")
         
         signInViewController.onCompleted = { [weak self] in
-            self?.handleSignInCompleted()
+            self?.observeUserStatus()
         }
         
         fade(to: signInViewController)
     }
     
     func loadMenu() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let menuViewController =
-            storyboard.instantiateViewController(withIdentifier: "MenuViewController") as? MenuViewController else {
-                return
-        }
+        let menuViewController = UIStoryboard.instantiate(MenuViewController.self, in: "Main")
         
         menuViewController.onPlayLocal = { [weak self] in
             self?.loadLocalGame()
@@ -59,26 +49,21 @@ private extension NavigationController {
                 return
             }
             
-            self.sub(self.manager.addToWaitingRoom().subscribe())
+            self.sub(self.matchingManager.addToWaitingRoom().subscribe())
         }
         
         fade(to: menuViewController)
     }
     
     func loadWaitingRoom() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let waitingRoomViewController =
-            storyboard.instantiateViewController(withIdentifier: "WaitingRoomViewController")
-                as? WaitingRoomViewController else {
-                    return
-        }
+        let waitingRoomViewController = UIStoryboard.instantiate(WaitingRoomViewController.self, in: "Main")
         
         waitingRoomViewController.onQuit = { [weak self] in
             guard let self = self else {
                 return
             }
             
-            self.sub(self.manager.quitWaitingRoom().subscribe())
+            self.sub(self.matchingManager.quitWaitingRoom().subscribe())
         }
         
         waitingRoomViewController.onStart = { [weak self] users in
@@ -86,28 +71,24 @@ private extension NavigationController {
                 return
             }
             
-            self.sub(self.manager.createGame(users: users).subscribe())
+            self.sub(self.matchingManager.createGame(users: users).subscribe())
         }
         
         fade(to: waitingRoomViewController)
     }
     
     func loadLocalGame() {
-        loadGame(environment: GameBuilder().createLocalGameEnvironment())
+        loadGame(environment: gameBuilder.createLocalGameEnvironment())
     }
     
     func loadOnlineGame(_ gameId: String, _ playerId: String) {
-        GameBuilder().createRemoteGameEnvironment(gameId: gameId, playerId: playerId) { [weak self] environment in
+        gameBuilder.createRemoteGameEnvironment(gameId: gameId, playerId: playerId) { [weak self] environment in
             self?.loadGame(environment: environment)
         }
     }
     
     func loadGame(environment: GameEnvironment) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let gameViewController =
-            storyboard.instantiateViewController(withIdentifier: "GameViewController") as? GameViewController else {
-                return
-        }
+        let gameViewController = UIStoryboard.instantiate(GameViewController.self, in: "Main")
         
         gameViewController.environment = environment
         
@@ -118,14 +99,14 @@ private extension NavigationController {
                 return
             }
             
-            self.sub(self.manager.quitGame().subscribe())
+            self.sub(self.matchingManager.quitGame().subscribe())
         }
         
         fade(to: gameViewController)
     }
     
     func observeUserStatus() {
-        sub(manager.observeUserStatus().subscribe(onNext: { [weak self] status in
+        sub(matchingManager.observeUserStatus().subscribe(onNext: { [weak self] status in
             switch status {
             case .waiting:
                 self?.loadWaitingRoom()
@@ -133,7 +114,7 @@ private extension NavigationController {
             case let .playing(gameId, playerId):
                 self?.loadOnlineGame(gameId, playerId)
                 
-            default:
+            case .idle:
                 self?.loadMenu()
             }
         }, onError: { error in
@@ -142,7 +123,7 @@ private extension NavigationController {
     }
 }
 
-extension UINavigationController {
+private extension UINavigationController {
     
     func fade(to viewController: UIViewController) {
         let transition: CATransition = CATransition()

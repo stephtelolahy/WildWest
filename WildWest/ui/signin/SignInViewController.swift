@@ -14,6 +14,7 @@ class SignInViewController: UIViewController, Subscribable {
     var onCompleted: (() -> Void)?
     
     private lazy var authUI = FUIAuth.defaultAuthUI()!
+    private lazy var manager = AppModules.shared.matchingManager
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +36,7 @@ extension SignInViewController: FUIAuthDelegate {
             return
         }
         
-        sub(AppModules.shared.matchingManager.createUser().subscribe(onCompleted: { [weak self] in
+        sub(manager.createUser().subscribe(onCompleted: { [weak self] in
             self?.onCompleted?()
         }, onError: { error in
             fatalError(error.localizedDescription)

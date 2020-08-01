@@ -11,10 +11,10 @@ import UIKit
 class RoleSelector: UIAlertController {
     
     private lazy var preferences = AppModules.shared.userPreferences
-    private lazy var roles = Role.allCases
     
     convenience init(completion: @escaping (Role?) -> Void) {
         self.init(title: "Choose role", message: nil, preferredStyle: .alert)
+        let roles = Role.allCases
         roles.forEach { role in
             addAction(UIAlertAction(title: role.rawValue,
                                     style: .default,

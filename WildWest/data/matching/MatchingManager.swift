@@ -6,58 +6,53 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-import Firebase
-import FirebaseUI
 import RxSwift
 
 protocol MatchingManagerProtocol {
-    var currentUser: WUserInfo { get }
-    
     func createUser() -> Completable
     func observeUserStatus() -> Observable<UserStatus>
     func addToWaitingRoom() -> Completable
     func quitWaitingRoom() -> Completable
-    func quitGame() -> Completable
     func observeWaitingUsers() -> Observable<[WUserInfo]>
     func createGame(users: [WUserInfo]) -> Completable
+    func quitGame() -> Completable
 }
 
 class MatchingManager: MatchingManagerProtocol {
     
+    private let accountManager: AccountManagerProtocol
     private let database: MatchingDatabaseProtocol
+    private let gameBuilder: GameBuilderProtocol
     
-    init(database: MatchingDatabaseProtocol) {
+    init(accountManager: AccountManagerProtocol,
+         database: MatchingDatabaseProtocol,
+         gameBuilder: GameBuilderProtocol) {
+        self.accountManager = accountManager
         self.database = database
-    }
-    
-    var currentUser: WUserInfo {
-        guard let user = Auth.auth().currentUser else {
-            fatalError("Missing user")
-        }
-        
-        return WUserInfo(id: user.uid,
-                         name: user.displayName ?? "",
-                         photoUrl: user.photoURL?.absoluteString ?? "")
+        self.gameBuilder = gameBuilder
     }
     
     func createUser() -> Completable {
-        database.createUser(currentUser)
+        guard let user = accountManager.currentUser else {
+            fatalError("Missing user")
+        }
+        return database.createUser(user)
     }
     
     func observeUserStatus() -> Observable<UserStatus> {
-        database.observeUserStatus(currentUser.id)
+        database.observeUserStatus(loggedUserId)
     }
     
     func addToWaitingRoom() -> Completable {
-        database.setUserStatus(currentUser.id, status: .waiting)
+        database.setUserStatus(loggedUserId, status: .waiting)
     }
     
     func quitWaitingRoom() -> Completable {
-        database.setUserStatus(currentUser.id, status: .idle)
+        database.setUserStatus(loggedUserId, status: .idle)
     }
     
     func quitGame() -> Completable {
-        database.setUserStatus(currentUser.id, status: .idle)
+        database.setUserStatus(loggedUserId, status: .idle)
     }
     
     func observeWaitingUsers() -> Observable<[WUserInfo]> {
@@ -65,7 +60,7 @@ class MatchingManager: MatchingManagerProtocol {
     }
     
     func createGame(users: [WUserInfo]) -> Completable {
-        let state = GameBuilder().createGame(for: users.count)
+        let state = gameBuilder.createGame(for: users.count)
         let gameId = FirebaseKeyGenerator().autoId()
         
         let playerIds = state.allPlayers.map { $0.identifier }
@@ -81,5 +76,13 @@ class MatchingManager: MatchingManagerProtocol {
         return database.createGame(id: gameId, state: state)
             .andThen(database.setGameUsers(gameId: gameId, users: usersDict))
             .andThen(Completable.concat(updates))
+    }
+    
+    private var loggedUserId: String {
+        guard let user = accountManager.currentUser else {
+            fatalError("Missing user")
+        }
+        
+        return user.id
     }
 }

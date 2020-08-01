@@ -23,6 +23,7 @@ extension GameStateProtocol {
 }
 
 private extension PlayerProtocol {
+    
     func observed(by playerId: String?, in state: GameStateProtocol) -> PlayerProtocol {
         let shouldHideRole = health > 0
             && identifier != playerId

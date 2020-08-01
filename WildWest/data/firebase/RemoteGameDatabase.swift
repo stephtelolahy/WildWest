@@ -11,12 +11,12 @@ import Firebase
 
 class RemoteGameDatabase: GameDatabaseProtocol, Subscribable {
     
+    private let gameRef: DatabaseReference
+    private let mapper: FirebaseMapperProtocol
     private let stateSubject: BehaviorSubject<GameStateProtocol>
     private let executedMoveSubject: PublishSubject<GameMove>
     private let executedUpdateSubject: PublishSubject<GameUpdate>
     private let validMovesSubject: BehaviorSubject<[GameMove]>
-    private let gameRef: DatabaseReference
-    private let mapper: FirebaseMapperProtocol
     
     init(gameRef: DatabaseReference,
          mapper: FirebaseMapperProtocol,

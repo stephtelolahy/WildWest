@@ -51,25 +51,25 @@ class GameViewController: UIViewController, Subscribable {
     private var latestState: GameStateProtocol?
     private var latestMove: GameMove?
     
-    private lazy var userPreferences = AppModules.shared.userPreferences
+    private lazy var analyticsManager = AppModules.shared.analyticsManager
+    private lazy var preferences = AppModules.shared.userPreferences
     private lazy var statsBuilder = StatsBuilder(sheriffId: subjects.sheriffId, classifier: MoveClassifier())
     private lazy var playerAdapter = PlayersAdapter()
     private lazy var handAdapter = HandAdapter(playerId: controlledPlayerId)
     private lazy var moveDescriptor = MoveDescriptor()
     private lazy var instructionBuilder = InstructionBuilder()
     private lazy var playMoveSelector = PlayMoveSelector(viewController: self)
-    private lazy var playerDescriptor = PlayerDescriptor(viewController: self)
     private lazy var updateAnimator = UpdateAnimator(viewController: self,
                                                      cardPositions: buildCardPositions(),
                                                      cardSize: buildCardSize(),
-                                                     updateDelay: userPreferences.updateDelay)
+                                                     updateDelay: preferences.updateDelay)
     
     private lazy var moveSoundPlayer: MoveSoundPlayerProtocol? = {
-        userPreferences.enableSound ? MoveSoundPlayer() : nil
+        preferences.enableSound ? MoveSoundPlayer() : nil
     }()
     
     private lazy var reactionMoveSelector: ReactionMoveSelectorProtocol? = {
-        if userPreferences.assistedMode {
+        if preferences.assistedMode {
             return AssistedReactionMoveSelector(ai: RandomAI())
         } else {
             return ReactionMoveSelector(viewController: self)
@@ -156,7 +156,7 @@ private extension GameViewController {
         
         if let outcome = state.outcome {
             showGameOver(outcome: outcome)
-            AnalyticsManager.shared.tagEventGameOver(state)
+            analyticsManager.tagEventGameOver(state)
         }
     }
     
@@ -172,7 +172,7 @@ private extension GameViewController {
         
         moveSoundPlayer?.playSound(for: move)
         
-        statsBuilder.updateOnExecuting(move)
+        statsBuilder.updateScores(move)
     }
     
     func processExecutedUpdate(_ update: GameUpdate) {
@@ -284,7 +284,8 @@ extension GameViewController: UICollectionViewDelegate {
     }
     
     private func playersCollectionViewDidSelectItem(at indexPath: IndexPath) {
-        playerDescriptor.display(playerItems[indexPath.row].player)
+        let playerDescriptor = PlayerDescriptor(player: playerItems[indexPath.row].player)
+        present(playerDescriptor, animated: true)
     }
     
     private func handCollectionViewDidSelectItem(at indexPath: IndexPath) {

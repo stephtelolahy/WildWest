@@ -7,9 +7,12 @@
 //
 
 protocol StatsBuilderProtocol {
+    
+    // Aggressivity score against sheriff
+    // The highest the score, the more a player attacked the sheriff
     var scores: [String: Int] { get }
     
-    func updateOnExecuting(_ move: GameMove)
+    func updateScores(_ move: GameMove)
 }
 
 class StatsBuilder: StatsBuilderProtocol {
@@ -24,7 +27,7 @@ class StatsBuilder: StatsBuilderProtocol {
         self.classifier = classifier
     }
     
-    func updateOnExecuting(_ move: GameMove) {
+    func updateScores(_ move: GameMove) {
         let classification = classifier.classify(move)
         switch classification {
         case let .strongAttack(actorId, targetId):

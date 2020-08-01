@@ -6,7 +6,12 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-class GameResources {
+protocol GameResourcesProtocol {
+    var allCards: [CardProtocol] { get }
+    var allFigures: [FigureProtocol] { get }
+}
+
+class GameResources: GameResourcesProtocol {
     
     private let jsonReader: JsonReaderProtocol
     

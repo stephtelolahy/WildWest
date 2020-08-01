@@ -16,15 +16,28 @@ protocol GameBuilderProtocol {
     func createRemoteGameEnvironment(gameId: String,
                                      playerId: String,
                                      completion: @escaping (GameEnvironment) -> Void)
+    func createGame(for playersCount: Int) -> GameStateProtocol
 }
 
-class GameBuilder: Subscribable {
+class GameBuilder: GameBuilderProtocol, Subscribable {
+    
+    private let preferences: UserPreferencesProtocol
+    private let matchingDatabase: MatchingDatabaseProtocol
+    private let gameResources: GameResourcesProtocol
+    private let firebaseMapper: FirebaseMapperProtocol
+    
+    init(preferences: UserPreferencesProtocol,
+         matchingDatabase: MatchingDatabaseProtocol,
+         gameResources: GameResourcesProtocol,
+         firebaseMapper: FirebaseMapperProtocol) {
+        self.preferences = preferences
+        self.matchingDatabase = matchingDatabase
+        self.gameResources = gameResources
+        self.firebaseMapper = firebaseMapper
+    }
     
     func createLocalGameEnvironment() -> GameEnvironment {
-        let userPreferences = AppModules.shared.userPreferences
-        let state = createGame(for: userPreferences.playersCount,
-                               preferredFigure: userPreferences.preferredFigure,
-                               preferredRole: userPreferences.preferredRole)
+        let state = createGame(for: preferences.playersCount)
         
         let controlledId = state.players.first?.identifier
         
@@ -44,15 +57,21 @@ class GameBuilder: Subscribable {
                                     executedUpdateSubject: executedUpdateSubject,
                                     validMovesSubject: validMovesSubject)
         
-        let engine = GameEngine(delay: userPreferences.updateDelay,
+        let engine = GameEngine(delay: preferences.updateDelay,
                                 database: database,
                                 moveMatchers: GameRules().moveMatchers)
         
         let aiPlayers = state.players.filter { $0.identifier != controlledId }
-        let aiAgents = aiPlayers.map { AIPlayerAgent(playerId: $0.identifier,
-                                                     ai: RandomAIWithRole(),
-                                                     engine: engine,
-                                                     subjects: subjects)
+        let aiAgents: [AIPlayerAgentProtocol] = aiPlayers.map { player in
+            let moveClassifier = MoveClassifier()
+            let statsBuilder = StatsBuilder(sheriffId: subjects.sheriffId, classifier: moveClassifier)
+            let roleEstimator = RoleEstimator(statsBuilder: statsBuilder)
+            let ai = RandomAIWithRole(classifier: moveClassifier, roleEstimator: roleEstimator)
+            return AIPlayerAgent(playerId: player.identifier,
+                                 ai: ai,
+                                 engine: engine,
+                                 subjects: subjects,
+                                 statsBuilder: statsBuilder)
         }
         
         aiAgents.forEach { $0.observeState() }
@@ -68,9 +87,9 @@ class GameBuilder: Subscribable {
                                      completion: @escaping (GameEnvironment) -> Void) {
         
         let request: Single<(GameStateProtocol, [String: WUserInfo])> =
-            AppModules.shared.matchingDatabase.getGame(gameId)
+            matchingDatabase.getGame(gameId)
                 .flatMap {  state in
-                    AppModules.shared.matchingDatabase.getGameUsers(gameId: gameId)
+                    self.matchingDatabase.getGameUsers(gameId: gameId)
                         .map { users in (state, users) }
                 }
         
@@ -83,7 +102,7 @@ class GameBuilder: Subscribable {
             
             let gameRef = Database.database().reference().child("games/\(gameId)")
             let database = RemoteGameDatabase(gameRef: gameRef,
-                                              mapper: AppModules.shared.firebaseMapper,
+                                              mapper: self.firebaseMapper,
                                               stateSubject: stateSubject,
                                               executedMoveSubject: executedMoveSubject,
                                               executedUpdateSubject: executedUpdateSubject,
@@ -94,7 +113,7 @@ class GameBuilder: Subscribable {
                                         executedUpdateSubject: executedUpdateSubject,
                                         validMovesSubject: validMovesSubject)
             
-            let engine = GameEngine(delay: AppModules.shared.userPreferences.updateDelay,
+            let engine = GameEngine(delay: self.preferences.updateDelay,
                                     database: database,
                                     moveMatchers: GameRules().moveMatchers)
             
@@ -114,21 +133,19 @@ class GameBuilder: Subscribable {
         }))
     }
     
-    func createGame(for playersCount: Int,
-                    preferredFigure: FigureName? = nil,
-                    preferredRole: Role? = nil) -> GameStateProtocol {
-        let cards = AppModules.shared.gameResources.allCards
-        let figures = AppModules.shared.gameResources.allFigures
+    func createGame(for playersCount: Int) -> GameStateProtocol {
+        let cards = gameResources.allCards
+        let figures = gameResources.allFigures
         
         let gameSetup = GameSetup()
         
         let shuffledRoles = gameSetup.roles(for: playersCount)
             .shuffled()
-            .starting(with: preferredRole)
+            .starting(with: preferences.preferredRole)
         
         let shuffledFigures = figures
             .shuffled()
-            .starting(where: { $0.name == preferredFigure })
+            .starting(where: { $0.name == preferences.preferredFigure })
         
         let shuffledCards = cards.shuffled()
         

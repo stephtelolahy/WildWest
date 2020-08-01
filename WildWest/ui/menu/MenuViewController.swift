@@ -28,10 +28,10 @@ class MenuViewController: UIViewController, Subscribable {
     var onPlayLocal: (() -> Void)?
     var onPlayOnline: (() -> Void)?
     
-    private lazy var user = AppModules.shared.matchingManager.currentUser
-    private lazy var userPreferences = AppModules.shared.userPreferences
+    private lazy var user = AppModules.shared.accountManager.currentUser
+    private lazy var preferences = AppModules.shared.userPreferences
     private lazy var allFigures = AppModules.shared.gameResources.allFigures
-    private lazy var musicPlayer: ThemeMusicPlayer? = userPreferences.enableSound ? ThemeMusicPlayer() : nil
+    private lazy var musicPlayer: ThemeMusicPlayer? = preferences.enableSound ? ThemeMusicPlayer() : nil
     
     // MARK: - Lifecycle
     
@@ -66,20 +66,22 @@ class MenuViewController: UIViewController, Subscribable {
     }
     
     @IBAction private func stepperValueChanged(_ sender: Any) {
-        userPreferences.playersCount = Int(playersCountStepper.value)
+        preferences.playersCount = Int(playersCountStepper.value)
         updatePlayersCount()
     }
     
     @IBAction private func figureButtonTapped(_ sender: Any) {
-        present(FigureSelector(completion: { [weak self] _ in
+        let figureSelector = FigureSelector(completion: { [weak self] _ in
             self?.updateFigureImage()
-        }), animated: true)
+        })
+        present(figureSelector, animated: true)
     }
     
     @IBAction private func roleButtonTapped(_ sender: Any) {
-        present(RoleSelector(completion: { [weak self] _ in
+        let roleSelector = RoleSelector(completion: { [weak self] _ in
             self?.updateRoleImage()
-        }), animated: true)
+        })
+        present(roleSelector, animated: true)
     }
     
     @IBAction private func contactButtonTapped(_ sender: Any) {
@@ -96,11 +98,11 @@ class MenuViewController: UIViewController, Subscribable {
 private extension MenuViewController {
     
     func updatePlayersCount() {
-        playersCountLabel.text = "\(userPreferences.playersCount) players"
+        playersCountLabel.text = "\(preferences.playersCount) players"
     }
     
     func updateFigureImage() {
-        if let figure = allFigures.first(where: { $0.name == userPreferences.preferredFigure }) {
+        if let figure = allFigures.first(where: { $0.name == preferences.preferredFigure }) {
             figureButton.setImage(UIImage(named: figure.imageName), for: .normal)
             figureLabel.text = "Play as \(figure.name.rawValue)"
         } else {
@@ -110,7 +112,7 @@ private extension MenuViewController {
     }
     
     func updateRoleImage() {
-        if let role = userPreferences.preferredRole {
+        if let role = preferences.preferredRole {
             roleButton.setImage(role.image(), for: .normal)
             roleLabel.text = role.rawValue
         } else {
@@ -120,6 +122,9 @@ private extension MenuViewController {
     }
     
     func updateUserView() {
+        guard let user = user else {
+            return
+        }
         avatarImageView.kf.setImage(with: URL(string: user.photoUrl))
         userNameLabel.text = user.name
     }

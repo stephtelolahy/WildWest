@@ -8,32 +8,39 @@
 
 class RandomAIWithRole: RandomAI {
     
-    private let classifier = MoveClassifier()
+    private let classifier: MoveClassifierProtocol
+    private let roleEstimator: RoleEstimatorProtoccol
     
-    override func evaluate(_ move: GameMove,
-                           in state: GameStateProtocol,
-                           scores: [String: Int]) -> Int {
+    init(classifier: MoveClassifierProtocol, roleEstimator: RoleEstimatorProtoccol) {
+        self.classifier = classifier
+        self.roleEstimator = roleEstimator
+    }
+    
+    override func evaluate(_ move: GameMove, in state: GameStateProtocol) -> Int {
         let classification = classifier.classify(move)
         switch classification {
         case let .strongAttack(actorId, targetId):
-            return evaluateStrongAttack(from: actorId, to: targetId, in: state, scores: scores)
+            return evaluateStrongAttack(from: actorId, to: targetId, in: state)
             
         case let .weakAttack(actorId, targetId):
-            return evaluateWeakAttack(from: actorId, to: targetId, in: state, scores: scores)
+            return evaluateWeakAttack(from: actorId, to: targetId, in: state)
             
         case let .help(actorId, targetId):
-            return evaluateHelp(from: actorId, to: targetId, in: state, scores: scores)
+            return evaluateHelp(from: actorId, to: targetId, in: state)
             
         default:
-            return super.evaluate(move, in: state, scores: scores)
+            return super.evaluate(move, in: state)
         }
     }
     
-    private func evaluateStrongAttack(from actorId: String,
-                                      to targetId: String,
-                                      in state: GameStateProtocol,
-                                      scores: [String: Int]) -> Int {
-        switch state.relationship(of: actorId, to: targetId, scores: scores) {
+}
+
+private extension RandomAIWithRole {
+    
+    func evaluateStrongAttack(from actorId: String,
+                              to targetId: String,
+                              in state: GameStateProtocol) -> Int {
+        switch relationship(of: actorId, to: targetId, in: state) {
         case .enemy:
             return Score.strongAttackEnemy
         case .teammate:
@@ -43,11 +50,10 @@ class RandomAIWithRole: RandomAI {
         }
     }
     
-    private func evaluateWeakAttack(from actorId: String,
-                                    to targetId: String,
-                                    in state: GameStateProtocol,
-                                    scores: [String: Int]) -> Int {
-        switch state.relationship(of: actorId, to: targetId, scores: scores) {
+    func evaluateWeakAttack(from actorId: String,
+                            to targetId: String,
+                            in state: GameStateProtocol) -> Int {
+        switch relationship(of: actorId, to: targetId, in: state) {
         case .enemy:
             return Score.weakAttackEnemy
         case .teammate:
@@ -57,11 +63,10 @@ class RandomAIWithRole: RandomAI {
         }
     }
     
-    private func evaluateHelp(from actorId: String,
-                              to targetId: String,
-                              in state: GameStateProtocol,
-                              scores: [String: Int]) -> Int {
-        switch state.relationship(of: actorId, to: targetId, scores: scores) {
+    func evaluateHelp(from actorId: String,
+                      to targetId: String,
+                      in state: GameStateProtocol) -> Int {
+        switch relationship(of: actorId, to: targetId, in: state) {
         case .enemy:
             return Score.helpEnemy
         case .teammate:
@@ -70,18 +75,15 @@ class RandomAIWithRole: RandomAI {
             return Score.helpUnknown
         }
     }
-}
-
-private extension GameStateProtocol {
     
-    func relationship(of sourceId: String, to targetId: String, scores: [String: Int]) -> Relationship {
-        guard let source = player(sourceId),
+    func relationship(of sourceId: String, to targetId: String, in state: GameStateProtocol) -> Relationship {
+        guard let source = state.player(sourceId),
             let sourceRole = source.role,
-            let target = player(targetId) else {
+            let target = state.player(targetId) else {
                 fatalError("Illegal state")
         }
         
-        let targetRole = target.role ?? Role.estimatedRole(for: targetId, scores: scores)
-        return sourceRole.relationShip(to: targetRole, playersCount: players.count)
+        let targetRole = target.role ?? roleEstimator.estimateRole(for: targetId)
+        return sourceRole.relationShip(to: targetRole, playersCount: state.players.count)
     }
 }

@@ -1,8 +1,8 @@
 //
-//  GameState+Image.swift
+//  GameState+DiscardImage.swift
 //  WildWest
 //
-//  Created by Hugues Stephano Telolahy on 14/04/2020.
+//  Created by Hugues Stephano Telolahy on 01/08/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
