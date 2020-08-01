@@ -10,12 +10,16 @@ import Firebase
 
 class AnalyticsManager {
     
+    func tageEventPlayerDescriptor(_ player: PlayerProtocol) {
+        Analytics.logEvent("player_descriptor",
+                           parameters: ["name": player.figureName.rawValue])
+    }
+    
     func tagEventGameOver(_ state: GameStateProtocol) {
-        Analytics.logEvent("game_over", parameters: [
-            "outcome": state.outcomeText ?? "",
-            "winner": state.winner ?? "",
-            "players_count": state.allPlayers.count
-        ])
+        Analytics.logEvent("game_over",
+                           parameters: ["outcome": state.outcomeText ?? "",
+                                        "winner": state.winner ?? "",
+                                        "players_count": state.allPlayers.count])
     }
 }
 

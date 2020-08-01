@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import Kingfisher
+import Resolver
 
 class MenuViewController: UIViewController, Subscribable {
     
@@ -29,7 +30,7 @@ class MenuViewController: UIViewController, Subscribable {
     var onPlayOnline: (() -> Void)?
     
     private lazy var user = AppModules.shared.accountManager.currentUser
-    private lazy var preferences = AppModules.shared.userPreferences
+    private lazy var preferences: UserPreferencesProtocol = Resolver.resolve()
     private lazy var allFigures = AppModules.shared.gameResources.allFigures
     private lazy var musicPlayer: ThemeMusicPlayer? = preferences.enableSound ? ThemeMusicPlayer() : nil
     

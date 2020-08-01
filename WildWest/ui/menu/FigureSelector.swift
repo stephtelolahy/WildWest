@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import Resolver
 
 class FigureSelector: UIAlertController {
     
-    private lazy var preferences = AppModules.shared.userPreferences
+    private lazy var preferences: UserPreferencesProtocol = Resolver.resolve()
     private lazy var figures = AppModules.shared.gameResources.allFigures.map { $0.name }
     
     convenience init(completion: @escaping (FigureName?) -> Void) {
