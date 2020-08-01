@@ -22,6 +22,7 @@ target 'WildWest' do
   pod 'FirebaseUI/Phone'
   
   pod 'Kingfisher'
+  pod "Resolver"
   
   pod 'SwiftLint'
 end
