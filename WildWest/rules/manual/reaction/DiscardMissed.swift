@@ -8,7 +8,7 @@
 
 class DiscardMissedMatcher: MoveMatcherProtocol {
     
-    func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
+    func moves(matching state: GameStateProtocol) -> [GameMove]? {
         guard let challenge = state.challenge,
             (challenge.name == .bang || challenge.name == .gatling),
             let actorId = challenge.targetIds.first,
@@ -22,7 +22,7 @@ class DiscardMissedMatcher: MoveMatcherProtocol {
         }
     }
     
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+    func updates(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .discardMissed = move.name,
             let challenge = state.challenge,
             let cardId = move.cardId else {

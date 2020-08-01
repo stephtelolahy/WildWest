@@ -24,7 +24,7 @@ class EndTurnMatcherTests: XCTestCase {
             .allPlayers(are: mockPlayer)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .endTurn, actorId: "p1")])
@@ -43,7 +43,7 @@ class EndTurnMatcherTests: XCTestCase {
             .allPlayers(are: mockPlayer)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .endTurn, actorId: "p1", discardIds: ["c1"]),
@@ -65,7 +65,7 @@ class EndTurnMatcherTests: XCTestCase {
         let move = GameMove(name: .endTurn, actorId: "p1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setTurn("p2"),
@@ -87,7 +87,7 @@ class EndTurnMatcherTests: XCTestCase {
         let move = GameMove(name: .endTurn, actorId: "p2")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setTurn("p1"),
@@ -108,7 +108,7 @@ class EndTurnMatcherTests: XCTestCase {
         let move = GameMove(name: .endTurn, actorId: "p1", discardIds: ["c1", "c2"])
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setTurn("p2"),

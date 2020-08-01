@@ -26,7 +26,7 @@ class DiscardBeerMatcherTests: XCTestCase {
             .allPlayers(are: mockPlayer1, MockPlayerProtocol().health(is: 1), MockPlayerProtocol().health(is: 1))
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .discardBeer, actorId: "p1", cardId: "c1")])
@@ -46,7 +46,7 @@ class DiscardBeerMatcherTests: XCTestCase {
             .allPlayers(are: mockPlayer1, MockPlayerProtocol().health(is: 1), MockPlayerProtocol().health(is: 1))
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .discardBeer, actorId: "p1", cardId: "c1")])
@@ -66,7 +66,7 @@ class DiscardBeerMatcherTests: XCTestCase {
             .allPlayers(are: mockPlayer1, MockPlayerProtocol().health(is: 1), MockPlayerProtocol().health(is: 1))
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .discardBeer, actorId: "p1", cardId: "c1")])
@@ -87,7 +87,7 @@ class DiscardBeerMatcherTests: XCTestCase {
             .challenge(is: Challenge(name: .dynamiteExploded))
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .discardBeer, actorId: "p1", cardId: "c1")])
@@ -108,7 +108,7 @@ class DiscardBeerMatcherTests: XCTestCase {
             .challenge(is: Challenge(name: .dynamiteExploded))
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertNil(moves)
@@ -130,7 +130,7 @@ class DiscardBeerMatcherTests: XCTestCase {
             .allPlayers(are: mockPlayer1, mockPlayer2)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertNil(moves)
@@ -144,7 +144,7 @@ class DiscardBeerMatcherTests: XCTestCase {
         let move = GameMove(name: .discardBeer, actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(Challenge(name: .dynamiteExploded, damage: 2)), .playerDiscardHand("p1", "c1")])
@@ -158,7 +158,7 @@ class DiscardBeerMatcherTests: XCTestCase {
         let move = GameMove(name: .discardBeer, actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(Challenge(name: .startTurn)),
@@ -176,7 +176,7 @@ class DiscardBeerMatcherTests: XCTestCase {
         let move = GameMove(name: .discardBeer, actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(nil),
@@ -194,7 +194,7 @@ class DiscardBeerMatcherTests: XCTestCase {
         let move = GameMove(name: .discardBeer, actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(Challenge(name: .gatling, targetIds: ["p2", "p3"])),
@@ -212,7 +212,7 @@ class DiscardBeerMatcherTests: XCTestCase {
         let move = GameMove(name: .discardBeer, actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(Challenge(name: .indians, targetIds: ["p2", "p3"])),
@@ -230,7 +230,7 @@ class DiscardBeerMatcherTests: XCTestCase {
         let move = GameMove(name: .discardBeer, actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(nil),

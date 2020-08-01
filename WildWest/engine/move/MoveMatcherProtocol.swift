@@ -8,19 +8,19 @@
 
 /// Function matching state to moves
 protocol MoveMatcherProtocol {
-    func validMoves(matching state: GameStateProtocol) -> [GameMove]?
-    func autoPlayMove(matching state: GameStateProtocol) -> GameMove?
+    func moves(matching state: GameStateProtocol) -> [GameMove]?
+    func autoPlay(matching state: GameStateProtocol) -> GameMove?
     func effect(onExecuting move: GameMove, in state: GameStateProtocol) -> GameMove?
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]?
+    func updates(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameUpdate]?
 }
 
 extension MoveMatcherProtocol {
     
-    func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
+    func moves(matching state: GameStateProtocol) -> [GameMove]? {
         nil
     }
     
-    func autoPlayMove(matching state: GameStateProtocol) -> GameMove? {
+    func autoPlay(matching state: GameStateProtocol) -> GameMove? {
         nil
     }
     
@@ -28,7 +28,7 @@ extension MoveMatcherProtocol {
         nil
     }
     
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+    func updates(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         nil
     }
 }

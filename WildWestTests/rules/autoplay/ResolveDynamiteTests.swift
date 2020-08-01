@@ -26,7 +26,7 @@ class ResolveDynamiteMatcherTests: XCTestCase {
             .deckCards(are: MockCardProtocol().value(is: "2").suit(is: .spades))
         
         // When
-        let move = sut.autoPlayMove(matching: mockState)
+        let move = sut.autoPlay(matching: mockState)
         
         // assert
         XCTAssertEqual(move, GameMove(name: .dynamiteExploded, actorId: "p1", cardId: "c1"))
@@ -39,7 +39,7 @@ class ResolveDynamiteMatcherTests: XCTestCase {
         let move = GameMove(name: .dynamiteExploded, actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.flipOverFirstDeckCard,
@@ -55,7 +55,7 @@ class ResolveDynamiteMatcherTests: XCTestCase {
         let move = GameMove(name: .dynamiteExploded, actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.flipOverFirstDeckCard,
@@ -72,7 +72,7 @@ class ResolveDynamiteMatcherTests: XCTestCase {
         let move = GameMove(name: .dynamiteExploded, actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.flipOverFirstDeckCard,
@@ -89,7 +89,7 @@ class ResolveDynamiteMatcherTests: XCTestCase {
         let move = GameMove(name: .dynamiteExploded, actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.flipOverFirstDeckCard,
@@ -110,7 +110,7 @@ class ResolveDynamiteMatcherTests: XCTestCase {
             .deckCards(are: MockCardProtocol().value(is: "2").suit(is: .diamonds))
         
         // When
-        let move = sut.autoPlayMove(matching: mockState)
+        let move = sut.autoPlay(matching: mockState)
         
         // assert
         XCTAssertEqual(move, GameMove(name: .passDynamite, actorId: "p1", cardId: "c1"))
@@ -126,7 +126,7 @@ class ResolveDynamiteMatcherTests: XCTestCase {
         let move = GameMove(name: .passDynamite, actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.flipOverFirstDeckCard,

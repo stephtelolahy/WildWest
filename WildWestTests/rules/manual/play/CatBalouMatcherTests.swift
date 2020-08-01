@@ -30,7 +30,7 @@ class CatBalouMatcherTests: XCTestCase {
             .players(are: mockPlayer1, mockPlayer2)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [
@@ -56,7 +56,7 @@ class CatBalouMatcherTests: XCTestCase {
             .players(are: mockPlayer1, mockPlayer2)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [
@@ -82,7 +82,7 @@ class CatBalouMatcherTests: XCTestCase {
             .players(are: mockPlayer1, mockPlayer2)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertNil(moves)
@@ -101,7 +101,7 @@ class CatBalouMatcherTests: XCTestCase {
         let move = GameMove(name: .catBalou, actorId: "p1", cardId: "c1", targetCard: TargetCard(ownerId: "p2", source: .randomHand))
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
@@ -121,7 +121,7 @@ class CatBalouMatcherTests: XCTestCase {
         let move = GameMove(name: .catBalou, actorId: "p1", cardId: "c1", targetCard: TargetCard(ownerId: "p2", source: .inPlay("c2")))
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),

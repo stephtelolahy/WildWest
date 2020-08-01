@@ -27,7 +27,7 @@ class ResolveBarrelMatcherTests: XCTestCase {
             .players(are: mockPlayer1)
         
         // When
-        let moves = sut.autoPlayMove(matching: mockState)
+        let moves = sut.autoPlay(matching: mockState)
         
         // Assert
         XCTAssertNil(moves)
@@ -47,7 +47,7 @@ class ResolveBarrelMatcherTests: XCTestCase {
             .deckCards(are: MockCardProtocol().suit(is: .hearts))
         
         // When
-        let move = sut.autoPlayMove(matching: mockState)
+        let move = sut.autoPlay(matching: mockState)
         
         // Assert
         XCTAssertEqual(move, GameMove(name: .useBarrel, actorId: "p1"))
@@ -62,7 +62,7 @@ class ResolveBarrelMatcherTests: XCTestCase {
         let move = GameMove(name: .useBarrel, actorId: "p1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(nil),
@@ -78,7 +78,7 @@ class ResolveBarrelMatcherTests: XCTestCase {
         let move = GameMove(name: .useBarrel, actorId: "p1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(Challenge(name: .gatling, targetIds: ["p2"], barrelsPlayed: 0)),
@@ -99,7 +99,7 @@ class ResolveBarrelMatcherTests: XCTestCase {
             .deckCards(are: MockCardProtocol().suit(is: .clubs))
         
         // When
-        let move = sut.autoPlayMove(matching: mockState)
+        let move = sut.autoPlay(matching: mockState)
         
         // Assert
         XCTAssertEqual(move, GameMove(name: .failBarrel, actorId: "p1"))
@@ -114,7 +114,7 @@ class ResolveBarrelMatcherTests: XCTestCase {
         let move = GameMove(name: .failBarrel, actorId: "p1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(Challenge(name: .bang, targetIds: ["p1"], barrelsPlayed: 1)),
@@ -133,7 +133,7 @@ class ResolveBarrelMatcherTests: XCTestCase {
             .deckCards(are: MockCardProtocol().suit(is: .spades), MockCardProtocol().suit(is: .hearts))
         
         // When
-        let move = sut.autoPlayMove(matching: mockState)
+        let move = sut.autoPlay(matching: mockState)
         
         // Assert
         XCTAssertEqual(move, GameMove(name: .useBarrel, actorId: "p1"))
@@ -151,7 +151,7 @@ class ResolveBarrelMatcherTests: XCTestCase {
         let move = GameMove(name: .useBarrel, actorId: "p1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(nil),
@@ -171,8 +171,8 @@ class ResolveBarrelMatcherTests: XCTestCase {
             .deckCards(are: MockCardProtocol().suit(is: .hearts))
         
         // When
-        let move = sut.autoPlayMove(matching: mockState)
-        let updates = sut.execute(move!, in: mockState)
+        let move = sut.autoPlay(matching: mockState)
+        let updates = sut.updates(onExecuting: move!, in: mockState)
         
         // Assert
         XCTAssertEqual(move, GameMove(name: .useBarrel, actorId: "p1"))
@@ -193,8 +193,8 @@ class ResolveBarrelMatcherTests: XCTestCase {
             .deckCards(are: MockCardProtocol().suit(is: .hearts))
         
         // When
-        let move = sut.autoPlayMove(matching: mockState)
-        let updates = sut.execute(move!, in: mockState)
+        let move = sut.autoPlay(matching: mockState)
+        let updates = sut.updates(onExecuting: move!, in: mockState)
         
         // Assert
         XCTAssertEqual(move, GameMove(name: .useBarrel, actorId: "p1"))

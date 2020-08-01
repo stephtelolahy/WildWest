@@ -26,7 +26,7 @@ class DiscardMissedOnBangMatcherTests: XCTestCase {
             .players(are: mockPlayer1)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .discardMissed, actorId: "p1", cardId: "c1")])
@@ -39,7 +39,7 @@ class DiscardMissedOnBangMatcherTests: XCTestCase {
         let move = GameMove(name: .discardMissed, actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(nil),
@@ -60,7 +60,7 @@ class DiscardMissedOnBangMatcherTests: XCTestCase {
             .players(are: mockPlayer1)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .discardMissed, actorId: "p1", cardId: "c1")])
@@ -73,7 +73,7 @@ class DiscardMissedOnBangMatcherTests: XCTestCase {
         let move = GameMove(name: .discardMissed, actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(Challenge(name: .gatling, targetIds: ["p2", "p3"], barrelsPlayed: 0)),

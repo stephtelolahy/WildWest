@@ -24,7 +24,7 @@ class StartTurnTests: XCTestCase {
             .players(are: player1)
         
         // When
-        let move = sut.autoPlayMove(matching: mockState)
+        let move = sut.autoPlay(matching: mockState)
         
         // Assert
         XCTAssertEqual(move, GameMove(name: .startTurn, actorId: "p1"))
@@ -41,7 +41,7 @@ class StartTurnTests: XCTestCase {
             .players(are: player1)
         
         // When
-        let moves = sut.autoPlayMove(matching: mockState)
+        let moves = sut.autoPlay(matching: mockState)
         
         // Assert
         XCTAssertNil(moves)
@@ -58,7 +58,7 @@ class StartTurnTests: XCTestCase {
             .players(are: player1)
         
         // When
-        let moves = sut.autoPlayMove(matching: mockState)
+        let moves = sut.autoPlay(matching: mockState)
         
         // Assert
         XCTAssertNil(moves)
@@ -71,7 +71,7 @@ class StartTurnTests: XCTestCase {
         let move = GameMove(name: .startTurn, actorId: "p1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(nil),

@@ -93,7 +93,7 @@ private extension NavigationController {
                                                                            playerId: playerId,
                                                                            state: state,
                                                                            users: users)
-            // wait until executedMove and executedUpdate PublishSubjects emit lastest values
+            // ⚠️ wait until GameSubjects emit lastest values
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
                 self?.loadGame(environment: environment)
             }

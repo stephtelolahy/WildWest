@@ -8,7 +8,7 @@
 
 class ChooseCardMatcher: MoveMatcherProtocol {
     
-    func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
+    func moves(matching state: GameStateProtocol) -> [GameMove]? {
         guard let challenge = state.challenge,
             case .generalStore = challenge.name,
             let actorId = challenge.targetIds.first else {
@@ -20,7 +20,7 @@ class ChooseCardMatcher: MoveMatcherProtocol {
         }
     }
     
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+    func updates(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .choose = move.name,
             let challenge = state.challenge,
             let cardId = move.cardId else {

@@ -26,7 +26,7 @@ class IndiansMatcherTests: XCTestCase {
             .players(are: mockPlayer)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .indians, actorId: "p1", cardId: "c1")])
@@ -44,7 +44,7 @@ class IndiansMatcherTests: XCTestCase {
         let move = GameMove(name: .indians, actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(Challenge(name: .indians, targetIds: ["p2", "p3", "p4"])),

@@ -36,7 +36,7 @@ class PanicMatcherTests: XCTestCase {
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [
@@ -61,7 +61,7 @@ class PanicMatcherTests: XCTestCase {
                      MockPlayerProtocol().identified(by: "p4").withDefault())
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertNil(moves)
@@ -85,7 +85,7 @@ class PanicMatcherTests: XCTestCase {
             .players(are: mockPlayer1, mockPlayer2)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertNil(moves)
@@ -103,7 +103,7 @@ class PanicMatcherTests: XCTestCase {
         let move = GameMove(name: .panic, actorId: "p1", cardId: "c1", targetCard: TargetCard(ownerId: "p2", source: .randomHand))
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
@@ -122,7 +122,7 @@ class PanicMatcherTests: XCTestCase {
         let move = GameMove(name: .panic, actorId: "p1", cardId: "c1", targetCard: TargetCard(ownerId: "p2", source: .inPlay("c2")))
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),

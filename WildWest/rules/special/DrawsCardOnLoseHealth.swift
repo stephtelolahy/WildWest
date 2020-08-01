@@ -29,7 +29,7 @@ class DrawsCardOnLoseHealthMatcher: MoveMatcherProtocol {
         return GameMove(name: .drawsCardOnLoseHealth, actorId: move.actorId)
     }
     
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+    func updates(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .drawsCardOnLoseHealth = move.name,
             let actor = state.player(move.actorId),
             let damageEvent = actor.lastDamage else {

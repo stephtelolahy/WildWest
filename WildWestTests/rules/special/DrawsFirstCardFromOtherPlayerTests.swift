@@ -28,8 +28,8 @@ class DrawsFirstCardFromOtherPlayerTests: XCTestCase {
             .players(are: player1, player2)
         
         // When
-        let autoPlayMove = sut.autoPlayMove(matching: mockState)
-        let validMoves = sut.validMoves(matching: mockState)
+        let autoPlayMove = sut.autoPlay(matching: mockState)
+        let validMoves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertNil(autoPlayMove)
@@ -52,8 +52,8 @@ class DrawsFirstCardFromOtherPlayerTests: XCTestCase {
             .players(are: player1, player2)
         
         // When
-        let autoPlayMove = sut.autoPlayMove(matching: mockState)
-        let validMoves = sut.validMoves(matching: mockState)
+        let autoPlayMove = sut.autoPlay(matching: mockState)
+        let validMoves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(autoPlayMove, GameMove(name: .startTurn, actorId: "p1"))
@@ -72,7 +72,7 @@ class DrawsFirstCardFromOtherPlayerTests: XCTestCase {
         let move = GameMove(name: .startTurnDrawFirstCardFromOtherPlayer, actorId: "p1", targetCard: TargetCard(ownerId: "p2", source: .randomHand))
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         // Assert

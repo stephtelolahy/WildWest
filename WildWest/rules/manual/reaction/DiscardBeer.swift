@@ -8,7 +8,7 @@
 
 class DiscardBeerMatcher: MoveMatcherProtocol {
     
-    func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
+    func moves(matching state: GameStateProtocol) -> [GameMove]? {
         guard let challenge = state.challenge,
             state.players.count > 2 else {
                 return nil
@@ -37,7 +37,7 @@ class DiscardBeerMatcher: MoveMatcherProtocol {
         }
     }
     
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+    func updates(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .discardBeer = move.name,
             let cardId = move.cardId,
             let challenge = state.challenge else {

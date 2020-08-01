@@ -18,7 +18,7 @@ class PassMatcherTests: XCTestCase {
             .challenge(is: Challenge(name: .gatling, targetIds: ["p1", "p2"]))
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .pass, actorId: "p1")])
@@ -30,7 +30,7 @@ class PassMatcherTests: XCTestCase {
             .challenge(is: Challenge(name: .indians, targetIds: ["p1", "p2"]))
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .pass, actorId: "p1")])
@@ -42,7 +42,7 @@ class PassMatcherTests: XCTestCase {
             .challenge(is: Challenge(name: .duel, targetIds: ["p1", "p2"]))
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .pass, actorId: "p1")])
@@ -55,7 +55,7 @@ class PassMatcherTests: XCTestCase {
             .challenge(is: Challenge(name: .dynamiteExploded))
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .pass, actorId: "p1")])
@@ -73,7 +73,7 @@ class PassMatcherTests: XCTestCase {
         let move = GameMove(name: .pass, actorId: "p1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(nil),
@@ -93,7 +93,7 @@ class PassMatcherTests: XCTestCase {
         let move = GameMove(name: .pass, actorId: "p1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(Challenge(name: .startTurn)),
@@ -113,7 +113,7 @@ class PassMatcherTests: XCTestCase {
         let move = GameMove(name: .pass, actorId: "p1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(nil),
@@ -133,7 +133,7 @@ class PassMatcherTests: XCTestCase {
         let move = GameMove(name: .pass, actorId: "p1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(Challenge(name: .gatling, targetIds: ["p2", "p3"])),
@@ -153,7 +153,7 @@ class PassMatcherTests: XCTestCase {
         let move = GameMove(name: .pass, actorId: "p1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(Challenge(name: .indians, targetIds: ["p2", "p3"])),
@@ -173,7 +173,7 @@ class PassMatcherTests: XCTestCase {
         let move = GameMove(name: .pass, actorId: "p1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(nil),

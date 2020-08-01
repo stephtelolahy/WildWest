@@ -24,8 +24,8 @@ class DrawsAnotherCardIfSecondDrawIsRedSuitMatcherTests: XCTestCase {
             .players(are: player1)
         
         // When
-        let autoPlayMove = sut.autoPlayMove(matching: mockState)
-        let validMoves = sut.validMoves(matching: mockState)
+        let autoPlayMove = sut.autoPlay(matching: mockState)
+        let validMoves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(autoPlayMove, GameMove(name: .startTurnDrawAnotherCardIfRedSuit, actorId: "p1"))
@@ -44,7 +44,7 @@ class DrawsAnotherCardIfSecondDrawIsRedSuitMatcherTests: XCTestCase {
         let move = GameMove(name: .startTurnDrawAnotherCardIfRedSuit, actorId: "p1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(nil),
@@ -67,7 +67,7 @@ class DrawsAnotherCardIfSecondDrawIsRedSuitMatcherTests: XCTestCase {
         let move = GameMove(name: .startTurnDrawAnotherCardIfRedSuit, actorId: "p1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(nil),

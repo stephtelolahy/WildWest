@@ -25,7 +25,7 @@ class ChooseCardMatcherTests: XCTestCase {
         }
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .choose, actorId: "p1", cardId: "c1"),
@@ -43,7 +43,7 @@ class ChooseCardMatcherTests: XCTestCase {
         }
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .choose, actorId: "p1", cardId: "c1")])
@@ -56,7 +56,7 @@ class ChooseCardMatcherTests: XCTestCase {
         let move = GameMove(name: .choose, actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(Challenge(name: .generalStore, targetIds: ["p2"])),
@@ -70,7 +70,7 @@ class ChooseCardMatcherTests: XCTestCase {
         let move = GameMove(name: .choose, actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(nil),

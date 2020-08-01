@@ -76,7 +76,7 @@ class DrawsCardFromPlayerDamagedHimMatcherTests: XCTestCase {
         let move = GameMove(name: .drawsCardFromPlayerDamagedHim, actorId: "p1", cardId: "c2", targetId: "p2")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.playerPullFromOtherHand("p1", "p2", "c2")])

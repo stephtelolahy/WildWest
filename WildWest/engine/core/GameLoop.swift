@@ -51,7 +51,7 @@ private extension GameLoop {
         currentMove = move
         
         let state = database.state
-        let updates = moveMatchers.compactMap({ $0.execute(move, in: state) }).flatMap { $0 }
+        let updates = moveMatchers.compactMap({ $0.updates(onExecuting: move, in: state) }).flatMap { $0 }
         pendingUpdates.append(contentsOf: updates)
         
         sub(database.setExecutedMove(move)
@@ -122,7 +122,7 @@ private extension GameLoop {
         }
         
         // queue autoPlay
-        let autoPlays = moveMatchers.compactMap { $0.autoPlayMove(matching: state) }
+        let autoPlays = moveMatchers.compactMap { $0.autoPlay(matching: state) }
         if !autoPlays.isEmpty {
             pendingMoves.append(contentsOf: autoPlays)
             return
@@ -140,7 +140,7 @@ private extension GameLoop {
             return
         }
         
-        let validMoves = moveMatchers.compactMap { $0.validMoves(matching: state) }.flatMap { $0 }
+        let validMoves = moveMatchers.compactMap { $0.moves(matching: state) }.flatMap { $0 }
         let database = self.database
         // ⚠️ Dispatch emit valid moves after loop completed
         DispatchQueue.main.async {

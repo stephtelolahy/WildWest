@@ -26,7 +26,7 @@ class StagecoachMatcherTests: XCTestCase {
             .players(are: mockPlayer)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .stagecoach, actorId: "p1", cardId: "c1")])
@@ -42,7 +42,7 @@ class StagecoachMatcherTests: XCTestCase {
         let move = GameMove(name: .stagecoach, actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
