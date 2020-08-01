@@ -72,7 +72,7 @@ class ResolveBarrelMatcherTests: XCTestCase {
     func test_RemoveGatlingChallengeAndResetBarrelsPlayed_UsingBarrel() {
         // Given
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .gatling, targetIds: ["p1", "p2"], barrelsPlayed: 1))
+            .challenge(is: Challenge(name: .gatling, targetIds: ["p1", "p2"], damage: 1, barrelsPlayed: 1))
             .players(are: MockPlayerProtocol().identified(by: "p1").withDefault())
         
         let move = GameMove(name: .useBarrel, actorId: "p1")
@@ -81,7 +81,7 @@ class ResolveBarrelMatcherTests: XCTestCase {
         let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .gatling, targetIds: ["p2"], barrelsPlayed: 0)),
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .gatling, targetIds: ["p2"], damage: 1)),
                                  .flipOverFirstDeckCard])
     }
     

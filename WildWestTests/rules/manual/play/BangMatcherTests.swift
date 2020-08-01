@@ -114,7 +114,7 @@ class BangMatcherTests: XCTestCase {
         let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .bang, targetIds: ["p2"], counterNeeded: 1, barrelsPlayed: 0)),
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .bang, targetIds: ["p2"], damage: 1, counterNeeded: 1)),
                                  .playerSetBangsPlayed("p1", 1),
                                  .playerDiscardHand("p1", "c1"),])
     }
@@ -134,7 +134,7 @@ class BangMatcherTests: XCTestCase {
         let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .bang, targetIds: ["p2"], counterNeeded: 2, barrelsPlayed: 0)),
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .bang, targetIds: ["p2"], damage: 1, counterNeeded: 2)),
                                  .playerSetBangsPlayed("p1", 1),
                                  .playerDiscardHand("p1", "c1"),])
     }

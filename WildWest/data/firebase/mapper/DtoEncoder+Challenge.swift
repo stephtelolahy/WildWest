@@ -26,9 +26,9 @@ extension DtoEncoder {
         }
         
         return try Challenge(name: MoveName(challenge.name.unwrap()),
-                             targetIds: challenge.targetIds ?? [],
-                             damage: try challenge.damage.unwrap(),
-                             counterNeeded: try challenge.counterNeeded.unwrap(),
-                             barrelsPlayed: try challenge.barrelsPlayed.unwrap())
+                             targetIds: challenge.targetIds,
+                             damage: challenge.damage,
+                             counterNeeded: challenge.counterNeeded,
+                             barrelsPlayed: challenge.barrelsPlayed)
     }
 }

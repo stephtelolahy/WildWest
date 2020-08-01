@@ -5,7 +5,6 @@
 //  Created by Hugues Stephano Telolahy on 21/03/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-// swiftlint:disable implicitly_unwrapped_optional
 
 class PassMatcher: MoveMatcherProtocol {
     
@@ -16,7 +15,10 @@ class PassMatcher: MoveMatcherProtocol {
         
         switch challenge.name {
         case .bang, .duel, .gatling, .indians:
-            return [GameMove(name: .pass, actorId: challenge.targetIds.first!)]
+            guard let actorId = challenge.targetIds?.first else {
+                return nil
+            }
+            return [GameMove(name: .pass, actorId: actorId)]
             
         case .dynamiteExploded:
             return [GameMove(name: .pass, actorId: state.turn)]
@@ -29,11 +31,12 @@ class PassMatcher: MoveMatcherProtocol {
     func updates(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .pass = move.name,
             let challenge = state.challenge,
-            let actor = state.player(move.actorId) else {
+            let actor = state.player(move.actorId),
+            let damage = challenge.damage else {
                 return nil
         }
         
-        var damageSource: DamageSource!
+        let damageSource: DamageSource
         switch challenge.name {
         case .bang, .duel, .gatling, .indians:
             damageSource = .byPlayer(state.turn)
@@ -45,8 +48,8 @@ class PassMatcher: MoveMatcherProtocol {
             return nil
         }
         
-        let health = max(actor.health - challenge.damage, 0)
-        let damageEvent = DamageEvent(damage: challenge.damage, source: damageSource)
+        let health = max(actor.health - damage, 0)
+        let damageEvent = DamageEvent(damage: damage, source: damageSource)
         return [.setChallenge(challenge.removing(move.actorId)),
                 .playerSetDamage(move.actorId, damageEvent),
                 .playerSetHealth(move.actorId, health)]

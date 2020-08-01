@@ -69,14 +69,14 @@ class DiscardMissedOnBangMatcherTests: XCTestCase {
     func test_DiscardCardAndRemoveActorFromGatlingChallenge_IfPlayingMissed() {
         // Given
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .gatling, targetIds: ["p1", "p2", "p3"]))
+            .challenge(is: Challenge(name: .gatling, targetIds: ["p1", "p2", "p3"], damage: 1))
         let move = GameMove(name: .discardMissed, actorId: "p1", cardId: "c1")
         
         // When
         let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .gatling, targetIds: ["p2", "p3"], barrelsPlayed: 0)),
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .gatling, targetIds: ["p2", "p3"], damage: 1)),
                                  .playerDiscardHand("p1", "c1")])
     }
 }

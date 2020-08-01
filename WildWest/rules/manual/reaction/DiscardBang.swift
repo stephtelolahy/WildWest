@@ -11,7 +11,7 @@ class DiscardBangOnDuelMatcher: MoveMatcherProtocol {
     func moves(matching state: GameStateProtocol) -> [GameMove]? {
         guard let challenge = state.challenge,
             case .duel = challenge.name,
-            let actorId = challenge.targetIds.first,
+            let actorId = challenge.targetIds?.first,
             let actor = state.player(actorId),
             let cards = actor.hand.filterOrNil({ $0.name == .bang }) else {
                 return nil
@@ -40,7 +40,7 @@ class DiscardBangOnIndiansMatcher: MoveMatcherProtocol {
     func moves(matching state: GameStateProtocol) -> [GameMove]? {
         guard let challenge = state.challenge,
             case .indians = challenge.name,
-            let actorId = challenge.targetIds.first,
+            let actorId = challenge.targetIds?.first,
             let actor = state.player(actorId),
             let cards = actor.hand.filterOrNil({ $0.name == .bang }) else {
                 return nil

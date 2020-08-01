@@ -26,7 +26,9 @@ class GatlingMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        let challenge = Challenge(name: .gatling, targetIds: state.otherPlayerIds(move.actorId))
+        let challenge = Challenge(name: .gatling,
+                                  targetIds: state.otherPlayerIds(move.actorId),
+                                  damage: 1)
         return [.setChallenge(challenge),
                 .playerDiscardHand(move.actorId, cardId)]
     }

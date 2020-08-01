@@ -22,7 +22,7 @@ class DiscardBeerMatcherTests: XCTestCase {
             .identified(by: "p1")
             .health(is: 1)
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .gatling, targetIds: ["p1", "p2"]))
+            .challenge(is: Challenge(name: .gatling, targetIds: ["p1", "p2"], damage: 1))
             .allPlayers(are: mockPlayer1, MockPlayerProtocol().health(is: 1), MockPlayerProtocol().health(is: 1))
         
         // When
@@ -42,7 +42,7 @@ class DiscardBeerMatcherTests: XCTestCase {
             .identified(by: "p1")
             .health(is: 1)
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .indians, targetIds: ["p1", "p2"]))
+            .challenge(is: Challenge(name: .indians, targetIds: ["p1", "p2"], damage: 1))
             .allPlayers(are: mockPlayer1, MockPlayerProtocol().health(is: 1), MockPlayerProtocol().health(is: 1))
         
         // When
@@ -62,7 +62,7 @@ class DiscardBeerMatcherTests: XCTestCase {
             .identified(by: "p1")
             .health(is: 1)
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .duel, targetIds: ["p1", "p2"]))
+            .challenge(is: Challenge(name: .duel, targetIds: ["p1", "p2"], damage: 1))
             .allPlayers(are: mockPlayer1, MockPlayerProtocol().health(is: 1), MockPlayerProtocol().health(is: 1))
         
         // When
@@ -84,7 +84,7 @@ class DiscardBeerMatcherTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .allPlayers(are: mockPlayer1, MockPlayerProtocol().health(is: 1), MockPlayerProtocol().health(is: 1))
             .currentTurn(is: "p1")
-            .challenge(is: Challenge(name: .dynamiteExploded))
+            .challenge(is: Challenge(name: .dynamiteExploded, damage: 3))
         
         // When
         let moves = sut.moves(matching: mockState)
@@ -171,7 +171,7 @@ class DiscardBeerMatcherTests: XCTestCase {
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "px")
-            .challenge(is: Challenge(name: .bang, targetIds: ["p1"]))
+            .challenge(is: Challenge(name: .bang, targetIds: ["p1"], damage: 1))
             .players(are: mockPlayer1)
         let move = GameMove(name: .discardBeer, actorId: "p1", cardId: "c1")
         
@@ -207,7 +207,7 @@ class DiscardBeerMatcherTests: XCTestCase {
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "px")
-            .challenge(is: Challenge(name: .indians, targetIds: ["p1", "p2", "p3"]))
+            .challenge(is: Challenge(name: .indians, targetIds: ["p1", "p2", "p3"], damage: 1))
             .players(are: mockPlayer1)
         let move = GameMove(name: .discardBeer, actorId: "p1", cardId: "c1")
         
@@ -215,7 +215,7 @@ class DiscardBeerMatcherTests: XCTestCase {
         let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .indians, targetIds: ["p2", "p3"])),
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .indians, targetIds: ["p2", "p3"], damage: 1)),
                                  .playerDiscardHand("p1", "c1")])
     }
     
