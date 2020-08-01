@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Resolver
 
 class WaitingRoomViewController: UIViewController, Subscribable {
     
@@ -20,7 +21,7 @@ class WaitingRoomViewController: UIViewController, Subscribable {
     var onQuit: (() -> Void)?
     var onStart: (([WUserInfo]) -> Void)?
     
-    private lazy var manager = AppModules.shared.matchingManager
+    private lazy var manager: MatchingManagerProtocol = Resolver.resolve()
     private var users: [WUserInfo] = []
     
     // MARK: - Lifecycle

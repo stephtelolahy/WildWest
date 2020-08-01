@@ -9,6 +9,7 @@
 
 import UIKit
 import RxSwift
+import Resolver
 
 class GameViewController: UIViewController, Subscribable {
     
@@ -51,18 +52,24 @@ class GameViewController: UIViewController, Subscribable {
     private var latestState: GameStateProtocol?
     private var latestMove: GameMove?
     
-    private lazy var analyticsManager = AppModules.shared.analyticsManager
-    private lazy var preferences = AppModules.shared.userPreferences
-    private lazy var statsBuilder = StatsBuilder(sheriffId: subjects.sheriffId, classifier: MoveClassifier())
-    private lazy var playerAdapter = PlayersAdapter()
-    private lazy var handAdapter = HandAdapter(playerId: controlledPlayerId)
-    private lazy var moveDescriptor = MoveDescriptor()
-    private lazy var instructionBuilder = InstructionBuilder()
-    private lazy var playMoveSelector = PlayMoveSelector(viewController: self)
-    private lazy var updateAnimator = UpdateAnimator(viewController: self,
-                                                     cardPositions: buildCardPositions(),
-                                                     cardSize: buildCardSize(),
-                                                     updateDelay: preferences.updateDelay)
+    private lazy var analyticsManager: AnalyticsManager = Resolver.resolve()
+    private lazy var preferences: UserPreferencesProtocol = Resolver.resolve()
+    
+    private lazy var statsBuilder: StatsBuilderProtocol = {
+        StatsBuilder(sheriffId: subjects.sheriffId, classifier: MoveClassifier())
+    }()
+    
+    private lazy var playerAdapter: PlayersAdapterProtocol = PlayersAdapter()
+    private lazy var handAdapter: HandAdapterProtocol = HandAdapter(playerId: controlledPlayerId)
+    private lazy var moveDescriptor: MoveDescriptorProtocol = MoveDescriptor()
+    private lazy var instructionBuilder: InstructionBuilderProtocol = InstructionBuilder()
+    private lazy var playMoveSelector: PlayMoveSelectorProtocol = PlayMoveSelector(viewController: self)
+    private lazy var updateAnimator: UpdateAnimatorProtocol = {
+        UpdateAnimator(viewController: self,
+                       cardPositions: buildCardPositions(),
+                       cardSize: buildCardSize(),
+                       updateDelay: preferences.updateDelay)
+    }()
     
     private lazy var moveSoundPlayer: MoveSoundPlayerProtocol? = {
         preferences.enableSound ? MoveSoundPlayer() : nil
@@ -284,8 +291,10 @@ extension GameViewController: UICollectionViewDelegate {
     }
     
     private func playersCollectionViewDidSelectItem(at indexPath: IndexPath) {
-        let playerDescriptor = PlayerDescriptor(player: playerItems[indexPath.row].player)
+        let player = playerItems[indexPath.row].player
+        let playerDescriptor = PlayerDescriptor(player: player)
         present(playerDescriptor, animated: true)
+        analyticsManager.tageEventPlayerDescriptor(player)
     }
     
     private func handCollectionViewDidSelectItem(at indexPath: IndexPath) {

@@ -16,6 +16,7 @@ protocol MatchingManagerProtocol {
     func observeWaitingUsers() -> Observable<[WUserInfo]>
     func createGame(users: [WUserInfo]) -> Completable
     func quitGame() -> Completable
+    func getGameData(gameId: String) -> Single<(GameStateProtocol, [String: WUserInfo])>
 }
 
 class MatchingManager: MatchingManagerProtocol {
@@ -76,6 +77,14 @@ class MatchingManager: MatchingManagerProtocol {
         return database.createGame(id: gameId, state: state)
             .andThen(database.setGameUsers(gameId: gameId, users: usersDict))
             .andThen(Completable.concat(updates))
+    }
+    
+    func getGameData(gameId: String) -> Single<(GameStateProtocol, [String: WUserInfo])> {
+        database.getGame(gameId)
+        .flatMap {  state in
+            self.database.getGameUsers(gameId: gameId)
+                .map { users in (state, users) }
+        }
     }
     
     private var loggedUserId: String {

@@ -130,6 +130,7 @@ PODS:
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
   - PromisesObjC (1.2.9)
+  - Resolver (1.0.7)
   - RxBlocking (5.1.1):
     - RxSwift (~> 5)
   - RxSwift (5.1.1)
@@ -148,6 +149,7 @@ DEPENDENCIES:
   - FirebaseUI/OAuth
   - FirebaseUI/Phone
   - Kingfisher
+  - Resolver
   - RxBlocking
   - RxSwift
   - RxTest
@@ -178,6 +180,7 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - PromisesObjC
+    - Resolver
     - RxBlocking
     - RxSwift
     - RxTest
@@ -207,11 +210,12 @@ SPEC CHECKSUMS:
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
+  Resolver: da30396fcabb46790959209430a4a0a9e6e39849
   RxBlocking: 5f700a78cad61ce253ebd37c9a39b5ccc76477b4
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   RxTest: 711632d5644dffbeb62c936a521b5b008a1e1faa
   SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
 
-PODFILE CHECKSUM: 9d91874024647e2dcf5381845db3b1f3fd30ff2f
+PODFILE CHECKSUM: de95d17cb5dd812e5000ef1e091855a10b5184cd
 
 COCOAPODS: 1.9.3

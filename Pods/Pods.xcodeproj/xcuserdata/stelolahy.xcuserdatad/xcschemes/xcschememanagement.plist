@@ -179,6 +179,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Resolver.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>RxBlocking.xcscheme</key>
 		<dict>
 			<key>isShown</key>

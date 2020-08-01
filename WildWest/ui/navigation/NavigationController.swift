@@ -8,12 +8,15 @@
 
 import UIKit
 import FirebaseUI
+import Resolver
+import RxSwift
 
 class NavigationController: UINavigationController, Subscribable {
     
-    private lazy var matchingManager = AppModules.shared.matchingManager
-    private lazy var accountManager = AppModules.shared.accountManager
-    private lazy var gameBuilder = AppModules.shared.gameBuilder
+    private lazy var matchingManager: MatchingManagerProtocol = Resolver.resolve()
+    private lazy var accountManager: AccountManagerProtocol = Resolver.resolve()
+    private lazy var gameBuilder: GameBuilderProtocol = Resolver.resolve()
+    private lazy var preferences: UserPreferencesProtocol = Resolver.resolve()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,13 +81,23 @@ private extension NavigationController {
     }
     
     func loadLocalGame() {
-        loadGame(environment: gameBuilder.createLocalGameEnvironment())
+        let state = gameBuilder.createGame(for: preferences.playersCount)
+        let playerId = state.players.first?.identifier
+        loadGame(environment: gameBuilder.createLocalGameEnvironment(state: state,
+                                                                     playerId: playerId))
     }
     
     func loadOnlineGame(_ gameId: String, _ playerId: String) {
-        gameBuilder.createRemoteGameEnvironment(gameId: gameId, playerId: playerId) { [weak self] environment in
-            self?.loadGame(environment: environment)
-        }
+        sub(matchingManager.getGameData(gameId: gameId).subscribe(onSuccess: { state, users in
+            let environment = self.gameBuilder.createRemoteGameEnvironment(gameId: gameId,
+                                                                           playerId: playerId,
+                                                                           state: state,
+                                                                           users: users)
+            // wait until executedMove and executedUpdate PublishSubjects emit lastest values
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+                self?.loadGame(environment: environment)
+            }
+        }))
     }
     
     func loadGame(environment: GameEnvironment) {

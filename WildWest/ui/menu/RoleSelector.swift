@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import Resolver
 
 class RoleSelector: UIAlertController {
     
-    private lazy var preferences = AppModules.shared.userPreferences
+    private lazy var preferences: UserPreferencesProtocol = Resolver.resolve()
     
     convenience init(completion: @escaping (Role?) -> Void) {
         self.init(title: "Choose role", message: nil, preferredStyle: .alert)
