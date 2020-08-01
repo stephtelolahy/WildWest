@@ -12,36 +12,52 @@ import RxSwift
 import Firebase
 
 protocol GameBuilderProtocol {
-    func createLocalGameEnvironment() -> GameEnvironment
-    func createRemoteGameEnvironment(gameId: String,
-                                     playerId: String,
-                                     completion: @escaping (GameEnvironment) -> Void)
     func createGame(for playersCount: Int) -> GameStateProtocol
+    func createLocalGameEnvironment(state: GameStateProtocol,
+                                    playerId: String?) -> GameEnvironment
+    func createRemoteGameEnvironment(gameId: String,
+                                     playerId: String?,
+                                     state: GameStateProtocol,
+                                     users: [String: WUserInfo]) -> GameEnvironment
 }
 
 class GameBuilder: GameBuilderProtocol, Subscribable {
     
     private let preferences: UserPreferencesProtocol
-    private let matchingDatabase: MatchingDatabaseProtocol
     private let gameResources: GameResourcesProtocol
     private let firebaseMapper: FirebaseMapperProtocol
     
     init(preferences: UserPreferencesProtocol,
-         matchingDatabase: MatchingDatabaseProtocol,
          gameResources: GameResourcesProtocol,
          firebaseMapper: FirebaseMapperProtocol) {
         self.preferences = preferences
-        self.matchingDatabase = matchingDatabase
         self.gameResources = gameResources
         self.firebaseMapper = firebaseMapper
     }
     
-    func createLocalGameEnvironment() -> GameEnvironment {
-        let state = createGame(for: preferences.playersCount)
+    func createGame(for playersCount: Int) -> GameStateProtocol {
+        let gameSetup = GameSetup()
         
-        let controlledId = state.players.first?.identifier
+        let figures = gameResources.allFigures
+        let shuffledRoles = gameSetup.roles(for: playersCount)
+            .shuffled()
+            .starting(with: preferences.preferredRole)
         
-        let stateSubject: BehaviorSubject<GameStateProtocol> = BehaviorSubject(value: state)
+        let shuffledFigures = figures
+            .shuffled()
+            .starting(where: { $0.name == preferences.preferredFigure })
+        
+        let cards = gameResources.allCards
+        let shuffledCards = cards.shuffled()
+        
+        return gameSetup.setupGame(roles: shuffledRoles,
+                                   figures: shuffledFigures,
+                                   cards: shuffledCards)
+    }
+    
+    func createLocalGameEnvironment(state: GameStateProtocol,
+                                    playerId: String?) -> GameEnvironment {
+        let stateSubject = BehaviorSubject<GameStateProtocol>(value: state)
         let executedMoveSubject = PublishSubject<GameMove>()
         let executedUpdateSubject = PublishSubject<GameUpdate>()
         let validMovesSubject = BehaviorSubject<[GameMove]>(value: [])
@@ -61,7 +77,7 @@ class GameBuilder: GameBuilderProtocol, Subscribable {
                                 database: database,
                                 moveMatchers: GameRules().moveMatchers)
         
-        let aiPlayers = state.players.filter { $0.identifier != controlledId }
+        let aiPlayers = state.players.filter { $0.identifier != playerId }
         let aiAgents: [AIPlayerAgentProtocol] = aiPlayers.map { player in
             let moveClassifier = MoveClassifier()
             let statsBuilder = StatsBuilder(sheriffId: subjects.sheriffId, classifier: moveClassifier)
@@ -73,84 +89,44 @@ class GameBuilder: GameBuilderProtocol, Subscribable {
                                  subjects: subjects,
                                  statsBuilder: statsBuilder)
         }
-        
         aiAgents.forEach { $0.observeState() }
         
         return GameEnvironment(engine: engine,
                                subjects: subjects,
-                               controlledId: controlledId,
+                               controlledId: playerId,
                                aiAgents: aiAgents)
     }
     
     func createRemoteGameEnvironment(gameId: String,
-                                     playerId: String,
-                                     completion: @escaping (GameEnvironment) -> Void) {
+                                     playerId: String?,
+                                     state: GameStateProtocol,
+                                     users: [String: WUserInfo]) -> GameEnvironment {
+        let stateSubject = BehaviorSubject<GameStateProtocol>(value: state)
+        let executedMoveSubject = PublishSubject<GameMove>()
+        let executedUpdateSubject = PublishSubject<GameUpdate>()
+        let validMovesSubject = BehaviorSubject<[GameMove]>(value: [])
         
-        let request: Single<(GameStateProtocol, [String: WUserInfo])> =
-            matchingDatabase.getGame(gameId)
-                .flatMap {  state in
-                    self.matchingDatabase.getGameUsers(gameId: gameId)
-                        .map { users in (state, users) }
-                }
+        let gameRef = Database.database().reference().child("games/\(gameId)")
+        let database = RemoteGameDatabase(gameRef: gameRef,
+                                          mapper: firebaseMapper,
+                                          stateSubject: stateSubject,
+                                          executedMoveSubject: executedMoveSubject,
+                                          executedUpdateSubject: executedUpdateSubject,
+                                          validMovesSubject: validMovesSubject)
         
-        sub(request.subscribe(onSuccess: { data in
-            let (state, users) = data
-            let stateSubject: BehaviorSubject<GameStateProtocol> = BehaviorSubject(value: state)
-            let executedMoveSubject = PublishSubject<GameMove>()
-            let executedUpdateSubject = PublishSubject<GameUpdate>()
-            let validMovesSubject = BehaviorSubject<[GameMove]>(value: [])
-            
-            let gameRef = Database.database().reference().child("games/\(gameId)")
-            let database = RemoteGameDatabase(gameRef: gameRef,
-                                              mapper: self.firebaseMapper,
-                                              stateSubject: stateSubject,
-                                              executedMoveSubject: executedMoveSubject,
-                                              executedUpdateSubject: executedUpdateSubject,
-                                              validMovesSubject: validMovesSubject)
-            
-            let subjects = GameSubjects(stateSubject: stateSubject,
-                                        executedMoveSubject: executedMoveSubject,
-                                        executedUpdateSubject: executedUpdateSubject,
-                                        validMovesSubject: validMovesSubject)
-            
-            let engine = GameEngine(delay: self.preferences.updateDelay,
-                                    database: database,
-                                    moveMatchers: GameRules().moveMatchers)
-            
-            let environment = GameEnvironment(engine: engine,
-                                              subjects: subjects,
-                                              controlledId: playerId,
-                                              aiAgents: nil,
-                                              gameUsers: users)
-            
-            // wait until executedMove and executedUpdate PublishSubjects emit lastest values
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                completion(environment)
-            }
-            
-        }, onError: { error in
-            fatalError(error.localizedDescription)
-        }))
-    }
-    
-    func createGame(for playersCount: Int) -> GameStateProtocol {
-        let cards = gameResources.allCards
-        let figures = gameResources.allFigures
+        let subjects = GameSubjects(stateSubject: stateSubject,
+                                    executedMoveSubject: executedMoveSubject,
+                                    executedUpdateSubject: executedUpdateSubject,
+                                    validMovesSubject: validMovesSubject)
         
-        let gameSetup = GameSetup()
+        let engine = GameEngine(delay: preferences.updateDelay,
+                                database: database,
+                                moveMatchers: GameRules().moveMatchers)
         
-        let shuffledRoles = gameSetup.roles(for: playersCount)
-            .shuffled()
-            .starting(with: preferences.preferredRole)
-        
-        let shuffledFigures = figures
-            .shuffled()
-            .starting(where: { $0.name == preferences.preferredFigure })
-        
-        let shuffledCards = cards.shuffled()
-        
-        return gameSetup.setupGame(roles: shuffledRoles,
-                                   figures: shuffledFigures,
-                                   cards: shuffledCards)
+        return GameEnvironment(engine: engine,
+                               subjects: subjects,
+                               controlledId: playerId,
+                               aiAgents: nil,
+                               gameUsers: users)
     }
 }

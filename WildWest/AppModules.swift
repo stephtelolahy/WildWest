@@ -11,6 +11,7 @@ import Resolver
 
 extension Resolver: ResolverRegistering {
     
+    // Resolve essential singletons
     public static func registerAllServices() {
         
         register { AnalyticsManager() }.scope(application)
@@ -26,13 +27,13 @@ extension Resolver: ResolverRegistering {
                               keyGenerator: resolve())
         }
         register { FirebaseMapper(dtoEncoder: resolve(), dictionaryEncoder: resolve()) as FirebaseMapperProtocol }
+            .scope(application)
         
         register { MatchingDatabase(rootRef: Database.database().reference(),
                                     mapper: resolve()) as MatchingDatabaseProtocol
         }.scope(application)
         
         register { GameBuilder(preferences: resolve(),
-                               matchingDatabase: resolve(),
                                gameResources: resolve(),
                                firebaseMapper: resolve()) as GameBuilderProtocol
         }
