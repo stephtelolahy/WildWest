@@ -35,25 +35,39 @@ class MatchingManager: MatchingManagerProtocol {
     
     func createUser() -> Completable {
         guard let user = accountManager.currentUser else {
-            fatalError("Missing user")
+            return Completable.error(NSError(domain: "Missing user", code: 0))
         }
         return database.createUser(user)
     }
     
     func observeUserStatus() -> Observable<UserStatus> {
-        database.observeUserStatus(loggedUserId)
+        guard let loggedUserId = accountManager.currentUser?.id else {
+            return Observable.error(NSError(domain: "Missing user", code: 0))
+        }
+        return database.observeUserStatus(loggedUserId)
     }
     
     func addToWaitingRoom() -> Completable {
-        database.setUserStatus(loggedUserId, status: .waiting)
+        guard let loggedUserId = accountManager.currentUser?.id else {
+            return Completable.error(NSError(domain: "Missing user", code: 0))
+        }
+        return database.setUserStatus(loggedUserId, status: .waiting)
     }
     
     func quitWaitingRoom() -> Completable {
-        database.setUserStatus(loggedUserId, status: .idle)
+        guard let loggedUserId = accountManager.currentUser?.id else {
+            return Completable.error(NSError(domain: "Missing user", code: 0))
+        }
+        
+        return database.setUserStatus(loggedUserId, status: .idle)
     }
     
     func quitGame() -> Completable {
-        database.setUserStatus(loggedUserId, status: .idle)
+        guard let loggedUserId = accountManager.currentUser?.id else {
+            return Completable.empty()
+        }
+        
+        return database.setUserStatus(loggedUserId, status: .idle)
     }
     
     func observeWaitingUsers() -> Observable<[WUserInfo]> {
@@ -81,17 +95,9 @@ class MatchingManager: MatchingManagerProtocol {
     
     func getGameData(gameId: String) -> Single<(GameStateProtocol, [String: WUserInfo])> {
         database.getGame(gameId)
-        .flatMap {  state in
-            self.database.getGameUsers(gameId: gameId)
-                .map { users in (state, users) }
-        }
-    }
-    
-    private var loggedUserId: String {
-        guard let user = accountManager.currentUser else {
-            fatalError("Missing user")
-        }
-        
-        return user.id
+            .flatMap {  state in
+                self.database.getGameUsers(gameId: gameId)
+                    .map { users in (state, users) }
+            }
     }
 }

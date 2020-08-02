@@ -43,12 +43,12 @@ class MenuViewController: UIViewController, Subscribable {
         updatePlayersCount()
         updateFigureImage()
         updateRoleImage()
-        updateUserView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         musicPlayer?.play()
+        updateUserView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -86,11 +86,11 @@ class MenuViewController: UIViewController, Subscribable {
     }
     
     @IBAction private func contactButtonTapped(_ sender: Any) {
-        Navigator(self).toContactUs()
+        toContactUs()
     }
     
     @IBAction private func logoButtonTapped(_ sender: Any) {
-        Navigator(self).toRules()
+        toRules()
     }
 }
 
@@ -125,8 +125,11 @@ private extension MenuViewController {
     
     func updateUserView() {
         guard let user = accountManager.currentUser else {
+            avatarImageView.image = nil
+            userNameLabel.text = nil
             return
         }
+        
         avatarImageView.kf.setImage(with: URL(string: user.photoUrl))
         userNameLabel.text = user.name
     }

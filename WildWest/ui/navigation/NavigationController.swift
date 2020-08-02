@@ -23,22 +23,12 @@ class NavigationController: UINavigationController, Subscribable {
         if accountManager.currentUser != nil {
             observeUserStatus()
         } else {
-            loadSignIn()
+            loadMenu()
         }
     }
 }
 
 private extension NavigationController {
-    
-    func loadSignIn() {
-        let signInViewController = UIStoryboard.instantiate(SignInViewController.self, in: "Main")
-        
-        signInViewController.onCompleted = { [weak self] in
-            self?.observeUserStatus()
-        }
-        
-        fade(to: signInViewController)
-    }
     
     func loadMenu() {
         let menuViewController = UIStoryboard.instantiate(MenuViewController.self, in: "Main")
@@ -48,14 +38,28 @@ private extension NavigationController {
         }
         
         menuViewController.onPlayOnline = { [weak self] in
-            guard let self = self else {
-                return
-            }
-            
-            self.sub(self.matchingManager.addToWaitingRoom().subscribe())
+            self?.tryPlayOnline()
         }
         
         fade(to: menuViewController)
+    }
+    
+    func tryPlayOnline() {
+        if accountManager.currentUser != nil {
+            sub(matchingManager.addToWaitingRoom().subscribe())
+        } else {
+            loadSignIn()
+        }
+    }
+    
+    func loadSignIn() {
+        guard let authUI = FUIAuth.defaultAuthUI() else {
+            return
+        }
+        
+        authUI.delegate = self
+        authUI.providers = [FUIGoogleAuth()]
+        present(authUI.authViewController(), animated: true)
     }
     
     func loadWaitingRoom() {
@@ -83,8 +87,8 @@ private extension NavigationController {
     func loadLocalGame() {
         let state = gameBuilder.createGame(for: preferences.playersCount)
         let playerId = state.players.first?.identifier
-        loadGame(environment: gameBuilder.createLocalGameEnvironment(state: state,
-                                                                     playerId: playerId))
+        let environment = gameBuilder.createLocalGameEnvironment(state: state, playerId: playerId)
+        loadGame(environment: environment)
     }
     
     func loadOnlineGame(_ gameId: String, _ playerId: String) {
@@ -106,12 +110,11 @@ private extension NavigationController {
         gameViewController.environment = environment
         
         gameViewController.onQuit = { [weak self] in
-            self?.loadMenu()
-            
             guard let self = self else {
                 return
             }
             
+            self.loadMenu()
             self.sub(self.matchingManager.quitGame().subscribe())
         }
         
@@ -132,6 +135,19 @@ private extension NavigationController {
             }
         }, onError: { error in
             fatalError(error.localizedDescription)
+        }))
+    }
+}
+
+extension NavigationController: FUIAuthDelegate {
+    
+    func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
+        guard error == nil else {
+            return
+        }
+        
+        sub(matchingManager.createUser().subscribe(onCompleted: { [weak self] in
+            self?.observeUserStatus()
         }))
     }
 }
