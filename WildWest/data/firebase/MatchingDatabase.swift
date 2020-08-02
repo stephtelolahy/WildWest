@@ -13,6 +13,7 @@ protocol MatchingDatabaseProtocol {
     func createGame(id: String, state: GameStateProtocol) -> Completable
     func getGame(_ id: String) -> Single<GameStateProtocol>
     func createUser(_ user: WUserInfo) -> Completable
+    func getUser(_ id: String) -> Single<WUserInfo>
     func observeUserStatus(_ id: String) -> Observable<UserStatus>
     func setUserStatus(_ id: String, status: UserStatus) -> Completable
     func observeWaitingUsers() -> Observable<[WUserInfo]>
@@ -44,6 +45,11 @@ class MatchingDatabase: MatchingDatabaseProtocol {
     func createUser(_ user: WUserInfo) -> Completable {
         rootRef.child("users/\(user.id)")
             .rxSetValue({ try self.mapper.encodeUser(user) })
+    }
+    
+    func getUser(_ id: String) -> Single<WUserInfo> {
+        rootRef.child("users/\(id)")
+            .rxObserveSingleEvent({ try self.mapper.decodeUser(from: $0) })
     }
     
     func observeUserStatus(_ id: String) -> Observable<UserStatus> {
