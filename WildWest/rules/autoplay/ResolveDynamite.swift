@@ -8,7 +8,7 @@
 
 class ResolveDynamiteMatcher: MoveMatcherProtocol {
     
-    func autoPlayMove(matching state: GameStateProtocol) -> GameMove? {
+    func autoPlay(matching state: GameStateProtocol) -> GameMove? {
         guard let challenge = state.challenge,
             case .startTurn = challenge.name,
             let actor = state.player(state.turn),
@@ -23,7 +23,7 @@ class ResolveDynamiteMatcher: MoveMatcherProtocol {
         return GameMove(name: moveName, actorId: actor.identifier, cardId: card.identifier)
     }
     
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+    func updates(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         switch move.name {
         case .dynamiteExploded:
             return executeDynamiteExploded(move, in: state)

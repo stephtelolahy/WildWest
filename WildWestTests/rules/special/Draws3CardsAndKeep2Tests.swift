@@ -27,8 +27,8 @@ class Draws3CardsAndKeep2Tests: XCTestCase {
                        MockCardProtocol().identified(by: "c3"))
         
         // When
-        let autoPlayMove = sut.autoPlayMove(matching: mockState)
-        let validMoves = sut.validMoves(matching: mockState)
+        let autoPlayMove = sut.autoPlay(matching: mockState)
+        let validMoves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertNil(autoPlayMove)
@@ -46,7 +46,7 @@ class Draws3CardsAndKeep2Tests: XCTestCase {
         let move = GameMove(name: .startTurnDraw3CardsAndKeep2, actorId: "p1", discardIds: ["c1"])
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(nil),

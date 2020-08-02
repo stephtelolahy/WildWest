@@ -18,7 +18,7 @@ class EliminateMatcher: MoveMatcherProtocol {
         return GameMove(name: .eliminate, actorId: move.actorId)
     }
     
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+    func updates(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .eliminate = move.name,
             let actor = state.allPlayers.first(where: { $0.identifier == move.actorId }) else {
                 return nil

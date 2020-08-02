@@ -8,36 +8,8 @@
 
 extension Challenge {
     
-    init(name: MoveName,
-         targetIds: [String] = [],
-         damage: Int? = nil,
-         counterNeeded: Int = 1,
-         barrelsPlayed: Int = 0) {
-        self.name = name
-        self.targetIds = targetIds
-        self.damage = damage ?? Self.defaultDamage(for: name)
-        self.counterNeeded = counterNeeded
-        self.barrelsPlayed = barrelsPlayed
-    }
-    
-    private static func defaultDamage(for name: MoveName) -> Int {
-        switch name {
-        case .bang, .gatling, .indians, .duel:
-            return 1
-            
-        case .dynamiteExploded:
-            return 3
-            
-        default:
-            return 0
-        }
-    }
-}
-
-extension Challenge {
-    
     func countering(_ playerId: String) -> Challenge? {
-        let remainingCounter = counterNeeded - 1
+        let remainingCounter = (counterNeeded ?? 0) - 1
         if remainingCounter <= 0 {
             return removing(playerId)
         } else {
@@ -52,14 +24,14 @@ extension Challenge {
     func removing(_ playerId: String) -> Challenge? {
         switch name {
         case .bang, .gatling, .indians, .generalStore:
-            let remainingIds = targetIds.filter { $0 != playerId }
-            if remainingIds.isEmpty {
-                return nil
-            } else {
-                return Challenge(name: name,
-                                 targetIds: remainingIds,
-                                 damage: damage)
+            guard let targetIds = self.targetIds,
+                let remainingIds = targetIds.filterOrNil({ $0 != playerId }) else {
+                    return nil
             }
+            
+            return Challenge(name: name,
+                             targetIds: remainingIds,
+                             damage: damage)
             
         case .duel:
             return nil
@@ -73,7 +45,7 @@ extension Challenge {
     }
     
     func decrementingDamage(_ playerId: String) -> Challenge? {
-        let remainingDamage = damage - 1
+        let remainingDamage = (damage ?? 0) - 1
         if remainingDamage <= 0 {
             return removing(playerId)
         } else {
@@ -84,12 +56,14 @@ extension Challenge {
     }
     
     func swappingTargets() -> Challenge? {
-        guard targetIds.count == 2 else {
-            fatalError("Illegal state")
+        guard let targetIds = self.targetIds,
+            targetIds.count == 2 else {
+                fatalError("Illegal state")
         }
         
         return Challenge(name: name,
-                         targetIds: [targetIds[1], targetIds[0]])
+                         targetIds: [targetIds[1], targetIds[0]],
+                         damage: damage)
     }
     
     func incrementingBarrelsPlayed() -> Challenge {
@@ -97,6 +71,6 @@ extension Challenge {
                   targetIds: targetIds,
                   damage: damage,
                   counterNeeded: counterNeeded,
-                  barrelsPlayed: barrelsPlayed + 1)
+                  barrelsPlayed: (barrelsPlayed ?? 0) + 1)
     }
 }

@@ -27,7 +27,7 @@ class Discard2CardsFor1LifeMatcherTests: XCTestCase {
             .challenge(is: nil)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .discard2CardsFor1Life, actorId: "p1", discardIds: ["c1", "c2"])])
@@ -47,7 +47,7 @@ class Discard2CardsFor1LifeMatcherTests: XCTestCase {
             .challenge(is: nil)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertNil(moves)
@@ -63,7 +63,7 @@ class Discard2CardsFor1LifeMatcherTests: XCTestCase {
         let move = GameMove(name: .discard2CardsFor1Life, actorId: "p1", discardIds: ["c1", "c2"])
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.playerSetHealth("p1", 2),

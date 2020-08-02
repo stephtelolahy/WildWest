@@ -31,7 +31,7 @@ class PlayerCell: UICollectionViewCell {
         updateBackground()
         
         let player = item.player
-        nameLabel.text = "\(player.figureName.rawValue.uppercased()) \(item.score?.description ?? "")"
+        nameLabel.text = "\(player.figureName.rawValue.uppercased())"// \(item.score?.description ?? "")"
         let isEliminated = player.health == 0
         figureImageView.alpha = !isEliminated ? 1.0 : 0.4
         equipmentLabel.text = player.inPlay.map { "[\($0.name.rawValue)]" }.joined(separator: "\n")

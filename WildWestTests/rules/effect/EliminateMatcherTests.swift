@@ -40,7 +40,7 @@ class EliminateMatcherTests: XCTestCase {
         let move = GameMove(name: .eliminate, actorId: "p1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [])
@@ -59,7 +59,7 @@ class EliminateMatcherTests: XCTestCase {
         let move = GameMove(name: .eliminate, actorId: "p1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
@@ -83,7 +83,7 @@ class EliminateMatcherTests: XCTestCase {
         let move = GameMove(name: .eliminate, actorId: "p1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.playerPullFromOtherHand("p2", "p1", "c1"),
@@ -105,7 +105,7 @@ class EliminateMatcherTests: XCTestCase {
         let move = GameMove(name: .eliminate, actorId: "p1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setChallenge(Challenge(name: .startTurn)),

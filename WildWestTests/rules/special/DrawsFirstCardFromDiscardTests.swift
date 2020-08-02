@@ -25,8 +25,8 @@ class DrawsFirstCardFromDiscardTests: XCTestCase {
             .topDiscardPile(is: MockCardProtocol().identified(by: "c1"))
         
         // When
-        let autoPlayMove = sut.autoPlayMove(matching: mockState)
-        let validMoves = sut.validMoves(matching: mockState)
+        let autoPlayMove = sut.autoPlay(matching: mockState)
+        let validMoves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertNil(autoPlayMove)
@@ -47,8 +47,8 @@ class DrawsFirstCardFromDiscardTests: XCTestCase {
             .topDiscardPile(is: nil)
         
         // When
-        let autoPlayMove = sut.autoPlayMove(matching: mockState)
-        let validMoves = sut.validMoves(matching: mockState)
+        let autoPlayMove = sut.autoPlay(matching: mockState)
+        let validMoves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(autoPlayMove, GameMove(name: .startTurn, actorId: "p1"))
@@ -64,7 +64,7 @@ class DrawsFirstCardFromDiscardTests: XCTestCase {
         let move = GameMove(name: .startTurnDrawFirstCardFromDiscard, actorId: "p1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         // Assert

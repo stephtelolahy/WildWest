@@ -28,7 +28,7 @@ class BangMatcherTests: XCTestCase {
                      MockPlayerProtocol().identified(by: "p3").withDefault())
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [
@@ -51,7 +51,7 @@ class BangMatcherTests: XCTestCase {
                      MockPlayerProtocol().identified(by: "p3").playing(MockCardProtocol().named(.mustang)).withDefault())
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertNil(moves)
@@ -72,7 +72,7 @@ class BangMatcherTests: XCTestCase {
                      MockPlayerProtocol().identified(by: "p3").playing(MockCardProtocol().named(.mustang)).withDefault())
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .bang, actorId: "p1", cardId: "c1", targetId: "p2"),
@@ -93,7 +93,7 @@ class BangMatcherTests: XCTestCase {
             .players(are: mockPlayer1, mockPlayer2)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertNil(moves)
@@ -111,10 +111,10 @@ class BangMatcherTests: XCTestCase {
         let move = GameMove(name: .bang, actorId: "p1", cardId: "c1", targetId: "p2")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .bang, targetIds: ["p2"], counterNeeded: 1, barrelsPlayed: 0)),
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .bang, targetIds: ["p2"], damage: 1, counterNeeded: 1)),
                                  .playerSetBangsPlayed("p1", 1),
                                  .playerDiscardHand("p1", "c1"),])
     }
@@ -131,10 +131,10 @@ class BangMatcherTests: XCTestCase {
         let move = GameMove(name: .bang, actorId: "p1", cardId: "c1", targetId: "p2")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .bang, targetIds: ["p2"], counterNeeded: 2, barrelsPlayed: 0)),
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .bang, targetIds: ["p2"], damage: 1, counterNeeded: 2)),
                                  .playerSetBangsPlayed("p1", 1),
                                  .playerDiscardHand("p1", "c1"),])
     }

@@ -23,7 +23,7 @@ class PenalizeSheriffOnEliminatingDeputyMatcher: MoveMatcherProtocol {
         return GameMove(name: .penalizeSheriffOnEliminatingDeputy, actorId: offenderId)
     }
     
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+    func updates(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .penalizeSheriffOnEliminatingDeputy = move.name,
             let actor = state.player(move.actorId) else {
                 return nil

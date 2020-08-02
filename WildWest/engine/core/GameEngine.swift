@@ -27,13 +27,13 @@ class GameEngine: GameEngineProtocol {
     func start() {
         let state = database.state
         
-        let autoplayMoves = moveMatchers.compactMap { $0.autoPlayMove(matching: state) }
+        let autoplayMoves = moveMatchers.compactMap { $0.autoPlay(matching: state) }
         if !autoplayMoves.isEmpty {
             autoplayMoves.forEach { execute($0) }
             return
         }
         
-        let validMoves = moveMatchers.compactMap { $0.validMoves(matching: state) }.flatMap { $0 }
+        let validMoves = moveMatchers.compactMap { $0.moves(matching: state) }.flatMap { $0 }
         _ = database.setValidMoves(validMoves).subscribe()
     }
     

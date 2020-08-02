@@ -38,9 +38,9 @@ extension Resolver: ResolverRegistering {
                                firebaseMapper: resolve()) as GameBuilderProtocol
         }
         
-        register { AccountManager() as AccountManagerProtocol }.scope(application)
+        register { AccountProvider() as AccountProviderProtocol }
         
-        register { MatchingManager(accountManager: resolve(),
+        register { MatchingManager(accountProvider: resolve(),
                                    database: resolve(),
                                    gameBuilder: resolve()) as MatchingManagerProtocol
         }.scope(application)

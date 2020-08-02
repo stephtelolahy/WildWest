@@ -8,7 +8,7 @@
 
 class IndiansMatcher: MoveMatcherProtocol {
     
-    func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
+    func moves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
             let actor = state.player(state.turn),
             let cards = actor.hand.filterOrNil({ $0.name == .indians }) else {
@@ -20,13 +20,15 @@ class IndiansMatcher: MoveMatcherProtocol {
         }
     }
     
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+    func updates(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .indians = move.name,
             let cardId = move.cardId else {
                 return nil
         }
         
-        return [.setChallenge(Challenge(name: .indians, targetIds: state.otherPlayerIds(move.actorId))),
+        return [.setChallenge(Challenge(name: .indians,
+                                        targetIds: state.otherPlayerIds(move.actorId),
+                                        damage: 1)),
                 .playerDiscardHand(move.actorId, cardId)]
     }
 }

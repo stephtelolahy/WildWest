@@ -42,7 +42,7 @@ private extension Challenge {
     func description(in state: GameStateProtocol) -> String {
         switch name {
         case .dynamiteExploded:
-            return "dynamite exploded (-\(damage))"
+            return "dynamite exploded (-\(damage?.description ?? ""))"
             
         case .duel:
             return "duel by \(state.turn)"

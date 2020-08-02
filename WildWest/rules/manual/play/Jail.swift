@@ -8,7 +8,7 @@
 
 class JailMatcher: MoveMatcherProtocol {
     
-    func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
+    func moves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
             let actor = state.player(state.turn),
             let cards = actor.hand.filterOrNil({ $0.name == .jail }) else {
@@ -35,7 +35,7 @@ class JailMatcher: MoveMatcherProtocol {
         }.flatMap { $0 }
     }
     
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+    func updates(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .jail = move.name,
             let cardId = move.cardId,
             let targetId = move.targetId else {

@@ -8,16 +8,16 @@
 
 class DiscardBeerMatcher: MoveMatcherProtocol {
     
-    func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
+    func moves(matching state: GameStateProtocol) -> [GameMove]? {
         guard let challenge = state.challenge,
             state.players.count > 2 else {
                 return nil
         }
         
-        var actorId: String?
+        let actorId: String?
         switch challenge.name {
         case .bang, .duel, .gatling, .indians, .generalStore:
-            actorId = challenge.targetIds.first
+            actorId = challenge.targetIds?.first
             
         case .dynamiteExploded:
             actorId = state.turn
@@ -27,7 +27,8 @@ class DiscardBeerMatcher: MoveMatcherProtocol {
         }
         
         guard let actor = state.player(actorId),
-            actor.health <= challenge.damage,
+            let damage = challenge.damage,
+            actor.health <= damage,
             let beers = actor.hand.filterOrNil({ $0.name == .beer }) else {
                 return nil
         }
@@ -37,7 +38,7 @@ class DiscardBeerMatcher: MoveMatcherProtocol {
         }
     }
     
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+    func updates(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .discardBeer = move.name,
             let cardId = move.cardId,
             let challenge = state.challenge else {

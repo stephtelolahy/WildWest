@@ -163,7 +163,6 @@
 		33515800245D892700C46888 /* KeyGeneratorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335157FF245D892700C46888 /* KeyGeneratorProtocol.swift */; };
 		33515801245D892700C46888 /* KeyGeneratorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335157FF245D892700C46888 /* KeyGeneratorProtocol.swift */; };
 		33516CCA2450A79E003C99E2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33516CC92450A79E003C99E2 /* GoogleService-Info.plist */; };
-		335632DB2479726D0004F371 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335632DA2479726D0004F371 /* SignInViewController.swift */; };
 		3356CF0E243237320071B04F /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3356CF0D243237320071B04F /* Challenge.swift */; };
 		3356CF0F243237320071B04F /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3356CF0D243237320071B04F /* Challenge.swift */; };
 		3356CF11243237500071B04F /* DamageEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3356CF10243237500071B04F /* DamageEvent.swift */; };
@@ -195,10 +194,12 @@
 		335BED9E2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */; };
 		335BED9F2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */; };
 		335C03BE2459F5C200043F46 /* GameMoveDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335C03BD2459F5C200043F46 /* GameMoveDto.swift */; };
-		33639FD724CB3C8500F48727 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33639FD624CB3C8500F48727 /* Navigator.swift */; };
 		33639FDA24CB421D00F48727 /* WaitingRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33639FD924CB421D00F48727 /* WaitingRoomViewController.swift */; };
 		336AA6F023F1450800328837 /* GameDatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */; };
 		336AA6F123F1450B00328837 /* GameDatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */; };
+		3371A3A724D6B44300D78FDC /* UIViewController+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3371A3A624D6B44300D78FDC /* UIViewController+Navigation.swift */; };
+		3371A3A924D6CFDD00D78FDC /* AccountProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3371A3A824D6CFDD00D78FDC /* AccountProvider.swift */; };
+		3371A3AD24D6D3FB00D78FDC /* 2017-03-24_-_Lone_Rider_-_David_Fesliyan.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3371A3AC24D6D3FB00D78FDC /* 2017-03-24_-_Lone_Rider_-_David_Fesliyan.mp3 */; };
 		3372CB522454BC7900C061C9 /* FigureSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372CB512454BC7900C061C9 /* FigureSelector.swift */; };
 		3372CB542454BF8E00C061C9 /* GameBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372CB532454BF8E00C061C9 /* GameBuilder.swift */; };
 		33734AE92454AB3000A5D2DA /* DictionaryEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AE82454AB3000A5D2DA /* DictionaryEncoder.swift */; };
@@ -222,7 +223,6 @@
 		3380B043243682B80040F027 /* DrawsCardFromPlayerDamagedHimMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3380B042243682B80040F027 /* DrawsCardFromPlayerDamagedHimMatcherTests.swift */; };
 		3380E3C924D537C800E2231A /* RoleEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3380E3C824D537C800E2231A /* RoleEstimator.swift */; };
 		3380E3CA24D53C7200E2231A /* RoleEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3380E3C824D537C800E2231A /* RoleEstimator.swift */; };
-		3380E3CC24D541A200E2231A /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3380E3CB24D541A200E2231A /* AccountManager.swift */; };
 		3383CFCE242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3383CFCD242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 */; };
 		3383CFD0242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3383CFCF242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 */; };
 		338A5FC0242BC8CE00766541 /* flyby-Conor-1500306612.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 338A5FBF242BC8CE00766541 /* flyby-Conor-1500306612.mp3 */; };
@@ -441,7 +441,6 @@
 		33516CC92450A79E003C99E2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3351B58524269386004F18C3 /* Pass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pass.swift; sourceTree = "<group>"; };
 		3351B58824269A24004F18C3 /* PassMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassMatcherTests.swift; sourceTree = "<group>"; };
-		335632DA2479726D0004F371 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		3356CF0D243237320071B04F /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
 		3356CF10243237500071B04F /* DamageEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DamageEvent.swift; sourceTree = "<group>"; };
 		335BED682429334F009184A3 /* MoveSoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveSoundPlayer.swift; sourceTree = "<group>"; };
@@ -460,9 +459,11 @@
 		335BED9A2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Pain-SoundBible.com-1883168362.mp3"; sourceTree = "<group>"; };
 		335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Automatic Machine Gun-SoundBible.com-253461580.mp3"; sourceTree = "<group>"; };
 		335C03BD2459F5C200043F46 /* GameMoveDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMoveDto.swift; sourceTree = "<group>"; };
-		33639FD624CB3C8500F48727 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		33639FD924CB421D00F48727 /* WaitingRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomViewController.swift; sourceTree = "<group>"; };
 		336AA6EF23F1450800328837 /* GameDatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDatabaseProtocol.swift; sourceTree = "<group>"; };
+		3371A3A624D6B44300D78FDC /* UIViewController+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Navigation.swift"; sourceTree = "<group>"; };
+		3371A3A824D6CFDD00D78FDC /* AccountProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProvider.swift; sourceTree = "<group>"; };
+		3371A3AC24D6D3FB00D78FDC /* 2017-03-24_-_Lone_Rider_-_David_Fesliyan.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "2017-03-24_-_Lone_Rider_-_David_Fesliyan.mp3"; sourceTree = "<group>"; };
 		3372CB512454BC7900C061C9 /* FigureSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FigureSelector.swift; sourceTree = "<group>"; };
 		3372CB532454BF8E00C061C9 /* GameBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBuilder.swift; sourceTree = "<group>"; };
 		33734AE82454AB3000A5D2DA /* DictionaryEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryEncoder.swift; sourceTree = "<group>"; };
@@ -479,7 +480,6 @@
 		3380B03F2436800F0040F027 /* DrawsCardFromPlayerDamagedHim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawsCardFromPlayerDamagedHim.swift; sourceTree = "<group>"; };
 		3380B042243682B80040F027 /* DrawsCardFromPlayerDamagedHimMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawsCardFromPlayerDamagedHimMatcherTests.swift; sourceTree = "<group>"; };
 		3380E3C824D537C800E2231A /* RoleEstimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleEstimator.swift; sourceTree = "<group>"; };
-		3380E3CB24D541A200E2231A /* AccountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
 		3383CFCD242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Metal Clang-SoundBible.com-19572601.mp3"; sourceTree = "<group>"; };
 		3383CFCF242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Ta Da-SoundBible.com-1884170640.mp3"; sourceTree = "<group>"; };
 		338A5FBF242BC8CE00766541 /* flyby-Conor-1500306612.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "flyby-Conor-1500306612.mp3"; sourceTree = "<group>"; };
@@ -717,7 +717,6 @@
 			isa = PBXGroup;
 			children = (
 				33C922DD24C9EF3000956151 /* model */,
-				3380E3CD24D5430500E2231A /* account */,
 				33C922E224C9F82E00956151 /* matching */,
 				331A58A124C9D3F8004CADDB /* preferences */,
 				331A58A324C9D674004CADDB /* json */,
@@ -799,7 +798,7 @@
 			isa = PBXGroup;
 			children = (
 				3346F33C24CB2F6F00FB0418 /* NavigationController.swift */,
-				33639FD624CB3C8500F48727 /* Navigator.swift */,
+				3371A3A624D6B44300D78FDC /* UIViewController+Navigation.swift */,
 			);
 			path = navigation;
 			sourceTree = "<group>";
@@ -810,14 +809,6 @@
 				335157F8245D860600C46888 /* DtoEncodingTests.swift */,
 			);
 			path = firebase;
-			sourceTree = "<group>";
-		};
-		335632D9247972530004F371 /* signin */ = {
-			isa = PBXGroup;
-			children = (
-				335632DA2479726D0004F371 /* SignInViewController.swift */,
-			);
-			path = signin;
 			sourceTree = "<group>";
 		};
 		335BED7024293418009184A3 /* sfx */ = {
@@ -859,6 +850,7 @@
 		335BED8724293D3D009184A3 /* music */ = {
 			isa = PBXGroup;
 			children = (
+				3371A3AC24D6D3FB00D78FDC /* 2017-03-24_-_Lone_Rider_-_David_Fesliyan.mp3 */,
 				335BED8824293D49009184A3 /* Cowboy_Theme-Pavak-1711860633.mp3 */,
 			);
 			path = music;
@@ -945,14 +937,6 @@
 				337C384B24D1D48500B4FE73 /* Draws3CardsAndKeep2Tests.swift */,
 			);
 			path = special;
-			sourceTree = "<group>";
-		};
-		3380E3CD24D5430500E2231A /* account */ = {
-			isa = PBXGroup;
-			children = (
-				3380E3CB24D541A200E2231A /* AccountManager.swift */,
-			);
-			path = account;
 			sourceTree = "<group>";
 		};
 		3385A1F423F9352800CD9660 /* game */ = {
@@ -1057,6 +1041,7 @@
 			isa = PBXGroup;
 			children = (
 				33C922E324C9F83C00956151 /* MatchingManager.swift */,
+				3371A3A824D6CFDD00D78FDC /* AccountProvider.swift */,
 				3372CB532454BF8E00C061C9 /* GameBuilder.swift */,
 				3337029024CB4879007E59A2 /* GameEnvironment.swift */,
 			);
@@ -1406,7 +1391,6 @@
 			isa = PBXGroup;
 			children = (
 				3346F33924CB2F1B00FB0418 /* navigation */,
-				335632D9247972530004F371 /* signin */,
 				33FDD70A240BFB3800BC3E14 /* menu */,
 				33639FD824CB41FD00F48727 /* waitingroom */,
 				3385A1F423F9352800CD9660 /* game */,
@@ -1529,6 +1513,7 @@
 				335BED8C24293FCA009184A3 /* Shotgun-SoundBible.com-862990674.mp3 in Resources */,
 				335BED7924293431009184A3 /* Horse Galloping-SoundBible.com-1451398148.mp3 in Resources */,
 				335BED8924293D49009184A3 /* Cowboy_Theme-Pavak-1711860633.mp3 in Resources */,
+				3371A3AD24D6D3FB00D78FDC /* 2017-03-24_-_Lone_Rider_-_David_Fesliyan.mp3 in Resources */,
 				3383CFCE242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 in Resources */,
 				335BED9824294422009184A3 /* Peacock-SoundBible.com-1698361099.mp3 in Resources */,
 				338A5FC2242BC9AA00766541 /* shotgun-old_school-RA_The_Sun_God-1129942741.mp3 in Resources */,
@@ -1715,6 +1700,7 @@
 				ADD035D523A96034003B2576 /* PlayerProtocol.swift in Sources */,
 				33D477F123E57DE500E232D9 /* FigureProtocol.swift in Sources */,
 				3328FCD5242F2D1100A82255 /* DiscardBang.swift in Sources */,
+				3371A3A924D6CFDD00D78FDC /* AccountProvider.swift in Sources */,
 				3395258323E37D07003DE948 /* GameSetupProtocol.swift in Sources */,
 				331231012434FC890080B696 /* GameState+Player.swift in Sources */,
 				AD49F86723BA054400543F59 /* Figure.swift in Sources */,
@@ -1754,7 +1740,6 @@
 				3328FCAB242F29B100A82255 /* Indians.swift in Sources */,
 				3328FCD7242F2D1100A82255 /* Pass.swift in Sources */,
 				3328FCD6242F2D1100A82255 /* DiscardBeer.swift in Sources */,
-				335632DB2479726D0004F371 /* SignInViewController.swift in Sources */,
 				3356CF11243237500071B04F /* DamageEvent.swift in Sources */,
 				334673E62436267500FFBB82 /* UIViewController+Alert.swift in Sources */,
 				33EAD12224D48F200052A97C /* Role+UIImage.swift in Sources */,
@@ -1806,7 +1791,6 @@
 				332F0497244716AA00BE2E4A /* UIImage+Color.swift in Sources */,
 				3380B0402436800F0040F027 /* DrawsCardFromPlayerDamagedHim.swift in Sources */,
 				330761A32453560900E8C2EF /* GameLoop.swift in Sources */,
-				3380E3CC24D541A200E2231A /* AccountManager.swift in Sources */,
 				33EE1B9A242E95C500A1E4F7 /* StartTurn.swift in Sources */,
 				330FDECD242F384C00284FE7 /* PenalizeSheriffOnEliminatingDeputy.swift in Sources */,
 				33029EAD24C74B8F002A5E54 /* DatabaseReference+Rx.swift in Sources */,
@@ -1828,7 +1812,6 @@
 				330761A0245355D200E8C2EF /* GameLoopProtocol.swift in Sources */,
 				3328FCA4242F29B100A82255 /* WellsFargo.swift in Sources */,
 				3380B037243641A20040F027 /* DrawsCardOnLoseHealth.swift in Sources */,
-				33639FD724CB3C8500F48727 /* Navigator.swift in Sources */,
 				3346F33D24CB2F6F00FB0418 /* NavigationController.swift in Sources */,
 				3346F33424CB280500FB0418 /* DtoEncoder+State.swift in Sources */,
 				3328FCA5242F29B100A82255 /* Equip.swift in Sources */,
@@ -1851,6 +1834,7 @@
 				337D7FD1243071AE0078F749 /* Player+Ability.swift in Sources */,
 				33E4411C24077CA000B2848E /* HandAdapter.swift in Sources */,
 				3398B0D4243B9AED00EB670A /* Role+Relationship.swift in Sources */,
+				3371A3A724D6B44300D78FDC /* UIViewController+Navigation.swift in Sources */,
 				3328FCA9242F29B100A82255 /* Bang.swift in Sources */,
 				33E4411E24077CA000B2848E /* PlayerCell.swift in Sources */,
 				339E4A2224516B490079F088 /* Challenge+Updating.swift in Sources */,

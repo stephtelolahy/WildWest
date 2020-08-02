@@ -116,6 +116,8 @@ class GameViewController: UIViewController, Subscribable {
         }
         
         startButton.isEnabled = playingSheriff()
+        
+        showRoles()
     }
     
     // MARK: IBAction
@@ -346,7 +348,7 @@ private extension GameViewController {
         discardImageView.bounds.size
     }
     
-    private func playingSheriff() -> Bool {
+    func playingSheriff() -> Bool {
         var playerIds: [String] = []
         
         if let controllerId = controlledPlayerId {
@@ -358,5 +360,18 @@ private extension GameViewController {
         }
         
         return playerIds.contains(where: { latestState?.player($0)?.role == .sheriff })
+    }
+    
+    func showRoles() {
+        let playersCount = subjects.playerIds(observedBy: controlledPlayerId).count
+        let roles = GameSetup().roles(for: playersCount)
+        let rolesWithCount: [String] = Role.allCases.compactMap { role in
+            guard let count = roles.filterOrNil({ $0 == role })?.count else {
+                return nil
+            }
+            return "\(count) \(role.rawValue)"
+        }
+        let message = rolesWithCount.joined(separator: "\n")
+        presentAlert(title: "Roles", message: message)
     }
 }

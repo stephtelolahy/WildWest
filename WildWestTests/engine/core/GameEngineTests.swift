@@ -41,7 +41,7 @@ class GameEngineTests: XCTestCase {
         // Given
         let move = GameMove(name: MoveName("m1"), actorId: "p1")
         Cuckoo.stub(mockMoveMatcher) { mock in
-            when(mock.autoPlayMove(matching: state(equalTo: mockState))).thenReturn(move)
+            when(mock.autoPlay(matching: state(equalTo: mockState))).thenReturn(move)
         }
         
         // When
@@ -126,7 +126,7 @@ class GameEngineTests: XCTestCase {
         let update: GameUpdate = .playerPullFromDeck("p1", 2)
         Cuckoo.stub(mockMoveMatcher) { mock in
             when(mock.execute(equal(to: move), in: state(equalTo: mockState))).thenReturn([update])
-            when(mock.autoPlayMove(matching: state(equalTo: mockState))).thenReturn(autoplay)
+            when(mock.autoPlay(matching: state(equalTo: mockState))).thenReturn(autoplay)
         }
         Cuckoo.stub(mockState) { mock in
             when(mock.players.get).thenReturn([

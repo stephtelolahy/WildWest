@@ -29,7 +29,7 @@ class MenuViewController: UIViewController, Subscribable {
     var onPlayLocal: (() -> Void)?
     var onPlayOnline: (() -> Void)?
     
-    private lazy var accountManager: AccountManagerProtocol = Resolver.resolve()
+    private lazy var manager: MatchingManagerProtocol = Resolver.resolve()
     private lazy var preferences: UserPreferencesProtocol = Resolver.resolve()
     private lazy var gameResources: GameResourcesProtocol = Resolver.resolve()
     private lazy var musicPlayer: ThemeMusicPlayer? = preferences.enableSound ? ThemeMusicPlayer() : nil
@@ -43,12 +43,12 @@ class MenuViewController: UIViewController, Subscribable {
         updatePlayersCount()
         updateFigureImage()
         updateRoleImage()
-        updateUserView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         musicPlayer?.play()
+        updateUserView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -86,11 +86,11 @@ class MenuViewController: UIViewController, Subscribable {
     }
     
     @IBAction private func contactButtonTapped(_ sender: Any) {
-        Navigator(self).toContactUs()
+        toContactUs()
     }
     
     @IBAction private func logoButtonTapped(_ sender: Any) {
-        Navigator(self).toRules()
+        toRules()
     }
 }
 
@@ -124,10 +124,12 @@ private extension MenuViewController {
     }
     
     func updateUserView() {
-        guard let user = accountManager.currentUser else {
-            return
-        }
-        avatarImageView.kf.setImage(with: URL(string: user.photoUrl))
-        userNameLabel.text = user.name
+        sub(manager.getUser().subscribe(onSuccess: { [weak self] user in
+            self?.avatarImageView.kf.setImage(with: URL(string: user.photoUrl))
+            self?.userNameLabel.text = user.name
+        }, onError: { [weak self] _ in
+            self?.avatarImageView.image = nil
+            self?.userNameLabel.text = nil
+        }))
     }
 }

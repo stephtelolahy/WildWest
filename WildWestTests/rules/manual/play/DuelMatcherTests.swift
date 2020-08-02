@@ -28,7 +28,7 @@ class DuelMatcherTests: XCTestCase {
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         XCTAssertEqual(moves, [
             GameMove(name: .duel, actorId: "p1", cardId: "c1", targetId: "p2"),
@@ -47,10 +47,10 @@ class DuelMatcherTests: XCTestCase {
         let move = GameMove(name: .duel, actorId: "p1", cardId: "c1", targetId: "p2")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .duel, targetIds: ["p2", "p1"])),
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .duel, targetIds: ["p2", "p1"], damage: 1)),
                                  .playerDiscardHand("p1", "c1")])
     }
 }

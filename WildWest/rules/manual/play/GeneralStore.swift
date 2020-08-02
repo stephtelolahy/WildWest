@@ -8,7 +8,7 @@
 
 class GeneralStoreMatcher: MoveMatcherProtocol {
     
-    func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
+    func moves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
             let actor = state.player(state.turn),
             let cards = actor.hand.filterOrNil({ $0.name == .generalStore }) else {
@@ -20,7 +20,7 @@ class GeneralStoreMatcher: MoveMatcherProtocol {
         }
     }
     
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+    func updates(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .generalStore = move.name,
             let cardId = move.cardId else {
                 return nil
