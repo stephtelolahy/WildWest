@@ -13,7 +13,7 @@ class ThemeMusicPlayer {
     private var audioPlayer: AVAudioPlayer?
     
     func play() {
-        let musicFile = "Cowboy_Theme-Pavak-1711860633.mp3"
+        let musicFile = "2017-03-24_-_Lone_Rider_-_David_Fesliyan.mp3"
         guard let path = Bundle.main.path(forResource: musicFile, ofType: nil) else {
             return
         }

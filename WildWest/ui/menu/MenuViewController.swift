@@ -29,7 +29,7 @@ class MenuViewController: UIViewController, Subscribable {
     var onPlayLocal: (() -> Void)?
     var onPlayOnline: (() -> Void)?
     
-    private lazy var manager: MatchingManager = Resolver.resolve()
+    private lazy var manager: MatchingManagerProtocol = Resolver.resolve()
     private lazy var preferences: UserPreferencesProtocol = Resolver.resolve()
     private lazy var gameResources: GameResourcesProtocol = Resolver.resolve()
     private lazy var musicPlayer: ThemeMusicPlayer? = preferences.enableSound ? ThemeMusicPlayer() : nil
