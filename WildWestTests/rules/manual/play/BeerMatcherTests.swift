@@ -25,10 +25,10 @@ class BeerMatcherTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
             .currentTurn(is: "p1")
-            .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
+            .allPlayers(are: mockPlayer, MockPlayerProtocol().health(is: 1), MockPlayerProtocol().health(is: 1))
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .beer, actorId: "p1", cardId: "c1")])
@@ -46,10 +46,10 @@ class BeerMatcherTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
             .currentTurn(is: "p1")
-            .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
+            .allPlayers(are: mockPlayer)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertNil(moves)
@@ -68,7 +68,7 @@ class BeerMatcherTests: XCTestCase {
             .players(are: mockPlayer, MockPlayerProtocol())
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertNil(moves)
@@ -79,16 +79,17 @@ class BeerMatcherTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
             .holding(MockCardProtocol().named(.beer).identified(by: "c1"))
+            .health(is: 2)
         let mockState = MockGameStateProtocol()
-            .players(are: mockPlayer1)
+            .allPlayers(are: mockPlayer1)
         let move = GameMove(name: .beer, actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .playerGainHealth("p1", 1)])
+        XCTAssertEqual(updates, [.playerSetHealth("p1", 3),
+                                 .playerDiscardHand("p1", "c1")])
     }
     
 }

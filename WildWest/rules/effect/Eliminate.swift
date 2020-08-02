@@ -18,13 +18,18 @@ class EliminateMatcher: MoveMatcherProtocol {
         return GameMove(name: .eliminate, actorId: move.actorId)
     }
     
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+    func updates(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .eliminate = move.name,
             let actor = state.allPlayers.first(where: { $0.identifier == move.actorId }) else {
                 return nil
         }
         
         var updates: [GameUpdate] = []
+        
+        if move.actorId == state.turn {
+            updates.append(.setChallenge(Challenge(name: .startTurn)))
+            updates.append(.setTurn(state.nextPlayer(after: move.actorId)))
+        }
         
         if let rewardedPlayer = state.players.first(where: {
             $0.abilities[.takesAllCardsFromEliminatedPlayers] == true }) {
@@ -38,11 +43,6 @@ class EliminateMatcher: MoveMatcherProtocol {
         } else {
             actor.hand.forEach { updates.append(.playerDiscardHand(move.actorId, $0.identifier)) }
             actor.inPlay.forEach { updates.append(.playerDiscardInPlay(move.actorId, $0.identifier)) }
-        }
-        
-        if move.actorId == state.turn {
-            updates.append(.setTurn(state.nextPlayer(after: move.actorId)))
-            updates.append(.setChallenge(Challenge(name: .startTurn)))
         }
         
         return updates

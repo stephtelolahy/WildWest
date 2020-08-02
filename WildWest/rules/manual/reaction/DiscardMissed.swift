@@ -8,10 +8,10 @@
 
 class DiscardMissedMatcher: MoveMatcherProtocol {
     
-    func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
+    func moves(matching state: GameStateProtocol) -> [GameMove]? {
         guard let challenge = state.challenge,
             (challenge.name == .bang || challenge.name == .gatling),
-            let actorId = challenge.actorId(in: state),
+            let actorId = challenge.targetIds?.first,
             let actor = state.player(actorId),
             let cards = actor.hand.filterOrNil({ actor.missedCardNames.contains($0.name) }) else {
                 return nil
@@ -22,15 +22,15 @@ class DiscardMissedMatcher: MoveMatcherProtocol {
         }
     }
     
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+    func updates(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .discardMissed = move.name,
             let challenge = state.challenge,
             let cardId = move.cardId else {
                 return nil
         }
         
-        return [.playerDiscardHand(move.actorId, cardId),
-                .setChallenge(challenge.countering(for: move.actorId))]
+        return [.setChallenge(challenge.countering(move.actorId)),
+                .playerDiscardHand(move.actorId, cardId)]
     }
 }
 

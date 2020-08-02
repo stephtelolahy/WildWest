@@ -27,7 +27,7 @@ class JailMatcherTests: XCTestCase {
             .players(are: mockPlayer1, mockPlayer2)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .jail, actorId: "p1", cardId: "c1", targetId: "p2")])
@@ -47,7 +47,7 @@ class JailMatcherTests: XCTestCase {
             .players(are: mockPlayer1, mockPlayer2)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertNil(moves)
@@ -68,7 +68,7 @@ class JailMatcherTests: XCTestCase {
             .players(are: mockPlayer1, mockPlayer2)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertNil(moves)
@@ -84,7 +84,7 @@ class JailMatcherTests: XCTestCase {
         let move = GameMove(name: .jail, actorId: "p1", cardId: "c1", targetId: "p2")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.playerPutInPlayOfOther("p1", "p2", "c1")])

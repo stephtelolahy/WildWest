@@ -10,7 +10,7 @@ import XCTest
 import Cuckoo
 
 class ChooseCardMatcherTests: XCTestCase {
-
+    
     private let sut = ChooseCardMatcher()
     
     func test_CanSelectCard_IfChallengeIsGeneralStore() {
@@ -25,7 +25,7 @@ class ChooseCardMatcherTests: XCTestCase {
         }
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .choose, actorId: "p1", cardId: "c1"),
@@ -43,12 +43,12 @@ class ChooseCardMatcherTests: XCTestCase {
         }
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .choose, actorId: "p1", cardId: "c1")])
     }
-
+    
     func test_PickOneCardFromGeneralStore_IfChoosingCard() {
         // Given
         let mockState = MockGameStateProtocol()
@@ -56,11 +56,11 @@ class ChooseCardMatcherTests: XCTestCase {
         let move = GameMove(name: .choose, actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerPullFromGeneralStore("p1", "c1"),
-                                 .setChallenge(Challenge(name: .generalStore, targetIds: ["p2"]))])
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .generalStore, targetIds: ["p2"])),
+                                 .playerPullFromGeneralStore("p1", "c1")])
     }
     
     func test_RemoveChallenge_IfChoosingLastCard() {
@@ -70,10 +70,10 @@ class ChooseCardMatcherTests: XCTestCase {
         let move = GameMove(name: .choose, actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerPullFromGeneralStore("p1", "c1"),
-                                 .setChallenge(nil)])
+        XCTAssertEqual(updates, [.setChallenge(nil),
+                                 .playerPullFromGeneralStore("p1", "c1")])
     }
 }

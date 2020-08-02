@@ -21,9 +21,13 @@ extension UIViewController {
         present(viewControllerToPresent, animated: flag)
     }
     
-    func select(title: String, choices: [String], cancelable: Bool = true, completion: @escaping((Int) -> Void)) {
+    func select(title: String,
+                message: String? = nil,
+                choices: [String],
+                cancelable: Bool = true,
+                completion: @escaping((Int) -> Void)) {
         let alertController = UIAlertController(title: title,
-                                                message: nil,
+                                                message: message,
                                                 preferredStyle: .alert)
         
         choices.forEach { choice in
@@ -46,4 +50,13 @@ extension UIViewController {
         present(alertController, animated: true)
     }
     
+    func presentAlert(title: String, message: String, completion: (() -> Void)? = nil) {
+        let alertController = UIAlertController(title: title,
+                                                message: message,
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { _ in
+            completion?()
+        }))
+        forcePresent(alertController, animated: true)
+    }
 }

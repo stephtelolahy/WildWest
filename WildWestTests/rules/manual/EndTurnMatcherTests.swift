@@ -21,10 +21,10 @@ class EndTurnMatcherTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
             .currentTurn(is: "p1")
-            .players(are: mockPlayer, MockPlayerProtocol(), MockPlayerProtocol())
+            .allPlayers(are: mockPlayer)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .endTurn, actorId: "p1")])
@@ -40,10 +40,10 @@ class EndTurnMatcherTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
             .currentTurn(is: "p1")
-            .players(are: mockPlayer, MockPlayerProtocol())
+            .allPlayers(are: mockPlayer)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .endTurn, actorId: "p1", discardIds: ["c1"]),
@@ -65,7 +65,7 @@ class EndTurnMatcherTests: XCTestCase {
         let move = GameMove(name: .endTurn, actorId: "p1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setTurn("p2"),
@@ -87,14 +87,14 @@ class EndTurnMatcherTests: XCTestCase {
         let move = GameMove(name: .endTurn, actorId: "p2")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setTurn("p1"),
                                  .setChallenge(Challenge(name: .startTurn))])
     }
     
-    func test_SetDiscardExcessCardsChallenge_IfEndingTurnWithExcessCards() {
+    func test_DiscardExcessCards_IfEndingTurnWithExcessCards() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
@@ -108,12 +108,12 @@ class EndTurnMatcherTests: XCTestCase {
         let move = GameMove(name: .endTurn, actorId: "p1", discardIds: ["c1", "c2"])
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.setTurn("p2"),
+                                 .setChallenge(Challenge(name: .startTurn)),
                                  .playerDiscardHand("p1", "c1"),
-                                 .playerDiscardHand("p1", "c2"),
-                                 .setChallenge(Challenge(name: .startTurn))])
+                                 .playerDiscardHand("p1", "c2")])
     }
 }

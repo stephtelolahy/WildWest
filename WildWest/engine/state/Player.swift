@@ -8,6 +8,7 @@
 
 class Player: PlayerProtocol {
     
+    let identifier: String
     let role: Role?
     let figureName: FigureName
     let imageName: String
@@ -20,7 +21,8 @@ class Player: PlayerProtocol {
     var bangsPlayed: Int
     var lastDamage: DamageEvent?
     
-    init(role: Role?,
+    init(identifier: String,
+         role: Role?,
          figureName: FigureName,
          imageName: String,
          description: String,
@@ -31,6 +33,7 @@ class Player: PlayerProtocol {
          inPlay: [CardProtocol],
          bangsPlayed: Int,
          lastDamage: DamageEvent?) {
+        self.identifier = identifier
         self.role = role
         self.figureName = figureName
         self.imageName = imageName
@@ -42,9 +45,5 @@ class Player: PlayerProtocol {
         self.inPlay = inPlay
         self.bangsPlayed = bangsPlayed
         self.lastDamage = lastDamage
-    }
-    
-    var identifier: String {
-        figureName.rawValue
     }
 }

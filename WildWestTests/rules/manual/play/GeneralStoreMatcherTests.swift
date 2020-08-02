@@ -26,7 +26,7 @@ class GeneralStoreMatcherTests: XCTestCase {
             .players(are: mockPlayer1)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves,  [GameMove(name: .generalStore, actorId: "p1", cardId: "c1")])
@@ -45,11 +45,11 @@ class GeneralStoreMatcherTests: XCTestCase {
         let move = GameMove(name: .generalStore, actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .generalStore, targetIds: ["p1", "p2", "p3", "p4"])),
                                  .setupGeneralStore(4),
-                                 .setChallenge(Challenge(name: .generalStore, targetIds: ["p1", "p2", "p3", "p4"]))])
+                                 .playerDiscardHand("p1", "c1")])
     }
 }

@@ -25,10 +25,10 @@ class SaloonMatcherTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
             .currentTurn(is: "p1")
-            .players(are: mockPlayer)
+            .allPlayers(are: mockPlayer)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .saloon, actorId: "p1", cardId: "c1")])
@@ -47,10 +47,10 @@ class SaloonMatcherTests: XCTestCase {
         let mockState = MockGameStateProtocol()
             .challenge(is: nil)
             .currentTurn(is: "p1")
-            .players(are: mockPlayer)
+            .allPlayers(are: mockPlayer)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertNil(moves)
@@ -72,15 +72,15 @@ class SaloonMatcherTests: XCTestCase {
             .health(is: 3)
             .maxHealth(is: 3)
         let mockState = MockGameStateProtocol()
-            .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
+            .allPlayers(are: mockPlayer1, mockPlayer2, mockPlayer3)
         let move = GameMove(name: .saloon, actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .playerGainHealth("p1", 1),
-                                 .playerGainHealth("p2", 1)])
+        XCTAssertEqual(updates, [.playerSetHealth("p1", 3),
+                                 .playerSetHealth("p2", 4),
+                                 .playerDiscardHand("p1", "c1")])
     }
 }

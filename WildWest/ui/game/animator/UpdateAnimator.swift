@@ -5,7 +5,6 @@
 //  Created by Hugues Stephano Telolahy on 13/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-// swiftlint:disable type_body_length
 // swiftlint:disable cyclomatic_complexity
 // swiftlint:disable function_body_length
 
@@ -24,22 +23,33 @@ protocol UpdateAnimatorProtocol {
 
 class UpdateAnimator: UpdateAnimatorProtocol {
     
-    private unowned var viewController: UIViewController
+    private unowned let viewController: UIViewController
     private let cardPositions: [CardPlace: CGPoint]
     private let cardSize: CGSize
+    private let updateDelay: TimeInterval
     
     init(viewController: UIViewController,
          cardPositions: [CardPlace: CGPoint],
-         cardSize: CGSize) {
+         cardSize: CGSize,
+         updateDelay: TimeInterval) {
         self.viewController = viewController
         self.cardPositions = cardPositions
         self.cardSize = cardSize
+        self.updateDelay = updateDelay
     }
     
     func animate(_ update: GameUpdate, in state: GameStateProtocol) {
         switch update {
         case let .playerPullFromDeck(playerId):
             animateMoveCard(from: .deck, to: .hand(playerId))
+            
+        case let .playerPullFromDiscard(playerId):
+            guard let card = state.discardPile.first else {
+                fatalError("Illegal state")
+            }
+            animateMoveCard(sourceImage: UIImage(named: card.imageName),
+                            from: .discard,
+                            to: .hand(playerId))
             
         case let .playerDiscardHand(playerId, cardId):
             guard let card = state.allPlayers.first(where: { $0.identifier == playerId })?.handCard(cardId)  else {
@@ -49,6 +59,10 @@ class UpdateAnimator: UpdateAnimatorProtocol {
                             targetImage: state.topDiscardImage,
                             from: .hand(playerId),
                             to: .discard)
+            
+        case let .playerDiscardTopDeck(playerId, _):
+            animateMoveCard(from: .hand(playerId),
+                            to: .deck)
             
         case let .playerPutInPlay(playerId, cardId):
             guard let card = state.player(playerId)?.handCard(cardId) else {
@@ -141,7 +155,7 @@ private extension UpdateAnimator {
                                        size: cardSize,
                                        from: sourcePosition,
                                        to: targetPosition,
-                                       duration: UserPreferences.shared.updateDelay * 0.6)
+                                       duration: updateDelay * 0.6)
     }
     
     func animateRevealCard(image: UIImage?,
@@ -153,7 +167,7 @@ private extension UpdateAnimator {
         viewController.animateRevealCard(image: image,
                                          size: cardSize,
                                          at: position,
-                                         duration: UserPreferences.shared.updateDelay)
+                                         duration: updateDelay)
     }
     
     func animateRevealThenMoveCard(sourceImage: UIImage? = #imageLiteral(resourceName: "01_back"),
@@ -170,6 +184,6 @@ private extension UpdateAnimator {
                                                  size: cardSize,
                                                  from: sourcePosition,
                                                  to: targetPosition,
-                                                 duration: UserPreferences.shared.updateDelay)
+                                                 duration: updateDelay)
     }
 }

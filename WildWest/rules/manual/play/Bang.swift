@@ -8,10 +8,10 @@
 
 class BangMatcher: MoveMatcherProtocol {
     
-    func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
+    func moves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
             let actor = state.player(state.turn),
-            let cards = actor.hand.filterOrNil({ actor.bandCardNames.contains($0.name) }) else {
+            let cards = actor.hand.filterOrNil({ actor.bangCardNames.contains($0.name) }) else {
                 return nil
         }
         
@@ -36,7 +36,7 @@ class BangMatcher: MoveMatcherProtocol {
         }.flatMap { $0 }
     }
     
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+    func updates(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .bang = move.name,
             let cardId = move.cardId,
             let actor = state.player(move.actorId),
@@ -44,10 +44,12 @@ class BangMatcher: MoveMatcherProtocol {
                 return nil
         }
         
-        return [.playerDiscardHand(move.actorId, cardId),
-                .setChallenge(Challenge(name: .bang,
+        return [.setChallenge(Challenge(name: .bang,
                                         targetIds: [targetId],
-                                        counterNeeded: actor.neededMissesToCancelHisBang))]
+                                        damage: 1,
+                                        counterNeeded: actor.neededMissesToCancelHisBang)),
+                .playerSetBangsPlayed(move.actorId, actor.bangsPlayed + 1),
+                .playerDiscardHand(move.actorId, cardId)]
     }
 }
 

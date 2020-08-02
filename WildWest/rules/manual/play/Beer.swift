@@ -8,7 +8,7 @@
 
 class BeerMatcher: MoveMatcherProtocol {
     
-    func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
+    func moves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
             let actor = state.player(state.turn),
             let cards = actor.hand.filterOrNil({ $0.name == .beer }),
@@ -22,14 +22,15 @@ class BeerMatcher: MoveMatcherProtocol {
         }
     }
     
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+    func updates(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .beer = move.name,
-            let cardId = move.cardId else {
+            let cardId = move.cardId,
+            let actor = state.player(move.actorId) else {
                 return nil
         }
         
-        return [.playerDiscardHand(move.actorId, cardId),
-                .playerGainHealth(move.actorId, 1)]
+        return [.playerSetHealth(move.actorId, actor.health + 1),
+                .playerDiscardHand(move.actorId, cardId)]
     }
 }
 

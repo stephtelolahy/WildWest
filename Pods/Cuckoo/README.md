@@ -1,15 +1,16 @@
 # Cuckoo
 ## Mock your Swift objects!
 
-[![CI Status](http://img.shields.io/travis/Brightify/Cuckoo/master.svg?style=flat)](https://travis-ci.org/Brightify/Cuckoo)
+[![CI Status](https://img.shields.io/travis/Brightify/Cuckoo?style=flat)](https://travis-ci.org/Brightify/Cuckoo)
 [![Version](https://img.shields.io/cocoapods/v/Cuckoo.svg?style=flat)](http://cocoapods.org/pods/Cuckoo)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![SwiftPM compatible](https://img.shields.io/badge/SwiftPM-compatible-brightgreen?style=flat)](https://swift.org/package-manager)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-brightgreen?style=flat)](https://github.com/Carthage/Carthage)
 [![License](https://img.shields.io/cocoapods/l/Cuckoo.svg?style=flat)](http://cocoapods.org/pods/Cuckoo)
 [![Platform](https://img.shields.io/cocoapods/p/Cuckoo.svg?style=flat)](http://cocoapods.org/pods/Cuckoo)
 [![Slack Status](http://swiftkit.brightify.org/badge.svg)](http://swiftkit.brightify.org)
 
 ## Introduction
-Cuckoo was created due to lack of a proper Swift mocking framework. We built the DSL to be very similar to [Mockito](http://mockito.org/), so anyone using it in Java/Android can immediately pick it up and use it.
+Cuckoo was created due to lack of a proper Swift mocking framework. We built the DSL to be very similar to [Mockito](http://mockito.org/), so anyone coming from Java/Android can immediately pick it up and use it.
 
 To have a chat, [join our Slack workspace](http://swiftkit.brightify.org)!
 
@@ -18,7 +19,7 @@ Cuckoo has two parts. One is the [runtime](https://github.com/Brightify/Cuckoo) 
 
 Unfortunately Swift does not have a proper reflection, so we decided to use a compile-time generator to go through files you specify and generate supporting structs/classes that will be used by the runtime in your test target.
 
-The generated files contain enough information to give you the right amount of power. They work based on inheritance and protocol adoption. This means that only overridable things can be mocked. We currently support all features which fulfill this rule except for things listed in TODO. Due to the complexity of Swift it is not easy to check for all edge cases so if you find some unexpected behavior please file an issue.
+The generated files contain enough information to give you the right amount of power. They work based on inheritance and protocol adoption. This means that only overridable things can be mocked. Due to the complexity of Swift it is not easy to check for all edge cases so if you find some unexpected behavior, please file an issue.
 
 ## Changelog
 List of all changes and new features can be found [here](CHANGELOG.md).
@@ -81,6 +82,8 @@ echo "Mocks Input Directory = ${INPUT_DIR}"
 ```
 
 **IMPORTANT**: To make your mocking journey easier, make absolutely sure that the run script is above the `Compile Sources` phase.
+
+**NOTE**: To avoid race condition errors when Xcode parallelizes build phases, add the path of the `OUTPUT_FILE` into the "Output Files" section of the build phase. If you find that `OUTPUT_FILE` still doesn't regenerate with new changes, adding mocked files to the "Input Files" section of the build phase might help.
 
 Input files can be also specified directly in `Run script` in `Input Files` form.
 
@@ -448,6 +451,20 @@ When a method is called or a property accessed/set on a stub, nothing happens. I
 `DefaultValueRegistry` is used by Stubs to get default values for return types. It knows only default Swift types, sets, arrays, dictionaries, optionals, and tuples (up to 6 values). Tuples for more values can be added through extensions. Custom types must be registered before use with `DefaultValueRegistry.register<T>(value: T, forType: T.Type)`. Furthermore, default values set by Cuckoo can also be overridden by this method. Sets, arrays, etc. do not have to be registered if their generic type is already registered.
 
 `DefaultValueRegistry.reset()` returns the registry to its clean slate before the `register` method made any changes.
+
+##### Type inference
+Cuckoo does a simple type inference on all variables which allows for much cleaner source code on your side. There are a total 3 ways the inference tries to extract the type name from a variable:
+
+```
+// From the explicitly declared type:
+let constant1: MyType
+
+// From the initial value:
+let constant2 = MyType(...)
+
+// From the explicitly specified type `as MyType`:
+let constant3 = anything as MyType
+```
 
 ## Cuckoo generator
 ### Installation

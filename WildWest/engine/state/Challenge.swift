@@ -9,8 +9,8 @@
 // Challenge is a prior state waiting for reaction
 struct Challenge: Equatable {
     let name: MoveName
-    let targetIds: [String]
-    let damage: Int
-    let counterNeeded: Int
-    let barrelsPlayed: Int
+    var targetIds: [String]?
+    var damage: Int?
+    var counterNeeded: Int?
+    var barrelsPlayed: Int?
 }

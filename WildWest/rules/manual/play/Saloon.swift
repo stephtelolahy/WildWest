@@ -8,7 +8,7 @@
 
 class SaloonMatcher: MoveMatcherProtocol {
     
-    func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
+    func moves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
             let actor = state.player(state.turn),
             let cards = actor.hand.filterOrNil({ $0.name == .saloon }),
@@ -21,18 +21,18 @@ class SaloonMatcher: MoveMatcherProtocol {
         }
     }
     
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+    func updates(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .saloon = move.name,
             let cardId = move.cardId else {
                 return nil
         }
         
         var updates: [GameUpdate] = []
-        updates.append(.playerDiscardHand(move.actorId, cardId))
         let damagedPlayers = state.players.filter { $0.health < $0.maxHealth }
         damagedPlayers.forEach {
-            updates.append(.playerGainHealth($0.identifier, 1))
+            updates.append(.playerSetHealth($0.identifier, $0.health + 1))
         }
+        updates.append(.playerDiscardHand(move.actorId, cardId))
         return updates
     }    
 }

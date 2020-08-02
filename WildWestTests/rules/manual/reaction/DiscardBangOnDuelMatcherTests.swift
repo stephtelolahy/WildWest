@@ -21,11 +21,11 @@ class DiscardBangOnDuelMatcherTests: XCTestCase {
             .holding(mockCard)
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .duel, targetIds: ["p1", "p2"]))
-            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
+            .challenge(is: Challenge(name: .duel, targetIds: ["p1", "p2"], damage: 1))
+            .players(are: mockPlayer1)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .discardBang, actorId: "p1", cardId: "c1")])
@@ -34,14 +34,14 @@ class DiscardBangOnDuelMatcherTests: XCTestCase {
     func test_SwitchTargetOfDuelChallenge_IfDiscardingBang() {
         // Given
         let mockState = MockGameStateProtocol()
-            .challenge(is: Challenge(name: .duel, targetIds: ["p1", "p2"]))
+            .challenge(is: Challenge(name: .duel, targetIds: ["p1", "p2"], damage: 1))
         let move = GameMove(name: .discardBang, actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .setChallenge(Challenge(name: .duel, targetIds: ["p2", "p1"]))])
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .duel, targetIds: ["p2", "p1"], damage: 1)),
+                                 .playerDiscardHand("p1", "c1")])
     }
 }

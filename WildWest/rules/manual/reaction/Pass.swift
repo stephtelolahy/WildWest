@@ -8,29 +8,51 @@
 
 class PassMatcher: MoveMatcherProtocol {
     
-    func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
+    func moves(matching state: GameStateProtocol) -> [GameMove]? {
         guard let challenge = state.challenge else {
             return nil
         }
         
         switch challenge.name {
-        case .bang, .gatling, .duel, .indians, .dynamiteExploded:
-            return [GameMove(name: .pass, actorId: challenge.actorId(in: state)!)]
+        case .bang, .duel, .gatling, .indians:
+            guard let actorId = challenge.targetIds?.first else {
+                return nil
+            }
+            return [GameMove(name: .pass, actorId: actorId)]
+            
+        case .dynamiteExploded:
+            return [GameMove(name: .pass, actorId: state.turn)]
             
         default:
             return nil
         }
     }
     
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+    func updates(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .pass = move.name,
             let challenge = state.challenge,
-            let damageSource = challenge.damageSource(in: state) else {
+            let actor = state.player(move.actorId),
+            let damage = challenge.damage else {
                 return nil
         }
         
-        return [.playerLooseHealth(move.actorId, challenge.damage, damageSource),
-                .setChallenge(challenge.removing(move.actorId))]
+        let damageSource: DamageSource
+        switch challenge.name {
+        case .bang, .duel, .gatling, .indians:
+            damageSource = .byPlayer(state.turn)
+            
+        case .dynamiteExploded:
+            damageSource = .byDynamite
+            
+        default:
+            return nil
+        }
+        
+        let health = max(actor.health - damage, 0)
+        let damageEvent = DamageEvent(damage: damage, source: damageSource)
+        return [.setChallenge(challenge.removing(move.actorId)),
+                .playerSetDamage(move.actorId, damageEvent),
+                .playerSetHealth(move.actorId, health)]
     }
 }
 

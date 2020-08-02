@@ -25,7 +25,7 @@ class ResolveJailTests: XCTestCase {
             .deckCards(are: MockCardProtocol().suit(is: .spades))
         
         // When
-        let move = sut.autoPlayMove(matching: mockState)
+        let move = sut.autoPlay(matching: mockState)
         
         // assert
         XCTAssertEqual(move, GameMove(name: .stayInJail, actorId: "p1", cardId: "c1"))
@@ -43,7 +43,7 @@ class ResolveJailTests: XCTestCase {
             .challenge(is: Challenge(name: .startTurn))
         
         // When
-        let moves = sut.autoPlayMove(matching: mockState)
+        let moves = sut.autoPlay(matching: mockState)
         
         // assert
         XCTAssertNil(moves)
@@ -59,12 +59,12 @@ class ResolveJailTests: XCTestCase {
         let move = GameMove(name: .stayInJail, actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.flipOverFirstDeckCard,
-                                 .playerDiscardInPlay("p1", "c1"),
-                                 .setTurn("p2")])
+                                 .setTurn("p2"),
+                                 .playerDiscardInPlay("p1", "c1")])
     }
     
     func test_ShouldEscapeFromJail_BeforeStartingTurn() {
@@ -80,7 +80,7 @@ class ResolveJailTests: XCTestCase {
             .deckCards(are: MockCardProtocol().suit(is: .hearts))
         
         // When
-        let move = sut.autoPlayMove(matching: mockState)
+        let move = sut.autoPlay(matching: mockState)
         
         // assert
         XCTAssertEqual(move, GameMove(name: .escapeFromJail, actorId: "p1", cardId: "c1"))
@@ -93,7 +93,7 @@ class ResolveJailTests: XCTestCase {
         let move = GameMove(name: .escapeFromJail, actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.flipOverFirstDeckCard,
@@ -113,7 +113,7 @@ class ResolveJailTests: XCTestCase {
             .deckCards(are: MockCardProtocol().suit(is: .clubs), MockCardProtocol().suit(is: .hearts))
         
         // When
-        let move = sut.autoPlayMove(matching: mockState)
+        let move = sut.autoPlay(matching: mockState)
         
         // assert
         XCTAssertEqual(move, GameMove(name: .escapeFromJail, actorId: "p1", cardId: "c1"))
@@ -129,7 +129,7 @@ class ResolveJailTests: XCTestCase {
         let move = GameMove(name: .escapeFromJail, actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.flipOverFirstDeckCard,

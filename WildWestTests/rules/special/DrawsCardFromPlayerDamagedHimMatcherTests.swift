@@ -17,7 +17,6 @@ class DrawsCardFromPlayerDamagedHimMatcherTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
             .abilities(are: [.drawsCardFromPlayerDamagedHim: true])
-            .health(is: 2)
             .lastDamage(is: DamageEvent(damage: 1, source: .byPlayer("p2")))
         let mockPlayer2 = MockPlayerProtocol()
             .identified(by: "p2")
@@ -38,7 +37,6 @@ class DrawsCardFromPlayerDamagedHimMatcherTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
             .abilities(are: [.drawsCardFromPlayerDamagedHim: true])
-            .health(is: 2)
             .lastDamage(is: DamageEvent(damage: 1, source: .byPlayer("p1")))
         let mockPlayer2 = MockPlayerProtocol()
             .identified(by: "p2")
@@ -59,7 +57,6 @@ class DrawsCardFromPlayerDamagedHimMatcherTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
             .abilities(are: [.drawsCardFromPlayerDamagedHim: true])
-            .health(is: 2)
             .lastDamage(is: DamageEvent(damage: 1, source: .byPlayer("p1")))
             .holding(MockCardProtocol().identified(by: "c1"))
         let mockState = MockGameStateProtocol()
@@ -79,7 +76,7 @@ class DrawsCardFromPlayerDamagedHimMatcherTests: XCTestCase {
         let move = GameMove(name: .drawsCardFromPlayerDamagedHim, actorId: "p1", cardId: "c2", targetId: "p2")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.playerPullFromOtherHand("p1", "p2", "c2")])

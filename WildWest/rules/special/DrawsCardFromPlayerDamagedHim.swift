@@ -26,7 +26,7 @@ class DrawsCardFromPlayerDamagedHimMatcher: MoveMatcherProtocol {
                         targetId: offender.identifier)
     }
     
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+    func updates(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .drawsCardFromPlayerDamagedHim = move.name,
             let targetId = move.targetId,
             let cardId = move.cardId else {

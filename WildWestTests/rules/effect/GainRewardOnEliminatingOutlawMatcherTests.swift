@@ -57,7 +57,7 @@ class GainRewardOnEliminatingOutlawMatcherTests: XCTestCase {
         let move = GameMove(name: .gainRewardOnEliminatingOutlaw, actorId: "p1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.playerPullFromDeck("p1"),

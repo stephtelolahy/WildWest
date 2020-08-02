@@ -7,7 +7,7 @@
 //
 
 class Discard2CardsFor1LifeMatcher: MoveMatcherProtocol {
-    func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
+    func moves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
             let actor = state.player(state.turn),
             actor.health < actor.maxHealth,
@@ -23,13 +23,14 @@ class Discard2CardsFor1LifeMatcher: MoveMatcherProtocol {
         }
     }
     
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+    func updates(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .discard2CardsFor1Life = move.name,
-            let discardIds = move.discardIds else {
+            let discardIds = move.discardIds,
+            let actor = state.player(move.actorId) else {
                 return nil
         }
         
-        var updates: [GameUpdate] = [.playerGainHealth(move.actorId, 1)]
+        var updates: [GameUpdate] = [.playerSetHealth(move.actorId, actor.health + 1)]
         discardIds.forEach { updates.append(.playerDiscardHand(move.actorId, $0)) }
         return updates
     }

@@ -8,7 +8,7 @@
 
 class EndTurnMatcher: MoveMatcherProtocol {
     
-    func validMoves(matching state: GameStateProtocol) -> [GameMove]? {
+    func moves(matching state: GameStateProtocol) -> [GameMove]? {
         guard state.challenge == nil,
             let actor = state.player(state.turn) else {
                 return nil
@@ -26,7 +26,7 @@ class EndTurnMatcher: MoveMatcherProtocol {
         }
     }
     
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+    func updates(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard case .endTurn = move.name,
             let actor = state.player(move.actorId) else {
                 return nil
@@ -35,12 +35,11 @@ class EndTurnMatcher: MoveMatcherProtocol {
         var updates: [GameUpdate] = []
         
         updates.append(.setTurn(state.nextPlayer(after: move.actorId)))
+        updates.append(.setChallenge(Challenge(name: .startTurn)))
         
         if let discardIds = move.discardIds {
             discardIds.forEach { updates.append(.playerDiscardHand(actor.identifier, $0)) }
         }
-        
-        updates.append(.setChallenge(Challenge(name: .startTurn)))
         
         return updates
     }

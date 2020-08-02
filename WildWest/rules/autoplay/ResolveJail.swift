@@ -8,7 +8,7 @@
 
 class ResolveJailMatcher: MoveMatcherProtocol {
     
-    func autoPlayMove(matching state: GameStateProtocol) -> GameMove? {
+    func autoPlay(matching state: GameStateProtocol) -> GameMove? {
         guard let challenge = state.challenge,
             case .startTurn = challenge.name,
             let actor = state.player(state.turn),
@@ -23,18 +23,24 @@ class ResolveJailMatcher: MoveMatcherProtocol {
         return GameMove(name: moveName, actorId: actor.identifier, cardId: card.identifier)
     }
     
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+    func updates(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard move.name == .escapeFromJail || move.name == .stayInJail,
             let cardId = move.cardId,
             let actor = state.player(move.actorId) else {
                 return nil
         }
         
-        var updates: [GameUpdate] = Array(1...actor.flippedCardsCount).map { _ in .flipOverFirstDeckCard }
-        updates.append(.playerDiscardInPlay(move.actorId, cardId))
+        var updates: [GameUpdate] = []
+        
+        Array(1...actor.flippedCardsCount).forEach { _ in
+            updates.append(.flipOverFirstDeckCard)
+        }
+        
         if move.name == .stayInJail {
             updates.append(.setTurn(state.nextPlayer(after: move.actorId)))
         }
+        
+        updates.append(.playerDiscardInPlay(move.actorId, cardId))
         
         return updates
     }

@@ -8,7 +8,7 @@
 
 class ResolveDynamiteMatcher: MoveMatcherProtocol {
     
-    func autoPlayMove(matching state: GameStateProtocol) -> GameMove? {
+    func autoPlay(matching state: GameStateProtocol) -> GameMove? {
         guard let challenge = state.challenge,
             case .startTurn = challenge.name,
             let actor = state.player(state.turn),
@@ -23,7 +23,7 @@ class ResolveDynamiteMatcher: MoveMatcherProtocol {
         return GameMove(name: moveName, actorId: actor.identifier, cardId: card.identifier)
     }
     
-    func execute(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
+    func updates(onExecuting move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         switch move.name {
         case .dynamiteExploded:
             return executeDynamiteExploded(move, in: state)
@@ -47,7 +47,10 @@ class ResolveDynamiteMatcher: MoveMatcherProtocol {
         let dynamiteDamage = 3
         let immediateDamage = actor.health <= dynamiteDamage ? actor.health - 1 : dynamiteDamage
         if immediateDamage > 0 {
-            updates.append(.playerLooseHealth(actor.identifier, immediateDamage, .byDynamite))
+            let health = max(actor.health - immediateDamage, 0)
+            let damageEvent = DamageEvent(damage: immediateDamage, source: .byDynamite)
+            updates.append(.playerSetDamage(actor.identifier, damageEvent))
+            updates.append(.playerSetHealth(actor.identifier, health))
         }
         
         let remainingDamage = dynamiteDamage - immediateDamage
@@ -63,7 +66,7 @@ class ResolveDynamiteMatcher: MoveMatcherProtocol {
     private func executePassDynamite(_ move: GameMove, in state: GameStateProtocol) -> [GameUpdate]? {
         guard let actor = state.player(move.actorId),
             let cardId = move.cardId else {
-            return nil
+                return nil
         }
         
         var updates: [GameUpdate] = Array(1...actor.flippedCardsCount).map { _ in .flipOverFirstDeckCard }

@@ -17,7 +17,6 @@ class DrawsCardOnLoseHealthMatcherTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .identified(by: "p1")
             .abilities(are: [.drawsCardOnLoseHealth: true])
-            .health(is: 2)
         let mockState = MockGameStateProtocol()
             .players(are: mockPlayer1)
         let move = GameMove(name: .pass, actorId: "p1")
@@ -39,7 +38,7 @@ class DrawsCardOnLoseHealthMatcherTests: XCTestCase {
         let move = GameMove(name: .drawsCardOnLoseHealth, actorId: "p1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.playerPullFromDeck("p1")])

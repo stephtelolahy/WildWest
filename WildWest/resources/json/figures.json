@@ -14,7 +14,7 @@
         "imageName": "01_blackjack",
         "description": "during the phase 1 of his turn, he must show the second card he draws: if it's Heart or Diamonds (just like a \"draw!\", he draws one additional card (without revealing it).",
         "abilities": {
-            "drawsAnotherCardIfSecondDrawIsRedSuit": true
+            "onStartTurnDrawsAnotherCardIfRedSuit": true
         }
     },
     {
@@ -39,7 +39,10 @@
         "name": "jesseJones",
         "bullets": 4,
         "imageName": "01_jessejones",
-        "description": "during phase 1 of his turn, he may choose to draw the first card from the deck, or randomly from the hand of any other player. Then he draws the second card from the deck."
+        "description": "during phase 1 of his turn, he may choose to draw the first card from the deck, or randomly from the hand of any other player. Then he draws the second card from the deck.",
+        "abilities": {
+            "onStartTurnCanDrawFirstCardFromPlayer": true
+        }
     },
     {
         "name": "joudonais",
@@ -54,7 +57,10 @@
         "name": "kitCarlson",
         "bullets": 4,
         "imageName": "01_kitcarlson",
-        "description": "during the phase 1 of his turn, he looks at the top three cards of the deck: he chooses 2 to draw, and puts the other one back on the top of the deck, face down."
+        "description": "during the phase 1 of his turn, he looks at the top three cards of the deck: he chooses 2 to draw, and puts the other one back on the top of the deck, face down.",
+        "abilities": {
+            "onStartTurnDraws3CardsAndKeep2": true
+        }
     },
     {
         "name": "luckyDuke",
@@ -78,7 +84,10 @@
         "name": "pedroRamirez",
         "bullets": 4,
         "imageName": "01_pedroramirez",
-        "description": "during the first phase of his turn, he may choose to draw the first card from the top of the discard pile or from the deck. Then, he draws the second card from the deck."
+        "description": "during the first phase of his turn, he may choose to draw the first card from the top of the discard pile or from the deck. Then, he draws the second card from the deck.",
+        "abilities": {
+            "onStartTurnCanDrawFirstCardFromDiscard": true
+        }
     },
     {
         "name": "roseDoolan",

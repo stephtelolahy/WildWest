@@ -9,22 +9,22 @@
 import XCTest
 
 class StartTurnTests: XCTestCase {
-
+    
     private let sut = StartTurnMatcher()
-
+    
     func test_ShouldStartTurn_IfChallengeIsStartTurn() {
         // Given
         let player1 = MockPlayerProtocol()
             .identified(by: "p1")
             .noCardsInPlay()
-            .health(is: 1)
+            .withDefault()
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p1")
             .challenge(is: Challenge(name: .startTurn))
             .players(are: player1)
         
         // When
-        let move = sut.autoPlayMove(matching: mockState)
+        let move = sut.autoPlay(matching: mockState)
         
         // Assert
         XCTAssertEqual(move, GameMove(name: .startTurn, actorId: "p1"))
@@ -34,7 +34,6 @@ class StartTurnTests: XCTestCase {
         // Given
         let player1 = MockPlayerProtocol()
             .identified(by: "p1")
-            .health(is: 1)
             .playing(MockCardProtocol().named(.jail))
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p1")
@@ -42,7 +41,7 @@ class StartTurnTests: XCTestCase {
             .players(are: player1)
         
         // When
-        let moves = sut.autoPlayMove(matching: mockState)
+        let moves = sut.autoPlay(matching: mockState)
         
         // Assert
         XCTAssertNil(moves)
@@ -52,7 +51,6 @@ class StartTurnTests: XCTestCase {
         // Given
         let player1 = MockPlayerProtocol()
             .identified(by: "p1")
-            .health(is: 1)
             .playing(MockCardProtocol().named(.dynamite))
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p1")
@@ -60,7 +58,7 @@ class StartTurnTests: XCTestCase {
             .players(are: player1)
         
         // When
-        let moves = sut.autoPlayMove(matching: mockState)
+        let moves = sut.autoPlay(matching: mockState)
         
         // Assert
         XCTAssertNil(moves)
@@ -73,11 +71,12 @@ class StartTurnTests: XCTestCase {
         let move = GameMove(name: .startTurn, actorId: "p1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerPullFromDeck("p1"),
+        XCTAssertEqual(updates, [.setChallenge(nil),
+                                 .playerSetBangsPlayed("p1", 0),
                                  .playerPullFromDeck("p1"),
-                                 .setChallenge(nil)])
+                                 .playerPullFromDeck("p1")])
     }
 }

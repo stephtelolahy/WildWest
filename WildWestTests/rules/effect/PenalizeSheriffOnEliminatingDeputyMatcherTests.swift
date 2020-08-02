@@ -49,7 +49,7 @@ class PenalizeSheriffOnEliminatingDeputyMatcherTests: XCTestCase {
         let move = GameMove(name: .penalizeSheriffOnEliminatingDeputy, actorId: "p1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
         XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),

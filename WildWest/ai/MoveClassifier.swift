@@ -6,6 +6,17 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
+protocol MoveClassifierProtocol {
+    func classify(_ move: GameMove) -> MoveClassification
+}
+
+enum MoveClassification {
+    case strongAttack(actorId: String, targetId: String)
+    case weakAttack(actorId: String, targetId: String)
+    case help(actorId: String, targetId: String)
+    case none
+}
+
 class MoveClassifier: MoveClassifierProtocol {
     
     func classify(_ move: GameMove) -> MoveClassification {
@@ -23,7 +34,7 @@ class MoveClassifier: MoveClassifierProtocol {
         if move.name == .panic || move.name == .catBalou,
             let targetCard = move.targetCard {
             if case let .inPlay(cardId) = targetCard.source,
-                cardId.contains("jail") {
+                cardId.contains(CardName.jail.rawValue) {
                 return .help(actorId: move.actorId, targetId: targetCard.ownerId)
             } else {
                 return .weakAttack(actorId: move.actorId, targetId: targetCard.ownerId)

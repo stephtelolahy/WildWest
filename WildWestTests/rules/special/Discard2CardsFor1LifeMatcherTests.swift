@@ -23,11 +23,11 @@ class Discard2CardsFor1LifeMatcherTests: XCTestCase {
             .maxHealth(is: 4)
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p1")
-            .players(are: mockPlayer1)
+            .allPlayers(are: mockPlayer1)
             .challenge(is: nil)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .discard2CardsFor1Life, actorId: "p1", discardIds: ["c1", "c2"])])
@@ -43,11 +43,11 @@ class Discard2CardsFor1LifeMatcherTests: XCTestCase {
             .maxHealth(is: 4)
         let mockState = MockGameStateProtocol()
             .currentTurn(is: "p1")
-            .players(are: mockPlayer1)
+            .allPlayers(are: mockPlayer1)
             .challenge(is: nil)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertNil(moves)
@@ -55,13 +55,18 @@ class Discard2CardsFor1LifeMatcherTests: XCTestCase {
     
     func test_ExecutingDiscard2CardsFor1Life() {
         // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .identified(by: "p1")
+            .health(is: 1)
+        let mockState = MockGameStateProtocol()
+            .allPlayers(are: mockPlayer1)
         let move = GameMove(name: .discard2CardsFor1Life, actorId: "p1", discardIds: ["c1", "c2"])
         
         // When
-        let updates = sut.execute(move, in: MockGameStateProtocol())
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerGainHealth("p1", 1),
+        XCTAssertEqual(updates, [.playerSetHealth("p1", 2),
                                  .playerDiscardHand("p1", "c1"),
                                  .playerDiscardHand("p1", "c2")])
     }

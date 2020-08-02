@@ -31,8 +31,4 @@ class GameState: GameStateProtocol {
         self.generalStore = generalStore
         self.outcome = outcome
     }
-    
-    var players: [PlayerProtocol] {
-        allPlayers.filter { $0.health > 0 }
-    }
 }

@@ -26,7 +26,7 @@ class GatlingMatcherTests: XCTestCase {
             .players(are: mockPlayer)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .gatling, actorId: "p1", cardId: "c1")])
@@ -44,10 +44,10 @@ class GatlingMatcherTests: XCTestCase {
         let move = GameMove(name: .gatling, actorId: "p2", cardId: "c2")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerDiscardHand("p2", "c2"),
-                                 .setChallenge(Challenge(name: .gatling, targetIds: ["p3", "p4", "p1"]))])
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .gatling, targetIds: ["p3", "p4", "p1"], damage: 1)),
+                                 .playerDiscardHand("p2", "c2")])
     }
 }

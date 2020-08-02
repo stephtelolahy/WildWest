@@ -22,10 +22,10 @@ class DiscardBangOnIndiansMatcherTests: XCTestCase {
             .identified(by: "p1")
         let mockState = MockGameStateProtocol()
             .challenge(is: Challenge(name: .indians, targetIds: ["p1", "p2"]))
-            .players(are: mockPlayer1, MockPlayerProtocol(), MockPlayerProtocol())
+            .players(are: mockPlayer1)
         
         // When
-        let moves = sut.validMoves(matching: mockState)
+        let moves = sut.moves(matching: mockState)
         
         // Assert
         XCTAssertEqual(moves, [GameMove(name: .discardBang, actorId: "p1", cardId: "c1")])
@@ -38,11 +38,10 @@ class DiscardBangOnIndiansMatcherTests: XCTestCase {
         let move = GameMove(name: .discardBang, actorId: "p1", cardId: "c1")
         
         // When
-        let updates = sut.execute(move, in: mockState)
+        let updates = sut.updates(onExecuting: move, in: mockState)
         
         // Assert
-        XCTAssertEqual(updates, [.playerDiscardHand("p1", "c1"),
-                                 .setChallenge(Challenge(name: .indians, targetIds: ["p2", "p3"]))
-        ])
+        XCTAssertEqual(updates, [.setChallenge(Challenge(name: .indians, targetIds: ["p2", "p3"])),
+                                 .playerDiscardHand("p1", "c1")])
     }
 }
