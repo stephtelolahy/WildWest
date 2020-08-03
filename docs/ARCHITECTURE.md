@@ -1,0 +1,2 @@
+# Architecture
+![](simplified-architecture.png)
