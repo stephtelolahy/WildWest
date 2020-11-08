@@ -16,7 +16,6 @@ class GameViewController: UIViewController {
     
     // MARK: IBOutlets
     
-    @IBOutlet private weak var startButton: UIButton!
     @IBOutlet private weak var endTurnButton: UIButton!
     @IBOutlet private weak var otherMovesButton: UIButton!
     @IBOutlet private weak var playersCollectionView: UICollectionView!
@@ -43,10 +42,8 @@ class GameViewController: UIViewController {
     private lazy var preferences: UserPreferencesProtocol = Resolver.resolve()
     
     private lazy var playerAdapter: PlayersAdapterProtocol = PlayersAdapter()
-    private lazy var moveDescriptor: MoveDescriptorProtocol = MoveDescriptor()
+    private lazy var messageAdapter: MessageAdapterProtocol = MessageAdapter()
     private lazy var instructionBuilder: InstructionBuilderProtocol = InstructionBuilder()
-    private lazy var playMoveSelector: PlayMoveSelectorProtocol = PlayMoveSelector(viewController: self)
-    private var updateAnimator: UpdateAnimatorProtocol?
     
     private lazy var handAdapter: HandAdapterProtocol? = {
         guard let playerId = environment.controlledId else {
@@ -55,13 +52,11 @@ class GameViewController: UIViewController {
         return HandAdapter(playerId: playerId) 
     }()
     
-    private lazy var moveSoundPlayer: MoveSoundPlayerProtocol? = {
-        preferences.enableSound ? MoveSoundPlayer() : nil
+    private lazy var moveSoundPlayer: SFXPlayerProtocol? = {
+        preferences.enableSound ? SFXPlayer() : nil
     }()
     
-    private lazy var reactionMoveSelector: ReactionMoveSelectorProtocol? = {
-        ReactionMoveSelector(viewController: self)
-    }()
+    private var updateAnimator: UpdateAnimatorProtocol?
     
     private let disposeBag = DisposeBag()
     
@@ -83,17 +78,15 @@ class GameViewController: UIViewController {
         .disposed(by: disposeBag)
         
         environment.database.event.subscribe(onNext: { [weak self] update in
-            self?.processExecutedUpdate(update)
+            self?.processEvent(update)
         })
         .disposed(by: disposeBag)
-        
-        startButton.isEnabled = true
-        
-        showRoles()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        showRoles()
         
         // Wait until collectionView loaded to initialize updateAnimator
         playersCollectionView.performBatchUpdates(nil) { [self] _ in
@@ -106,9 +99,8 @@ class GameViewController: UIViewController {
     
     // MARK: IBAction
     
-    @IBAction private func startButtonTapped(_ sender: Any) {
+    @IBAction private func refreshButtonTapped(_ sender: Any) {
         environment.engine.refresh()
-        startButton.isEnabled = false
     }
     
     @IBAction private func menuButtonTapped(_ sender: Any) {
@@ -116,15 +108,11 @@ class GameViewController: UIViewController {
     }
     
     @IBAction private func endTurnTapped(_ sender: Any) {
-        playMoveSelector.selectMove(within: endTurnMoves) { [weak self] move in
-            self?.environment.engine.execute(move)
-        }
+        playMove(among: endTurnMoves)
     }
     
     @IBAction private func otherMovesTapped(_ sender: Any) {
-        playMoveSelector.selectMove(within: otherMoves) { [weak self] move in
-            self?.environment.engine.execute(move)
-        }
+        playMove(among: otherMoves)
     }
 }
 
@@ -142,7 +130,7 @@ private extension GameViewController {
         titleLabel.text = instructionBuilder.buildInstruction(state: state, for: environment.controlledId)
     }
     
-    func processExecutedUpdate(_ event: GEvent) {
+    func processEvent(_ event: GEvent) {
         switch event {
         case let .activate(moves):
             processValidMoves(moves)
@@ -158,14 +146,13 @@ private extension GameViewController {
             break
         }
         
-        updateAnimator?.animate(event, in: state)
+        updateAnimator?.animate(on: event, in: state)
+        moveSoundPlayer?.playSound(on: event)
     }
     
     func processExecutedMove(_ move: GMove) {
-        messages.append(moveDescriptor.description(for: move))
+        messages.append(messageAdapter.description(for: move))
         messageTableView.reloadDataScrollingAtBottom()
-        
-        moveSoundPlayer?.playSound(for: move)
     }
     
     func processValidMoves(_ moves: [GMove]) {
@@ -176,11 +163,15 @@ private extension GameViewController {
             handCollectionView.reloadData()
         }
         
-        if !state.hits.isEmpty, 
+        if let hit = state.hits.first,
            !moves.isEmpty {
-            reactionMoveSelector?.selectMove(within: moves, state: state) { [weak self] move in
-                self?.environment.engine.execute(move)
-            }
+            let alert = UIAlertController(title: hit.abilities.joined(separator: ","), 
+                                          choices: moves.map { String(describing: $0) },
+                                          cancelable: false,
+                                          completion: { [weak self] index in 
+                                            self?.environment.engine.execute(moves[index])
+                                          })
+            present(alert, animated: true)
         }
         
         endTurnMoves = moves.filter { $0.ability == "endTurn" }
@@ -191,9 +182,67 @@ private extension GameViewController {
     }
     
     func showGameOver(_ winner: Role) {
-        presentAlert(title: "Game Over", message: "\(winner.rawValue) wins") { [weak self] in
-            self?.onQuit?()
+        let alert = UIAlertController(title: "Game Over",
+                                      message: "\(winner.rawValue) wins",
+                                      closeAction: "Close", 
+                                      completion: { [weak self] in 
+                                        self?.onQuit?()
+                                      })
+        present(alert, animated: true)
+    }
+    
+    func buildCardPositions() -> [CardPlace: CGPoint] {
+        var result: [CardPlace: CGPoint] = [:]
+        
+        guard let discardCenter = discardImageView.superview?.convert(discardImageView.center, to: view),
+            let deckCenter = deckImageView.superview?.convert(deckImageView.center, to: view)  else {
+                fatalError("Illegal state")
         }
+        
+        result[.deck] = deckCenter
+        result[.discard] = discardCenter
+        
+        let playerIds = state.initialOrder
+        for (index, playerId) in playerIds.enumerated() {
+            guard let cell = playersCollectionView.cellForItem(at: IndexPath(row: index, section: 0)),
+                let cellCenter = cell.superview?.convert(cell.center, to: view) else {
+                    fatalError("Illegal state")
+            }
+            
+            let handPosition = cellCenter
+            let inPlayPosition = cellCenter.applying(CGAffineTransform(translationX: cell.bounds.size.height / 2, y: 0))
+            
+            result[.hand(playerId)] = handPosition
+            result[.inPlay(playerId)] = inPlayPosition
+        }
+        
+        return result
+    }
+    
+    func buildCardSize() -> CGSize {
+        discardImageView.bounds.size
+    }
+    
+    func showRoles() {
+        let roles = GSetup().roles(for: state.players.count)
+        let rolesWithCount: [String] = Role.allCases.compactMap { role in
+            guard let count = roles.filterOrNil({ $0 == role })?.count else {
+                return nil
+            }
+            return "\(count) \(role.rawValue)"
+        }
+        let message = rolesWithCount.joined(separator: "\n")
+        let alert = UIAlertController(title: "Roles", message: message, closeAction: "Close")
+        present(alert, animated: true)
+    }
+    
+    func playMove(among moves: [GMove]) {
+        let alert = UIAlertController(title: "Select move",
+                                      choices: moves.map { String(describing: $0) },
+                                      completion: { [weak self] index in
+                                        self?.environment.engine.execute(moves[index])
+                                      })
+        present(alert, animated: true)
     }
 }
 
@@ -265,16 +314,15 @@ extension GameViewController: UICollectionViewDelegate {
     
     private func playersCollectionViewDidSelectItem(at indexPath: IndexPath) {
         let player = playerItems[indexPath.row].player
-        let playerDescriptor = PlayerDescriptor(player: player)
-        present(playerDescriptor, animated: true)
+        let alert = UIAlertController(title: player.name.uppercased(),
+                                      message: player.desc,
+                                      closeAction: "Close")
+        present(alert, animated: true)
         analyticsManager.tageEventPlayerDescriptor(player)
     }
     
     private func handCollectionViewDidSelectItem(at indexPath: IndexPath) {
-        let moves = handItems[indexPath.row].moves
-        playMoveSelector.selectMove(within: moves) { [weak self] move in
-            self?.environment.engine.execute(move)
-        }
+        playMove(among: handItems[indexPath.row].moves)
     }
 }
 
@@ -285,49 +333,13 @@ extension GameViewController: GameCollectionViewLayoutDelegate {
     }
 }
 
-private extension GameViewController {
+extension StateProtocol {
     
-    func buildCardPositions() -> [CardPlace: CGPoint] {
-        var result: [CardPlace: CGPoint] = [:]
-        
-        guard let discardCenter = discardImageView.superview?.convert(discardImageView.center, to: view),
-            let deckCenter = deckImageView.superview?.convert(deckImageView.center, to: view)  else {
-                fatalError("Illegal state")
+    var topDiscardImage: UIImage? {
+        guard let topDiscard = discard.first else {
+            return UIImage(color: .gold)
         }
         
-        result[.deck] = deckCenter
-        result[.discard] = discardCenter
-        
-        let playerIds = state.initialOrder
-        for (index, playerId) in playerIds.enumerated() {
-            guard let cell = playersCollectionView.cellForItem(at: IndexPath(row: index, section: 0)),
-                let cellCenter = cell.superview?.convert(cell.center, to: view) else {
-                    fatalError("Illegal state")
-            }
-            
-            let handPosition = cellCenter
-            let inPlayPosition = cellCenter.applying(CGAffineTransform(translationX: cell.bounds.size.height / 2, y: 0))
-            
-            result[.hand(playerId)] = handPosition
-            result[.inPlay(playerId)] = inPlayPosition
-        }
-        
-        return result
-    }
-    
-    func buildCardSize() -> CGSize {
-        discardImageView.bounds.size
-    }
-    
-    func showRoles() {
-        let roles = GSetup().roles(for: state.players.count)
-        let rolesWithCount: [String] = Role.allCases.compactMap { role in
-            guard let count = roles.filterOrNil({ $0 == role })?.count else {
-                return nil
-            }
-            return "\(count) \(role.rawValue)"
-        }
-        let message = rolesWithCount.joined(separator: "\n")
-        presentAlert(title: "Roles", message: message)
+        return UIImage(named: topDiscard.name)
     }
 }

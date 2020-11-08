@@ -19,7 +19,7 @@ enum CardPlace: Hashable {
 }
 
 protocol UpdateAnimatorProtocol {
-    func animate(_ update: GEvent, in state: StateProtocol)
+    func animate(on event: GEvent, in state: StateProtocol)
 }
 
 class UpdateAnimator: UpdateAnimatorProtocol {
@@ -39,7 +39,7 @@ class UpdateAnimator: UpdateAnimatorProtocol {
         self.updateDelay = updateDelay
     }
     
-    func animate(_ update: GEvent, in state: StateProtocol) {
+    func animate(on event: GEvent, in state: StateProtocol) {
         /*
         switch update {
         case let .playerPullFromDeck(playerId):

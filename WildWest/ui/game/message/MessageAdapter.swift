@@ -1,5 +1,5 @@
 //
-//  MoveDescriptor.swift
+//  MessageAdapter.swift
 //  WildWest
 //
 //  Created by Hugues Stéphano TELOLAHY on 3/17/20.
@@ -9,11 +9,11 @@
 import UIKit
 import CardGameEngine
 
-protocol MoveDescriptorProtocol {
+protocol MessageAdapterProtocol {
     func description(for move: GMove) -> String
 }
 
-class MoveDescriptor: MoveDescriptorProtocol {
+class MessageAdapter: MessageAdapterProtocol {
     
     func description(for move: GMove) -> String {
         String(describing: move)

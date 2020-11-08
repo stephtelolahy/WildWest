@@ -351,7 +351,7 @@ name</string>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bang_6_diamonds" translatesAutoresizingMaskIntoConstraints="NO" id="F8P-W3-OtS" userLabel="discardImageView">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bang" translatesAutoresizingMaskIntoConstraints="NO" id="F8P-W3-OtS" userLabel="discardImageView">
                                         <rect key="frame" x="70.666666666666686" y="0.0" width="66.666666666666686" height="103.33333333333333"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -510,7 +510,7 @@ name</string>
                                     <action selector="otherMovesTapped:" destination="Yy6-0k-mhK" eventType="touchUpInside" id="4Q7-LJ-TeV"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rvo-zi-xqB" userLabel="closeButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rvo-zi-xqB" userLabel="closeButton">
                                 <rect key="frame" x="704" y="64" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="YS1-wn-06Q"/>
@@ -518,7 +518,7 @@ name</string>
                                 <color key="tintColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="ic_start"/>
                                 <connections>
-                                    <action selector="startButtonTapped:" destination="Yy6-0k-mhK" eventType="touchUpInside" id="Cel-7h-UeM"/>
+                                    <action selector="refreshButtonTapped:" destination="Yy6-0k-mhK" eventType="touchUpInside" id="Cel-7h-UeM"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -566,7 +566,6 @@ name</string>
                         <outlet property="messageTableView" destination="iCj-xh-rDL" id="Bv5-eY-6ye"/>
                         <outlet property="otherMovesButton" destination="VPY-zg-TVx" id="hGE-LG-kBY"/>
                         <outlet property="playersCollectionView" destination="Cuo-aq-X8E" id="Ffa-eb-FVY"/>
-                        <outlet property="startButton" destination="rvo-zi-xqB" id="VHI-8P-yx4"/>
                         <outlet property="titleLabel" destination="H6O-tM-KGf" id="I0Y-yZ-IzN"/>
                     </connections>
                 </viewController>
@@ -709,7 +708,7 @@ name</string>
         <image name="01_back" width="160" height="247"/>
         <image name="01_bartcassidy" width="81" height="90"/>
         <image name="01_sceriffo" width="85" height="85"/>
-        <image name="bang_6_diamonds" width="250" height="389"/>
+        <image name="bang" width="250" height="389"/>
         <image name="bartCassidy" width="81" height="90"/>
         <image name="bg_splash" width="104" height="58.5"/>
         <image name="duel" width="250" height="389"/>

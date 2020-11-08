@@ -22,19 +22,13 @@ class UserPreferences: UserPreferencesProtocol {
     @UserDefaultsStored("players_count", defaultValue: 5)
     var playersCount: Int
     
-    var preferredRole: Role? {
-        get {
-            Role(rawValue: preferredRoleString)
-        }
-        set {
-            preferredRoleString = newValue?.rawValue ?? ""
-        }
-    }
+    @OptionalEnumUserDefaultsStored("preferred_role", defaultValue: .sheriff)
+    var preferredRole: Role?
     
     @OptionalUserDefaultsStored("preferred_figure", defaultValue: "suzyLafayette")
     var preferredFigure: String?
     
-    @UserDefaultsStored("update_delay", defaultValue: 0.8)
+    @UserDefaultsStored("update_delay", defaultValue: 0.1)
     var updateDelay: Double
     
     @UserDefaultsStored("assisted_mode", defaultValue: false)
@@ -42,9 +36,4 @@ class UserPreferences: UserPreferencesProtocol {
     
     @UserDefaultsStored("enable_sound", defaultValue: true)
     var enableSound: Bool
-    
-    // MARK: - Private
-    
-    @UserDefaultsStored("preferred_role", defaultValue: Role.sheriff.rawValue)
-    private var preferredRoleString: String
 }

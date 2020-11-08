@@ -57,3 +57,33 @@ struct OptionalUserDefaultsStored<T> {
         }
     }
 }
+
+@propertyWrapper
+struct OptionalEnumUserDefaultsStored<T: RawRepresentable> {
+    private let key: String
+    private let defaultValue: T?
+    private let storage: UserDefaults
+    
+    init(_ key: String, defaultValue: T?, storage: UserDefaults = .standard) {
+        self.key = key
+        self.defaultValue = defaultValue
+        self.storage = storage
+    }
+    
+    var wrappedValue: T? {
+        get {
+            guard let rawValue = storage.object(forKey: key) as? T.RawValue else {
+                return nil
+            }
+            return T(rawValue: rawValue)
+        }
+        set {
+            if let rawValue = newValue?.rawValue {
+                storage.set(rawValue, forKey: key)
+            } else {
+                storage.removeObject(forKey: key)
+            }
+            storage.synchronize()
+        }
+    }
+}

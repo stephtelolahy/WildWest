@@ -1,5 +1,5 @@
 //
-//  MoveSoundPlayer.swift
+//  SFXPlayer.swift
 //  WildWest
 //
 //  Created by Hugues Stephano Telolahy on 23/03/2020.
@@ -9,15 +9,15 @@
 import AVFoundation
 import CardGameEngine
 
-protocol MoveSoundPlayerProtocol {
-    func playSound(for move: GMove)
+protocol SFXPlayerProtocol {
+    func playSound(on event: GEvent)
 }
 
-class MoveSoundPlayer: MoveSoundPlayerProtocol {
+class SFXPlayer: SFXPlayerProtocol {
     
     private var sfxPlayers: [AVAudioPlayer] = []
     
-    func playSound(for move: GMove) {
+    func playSound(on event: GEvent) {
         /*
         sfxPlayers = sfxPlayers.filter { $0.isPlaying }
         
