@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import CardGameEngine
 
 protocol PlayMoveSelectorProtocol {
-    func selectMove(within moves: [GameMove], completion: @escaping (GameMove) -> Void)
+    func selectMove(within moves: [GMove], completion: @escaping (GMove) -> Void)
 }
 
 class PlayMoveSelector: PlayMoveSelectorProtocol {
@@ -20,43 +21,32 @@ class PlayMoveSelector: PlayMoveSelectorProtocol {
         self.viewController = viewController
     }
     
-    func selectMove(within moves: [GameMove], completion: @escaping (GameMove) -> Void) {
+    func selectMove(within moves: [GMove], completion: @escaping (GMove) -> Void) {
         guard !moves.isEmpty else {
             return
         }
         
-        if moves.count == 1,
-            let uniqueMove = moves.first,
-            uniqueMove.targetId == nil,
-            uniqueMove.targetCard == nil,
-            uniqueMove.discardIds == nil {
-            completion(uniqueMove)
+        if moves.count == 1, 
+           moves[0].args.isEmpty {
+            completion(moves[0])
             return
         }
         
-        if moves.allSatisfy({ $0.name == moves[0].name && $0.cardId == moves[0].cardId }) {
-            let choices: [String] = moves.map {
-                [$0.targetId,
-                 $0.targetCard?.description,
-                 $0.discardIds?.joined(separator: ", ")]
-                    .compactMap { $0 }
-                    .joined(separator: " ")
-            }
-            viewController.select(title: moves[0].name.rawValue, choices: choices) { index in
-                completion(moves[index])
-            }
-            return
-        }
+//        if moves.allSatisfy({ $0.name == moves[0].name && $0.cardId == moves[0].cardId }) {
+//            let choices: [String] = moves.map {
+//                [$0.targetId,
+//                 $0.targetCard?.description,
+//                 $0.discardIds?.joined(separator: ", ")]
+//                    .compactMap { $0 }
+//                    .joined(separator: " ")
+//            }
+//            viewController.select(title: moves[0].name.rawValue, choices: choices) { index in
+//                completion(moves[index])
+//            }
+//            return
+//        }
         
-        let choices: [String] = moves.map {
-            [$0.name.rawValue,
-             $0.cardId,
-             $0.targetId,
-             $0.targetCard?.description,
-             $0.discardIds?.joined(separator: ", ")]
-                .compactMap { $0 }
-                .joined(separator: " ")
-        }
+        let choices = moves.map { String(describing: $0) }
         viewController.select(title: "Select move", choices: choices) { index in
             completion(moves[index])
         }

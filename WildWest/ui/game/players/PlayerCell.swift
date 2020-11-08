@@ -31,16 +31,16 @@ class PlayerCell: UICollectionViewCell {
         updateBackground()
         
         let player = item.player
-        nameLabel.text = "\(player.figureName.rawValue.uppercased())"// \(item.score?.description ?? "")"
+        nameLabel.text = "\(player.name.uppercased()) \(item.score?.description ?? "")"
         let isEliminated = player.health == 0
         figureImageView.alpha = !isEliminated ? 1.0 : 0.4
-        equipmentLabel.text = player.inPlay.map { "[\($0.name.rawValue)]" }.joined(separator: "\n")
-        roleImageView.image = item.player.role?.image()
+        equipmentLabel.text = player.inPlay.map { "[\($0.name)]" }.joined(separator: "\n")
+        roleImageView.image = UIImage(named: player.role?.rawValue ?? "")
         healthLabel.text = ""
             + Array(player.health..<player.maxHealth).map { _ in "░" }
             + Array(0..<player.health).map { _ in "■" }.joined()
         handLabel.text = "[] \(player.hand.count)"
-        figureImageView.image = UIImage(named: player.imageName)
+        figureImageView.image = UIImage(named: player.name)
         
         if let user = item.user {
             avatarImageView.kf.setImage(with: URL(string: user.photoUrl))

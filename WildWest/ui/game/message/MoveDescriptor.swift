@@ -7,21 +7,23 @@
 //
 
 import UIKit
+import CardGameEngine
 
 protocol MoveDescriptorProtocol {
-    func description(for move: GameMove) -> String
+    func description(for move: GMove) -> String
 }
 
 class MoveDescriptor: MoveDescriptorProtocol {
     
-    func description(for move: GameMove) -> String {
-        guard let emoji = emojis[move.name] else {
-            fatalError("Illegal state")
-        }
-        
-        return "\(emoji) \(move.description)"
+    func description(for move: GMove) -> String {
+        String(describing: move)
+//        guard let emoji = emojis[move.name] else {
+//            fatalError("Illegal state")
+//        }
+//        
+//        return "\(emoji) \(move.description)"
     }
-    
+    /*
     private let emojis: [MoveName: String] =
         [
             .beer: "🍺",
@@ -63,4 +65,5 @@ class MoveDescriptor: MoveDescriptorProtocol {
             .drawsCardWhenHandIsEmpty: "💰",
             .discard2CardsFor1Life: "🍺"
         ]
+ */
 }

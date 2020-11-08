@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import CardGameEngine
 
 class PlayerDescriptor: UIAlertController {
     
     convenience init(player: PlayerProtocol) {
-        self.init(title: player.figureName.rawValue.uppercased(),
-                  message: player.description,
+        self.init(title: player.name.uppercased(),
+                  message: player.desc,
                   preferredStyle: .alert)
         
         addAction(UIAlertAction(title: "Close",

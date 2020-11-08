@@ -5,7 +5,7 @@
 //  Created by Hugues Stephano Telolahy on 23/07/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-
+/*
 import RxSwift
 import FirebaseUI
 
@@ -113,3 +113,4 @@ class MatchingManager: MatchingManagerProtocol {
             }
     }
 }
+*/

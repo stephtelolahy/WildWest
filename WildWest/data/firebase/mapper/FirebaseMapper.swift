@@ -6,7 +6,7 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 // swiftlint:disable type_body_length
-
+/*
 import Firebase
 
 protocol FirebaseMapperProtocol {
@@ -220,3 +220,4 @@ class FirebaseMapper: FirebaseMapperProtocol {
         })
     }
 }
+*/

@@ -4,6 +4,8 @@ PODS:
     - AppAuth/ExternalUserAgent (= 1.4.0)
   - AppAuth/Core (1.4.0)
   - AppAuth/ExternalUserAgent (1.4.0)
+  - CardGameEngine (0.1.0):
+    - RxSwift
   - Cuckoo (1.4.1):
     - Cuckoo/Swift (= 1.4.1)
   - Cuckoo/Swift (1.4.1)
@@ -139,6 +141,7 @@ PODS:
   - SwiftLint (0.39.2)
 
 DEPENDENCIES:
+  - "CardGameEngine (from `git@bitbucket.org:stephanotelolahy/cardgameengine.git`, branch `fix/engine`)"
   - Cuckoo
   - Firebase/Analytics
   - Firebase/Crashlytics
@@ -151,7 +154,6 @@ DEPENDENCIES:
   - Kingfisher
   - Resolver
   - RxBlocking
-  - RxSwift
   - RxTest
   - SwiftLint
 
@@ -186,8 +188,19 @@ SPEC REPOS:
     - RxTest
     - SwiftLint
 
+EXTERNAL SOURCES:
+  CardGameEngine:
+    :branch: fix/engine
+    :git: "git@bitbucket.org:stephanotelolahy/cardgameengine.git"
+
+CHECKOUT OPTIONS:
+  CardGameEngine:
+    :commit: 84e47b3313b295dcb32c6fae419e103195fb0f86
+    :git: "git@bitbucket.org:stephanotelolahy/cardgameengine.git"
+
 SPEC CHECKSUMS:
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
+  CardGameEngine: bd0b15156ccea17f418cb137683dc99a7f842615
   Cuckoo: 4625f7f54d9bb880123270e8969898d6c1d036b5
   FBSDKCoreKit: 1d5acf7c9d7a2f92bb1a242dc60cae5b7adb91df
   FBSDKLoginKit: f1ea8026a58b52d30c9f2e6a58ca7d813619fb83
@@ -216,6 +229,6 @@ SPEC CHECKSUMS:
   RxTest: 711632d5644dffbeb62c936a521b5b008a1e1faa
   SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
 
-PODFILE CHECKSUM: de95d17cb5dd812e5000ef1e091855a10b5184cd
+PODFILE CHECKSUM: 177fa13a45eed71d715e810418bd3ba3f2f91008
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.0

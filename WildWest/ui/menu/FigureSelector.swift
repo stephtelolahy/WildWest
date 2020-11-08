@@ -8,23 +8,24 @@
 
 import UIKit
 import Resolver
+import CardGameEngine
 
 class FigureSelector: UIAlertController {
     
     private lazy var preferences: UserPreferencesProtocol = Resolver.resolve()
-    private lazy var gameResources: GameResourcesProtocol = Resolver.resolve()
+    private lazy var gameResources: ResourcesLoaderProtocol = Resolver.resolve()
     
-    convenience init(completion: @escaping (FigureName?) -> Void) {
+    convenience init(completion: @escaping (String?) -> Void) {
         self.init(title: "Choose figure", message: nil, preferredStyle: .alert)
-        let figures = gameResources.allFigures.map { $0.name }
+        let figures = try! gameResources.loadCards().filter { $0.type == .figure }.map { $0.name }
         figures.forEach { figure in
-            addAction(UIAlertAction(title: figure.rawValue,
+            addAction(UIAlertAction(title: figure,
                                     style: .default,
                                     handler: { _ in
                                         self.preferences.preferredFigure = figure
                                         completion(figure)
                                         
-            }))
+                                    }))
         }
         
         addAction(UIAlertAction(title: "Random",
@@ -32,6 +33,6 @@ class FigureSelector: UIAlertController {
                                 handler: { _ in
                                     self.preferences.preferredFigure = nil
                                     completion(nil)
-        }))
+                                }))
     }
 }

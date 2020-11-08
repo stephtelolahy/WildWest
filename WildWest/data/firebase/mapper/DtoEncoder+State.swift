@@ -5,7 +5,7 @@
 //  Created by Hugues Stephano Telolahy on 24/07/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-
+/*
 extension DtoEncoder {
     
     func encode(state: GameStateProtocol) -> GameStateDto {
@@ -61,3 +61,4 @@ private extension DtoEncoder {
         return try GameOutcome(rawValue: outcome).unwrap()
     }
 }
+*/

@@ -6,11 +6,12 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 // swiftlint:disable let_var_whitespace
+import CardGameEngine
 
 protocol UserPreferencesProtocol {
     var playersCount: Int { get set }
     var preferredRole: Role? { get set }
-    var preferredFigure: FigureName? { get set }
+    var preferredFigure: String? { get set }
     var updateDelay: Double { get }
     var assistedMode: Bool { get }
     var enableSound: Bool { get }
@@ -30,20 +31,8 @@ class UserPreferences: UserPreferencesProtocol {
         }
     }
     
-    @UserDefaultsStored("preferred_role", defaultValue: Role.sheriff.rawValue)
-    private var preferredRoleString: String
-    
-    var preferredFigure: FigureName? {
-        get {
-            FigureName(rawValue: preferredFigureString)
-        }
-        set {
-            preferredFigureString = newValue?.rawValue ?? ""
-        }
-    }
-    
-    @UserDefaultsStored("preferred_figure", defaultValue: FigureName.suzyLafayette.rawValue)
-    private var preferredFigureString: String
+    @OptionalUserDefaultsStored("preferred_figure", defaultValue: "suzyLafayette")
+    var preferredFigure: String?
     
     @UserDefaultsStored("update_delay", defaultValue: 0.8)
     var updateDelay: Double
@@ -53,4 +42,9 @@ class UserPreferences: UserPreferencesProtocol {
     
     @UserDefaultsStored("enable_sound", defaultValue: true)
     var enableSound: Bool
+    
+    // MARK: - Private
+    
+    @UserDefaultsStored("preferred_role", defaultValue: Role.sheriff.rawValue)
+    private var preferredRoleString: String
 }

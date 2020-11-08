@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import CardGameEngine
 
 protocol ReactionMoveSelectorProtocol {
-    func selectMove(within moves: [GameMove], state: GameStateProtocol, completion: @escaping (GameMove) -> Void)
+    func selectMove(within moves: [GMove], state: StateProtocol, completion: @escaping (GMove) -> Void)
 }
 
 class ReactionMoveSelector: ReactionMoveSelectorProtocol {
@@ -20,11 +21,9 @@ class ReactionMoveSelector: ReactionMoveSelectorProtocol {
         self.viewController = viewController
     }
     
-    func selectMove(within moves: [GameMove], state: GameStateProtocol, completion: @escaping (GameMove) -> Void) {
-        guard let challenge = state.challenge else {
-            fatalError("Illegal state")
-        }
-        
+    func selectMove(within moves: [GMove], state: StateProtocol, completion: @escaping (GMove) -> Void) {
+        #warning("Display hit name")
+        /*
         let choices: [String] = moves.map {
             $0.cardId ?? $0.targetCard?.description ?? $0.discardIds?.joined(separator: ", ") ??  $0.name.rawValue
         }
@@ -34,9 +33,10 @@ class ReactionMoveSelector: ReactionMoveSelectorProtocol {
                               cancelable: false) { index in
                                 completion(moves[index])
         }
+        */
     }
 }
-
+/*
 private extension Challenge {
     
     func description(in state: GameStateProtocol) -> String {
@@ -74,3 +74,4 @@ private extension Challenge {
         }
     }
 }
+*/

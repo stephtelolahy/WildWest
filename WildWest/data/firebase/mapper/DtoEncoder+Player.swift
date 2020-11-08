@@ -5,7 +5,7 @@
 //  Created by Hugues Stephano Telolahy on 24/07/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-
+/*
 import Foundation
 
 extension DtoEncoder {
@@ -106,3 +106,4 @@ private extension DtoEncoder {
         throw NSError(domain: "invalid DamageSourceDto", code: 0)
     }
 }
+*/

@@ -5,7 +5,7 @@
 //  Created by Hugues Stephano Telolahy on 24/07/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-
+/*
 extension DtoEncoder {
     
     func encode(challenge: Challenge?) -> ChallengeDto? {
@@ -32,3 +32,4 @@ extension DtoEncoder {
                              barrelsPlayed: challenge.barrelsPlayed)
     }
 }
+*/

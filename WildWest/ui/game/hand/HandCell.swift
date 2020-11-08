@@ -24,6 +24,6 @@ class HandCell: UICollectionViewCell {
     
     func update(with item: HandItem) {
         cardView.isHidden = !item.moves.isEmpty
-        cardImageView.image = UIImage(named: item.card.imageName)
+        cardImageView.image = UIImage(named: item.card.name)
     }
 }

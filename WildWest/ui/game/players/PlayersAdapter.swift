@@ -5,6 +5,7 @@
 //  Created by Hugues Stephano Telolahy on 04/02/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
+import CardGameEngine
 
 struct PlayerItem {
     let player: PlayerProtocol
@@ -17,8 +18,7 @@ struct PlayerItem {
 
 protocol PlayersAdapterProtocol {
     func setUsers(_ users: [String: WUserInfo])
-    func buildItems(state: GameStateProtocol,
-                    latestMove: GameMove?,
+    func buildItems(state: StateProtocol,
                     scores: [String: Int]) -> [PlayerItem]
 }
 
@@ -30,24 +30,20 @@ class PlayersAdapter: PlayersAdapterProtocol {
         self.users = users
     }
     
-    func buildItems(state: GameStateProtocol,
-                    latestMove: GameMove?,
+    func buildItems(state: StateProtocol,
                     scores: [String: Int]) -> [PlayerItem] {
-        state.allPlayers.map { player in
-            let playerId = player.identifier
-            let isAttacked = state.isPlayerAttacked(playerId) || latestMove?.isPlayerAttacked(playerId) == true
-            let isHelped = state.isPlayerHelped(playerId) || latestMove?.isPlayerHelped(playerId) == true
-            return PlayerItem(player: player,
-                              isTurn: player.identifier == state.turn,
-                              isAttacked: isAttacked,
-                              isHelped: isHelped,
-                              score: scores[playerId],
-                              user: users[player.identifier])
+        state.initialOrder.map { player in
+            PlayerItem(player: state.players[player]!,
+                       isTurn: player == state.turn,
+                       isAttacked: false,
+                       isHelped: false,
+                       score: scores[player],
+                       user: users[player])
         }
     }
 }
-
-private extension GameStateProtocol {
+/*
+private extension StateProtocol {
     
     func isPlayerAttacked(_ playerId: String) -> Bool {
         if let challenge = self.challenge {
@@ -111,3 +107,4 @@ private extension GameMove {
         }
     }
 }
+*/

@@ -9,6 +9,7 @@
 // swiftlint:disable function_body_length
 
 import UIKit
+import CardGameEngine
 
 enum CardPlace: Hashable {
     case deck
@@ -18,7 +19,7 @@ enum CardPlace: Hashable {
 }
 
 protocol UpdateAnimatorProtocol {
-    func animate(_ update: GameUpdate, in state: GameStateProtocol)
+    func animate(_ update: GEvent, in state: StateProtocol)
 }
 
 class UpdateAnimator: UpdateAnimatorProtocol {
@@ -38,7 +39,8 @@ class UpdateAnimator: UpdateAnimatorProtocol {
         self.updateDelay = updateDelay
     }
     
-    func animate(_ update: GameUpdate, in state: GameStateProtocol) {
+    func animate(_ update: GEvent, in state: StateProtocol) {
+        /*
         switch update {
         case let .playerPullFromDeck(playerId):
             animateMoveCard(from: .deck, to: .hand(playerId))
@@ -136,6 +138,7 @@ class UpdateAnimator: UpdateAnimatorProtocol {
         default:
             break
         }
+         */
     }
 }
 

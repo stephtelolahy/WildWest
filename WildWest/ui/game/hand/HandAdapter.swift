@@ -5,34 +5,46 @@
 //  Created by Hugues Stephano Telolahy on 04/02/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
+import CardGameEngine
 
 struct HandItem {
     let card: CardProtocol
-    let moves: [GameMove]
+    let moves: [GMove]
 }
 
 protocol HandAdapterProtocol {
-    func buildItems(validMoves: [GameMove],
-                    state: GameStateProtocol?) -> [HandItem]
+    func buildItems(validMoves: [GMove], state: StateProtocol) -> [HandItem]
 }
 
 class HandAdapter: HandAdapterProtocol {
     
-    private let playerId: String?
+    private let playerId: String
     
-    init(playerId: String?) {
+    init(playerId: String) {
         self.playerId = playerId
     }
     
-    func buildItems(validMoves: [GameMove], state: GameStateProtocol?) -> [HandItem] {
-        guard let controlledPlayerId = playerId,
-            let player = state?.player(controlledPlayerId) else {
-                return []
+    func buildItems(validMoves: [GMove], state: StateProtocol) -> [HandItem] {
+        state.players[playerId]!.hand.map { card in
+            HandItem(card: card, 
+                     moves: validMoves.filter { $0.isPlaying(card.identifier) })
+        }
+    }
+}
+
+private extension GMove {
+    
+    func isPlaying(_ cardId: String) -> Bool {
+        if case let .hand(aCard) = card, 
+           cardId == aCard {
+            return true
         }
         
-        return player.hand.map { card in
-            let moves = validMoves.filter { $0.cardId == card.identifier }
-            return HandItem(card: card, moves: moves)
+        if ["equip", "handicap"].contains(ability),
+           args[.requiredHand] == [cardId] {
+            return true
         }
+        
+        return false
     }
 }

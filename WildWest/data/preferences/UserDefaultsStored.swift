@@ -30,3 +30,30 @@ struct UserDefaultsStored<T> {
         }
     }
 }
+
+@propertyWrapper
+struct OptionalUserDefaultsStored<T> {
+    private let key: String
+    private let defaultValue: T?
+    private let storage: UserDefaults
+    
+    init(_ key: String, defaultValue: T?, storage: UserDefaults = .standard) {
+        self.key = key
+        self.defaultValue = defaultValue
+        self.storage = storage
+    }
+    
+    var wrappedValue: T? {
+        get {
+            storage.object(forKey: key) as? T ?? defaultValue
+        }
+        set {
+            if newValue == nil {
+                storage.removeObject(forKey: key)
+            } else {
+                storage.set(newValue, forKey: key)
+                storage.synchronize()
+            }
+        }
+    }
+}

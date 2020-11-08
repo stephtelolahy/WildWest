@@ -7,16 +7,18 @@
 //
 
 import AVFoundation
+import CardGameEngine
 
 protocol MoveSoundPlayerProtocol {
-    func playSound(for move: GameMove)
+    func playSound(for move: GMove)
 }
 
 class MoveSoundPlayer: MoveSoundPlayerProtocol {
     
     private var sfxPlayers: [AVAudioPlayer] = []
     
-    func playSound(for move: GameMove) {
+    func playSound(for move: GMove) {
+        /*
         sfxPlayers = sfxPlayers.filter { $0.isPlaying }
         
         guard let fileName = sfxFile(for: move),
@@ -32,8 +34,9 @@ class MoveSoundPlayer: MoveSoundPlayerProtocol {
         } catch {
             // couldn't load file :(
         }
+        */
     }
-    
+    /*
     private func sfxFile(for move: GameMove) -> String? {
         if move.name == .equip,
             let cardName = move.cardId?.extractCardName() {
@@ -93,15 +96,5 @@ class MoveSoundPlayer: MoveSoundPlayerProtocol {
         .mustang: "Cowboy_with_spurs-G-rant-1371954508",
         .scope: "Cowboy_with_spurs-G-rant-1371954508"
     ]
-}
-
-private extension String {
-    func extractCardName() -> CardName {
-        guard let rawValue = components(separatedBy: "-").first,
-            let name = CardName(rawValue: rawValue) else {
-                fatalError("Illegal state")
-        }
-        
-        return name
-    }
+ */
 }

@@ -7,14 +7,15 @@
 //
 
 import UIKit
+import CardGameEngine
 
-extension GameStateProtocol {
+extension StateProtocol {
     
     var topDiscardImage: UIImage? {
-        guard let topDiscard = discardPile.first else {
+        guard let topDiscard = discard.first else {
             return UIImage(color: .gold)
         }
         
-        return UIImage(named: topDiscard.imageName)
+        return UIImage(named: topDiscard.name)
     }
 }
