@@ -40,7 +40,7 @@ private extension GMove {
             return true
         }
         
-        if ["equip", "handicap"].contains(ability),
+        if ["equip", "handicap"].contains(name),
            args[.requiredHand] == [cardId] {
             return true
         }

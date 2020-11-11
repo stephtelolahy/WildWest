@@ -81,10 +81,6 @@ class GameViewController: UIViewController {
             self?.processEvent(update)
         })
         .disposed(by: disposeBag)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         
         showRoles()
         
@@ -165,7 +161,7 @@ private extension GameViewController {
         
         if let hit = state.hits.first,
            !moves.isEmpty {
-            let alert = UIAlertController(title: hit.abilities.joined(separator: ","), 
+            let alert = UIAlertController(title: hit.name, 
                                           choices: moves.map { String(describing: $0) },
                                           cancelable: false,
                                           completion: { [weak self] index in 
@@ -174,10 +170,10 @@ private extension GameViewController {
             present(alert, animated: true)
         }
         
-        endTurnMoves = moves.filter { $0.ability == "endTurn" }
+        endTurnMoves = moves.filter { $0.name == "endTurn" }
         endTurnButton.isEnabled = !endTurnMoves.isEmpty
         
-        otherMoves = moves.filter { $0.card == nil && $0.ability != "endTurn" }
+        otherMoves = moves.filter { $0.card == nil && $0.name != "endTurn" }
         otherMovesButton.isEnabled = !otherMoves.isEmpty
     }
     
