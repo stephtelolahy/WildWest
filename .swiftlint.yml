@@ -40,7 +40,6 @@ included: # paths to include during linting. `--path` is ignored if present.
 
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Pods
-  - WildWestTests
 
 # configurable rules can be customized from this configuration file
 # binary rules can set their severity level
@@ -49,15 +48,15 @@ force_try:
   severity: warning # explicitly
 # rules that have both warning and error levels, can set just the warning level
 # implicitly
-line_length: 120
+line_length: 160
 # they can set both implicitly with an array
 type_body_length:
   - 100 # warning
   - 256 # error
 # or they can set both explicitly
-function_body_length: 
- - 35 # warning
- - 35 # error
+function_body_length:
+  - 35 # warning
+  - 35 # error
 file_length:
   warning: 500
   error: 1200
@@ -68,7 +67,7 @@ type_name:
   max_length: # warning and error
     warning: 40
     error: 50
-  excluded: 
+  excluded:
     - iPhone # excluded via string
 identifier_name:
   min_length: # only min_length

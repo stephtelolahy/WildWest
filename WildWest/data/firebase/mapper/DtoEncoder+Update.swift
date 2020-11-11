@@ -5,8 +5,6 @@
 //  Created by Hugues Stephano Telolahy on 24/07/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-// swiftlint:disable cyclomatic_complexity
-// swiftlint:disable function_body_length
 /*
 import Foundation
 

@@ -11,13 +11,13 @@ import UIKit
 extension UIAlertController {
     
     convenience init(title: String,
-                     choices: [String],
+                     options: [String],
                      cancelable: Bool = true,
                      completion: @escaping((Int) -> Void)) {
         self.init(title: title, message: nil, preferredStyle: .alert)
         
-        for (index, choice) in choices.enumerated() {
-            addAction(UIAlertAction(title: choice,
+        for (index, option) in options.enumerated() {
+            addAction(UIAlertAction(title: option,
                                     style: .default,
                                     handler: { _ in
                                         completion(index)
@@ -36,4 +36,3 @@ extension UIAlertController {
         }))
     }
 }
-

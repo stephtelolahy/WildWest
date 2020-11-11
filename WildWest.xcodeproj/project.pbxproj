@@ -84,6 +84,9 @@
 		33734AF12454ABF200A5D2DA /* PlayerDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AF02454ABF200A5D2DA /* PlayerDto.swift */; };
 		33734AF52454AD7200A5D2DA /* DtoEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AF42454AD7200A5D2DA /* DtoEncoder.swift */; };
 		337AE25825587F16004015ED /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337AE25725587F16004015ED /* UIAlertControllerExtension.swift */; };
+		337B5A52255BB7190079AA14 /* MoveSelectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337B5A51255BB7190079AA14 /* MoveSelectorTests.swift */; };
+		337B5A56255BB7350079AA14 /* MoveSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337B5A55255BB7350079AA14 /* MoveSelector.swift */; };
+		337B5A59255BB7390079AA14 /* MoveSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337B5A55255BB7350079AA14 /* MoveSelector.swift */; };
 		3383CFCE242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3383CFCD242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 */; };
 		3383CFD0242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3383CFCF242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 */; };
 		338A5FC0242BC8CE00766541 /* flyby-Conor-1500306612.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 338A5FBF242BC8CE00766541 /* flyby-Conor-1500306612.mp3 */; };
@@ -123,7 +126,6 @@
 		33F36ABC24CB0DD0000533A4 /* DtoEncoder+Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F36ABA24CB0DD0000533A4 /* DtoEncoder+Move.swift */; };
 		33FB59B82427F6D000090D23 /* PlayersAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E4411524077CA000B2848E /* PlayersAdapter.swift */; };
 		33FDD70C240BFB4B00BC3E14 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */; };
-		AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */; };
 		ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D2EB239EE03800653905 /* AppDelegate.swift */; };
 		ADB7D2F3239EE03800653905 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F1239EE03800653905 /* Main.storyboard */; };
 		ADB7D2F5239EE03900653905 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F4239EE03900653905 /* Assets.xcassets */; };
@@ -198,6 +200,8 @@
 		33734AF02454ABF200A5D2DA /* PlayerDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDto.swift; sourceTree = "<group>"; };
 		33734AF42454AD7200A5D2DA /* DtoEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DtoEncoder.swift; sourceTree = "<group>"; };
 		337AE25725587F16004015ED /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
+		337B5A51255BB7190079AA14 /* MoveSelectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveSelectorTests.swift; sourceTree = "<group>"; };
+		337B5A55255BB7350079AA14 /* MoveSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveSelector.swift; sourceTree = "<group>"; };
 		3383CFCD242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Metal Clang-SoundBible.com-19572601.mp3"; sourceTree = "<group>"; };
 		3383CFCF242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Ta Da-SoundBible.com-1884170640.mp3"; sourceTree = "<group>"; };
 		338A5FBF242BC8CE00766541 /* flyby-Conor-1500306612.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "flyby-Conor-1500306612.mp3"; sourceTree = "<group>"; };
@@ -232,7 +236,6 @@
 		35F41BA092B7A7796FA3F806 /* Pods-WildWestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.debug.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4B5AEE954AF0E177C62E974F /* Pods-WildWestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.release.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.release.xcconfig"; sourceTree = "<group>"; };
 		997450381941D5B6CC8038B9 /* libPods-WildWestTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WildWestTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
 		ADB7D2E8239EE03800653905 /* WildWest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WildWest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB7D2EB239EE03800653905 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADB7D2F2239EE03800653905 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -313,6 +316,7 @@
 				33E4411624077CA000B2848E /* HandAdapter.swift */,
 				33E4411824077CA000B2848E /* HandCell.swift */,
 				33DB41BB2438841A00B94E8A /* HandCollectionViewLayout.swift */,
+				337B5A55255BB7350079AA14 /* MoveSelector.swift */,
 			);
 			path = hand;
 			sourceTree = "<group>";
@@ -503,6 +507,7 @@
 			isa = PBXGroup;
 			children = (
 				33B896C624384B180005FF21 /* GameLayoutBuilderTests.swift */,
+				337B5A51255BB7190079AA14 /* MoveSelectorTests.swift */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -593,7 +598,6 @@
 			children = (
 				335157F1245D851900C46888 /* firebase */,
 				33FB59B52427F68100090D23 /* ui */,
-				AD186BDE23A461F300ABF3E7 /* GeneratedMocks.swift */,
 				ADB7D304239EE03900653905 /* Info.plist */,
 			);
 			path = WildWestTests;
@@ -913,6 +917,7 @@
 				ADD4DB6E24209E4D001BBD48 /* MessageAdapter.swift in Sources */,
 				332F0499244716C100BE2E4A /* UIColor+Hex.swift in Sources */,
 				33EAD12624D499910052A97C /* RoleSelector.swift in Sources */,
+				337B5A56255BB7350079AA14 /* MoveSelector.swift in Sources */,
 				33FDD70C240BFB4B00BC3E14 /* MenuViewController.swift in Sources */,
 				3337029124CB4879007E59A2 /* GameEnvironment.swift in Sources */,
 				33AFA25323DC201A00425BEB /* ClassNameProtocol.swift in Sources */,
@@ -959,12 +964,12 @@
 				33B896C524384A770005FF21 /* GameLayoutBuilder.swift in Sources */,
 				335BED6E24293358009184A3 /* HandAdapter.swift in Sources */,
 				333DB7CB24D55028002A5692 /* HandCollectionViewLayout.swift in Sources */,
-				AD186BDF23A461F300ABF3E7 /* GeneratedMocks.swift in Sources */,
 				3346F32C24CB263F00FB0418 /* DtoEncoder+Update.swift in Sources */,
 				3346F32F24CB26C600FB0418 /* DtoEncoder+Challenge.swift in Sources */,
 				333DB7C824D54FFF002A5692 /* HandCell.swift in Sources */,
 				33C922ED24CA9B1300956151 /* UserStatus.swift in Sources */,
 				33C922EE24CA9B1A00956151 /* WUserInfo.swift in Sources */,
+				337B5A59255BB7390079AA14 /* MoveSelector.swift in Sources */,
 				335157FC245D88AD00C46888 /* GameMoveDto.swift in Sources */,
 				335157FB245D889900C46888 /* PlayerDto.swift in Sources */,
 				33515801245D892700C46888 /* KeyGeneratorProtocol.swift in Sources */,
@@ -975,6 +980,7 @@
 				33DC6E4F24CA9F5A00072B51 /* UserStatusDto.swift in Sources */,
 				33FB59B82427F6D000090D23 /* PlayersAdapter.swift in Sources */,
 				335157F9245D860600C46888 /* DtoEncodingTests.swift in Sources */,
+				337B5A52255BB7190079AA14 /* MoveSelectorTests.swift in Sources */,
 				33DC6E4E24CA9F5100072B51 /* UserInfoDto.swift in Sources */,
 				335157F6245D855E00C46888 /* DtoEncoder.swift in Sources */,
 				33F36ABC24CB0DD0000533A4 /* DtoEncoder+Move.swift in Sources */,

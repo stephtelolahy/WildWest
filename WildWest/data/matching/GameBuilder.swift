@@ -5,7 +5,6 @@
 //  Created by Hugues Stephano Telolahy on 25/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-// swiftlint:disable force_cast
 
 import UIKit
 import RxSwift

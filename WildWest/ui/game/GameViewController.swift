@@ -44,6 +44,7 @@ class GameViewController: UIViewController {
     private lazy var playerAdapter: PlayersAdapterProtocol = PlayersAdapter()
     private lazy var messageAdapter: MessageAdapterProtocol = MessageAdapter()
     private lazy var instructionBuilder: InstructionBuilderProtocol = InstructionBuilder()
+    private lazy var moveSelector: MoveSelectorProtocol = MoveSelector()
     
     private lazy var handAdapter: HandAdapterProtocol? = {
         guard let playerId = environment.controlledId else {
@@ -160,9 +161,9 @@ private extension GameViewController {
         }
         
         if let hit = state.hits.first,
-           !moves.isEmpty {
-            let alert = UIAlertController(title: hit.name, 
-                                          choices: moves.map { String(describing: $0) },
+           let selection = moveSelector.select(reactionTo: hit.name, moves: moves) {
+            let alert = UIAlertController(title: selection.title, 
+                                          options: selection.options,
                                           cancelable: false,
                                           completion: { [weak self] index in 
                                             self?.environment.engine.execute(moves[index])
@@ -233,8 +234,11 @@ private extension GameViewController {
     }
     
     func playMove(among moves: [GMove]) {
-        let alert = UIAlertController(title: "Select move",
-                                      choices: moves.map { String(describing: $0) },
+        guard let selection = moveSelector.select(active: moves) else {
+            return
+        }
+        let alert = UIAlertController(title: selection.title,
+                                      options: selection.options,
                                       completion: { [weak self] index in
                                         self?.environment.engine.execute(moves[index])
                                       })
