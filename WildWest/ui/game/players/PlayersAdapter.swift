@@ -5,6 +5,7 @@
 //  Created by Hugues Stephano Telolahy on 04/02/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
+import CardGameEngine
 
 struct PlayerItem {
     let player: PlayerProtocol
@@ -17,9 +18,7 @@ struct PlayerItem {
 
 protocol PlayersAdapterProtocol {
     func setUsers(_ users: [String: WUserInfo])
-    func buildItems(state: GameStateProtocol,
-                    latestMove: GameMove?,
-                    scores: [String: Int]) -> [PlayerItem]
+    func buildItems(state: StateProtocol) -> [PlayerItem]
 }
 
 class PlayersAdapter: PlayersAdapterProtocol {
@@ -30,84 +29,14 @@ class PlayersAdapter: PlayersAdapterProtocol {
         self.users = users
     }
     
-    func buildItems(state: GameStateProtocol,
-                    latestMove: GameMove?,
-                    scores: [String: Int]) -> [PlayerItem] {
-        state.allPlayers.map { player in
-            let playerId = player.identifier
-            let isAttacked = state.isPlayerAttacked(playerId) || latestMove?.isPlayerAttacked(playerId) == true
-            let isHelped = state.isPlayerHelped(playerId) || latestMove?.isPlayerHelped(playerId) == true
-            return PlayerItem(player: player,
-                              isTurn: player.identifier == state.turn,
-                              isAttacked: isAttacked,
-                              isHelped: isHelped,
-                              score: scores[playerId],
-                              user: users[player.identifier])
-        }
-    }
-}
-
-private extension GameStateProtocol {
-    
-    func isPlayerAttacked(_ playerId: String) -> Bool {
-        if let challenge = self.challenge {
-            switch challenge.name {
-            case .bang, .gatling, .indians:
-                return challenge.targetIds?.contains(playerId) == true
-                
-            case .duel:
-                return challenge.targetIds?.first == playerId
-                
-            case .dynamiteExploded:
-                return turn == playerId
-                
-            default:
-                return false
-            }
-        }
-        return false
-    }
-    
-    func isPlayerHelped(_ playerId: String) -> Bool {
-        if let challenge = self.challenge {
-            switch challenge.name {
-            case .generalStore:
-                return  challenge.targetIds?.contains(playerId) == true
-                
-            default:
-                return false
-            }
-        }
-        return false
-    }
-}
-
-private extension GameMove {
-    
-    func isPlayerAttacked(_ playerId: String) -> Bool {
-        switch MoveClassifier().classify(self) {
-        case let .strongAttack(_, targetId):
-            return targetId == playerId
-            
-        case let .weakAttack(_, targetId):
-            return targetId == playerId
-            
-        default:
-            return false
-        }
-    }
-    
-    func isPlayerHelped(_ playerId: String) -> Bool {
-        if case .saloon = name {
-            return true
-        }
-        
-        switch MoveClassifier().classify(self) {
-        case let .help(_, targetId):
-            return targetId == playerId
-            
-        default:
-            return false
+    func buildItems(state: StateProtocol) -> [PlayerItem] {
+        state.initialOrder.map { player in
+            PlayerItem(player: state.players[player]!,
+                       isTurn: player == state.turn,
+                       isAttacked: state.hits.first?.player == player,
+                       isHelped: false,
+                       score: 0,
+                       user: users[player])
         }
     }
 }

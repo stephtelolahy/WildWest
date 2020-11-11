@@ -6,10 +6,12 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
+import CardGameEngine
+
 struct GameEnvironment {
-    let engine: GameEngineProtocol
-    let subjects: GameSubjectsProtocol
+    let engine: EngineProtocol
+    let database: RestrictedDatabaseProtocol
     let controlledId: String?
-    let aiAgents: [AIPlayerAgentProtocol]?
+    let aiAgents: [AIAgentProtocol]?
     var gameUsers: [String: WUserInfo]?
 }

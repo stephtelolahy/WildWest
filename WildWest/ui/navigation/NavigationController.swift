@@ -11,19 +11,19 @@ import FirebaseUI
 import Resolver
 import RxSwift
 
-class NavigationController: UINavigationController, Subscribable {
+class NavigationController: UINavigationController {
     
-    private lazy var manager: MatchingManagerProtocol = Resolver.resolve()
+//    private lazy var manager: MatchingManagerProtocol = Resolver.resolve()
     private lazy var gameBuilder: GameBuilderProtocol = Resolver.resolve()
     private lazy var preferences: UserPreferencesProtocol = Resolver.resolve()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if manager.isLoggedIn {
-            observeUserStatus()
-        } else {
+//        if manager.isLoggedIn {
+//            observeUserStatus()
+//        } else {
             loadMenu()
-        }
+//        }
     }
 }
 
@@ -44,18 +44,20 @@ private extension NavigationController {
     }
     
     func tryPlayOnline() {
+        /*
         guard manager.isLoggedIn else {
             requestSignIn()
             return
         }
         
         addToWaitingRoom()
+        */
     }
-    
+    /*
     func addToWaitingRoom() {
         sub(manager.addToWaitingRoom().subscribe())
     }
-    
+    */
     func requestSignIn() {
         let alertController = UIAlertController(title: "Authentication required",
                                                 message: "Get started to online game by signin to your account",
@@ -117,7 +119,7 @@ private extension NavigationController {
             self?.handleSigninCompleted(user, pseudo: pseudo)
         }
     }
-    
+    /*
     func loadWaitingRoom() {
         let waitingRoomViewController = UIStoryboard.instantiate(WaitingRoomViewController.self, in: "Main")
         
@@ -139,15 +141,16 @@ private extension NavigationController {
         
         fade(to: waitingRoomViewController)
     }
-    
+    */
     func loadLocalGame() {
         let state = gameBuilder.createGame(for: preferences.playersCount)
-        let playerId = state.players.first?.identifier
+        let playerId = state.playOrder.first
         let environment = gameBuilder.createLocalGameEnvironment(state: state, playerId: playerId)
         loadGame(environment: environment)
     }
     
     func loadOnlineGame(_ gameId: String, _ playerId: String) {
+        /*
         sub(manager.getGameData(gameId: gameId).subscribe(onSuccess: { state, users in
             let environment = self.gameBuilder.createRemoteGameEnvironment(gameId: gameId,
                                                                            playerId: playerId,
@@ -158,6 +161,7 @@ private extension NavigationController {
                 self?.loadGame(environment: environment)
             }
         }))
+         */
     }
     
     func loadGame(environment: GameEnvironment) {
@@ -171,13 +175,14 @@ private extension NavigationController {
             }
             
             self.loadMenu()
-            self.sub(self.manager.quitGame().subscribe())
+//            self.sub(self.manager.quitGame().subscribe())
         }
         
         fade(to: gameViewController)
     }
     
     func observeUserStatus() {
+        /*
         sub(manager.observeUserStatus().subscribe(onNext: { [weak self] status in
             switch status {
             case .waiting:
@@ -192,9 +197,11 @@ private extension NavigationController {
         }, onError: { error in
             fatalError(error.localizedDescription)
         }))
+ */
     }
     
     func handleSigninCompleted(_ user: User, pseudo: String? = nil) {
+        /*
         let wuser: WUserInfo
         
         if user.isAnonymous {
@@ -211,6 +218,7 @@ private extension NavigationController {
             self?.observeUserStatus()
             self?.addToWaitingRoom()
         }))
+ */
     }
 }
 

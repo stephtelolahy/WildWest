@@ -5,7 +5,7 @@
 //  Created by Hugues Stephano Telolahy on 21/07/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-
+/*
 import RxSwift
 import Firebase
 
@@ -85,3 +85,4 @@ class MatchingDatabase: MatchingDatabaseProtocol {
             .rxObserveSingleEvent({ try self.mapper.decodeGameUsers(from: $0) })
     }
 }
+*/

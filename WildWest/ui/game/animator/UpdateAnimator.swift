@@ -5,10 +5,9 @@
 //  Created by Hugues Stephano Telolahy on 13/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-// swiftlint:disable cyclomatic_complexity
-// swiftlint:disable function_body_length
 
 import UIKit
+import CardGameEngine
 
 enum CardPlace: Hashable {
     case deck
@@ -18,7 +17,7 @@ enum CardPlace: Hashable {
 }
 
 protocol UpdateAnimatorProtocol {
-    func animate(_ update: GameUpdate, in state: GameStateProtocol)
+    func animate(on event: GEvent, in state: StateProtocol)
 }
 
 class UpdateAnimator: UpdateAnimatorProtocol {
@@ -38,7 +37,8 @@ class UpdateAnimator: UpdateAnimatorProtocol {
         self.updateDelay = updateDelay
     }
     
-    func animate(_ update: GameUpdate, in state: GameStateProtocol) {
+    func animate(on event: GEvent, in state: StateProtocol) {
+        /*
         switch update {
         case let .playerPullFromDeck(playerId):
             animateMoveCard(from: .deck, to: .hand(playerId))
@@ -136,6 +136,7 @@ class UpdateAnimator: UpdateAnimatorProtocol {
         default:
             break
         }
+         */
     }
 }
 

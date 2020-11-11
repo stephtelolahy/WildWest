@@ -9,7 +9,7 @@
 import UIKit
 import Resolver
 
-class WaitingRoomViewController: UIViewController, Subscribable {
+class WaitingRoomViewController: UIViewController {
     
     // MARK: - IBOutlets
     
@@ -21,7 +21,7 @@ class WaitingRoomViewController: UIViewController, Subscribable {
     var onQuit: (() -> Void)?
     var onStart: (([WUserInfo]) -> Void)?
     
-    private lazy var manager: MatchingManagerProtocol = Resolver.resolve()
+//    private lazy var manager: MatchingManagerProtocol = Resolver.resolve()
     private var users: [WUserInfo] = []
     
     // MARK: - Lifecycle
@@ -44,12 +44,12 @@ class WaitingRoomViewController: UIViewController, Subscribable {
     // MARK: - Private
     
     func observeWaitingUsers() {
-        sub(manager.observeWaitingUsers().subscribe(onNext: { [weak self] users in
-            self?.users = users
-            self?.userCollectionView.reloadData()
-            let minUsersCount = 2
-            self?.startButton.isHidden = users.count < minUsersCount
-        }))
+//        sub(manager.observeWaitingUsers().subscribe(onNext: { [weak self] users in
+//            self?.users = users
+//            self?.userCollectionView.reloadData()
+//            let minUsersCount = 2
+//            self?.startButton.isHidden = users.count < minUsersCount
+//        }))
     }
 }
 

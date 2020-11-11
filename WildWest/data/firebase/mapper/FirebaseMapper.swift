@@ -5,8 +5,7 @@
 //  Created by Hugues Stephano Telolahy on 26/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-// swiftlint:disable type_body_length
-
+/*
 import Firebase
 
 protocol FirebaseMapperProtocol {
@@ -220,3 +219,4 @@ class FirebaseMapper: FirebaseMapperProtocol {
         })
     }
 }
+*/

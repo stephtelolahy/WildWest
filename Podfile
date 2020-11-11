@@ -4,7 +4,7 @@ platform :ios, '9.3'
 inhibit_all_warnings!
 
 def shared_pods
-  pod 'RxSwift'
+  pod 'CardGameEngine', :git => 'git@bitbucket.org:stephanotelolahy/cardgameengine.git', :tag => '0.1.1'
   pod 'Firebase/Database'
 end
 
@@ -21,16 +21,12 @@ target 'WildWest' do
   pod 'FirebaseUI/OAuth' # Used for Sign in with Apple, Twitter, etc
   pod 'FirebaseUI/Phone'
   
-  pod 'Kingfisher'
   pod "Resolver"
-  
+  pod 'Kingfisher'
   pod 'SwiftLint'
 end
 
 target 'WildWestTests' do
   inherit! :search_paths
   shared_pods
-  pod 'RxBlocking'
-  pod 'RxTest'
-  pod 'Cuckoo'
 end

@@ -10,8 +10,9 @@ import UIKit
 import RxSwift
 import Kingfisher
 import Resolver
+import CardGameEngine
 
-class MenuViewController: UIViewController, Subscribable {
+class MenuViewController: UIViewController {
     
     // MARK: - IBOutlets
     
@@ -29,9 +30,8 @@ class MenuViewController: UIViewController, Subscribable {
     var onPlayLocal: (() -> Void)?
     var onPlayOnline: (() -> Void)?
     
-    private lazy var manager: MatchingManagerProtocol = Resolver.resolve()
+//    private lazy var manager: MatchingManagerProtocol = Resolver.resolve()
     private lazy var preferences: UserPreferencesProtocol = Resolver.resolve()
-    private lazy var gameResources: GameResourcesProtocol = Resolver.resolve()
     private lazy var musicPlayer: ThemeMusicPlayer? = preferences.enableSound ? ThemeMusicPlayer() : nil
     
     // MARK: - Lifecycle
@@ -103,10 +103,9 @@ private extension MenuViewController {
     }
     
     func updateFigureImage() {
-        let allFigures = gameResources.allFigures
-        if let figure = allFigures.first(where: { $0.name == preferences.preferredFigure }) {
-            figureButton.setImage(UIImage(named: figure.imageName), for: .normal)
-            figureLabel.text = "Play as \(figure.name.rawValue)"
+        if let figure = preferences.preferredFigure {
+            figureButton.setImage(UIImage(named: figure), for: .normal)
+            figureLabel.text = "Play as \(figure)"
         } else {
             figureButton.setImage(#imageLiteral(resourceName: "01_random"), for: .normal)
             figureLabel.text = "Play as random"
@@ -115,7 +114,7 @@ private extension MenuViewController {
     
     func updateRoleImage() {
         if let role = preferences.preferredRole {
-            roleButton.setImage(role.image(), for: .normal)
+            roleButton.setImage(UIImage(named: role.rawValue), for: .normal)
             roleLabel.text = role.rawValue
         } else {
             roleButton.setImage(#imageLiteral(resourceName: "01_random"), for: .normal)
@@ -124,12 +123,12 @@ private extension MenuViewController {
     }
     
     func updateUserView() {
-        sub(manager.getUser().subscribe(onSuccess: { [weak self] user in
-            self?.avatarImageView.kf.setImage(with: URL(string: user.photoUrl))
-            self?.userNameLabel.text = user.name
-        }, onError: { [weak self] _ in
-            self?.avatarImageView.image = nil
-            self?.userNameLabel.text = nil
-        }))
+//        sub(manager.getUser().subscribe(onSuccess: { [weak self] user in
+//            self?.avatarImageView.kf.setImage(with: URL(string: user.photoUrl))
+//            self?.userNameLabel.text = user.name
+//        }, onError: { [weak self] _ in
+//            self?.avatarImageView.image = nil
+//            self?.userNameLabel.text = nil
+//        }))
     }
 }

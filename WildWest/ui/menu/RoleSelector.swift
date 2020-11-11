@@ -8,6 +8,7 @@
 
 import UIKit
 import Resolver
+import CardGameEngine
 
 class RoleSelector: UIAlertController {
     
