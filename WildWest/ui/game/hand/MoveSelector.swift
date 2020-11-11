@@ -27,19 +27,22 @@ class MoveSelector: MoveSelectorProtocol {
         
         let refMove = moves[0]
         if moves.allSatisfy({ $0.name == refMove.name }) {
-            let title: String
             if case let .hand(refCard) = refMove.card,
                moves.allSatisfy({ $0.card == .hand(refCard) }) {
-                title = refCard
+                return MoveSelection(title: refCard, 
+                                     options: moves.map { $0.argsString() })
+            } else if let refCard = refMove.args[.requiredHand]?.first, 
+                      moves.allSatisfy({ $0.args[.requiredHand] == refMove.args[.requiredHand] }) {
+                return MoveSelection(title: refCard, 
+                                     options: moves.map { $0.argsString([.target]) })
             } else {
-                title = refMove.name
+                return MoveSelection(title: refMove.name, 
+                                     options: moves.map { $0.argsString() })
             }
-            return MoveSelection(title: title, 
-                                 options: moves.map { $0.argsString })
         } else {
             let title = "Select move"
             let options: [String] = moves.map {
-                let argString = $0.argsString
+                let argString = $0.argsString()
                 if !argString.isEmpty {
                     return "\($0.name) \(argString)"
                 } else {
@@ -57,7 +60,7 @@ class MoveSelector: MoveSelectorProtocol {
         }
         
         let options: [String] = moves.map {
-            let argString = $0.argsString
+            let argString = $0.argsString()
             if !argString.isEmpty {
                 return argString
             } else if case let .hand(card) = $0.card {
@@ -72,9 +75,8 @@ class MoveSelector: MoveSelectorProtocol {
 }
 
 private extension GMove {
-    var argsString: String {
+    func argsString(_ playArgs: [PlayArg] = [.target, .requiredInPlay, .requiredHand, .requiredStore]) -> String {
         var flatValues: [String] = []
-        let playArgs: [PlayArg] = [.target, .requiredInPlay, .requiredHand, .requiredStore]
         playArgs.forEach { key in
             if let values = args[key] {
                 flatValues.append(contentsOf: values)

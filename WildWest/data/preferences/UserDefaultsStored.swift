@@ -34,18 +34,16 @@ struct UserDefaultsStored<T> {
 @propertyWrapper
 struct OptionalUserDefaultsStored<T> {
     private let key: String
-    private let defaultValue: T?
     private let storage: UserDefaults
     
-    init(_ key: String, defaultValue: T?, storage: UserDefaults = .standard) {
+    init(_ key: String, storage: UserDefaults = .standard) {
         self.key = key
-        self.defaultValue = defaultValue
         self.storage = storage
     }
     
     var wrappedValue: T? {
         get {
-            storage.object(forKey: key) as? T ?? defaultValue
+            storage.object(forKey: key) as? T
         }
         set {
             if newValue == nil {
@@ -61,12 +59,10 @@ struct OptionalUserDefaultsStored<T> {
 @propertyWrapper
 struct OptionalEnumUserDefaultsStored<T: RawRepresentable> {
     private let key: String
-    private let defaultValue: T?
     private let storage: UserDefaults
     
-    init(_ key: String, defaultValue: T?, storage: UserDefaults = .standard) {
+    init(_ key: String, storage: UserDefaults = .standard) {
         self.key = key
-        self.defaultValue = defaultValue
         self.storage = storage
     }
     

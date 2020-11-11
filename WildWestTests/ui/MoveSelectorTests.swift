@@ -133,6 +133,32 @@ class MoveSelectorTests: XCTestCase {
         XCTAssertEqual(selection.options, ["c2", "c3", "c4"])
     }
     
+    func test_OptionsAreEmptyString_IfPlayingEquip() throws {
+        // Given
+        let moves = [GMove("equip", actor: "p1", args: [.requiredHand: ["c1"]])]
+        
+        // When
+        let selection = try XCTUnwrap(sut.select(active: moves))
+        
+        // Assert
+        XCTAssertEqual(selection.title, "c1")
+        XCTAssertEqual(selection.options, [""])
+    }
+    
+    func test_OptionsAreTarget_IfPlayingHandicap() throws {
+        // Given
+        let moves = [GMove("handicap", actor: "p1", args: [.requiredHand: ["c1"], .target: ["p2"]]),
+                     GMove("handicap", actor: "p1", args: [.requiredHand: ["c1"], .target: ["p3"]]),
+                     GMove("handicap", actor: "p1", args: [.requiredHand: ["c1"], .target: ["p4"]])]
+        
+        // When
+        let selection = try XCTUnwrap(sut.select(active: moves))
+        
+        // Assert
+        XCTAssertEqual(selection.title, "c1")
+        XCTAssertEqual(selection.options, ["p2", "p3", "p4"])
+    }
+    
     // MARK: - Different abilities
     
     func test_OptionsAreMoveNameAndArgs_IfPlayingDifferentAbilities() throws {

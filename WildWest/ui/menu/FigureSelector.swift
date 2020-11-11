@@ -24,7 +24,6 @@ class FigureSelector: UIAlertController {
                                     handler: { _ in
                                         self.preferences.preferredFigure = figure
                                         completion(figure)
-                                        
                                     }))
         }
         

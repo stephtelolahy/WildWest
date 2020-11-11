@@ -22,10 +22,10 @@ class UserPreferences: UserPreferencesProtocol {
     @UserDefaultsStored("players_count", defaultValue: 5)
     var playersCount: Int
     
-    @OptionalEnumUserDefaultsStored("preferred_role", defaultValue: .sheriff)
+    @OptionalEnumUserDefaultsStored("preferred_role")
     var preferredRole: Role?
     
-    @OptionalUserDefaultsStored("preferred_figure", defaultValue: "suzyLafayette")
+    @OptionalUserDefaultsStored("preferred_figure")
     var preferredFigure: String?
     
     @UserDefaultsStored("update_delay", defaultValue: 0.1)
