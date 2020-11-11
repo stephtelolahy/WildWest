@@ -516,7 +516,7 @@ name</string>
                                     <constraint firstAttribute="height" constant="32" id="YS1-wn-06Q"/>
                                 </constraints>
                                 <color key="tintColor" red="0.57874745130000005" green="0.32151988149999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" image="ic_start"/>
+                                <state key="normal" image="ic_refresh"/>
                                 <connections>
                                     <action selector="refreshButtonTapped:" destination="Yy6-0k-mhK" eventType="touchUpInside" id="Cel-7h-UeM"/>
                                 </connections>
@@ -718,7 +718,7 @@ name</string>
         <image name="ic_more" width="48" height="48"/>
         <image name="ic_online" width="557" height="291"/>
         <image name="ic_play" width="557" height="291"/>
-        <image name="ic_start" width="48" height="48"/>
+        <image name="ic_refresh" width="48" height="48"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

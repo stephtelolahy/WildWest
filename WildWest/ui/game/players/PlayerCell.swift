@@ -35,7 +35,11 @@ class PlayerCell: UICollectionViewCell {
         let isEliminated = player.health == 0
         figureImageView.alpha = !isEliminated ? 1.0 : 0.4
         equipmentLabel.text = player.inPlay.map { "[\($0.name)]" }.joined(separator: "\n")
-        roleImageView.image = UIImage(named: player.role?.rawValue ?? "")
+        if let role = player.role {
+            roleImageView.image = UIImage(named: role.rawValue)
+        } else {
+            roleImageView.image = nil
+        }
         healthLabel.text = ""
             + Array(player.health..<player.maxHealth).map { _ in "░" }
             + Array(0..<player.health).map { _ in "■" }.joined()

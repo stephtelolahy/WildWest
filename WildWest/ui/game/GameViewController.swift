@@ -32,10 +32,9 @@ class GameViewController: UIViewController {
     var onQuit: (() -> Void)?
     
     private var playerItems: [PlayerItem] = []
-    private var handItems: [HandItem] = []
+    private var handCards: [CardProtocol] = []
     private var messages: [String] = []
-    private var endTurnMoves: [GMove] = []
-    private var otherMoves: [GMove] = []
+    private var segmentedMoves: [String: [GMove]] = [:]
     private var state: StateProtocol!
     
     private lazy var analyticsManager: AnalyticsManager = Resolver.resolve()
@@ -44,14 +43,8 @@ class GameViewController: UIViewController {
     private lazy var playerAdapter: PlayersAdapterProtocol = PlayersAdapter()
     private lazy var messageAdapter: MessageAdapterProtocol = MessageAdapter()
     private lazy var instructionBuilder: InstructionBuilderProtocol = InstructionBuilder()
+    private lazy var moveSegmenter: MoveSegmenterProtocol = MoveSegmenter()
     private lazy var moveSelector: MoveSelectorProtocol = MoveSelector()
-    
-    private lazy var handAdapter: HandAdapterProtocol? = {
-        guard let playerId = environment.controlledId else {
-            return nil
-        }
-        return HandAdapter(playerId: playerId) 
-    }()
     
     private lazy var moveSoundPlayer: SFXPlayerProtocol? = {
         preferences.enableSound ? SFXPlayer() : nil
@@ -105,11 +98,15 @@ class GameViewController: UIViewController {
     }
     
     @IBAction private func endTurnTapped(_ sender: Any) {
-        playMove(among: endTurnMoves)
+        if let move = segmentedMoves["endTurn"]?.first {
+            environment.engine.execute(move)
+        }
     }
     
     @IBAction private func otherMovesTapped(_ sender: Any) {
-        playMove(among: otherMoves)
+        if let moves = segmentedMoves["*"] {
+            playMove(among: moves)
+        }
     }
 }
 
@@ -118,8 +115,14 @@ private extension GameViewController {
     func processState(_ state: StateProtocol) {
         self.state = state
         
-        playerItems = playerAdapter.buildItems(state: state, scores: [:])
+        playerItems = playerAdapter.buildItems(state: state)
         playersCollectionView.reloadData()
+        
+        if let controlledId = environment.controlledId,
+           let player = state.players[controlledId] {
+            handCards = player.hand
+            handCollectionView.reloadData()
+        }
         
         discardImageView.image = state.topDiscardImage
         deckCountLabel.text = "[] \(state.deck.count)"
@@ -155,11 +158,6 @@ private extension GameViewController {
     func processValidMoves(_ moves: [GMove]) {
         let moves = moves.filter { $0.actor == environment.controlledId }
         
-        if let items = handAdapter?.buildItems(validMoves: moves, state: state) {
-            handItems = items
-            handCollectionView.reloadData()
-        }
-        
         if let hit = state.hits.first,
            let selection = moveSelector.select(reactionTo: hit.name, moves: moves) {
             let alert = UIAlertController(title: selection.title, 
@@ -171,11 +169,17 @@ private extension GameViewController {
             present(alert, animated: true)
         }
         
-        endTurnMoves = moves.filter { $0.name == "endTurn" }
-        endTurnButton.isEnabled = !endTurnMoves.isEmpty
+        segmentedMoves = moveSegmenter.segment(moves)
+        handCollectionView.reloadData()
+        endTurnButton.isEnabled = segmentedMoves["endTurn"] != nil
+        otherMovesButton.isEnabled = segmentedMoves["*"] != nil
         
-        otherMoves = moves.filter { $0.card == nil && $0.name != "endTurn" }
-        otherMovesButton.isEnabled = !otherMoves.isEmpty
+        // <HACK> Autocast startTurn
+        if moves.count == 1, 
+           state.phase == 1 {
+            environment.engine.execute(moves[0])
+        }
+        // </HACK>
     }
     
     func showGameOver(_ winner: Role) {
@@ -192,8 +196,8 @@ private extension GameViewController {
         var result: [CardPlace: CGPoint] = [:]
         
         guard let discardCenter = discardImageView.superview?.convert(discardImageView.center, to: view),
-            let deckCenter = deckImageView.superview?.convert(deckImageView.center, to: view)  else {
-                fatalError("Illegal state")
+              let deckCenter = deckImageView.superview?.convert(deckImageView.center, to: view)  else {
+            fatalError("Illegal state")
         }
         
         result[.deck] = deckCenter
@@ -202,8 +206,8 @@ private extension GameViewController {
         let playerIds = state.initialOrder
         for (index, playerId) in playerIds.enumerated() {
             guard let cell = playersCollectionView.cellForItem(at: IndexPath(row: index, section: 0)),
-                let cellCenter = cell.superview?.convert(cell.center, to: view) else {
-                    fatalError("Illegal state")
+                  let cellCenter = cell.superview?.convert(cell.center, to: view) else {
+                fatalError("Illegal state")
             }
             
             let handPosition = cellCenter
@@ -237,6 +241,15 @@ private extension GameViewController {
         guard let selection = moveSelector.select(active: moves) else {
             return
         }
+        
+        // <HACK> No selector for single no args move
+        if selection.options.count == 1, 
+           selection.options[0].isEmpty {
+            environment.engine.execute(moves[0])
+            return
+        }
+        // </HACK>
+        
         let alert = UIAlertController(title: selection.title,
                                       options: selection.options,
                                       completion: { [weak self] index in
@@ -284,7 +297,7 @@ extension GameViewController: UICollectionViewDataSource {
     }
     
     private func handCollectionViewNumberOfItems() -> Int {
-        handItems.count
+        handCards.count
     }
     
     private func playersCollectionView(_ collectionView: UICollectionView,
@@ -297,7 +310,9 @@ extension GameViewController: UICollectionViewDataSource {
     private func handCollectionView(_ collectionView: UICollectionView,
                                     cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(with: HandCell.self, for: indexPath)
-        cell.update(with: handItems[indexPath.row])
+        let card = handCards[indexPath.row]
+        let active = segmentedMoves[card.identifier] != nil
+        cell.update(with: card, active: active)
         return cell
     }
 }
@@ -322,7 +337,10 @@ extension GameViewController: UICollectionViewDelegate {
     }
     
     private func handCollectionViewDidSelectItem(at indexPath: IndexPath) {
-        playMove(among: handItems[indexPath.row].moves)
+        guard let moves = segmentedMoves[handCards[indexPath.row].identifier] else {
+            return
+        }
+        playMove(among: moves)
     }
 }
 

@@ -16,54 +16,45 @@ protocol MessageAdapterProtocol {
 class MessageAdapter: MessageAdapterProtocol {
     
     func description(for move: GMove) -> String {
-        String(describing: move)
-//        guard let emoji = emojis[move.name] else {
-//            fatalError("Illegal state")
-//        }
-//        
-//        return "\(emoji) \(move.description)"
+        "\(emojis[move.name] ?? "❓") \(move.actor) \(move.name) \(move.argsString)"
     }
-    /*
-    private let emojis: [MoveName: String] =
+    
+    private let emojis: [String: String] =
         [
-            .beer: "🍺",
-            .saloon: "🍻",
-            .stagecoach: "💰",
-            .wellsFargo: "💰",
-            .panic: "‼️",
-            .catBalou: "❌",
-            .equip: "😎",
-            .dynamite: "💣",
-            .jail: "🚧",
-            .generalStore: "💰",
-            .bang: "🔫",
-            .gatling: "🔫",
-            .indians: "💢",
-            .duel: "🔫",
-            .discardMissed: "😝",
-            .discardBang: "🔫",
-            .discardBeer: "🍺",
-            .pass: "❤️",
-            .choose: "💰",
-            .endTurn: "✔️",
-            .startTurn: "🔥",
-            .startTurnDrawAnotherCardIfRedSuit: "🔥",
-            .startTurnDraw3CardsAndKeep2: "🔥",
-            .startTurnDrawFirstCardFromOtherPlayer: "🔥",
-            .startTurnDrawFirstCardFromDiscard: "🔥",
-            .passDynamite: "💣",
-            .dynamiteExploded: "💥",
-            .stayInJail: "😞",
-            .escapeFromJail: "😅",
-            .useBarrel: "😝",
-            .failBarrel: "😞",
-            .eliminate: "☠️",
-            .gainRewardOnEliminatingOutlaw: "🎁",
-            .penalizeSheriffOnEliminatingDeputy: "⚠️",
-            .drawsCardOnLoseHealth: "💰",
-            .drawsCardFromPlayerDamagedHim: "‼️",
-            .drawsCardWhenHandIsEmpty: "💰",
-            .discard2CardsFor1Life: "🍺"
+            "beer": "🍺",
+            "saloon": "🍺",
+            "discardBeer": "🍺",
+            "stagecoach": "💰",
+            "wellsFargo": "💰",
+            "drawStore": "💰",
+            "gainRewardOnEliminatingOutlaw": "💰",
+            "drawHandCardAt1": "‼️",
+            "drawInPlayCardAt1": "‼️",
+            "discardOtherHand": "❌",
+            "discardOtherInPlay": "❌",
+            "discardSelfInPlay": "❌",
+            "penalizeSheriffOnEliminatingDeputy": "❌",
+            "equip": "😎",
+            "handicap": "⚠️",
+            "dynamite": "💣",
+            "jail": "🚧",
+            "generalstore": "💰",
+            "bang": "🔫",
+            "gatling": "🔫",
+            "duel": "🔫",
+            "indians": "💢",
+            "missed": "😝",
+            "barrel": "😝",
+            "looseHealth": "❤️",
+            "endTurn": "✔️",
+            "startTurn": "🔥",
+            "removeFromPlayOrderOnEliminated": "☠️"
         ]
- */
+}
+
+private extension GMove {
+    var argsString: String {
+        let values: [String] = args.values.flatMap { $0 }
+        return values.joined(separator: ", ")
+    }
 }
