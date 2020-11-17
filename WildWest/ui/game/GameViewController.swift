@@ -31,23 +31,32 @@ class GameViewController: UIViewController {
     var environment: GameEnvironment!
     var onQuit: (() -> Void)?
     
+    private var state: StateProtocol!
     private var playerItems: [PlayerItem] = []
     private var handCards: [CardProtocol] = []
-    private var messages: [String] = []
     private var segmentedMoves: [String: [GMove]] = [:]
-    private var state: StateProtocol!
+    private var messages: [String] = []
     
     private lazy var analyticsManager: AnalyticsManager = Resolver.resolve()
     private lazy var preferences: UserPreferencesProtocol = Resolver.resolve()
+    private lazy var resourceLoader: ResourcesLoaderProtocol = Resolver.resolve()
     
     private lazy var playerAdapter: PlayersAdapterProtocol = PlayersAdapter()
-    private lazy var messageAdapter: MessageAdapterProtocol = MessageAdapter()
     private lazy var instructionBuilder: InstructionBuilderProtocol = InstructionBuilder()
     private lazy var moveSegmenter: MoveSegmenterProtocol = MoveSegmenter()
     private lazy var moveSelector: MoveSelectorProtocol = MoveSelector()
     
-    private lazy var moveSoundPlayer: SFXPlayerProtocol? = {
+    private lazy var eventMatcher: EventMatcherProtocol = {
+        let media = resourceLoader.loadEventMedia()
+        return EventMatcher(media: media)
+    }()
+    
+    private lazy var sfxPlayer: SFXPlayerProtocol? = {
         preferences.enableSound ? SFXPlayer() : nil
+    }()
+    
+    private lazy var inputHandler: InputHandlerProtocol = {
+        InputHandler(selector: MoveSelector(), viewController: self)  
     }()
     
     private var updateAnimator: UpdateAnimatorProtocol?
@@ -82,7 +91,7 @@ class GameViewController: UIViewController {
         playersCollectionView.performBatchUpdates(nil) { [self] _ in
             updateAnimator = UpdateAnimator(viewController: self,
                                             cardPositions: buildCardPositions(),
-                                            cardSize: buildCardSize(),
+                                            cardSize: discardImageView.bounds.size,
                                             updateDelay: preferences.updateDelay)
         }
     }
@@ -98,14 +107,22 @@ class GameViewController: UIViewController {
     }
     
     @IBAction private func endTurnTapped(_ sender: Any) {
-        if let move = segmentedMoves["endTurn"]?.first {
-            environment.engine.execute(move)
+        guard let moves = segmentedMoves["endTurn"] else {
+            return
+        }
+        
+        inputHandler.selectMove(among: moves, context: nil, cancelable: true) { [weak self] move in
+            self?.environment.engine.execute(move)
         }
     }
     
     @IBAction private func otherMovesTapped(_ sender: Any) {
-        if let moves = segmentedMoves["*"] {
-            playMove(among: moves)
+        guard let moves = segmentedMoves["*"] else {
+            return
+        }
+        
+        inputHandler.selectMove(among: moves, context: nil, cancelable: true) { [weak self] move in
+            self?.environment.engine.execute(move)
         }
     }
 }
@@ -133,10 +150,8 @@ private extension GameViewController {
     func processEvent(_ event: GEvent) {
         switch event {
         case let .activate(moves):
-            processValidMoves(moves)
-            
-        case let .play(move):
-            processExecutedMove(move)
+            let moves = moves.filter { $0.actor == environment.controlledId }
+            processMoves(moves)
             
         case let .gameover(winner):
             showGameOver(winner)
@@ -147,39 +162,27 @@ private extension GameViewController {
         }
         
         updateAnimator?.animate(on: event, in: state)
-        moveSoundPlayer?.playSound(on: event)
-    }
-    
-    func processExecutedMove(_ move: GMove) {
-        messages.append(messageAdapter.description(for: move))
+        sfxPlayer?.playSound(on: event)
+        
+        messages.append("\(eventMatcher.emoji(event)) \(event)")
         messageTableView.reloadDataScrollingAtBottom()
     }
     
-    func processValidMoves(_ moves: [GMove]) {
-        let moves = moves.filter { $0.actor == environment.controlledId }
-        
-        if let hit = state.hits.first,
-           let selection = moveSelector.select(reactionTo: hit.name, moves: moves) {
-            let alert = UIAlertController(title: selection.title, 
-                                          options: selection.options,
-                                          cancelable: false,
-                                          completion: { [weak self] index in 
-                                            self?.environment.engine.execute(moves[index])
-                                          })
-            present(alert, animated: true)
-        }
-        
+    func processMoves(_ moves: [GMove]) {
         segmentedMoves = moveSegmenter.segment(moves)
+        
         handCollectionView.reloadData()
         endTurnButton.isEnabled = segmentedMoves["endTurn"] != nil
         otherMovesButton.isEnabled = segmentedMoves["*"] != nil
         
-        // <HACK> Autocast startTurn
-        if moves.count == 1, 
-           state.phase == 1 {
-            environment.engine.execute(moves[0])
+        // <RULE> Force select reaction moves
+        if !moves.isEmpty,
+           let hit = state.hits.first {
+            inputHandler.selectMove(among: moves, context: hit.name, cancelable: false) { [weak self] move in
+                self?.environment.engine.execute(move)
+            }
         }
-        // </HACK>
+        // </RULE> 
     }
     
     func showGameOver(_ winner: Role) {
@@ -220,10 +223,6 @@ private extension GameViewController {
         return result
     }
     
-    func buildCardSize() -> CGSize {
-        discardImageView.bounds.size
-    }
-    
     func showRoles() {
         let roles = GSetup().roles(for: state.players.count)
         let rolesWithCount: [String] = Role.allCases.compactMap { role in
@@ -234,27 +233,6 @@ private extension GameViewController {
         }
         let message = rolesWithCount.joined(separator: "\n")
         let alert = UIAlertController(title: "Roles", message: message, closeAction: "Close")
-        present(alert, animated: true)
-    }
-    
-    func playMove(among moves: [GMove]) {
-        guard let selection = moveSelector.select(active: moves) else {
-            return
-        }
-        
-        // <HACK> No selector for single no args move
-        if selection.options.count == 1, 
-           selection.options[0].isEmpty {
-            environment.engine.execute(moves[0])
-            return
-        }
-        // </HACK>
-        
-        let alert = UIAlertController(title: selection.title,
-                                      options: selection.options,
-                                      completion: { [weak self] index in
-                                        self?.environment.engine.execute(moves[index])
-                                      })
         present(alert, animated: true)
     }
 }
@@ -340,7 +318,10 @@ extension GameViewController: UICollectionViewDelegate {
         guard let moves = segmentedMoves[handCards[indexPath.row].identifier] else {
             return
         }
-        playMove(among: moves)
+        
+        inputHandler.selectMove(among: moves, context: nil, cancelable: true) { [weak self] move in
+            self?.environment.engine.execute(move)
+        }
     }
 }
 
