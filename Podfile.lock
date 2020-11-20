@@ -131,7 +131,7 @@ PODS:
   - PromisesObjC (1.2.11)
   - Resolver (1.0.7)
   - RxSwift (5.1.1)
-  - SwiftLint (0.40.3)
+  - SwiftLint (0.41.0)
 
 DEPENDENCIES:
   - "CardGameEngine (from `git@bitbucket.org:stephanotelolahy/cardgameengine.git`, branch `fix/moves`)"
@@ -182,7 +182,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   CardGameEngine:
-    :commit: 5cdd1015c122ca2b814e24aa854b094bb497683c
+    :commit: 90f85ca11f789bbaef22f533844d365710d6e890
     :git: "git@bitbucket.org:stephanotelolahy/cardgameengine.git"
 
 SPEC CHECKSUMS:
@@ -211,7 +211,7 @@ SPEC CHECKSUMS:
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   Resolver: da30396fcabb46790959209430a4a0a9e6e39849
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
-  SwiftLint: dfd554ff0dff17288ee574814ccdd5cea85d76f7
+  SwiftLint: c585ebd615d9520d7fbdbe151f527977b0534f1e
 
 PODFILE CHECKSUM: 81964b522a742d3e48131a98cdeeb9add4a95772
 

@@ -23,30 +23,34 @@ class InputHandler: InputHandlerProtocol {
     }
     
     func selectMove(among moves: [GMove], context: String?, cancelable: Bool, completion: @escaping (GMove) -> Void) {
-        let node = selector.select(active: moves)
+        var root = selector.select(active: moves)
         
-        if let move = node.value {
-            let alert = UIAlertController(title: context ?? node.name ?? "Play", 
-                                          options: [context != nil ? node.name! : "OK"],
-                                          cancelable: cancelable) { _ in
-                completion(move)
+        if let hit = context {
+            switch root.value {
+            case let .options(nodes):
+                root = MoveNode(name: hit, value: .options(nodes))
+                
+            case let .move(move):
+                root = MoveNode(name: hit, value: .options([MoveNode(name: move.name, value: .move(move))]))
             }
-            viewController?.present(alert, animated: true)
+        }
+        
+        select(root, cancelable: cancelable, completion: completion)
+    }
+}
+
+private extension InputHandler {
+    
+    func select(_ node: MoveNode, cancelable: Bool, completion: @escaping (GMove) -> Void) {
+        switch node.value {
+        case let .move(move):
+            completion(move)
             
-        } else {
-            
-            let children = node.children!
-            let options = children.map { $0.name! }
-            let alert = UIAlertController(title: context ?? node.name ?? "Play", 
-                                          options: options,
-                                          cancelable: cancelable) { index in
-                let child = children[index]
-                if let childMove = child.value {
-                    completion(childMove)
-                } else {
-                    #warning("TODO: open alert to choose sub-options")
-                    fatalError("Unsupported")
-                }
+        case let .options(children):
+            let alert = UIAlertController(title: node.name, 
+                                          options: children.map { $0.name },
+                                          cancelable: cancelable) { [weak self] index in
+                self?.select(children[index], cancelable: cancelable, completion: completion)
             }
             viewController?.present(alert, animated: true)
         }
