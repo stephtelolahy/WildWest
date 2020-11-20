@@ -25,13 +25,13 @@ class InputHandler: InputHandlerProtocol {
     func selectMove(among moves: [GMove], context: String?, cancelable: Bool, completion: @escaping (GMove) -> Void) {
         var root = selector.select(active: moves)
         
-        if let hit = context {
+        if let context = context {
             switch root.value {
             case let .options(nodes):
-                root = MoveNode(name: hit, value: .options(nodes))
+                root = MoveNode(name: context, value: .options(nodes))
                 
             case let .move(move):
-                root = MoveNode(name: hit, value: .options([MoveNode(name: move.name, value: .move(move))]))
+                root = MoveNode(name: context, value: .options([MoveNode(name: move.name, value: .move(move))]))
             }
         }
         

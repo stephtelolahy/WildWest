@@ -48,6 +48,7 @@
 		33515800245D892700C46888 /* KeyGeneratorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335157FF245D892700C46888 /* KeyGeneratorProtocol.swift */; };
 		33515801245D892700C46888 /* KeyGeneratorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335157FF245D892700C46888 /* KeyGeneratorProtocol.swift */; };
 		33516CCA2450A79E003C99E2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33516CC92450A79E003C99E2 /* GoogleService-Info.plist */; };
+		335447622568825800D7B02C /* ResourcesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335447612568825800D7B02C /* ResourcesTests.swift */; };
 		335BED692429334F009184A3 /* SFXPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335BED682429334F009184A3 /* SFXPlayer.swift */; };
 		335BED7824293431009184A3 /* Western Ricochet-SoundBible.com-1725886901.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED722429342F009184A3 /* Western Ricochet-SoundBible.com-1725886901.mp3 */; };
 		335BED7924293431009184A3 /* Horse Galloping-SoundBible.com-1451398148.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED732429342F009184A3 /* Horse Galloping-SoundBible.com-1451398148.mp3 */; };
@@ -168,6 +169,7 @@
 		335157F8245D860600C46888 /* DtoEncodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DtoEncodingTests.swift; sourceTree = "<group>"; };
 		335157FF245D892700C46888 /* KeyGeneratorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyGeneratorProtocol.swift; sourceTree = "<group>"; };
 		33516CC92450A79E003C99E2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		335447612568825800D7B02C /* ResourcesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesTests.swift; sourceTree = "<group>"; };
 		335BED682429334F009184A3 /* SFXPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFXPlayer.swift; sourceTree = "<group>"; };
 		335BED722429342F009184A3 /* Western Ricochet-SoundBible.com-1725886901.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Western Ricochet-SoundBible.com-1725886901.mp3"; sourceTree = "<group>"; };
 		335BED732429342F009184A3 /* Horse Galloping-SoundBible.com-1451398148.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Horse Galloping-SoundBible.com-1451398148.mp3"; sourceTree = "<group>"; };
@@ -417,7 +419,7 @@
 			isa = PBXGroup;
 			children = (
 				332499B223DB9F650082EF09 /* GameViewController.swift */,
-				3372615C2563951800AE8964 /* InputHandler.swift */,
+				33E8633A2568E12C00558E85 /* input */,
 				33AA9B132557E69200A97910 /* instruction */,
 				333DB7C924D55008002A5692 /* players */,
 				333DB7C724D54FF4002A5692 /* hand */,
@@ -491,6 +493,14 @@
 				33E4411A24077CA000B2848E /* MessageCell.swift */,
 			);
 			path = message;
+			sourceTree = "<group>";
+		};
+		33E8633A2568E12C00558E85 /* input */ = {
+			isa = PBXGroup;
+			children = (
+				3372615C2563951800AE8964 /* InputHandler.swift */,
+			);
+			path = input;
 			sourceTree = "<group>";
 		};
 		33FB59B52427F68100090D23 /* ui */ = {
@@ -576,6 +586,7 @@
 		ADB7D301239EE03900653905 /* WildWestTests */ = {
 			isa = PBXGroup;
 			children = (
+				335447612568825800D7B02C /* ResourcesTests.swift */,
 				335157F1245D851900C46888 /* firebase */,
 				33FB59B52427F68100090D23 /* ui */,
 				ADB7D304239EE03900653905 /* Info.plist */,
@@ -959,6 +970,7 @@
 				335157FB245D889900C46888 /* PlayerDto.swift in Sources */,
 				33515801245D892700C46888 /* KeyGeneratorProtocol.swift in Sources */,
 				3346F32924CB1D7800FB0418 /* DtoEncoder+User.swift in Sources */,
+				335447622568825800D7B02C /* ResourcesTests.swift in Sources */,
 				335157FA245D888F00C46888 /* GameStateDto.swift in Sources */,
 				3346F33824CB289500FB0418 /* DtoEncoder+Player.swift in Sources */,
 				335157FD245D88B100C46888 /* GameUpdateDto.swift in Sources */,
