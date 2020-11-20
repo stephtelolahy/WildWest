@@ -14,35 +14,23 @@ protocol GameCollectionViewLayoutDelegate: class {
 
 class GameCollectionViewLayout: UICollectionViewLayout {
     
+    weak var delegate: GameCollectionViewLayoutDelegate?
+    
     //An array to cache the calculated attributes
     private var cache: [UICollectionViewLayoutAttributes] = []
     
     private let cellPadding: CGFloat = 16
     
-    //For content size
-    private var contentHeight: CGFloat {
-        guard let collectionView = collectionView else {
-            return 0
-        }
-        
-        let insets = collectionView.contentInset
-        return collectionView.bounds.height - (insets.left + insets.right)
-    }
-    
-    private var contentWidth: CGFloat {
-        guard let collectionView = collectionView else {
-            return 0
-        }
-        
-        let insets = collectionView.contentInset
-        return collectionView.bounds.width - (insets.left + insets.right)
-    }
-    
-    weak var delegate: GameCollectionViewLayoutDelegate?
-    
     //Setting the content size
     override var collectionViewContentSize: CGSize {
-        CGSize(width: contentWidth, height: contentHeight)
+        guard let collectionView = collectionView else {
+            fatalError("Illegal state")
+        }
+        
+        let insets = collectionView.contentInset
+        let bounds = collectionView.bounds
+        return CGSize(width: bounds.width - (insets.left + insets.right),
+                      height: bounds.height - (insets.left + insets.right))
     }
     
     override func prepare() {

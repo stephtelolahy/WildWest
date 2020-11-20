@@ -51,15 +51,15 @@ class GameViewController: UIViewController {
         return EventMatcher(media: media)
     }()
     
-    private lazy var sfxPlayer: SFXPlayerProtocol? = {
-        preferences.enableSound ? SFXPlayer() : nil
-    }()
+    private lazy var sfxPlayer: SFXPlayerProtocol = SFXPlayer()
+    private lazy var inputHandler: InputHandlerProtocol = InputHandler(selector: MoveSelector(), viewController: self)
     
-    private lazy var inputHandler: InputHandlerProtocol = {
-        InputHandler(selector: MoveSelector(), viewController: self)  
+    private lazy var updateAnimator: UpdateAnimatorProtocol = {
+        UpdateAnimator(viewController: self,
+                       cardPositions: buildCardPositions(),
+                       cardSize: discardImageView.bounds.size,
+                       updateDelay: preferences.updateDelay)
     }()
-    
-    private var updateAnimator: UpdateAnimatorProtocol?
     
     private let disposeBag = DisposeBag()
     
@@ -86,14 +86,6 @@ class GameViewController: UIViewController {
         .disposed(by: disposeBag)
         
         showRoles()
-        
-        // Wait until collectionView loaded to initialize updateAnimator
-        playersCollectionView.performBatchUpdates(nil) { [self] _ in
-            updateAnimator = UpdateAnimator(viewController: self,
-                                            cardPositions: buildCardPositions(),
-                                            cardSize: discardImageView.bounds.size,
-                                            updateDelay: preferences.updateDelay)
-        }
     }
     
     // MARK: IBAction
@@ -161,8 +153,8 @@ private extension GameViewController {
             break
         }
         
-        updateAnimator?.animate(on: event, in: state)
-        sfxPlayer?.playSound(on: event)
+//        updateAnimator.animate(on: event, in: state)
+        sfxPlayer.playSound(on: event)
         
         messages.append("\(eventMatcher.emoji(event)) \(event)")
         messageTableView.reloadDataScrollingAtBottom()
