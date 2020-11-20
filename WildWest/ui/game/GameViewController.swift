@@ -158,6 +158,10 @@ private extension GameViewController {
         
         messages.append("\(eventMatcher.emoji(event)) \(event)")
         messageTableView.reloadDataScrollingAtBottom()
+        
+        #if DEBUG
+        print("\(eventMatcher.emoji(event)) \(event)")
+        #endif
     }
     
     func processMoves(_ moves: [GMove]) {
