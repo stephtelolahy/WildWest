@@ -107,7 +107,7 @@ private extension MenuViewController {
             figureButton.setImage(UIImage(named: figure), for: .normal)
             figureLabel.text = "Play as \(figure)"
         } else {
-            figureButton.setImage(#imageLiteral(resourceName: "01_random"), for: .normal)
+            figureButton.setImage(nil, for: .normal)
             figureLabel.text = "Play as random"
         }
     }
@@ -117,7 +117,7 @@ private extension MenuViewController {
             roleButton.setImage(UIImage(named: role.rawValue), for: .normal)
             roleLabel.text = role.rawValue
         } else {
-            roleButton.setImage(#imageLiteral(resourceName: "01_random"), for: .normal)
+            roleButton.setImage(nil, for: .normal)
             roleLabel.text = "random"
         }
     }
