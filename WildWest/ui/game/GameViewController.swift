@@ -54,11 +54,11 @@ class GameViewController: UIViewController {
     private lazy var sfxPlayer: SFXPlayerProtocol = SFXPlayer()
     private lazy var inputHandler: InputHandlerProtocol = InputHandler(selector: MoveSelector(), viewController: self)
     
-    private lazy var updateAnimator: UpdateAnimatorProtocol = {
-        UpdateAnimator(viewController: self,
-                       cardPositions: buildCardPositions(),
-                       cardSize: discardImageView.bounds.size,
-                       updateDelay: preferences.updateDelay)
+    private lazy var eventAnimator: EventAnimatorProtocol = {
+        EventAnimator(viewController: self,
+                      cardPositions: buildCardPositions(),
+                      cardSize: discardImageView.bounds.size,
+                      updateDelay: preferences.updateDelay)
     }()
     
     private let disposeBag = DisposeBag()
@@ -156,7 +156,7 @@ private extension GameViewController {
             break
         }
         
-        updateAnimator.animate(on: event, in: state)
+        eventAnimator.animate(on: event, in: state)
         sfxPlayer.playSound(on: event)
         
         messages.append("\(eventMatcher.emoji(event)) \(event)")
@@ -194,8 +194,8 @@ private extension GameViewController {
         present(alert, animated: true)
     }
     
-    func buildCardPositions() -> [CardPlace: CGPoint] {
-        var result: [CardPlace: CGPoint] = [:]
+    func buildCardPositions() -> [CardArea: CGPoint] {
+        var result: [CardArea: CGPoint] = [:]
         
         guard let discardCenter = discardImageView.superview?.convert(discardImageView.center, to: view),
               let deckCenter = deckImageView.superview?.convert(deckImageView.center, to: view)  else {
@@ -203,18 +203,18 @@ private extension GameViewController {
         }
         
         result[.deck] = deckCenter
+        result[.store] = deckCenter
         result[.discard] = discardCenter
         
         let playerIds = state.initialOrder
         for (index, playerId) in playerIds.enumerated() {
-            guard let cell = playersCollectionView.cellForItem(at: IndexPath(row: index, section: 0)),
-                  let cellCenter = cell.superview?.convert(cell.center, to: view) else {
+            guard let attribute = playersCollectionView.collectionViewLayout
+                    .layoutAttributesForItem(at: IndexPath(row: index, section: 0)) else {
                 fatalError("Illegal state")
             }
-            
+            let cellCenter = playersCollectionView.convert(attribute.center, to: view)
             let handPosition = cellCenter
-            let inPlayPosition = cellCenter.applying(CGAffineTransform(translationX: cell.bounds.size.height / 2, y: 0))
-            
+            let inPlayPosition = cellCenter.applying(CGAffineTransform(translationX: attribute.bounds.size.height / 2, y: 0))
             result[.hand(playerId)] = handPosition
             result[.inPlay(playerId)] = inPlayPosition
         }
