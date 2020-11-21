@@ -58,7 +58,8 @@ class GameViewController: UIViewController {
         EventAnimator(viewController: self,
                       cardPositions: buildCardPositions(),
                       cardSize: discardImageView.bounds.size,
-                      updateDelay: preferences.updateDelay)
+                      updateDelay: preferences.updateDelay,
+                      eventMatcher: eventMatcher)
     }()
     
     private let disposeBag = DisposeBag()
