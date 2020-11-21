@@ -84,7 +84,10 @@ class GameViewController: UIViewController {
             self?.processEvent(update)
         })
         .disposed(by: disposeBag)
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         showRoles()
     }
     
@@ -153,7 +156,7 @@ private extension GameViewController {
             break
         }
         
-//        updateAnimator.animate(on: event, in: state)
+        updateAnimator.animate(on: event, in: state)
         sfxPlayer.playSound(on: event)
         
         messages.append("\(eventMatcher.emoji(event)) \(event)")
