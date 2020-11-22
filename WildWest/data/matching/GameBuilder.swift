@@ -35,14 +35,14 @@ class GameBuilder: GameBuilderProtocol {
     func createGame(for playersCount: Int) -> StateProtocol {
         let cards = resourcesLoader.loadCards()
         let cardSet = resourcesLoader.loadDeck()
-        let scenario = resourcesLoader.loadDefault()
+        let defaults = resourcesLoader.loadDefaults()
         
         let setup = GSetup()
         let roles = setup.roles(for: playersCount)
         return setup.setupGame(roles: roles,
                                cards: cards,
                                cardSet: cardSet,
-                               scenario: scenario,
+                               defaults: defaults,
                                preferredRole: preferences.preferredRole,
                                preferredFigure: preferences.preferredFigure)
     }
