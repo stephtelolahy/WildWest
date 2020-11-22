@@ -15,16 +15,10 @@ class InstructionBuilder: InstructionBuilderProtocol {
     func buildInstruction(state: StateProtocol, for controlledPlayerId: String?) -> String {
         if controlledPlayerId == nil {
             return "viewing game"
-        }
-        
-//        if let challenge = state.challenge {
-//            return challenge.name.rawValue
-//        }
-        
-        if controlledPlayerId != state.turn {
+        } else if controlledPlayerId != state.turn {
             return "waiting others to play"
+        } else {
+            return "play any card"
         }
-        
-        return "play any card"
     }
 }

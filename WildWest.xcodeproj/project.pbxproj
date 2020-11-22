@@ -11,7 +11,7 @@
 		33031E0D2455513000528158 /* ThemeMusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33031E0C2455513000528158 /* ThemeMusicPlayer.swift */; };
 		33031E0F24555D5F00528158 /* OptionalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33031E0E24555D5F00528158 /* OptionalExtension.swift */; };
 		3306682E245588B9003B2263 /* FirebaseMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3306682D245588B9003B2263 /* FirebaseMapper.swift */; };
-		33112E70244503EA009C706E /* UpdateAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33112E6F244503EA009C706E /* UpdateAnimator.swift */; };
+		33112E70244503EA009C706E /* EventAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33112E6F244503EA009C706E /* EventAnimator.swift */; };
 		3322C4B3245236D500D7B297 /* RemoteGameDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4B2245236D500D7B297 /* RemoteGameDatabase.swift */; };
 		3322C4B62452379700D7B297 /* GameStateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4B52452379700D7B297 /* GameStateDto.swift */; };
 		3324018E23DBA6C800B92439 /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */; };
@@ -48,6 +48,7 @@
 		33515800245D892700C46888 /* KeyGeneratorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335157FF245D892700C46888 /* KeyGeneratorProtocol.swift */; };
 		33515801245D892700C46888 /* KeyGeneratorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335157FF245D892700C46888 /* KeyGeneratorProtocol.swift */; };
 		33516CCA2450A79E003C99E2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33516CC92450A79E003C99E2 /* GoogleService-Info.plist */; };
+		335447622568825800D7B02C /* ResourcesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335447612568825800D7B02C /* ResourcesTests.swift */; };
 		335BED692429334F009184A3 /* SFXPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335BED682429334F009184A3 /* SFXPlayer.swift */; };
 		335BED7824293431009184A3 /* Western Ricochet-SoundBible.com-1725886901.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED722429342F009184A3 /* Western Ricochet-SoundBible.com-1725886901.mp3 */; };
 		335BED7924293431009184A3 /* Horse Galloping-SoundBible.com-1451398148.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED732429342F009184A3 /* Horse Galloping-SoundBible.com-1451398148.mp3 */; };
@@ -74,21 +75,16 @@
 		335BED9F2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */; };
 		335C03BE2459F5C200043F46 /* GameMoveDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335C03BD2459F5C200043F46 /* GameMoveDto.swift */; };
 		33639FDA24CB421D00F48727 /* WaitingRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33639FD924CB421D00F48727 /* WaitingRoomViewController.swift */; };
-		3366E199255BEA0300A5ABCC /* MoveSegmenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3366E198255BEA0300A5ABCC /* MoveSegmenter.swift */; };
-		3366E19A255BEA0300A5ABCC /* MoveSegmenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3366E198255BEA0300A5ABCC /* MoveSegmenter.swift */; };
-		3366E19F255BEAA600A5ABCC /* MoveSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337B5A55255BB7350079AA14 /* MoveSelector.swift */; };
-		3366E1A3255BED0500A5ABCC /* MoveSegmenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3366E1A2255BED0500A5ABCC /* MoveSegmenterTests.swift */; };
 		3371A3A724D6B44300D78FDC /* UIViewController+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3371A3A624D6B44300D78FDC /* UIViewController+Navigation.swift */; };
 		3371A3A924D6CFDD00D78FDC /* AccountProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3371A3A824D6CFDD00D78FDC /* AccountProvider.swift */; };
 		3371A3AD24D6D3FB00D78FDC /* 2017-03-24_-_Lone_Rider_-_David_Fesliyan.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3371A3AC24D6D3FB00D78FDC /* 2017-03-24_-_Lone_Rider_-_David_Fesliyan.mp3 */; };
+		3372615D2563951800AE8964 /* InputHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372615C2563951800AE8964 /* InputHandler.swift */; };
 		3372CB522454BC7900C061C9 /* FigureSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372CB512454BC7900C061C9 /* FigureSelector.swift */; };
 		3372CB542454BF8E00C061C9 /* GameBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372CB532454BF8E00C061C9 /* GameBuilder.swift */; };
 		33734AE92454AB3000A5D2DA /* DictionaryEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AE82454AB3000A5D2DA /* DictionaryEncoder.swift */; };
 		33734AF12454ABF200A5D2DA /* PlayerDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AF02454ABF200A5D2DA /* PlayerDto.swift */; };
 		33734AF52454AD7200A5D2DA /* DtoEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AF42454AD7200A5D2DA /* DtoEncoder.swift */; };
 		337AE25825587F16004015ED /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337AE25725587F16004015ED /* UIAlertControllerExtension.swift */; };
-		337B5A52255BB7190079AA14 /* MoveSelectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337B5A51255BB7190079AA14 /* MoveSelectorTests.swift */; };
-		337B5A56255BB7350079AA14 /* MoveSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337B5A55255BB7350079AA14 /* MoveSelector.swift */; };
 		3383CFCE242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3383CFCD242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 */; };
 		3383CFD0242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3383CFCF242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 */; };
 		338A5FC0242BC8CE00766541 /* flyby-Conor-1500306612.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 338A5FBF242BC8CE00766541 /* flyby-Conor-1500306612.mp3 */; };
@@ -127,13 +123,12 @@
 		33F36ABC24CB0DD0000533A4 /* DtoEncoder+Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F36ABA24CB0DD0000533A4 /* DtoEncoder+Move.swift */; };
 		33FB59B82427F6D000090D23 /* PlayersAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E4411524077CA000B2848E /* PlayersAdapter.swift */; };
 		33FDD70C240BFB4B00BC3E14 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */; };
+		618C8905891D660072538B42 /* Pods_WildWest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85A01BCE4EF1686CFB3EAB04 /* Pods_WildWest.framework */; };
 		ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D2EB239EE03800653905 /* AppDelegate.swift */; };
 		ADB7D2F3239EE03800653905 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F1239EE03800653905 /* Main.storyboard */; };
 		ADB7D2F5239EE03900653905 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F4239EE03900653905 /* Assets.xcassets */; };
 		ADB7D2F8239EE03900653905 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F6239EE03900653905 /* LaunchScreen.storyboard */; };
-		ADD4DB6E24209E4D001BBD48 /* MessageAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD4DB6D24209E4D001BBD48 /* MessageAdapter.swift */; };
-		D32FEDB51BC388D8C4BF924E /* libPods-WildWestTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 997450381941D5B6CC8038B9 /* libPods-WildWestTests.a */; };
-		D33B4CC3920D72DDCF571F0E /* Pods_WildWest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C41E8ADCD4ACB340919D5B /* Pods_WildWest.framework */; };
+		B0D8BDA088E445DCB7CB76C0 /* libPods-WildWestTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DF1623822E9BEA26705813E /* libPods-WildWestTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,12 +142,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2FF97C8B3AEC3C1A26AE4F92 /* Pods-WildWest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.release.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.release.xcconfig"; sourceTree = "<group>"; };
 		33029EAC24C74B8F002A5E54 /* DatabaseReference+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DatabaseReference+Rx.swift"; sourceTree = "<group>"; };
 		33031E0C2455513000528158 /* ThemeMusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeMusicPlayer.swift; sourceTree = "<group>"; };
 		33031E0E24555D5F00528158 /* OptionalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OptionalExtension.swift; path = ../data/firebase/mapper/OptionalExtension.swift; sourceTree = "<group>"; };
 		3306682D245588B9003B2263 /* FirebaseMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseMapper.swift; sourceTree = "<group>"; };
-		33112E6F244503EA009C706E /* UpdateAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAnimator.swift; sourceTree = "<group>"; };
+		33112E6F244503EA009C706E /* EventAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAnimator.swift; sourceTree = "<group>"; };
 		3322C4B2245236D500D7B297 /* RemoteGameDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteGameDatabase.swift; sourceTree = "<group>"; };
 		3322C4B52452379700D7B297 /* GameStateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateDto.swift; sourceTree = "<group>"; };
 		3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
@@ -175,6 +169,7 @@
 		335157F8245D860600C46888 /* DtoEncodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DtoEncodingTests.swift; sourceTree = "<group>"; };
 		335157FF245D892700C46888 /* KeyGeneratorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyGeneratorProtocol.swift; sourceTree = "<group>"; };
 		33516CC92450A79E003C99E2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		335447612568825800D7B02C /* ResourcesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesTests.swift; sourceTree = "<group>"; };
 		335BED682429334F009184A3 /* SFXPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFXPlayer.swift; sourceTree = "<group>"; };
 		335BED722429342F009184A3 /* Western Ricochet-SoundBible.com-1725886901.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Western Ricochet-SoundBible.com-1725886901.mp3"; sourceTree = "<group>"; };
 		335BED732429342F009184A3 /* Horse Galloping-SoundBible.com-1451398148.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Horse Galloping-SoundBible.com-1451398148.mp3"; sourceTree = "<group>"; };
@@ -192,19 +187,16 @@
 		335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Automatic Machine Gun-SoundBible.com-253461580.mp3"; sourceTree = "<group>"; };
 		335C03BD2459F5C200043F46 /* GameMoveDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMoveDto.swift; sourceTree = "<group>"; };
 		33639FD924CB421D00F48727 /* WaitingRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomViewController.swift; sourceTree = "<group>"; };
-		3366E198255BEA0300A5ABCC /* MoveSegmenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveSegmenter.swift; sourceTree = "<group>"; };
-		3366E1A2255BED0500A5ABCC /* MoveSegmenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveSegmenterTests.swift; sourceTree = "<group>"; };
 		3371A3A624D6B44300D78FDC /* UIViewController+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Navigation.swift"; sourceTree = "<group>"; };
 		3371A3A824D6CFDD00D78FDC /* AccountProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProvider.swift; sourceTree = "<group>"; };
 		3371A3AC24D6D3FB00D78FDC /* 2017-03-24_-_Lone_Rider_-_David_Fesliyan.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "2017-03-24_-_Lone_Rider_-_David_Fesliyan.mp3"; sourceTree = "<group>"; };
+		3372615C2563951800AE8964 /* InputHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputHandler.swift; sourceTree = "<group>"; };
 		3372CB512454BC7900C061C9 /* FigureSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FigureSelector.swift; sourceTree = "<group>"; };
 		3372CB532454BF8E00C061C9 /* GameBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBuilder.swift; sourceTree = "<group>"; };
 		33734AE82454AB3000A5D2DA /* DictionaryEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryEncoder.swift; sourceTree = "<group>"; };
 		33734AF02454ABF200A5D2DA /* PlayerDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDto.swift; sourceTree = "<group>"; };
 		33734AF42454AD7200A5D2DA /* DtoEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DtoEncoder.swift; sourceTree = "<group>"; };
 		337AE25725587F16004015ED /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
-		337B5A51255BB7190079AA14 /* MoveSelectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveSelectorTests.swift; sourceTree = "<group>"; };
-		337B5A55255BB7350079AA14 /* MoveSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveSelector.swift; sourceTree = "<group>"; };
 		3383CFCD242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Metal Clang-SoundBible.com-19572601.mp3"; sourceTree = "<group>"; };
 		3383CFCF242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Ta Da-SoundBible.com-1884170640.mp3"; sourceTree = "<group>"; };
 		338A5FBF242BC8CE00766541 /* flyby-Conor-1500306612.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "flyby-Conor-1500306612.mp3"; sourceTree = "<group>"; };
@@ -235,9 +227,10 @@
 		33EAD12724D4A4080052A97C /* UIStoryboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtension.swift; sourceTree = "<group>"; };
 		33F36ABA24CB0DD0000533A4 /* DtoEncoder+Move.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DtoEncoder+Move.swift"; sourceTree = "<group>"; };
 		33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		35F41BA092B7A7796FA3F806 /* Pods-WildWestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.debug.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.debug.xcconfig"; sourceTree = "<group>"; };
-		4B5AEE954AF0E177C62E974F /* Pods-WildWestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.release.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.release.xcconfig"; sourceTree = "<group>"; };
-		997450381941D5B6CC8038B9 /* libPods-WildWestTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WildWestTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		64B4803454AD3DC9D88F268C /* Pods-WildWest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.debug.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.debug.xcconfig"; sourceTree = "<group>"; };
+		85A01BCE4EF1686CFB3EAB04 /* Pods_WildWest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DF1623822E9BEA26705813E /* libPods-WildWestTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WildWestTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		94F61BA9048076D97EEC749B /* Pods-WildWest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.release.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.release.xcconfig"; sourceTree = "<group>"; };
 		ADB7D2E8239EE03800653905 /* WildWest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WildWest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB7D2EB239EE03800653905 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADB7D2F2239EE03800653905 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -246,9 +239,8 @@
 		ADB7D2F9239EE03900653905 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADB7D2FE239EE03900653905 /* WildWestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WildWestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB7D304239EE03900653905 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ADD4DB6D24209E4D001BBD48 /* MessageAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAdapter.swift; sourceTree = "<group>"; };
-		CA12E847088D5CEC88C7A8BF /* Pods-WildWest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.debug.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.debug.xcconfig"; sourceTree = "<group>"; };
-		D1C41E8ADCD4ACB340919D5B /* Pods_WildWest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BAE16C3BAAAE8633ECFBC16E /* Pods-WildWestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.release.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.release.xcconfig"; sourceTree = "<group>"; };
+		DB66554CF5F2E34E065D1A17 /* Pods-WildWestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.debug.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,7 +248,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D33B4CC3920D72DDCF571F0E /* Pods_WildWest.framework in Frameworks */,
+				618C8905891D660072538B42 /* Pods_WildWest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,7 +256,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D32FEDB51BC388D8C4BF924E /* libPods-WildWestTests.a in Frameworks */,
+				B0D8BDA088E445DCB7CB76C0 /* libPods-WildWestTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,10 +266,10 @@
 		0B678BA1DAA05FDC7F98BA1E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				CA12E847088D5CEC88C7A8BF /* Pods-WildWest.debug.xcconfig */,
-				2FF97C8B3AEC3C1A26AE4F92 /* Pods-WildWest.release.xcconfig */,
-				35F41BA092B7A7796FA3F806 /* Pods-WildWestTests.debug.xcconfig */,
-				4B5AEE954AF0E177C62E974F /* Pods-WildWestTests.release.xcconfig */,
+				64B4803454AD3DC9D88F268C /* Pods-WildWest.debug.xcconfig */,
+				94F61BA9048076D97EEC749B /* Pods-WildWest.release.xcconfig */,
+				DB66554CF5F2E34E065D1A17 /* Pods-WildWestTests.debug.xcconfig */,
+				BAE16C3BAAAE8633ECFBC16E /* Pods-WildWestTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -285,7 +277,7 @@
 		33112E71244503F1009C706E /* animator */ = {
 			isa = PBXGroup;
 			children = (
-				33112E6F244503EA009C706E /* UpdateAnimator.swift */,
+				33112E6F244503EA009C706E /* EventAnimator.swift */,
 				33BC633E2444D0FF00760F25 /* UIViewController+CardAnimation.swift */,
 			);
 			path = animator;
@@ -427,8 +419,7 @@
 			isa = PBXGroup;
 			children = (
 				332499B223DB9F650082EF09 /* GameViewController.swift */,
-				337B5A55255BB7350079AA14 /* MoveSelector.swift */,
-				3366E198255BEA0300A5ABCC /* MoveSegmenter.swift */,
+				33E8633A2568E12C00558E85 /* input */,
 				33AA9B132557E69200A97910 /* instruction */,
 				333DB7C924D55008002A5692 /* players */,
 				333DB7C724D54FF4002A5692 /* hand */,
@@ -499,18 +490,23 @@
 		33E4411724077CA000B2848E /* message */ = {
 			isa = PBXGroup;
 			children = (
-				ADD4DB6D24209E4D001BBD48 /* MessageAdapter.swift */,
 				33E4411A24077CA000B2848E /* MessageCell.swift */,
 			);
 			path = message;
+			sourceTree = "<group>";
+		};
+		33E8633A2568E12C00558E85 /* input */ = {
+			isa = PBXGroup;
+			children = (
+				3372615C2563951800AE8964 /* InputHandler.swift */,
+			);
+			path = input;
 			sourceTree = "<group>";
 		};
 		33FB59B52427F68100090D23 /* ui */ = {
 			isa = PBXGroup;
 			children = (
 				33B896C624384B180005FF21 /* GameLayoutBuilderTests.swift */,
-				337B5A51255BB7190079AA14 /* MoveSelectorTests.swift */,
-				3366E1A2255BED0500A5ABCC /* MoveSegmenterTests.swift */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -524,15 +520,6 @@
 				33031E0C2455513000528158 /* ThemeMusicPlayer.swift */,
 			);
 			path = menu;
-			sourceTree = "<group>";
-		};
-		63E5561B0D5B08842C1FBEE2 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D1C41E8ADCD4ACB340919D5B /* Pods_WildWest.framework */,
-				997450381941D5B6CC8038B9 /* libPods-WildWestTests.a */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		AD36CDDF23C51F08008D4EDB /* misc */ = {
@@ -567,7 +554,7 @@
 				ADB7D301239EE03900653905 /* WildWestTests */,
 				ADB7D2E9239EE03800653905 /* Products */,
 				0B678BA1DAA05FDC7F98BA1E /* Pods */,
-				63E5561B0D5B08842C1FBEE2 /* Frameworks */,
+				DCB5082A5858B156C5A5E0A4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -599,6 +586,7 @@
 		ADB7D301239EE03900653905 /* WildWestTests */ = {
 			isa = PBXGroup;
 			children = (
+				335447612568825800D7B02C /* ResourcesTests.swift */,
 				335157F1245D851900C46888 /* firebase */,
 				33FB59B52427F68100090D23 /* ui */,
 				ADB7D304239EE03900653905 /* Info.plist */,
@@ -619,6 +607,15 @@
 			path = ui;
 			sourceTree = "<group>";
 		};
+		DCB5082A5858B156C5A5E0A4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				85A01BCE4EF1686CFB3EAB04 /* Pods_WildWest.framework */,
+				8DF1623822E9BEA26705813E /* libPods-WildWestTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -626,14 +623,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ADB7D307239EE03900653905 /* Build configuration list for PBXNativeTarget "WildWest" */;
 			buildPhases = (
-				49A0EC7EDC3BBAEA58E074D7 /* [CP] Check Pods Manifest.lock */,
+				35B52B29130DDF03AE6F8EBE /* [CP] Check Pods Manifest.lock */,
 				ADB7D2E4239EE03800653905 /* Sources */,
 				ADB7D2E5239EE03800653905 /* Frameworks */,
 				ADB7D2E6239EE03800653905 /* Resources */,
 				AD8540A223A4291100568FE9 /* Run Swiftlint */,
 				33516CCB2450AA78003C99E2 /* Run FirebaseCrashlytics */,
-				1B436984702E4869CEECE1DC /* [CP] Embed Pods Frameworks */,
-				39C7A515ED7666AB977BAD94 /* [CP] Copy Pods Resources */,
+				A668BC3F359AD044D615FE1D /* [CP] Embed Pods Frameworks */,
+				6E98BBF0B96F61C3EE18CA17 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -648,11 +645,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ADB7D30A239EE03900653905 /* Build configuration list for PBXNativeTarget "WildWestTests" */;
 			buildPhases = (
-				02AFDEAE3BC3186614186569 /* [CP] Check Pods Manifest.lock */,
+				7676014F6B8B2CEA1445179B /* [CP] Check Pods Manifest.lock */,
 				ADB7D2FA239EE03900653905 /* Sources */,
 				ADB7D2FB239EE03900653905 /* Frameworks */,
 				ADB7D2FC239EE03900653905 /* Resources */,
-				0302A842156C532F65DF9AC5 /* [CP] Copy Pods Resources */,
+				4A8DFB6097E38C9533141C58 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -755,7 +752,81 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		02AFDEAE3BC3186614186569 /* [CP] Check Pods Manifest.lock */ = {
+		33516CCB2450AA78003C99E2 /* Run FirebaseCrashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run FirebaseCrashlytics";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
+		35B52B29130DDF03AE6F8EBE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WildWest-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4A8DFB6097E38C9533141C58 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WildWestTests/Pods-WildWestTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WildWestTests/Pods-WildWestTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WildWestTests/Pods-WildWestTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6E98BBF0B96F61C3EE18CA17 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7676014F6B8B2CEA1445179B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -777,24 +848,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		0302A842156C532F65DF9AC5 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WildWestTests/Pods-WildWestTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WildWestTests/Pods-WildWestTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WildWestTests/Pods-WildWestTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		1B436984702E4869CEECE1DC /* [CP] Embed Pods Frameworks */ = {
+		A668BC3F359AD044D615FE1D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -809,63 +863,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		33516CCB2450AA78003C99E2 /* Run FirebaseCrashlytics */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run FirebaseCrashlytics";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
-		};
-		39C7A515ED7666AB977BAD94 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		49A0EC7EDC3BBAEA58E074D7 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WildWest-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		AD8540A223A4291100568FE9 /* Run Swiftlint */ = {
@@ -907,24 +904,22 @@
 				3324018E23DBA6C800B92439 /* UICollectionViewExtension.swift in Sources */,
 				33031E0D2455513000528158 /* ThemeMusicPlayer.swift in Sources */,
 				335C03BE2459F5C200043F46 /* GameMoveDto.swift in Sources */,
-				33112E70244503EA009C706E /* UpdateAnimator.swift in Sources */,
+				33112E70244503EA009C706E /* EventAnimator.swift in Sources */,
 				3328DEB524CEF0B900D09117 /* UserCell.swift in Sources */,
 				33C922E824CA986300956151 /* UserInfoDto.swift in Sources */,
 				3346F32B24CB263F00FB0418 /* DtoEncoder+Update.swift in Sources */,
 				334673E82436314E00FFBB82 /* UserDefaultsStored.swift in Sources */,
+				3372615D2563951800AE8964 /* InputHandler.swift in Sources */,
 				33D3C3B824C9E55A00120D9A /* AppModules.swift in Sources */,
 				335BED692429334F009184A3 /* SFXPlayer.swift in Sources */,
 				33639FDA24CB421D00F48727 /* WaitingRoomViewController.swift in Sources */,
 				33E4411D24077CA000B2848E /* HandCell.swift in Sources */,
 				33734AF52454AD7200A5D2DA /* DtoEncoder.swift in Sources */,
-				ADD4DB6E24209E4D001BBD48 /* MessageAdapter.swift in Sources */,
 				332F0499244716C100BE2E4A /* UIColor+Hex.swift in Sources */,
 				33EAD12624D499910052A97C /* RoleSelector.swift in Sources */,
-				337B5A56255BB7350079AA14 /* MoveSelector.swift in Sources */,
 				33FDD70C240BFB4B00BC3E14 /* MenuViewController.swift in Sources */,
 				3337029124CB4879007E59A2 /* GameEnvironment.swift in Sources */,
 				33AFA25323DC201A00425BEB /* ClassNameProtocol.swift in Sources */,
-				3366E199255BEA0300A5ABCC /* MoveSegmenter.swift in Sources */,
 				33E4411B24077CA000B2848E /* PlayersAdapter.swift in Sources */,
 				33031E0F24555D5F00528158 /* OptionalExtension.swift in Sources */,
 				3346F33724CB289500FB0418 /* DtoEncoder+Player.swift in Sources */,
@@ -968,23 +963,20 @@
 				333DB7CB24D55028002A5692 /* HandCollectionViewLayout.swift in Sources */,
 				3346F32C24CB263F00FB0418 /* DtoEncoder+Update.swift in Sources */,
 				3346F32F24CB26C600FB0418 /* DtoEncoder+Challenge.swift in Sources */,
-				3366E1A3255BED0500A5ABCC /* MoveSegmenterTests.swift in Sources */,
 				333DB7C824D54FFF002A5692 /* HandCell.swift in Sources */,
 				33C922ED24CA9B1300956151 /* UserStatus.swift in Sources */,
 				33C922EE24CA9B1A00956151 /* WUserInfo.swift in Sources */,
 				335157FC245D88AD00C46888 /* GameMoveDto.swift in Sources */,
-				3366E19F255BEAA600A5ABCC /* MoveSelector.swift in Sources */,
 				335157FB245D889900C46888 /* PlayerDto.swift in Sources */,
 				33515801245D892700C46888 /* KeyGeneratorProtocol.swift in Sources */,
-				3366E19A255BEA0300A5ABCC /* MoveSegmenter.swift in Sources */,
 				3346F32924CB1D7800FB0418 /* DtoEncoder+User.swift in Sources */,
+				335447622568825800D7B02C /* ResourcesTests.swift in Sources */,
 				335157FA245D888F00C46888 /* GameStateDto.swift in Sources */,
 				3346F33824CB289500FB0418 /* DtoEncoder+Player.swift in Sources */,
 				335157FD245D88B100C46888 /* GameUpdateDto.swift in Sources */,
 				33DC6E4F24CA9F5A00072B51 /* UserStatusDto.swift in Sources */,
 				33FB59B82427F6D000090D23 /* PlayersAdapter.swift in Sources */,
 				335157F9245D860600C46888 /* DtoEncodingTests.swift in Sources */,
-				337B5A52255BB7190079AA14 /* MoveSelectorTests.swift in Sources */,
 				33DC6E4E24CA9F5100072B51 /* UserInfoDto.swift in Sources */,
 				335157F6245D855E00C46888 /* DtoEncoder.swift in Sources */,
 				33F36ABC24CB0DD0000533A4 /* DtoEncoder+Move.swift in Sources */,
@@ -1140,7 +1132,7 @@
 		};
 		ADB7D308239EE03900653905 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CA12E847088D5CEC88C7A8BF /* Pods-WildWest.debug.xcconfig */;
+			baseConfigurationReference = 64B4803454AD3DC9D88F268C /* Pods-WildWest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1161,7 +1153,7 @@
 		};
 		ADB7D309239EE03900653905 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2FF97C8B3AEC3C1A26AE4F92 /* Pods-WildWest.release.xcconfig */;
+			baseConfigurationReference = 94F61BA9048076D97EEC749B /* Pods-WildWest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1182,7 +1174,7 @@
 		};
 		ADB7D30B239EE03900653905 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 35F41BA092B7A7796FA3F806 /* Pods-WildWestTests.debug.xcconfig */;
+			baseConfigurationReference = DB66554CF5F2E34E065D1A17 /* Pods-WildWestTests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
@@ -1201,7 +1193,7 @@
 		};
 		ADB7D30C239EE03900653905 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4B5AEE954AF0E177C62E974F /* Pods-WildWestTests.release.xcconfig */;
+			baseConfigurationReference = BAE16C3BAAAE8633ECFBC16E /* Pods-WildWestTests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";

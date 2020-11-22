@@ -33,27 +33,29 @@ class GameBuilder: GameBuilderProtocol {
     }
     
     func createGame(for playersCount: Int) -> StateProtocol {
-        let cards = try! resourcesLoader.loadCards()
-        let cardSet = try! resourcesLoader.loadDeck()
-        let scenario = try! resourcesLoader.loadDefault()
+        let cards = resourcesLoader.loadCards()
+        let cardSet = resourcesLoader.loadDeck()
+        let defaults = resourcesLoader.loadDefaults()
         
         let setup = GSetup()
         let roles = setup.roles(for: playersCount)
         return setup.setupGame(roles: roles,
                                cards: cards,
                                cardSet: cardSet,
-                               scenario: scenario,
+                               defaults: defaults,
                                preferredRole: preferences.preferredRole,
                                preferredFigure: preferences.preferredFigure)
     }
     
     func createLocalGameEnvironment(state: StateProtocol,
                                     playerId: String?) -> GameEnvironment {
-        let abilities = try! resourcesLoader.loadAbilities()
-        let scores = try! resourcesLoader.loadScores()
+        let abilities = resourcesLoader.loadAbilities()
+        let scores = resourcesLoader.loadScores()
+        let media = resourcesLoader.loadEventMedia()
         
-        let eventMatcher = EventMatcher()
-        let database = GDatabase(state, matcher: eventMatcher)
+        let eventMatcher = EventMatcher(media: media)
+        let databaseUpdater = GDatabaseUpdater()
+        let database = GDatabase(state, updater: databaseUpdater)
         
         let playReqMatcher = PlayReqMatcher()
         let effectMatcher = EffectMatcher()

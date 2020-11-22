@@ -17,7 +17,7 @@ class FigureSelector: UIAlertController {
     
     convenience init(completion: @escaping (String?) -> Void) {
         self.init(title: "Choose figure", message: nil, preferredStyle: .alert)
-        let figures = try! gameResources.loadCards().filter { $0.type == .figure }.map { $0.name }
+        let figures = gameResources.loadCards().filter { $0.type == .figure }.map { $0.name }
         figures.forEach { figure in
             addAction(UIAlertAction(title: figure,
                                     style: .default,
