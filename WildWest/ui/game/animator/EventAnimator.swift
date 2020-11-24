@@ -54,16 +54,6 @@ class EventAnimator: EventAnimatorProtocol {
         
         /*
         switch event {
-        
-            
-        case let .drawDiscard(player):
-            guard let card = state.discard.first else {
-                fatalError("Illegal state")
-            }
-            animateMoveCard(sourceImage: UIImage(named: card.name),
-                            from: .discard,
-                            to: .hand(player), 
-                            duration: duration)
             
         case let .discardHand(player, card):
             guard let card = state.players[player]?.hand.first(where: { $0.identifier == card })  else {
@@ -196,7 +186,8 @@ private struct EventDesc {
 private extension EventAnimator {
     
     static let all: [String: EventDesc] = [
-        drawDeck()
+        drawDeck(),
+        drawDiscard()
     ]
     .toDictionary(with: { $0.id })
     
@@ -204,13 +195,26 @@ private extension EventAnimator {
         EventDesc(id: "drawDeck", 
                   sfx: "Slide Closed-SoundBible.com-1521580537") { event, _ in
             guard case let .drawDeck(player) = event else {
-                return nil
+                fatalError("Invalid event")
             }
             
             return .move(sourceName: nil,
                          targetName: nil, 
                          source: .deck, 
                          target: .hand(player))
+        }
+    }
+    
+    static func drawDiscard() -> EventDesc {
+        EventDesc(id: "drawDiscard",
+                  sfx: "Slide Closed-SoundBible.com-1521580537") { event, state in
+            guard case let .drawDiscard(player) = event else {
+                fatalError("Invalid event")
+            }
+            guard let card = state.discard.first else {
+                fatalError("Illegal state")
+            }
+            return .move(sourceName: card.name, targetName: nil, source: .discard, target: .hand(player))
         }
     }
 }
