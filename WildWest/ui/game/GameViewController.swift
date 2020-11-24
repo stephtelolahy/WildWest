@@ -332,7 +332,7 @@ extension GameViewController: GameCollectionViewLayoutDelegate {
     }
 }
 
-extension StateProtocol {
+private extension StateProtocol {
     
     var topDiscardImage: UIImage? {
         guard let topDiscard = discard.first else {

@@ -33,14 +33,6 @@ class SFXPlayer: SFXPlayerProtocol {
         }
     }
     /*
-    private func sfxFile(for move: GameMove) -> String? {
-        if move.name == .equip,
-            let cardName = move.cardId?.extractCardName() {
-            return equipSfx[cardName]
-        }
-        
-        return sfx[move.name]
-    }
     
     private let sfx: [MoveName: String] = [
         .beer: "Slurping 2-SoundBible.com-1269549524",
