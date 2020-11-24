@@ -5,9 +5,6 @@
 //  Created by Hugues Stephano Telolahy on 13/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-// swiftlint:disable function_body_length
-// swiftlint:disable cyclomatic_complexity
-// swiftlint:disable type_body_length
 
 import UIKit
 import CardGameEngine
@@ -24,47 +21,40 @@ protocol EventAnimatorProtocol {
     func animate(on event: GEvent, in state: StateProtocol)
 }
 
-private typealias AnimateFunc = (GEvent, GState) -> Void
-private struct EventAnimation {
-    let id: String
-    let sfx: String
-    let animateFunc: AnimateFunc
-    #warning("TODO: take into account the event animation duration")
-}
-
 class EventAnimator: EventAnimatorProtocol {
     
-    private unowned let viewController: UIViewController
-    private let cardPositions: [CardArea: CGPoint]
-    private let cardSize: CGSize
-    private let updateDelay: TimeInterval
     private let eventMatcher: EventMatcherProtocol
+    private let renderer: AnimationRendererProtocol
+    private let sfxPlayer: SFXPlayerProtocol
     
-    init(viewController: UIViewController,
-         cardPositions: [CardArea: CGPoint],
-         cardSize: CGSize,
-         updateDelay: TimeInterval, 
-         eventMatcher: EventMatcherProtocol) {
-        self.viewController = viewController
-        self.cardPositions = cardPositions
-        self.cardSize = cardSize
-        self.updateDelay = updateDelay
+    init(eventMatcher: EventMatcherProtocol, 
+         renderer: AnimationRendererProtocol,
+         sfxPlayer: SFXPlayerProtocol) {
         self.eventMatcher = eventMatcher
+        self.renderer = renderer
+        self.sfxPlayer = sfxPlayer
     }
     
     func animate(on event: GEvent, in state: StateProtocol) {
-        
-        var duration = eventMatcher.waitDuration(event)
+        let duration = eventMatcher.waitDuration(event)
         guard duration > 0 else {
             return
         }
-        duration *= updateDelay 
         
+        guard let eventDesc = Self.all[event.hashValue] else {
+            print("⚠️ No event description matching \(event)")
+            return
+        }
+        
+        if let animation = eventDesc.animateFunc(event, state) {
+            renderer.execute(animation, duration: duration)
+        }
+        
+        sfxPlayer.playSound(named: eventDesc.sfx)
+        
+        /*
         switch event {
-        case let .drawDeck(player):
-            animateMoveCard(from: .deck,
-                            to: .hand(player),
-                            duration: duration)
+        
             
         case let .drawDiscard(player):
             guard let card = state.discard.first else {
@@ -191,44 +181,36 @@ class EventAnimator: EventAnimatorProtocol {
         default:
             fatalError("⚠️ Cannot animate \(event)")
         }
+         */
     }
+}
+
+private typealias EventAnimateFunc = (GEvent, StateProtocol) -> EventAnimation?
+
+private struct EventDesc {
+    let id: String
+    let sfx: String
+    let animateFunc: EventAnimateFunc
 }
 
 private extension EventAnimator {
     
-    func animateMoveCard(sourceImage: UIImage? = #imageLiteral(resourceName: "01_back"),
-                         targetImage: UIImage? = nil,
-                         from source: CardArea,
-                         to target: CardArea, 
-                         duration: TimeInterval) {
-        guard let sourcePosition = cardPositions[source],
-              let targetPosition = cardPositions[target] else {
-            fatalError("Illegal state")
-        }
-        
-        viewController.animateMoveCard(sourceImage: sourceImage,
-                                       targetImage: targetImage,
-                                       size: cardSize,
-                                       from: sourcePosition,
-                                       to: targetPosition,
-                                       duration: duration)
-    }
+    static let all: [String: EventDesc] = [
+        drawDeck()
+    ]
+    .toDictionary(with: { $0.id })
     
-    func animateRevealCard(sourceImage: UIImage? = #imageLiteral(resourceName: "01_back"),
-                           targetImage: UIImage? = nil,
-                           from source: CardArea,
-                           to target: CardArea, 
-                           duration: TimeInterval) {
-        guard let sourcePosition = cardPositions[source],
-              let targetPosition = cardPositions[target] else {
-            fatalError("Illegal state")
+    static func drawDeck() -> EventDesc {
+        EventDesc(id: "drawDeck", 
+                  sfx: "Slide Closed-SoundBible.com-1521580537") { event, _ in
+            guard case let .drawDeck(player) = event else {
+                return nil
+            }
+            
+            return .move(sourceName: nil,
+                         targetName: nil, 
+                         source: .deck, 
+                         target: .hand(player))
         }
-        
-        viewController.animateRevealCard(sourceImage: sourceImage,
-                                         targetImage: targetImage,
-                                         size: cardSize,
-                                         from: sourcePosition,
-                                         to: targetPosition,
-                                         duration: duration)
     }
 }

@@ -44,22 +44,23 @@ class GameViewController: UIViewController {
     private lazy var playerAdapter: PlayersAdapterProtocol = PlayersAdapter()
     private lazy var instructionBuilder: InstructionBuilderProtocol = InstructionBuilder()
     private lazy var moveSegmenter: MoveSegmenterProtocol = MoveSegmenter()
-    private lazy var moveSelector: MoveSelectorProtocol = MoveSelector()
     
     private lazy var eventMatcher: EventMatcherProtocol = {
         let media = resourceLoader.loadEventMedia()
         return EventMatcher(media: media)
     }()
     
-    private lazy var sfxPlayer: SFXPlayerProtocol = SFXPlayer()
     private lazy var inputHandler: InputHandlerProtocol = InputHandler(selector: MoveSelector(), viewController: self)
     
     private lazy var eventAnimator: EventAnimatorProtocol = {
-        EventAnimator(viewController: self,
-                      cardPositions: buildCardPositions(),
-                      cardSize: discardImageView.bounds.size,
-                      updateDelay: preferences.updateDelay,
-                      eventMatcher: eventMatcher)
+        let renderer = AnimationRenderer(viewController: self,
+                                         delay: preferences.updateDelay, 
+                                         cardPositions: buildCardPositions(),
+                                         cardSize: discardImageView.bounds.size,
+                                         cardBackImage: #imageLiteral(resourceName: "01_back"))
+        return EventAnimator(eventMatcher: eventMatcher, 
+                             renderer: renderer,
+                             sfxPlayer: SFXPlayer())
     }()
     
     private let disposeBag = DisposeBag()
@@ -158,7 +159,6 @@ private extension GameViewController {
         }
         
         eventAnimator.animate(on: event, in: state)
-        sfxPlayer.playSound(on: event)
         
         messages.append("\(eventMatcher.emoji(event)) \(event)")
         messageTableView.reloadDataScrollingAtBottom()
