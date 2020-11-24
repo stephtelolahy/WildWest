@@ -24,7 +24,10 @@ private extension SFXEventMatcher {
     static let sfx: [String: String] = [
         "drawDeck": "Slide Closed-SoundBible.com-1521580537",
         "drawDiscard": "Slide Closed-SoundBible.com-1521580537",
-        "putInPlay": "Shotgun-SoundBible.com-862990674"
+        "putInPlay": "Shotgun-SoundBible.com-862990674",
+        "revealHand": "Western Ricochet-SoundBible.com-1725886901",
+        "discardInPlay": "flyby-Conor-1500306612",
+        "drawHand": "Slap-SoundMaster13-49669815"
     ]
 }
 

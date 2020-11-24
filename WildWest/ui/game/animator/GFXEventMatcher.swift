@@ -49,35 +49,16 @@ private extension GFXEventMatcher {
         drawDeck(),
         drawDiscard(),
         discardHand(),
-        putInPlay()
+        putInPlay(),
+        revealHand(),
+        discardInPlay(),
+        drawHand()
     ]
     .toDictionary(with: { $0.id })
     
     /*
-    switch event {
-    case let .revealHand(player, card):
-        guard let card = state.players[player]?.hand.first(where: { $0.identifier == card }) else {
-            fatalError("Illegal state")
-        }
-        animateRevealCard(sourceImage: UIImage(named: card.name),
-                          from: .hand(player), 
-                          to: .hand(player), 
-                          duration: duration)
         
-    case let .discardInPlay(player, card):
-        guard let card = state.players[player]?.inPlay.first(where: { $0.identifier == card }) else {
-            fatalError("Illegal state")
-        }
-        animateMoveCard(sourceImage: UIImage(named: card.name),
-                        targetImage: state.topDiscardImage,
-                        from: .inPlay(player),
-                        to: .discard,
-                        duration: duration)
-        
-    case let .drawHand(player, other, _):
-        animateMoveCard(from: .hand(other),
-                        to: .hand(player), 
-                        duration: duration)
+    
         
     case let .drawInPlay(player, other, card):
         guard let card = state.players[other]?.inPlay.first(where: { $0.identifier == card }) else {
@@ -203,6 +184,50 @@ private extension GFXEventMatcher {
                          targetName: nil,
                          source: CardArea.hand(player),
                          target: .inPlay(player))
+        }
+    }
+    
+    static func revealHand() -> EventDesc {
+        EventDesc(id: "revealHand") { event, state in
+            guard case let .revealHand(player, card) = event else {
+                fatalError("Invalid event")
+            }
+            
+            guard let cardObject = state.players[player]?.hand.first(where: { $0.identifier == card }) else {
+                fatalError("Illegal state")
+            }
+            return .reveal(sourceName: cardObject.name,
+                           targetName: nil,
+                           source: .hand(player),
+                           target: .hand(player))
+        }
+    }
+    
+    static func discardInPlay() -> EventDesc {
+        EventDesc(id: "discardInPlay") { event, state in
+            guard case let .discardInPlay(player, card) = event else {
+                fatalError("Invalid event")
+            }
+            
+            guard let cardObject = state.players[player]?.inPlay.first(where: { $0.identifier == card }) else {
+                fatalError("Illegal state")
+            }
+            return .move(sourceName: cardObject.name,
+                         targetName: state.discard.first?.name,
+                         source: .inPlay(player),
+                         target: .discard)
+        }
+    }
+    
+    static func drawHand() -> EventDesc {
+        EventDesc(id: "drawHand") { event, _ in
+            guard case let .drawHand(player, other, _) = event else {
+                fatalError("Invalid event")
+            } 
+            return .move(sourceName: nil, 
+                         targetName: nil, 
+                         source: .hand(other), 
+                         target: .hand(player))
         }
     }
 }
