@@ -29,6 +29,7 @@ class GFXEventMatcher: GFXEventMatcherProtocol {
     
     func animation(on event: GEvent, in state: StateProtocol) -> EventAnimation? {
         guard let gfx = Self.gfx[event.hashValue] else {
+            print("⚠️ No animation matching \(event)")
             return nil
         }
         
@@ -52,85 +53,16 @@ private extension GFXEventMatcher {
         putInPlay(),
         revealHand(),
         discardInPlay(),
-        drawHand()
+        drawHand(),
+        drawInPlay(),
+        putInPlayOther(),
+        passInPlayOther(),
+        revealDeck(),
+        deckToStore(),
+        storeToDeck(),
+        drawStore()
     ]
     .toDictionary(with: { $0.id })
-    
-    /*
-        
-    
-        
-    case let .drawInPlay(player, other, card):
-        guard let card = state.players[other]?.inPlay.first(where: { $0.identifier == card }) else {
-            fatalError("Illegal state")
-        }
-        animateMoveCard(sourceImage: UIImage(named: card.name),
-                        from: .inPlay(other),
-                        to: .hand(player), 
-                        duration: duration)
-        
-    case let .putInPlayOther(player, card, other):
-        guard let card = state.players[player]?.hand.first(where: { $0.identifier == card }) else {
-            fatalError("Illegal state")
-        }
-        animateMoveCard(sourceImage: UIImage(named: card.name),
-                        from: .hand(player),
-                        to: .inPlay(other), 
-                        duration: duration)
-        
-    case let .passInPlayOther(player, card, other):
-        guard let card = state.players[player]?.inPlay.first(where: { $0.identifier == card }) else {
-            fatalError("Illegal state")
-        }
-        animateMoveCard(sourceImage: UIImage(named: card.name),
-                        from: .inPlay(player),
-                        to: .inPlay(other), 
-                        duration: duration)
-        
-    case .revealDeck:
-        guard let card = state.deck.first else {
-            fatalError("Illegal state")
-        }
-        animateRevealCard(sourceImage: UIImage(named: card.name),
-                          targetImage: state.topDiscardImage,
-                          from: .deck,
-                          to: .discard,
-                          duration: duration)
-        
-    case .deckToStore:
-        guard let card = state.deck.first else {
-            fatalError("Illegal state")
-        }
-        
-        let sourceImage = state.storeView == nil ? UIImage(named: card.name) : #imageLiteral(resourceName: "01_back")  
-        animateRevealCard(sourceImage: sourceImage,
-                          from: .deck,
-                          to: .store,
-                          duration: duration)
-        
-    case .storeToDeck:
-        animateRevealCard(from: .store,
-                          to: .deck,
-                          duration: duration)
-        
-    case let .drawStore(player, card):
-        guard let card = state.store.first(where: { $0.identifier == card }) else {
-            fatalError("Illegal state")
-        }
-        let sourceImage = state.storeView == nil ? UIImage(named: card.name) : #imageLiteral(resourceName: "01_back")
-        animateMoveCard(sourceImage: sourceImage,
-                        from: .store,
-                        to: .hand(player), 
-                        duration: duration)
-        
-    case .setTurn,
-         .setPhase, 
-         .looseHealth,
-         .gainHealth, 
-         .eliminate:
-        
-    }
-     */
     
     static func drawDeck() -> EventDesc {
         EventDesc(id: "drawDeck") { event, _ in
@@ -150,10 +82,10 @@ private extension GFXEventMatcher {
             guard case let .drawDiscard(player) = event else {
                 fatalError("Invalid event")
             }
-            guard let card = state.discard.first else {
+            guard let cardObject = state.discard.first else {
                 fatalError("Illegal state")
             }
-            return .move(sourceName: card.name, targetName: nil, source: .discard, target: .hand(player))
+            return .move(sourceName: cardObject.name, targetName: nil, source: .discard, target: .hand(player))
         }
     }
     
@@ -227,6 +159,111 @@ private extension GFXEventMatcher {
             return .move(sourceName: nil, 
                          targetName: nil, 
                          source: .hand(other), 
+                         target: .hand(player))
+        }
+    }
+    
+    static func drawInPlay() -> EventDesc {
+        EventDesc(id: "drawInPlay") { event, state in
+            guard case let .drawInPlay(player, other, card) = event else {
+                fatalError("Invalid event")
+            }
+            guard let cardObject = state.players[other]?.inPlay.first(where: { $0.identifier == card }) else {
+                fatalError("Illegal state")
+            }
+            return .move(sourceName: cardObject.name,
+                         targetName: nil,
+                         source: .inPlay(other),
+                         target: .hand(player))
+        }
+    }
+    
+    static func putInPlayOther() -> EventDesc {
+        EventDesc(id: "putInPlayOther") { event, state in
+            guard case let .putInPlayOther(player, card, other) = event else {
+                fatalError("Invalid event")
+            }
+            guard let cardObject = state.players[player]?.hand.first(where: { $0.identifier == card }) else {
+                fatalError("Illegal state")
+            }
+            return .move(sourceName: cardObject.name,
+                         targetName: nil,
+                         source: .hand(player),
+                         target: .inPlay(other))
+        }
+    }
+    
+    static func passInPlayOther() -> EventDesc {
+        EventDesc(id: "passInPlayOther") { event, state in
+            guard case let .passInPlayOther(player, card, other) = event else {
+                fatalError("Invalid event")
+            }
+            
+            guard let cardObject = state.players[player]?.inPlay.first(where: { $0.identifier == card }) else {
+                fatalError("Illegal state")
+            }
+            
+            return .move(sourceName: cardObject.name,
+                         targetName: nil,
+                         source: .inPlay(player),
+                         target: .inPlay(other))
+        }
+    }
+    
+    static func revealDeck() -> EventDesc {
+        EventDesc(id: "passInPlayOther") { event, state in
+            guard case .revealDeck = event else {
+                fatalError("Invalid event")
+            }
+            guard let cardObject = state.deck.first else {
+                fatalError("Illegal state")
+            }
+            return .reveal(sourceName: cardObject.name, 
+                           targetName: state.discard.first?.name,
+                           source: .deck,
+                           target: .discard)
+        }
+    }
+    
+    static func deckToStore() -> EventDesc {
+        EventDesc(id: "deckToStore") { event, state in
+            guard case .deckToStore = event else {
+                fatalError("Invalid event")
+            }
+            guard let cardObject = state.deck.first else {
+                fatalError("Illegal state")
+            }
+            
+            let sourceName = state.storeView == nil ? cardObject.name : nil
+            return .reveal(sourceName: sourceName,
+                           targetName: nil,
+                           source: .deck, 
+                           target: .store)
+        }
+    }
+    
+    static func storeToDeck() -> EventDesc {
+        EventDesc(id: "storeToDeck") { event, _ in
+            guard case .storeToDeck = event else {
+                fatalError("Invalid event")
+            }
+            
+            return .reveal(sourceName: nil, targetName: nil, source: .store, target: .deck)
+        }
+    }
+    
+    static func drawStore() -> EventDesc {
+        EventDesc(id: "drawStore") { event, state in
+            guard case let .drawStore(player, card) = event else {
+                fatalError("Invalid event")
+            }
+            guard let cardObject = state.store.first(where: { $0.identifier == card }) else {
+                fatalError("Illegal state")
+            }
+            let sourceName = state.storeView == nil ? cardObject.name : nil
+            return .move(sourceName: sourceName,
+                         targetName: nil, 
+                         source: .store,
                          target: .hand(player))
         }
     }
