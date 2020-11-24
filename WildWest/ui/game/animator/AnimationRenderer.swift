@@ -8,11 +8,6 @@
 
 import UIKit
 
-enum EventAnimation {
-    case move(sourceName: String?, targetName: String?, source: CardArea, target: CardArea)
-    case reveal(sourceName: String?, targetName: String?, source: CardArea, target: CardArea)
-}
-
 protocol AnimationRendererProtocol {
     func execute(_ animation: EventAnimation, duration: TimeInterval) 
 }
