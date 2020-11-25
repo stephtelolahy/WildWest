@@ -19,6 +19,7 @@
 		3328DEB524CEF0B900D09117 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3328DEB424CEF0B900D09117 /* UserCell.swift */; };
 		332F0497244716AA00BE2E4A /* UIImage+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332F0496244716AA00BE2E4A /* UIImage+Color.swift */; };
 		332F0499244716C100BE2E4A /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332F0498244716C100BE2E4A /* UIColor+Hex.swift */; };
+		33315303256ED0EB0088D281 /* UIEventMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33315302256ED0EB0088D281 /* UIEventMatcher.swift */; };
 		3331A9CC2455F2AF0063885C /* FirebaseKeyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3331A9CB2455F2AF0063885C /* FirebaseKeyGenerator.swift */; };
 		3337029124CB4879007E59A2 /* GameEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3337029024CB4879007E59A2 /* GameEnvironment.swift */; };
 		333DB7C824D54FFF002A5692 /* HandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E4411824077CA000B2848E /* HandCell.swift */; };
@@ -85,8 +86,6 @@
 		33734AF12454ABF200A5D2DA /* PlayerDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AF02454ABF200A5D2DA /* PlayerDto.swift */; };
 		33734AF52454AD7200A5D2DA /* DtoEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AF42454AD7200A5D2DA /* DtoEncoder.swift */; };
 		337AE25825587F16004015ED /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337AE25725587F16004015ED /* UIAlertControllerExtension.swift */; };
-		337C0972256DA6AB009E88CE /* GFXEventMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337C0971256DA6AB009E88CE /* GFXEventMatcher.swift */; };
-		337C0982256DA870009E88CE /* SFXEventMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337C0981256DA870009E88CE /* SFXEventMatcher.swift */; };
 		3383CFCE242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3383CFCD242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 */; };
 		3383CFD0242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3383CFCF242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 */; };
 		338A5FC0242BC8CE00766541 /* flyby-Conor-1500306612.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 338A5FBF242BC8CE00766541 /* flyby-Conor-1500306612.mp3 */; };
@@ -156,6 +155,7 @@
 		3328DEB424CEF0B900D09117 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		332F0496244716AA00BE2E4A /* UIImage+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Color.swift"; sourceTree = "<group>"; };
 		332F0498244716C100BE2E4A /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		33315302256ED0EB0088D281 /* UIEventMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEventMatcher.swift; sourceTree = "<group>"; };
 		3331A9CB2455F2AF0063885C /* FirebaseKeyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseKeyGenerator.swift; sourceTree = "<group>"; };
 		3337029024CB4879007E59A2 /* GameEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEnvironment.swift; sourceTree = "<group>"; };
 		333E692C245D557A00DEF93B /* GameUpdateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUpdateDto.swift; sourceTree = "<group>"; };
@@ -199,8 +199,6 @@
 		33734AF02454ABF200A5D2DA /* PlayerDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDto.swift; sourceTree = "<group>"; };
 		33734AF42454AD7200A5D2DA /* DtoEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DtoEncoder.swift; sourceTree = "<group>"; };
 		337AE25725587F16004015ED /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
-		337C0971256DA6AB009E88CE /* GFXEventMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFXEventMatcher.swift; sourceTree = "<group>"; };
-		337C0981256DA870009E88CE /* SFXEventMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFXEventMatcher.swift; sourceTree = "<group>"; };
 		3383CFCD242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Metal Clang-SoundBible.com-19572601.mp3"; sourceTree = "<group>"; };
 		3383CFCF242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Ta Da-SoundBible.com-1884170640.mp3"; sourceTree = "<group>"; };
 		338A5FBF242BC8CE00766541 /* flyby-Conor-1500306612.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "flyby-Conor-1500306612.mp3"; sourceTree = "<group>"; };
@@ -283,7 +281,6 @@
 			children = (
 				3314A020256C586300E54AF6 /* AnimationRenderer.swift */,
 				33BC633E2444D0FF00760F25 /* UIViewController+CardAnimation.swift */,
-				337C0971256DA6AB009E88CE /* GFXEventMatcher.swift */,
 			);
 			path = animator;
 			sourceTree = "<group>";
@@ -307,6 +304,14 @@
 				33A632FE24545AEE0023A2D2 /* analytics */,
 			);
 			path = data;
+			sourceTree = "<group>";
+		};
+		33315301256ED0AD0088D281 /* uimatcher */ = {
+			isa = PBXGroup;
+			children = (
+				33315302256ED0EB0088D281 /* UIEventMatcher.swift */,
+			);
+			path = uimatcher;
 			sourceTree = "<group>";
 		};
 		333DB7C724D54FF4002A5692 /* hand */ = {
@@ -424,7 +429,6 @@
 			isa = PBXGroup;
 			children = (
 				335BED682429334F009184A3 /* SFXPlayer.swift */,
-				337C0981256DA870009E88CE /* SFXEventMatcher.swift */,
 			);
 			path = sfx;
 			sourceTree = "<group>";
@@ -438,6 +442,7 @@
 				333DB7C924D55008002A5692 /* players */,
 				333DB7C724D54FF4002A5692 /* hand */,
 				33E4411724077CA000B2848E /* message */,
+				33315301256ED0AD0088D281 /* uimatcher */,
 				33112E71244503F1009C706E /* animator */,
 				337C0985256DA8B7009E88CE /* sfx */,
 			);
@@ -934,14 +939,12 @@
 				33E4411F24077CA000B2848E /* MessageCell.swift in Sources */,
 				33DB41BC2438841A00B94E8A /* HandCollectionViewLayout.swift in Sources */,
 				3346F32824CB1D7800FB0418 /* DtoEncoder+User.swift in Sources */,
-				337C0982256DA870009E88CE /* SFXEventMatcher.swift in Sources */,
 				33EAD12824D4A4080052A97C /* UIStoryboardExtension.swift in Sources */,
 				33C922EC24CA997700956151 /* WUserInfo.swift in Sources */,
 				33515800245D892700C46888 /* KeyGeneratorProtocol.swift in Sources */,
 				332499B323DB9F650082EF09 /* GameViewController.swift in Sources */,
 				332F0497244716AA00BE2E4A /* UIImage+Color.swift in Sources */,
 				33029EAD24C74B8F002A5E54 /* DatabaseReference+Rx.swift in Sources */,
-				337C0972256DA6AB009E88CE /* GFXEventMatcher.swift in Sources */,
 				33C3628124C7322500824548 /* MatchingDatabase.swift in Sources */,
 				333E692D245D557A00DEF93B /* GameUpdateDto.swift in Sources */,
 				3372CB542454BF8E00C061C9 /* GameBuilder.swift in Sources */,
@@ -951,6 +954,7 @@
 				3346F33D24CB2F6F00FB0418 /* NavigationController.swift in Sources */,
 				3346F33424CB280500FB0418 /* DtoEncoder+State.swift in Sources */,
 				33734AF12454ABF200A5D2DA /* PlayerDto.swift in Sources */,
+				33315303256ED0EB0088D281 /* UIEventMatcher.swift in Sources */,
 				334673EB2436328000FFBB82 /* UserPreferences.swift in Sources */,
 				33C922EA24CA987200956151 /* UserStatusDto.swift in Sources */,
 				3372CB522454BC7900C061C9 /* FigureSelector.swift in Sources */,

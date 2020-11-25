@@ -24,6 +24,8 @@ extension Resolver: ResolverRegistering {
         
         register { FirebaseKeyGenerator() as KeyGeneratorProtocol }
         register { DictionaryEncoder() }
+        
+        register {  UIEventMatcher() as UIEventMatcherProtocol }.scope(application)
 //        register { DtoEncoder(allCards: Resolver.resolve(ResourcesLoaderProtocol.self).allCards,
 //                              keyGenerator: resolve())
 //        }
