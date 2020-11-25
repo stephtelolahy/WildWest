@@ -44,23 +44,27 @@ class GameViewController: UIViewController {
     private lazy var playerAdapter: PlayersAdapterProtocol = PlayersAdapter()
     private lazy var instructionBuilder: InstructionBuilderProtocol = InstructionBuilder()
     private lazy var moveSegmenter: MoveSegmenterProtocol = MoveSegmenter()
-    private lazy var moveSelector: MoveSelectorProtocol = MoveSelector()
     
     private lazy var eventMatcher: EventMatcherProtocol = {
         let media = resourceLoader.loadEventMedia()
         return EventMatcher(media: media)
     }()
     
-    private lazy var sfxPlayer: SFXPlayerProtocol = SFXPlayer()
+    private lazy var gfxMatcher: GFXEventMatcherProtocol = GFXEventMatcher()
+    
+    private lazy var sfxMatcher: SFXEventMatcherProtocol = SFXEventMatcher()
+    
     private lazy var inputHandler: InputHandlerProtocol = InputHandler(selector: MoveSelector(), viewController: self)
     
-    private lazy var eventAnimator: EventAnimatorProtocol = {
-        EventAnimator(viewController: self,
-                      cardPositions: buildCardPositions(),
-                      cardSize: discardImageView.bounds.size,
-                      updateDelay: preferences.updateDelay,
-                      eventMatcher: eventMatcher)
+    private lazy var animationRenderer: AnimationRendererProtocol = {
+        AnimationRenderer(viewController: self,
+                                         delay: preferences.updateDelay, 
+                                         cardPositions: buildCardPositions(),
+                                         cardSize: discardImageView.bounds.size,
+                                         cardBackImage: #imageLiteral(resourceName: "01_back"))
     }()
+    
+    private let sfxPlayer: SFXPlayerProtocol = SFXPlayer()
     
     private let disposeBag = DisposeBag()
     
@@ -157,11 +161,16 @@ private extension GameViewController {
             break
         }
         
-        eventAnimator.animate(on: event, in: state)
-        sfxPlayer.playSound(on: event)
-        
         messages.append("\(eventMatcher.emoji(event)) \(event)")
         messageTableView.reloadDataScrollingAtBottom()
+        
+        if let gfx = gfxMatcher.animation(on: event, in: state) {
+            animationRenderer.execute(gfx, duration: eventMatcher.waitDuration(event))
+        }
+        
+        if let sfx = sfxMatcher.sfx(on: event) {
+            sfxPlayer.playSound(named: sfx)
+        }
         
         #if DEBUG
         print("\(eventMatcher.emoji(event)) \(event)")
@@ -332,7 +341,7 @@ extension GameViewController: GameCollectionViewLayoutDelegate {
     }
 }
 
-extension StateProtocol {
+private extension StateProtocol {
     
     var topDiscardImage: UIImage? {
         guard let topDiscard = discard.first else {
