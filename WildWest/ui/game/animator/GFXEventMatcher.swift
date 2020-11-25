@@ -211,7 +211,7 @@ private extension GFXEventMatcher {
     }
     
     static func revealDeck() -> EventDesc {
-        EventDesc(id: "passInPlayOther") { event, state in
+        EventDesc(id: "revealDeck") { event, state in
             guard case .revealDeck = event else {
                 fatalError("Invalid event")
             }

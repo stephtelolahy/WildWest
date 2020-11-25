@@ -37,7 +37,8 @@ private extension SFXEventMatcher {
         "drawStore": "Slide Closed-SoundBible.com-1521580537",
         "gainHealth": "Slurping 2-SoundBible.com-1269549524",
         "looseHealth": "342229_christopherderp_hurt-1-male (online-audio-converter.com)",
-        "eliminate": "Pain-SoundBible.com-1883168362"
+        "eliminate": "Pain-SoundBible.com-1883168362",
+        "addHit": "Gun_loud-Soundmaster_-88363983"
     ]
 }
 
