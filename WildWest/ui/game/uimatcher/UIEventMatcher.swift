@@ -7,16 +7,23 @@
 //
 
 import CardGameEngine
+import Resolver
 
 protocol UIEventMatcherProtocol: EventMatcherProtocol {
-    func animation(on event: GEvent, in state: StateProtocol) -> EventAnimation?
+    func animation(on event: GEvent) -> EventAnimation?
     func sfx(on event: GEvent) -> String?
     func emoji(_ event: GEvent) -> String?
 }
 
-enum EventAnimation {
-    case move(sourceName: String?, targetName: String?, source: CardArea, target: CardArea)
-    case reveal(sourceName: String?, targetName: String?, source: CardArea, target: CardArea)
+struct EventAnimation {
+    let type: EventAnimationType
+    let duration: TimeInterval
+}
+
+enum EventAnimationType {
+    case move(card: String?, source: CardArea, target: CardArea)
+    case reveal(card: String?, source: CardArea, target: CardArea)
+    case dummy
 }
 
 enum CardArea: Hashable {
@@ -27,20 +34,30 @@ enum CardArea: Hashable {
     case inPlay(String)
 }
 
+enum StateCard {
+    static let deck = "deck"
+    static let discard = "discard"
+}
+
 class UIEventMatcher: UIEventMatcherProtocol {
     
+    static let preferences: UserPreferencesProtocol = Resolver.resolve()
+    
     func waitDuration(_ event: GEvent) -> Double {
-        #warning("TODO: implement")
-        return 1
+        guard let anim = animation(on: event) else {
+            return 0
+        }
+        
+        return anim.duration
     }
     
-    func animation(on event: GEvent, in state: StateProtocol) -> EventAnimation? {
+    func animation(on event: GEvent) -> EventAnimation? {
         guard let gfx = Self.gfx[event.hashValue] else {
             print("⚠️ No animation matching \(event)")
             return nil
         }
         
-        return gfx.animateFunc(event, state)
+        return gfx.animateFunc(event)
     }
     
     func sfx(on event: GEvent) -> String? {
@@ -52,7 +69,7 @@ class UIEventMatcher: UIEventMatcherProtocol {
     }
 }
 
-private typealias EventAnimateFunc = (GEvent, StateProtocol) -> EventAnimation
+private typealias EventAnimateFunc = (GEvent) -> EventAnimation
 
 private struct EventDesc {
     let id: String
@@ -62,6 +79,13 @@ private struct EventDesc {
 private extension UIEventMatcher {
     
     static let gfx: [String: EventDesc] = [
+        play(),
+        setTurn(),
+        setPhase(),
+        gainHealth(),
+        looseHealth(),
+        eliminate(),
+        addHit(),
         drawDeck(),
         drawDiscard(),
         discardHand(),
@@ -79,207 +103,187 @@ private extension UIEventMatcher {
     ]
     .toDictionary(with: { $0.id })
     
+    static func play() -> EventDesc {
+        EventDesc(id: "play") { _ in
+            EventAnimation(type: .dummy, duration: preferences.updateDelay)
+        }
+    }
+    
+    static func setTurn() -> EventDesc {
+        EventDesc(id: "setTurn") { _ in
+            EventAnimation(type: .dummy, duration: preferences.updateDelay)
+        }
+    }
+    
+    static func setPhase() -> EventDesc {
+        EventDesc(id: "setPhase") { _ in
+            EventAnimation(type: .dummy, duration: preferences.updateDelay)
+        }
+    }
+    
+    static func gainHealth() -> EventDesc {
+        EventDesc(id: "gainHealth") { _ in
+            EventAnimation(type: .dummy, duration: preferences.updateDelay)
+        }
+    }
+    
+    static func looseHealth() -> EventDesc {
+        EventDesc(id: "looseHealth") { _ in
+            EventAnimation(type: .dummy, duration: preferences.updateDelay)
+        }
+    }
+    
+    static func eliminate() -> EventDesc {
+        EventDesc(id: "eliminate") { _ in
+            EventAnimation(type: .dummy, duration: preferences.updateDelay)
+        }
+    }
+    
+    static func addHit() -> EventDesc {
+        EventDesc(id: "addHit") { _ in
+            EventAnimation(type: .dummy, duration: preferences.updateDelay)
+        }
+    }
+    
     static func drawDeck() -> EventDesc {
-        EventDesc(id: "drawDeck") { event, _ in
+        EventDesc(id: "drawDeck") { event in
             guard case let .drawDeck(player) = event else {
                 fatalError("Invalid event")
             }
             
-            return .move(sourceName: nil,
-                         targetName: nil, 
-                         source: .deck, 
-                         target: .hand(player))
+            return EventAnimation(type: .move(card: nil, source: .deck, target: .hand(player)),
+                                  duration: preferences.updateDelay)
         }
     }
     
     static func drawDiscard() -> EventDesc {
-        EventDesc(id: "drawDiscard") { event, state in
+        EventDesc(id: "drawDiscard") { event in
             guard case let .drawDiscard(player) = event else {
                 fatalError("Invalid event")
             }
-            guard let cardObject = state.discard.first else {
-                fatalError("Illegal state")
-            }
-            return .move(sourceName: cardObject.name, targetName: nil, source: .discard, target: .hand(player))
+            return EventAnimation(type: .move(card: StateCard.discard, source: .discard, target: .hand(player)),
+                                  duration: preferences.updateDelay)
         }
     }
     
     static func discardHand() -> EventDesc {
-        EventDesc(id: "discardHand") { event, state in
+        EventDesc(id: "discardHand") { event in
             guard case let .discardHand(player, card) = event else {
                 fatalError("Invalid event")
             }
-            guard let cardObject = state.players[player]?.hand.first(where: { $0.identifier == card })  else {
-                fatalError("Illegal state")
-            }
-            return .move(sourceName: cardObject.name, 
-                         targetName: state.discard.first?.name, 
-                         source: .hand(player),
-                         target: .discard)
+            return EventAnimation(type: .move(card: card, source: .hand(player), target: .discard),
+                                  duration: preferences.updateDelay)
         }
     }
     
     static func putInPlay() -> EventDesc {
-        EventDesc(id: "putInPlay") { event, state in
+        EventDesc(id: "putInPlay") { event in
             guard case let .putInPlay(player, card) = event else {
                 fatalError("Invalid event")
             }
-            guard let cardObject = state.players[player]?.hand.first(where: { $0.identifier == card }) else {
-                fatalError("Illegal state")
-            }
-            return .move(sourceName: cardObject.name,
-                         targetName: nil,
-                         source: CardArea.hand(player),
-                         target: .inPlay(player))
+            return EventAnimation(type: .move(card: card, source: .hand(player), target: .inPlay(player)),
+                                  duration: preferences.updateDelay)
         }
     }
     
     static func revealHand() -> EventDesc {
-        EventDesc(id: "revealHand") { event, state in
+        EventDesc(id: "revealHand") { event in
             guard case let .revealHand(player, card) = event else {
                 fatalError("Invalid event")
             }
-            
-            guard let cardObject = state.players[player]?.hand.first(where: { $0.identifier == card }) else {
-                fatalError("Illegal state")
-            }
-            return .reveal(sourceName: cardObject.name,
-                           targetName: nil,
-                           source: .hand(player),
-                           target: .hand(player))
+            return EventAnimation(type: .reveal(card: card, source: .hand(player), target: .hand(player)),
+                                  duration: preferences.updateDelay)
         }
     }
     
     static func discardInPlay() -> EventDesc {
-        EventDesc(id: "discardInPlay") { event, state in
+        EventDesc(id: "discardInPlay") { event in
             guard case let .discardInPlay(player, card) = event else {
                 fatalError("Invalid event")
             }
-            
-            guard let cardObject = state.players[player]?.inPlay.first(where: { $0.identifier == card }) else {
-                fatalError("Illegal state")
-            }
-            return .move(sourceName: cardObject.name,
-                         targetName: state.discard.first?.name,
-                         source: .inPlay(player),
-                         target: .discard)
+            return EventAnimation(type: .move(card: card, source: .inPlay(player), target: .discard),
+                                  duration: preferences.updateDelay)
         }
     }
     
     static func drawHand() -> EventDesc {
-        EventDesc(id: "drawHand") { event, _ in
+        EventDesc(id: "drawHand") { event in
             guard case let .drawHand(player, other, _) = event else {
                 fatalError("Invalid event")
             } 
-            return .move(sourceName: nil, 
-                         targetName: nil, 
-                         source: .hand(other), 
-                         target: .hand(player))
+            return EventAnimation(type: .move(card: nil, source: .hand(other), target: .hand(player)),
+                                  duration: preferences.updateDelay)
         }
     }
     
     static func drawInPlay() -> EventDesc {
-        EventDesc(id: "drawInPlay") { event, state in
+        EventDesc(id: "drawInPlay") { event in
             guard case let .drawInPlay(player, other, card) = event else {
                 fatalError("Invalid event")
             }
-            guard let cardObject = state.players[other]?.inPlay.first(where: { $0.identifier == card }) else {
-                fatalError("Illegal state")
-            }
-            return .move(sourceName: cardObject.name,
-                         targetName: nil,
-                         source: .inPlay(other),
-                         target: .hand(player))
+            return EventAnimation(type: .move(card: card, source: .inPlay(other), target: .hand(player)),
+                                  duration: preferences.updateDelay)
         }
     }
     
     static func putInPlayOther() -> EventDesc {
-        EventDesc(id: "putInPlayOther") { event, state in
+        EventDesc(id: "putInPlayOther") { event in
             guard case let .putInPlayOther(player, card, other) = event else {
                 fatalError("Invalid event")
             }
-            guard let cardObject = state.players[player]?.hand.first(where: { $0.identifier == card }) else {
-                fatalError("Illegal state")
-            }
-            return .move(sourceName: cardObject.name,
-                         targetName: nil,
-                         source: .hand(player),
-                         target: .inPlay(other))
+            return EventAnimation(type: .move(card: card, source: .hand(player), target: .inPlay(other)),
+                                  duration: preferences.updateDelay)
         }
     }
     
     static func passInPlayOther() -> EventDesc {
-        EventDesc(id: "passInPlayOther") { event, state in
+        EventDesc(id: "passInPlayOther") { event in
             guard case let .passInPlayOther(player, card, other) = event else {
                 fatalError("Invalid event")
             }
-            
-            guard let cardObject = state.players[player]?.inPlay.first(where: { $0.identifier == card }) else {
-                fatalError("Illegal state")
-            }
-            
-            return .move(sourceName: cardObject.name,
-                         targetName: nil,
-                         source: .inPlay(player),
-                         target: .inPlay(other))
+            return EventAnimation(type: .move(card: card, source: .inPlay(player), target: .inPlay(other)),
+                                  duration: preferences.updateDelay)
         }
     }
     
     static func revealDeck() -> EventDesc {
-        EventDesc(id: "revealDeck") { event, state in
+        EventDesc(id: "revealDeck") { event in
             guard case .revealDeck = event else {
                 fatalError("Invalid event")
             }
-            guard let cardObject = state.deck.first else {
-                fatalError("Illegal state")
-            }
-            return .reveal(sourceName: cardObject.name, 
-                           targetName: state.discard.first?.name,
-                           source: .deck,
-                           target: .discard)
+            return EventAnimation(type: .reveal(card: StateCard.deck, source: .deck, target: .discard),
+                                  duration: preferences.updateDelay)
         }
     }
     
     static func deckToStore() -> EventDesc {
-        EventDesc(id: "deckToStore") { event, state in
+        EventDesc(id: "deckToStore") { event in
             guard case .deckToStore = event else {
                 fatalError("Invalid event")
             }
-            guard let cardObject = state.deck.first else {
-                fatalError("Illegal state")
-            }
-            
-            let sourceName = state.storeView == nil ? cardObject.name : nil
-            return .reveal(sourceName: sourceName,
-                           targetName: nil,
-                           source: .deck, 
-                           target: .store)
+            #warning("TODO: handle hidden store in animRenderer")
+            return EventAnimation(type: .reveal(card: StateCard.deck, source: .deck, target: .store),
+                                  duration: preferences.updateDelay)
         }
     }
     
     static func storeToDeck() -> EventDesc {
-        EventDesc(id: "storeToDeck") { event, _ in
-            guard case .storeToDeck = event else {
+        EventDesc(id: "storeToDeck") { event in
+            guard case let .storeToDeck(card) = event else {
                 fatalError("Invalid event")
             }
-            
-            return .reveal(sourceName: nil, targetName: nil, source: .store, target: .deck)
+            return EventAnimation(type: .move(card: card, source: .store, target: .deck),
+                                  duration: preferences.updateDelay)
         }
     }
     
     static func drawStore() -> EventDesc {
-        EventDesc(id: "drawStore") { event, state in
+        EventDesc(id: "drawStore") { event in
             guard case let .drawStore(player, card) = event else {
                 fatalError("Invalid event")
             }
-            guard let cardObject = state.store.first(where: { $0.identifier == card }) else {
-                fatalError("Illegal state")
-            }
-            let sourceName = state.storeView == nil ? cardObject.name : nil
-            return .move(sourceName: sourceName,
-                         targetName: nil, 
-                         source: .store,
-                         target: .hand(player))
+            return EventAnimation(type: .move(card: card, source: .store, target: .hand(player)),
+                                  duration: preferences.updateDelay)
         }
     }
 }

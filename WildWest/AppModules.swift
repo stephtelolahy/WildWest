@@ -26,6 +26,7 @@ extension Resolver: ResolverRegistering {
         register { DictionaryEncoder() }
         
         register {  UIEventMatcher() as UIEventMatcherProtocol }.scope(application)
+        
 //        register { DtoEncoder(allCards: Resolver.resolve(ResourcesLoaderProtocol.self).allCards,
 //                              keyGenerator: resolve())
 //        }

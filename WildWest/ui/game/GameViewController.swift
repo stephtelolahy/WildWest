@@ -49,8 +49,7 @@ class GameViewController: UIViewController {
     private lazy var inputHandler: InputHandlerProtocol = InputHandler(selector: MoveSelector(), viewController: self)
     
     private lazy var animationRenderer: AnimationRendererProtocol = {
-        AnimationRenderer(viewController: self,
-                          delay: preferences.updateDelay, 
+        AnimationRenderer(viewController: self, 
                           cardPositions: buildCardPositions(),
                           cardSize: discardImageView.bounds.size,
                           cardBackImage: #imageLiteral(resourceName: "01_back"))
@@ -160,8 +159,8 @@ private extension GameViewController {
         print("\(eventMatcher.emoji(event) ?? "") \(event)")
         #endif
         
-        if let gfx = eventMatcher.animation(on: event, in: state) {
-            animationRenderer.execute(gfx, duration: eventMatcher.waitDuration(event))
+        if let gfx = eventMatcher.animation(on: event) {
+            animationRenderer.execute(gfx, in: state)
         }
         
         if let sfx = eventMatcher.sfx(on: event) {

@@ -53,7 +53,6 @@ class GameBuilder: GameBuilderProtocol {
         let abilities = resourcesLoader.loadAbilities()
         let scores = resourcesLoader.loadScores()
         
-        let eventMatcher: UIEventMatcherProtocol = Resolver.resolve()
         let databaseUpdater = GDatabaseUpdater()
         let database = GDatabase(state, updater: databaseUpdater)
         
@@ -61,7 +60,8 @@ class GameBuilder: GameBuilderProtocol {
         let effectMatcher = EffectMatcher()
         let abilityMatcher = AbilityMatcher(abilities: abilities, effectMatcher: effectMatcher, playReqMatcher: playReqMatcher)
         let eventsQueue = GEventQueue()
-        let timer = GTimer(delay: preferences.updateDelay, matcher: eventMatcher)
+        let eventMatcher: UIEventMatcherProtocol = Resolver.resolve()
+        let timer = GTimer(matcher: eventMatcher)
         let loop = GLoop(eventsQueue: eventsQueue, database: database, matcher: abilityMatcher, timer: timer)
         let engine = GEngine(loop: loop, database: database, matcher: abilityMatcher)
         
