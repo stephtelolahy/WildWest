@@ -84,6 +84,18 @@ class MediaEventMatcherTests: XCTestCase {
         XCTAssertEqual(sut.emoji(on: .eliminate(player: "p1", offender: "p2")), "☠️")
     }
     
+    func test_GameOver() {
+        XCTAssertEqual(sut.emoji(on: .gameover(winner: .renegade)), "🎉")
+    }
+    
+    func test_StartTurn() {
+        XCTAssertEqual(sut.emoji(on: .setTurn(player: "p1")), "🔥")
+    }
+    
+    func test_SetPhase() {
+        XCTAssertEqual(sut.emoji(on: .setPhase(value: 1)), "✔️")
+    }
+    
     // MARK: - Engine events
     
     func test_Activate() {

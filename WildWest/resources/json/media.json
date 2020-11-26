@@ -95,5 +95,21 @@
     "emoji": "☠️",
     "sfx": "Pain-SoundBible.com-1883168362",
     "playReqs": [{ "event": "eliminate" }]
+  },
+  {
+    "desc": "gameover",
+    "emoji": "🎉",
+    "sfx": "Ta Da-SoundBible.com-1884170640",
+    "playReqs": [{ "event": "gameover" }]
+  },
+  {
+    "desc": "start turn",
+    "emoji": "🔥",
+    "playReqs": [{ "event": "setTurn" }]
+  },
+  {
+    "desc": "set phase",
+    "emoji": "✔️",
+    "playReqs": [{ "event": "setPhase" }]
   }
 ]
