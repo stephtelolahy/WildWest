@@ -20,10 +20,11 @@ class MediaEventMatcherTests: XCTestCase {
         sut = MediaEventMatcher(mediaArray: mediaArray)
     }
     
-    func test_MediaBang() {
-        // Given
-        // When
-        // Assert
+    func test_PlayBang() {
         XCTAssertEqual(sut.emoji(on: .play(move: GMove("bang", actor: "p1"))), "🔫")
+    }
+    
+    func test_Activate() {
+        XCTAssertEqual(sut.emoji(on: .activate(moves: [])), "🎮")
     }
 }

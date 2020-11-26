@@ -15,7 +15,7 @@ protocol MediaEventMatcherProtocol {
 
 struct EventMedia: Decodable {
     let emoji: String
-    let sfx: String
+    let sfx: String?
     let playReqs: [[String: String]]
 }
 
@@ -44,22 +44,28 @@ class MediaEventMatcher: MediaEventMatcherProtocol {
 
 private extension MediaEventMatcher {
     
-    func destructuring(_ event: GEvent) -> [String: String] {
-        switch event {
-        case let .play(move):
-            return ["event": "play", 
-                    "move": move.name]
-            
-        default:
-            return [:]
-        }
-    }
-    
     func media(matching event: GEvent) -> EventMedia? {
         let destructed = destructuring(event)
         let matching = mediaArray.filter { $0.playReqs.contains(where: { destructed.matches($0) }) }
         assert(matching.count < 2, "Illegal state")
         return matching.first
+    }
+}
+
+private extension MediaEventMatcher {
+    
+    func destructuring(_ event: GEvent) -> [String: String] {
+        switch event {
+        case let .play(move):
+            return ["event": "play", 
+                    "ability": move.name]
+            
+        case .activate:
+            return ["event": "activate"]
+            
+        default:
+            fatalError("Illegal state")
+        }
     }
 }
 

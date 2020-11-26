@@ -296,7 +296,6 @@ private extension AnimationEventMatcher {
         "gainHealth": "Slurping 2-SoundBible.com-1269549524",
         "looseHealth": "342229_christopherderp_hurt-1-male (online-audio-converter.com)",
         "eliminate": "Pain-SoundBible.com-1883168362",
-        "addHit": "Gun_loud-Soundmaster_-88363983"
     ]
 }
 
@@ -328,7 +327,6 @@ private extension AnimationEventMatcher {
     
     static let emoji: [String: String] = [
         "play": "👍",
-        "activate": "🎮",
         "emptyQueue": "💤",
         "gameover": "🎉",
         "setTurn": "🔥",

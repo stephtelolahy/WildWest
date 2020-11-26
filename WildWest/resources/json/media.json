@@ -2,6 +2,10 @@
   {
     "emoji": "🔫",
     "sfx": "Gun_loud-Soundmaster_-88363983",
-    "playReqs": [{ "event": "play", "move": "bang" }]
+    "playReqs": [{ "event": "play", "ability": "bang" }]
+  },
+  {
+    "emoji": "🎮",
+    "playReqs": [{ "event": "activate" }]
   }
 ]
