@@ -31,6 +31,7 @@ class AnimationRenderer: AnimationRendererProtocol {
     }
     
     func execute(_ animation: EventAnimation, in state: StateProtocol) {
+        #warning("TODO: hide store cards if storeView != nil")
         switch animation.type {
         case let .move(card, source, target):
             let sourceName = sourceImageName(for: card, in: state)

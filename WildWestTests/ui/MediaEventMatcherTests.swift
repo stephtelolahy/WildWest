@@ -27,4 +27,10 @@ class MediaEventMatcherTests: XCTestCase {
     func test_Activate() {
         XCTAssertEqual(sut.emoji(on: .activate(moves: [])), "🎮")
     }
+    
+    func test_DrawCard() {
+        XCTAssertEqual(sut.emoji(on: .drawDeck(player: "p1")), "💰")
+        XCTAssertEqual(sut.emoji(on: .drawDiscard(player: "p1")), "💰")
+        XCTAssertEqual(sut.emoji(on: .drawStore(player: "p1", card: "c1")), "💰")
+    }
 }

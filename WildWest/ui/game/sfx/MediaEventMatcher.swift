@@ -57,14 +57,11 @@ private extension MediaEventMatcher {
     func destructuring(_ event: GEvent) -> [String: String] {
         switch event {
         case let .play(move):
-            return ["event": "play", 
+            return ["event": event.hashValue, 
                     "ability": move.name]
             
-        case .activate:
-            return ["event": "activate"]
-            
         default:
-            fatalError("Illegal state")
+            return ["event": event.hashValue]
         }
     }
 }

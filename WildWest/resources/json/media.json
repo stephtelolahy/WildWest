@@ -1,11 +1,23 @@
 [
   {
+    "desc": "play bang",
     "emoji": "🔫",
     "sfx": "Gun_loud-Soundmaster_-88363983",
     "playReqs": [{ "event": "play", "ability": "bang" }]
   },
   {
+    "desc": "activate",
     "emoji": "🎮",
     "playReqs": [{ "event": "activate" }]
+  },
+  {
+    "desc": "draw card",
+    "emoji": "💰",
+    "sfx": "Slide Closed-SoundBible.com-1521580537",
+    "playReqs": [
+      { "event": "drawDeck" },
+      { "event": "drawDiscard" },
+      { "event": "drawStore" }
+    ]
   }
 ]
