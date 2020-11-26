@@ -164,7 +164,7 @@ private extension GameViewController {
         }
         
         if let sfx = eventMatcher.sfx(on: event) {
-            sfxPlayer.playSound(named: sfx)
+            sfxPlayer.play(sfx)
         }
     }
     

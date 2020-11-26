@@ -32,7 +32,7 @@ class MenuViewController: UIViewController {
     
 //    private lazy var manager: MatchingManagerProtocol = Resolver.resolve()
     private lazy var preferences: UserPreferencesProtocol = Resolver.resolve()
-    private lazy var musicPlayer: ThemeMusicPlayer? = preferences.enableSound ? ThemeMusicPlayer() : nil
+    private lazy var musicPlayer: SFXPlayerProtocol = SFXPlayer()
     
     // MARK: - Lifecycle
     
@@ -47,13 +47,14 @@ class MenuViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        musicPlayer?.play()
+        let musicFile = "2017-03-24_-_Lone_Rider_-_David_Fesliyan"
+        musicPlayer.play(musicFile)
         updateUserView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        musicPlayer?.stop()
+        musicPlayer.stop()
     }
     
     // MARK: - IBActions

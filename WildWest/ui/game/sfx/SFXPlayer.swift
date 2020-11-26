@@ -7,29 +7,38 @@
 //
 
 import AVFoundation
+import Resolver
 
 protocol SFXPlayerProtocol {
-    func playSound(named fileName: String)
+    func play(_ fileName: String)
+    func stop()
 }
 
 class SFXPlayer: SFXPlayerProtocol {
     
+    private lazy var preferences: UserPreferencesProtocol = Resolver.resolve()
+    
     private var sfxPlayers: [AVAudioPlayer] = []
     
-    func playSound(named fileName: String) {
-        sfxPlayers = sfxPlayers.filter { $0.isPlaying }
-        
-        guard let path = Bundle.main.path(forResource: "\(fileName).mp3", ofType: nil) else {
-            fatalError("Illegal state")
+    func play(_ fileName: String) {
+        guard preferences.enableSound else {
+            return
         }
         
-        let url = URL(fileURLWithPath: path)
+        sfxPlayers.removeAll(where: { !$0.isPlaying })
+        
         do {
+            let path = try Bundle.main.path(forResource: "\(fileName).mp3", ofType: nil).unwrap()
+            let url = URL(fileURLWithPath: path)
             let soundEffect = try AVAudioPlayer(contentsOf: url)
             sfxPlayers.append(soundEffect)
             soundEffect.play()
         } catch {
             fatalError(error.localizedDescription)
         }
+    }
+    
+    func stop() {
+        sfxPlayers.forEach { $0.stop() }
     }
 }

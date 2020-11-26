@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		33029EAD24C74B8F002A5E54 /* DatabaseReference+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33029EAC24C74B8F002A5E54 /* DatabaseReference+Rx.swift */; };
-		33031E0D2455513000528158 /* ThemeMusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33031E0C2455513000528158 /* ThemeMusicPlayer.swift */; };
 		33031E0F24555D5F00528158 /* OptionalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33031E0E24555D5F00528158 /* OptionalExtension.swift */; };
 		3306682E245588B9003B2263 /* FirebaseMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3306682D245588B9003B2263 /* FirebaseMapper.swift */; };
 		3314A021256C586300E54AF6 /* AnimationRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3314A020256C586300E54AF6 /* AnimationRenderer.swift */; };
@@ -144,7 +143,6 @@
 
 /* Begin PBXFileReference section */
 		33029EAC24C74B8F002A5E54 /* DatabaseReference+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DatabaseReference+Rx.swift"; sourceTree = "<group>"; };
-		33031E0C2455513000528158 /* ThemeMusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeMusicPlayer.swift; sourceTree = "<group>"; };
 		33031E0E24555D5F00528158 /* OptionalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OptionalExtension.swift; path = ../data/firebase/mapper/OptionalExtension.swift; sourceTree = "<group>"; };
 		3306682D245588B9003B2263 /* FirebaseMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseMapper.swift; sourceTree = "<group>"; };
 		3314A020256C586300E54AF6 /* AnimationRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationRenderer.swift; sourceTree = "<group>"; };
@@ -528,7 +526,6 @@
 				33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */,
 				3372CB512454BC7900C061C9 /* FigureSelector.swift */,
 				33EAD12524D499910052A97C /* RoleSelector.swift */,
-				33031E0C2455513000528158 /* ThemeMusicPlayer.swift */,
 			);
 			path = menu;
 			sourceTree = "<group>";
@@ -913,7 +910,6 @@
 				33B896CA243862AB0005FF21 /* GameCollectionViewLayout.swift in Sources */,
 				33B896C424384A770005FF21 /* GameLayoutBuilder.swift in Sources */,
 				3324018E23DBA6C800B92439 /* UICollectionViewExtension.swift in Sources */,
-				33031E0D2455513000528158 /* ThemeMusicPlayer.swift in Sources */,
 				335C03BE2459F5C200043F46 /* GameMoveDto.swift in Sources */,
 				3328DEB524CEF0B900D09117 /* UserCell.swift in Sources */,
 				33C922E824CA986300956151 /* UserInfoDto.swift in Sources */,
