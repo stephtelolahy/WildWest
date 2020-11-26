@@ -28,8 +28,26 @@ class MediaEventMatcherTests: XCTestCase {
         XCTAssertEqual(sut.emoji(on: .play(move: GMove("discardBangOnIndians", actor: "p1"))), "🔫")
     }
     
+    func test_PlayDuel() {
+        XCTAssertEqual(sut.emoji(on: .play(move: GMove("duel", actor: "p1"))), "🔫")
+    }
+    
     func test_PlayMissed() {
         XCTAssertEqual(sut.emoji(on: .play(move: GMove("missed", actor: "p1"))), "😝")
+    }
+    
+    func test_PlayDrawCard() {
+        XCTAssertEqual(sut.emoji(on: .play(move: GMove("stagecoach", actor: "p1"))), "🎁")
+        XCTAssertEqual(sut.emoji(on: .play(move: GMove("wellsFargo", actor: "p1"))), "🎁")
+    }
+    
+    func test_PlayMassiveShoot() {
+        XCTAssertEqual(sut.emoji(on: .play(move: GMove("gatling", actor: "p1"))), "💢")
+        XCTAssertEqual(sut.emoji(on: .play(move: GMove("indians", actor: "p1"))), "💢")
+    }
+    
+    func test_PlayCommon() {
+        XCTAssertEqual(sut.emoji(on: .play(move: GMove("any", actor: "p1"))), "👍")
     }
     
     // MARK: - Update Events
@@ -94,6 +112,11 @@ class MediaEventMatcherTests: XCTestCase {
     
     func test_SetPhase() {
         XCTAssertEqual(sut.emoji(on: .setPhase(value: 1)), "✔️")
+    }
+    
+    func test_DynamiteExploded() {
+        XCTAssertEqual(sut.emoji(on: .addHit(name: "dynamite", player: "p1", abilities: [], cancelable: 0, offender: "p1")), "😰")
+        XCTAssertNil(sut.emoji(on: .addHit(name: "any", player: "p1", abilities: [], cancelable: 0, offender: "p1")))
     }
     
     // MARK: - Engine events

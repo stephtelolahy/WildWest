@@ -1,5 +1,10 @@
 [
   {
+    "desc": "play",
+    "emoji": "👍",
+    "playReqs": [{ "event": "play" }]
+  },
+  {
     "desc": "play bang",
     "emoji": "🔫",
     "sfx": "Gun_loud-Soundmaster_-88363983",
@@ -8,6 +13,33 @@
       { "event": "play", "ability": "discardBangOnDuel" },
       { "event": "play", "ability": "discardBangOnIndians" }
     ]
+  },
+  {
+    "desc": "play draw cards",
+    "emoji": "🎁",
+    "sfx": "Horse Galloping-SoundBible.com-1451398148",
+    "playReqs": [
+      { "event": "play", "ability": "stagecoach" },
+      { "event": "play", "ability": "wellsFargo" }
+    ]
+  },
+  {
+    "desc": "play duel",
+    "emoji": "🔫",
+    "sfx": "shotgun-old_school-RA_The_Sun_God-1129942741",
+    "playReqs": [{ "event": "play", "ability": "duel" }]
+  },
+  {
+    "desc": "play gatling",
+    "emoji": "💢",
+    "sfx": "Automatic Machine Gun-SoundBible.com-253461580",
+    "playReqs": [{ "event": "play", "ability": "gatling" }]
+  },
+  {
+    "desc": "play indians",
+    "emoji": "💢",
+    "sfx": "Peacock-SoundBible.com-1698361099",
+    "playReqs": [{ "event": "play", "ability": "indians" }]
   },
   {
     "desc": "activate",
@@ -111,5 +143,11 @@
     "desc": "set phase",
     "emoji": "✔️",
     "playReqs": [{ "event": "setPhase" }]
+  },
+  {
+    "desc": "dynamite exploded",
+    "emoji": "😰",
+    "sfx": "Big Bomb-SoundBible.com-1219802495",
+    "playReqs": [{ "event": "addHit", "ability": "dynamite" }]
   }
 ]

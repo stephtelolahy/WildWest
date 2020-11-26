@@ -94,7 +94,7 @@ private extension AnimationEventMatcher {
     
     static func play() -> EventDesc {
         EventDesc(id: "play") { _ in
-            EventAnimation(type: .dummy, duration: preferences.updateDelay)
+            EventAnimation(type: .dummy, duration: 0)
         }
     }
     

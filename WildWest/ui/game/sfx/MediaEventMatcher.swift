@@ -46,9 +46,21 @@ private extension MediaEventMatcher {
     
     func media(matching event: GEvent) -> EventMedia? {
         let destructed = destructuring(event)
-        let matching = mediaArray.filter { $0.playReqs.contains(where: { destructed.matches($0) }) }
-        assert(matching.count < 2, "Illegal state")
-        return matching.first
+        
+        var matchedMedia: EventMedia?
+        var matchedCriteria = 0
+        
+        for media in mediaArray {
+            for playReq in media.playReqs {
+                if destructed.matches(playReq), 
+                   playReq.count > matchedCriteria {
+                    matchedMedia = media
+                    matchedCriteria = playReq.count
+                }
+            }
+        }
+        
+        return matchedMedia
     }
 }
 
@@ -59,6 +71,10 @@ private extension MediaEventMatcher {
         case let .play(move):
             return ["event": event.hashValue, 
                     "ability": move.name]
+            
+        case let .addHit(name, _, _, _, _):
+            return ["event": event.hashValue, 
+                    "ability": name]
             
         default:
             return ["event": event.hashValue]
