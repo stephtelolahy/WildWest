@@ -1,0 +1,7 @@
+[
+  {
+    "emoji": "🔫",
+    "sfx": "Gun_loud-Soundmaster_-88363983",
+    "playReqs": [{ "event": "play", "move": "bang" }]
+  }
+]

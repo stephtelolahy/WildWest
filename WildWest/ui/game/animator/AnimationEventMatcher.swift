@@ -1,5 +1,5 @@
 //
-//  UIEventMatcher.swift
+//  AnimationEventMatcher.swift
 //  WildWest
 //
 //  Created by Hugues Stephano Telolahy on 25/11/2020.
@@ -9,10 +9,8 @@
 import CardGameEngine
 import Resolver
 
-protocol UIEventMatcherProtocol: EventMatcherProtocol {
+protocol AnimationEventMatcherProtocol: EventMatcherProtocol {
     func animation(on event: GEvent) -> EventAnimation?
-    func sfx(on event: GEvent) -> String?
-    func emoji(_ event: GEvent) -> String?
 }
 
 struct EventAnimation {
@@ -39,7 +37,7 @@ enum StateCard {
     static let discard = "discard"
 }
 
-class UIEventMatcher: UIEventMatcherProtocol {
+class AnimationEventMatcher: AnimationEventMatcherProtocol {
     
     static let preferences: UserPreferencesProtocol = Resolver.resolve()
     
@@ -52,20 +50,11 @@ class UIEventMatcher: UIEventMatcherProtocol {
     }
     
     func animation(on event: GEvent) -> EventAnimation? {
-        guard let gfx = Self.gfx[event.hashValue] else {
-            print("⚠️ No animation matching \(event)")
+        guard let eventDesc = Self.all[event.hashValue] else {
             return nil
         }
         
-        return gfx.animateFunc(event)
-    }
-    
-    func sfx(on event: GEvent) -> String? {
-        Self.sfx[event.hashValue]
-    }
-    
-    func emoji(_ event: GEvent) -> String? {
-        Self.emoji[event.hashValue]
+        return eventDesc.animateFunc(event)
     }
 }
 
@@ -76,9 +65,9 @@ private struct EventDesc {
     let animateFunc: EventAnimateFunc
 }
 
-private extension UIEventMatcher {
+private extension AnimationEventMatcher {
     
-    static let gfx: [String: EventDesc] = [
+    static let all: [String: EventDesc] = [
         play(),
         setTurn(),
         setPhase(),
@@ -288,7 +277,7 @@ private extension UIEventMatcher {
     }
 }
 
-private extension UIEventMatcher {
+private extension AnimationEventMatcher {
     
     static let sfx: [String: String] = [
         "drawDeck": "Slide Closed-SoundBible.com-1521580537",
@@ -335,7 +324,7 @@ private var equipSfx: [CardName: String] = [
 ]
 */
 
-private extension UIEventMatcher {
+private extension AnimationEventMatcher {
     
     static let emoji: [String: String] = [
         "play": "👍",

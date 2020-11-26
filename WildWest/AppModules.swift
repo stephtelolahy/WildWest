@@ -25,7 +25,9 @@ extension Resolver: ResolverRegistering {
         register { FirebaseKeyGenerator() as KeyGeneratorProtocol }
         register { DictionaryEncoder() }
         
-        register {  UIEventMatcher() as UIEventMatcherProtocol }.scope(application)
+        register { AnimationEventMatcher() as AnimationEventMatcherProtocol }.scope(application)
+        
+        register { createMediaMatcher() as MediaEventMatcherProtocol }.scope(application)
         
 //        register { DtoEncoder(allCards: Resolver.resolve(ResourcesLoaderProtocol.self).allCards,
 //                              keyGenerator: resolve())
@@ -47,5 +49,11 @@ extension Resolver: ResolverRegistering {
 //                                   database: resolve(),
 //                                   gameBuilder: resolve()) as MatchingManagerProtocol
 //        }.scope(application)
+    }
+    
+    private static func createMediaMatcher() -> MediaEventMatcherProtocol {
+        let jsonReader = JsonReader(bundle: Bundle.main)
+        let mediaArray: [EventMedia] = jsonReader.load("media")
+        return MediaEventMatcher(mediaArray: mediaArray)
     }
 }
