@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import Firebase
 import CardGameEngine
+import Resolver
 
 protocol GameBuilderProtocol {
     func createGame(for playersCount: Int) -> StateProtocol
@@ -51,9 +52,7 @@ class GameBuilder: GameBuilderProtocol {
                                     playerId: String?) -> GameEnvironment {
         let abilities = resourcesLoader.loadAbilities()
         let scores = resourcesLoader.loadScores()
-        let media = resourcesLoader.loadEventMedia()
         
-        let eventMatcher = EventMatcher(media: media)
         let databaseUpdater = GDatabaseUpdater()
         let database = GDatabase(state, updater: databaseUpdater)
         
@@ -61,7 +60,8 @@ class GameBuilder: GameBuilderProtocol {
         let effectMatcher = EffectMatcher()
         let abilityMatcher = AbilityMatcher(abilities: abilities, effectMatcher: effectMatcher, playReqMatcher: playReqMatcher)
         let eventsQueue = GEventQueue()
-        let timer = GTimer(delay: preferences.updateDelay, matcher: eventMatcher)
+        let eventMatcher: AnimationEventMatcherProtocol = Resolver.resolve()
+        let timer = GTimer(matcher: eventMatcher)
         let loop = GLoop(eventsQueue: eventsQueue, database: database, matcher: abilityMatcher, timer: timer)
         let engine = GEngine(loop: loop, database: database, matcher: abilityMatcher)
         

@@ -33,7 +33,7 @@ class PlayersAdapter: PlayersAdapterProtocol {
         state.initialOrder.map { player in
             PlayerItem(player: state.players[player]!,
                        isTurn: player == state.turn,
-                       isAttacked: state.hits.first?.player == player,
+                       isAttacked: state.hits.contains(where: { $0.player == player }),
                        isHelped: false,
                        score: 0,
                        user: users[player])

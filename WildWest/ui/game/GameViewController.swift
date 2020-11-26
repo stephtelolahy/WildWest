@@ -40,28 +40,20 @@ class GameViewController: UIViewController {
     private lazy var analyticsManager: AnalyticsManager = Resolver.resolve()
     private lazy var preferences: UserPreferencesProtocol = Resolver.resolve()
     private lazy var resourceLoader: ResourcesLoaderProtocol = Resolver.resolve()
+    private lazy var animationMatcher: AnimationEventMatcherProtocol = Resolver.resolve()
+    private lazy var mediaMatcher: MediaEventMatcherProtocol  = Resolver.resolve()
     
     private lazy var playerAdapter: PlayersAdapterProtocol = PlayersAdapter()
     private lazy var instructionBuilder: InstructionBuilderProtocol = InstructionBuilder()
     private lazy var moveSegmenter: MoveSegmenterProtocol = MoveSegmenter()
     
-    private lazy var eventMatcher: EventMatcherProtocol = {
-        let media = resourceLoader.loadEventMedia()
-        return EventMatcher(media: media)
-    }()
-    
-    private lazy var gfxMatcher: GFXEventMatcherProtocol = GFXEventMatcher()
-    
-    private lazy var sfxMatcher: SFXEventMatcherProtocol = SFXEventMatcher()
-    
     private lazy var inputHandler: InputHandlerProtocol = InputHandler(selector: MoveSelector(), viewController: self)
     
     private lazy var animationRenderer: AnimationRendererProtocol = {
-        AnimationRenderer(viewController: self,
-                                         delay: preferences.updateDelay, 
-                                         cardPositions: buildCardPositions(),
-                                         cardSize: discardImageView.bounds.size,
-                                         cardBackImage: #imageLiteral(resourceName: "01_back"))
+        AnimationRenderer(viewController: self, 
+                          cardPositions: buildCardPositions(),
+                          cardSize: discardImageView.bounds.size,
+                          cardBackImage: #imageLiteral(resourceName: "01_back"))
     }()
     
     private let sfxPlayer: SFXPlayerProtocol = SFXPlayer()
@@ -161,20 +153,20 @@ private extension GameViewController {
             break
         }
         
-        messages.append("\(eventMatcher.emoji(event)) \(event)")
+        messages.append("\(mediaMatcher.emoji(on: event) ?? "") \(event)")
         messageTableView.reloadDataScrollingAtBottom()
         
-        if let gfx = gfxMatcher.animation(on: event, in: state) {
-            animationRenderer.execute(gfx, duration: eventMatcher.waitDuration(event))
-        }
-        
-        if let sfx = sfxMatcher.sfx(on: event) {
-            sfxPlayer.playSound(named: sfx)
-        }
-        
         #if DEBUG
-        print("\(eventMatcher.emoji(event)) \(event)")
+        print("\(mediaMatcher.emoji(on: event) ?? "") \(event)")
         #endif
+        
+        if let animation = animationMatcher.animation(on: event) {
+            animationRenderer.execute(animation, in: state)
+        }
+        
+        if let sfx = mediaMatcher.sfx(on: event) {
+            sfxPlayer.play(sfx)
+        }
     }
     
     func processMoves(_ moves: [GMove]) {

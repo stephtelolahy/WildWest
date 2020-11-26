@@ -1,0 +1,153 @@
+[
+  {
+    "desc": "play",
+    "emoji": "👍",
+    "playReqs": [{ "event": "play" }]
+  },
+  {
+    "desc": "play bang",
+    "emoji": "🔫",
+    "sfx": "Gun_loud-Soundmaster_-88363983",
+    "playReqs": [
+      { "event": "play", "ability": "bang" },
+      { "event": "play", "ability": "discardBangOnDuel" },
+      { "event": "play", "ability": "discardBangOnIndians" }
+    ]
+  },
+  {
+    "desc": "play draw cards",
+    "emoji": "🎁",
+    "sfx": "Horse Galloping-SoundBible.com-1451398148",
+    "playReqs": [
+      { "event": "play", "ability": "stagecoach" },
+      { "event": "play", "ability": "wellsFargo" }
+    ]
+  },
+  {
+    "desc": "play duel",
+    "emoji": "🔫",
+    "sfx": "shotgun-old_school-RA_The_Sun_God-1129942741",
+    "playReqs": [{ "event": "play", "ability": "duel" }]
+  },
+  {
+    "desc": "play gatling",
+    "emoji": "💢",
+    "sfx": "Automatic Machine Gun-SoundBible.com-253461580",
+    "playReqs": [{ "event": "play", "ability": "gatling" }]
+  },
+  {
+    "desc": "play indians",
+    "emoji": "💢",
+    "sfx": "Peacock-SoundBible.com-1698361099",
+    "playReqs": [{ "event": "play", "ability": "indians" }]
+  },
+  {
+    "desc": "activate",
+    "emoji": "🎮",
+    "playReqs": [{ "event": "activate" }]
+  },
+  {
+    "desc": "empty queue",
+    "emoji": "💤",
+    "playReqs": [{ "event": "emptyQueue" }]
+  },
+  {
+    "desc": "draw card",
+    "emoji": "💰",
+    "sfx": "Slide Closed-SoundBible.com-1521580537",
+    "playReqs": [
+      { "event": "drawDeck" },
+      { "event": "drawDiscard" },
+      { "event": "drawStore" }
+    ]
+  },
+  {
+    "desc": "reveal card",
+    "emoji": "🌟",
+    "sfx": "Metal Clang-SoundBible.com-19572601",
+    "playReqs": [{ "event": "revealDeck" }, { "event": "revealHand" }]
+  },
+  {
+    "desc": "discard card",
+    "emoji": "❌",
+    "sfx": "flyby-Conor-1500306612",
+    "playReqs": [{ "event": "discardHand" }, { "event": "discardInPlay" }]
+  },
+  {
+    "desc": "play missed",
+    "emoji": "😝",
+    "sfx": "Western Ricochet-SoundBible.com-1725886901",
+    "playReqs": [{ "event": "play", "ability": "missed" }]
+  },
+  {
+    "desc": "draw from player",
+    "emoji": "‼️",
+    "sfx": "Slap-SoundMaster13-49669815",
+    "playReqs": [{ "event": "drawHand" }, { "event": "drawInPlay" }]
+  },
+  {
+    "desc": "equip",
+    "emoji": "😎",
+    "sfx": "Shotgun-SoundBible.com-862990674",
+    "playReqs": [{ "event": "putInPlay" }]
+  },
+  {
+    "desc": "equip",
+    "emoji": "⚠️",
+    "sfx": "Metal Latch-SoundBible.com-736691159",
+    "playReqs": [{ "event": "putInPlayOther" }]
+  },
+  {
+    "desc": "pass to player",
+    "emoji": "💣",
+    "sfx": "Fuse Burning-SoundBible.com-1372982430",
+    "playReqs": [{ "event": "passInPlayOther" }]
+  },
+  {
+    "desc": "store",
+    "emoji": "🎁",
+    "sfx": "Slide Closed-SoundBible.com-1521580537",
+    "playReqs": [{ "event": "deckToStore" }, { "event": "storeToDeck" }]
+  },
+  {
+    "desc": "gain health",
+    "emoji": "🍺",
+    "sfx": "Slurping 2-SoundBible.com-1269549524",
+    "playReqs": [{ "event": "gainHealth" }]
+  },
+
+  {
+    "desc": "loose health",
+    "emoji": "❤️",
+    "sfx": "342229_christopherderp_hurt-1-male (online-audio-converter.com)",
+    "playReqs": [{ "event": "looseHealth" }]
+  },
+  {
+    "desc": "eliminate",
+    "emoji": "☠️",
+    "sfx": "Pain-SoundBible.com-1883168362",
+    "playReqs": [{ "event": "eliminate" }]
+  },
+  {
+    "desc": "gameover",
+    "emoji": "🎉",
+    "sfx": "Ta Da-SoundBible.com-1884170640",
+    "playReqs": [{ "event": "gameover" }]
+  },
+  {
+    "desc": "start turn",
+    "emoji": "🔥",
+    "playReqs": [{ "event": "setTurn" }]
+  },
+  {
+    "desc": "set phase",
+    "emoji": "✔️",
+    "playReqs": [{ "event": "setPhase" }]
+  },
+  {
+    "desc": "dynamite exploded",
+    "emoji": "😰",
+    "sfx": "Big Bomb-SoundBible.com-1219802495",
+    "playReqs": [{ "event": "addHit", "ability": "dynamite" }]
+  }
+]

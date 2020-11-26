@@ -4,7 +4,7 @@ platform :ios, '9.3'
 inhibit_all_warnings!
 
 def shared_pods
-  pod 'CardGameEngine', :git => 'git@bitbucket.org:stephanotelolahy/cardgameengine.git', :branch => 'fix/moves'
+  pod 'CardGameEngine', :git => 'git@bitbucket.org:stephanotelolahy/cardgameengine.git', :branch => 'feature/fix-animation'
   pod 'Firebase/Database'
 end
 
