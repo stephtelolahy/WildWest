@@ -38,8 +38,6 @@ class GameViewController: UIViewController {
     private var messages: [String] = []
     
     private lazy var analyticsManager: AnalyticsManager = Resolver.resolve()
-    private lazy var preferences: UserPreferencesProtocol = Resolver.resolve()
-    private lazy var resourceLoader: ResourcesLoaderProtocol = Resolver.resolve()
     private lazy var animationMatcher: AnimationEventMatcherProtocol = Resolver.resolve()
     private lazy var mediaMatcher: MediaEventMatcherProtocol = Resolver.resolve()
     
