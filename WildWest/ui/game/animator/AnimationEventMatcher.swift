@@ -9,7 +9,7 @@
 import CardGameEngine
 import Resolver
 
-protocol AnimationEventMatcherProtocol: EventMatcherProtocol {
+protocol AnimationEventMatcherProtocol: DurationMatcherProtocol {
     func animation(on event: GEvent) -> EventAnimation?
 }
 
@@ -68,7 +68,6 @@ private struct EventDesc {
 private extension AnimationEventMatcher {
     
     static let all: [String: EventDesc] = [
-        play(),
         setTurn(),
         setPhase(),
         gainHealth(),
@@ -78,25 +77,20 @@ private extension AnimationEventMatcher {
         drawDeck(),
         drawDiscard(),
         discardHand(),
-        putInPlay(),
+        play(),
+        equip(),
         revealHand(),
         discardInPlay(),
         drawHand(),
         drawInPlay(),
-        putInPlayOther(),
-        passInPlayOther(),
+        handicap(),
+        passInPlay(),
         revealDeck(),
         deckToStore(),
         storeToDeck(),
         drawStore()
     ]
     .toDictionary(with: { $0.id })
-    
-    static func play() -> EventDesc {
-        EventDesc(id: "play") { _ in
-            EventAnimation(type: .dummy, duration: 0)
-        }
-    }
     
     static func setTurn() -> EventDesc {
         EventDesc(id: "setTurn") { _ in
@@ -165,9 +159,19 @@ private extension AnimationEventMatcher {
         }
     }
     
-    static func putInPlay() -> EventDesc {
-        EventDesc(id: "putInPlay") { event in
-            guard case let .putInPlay(player, card) = event else {
+    static func play() -> EventDesc {
+        EventDesc(id: "play") { event in
+            guard case let .play(player, card) = event else {
+                fatalError("Invalid event")
+            }
+            return EventAnimation(type: .move(card: card, source: .hand(player), target: .discard),
+                                  duration: preferences.updateDelay)
+        }
+    }
+    
+    static func equip() -> EventDesc {
+        EventDesc(id: "equip") { event in
+            guard case let .equip(player, card) = event else {
                 fatalError("Invalid event")
             }
             return EventAnimation(type: .move(card: card, source: .hand(player), target: .inPlay(player)),
@@ -215,9 +219,9 @@ private extension AnimationEventMatcher {
         }
     }
     
-    static func putInPlayOther() -> EventDesc {
-        EventDesc(id: "putInPlayOther") { event in
-            guard case let .putInPlayOther(player, card, other) = event else {
+    static func handicap() -> EventDesc {
+        EventDesc(id: "handicap") { event in
+            guard case let .handicap(player, card, other) = event else {
                 fatalError("Invalid event")
             }
             return EventAnimation(type: .move(card: card, source: .hand(player), target: .inPlay(other)),
@@ -225,9 +229,9 @@ private extension AnimationEventMatcher {
         }
     }
     
-    static func passInPlayOther() -> EventDesc {
-        EventDesc(id: "passInPlayOther") { event in
-            guard case let .passInPlayOther(player, card, other) = event else {
+    static func passInPlay() -> EventDesc {
+        EventDesc(id: "passInPlay") { event in
+            guard case let .passInPlay(player, card, other) = event else {
                 fatalError("Invalid event")
             }
             return EventAnimation(type: .move(card: card, source: .inPlay(player), target: .inPlay(other)),

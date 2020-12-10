@@ -62,7 +62,7 @@ class GameBuilder: GameBuilderProtocol {
         let eventMatcher: AnimationEventMatcherProtocol = Resolver.resolve()
         let timer = GTimer(matcher: eventMatcher)
         let loop = GLoop(eventsQueue: eventsQueue, database: database, matcher: abilityMatcher, timer: timer)
-        let engine = GEngine(loop: loop, database: database, matcher: abilityMatcher)
+        let engine = GEngine(loop: loop)
         
         let sheriff = state.players.values.first(where: { $0.role == .sheriff })!.identifier
         let agents: [AIAgentProtocol] = state.playOrder.filter { $0 != playerId }.map { player in

@@ -1,17 +1,17 @@
 [
   {
-    "desc": "play",
+    "desc": "run",
     "emoji": "👍",
-    "playReqs": [{ "event": "play" }]
+    "playReqs": [{ "event": "run" }]
   },
   {
     "desc": "play bang",
     "emoji": "🔫",
     "sfx": "Gun_loud-Soundmaster_-88363983",
     "playReqs": [
-      { "event": "play", "ability": "bang" },
-      { "event": "play", "ability": "discardBangOnDuel" },
-      { "event": "play", "ability": "discardBangOnIndians" }
+      { "event": "run", "ability": "bang" },
+      { "event": "run", "ability": "discardBangOnDuel" },
+      { "event": "run", "ability": "discardBangOnIndians" }
     ]
   },
   {
@@ -19,27 +19,27 @@
     "emoji": "🎁",
     "sfx": "Horse Galloping-SoundBible.com-1451398148",
     "playReqs": [
-      { "event": "play", "ability": "stagecoach" },
-      { "event": "play", "ability": "wellsFargo" }
+      { "event": "run", "ability": "stagecoach" },
+      { "event": "run", "ability": "wellsFargo" }
     ]
   },
   {
     "desc": "play duel",
     "emoji": "🔫",
     "sfx": "shotgun-old_school-RA_The_Sun_God-1129942741",
-    "playReqs": [{ "event": "play", "ability": "duel" }]
+    "playReqs": [{ "event": "run", "ability": "duel" }]
   },
   {
     "desc": "play gatling",
     "emoji": "💢",
     "sfx": "Automatic Machine Gun-SoundBible.com-253461580",
-    "playReqs": [{ "event": "play", "ability": "gatling" }]
+    "playReqs": [{ "event": "run", "ability": "gatling" }]
   },
   {
     "desc": "play indians",
     "emoji": "💢",
     "sfx": "Peacock-SoundBible.com-1698361099",
-    "playReqs": [{ "event": "play", "ability": "indians" }]
+    "playReqs": [{ "event": "run", "ability": "indians" }]
   },
   {
     "desc": "activate",
@@ -77,7 +77,7 @@
     "desc": "play missed",
     "emoji": "😝",
     "sfx": "Western Ricochet-SoundBible.com-1725886901",
-    "playReqs": [{ "event": "play", "ability": "missed" }]
+    "playReqs": [{ "event": "run", "ability": "missed" }]
   },
   {
     "desc": "draw from player",
@@ -89,19 +89,19 @@
     "desc": "equip",
     "emoji": "😎",
     "sfx": "Shotgun-SoundBible.com-862990674",
-    "playReqs": [{ "event": "putInPlay" }]
+    "playReqs": [{ "event": "equip" }]
   },
   {
-    "desc": "equip",
+    "desc": "handicap",
     "emoji": "⚠️",
     "sfx": "Metal Latch-SoundBible.com-736691159",
-    "playReqs": [{ "event": "putInPlayOther" }]
+    "playReqs": [{ "event": "handicap" }]
   },
   {
     "desc": "pass to player",
     "emoji": "💣",
     "sfx": "Fuse Burning-SoundBible.com-1372982430",
-    "playReqs": [{ "event": "passInPlayOther" }]
+    "playReqs": [{ "event": "passInPlay" }]
   },
   {
     "desc": "store",

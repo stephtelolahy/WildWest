@@ -182,7 +182,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   CardGameEngine:
-    :commit: e2b80db2f6e26df73d0a9431d808d4a23eaf982c
+    :commit: 1fd1186b263218d9023618b5baf73bb322ba8d4f
     :git: "git@bitbucket.org:stephanotelolahy/cardgameengine.git"
 
 SPEC CHECKSUMS:

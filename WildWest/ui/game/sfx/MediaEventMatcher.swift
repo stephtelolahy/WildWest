@@ -68,9 +68,9 @@ private extension MediaEventMatcher {
     
     func destructuring(_ event: GEvent) -> [String: String] {
         switch event {
-        case let .play(move):
+        case let .run(move):
             return ["event": event.hashValue, 
-                    "ability": move.name]
+                    "ability": move.ability]
             
         case let .addHit(name, _, _, _, _):
             return ["event": event.hashValue, 

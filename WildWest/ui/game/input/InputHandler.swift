@@ -31,7 +31,7 @@ class InputHandler: InputHandlerProtocol {
                 root = MoveNode(name: context, value: .options(nodes))
                 
             case let .move(move):
-                root = MoveNode(name: context, value: .options([MoveNode(name: move.name, value: .move(move))]))
+                root = MoveNode(name: context, value: .options([MoveNode(name: move.ability, value: .move(move))]))
             }
         }
         
