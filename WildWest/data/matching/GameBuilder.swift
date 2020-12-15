@@ -51,7 +51,6 @@ class GameBuilder: GameBuilderProtocol {
     func createLocalGameEnvironment(state: StateProtocol,
                                     playerId: String?) -> GameEnvironment {
         let abilities = resourcesLoader.loadAbilities()
-        let scores = resourcesLoader.loadScores()
         
         let databaseUpdater = GDatabaseUpdater()
         let database = GDatabase(state, updater: databaseUpdater)
@@ -63,13 +62,14 @@ class GameBuilder: GameBuilderProtocol {
         let eventMatcher: AnimationEventMatcherProtocol = Resolver.resolve()
         let timer = GTimer(matcher: eventMatcher)
         let loop = GLoop(eventsQueue: eventsQueue, database: database, matcher: abilityMatcher, timer: timer)
-        let engine = GEngine(loop: loop, database: database, matcher: abilityMatcher)
+        let engine = GEngine(loop: loop)
         
         let sheriff = state.players.values.first(where: { $0.role == .sheriff })!.identifier
         let agents: [AIAgentProtocol] = state.playOrder.filter { $0 != playerId }.map { player in
-            let roleEstimator = RoleEstimator(sheriff: sheriff, abilityScores: scores)
+            let abilityEvaluator = AbilityEvaluator()
+            let roleEstimator = RoleEstimator(sheriff: sheriff, abilityEvaluator: abilityEvaluator)
             let roleStrategy = RoleStrategy()
-            let moveEvaluator = MoveEvaluator(abilityScores: scores, roleEstimator: roleEstimator, roleStrategy: roleStrategy)
+            let moveEvaluator = MoveEvaluator(abilityEvaluator: abilityEvaluator, roleEstimator: roleEstimator, roleStrategy: roleStrategy)
             let ai = GAI(moveEvaluator: moveEvaluator)
             return AIAgent(player: player, engine: engine, database: database, ai: ai, roleEstimator: roleEstimator)
         }

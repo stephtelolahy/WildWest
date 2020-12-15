@@ -134,7 +134,7 @@ PODS:
   - SwiftLint (0.41.0)
 
 DEPENDENCIES:
-  - "CardGameEngine (from `git@bitbucket.org:stephanotelolahy/cardgameengine.git`, branch `feature/fix-animation`)"
+  - "CardGameEngine (from `git@bitbucket.org:stephanotelolahy/cardgameengine.git`, branch `develop`)"
   - Firebase/Analytics
   - Firebase/Crashlytics
   - Firebase/Database
@@ -177,12 +177,12 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   CardGameEngine:
-    :branch: feature/fix-animation
+    :branch: develop
     :git: "git@bitbucket.org:stephanotelolahy/cardgameengine.git"
 
 CHECKOUT OPTIONS:
   CardGameEngine:
-    :commit: e57ab8de382c7744acbd5df497872589710d0eea
+    :commit: 1fd1186b263218d9023618b5baf73bb322ba8d4f
     :git: "git@bitbucket.org:stephanotelolahy/cardgameengine.git"
 
 SPEC CHECKSUMS:
@@ -213,6 +213,6 @@ SPEC CHECKSUMS:
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SwiftLint: c585ebd615d9520d7fbdbe151f527977b0534f1e
 
-PODFILE CHECKSUM: 75a187df99c88fea24c3f288b37556e1ec1e60a5
+PODFILE CHECKSUM: 51841983123e16df27b3343fac4e6304c8daedd5
 
 COCOAPODS: 1.10.0

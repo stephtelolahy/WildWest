@@ -9,7 +9,7 @@
 import Foundation
 
 struct GameMoveDto: Codable {
-    let timestamp: String = "\(Date().timeIntervalSince1970)"
+    var timestamp: String = "\(Date().timeIntervalSince1970)"
     let name: String?
     let actorId: String?
     let cardId: String?

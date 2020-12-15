@@ -4,7 +4,7 @@ platform :ios, '9.3'
 inhibit_all_warnings!
 
 def shared_pods
-  pod 'CardGameEngine', :git => 'git@bitbucket.org:stephanotelolahy/cardgameengine.git', :branch => 'feature/fix-animation'
+  pod 'CardGameEngine', :git => 'git@bitbucket.org:stephanotelolahy/cardgameengine.git', :branch => 'develop'
   pod 'Firebase/Database'
 end
 
@@ -29,4 +29,13 @@ end
 target 'WildWestTests' do
   inherit! :search_paths
   shared_pods
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['ONLY_ACTIVE_ARCH'] = 'YES'
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.3'
+    end
+  end
 end
