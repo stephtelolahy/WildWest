@@ -5,7 +5,7 @@
 //  Created by Hugues Stephano Telolahy on 20/03/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-import CardGameEngine
+import WildWestEngine
 
 protocol InstructionBuilderProtocol {
     func buildInstruction(state: StateProtocol, for controlledPlayerId: String?) -> String

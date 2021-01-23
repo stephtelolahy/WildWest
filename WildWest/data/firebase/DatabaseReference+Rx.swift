@@ -10,6 +10,7 @@
 
 import RxSwift
 import Firebase
+import FirebaseDatabase
 
 extension DatabaseReference {
     
@@ -41,10 +42,10 @@ extension DatabaseQuery {
                     let object = try decoding(snapshot)
                     single(.success(object))
                 } catch {
-                    single(.error(error))
+                    single(.failure(error))
                 }
             }) { error in
-                single(.error(error))
+                single(.failure(error))
             }
             return Disposables.create()
         }

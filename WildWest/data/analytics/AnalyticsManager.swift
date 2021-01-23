@@ -7,7 +7,7 @@
 //
 
 import Firebase
-import CardGameEngine
+import WildWestEngine
 
 class AnalyticsManager {
     

@@ -8,7 +8,7 @@
 
 import Firebase
 import Resolver
-import CardGameEngine
+import WildWestEngine
 
 extension Resolver: ResolverRegistering {
     

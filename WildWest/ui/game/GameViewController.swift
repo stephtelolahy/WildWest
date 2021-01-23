@@ -10,7 +10,7 @@
 import UIKit
 import RxSwift
 import Resolver
-import CardGameEngine
+import WildWestEngine
 
 class GameViewController: UIViewController {
     

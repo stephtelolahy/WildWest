@@ -8,7 +8,7 @@
 
 import UIKit
 import Resolver
-import CardGameEngine
+import WildWestEngine
 
 class RoleSelector: UIAlertController {
     

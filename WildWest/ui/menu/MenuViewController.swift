@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import Kingfisher
 import Resolver
-import CardGameEngine
+import WildWestEngine
 
 class MenuViewController: UIViewController {
     

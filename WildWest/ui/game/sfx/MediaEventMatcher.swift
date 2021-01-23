@@ -6,7 +6,7 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-import CardGameEngine
+import WildWestEngine
 
 protocol MediaEventMatcherProtocol {
     func emoji(on event: GEvent) -> String?

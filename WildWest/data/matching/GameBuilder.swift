@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 import Firebase
-import CardGameEngine
+import WildWestEngine
 import Resolver
 
 protocol GameBuilderProtocol {

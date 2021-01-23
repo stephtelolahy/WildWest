@@ -6,7 +6,7 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-import CardGameEngine
+import WildWestEngine
 
 struct GameEnvironment {
     let engine: EngineProtocol

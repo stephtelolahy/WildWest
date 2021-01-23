@@ -6,7 +6,7 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 // swiftlint:disable let_var_whitespace
-import CardGameEngine
+import WildWestEngine
 
 protocol UserPreferencesProtocol {
     var playersCount: Int { get set }
