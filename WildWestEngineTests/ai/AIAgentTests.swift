@@ -33,13 +33,13 @@ class AIAgentTests: XCTestCase {
         }
         mockAI = MockAIProtocol()
         mockRoleEstimator = MockRoleEstimatorProtocol().withEnabledDefaultImplementation(RoleEstimatorProtocolStub())
-        sut = AIAgent(player: "p1", engine: mockEngine, database: mockDatabase, ai: mockAI, roleEstimator: mockRoleEstimator)
+        sut = AIAgent(player: "p1", engine: mockEngine, ai: mockAI, roleEstimator: mockRoleEstimator)
     }
     
     func test_UpdateRoleEstimator_IfReceivingMove() {
         // Given
         let move = GMove("m1", actor: "p1")
-        sut.observe()
+        sut.observe(mockDatabase)
         
         // When
         eventSubject.onNext(.run(move: move))
@@ -57,7 +57,7 @@ class AIAgentTests: XCTestCase {
         stub(mockAI) { mock in
             when(mock.bestMove(among: equal(to: moves), in: state(equalTo: mockState))).thenReturn(move2)
         }
-        sut.observe()
+        sut.observe(mockDatabase)
         
         // When
         eventSubject.onNext(.activate(moves: moves))
@@ -72,7 +72,7 @@ class AIAgentTests: XCTestCase {
         let move2 = GMove("m2", actor: "p2")
         let move3 = GMove("m3", actor: "p2")
         let moves = [move1, move2, move3]
-        sut.observe()
+        sut.observe(mockDatabase)
         
         // When
         eventSubject.onNext(.activate(moves: moves))

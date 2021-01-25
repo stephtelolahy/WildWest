@@ -202,14 +202,14 @@ private extension NavigationController {
     
     func handleSigninCompleted(_ user: User, pseudo: String? = nil) {
         /*
-        let wuser: WUserInfo
+        let wuser: UserInfo
         
         if user.isAnonymous {
-            wuser = WUserInfo(id: user.uid,
+            wuser = UserInfo(id: user.uid,
                               name: pseudo ?? user.uid,
                               photoUrl: "https://i.pinimg.com/236x/86/69/26/866926c527318527f2b3704e89fabc2e.jpg")
         } else {
-            wuser = WUserInfo(id: user.uid,
+            wuser = UserInfo(id: user.uid,
                               name: user.displayName ?? "",
                               photoUrl: user.photoURL?.absoluteString ?? "")
         }

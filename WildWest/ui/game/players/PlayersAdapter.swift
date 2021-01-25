@@ -13,19 +13,19 @@ struct PlayerItem {
     let isAttacked: Bool
     let isHelped: Bool
     let score: Int?
-    let user: WUserInfo?
+    let user: UserInfo?
 }
 
 protocol PlayersAdapterProtocol {
-    func setUsers(_ users: [String: WUserInfo])
+    func setUsers(_ users: [String: UserInfo])
     func buildItems(state: StateProtocol) -> [PlayerItem]
 }
 
 class PlayersAdapter: PlayersAdapterProtocol {
     
-    private var users: [String: WUserInfo] = [:]
+    private var users: [String: UserInfo] = [:]
     
-    func setUsers(_ users: [String: WUserInfo]) {
+    func setUsers(_ users: [String: UserInfo]) {
         self.users = users
     }
     

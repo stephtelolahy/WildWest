@@ -123,16 +123,16 @@ public class MockAIAgentProtocol: AIAgentProtocol, Cuckoo.ProtocolMock {
     
     
     
-    public func observe()  {
+    public func observe(_ database: RestrictedDatabaseProtocol)  {
         
-    return cuckoo_manager.call("observe()",
-            parameters: (),
-            escapingParameters: (),
+    return cuckoo_manager.call("observe(_: RestrictedDatabaseProtocol)",
+            parameters: (database),
+            escapingParameters: (database),
             superclassCall:
                 
                 Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
-            defaultCall: __defaultImplStub!.observe())
+            defaultCall: __defaultImplStub!.observe(database))
         
     }
     
@@ -145,9 +145,9 @@ public class MockAIAgentProtocol: AIAgentProtocol, Cuckoo.ProtocolMock {
 	    }
 	    
 	    
-	    func observe() -> Cuckoo.ProtocolStubNoReturnFunction<()> {
-	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return .init(stub: cuckoo_manager.createStub(for: MockAIAgentProtocol.self, method: "observe()", parameterMatchers: matchers))
+	    func observe<M1: Cuckoo.Matchable>(_ database: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(RestrictedDatabaseProtocol)> where M1.MatchedType == RestrictedDatabaseProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(RestrictedDatabaseProtocol)>] = [wrap(matchable: database) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockAIAgentProtocol.self, method: "observe(_: RestrictedDatabaseProtocol)", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -167,9 +167,9 @@ public class MockAIAgentProtocol: AIAgentProtocol, Cuckoo.ProtocolMock {
 	
 	    
 	    @discardableResult
-	    func observe() -> Cuckoo.__DoNotUse<(), Void> {
-	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return cuckoo_manager.verify("observe()", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    func observe<M1: Cuckoo.Matchable>(_ database: M1) -> Cuckoo.__DoNotUse<(RestrictedDatabaseProtocol), Void> where M1.MatchedType == RestrictedDatabaseProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(RestrictedDatabaseProtocol)>] = [wrap(matchable: database) { $0 }]
+	        return cuckoo_manager.verify("observe(_: RestrictedDatabaseProtocol)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -181,7 +181,7 @@ public class AIAgentProtocolStub: AIAgentProtocol {
     
 
     
-    public func observe()   {
+    public func observe(_ database: RestrictedDatabaseProtocol)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     

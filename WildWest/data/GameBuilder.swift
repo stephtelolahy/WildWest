@@ -19,7 +19,7 @@ protocol GameBuilderProtocol {
 //    func createRemoteGameEnvironment(gameId: String,
 //                                     playerId: String?,
 //                                     state: StateProtocol,
-//                                     users: [String: WUserInfo]) -> GameEnvironment
+//                                     users: [String: UserInfo]) -> GameEnvironment
 }
 
 class GameBuilder: GameBuilderProtocol {
@@ -71,10 +71,10 @@ class GameBuilder: GameBuilderProtocol {
             let roleStrategy = RoleStrategy()
             let moveEvaluator = MoveEvaluator(abilityEvaluator: abilityEvaluator, roleEstimator: roleEstimator, roleStrategy: roleStrategy)
             let ai = GAI(moveEvaluator: moveEvaluator)
-            return AIAgent(player: player, engine: engine, database: database, ai: ai, roleEstimator: roleEstimator)
+            return AIAgent(player: player, engine: engine, ai: ai, roleEstimator: roleEstimator)
         }
         
-        agents.forEach { $0.observe() }
+        agents.forEach { $0.observe(database) }
         
         return GameEnvironment(engine: engine,
                                database: database,
@@ -85,7 +85,7 @@ class GameBuilder: GameBuilderProtocol {
     func createRemoteGameEnvironment(gameId: String,
                                      playerId: String?,
                                      state: GameStateProtocol,
-                                     users: [String: WUserInfo]) -> GameEnvironment {
+                                     users: [String: UserInfo]) -> GameEnvironment {
         let stateSubject = BehaviorSubject<GameStateProtocol>(value: state)
         let executedMoveSubject = PublishSubject<GameMove>()
         let executedUpdateSubject = PublishSubject<GameUpdate>()

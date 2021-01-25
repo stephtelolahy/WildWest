@@ -32,7 +32,7 @@ class MenuViewController: UIViewController {
     
 //    private lazy var manager: MatchingManagerProtocol = Resolver.resolve()
     private lazy var preferences: UserPreferencesProtocol = Resolver.resolve()
-    private lazy var musicPlayer: SFXPlayerProtocol = SFXPlayer()
+    private lazy var musicPlayer: SoundPlayerProtocol = SoundPlayer()
     
     // MARK: - Lifecycle
     

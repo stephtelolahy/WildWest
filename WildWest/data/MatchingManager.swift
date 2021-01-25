@@ -12,15 +12,15 @@ import FirebaseUI
 protocol MatchingManagerProtocol {
     var isLoggedIn: Bool { get }
     
-    func createUser(_ user: WUserInfo) -> Completable
-    func getUser() -> Single<WUserInfo>
+    func createUser(_ user: UserInfo) -> Completable
+    func getUser() -> Single<UserInfo>
     func observeUserStatus() -> Observable<UserStatus>
     func addToWaitingRoom() -> Completable
     func quitWaitingRoom() -> Completable
-    func observeWaitingUsers() -> Observable<[WUserInfo]>
-    func createGame(users: [WUserInfo]) -> Completable
+    func observeWaitingUsers() -> Observable<[UserInfo]>
+    func createGame(users: [UserInfo]) -> Completable
     func quitGame() -> Completable
-    func getGameData(gameId: String) -> Single<(GameStateProtocol, [String: WUserInfo])>
+    func getGameData(gameId: String) -> Single<(GameStateProtocol, [String: UserInfo])>
 }
 
 class MatchingManager: MatchingManagerProtocol {
@@ -41,11 +41,11 @@ class MatchingManager: MatchingManagerProtocol {
         accountProvider.loggedInUserId != nil
     }
     
-    func createUser(_ user: WUserInfo) -> Completable {
+    func createUser(_ user: UserInfo) -> Completable {
         database.createUser(user)
     }
     
-    func getUser() -> Single<WUserInfo> {
+    func getUser() -> Single<UserInfo> {
         guard let userId = accountProvider.loggedInUserId else {
             return Single.error(NSError(domain: "Missing user", code: 0))
         }
@@ -82,11 +82,11 @@ class MatchingManager: MatchingManagerProtocol {
         return database.setUserStatus(userId, status: .idle)
     }
     
-    func observeWaitingUsers() -> Observable<[WUserInfo]> {
+    func observeWaitingUsers() -> Observable<[UserInfo]> {
         database.observeWaitingUsers()
     }
     
-    func createGame(users: [WUserInfo]) -> Completable {
+    func createGame(users: [UserInfo]) -> Completable {
         let state = gameBuilder.createGame(for: users.count)
         let gameId = FirebaseKeyGenerator().autoId()
         
@@ -95,7 +95,7 @@ class MatchingManager: MatchingManagerProtocol {
             database.setUserStatus(user.id, status: .playing(gameId: gameId, playerId: playerIds[index]))
         }
         
-        var usersDict: [String: WUserInfo] = [:]
+        var usersDict: [String: UserInfo] = [:]
         for (index, user) in users.enumerated() {
             usersDict[playerIds[index]] = user
         }
@@ -105,7 +105,7 @@ class MatchingManager: MatchingManagerProtocol {
             .andThen(Completable.concat(updates))
     }
     
-    func getGameData(gameId: String) -> Single<(GameStateProtocol, [String: WUserInfo])> {
+    func getGameData(gameId: String) -> Single<(GameStateProtocol, [String: UserInfo])> {
         database.getGame(gameId)
             .flatMap {  state in
                 self.database.getGameUsers(gameId: gameId)

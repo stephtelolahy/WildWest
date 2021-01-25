@@ -13,5 +13,5 @@ struct GameEnvironment {
     let database: RestrictedDatabaseProtocol
     let controlledId: String?
     let aiAgents: [AIAgentProtocol]?
-    var gameUsers: [String: WUserInfo]?
+    var gameUsers: [String: UserInfo]?
 }

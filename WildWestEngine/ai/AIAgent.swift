@@ -7,32 +7,29 @@
 import RxSwift
 
 public protocol AIAgentProtocol {
-    func observe()
+    func observe(_ database: RestrictedDatabaseProtocol)
 }
 
 public class AIAgent: AIAgentProtocol {
     
     private let player: String
     private let engine: EngineProtocol
-    private let database: RestrictedDatabaseProtocol
     private let ai: AIProtocol
     private let roleEstimator: RoleEstimatorProtocol
     private let disposeBag = DisposeBag()
     private var state: StateProtocol?
     
     public init(player: String,
-                engine: EngineProtocol, 
-                database: RestrictedDatabaseProtocol,
+                engine: EngineProtocol,
                 ai: AIProtocol,
                 roleEstimator: RoleEstimatorProtocol) {
         self.player = player
         self.engine = engine
-        self.database = database
         self.ai = ai
         self.roleEstimator = roleEstimator
     }
     
-    public func observe() {
+    public func observe(_ database: RestrictedDatabaseProtocol) {
         database.state(observedBy: player).subscribe(onNext: { [weak self] state in
             self?.state = state
         })
