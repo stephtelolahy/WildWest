@@ -5,21 +5,21 @@
 //  Created by Hugues Stephano Telolahy on 24/07/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
+// swiftlint:disable implicitly_unwrapped_optional
 
 import UIKit
 import FirebaseUI
-import Resolver
 import RxSwift
 
 class MainViewController: UINavigationController {
     
     // MARK: - Dependencies
     
-    private lazy var router: RouterProtocol = Router(viewController: self, dependencies: Resolver.resolve())
+    var router: RouterProtocol!
     
 //    private lazy var manager: MatchingManagerProtocol = Resolver.resolve()
-    private lazy var gameBuilder: GameBuilderProtocol = Resolver.resolve()
-    private lazy var preferences: UserPreferencesProtocol = Resolver.resolve()
+//    private lazy var gameBuilder: GameBuilderProtocol = Resolver.resolve()
+//    private lazy var preferences: UserPreferencesProtocol = Resolver.resolve()
     
     // MARK: - Lifecycle
     

@@ -25,7 +25,7 @@ class MoveSelectorTests: XCTestCase {
         let move1 = GMove("endTurn", actor: "p1")
         
         // When
-        let root = sut.select(active: [move1])
+        let root = sut.select([move1])
         
         // Assert
         XCTAssertEqual(root.name, "endTurn")
@@ -37,7 +37,7 @@ class MoveSelectorTests: XCTestCase {
         let move1 = GMove("equip", actor: "p1", card: .hand("mustang-8-♥️"))
         
         // When
-        let root = sut.select(active: [move1])
+        let root = sut.select([move1])
         
         // Assert
         XCTAssertEqual(root.name, "mustang-8-♥️")
@@ -52,7 +52,7 @@ class MoveSelectorTests: XCTestCase {
         let move2 = GMove("startTurnDrawingPlayer", actor: "pX", args: [.target: ["p2"]])
         
         // When
-        let root = sut.select(active: [move1, move2])
+        let root = sut.select([move1, move2])
         
         // Assert
         XCTAssertEqual(root.name, "startTurnDrawingPlayer")
@@ -66,7 +66,7 @@ class MoveSelectorTests: XCTestCase {
         let move2 = GMove("bang", actor: "pX", card: .hand("bang-10-♠️"), args: [.target: ["p2"]])
         
         // When
-        let root = sut.select(active: [move1, move2])
+        let root = sut.select([move1, move2])
         
         // Assert
         XCTAssertEqual(root.name, "bang-10-♠️")
@@ -80,7 +80,7 @@ class MoveSelectorTests: XCTestCase {
         let move2 = GMove("drawStore", actor: "pX", args: [.requiredStore: ["c2", "c3"]])
         
         // When
-        let root = sut.select(active: [move1, move2])
+        let root = sut.select([move1, move2])
         
         // Assert
         XCTAssertEqual(root.name, "drawStore")
@@ -94,7 +94,7 @@ class MoveSelectorTests: XCTestCase {
         let move2 = GMove("discardSelfHand", actor: "pX", args: [.requiredHand: ["volcanic-10-♠️"]])
         
         // When
-        let root = sut.select(active: [move1, move2])
+        let root = sut.select([move1, move2])
         
         // Assert
         XCTAssertEqual(root.name, "discardSelfHand")
@@ -112,7 +112,7 @@ class MoveSelectorTests: XCTestCase {
         let move22 = GMove("discardOtherInPlay", actor: "pX", args: [.target: ["p2"], .requiredInPlay: ["c22"]])
         
         // When
-        let root = sut.select(active: [move11, move12, move21, move22])
+        let root = sut.select([move11, move12, move21, move22])
         
         // Assert
         XCTAssertEqual(root.name, "discardOtherInPlay")
@@ -141,7 +141,7 @@ class MoveSelectorTests: XCTestCase {
         let move2 = GMove("startTurnDrawingDeck", actor: "pX")
         
         // When
-        let root = sut.select(active: [move1, move2])
+        let root = sut.select([move1, move2])
         
         // Assert
         XCTAssertEqual(root.value, .options([MoveNode(name: "startTurnDrawingDiscard", value: .move(move1)),
@@ -155,7 +155,7 @@ class MoveSelectorTests: XCTestCase {
         let move3 = GMove("missed", actor: "pX", card: .hand("missed-7-♠️"))
         
         // When
-        let root = sut.select(active: [move1, move2, move3])
+        let root = sut.select([move1, move2, move3])
         
         // Assert
         XCTAssertEqual(root.value, .options([MoveNode(name: "looseHealth", value: .move(move1)),

@@ -7,6 +7,7 @@
 //
 // swiftlint:disable force_cast
 // swiftlint:disable function_body_length
+// swiftlint:disable type_body_length
 
 import XCTest
 import WildWestEngine

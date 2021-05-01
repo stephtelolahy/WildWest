@@ -16,15 +16,15 @@ protocol InputHandlerProtocol {
 class InputHandler: InputHandlerProtocol {
     
     private let selector: MoveSelectorProtocol
-    private weak var viewController: UIViewController?
+    private let router: RouterProtocol
     
-    init(selector: MoveSelectorProtocol, viewController: UIViewController) {
+    init(selector: MoveSelectorProtocol, router: RouterProtocol) {
         self.selector = selector
-        self.viewController = viewController
+        self.router = router
     }
     
     func selectMove(among moves: [GMove], context: String?, cancelable: Bool, completion: @escaping (GMove) -> Void) {
-        var root = selector.select(active: moves)
+        var root = selector.select(moves)
         
         if let context = context {
             switch root.value {
@@ -48,12 +48,9 @@ private extension InputHandler {
             completion(move)
             
         case let .options(children):
-            let alert = UIAlertController(title: node.name, 
-                                          options: children.map { $0.name },
-                                          cancelable: cancelable) { [weak self] index in
-                self?.select(children[index], cancelable: cancelable, completion: completion)
+            router.toGameMoveSelector(node.name, children: children, cancelable: cancelable) { [weak self] node in
+                self?.select(node, cancelable: cancelable, completion: completion)
             }
-            viewController?.present(alert, animated: true)
         }
     }
 }

@@ -10,11 +10,11 @@ import UIKit
 import RxSwift
 import Firebase
 import WildWestEngine
-import Resolver
 
 protocol GameBuilderProtocol {
     func createGame(for playersCount: Int) -> StateProtocol
     func createLocalGameEnvironment(state: StateProtocol,
+                                    eventMatcher: AnimationEventMatcherProtocol,
                                     playerId: String?) -> GameEnvironment
 //    func createRemoteGameEnvironment(gameId: String,
 //                                     playerId: String?,
@@ -49,6 +49,7 @@ class GameBuilder: GameBuilderProtocol {
     }
     
     func createLocalGameEnvironment(state: StateProtocol,
+                                    eventMatcher: AnimationEventMatcherProtocol,
                                     playerId: String?) -> GameEnvironment {
         let abilities = resourcesLoader.loadAbilities()
         
@@ -59,7 +60,6 @@ class GameBuilder: GameBuilderProtocol {
         let effectMatcher = EffectMatcher()
         let abilityMatcher = AbilityMatcher(abilities: abilities, effectMatcher: effectMatcher, playReqMatcher: playReqMatcher)
         let eventsQueue = GEventQueue()
-        let eventMatcher: AnimationEventMatcherProtocol = Resolver.resolve()
         let timer = GTimer(matcher: eventMatcher)
         let loop = GLoop(eventsQueue: eventsQueue, database: database, matcher: abilityMatcher, timer: timer)
         let engine = GEngine(loop: loop)

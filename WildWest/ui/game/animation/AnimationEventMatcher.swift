@@ -7,7 +7,6 @@
 //
 
 import WildWestEngine
-import Resolver
 
 protocol AnimationEventMatcherProtocol: DurationMatcherProtocol {
     func animation(on event: GEvent) -> EventAnimation?
@@ -39,14 +38,18 @@ enum StateCard {
 
 class AnimationEventMatcher: AnimationEventMatcherProtocol {
     
-    static let preferences: UserPreferencesProtocol = Resolver.resolve()
+    private let preferences: UserPreferencesProtocol
+    
+    init(preferences: UserPreferencesProtocol) {
+        self.preferences = preferences
+    }
     
     func waitDuration(_ event: GEvent) -> Double {
-        guard let anim = animation(on: event) else {
+        guard animation(on: event) != nil else {
             return 0
         }
         
-        return anim.duration
+        return preferences.updateDelay
     }
     
     func animation(on event: GEvent) -> EventAnimation? {
@@ -54,11 +57,12 @@ class AnimationEventMatcher: AnimationEventMatcherProtocol {
             return nil
         }
         
-        return eventDesc.animateFunc(event)
+        return EventAnimation(type: eventDesc.animateFunc(event),
+                              duration: preferences.updateDelay)
     }
 }
 
-private typealias EventAnimateFunc = (GEvent) -> EventAnimation
+private typealias EventAnimateFunc = (GEvent) -> EventAnimationType
 
 private struct EventDesc {
     let id: String
@@ -94,37 +98,37 @@ private extension AnimationEventMatcher {
     
     static func setTurn() -> EventDesc {
         EventDesc(id: "setTurn") { _ in
-            EventAnimation(type: .dummy, duration: preferences.updateDelay)
+            .dummy
         }
     }
     
     static func setPhase() -> EventDesc {
         EventDesc(id: "setPhase") { _ in
-            EventAnimation(type: .dummy, duration: preferences.updateDelay)
+            .dummy
         }
     }
     
     static func gainHealth() -> EventDesc {
         EventDesc(id: "gainHealth") { _ in
-            EventAnimation(type: .dummy, duration: preferences.updateDelay)
+            .dummy
         }
     }
     
     static func looseHealth() -> EventDesc {
         EventDesc(id: "looseHealth") { _ in
-            EventAnimation(type: .dummy, duration: preferences.updateDelay)
+            .dummy
         }
     }
     
     static func eliminate() -> EventDesc {
         EventDesc(id: "eliminate") { _ in
-            EventAnimation(type: .dummy, duration: preferences.updateDelay)
+            .dummy
         }
     }
     
     static func addHit() -> EventDesc {
         EventDesc(id: "addHit") { _ in
-            EventAnimation(type: .dummy, duration: preferences.updateDelay)
+            .dummy
         }
     }
     
@@ -134,8 +138,7 @@ private extension AnimationEventMatcher {
                 fatalError("Invalid event")
             }
             
-            return EventAnimation(type: .move(card: nil, source: .deck, target: .hand(player)),
-                                  duration: preferences.updateDelay)
+            return .move(card: nil, source: .deck, target: .hand(player))
         }
     }
     
@@ -144,8 +147,7 @@ private extension AnimationEventMatcher {
             guard case let .drawDiscard(player) = event else {
                 fatalError("Invalid event")
             }
-            return EventAnimation(type: .move(card: StateCard.discard, source: .discard, target: .hand(player)),
-                                  duration: preferences.updateDelay)
+            return .move(card: StateCard.discard, source: .discard, target: .hand(player))
         }
     }
     
@@ -154,8 +156,7 @@ private extension AnimationEventMatcher {
             guard case let .discardHand(player, card) = event else {
                 fatalError("Invalid event")
             }
-            return EventAnimation(type: .move(card: card, source: .hand(player), target: .discard),
-                                  duration: preferences.updateDelay)
+            return .move(card: card, source: .hand(player), target: .discard)
         }
     }
     
@@ -164,8 +165,7 @@ private extension AnimationEventMatcher {
             guard case let .play(player, card) = event else {
                 fatalError("Invalid event")
             }
-            return EventAnimation(type: .move(card: card, source: .hand(player), target: .discard),
-                                  duration: preferences.updateDelay)
+            return .move(card: card, source: .hand(player), target: .discard)
         }
     }
     
@@ -174,8 +174,7 @@ private extension AnimationEventMatcher {
             guard case let .equip(player, card) = event else {
                 fatalError("Invalid event")
             }
-            return EventAnimation(type: .move(card: card, source: .hand(player), target: .inPlay(player)),
-                                  duration: preferences.updateDelay)
+            return .move(card: card, source: .hand(player), target: .inPlay(player))
         }
     }
     
@@ -184,8 +183,7 @@ private extension AnimationEventMatcher {
             guard case let .revealHand(player, card) = event else {
                 fatalError("Invalid event")
             }
-            return EventAnimation(type: .reveal(card: card, source: .hand(player), target: .hand(player)),
-                                  duration: preferences.updateDelay)
+            return .reveal(card: card, source: .hand(player), target: .hand(player))
         }
     }
     
@@ -194,8 +192,7 @@ private extension AnimationEventMatcher {
             guard case let .discardInPlay(player, card) = event else {
                 fatalError("Invalid event")
             }
-            return EventAnimation(type: .move(card: card, source: .inPlay(player), target: .discard),
-                                  duration: preferences.updateDelay)
+            return .move(card: card, source: .inPlay(player), target: .discard)
         }
     }
     
@@ -203,9 +200,8 @@ private extension AnimationEventMatcher {
         EventDesc(id: "drawHand") { event in
             guard case let .drawHand(player, other, _) = event else {
                 fatalError("Invalid event")
-            } 
-            return EventAnimation(type: .move(card: nil, source: .hand(other), target: .hand(player)),
-                                  duration: preferences.updateDelay)
+            }
+            return .move(card: nil, source: .hand(other), target: .hand(player))
         }
     }
     
@@ -214,8 +210,7 @@ private extension AnimationEventMatcher {
             guard case let .drawInPlay(player, other, card) = event else {
                 fatalError("Invalid event")
             }
-            return EventAnimation(type: .move(card: card, source: .inPlay(other), target: .hand(player)),
-                                  duration: preferences.updateDelay)
+            return .move(card: card, source: .inPlay(other), target: .hand(player))
         }
     }
     
@@ -224,8 +219,7 @@ private extension AnimationEventMatcher {
             guard case let .handicap(player, card, other) = event else {
                 fatalError("Invalid event")
             }
-            return EventAnimation(type: .move(card: card, source: .hand(player), target: .inPlay(other)),
-                                  duration: preferences.updateDelay)
+            return .move(card: card, source: .hand(player), target: .inPlay(other))
         }
     }
     
@@ -234,8 +228,7 @@ private extension AnimationEventMatcher {
             guard case let .passInPlay(player, card, other) = event else {
                 fatalError("Invalid event")
             }
-            return EventAnimation(type: .move(card: card, source: .inPlay(player), target: .inPlay(other)),
-                                  duration: preferences.updateDelay)
+            return .move(card: card, source: .inPlay(player), target: .inPlay(other))
         }
     }
     
@@ -244,8 +237,7 @@ private extension AnimationEventMatcher {
             guard case .revealDeck = event else {
                 fatalError("Invalid event")
             }
-            return EventAnimation(type: .reveal(card: StateCard.deck, source: .deck, target: .discard),
-                                  duration: preferences.updateDelay)
+            return .reveal(card: StateCard.deck, source: .deck, target: .discard)
         }
     }
     
@@ -254,8 +246,7 @@ private extension AnimationEventMatcher {
             guard case .deckToStore = event else {
                 fatalError("Invalid event")
             }
-            return EventAnimation(type: .reveal(card: StateCard.deck, source: .deck, target: .store),
-                                  duration: preferences.updateDelay)
+            return .reveal(card: StateCard.deck, source: .deck, target: .store)
         }
     }
     
@@ -264,8 +255,7 @@ private extension AnimationEventMatcher {
             guard case let .storeToDeck(card) = event else {
                 fatalError("Invalid event")
             }
-            return EventAnimation(type: .move(card: card, source: .store, target: .deck),
-                                  duration: preferences.updateDelay)
+            return .move(card: card, source: .store, target: .deck)
         }
     }
     
@@ -274,8 +264,7 @@ private extension AnimationEventMatcher {
             guard case let .drawStore(player, card) = event else {
                 fatalError("Invalid event")
             }
-            return EventAnimation(type: .move(card: card, source: .store, target: .hand(player)),
-                                  duration: preferences.updateDelay)
+            return .move(card: card, source: .store, target: .hand(player))
         }
     }
 }
