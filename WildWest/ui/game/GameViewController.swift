@@ -9,12 +9,11 @@
 
 import UIKit
 import RxSwift
-import Resolver
 import WildWestEngine
 
 class GameViewController: UIViewController {
     
-    // MARK: IBOutlets
+    // MARK: - IBOutlets
     
     @IBOutlet private weak var endTurnButton: UIButton!
     @IBOutlet private weak var otherMovesButton: UIButton!
@@ -26,36 +25,31 @@ class GameViewController: UIViewController {
     @IBOutlet private weak var deckImageView: UIImageView!
     @IBOutlet private weak var deckCountLabel: UILabel!
     
-    // MARK: Properties
+    // MARK: - Dependencies
     
+    var router: RouterProtocol!
     var environment: GameEnvironment!
-    var onQuit: (() -> Void)?
+    var analyticsManager: AnalyticsManager!
+    var animationMatcher: AnimationEventMatcherProtocol!
+    var mediaMatcher: MediaEventMatcherProtocol!
+    var soundPlayer: SoundPlayerProtocol!
+    var inputHandler: InputHandlerProtocol!
+    var moveSegmenter: MoveSegmenterProtocol!
+    
+    private lazy var animationRenderer: AnimationRendererProtocol = {
+        AnimationRenderer(viewController: self,
+                          cardPositions: buildCardPositions(),
+                          cardSize: discardImageView.bounds.size,
+                          cardBackImage: #imageLiteral(resourceName: "01_back"))
+    }()
+    
+    // MARK: - Data
     
     private var state: StateProtocol!
     private var playerItems: [PlayerItem] = []
     private var handCards: [CardProtocol] = []
     private var segmentedMoves: [String: [GMove]] = [:]
     private var messages: [String] = []
-    
-    private lazy var analyticsManager: AnalyticsManager = Resolver.resolve()
-    private lazy var animationMatcher: AnimationEventMatcherProtocol = Resolver.resolve()
-    private lazy var mediaMatcher: MediaEventMatcherProtocol = Resolver.resolve()
-    
-    private lazy var playerAdapter: PlayersAdapterProtocol = PlayersAdapter()
-    private lazy var instructionBuilder: InstructionBuilderProtocol = InstructionBuilder()
-    private lazy var moveSegmenter: MoveSegmenterProtocol = MoveSegmenter()
-    
-    private lazy var inputHandler: InputHandlerProtocol = InputHandler(selector: MoveSelector(), viewController: self)
-    
-    private lazy var animationRenderer: AnimationRendererProtocol = {
-        AnimationRenderer(viewController: self, 
-                          cardPositions: buildCardPositions(),
-                          cardSize: discardImageView.bounds.size,
-                          cardBackImage: #imageLiteral(resourceName: "01_back"))
-    }()
-    
-    private let soundPlayer: SoundPlayerProtocol = SoundPlayer(preferences: Resolver.resolve())
-    
     private let disposeBag = DisposeBag()
     
     // MARK: Lifecycle
@@ -65,10 +59,6 @@ class GameViewController: UIViewController {
         
         let layout = playersCollectionView.collectionViewLayout as? GameCollectionViewLayout
         layout?.delegate = self
-        
-        if let users = environment.gameUsers {
-            playerAdapter.setUsers(users)
-        }
         
         environment.database.state(observedBy: environment.controlledId).subscribe(onNext: { [weak self] state in
             self?.processState(state)
@@ -83,17 +73,17 @@ class GameViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        showRoles()
+        router.toGameRoles(state.players.count)
     }
     
-    // MARK: IBAction
+    // MARK: - IBAction
     
     @IBAction private func refreshButtonTapped(_ sender: Any) {
         environment.engine.refresh()
     }
     
     @IBAction private func menuButtonTapped(_ sender: Any) {
-        onQuit?()
+        router.toMenu()
     }
     
     @IBAction private func endTurnTapped(_ sender: Any) {
@@ -122,7 +112,7 @@ private extension GameViewController {
     func processState(_ state: StateProtocol) {
         self.state = state
         
-        playerItems = playerAdapter.buildItems(state: state)
+        playerItems = state.playerItems(users: environment.gameUsers)
         playersCollectionView.reloadData()
         
         if let controlledId = environment.controlledId,
@@ -134,7 +124,7 @@ private extension GameViewController {
         discardImageView.image = state.topDiscardImage
         deckCountLabel.text = "[] \(state.deck.count)"
         
-        titleLabel.text = instructionBuilder.buildInstruction(state: state, for: environment.controlledId)
+        titleLabel.text = state.instruction(for: environment.controlledId)
     }
     
     func processEvent(_ event: GEvent) {
@@ -144,7 +134,7 @@ private extension GameViewController {
             processMoves(moves)
             
         case let .gameover(winner):
-            showGameOver(winner)
+            router.toGameOver(winner)
             analyticsManager.tagEventGameOver(state)
             
         default:
@@ -181,17 +171,7 @@ private extension GameViewController {
                 self?.environment.engine.execute(move)
             }
         }
-        // </RULE> 
-    }
-    
-    func showGameOver(_ winner: Role) {
-        let alert = UIAlertController(title: "Game Over",
-                                      message: "\(winner.rawValue) wins",
-                                      closeAction: "Close", 
-                                      completion: { [weak self] in 
-                                        self?.onQuit?()
-                                      })
-        present(alert, animated: true)
+        // </RULE>
     }
     
     func buildCardPositions() -> [CardArea: CGPoint] {
@@ -220,19 +200,6 @@ private extension GameViewController {
         }
         
         return result
-    }
-    
-    func showRoles() {
-        let roles = GSetup().roles(for: state.players.count)
-        let rolesWithCount: [String] = Role.allCases.compactMap { role in
-            guard let count = roles.filterOrNil({ $0 == role })?.count else {
-                return nil
-            }
-            return "\(count) \(role.rawValue)"
-        }
-        let message = rolesWithCount.joined(separator: "\n")
-        let alert = UIAlertController(title: "Roles", message: message, closeAction: "Close")
-        present(alert, animated: true)
     }
 }
 
@@ -306,10 +273,7 @@ extension GameViewController: UICollectionViewDelegate {
     
     private func playersCollectionViewDidSelectItem(at indexPath: IndexPath) {
         let player = playerItems[indexPath.row].player
-        let alert = UIAlertController(title: player.name.uppercased(),
-                                      message: player.desc,
-                                      closeAction: "Close")
-        present(alert, animated: true)
+        router.toGamePlayer(player)
         analyticsManager.tageEventPlayerDescriptor(player)
     }
     
@@ -339,5 +303,24 @@ private extension StateProtocol {
         }
         
         return UIImage(named: topDiscard.name)
+    }
+    
+    func instruction(for controlledPlayerId: String?) -> String {
+        if controlledPlayerId == nil {
+            return "viewing game"
+        } else if controlledPlayerId != turn {
+            return "waiting others to play"
+        } else {
+            return "play any card"
+        }
+    }
+    
+    func playerItems(users: [String: UserInfo]?) -> [PlayerItem] {
+        initialOrder.map { player in
+            PlayerItem(player: players[player]!,
+                       isTurn: player == turn,
+                       isHit: hits.contains(where: { $0.player == player }),
+                       user: users?[player])
+        }
     }
 }

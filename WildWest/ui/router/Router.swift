@@ -18,14 +18,19 @@ protocol RouterProtocol {
     func toContactUs()
     func toRules()
     func toLocalGame()
-    func toOnlineGame()
+    func toGameRoles(_ playersCount: Int)
+    func toGameOver(_ winner: Role)
+    func toGamePlayer(_ player: PlayerProtocol)
 }
 
 protocol RouterDepenenciesProtocol {
-    func resolveFigureSelector(_ completion: @escaping (String?) -> Void) -> UIViewController
-    func resolveRoleSelector(_ completion: @escaping (Role?) -> Void) -> UIViewController
+    func resolveFigureSelectorWidget(_ completion: @escaping (String?) -> Void) -> UIViewController
+    func resolveRoleSelectorWidget(_ completion: @escaping (Role?) -> Void) -> UIViewController
     func resolveLocalGameViewController() -> UIViewController
     func resolveMenuViewController() -> UIViewController
+    func resolveGameRolesWidget(_ playersCount: Int) -> UIViewController
+    func resolveGameOverWidget(winner: Role, completion: @escaping () -> Void) -> UIViewController
+    func resolveGamePlayerWidget(_ player: PlayerProtocol) -> UIViewController
 }
 
 class Router: RouterProtocol {
@@ -50,18 +55,11 @@ class Router: RouterProtocol {
     }
     
     func toFigureSelector(completion: @escaping (String?) -> Void) {
-        viewController?.present(dependencies.resolveFigureSelector(completion), animated: true)
+        viewController?.present(dependencies.resolveFigureSelectorWidget(completion), animated: true)
     }
     
     func toRoleSelector(_ completion: @escaping (Role?) -> Void) {
-        viewController?.present(dependencies.resolveRoleSelector(completion), animated: true)
-    }
-    
-    func toLocalGame() {
-        viewController?.navigationController?.fade(to: dependencies.resolveLocalGameViewController())
-    }
-    
-    func toOnlineGame() {
+        viewController?.present(dependencies.resolveRoleSelectorWidget(completion), animated: true)
     }
     
     func toContactUs() {
@@ -83,6 +81,25 @@ class Router: RouterProtocol {
                 viewController?.openUrl(url)
             }
         }
+    }
+    
+    func toLocalGame() {
+        viewController?.navigationController?.fade(to: dependencies.resolveLocalGameViewController())
+    }
+    
+    func toGameRoles(_ playersCount: Int) {
+        viewController?.present(dependencies.resolveGameRolesWidget(playersCount), animated: true)
+    }
+    
+    func toGameOver(_ winner: Role) {
+        let widget = dependencies.resolveGameOverWidget(winner: winner) { [weak self] in
+            self?.toMenu()
+        }
+        viewController?.present(widget, animated: true)
+    }
+    
+    func toGamePlayer(_ player: PlayerProtocol) {
+        viewController?.present(dependencies.resolveGamePlayerWidget(player), animated: true)
     }
 }
 

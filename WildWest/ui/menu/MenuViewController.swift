@@ -28,7 +28,7 @@ class MenuViewController: UIViewController {
     
     var router: RouterProtocol!
     var preferences: UserPreferencesProtocol!
-    var musicPlayer: SoundPlayerProtocol!
+    var soundPlayer: SoundPlayerProtocol!
     
     // MARK: - Lifecycle
     
@@ -43,12 +43,12 @@ class MenuViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        musicPlayer.play("2017-03-24_-_Lone_Rider_-_David_Fesliyan")
+        soundPlayer.play("2017-03-24_-_Lone_Rider_-_David_Fesliyan")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        musicPlayer.stop()
+        soundPlayer.stop()
     }
     
     // MARK: - IBActions
@@ -58,7 +58,7 @@ class MenuViewController: UIViewController {
     }
     
     @IBAction private func onlineButtonTapped(_ sender: Any) {
-        router.toOnlineGame()
+        #warning("TODO: implement")
     }
     
     @IBAction private func stepperValueChanged(_ sender: UIStepper) {
