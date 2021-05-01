@@ -19,10 +19,10 @@ class WaitingRoomViewController: UIViewController {
     // MARK: - Properties
     
     var onQuit: (() -> Void)?
-    var onStart: (([WUserInfo]) -> Void)?
+    var onStart: (([UserInfo]) -> Void)?
     
 //    private lazy var manager: MatchingManagerProtocol = Resolver.resolve()
-    private var users: [WUserInfo] = []
+    private var users: [UserInfo] = []
     
     // MARK: - Lifecycle
     

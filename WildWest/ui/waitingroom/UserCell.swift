@@ -14,7 +14,7 @@ class UserCell: UICollectionViewCell {
     @IBOutlet private weak var photoImageView: UIImageView!
     @IBOutlet private weak var nameLabel: UILabel!
     
-    func update(with user: WUserInfo) {
+    func update(with user: UserInfo) {
         nameLabel.text = user.name
         photoImageView.kf.setImage(with: URL(string: user.photoUrl))
     }

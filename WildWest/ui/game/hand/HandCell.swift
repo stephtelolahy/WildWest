@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import CardGameEngine
+import WildWestEngine
 
 class HandCell: UICollectionViewCell {
     

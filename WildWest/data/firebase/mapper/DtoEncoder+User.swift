@@ -8,19 +8,19 @@
 /*
 extension DtoEncoder {
     
-    func encode(user: WUserInfo) -> UserInfoDto {
+    func encode(user: UserInfo) -> UserInfoDto {
         UserInfoDto(id: user.id,
                     name: user.name,
                     photoUrl: user.photoUrl)
     }
     
-    func decode(user: UserInfoDto) throws -> WUserInfo {
-        WUserInfo(id: try user.id.unwrap(),
+    func decode(user: UserInfoDto) throws -> UserInfo {
+        UserInfo(id: try user.id.unwrap(),
                   name: try user.name.unwrap(),
                   photoUrl: try user.photoUrl.unwrap())
     }
     
-    func decode(users: [String: UserInfoDto]) throws -> [WUserInfo] {
+    func decode(users: [String: UserInfoDto]) throws -> [UserInfo] {
         try Array(users.values)
             .map { try decode(user: $0) }
     }

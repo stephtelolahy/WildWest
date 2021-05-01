@@ -8,7 +8,7 @@
 // swiftlint:disable implicitly_unwrapped_optional
 
 import XCTest
-import CardGameEngine
+import WildWestEngine
 
 class MediaEventMatcherTests: XCTestCase {
     

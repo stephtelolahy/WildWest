@@ -6,7 +6,8 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-import CardGameEngine
+import UIKit
+import WildWestEngine
 
 protocol InputHandlerProtocol {
     func selectMove(among moves: [GMove], context: String?, cancelable: Bool, completion: @escaping (GMove) -> Void)

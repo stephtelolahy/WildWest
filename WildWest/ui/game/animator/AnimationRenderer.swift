@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import CardGameEngine
+import WildWestEngine
 
 protocol AnimationRendererProtocol {
     func execute(_ animation: EventAnimation, in state: StateProtocol) 

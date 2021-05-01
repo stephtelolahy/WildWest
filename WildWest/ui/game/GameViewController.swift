@@ -10,7 +10,7 @@
 import UIKit
 import RxSwift
 import Resolver
-import CardGameEngine
+import WildWestEngine
 
 class GameViewController: UIViewController {
     
@@ -54,7 +54,7 @@ class GameViewController: UIViewController {
                           cardBackImage: #imageLiteral(resourceName: "01_back"))
     }()
     
-    private let sfxPlayer: SFXPlayerProtocol = SFXPlayer()
+    private let soundPlayer: SoundPlayerProtocol = SoundPlayer()
     
     private let disposeBag = DisposeBag()
     
@@ -163,7 +163,7 @@ private extension GameViewController {
         }
         
         if let sfx = mediaMatcher.sfx(on: event) {
-            sfxPlayer.play(sfx)
+            soundPlayer.play(sfx)
         }
     }
     
