@@ -4,7 +4,6 @@
 //
 //  Created by Hugues Stephano Telolahy on 29/09/2020.
 //
-// swiftlint:disable file_length
 
 public protocol PlayReqMatcherProtocol {
     func match(canPlay: [String: Any], ctx: PlayReqContext) -> [[PlayArg: [String]]]?

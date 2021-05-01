@@ -16,12 +16,12 @@ class GameCollectionViewLayout: UICollectionViewLayout {
     
     weak var delegate: GameCollectionViewLayoutDelegate?
     
-    //An array to cache the calculated attributes
+    // An array to cache the calculated attributes
     private var cache: [UICollectionViewLayoutAttributes] = []
     
     private let cellPadding: CGFloat = 16
     
-    //Setting the content size
+    // Setting the content size
     override var collectionViewContentSize: CGSize {
         guard let collectionView = collectionView else {
             fatalError("Illegal state")
@@ -34,7 +34,7 @@ class GameCollectionViewLayout: UICollectionViewLayout {
     }
     
     override func prepare() {
-        //We begin measuring the location of items only if the cache is empty
+        // We begin measuring the location of items only if the cache is empty
         guard cache.isEmpty,
             let numberOfItems = delegate?.numberOfItemsForGameCollectionViewLayout(layout: self) else {
                 return
@@ -54,7 +54,7 @@ class GameCollectionViewLayout: UICollectionViewLayout {
         }
     }
     
-    //Is called  to determine which items are visible in the given rect
+    // Is called  to determine which items are visible in the given rect
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         var visibleLayoutAttributes = [UICollectionViewLayoutAttributes]()
         
@@ -68,7 +68,7 @@ class GameCollectionViewLayout: UICollectionViewLayout {
         return visibleLayoutAttributes
     }
     
-    //The attributes for the item at the indexPath
+    // The attributes for the item at the indexPath
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         cache[indexPath.item]
     }

@@ -4,7 +4,6 @@
 //
 //  Created by Hugues Stephano Telolahy on 14/11/2020.
 //
-// swiftlint:disable file_length
 
 public protocol GDatabaseUpdaterProtocol {
     func execute(_ event: GEvent, in state: GState)

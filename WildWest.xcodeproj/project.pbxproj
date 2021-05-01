@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		30D5F9EA6CBC158558625BEA /* Pods_WildWest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEEA394FB0EF19C7678308A /* Pods_WildWest.framework */; };
-		313B3AE6044622361F484F3C /* Pods_WildWestEngine_WildWestEngineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A19CD47C55EEF98F1E6FAD0F /* Pods_WildWestEngine_WildWestEngineTests.framework */; };
 		3300EF29256FE3C1006075F6 /* MediaEventMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3300EF28256FE3C1006075F6 /* MediaEventMatcherTests.swift */; };
 		3300EF2E256FE4FE006075F6 /* media.json in Resources */ = {isa = PBXBuildFile; fileRef = 3300EF2D256FE4FE006075F6 /* media.json */; };
 		3300EF6F256FE878006075F6 /* media.json in Resources */ = {isa = PBXBuildFile; fileRef = 3300EF2D256FE4FE006075F6 /* media.json */; };
@@ -228,6 +226,7 @@
 		33C922EC24CA997700956151 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C922EB24CA997700956151 /* UserInfo.swift */; };
 		33D3C3B824C9E55A00120D9A /* AppModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D3C3B724C9E55A00120D9A /* AppModules.swift */; };
 		33DB41BC2438841A00B94E8A /* HandCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DB41BB2438841A00B94E8A /* HandCollectionViewLayout.swift */; };
+		33DB7006263D2CA100D3BA9A /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C922EB24CA997700956151 /* UserInfo.swift */; };
 		33DC6E4E24CA9F5100072B51 /* UserInfoDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C922E724CA986300956151 /* UserInfoDto.swift */; };
 		33DC6E4F24CA9F5A00072B51 /* UserStatusDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C922E924CA987200956151 /* UserStatusDto.swift */; };
 		33E4411B24077CA000B2848E /* PlayersAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E4411524077CA000B2848E /* PlayersAdapter.swift */; };
@@ -242,12 +241,14 @@
 		33FABE3825BC6CCC00E96097 /* SimulationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FABE3725BC6CCC00E96097 /* SimulationTests.swift */; };
 		33FB59B82427F6D000090D23 /* PlayersAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E4411524077CA000B2848E /* PlayersAdapter.swift */; };
 		33FDD70C240BFB4B00BC3E14 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */; };
-		6CC3C12FAF057462C9A4735E /* Pods_WildWestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B13F0B3698080C2B6364090 /* Pods_WildWestTests.framework */; };
+		8520F714BE4E7D1170B1862A /* Pods_WildWest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C9B7CE27CC9561ECE753851 /* Pods_WildWest.framework */; };
 		ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D2EB239EE03800653905 /* AppDelegate.swift */; };
 		ADB7D2F3239EE03800653905 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F1239EE03800653905 /* Main.storyboard */; };
 		ADB7D2F5239EE03900653905 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F4239EE03900653905 /* Assets.xcassets */; };
 		ADB7D2F8239EE03900653905 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F6239EE03900653905 /* LaunchScreen.storyboard */; };
-		DCDD7FDA197EB9BCDC3F7C9D /* Pods_WildWestEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 990BF9C35B136458D50FB142 /* Pods_WildWestEngine.framework */; };
+		C1B75D27068702D5758003B2 /* Pods_WildWestEngine_WildWestEngineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D32D417295C92CEB3D43D59 /* Pods_WildWestEngine_WildWestEngineTests.framework */; };
+		C48A6A0E2DFA677CFDAAB5F9 /* Pods_WildWestEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD56886842EED2B67FE6A8DB /* Pods_WildWestEngine.framework */; };
+		F98F8042167F3608FFA9060D /* Pods_WildWestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B87292ADCDAB7A282AA8D2EC /* Pods_WildWestTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -289,10 +290,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		041DBBB5197439B7921AFF75 /* Pods-WildWestEngine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestEngine.release.xcconfig"; path = "Target Support Files/Pods-WildWestEngine/Pods-WildWestEngine.release.xcconfig"; sourceTree = "<group>"; };
-		0661240745C476619D1DCFC8 /* Pods-WildWestEngine-WildWestEngineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestEngine-WildWestEngineTests.release.xcconfig"; path = "Target Support Files/Pods-WildWestEngine-WildWestEngineTests/Pods-WildWestEngine-WildWestEngineTests.release.xcconfig"; sourceTree = "<group>"; };
-		14F8C3B37322A7421A6311A6 /* Pods-WildWestEngine-WildWestEngineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestEngine-WildWestEngineTests.debug.xcconfig"; path = "Target Support Files/Pods-WildWestEngine-WildWestEngineTests/Pods-WildWestEngine-WildWestEngineTests.debug.xcconfig"; sourceTree = "<group>"; };
-		28C8FE9906EC898D2C0E688C /* Pods-WildWestEngine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestEngine.debug.xcconfig"; path = "Target Support Files/Pods-WildWestEngine/Pods-WildWestEngine.debug.xcconfig"; sourceTree = "<group>"; };
+		01B8192BDC8D16C8F704FADA /* Pods-WildWestEngine-WildWestEngineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestEngine-WildWestEngineTests.debug.xcconfig"; path = "Target Support Files/Pods-WildWestEngine-WildWestEngineTests/Pods-WildWestEngine-WildWestEngineTests.debug.xcconfig"; sourceTree = "<group>"; };
+		14B641DF85F420B04D6F5004 /* Pods-WildWest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.debug.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.debug.xcconfig"; sourceTree = "<group>"; };
+		217029B4590FA9785D788A41 /* Pods-WildWestEngine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestEngine.debug.xcconfig"; path = "Target Support Files/Pods-WildWestEngine/Pods-WildWestEngine.debug.xcconfig"; sourceTree = "<group>"; };
 		3300EF28256FE3C1006075F6 /* MediaEventMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaEventMatcherTests.swift; sourceTree = "<group>"; };
 		3300EF2D256FE4FE006075F6 /* media.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = media.json; sourceTree = "<group>"; };
 		33029EAC24C74B8F002A5E54 /* DatabaseReference+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DatabaseReference+Rx.swift"; sourceTree = "<group>"; };
@@ -498,12 +498,13 @@
 		33FABE3725BC6CCC00E96097 /* SimulationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SimulationTests.swift; path = ../../../../../SimulationTests.swift; sourceTree = "<group>"; };
 		33FD5E1F25BC3AD500F18AF3 /* ENGINE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = ENGINE.md; sourceTree = "<group>"; };
 		33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		4C7073BEAC4E3C370F2F59BA /* Pods-WildWestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.release.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.release.xcconfig"; sourceTree = "<group>"; };
-		4CEEA394FB0EF19C7678308A /* Pods_WildWest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		884785F4218D30A37032569E /* Pods-WildWest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.debug.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.debug.xcconfig"; sourceTree = "<group>"; };
-		990BF9C35B136458D50FB142 /* Pods_WildWestEngine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWestEngine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9B13F0B3698080C2B6364090 /* Pods_WildWestTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWestTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A19CD47C55EEF98F1E6FAD0F /* Pods_WildWestEngine_WildWestEngineTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWestEngine_WildWestEngineTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C9B7CE27CC9561ECE753851 /* Pods_WildWest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E11AAB7EF987839D511A07C /* Pods-WildWest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.release.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.release.xcconfig"; sourceTree = "<group>"; };
+		8D32D417295C92CEB3D43D59 /* Pods_WildWestEngine_WildWestEngineTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWestEngine_WildWestEngineTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		920167E85C10A1C7552A1D60 /* Pods-WildWestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.release.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.release.xcconfig"; sourceTree = "<group>"; };
+		96DDA9143948008163AD2C25 /* Pods-WildWestEngine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestEngine.release.xcconfig"; path = "Target Support Files/Pods-WildWestEngine/Pods-WildWestEngine.release.xcconfig"; sourceTree = "<group>"; };
+		99966AA7818FC08736138DD1 /* Pods-WildWestEngine-WildWestEngineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestEngine-WildWestEngineTests.release.xcconfig"; path = "Target Support Files/Pods-WildWestEngine-WildWestEngineTests/Pods-WildWestEngine-WildWestEngineTests.release.xcconfig"; sourceTree = "<group>"; };
+		9E6A47481BF4E3B7E9A65359 /* Pods-WildWestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.debug.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ADB7D2E8239EE03800653905 /* WildWest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WildWest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB7D2EB239EE03800653905 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADB7D2F2239EE03800653905 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -512,8 +513,8 @@
 		ADB7D2F9239EE03900653905 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADB7D2FE239EE03900653905 /* WildWestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WildWestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB7D304239EE03900653905 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F09BD086FA2E9921075E0CF5 /* Pods-WildWest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.release.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.release.xcconfig"; sourceTree = "<group>"; };
-		FA3B4CBCCC5F01D39FF31150 /* Pods-WildWestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.debug.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B87292ADCDAB7A282AA8D2EC /* Pods_WildWestTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWestTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD56886842EED2B67FE6A8DB /* Pods_WildWestEngine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWestEngine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -521,7 +522,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCDD7FDA197EB9BCDC3F7C9D /* Pods_WildWestEngine.framework in Frameworks */,
+				C48A6A0E2DFA677CFDAAB5F9 /* Pods_WildWestEngine.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,7 +531,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				335832DE25BC24FD001BE4D8 /* WildWestEngine.framework in Frameworks */,
-				313B3AE6044622361F484F3C /* Pods_WildWestEngine_WildWestEngineTests.framework in Frameworks */,
+				C1B75D27068702D5758003B2 /* Pods_WildWestEngine_WildWestEngineTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,7 +540,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				335832EA25BC24FD001BE4D8 /* WildWestEngine.framework in Frameworks */,
-				30D5F9EA6CBC158558625BEA /* Pods_WildWest.framework in Frameworks */,
+				8520F714BE4E7D1170B1862A /* Pods_WildWest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,7 +548,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6CC3C12FAF057462C9A4735E /* Pods_WildWestTests.framework in Frameworks */,
+				F98F8042167F3608FFA9060D /* Pods_WildWestTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,14 +558,14 @@
 		0B678BA1DAA05FDC7F98BA1E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				884785F4218D30A37032569E /* Pods-WildWest.debug.xcconfig */,
-				F09BD086FA2E9921075E0CF5 /* Pods-WildWest.release.xcconfig */,
-				28C8FE9906EC898D2C0E688C /* Pods-WildWestEngine.debug.xcconfig */,
-				041DBBB5197439B7921AFF75 /* Pods-WildWestEngine.release.xcconfig */,
-				14F8C3B37322A7421A6311A6 /* Pods-WildWestEngine-WildWestEngineTests.debug.xcconfig */,
-				0661240745C476619D1DCFC8 /* Pods-WildWestEngine-WildWestEngineTests.release.xcconfig */,
-				FA3B4CBCCC5F01D39FF31150 /* Pods-WildWestTests.debug.xcconfig */,
-				4C7073BEAC4E3C370F2F59BA /* Pods-WildWestTests.release.xcconfig */,
+				14B641DF85F420B04D6F5004 /* Pods-WildWest.debug.xcconfig */,
+				6E11AAB7EF987839D511A07C /* Pods-WildWest.release.xcconfig */,
+				217029B4590FA9785D788A41 /* Pods-WildWestEngine.debug.xcconfig */,
+				96DDA9143948008163AD2C25 /* Pods-WildWestEngine.release.xcconfig */,
+				01B8192BDC8D16C8F704FADA /* Pods-WildWestEngine-WildWestEngineTests.debug.xcconfig */,
+				99966AA7818FC08736138DD1 /* Pods-WildWestEngine-WildWestEngineTests.release.xcconfig */,
+				9E6A47481BF4E3B7E9A65359 /* Pods-WildWestTests.debug.xcconfig */,
+				920167E85C10A1C7552A1D60 /* Pods-WildWestTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1169,13 +1170,13 @@
 			path = menu;
 			sourceTree = "<group>";
 		};
-		90B0A9689CF2B1F80C572F94 /* Frameworks */ = {
+		A743FA82CF6BEE1B8102D6C9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4CEEA394FB0EF19C7678308A /* Pods_WildWest.framework */,
-				990BF9C35B136458D50FB142 /* Pods_WildWestEngine.framework */,
-				A19CD47C55EEF98F1E6FAD0F /* Pods_WildWestEngine_WildWestEngineTests.framework */,
-				9B13F0B3698080C2B6364090 /* Pods_WildWestTests.framework */,
+				5C9B7CE27CC9561ECE753851 /* Pods_WildWest.framework */,
+				CD56886842EED2B67FE6A8DB /* Pods_WildWestEngine.framework */,
+				8D32D417295C92CEB3D43D59 /* Pods_WildWestEngine_WildWestEngineTests.framework */,
+				B87292ADCDAB7A282AA8D2EC /* Pods_WildWestTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1210,7 +1211,7 @@
 				335832E325BC24FD001BE4D8 /* WildWestEngineTests */,
 				ADB7D2E9239EE03800653905 /* Products */,
 				0B678BA1DAA05FDC7F98BA1E /* Pods */,
-				90B0A9689CF2B1F80C572F94 /* Frameworks */,
+				A743FA82CF6BEE1B8102D6C9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1283,7 +1284,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 335832EC25BC24FD001BE4D8 /* Build configuration list for PBXNativeTarget "WildWestEngine" */;
 			buildPhases = (
-				C75AA483AB9CAA0440BFC0D7 /* [CP] Check Pods Manifest.lock */,
+				9BD17E057FE73ED679C9C1BC /* [CP] Check Pods Manifest.lock */,
 				335832D025BC24FD001BE4D8 /* Headers */,
 				335832D125BC24FD001BE4D8 /* Sources */,
 				335832D225BC24FD001BE4D8 /* Frameworks */,
@@ -1302,11 +1303,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 335832F025BC24FD001BE4D8 /* Build configuration list for PBXNativeTarget "WildWestEngineTests" */;
 			buildPhases = (
-				8CB06373D61AEDBAA8E78291 /* [CP] Check Pods Manifest.lock */,
+				9EBEC783B96B6994B8FBA117 /* [CP] Check Pods Manifest.lock */,
 				3392B24225BC38D900214393 /* Run Cuckoo */,
 				335832D925BC24FD001BE4D8 /* Sources */,
 				335832DA25BC24FD001BE4D8 /* Frameworks */,
-				CADF3E267F0BB664C4541ABE /* [CP] Embed Pods Frameworks */,
+				1AC3D18E65558068CA3AD35E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1322,15 +1323,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ADB7D307239EE03900653905 /* Build configuration list for PBXNativeTarget "WildWest" */;
 			buildPhases = (
-				7F47F2BA88B0D56932DE5958 /* [CP] Check Pods Manifest.lock */,
+				4B1E1DF7755E7E4CB32BA07F /* [CP] Check Pods Manifest.lock */,
 				AD8540A223A4291100568FE9 /* Run Swiftlint */,
 				ADB7D2E4239EE03800653905 /* Sources */,
 				ADB7D2E5239EE03800653905 /* Frameworks */,
 				ADB7D2E6239EE03800653905 /* Resources */,
 				33516CCB2450AA78003C99E2 /* Run FirebaseCrashlytics */,
 				335832EF25BC24FD001BE4D8 /* Embed Frameworks */,
-				252EB578B6AC2F18ED6DBF71 /* [CP] Embed Pods Frameworks */,
-				466ECA6AAFA102B105709C5F /* [CP] Copy Pods Resources */,
+				DC079DCAD3CB8C0ADB64BD20 /* [CP] Embed Pods Frameworks */,
+				416BFCC4D11AAC0477FAA528 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1346,7 +1347,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ADB7D30A239EE03900653905 /* Build configuration list for PBXNativeTarget "WildWestTests" */;
 			buildPhases = (
-				F503ECB60972F571B7BE512C /* [CP] Check Pods Manifest.lock */,
+				FCB6D5A402095DA8E7B0D52F /* [CP] Check Pods Manifest.lock */,
 				ADB7D2FA239EE03900653905 /* Sources */,
 				ADB7D2FB239EE03900653905 /* Frameworks */,
 				ADB7D2FC239EE03900653905 /* Resources */,
@@ -1368,7 +1369,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1230;
-				LastUpgradeCheck = 1230;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = creativeGames;
 				TargetAttributes = {
 					335832D425BC24FD001BE4D8 = {
@@ -1472,21 +1473,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		252EB578B6AC2F18ED6DBF71 /* [CP] Embed Pods Frameworks */ = {
+		1AC3D18E65558068CA3AD35E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-WildWestEngine-WildWestEngineTests/Pods-WildWestEngine-WildWestEngineTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-WildWestEngine-WildWestEngineTests/Pods-WildWestEngine-WildWestEngineTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WildWestEngine-WildWestEngineTests/Pods-WildWestEngine-WildWestEngineTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		33516CCB2450AA78003C99E2 /* Run FirebaseCrashlytics */ = {
@@ -1525,7 +1526,7 @@
 			shellPath = /bin/sh;
 			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/WildWestEngineTests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/WildWestEngine\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"WildWestEngine\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/core/State.swift\" \\\n\"${INPUT_DIR}/engine/Database.swift\" \\\n\"${INPUT_DIR}/engine/GDatabaseUpdater.swift\" \\\n\"${INPUT_DIR}/engine/Engine.swift\" \\\n\"${INPUT_DIR}/engine/GLoop.swift\" \\\n\"${INPUT_DIR}/engine/GEventQueue.swift\" \\\n\"${INPUT_DIR}/engine/GTimer.swift\" \\\n\"${INPUT_DIR}/matcher/AbilityMatcher.swift\" \\\n\"${INPUT_DIR}/matcher/PlayReqMatcher.swift\" \\\n\"${INPUT_DIR}/matcher/EffectMatcher.swift\" \\\n\"${INPUT_DIR}/setup/Setup.swift\" \\\n\"${INPUT_DIR}/setup/ResourcesLoader.swift\" \\\n\"${INPUT_DIR}/ai/AIAgent.swift\" \\\n\"${INPUT_DIR}/ai/AI.swift\" \\\n\"${INPUT_DIR}/ai/MoveEvaluator.swift\" \\\n\"${INPUT_DIR}/ai/RoleEstimator.swift\" \\\n\"${INPUT_DIR}/ai/RoleStrategy.swift\" \\\n\"${INPUT_DIR}/ai/AbilityEvaluator.swift\"\n";
 		};
-		466ECA6AAFA102B105709C5F /* [CP] Copy Pods Resources */ = {
+		416BFCC4D11AAC0477FAA528 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1542,7 +1543,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7F47F2BA88B0D56932DE5958 /* [CP] Check Pods Manifest.lock */ = {
+		4B1E1DF7755E7E4CB32BA07F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1564,7 +1565,29 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8CB06373D61AEDBAA8E78291 /* [CP] Check Pods Manifest.lock */ = {
+		9BD17E057FE73ED679C9C1BC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WildWestEngine-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9EBEC783B96B6994B8FBA117 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1604,46 +1627,24 @@
 			shellPath = /bin/sh;
 			shellScript = "echo \"SWIFTLINT PATH\"\npwd\n\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
-		C75AA483AB9CAA0440BFC0D7 /* [CP] Check Pods Manifest.lock */ = {
+		DC079DCAD3CB8C0ADB64BD20 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WildWestEngine-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CADF3E267F0BB664C4541ABE /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WildWestEngine-WildWestEngineTests/Pods-WildWestEngine-WildWestEngineTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WildWestEngine-WildWestEngineTests/Pods-WildWestEngine-WildWestEngineTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WildWestEngine-WildWestEngineTests/Pods-WildWestEngine-WildWestEngineTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F503ECB60972F571B7BE512C /* [CP] Check Pods Manifest.lock */ = {
+		FCB6D5A402095DA8E7B0D52F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1864,6 +1865,7 @@
 				335157FE245D88BE00C46888 /* OptionalExtension.swift in Sources */,
 				3346F33524CB280500FB0418 /* DtoEncoder+State.swift in Sources */,
 				33B896C524384A770005FF21 /* GameLayoutBuilder.swift in Sources */,
+				33DB7006263D2CA100D3BA9A /* UserInfo.swift in Sources */,
 				3300EFDB256FEE5E006075F6 /* MediaEventMatcher.swift in Sources */,
 				333DB7CB24D55028002A5692 /* HandCollectionViewLayout.swift in Sources */,
 				3300EF29256FE3C1006075F6 /* MediaEventMatcherTests.swift in Sources */,
@@ -1930,7 +1932,7 @@
 /* Begin XCBuildConfiguration section */
 		335832ED25BC24FD001BE4D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 28C8FE9906EC898D2C0E688C /* Pods-WildWestEngine.debug.xcconfig */;
+			baseConfigurationReference = 217029B4590FA9785D788A41 /* Pods-WildWestEngine.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -1959,7 +1961,7 @@
 		};
 		335832EE25BC24FD001BE4D8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 041DBBB5197439B7921AFF75 /* Pods-WildWestEngine.release.xcconfig */;
+			baseConfigurationReference = 96DDA9143948008163AD2C25 /* Pods-WildWestEngine.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -1986,7 +1988,7 @@
 		};
 		335832F125BC24FD001BE4D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 14F8C3B37322A7421A6311A6 /* Pods-WildWestEngine-WildWestEngineTests.debug.xcconfig */;
+			baseConfigurationReference = 01B8192BDC8D16C8F704FADA /* Pods-WildWestEngine-WildWestEngineTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -2009,7 +2011,7 @@
 		};
 		335832F225BC24FD001BE4D8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0661240745C476619D1DCFC8 /* Pods-WildWestEngine-WildWestEngineTests.release.xcconfig */;
+			baseConfigurationReference = 99966AA7818FC08736138DD1 /* Pods-WildWestEngine-WildWestEngineTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -2148,7 +2150,7 @@
 		};
 		ADB7D308239EE03900653905 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 884785F4218D30A37032569E /* Pods-WildWest.debug.xcconfig */;
+			baseConfigurationReference = 14B641DF85F420B04D6F5004 /* Pods-WildWest.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2170,7 +2172,7 @@
 		};
 		ADB7D309239EE03900653905 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F09BD086FA2E9921075E0CF5 /* Pods-WildWest.release.xcconfig */;
+			baseConfigurationReference = 6E11AAB7EF987839D511A07C /* Pods-WildWest.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2192,7 +2194,7 @@
 		};
 		ADB7D30B239EE03900653905 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FA3B4CBCCC5F01D39FF31150 /* Pods-WildWestTests.debug.xcconfig */;
+			baseConfigurationReference = 9E6A47481BF4E3B7E9A65359 /* Pods-WildWestTests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
@@ -2211,7 +2213,7 @@
 		};
 		ADB7D30C239EE03900653905 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4C7073BEAC4E3C370F2F59BA /* Pods-WildWestTests.release.xcconfig */;
+			baseConfigurationReference = 920167E85C10A1C7552A1D60 /* Pods-WildWestTests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";

@@ -93,11 +93,11 @@ private extension EffectMatcher {
         cancelHit(),
         reverseHit(),
 
-        //<LOGIC>
+        // <LOGIC>
         revealDeckIf(),
         revealHandIf(),
         loop()
-        //</LOGIC>
+        // </LOGIC>
     ].toDictionary { $0.id }
 
     static func equip() -> Effect {
