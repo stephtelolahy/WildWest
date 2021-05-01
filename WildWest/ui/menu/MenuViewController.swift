@@ -5,6 +5,7 @@
 //  Created by Hugues Stephano Telolahy on 01/03/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
+// swiftlint:disable implicitly_unwrapped_optional
 
 import UIKit
 import RxSwift
@@ -26,6 +27,8 @@ class MenuViewController: UIViewController {
     @IBOutlet private weak var userNameLabel: UILabel!
     
     // MARK: - Properties
+    
+    var router: RouterProtocol!
     
     var onPlayLocal: (() -> Void)?
     var onPlayOnline: (() -> Void)?
@@ -73,17 +76,17 @@ class MenuViewController: UIViewController {
     }
     
     @IBAction private func figureButtonTapped(_ sender: Any) {
-        let figureSelector = FigureSelector(completion: { [weak self] _ in
+        router.toFigureSelector { [weak self] figure in
+            self?.preferences.preferredFigure = figure
             self?.updateFigureImage()
-        })
-        present(figureSelector, animated: true)
+        }
     }
     
     @IBAction private func roleButtonTapped(_ sender: Any) {
-        let roleSelector = RoleSelector(completion: { [weak self] _ in
+        router.toRoleSelector { [weak self] role in
+            self?.preferences.preferredRole = role
             self?.updateRoleImage()
-        })
-        present(roleSelector, animated: true)
+        }
     }
     
     @IBAction private func contactButtonTapped(_ sender: Any) {

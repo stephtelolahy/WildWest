@@ -31,6 +31,7 @@ private extension NavigationController {
     
     func loadMenu() {
         let menuViewController = UIStoryboard.instantiate(MenuViewController.self, in: "Main")
+        menuViewController.router = Router(viewController: menuViewController, dependencies: DIContainer.shared)
         
         menuViewController.onPlayLocal = { [weak self] in
             self?.loadLocalGame()
