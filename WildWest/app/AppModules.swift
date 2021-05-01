@@ -15,9 +15,13 @@ extension Resolver: ResolverRegistering {
     // Resolve essential singletons
     public static func registerAllServices() {
         
+        register { DIContainer() as RouterDepenenciesProtocol }.scope(application)
+        
         register { AnalyticsManager() }.scope(application)
         
         register { UserPreferences() as UserPreferencesProtocol }.scope(application)
+        
+        register { SoundPlayer(preferences: resolve()) as SoundPlayerProtocol }.scope(application)
         
         register { JsonReader(bundle: Bundle.resourcesBundle) as JsonReader }
         register { ResourcesLoader(jsonReader: resolve()) as ResourcesLoaderProtocol }.scope(application)

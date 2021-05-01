@@ -54,7 +54,7 @@ class GameViewController: UIViewController {
                           cardBackImage: #imageLiteral(resourceName: "01_back"))
     }()
     
-    private let soundPlayer: SoundPlayerProtocol = SoundPlayer()
+    private let soundPlayer: SoundPlayerProtocol = SoundPlayer(preferences: Resolver.resolve())
     
     private let disposeBag = DisposeBag()
     

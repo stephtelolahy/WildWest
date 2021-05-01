@@ -1,5 +1,5 @@
 //
-//  NavigationController.swift
+//  MainViewController.swift
 //  WildWest
 //
 //  Created by Hugues Stephano Telolahy on 24/07/2020.
@@ -11,38 +11,29 @@ import FirebaseUI
 import Resolver
 import RxSwift
 
-class NavigationController: UINavigationController {
+class MainViewController: UINavigationController {
+    
+    // MARK: - Dependencies
+    
+    private lazy var router: RouterProtocol = Router(viewController: self, dependencies: Resolver.resolve())
     
 //    private lazy var manager: MatchingManagerProtocol = Resolver.resolve()
     private lazy var gameBuilder: GameBuilderProtocol = Resolver.resolve()
     private lazy var preferences: UserPreferencesProtocol = Resolver.resolve()
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
 //        if manager.isLoggedIn {
 //            observeUserStatus()
 //        } else {
-            loadMenu()
+            router.toMenu()
 //        }
     }
 }
 
-private extension NavigationController {
-    
-    func loadMenu() {
-        let menuViewController = UIStoryboard.instantiate(MenuViewController.self, in: "Main")
-        menuViewController.router = Router(viewController: menuViewController, dependencies: DIContainer.shared)
-        
-        menuViewController.onPlayLocal = { [weak self] in
-            self?.loadLocalGame()
-        }
-        
-        menuViewController.onPlayOnline = { [weak self] in
-            self?.tryPlayOnline()
-        }
-        
-        fade(to: menuViewController)
-    }
+private extension MainViewController {
     
     func tryPlayOnline() {
         /*
@@ -143,12 +134,6 @@ private extension NavigationController {
         fade(to: waitingRoomViewController)
     }
     */
-    func loadLocalGame() {
-        let state = gameBuilder.createGame(for: preferences.playersCount)
-        let playerId = state.playOrder.first
-        let environment = gameBuilder.createLocalGameEnvironment(state: state, playerId: playerId)
-        loadGame(environment: environment)
-    }
     
     func loadOnlineGame(_ gameId: String, _ playerId: String) {
         /*
@@ -163,23 +148,6 @@ private extension NavigationController {
             }
         }))
          */
-    }
-    
-    func loadGame(environment: GameEnvironment) {
-        let gameViewController = UIStoryboard.instantiate(GameViewController.self, in: "Main")
-        
-        gameViewController.environment = environment
-        
-        gameViewController.onQuit = { [weak self] in
-            guard let self = self else {
-                return
-            }
-            
-            self.loadMenu()
-//            self.sub(self.manager.quitGame().subscribe())
-        }
-        
-        fade(to: gameViewController)
     }
     
     func observeUserStatus() {
@@ -223,7 +191,7 @@ private extension NavigationController {
     }
 }
 
-extension NavigationController: FUIAuthDelegate {
+extension MainViewController: FUIAuthDelegate {
     
     func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
         guard let user = authDataResult?.user else {
@@ -231,16 +199,5 @@ extension NavigationController: FUIAuthDelegate {
         }
         
         handleSigninCompleted(user)
-    }
-}
-
-private extension UINavigationController {
-    
-    func fade(to viewController: UIViewController) {
-        let transition: CATransition = CATransition()
-        transition.duration = 0.3
-        transition.type = .fade
-        view.layer.add(transition, forKey: nil)
-        setViewControllers([viewController], animated: false)
     }
 }
