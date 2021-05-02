@@ -21,7 +21,7 @@ protocol RouterProtocol {
     func toGameRoles(_ playersCount: Int)
     func toGameOver(_ winner: Role)
     func toGamePlayer(_ player: PlayerProtocol)
-    func toGameMoveSelector(_ title: String, children: [MoveNode], cancelable: Bool, completion: @escaping (MoveNode) -> Void)
+    func toWaitingRoom()
 }
 
 protocol RouterDepenenciesProtocol {
@@ -32,7 +32,6 @@ protocol RouterDepenenciesProtocol {
     func resolveGameRolesWidget(_ playersCount: Int) -> UIViewController
     func resolveGameOverWidget(winner: Role, completion: @escaping () -> Void) -> UIViewController
     func resolveGamePlayerWidget(_ player: PlayerProtocol) -> UIViewController
-    func resolveGameMoveSelectorWidget(_ title: String, children: [MoveNode], cancelable: Bool, completion: @escaping (MoveNode) -> Void) -> UIViewController
 }
 
 class Router: RouterProtocol {
@@ -104,9 +103,8 @@ class Router: RouterProtocol {
         viewController?.present(dependencies.resolveGamePlayerWidget(player), animated: true)
     }
     
-    func toGameMoveSelector(_ title: String, children: [MoveNode], cancelable: Bool, completion: @escaping (MoveNode) -> Void) {
-        let widget = dependencies.resolveGameMoveSelectorWidget(title, children: children, cancelable: cancelable, completion: completion)
-        viewController?.present(widget, animated: true)
+    func toWaitingRoom() {
+        #warning("TODO: implement")
     }
 }
 

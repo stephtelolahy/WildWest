@@ -10,6 +10,7 @@
 import UIKit
 import Kingfisher
 import WildWestEngine
+import RxSwift
 
 class MenuViewController: UIViewController {
     
@@ -26,9 +27,15 @@ class MenuViewController: UIViewController {
     
     // MARK: - Dependencies
     
+    var userManager: UserManagerProtocol!
     var router: RouterProtocol!
     var preferences: UserPreferencesProtocol!
     var soundPlayer: SoundPlayerProtocol!
+    var signInWidget: SignInWidget!
+    
+    // MARK: - Properties
+    
+    private let disposeBag = DisposeBag()
     
     // MARK: - Lifecycle
     
@@ -39,6 +46,11 @@ class MenuViewController: UIViewController {
         setPlayersCount(preferences.playersCount)
         setFigure(preferences.preferredFigure)
         setRole(preferences.preferredRole)
+        
+        userManager.getUser().subscribe(onSuccess: { [weak self] user in
+            self?.setUser(user)
+        })
+        .disposed(by: disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,7 +70,16 @@ class MenuViewController: UIViewController {
     }
     
     @IBAction private func onlineButtonTapped(_ sender: Any) {
-        #warning("TODO: implement")
+        guard userManager.isLoggedIn else {
+            signInWidget.signIn { [weak self] user in
+                self?.setUser(user)
+                #warning("TODO: add user to waiting room")
+                #warning("TODO: ask main to observe user status")
+            }
+            return
+        }
+        
+        #warning("TODO: add to waiting room")
     }
     
     @IBAction private func stepperValueChanged(_ sender: UIStepper) {
@@ -106,5 +127,10 @@ private extension MenuViewController {
     func setRole(_ role: Role?) {
         roleButton.setImage(UIImage(named: role?.rawValue ?? ""), for: .normal)
         roleLabel.text = role?.rawValue ?? "random"
+    }
+    
+    func setUser(_ user: UserInfo) {
+        userNameLabel.text = user.name
+        avatarImageView.kf.setImage(with: URL(string: user.photoUrl))
     }
 }

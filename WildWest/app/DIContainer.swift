@@ -9,6 +9,7 @@
 import UIKit
 import WildWestEngine
 import Resolver
+import Firebase
 
 // The central unit of all injections.
 // Instantiates and supplies the dependencies of all object
@@ -31,6 +32,8 @@ extension DIContainer: RouterDepenenciesProtocol {
         menuViewController.router = Router(viewController: menuViewController, dependencies: Resolver.resolve())
         menuViewController.preferences = Resolver.optional()
         menuViewController.soundPlayer = Resolver.optional()
+        menuViewController.userManager = Resolver.optional()
+        menuViewController.signInWidget = SignInWidget(viewController: menuViewController, userManager: Resolver.resolve())
         return menuViewController
     }
     
@@ -46,13 +49,12 @@ extension DIContainer: RouterDepenenciesProtocol {
                                                                  playerId: playerId)
         gameViewController.environment = environment
         
-        let router = Router(viewController: gameViewController, dependencies: Resolver.resolve())
-        gameViewController.router = router
+        gameViewController.router = Router(viewController: gameViewController, dependencies: Resolver.resolve())
         gameViewController.analyticsManager = Resolver.optional()
         gameViewController.animationMatcher = Resolver.optional()
         gameViewController.mediaMatcher = Resolver.optional()
         gameViewController.soundPlayer = Resolver.optional()
-        gameViewController.inputHandler = InputHandler(selector: MoveSelector(), router: router)
+        gameViewController.moveSelector = GameMoveSelectorWidget(selector: MoveSelector(), viewController: gameViewController)
         gameViewController.moveSegmenter = MoveSegmenter()
         return gameViewController
     }
@@ -67,10 +69,6 @@ extension DIContainer: RouterDepenenciesProtocol {
     
     func resolveGamePlayerWidget(_ player: PlayerProtocol) -> UIViewController {
         GamePlayerWidget(player: player)
-    }
-    
-    func resolveGameMoveSelectorWidget(_ title: String, children: [MoveNode], cancelable: Bool, completion: @escaping (MoveNode) -> Void) -> UIViewController {
-        GameMoveSelectorWidget(title, children: children, cancelable: cancelable, completion: completion)
     }
 }
 
@@ -96,26 +94,25 @@ extension Resolver: ResolverRegistering {
         
         register { createMediaMatcher() as MediaEventMatcherProtocol }.scope(application)
         
-//        register { DtoEncoder(allCards: Resolver.resolve(ResourcesLoaderProtocol.self).allCards,
-//                              keyGenerator: resolve())
-//        }
-//        register { FirebaseMapper(dtoEncoder: resolve(), dictionaryEncoder: resolve()) as FirebaseMapperProtocol }
-//            .scope(application)
-//
-//        register { MatchingDatabase(rootRef: Database.database().reference(),
-//                                    mapper: resolve()) as MatchingDatabaseProtocol
-//        }.scope(application)
+        register { DtoEncoder() }
+        
+        register { FirebaseMapper(dtoEncoder: resolve(),
+                                  dictionaryEncoder: resolve()) as FirebaseMapperProtocol
+        }.scope(application)
+
+        register { UserDatabase(rootRef: Database.database().reference(),
+                                mapper: resolve()) as UserDatabaseProtocol
+        }.scope(application)
         
         register { GameBuilder(preferences: resolve(),
                                resourcesLoader: resolve()) as GameBuilderProtocol
-        }
+        }.scope(application)
         
-        register { AccountProvider() as AccountProviderProtocol }
+        register { AuthProvider() as AuthProviderProtocol }.scope(application)
         
-//        register { MatchingManager(accountProvider: resolve(),
-//                                   database: resolve(),
-//                                   gameBuilder: resolve()) as MatchingManagerProtocol
-//        }.scope(application)
+        register { UserManager(authProvider: resolve(),
+                               database: resolve()) as UserManagerProtocol
+        }.scope(application)
     }
     
     private static func createMediaMatcher() -> MediaEventMatcherProtocol {

@@ -5,11 +5,11 @@
 //  Created by Hugues Stephano Telolahy on 26/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-/*
+
 import Firebase
 
 protocol FirebaseMapperProtocol {
-    
+    /*
     func decodeState(from snapshot: DataSnapshot) throws -> GameStateProtocol
     func decodeCard(from snapthot: DataSnapshot) throws -> (String, CardProtocol)
     func decodeCard(from cardId: String) throws -> CardProtocol
@@ -25,17 +25,20 @@ protocol FirebaseMapperProtocol {
     func encodeMove(_ move: GameMove) throws -> [String: Any]
     func encodeMoves(_ moves: [GameMove]) throws -> [[String: Any]]
     func encodeUpdate(_ update: GameUpdate) throws -> [String: Any]
-    
+    */
     func encodeUser(_ user: UserInfo) throws -> [String: Any]
     func decodeUser(from snapshot: DataSnapshot) throws -> UserInfo
+    /*
     func decodeUsers(from snapshot: DataSnapshot) throws -> [UserInfo]
     func encodeUserStatus(_ status: UserStatus) throws -> [String: Any]?
+     */
     func decodeUserStatus(from snapshot: DataSnapshot) throws -> UserStatus
-    
+    /*
     func encodeGameUsers(_ users: [String: UserInfo]) throws -> [String: Any]
     func decodeGameUsers(from snapshot: DataSnapshot) throws -> [String: UserInfo]
     
     func decodeStatusDictionary(from snapshot: DataSnapshot) throws -> [String: UserStatus]
+ */
 }
 
 class FirebaseMapper: FirebaseMapperProtocol {
@@ -49,7 +52,7 @@ class FirebaseMapper: FirebaseMapperProtocol {
         self.dictionaryEncoder = dictionaryEncoder
         
     }
-    
+    /*
     func decodeState(from snapshot: DataSnapshot) throws -> GameStateProtocol {
         let value = try (snapshot.value as? [String: Any]).unwrap()
         let dto = try self.dictionaryEncoder.decode(GameStateDto.self, from: value)
@@ -147,13 +150,13 @@ class FirebaseMapper: FirebaseMapperProtocol {
         let value = try dictionaryEncoder.encode(dto)
         return value
     }
-    
+    */
     func encodeUser(_ user: UserInfo) throws -> [String: Any] {
         let dto = dtoEncoder.encode(user: user)
         let value = try dictionaryEncoder.encode(dto)
         return value
     }
-    
+    /*
     func encodeUserStatus(_ status: UserStatus) throws -> [String: Any]? {
         guard let dto = dtoEncoder.encode(status: status) else {
             return nil
@@ -162,7 +165,7 @@ class FirebaseMapper: FirebaseMapperProtocol {
         let value = try dictionaryEncoder.encode(dto)
         return value
     }
-    
+    */
     func decodeUserStatus(from snapshot: DataSnapshot) throws -> UserStatus {
         guard let value = snapshot.value as? [String: Any] else {
             return .idle
@@ -179,7 +182,7 @@ class FirebaseMapper: FirebaseMapperProtocol {
         let user = try dtoEncoder.decode(user: dto)
         return user
     }
-    
+    /*
     func decodeUsers(from snapshot: DataSnapshot) throws -> [UserInfo] {
         guard let dict = snapshot.value as? [String: [String: Any]] else {
             return []
@@ -218,5 +221,5 @@ class FirebaseMapper: FirebaseMapperProtocol {
             return (key, status)
         })
     }
+ */
 }
-*/

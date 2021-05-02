@@ -1,64 +1,75 @@
 //
-//  MatchingManager.swift
+//  UserManager.swift
 //  WildWest
 //
 //  Created by Hugues Stephano Telolahy on 23/07/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-/*
+
 import RxSwift
 import FirebaseUI
 
-protocol MatchingManagerProtocol {
+protocol UserManagerProtocol {
     var isLoggedIn: Bool { get }
     
-    func createUser(_ user: UserInfo) -> Completable
     func getUser() -> Single<UserInfo>
+    func createUser(_ user: UserInfo) -> Completable
     func observeUserStatus() -> Observable<UserStatus>
+    /*
     func addToWaitingRoom() -> Completable
     func quitWaitingRoom() -> Completable
     func observeWaitingUsers() -> Observable<[UserInfo]>
     func createGame(users: [UserInfo]) -> Completable
     func quitGame() -> Completable
     func getGameData(gameId: String) -> Single<(GameStateProtocol, [String: UserInfo])>
+ */
 }
 
-class MatchingManager: MatchingManagerProtocol {
+class UserManager: UserManagerProtocol {
     
-    private let accountProvider: AccountProviderProtocol
-    private let database: MatchingDatabaseProtocol
-    private let gameBuilder: GameBuilderProtocol
+    private let authProvider: AuthProviderProtocol
+    private let database: UserDatabaseProtocol
     
-    init(accountProvider: AccountProviderProtocol,
-         database: MatchingDatabaseProtocol,
-         gameBuilder: GameBuilderProtocol) {
-        self.accountProvider = accountProvider
+    init(authProvider: AuthProviderProtocol,
+         database: UserDatabaseProtocol) {
+        self.authProvider = authProvider
         self.database = database
-        self.gameBuilder = gameBuilder
     }
     
     var isLoggedIn: Bool {
-        accountProvider.loggedInUserId != nil
-    }
-    
-    func createUser(_ user: UserInfo) -> Completable {
-        database.createUser(user)
+        authProvider.loggedInUserId != nil
     }
     
     func getUser() -> Single<UserInfo> {
-        guard let userId = accountProvider.loggedInUserId else {
+        guard let userId = authProvider.loggedInUserId else {
             return Single.error(NSError(domain: "Missing user", code: 0))
         }
         return database.getUser(userId)
     }
     
+    /*
+    
+    private let gameBuilder: GameBuilderProtocol
+    
+    init(accountProvider: AccountProviderProtocol,
+         
+         gameBuilder: GameBuilderProtocol) {
+        self.accountProvider = accountProvider
+        self.database = database
+        self.gameBuilder = gameBuilder
+    }
+    */
+    func createUser(_ user: UserInfo) -> Completable {
+        database.createUser(user)
+    }
+    
     func observeUserStatus() -> Observable<UserStatus> {
-        guard let userId = accountProvider.loggedInUserId else {
+        guard let userId = authProvider.loggedInUserId else {
             return Observable.error(NSError(domain: "Missing user", code: 0))
         }
         return database.observeUserStatus(userId)
     }
-    
+    /*
     func addToWaitingRoom() -> Completable {
         guard let userId = accountProvider.loggedInUserId else {
             return Completable.error(NSError(domain: "Missing user", code: 0))
@@ -112,5 +123,5 @@ class MatchingManager: MatchingManagerProtocol {
                     .map { users in (state, users) }
             }
     }
+    */
 }
-*/

@@ -5,11 +5,11 @@
 //  Created by Hugues Stephano Telolahy on 25/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-/*
+
 import Foundation
 
 class DtoEncoder {
-    
+    /*
     private let allCards: [CardProtocol]
     private let keyGenerator: KeyGeneratorProtocol
     
@@ -77,5 +77,5 @@ class DtoEncoder {
         
         return result.sorted(by: { $0.identifier < $1.identifier })
     }
+ */
 }
-*/
