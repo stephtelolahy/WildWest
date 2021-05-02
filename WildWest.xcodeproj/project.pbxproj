@@ -30,6 +30,8 @@
 		333DB7CB24D55028002A5692 /* HandCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DB41BB2438841A00B94E8A /* HandCollectionViewLayout.swift */; };
 		333E692D245D557A00DEF93B /* GameUpdateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333E692C245D557A00DEF93B /* GameUpdateDto.swift */; };
 		333E8757242D5B3B00EAE8FC /* Big Bomb-SoundBible.com-1219802495.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 333E8756242D5B3B00EAE8FC /* Big Bomb-SoundBible.com-1219802495.mp3 */; };
+		3342DF9C263EF71C000BDC57 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C922EB24CA997700956151 /* UserInfo.swift */; };
+		3342DFA0263EF733000BDC57 /* UserStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C922E524CA982500956151 /* UserStatus.swift */; };
 		33461170263E1F170043F14D /* GameMoveSelectorWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3346116F263E1F170043F14D /* GameMoveSelectorWidget.swift */; };
 		334673E82436314E00FFBB82 /* UserDefaultsStored.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334673E72436314E00FFBB82 /* UserDefaultsStored.swift */; };
 		334673EB2436328000FFBB82 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334673EA2436328000FFBB82 /* UserPreferences.swift */; };
@@ -1892,6 +1894,7 @@
 				335157FE245D88BE00C46888 /* OptionalExtension.swift in Sources */,
 				3346F33524CB280500FB0418 /* DtoEncoder+State.swift in Sources */,
 				33B896C524384A770005FF21 /* GameLayoutBuilder.swift in Sources */,
+				3342DF9C263EF71C000BDC57 /* UserInfo.swift in Sources */,
 				3300EFDB256FEE5E006075F6 /* MediaEventMatcher.swift in Sources */,
 				333DB7CB24D55028002A5692 /* HandCollectionViewLayout.swift in Sources */,
 				3300EF29256FE3C1006075F6 /* MediaEventMatcherTests.swift in Sources */,
@@ -1910,6 +1913,7 @@
 				33DC6E4F24CA9F5A00072B51 /* UserStatusDto.swift in Sources */,
 				335157F9245D860600C46888 /* DtoEncodingTests.swift in Sources */,
 				33DC6E4E24CA9F5100072B51 /* UserInfoDto.swift in Sources */,
+				3342DFA0263EF733000BDC57 /* UserStatus.swift in Sources */,
 				335157F6245D855E00C46888 /* DtoEncoder.swift in Sources */,
 				33F36ABC24CB0DD0000533A4 /* DtoEncoder+Move.swift in Sources */,
 				33B896C724384B180005FF21 /* GameLayoutBuilderTests.swift in Sources */,

@@ -7,7 +7,7 @@
 //
 
 enum UserStatus: Equatable {
-    case playing(gameId: String, playerId: String)
-    case waiting
     case idle
+    case waiting
+    case playing(gameId: String)
 }

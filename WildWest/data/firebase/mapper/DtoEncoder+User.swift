@@ -27,8 +27,8 @@ extension DtoEncoder {
     
     func encode(status: UserStatus) -> UserStatusDto? {
         switch status {
-        case let .playing(gameId, playerId):
-            return UserStatusDto(gameId: gameId, playerId: playerId)
+        case let .playing(gameId):
+            return UserStatusDto(gameId: gameId)
             
         case .waiting:
             return UserStatusDto(waiting: true)
@@ -43,9 +43,8 @@ extension DtoEncoder {
             return .waiting
         }
         
-        if let gameId = status?.gameId,
-            let playerId = status?.playerId {
-            return .playing(gameId: gameId, playerId: playerId)
+        if let gameId = status?.gameId {
+            return .playing(gameId: gameId)
         }
         
         return .idle

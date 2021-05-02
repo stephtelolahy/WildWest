@@ -5,8 +5,10 @@
 //  Created by Hugues Stephano Telolahy on 24/07/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
+// swiftlint:disable implicitly_unwrapped_optional
 
 import UIKit
+import RxSwift
 
 class WaitingRoomViewController: UIViewController {
     
@@ -15,12 +17,14 @@ class WaitingRoomViewController: UIViewController {
     @IBOutlet private weak var userCollectionView: UICollectionView!
     @IBOutlet private weak var startButton: UIButton!
     
-    // MARK: - Properties
+    // MARK: - Dependencies
     
-    var onQuit: (() -> Void)?
-    var onStart: (([UserInfo]) -> Void)?
+    var router: RouterProtocol!
+    var userManager: UserManagerProtocol!
+    private let disposeBag = DisposeBag()
     
-//    private lazy var manager: MatchingManagerProtocol = Resolver.resolve()
+    // MARK: - Data
+    
     private var users: [UserInfo] = []
     
     // MARK: - Lifecycle
@@ -33,22 +37,25 @@ class WaitingRoomViewController: UIViewController {
     // MARK: - IBAction
     
     @IBAction private func quitButtonTapped(_ sender: Any) {
-        onQuit?()
+        userManager.quitWaitingRoom().subscribe().disposed(by: disposeBag)
+        router.toMenu()
     }
     
     @IBAction private func startButtonTapped(_ sender: Any) {
-        onStart?(users)
+        #warning("TODO: create remote game")
+        #warning("TODO: open remote game")
+        //  self.sub(self.manager.createGame(users: users).subscribe())
     }
     
     // MARK: - Private
     
     func observeWaitingUsers() {
-//        sub(manager.observeWaitingUsers().subscribe(onNext: { [weak self] users in
-//            self?.users = users
-//            self?.userCollectionView.reloadData()
-//            let minUsersCount = 2
-//            self?.startButton.isHidden = users.count < minUsersCount
-//        }))
+        userManager.observeWaitingUsers().subscribe(onNext: { [weak self] users in
+            self?.users = users
+            self?.userCollectionView.reloadData()
+            let minUsersCount = 2
+            self?.startButton.isHidden = users.count < minUsersCount
+        }).disposed(by: disposeBag)
     }
 }
 

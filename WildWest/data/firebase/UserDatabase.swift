@@ -17,9 +17,9 @@ protocol UserDatabaseProtocol {
     func createUser(_ user: UserInfo) -> Completable
     func getUser(_ id: String) -> Single<UserInfo>
     func observeUserStatus(_ id: String) -> Observable<UserStatus>
-    /*
     func setUserStatus(_ id: String, status: UserStatus) -> Completable
     func observeWaitingUsers() -> Observable<[UserInfo]>
+    /*
     func setGameUsers(gameId: String, users: [String: UserInfo]) -> Completable
     func getGameUsers(gameId: String) -> Single<[String: UserInfo]>
  */
@@ -60,7 +60,7 @@ class UserDatabase: UserDatabaseProtocol {
         rootRef.child("user_status/\(id)")
             .rxObserve({ try self.mapper.decodeUserStatus(from: $0) })
     }
-    /*
+    
     func setUserStatus(_ id: String, status: UserStatus) -> Completable {
         rootRef.child("user_status/\(id)")
             .rxSetValue({ try self.mapper.encodeUserStatus(status) })
@@ -78,7 +78,7 @@ class UserDatabase: UserDatabaseProtocol {
             return users.filter { waitingIds.contains($0.id) }
         }
     }
-    
+    /*
     func setGameUsers(gameId: String, users: [String: UserInfo]) -> Completable {
         rootRef.child("games/\(gameId)/users")
             .rxSetValue({ try self.mapper.encodeGameUsers(users) })

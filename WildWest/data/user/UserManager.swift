@@ -15,14 +15,14 @@ protocol UserManagerProtocol {
     func getUser() -> Single<UserInfo>
     func createUser(_ user: UserInfo) -> Completable
     func observeUserStatus() -> Observable<UserStatus>
-    /*
     func addToWaitingRoom() -> Completable
     func quitWaitingRoom() -> Completable
     func observeWaitingUsers() -> Observable<[UserInfo]>
+    /*
     func createGame(users: [UserInfo]) -> Completable
     func quitGame() -> Completable
     func getGameData(gameId: String) -> Single<(GameStateProtocol, [String: UserInfo])>
- */
+    */
 }
 
 class UserManager: UserManagerProtocol {
@@ -69,25 +69,17 @@ class UserManager: UserManagerProtocol {
         }
         return database.observeUserStatus(userId)
     }
-    /*
+    
     func addToWaitingRoom() -> Completable {
-        guard let userId = accountProvider.loggedInUserId else {
+        guard let userId = authProvider.loggedInUserId else {
             return Completable.error(NSError(domain: "Missing user", code: 0))
         }
         return database.setUserStatus(userId, status: .waiting)
     }
     
     func quitWaitingRoom() -> Completable {
-        guard let userId = accountProvider.loggedInUserId else {
+        guard let userId = authProvider.loggedInUserId else {
             return Completable.error(NSError(domain: "Missing user", code: 0))
-        }
-        
-        return database.setUserStatus(userId, status: .idle)
-    }
-    
-    func quitGame() -> Completable {
-        guard let userId = accountProvider.loggedInUserId else {
-            return Completable.empty()
         }
         
         return database.setUserStatus(userId, status: .idle)
@@ -95,6 +87,15 @@ class UserManager: UserManagerProtocol {
     
     func observeWaitingUsers() -> Observable<[UserInfo]> {
         database.observeWaitingUsers()
+    }
+    
+    /*
+    func quitGame() -> Completable {
+        guard let userId = accountProvider.loggedInUserId else {
+            return Completable.empty()
+        }
+        
+        return database.setUserStatus(userId, status: .idle)
     }
     
     func createGame(users: [UserInfo]) -> Completable {

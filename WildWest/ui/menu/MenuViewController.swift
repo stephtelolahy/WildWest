@@ -32,9 +32,6 @@ class MenuViewController: UIViewController {
     var preferences: UserPreferencesProtocol!
     var soundPlayer: SoundPlayerProtocol!
     var signInWidget: SignInWidget!
-    
-    // MARK: - Properties
-    
     private let disposeBag = DisposeBag()
     
     // MARK: - Lifecycle
@@ -73,13 +70,15 @@ class MenuViewController: UIViewController {
         guard userManager.isLoggedIn else {
             signInWidget.signIn { [weak self] user in
                 self?.setUser(user)
-                #warning("TODO: add user to waiting room")
-                #warning("TODO: ask main to observe user status")
+                self?.addToWaitingRoom()
+                
+                #warning("TODO: remove coupling")
+                (self?.navigationController as? MainViewController)?.observeUserStatus()
             }
             return
         }
         
-        #warning("TODO: add to waiting room")
+        addToWaitingRoom()
     }
     
     @IBAction private func stepperValueChanged(_ sender: UIStepper) {
@@ -132,5 +131,9 @@ private extension MenuViewController {
     func setUser(_ user: UserInfo) {
         userNameLabel.text = user.name
         avatarImageView.kf.setImage(with: URL(string: user.photoUrl))
+    }
+    
+    func addToWaitingRoom() {
+        userManager.addToWaitingRoom().subscribe().disposed(by: disposeBag)
     }
 }

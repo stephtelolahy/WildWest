@@ -28,17 +28,17 @@ extension DIContainer: RouterDepenenciesProtocol {
     }
     
     func resolveMenuViewController() -> UIViewController {
-        let menuViewController = UIStoryboard.instantiate(MenuViewController.self, in: "Main")
-        menuViewController.router = Router(viewController: menuViewController, dependencies: Resolver.resolve())
-        menuViewController.preferences = Resolver.optional()
-        menuViewController.soundPlayer = Resolver.optional()
-        menuViewController.userManager = Resolver.optional()
-        menuViewController.signInWidget = SignInWidget(viewController: menuViewController, userManager: Resolver.resolve())
-        return menuViewController
+        let viewController = UIStoryboard.instantiate(MenuViewController.self, in: "Main")
+        viewController.router = Router(viewController: viewController, dependencies: Resolver.resolve())
+        viewController.preferences = Resolver.optional()
+        viewController.soundPlayer = Resolver.optional()
+        viewController.userManager = Resolver.optional()
+        viewController.signInWidget = SignInWidget(viewController: viewController, userManager: Resolver.resolve())
+        return viewController
     }
     
     func resolveLocalGameViewController() -> UIViewController {
-        let gameViewController = UIStoryboard.instantiate(GameViewController.self, in: "Main")
+        let viewController = UIStoryboard.instantiate(GameViewController.self, in: "Main")
         
         let gameBuilder: GameBuilderProtocol = Resolver.resolve()
         let preferences: UserPreferencesProtocol = Resolver.resolve()
@@ -47,16 +47,16 @@ extension DIContainer: RouterDepenenciesProtocol {
         let environment = gameBuilder.createLocalGameEnvironment(state: state,
                                                                  eventMatcher: Resolver.resolve(),
                                                                  playerId: playerId)
-        gameViewController.environment = environment
+        viewController.environment = environment
         
-        gameViewController.router = Router(viewController: gameViewController, dependencies: Resolver.resolve())
-        gameViewController.analyticsManager = Resolver.optional()
-        gameViewController.animationMatcher = Resolver.optional()
-        gameViewController.mediaMatcher = Resolver.optional()
-        gameViewController.soundPlayer = Resolver.optional()
-        gameViewController.moveSelector = GameMoveSelectorWidget(selector: MoveSelector(), viewController: gameViewController)
-        gameViewController.moveSegmenter = MoveSegmenter()
-        return gameViewController
+        viewController.router = Router(viewController: viewController, dependencies: Resolver.resolve())
+        viewController.analyticsManager = Resolver.optional()
+        viewController.animationMatcher = Resolver.optional()
+        viewController.mediaMatcher = Resolver.optional()
+        viewController.soundPlayer = Resolver.optional()
+        viewController.moveSelector = GameMoveSelectorWidget(selector: MoveSelector(), viewController: viewController)
+        viewController.moveSegmenter = MoveSegmenter()
+        return viewController
     }
     
     func resolveGameOverWidget(winner: Role, completion: @escaping () -> Void) -> UIViewController {
@@ -69,6 +69,13 @@ extension DIContainer: RouterDepenenciesProtocol {
     
     func resolveGamePlayerWidget(_ player: PlayerProtocol) -> UIViewController {
         GamePlayerWidget(player: player)
+    }
+    
+    func resolveWaitingRoomViewController() -> UIViewController {
+        let viewController = UIStoryboard.instantiate(WaitingRoomViewController.self, in: "Main")
+        viewController.router = Router(viewController: viewController, dependencies: Resolver.resolve())
+        viewController.userManager = Resolver.optional()
+        return viewController
     }
 }
 

@@ -15,7 +15,6 @@ class SignInWidget: NSObject {
     private weak var viewController: UIViewController?
     private let userManager: UserManagerProtocol
     private let disposeBag = DisposeBag()
-    
     private var completion: ((UserInfo) -> Void)?
     
     init(viewController: UIViewController, userManager: UserManagerProtocol) {

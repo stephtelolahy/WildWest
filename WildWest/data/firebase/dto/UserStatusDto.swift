@@ -9,5 +9,4 @@
 struct UserStatusDto: Codable {
     var waiting: Bool?
     var gameId: String?
-    var playerId: String?
 }

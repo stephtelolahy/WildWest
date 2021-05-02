@@ -22,6 +22,7 @@ protocol RouterProtocol {
     func toGameOver(_ winner: Role)
     func toGamePlayer(_ player: PlayerProtocol)
     func toWaitingRoom()
+    func toOnlineGame(_ gameId: String)
 }
 
 protocol RouterDepenenciesProtocol {
@@ -32,6 +33,7 @@ protocol RouterDepenenciesProtocol {
     func resolveGameRolesWidget(_ playersCount: Int) -> UIViewController
     func resolveGameOverWidget(winner: Role, completion: @escaping () -> Void) -> UIViewController
     func resolveGamePlayerWidget(_ player: PlayerProtocol) -> UIViewController
+    func resolveWaitingRoomViewController() -> UIViewController
 }
 
 class Router: RouterProtocol {
@@ -45,13 +47,6 @@ class Router: RouterProtocol {
     }
     
     func toMenu() {
-        let navController: UINavigationController?
-        if viewController is UINavigationController {
-            navController = viewController as? UINavigationController
-        } else {
-            navController = viewController?.navigationController
-        }
-        
         navController?.fade(to: dependencies.resolveMenuViewController())
     }
     
@@ -85,7 +80,7 @@ class Router: RouterProtocol {
     }
     
     func toLocalGame() {
-        viewController?.navigationController?.fade(to: dependencies.resolveLocalGameViewController())
+        navController?.fade(to: dependencies.resolveLocalGameViewController())
     }
     
     func toGameRoles(_ playersCount: Int) {
@@ -104,7 +99,34 @@ class Router: RouterProtocol {
     }
     
     func toWaitingRoom() {
+        navController?.fade(to: dependencies.resolveWaitingRoomViewController())
+    }
+    
+    func toOnlineGame(_ gameId: String) {
         #warning("TODO: implement")
+            /*
+            sub(manager.getGameData(gameId: gameId).subscribe(onSuccess: { state, users in
+                let environment = self.gameBuilder.createRemoteGameEnvironment(gameId: gameId,
+                                                                               playerId: playerId,
+                                                                               state: state,
+                                                                               users: users)
+                // ⚠️ wait until GameSubjects emit lastest values
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+                    self?.loadGame(environment: environment)
+                }
+            }))
+             */
+        }
+}
+
+private extension Router {
+    
+    var navController: UINavigationController? {
+        if let navC = viewController as? UINavigationController {
+            return navC
+        } else {
+            return viewController?.navigationController
+        }
     }
 }
 
