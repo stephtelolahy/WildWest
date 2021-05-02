@@ -7,7 +7,15 @@
 //
 
 import UIKit
+import WildWestEngine
 import Kingfisher
+
+struct PlayerItem {
+    let player: PlayerProtocol
+    let isTurn: Bool
+    let isHit: Bool
+    let user: UserInfo?
+}
 
 class PlayerCell: UICollectionViewCell {
     
@@ -24,14 +32,11 @@ class PlayerCell: UICollectionViewCell {
         figureImageView.addBrownRoundedBorder()
     }
     
-    private var item: PlayerItem?
-    
     func update(with item: PlayerItem) {
-        self.item = item
-        updateBackground()
+        updateBackground(item)
         
         let player = item.player
-        nameLabel.text = "\(player.name.uppercased()) \(item.score?.description ?? "")"
+        nameLabel.text = player.name.uppercased()
         let isEliminated = player.health == 0
         figureImageView.alpha = !isEliminated ? 1.0 : 0.4
         equipmentLabel.text = player.inPlay.map { "[\($0.name)]" }.joined(separator: "\n")
@@ -53,31 +58,15 @@ class PlayerCell: UICollectionViewCell {
         }
     }
     
-    private func updateBackground() {
-        guard let item = self.item else {
-            backgroundColor = .clear
-            return
-        }
-        
+    private func updateBackground(_ item: PlayerItem) {
         if item.player.health == 0 {
             backgroundColor = .clear
-        } else if item.isAttacked {
+        } else if item.isHit {
             backgroundColor = UIColor.red
-        } else if item.isHelped {
-            backgroundColor = UIColor.blue.withAlphaComponent(0.4)
         } else if item.isTurn {
             backgroundColor = UIColor.orange
         } else {
             backgroundColor = UIColor.brown.withAlphaComponent(0.4)
         }
-    }
-}
-
-extension UIView {
-    func addBrownRoundedBorder() {
-        layer.cornerRadius = 8
-        layer.borderColor = UIColor.brown.cgColor
-        layer.borderWidth = 4
-        clipsToBounds = true
     }
 }

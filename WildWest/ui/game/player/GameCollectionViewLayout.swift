@@ -58,7 +58,7 @@ class GameCollectionViewLayout: UICollectionViewLayout {
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         var visibleLayoutAttributes = [UICollectionViewLayoutAttributes]()
         
-        //Loop through the cache and look for items in the rect
+        // Loop through the cache and look for items in the rect
         for attribute in cache {
             if attribute.frame.intersects(rect) {
                 visibleLayoutAttributes.append(attribute)

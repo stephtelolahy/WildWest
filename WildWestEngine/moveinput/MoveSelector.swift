@@ -21,7 +21,7 @@ public struct MoveNode: Equatable {
 }
 
 public protocol MoveSelectorProtocol {
-    func select(active moves: [GMove]) -> MoveNode
+    func select(_ moves: [GMove]) -> MoveNode
 }
 
 public class MoveSelector: MoveSelectorProtocol {
@@ -29,7 +29,7 @@ public class MoveSelector: MoveSelectorProtocol {
     public init() {
     }
     
-    public func select(active moves: [GMove]) -> MoveNode {
+    public func select(_ moves: [GMove]) -> MoveNode {
         let refMove = moves[0]
         
         if moves.allSatisfy({ $0.ability == refMove.ability && $0.card == refMove.card }) {

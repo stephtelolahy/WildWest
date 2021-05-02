@@ -7,7 +7,6 @@
 //
 
 import AVFoundation
-import Resolver
 
 protocol SoundPlayerProtocol {
     func play(_ fileName: String)
@@ -16,7 +15,11 @@ protocol SoundPlayerProtocol {
 
 class SoundPlayer: SoundPlayerProtocol {
     
-    private lazy var preferences: UserPreferencesProtocol = Resolver.resolve()
+    private let preferences: UserPreferencesProtocol
+    
+    init(preferences: UserPreferencesProtocol) {
+        self.preferences = preferences
+    }
     
     private var audioPlayers: [AVAudioPlayer] = []
     

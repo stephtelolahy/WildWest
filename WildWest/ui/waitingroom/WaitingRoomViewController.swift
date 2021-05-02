@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Resolver
 
 class WaitingRoomViewController: UIViewController {
     
