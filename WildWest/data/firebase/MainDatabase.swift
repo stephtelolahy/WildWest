@@ -1,5 +1,5 @@
 //
-//  UserDatabase.swift
+//  MainDatabase.swift
 //  WildWest
 //
 //  Created by Hugues Stephano Telolahy on 21/07/2020.
@@ -8,24 +8,25 @@
 
 import RxSwift
 import Firebase
+import WildWestEngine
 
-protocol UserDatabaseProtocol {
-    /*
-    func createGame(id: String, state: GameStateProtocol) -> Completable
-    func getGame(_ id: String) -> Single<GameStateProtocol>
-     */
+protocol MainDatabaseProtocol {
+    
     func createUser(_ user: UserInfo) -> Completable
     func getUser(_ id: String) -> Single<UserInfo>
     func observeUserStatus(_ id: String) -> Observable<UserStatus>
     func setUserStatus(_ id: String, status: UserStatus) -> Completable
     func observeWaitingUsers() -> Observable<[UserInfo]>
+    
+    func createGame(id: String, state: StateProtocol) -> Completable
+    func setGameUsers(id: String, users: [String: UserInfo]) -> Completable
     /*
-    func setGameUsers(gameId: String, users: [String: UserInfo]) -> Completable
+     func getGame(_ id: String) -> Single<GameStateProtocol>
     func getGameUsers(gameId: String) -> Single<[String: UserInfo]>
  */
 }
 
-class UserDatabase: UserDatabaseProtocol {
+class MainDatabase: MainDatabaseProtocol {
     
     private let rootRef: DatabaseReference
     private let mapper: FirebaseMapperProtocol
@@ -35,17 +36,7 @@ class UserDatabase: UserDatabaseProtocol {
         self.rootRef = rootRef
         self.mapper = mapper
     }
-    /*
-    func createGame(id: String, state: GameStateProtocol) -> Completable {
-        rootRef.child("games/\(id)/state")
-            .rxSetValue({ try self.mapper.encodeState(state) })
-    }
     
-    func getGame(_ id: String) -> Single<GameStateProtocol> {
-        rootRef.child("games/\(id)/state")
-            .rxObserveSingleEvent { try self.mapper.decodeState(from: $0) }
-    }
-    */
     func createUser(_ user: UserInfo) -> Completable {
         rootRef.child("users/\(user.id)")
             .rxSetValue({ try self.mapper.encodeUser(user) })
@@ -78,12 +69,23 @@ class UserDatabase: UserDatabaseProtocol {
             return users.filter { waitingIds.contains($0.id) }
         }
     }
-    /*
-    func setGameUsers(gameId: String, users: [String: UserInfo]) -> Completable {
-        rootRef.child("games/\(gameId)/users")
+    
+    func createGame(id: String, state: StateProtocol) -> Completable {
+        rootRef.child("games/\(id)/state")
+            .rxSetValue({ try self.mapper.encodeState(state) })
+    }
+    
+    func setGameUsers(id: String, users: [String: UserInfo]) -> Completable {
+        rootRef.child("games/\(id)/users")
             .rxSetValue({ try self.mapper.encodeGameUsers(users) })
     }
     
+    /*
+     func getGame(_ id: String) -> Single<GameStateProtocol> {
+         rootRef.child("games/\(id)/state")
+             .rxObserveSingleEvent { try self.mapper.decodeState(from: $0) }
+     }
+     
     func getGameUsers(gameId: String) -> Single<[String: UserInfo]> {
         rootRef.child("games/\(gameId)/users")
             .rxObserveSingleEvent({ try self.mapper.decodeGameUsers(from: $0) })

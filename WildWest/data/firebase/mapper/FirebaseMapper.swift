@@ -7,6 +7,7 @@
 //
 
 import Firebase
+import WildWestEngine
 
 protocol FirebaseMapperProtocol {
     /*
@@ -17,8 +18,9 @@ protocol FirebaseMapperProtocol {
     func decodeMove(from snapshot: DataSnapshot) throws -> GameMove
     func decodeMoves(from snapshot: DataSnapshot) throws -> [GameMove]
     func decodeUpdate(from snapshot: DataSnapshot) throws -> GameUpdate
-    
-    func encodeState(_ state: GameStateProtocol) throws -> [String: Any]
+    */
+    func encodeState(_ state: StateProtocol) throws -> [String: Any]
+    /*
     func encodeChallenge(_ challenge: Challenge?) throws -> [String: Any]?
     func encodeDamageEvent(_ damageEvent: DamageEvent) throws -> [String: Any]
     func encodeOrderedCards(_ cards: [CardProtocol]) throws -> [String: Any]
@@ -26,6 +28,7 @@ protocol FirebaseMapperProtocol {
     func encodeMoves(_ moves: [GameMove]) throws -> [[String: Any]]
     func encodeUpdate(_ update: GameUpdate) throws -> [String: Any]
     */
+    
     func encodeUser(_ user: UserInfo) throws -> [String: Any]
     func decodeUser(from snapshot: DataSnapshot) throws -> UserInfo
     func decodeUsers(from snapshot: DataSnapshot) throws -> [UserInfo]
@@ -102,13 +105,13 @@ class FirebaseMapper: FirebaseMapperProtocol {
         let update = try self.dtoEncoder.decode(update: dto)
         return update
     }
-    
-    func encodeState(_ state: GameStateProtocol) throws -> [String: Any] {
+    */
+    func encodeState(_ state: StateProtocol) throws -> [String: Any] {
         let dto = dtoEncoder.encode(state: state)
         let value = try dictionaryEncoder.encode(dto)
         return value
     }
-    
+    /*
     func encodeChallenge(_ challenge: Challenge?) throws -> [String: Any]? {
         guard let dto = dtoEncoder.encode(challenge: challenge) else {
             return nil

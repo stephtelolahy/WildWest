@@ -21,6 +21,7 @@ class WaitingRoomViewController: UIViewController {
     
     var router: RouterProtocol!
     var userManager: UserManagerProtocol!
+    var gameManager: GameManagerProtocol!
     private let disposeBag = DisposeBag()
     
     // MARK: - Data
@@ -42,9 +43,7 @@ class WaitingRoomViewController: UIViewController {
     }
     
     @IBAction private func startButtonTapped(_ sender: Any) {
-        #warning("TODO: create remote game")
-        #warning("TODO: open remote game")
-        //  self.sub(self.manager.createGame(users: users).subscribe())
+        gameManager.createRemoteGame(users: users).subscribe().disposed(by: disposeBag)
     }
     
     // MARK: - Private

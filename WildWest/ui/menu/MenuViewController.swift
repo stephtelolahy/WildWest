@@ -28,6 +28,7 @@ class MenuViewController: UIViewController {
     // MARK: - Dependencies
     
     var userManager: UserManagerProtocol!
+    var gameManager: GameManagerProtocol!
     var router: RouterProtocol!
     var preferences: UserPreferencesProtocol!
     var soundPlayer: SoundPlayerProtocol!
@@ -63,7 +64,7 @@ class MenuViewController: UIViewController {
     // MARK: - IBActions
     
     @IBAction private func playButtonTapped(_ sender: Any) {
-        router.toLocalGame()
+        router.toGame(gameManager.createLocalGame())
     }
     
     @IBAction private func onlineButtonTapped(_ sender: Any) {
@@ -71,9 +72,7 @@ class MenuViewController: UIViewController {
             signInWidget.signIn { [weak self] user in
                 self?.setUser(user)
                 self?.addToWaitingRoom()
-                
-                #warning("TODO: remove coupling")
-                (self?.navigationController as? MainViewController)?.observeUserStatus()
+                NotificationCenter.default.post(Notification(name: .didSingIn, object: nil))
             }
             return
         }
@@ -136,4 +135,10 @@ private extension MenuViewController {
     func addToWaitingRoom() {
         userManager.addToWaitingRoom().subscribe().disposed(by: disposeBag)
     }
+}
+
+/// In-app broadcasted notification using `NotificationCenter` mechanism
+
+extension Notification.Name {
+    static let didSingIn = Notification.Name("didSingIn")
 }

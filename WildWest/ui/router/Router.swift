@@ -17,23 +17,23 @@ protocol RouterProtocol {
     func toRoleSelector(_ completion: @escaping (Role?) -> Void)
     func toContactUs()
     func toRules()
-    func toLocalGame()
+    func toGame(_ environment: GameEnvironment)
     func toGameRoles(_ playersCount: Int)
     func toGameOver(_ winner: Role)
     func toGamePlayer(_ player: PlayerProtocol)
     func toWaitingRoom()
-    func toOnlineGame(_ gameId: String)
 }
 
 protocol RouterDepenenciesProtocol {
-    func resolveFigureSelectorWidget(_ completion: @escaping (String?) -> Void) -> UIViewController
-    func resolveRoleSelectorWidget(_ completion: @escaping (Role?) -> Void) -> UIViewController
-    func resolveLocalGameViewController() -> UIViewController
-    func resolveMenuViewController() -> UIViewController
-    func resolveGameRolesWidget(_ playersCount: Int) -> UIViewController
-    func resolveGameOverWidget(winner: Role, completion: @escaping () -> Void) -> UIViewController
-    func resolveGamePlayerWidget(_ player: PlayerProtocol) -> UIViewController
-    func resolveWaitingRoomViewController() -> UIViewController
+    func provideMainViewController() -> UIViewController
+    func provideFigureSelectorWidget(_ completion: @escaping (String?) -> Void) -> UIViewController
+    func provideRoleSelectorWidget(_ completion: @escaping (Role?) -> Void) -> UIViewController
+    func provideGameViewController(_ environment: GameEnvironment) -> UIViewController
+    func provideMenuViewController() -> UIViewController
+    func provideGameRolesWidget(_ playersCount: Int) -> UIViewController
+    func provideGameOverWidget(winner: Role, completion: @escaping () -> Void) -> UIViewController
+    func provideGamePlayerWidget(_ player: PlayerProtocol) -> UIViewController
+    func provideWaitingRoomViewController() -> UIViewController
 }
 
 class Router: RouterProtocol {
@@ -47,15 +47,15 @@ class Router: RouterProtocol {
     }
     
     func toMenu() {
-        navController?.fade(to: dependencies.resolveMenuViewController())
+        navController?.fade(to: dependencies.provideMenuViewController())
     }
     
     func toFigureSelector(completion: @escaping (String?) -> Void) {
-        viewController?.present(dependencies.resolveFigureSelectorWidget(completion), animated: true)
+        viewController?.present(dependencies.provideFigureSelectorWidget(completion), animated: true)
     }
     
     func toRoleSelector(_ completion: @escaping (Role?) -> Void) {
-        viewController?.present(dependencies.resolveRoleSelectorWidget(completion), animated: true)
+        viewController?.present(dependencies.provideRoleSelectorWidget(completion), animated: true)
     }
     
     func toContactUs() {
@@ -79,44 +79,28 @@ class Router: RouterProtocol {
         }
     }
     
-    func toLocalGame() {
-        navController?.fade(to: dependencies.resolveLocalGameViewController())
+    func toGame(_ environment: GameEnvironment) {
+        navController?.fade(to: dependencies.provideGameViewController(environment))
     }
     
     func toGameRoles(_ playersCount: Int) {
-        viewController?.present(dependencies.resolveGameRolesWidget(playersCount), animated: true)
+        viewController?.present(dependencies.provideGameRolesWidget(playersCount), animated: true)
     }
     
     func toGameOver(_ winner: Role) {
-        let widget = dependencies.resolveGameOverWidget(winner: winner) { [weak self] in
+        let widget = dependencies.provideGameOverWidget(winner: winner) { [weak self] in
             self?.toMenu()
         }
         viewController?.present(widget, animated: true)
     }
     
     func toGamePlayer(_ player: PlayerProtocol) {
-        viewController?.present(dependencies.resolveGamePlayerWidget(player), animated: true)
+        viewController?.present(dependencies.provideGamePlayerWidget(player), animated: true)
     }
     
     func toWaitingRoom() {
-        navController?.fade(to: dependencies.resolveWaitingRoomViewController())
+        navController?.fade(to: dependencies.provideWaitingRoomViewController())
     }
-    
-    func toOnlineGame(_ gameId: String) {
-        #warning("TODO: implement")
-            /*
-            sub(manager.getGameData(gameId: gameId).subscribe(onSuccess: { state, users in
-                let environment = self.gameBuilder.createRemoteGameEnvironment(gameId: gameId,
-                                                                               playerId: playerId,
-                                                                               state: state,
-                                                                               users: users)
-                // ⚠️ wait until GameSubjects emit lastest values
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-                    self?.loadGame(environment: environment)
-                }
-            }))
-             */
-        }
 }
 
 private extension Router {

@@ -17,11 +17,11 @@ public class GHit: HitProtocol {
     
     // MARK: - Init
     
-    init(name: String,
-         player: String,
-         abilities: [String],
-         cancelable: Int,
-         offender: String) {
+    public init(name: String,
+                player: String,
+                abilities: [String],
+                cancelable: Int,
+                offender: String) {
         self.name = name
         self.player = player
         self.abilities = abilities

@@ -19,36 +19,35 @@ final class DIContainer {
 
 extension DIContainer: RouterDepenenciesProtocol {
     
-    func resolveFigureSelectorWidget(_ completion: @escaping (String?) -> Void) -> UIViewController {
+    func provideMainViewController() -> UIViewController {
+        let viewController = UIStoryboard.instantiate(MainViewController.self, in: "Main")
+        viewController.userManager = Resolver.optional()
+        viewController.router = Router(viewController: viewController, dependencies: Resolver.resolve())
+        return viewController
+    }
+    
+    func provideFigureSelectorWidget(_ completion: @escaping (String?) -> Void) -> UIViewController {
         FigureSelectorWidget(gameResources: Resolver.resolve(), completion: completion)
     }
     
-    func resolveRoleSelectorWidget(_ completion: @escaping (Role?) -> Void) -> UIViewController {
+    func provideRoleSelectorWidget(_ completion: @escaping (Role?) -> Void) -> UIViewController {
         RoleSelectorWidget(completion)
     }
     
-    func resolveMenuViewController() -> UIViewController {
+    func provideMenuViewController() -> UIViewController {
         let viewController = UIStoryboard.instantiate(MenuViewController.self, in: "Main")
         viewController.router = Router(viewController: viewController, dependencies: Resolver.resolve())
         viewController.preferences = Resolver.optional()
         viewController.soundPlayer = Resolver.optional()
         viewController.userManager = Resolver.optional()
+        viewController.gameManager = Resolver.optional()
         viewController.signInWidget = SignInWidget(viewController: viewController, userManager: Resolver.resolve())
         return viewController
     }
     
-    func resolveLocalGameViewController() -> UIViewController {
+    func provideGameViewController(_ environment: GameEnvironment) -> UIViewController {
         let viewController = UIStoryboard.instantiate(GameViewController.self, in: "Main")
-        
-        let gameBuilder: GameBuilderProtocol = Resolver.resolve()
-        let preferences: UserPreferencesProtocol = Resolver.resolve()
-        let state = gameBuilder.createGame(for: preferences.playersCount)
-        let playerId = state.playOrder.first
-        let environment = gameBuilder.createLocalGameEnvironment(state: state,
-                                                                 eventMatcher: Resolver.resolve(),
-                                                                 playerId: playerId)
         viewController.environment = environment
-        
         viewController.router = Router(viewController: viewController, dependencies: Resolver.resolve())
         viewController.analyticsManager = Resolver.optional()
         viewController.animationMatcher = Resolver.optional()
@@ -59,22 +58,23 @@ extension DIContainer: RouterDepenenciesProtocol {
         return viewController
     }
     
-    func resolveGameOverWidget(winner: Role, completion: @escaping () -> Void) -> UIViewController {
+    func provideGameOverWidget(winner: Role, completion: @escaping () -> Void) -> UIViewController {
         GameOverWidget(winner: winner, completion: completion)
     }
     
-    func resolveGameRolesWidget(_ playersCount: Int) -> UIViewController {
+    func provideGameRolesWidget(_ playersCount: Int) -> UIViewController {
         GameRolesWidget(playersCount: playersCount)
     }
     
-    func resolveGamePlayerWidget(_ player: PlayerProtocol) -> UIViewController {
+    func provideGamePlayerWidget(_ player: PlayerProtocol) -> UIViewController {
         GamePlayerWidget(player: player)
     }
     
-    func resolveWaitingRoomViewController() -> UIViewController {
+    func provideWaitingRoomViewController() -> UIViewController {
         let viewController = UIStoryboard.instantiate(WaitingRoomViewController.self, in: "Main")
         viewController.router = Router(viewController: viewController, dependencies: Resolver.resolve())
         viewController.userManager = Resolver.optional()
+        viewController.gameManager = Resolver.optional()
         return viewController
     }
 }
@@ -99,16 +99,16 @@ extension Resolver: ResolverRegistering {
         
         register { AnimationEventMatcher(preferences: resolve()) as AnimationEventMatcherProtocol }.scope(application)
         
-        register { createMediaMatcher() as MediaEventMatcherProtocol }.scope(application)
+        register { provideMediaMatcher() as MediaEventMatcherProtocol }.scope(application)
         
-        register { DtoEncoder() }
+        register { DtoEncoder(allCards: provideAllCards(), keyGenerator: resolve()) }
         
         register { FirebaseMapper(dtoEncoder: resolve(),
                                   dictionaryEncoder: resolve()) as FirebaseMapperProtocol
         }.scope(application)
-
-        register { UserDatabase(rootRef: Database.database().reference(),
-                                mapper: resolve()) as UserDatabaseProtocol
+        
+        register { MainDatabase(rootRef: Database.database().reference(),
+                                mapper: resolve()) as MainDatabaseProtocol
         }.scope(application)
         
         register { GameBuilder(preferences: resolve(),
@@ -120,11 +120,23 @@ extension Resolver: ResolverRegistering {
         register { UserManager(authProvider: resolve(),
                                database: resolve()) as UserManagerProtocol
         }.scope(application)
+        
+        register { GameManager(preferences: resolve(),
+                               eventMatcher: resolve(),
+                               database: resolve(),
+                               gameBuilder: resolve()) as GameManagerProtocol
+        }.scope(application)
     }
     
-    private static func createMediaMatcher() -> MediaEventMatcherProtocol {
+    private static func provideMediaMatcher() -> MediaEventMatcherProtocol {
         let jsonReader = JsonReader(bundle: Bundle.main)
         let mediaArray: [EventMedia] = jsonReader.load("media")
         return MediaEventMatcher(mediaArray: mediaArray)
+    }
+    
+    private static func provideAllCards() -> [CardProtocol] {
+        let resourcesLoader: ResourcesLoaderProtocol = resolve()
+        #warning("TODO: add method in GSetup to generate all cards")
+        return []
     }
 }

@@ -8,18 +8,22 @@
 
 struct GameStateDto: Codable {
     let players: [String: PlayerDto]?
-    let deck: [String: String]?
-    let discardPile: [String: String]?
+    let initialOrder: [String]?
+    let playOrder: [String]?
     let turn: String?
-    let generalStore: [String: Bool]?
-    let outcome: String?
-    let challenge: ChallengeDto?
+    let phase: Int?
+    let deck: [String: String]?
+    let discard: [String: String]?
+    let store: [String: String]?
+    let storeView: String?
+    let hits: [HitDto]?
+    let played: [String]?
 }
 
-struct ChallengeDto: Codable {
+struct HitDto: Codable {
     let name: String?
-    let targetIds: [String]?
-    let damage: Int?
-    let counterNeeded: Int?
-    let barrelsPlayed: Int?
+    let abilities: [String]?
+    let player: String?
+    let offender: String?
+    let cancelable: Int?
 }

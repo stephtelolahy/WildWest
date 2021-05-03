@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+/*
 struct GameUpdateDto: Codable {
     var timestamp: String = "\(Date().timeIntervalSince1970)"
     var setTurn: String?
@@ -57,3 +57,4 @@ struct PlayerManipulatesOtherCardDto: Codable {
     let otherId: String?
     let cardId: String?
 }
+*/

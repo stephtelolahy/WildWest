@@ -18,20 +18,20 @@ protocol UserManagerProtocol {
     func addToWaitingRoom() -> Completable
     func quitWaitingRoom() -> Completable
     func observeWaitingUsers() -> Observable<[UserInfo]>
+    
     /*
-    func createGame(users: [UserInfo]) -> Completable
-    func quitGame() -> Completable
-    func getGameData(gameId: String) -> Single<(GameStateProtocol, [String: UserInfo])>
-    */
+     func getGameData(gameId: String) -> Single<(GameStateProtocol, [String: UserInfo])>
+     func quitGame() -> Completable
+     */
 }
 
 class UserManager: UserManagerProtocol {
     
     private let authProvider: AuthProviderProtocol
-    private let database: UserDatabaseProtocol
+    private let database: MainDatabaseProtocol
     
     init(authProvider: AuthProviderProtocol,
-         database: UserDatabaseProtocol) {
+         database: MainDatabaseProtocol) {
         self.authProvider = authProvider
         self.database = database
     }
@@ -47,18 +47,6 @@ class UserManager: UserManagerProtocol {
         return database.getUser(userId)
     }
     
-    /*
-    
-    private let gameBuilder: GameBuilderProtocol
-    
-    init(accountProvider: AccountProviderProtocol,
-         
-         gameBuilder: GameBuilderProtocol) {
-        self.accountProvider = accountProvider
-        self.database = database
-        self.gameBuilder = gameBuilder
-    }
-    */
     func createUser(_ user: UserInfo) -> Completable {
         database.createUser(user)
     }
@@ -90,33 +78,6 @@ class UserManager: UserManagerProtocol {
     }
     
     /*
-    func quitGame() -> Completable {
-        guard let userId = accountProvider.loggedInUserId else {
-            return Completable.empty()
-        }
-        
-        return database.setUserStatus(userId, status: .idle)
-    }
-    
-    func createGame(users: [UserInfo]) -> Completable {
-        let state = gameBuilder.createGame(for: users.count)
-        let gameId = FirebaseKeyGenerator().autoId()
-        
-        let playerIds = state.allPlayers.map { $0.identifier }
-        let updates: [Completable] = users.enumerated().map { index, user in
-            database.setUserStatus(user.id, status: .playing(gameId: gameId, playerId: playerIds[index]))
-        }
-        
-        var usersDict: [String: UserInfo] = [:]
-        for (index, user) in users.enumerated() {
-            usersDict[playerIds[index]] = user
-        }
-        
-        return database.createGame(id: gameId, state: state)
-            .andThen(database.setGameUsers(gameId: gameId, users: usersDict))
-            .andThen(Completable.concat(updates))
-    }
-    
     func getGameData(gameId: String) -> Single<(GameStateProtocol, [String: UserInfo])> {
         database.getGame(gameId)
             .flatMap {  state in
@@ -124,5 +85,13 @@ class UserManager: UserManagerProtocol {
                     .map { users in (state, users) }
             }
     }
+     
+     func quitGame() -> Completable {
+         guard let userId = accountProvider.loggedInUserId else {
+             return Completable.empty()
+         }
+         
+         return database.setUserStatus(userId, status: .idle)
+     }
     */
 }

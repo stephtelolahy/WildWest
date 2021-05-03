@@ -5,27 +5,24 @@
 //  Created by Hugues Stephano Telolahy on 24/07/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-/*
+
 import Foundation
+import WildWestEngine
 
 extension DtoEncoder {
     
-    func encode(player: PlayerProtocol, index: Int) -> PlayerDto {
+    func encode(player: PlayerProtocol) -> PlayerDto {
         PlayerDto(identifier: player.identifier,
-                  index: index,
-                  role: player.role!.rawValue,
-                  figureName: player.figureName.rawValue,
-                  imageName: player.imageName,
-                  description: player.description,
-                  abilities: encode(abilities: player.abilities),
+                  name: player.name,
+                  desc: player.desc,
+                  abilities: player.abilities,
+                  role: player.role?.rawValue,
                   maxHealth: player.maxHealth,
                   health: player.health,
                   hand: encode(cards: player.hand),
-                  inPlay: encode(cards: player.inPlay),
-                  bangsPlayed: player.bangsPlayed,
-                  lastDamage: encode(damageEvent: player.lastDamage))
+                  inPlay: encode(cards: player.inPlay))
     }
-    
+    /*
     func decode(player: PlayerDto) throws -> PlayerProtocol {
         Player(identifier: try player.identifier.unwrap(),
                role: try Role(rawValue: try player.role.unwrap()).unwrap(),
@@ -40,29 +37,11 @@ extension DtoEncoder {
                bangsPlayed: try player.bangsPlayed.unwrap(),
                lastDamage: try decode(damageEvent: player.lastDamage))
     }
-    
-    func encode(damageEvent: DamageEvent?) -> DamageEventDto? {
-        guard let damageEvent = damageEvent else {
-            return nil
-        }
-        
-        return DamageEventDto(damage: damageEvent.damage,
-                              source: encode(damageSource: damageEvent.source))
-        
-    }
-    
-    func decode(damageEvent: DamageEventDto?) throws -> DamageEvent? {
-        guard let damageEvent = damageEvent else {
-            return nil
-        }
-        
-        return DamageEvent(damage: try damageEvent.damage.unwrap(),
-                           source: try decode(damageSource: try damageEvent.source.unwrap()))
-    }
+ */
 }
 
 private extension DtoEncoder {
-    
+    /*
     func encode(abilities: [AbilityName: Bool]) -> [String: Bool] {
         var result: [String: Bool] = [:]
         abilities.forEach { key, value in
@@ -105,5 +84,5 @@ private extension DtoEncoder {
         
         throw NSError(domain: "invalid DamageSourceDto", code: 0)
     }
+ */
 }
-*/

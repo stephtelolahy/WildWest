@@ -10,26 +10,12 @@ import Foundation
 
 struct PlayerDto: Codable {
     let identifier: String?
-    let index: Int?
+    let name: String?
+    let desc: String?
+    let abilities: [String: Int]?
     let role: String?
-    let figureName: String?
-    let imageName: String?
-    let description: String?
-    let abilities: [String: Bool]?
     let maxHealth: Int?
     let health: Int?
-    let hand: [String: Bool]?
-    let inPlay: [String: Bool]?
-    let bangsPlayed: Int?
-    let lastDamage: DamageEventDto?
-}
-
-struct DamageEventDto: Codable {
-    let damage: Int?
-    let source: DamageSourceDto?
-}
-
-struct DamageSourceDto: Codable {
-    var byDynamite: Bool?
-    var byPlayer: String?
+    let hand: [String: String]?
+    let inPlay: [String: String]?
 }

@@ -113,7 +113,7 @@ private extension GameViewController {
     func processState(_ state: StateProtocol) {
         self.state = state
         
-        playerItems = state.playerItems(users: environment.gameUsers)
+        playerItems = state.playerItems(users: environment.users)
         playersCollectionView.reloadData()
         
         if let controlledId = environment.controlledId,
