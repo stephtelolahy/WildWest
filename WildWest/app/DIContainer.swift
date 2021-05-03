@@ -136,7 +136,9 @@ extension Resolver: ResolverRegistering {
     
     private static func provideAllCards() -> [CardProtocol] {
         let resourcesLoader: ResourcesLoaderProtocol = resolve()
-        #warning("TODO: add method in GSetup to generate all cards")
-        return []
+        let cards = resourcesLoader.loadCards()
+        let cardSet = resourcesLoader.loadDeck()
+        let deck = GSetup().setupDeck(cardSet: cardSet, cards: cards)
+        return deck
     }
 }

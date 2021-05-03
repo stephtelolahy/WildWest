@@ -5046,6 +5046,21 @@ public class MockSetupProtocol: SetupProtocol, Cuckoo.ProtocolMock {
     
     
     
+    public func setupDeck(cardSet: [DeckCard], cards: [Card]) -> [CardProtocol] {
+        
+    return cuckoo_manager.call("setupDeck(cardSet: [DeckCard], cards: [Card]) -> [CardProtocol]",
+            parameters: (cardSet, cards),
+            escapingParameters: (cardSet, cards),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.setupDeck(cardSet: cardSet, cards: cards))
+        
+    }
+    
+    
+    
     public func setupGame(roles: [Role], cards: [Card], cardSet: [DeckCard], defaults: DefaultAbilities, preferredRole: Role?, preferredFigure: String?) -> StateProtocol {
         
     return cuckoo_manager.call("setupGame(roles: [Role], cards: [Card], cardSet: [DeckCard], defaults: DefaultAbilities, preferredRole: Role?, preferredFigure: String?) -> StateProtocol",
@@ -5071,6 +5086,11 @@ public class MockSetupProtocol: SetupProtocol, Cuckoo.ProtocolMock {
 	    func roles<M1: Cuckoo.Matchable>(for playersCount: M1) -> Cuckoo.ProtocolStubFunction<(Int), [Role]> where M1.MatchedType == Int {
 	        let matchers: [Cuckoo.ParameterMatcher<(Int)>] = [wrap(matchable: playersCount) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockSetupProtocol.self, method: "roles(for: Int) -> [Role]", parameterMatchers: matchers))
+	    }
+	    
+	    func setupDeck<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(cardSet: M1, cards: M2) -> Cuckoo.ProtocolStubFunction<([DeckCard], [Card]), [CardProtocol]> where M1.MatchedType == [DeckCard], M2.MatchedType == [Card] {
+	        let matchers: [Cuckoo.ParameterMatcher<([DeckCard], [Card])>] = [wrap(matchable: cardSet) { $0.0 }, wrap(matchable: cards) { $0.1 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockSetupProtocol.self, method: "setupDeck(cardSet: [DeckCard], cards: [Card]) -> [CardProtocol]", parameterMatchers: matchers))
 	    }
 	    
 	    func setupGame<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable, M4: Cuckoo.Matchable, M5: Cuckoo.OptionalMatchable, M6: Cuckoo.OptionalMatchable>(roles: M1, cards: M2, cardSet: M3, defaults: M4, preferredRole: M5, preferredFigure: M6) -> Cuckoo.ProtocolStubFunction<([Role], [Card], [DeckCard], DefaultAbilities, Role?, String?), StateProtocol> where M1.MatchedType == [Role], M2.MatchedType == [Card], M3.MatchedType == [DeckCard], M4.MatchedType == DefaultAbilities, M5.OptionalMatchedType == Role, M6.OptionalMatchedType == String {
@@ -5101,6 +5121,12 @@ public class MockSetupProtocol: SetupProtocol, Cuckoo.ProtocolMock {
 	    }
 	    
 	    @discardableResult
+	    func setupDeck<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(cardSet: M1, cards: M2) -> Cuckoo.__DoNotUse<([DeckCard], [Card]), [CardProtocol]> where M1.MatchedType == [DeckCard], M2.MatchedType == [Card] {
+	        let matchers: [Cuckoo.ParameterMatcher<([DeckCard], [Card])>] = [wrap(matchable: cardSet) { $0.0 }, wrap(matchable: cards) { $0.1 }]
+	        return cuckoo_manager.verify("setupDeck(cardSet: [DeckCard], cards: [Card]) -> [CardProtocol]", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
 	    func setupGame<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, M3: Cuckoo.Matchable, M4: Cuckoo.Matchable, M5: Cuckoo.OptionalMatchable, M6: Cuckoo.OptionalMatchable>(roles: M1, cards: M2, cardSet: M3, defaults: M4, preferredRole: M5, preferredFigure: M6) -> Cuckoo.__DoNotUse<([Role], [Card], [DeckCard], DefaultAbilities, Role?, String?), StateProtocol> where M1.MatchedType == [Role], M2.MatchedType == [Card], M3.MatchedType == [DeckCard], M4.MatchedType == DefaultAbilities, M5.OptionalMatchedType == Role, M6.OptionalMatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<([Role], [Card], [DeckCard], DefaultAbilities, Role?, String?)>] = [wrap(matchable: roles) { $0.0 }, wrap(matchable: cards) { $0.1 }, wrap(matchable: cardSet) { $0.2 }, wrap(matchable: defaults) { $0.3 }, wrap(matchable: preferredRole) { $0.4 }, wrap(matchable: preferredFigure) { $0.5 }]
 	        return cuckoo_manager.verify("setupGame(roles: [Role], cards: [Card], cardSet: [DeckCard], defaults: DefaultAbilities, preferredRole: Role?, preferredFigure: String?) -> StateProtocol", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
@@ -5117,6 +5143,10 @@ public class SetupProtocolStub: SetupProtocol {
     
     public func roles(for playersCount: Int) -> [Role]  {
         return DefaultValueRegistry.defaultValue(for: ([Role]).self)
+    }
+    
+    public func setupDeck(cardSet: [DeckCard], cards: [Card]) -> [CardProtocol]  {
+        return DefaultValueRegistry.defaultValue(for: ([CardProtocol]).self)
     }
     
     public func setupGame(roles: [Role], cards: [Card], cardSet: [DeckCard], defaults: DefaultAbilities, preferredRole: Role?, preferredFigure: String?) -> StateProtocol  {
