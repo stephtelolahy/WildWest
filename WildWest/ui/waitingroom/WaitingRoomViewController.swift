@@ -22,6 +22,7 @@ class WaitingRoomViewController: UIViewController {
     var router: RouterProtocol!
     var userManager: UserManagerProtocol!
     var gameManager: GameManagerProtocol!
+    
     private let disposeBag = DisposeBag()
     
     // MARK: - Data
@@ -38,7 +39,7 @@ class WaitingRoomViewController: UIViewController {
     // MARK: - IBAction
     
     @IBAction private func quitButtonTapped(_ sender: Any) {
-        userManager.quitWaitingRoom().subscribe().disposed(by: disposeBag)
+        userManager.setStatusIdle().subscribe().disposed(by: disposeBag)
         router.toMenu()
     }
     

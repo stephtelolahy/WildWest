@@ -23,29 +23,18 @@ extension DtoEncoder {
                      hits: state.hits.map { encode(hit: $0) },
                      played: state.played)
     }
-    /*
-    func decode(state: GameStateDto) throws -> GameStateProtocol {
-        GameState(allPlayers: try decode(players: state.players),
-                  deck: try decode(orderedCards: state.deck),
-                  discardPile: try decode(orderedCards: state.discardPile).reversed(),
-                  turn: try state.turn.unwrap(),
-                  challenge: try decode(challenge: state.challenge),
-                  generalStore: try decode(cards: state.generalStore),
-                  outcome: try decode(outcome: state.outcome))
-    }
- */
-}
-
-private extension DtoEncoder {
     
-    /*
-    func decode(players: [String: PlayerDto]?) throws -> [PlayerProtocol] {
-        let playerDtos = Array(try players.unwrap().values)
-        
-        return try playerDtos
-            .sorted(by: { ($0.index ?? 0) < ($1.index ?? 0) })
-            .map { try self.decode(player: $0) }
-        
+    func decode(state: GameStateDto) throws -> StateProtocol {
+        GState(players: try state.players?.mapValues({ try decode(player: $0) }) ?? [:],
+               initialOrder: try state.initialOrder.unwrap(),
+               playOrder: try state.playOrder.unwrap(),
+               turn: try state.turn.unwrap(),
+               phase: try state.phase.unwrap(),
+               deck: try decode(cards: state.deck),
+               discard: try decode(cards: state.discard).reversed(),
+               store: try decode(cards: state.store),
+               storeView: state.storeView,
+               hits: try state.hits?.map({ try decode(hit: $0) }) ?? [],
+               played: state.played ?? [])
     }
- */
 }

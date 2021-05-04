@@ -14,6 +14,7 @@ class SignInWidget: NSObject {
     
     private weak var viewController: UIViewController?
     private let userManager: UserManagerProtocol
+    
     private let disposeBag = DisposeBag()
     private var completion: ((UserInfo) -> Void)?
     
@@ -34,14 +35,10 @@ class SignInWidget: NSObject {
                                                 }))
         
         alertController.addAction(UIAlertAction(title: "Continue as guest",
-                                                style: .default,
+                                                style: .cancel,
                                                 handler: { [weak self] _ in
                                                     self?.toAnonymousSignIn(completion)
                                                 }))
-        
-        alertController.addAction(UIAlertAction(title: "Cancel",
-                                                style: .cancel,
-                                                handler: nil))
         
         viewController?.present(alertController, animated: true)
     }

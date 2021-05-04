@@ -19,11 +19,11 @@ protocol MainDatabaseProtocol {
     func observeWaitingUsers() -> Observable<[UserInfo]>
     
     func createGame(id: String, state: StateProtocol) -> Completable
+    func getGame(_ id: String) -> Single<StateProtocol>
     func setGameUsers(id: String, users: [String: UserInfo]) -> Completable
-    /*
-     func getGame(_ id: String) -> Single<GameStateProtocol>
-    func getGameUsers(gameId: String) -> Single<[String: UserInfo]>
- */
+    func getGameUsers(_ gameId: String) -> Single<[String: UserInfo]>
+    
+    func remoteGameDatabase(_ gameId: String, state: StateProtocol) -> RemoteGameDatabase
 }
 
 class MainDatabase: MainDatabaseProtocol {
@@ -60,10 +60,10 @@ class MainDatabase: MainDatabaseProtocol {
     func observeWaitingUsers() -> Observable<[UserInfo]> {
         let userStatus = rootRef.child("user_status")
             .rxObserve({ try self.mapper.decodeStatusDictionary(from: $0) })
-            
+        
         let users = rootRef.child("users")
             .rxObserve({ try self.mapper.decodeUsers(from: $0) })
-            
+        
         return Observable.combineLatest(userStatus, users) { userStatus, users -> [UserInfo] in
             let waitingIds = Array(userStatus.filter { $0.value == .waiting }.keys)
             return users.filter { waitingIds.contains($0.id) }
@@ -75,20 +75,22 @@ class MainDatabase: MainDatabaseProtocol {
             .rxSetValue({ try self.mapper.encodeState(state) })
     }
     
+    func getGame(_ id: String) -> Single<StateProtocol> {
+        rootRef.child("games/\(id)/state")
+            .rxObserveSingleEvent { try self.mapper.decodeState(from: $0) }
+    }
+    
     func setGameUsers(id: String, users: [String: UserInfo]) -> Completable {
         rootRef.child("games/\(id)/users")
             .rxSetValue({ try self.mapper.encodeGameUsers(users) })
     }
     
-    /*
-     func getGame(_ id: String) -> Single<GameStateProtocol> {
-         rootRef.child("games/\(id)/state")
-             .rxObserveSingleEvent { try self.mapper.decodeState(from: $0) }
-     }
-     
-    func getGameUsers(gameId: String) -> Single<[String: UserInfo]> {
+    func getGameUsers(_ gameId: String) -> Single<[String: UserInfo]> {
         rootRef.child("games/\(gameId)/users")
             .rxObserveSingleEvent({ try self.mapper.decodeGameUsers(from: $0) })
     }
- */
+    
+    func remoteGameDatabase(_ gameId: String, state: StateProtocol) -> RemoteGameDatabase {
+        RemoteGameDatabase(state, gameRef: rootRef.child("games/\(gameId)"), mapper: mapper)
+    }
 }

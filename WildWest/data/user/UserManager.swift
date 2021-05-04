@@ -15,14 +15,9 @@ protocol UserManagerProtocol {
     func getUser() -> Single<UserInfo>
     func createUser(_ user: UserInfo) -> Completable
     func observeUserStatus() -> Observable<UserStatus>
-    func addToWaitingRoom() -> Completable
-    func quitWaitingRoom() -> Completable
     func observeWaitingUsers() -> Observable<[UserInfo]>
-    
-    /*
-     func getGameData(gameId: String) -> Single<(GameStateProtocol, [String: UserInfo])>
-     func quitGame() -> Completable
-     */
+    func setStatusWaiting() -> Completable
+    func setStatusIdle() -> Completable
 }
 
 class UserManager: UserManagerProtocol {
@@ -58,40 +53,22 @@ class UserManager: UserManagerProtocol {
         return database.observeUserStatus(userId)
     }
     
-    func addToWaitingRoom() -> Completable {
+    func observeWaitingUsers() -> Observable<[UserInfo]> {
+        database.observeWaitingUsers()
+    }
+    
+    func setStatusWaiting() -> Completable {
         guard let userId = authProvider.loggedInUserId else {
             return Completable.error(NSError(domain: "Missing user", code: 0))
         }
         return database.setUserStatus(userId, status: .waiting)
     }
     
-    func quitWaitingRoom() -> Completable {
+    func setStatusIdle() -> Completable {
         guard let userId = authProvider.loggedInUserId else {
             return Completable.error(NSError(domain: "Missing user", code: 0))
         }
         
         return database.setUserStatus(userId, status: .idle)
     }
-    
-    func observeWaitingUsers() -> Observable<[UserInfo]> {
-        database.observeWaitingUsers()
-    }
-    
-    /*
-    func getGameData(gameId: String) -> Single<(GameStateProtocol, [String: UserInfo])> {
-        database.getGame(gameId)
-            .flatMap {  state in
-                self.database.getGameUsers(gameId: gameId)
-                    .map { users in (state, users) }
-            }
-    }
-     
-     func quitGame() -> Completable {
-         guard let userId = accountProvider.loggedInUserId else {
-             return Completable.empty()
-         }
-         
-         return database.setUserStatus(userId, status: .idle)
-     }
-    */
 }

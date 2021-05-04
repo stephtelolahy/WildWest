@@ -33,6 +33,7 @@ class MenuViewController: UIViewController {
     var preferences: UserPreferencesProtocol!
     var soundPlayer: SoundPlayerProtocol!
     var signInWidget: SignInWidget!
+    
     private let disposeBag = DisposeBag()
     
     // MARK: - Lifecycle
@@ -133,7 +134,7 @@ private extension MenuViewController {
     }
     
     func addToWaitingRoom() {
-        userManager.addToWaitingRoom().subscribe().disposed(by: disposeBag)
+        userManager.setStatusWaiting().subscribe().disposed(by: disposeBag)
     }
 }
 

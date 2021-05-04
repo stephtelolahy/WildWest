@@ -12,6 +12,6 @@ struct GameEnvironment {
     let engine: EngineProtocol
     let database: RestrictedDatabaseProtocol
     let controlledId: String?
-    let aiAgents: [AIAgentProtocol]?
+    var aiAgents: [AIAgentProtocol]?
     var users: [String: UserInfo]?
 }

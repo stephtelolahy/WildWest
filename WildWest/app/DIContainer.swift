@@ -22,7 +22,8 @@ extension DIContainer: RouterDepenenciesProtocol {
     func provideMainViewController() -> UIViewController {
         let viewController = UIStoryboard.instantiate(MainViewController.self, in: "Main")
         viewController.userManager = Resolver.optional()
-        viewController.router = Router(viewController: viewController, dependencies: Resolver.resolve())
+        viewController.gameManager = Resolver.optional()
+        viewController.router = provideRouter(viewController)
         return viewController
     }
     
@@ -36,7 +37,7 @@ extension DIContainer: RouterDepenenciesProtocol {
     
     func provideMenuViewController() -> UIViewController {
         let viewController = UIStoryboard.instantiate(MenuViewController.self, in: "Main")
-        viewController.router = Router(viewController: viewController, dependencies: Resolver.resolve())
+        viewController.router = provideRouter(viewController)
         viewController.preferences = Resolver.optional()
         viewController.soundPlayer = Resolver.optional()
         viewController.userManager = Resolver.optional()
@@ -48,7 +49,8 @@ extension DIContainer: RouterDepenenciesProtocol {
     func provideGameViewController(_ environment: GameEnvironment) -> UIViewController {
         let viewController = UIStoryboard.instantiate(GameViewController.self, in: "Main")
         viewController.environment = environment
-        viewController.router = Router(viewController: viewController, dependencies: Resolver.resolve())
+        viewController.router = provideRouter(viewController)
+        viewController.userManager = Resolver.optional()
         viewController.analyticsManager = Resolver.optional()
         viewController.animationMatcher = Resolver.optional()
         viewController.mediaMatcher = Resolver.optional()
@@ -72,10 +74,14 @@ extension DIContainer: RouterDepenenciesProtocol {
     
     func provideWaitingRoomViewController() -> UIViewController {
         let viewController = UIStoryboard.instantiate(WaitingRoomViewController.self, in: "Main")
-        viewController.router = Router(viewController: viewController, dependencies: Resolver.resolve())
+        viewController.router = provideRouter(viewController)
         viewController.userManager = Resolver.optional()
         viewController.gameManager = Resolver.optional()
         return viewController
+    }
+    
+    private func provideRouter(_ viewController: UIViewController) -> RouterProtocol {
+        Router(viewController: viewController, dependencies: Resolver.resolve())
     }
 }
 
@@ -98,10 +104,11 @@ extension Resolver: ResolverRegistering {
         register { DictionaryEncoder() }
         
         register { AnimationEventMatcher(preferences: resolve()) as AnimationEventMatcherProtocol }.scope(application)
+        register { AnimationEventMatcher(preferences: resolve()) as DurationMatcherProtocol }.scope(application)
         
         register { provideMediaMatcher() as MediaEventMatcherProtocol }.scope(application)
         
-        register { DtoEncoder(allCards: provideAllCards(), keyGenerator: resolve()) }
+        register { DtoEncoder(allCards: provideDeckCards(), keyGenerator: resolve()) }
         
         register { FirebaseMapper(dtoEncoder: resolve(),
                                   dictionaryEncoder: resolve()) as FirebaseMapperProtocol
@@ -112,7 +119,9 @@ extension Resolver: ResolverRegistering {
         }.scope(application)
         
         register { GameBuilder(preferences: resolve(),
-                               resourcesLoader: resolve()) as GameBuilderProtocol
+                               resourcesLoader: resolve(),
+                               durationMatcher: resolve(),
+                               database: resolve()) as GameBuilderProtocol
         }.scope(application)
         
         register { AuthProvider() as AuthProviderProtocol }.scope(application)
@@ -122,7 +131,6 @@ extension Resolver: ResolverRegistering {
         }.scope(application)
         
         register { GameManager(preferences: resolve(),
-                               eventMatcher: resolve(),
                                database: resolve(),
                                gameBuilder: resolve()) as GameManagerProtocol
         }.scope(application)
@@ -134,7 +142,7 @@ extension Resolver: ResolverRegistering {
         return MediaEventMatcher(mediaArray: mediaArray)
     }
     
-    private static func provideAllCards() -> [CardProtocol] {
+    private static func provideDeckCards() -> [CardProtocol] {
         let resourcesLoader: ResourcesLoaderProtocol = resolve()
         let cards = resourcesLoader.loadCards()
         let cardSet = resourcesLoader.loadDeck()

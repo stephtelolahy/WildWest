@@ -28,6 +28,7 @@ class GameViewController: UIViewController {
     // MARK: - Dependencies
     
     var router: RouterProtocol!
+    var userManager: UserManagerProtocol!
     var environment: GameEnvironment!
     var analyticsManager: AnalyticsManager!
     var animationMatcher: AnimationEventMatcherProtocol!
@@ -83,8 +84,8 @@ class GameViewController: UIViewController {
     }
     
     @IBAction private func menuButtonTapped(_ sender: Any) {
+        userManager.setStatusIdle().subscribe().disposed(by: disposeBag)
         router.toMenu()
-        #warning("TODO: quit remote game")
     }
     
     @IBAction private func endTurnTapped(_ sender: Any) {

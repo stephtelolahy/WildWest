@@ -5,45 +5,47 @@
 //  Created by Hugues Stephano Telolahy on 23/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-/*
+
 import RxSwift
 import Firebase
+import WildWestEngine
 
-class RemoteGameDatabase: GameDatabaseProtocol, Subscribable {
+public class RemoteGameDatabase: DatabaseProtocol {
+    
+    // MARK: - Dependencies
     
     private let gameRef: DatabaseReference
     private let mapper: FirebaseMapperProtocol
-    private let stateSubject: BehaviorSubject<GameStateProtocol>
-    private let executedMoveSubject: PublishSubject<GameMove>
-    private let executedUpdateSubject: PublishSubject<GameUpdate>
-    private let validMovesSubject: BehaviorSubject<[GameMove]>
     
-    init(gameRef: DatabaseReference,
-         mapper: FirebaseMapperProtocol,
-         stateSubject: BehaviorSubject<GameStateProtocol>,
-         executedMoveSubject: PublishSubject<GameMove>,
-         executedUpdateSubject: PublishSubject<GameUpdate>,
-         validMovesSubject: BehaviorSubject<[GameMove]>) {
+    // MARK: - Subjects
+    
+    public let state: BehaviorSubject<StateProtocol>
+    public let event: PublishSubject<GEvent>
+    
+    // MARK: - Properties
+    
+    private let disposeBag = DisposeBag()
+    
+    init(_ aState: StateProtocol,
+         gameRef: DatabaseReference,
+         mapper: FirebaseMapperProtocol) {
         self.gameRef = gameRef
         self.mapper = mapper
-        self.stateSubject = stateSubject
-        self.executedMoveSubject = executedMoveSubject
-        self.executedUpdateSubject = executedUpdateSubject
-        self.validMovesSubject = validMovesSubject
+        state = BehaviorSubject(value: aState)
+        event = PublishSubject()
         
         observeStateChanges()
-        observeExecutedMoveChanges()
-        observeExecutedUpdateChanges()
-        observeValidMovesChanges()
+        observeEventChanges()
     }
     
-    var state: GameStateProtocol {
-        guard let value = try? stateSubject.value() else {
-            fatalError("Illegal state")
-        }
-        return value
+    // MARK: - DatabaseProtocol
+    
+    public func update(event aEvent: GEvent) -> Completable {
+        // TODO: implement
+        Completable.empty()
     }
     
+    /*
     // MARK: - Flags
     
     func setTurn(_ turn: String) -> Completable {
@@ -155,91 +157,78 @@ class RemoteGameDatabase: GameDatabaseProtocol, Subscribable {
         gameRef.child("validMoves")
             .rxSetValue({ try self.mapper.encodeMoves(moves) })
     }
+     
+     func resetDeck(when minSize: Int) -> Completable {
+         var oldDeck: [CardProtocol] = []
+         var oldDiscard: [CardProtocol] = []
+         var newDeck: [CardProtocol] = []
+         var newDiscard: [CardProtocol] = []
+         
+         let queryDeck = gameRef.child("state/deck").queryLimited(toFirst: UInt(minSize + 1))
+             .rxObserveSingleEvent({ try self.mapper.decodeCards(from: $0) })
+             .flatMapCompletable { cards in
+                 guard cards.count <= minSize else {
+                     return Completable.error(NSError(domain: "enough cards", code: 0))
+                 }
+                 
+                 oldDeck = cards
+                 return Completable.empty()
+             }
+         
+         let queryDiscardPile = gameRef.child("state/discardPile").queryOrderedByKey()
+             .rxObserveSingleEvent({ try self.mapper.decodeCards(from: $0) })
+             .flatMapCompletable { cards in
+                 oldDiscard = cards.reversed()
+                 newDiscard = Array(oldDiscard[0..<1])
+                 newDeck = (oldDeck + Array(oldDiscard[1..<oldDiscard.count])).shuffled()
+                 return Completable.empty()
+             }
+         
+         let updateDeck = self.gameRef.child("state/deck")
+             .rxSetValue({ try self.mapper.encodeOrderedCards(newDeck) })
+         
+         let updateDiscardPile = self.gameRef.child("state/discardPile")
+             .rxSetValue({ try self.mapper.encodeOrderedCards(newDiscard) })
+         
+         return queryDeck
+             .andThen(queryDiscardPile)
+             .andThen(updateDeck)
+             .andThen(updateDiscardPile)
+             .catchError({ _ in Completable.empty() })
+     }
+     
+     func pullDeck() -> Single<CardProtocol> {
+         gameRef.child("state/deck").queryLimited(toFirst: 1)
+             .rxObserveSingleEvent({ try self.mapper.decodeCard(from: $0) })
+             .flatMap { key, card in
+                 self.gameRef.child("state/deck/\(key)").rxSetValue({ nil })
+                     .andThen(Single.just(card))
+             }
+     }
+     */
 }
 
 private extension RemoteGameDatabase {
-    
+
     func observeStateChanges() {
-        sub(gameRef.child("state")
+        gameRef.child("state")
             .rxObserve({ try self.mapper.decodeState(from: $0) })
-            .subscribe(onNext: { [weak self] state in
-                self?.stateSubject.onNext(state)
-            }))
+            .subscribe(onNext: { [weak self] aState in
+                self?.state.onNext(aState)
+            })
+            .disposed(by: disposeBag)
     }
     
-    func observeExecutedMoveChanges() {
-        sub(gameRef.child("executedMove")
-            .rxObserve({ try self.mapper.decodeMove(from: $0) })
-            .subscribe(onNext: { [weak self] move in
-                self?.executedMoveSubject.onNext(move)
-            }))
-    }
-    
-    func observeExecutedUpdateChanges() {
-        sub(gameRef.child("executedUpdate")
+    func observeEventChanges() {
+        // TODO: implement
+        /*
+        gameRef.child("events")
             .rxObserve({ try self.mapper.decodeUpdate(from: $0) })
-            .subscribe(onNext: { [weak self] update in
-                self?.executedUpdateSubject.onNext(update)
-            }))
+            .subscribe(onNext: { [weak self] anEvent in
+                self?.event.onNext(anEvent)
+            })
+            .disposed(by: disposeBag)
+ */
     }
     
-    func observeValidMovesChanges() {
-        sub(gameRef.child("validMoves")
-            .rxObserve({ try self.mapper.decodeMoves(from: $0) })
-            .subscribe(onNext: { [weak self] moves in
-                self?.validMovesSubject.onNext(moves)
-            }))
-    }
 }
-
-private extension RemoteGameDatabase {
-    
-    func resetDeck(when minSize: Int) -> Completable {
-        var oldDeck: [CardProtocol] = []
-        var oldDiscard: [CardProtocol] = []
-        var newDeck: [CardProtocol] = []
-        var newDiscard: [CardProtocol] = []
-        
-        let queryDeck = gameRef.child("state/deck").queryLimited(toFirst: UInt(minSize + 1))
-            .rxObserveSingleEvent({ try self.mapper.decodeCards(from: $0) })
-            .flatMapCompletable { cards in
-                guard cards.count <= minSize else {
-                    return Completable.error(NSError(domain: "enough cards", code: 0))
-                }
-                
-                oldDeck = cards
-                return Completable.empty()
-            }
-        
-        let queryDiscardPile = gameRef.child("state/discardPile").queryOrderedByKey()
-            .rxObserveSingleEvent({ try self.mapper.decodeCards(from: $0) })
-            .flatMapCompletable { cards in
-                oldDiscard = cards.reversed()
-                newDiscard = Array(oldDiscard[0..<1])
-                newDeck = (oldDeck + Array(oldDiscard[1..<oldDiscard.count])).shuffled()
-                return Completable.empty()
-            }
-        
-        let updateDeck = self.gameRef.child("state/deck")
-            .rxSetValue({ try self.mapper.encodeOrderedCards(newDeck) })
-        
-        let updateDiscardPile = self.gameRef.child("state/discardPile")
-            .rxSetValue({ try self.mapper.encodeOrderedCards(newDiscard) })
-        
-        return queryDeck
-            .andThen(queryDiscardPile)
-            .andThen(updateDeck)
-            .andThen(updateDiscardPile)
-            .catchError({ _ in Completable.empty() })
-    }
-    
-    func pullDeck() -> Single<CardProtocol> {
-        gameRef.child("state/deck").queryLimited(toFirst: 1)
-            .rxObserveSingleEvent({ try self.mapper.decodeCard(from: $0) })
-            .flatMap { key, card in
-                self.gameRef.child("state/deck/\(key)").rxSetValue({ nil })
-                    .andThen(Single.just(card))
-            }
-    }
-}
-*/

@@ -40,18 +40,12 @@ public class GDatabase: DatabaseProtocol {
             return Disposables.create()
         }
     }
-    
-    public func state(observedBy actor: String?) -> Observable<StateProtocol> {
-        state.map { $0.observed(by: actor) }
-    }
 }
 
-extension DatabaseProtocol {
-    var currentState: StateProtocol {
-        guard let result = try? state.value() else {
-            fatalError("Failed getting current state")
-        }
-        return result
+public extension RestrictedDatabaseProtocol where Self: DatabaseProtocol {
+    
+    func state(observedBy actor: String?) -> Observable<StateProtocol> {
+        state.map { $0.observed(by: actor) }
     }
 }
 

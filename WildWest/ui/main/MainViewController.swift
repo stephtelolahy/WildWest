@@ -16,7 +16,9 @@ class MainViewController: UINavigationController {
     // MARK: - Dependencies
     
     var userManager: UserManagerProtocol!
+    var gameManager: GameManagerProtocol!
     var router: RouterProtocol!
+    
     private let disposeBag = DisposeBag()
     
     // MARK: - Lifecycle
@@ -41,8 +43,8 @@ private extension MainViewController {
             case .waiting:
                 self?.router.toWaitingRoom()
                 
-            case let .playing(gameId):
-                self?.toOnlineGame(gameId)
+            case let .playing(gameId, playerId):
+                self?.toOnlineGame(gameId: gameId, playerId: playerId)
                 
             case .idle:
                 self?.router.toMenu()
@@ -56,19 +58,9 @@ private extension MainViewController {
         }
     }
     
-    func toOnlineGame(_ gameId: String) {
-        // TODO: implement
-        /*
-         sub(manager.getGameData(gameId: gameId).subscribe(onSuccess: { state, users in
-             let environment = self.gameBuilder.createRemoteGameEnvironment(gameId: gameId,
-                                                                            playerId: playerId,
-                                                                            state: state,
-                                                                            users: users)
-             // ⚠️ wait until GameSubjects emit lastest values
-             DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-                 self?.loadGame(environment: environment)
-             }
-         }))
-         */
+    func toOnlineGame(gameId: String, playerId: String) {
+        gameManager.joinRemoteGame(gameId: gameId, playerId: playerId).subscribe(onSuccess: { [weak self] environment in
+            self?.router.toGame(environment)
+        }).disposed(by: disposeBag)
     }
 }

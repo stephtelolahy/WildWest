@@ -23,17 +23,17 @@ public class GState: StateProtocol {
     
     // MARK: Init
     
-    init(players: [String: PlayerProtocol],
-         initialOrder: [String],
-         playOrder: [String],
-         turn: String,
-         phase: Int,
-         deck: [CardProtocol],
-         discard: [CardProtocol],
-         store: [CardProtocol],
-         storeView: String?,
-         hits: [HitProtocol],
-         played: [String]) {
+    public init(players: [String: PlayerProtocol],
+                initialOrder: [String],
+                playOrder: [String],
+                turn: String,
+                phase: Int,
+                deck: [CardProtocol],
+                discard: [CardProtocol],
+                store: [CardProtocol],
+                storeView: String?,
+                hits: [HitProtocol],
+                played: [String]) {
         self.players = players.mapValues { GPlayer($0) }
         self.initialOrder = initialOrder
         self.playOrder = playOrder

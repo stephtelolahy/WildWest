@@ -10,8 +10,8 @@ import Firebase
 import WildWestEngine
 
 protocol FirebaseMapperProtocol {
+    func decodeState(from snapshot: DataSnapshot) throws -> StateProtocol
     /*
-    func decodeState(from snapshot: DataSnapshot) throws -> GameStateProtocol
     func decodeCard(from snapthot: DataSnapshot) throws -> (String, CardProtocol)
     func decodeCard(from cardId: String) throws -> CardProtocol
     func decodeCards(from snapshot: DataSnapshot) throws -> [CardProtocol]
@@ -50,14 +50,15 @@ class FirebaseMapper: FirebaseMapperProtocol {
         self.dictionaryEncoder = dictionaryEncoder
         
     }
-    /*
-    func decodeState(from snapshot: DataSnapshot) throws -> GameStateProtocol {
+    
+    func decodeState(from snapshot: DataSnapshot) throws -> StateProtocol {
         let value = try (snapshot.value as? [String: Any]).unwrap()
         let dto = try self.dictionaryEncoder.decode(GameStateDto.self, from: value)
         let state = try self.dtoEncoder.decode(state: dto)
         return state
     }
     
+    /*
     func decodeCard(from snapthot: DataSnapshot) throws -> (String, CardProtocol) {
         let dictionary = try (snapthot.value as? [String: String]).unwrap()
         let key = try dictionary.keys.first.unwrap()

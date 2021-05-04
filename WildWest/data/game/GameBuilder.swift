@@ -14,23 +14,28 @@ import WildWestEngine
 protocol GameBuilderProtocol {
     func createGame(for playersCount: Int) -> StateProtocol
     func createLocalGameEnvironment(state: StateProtocol,
-                                    eventMatcher: AnimationEventMatcherProtocol,
                                     playerId: String?) -> GameEnvironment
-//    func createRemoteGameEnvironment(gameId: String,
-//                                     playerId: String?,
-//                                     state: StateProtocol,
-//                                     users: [String: UserInfo]) -> GameEnvironment
+    func createRemoteGameEnvironment(state: StateProtocol,
+                                     playerId: String?,
+                                     gameId: String,
+                                     users: [String: UserInfo]) -> GameEnvironment
 }
 
 class GameBuilder: GameBuilderProtocol {
     
     private let preferences: UserPreferencesProtocol
     private let resourcesLoader: ResourcesLoaderProtocol
+    private let durationMatcher: DurationMatcherProtocol
+    private let database: MainDatabaseProtocol
     
     init(preferences: UserPreferencesProtocol,
-         resourcesLoader: ResourcesLoaderProtocol) {
+         resourcesLoader: ResourcesLoaderProtocol,
+         durationMatcher: DurationMatcherProtocol,
+         database: MainDatabaseProtocol) {
         self.preferences = preferences
         self.resourcesLoader = resourcesLoader
+        self.durationMatcher = durationMatcher
+        self.database = database
     }
     
     func createGame(for playersCount: Int) -> StateProtocol {
@@ -49,18 +54,17 @@ class GameBuilder: GameBuilderProtocol {
     }
     
     func createLocalGameEnvironment(state: StateProtocol,
-                                    eventMatcher: AnimationEventMatcherProtocol,
                                     playerId: String?) -> GameEnvironment {
-        let abilities = resourcesLoader.loadAbilities()
         
         let databaseUpdater = GDatabaseUpdater()
         let database = GDatabase(state, updater: databaseUpdater)
         
         let playReqMatcher = PlayReqMatcher()
         let effectMatcher = EffectMatcher()
+        let abilities = resourcesLoader.loadAbilities()
         let abilityMatcher = AbilityMatcher(abilities: abilities, effectMatcher: effectMatcher, playReqMatcher: playReqMatcher)
         let eventsQueue = GEventQueue()
-        let timer = GTimer(matcher: eventMatcher)
+        let timer = GTimer(matcher: durationMatcher)
         let loop = GLoop(eventsQueue: eventsQueue, database: database, matcher: abilityMatcher, timer: timer)
         let engine = GEngine(loop: loop)
         
@@ -81,38 +85,25 @@ class GameBuilder: GameBuilderProtocol {
                                controlledId: playerId,
                                aiAgents: agents)
     }
-    /*
-    func createRemoteGameEnvironment(gameId: String,
+    
+    func createRemoteGameEnvironment(state: StateProtocol,
                                      playerId: String?,
-                                     state: GameStateProtocol,
+                                     gameId: String,
                                      users: [String: UserInfo]) -> GameEnvironment {
-        let stateSubject = BehaviorSubject<GameStateProtocol>(value: state)
-        let executedMoveSubject = PublishSubject<GameMove>()
-        let executedUpdateSubject = PublishSubject<GameUpdate>()
-        let validMovesSubject = BehaviorSubject<[GameMove]>(value: [])
+        let gameDatabase = database.remoteGameDatabase(gameId, state: state)
         
-        let gameRef = Database.database().reference().child("games/\(gameId)")
-        let database = RemoteGameDatabase(gameRef: gameRef,
-                                          mapper: firebaseMapper,
-                                          stateSubject: stateSubject,
-                                          executedMoveSubject: executedMoveSubject,
-                                          executedUpdateSubject: executedUpdateSubject,
-                                          validMovesSubject: validMovesSubject)
-        
-        let subjects = GameSubjects(stateSubject: stateSubject,
-                                    executedMoveSubject: executedMoveSubject,
-                                    executedUpdateSubject: executedUpdateSubject,
-                                    validMovesSubject: validMovesSubject)
-        
-        let engine = GameEngine(delay: preferences.updateDelay,
-                                database: database,
-                                moveMatchers: GameRules().moveMatchers)
+        let playReqMatcher = PlayReqMatcher()
+        let effectMatcher = EffectMatcher()
+        let abilities = resourcesLoader.loadAbilities()
+        let abilityMatcher = AbilityMatcher(abilities: abilities, effectMatcher: effectMatcher, playReqMatcher: playReqMatcher)
+        let eventsQueue = GEventQueue()
+        let timer = GTimer(matcher: durationMatcher)
+        let loop = GLoop(eventsQueue: eventsQueue, database: gameDatabase, matcher: abilityMatcher, timer: timer)
+        let engine = GEngine(loop: loop)
         
         return GameEnvironment(engine: engine,
-                               subjects: subjects,
+                               database: gameDatabase,
                                controlledId: playerId,
-                               aiAgents: nil,
-                               gameUsers: users)
+                               users: users)
     }
- */
 }
