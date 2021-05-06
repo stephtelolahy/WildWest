@@ -11,3 +11,9 @@ struct UserInfoDto: Codable {
     let name: String?
     let photoUrl: String?
 }
+
+struct UserStatusDto: Codable {
+    var waiting: Bool?
+    var gameId: String?
+    var playerId: String?
+}

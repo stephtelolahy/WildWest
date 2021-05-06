@@ -52,16 +52,6 @@
                ReferencedContainer = "container:WildWest.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "335832DC25BC24FD001BE4D8"
-               BuildableName = "WildWestEngineTests.xctest"
-               BlueprintName = "WildWestEngineTests"
-               ReferencedContainer = "container:WildWest.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

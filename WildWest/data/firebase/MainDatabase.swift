@@ -59,7 +59,7 @@ class MainDatabase: MainDatabaseProtocol {
     
     func observeWaitingUsers() -> Observable<[UserInfo]> {
         let userStatus = rootRef.child("user_status")
-            .rxObserve({ try self.mapper.decodeStatusDictionary(from: $0) })
+            .rxObserve({ try self.mapper.decodeUserStatuses(from: $0) })
         
         let users = rootRef.child("users")
             .rxObserve({ try self.mapper.decodeUsers(from: $0) })
@@ -91,6 +91,9 @@ class MainDatabase: MainDatabaseProtocol {
     }
     
     func remoteGameDatabase(_ gameId: String, state: StateProtocol) -> RemoteGameDatabase {
-        RemoteGameDatabase(state, gameRef: rootRef.child("games/\(gameId)"), mapper: mapper)
+        RemoteGameDatabase(state,
+                           gameRef: rootRef.child("games/\(gameId)"),
+                           mapper: mapper,
+                           updater: RemoteGameDatabaseUpdater(gameRef: rootRef.child("games/\(gameId)")))
     }
 }

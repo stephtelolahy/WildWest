@@ -1,12 +1,12 @@
 //
-//  GameStateDto.swift
+//  StateDto.swift
 //  WildWest
 //
 //  Created by Hugues Stephano Telolahy on 23/04/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-struct GameStateDto: Codable {
+struct StateDto: Codable {
     let players: [String: PlayerDto]?
     let initialOrder: [String]?
     let playOrder: [String]?
@@ -17,7 +17,7 @@ struct GameStateDto: Codable {
     let store: [String: String]?
     let storeView: String?
     let hits: [HitDto]?
-    let played: [String]?
+    let played: [String: String]?
 }
 
 struct HitDto: Codable {

@@ -10,8 +10,8 @@ import WildWestEngine
 
 extension DtoEncoder {
     
-    func encode(state: StateProtocol) -> GameStateDto {
-        GameStateDto(players: state.players.mapValues { encode(player: $0) },
+    func encode(state: StateProtocol) -> StateDto {
+        StateDto(players: state.players.mapValues { encode(player: $0) },
                      initialOrder: state.initialOrder,
                      playOrder: state.playOrder,
                      turn: state.turn,
@@ -21,10 +21,10 @@ extension DtoEncoder {
                      store: encode(cards: state.store),
                      storeView: state.storeView,
                      hits: state.hits.map { encode(hit: $0) },
-                     played: state.played)
+                     played: encode(abilities: state.played))
     }
     
-    func decode(state: GameStateDto) throws -> StateProtocol {
+    func decode(state: StateDto) throws -> StateProtocol {
         GState(players: try state.players?.mapValues({ try decode(player: $0) }) ?? [:],
                initialOrder: try state.initialOrder.unwrap(),
                playOrder: try state.playOrder.unwrap(),
@@ -35,6 +35,25 @@ extension DtoEncoder {
                store: try decode(cards: state.store),
                storeView: state.storeView,
                hits: try state.hits?.map({ try decode(hit: $0) }) ?? [],
-               played: state.played ?? [])
+               played: try decode(abilities: state.played))
+    }
+}
+
+private extension DtoEncoder {
+    
+    func encode(hit: HitProtocol) -> HitDto {
+        HitDto(name: hit.name,
+               abilities: hit.abilities,
+               player: hit.player,
+               offender: hit.offender,
+               cancelable: hit.cancelable)
+    }
+    
+    func decode(hit: HitDto) throws -> HitProtocol {
+        try GHit(name: hit.name.unwrap(),
+                 player: hit.player.unwrap(),
+                 abilities: hit.abilities.unwrap(),
+                 cancelable: hit.cancelable.unwrap(),
+                 offender: hit.offender.unwrap())
     }
 }

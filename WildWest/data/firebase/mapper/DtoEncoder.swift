@@ -45,4 +45,21 @@ class DtoEncoder {
         let orderedKeys = cards.keys.sorted()
         return try orderedKeys.map { try decode(card: cards[$0].unwrap()) }
     }
+    
+    func encode(abilities: [String]) -> [String: String] {
+        abilities.reduce([String: String]()) { dict, ability in
+            var dict = dict
+            let key = self.keyGenerator.autoId()
+            dict[key] = ability
+            return dict
+        }
+    }
+    
+    func decode(abilities: [String: String]?) throws -> [String] {
+        guard let abilities = abilities else {
+            return []
+        }
+        
+        return Array(abilities.values)
+    }
 }
