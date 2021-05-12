@@ -7,7 +7,6 @@
 //
 
 import Firebase
-import FirebaseDatabase
 
 class FirebaseKeyGenerator: KeyGeneratorProtocol {
     

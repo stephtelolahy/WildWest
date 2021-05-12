@@ -7,7 +7,6 @@
 //
 
 import RxSwift
-import FirebaseUI
 
 protocol UserManagerProtocol {
     var isLoggedIn: Bool { get }

@@ -8,7 +8,6 @@
 // swiftlint:disable implicitly_unwrapped_optional
 
 import UIKit
-import FirebaseUI
 import RxSwift
 
 class MainViewController: UINavigationController {

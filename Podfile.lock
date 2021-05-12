@@ -7,16 +7,6 @@ PODS:
   - Cuckoo (1.5.0):
     - Cuckoo/Swift (= 1.5.0)
   - Cuckoo/Swift (1.5.0)
-  - FBSDKCoreKit (5.15.1):
-    - FBSDKCoreKit/Basics (= 5.15.1)
-    - FBSDKCoreKit/Core (= 5.15.1)
-  - FBSDKCoreKit/Basics (5.15.1)
-  - FBSDKCoreKit/Core (5.15.1):
-    - FBSDKCoreKit/Basics
-  - FBSDKLoginKit (5.15.1):
-    - FBSDKLoginKit/Login (= 5.15.1)
-  - FBSDKLoginKit/Login (5.15.1):
-    - FBSDKCoreKit (~> 5.0)
   - Firebase/Analytics (6.34.0):
     - Firebase/Core
   - Firebase/Auth (6.34.0):
@@ -73,9 +63,6 @@ PODS:
   - FirebaseUI/Auth (8.5.1):
     - Firebase/Auth (~> 6.0)
     - GoogleUtilities/UserDefaults
-  - FirebaseUI/Facebook (8.5.1):
-    - FBSDKLoginKit (~> 5.0)
-    - FirebaseUI/Auth
   - FirebaseUI/Google (8.5.1):
     - FirebaseUI/Auth
     - GoogleSignIn (~> 5.0)
@@ -114,7 +101,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.7.2):
     - GoogleUtilities/Logger
-  - GTMAppAuth (1.2.1):
+  - GTMAppAuth (1.2.2):
     - AppAuth/Core (~> 1.4)
     - GTMSessionFetcher/Core (~> 1.5)
   - GTMSessionFetcher/Core (1.5.0)
@@ -127,9 +114,9 @@ PODS:
   - nanopb/encode (1.30906.0)
   - PromisesObjC (1.2.12)
   - Resolver (1.0.7)
-  - RxSwift (6.1.0)
-  - RxTest (6.1.0):
-    - RxSwift (= 6.1.0)
+  - RxSwift (6.2.0)
+  - RxTest (6.2.0):
+    - RxSwift (= 6.2.0)
   - SwiftLint (0.43.1)
 
 DEPENDENCIES:
@@ -138,7 +125,6 @@ DEPENDENCIES:
   - Firebase/Crashlytics
   - Firebase/Database
   - FirebaseUI/Auth
-  - FirebaseUI/Facebook
   - FirebaseUI/Google
   - FirebaseUI/OAuth
   - FirebaseUI/Phone
@@ -152,8 +138,6 @@ SPEC REPOS:
   trunk:
     - AppAuth
     - Cuckoo
-    - FBSDKCoreKit
-    - FBSDKLoginKit
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -181,8 +165,6 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   Cuckoo: 09ff1b7c6613b9c27dafea90702ca32208fe59d3
-  FBSDKCoreKit: 1d5acf7c9d7a2f92bb1a242dc60cae5b7adb91df
-  FBSDKLoginKit: f1ea8026a58b52d30c9f2e6a58ca7d813619fb83
   Firebase: c23a36d9e4cdf7877dfcba8dd0c58add66358999
   FirebaseAnalytics: 3bb096873ee0d7fa4b6c70f5e9166b6da413cc7f
   FirebaseAuth: c92d49ada7948d1a23466e3db17bc4c2039dddc3
@@ -196,17 +178,17 @@ SPEC CHECKSUMS:
   GoogleDataTransport: f56af7caa4ed338dc8e138a5d7c5973e66440833
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
-  GTMAppAuth: 5b53231ef6920f149ab84b2969cb0ab572da3077
+  GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   Resolver: da30396fcabb46790959209430a4a0a9e6e39849
-  RxSwift: a834e5c538e89eca0cae86f403f4fbf0336786ce
-  RxTest: 9d26616eaff4a7e75f4ecae9b2c24840f2e8218d
+  RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
+  RxTest: 0c692fa672b694373ba86d2b00033595297a2831
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
-PODFILE CHECKSUM: f64c8a27e2c7c8302fc02679185544319fc9d5a6
+PODFILE CHECKSUM: c552d559b75eeb3739fdc8b0c74dc8e842d0aa1c
 
 COCOAPODS: 1.10.1

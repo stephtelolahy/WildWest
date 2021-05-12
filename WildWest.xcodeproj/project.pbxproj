@@ -3,13 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11A4260096983812EE5C92DA /* Pods_WildWest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C68CDDA530FC48B097AEAB55 /* Pods_WildWest.framework */; };
 		3300EF29256FE3C1006075F6 /* MediaEventMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3300EF28256FE3C1006075F6 /* MediaEventMatcherTests.swift */; };
 		3300EF2E256FE4FE006075F6 /* media.json in Resources */ = {isa = PBXBuildFile; fileRef = 3300EF2D256FE4FE006075F6 /* media.json */; };
-		3300EF6F256FE878006075F6 /* media.json in Resources */ = {isa = PBXBuildFile; fileRef = 3300EF2D256FE4FE006075F6 /* media.json */; };
 		3300EFDB256FEE5E006075F6 /* MediaEventMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33626FB9256FE31B00128C0A /* MediaEventMatcher.swift */; };
 		33029EAD24C74B8F002A5E54 /* DatabaseReference+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33029EAC24C74B8F002A5E54 /* DatabaseReference+Rx.swift */; };
 		33031E0F24555D5F00528158 /* OptionalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33031E0E24555D5F00528158 /* OptionalExtension.swift */; };
@@ -101,23 +101,13 @@
 		335BED7C24293431009184A3 /* Cowboy_with_spurs-G-rant-1371954508.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED7624293430009184A3 /* Cowboy_with_spurs-G-rant-1371954508.mp3 */; };
 		335BED7D24293431009184A3 /* Gun_loud-Soundmaster_-88363983.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED7724293431009184A3 /* Gun_loud-Soundmaster_-88363983.mp3 */; };
 		335BED8224293B65009184A3 /* Fuse Burning-SoundBible.com-1372982430.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED8124293B64009184A3 /* Fuse Burning-SoundBible.com-1372982430.mp3 */; };
-		335BED8324293B65009184A3 /* Fuse Burning-SoundBible.com-1372982430.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED8124293B64009184A3 /* Fuse Burning-SoundBible.com-1372982430.mp3 */; };
 		335BED8524293C2D009184A3 /* Slurping 2-SoundBible.com-1269549524.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED8424293C2D009184A3 /* Slurping 2-SoundBible.com-1269549524.mp3 */; };
-		335BED8624293C2D009184A3 /* Slurping 2-SoundBible.com-1269549524.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED8424293C2D009184A3 /* Slurping 2-SoundBible.com-1269549524.mp3 */; };
-		335BED8924293D49009184A3 /* Cowboy_Theme-Pavak-1711860633.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED8824293D49009184A3 /* Cowboy_Theme-Pavak-1711860633.mp3 */; };
-		335BED8A24293D49009184A3 /* Cowboy_Theme-Pavak-1711860633.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED8824293D49009184A3 /* Cowboy_Theme-Pavak-1711860633.mp3 */; };
 		335BED8C24293FCA009184A3 /* Shotgun-SoundBible.com-862990674.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED8B24293FCA009184A3 /* Shotgun-SoundBible.com-862990674.mp3 */; };
-		335BED8D24293FCA009184A3 /* Shotgun-SoundBible.com-862990674.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED8B24293FCA009184A3 /* Shotgun-SoundBible.com-862990674.mp3 */; };
 		335BED922429416A009184A3 /* Metal Latch-SoundBible.com-736691159.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED912429416A009184A3 /* Metal Latch-SoundBible.com-736691159.mp3 */; };
-		335BED932429416A009184A3 /* Metal Latch-SoundBible.com-736691159.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED912429416A009184A3 /* Metal Latch-SoundBible.com-736691159.mp3 */; };
 		335BED95242941DA009184A3 /* Slide Closed-SoundBible.com-1521580537.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED94242941DA009184A3 /* Slide Closed-SoundBible.com-1521580537.mp3 */; };
-		335BED96242941DA009184A3 /* Slide Closed-SoundBible.com-1521580537.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED94242941DA009184A3 /* Slide Closed-SoundBible.com-1521580537.mp3 */; };
 		335BED9824294422009184A3 /* Peacock-SoundBible.com-1698361099.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9724294422009184A3 /* Peacock-SoundBible.com-1698361099.mp3 */; };
-		335BED9924294422009184A3 /* Peacock-SoundBible.com-1698361099.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9724294422009184A3 /* Peacock-SoundBible.com-1698361099.mp3 */; };
 		335BED9B2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9A2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 */; };
-		335BED9C2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9A2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 */; };
 		335BED9E2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */; };
-		335BED9F2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 335BED9D2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 */; };
 		33626FBA256FE31B00128C0A /* MediaEventMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33626FB9256FE31B00128C0A /* MediaEventMatcher.swift */; };
 		33639FDA24CB421D00F48727 /* WaitingRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33639FD924CB421D00F48727 /* WaitingRoomViewController.swift */; };
 		336469272640786500550209 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336469262640786500550209 /* GameManager.swift */; };
@@ -129,6 +119,8 @@
 		33734AE92454AB3000A5D2DA /* DictionaryEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AE82454AB3000A5D2DA /* DictionaryEncoder.swift */; };
 		33734AF12454ABF200A5D2DA /* PlayerDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AF02454ABF200A5D2DA /* PlayerDto.swift */; };
 		33734AF52454AD7200A5D2DA /* DtoEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AF42454AD7200A5D2DA /* DtoEncoder.swift */; };
+		3373EF14264BA0EB006C8D6D /* media.json in Resources */ = {isa = PBXBuildFile; fileRef = 3300EF2D256FE4FE006075F6 /* media.json */; };
+		3373EF18264BA11C006C8D6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F4239EE03900653905 /* Assets.xcassets */; };
 		337AE25825587F16004015ED /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337AE25725587F16004015ED /* UIAlertControllerExtension.swift */; };
 		3383CFCE242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3383CFCD242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 */; };
 		3383CFD0242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3383CFCF242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 */; };
@@ -209,7 +201,6 @@
 		3395559A2644394F0006FBB0 /* DtoEncoder+Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339555992644394F0006FBB0 /* DtoEncoder+Event.swift */; };
 		339B4EFC2434A7D700E32965 /* 342229_christopherderp_hurt-1-male (online-audio-converter.com).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 339B4EFB2434A7D700E32965 /* 342229_christopherderp_hurt-1-male (online-audio-converter.com).mp3 */; };
 		33A6330024545B060023A2D2 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A632FF24545B060023A2D2 /* AnalyticsManager.swift */; };
-		33A815E623DB507D0081A055 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F4239EE03900653905 /* Assets.xcassets */; };
 		33AFA25323DC201A00425BEB /* ClassNameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */; };
 		33B0E85B263D5901004B5806 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0E85A263D5901004B5806 /* Router.swift */; };
 		33B0E85C263D5901004B5806 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0E85A263D5901004B5806 /* Router.swift */; };
@@ -238,14 +229,13 @@
 		33EAD12824D4A4080052A97C /* UIStoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EAD12724D4A4080052A97C /* UIStoryboardExtension.swift */; };
 		33FABE3825BC6CCC00E96097 /* SimulationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FABE3725BC6CCC00E96097 /* SimulationTests.swift */; };
 		33FDD70C240BFB4B00BC3E14 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */; };
-		8520F714BE4E7D1170B1862A /* Pods_WildWest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C9B7CE27CC9561ECE753851 /* Pods_WildWest.framework */; };
+		794C0D33B230E521EBEBBD1E /* Pods_WildWestEngineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F82ECCD5B58B11617E188DB8 /* Pods_WildWestEngineTests.framework */; };
 		ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D2EB239EE03800653905 /* AppDelegate.swift */; };
 		ADB7D2F3239EE03800653905 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F1239EE03800653905 /* Main.storyboard */; };
 		ADB7D2F5239EE03900653905 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F4239EE03900653905 /* Assets.xcassets */; };
 		ADB7D2F8239EE03900653905 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F6239EE03900653905 /* LaunchScreen.storyboard */; };
-		C1B75D27068702D5758003B2 /* Pods_WildWestEngine_WildWestEngineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D32D417295C92CEB3D43D59 /* Pods_WildWestEngine_WildWestEngineTests.framework */; };
-		C48A6A0E2DFA677CFDAAB5F9 /* Pods_WildWestEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD56886842EED2B67FE6A8DB /* Pods_WildWestEngine.framework */; };
-		F98F8042167F3608FFA9060D /* Pods_WildWestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B87292ADCDAB7A282AA8D2EC /* Pods_WildWestTests.framework */; };
+		AF99FE0D34D30465397547D9 /* Pods_WildWestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F891B98938C35C6B2926FEA0 /* Pods_WildWestTests.framework */; };
+		BCFB056526CB843B6FDBD211 /* Pods_WildWestEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F00C868CE95BD6811AC82D20 /* Pods_WildWestEngine.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -257,6 +247,13 @@
 			remoteInfo = WildWestEngine;
 		};
 		335832E825BC24FD001BE4D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADB7D2E0239EE03800653905 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 335832D425BC24FD001BE4D8;
+			remoteInfo = WildWestEngine;
+		};
+		3373ECF1264B9B53006C8D6D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ADB7D2E0239EE03800653905 /* Project object */;
 			proxyType = 1;
@@ -287,9 +284,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		01B8192BDC8D16C8F704FADA /* Pods-WildWestEngine-WildWestEngineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestEngine-WildWestEngineTests.debug.xcconfig"; path = "Target Support Files/Pods-WildWestEngine-WildWestEngineTests/Pods-WildWestEngine-WildWestEngineTests.debug.xcconfig"; sourceTree = "<group>"; };
-		14B641DF85F420B04D6F5004 /* Pods-WildWest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.debug.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.debug.xcconfig"; sourceTree = "<group>"; };
-		217029B4590FA9785D788A41 /* Pods-WildWestEngine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestEngine.debug.xcconfig"; path = "Target Support Files/Pods-WildWestEngine/Pods-WildWestEngine.debug.xcconfig"; sourceTree = "<group>"; };
+		005E8ADD627DA931B976C778 /* Pods-WildWestEngine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestEngine.release.xcconfig"; path = "Target Support Files/Pods-WildWestEngine/Pods-WildWestEngine.release.xcconfig"; sourceTree = "<group>"; };
+		03D6E9DC5B088BA6E08BC06C /* Pods-WildWestEngineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestEngineTests.release.xcconfig"; path = "Target Support Files/Pods-WildWestEngineTests/Pods-WildWestEngineTests.release.xcconfig"; sourceTree = "<group>"; };
+		04F1F8D52B2DD750FEED02C0 /* Pods-WildWestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.debug.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.debug.xcconfig"; sourceTree = "<group>"; };
+		14AFD6F4EDB16A93DFD234C0 /* Pods-WildWestEngineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestEngineTests.debug.xcconfig"; path = "Target Support Files/Pods-WildWestEngineTests/Pods-WildWestEngineTests.debug.xcconfig"; sourceTree = "<group>"; };
+		213EF09E4753EE8978B47280 /* Pods-WildWest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.release.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.release.xcconfig"; sourceTree = "<group>"; };
+		302397755E696ECE7C3EE1C2 /* Pods-WildWest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.debug.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.debug.xcconfig"; sourceTree = "<group>"; };
 		3300EF28256FE3C1006075F6 /* MediaEventMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaEventMatcherTests.swift; sourceTree = "<group>"; };
 		3300EF2D256FE4FE006075F6 /* media.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = media.json; sourceTree = "<group>"; };
 		33029EAC24C74B8F002A5E54 /* DatabaseReference+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DatabaseReference+Rx.swift"; sourceTree = "<group>"; };
@@ -372,7 +372,6 @@
 		335BED7724293431009184A3 /* Gun_loud-Soundmaster_-88363983.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Gun_loud-Soundmaster_-88363983.mp3"; sourceTree = "<group>"; };
 		335BED8124293B64009184A3 /* Fuse Burning-SoundBible.com-1372982430.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Fuse Burning-SoundBible.com-1372982430.mp3"; sourceTree = "<group>"; };
 		335BED8424293C2D009184A3 /* Slurping 2-SoundBible.com-1269549524.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Slurping 2-SoundBible.com-1269549524.mp3"; sourceTree = "<group>"; };
-		335BED8824293D49009184A3 /* Cowboy_Theme-Pavak-1711860633.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Cowboy_Theme-Pavak-1711860633.mp3"; sourceTree = "<group>"; };
 		335BED8B24293FCA009184A3 /* Shotgun-SoundBible.com-862990674.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Shotgun-SoundBible.com-862990674.mp3"; sourceTree = "<group>"; };
 		335BED912429416A009184A3 /* Metal Latch-SoundBible.com-736691159.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Metal Latch-SoundBible.com-736691159.mp3"; sourceTree = "<group>"; };
 		335BED94242941DA009184A3 /* Slide Closed-SoundBible.com-1521580537.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Slide Closed-SoundBible.com-1521580537.mp3"; sourceTree = "<group>"; };
@@ -496,13 +495,8 @@
 		33FABE3725BC6CCC00E96097 /* SimulationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SimulationTests.swift; path = ../../../../../SimulationTests.swift; sourceTree = "<group>"; };
 		33FD5E1F25BC3AD500F18AF3 /* ENGINE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = ENGINE.md; sourceTree = "<group>"; };
 		33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		5C9B7CE27CC9561ECE753851 /* Pods_WildWest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6E11AAB7EF987839D511A07C /* Pods-WildWest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.release.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.release.xcconfig"; sourceTree = "<group>"; };
-		8D32D417295C92CEB3D43D59 /* Pods_WildWestEngine_WildWestEngineTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWestEngine_WildWestEngineTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		920167E85C10A1C7552A1D60 /* Pods-WildWestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.release.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.release.xcconfig"; sourceTree = "<group>"; };
-		96DDA9143948008163AD2C25 /* Pods-WildWestEngine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestEngine.release.xcconfig"; path = "Target Support Files/Pods-WildWestEngine/Pods-WildWestEngine.release.xcconfig"; sourceTree = "<group>"; };
-		99966AA7818FC08736138DD1 /* Pods-WildWestEngine-WildWestEngineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestEngine-WildWestEngineTests.release.xcconfig"; path = "Target Support Files/Pods-WildWestEngine-WildWestEngineTests/Pods-WildWestEngine-WildWestEngineTests.release.xcconfig"; sourceTree = "<group>"; };
-		9E6A47481BF4E3B7E9A65359 /* Pods-WildWestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.debug.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7076E7B55735D7880ABED367 /* Pods-WildWestEngine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestEngine.debug.xcconfig"; path = "Target Support Files/Pods-WildWestEngine/Pods-WildWestEngine.debug.xcconfig"; sourceTree = "<group>"; };
+		75480CE9519C850DCF8399D2 /* Pods-WildWestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.release.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.release.xcconfig"; sourceTree = "<group>"; };
 		ADB7D2E8239EE03800653905 /* WildWest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WildWest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB7D2EB239EE03800653905 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADB7D2F2239EE03800653905 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -511,8 +505,10 @@
 		ADB7D2F9239EE03900653905 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADB7D2FE239EE03900653905 /* WildWestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WildWestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB7D304239EE03900653905 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B87292ADCDAB7A282AA8D2EC /* Pods_WildWestTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWestTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CD56886842EED2B67FE6A8DB /* Pods_WildWestEngine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWestEngine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C68CDDA530FC48B097AEAB55 /* Pods_WildWest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F00C868CE95BD6811AC82D20 /* Pods_WildWestEngine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWestEngine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F82ECCD5B58B11617E188DB8 /* Pods_WildWestEngineTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWestEngineTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F891B98938C35C6B2926FEA0 /* Pods_WildWestTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWestTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -520,7 +516,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C48A6A0E2DFA677CFDAAB5F9 /* Pods_WildWestEngine.framework in Frameworks */,
+				BCFB056526CB843B6FDBD211 /* Pods_WildWestEngine.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,7 +525,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				335832DE25BC24FD001BE4D8 /* WildWestEngine.framework in Frameworks */,
-				C1B75D27068702D5758003B2 /* Pods_WildWestEngine_WildWestEngineTests.framework in Frameworks */,
+				794C0D33B230E521EBEBBD1E /* Pods_WildWestEngineTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,7 +534,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				335832EA25BC24FD001BE4D8 /* WildWestEngine.framework in Frameworks */,
-				8520F714BE4E7D1170B1862A /* Pods_WildWest.framework in Frameworks */,
+				11A4260096983812EE5C92DA /* Pods_WildWest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,24 +542,35 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F98F8042167F3608FFA9060D /* Pods_WildWestTests.framework in Frameworks */,
+				AF99FE0D34D30465397547D9 /* Pods_WildWestTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A8BE7FDF89C5BA7E7441A0E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C68CDDA530FC48B097AEAB55 /* Pods_WildWest.framework */,
+				F00C868CE95BD6811AC82D20 /* Pods_WildWestEngine.framework */,
+				F82ECCD5B58B11617E188DB8 /* Pods_WildWestEngineTests.framework */,
+				F891B98938C35C6B2926FEA0 /* Pods_WildWestTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		0B678BA1DAA05FDC7F98BA1E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				14B641DF85F420B04D6F5004 /* Pods-WildWest.debug.xcconfig */,
-				6E11AAB7EF987839D511A07C /* Pods-WildWest.release.xcconfig */,
-				217029B4590FA9785D788A41 /* Pods-WildWestEngine.debug.xcconfig */,
-				96DDA9143948008163AD2C25 /* Pods-WildWestEngine.release.xcconfig */,
-				01B8192BDC8D16C8F704FADA /* Pods-WildWestEngine-WildWestEngineTests.debug.xcconfig */,
-				99966AA7818FC08736138DD1 /* Pods-WildWestEngine-WildWestEngineTests.release.xcconfig */,
-				9E6A47481BF4E3B7E9A65359 /* Pods-WildWestTests.debug.xcconfig */,
-				920167E85C10A1C7552A1D60 /* Pods-WildWestTests.release.xcconfig */,
+				302397755E696ECE7C3EE1C2 /* Pods-WildWest.debug.xcconfig */,
+				213EF09E4753EE8978B47280 /* Pods-WildWest.release.xcconfig */,
+				7076E7B55735D7880ABED367 /* Pods-WildWestEngine.debug.xcconfig */,
+				005E8ADD627DA931B976C778 /* Pods-WildWestEngine.release.xcconfig */,
+				14AFD6F4EDB16A93DFD234C0 /* Pods-WildWestEngineTests.debug.xcconfig */,
+				03D6E9DC5B088BA6E08BC06C /* Pods-WildWestEngineTests.release.xcconfig */,
+				04F1F8D52B2DD750FEED02C0 /* Pods-WildWestTests.debug.xcconfig */,
+				75480CE9519C850DCF8399D2 /* Pods-WildWestTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -800,7 +807,6 @@
 			isa = PBXGroup;
 			children = (
 				3371A3AC24D6D3FB00D78FDC /* 2017-03-24_-_Lone_Rider_-_David_Fesliyan.mp3 */,
-				335BED8824293D49009184A3 /* Cowboy_Theme-Pavak-1711860633.mp3 */,
 			);
 			path = music;
 			sourceTree = "<group>";
@@ -1185,17 +1191,6 @@
 			path = menu;
 			sourceTree = "<group>";
 		};
-		A743FA82CF6BEE1B8102D6C9 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				5C9B7CE27CC9561ECE753851 /* Pods_WildWest.framework */,
-				CD56886842EED2B67FE6A8DB /* Pods_WildWestEngine.framework */,
-				8D32D417295C92CEB3D43D59 /* Pods_WildWestEngine_WildWestEngineTests.framework */,
-				B87292ADCDAB7A282AA8D2EC /* Pods_WildWestTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		AD36CDDF23C51F08008D4EDB /* misc */ = {
 			isa = PBXGroup;
 			children = (
@@ -1226,7 +1221,7 @@
 				335832E325BC24FD001BE4D8 /* WildWestEngineTests */,
 				ADB7D2E9239EE03800653905 /* Products */,
 				0B678BA1DAA05FDC7F98BA1E /* Pods */,
-				A743FA82CF6BEE1B8102D6C9 /* Frameworks */,
+				0A8BE7FDF89C5BA7E7441A0E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1299,7 +1294,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 335832EC25BC24FD001BE4D8 /* Build configuration list for PBXNativeTarget "WildWestEngine" */;
 			buildPhases = (
-				9BD17E057FE73ED679C9C1BC /* [CP] Check Pods Manifest.lock */,
+				8B9DB4E1EC513A69ACCF8326 /* [CP] Check Pods Manifest.lock */,
 				335832D025BC24FD001BE4D8 /* Headers */,
 				335832D125BC24FD001BE4D8 /* Sources */,
 				335832D225BC24FD001BE4D8 /* Frameworks */,
@@ -1318,11 +1313,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 335832F025BC24FD001BE4D8 /* Build configuration list for PBXNativeTarget "WildWestEngineTests" */;
 			buildPhases = (
-				9EBEC783B96B6994B8FBA117 /* [CP] Check Pods Manifest.lock */,
+				C2F3FE7600BB1558287DD171 /* [CP] Check Pods Manifest.lock */,
 				3392B24225BC38D900214393 /* Run Cuckoo */,
 				335832D925BC24FD001BE4D8 /* Sources */,
 				335832DA25BC24FD001BE4D8 /* Frameworks */,
-				1AC3D18E65558068CA3AD35E /* [CP] Embed Pods Frameworks */,
+				D81EE373CF066BA3601FAE9F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1338,15 +1333,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ADB7D307239EE03900653905 /* Build configuration list for PBXNativeTarget "WildWest" */;
 			buildPhases = (
-				4B1E1DF7755E7E4CB32BA07F /* [CP] Check Pods Manifest.lock */,
+				3DE5D489E0D81C17891F4FD5 /* [CP] Check Pods Manifest.lock */,
 				AD8540A223A4291100568FE9 /* Run Swiftlint */,
 				ADB7D2E4239EE03800653905 /* Sources */,
 				ADB7D2E5239EE03800653905 /* Frameworks */,
 				ADB7D2E6239EE03800653905 /* Resources */,
 				33516CCB2450AA78003C99E2 /* Run FirebaseCrashlytics */,
 				335832EF25BC24FD001BE4D8 /* Embed Frameworks */,
-				DC079DCAD3CB8C0ADB64BD20 /* [CP] Embed Pods Frameworks */,
-				416BFCC4D11AAC0477FAA528 /* [CP] Copy Pods Resources */,
+				C748AB4D491E2EEEBFB3650A /* [CP] Embed Pods Frameworks */,
+				D8D753D846A99915651989CE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1362,14 +1357,16 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ADB7D30A239EE03900653905 /* Build configuration list for PBXNativeTarget "WildWestTests" */;
 			buildPhases = (
-				FCB6D5A402095DA8E7B0D52F /* [CP] Check Pods Manifest.lock */,
+				2D78E27F4A4D72D0BC13C669 /* [CP] Check Pods Manifest.lock */,
 				ADB7D2FA239EE03900653905 /* Sources */,
 				ADB7D2FB239EE03900653905 /* Frameworks */,
 				ADB7D2FC239EE03900653905 /* Resources */,
+				7B584E8CD97CA1B35863B60F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				3373ECF2264B9B53006C8D6D /* PBXTargetDependency */,
 				ADB7D300239EE03900653905 /* PBXTargetDependency */,
 			);
 			name = WildWestTests;
@@ -1453,7 +1450,6 @@
 				335BED7824293431009184A3 /* Western Ricochet-SoundBible.com-1725886901.mp3 in Resources */,
 				335BED8C24293FCA009184A3 /* Shotgun-SoundBible.com-862990674.mp3 in Resources */,
 				335BED7924293431009184A3 /* Horse Galloping-SoundBible.com-1451398148.mp3 in Resources */,
-				335BED8924293D49009184A3 /* Cowboy_Theme-Pavak-1711860633.mp3 in Resources */,
 				3371A3AD24D6D3FB00D78FDC /* 2017-03-24_-_Lone_Rider_-_David_Fesliyan.mp3 in Resources */,
 				3383CFCE242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 in Resources */,
 				335BED9824294422009184A3 /* Peacock-SoundBible.com-1698361099.mp3 in Resources */,
@@ -1471,38 +1467,34 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				335BED9924294422009184A3 /* Peacock-SoundBible.com-1698361099.mp3 in Resources */,
-				33A815E623DB507D0081A055 /* Assets.xcassets in Resources */,
-				335BED8A24293D49009184A3 /* Cowboy_Theme-Pavak-1711860633.mp3 in Resources */,
-				335BED8D24293FCA009184A3 /* Shotgun-SoundBible.com-862990674.mp3 in Resources */,
-				335BED9F2429468C009184A3 /* Automatic Machine Gun-SoundBible.com-253461580.mp3 in Resources */,
-				335BED96242941DA009184A3 /* Slide Closed-SoundBible.com-1521580537.mp3 in Resources */,
-				3300EF6F256FE878006075F6 /* media.json in Resources */,
-				335BED8324293B65009184A3 /* Fuse Burning-SoundBible.com-1372982430.mp3 in Resources */,
-				335BED932429416A009184A3 /* Metal Latch-SoundBible.com-736691159.mp3 in Resources */,
-				335BED9C2429448D009184A3 /* Pain-SoundBible.com-1883168362.mp3 in Resources */,
-				335BED8624293C2D009184A3 /* Slurping 2-SoundBible.com-1269549524.mp3 in Resources */,
+				3373EF18264BA11C006C8D6D /* Assets.xcassets in Resources */,
+				3373EF14264BA0EB006C8D6D /* media.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1AC3D18E65558068CA3AD35E /* [CP] Embed Pods Frameworks */ = {
+		2D78E27F4A4D72D0BC13C669 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WildWestEngine-WildWestEngineTests/Pods-WildWestEngine-WildWestEngineTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WildWestEngine-WildWestEngineTests/Pods-WildWestEngine-WildWestEngineTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WildWestTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WildWestEngine-WildWestEngineTests/Pods-WildWestEngine-WildWestEngineTests-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		33516CCB2450AA78003C99E2 /* Run FirebaseCrashlytics */ = {
@@ -1541,24 +1533,7 @@
 			shellPath = /bin/sh;
 			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/WildWestEngineTests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/WildWestEngine\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"WildWestEngine\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/core/State.swift\" \\\n\"${INPUT_DIR}/engine/Database.swift\" \\\n\"${INPUT_DIR}/engine/GDatabaseUpdater.swift\" \\\n\"${INPUT_DIR}/engine/Engine.swift\" \\\n\"${INPUT_DIR}/engine/GLoop.swift\" \\\n\"${INPUT_DIR}/engine/GEventQueue.swift\" \\\n\"${INPUT_DIR}/engine/GTimer.swift\" \\\n\"${INPUT_DIR}/matcher/AbilityMatcher.swift\" \\\n\"${INPUT_DIR}/matcher/PlayReqMatcher.swift\" \\\n\"${INPUT_DIR}/matcher/EffectMatcher.swift\" \\\n\"${INPUT_DIR}/setup/Setup.swift\" \\\n\"${INPUT_DIR}/setup/ResourcesLoader.swift\" \\\n\"${INPUT_DIR}/ai/AIAgent.swift\" \\\n\"${INPUT_DIR}/ai/AI.swift\" \\\n\"${INPUT_DIR}/ai/MoveEvaluator.swift\" \\\n\"${INPUT_DIR}/ai/RoleEstimator.swift\" \\\n\"${INPUT_DIR}/ai/RoleStrategy.swift\" \\\n\"${INPUT_DIR}/ai/AbilityEvaluator.swift\"\n";
 		};
-		416BFCC4D11AAC0477FAA528 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4B1E1DF7755E7E4CB32BA07F /* [CP] Check Pods Manifest.lock */ = {
+		3DE5D489E0D81C17891F4FD5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1580,7 +1555,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9BD17E057FE73ED679C9C1BC /* [CP] Check Pods Manifest.lock */ = {
+		7B584E8CD97CA1B35863B60F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WildWestTests/Pods-WildWestTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WildWestTests/Pods-WildWestTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WildWestTests/Pods-WildWestTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8B9DB4E1EC513A69ACCF8326 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1596,28 +1588,6 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-WildWestEngine-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9EBEC783B96B6994B8FBA117 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WildWestEngine-WildWestEngineTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1642,7 +1612,29 @@
 			shellPath = /bin/sh;
 			shellScript = "echo \"SWIFTLINT PATH\"\npwd\n\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
-		DC079DCAD3CB8C0ADB64BD20 /* [CP] Embed Pods Frameworks */ = {
+		C2F3FE7600BB1558287DD171 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WildWestEngineTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C748AB4D491E2EEEBFB3650A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1659,26 +1651,38 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FCB6D5A402095DA8E7B0D52F /* [CP] Check Pods Manifest.lock */ = {
+		D81EE373CF066BA3601FAE9F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WildWestEngineTests/Pods-WildWestEngineTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WildWestTests-checkManifestLockResult.txt",
+				"${PODS_ROOT}/Target Support Files/Pods-WildWestEngineTests/Pods-WildWestEngineTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WildWestEngineTests/Pods-WildWestEngineTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D8D753D846A99915651989CE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1915,6 +1919,11 @@
 			target = 335832D425BC24FD001BE4D8 /* WildWestEngine */;
 			targetProxy = 335832E825BC24FD001BE4D8 /* PBXContainerItemProxy */;
 		};
+		3373ECF2264B9B53006C8D6D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 335832D425BC24FD001BE4D8 /* WildWestEngine */;
+			targetProxy = 3373ECF1264B9B53006C8D6D /* PBXContainerItemProxy */;
+		};
 		ADB7D300239EE03900653905 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = ADB7D2E7239EE03800653905 /* WildWest */;
@@ -1944,7 +1953,7 @@
 /* Begin XCBuildConfiguration section */
 		335832ED25BC24FD001BE4D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 217029B4590FA9785D788A41 /* Pods-WildWestEngine.debug.xcconfig */;
+			baseConfigurationReference = 7076E7B55735D7880ABED367 /* Pods-WildWestEngine.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -1973,7 +1982,7 @@
 		};
 		335832EE25BC24FD001BE4D8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96DDA9143948008163AD2C25 /* Pods-WildWestEngine.release.xcconfig */;
+			baseConfigurationReference = 005E8ADD627DA931B976C778 /* Pods-WildWestEngine.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -2000,9 +2009,8 @@
 		};
 		335832F125BC24FD001BE4D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 01B8192BDC8D16C8F704FADA /* Pods-WildWestEngine-WildWestEngineTests.debug.xcconfig */;
+			baseConfigurationReference = 14AFD6F4EDB16A93DFD234C0 /* Pods-WildWestEngineTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -2023,9 +2031,8 @@
 		};
 		335832F225BC24FD001BE4D8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 99966AA7818FC08736138DD1 /* Pods-WildWestEngine-WildWestEngineTests.release.xcconfig */;
+			baseConfigurationReference = 03D6E9DC5B088BA6E08BC06C /* Pods-WildWestEngineTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
@@ -2162,9 +2169,8 @@
 		};
 		ADB7D308239EE03900653905 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 14B641DF85F420B04D6F5004 /* Pods-WildWest.debug.xcconfig */;
+			baseConfigurationReference = 302397755E696ECE7C3EE1C2 /* Pods-WildWest.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -2184,9 +2190,8 @@
 		};
 		ADB7D309239EE03900653905 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6E11AAB7EF987839D511A07C /* Pods-WildWest.release.xcconfig */;
+			baseConfigurationReference = 213EF09E4753EE8978B47280 /* Pods-WildWest.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -2206,7 +2211,7 @@
 		};
 		ADB7D30B239EE03900653905 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9E6A47481BF4E3B7E9A65359 /* Pods-WildWestTests.debug.xcconfig */;
+			baseConfigurationReference = 04F1F8D52B2DD750FEED02C0 /* Pods-WildWestTests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
@@ -2225,7 +2230,7 @@
 		};
 		ADB7D30C239EE03900653905 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 920167E85C10A1C7552A1D60 /* Pods-WildWestTests.release.xcconfig */;
+			baseConfigurationReference = 75480CE9519C850DCF8399D2 /* Pods-WildWestTests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
