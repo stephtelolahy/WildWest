@@ -12,7 +12,11 @@ import WildWestEngine
 extension DtoEncoder {
     
     func decode(event: EventDto) throws -> GEvent {
-        fatalError()
+        .emptyQueue
+    }
+    
+    func encode(event: GEvent) -> EventDto {
+        EventDto()
     }
 }
 /*

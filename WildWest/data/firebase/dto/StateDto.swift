@@ -16,14 +16,14 @@ struct StateDto: Codable {
     let discard: [String: String]?
     let store: [String: String]?
     let storeView: String?
-    let hits: [HitDto]?
+    let hits: [String: HitDto]?
     let played: [String: String]?
 }
 
-struct HitDto: Codable {
+struct HitDto: Codable, Equatable {
     let name: String?
-    let abilities: [String]?
     let player: String?
+    let abilities: [String]?
     let offender: String?
     let cancelable: Int?
 }

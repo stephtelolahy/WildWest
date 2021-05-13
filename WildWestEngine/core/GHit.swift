@@ -10,8 +10,8 @@ public class GHit: HitProtocol {
     // MARK: - Properties
     
     public let name: String
-    public let abilities: [String]
     public let player: String
+    public let abilities: [String]
     public let offender: String
     public var cancelable: Int
     

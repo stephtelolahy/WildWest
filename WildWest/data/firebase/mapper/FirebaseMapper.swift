@@ -10,25 +10,16 @@ import Firebase
 import WildWestEngine
 
 protocol FirebaseMapperProtocol {
-    func decodeState(from snapshot: DataSnapshot) throws -> StateProtocol
-    /*
-    func decodeCard(from snapthot: DataSnapshot) throws -> (String, CardProtocol)
-    func decodeCard(from cardId: String) throws -> CardProtocol
-    func decodeCards(from snapshot: DataSnapshot) throws -> [CardProtocol]
-    func decodeMove(from snapshot: DataSnapshot) throws -> GameMove
-    func decodeMoves(from snapshot: DataSnapshot) throws -> [GameMove]
-    */
-    func decodeEvent(from snapshot: DataSnapshot) throws -> GEvent
-    func encodeState(_ state: StateProtocol) throws -> [String: Any]
-    /*
-    func encodeChallenge(_ challenge: Challenge?) throws -> [String: Any]?
-    func encodeDamageEvent(_ damageEvent: DamageEvent) throws -> [String: Any]
-    func encodeOrderedCards(_ cards: [CardProtocol]) throws -> [String: Any]
-    func encodeMove(_ move: GameMove) throws -> [String: Any]
-    func encodeMoves(_ moves: [GameMove]) throws -> [[String: Any]]
-    func encodeUpdate(_ update: GameUpdate) throws -> [String: Any]
-    */
     
+    // MARK: - State
+    func decodeState(from snapshot: DataSnapshot) throws -> StateProtocol
+    func encodeState(_ state: StateProtocol) throws -> [String: Any]
+    
+    // MARK: - Event
+    func decodeEvent(from snapshot: DataSnapshot) throws -> GEvent
+    func encodeEvent(_ event: GEvent) throws -> [String: Any]
+    
+    // MARK: - User
     func encodeUser(_ user: UserInfo) throws -> [String: Any]
     func decodeUser(from snapshot: DataSnapshot) throws -> UserInfo
     func decodeUsers(from snapshot: DataSnapshot) throws -> [UserInfo]
@@ -51,6 +42,8 @@ class FirebaseMapper: FirebaseMapperProtocol {
         
     }
     
+    // MARK: - State
+    
     func decodeState(from snapshot: DataSnapshot) throws -> StateProtocol {
         let value = try (snapshot.value as? [String: Any]).unwrap()
         let dto = try self.dictionaryEncoder.decode(StateDto.self, from: value)
@@ -58,49 +51,13 @@ class FirebaseMapper: FirebaseMapperProtocol {
         return state
     }
     
-    /*
-    func decodeCard(from snapthot: DataSnapshot) throws -> (String, CardProtocol) {
-        let dictionary = try (snapthot.value as? [String: String]).unwrap()
-        let key = try dictionary.keys.first.unwrap()
-        let cardId = try dictionary.values.first.unwrap()
-        let card = try dtoEncoder.decode(card: cardId)
-        return (key, card)
+    func encodeState(_ state: StateProtocol) throws -> [String: Any] {
+        let dto = dtoEncoder.encode(state: state)
+        let value = try dictionaryEncoder.encode(dto)
+        return value
     }
     
-    func decodeCard(from cardId: String) throws -> CardProtocol {
-        try dtoEncoder.decode(card: cardId)
-    }
-    
-    func decodeCards(from snapshot: DataSnapshot) throws -> [CardProtocol] {
-        let dictionary = try (snapshot.value as? [String: String]).unwrap()
-        let keys = dictionary.keys.sorted()
-        return try keys.map { key in
-            let cardId = try dictionary[key].unwrap()
-            let card = try dtoEncoder.decode(card: cardId)
-            return card
-        }
-    }
-    
-    func decodeMove(from snapshot: DataSnapshot) throws -> GameMove {
-        let value = try (snapshot.value as? [String: Any]).unwrap()
-        let dto = try self.dictionaryEncoder.decode(GameMoveDto.self, from: value)
-        let move = try self.dtoEncoder.decode(move: dto)
-        return move
-    }
-    
-    func decodeMoves(from snapshot: DataSnapshot) throws -> [GameMove] {
-        guard let values = snapshot.value as? [[String: Any]] else {
-            return []
-        }
-        
-        return try values.map { value in
-            let dto = try self.dictionaryEncoder.decode(GameMoveDto.self, from: value)
-            let move = try self.dtoEncoder.decode(move: dto)
-            return move
-        }
-    }
-    
-    */
+    // MARK: - Event
     
     func decodeEvent(from snapshot: DataSnapshot) throws -> GEvent {
         let value = try (snapshot.value as? [String: Any]).unwrap()
@@ -109,49 +66,14 @@ class FirebaseMapper: FirebaseMapperProtocol {
         return update
     }
     
-    func encodeState(_ state: StateProtocol) throws -> [String: Any] {
-        let dto = dtoEncoder.encode(state: state)
-        let value = try dictionaryEncoder.encode(dto)
-        return value
-    }
-    /*
-    func encodeChallenge(_ challenge: Challenge?) throws -> [String: Any]? {
-        guard let dto = dtoEncoder.encode(challenge: challenge) else {
-            return nil
-        }
-        
+    func encodeEvent(_ event: GEvent) throws -> [String: Any] {
+        let dto = dtoEncoder.encode(event: event)
         let value = try dictionaryEncoder.encode(dto)
         return value
     }
     
-    func encodeDamageEvent(_ damageEvent: DamageEvent) throws -> [String: Any] {
-        let dto = try dtoEncoder.encode(damageEvent: damageEvent).unwrap()
-        let value = try dictionaryEncoder.encode(dto)
-        return value
-    }
+    // MARK: - User
     
-    func encodeOrderedCards(_ cards: [CardProtocol]) throws -> [String: Any] {
-        let dto = dtoEncoder.encode(orderedCards: cards)
-        let value = try dictionaryEncoder.encode(dto)
-        return value
-    }
-    
-    func encodeMove(_ move: GameMove) throws -> [String: Any] {
-        let dto = dtoEncoder.encode(move: move)
-        let value = try dictionaryEncoder.encode(dto)
-        return value
-    }
-    
-    func encodeMoves(_ moves: [GameMove]) throws -> [[String: Any]] {
-        try moves.map { try encodeMove($0) }
-    }
-    
-    func encodeUpdate(_ update: GameUpdate) throws -> [String: Any] {
-        let dto = dtoEncoder.encode(update: update)
-        let value = try dictionaryEncoder.encode(dto)
-        return value
-    }
-    */
     func encodeUser(_ user: UserInfo) throws -> [String: Any] {
         let dto = dtoEncoder.encode(user: user)
         let value = try dictionaryEncoder.encode(dto)

@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
-        let dependencies: RouterDepenenciesProtocol = Resolver.resolve()
+        let dependencies: RouterDependenciesProtocol = Resolver.resolve()
         let mainVC = dependencies.provideMainViewController()
         window?.rootViewController = mainVC
         window?.makeKeyAndVisible()

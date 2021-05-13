@@ -18,6 +18,7 @@ protocol MainDatabaseProtocol {
     func setUserStatus(_ id: String, status: UserStatus) -> Completable
     func observeWaitingUsers() -> Observable<[UserInfo]>
     
+    func createGameId() -> String
     func createGame(id: String, state: StateProtocol) -> Completable
     func getGame(_ id: String) -> Single<StateProtocol>
     func setGameUsers(id: String, users: [String: UserInfo]) -> Completable
@@ -70,6 +71,10 @@ class MainDatabase: MainDatabaseProtocol {
         }
     }
     
+    func createGameId() -> String {
+        rootRef.childByAutoId().key!
+    }
+    
     func createGame(id: String, state: StateProtocol) -> Completable {
         rootRef.child("games/\(id)/state")
             .rxSetValue({ try self.mapper.encodeState(state) })
@@ -91,9 +96,10 @@ class MainDatabase: MainDatabaseProtocol {
     }
     
     func remoteGameDatabase(_ gameId: String, state: StateProtocol) -> RemoteGameDatabase {
-        RemoteGameDatabase(state,
-                           gameRef: rootRef.child("games/\(gameId)"),
-                           mapper: mapper,
-                           updater: RemoteGameDatabaseUpdater(gameRef: rootRef.child("games/\(gameId)")))
+        let updater = RemoteGameDatabaseUpdater(gameRef: rootRef.child("games/\(gameId)"))
+        return RemoteGameDatabase(state,
+                                  gameRef: rootRef.child("games/\(gameId)"),
+                                  mapper: mapper,
+                                  updater: updater)
     }
 }

@@ -6,18 +6,17 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-import Foundation
+import Firebase
 import WildWestEngine
 
 class DtoEncoder {
     
+    let databaseRef: DatabaseReference
     private let allCards: [CardProtocol]
-    private let keyGenerator: KeyGeneratorProtocol
     
-    init(allCards: [CardProtocol],
-         keyGenerator: KeyGeneratorProtocol) {
+    init(databaseRef: DatabaseReference, allCards: [CardProtocol]) {
         self.allCards = allCards
-        self.keyGenerator = keyGenerator
+        self.databaseRef = databaseRef
     }
     
     func encode(card: CardProtocol) -> String {
@@ -31,7 +30,7 @@ class DtoEncoder {
     func encode(cards: [CardProtocol]) -> [String: String] {
         cards.reduce([String: String]()) { dict, card in
             var dict = dict
-            let key = self.keyGenerator.autoId()
+            let key = self.databaseRef.childByAutoId().key!
             dict[key] = encode(card: card)
             return dict
         }
@@ -44,22 +43,5 @@ class DtoEncoder {
         
         let orderedKeys = cards.keys.sorted()
         return try orderedKeys.map { try decode(card: cards[$0].unwrap()) }
-    }
-    
-    func encode(abilities: [String]) -> [String: String] {
-        abilities.reduce([String: String]()) { dict, ability in
-            var dict = dict
-            let key = self.keyGenerator.autoId()
-            dict[key] = ability
-            return dict
-        }
-    }
-    
-    func decode(abilities: [String: String]?) throws -> [String] {
-        guard let abilities = abilities else {
-            return []
-        }
-        
-        return Array(abilities.values)
     }
 }

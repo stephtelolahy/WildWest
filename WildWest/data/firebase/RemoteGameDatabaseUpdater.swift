@@ -5,6 +5,7 @@
 //  Created by Hugues Stéphano TELOLAHY on 06/05/2021.
 //  Copyright © 2021 creativeGames. All rights reserved.
 //
+// swiftlint:disable file_length
 
 import RxSwift
 import Firebase
@@ -24,7 +25,7 @@ class RemoteGameDatabaseUpdater: RemoteGameDatabaseUpdaterProtocol {
     
     func execute(_ event: GEvent) -> Completable {
         guard let eventDesc = Self.all[event.hashValue] else {
-            fatalError("No event description matching \(event)")
+            fatalError("No database transaction matching \(event)")
         }
         
         return eventDesc.updateFunc(event, gameRef)
@@ -43,8 +44,7 @@ private struct EventDesc {
 private extension RemoteGameDatabaseUpdater {
     
     static let all: [String: EventDesc] = [
-        run()
-        /*
+        run(),
         activate(),
         gameover(),
         setTurn(),
@@ -52,6 +52,7 @@ private extension RemoteGameDatabaseUpdater {
         gainHealth(),
         looseHealth(),
         eliminate(),
+        /*
         drawDeck(),
         drawHand(),
         drawInPlay(),
@@ -71,8 +72,8 @@ private extension RemoteGameDatabaseUpdater {
         addHit(),
         removeHit(),
         cancelHit(),
+         */
         emptyQueue()
- */
     ]
     .toDictionary(with: { $0.id })
     
@@ -82,18 +83,18 @@ private extension RemoteGameDatabaseUpdater {
                 fatalError("Invalid event")
             }
             
-            let key = FirebaseKeyGenerator().autoId()
-            return gameRef.child("state/played/\(key)")
-                .rxSetValue({ move.ability })
+            let key = gameRef.childByAutoId().key!
+            return gameRef.child("state/played/\(key)").rxSetValue({ move.ability })
         }
     }
-    /*
+    
     static func activate() -> EventDesc {
         EventDesc(id: "activate", desc: "activate moves") { event, _ in
             guard case .activate = event else {
                 fatalError("Invalid event")
             }
             // do nothing
+            return Completable.empty()
         }
     }
     
@@ -103,60 +104,89 @@ private extension RemoteGameDatabaseUpdater {
                 fatalError("Invalid event")
             }
             // do nothing
+            return Completable.empty()
         }
     }
     
     static func setTurn() -> EventDesc {
-        EventDesc(id: "setTurn", desc: "set current turn, implicitly clear played abilities") { event, state in
+        EventDesc(id: "setTurn", desc: "set current turn, implicitly clear played abilities") { event, gameRef in
             guard case let .setTurn(player) = event else {
                 fatalError("Invalid event")
             }
-            state.turn = player
-            state.played.removeAll()
+            
+            return gameRef.child("state/turn").rxSetValue({ player })
+                .andThen(gameRef.child("state/played").rxSetValue({ nil }))
         }
     }
     
     static func setPhase() -> EventDesc {
-        EventDesc(id: "setPhase", desc: "set phase") { event, state in
+        EventDesc(id: "setPhase", desc: "set phase") { event, gameRef in
             guard case let .setPhase(value) = event else {
                 fatalError("Invalid event")
             }
-            state.phase = value
+            return gameRef.child("state/phase").rxSetValue({ value })
         }
     }
     
     static func gainHealth() -> EventDesc {
-        EventDesc(id: "gainHealth", desc: "Gain 1 life point") { event, state in
+        EventDesc(id: "gainHealth", desc: "Gain 1 life point") { event, gameRef in
             guard case let .gainHealth(player) = event else {
                 fatalError("Invalid event")
             }
-            state.mutablePlayer(player).health += 1
+            
+            return gameRef.child("state/players/\(player)/health")
+                .rxObserveSingleEvent({ snapshot in
+                    let health = try (snapshot.value as? Int).unwrap()
+                    return health
+                }).flatMapCompletable { health -> Completable in
+                    gameRef.child("state/players/\(player)/health")
+                        .rxSetValue({ health + 1 })
+                }
         }
     }
     
     static func looseHealth() -> EventDesc {
-        EventDesc(id: "looseHealth", desc: "Loose 1 life point") { event, state in
+        EventDesc(id: "looseHealth", desc: "Loose 1 life point") { event, gameRef in
             guard case let .looseHealth(player, _) = event else {
                 fatalError("Invalid event")
             }
-            state.mutablePlayer(player).health -= 1
+            return gameRef.child("state/players/\(player)/health")
+                .rxObserveSingleEvent({ snapshot -> Int in
+                    try (snapshot.value as? Int).unwrap()
+                }).flatMapCompletable { health -> Completable in
+                    gameRef.child("state/players/\(player)/health")
+                        .rxSetValue({ health - 1 })
+                }
         }
     }
     
     static func eliminate() -> EventDesc {
-        EventDesc(id: "eliminate", desc: "Remove from playOrder") { event, state in
+        EventDesc(id: "eliminate", desc: "Remove from playOrder") { event, gameRef in
             guard case let .eliminate(player, _) = event else {
                 fatalError("Invalid event")
             }
-            guard let index = state.playOrder.firstIndex(where: { $0 == player }) else {
-                fatalError("Player \(player) not in playOrder")
-            }
-            state.playOrder.remove(at: index)
-            state.hits.removeAll(where: { $0.player == player })
-            state.mutablePlayer(player).health = 0
+            return gameRef.child("state/players/\(player)/health").rxSetValue({ 0 })
+                .andThen(gameRef.child("state/playOrder").rxObserveSingleEvent({ snapshot -> [String]? in
+                    snapshot.value as? [String]
+                }).flatMapCompletable({ playOrder -> Completable in
+                    var value = playOrder ?? []
+                    if let index = value.firstIndex(of: player) {
+                        value.remove(at: index)
+                    }
+                    return gameRef.child("state/playOrder").rxSetValue({ value })
+                }))
+                .andThen(gameRef.child("state/hits").rxObserveSingleEvent({ snapshot -> [String: HitDto]? in
+                    snapshot.value as? [String: HitDto]
+                }).flatMapCompletable({ hits -> Completable in
+                    var value = hits ?? [:]
+                    for (key, val) in value where val.player == player {
+                        value[key] = nil
+                    }
+                    return gameRef.child("state/hits").rxSetValue({ value })
+                }))
         }
     }
-    
+    /*
     static func drawDeck() -> EventDesc {
         EventDesc(id: "drawDeck", desc: "Draw top card from deck") { event, state in
             guard case let .drawDeck(player) = event else {
@@ -399,35 +429,21 @@ private extension RemoteGameDatabaseUpdater {
             hitObject.cancelable -= 1
         }
     }
-    
+    */
     static func emptyQueue() -> EventDesc {
         EventDesc(id: "emptyQueue", desc: "EventQueue is empty") { event, _ in
             guard case .emptyQueue = event else {
                 fatalError("Invalid event")
             }
+            // do nothing
+            return Completable.empty()
         }
-        // do nothing
     }
- */
 }
 
 /*
 // MARK: - Flags
 
-func setTurn(_ turn: String) -> Completable {
-    gameRef.child("state/turn")
-        .rxSetValue({ turn })
-}
-
-func setChallenge(_ challenge: Challenge?) -> Completable {
-    gameRef.child("state/challenge")
-        .rxSetValue({ try self.mapper.encodeChallenge(challenge) })
-}
-
-func setOutcome(_ outcome: GameOutcome) -> Completable {
-    gameRef.child("state/outcome")
-        .rxSetValue({ outcome.rawValue })
-}
 
 // MARK: - Deck
 
@@ -469,11 +485,6 @@ func removeGeneralStore(_ cardId: String) -> Single<CardProtocol> {
 }
 
 // MARK: - Player
-
-func playerSetHealth(_ playerId: String, _ health: Int) -> Completable {
-    gameRef.child("state/players/\(playerId)/health")
-        .rxSetValue({ health })
-}
 
 func playerAddHand(_ playerId: String, _ card: CardProtocol) -> Completable {
     gameRef.child("state/players/\(playerId)/hand/\(card.identifier)")

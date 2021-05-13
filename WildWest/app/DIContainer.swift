@@ -17,7 +17,7 @@ import Firebase
 final class DIContainer {
 }
 
-extension DIContainer: RouterDepenenciesProtocol {
+extension DIContainer: RouterDependenciesProtocol {
     
     func provideMainViewController() -> UIViewController {
         let viewController = UIStoryboard.instantiate(MainViewController.self, in: "Main")
@@ -89,7 +89,7 @@ extension Resolver: ResolverRegistering {
     
     public static func registerAllServices() {
         
-        register { DIContainer() as RouterDepenenciesProtocol }.scope(application)
+        register { DIContainer() as RouterDependenciesProtocol }.scope(application)
         
         register { AnalyticsManager() }.scope(application)
         
@@ -100,7 +100,6 @@ extension Resolver: ResolverRegistering {
         register { JsonReader(bundle: Bundle.resourcesBundle) as JsonReader }.scope(application)
         register { ResourcesLoader(jsonReader: resolve()) as ResourcesLoaderProtocol }.scope(application)
         
-        register { FirebaseKeyGenerator() as KeyGeneratorProtocol }
         register { DictionaryEncoder() }
         
         register { AnimationEventMatcher(preferences: resolve()) as AnimationEventMatcherProtocol }.scope(application)
@@ -108,14 +107,15 @@ extension Resolver: ResolverRegistering {
         
         register { provideMediaMatcher() as MediaEventMatcherProtocol }.scope(application)
         
-        register { DtoEncoder(allCards: provideDeckCards(), keyGenerator: resolve()) }
+        register { Database.database().reference() as DatabaseReference }.scope(application)
+        
+        register { DtoEncoder(databaseRef: resolve(), allCards: provideDeckCards()) }
         
         register { FirebaseMapper(dtoEncoder: resolve(),
                                   dictionaryEncoder: resolve()) as FirebaseMapperProtocol
         }.scope(application)
         
-        register { MainDatabase(rootRef: Database.database().reference(),
-                                mapper: resolve()) as MainDatabaseProtocol
+        register { MainDatabase(rootRef: resolve(), mapper: resolve()) as MainDatabaseProtocol
         }.scope(application)
         
         register { GameBuilder(preferences: resolve(),

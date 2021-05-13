@@ -30,8 +30,8 @@ public protocol StateProtocol: StateStoredProtocol, StateComputedProtocol {
 
 public protocol HitProtocol {
     var name: String { get }
-    var abilities: [String] { get }
     var player: String { get }
+    var abilities: [String] { get }
     var offender: String { get }
     var cancelable: Int { get }
 }

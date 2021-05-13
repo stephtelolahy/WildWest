@@ -44,7 +44,8 @@ public class RemoteGameDatabase: DatabaseProtocol {
     // MARK: - DatabaseProtocol
     
     public func update(event aEvent: GEvent) -> Completable {
-        updater.execute(aEvent)
+        gameRef.child("events").rxSetValue({ try self.mapper.encodeEvent(aEvent) })
+            .andThen(updater.execute(aEvent))
     }
 }
 

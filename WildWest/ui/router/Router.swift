@@ -24,7 +24,7 @@ protocol RouterProtocol {
     func toWaitingRoom()
 }
 
-protocol RouterDepenenciesProtocol {
+protocol RouterDependenciesProtocol {
     func provideMainViewController() -> UIViewController
     func provideFigureSelectorWidget(_ completion: @escaping (String?) -> Void) -> UIViewController
     func provideRoleSelectorWidget(_ completion: @escaping (Role?) -> Void) -> UIViewController
@@ -39,9 +39,9 @@ protocol RouterDepenenciesProtocol {
 class Router: RouterProtocol {
     
     private weak var viewController: UIViewController?
-    private let dependencies: RouterDepenenciesProtocol
+    private let dependencies: RouterDependenciesProtocol
     
-    init(viewController: UIViewController, dependencies: RouterDepenenciesProtocol) {
+    init(viewController: UIViewController, dependencies: RouterDependenciesProtocol) {
         self.viewController = viewController
         self.dependencies = dependencies
     }

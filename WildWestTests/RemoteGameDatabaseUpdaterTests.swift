@@ -1,174 +1,175 @@
 //
-//  GDatabaseUpdaterTests.swift
-//  CardGameEngine_Tests
+//  RemoteGameDatabaseUpdaterTests.swift
+//  WildWestTests
 //
-//  Created by Hugues Stephano Telolahy on 14/11/2020.
-//  Copyright © 2020 CocoaPods. All rights reserved.
+//  Created by Hugues Stéphano TELOLAHY on 12/05/2021.
+//  Copyright © 2021 creativeGames. All rights reserved.
 //
 // swiftlint:disable implicitly_unwrapped_optional
-// swiftlint:disable type_body_length
 // swiftlint:disable file_length
 
 import XCTest
+import Firebase
 import WildWestEngine
+import RxSwift
 
-class GDatabaseUpdaterTests: XCTestCase {
+class RemoteGameDatabaseUpdaterTests: XCTestCase {
 
-    private var sut: GDatabaseUpdaterProtocol!
+    private var sut: RemoteGameDatabaseUpdaterProtocol!
+    private var mockDatabaseReference: MockDatabaseReference!
+    private var disposeBag: DisposeBag!
     
     override func setUp() {
-        sut = GDatabaseUpdater()
+        mockDatabaseReference = MockDatabaseReference()
+        sut = RemoteGameDatabaseUpdater(gameRef: mockDatabaseReference)
+        disposeBag = DisposeBag()
     }
     
     // MARK: - play, setTurn, setPhase
     
-    func test_Run() {
+    func test_appendPlayedAbility_IfRun() throws {
         // Given
-        let mockState = MockStateProtocol()
-            .withDefault()
-            .played(are: "a1")
-        let state = GState(mockState)
-        let event = GEvent.run(move: GMove("a2", actor: "p1"))
+        let event = GEvent.run(move: GMove("a1", actor: "p1"))
+        let expectation = XCTestExpectation(description: #function)
         
         // When
-        sut.execute(event, in: state)
-        
         // Assert
-        XCTAssertEqual(state.played, ["a1", "a2"])
+        sut.execute(event).subscribe(onCompleted: {
+            XCTAssertEqual(self.mockDatabaseReference.settedValues["state/played/1"] as? String, "a1")
+            expectation.fulfill()
+        }).disposed(by: disposeBag)
+            
+        wait(for: [expectation], timeout: 0.5)
     }
     
-    func test_setTurn() {
+    func test_updateTurn_IfSetTurn() {
         // Given
-        let mockState = MockStateProtocol()
-            .withDefault()
-            .turn(is: "p1")
-            .played(are: "a1")
-        let state = GState(mockState)
         let event = GEvent.setTurn(player: "p2")
+        let expectation = XCTestExpectation(description: #function)
         
         // When
-        sut.execute(event, in: state)
-        
         // Assert
-        XCTAssertEqual(state.turn, "p2")
-        XCTAssertEqual(state.played, [])
+        sut.execute(event).subscribe(onCompleted: {
+            XCTAssertEqual(self.mockDatabaseReference.settedValues["state/turn"] as? String, "p2")
+            expectation.fulfill()
+        }).disposed(by: disposeBag)
+            
+        wait(for: [expectation], timeout: 0.5)
     }
     
-    func test_setPhase() {
+    func test_clearPlayedAbilities_IfSetTurn() {
         // Given
-        let mockState = MockStateProtocol()
-            .withDefault()
-            .phase(is: 1)
-        let state = GState(mockState)
-        let event = GEvent.setPhase(value: 2)
+        let event = GEvent.setTurn(player: "p2")
+        let expectation = XCTestExpectation(description: #function)
         
         // When
-        sut.execute(event, in: state)
-        
         // Assert
-        XCTAssertEqual(state.phase, 2)
+        sut.execute(event).subscribe(onCompleted: {
+            XCTAssertNil(self.mockDatabaseReference.settedValues["state/played"])
+            expectation.fulfill()
+        }).disposed(by: disposeBag)
+            
+        wait(for: [expectation], timeout: 0.5)
+    }
+    
+    func test_updatePhase_IfSetPhase() {
+        // Given
+        let event = GEvent.setPhase(value: 2)
+        let expectation = XCTestExpectation(description: #function)
+        
+        // When
+        // Assert
+        sut.execute(event).subscribe(onCompleted: {
+            XCTAssertEqual(self.mockDatabaseReference.settedValues["state/phase"] as? Int, 2)
+            expectation.fulfill()
+        }).disposed(by: disposeBag)
+        
+        wait(for: [expectation], timeout: 0.5)
     }
     
     // MARK: - Health
     
     func test_IncrementHealth_IfGainHealth() {
         // Given
-        let mockPlayer1 = MockPlayerProtocol()
-            .withDefault()
-            .identified(by: "p1")
-            .health(is: 2)
-        let mockState = MockStateProtocol()
-            .withDefault()
-            .players(are: mockPlayer1)
-        let state = GState(mockState)
         let event = GEvent.gainHealth(player: "p1")
+        let expectation = XCTestExpectation(description: #function)
+        mockDatabaseReference.returnedValues["state/players/p1/health"] = 1
         
         // When
-        sut.execute(event, in: state)
-        
         // Assert
-        XCTAssertEqual(state.players["p1"]!.health, 3)
+        sut.execute(event).subscribe(onCompleted: {
+            XCTAssertEqual(self.mockDatabaseReference.settedValues["state/players/p1/health"] as? Int, 2)
+            expectation.fulfill()
+        }).disposed(by: disposeBag)
+        
+        wait(for: [expectation], timeout: 0.5)
     }
     
     func test_DecrementHealth_IfLooseHealth() {
         // Given
-        let mockPlayer1 = MockPlayerProtocol()
-            .withDefault()
-            .identified(by: "p1")
-            .health(is: 2)
-        let mockState = MockStateProtocol()
-            .withDefault()
-            .players(are: mockPlayer1)
-        let state = GState(mockState)
         let event = GEvent.looseHealth(player: "p1", offender: "pX")
+        let expectation = XCTestExpectation(description: #function)
+        mockDatabaseReference.returnedValues["state/players/p1/health"] = 2
         
         // When
-        sut.execute(event, in: state)
-        
         // Assert
-        XCTAssertEqual(state.players["p1"]!.health, 1)
+        sut.execute(event).subscribe(onCompleted: {
+            XCTAssertEqual(self.mockDatabaseReference.settedValues["state/players/p1/health"] as? Int, 1)
+            expectation.fulfill()
+        }).disposed(by: disposeBag)
+        
+        wait(for: [expectation], timeout: 0.5)
     }
     
     func test_SetHealthZero_IfEliminate() {
         // Given
-        let mockPlayer1 = MockPlayerProtocol()
-            .withDefault()
-            .identified(by: "p1")
-            .health(is: 1)
-        let mockState = MockStateProtocol()
-            .withDefault()
-            .players(are: mockPlayer1)
-            .playOrder(is: "p1", "p2", "p3")
-        let state = GState(mockState)
         let event = GEvent.eliminate(player: "p1", offender: "pX")
+        let expectation = XCTestExpectation(description: #function)
         
         // When
-        sut.execute(event, in: state)
-        
         // Assert
-        XCTAssertEqual(state.players["p1"]!.health, 0)
+        sut.execute(event).subscribe(onCompleted: {
+            XCTAssertEqual(self.mockDatabaseReference.settedValues["state/players/p1/health"] as? Int, 0)
+            expectation.fulfill()
+        }).disposed(by: disposeBag)
+        
+        wait(for: [expectation], timeout: 0.5)
     }
     
     func test_RemovePlayerFromPlayOrder_IfEliminate() {
         // Given
-        let mockPlayer1 = MockPlayerProtocol()
-            .withDefault()
-            .identified(by: "p1")
-        let mockState = MockStateProtocol()
-            .withDefault()
-            .players(are: mockPlayer1)
-            .playOrder(is: "p1", "p2", "p3")
-        let state = GState(mockState)
         let event = GEvent.eliminate(player: "p1", offender: "p2")
+        mockDatabaseReference.returnedValues["state/playOrder"] = ["p1", "p2", "p3"]
+        let expectation = XCTestExpectation(description: #function)
         
         // When
-        sut.execute(event, in: state)
-        
         // Assert
-        XCTAssertEqual(state.playOrder, ["p2", "p3"])
+        sut.execute(event).subscribe(onCompleted: {
+            XCTAssertEqual(self.mockDatabaseReference.settedValues["state/playOrder"] as? [String], ["p2", "p3"])
+            expectation.fulfill()
+        }).disposed(by: disposeBag)
+        
+        wait(for: [expectation], timeout: 0.5)
     }
     
     func test_removeAssociatedHits_IfEliminate() {
         // Given
-        let mockPlayer1 = MockPlayerProtocol()
-            .withDefault()
-            .identified(by: "p1")
-        let mockState = MockStateProtocol()
-            .withDefault()
-            .players(are: mockPlayer1)
-            .playOrder(is: "p1", "p2", "p3")
-            .hits(are: MockHitProtocol().withDefault().player(is: "p1"))
-        let state = GState(mockState)
         let event = GEvent.eliminate(player: "p1", offender: "p2")
+        let hit1 = HitDto(name: "h1", player: "p1", abilities: nil, offender: nil, cancelable: nil)
+        let hit2 = HitDto(name: "h2", player: "p2", abilities: nil, offender: nil, cancelable: nil)
+        mockDatabaseReference.returnedValues["state/hits"] = ["key1": hit1, "key2": hit2]
+        let expectation = XCTestExpectation(description: #function)
         
         // When
-        sut.execute(event, in: state)
-        
         // Assert
-        XCTAssertEqual(state.playOrder, ["p2", "p3"])
-        XCTAssertEqual(state.hits.count, 0)
+        sut.execute(event).subscribe(onCompleted: {
+            XCTAssertEqual(self.mockDatabaseReference.settedValues["state/hits"] as? [String: HitDto], ["key2": hit2])
+            expectation.fulfill()
+        }).disposed(by: disposeBag)
+        
+        wait(for: [expectation], timeout: 0.5)
     }
-    
+    /*
     // MARK: - Draw
     
     func test_AddCardToHand_IfDrawingDeck() {
@@ -659,42 +660,48 @@ class GDatabaseUpdaterTests: XCTestCase {
         XCTAssertEqual(state.hits[0].cancelable, 1)
         XCTAssertEqual(state.hits[1].player, "p2")
     }
-    
+    */
     // MARK: - Engine
     
     func test_DoNothing_IfActivateMoves() {
         // Given
-        let mockState = MockStateProtocol()
-            .withDefault()
-        let state = GState(mockState)
         let event = GEvent.activate(moves: [])
+        let expectation = XCTestExpectation(description: #function)
         
         // When
         // Assert
-        XCTAssertNoThrow(sut.execute(event, in: state))
+        sut.execute(event).subscribe(onCompleted: {
+            expectation.fulfill()
+        }).disposed(by: disposeBag)
+            
+        wait(for: [expectation], timeout: 0.5)
     }
     
     func test_DoNothing_IfGameOver() {
         // Given
-        let mockState = MockStateProtocol()
-            .withDefault()
-        let state = GState(mockState)
         let event = GEvent.gameover(winner: .outlaw)
+        let expectation = XCTestExpectation(description: #function)
         
         // When
         // Assert
-        XCTAssertNoThrow(sut.execute(event, in: state))
+        sut.execute(event).subscribe(onCompleted: {
+            expectation.fulfill()
+        }).disposed(by: disposeBag)
+            
+        wait(for: [expectation], timeout: 0.5)
     }
     
     func test_DoNothing_IfEmptyQueue() {
         // Given
-        let mockState = MockStateProtocol()
-            .withDefault()
-        let state = GState(mockState)
         let event = GEvent.emptyQueue
+        let expectation = XCTestExpectation(description: #function)
         
         // When
         // Assert
-        XCTAssertNoThrow(sut.execute(event, in: state))
+        sut.execute(event).subscribe(onCompleted: {
+            expectation.fulfill()
+        }).disposed(by: disposeBag)
+            
+        wait(for: [expectation], timeout: 0.5)
     }
 }
