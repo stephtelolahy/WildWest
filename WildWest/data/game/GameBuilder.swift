@@ -26,12 +26,12 @@ class GameBuilder: GameBuilderProtocol {
     private let preferences: UserPreferencesProtocol
     private let resourcesLoader: ResourcesLoaderProtocol
     private let durationMatcher: DurationMatcherProtocol
-    private let database: MainDatabaseProtocol
+    private let database: UserDatabaseProtocol
     
     init(preferences: UserPreferencesProtocol,
          resourcesLoader: ResourcesLoaderProtocol,
          durationMatcher: DurationMatcherProtocol,
-         database: MainDatabaseProtocol) {
+         database: UserDatabaseProtocol) {
         self.preferences = preferences
         self.resourcesLoader = resourcesLoader
         self.durationMatcher = durationMatcher
@@ -90,7 +90,7 @@ class GameBuilder: GameBuilderProtocol {
                                      playerId: String?,
                                      gameId: String,
                                      users: [String: UserInfo]) -> GameEnvironment {
-        let gameDatabase = database.remoteGameDatabase(gameId, state: state)
+        let gameDatabase = database.createGameDatabase(gameId, state: state)
         
         let playReqMatcher = PlayReqMatcher()
         let effectMatcher = EffectMatcher()

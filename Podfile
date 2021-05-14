@@ -31,6 +31,7 @@ target 'WildWestTests' do
   # Pods for testing
   shared_pods
   pod 'Firebase/Database'
+  pod 'Cuckoo'
 end
 
 target 'WildWestEngine' do

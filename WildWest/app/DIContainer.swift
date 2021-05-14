@@ -107,15 +107,13 @@ extension Resolver: ResolverRegistering {
         
         register { provideMediaMatcher() as MediaEventMatcherProtocol }.scope(application)
         
-        register { Database.database().reference() as DatabaseReference }.scope(application)
-        
-        register { DtoEncoder(databaseRef: resolve(), allCards: provideDeckCards()) }
+        register { DtoEncoder(databaseRef: Database.database().reference(), allCards: provideDeckCards()) }
         
         register { FirebaseMapper(dtoEncoder: resolve(),
                                   dictionaryEncoder: resolve()) as FirebaseMapperProtocol
         }.scope(application)
         
-        register { MainDatabase(rootRef: resolve(), mapper: resolve()) as MainDatabaseProtocol
+        register { UserDatabase(rootRef: Database.database().reference(), mapper: resolve()) as UserDatabaseProtocol
         }.scope(application)
         
         register { GameBuilder(preferences: resolve(),

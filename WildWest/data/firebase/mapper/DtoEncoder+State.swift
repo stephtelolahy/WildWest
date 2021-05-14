@@ -52,7 +52,7 @@ private extension DtoEncoder {
     func encode(hits: [HitProtocol]) -> [String: HitDto] {
         hits.reduce([String: HitDto]()) { dict, hit in
             var dict = dict
-            let key = self.databaseRef.childByAutoId().key!
+            let key = self.databaseRef.childByAutoIdKey()
             dict[key] = encode(hit: hit)
             return dict
         }
@@ -102,7 +102,7 @@ private extension DtoEncoder {
     func encode(abilities: [String]) -> [String: String] {
         abilities.reduce([String: String]()) { dict, ability in
             var dict = dict
-            let key = self.databaseRef.childByAutoId().key!
+            let key = self.databaseRef.childByAutoIdKey()
             dict[key] = ability
             return dict
         }

@@ -22,10 +22,10 @@ protocol UserManagerProtocol {
 class UserManager: UserManagerProtocol {
     
     private let authProvider: AuthProviderProtocol
-    private let database: MainDatabaseProtocol
+    private let database: UserDatabaseProtocol
     
     init(authProvider: AuthProviderProtocol,
-         database: MainDatabaseProtocol) {
+         database: UserDatabaseProtocol) {
         self.authProvider = authProvider
         self.database = database
     }

@@ -14,7 +14,7 @@ public class RemoteGameDatabase: DatabaseProtocol {
     
     // MARK: - Dependencies
     
-    private let gameRef: DatabaseReference
+    private let gameRef: DatabaseReferenceProtocol
     private let mapper: FirebaseMapperProtocol
     private let updater: RemoteGameDatabaseUpdaterProtocol
     
@@ -28,7 +28,7 @@ public class RemoteGameDatabase: DatabaseProtocol {
     private let disposeBag = DisposeBag()
     
     init(_ aState: StateProtocol,
-         gameRef: DatabaseReference,
+         gameRef: DatabaseReferenceProtocol,
          mapper: FirebaseMapperProtocol,
          updater: RemoteGameDatabaseUpdaterProtocol) {
         self.gameRef = gameRef
@@ -44,7 +44,7 @@ public class RemoteGameDatabase: DatabaseProtocol {
     // MARK: - DatabaseProtocol
     
     public func update(event aEvent: GEvent) -> Completable {
-        gameRef.child("events").rxSetValue({ try self.mapper.encodeEvent(aEvent) })
+        gameRef.rxSetValue("events", encoding: { try self.mapper.encodeEvent(aEvent) })
             .andThen(updater.execute(aEvent))
     }
 }
@@ -52,8 +52,7 @@ public class RemoteGameDatabase: DatabaseProtocol {
 private extension RemoteGameDatabase {
     
     func observeStateChanges() {
-        gameRef.child("state")
-            .rxObserve({ try self.mapper.decodeState(from: $0) })
+        gameRef.rxObserve("state", decoding: { try self.mapper.decodeState(from: $0) })
             .subscribe(onNext: { [weak self] aState in
                 self?.state.onNext(aState)
             })
@@ -61,8 +60,7 @@ private extension RemoteGameDatabase {
     }
     
     func observeEventChanges() {
-        gameRef.child("events")
-            .rxObserve({ try self.mapper.decodeEvent(from: $0) })
+        gameRef.rxObserve("events", decoding: { try self.mapper.decodeEvent(from: $0) })
             .subscribe(onNext: { [weak self] anEvent in
                 self?.event.onNext(anEvent)
             })

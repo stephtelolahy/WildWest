@@ -11,6 +11,7 @@
 
 import XCTest
 import WildWestEngine
+import Cuckoo
 
 class DtoEncodingTests: XCTestCase {
     
@@ -19,16 +20,15 @@ class DtoEncodingTests: XCTestCase {
     private var mockCard2: CardProtocol!
     private var mockCard3: CardProtocol!
     private var mockCard4: CardProtocol!
-    private var mockDatabaseRef: MockDatabaseReference!
+    private var mockDatabaseReference: MockDatabaseReferenceProtocol!
     
     override func setUp() {
         mockCard1 = GCard(identifier: "c1", name: "", type: .blue, desc: "", abilities: [:], suit: "", value: "")
         mockCard2 = GCard(identifier: "c2", name: "", type: .blue, desc: "", abilities: [:], suit: "", value: "")
         mockCard3 = GCard(identifier: "c3", name: "", type: .blue, desc: "", abilities: [:], suit: "", value: "")
         mockCard4 = GCard(identifier: "c4", name: "", type: .blue, desc: "", abilities: [:], suit: "", value: "")
-        
-        mockDatabaseRef = MockDatabaseReference()
-        sut = DtoEncoder(databaseRef: mockDatabaseRef, allCards: [mockCard1, mockCard2, mockCard3, mockCard4])
+        mockDatabaseReference = MockDatabaseReferenceProtocol()
+        sut = DtoEncoder(databaseRef: mockDatabaseReference, allCards: [mockCard1, mockCard2, mockCard3, mockCard4])
     }
     
     // MARK: - State
@@ -60,6 +60,10 @@ class DtoEncodingTests: XCTestCase {
                            storeView: "p1",
                            hits: [hit1],
                            played: ["bang"])
+        
+        stub(mockDatabaseReference) { mock in
+            when(mock.childByAutoIdKey()).thenReturn("key1", "key2", "key3", "key4")
+        }
         
         // When
         let encoded = sut.encode(state: state)

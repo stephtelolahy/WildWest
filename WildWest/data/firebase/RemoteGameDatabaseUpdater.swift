@@ -17,9 +17,9 @@ protocol RemoteGameDatabaseUpdaterProtocol {
 
 class RemoteGameDatabaseUpdater: RemoteGameDatabaseUpdaterProtocol {
     
-    private let gameRef: DatabaseReference
+    private let gameRef: DatabaseReferenceProtocol
     
-    init(gameRef: DatabaseReference) {
+    init(gameRef: DatabaseReferenceProtocol) {
         self.gameRef = gameRef
     }
     
@@ -32,7 +32,7 @@ class RemoteGameDatabaseUpdater: RemoteGameDatabaseUpdaterProtocol {
     }
 }
 
-private typealias EventFunc = (GEvent, DatabaseReference) -> Completable
+private typealias EventFunc = (GEvent, DatabaseReferenceProtocol) -> Completable
 private typealias MatchingFunc = (GEvent) -> Bool
 
 private struct EventDesc {
@@ -83,8 +83,8 @@ private extension RemoteGameDatabaseUpdater {
                 fatalError("Invalid event")
             }
             
-            let key = gameRef.childByAutoId().key!
-            return gameRef.child("state/played/\(key)").rxSetValue({ move.ability })
+            let key = gameRef.childByAutoIdKey()
+            return gameRef.rxSetValue("state/played/\(key)") { move.ability }
         }
     }
     
@@ -114,8 +114,8 @@ private extension RemoteGameDatabaseUpdater {
                 fatalError("Invalid event")
             }
             
-            return gameRef.child("state/turn").rxSetValue({ player })
-                .andThen(gameRef.child("state/played").rxSetValue({ nil }))
+            return gameRef.rxSetValue("state/turn", encoding: { player })
+                .andThen(gameRef.rxSetValue("state/played", encoding: { nil }))
         }
     }
     
@@ -124,7 +124,7 @@ private extension RemoteGameDatabaseUpdater {
             guard case let .setPhase(value) = event else {
                 fatalError("Invalid event")
             }
-            return gameRef.child("state/phase").rxSetValue({ value })
+            return gameRef.rxSetValue("state/phase") { value }
         }
     }
     
@@ -134,14 +134,11 @@ private extension RemoteGameDatabaseUpdater {
                 fatalError("Invalid event")
             }
             
-            return gameRef.child("state/players/\(player)/health")
-                .rxObserveSingleEvent({ snapshot in
-                    let health = try (snapshot.value as? Int).unwrap()
-                    return health
-                }).flatMapCompletable { health -> Completable in
-                    gameRef.child("state/players/\(player)/health")
-                        .rxSetValue({ health + 1 })
-                }
+            return gameRef.rxObserveSingleEvent("state/players/\(player)/health", decoding: { snapshot -> Int in
+                try (snapshot.value as? Int).unwrap()
+            }).flatMapCompletable { health -> Completable in
+                gameRef.rxSetValue("state/players/\(player)/health") { health + 1 }
+            }
         }
     }
     
@@ -150,13 +147,11 @@ private extension RemoteGameDatabaseUpdater {
             guard case let .looseHealth(player, _) = event else {
                 fatalError("Invalid event")
             }
-            return gameRef.child("state/players/\(player)/health")
-                .rxObserveSingleEvent({ snapshot -> Int in
-                    try (snapshot.value as? Int).unwrap()
-                }).flatMapCompletable { health -> Completable in
-                    gameRef.child("state/players/\(player)/health")
-                        .rxSetValue({ health - 1 })
-                }
+            return gameRef.rxObserveSingleEvent("state/players/\(player)/health", decoding: { snapshot -> Int in
+                try (snapshot.value as? Int).unwrap()
+            }).flatMapCompletable { health -> Completable in
+                gameRef.rxSetValue("state/players/\(player)/health") { health - 1 }
+            }
         }
     }
     
@@ -165,24 +160,26 @@ private extension RemoteGameDatabaseUpdater {
             guard case let .eliminate(player, _) = event else {
                 fatalError("Invalid event")
             }
-            return gameRef.child("state/players/\(player)/health").rxSetValue({ 0 })
-                .andThen(gameRef.child("state/playOrder").rxObserveSingleEvent({ snapshot -> [String]? in
+            return gameRef.rxSetValue("state/players/\(player)/health", encoding: { 0 })
+                .andThen(gameRef.rxObserveSingleEvent("state/playOrder", decoding: { snapshot -> [String]? in
                     snapshot.value as? [String]
                 }).flatMapCompletable({ playOrder -> Completable in
                     var value = playOrder ?? []
                     if let index = value.firstIndex(of: player) {
                         value.remove(at: index)
                     }
-                    return gameRef.child("state/playOrder").rxSetValue({ value })
+                    return gameRef.rxSetValue("state/playOrder") { value }
                 }))
-                .andThen(gameRef.child("state/hits").rxObserveSingleEvent({ snapshot -> [String: HitDto]? in
+                .andThen(gameRef.rxObserveSingleEvent("state/hits", decoding: { snapshot -> [String: HitDto]? in
                     snapshot.value as? [String: HitDto]
                 }).flatMapCompletable({ hits -> Completable in
-                    var value = hits ?? [:]
-                    for (key, val) in value where val.player == player {
-                        value[key] = nil
+                    let hits = hits ?? [:]
+                    var keysToRemove: [String] = []
+                    for (key, value) in hits where value.player == player {
+                        keysToRemove.append(key)
                     }
-                    return gameRef.child("state/hits").rxSetValue({ value })
+                    let completables: [Completable] = keysToRemove.map { gameRef.rxSetValue("state/hits/\($0)", encoding: { nil }) }
+                    return Completable.concat(completables)
                 }))
         }
     }

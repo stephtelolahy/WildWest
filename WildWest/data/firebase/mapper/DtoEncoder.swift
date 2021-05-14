@@ -11,10 +11,10 @@ import WildWestEngine
 
 class DtoEncoder {
     
-    let databaseRef: DatabaseReference
+    let databaseRef: DatabaseReferenceProtocol
     private let allCards: [CardProtocol]
     
-    init(databaseRef: DatabaseReference, allCards: [CardProtocol]) {
+    init(databaseRef: DatabaseReferenceProtocol, allCards: [CardProtocol]) {
         self.allCards = allCards
         self.databaseRef = databaseRef
     }
@@ -30,7 +30,7 @@ class DtoEncoder {
     func encode(cards: [CardProtocol]) -> [String: String] {
         cards.reduce([String: String]()) { dict, card in
             var dict = dict
-            let key = self.databaseRef.childByAutoId().key!
+            let key = self.databaseRef.childByAutoIdKey()
             dict[key] = encode(card: card)
             return dict
         }

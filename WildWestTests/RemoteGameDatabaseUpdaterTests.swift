@@ -7,20 +7,22 @@
 //
 // swiftlint:disable implicitly_unwrapped_optional
 // swiftlint:disable file_length
+// swiftlint:disable type_body_length
 
 import XCTest
 import Firebase
 import WildWestEngine
 import RxSwift
+import Cuckoo
 
 class RemoteGameDatabaseUpdaterTests: XCTestCase {
-
+    
     private var sut: RemoteGameDatabaseUpdaterProtocol!
-    private var mockDatabaseReference: MockDatabaseReference!
+    private var mockDatabaseReference: MockDatabaseReferenceProtocol!
     private var disposeBag: DisposeBag!
     
     override func setUp() {
-        mockDatabaseReference = MockDatabaseReference()
+        mockDatabaseReference = MockDatabaseReferenceProtocol().withDefault()
         sut = RemoteGameDatabaseUpdater(gameRef: mockDatabaseReference)
         disposeBag = DisposeBag()
     }
@@ -31,14 +33,17 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         // Given
         let event = GEvent.run(move: GMove("a1", actor: "p1"))
         let expectation = XCTestExpectation(description: #function)
+        stub(mockDatabaseReference) { mock in
+            when(mock).childByAutoIdKey().thenReturn("key1")
+        }
         
         // When
         // Assert
         sut.execute(event).subscribe(onCompleted: {
-            XCTAssertEqual(self.mockDatabaseReference.settedValues["state/played/1"] as? String, "a1")
+            verify(self.mockDatabaseReference).setValue("state/played/key1", value: any(equalToString: "a1"), withCompletionBlock: any())
             expectation.fulfill()
         }).disposed(by: disposeBag)
-            
+        
         wait(for: [expectation], timeout: 0.5)
     }
     
@@ -50,10 +55,10 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         // When
         // Assert
         sut.execute(event).subscribe(onCompleted: {
-            XCTAssertEqual(self.mockDatabaseReference.settedValues["state/turn"] as? String, "p2")
+            verify(self.mockDatabaseReference).setValue("state/turn", value: any(equalToString: "p2"), withCompletionBlock: any())
             expectation.fulfill()
         }).disposed(by: disposeBag)
-            
+        
         wait(for: [expectation], timeout: 0.5)
     }
     
@@ -65,10 +70,10 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         // When
         // Assert
         sut.execute(event).subscribe(onCompleted: {
-            XCTAssertNil(self.mockDatabaseReference.settedValues["state/played"])
+            verify(self.mockDatabaseReference).setValue("state/played", value: isNil(), withCompletionBlock: any())
             expectation.fulfill()
         }).disposed(by: disposeBag)
-            
+        
         wait(for: [expectation], timeout: 0.5)
     }
     
@@ -80,7 +85,7 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         // When
         // Assert
         sut.execute(event).subscribe(onCompleted: {
-            XCTAssertEqual(self.mockDatabaseReference.settedValues["state/phase"] as? Int, 2)
+            verify(self.mockDatabaseReference).setValue("state/phase", value: any(equalToInt: 2), withCompletionBlock: any())
             expectation.fulfill()
         }).disposed(by: disposeBag)
         
@@ -93,12 +98,12 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         // Given
         let event = GEvent.gainHealth(player: "p1")
         let expectation = XCTestExpectation(description: #function)
-        mockDatabaseReference.returnedValues["state/players/p1/health"] = 1
+        mockDatabaseReference.stubObserveSingleEvent("state/players/p1/health", value: 1)
         
         // When
         // Assert
         sut.execute(event).subscribe(onCompleted: {
-            XCTAssertEqual(self.mockDatabaseReference.settedValues["state/players/p1/health"] as? Int, 2)
+            verify(self.mockDatabaseReference).setValue("state/players/p1/health", value: any(equalToInt: 2), withCompletionBlock: any())
             expectation.fulfill()
         }).disposed(by: disposeBag)
         
@@ -109,12 +114,12 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         // Given
         let event = GEvent.looseHealth(player: "p1", offender: "pX")
         let expectation = XCTestExpectation(description: #function)
-        mockDatabaseReference.returnedValues["state/players/p1/health"] = 2
+        mockDatabaseReference.stubObserveSingleEvent("state/players/p1/health", value: 2)
         
         // When
         // Assert
         sut.execute(event).subscribe(onCompleted: {
-            XCTAssertEqual(self.mockDatabaseReference.settedValues["state/players/p1/health"] as? Int, 1)
+            verify(self.mockDatabaseReference).setValue("state/players/p1/health", value: any(equalToInt: 1), withCompletionBlock: any())
             expectation.fulfill()
         }).disposed(by: disposeBag)
         
@@ -129,7 +134,7 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         // When
         // Assert
         sut.execute(event).subscribe(onCompleted: {
-            XCTAssertEqual(self.mockDatabaseReference.settedValues["state/players/p1/health"] as? Int, 0)
+            verify(self.mockDatabaseReference).setValue("state/players/p1/health", value: any(equalToInt: 0), withCompletionBlock: any())
             expectation.fulfill()
         }).disposed(by: disposeBag)
         
@@ -139,13 +144,13 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
     func test_RemovePlayerFromPlayOrder_IfEliminate() {
         // Given
         let event = GEvent.eliminate(player: "p1", offender: "p2")
-        mockDatabaseReference.returnedValues["state/playOrder"] = ["p1", "p2", "p3"]
+        mockDatabaseReference.stubObserveSingleEvent("state/playOrder", value: ["p1", "p2", "p3"])
         let expectation = XCTestExpectation(description: #function)
         
         // When
         // Assert
         sut.execute(event).subscribe(onCompleted: {
-            XCTAssertEqual(self.mockDatabaseReference.settedValues["state/playOrder"] as? [String], ["p2", "p3"])
+            verify(self.mockDatabaseReference).setValue("state/playOrder", value: any(equalToStringArray: ["p2", "p3"]), withCompletionBlock: any())
             expectation.fulfill()
         }).disposed(by: disposeBag)
         
@@ -157,13 +162,14 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         let event = GEvent.eliminate(player: "p1", offender: "p2")
         let hit1 = HitDto(name: "h1", player: "p1", abilities: nil, offender: nil, cancelable: nil)
         let hit2 = HitDto(name: "h2", player: "p2", abilities: nil, offender: nil, cancelable: nil)
-        mockDatabaseReference.returnedValues["state/hits"] = ["key1": hit1, "key2": hit2]
+        let hits = ["key1": hit1, "key2": hit2]
+        mockDatabaseReference.stubObserveSingleEvent("state/hits", value: hits)
         let expectation = XCTestExpectation(description: #function)
         
         // When
         // Assert
         sut.execute(event).subscribe(onCompleted: {
-            XCTAssertEqual(self.mockDatabaseReference.settedValues["state/hits"] as? [String: HitDto], ["key2": hit2])
+            verify(self.mockDatabaseReference).setValue("state/hits/key1", value: isNil(), withCompletionBlock: any())
             expectation.fulfill()
         }).disposed(by: disposeBag)
         
@@ -671,6 +677,7 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         // When
         // Assert
         sut.execute(event).subscribe(onCompleted: {
+            verifyNoMoreInteractions(self.mockDatabaseReference)
             expectation.fulfill()
         }).disposed(by: disposeBag)
             
@@ -685,6 +692,7 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         // When
         // Assert
         sut.execute(event).subscribe(onCompleted: {
+            verifyNoMoreInteractions(self.mockDatabaseReference)
             expectation.fulfill()
         }).disposed(by: disposeBag)
             
@@ -699,6 +707,7 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         // When
         // Assert
         sut.execute(event).subscribe(onCompleted: {
+            verifyNoMoreInteractions(self.mockDatabaseReference)
             expectation.fulfill()
         }).disposed(by: disposeBag)
             
