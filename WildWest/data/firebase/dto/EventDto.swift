@@ -10,6 +10,13 @@ import Foundation
 
 struct EventDto: Codable {
     var timestamp: String = "\(Date().timeIntervalSince1970)"
+    var emptyQueue: Bool?
+    var revealDeck: Bool?
+    var deckToStore: Bool?
+    var setPhase: Int?
+    var setTurn: String?
+    var gainHealth: String?
+    var drawDeck: String?
     /*
      case activate(moves: [GMove])
      case run(move: GMove)
@@ -18,14 +25,9 @@ struct EventDto: Codable {
      case equip(player: String, card: String)
      case handicap(player: String, card: String, other: String)
      
-     case setTurn(player: String)
-     case setPhase(value: Int)
-
-     case gainHealth(player: String)
      case looseHealth(player: String, offender: String)
      case eliminate(player: String, offender: String)
      
-     case drawDeck(player: String)
      case drawHand(player: String, other: String, card: String)
      case drawInPlay(player: String, other: String, card: String)
      case drawStore(player: String, card: String)
@@ -36,10 +38,9 @@ struct EventDto: Codable {
      case passInPlay(player: String, card: String, other: String)
 
      case setStoreView(player: String?)
-     case deckToStore
+     
      case storeToDeck(card: String)
      
-     case revealDeck
      case revealHand(player: String, card: String)
 
      case addHit(name: String, player: String, abilities: [String], cancelable: Int, offender: String)
@@ -47,7 +48,7 @@ struct EventDto: Codable {
      case cancelHit(player: String)
      
      case gameover(winner: Role)
-     case emptyQueue
+     
      */
 }
 

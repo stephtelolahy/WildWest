@@ -30,8 +30,7 @@ class DtoEncoder {
     func encode(cards: [CardProtocol]) -> [String: String] {
         cards.reduce([String: String]()) { dict, card in
             var dict = dict
-            let key = self.databaseRef.childByAutoIdKey()
-            dict[key] = encode(card: card)
+            dict[self.databaseRef.childByAutoIdKey()] = encode(card: card)
             return dict
         }
     }

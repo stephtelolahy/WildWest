@@ -12,11 +12,63 @@ import WildWestEngine
 extension DtoEncoder {
     
     func decode(event: EventDto) throws -> GEvent {
-        .emptyQueue
+        if event.emptyQueue != nil {
+            return .emptyQueue
+        }
+        
+        if event.revealDeck != nil {
+            return .revealDeck
+        }
+        
+        if event.deckToStore != nil {
+            return .deckToStore
+        }
+        
+        if let phase = event.setPhase {
+            return .setPhase(value: phase)
+        }
+        
+        if let player = event.setTurn {
+            return .setTurn(player: player)
+        }
+        
+        if let player = event.gainHealth {
+            return .gainHealth(player: player)
+        }
+        
+        if let player = event.drawDeck {
+            return .drawDeck(player: player)
+        }
+        
+        return .emptyQueue
     }
     
     func encode(event: GEvent) -> EventDto {
-        EventDto()
+        switch event {
+        case .emptyQueue:
+            return EventDto(emptyQueue: true)
+            
+        case .revealDeck:
+            return EventDto(revealDeck: true)
+            
+        case .deckToStore:
+            return EventDto(deckToStore: true)
+            
+        case let .setPhase(value: phase):
+            return EventDto(setPhase: phase)
+            
+        case let .setTurn(player):
+            return EventDto(setTurn: player)
+            
+        case let .gainHealth(player: player):
+            return EventDto(gainHealth: player)
+            
+        case let .drawDeck(player: player):
+            return EventDto(drawDeck: player)
+            
+        default:
+            return EventDto()
+        }
     }
 }
 /*

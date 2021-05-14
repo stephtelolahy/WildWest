@@ -44,7 +44,6 @@
 		335157F6245D855E00C46888 /* DtoEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AF42454AD7200A5D2DA /* DtoEncoder.swift */; };
 		335157F9245D860600C46888 /* DtoEncodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335157F8245D860600C46888 /* DtoEncodingTests.swift */; };
 		335157FA245D888F00C46888 /* StateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4B52452379700D7B297 /* StateDto.swift */; };
-		335157FB245D889900C46888 /* PlayerDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AF02454ABF200A5D2DA /* PlayerDto.swift */; };
 		335157FE245D88BE00C46888 /* OptionalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33031E0E24555D5F00528158 /* OptionalExtension.swift */; };
 		33516CCA2450A79E003C99E2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33516CC92450A79E003C99E2 /* GoogleService-Info.plist */; };
 		335447622568825800D7B02C /* ResourcesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335447612568825800D7B02C /* ResourcesTests.swift */; };
@@ -117,7 +116,6 @@
 		33732A80264BB5C9007A9EA7 /* DtoEncoder+Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339555992644394F0006FBB0 /* DtoEncoder+Event.swift */; };
 		33732A84264BB984007A9EA7 /* EventDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33955594264439200006FBB0 /* EventDto.swift */; };
 		33734AE92454AB3000A5D2DA /* DictionaryEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AE82454AB3000A5D2DA /* DictionaryEncoder.swift */; };
-		33734AF12454ABF200A5D2DA /* PlayerDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AF02454ABF200A5D2DA /* PlayerDto.swift */; };
 		33734AF52454AD7200A5D2DA /* DtoEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33734AF42454AD7200A5D2DA /* DtoEncoder.swift */; };
 		3373EF14264BA0EB006C8D6D /* media.json in Resources */ = {isa = PBXBuildFile; fileRef = 3300EF2D256FE4FE006075F6 /* media.json */; };
 		3373EF18264BA11C006C8D6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F4239EE03900653905 /* Assets.xcassets */; };
@@ -388,7 +386,6 @@
 		3372CB512454BC7900C061C9 /* FigureSelectorWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FigureSelectorWidget.swift; sourceTree = "<group>"; };
 		3372CB532454BF8E00C061C9 /* GameBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBuilder.swift; sourceTree = "<group>"; };
 		33734AE82454AB3000A5D2DA /* DictionaryEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryEncoder.swift; sourceTree = "<group>"; };
-		33734AF02454ABF200A5D2DA /* PlayerDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDto.swift; sourceTree = "<group>"; };
 		33734AF42454AD7200A5D2DA /* DtoEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DtoEncoder.swift; sourceTree = "<group>"; };
 		337AE25725587F16004015ED /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
 		3383CFCD242D4AAE00777E61 /* Metal Clang-SoundBible.com-19572601.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Metal Clang-SoundBible.com-19572601.mp3"; sourceTree = "<group>"; };
@@ -704,11 +701,11 @@
 		3358330725BC2584001BE4D8 /* setup */ = {
 			isa = PBXGroup;
 			children = (
-				3358330825BC2584001BE4D8 /* DeckCard.swift */,
 				3358330925BC2584001BE4D8 /* ResourcesLoader.swift */,
 				3358330A25BC2584001BE4D8 /* Ability.swift */,
 				3358330B25BC2585001BE4D8 /* JsonReader.swift */,
 				3358330C25BC2585001BE4D8 /* Card.swift */,
+				3358330825BC2584001BE4D8 /* DeckCard.swift */,
 				3358330D25BC2585001BE4D8 /* DefaultAbilities.swift */,
 				3358330E25BC2585001BE4D8 /* Setup.swift */,
 			);
@@ -833,9 +830,8 @@
 			isa = PBXGroup;
 			children = (
 				3322C4B52452379700D7B297 /* StateDto.swift */,
-				33734AF02454ABF200A5D2DA /* PlayerDto.swift */,
-				33C922E724CA986300956151 /* UserInfoDto.swift */,
 				33955594264439200006FBB0 /* EventDto.swift */,
+				33C922E724CA986300956151 /* UserInfoDto.swift */,
 			);
 			path = dto;
 			sourceTree = "<group>";
@@ -1879,7 +1875,6 @@
 				33A6330024545B060023A2D2 /* AnalyticsManager.swift in Sources */,
 				3346F33D24CB2F6F00FB0418 /* MainViewController.swift in Sources */,
 				3346F33424CB280500FB0418 /* DtoEncoder+State.swift in Sources */,
-				33734AF12454ABF200A5D2DA /* PlayerDto.swift in Sources */,
 				33315303256ED0EB0088D281 /* AnimationEventMatcher.swift in Sources */,
 				334673EB2436328000FFBB82 /* UserPreferences.swift in Sources */,
 				3372CB522454BC7900C061C9 /* FigureSelectorWidget.swift in Sources */,
@@ -1910,7 +1905,6 @@
 				33646989264099C400550209 /* GameEnvironment.swift in Sources */,
 				3300EF29256FE3C1006075F6 /* MediaEventMatcherTests.swift in Sources */,
 				333DB7C824D54FFF002A5692 /* HandCell.swift in Sources */,
-				335157FB245D889900C46888 /* PlayerDto.swift in Sources */,
 				33B0E85C263D5901004B5806 /* Router.swift in Sources */,
 				3346F32924CB1D7800FB0418 /* DtoEncoder+User.swift in Sources */,
 				335447622568825800D7B02C /* ResourcesTests.swift in Sources */,

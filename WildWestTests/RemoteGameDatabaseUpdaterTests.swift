@@ -40,7 +40,7 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         // When
         // Assert
         sut.execute(event).subscribe(onCompleted: {
-            verify(self.mockDatabaseReference).setValue("state/played/key1", value: any(equalToString: "a1"), withCompletionBlock: any())
+            verify(self.mockDatabaseReference).setValue("state/played/key1", value: any(equalTo: "a1"), withCompletionBlock: any())
             expectation.fulfill()
         }).disposed(by: disposeBag)
         
@@ -55,7 +55,7 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         // When
         // Assert
         sut.execute(event).subscribe(onCompleted: {
-            verify(self.mockDatabaseReference).setValue("state/turn", value: any(equalToString: "p2"), withCompletionBlock: any())
+            verify(self.mockDatabaseReference).setValue("state/turn", value: any(equalTo: "p2"), withCompletionBlock: any())
             expectation.fulfill()
         }).disposed(by: disposeBag)
         
@@ -85,7 +85,7 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         // When
         // Assert
         sut.execute(event).subscribe(onCompleted: {
-            verify(self.mockDatabaseReference).setValue("state/phase", value: any(equalToInt: 2), withCompletionBlock: any())
+            verify(self.mockDatabaseReference).setValue("state/phase", value: any(equalTo: 2), withCompletionBlock: any())
             expectation.fulfill()
         }).disposed(by: disposeBag)
         
@@ -103,7 +103,7 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         // When
         // Assert
         sut.execute(event).subscribe(onCompleted: {
-            verify(self.mockDatabaseReference).setValue("state/players/p1/health", value: any(equalToInt: 2), withCompletionBlock: any())
+            verify(self.mockDatabaseReference).setValue("state/players/p1/health", value: any(equalTo: 2), withCompletionBlock: any())
             expectation.fulfill()
         }).disposed(by: disposeBag)
         
@@ -119,7 +119,7 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         // When
         // Assert
         sut.execute(event).subscribe(onCompleted: {
-            verify(self.mockDatabaseReference).setValue("state/players/p1/health", value: any(equalToInt: 1), withCompletionBlock: any())
+            verify(self.mockDatabaseReference).setValue("state/players/p1/health", value: any(equalTo: 1), withCompletionBlock: any())
             expectation.fulfill()
         }).disposed(by: disposeBag)
         
@@ -134,7 +134,7 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         // When
         // Assert
         sut.execute(event).subscribe(onCompleted: {
-            verify(self.mockDatabaseReference).setValue("state/players/p1/health", value: any(equalToInt: 0), withCompletionBlock: any())
+            verify(self.mockDatabaseReference).setValue("state/players/p1/health", value: any(equalTo: 0), withCompletionBlock: any())
             expectation.fulfill()
         }).disposed(by: disposeBag)
         
@@ -150,7 +150,7 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         // When
         // Assert
         sut.execute(event).subscribe(onCompleted: {
-            verify(self.mockDatabaseReference).setValue("state/playOrder", value: any(equalToStringArray: ["p2", "p3"]), withCompletionBlock: any())
+            verify(self.mockDatabaseReference).setValue("state/playOrder", value: any(equalTo: ["p2", "p3"]), withCompletionBlock: any())
             expectation.fulfill()
         }).disposed(by: disposeBag)
         
@@ -175,110 +175,72 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         
         wait(for: [expectation], timeout: 0.5)
     }
-    /*
+    
     // MARK: - Draw
     
-    func test_AddCardToHand_IfDrawingDeck() {
+    func test_MoveCardFromDeckToHand_IfDrawingDeck() {
         // Given
-        let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
-        let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
-        let mockCard3 = MockCardProtocol().withDefault().identified(by: "c3")
-        let mockPlayer1 = MockPlayerProtocol()
-            .withDefault()
-            .identified(by: "p1")
-            .holding(mockCard1)
-        let mockState = MockStateProtocol()
-            .withDefault()
-            .players(are: mockPlayer1)
-            .deck(are: mockCard2, mockCard3)
-        let state = GState(mockState)
         let event = GEvent.drawDeck(player: "p1")
+        let expectation = XCTestExpectation(description: #function)
+        mockDatabaseReference.stubObserveSingleEvent("state/deck", value: ["key2": "c2", "key1": "c1", "key3": "c3"])
+        stub(mockDatabaseReference) { mock in
+            when(mock).childByAutoIdKey().thenReturn("keyX")
+        }
         
         // When
-        sut.execute(event, in: state)
-        
         // Assert
-        XCTAssertEqual(state.players["p1"]!.hand.map { $0.identifier }, ["c1", "c2"])
-        XCTAssertEqual(state.deck.map { $0.identifier }, ["c3"])
+        sut.execute(event).subscribe(onCompleted: {
+            verify(self.mockDatabaseReference).setValue("state/deck/key1", value: isNil(), withCompletionBlock: any())
+            verify(self.mockDatabaseReference).setValue("state/players/p1/hand/keyX", value: any(equalTo: "c1"), withCompletionBlock: any())
+            expectation.fulfill()
+        }).disposed(by: disposeBag)
+        
+        wait(for: [expectation], timeout: 0.5)
     }
     
     func test_ResetDeck_IfDrawingLastDeckCard() {
         // Given
-        let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
-        let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
-        let mockCard3 = MockCardProtocol().withDefault().identified(by: "c3")
-        let mockPlayer1 = MockPlayerProtocol()
-            .withDefault()
-            .identified(by: "p1")
-        let mockState = MockStateProtocol()
-            .withDefault()
-            .players(are: mockPlayer1)
-            .deck(are: mockCard1)
-            .discard(are: mockCard2, mockCard3)
-        let state = GState(mockState)
         let event = GEvent.drawDeck(player: "p1")
+        let expectation = XCTestExpectation(description: #function)
+        mockDatabaseReference.stubObserveSingleEvent("state/deck", value: ["key1": "c1"])
+        mockDatabaseReference.stubObserveSingleEvent("state/discard", value: ["key2": "c2", "key3": "c3"])
+        stub(mockDatabaseReference) { mock in
+            when(mock).childByAutoIdKey().thenReturn("keyA", "keyB")
+        }
         
         // When
-        sut.execute(event, in: state)
-        
         // Assert
-        XCTAssertEqual(state.players["p1"]!.hand.map { $0.identifier }, ["c1"])
-        XCTAssertEqual(state.deck.map { $0.identifier }, ["c3"])
-        XCTAssertEqual(state.discard.map { $0.identifier }, ["c2"])
+        sut.execute(event).subscribe(onCompleted: {
+            verify(self.mockDatabaseReference).setValue("state/discard/key2", value: isNil(), withCompletionBlock: any())
+            verify(self.mockDatabaseReference).setValue("state/deck/keyA", value: any(equalTo: "c2"), withCompletionBlock: any())
+            verify(self.mockDatabaseReference).setValue("state/deck/key1", value: isNil(), withCompletionBlock: any())
+            verify(self.mockDatabaseReference).setValue("state/players/p1/hand/keyB", value: any(equalTo: "c1"), withCompletionBlock: any())
+            expectation.fulfill()
+        }).disposed(by: disposeBag)
+        
+        wait(for: [expectation], timeout: 0.5)
     }
     
-    func test_ResetDeck_IfDrawingCardWhileDeckId2() {
+    func test_MoveCardFromHandToHand_IfDrawHand() {
         // Given
-        let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
-        let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
-        let mockCard3 = MockCardProtocol().withDefault().identified(by: "c3")
-        let mockCard4 = MockCardProtocol().withDefault().identified(by: "c4")
-        let mockPlayer1 = MockPlayerProtocol()
-            .withDefault()
-            .identified(by: "p1")
-        let mockState = MockStateProtocol()
-            .withDefault()
-            .players(are: mockPlayer1)
-            .deck(are: mockCard1, mockCard4)
-            .discard(are: mockCard2, mockCard3)
-        let state = GState(mockState)
-        let event = GEvent.drawDeck(player: "p1")
-        
-        // When
-        sut.execute(event, in: state)
-        
-        // Assert
-        XCTAssertEqual(state.players["p1"]!.hand.map { $0.identifier }, ["c1"])
-        XCTAssertEqual(state.deck.map { $0.identifier }, ["c4", "c3"])
-        XCTAssertEqual(state.discard.map { $0.identifier }, ["c2"])
-    }
-    
-    func test_drawHand() {
-        // Given
-        let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
-        let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
-        let mockPlayer1 = MockPlayerProtocol()
-            .withDefault()
-            .identified(by: "p1")
-            .holding(mockCard1)
-        let mockPlayer2 = MockPlayerProtocol()
-            .withDefault()
-            .identified(by: "p2")
-            .holding(mockCard2)
-        let mockState = MockStateProtocol()
-            .withDefault()
-            .players(are: mockPlayer1, mockPlayer2)
-        let state = GState(mockState)
         let event = GEvent.drawHand(player: "p1", other: "p2", card: "c2")
+        let expectation = XCTestExpectation(description: #function)
+        mockDatabaseReference.stubObserveSingleEvent("state/players/p2/hand", value: ["key1": "c1", "key2": "c2"])
+        stub(mockDatabaseReference) { mock in
+            when(mock).childByAutoIdKey().thenReturn("keyX")
+        }
         
         // When
-        sut.execute(event, in: state)
-        
         // Assert
-        XCTAssertEqual(state.players["p1"]!.hand.map { $0.identifier }, ["c1", "c2"])
-        XCTAssertEqual(state.players["p2"]!.hand.map { $0.identifier }, [])
+        sut.execute(event).subscribe(onCompleted: {
+            verify(self.mockDatabaseReference).setValue("state/players/p2/hand/key2", value: isNil(), withCompletionBlock: any())
+            verify(self.mockDatabaseReference).setValue("state/players/p1/hand/keyX", value: any(equalTo: "c2"), withCompletionBlock: any())
+            expectation.fulfill()
+        }).disposed(by: disposeBag)
+        
+        wait(for: [expectation], timeout: 0.5)
     }
-    
+    /*
     func test_drawInPlay() {
         // Given
         let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")

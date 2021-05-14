@@ -8,20 +8,8 @@
 
 import Cuckoo
 
-func any(equalToString string: String) -> ParameterMatcher<Any?> {
+func any<T: Equatable>(equalTo value: T) -> ParameterMatcher<Any?> {
     ParameterMatcher { object in
-        object as? String == string
-    }
-}
-
-func any(equalToInt integer: Int) -> ParameterMatcher<Any?> {
-    ParameterMatcher { object in
-        object as? Int == integer
-    }
-}
-
-func any(equalToStringArray array: [String]) -> ParameterMatcher<Any?> {
-    ParameterMatcher { object in
-        object as? [String] == array
+        object as? T == value
     }
 }

@@ -102,8 +102,7 @@ private extension DtoEncoder {
     func encode(abilities: [String]) -> [String: String] {
         abilities.reduce([String: String]()) { dict, ability in
             var dict = dict
-            let key = self.databaseRef.childByAutoIdKey()
-            dict[key] = ability
+            dict[self.databaseRef.childByAutoIdKey()] = ability
             return dict
         }
     }

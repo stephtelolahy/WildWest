@@ -52,9 +52,9 @@ private extension RemoteGameDatabaseUpdater {
         gainHealth(),
         looseHealth(),
         eliminate(),
-        /*
         drawDeck(),
         drawHand(),
+        /*
         drawInPlay(),
         drawDiscard(),
         drawStore(),
@@ -82,9 +82,7 @@ private extension RemoteGameDatabaseUpdater {
             guard case let .run(move) = event else {
                 fatalError("Invalid event")
             }
-            
-            let key = gameRef.childByAutoIdKey()
-            return gameRef.rxSetValue("state/played/\(key)") { move.ability }
+            return gameRef.rxSetValue("state/played/\(gameRef.childByAutoIdKey())") { move.ability }
         }
     }
     
@@ -136,7 +134,7 @@ private extension RemoteGameDatabaseUpdater {
             
             return gameRef.rxObserveSingleEvent("state/players/\(player)/health", decoding: { snapshot -> Int in
                 try (snapshot.value as? Int).unwrap()
-            }).flatMapCompletable { health -> Completable in
+            }).flatMapCompletable { health in
                 gameRef.rxSetValue("state/players/\(player)/health") { health + 1 }
             }
         }
@@ -149,7 +147,7 @@ private extension RemoteGameDatabaseUpdater {
             }
             return gameRef.rxObserveSingleEvent("state/players/\(player)/health", decoding: { snapshot -> Int in
                 try (snapshot.value as? Int).unwrap()
-            }).flatMapCompletable { health -> Completable in
+            }).flatMapCompletable { health in
                 gameRef.rxSetValue("state/players/\(player)/health") { health - 1 }
             }
         }
@@ -163,7 +161,7 @@ private extension RemoteGameDatabaseUpdater {
             return gameRef.rxSetValue("state/players/\(player)/health", encoding: { 0 })
                 .andThen(gameRef.rxObserveSingleEvent("state/playOrder", decoding: { snapshot -> [String]? in
                     snapshot.value as? [String]
-                }).flatMapCompletable({ playOrder -> Completable in
+                }).flatMapCompletable({ playOrder in
                     var value = playOrder ?? []
                     if let index = value.firstIndex(of: player) {
                         value.remove(at: index)
@@ -172,7 +170,7 @@ private extension RemoteGameDatabaseUpdater {
                 }))
                 .andThen(gameRef.rxObserveSingleEvent("state/hits", decoding: { snapshot -> [String: HitDto]? in
                     snapshot.value as? [String: HitDto]
-                }).flatMapCompletable({ hits -> Completable in
+                }).flatMapCompletable({ hits in
                     let hits = hits ?? [:]
                     var keysToRemove: [String] = []
                     for (key, value) in hits where value.player == player {
@@ -183,32 +181,42 @@ private extension RemoteGameDatabaseUpdater {
                 }))
         }
     }
-    /*
+    
     static func drawDeck() -> EventDesc {
-        EventDesc(id: "drawDeck", desc: "Draw top card from deck") { event, state in
+        EventDesc(id: "drawDeck", desc: "Draw top card from deck") { event, gameRef in
             guard case let .drawDeck(player) = event else {
                 fatalError("Invalid event")
             }
-            state.resetDeckIfNeeded()
-            let cardObject = state.deck.removeFirst()
-            state.mutablePlayer(player).hand.append(cardObject)
+            
+            return resetDeckIfNeeded(gameRef)
+                .andThen(gameRef.rxObserveSingleEvent("state/deck", decoding: { snapshot -> [String: String] in
+                    try (snapshot.value as? [String: String]).unwrap()
+                }).flatMapCompletable({ deck in
+                    let deckKey = deck.keys.sorted()[0]
+                    let removeDeckCompletable = gameRef.rxSetValue("state/deck/\(deckKey)") { nil }
+                    let cardId = deck[deckKey]
+                    let addHandCompletable = gameRef.rxSetValue("state/players/\(player)/hand/\(gameRef.childByAutoIdKey())") { cardId }
+                    return Completable.concat(removeDeckCompletable, addHandCompletable)
+                }))
         }
     }
     
     static func drawHand() -> EventDesc {
-        EventDesc(id: "drawHand", desc: "Draw a specific card from other's hand") { event, state in
+        EventDesc(id: "drawHand", desc: "Draw a specific card from other's hand") { event, gameRef in
             guard case let .drawHand(player, other, card) = event else {
                 fatalError("Invalid event")
             }
-            let otherObject = state.mutablePlayer(other)
-            guard let index = otherObject.hand.firstIndex(where: { $0.identifier == card }) else {
-                fatalError("Card \(card) not found")
+            
+            return gameRef.rxObserveSingleEvent("state/players/\(other)/hand", decoding: { snapshot -> [String: String] in
+                try (snapshot.value as? [String: String]).unwrap()
+            }).flatMapCompletable { hand in
+                let cardKey = hand.first(where: { $0.value == card })!.key
+                return gameRef.rxSetValue("state/players/\(other)/hand/\(cardKey)", encoding: { nil })
+                    .andThen(gameRef.rxSetValue("state/players/\(player)/hand/\(gameRef.childByAutoIdKey())", encoding: { card }))
             }
-            let cardObject = otherObject.hand.remove(at: index)
-            state.mutablePlayer(player).hand.append(cardObject)
         }
     }
-    
+    /*
     static func drawInPlay() -> EventDesc {
         EventDesc(id: "drawInPlay", desc: "Draw a specific card from other's inPlay") { event, state in
             guard case let .drawInPlay(player, other, card) = event else {
@@ -438,16 +446,51 @@ private extension RemoteGameDatabaseUpdater {
     }
 }
 
+private extension RemoteGameDatabaseUpdater {
+    
+    static func resetDeckIfNeeded(_ gameRef: DatabaseReferenceProtocol) -> Completable {
+        let minDeck = 2
+        return gameRef.rxObserveSingleEvent("state/deck", decoding: { snapshot -> [String: String] in
+            try (snapshot.value as? [String: String]).unwrap()
+        }).flatMapCompletable { deck in
+            if deck.count > minDeck {
+                // Do nothing
+                return Completable.empty()
+            }
+            
+            // Reset deck
+            return resetDeckCompletable(gameRef)
+        }
+    }
+    
+    static func resetDeckCompletable(_ gameRef: DatabaseReferenceProtocol) -> Completable {
+        let minDiscard = 2
+        return gameRef.rxObserveSingleEvent("state/discard", decoding: { snapshot -> [String: String] in
+            try (snapshot.value as? [String: String]).unwrap()
+        }).flatMapCompletable { discard in
+            if discard.count < minDiscard {
+                return Completable.empty()
+            }
+            
+            let topDiscardKey = discard.keys.sorted().reversed()[0]
+            var cards = discard
+            cards.removeValue(forKey: topDiscardKey)
+            
+            var completables: [Completable] = []
+            for (key, value) in cards {
+                completables.append(gameRef.rxSetValue("state/discard/\(key)", encoding: { nil }))
+                completables.append(gameRef.rxSetValue("state/deck/\(gameRef.childByAutoIdKey())", encoding: { value }))
+            }
+            return Completable.concat(completables)
+        }
+    }
+}
+
 /*
 // MARK: - Flags
 
 
 // MARK: - Deck
-
-func deckRemoveFirst() -> Single<CardProtocol> {
-    resetDeck(when: 3)
-        .andThen(pullDeck())
-}
 
 func discardRemoveFirst() -> Single<CardProtocol> {
     gameRef.child("state/discardPile").queryLimited(toLast: 1)

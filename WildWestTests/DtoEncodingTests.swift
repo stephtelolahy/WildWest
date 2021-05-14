@@ -102,8 +102,7 @@ class DtoEncodingTests: XCTestCase {
     }
     
     // MARK: - Event
-    #warning("TODO: implement")
-    /*
+    
     func test_EventEncoding() throws {
         // Given
         let events: [GEvent] = [
@@ -149,7 +148,7 @@ class DtoEncodingTests: XCTestCase {
             XCTAssertEqual(decoded, event)
         }
     }
-    */
+    
     // MARK: - User
     
     func test_UserInfoEncoding() throws {
