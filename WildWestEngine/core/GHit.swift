@@ -17,21 +17,21 @@ public class GHit: HitProtocol {
     
     // MARK: - Init
     
-    public init(name: String,
-                player: String,
+    public init(player: String,
+                name: String,
                 abilities: [String],
                 cancelable: Int,
                 offender: String) {
-        self.name = name
         self.player = player
+        self.name = name
         self.abilities = abilities
         self.cancelable = cancelable
         self.offender = offender
     }
     
     convenience init(_ hit: HitProtocol) {
-        self.init(name: hit.name,
-                  player: hit.player, 
+        self.init(player: hit.player,
+                  name: hit.name, 
                   abilities: hit.abilities,
                   cancelable: hit.cancelable,
                   offender: hit.offender)

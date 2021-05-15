@@ -168,7 +168,7 @@ class GLoopTests: XCTestCase {
     
     func test_ThrowsError_IfFailedApplyingEvent() {
         // Given
-        let event: GEvent = .setStoreView(player: "p1") 
+        let event: GEvent = .emptyQueue
         stub(mockQueue) { mock in
             when(mock.pop()).thenReturn(event)
         }

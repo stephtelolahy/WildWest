@@ -17,112 +17,52 @@ struct EventDto: Codable {
     var setTurn: String?
     var gainHealth: String?
     var drawDeck: String?
-    /*
-     case activate(moves: [GMove])
-     case run(move: GMove)
-     
-     case play(player: String, card: String)
-     case equip(player: String, card: String)
-     case handicap(player: String, card: String, other: String)
-     
-     case looseHealth(player: String, offender: String)
-     case eliminate(player: String, offender: String)
-     
-     case drawHand(player: String, other: String, card: String)
-     case drawInPlay(player: String, other: String, card: String)
-     case drawStore(player: String, card: String)
-     case drawDiscard(player: String)
-     
-     case discardHand(player: String, card: String)
-     case discardInPlay(player: String, card: String)
-     case passInPlay(player: String, card: String, other: String)
-
-     case setStoreView(player: String?)
-     
-     case storeToDeck(card: String)
-     
-     case revealHand(player: String, card: String)
-
-     case addHit(name: String, player: String, abilities: [String], cancelable: Int, offender: String)
-     case removeHit(player: String)
-     case cancelHit(player: String)
-     
-     case gameover(winner: Role)
-     
-     */
+    var drawDiscard: String?
+    var storeToDeck: String?
+    var removeHit: String?
+    var cancelHit: String?
+    var gameover: String?
+    var run: MoveDto?
+    var activate: [MoveDto]?
+    var addHit: HitDto?
+    var play: PlayerCardDto?
+    var equip: PlayerCardDto?
+    var drawStore: PlayerCardDto?
+    var discardHand: PlayerCardDto?
+    var discardInPlay: PlayerCardDto?
+    var revealHand: PlayerCardDto?
+    var looseHealth: PlayerOffenderDto?
+    var eliminate: PlayerOffenderDto?
+    var handicap: PlayerOtherCardDto?
+    var drawHand: PlayerOtherCardDto?
+    var drawInPlay: PlayerOtherCardDto?
+    var passInPlay: PlayerOtherCardDto?
 }
 
-/*
- struct GameUpdateDto: Codable {
-     var timestamp: String = "\(Date().timeIntervalSince1970)"
-     var setTurn: String?
-     var setChallenge: ChallengeDto?
-     var removeChallenge: Bool?
-     var flipOverFirstDeckCard: Bool?
-     var setupGeneralStore: Int?
-     var playerPullFromDeck: String?
-     var playerPullFromDiscard: String?
-     var playerSetBangsPlayed: PlayerSetBangsPlayedDto?
-     var playerSetHealth: PlayerSetHealthDto?
-     var playerSetDamage: PlayerSetDamageDto?
-     var playerDiscardHand: PlayerManipulatesCardDto?
-     var playerDiscardTopDeck: PlayerManipulatesCardDto?
-     var playerPutInPlay: PlayerManipulatesCardDto?
-     var playerDiscardInPlay: PlayerManipulatesCardDto?
-     var playerPullFromGeneralStore: PlayerManipulatesCardDto?
-     var playerRevealHandCard: PlayerManipulatesCardDto?
-     var playerPullFromOtherHand: PlayerManipulatesOtherCardDto?
-     var playerPullFromOtherInPlay: PlayerManipulatesOtherCardDto?
-     var playerPutInPlayOfOther: PlayerManipulatesOtherCardDto?
-     var playerPassInPlayOfOther: PlayerManipulatesOtherCardDto?
- }
+struct MoveDto: Codable {
+    var ability: String?
+    var actor: String?
+    var card: PlayCardDto?
+    var args: [String: [String]]?
+}
 
- struct PlayerSetBangsPlayedDto: Codable {
-     let playerId: String?
-     let count: Int?
- }
+struct PlayCardDto: Codable {
+    var hand: String?
+    var inPlay: String?
+}
 
- struct PlayerSetHealthDto: Codable {
-     let playerId: String?
-     let health: Int?
- }
+struct PlayerCardDto: Codable {
+    var player: String?
+    var card: String?
+}
 
- struct PlayerSetDamageDto: Codable {
-     let playerId: String?
-     let event: DamageEventDto?
- }
+struct PlayerOffenderDto: Codable {
+    var player: String?
+    var offender: String?
+}
 
- struct PlayerManipulatesCardDto: Codable {
-     let playerId: String?
-     let cardId: String?
- }
-
- struct PlayerManipulatesOtherCardDto: Codable {
-     let playerId: String?
-     let otherId: String?
-     let cardId: String?
- }
- */
-
-/*
- struct GameMoveDto: Codable {
-     var timestamp: String = "\(Date().timeIntervalSince1970)"
-     let name: String?
-     let actorId: String?
-     let cardId: String?
-     let targetId: String?
-     let targetCard: TargetCardDto?
-     var discardIds: [String]?
- }
-
- struct TargetCardDto: Codable {
-     let ownerId: String?
-     let source: TargetCardSourceDto?
- }
-
- struct TargetCardSourceDto: Codable {
-     var randomHand: Bool?
-     var inPlay: String?
- }
-
- */
+struct PlayerOtherCardDto: Codable {
+    var player: String?
+    var other: String?
+    var card: String?
+}

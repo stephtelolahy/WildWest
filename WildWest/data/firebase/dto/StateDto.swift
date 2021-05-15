@@ -15,14 +15,13 @@ struct StateDto: Codable {
     let deck: [String: String]?
     let discard: [String: String]?
     let store: [String: String]?
-    let storeView: String?
     let hits: [String: HitDto]?
     let played: [String: String]?
 }
 
 struct HitDto: Codable, Equatable {
-    let name: String?
     let player: String?
+    let name: String?
     let abilities: [String]?
     let offender: String?
     let cancelable: Int?
@@ -39,4 +38,3 @@ struct PlayerDto: Codable {
     let hand: [String: String]?
     let inPlay: [String: String]?
 }
-

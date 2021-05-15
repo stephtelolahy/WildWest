@@ -44,8 +44,8 @@ class DtoEncodingTests: XCTestCase {
                               health: 2,
                               hand: [],
                               inPlay: [])
-        let hit1 = GHit(name: "hit1",
-                        player: "p1",
+        let hit1 = GHit(player: "p1",
+                        name: "hit1",
                         abilities: ["ab1"],
                         cancelable: 1,
                         offender: "p2")
@@ -57,7 +57,6 @@ class DtoEncodingTests: XCTestCase {
                            deck: [mockCard1, mockCard2],
                            discard: [mockCard3, mockCard4],
                            store: [],
-                           storeView: "p1",
                            hits: [hit1],
                            played: ["bang"])
         
@@ -78,7 +77,6 @@ class DtoEncodingTests: XCTestCase {
         XCTAssertEqual(decoded.deck.map { $0.identifier }, ["c1", "c2"])
         XCTAssertEqual(decoded.discard.map { $0.identifier }, ["c3", "c4"])
         XCTAssertEqual(decoded.store.map { $0.identifier }, [])
-        XCTAssertEqual(decoded.storeView, "p1")
         XCTAssertEqual(decoded.hits.count, 1)
         XCTAssertEqual(decoded.played, ["bang"])
         
@@ -106,10 +104,12 @@ class DtoEncodingTests: XCTestCase {
     func test_EventEncoding() throws {
         // Given
         let events: [GEvent] = [
-            .activate(moves: [GMove("a1", actor: "p1", card: .hand("c1")),
-                              GMove("a2", actor: "p1", card: .inPlay("c2")),
-                              GMove("a3", actor: "p1")]),
             .run(move: GMove("a1", actor: "p1")),
+            .run(move: GMove("a1", actor: "p1", card: .hand("c1"))),
+            .run(move: GMove("a1", actor: "p1", card: .inPlay("c1"))),
+            .run(move: GMove("a1", actor: "p1", args: [.target: ["p2"]])),
+            .activate(moves: [GMove("a1", actor: "p1"),
+                              GMove("a2", actor: "p1")]),
             .play(player: "p1", card: "c1"),
             .equip(player: "p1", card: "c1"),
             .handicap(player: "p1", card: "c1", other: "p2"),
@@ -126,13 +126,11 @@ class DtoEncodingTests: XCTestCase {
             .discardHand(player: "p1", card: "c1"),
             .discardInPlay(player: "p1", card: "c1"),
             .passInPlay(player: "p1", card: "c1", other: "p2"),
-            .setStoreView(player: "p1"),
-            .setStoreView(player: nil),
             .deckToStore,
             .storeToDeck(card: "c1"),
             .revealDeck,
             .revealHand(player: "p1", card: "c1"),
-            .addHit(name: "h1", player: "p1", abilities: ["a1", "a2"], cancelable: 1, offender: "p2"),
+            .addHit(player: "p1", name: "h1", abilities: ["a1", "a2"], cancelable: 1, offender: "p2"),
             .removeHit(player: "p1"),
             .cancelHit(player: "p1"),
             .gameover(winner: .renegade),

@@ -160,8 +160,8 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
     func test_removeAssociatedHits_IfEliminate() {
         // Given
         let event = GEvent.eliminate(player: "p1", offender: "p2")
-        let hit1 = HitDto(name: "h1", player: "p1", abilities: nil, offender: nil, cancelable: nil)
-        let hit2 = HitDto(name: "h2", player: "p2", abilities: nil, offender: nil, cancelable: nil)
+        let hit1 = HitDto(player: "p1", name: nil, abilities: nil, offender: nil, cancelable: nil)
+        let hit2 = HitDto(player: "p2", name: nil, abilities: nil, offender: nil, cancelable: nil)
         let hits = ["key1": hit1, "key2": hit2]
         mockDatabaseReference.stubObserveSingleEvent("state/hits", value: hits)
         let expectation = XCTestExpectation(description: #function)
@@ -464,19 +464,6 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
     }
     
     // MARK: - Store
-    
-    func test_setStoreView() {
-        // Given
-        let mockState = MockStateProtocol().withDefault()
-        let state = GState(mockState)
-        let event = GEvent.setStoreView(player: "p1")
-        
-        // When
-        sut.execute(event, in: state)
-        
-        // Assert
-        XCTAssertEqual(state.storeView, "p1")
-    }
     
     func test_deckToStore() {
         // Given

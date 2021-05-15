@@ -19,7 +19,6 @@ extension DtoEncoder {
                  deck: encode(cards: state.deck),
                  discard: encode(cards: state.discard.reversed()),
                  store: encode(cards: state.store),
-                 storeView: state.storeView,
                  hits: encode(hits: state.hits),
                  played: encode(abilities: state.played))
     }
@@ -33,21 +32,28 @@ extension DtoEncoder {
                deck: try decode(cards: state.deck),
                discard: try decode(cards: state.discard).reversed(),
                store: try decode(cards: state.store),
-               storeView: state.storeView,
                hits: try decode(hits: state.hits),
                played: try decode(abilities: state.played))
     }
-}
-
-private extension DtoEncoder {
     
     func encode(hit: HitProtocol) -> HitDto {
-        HitDto(name: hit.name,
-               player: hit.player,
+        HitDto(player: hit.player,
+               name: hit.name,
                abilities: hit.abilities,
                offender: hit.offender,
                cancelable: hit.cancelable)
     }
+    
+    func decode(hit: HitDto) throws -> HitProtocol {
+        try GHit(player: hit.player.unwrap(),
+                 name: hit.name.unwrap(),
+                 abilities: hit.abilities.unwrap(),
+                 cancelable: hit.cancelable.unwrap(),
+                 offender: hit.offender.unwrap())
+    }
+}
+
+private extension DtoEncoder {
     
     func encode(hits: [HitProtocol]) -> [String: HitDto] {
         hits.reduce([String: HitDto]()) { dict, hit in
@@ -56,14 +62,6 @@ private extension DtoEncoder {
             dict[key] = encode(hit: hit)
             return dict
         }
-    }
-    
-    func decode(hit: HitDto) throws -> HitProtocol {
-        try GHit(name: hit.name.unwrap(),
-                 player: hit.player.unwrap(),
-                 abilities: hit.abilities.unwrap(),
-                 cancelable: hit.cancelable.unwrap(),
-                 offender: hit.offender.unwrap())
     }
     
     func decode(hits: [String: HitDto]?) throws -> [HitProtocol] {

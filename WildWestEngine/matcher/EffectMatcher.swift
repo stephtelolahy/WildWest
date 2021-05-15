@@ -277,7 +277,7 @@ private extension EffectMatcher {
                 let players = params.players(forKey: "player", ctx: ctx)
                 let abilities = params.strings(forKey: "abilities")
                 let cancelable = params.number(forKey: "cancelable", ctx: ctx)
-                return players.map { .addHit(name: ctx.ability, player: $0, abilities: abilities, cancelable: cancelable, offender: ctx.actor.identifier) }
+                return players.map { .addHit(player: $0, name: ctx.ability, abilities: abilities, cancelable: cancelable, offender: ctx.actor.identifier) }
                })
     }
     
@@ -332,7 +332,7 @@ private extension EffectMatcher {
                     fatalError("Invalid hit")
                 }
                 return [.removeHit(player: player),
-                        .addHit(name: hit.name, player: hit.offender, abilities: hit.abilities, cancelable: hit.cancelable, offender: player)]
+                        .addHit(player: hit.offender, name: hit.name, abilities: hit.abilities, cancelable: hit.cancelable, offender: player)]
                })
     }
     
@@ -340,10 +340,8 @@ private extension EffectMatcher {
         Effect(id: "deckToStore",
                desc: "Draw X cards from deck to store",
                matchingFunc: { params, ctx in
-                let hidden = params.bool(forKey: "hidden")
-                let player = hidden ? ctx.actor.identifier : nil
                 let amount = params.number(forKey: "amount", ctx: ctx)
-                return  [.setStoreView(player: player)] + Array(0..<amount).map { _ in .deckToStore }
+                return  Array(0..<amount).map { _ in .deckToStore }
                })
     }
     
@@ -541,14 +539,6 @@ private extension Dictionary where Key == String {
         }
         
         guard let value = self[key] as? Int else {
-            fatalError("Missing parameter \(key)")
-        }
-        
-        return value
-    }
-    
-    func bool(forKey key: String) -> Bool {
-        guard let value = self[key] as? Bool else {
             fatalError("Missing parameter \(key)")
         }
         

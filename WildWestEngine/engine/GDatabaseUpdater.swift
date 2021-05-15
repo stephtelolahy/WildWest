@@ -63,7 +63,6 @@ private extension GDatabaseUpdater {
         discardHand(),
         play(),
         discardInPlay(),
-        setStoreView(),
         deckToStore(),
         storeToDeck(),
         revealDeck(),
@@ -299,15 +298,6 @@ private extension GDatabaseUpdater {
         }
     }
     
-    static func setStoreView() -> EventDesc {
-        EventDesc(id: "setStoreView", desc: "set specific player that can view store cards") { event, state in
-            guard case let .setStoreView(player) = event else {
-                fatalError("Invalid event")
-            }
-            state.storeView = player
-        }
-    }
-    
     static func deckToStore() -> EventDesc {
         EventDesc(id: "deckToStore", desc: "Draw top card from deck to store") { event, state in
             guard case .deckToStore = event else {
@@ -359,11 +349,11 @@ private extension GDatabaseUpdater {
     
     static func addHit() -> EventDesc {
         EventDesc(id: "addHit", desc: "Add blocking hit") { event, state in
-            guard case let .addHit(name, player, abilities, cancelable, offender) = event else {
+            guard case let .addHit(player, name, abilities, cancelable, offender) = event else {
                 fatalError("Invalid event")
             }
-            let hitObject = GHit(name: name,
-                                 player: player,
+            let hitObject = GHit(player: player,
+                                 name: name,
                                  abilities: abilities,
                                  cancelable: cancelable,
                                  offender: offender)

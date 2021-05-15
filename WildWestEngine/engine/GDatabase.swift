@@ -61,7 +61,6 @@ private extension StateProtocol {
                       deck: deck,
                       discard: discard,
                       store: store,
-                      storeView: storeView,
                       hits: hits,
                       played: played)
     }

@@ -35,11 +35,10 @@ class StartTurnDrawing3CardsAndKeep2Tests: XCTestCase {
         
         // Assert
         XCTAssertEqual(moves, [GMove("startTurnDrawing3CardsAndKeep2", actor: "p1")])
-        XCTAssertEqual(events, [.setStoreView(player: "p1"),
+        XCTAssertEqual(events, [.deckToStore,
                                 .deckToStore,
                                 .deckToStore,
-                                .deckToStore,
-                                .addHit(name: "startTurnDrawing3CardsAndKeep2", player: "p1", abilities: ["startTurnDrawingStore"], cancelable: 0, offender: "p1")])
+                                .addHit(player: "p1", name: "startTurnDrawing3CardsAndKeep2", abilities: ["startTurnDrawingStore"], cancelable: 0, offender: "p1")])
     }
     
     func test_StartTurnDrawingsStore() throws {

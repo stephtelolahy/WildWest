@@ -64,7 +64,6 @@ private extension RemoteGameDatabaseUpdater {
         discardHand(),
         play(),
         discardInPlay(),
-        setStoreView(),
         deckToStore(),
         storeToDeck(),
         revealDeck(),
@@ -335,15 +334,6 @@ private extension RemoteGameDatabaseUpdater {
             }
             let cardObject = playerObject.inPlay.remove(at: index)
             state.discard.insert(cardObject, at: 0)
-        }
-    }
-    
-    static func setStoreView() -> EventDesc {
-        EventDesc(id: "setStoreView", desc: "set specific player that can view store cards") { event, state in
-            guard case let .setStoreView(player) = event else {
-                fatalError("Invalid event")
-            }
-            state.storeView = player
         }
     }
     
