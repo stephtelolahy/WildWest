@@ -23,8 +23,8 @@ struct HitDto: Codable, Equatable {
     let player: String?
     let name: String?
     let abilities: [String]?
-    let offender: String?
     let cancelable: Int?
+    let offender: String?
 }
 
 struct PlayerDto: Codable {

@@ -137,6 +137,7 @@ private extension GameViewController {
             
         case let .gameover(winner):
             router.toGameOver(winner)
+            userManager.setStatusIdle().subscribe().disposed(by: disposeBag)
             analyticsManager.tagEventGameOver(state)
             
         default:

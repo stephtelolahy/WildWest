@@ -13,3 +13,13 @@ func any<T: Equatable>(equalTo value: T) -> ParameterMatcher<Any?> {
         object as? T == value
     }
 }
+
+func any(equalToDictionary dict: [String: Any]) -> ParameterMatcher<Any?> {
+    ParameterMatcher { object in
+        guard let value = object as? [String: Any] else {
+            return false
+        }
+        
+        return NSDictionary(dictionary: value).isEqual(to: dict)
+    }
+}

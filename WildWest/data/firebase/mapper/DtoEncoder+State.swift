@@ -40,8 +40,8 @@ extension DtoEncoder {
         HitDto(player: hit.player,
                name: hit.name,
                abilities: hit.abilities,
-               offender: hit.offender,
-               cancelable: hit.cancelable)
+               cancelable: hit.cancelable,
+               offender: hit.offender)
     }
     
     func decode(hit: HitDto) throws -> HitProtocol {
