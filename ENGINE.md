@@ -1,4 +1,4 @@
-# CardGameEngine
+# WildWestEngine
 
 A data driven engine for [Bang!](<https://en.wikipedia.org/wiki/Bang!_(card_game)>) card game
 

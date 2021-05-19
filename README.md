@@ -14,13 +14,12 @@ The aim of this project is only educational: exploring AI algorithms, scripting 
 
 You wil need
 
-- XCode 11+
+- XCode 12+
 - Device or Simulator on iOS 9.3+
 
 1. [Install CocoaPods](https://guides.cocoapods.org/using/getting-started.html#toc_3) on your computer
 2. Run `$ pod install` in the project directory
 3. Open `WildWest.xcworkspace` and build
-
 
 ## Rights
 
@@ -34,6 +33,8 @@ Please make sure to update tests as appropriate.
 
 ## Additional Resouces
 - [Architecture](docs/ARCHITECTURE.md)
+- [Engine](./ENGINE.md)
+- [Changelog](./CHANGELOG.md)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
