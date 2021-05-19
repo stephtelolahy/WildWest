@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WildWestEngine
 
 class HandCell: UICollectionViewCell {
     
@@ -22,8 +23,8 @@ class HandCell: UICollectionViewCell {
         contentView.layer.cornerRadius = 2
     }
     
-    func update(with item: HandItem) {
-        cardView.isHidden = !item.moves.isEmpty
-        cardImageView.image = UIImage(named: item.card.imageName)
+    func update(with card: CardProtocol, active: Bool) {
+        cardImageView.image = UIImage(named: card.name)
+        cardView.isHidden = active
     }
 }
