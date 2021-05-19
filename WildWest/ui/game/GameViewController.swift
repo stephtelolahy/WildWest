@@ -84,7 +84,7 @@ class GameViewController: UIViewController {
     }
     
     @IBAction private func menuButtonTapped(_ sender: Any) {
-        userManager.setStatusIdle().subscribe().disposed(by: disposeBag)
+        userManager.setStatusIdle()
         router.toMenu()
     }
     
@@ -137,7 +137,7 @@ private extension GameViewController {
             
         case let .gameover(winner):
             router.toGameOver(winner)
-            userManager.setStatusIdle().subscribe().disposed(by: disposeBag)
+            userManager.setStatusIdle()
             analyticsManager.tagEventGameOver(state)
             
         default:

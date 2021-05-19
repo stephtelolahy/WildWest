@@ -15,8 +15,8 @@ protocol UserManagerProtocol {
     func createUser(_ user: UserInfo) -> Completable
     func observeUserStatus() -> Observable<UserStatus>
     func observeWaitingUsers() -> Observable<[UserInfo]>
-    func setStatusWaiting() -> Completable
-    func setStatusIdle() -> Completable
+    func setStatusWaiting()
+    func setStatusIdle()
 }
 
 class UserManager: UserManagerProtocol {
@@ -24,10 +24,13 @@ class UserManager: UserManagerProtocol {
     private let authProvider: AuthProviderProtocol
     private let database: UserDatabaseProtocol
     
+    private let disposeBag: DisposeBag
+    
     init(authProvider: AuthProviderProtocol,
          database: UserDatabaseProtocol) {
         self.authProvider = authProvider
         self.database = database
+        self.disposeBag = DisposeBag()
     }
     
     var isLoggedIn: Bool {
@@ -56,18 +59,23 @@ class UserManager: UserManagerProtocol {
         database.observeWaitingUsers()
     }
     
-    func setStatusWaiting() -> Completable {
+    func setStatusWaiting() {
         guard let userId = authProvider.loggedInUserId else {
-            return Completable.error(NSError(domain: "Missing user", code: 0))
-        }
-        return database.setUserStatus(userId, status: .waiting)
-    }
-    
-    func setStatusIdle() -> Completable {
-        guard let userId = authProvider.loggedInUserId else {
-            return Completable.error(NSError(domain: "Missing user", code: 0))
+            return
         }
         
-        return database.setUserStatus(userId, status: .idle)
+        database.setUserStatus(userId, status: .waiting)
+            .subscribe()
+            .disposed(by: disposeBag)
+    }
+    
+    func setStatusIdle() {
+        guard let userId = authProvider.loggedInUserId else {
+            return
+        }
+        
+        database.setUserStatus(userId, status: .idle)
+            .subscribe()
+            .disposed(by: disposeBag)
     }
 }

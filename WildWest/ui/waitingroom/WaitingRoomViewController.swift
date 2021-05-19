@@ -39,12 +39,12 @@ class WaitingRoomViewController: UIViewController {
     // MARK: - IBAction
     
     @IBAction private func quitButtonTapped(_ sender: Any) {
-        userManager.setStatusIdle().subscribe().disposed(by: disposeBag)
+        userManager.setStatusIdle()
         router.toMenu()
     }
     
     @IBAction private func startButtonTapped(_ sender: Any) {
-        gameManager.createRemoteGame(users: users).subscribe().disposed(by: disposeBag)
+        gameManager.createRemoteGame(users: users)
     }
     
     // MARK: - Private

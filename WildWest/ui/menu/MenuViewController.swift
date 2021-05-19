@@ -134,7 +134,7 @@ private extension MenuViewController {
     }
     
     func addToWaitingRoom() {
-        userManager.setStatusWaiting().subscribe().disposed(by: disposeBag)
+        userManager.setStatusWaiting()
     }
 }
 
