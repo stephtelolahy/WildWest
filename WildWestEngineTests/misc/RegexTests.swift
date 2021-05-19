@@ -6,6 +6,7 @@
 //  Copyright © 2020 CocoaPods. All rights reserved.
 //
 // swiftlint:disable function_body_length
+// swiftlint:disable type_body_length
 
 import XCTest
 import WildWestEngine

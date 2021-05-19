@@ -41,12 +41,11 @@ class GeneralStoreTests: XCTestCase {
         // Assert
         XCTAssertEqual(moves, [GMove("generalstore", actor: "p1", card: .hand("c1"))])
         XCTAssertEqual(events, [.play(player: "p1", card: "c1"),
-                                .setStoreView(player: nil),
                                 .deckToStore,
                                 .deckToStore,
                                 .deckToStore,
-                                .addHit(name: "generalstore", player: "p1", abilities: ["drawStore"], cancelable: 0, offender: "p1"),
-                                .addHit(name: "generalstore", player: "p2", abilities: ["drawStore"], cancelable: 0, offender: "p1"),
-                                .addHit(name: "generalstore", player: "p3", abilities: ["drawStore"], cancelable: 0, offender: "p1")])
+                                .addHit(player: "p1", name: "generalstore", abilities: ["drawStore"], cancelable: 0, offender: "p1"),
+                                .addHit(player: "p2", name: "generalstore", abilities: ["drawStore"], cancelable: 0, offender: "p1"),
+                                .addHit(player: "p3", name: "generalstore", abilities: ["drawStore"], cancelable: 0, offender: "p1")])
     }
 }

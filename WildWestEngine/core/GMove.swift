@@ -24,7 +24,7 @@ public enum PlayCard: Equatable {
     case inPlay(String)
 }
 
-public enum PlayArg: Equatable {
+public enum PlayArg: String, Equatable {
     case target
     case requiredInPlay
     case requiredStore

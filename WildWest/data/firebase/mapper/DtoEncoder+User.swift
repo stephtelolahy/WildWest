@@ -5,7 +5,7 @@
 //  Created by Hugues Stephano Telolahy on 24/07/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-/*
+
 extension DtoEncoder {
     
     func encode(user: UserInfo) -> UserInfoDto {
@@ -16,8 +16,8 @@ extension DtoEncoder {
     
     func decode(user: UserInfoDto) throws -> UserInfo {
         UserInfo(id: try user.id.unwrap(),
-                  name: try user.name.unwrap(),
-                  photoUrl: try user.photoUrl.unwrap())
+                 name: try user.name.unwrap(),
+                 photoUrl: try user.photoUrl.unwrap())
     }
     
     func decode(users: [String: UserInfoDto]) throws -> [UserInfo] {
@@ -44,11 +44,10 @@ extension DtoEncoder {
         }
         
         if let gameId = status?.gameId,
-            let playerId = status?.playerId {
+           let playerId = status?.playerId {
             return .playing(gameId: gameId, playerId: playerId)
         }
         
         return .idle
     }
 }
-*/

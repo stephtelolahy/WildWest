@@ -14,7 +14,6 @@ public protocol StateStoredProtocol {
     var deck: [CardProtocol] { get }    // stack of cards
     var discard: [CardProtocol] { get } // discard pile
     var store: [CardProtocol] { get }   // choosable cards collection, may be hidden to some players
-    var storeView: String? { get }      // the only player that can view store cards, if nil then all players can view
     var hits: [HitProtocol] { get }     // blocking challenge to be resolved before continuing turn
     var played: [String] { get }        // played abilities during current turn
 }
@@ -29,9 +28,9 @@ public protocol StateProtocol: StateStoredProtocol, StateComputedProtocol {
 }
 
 public protocol HitProtocol {
+    var player: String { get }
     var name: String { get }
     var abilities: [String] { get }
-    var player: String { get }
     var offender: String { get }
     var cancelable: Int { get }
 }

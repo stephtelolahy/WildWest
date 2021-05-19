@@ -6,9 +6,9 @@
 //
 
 public class GCard: CardProtocol {
-
+    
     // MARK: - Properties
-
+    
     public let identifier: String
     public let name: String
     public let type: CardType
@@ -16,16 +16,16 @@ public class GCard: CardProtocol {
     public let abilities: [String: Int]
     public let suit: String
     public let value: String
-
+    
     // MARK: Init
-
-    init(identifier: String,
-         name: String,
-         type: CardType,
-         desc: String,
-         abilities: [String: Int],
-         suit: String,
-         value: String) {
+    
+    public init(identifier: String,
+                name: String,
+                type: CardType,
+                desc: String,
+                abilities: [String: Int],
+                suit: String,
+                value: String) {
         self.identifier = identifier
         self.name = name
         self.type = type

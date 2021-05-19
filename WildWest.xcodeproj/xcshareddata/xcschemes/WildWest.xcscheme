@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1240"
+   LastUpgradeVersion = "1250"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -49,16 +49,6 @@
                BlueprintIdentifier = "ADB7D2FD239EE03900653905"
                BuildableName = "WildWestTests.xctest"
                BlueprintName = "WildWestTests"
-               ReferencedContainer = "container:WildWest.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "335832DC25BC24FD001BE4D8"
-               BuildableName = "WildWestEngineTests.xctest"
-               BlueprintName = "WildWestEngineTests"
                ReferencedContainer = "container:WildWest.xcodeproj">
             </BuildableReference>
          </TestableReference>

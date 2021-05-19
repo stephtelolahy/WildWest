@@ -10,6 +10,7 @@
 import UIKit
 import Kingfisher
 import WildWestEngine
+import RxSwift
 
 class MenuViewController: UIViewController {
     
@@ -26,9 +27,14 @@ class MenuViewController: UIViewController {
     
     // MARK: - Dependencies
     
+    var userManager: UserManagerProtocol!
+    var gameManager: GameManagerProtocol!
     var router: RouterProtocol!
     var preferences: UserPreferencesProtocol!
     var soundPlayer: SoundPlayerProtocol!
+    var signInWidget: SignInWidget!
+    
+    private let disposeBag = DisposeBag()
     
     // MARK: - Lifecycle
     
@@ -39,6 +45,11 @@ class MenuViewController: UIViewController {
         setPlayersCount(preferences.playersCount)
         setFigure(preferences.preferredFigure)
         setRole(preferences.preferredRole)
+        
+        userManager.getUser().subscribe(onSuccess: { [weak self] user in
+            self?.setUser(user)
+        })
+        .disposed(by: disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,11 +65,20 @@ class MenuViewController: UIViewController {
     // MARK: - IBActions
     
     @IBAction private func playButtonTapped(_ sender: Any) {
-        router.toLocalGame()
+        router.toGame(gameManager.createLocalGame())
     }
     
     @IBAction private func onlineButtonTapped(_ sender: Any) {
-        #warning("TODO: implement")
+        guard userManager.isLoggedIn else {
+            signInWidget.signIn { [weak self] user in
+                self?.setUser(user)
+                self?.addToWaitingRoom()
+                NotificationCenter.default.post(Notification(name: .didSingIn, object: nil))
+            }
+            return
+        }
+        
+        addToWaitingRoom()
     }
     
     @IBAction private func stepperValueChanged(_ sender: UIStepper) {
@@ -107,4 +127,19 @@ private extension MenuViewController {
         roleButton.setImage(UIImage(named: role?.rawValue ?? ""), for: .normal)
         roleLabel.text = role?.rawValue ?? "random"
     }
+    
+    func setUser(_ user: UserInfo) {
+        userNameLabel.text = user.name
+        avatarImageView.kf.setImage(with: URL(string: user.photoUrl))
+    }
+    
+    func addToWaitingRoom() {
+        userManager.setStatusWaiting()
+    }
+}
+
+/// In-app broadcasted notification using `NotificationCenter` mechanism
+
+extension Notification.Name {
+    static let didSingIn = Notification.Name("didSingIn")
 }

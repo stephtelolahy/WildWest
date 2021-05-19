@@ -10,28 +10,28 @@ public class GHit: HitProtocol {
     // MARK: - Properties
     
     public let name: String
-    public let abilities: [String]
     public let player: String
+    public let abilities: [String]
     public let offender: String
     public var cancelable: Int
     
     // MARK: - Init
     
-    init(name: String,
-         player: String,
-         abilities: [String],
-         cancelable: Int,
-         offender: String) {
-        self.name = name
+    public init(player: String,
+                name: String,
+                abilities: [String],
+                cancelable: Int,
+                offender: String) {
         self.player = player
+        self.name = name
         self.abilities = abilities
         self.cancelable = cancelable
         self.offender = offender
     }
     
     convenience init(_ hit: HitProtocol) {
-        self.init(name: hit.name,
-                  player: hit.player, 
+        self.init(player: hit.player,
+                  name: hit.name, 
                   abilities: hit.abilities,
                   cancelable: hit.cancelable,
                   offender: hit.offender)

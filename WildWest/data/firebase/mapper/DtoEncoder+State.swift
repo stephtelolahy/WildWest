@@ -5,60 +5,111 @@
 //  Created by Hugues Stephano Telolahy on 24/07/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
-/*
+
+import WildWestEngine
+
 extension DtoEncoder {
     
-    func encode(state: GameStateProtocol) -> GameStateDto {
-        GameStateDto(players: encode(players: state.allPlayers),
-                     deck: encode(orderedCards: state.deck),
-                     discardPile: encode(orderedCards: state.discardPile.reversed()),
-                     turn: state.turn,
-                     generalStore: encode(cards: state.generalStore),
-                     outcome: encode(outcome: state.outcome),
-                     challenge: encode(challenge: state.challenge))
+    func encode(state: StateProtocol) -> StateDto {
+        StateDto(players: state.players.mapValues { encode(player: $0) },
+                 initialOrder: state.initialOrder,
+                 playOrder: state.playOrder,
+                 turn: state.turn,
+                 phase: state.phase,
+                 deck: encode(cards: state.deck),
+                 discard: encode(cards: state.discard.reversed()),
+                 store: encode(cards: state.store),
+                 hits: encode(hits: state.hits),
+                 played: encode(abilities: state.played))
     }
     
-    func decode(state: GameStateDto) throws -> GameStateProtocol {
-        GameState(allPlayers: try decode(players: state.players),
-                  deck: try decode(orderedCards: state.deck),
-                  discardPile: try decode(orderedCards: state.discardPile).reversed(),
-                  turn: try state.turn.unwrap(),
-                  challenge: try decode(challenge: state.challenge),
-                  generalStore: try decode(cards: state.generalStore),
-                  outcome: try decode(outcome: state.outcome))
+    func decode(state: StateDto) throws -> StateProtocol {
+        GState(players: try state.players?.mapValues({ try decode(player: $0) }) ?? [:],
+               initialOrder: try state.initialOrder.unwrap(),
+               playOrder: try state.playOrder.unwrap(),
+               turn: try state.turn.unwrap(),
+               phase: try state.phase.unwrap(),
+               deck: try decode(cards: state.deck),
+               discard: try decode(cards: state.discard).reversed(),
+               store: try decode(cards: state.store),
+               hits: try decode(hits: state.hits),
+               played: try decode(abilities: state.played))
+    }
+    
+    func encode(hit: HitProtocol) -> HitDto {
+        HitDto(player: hit.player,
+               name: hit.name,
+               abilities: hit.abilities,
+               cancelable: hit.cancelable,
+               offender: hit.offender)
+    }
+    
+    func decode(hit: HitDto) throws -> HitProtocol {
+        try GHit(player: hit.player.unwrap(),
+                 name: hit.name.unwrap(),
+                 abilities: hit.abilities.unwrap(),
+                 cancelable: hit.cancelable.unwrap(),
+                 offender: hit.offender.unwrap())
     }
 }
 
 private extension DtoEncoder {
     
-    func encode(players: [PlayerProtocol]) -> [String: PlayerDto] {
-        var result: [String: PlayerDto] = [:]
-        for (index, player) in players.enumerated() {
-            let dto = encode(player: player, index: index)
-            result[player.identifier] = dto
+    func encode(hits: [HitProtocol]) -> [String: HitDto] {
+        hits.reduce([String: HitDto]()) { dict, hit in
+            var dict = dict
+            let key = self.databaseRef.childByAutoIdKey()
+            dict[key] = encode(hit: hit)
+            return dict
         }
-        return result
     }
     
-    func decode(players: [String: PlayerDto]?) throws -> [PlayerProtocol] {
-        let playerDtos = Array(try players.unwrap().values)
-        
-        return try playerDtos
-            .sorted(by: { ($0.index ?? 0) < ($1.index ?? 0) })
-            .map { try self.decode(player: $0) }
-        
-    }
-    
-    func encode(outcome: GameOutcome?) -> String? {
-        outcome?.rawValue
-    }
-    
-    func decode(outcome: String?) throws -> GameOutcome? {
-        guard let outcome = outcome else {
-            return nil
+    func decode(hits: [String: HitDto]?) throws -> [HitProtocol] {
+        guard let hits = hits else {
+            return []
         }
         
-        return try GameOutcome(rawValue: outcome).unwrap()
+        let orderedKeys = hits.keys.sorted()
+        return try orderedKeys.map { try decode(hit: hits[$0].unwrap()) }
+    }
+    
+    func encode(player: PlayerProtocol) -> PlayerDto {
+        PlayerDto(identifier: player.identifier,
+                  name: player.name,
+                  desc: player.desc,
+                  abilities: player.abilities,
+                  role: player.role?.rawValue,
+                  maxHealth: player.maxHealth,
+                  health: player.health,
+                  hand: encode(cards: player.hand),
+                  inPlay: encode(cards: player.inPlay))
+    }
+    
+    func decode(player: PlayerDto) throws -> PlayerProtocol {
+        GPlayer(identifier: try player.identifier.unwrap(),
+                name: try player.name.unwrap(),
+                desc: try player.desc.unwrap(),
+                abilities: try player.abilities.unwrap(),
+                role: try Role(rawValue: try player.role.unwrap()).unwrap(),
+                maxHealth: try player.maxHealth.unwrap(),
+                health: try player.health.unwrap(),
+                hand: try decode(cards: player.hand),
+                inPlay: try decode(cards: player.inPlay))
+    }
+    
+    func encode(abilities: [String]) -> [String: String] {
+        abilities.reduce([String: String]()) { dict, ability in
+            var dict = dict
+            dict[self.databaseRef.childByAutoIdKey()] = ability
+            return dict
+        }
+    }
+    
+    func decode(abilities: [String: String]?) throws -> [String] {
+        guard let abilities = abilities else {
+            return []
+        }
+        
+        return Array(abilities.values)
     }
 }
-*/

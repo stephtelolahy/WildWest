@@ -1,5 +1,5 @@
 //
-//  AccountProvider.swift
+//  AuthProvider.swift
 //  WildWest
 //
 //  Created by Hugues Stephano Telolahy on 02/08/2020.
@@ -8,11 +8,11 @@
 
 import FirebaseUI
 
-protocol AccountProviderProtocol {
+protocol AuthProviderProtocol {
     var loggedInUserId: String? { get }
 }
 
-class AccountProvider: AccountProviderProtocol {
+class AuthProvider: AuthProviderProtocol {
     
     var loggedInUserId: String? {
         Auth.auth().currentUser?.uid

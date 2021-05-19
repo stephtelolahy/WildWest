@@ -5,8 +5,10 @@
 //  Created by Hugues Stephano Telolahy on 24/07/2020.
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
+// swiftlint:disable implicitly_unwrapped_optional
 
 import UIKit
+import RxSwift
 
 class WaitingRoomViewController: UIViewController {
     
@@ -15,12 +17,16 @@ class WaitingRoomViewController: UIViewController {
     @IBOutlet private weak var userCollectionView: UICollectionView!
     @IBOutlet private weak var startButton: UIButton!
     
-    // MARK: - Properties
+    // MARK: - Dependencies
     
-    var onQuit: (() -> Void)?
-    var onStart: (([UserInfo]) -> Void)?
+    var router: RouterProtocol!
+    var userManager: UserManagerProtocol!
+    var gameManager: GameManagerProtocol!
     
-//    private lazy var manager: MatchingManagerProtocol = Resolver.resolve()
+    private let disposeBag = DisposeBag()
+    
+    // MARK: - Data
+    
     private var users: [UserInfo] = []
     
     // MARK: - Lifecycle
@@ -33,22 +39,23 @@ class WaitingRoomViewController: UIViewController {
     // MARK: - IBAction
     
     @IBAction private func quitButtonTapped(_ sender: Any) {
-        onQuit?()
+        userManager.setStatusIdle()
+        router.toMenu()
     }
     
     @IBAction private func startButtonTapped(_ sender: Any) {
-        onStart?(users)
+        gameManager.createRemoteGame(users: users)
     }
     
     // MARK: - Private
     
     func observeWaitingUsers() {
-//        sub(manager.observeWaitingUsers().subscribe(onNext: { [weak self] users in
-//            self?.users = users
-//            self?.userCollectionView.reloadData()
-//            let minUsersCount = 2
-//            self?.startButton.isHidden = users.count < minUsersCount
-//        }))
+        userManager.observeWaitingUsers().subscribe(onNext: { [weak self] users in
+            self?.users = users
+            self?.userCollectionView.reloadData()
+            let minUsersCount = 2
+            self?.startButton.isHidden = users.count < minUsersCount
+        }).disposed(by: disposeBag)
     }
 }
 

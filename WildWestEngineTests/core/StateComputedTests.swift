@@ -5,7 +5,7 @@
 //  Created by Hugues Stéphano TELOLAHY on 10/25/20.
 //  Copyright © 2020 CocoaPods. All rights reserved.
 //
-//swiftlint:disable type_body_length
+// swiftlint:disable type_body_length
 
 import XCTest
 import WildWestEngine

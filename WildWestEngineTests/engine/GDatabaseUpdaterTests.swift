@@ -71,7 +71,7 @@ class GDatabaseUpdaterTests: XCTestCase {
     
     // MARK: - Health
     
-    func test_IncrmentHealth_IfGainHealth() {
+    func test_IncrementHealth_IfGainHealth() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
@@ -496,19 +496,6 @@ class GDatabaseUpdaterTests: XCTestCase {
     
     // MARK: - Store
     
-    func test_setStoreView() {
-        // Given
-        let mockState = MockStateProtocol().withDefault()
-        let state = GState(mockState)
-        let event = GEvent.setStoreView(player: "p1")
-        
-        // When
-        sut.execute(event, in: state)
-        
-        // Assert
-        XCTAssertEqual(state.storeView, "p1")
-    }
-    
     func test_deckToStore() {
         // Given
         let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
@@ -599,7 +586,7 @@ class GDatabaseUpdaterTests: XCTestCase {
             .withDefault()
             .hits(are: mockHit1)
         let state = GState(mockState)
-        let event = GEvent.addHit(name: "n1", player: "p2", abilities: ["looseHealth"], cancelable: 1, offender: "p1")
+        let event = GEvent.addHit(player: "p2", name: "n1", abilities: ["looseHealth"], cancelable: 1, offender: "p1")
         
         // When
         sut.execute(event, in: state)

@@ -72,7 +72,7 @@ private extension MediaEventMatcher {
             return ["event": event.hashValue, 
                     "ability": move.ability]
             
-        case let .addHit(name, _, _, _, _):
+        case let .addHit(_, name, _, _, _):
             return ["event": event.hashValue, 
                     "ability": name]
             

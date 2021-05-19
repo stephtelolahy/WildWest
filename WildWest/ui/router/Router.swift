@@ -17,51 +17,45 @@ protocol RouterProtocol {
     func toRoleSelector(_ completion: @escaping (Role?) -> Void)
     func toContactUs()
     func toRules()
-    func toLocalGame()
+    func toGame(_ environment: GameEnvironment)
     func toGameRoles(_ playersCount: Int)
     func toGameOver(_ winner: Role)
     func toGamePlayer(_ player: PlayerProtocol)
-    func toGameMoveSelector(_ title: String, children: [MoveNode], cancelable: Bool, completion: @escaping (MoveNode) -> Void)
+    func toWaitingRoom()
 }
 
-protocol RouterDepenenciesProtocol {
-    func resolveFigureSelectorWidget(_ completion: @escaping (String?) -> Void) -> UIViewController
-    func resolveRoleSelectorWidget(_ completion: @escaping (Role?) -> Void) -> UIViewController
-    func resolveLocalGameViewController() -> UIViewController
-    func resolveMenuViewController() -> UIViewController
-    func resolveGameRolesWidget(_ playersCount: Int) -> UIViewController
-    func resolveGameOverWidget(winner: Role, completion: @escaping () -> Void) -> UIViewController
-    func resolveGamePlayerWidget(_ player: PlayerProtocol) -> UIViewController
-    func resolveGameMoveSelectorWidget(_ title: String, children: [MoveNode], cancelable: Bool, completion: @escaping (MoveNode) -> Void) -> UIViewController
+protocol RouterDependenciesProtocol {
+    func provideMainViewController() -> UIViewController
+    func provideFigureSelectorWidget(_ completion: @escaping (String?) -> Void) -> UIViewController
+    func provideRoleSelectorWidget(_ completion: @escaping (Role?) -> Void) -> UIViewController
+    func provideGameViewController(_ environment: GameEnvironment) -> UIViewController
+    func provideMenuViewController() -> UIViewController
+    func provideGameRolesWidget(_ playersCount: Int) -> UIViewController
+    func provideGameOverWidget(winner: Role, completion: @escaping () -> Void) -> UIViewController
+    func provideGamePlayerWidget(_ player: PlayerProtocol) -> UIViewController
+    func provideWaitingRoomViewController() -> UIViewController
 }
 
 class Router: RouterProtocol {
     
     private weak var viewController: UIViewController?
-    private let dependencies: RouterDepenenciesProtocol
+    private let dependencies: RouterDependenciesProtocol
     
-    init(viewController: UIViewController, dependencies: RouterDepenenciesProtocol) {
+    init(viewController: UIViewController, dependencies: RouterDependenciesProtocol) {
         self.viewController = viewController
         self.dependencies = dependencies
     }
     
     func toMenu() {
-        let navController: UINavigationController?
-        if viewController is UINavigationController {
-            navController = viewController as? UINavigationController
-        } else {
-            navController = viewController?.navigationController
-        }
-        
-        navController?.fade(to: dependencies.resolveMenuViewController())
+        navController?.fade(to: dependencies.provideMenuViewController())
     }
     
     func toFigureSelector(completion: @escaping (String?) -> Void) {
-        viewController?.present(dependencies.resolveFigureSelectorWidget(completion), animated: true)
+        viewController?.present(dependencies.provideFigureSelectorWidget(completion), animated: true)
     }
     
     func toRoleSelector(_ completion: @escaping (Role?) -> Void) {
-        viewController?.present(dependencies.resolveRoleSelectorWidget(completion), animated: true)
+        viewController?.present(dependencies.provideRoleSelectorWidget(completion), animated: true)
     }
     
     func toContactUs() {
@@ -85,28 +79,38 @@ class Router: RouterProtocol {
         }
     }
     
-    func toLocalGame() {
-        viewController?.navigationController?.fade(to: dependencies.resolveLocalGameViewController())
+    func toGame(_ environment: GameEnvironment) {
+        navController?.fade(to: dependencies.provideGameViewController(environment))
     }
     
     func toGameRoles(_ playersCount: Int) {
-        viewController?.present(dependencies.resolveGameRolesWidget(playersCount), animated: true)
+        viewController?.present(dependencies.provideGameRolesWidget(playersCount), animated: true)
     }
     
     func toGameOver(_ winner: Role) {
-        let widget = dependencies.resolveGameOverWidget(winner: winner) { [weak self] in
+        let widget = dependencies.provideGameOverWidget(winner: winner) { [weak self] in
             self?.toMenu()
         }
         viewController?.present(widget, animated: true)
     }
     
     func toGamePlayer(_ player: PlayerProtocol) {
-        viewController?.present(dependencies.resolveGamePlayerWidget(player), animated: true)
+        viewController?.present(dependencies.provideGamePlayerWidget(player), animated: true)
     }
     
-    func toGameMoveSelector(_ title: String, children: [MoveNode], cancelable: Bool, completion: @escaping (MoveNode) -> Void) {
-        let widget = dependencies.resolveGameMoveSelectorWidget(title, children: children, cancelable: cancelable, completion: completion)
-        viewController?.present(widget, animated: true)
+    func toWaitingRoom() {
+        navController?.fade(to: dependencies.provideWaitingRoomViewController())
+    }
+}
+
+private extension Router {
+    
+    var navController: UINavigationController? {
+        if let navC = viewController as? UINavigationController {
+            return navC
+        } else {
+            return viewController?.navigationController
+        }
     }
 }
 

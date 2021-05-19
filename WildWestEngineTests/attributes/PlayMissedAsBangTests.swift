@@ -47,6 +47,6 @@ class PlayMissedAsBangTests: XCTestCase {
         // Assert
         XCTAssertEqual(moves, [GMove("bang", actor: "p1", card: .hand("c1"), args: [.target: ["p2"]])])
         XCTAssertEqual(events, [.play(player: "p1", card: "c1"),
-                                .addHit(name: "bang", player: "p2", abilities: ["looseHealth"], cancelable: 1, offender: "p1")])
+                                .addHit(player: "p2", name: "bang", abilities: ["looseHealth"], cancelable: 1, offender: "p1")])
     }
 }

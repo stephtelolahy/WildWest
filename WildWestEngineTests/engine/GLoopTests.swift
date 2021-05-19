@@ -6,6 +6,7 @@
 //  Copyright © 2020 CocoaPods. All rights reserved.
 //
 // swiftlint:disable implicitly_unwrapped_optional
+// swiftlint:disable type_body_length
 
 import XCTest
 import WildWestEngine
@@ -167,7 +168,7 @@ class GLoopTests: XCTestCase {
     
     func test_ThrowsError_IfFailedApplyingEvent() {
         // Given
-        let event: GEvent = .setStoreView(player: "p1") 
+        let event: GEvent = .emptyQueue
         stub(mockQueue) { mock in
             when(mock.pop()).thenReturn(event)
         }

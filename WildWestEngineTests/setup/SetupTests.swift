@@ -147,6 +147,32 @@ class SetupTests: XCTestCase {
         let player1 = try XCTUnwrap(state.players[state.playOrder[0]])
         XCTAssertNotEqual(player1.hand.map { $0.name }, ["c1", "c2", "c3", "c4"])
     }
+    
+    func test_setupDeck() throws {
+        // Given
+        let cards: [Card] = [Card(name: "c1", type: .brown),
+                             Card(name: "c2", type: .blue) ]
+        let cardSet: [DeckCard] = Array(1...2).map { DeckCard(name: "c\($0)", value: "v\($0)", suit: "s\($0)") }
+        
+        // When
+        let playCards = sut.setupDeck(cardSet: cardSet, cards: cards)
+        
+        // Assert
+        XCTAssertEqual(playCards.count, 2)
+        
+        XCTAssertEqual(playCards[0].identifier, "c1-v1-s1")
+        XCTAssertEqual(playCards[0].name, "c1")
+        XCTAssertEqual(playCards[0].type, .brown)
+        XCTAssertEqual(playCards[0].value, "v1")
+        XCTAssertEqual(playCards[0].suit, "s1")
+        
+        XCTAssertEqual(playCards[1].identifier, "c2-v2-s2")
+        XCTAssertEqual(playCards[1].name, "c2")
+        XCTAssertEqual(playCards[1].type, .blue)
+        XCTAssertEqual(playCards[1].value, "v2")
+        XCTAssertEqual(playCards[1].suit, "s2")
+        
+    }
 }
 
 private extension Array where Element: Equatable {

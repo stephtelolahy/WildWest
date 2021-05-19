@@ -28,13 +28,14 @@ class GameViewController: UIViewController {
     // MARK: - Dependencies
     
     var router: RouterProtocol!
+    var userManager: UserManagerProtocol!
     var environment: GameEnvironment!
     var analyticsManager: AnalyticsManager!
     var animationMatcher: AnimationEventMatcherProtocol!
     var mediaMatcher: MediaEventMatcherProtocol!
     var soundPlayer: SoundPlayerProtocol!
-    var inputHandler: InputHandlerProtocol!
     var moveSegmenter: MoveSegmenterProtocol!
+    var moveSelector: GameMoveSelectorWidget!
     
     private lazy var animationRenderer: AnimationRendererProtocol = {
         AnimationRenderer(viewController: self,
@@ -83,6 +84,7 @@ class GameViewController: UIViewController {
     }
     
     @IBAction private func menuButtonTapped(_ sender: Any) {
+        userManager.setStatusIdle()
         router.toMenu()
     }
     
@@ -91,7 +93,7 @@ class GameViewController: UIViewController {
             return
         }
         
-        inputHandler.selectMove(among: moves, context: nil, cancelable: true) { [weak self] move in
+        moveSelector.selectMove(among: moves, context: nil, cancelable: true) { [weak self] move in
             self?.environment.engine.execute(move)
         }
     }
@@ -101,7 +103,7 @@ class GameViewController: UIViewController {
             return
         }
         
-        inputHandler.selectMove(among: moves, context: nil, cancelable: true) { [weak self] move in
+        moveSelector.selectMove(among: moves, context: nil, cancelable: true) { [weak self] move in
             self?.environment.engine.execute(move)
         }
     }
@@ -112,7 +114,7 @@ private extension GameViewController {
     func processState(_ state: StateProtocol) {
         self.state = state
         
-        playerItems = state.playerItems(users: environment.gameUsers)
+        playerItems = state.playerItems(users: environment.users)
         playersCollectionView.reloadData()
         
         if let controlledId = environment.controlledId,
@@ -135,6 +137,7 @@ private extension GameViewController {
             
         case let .gameover(winner):
             router.toGameOver(winner)
+            userManager.setStatusIdle()
             analyticsManager.tagEventGameOver(state)
             
         default:
@@ -167,7 +170,7 @@ private extension GameViewController {
         // <RULE> Force select reaction moves
         if !moves.isEmpty,
            let hit = state.hits.first {
-            inputHandler.selectMove(among: moves, context: hit.name, cancelable: false) { [weak self] move in
+            moveSelector.selectMove(among: moves, context: hit.name, cancelable: false) { [weak self] move in
                 self?.environment.engine.execute(move)
             }
         }
@@ -282,7 +285,7 @@ extension GameViewController: UICollectionViewDelegate {
             return
         }
         
-        inputHandler.selectMove(among: moves, context: nil, cancelable: true) { [weak self] move in
+        moveSelector.selectMove(among: moves, context: nil, cancelable: true) { [weak self] move in
             self?.environment.engine.execute(move)
         }
     }
