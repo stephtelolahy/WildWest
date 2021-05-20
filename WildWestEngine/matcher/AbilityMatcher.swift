@@ -68,19 +68,19 @@ private extension AbilityMatcher {
     func active(actor identifier: String,
                 in state: StateProtocol) -> [GMove]? {
         let actor = state.players[identifier]!
-        let innerAbilities = abilities(appliedTo: actor)
+        let innerAbilities = abilities(applicableTo: actor)
         let innerMoves: [GMove] = innerAbilities.keys
             .compactMap { self.moves(ofType: .active, ability: $0, card: nil, actor: actor, in: state) }
             .flatMap { $0 }
         
         let playHandMoves: [GMove] = actor.hand.flatMap { card -> [GMove] in
-            abilities(appliedTo: card, actor: actor).keys
+            abilities(applicableTo: card, actor: actor).keys
                 .compactMap { ability -> [GMove]? in
                     self.moves(ofType: .active, ability: ability, card: .hand(card.identifier), actor: actor, in: state)?
                         .filter { move -> Bool in
                             if let target = move.args[.target]?.first,
                                let targetObject = state.players[target],
-                               self.isCard(card, targetableTo: targetObject) == false {
+                               self.isPlayer(targetObject, targetableBy: card) == false {
                                 return false
                             }
                             
@@ -107,7 +107,7 @@ private extension AbilityMatcher {
                    actor identifier: String,
                    in state: StateProtocol) -> [GMove]? {
         let actor = state.players[identifier]!
-        let innerAbilities = abilities(appliedTo: actor)
+        let innerAbilities = abilities(applicableTo: actor)
         let innerMoves: [GMove] = innerAbilities.keys
             .compactMap { self.moves(ofType: .triggered, ability: $0, card: nil, actor: actor, in: state, event: event) }
             .flatMap { $0 }
@@ -179,7 +179,7 @@ private extension AbilityMatcher {
 
 private extension AbilityMatcher {
     
-    func abilities(appliedTo actor: PlayerProtocol) -> [String: Int] {
+    func abilities(applicableTo actor: PlayerProtocol) -> [String: Int] {
         var abilities = actor.abilities
         
         if actor.abilities["silentStartTurnOnPhase1"] != nil {
@@ -189,7 +189,7 @@ private extension AbilityMatcher {
         return abilities
     }
     
-    func abilities(appliedTo card: CardProtocol, actor: PlayerProtocol) -> [String: Int] {
+    func abilities(applicableTo card: CardProtocol, actor: PlayerProtocol) -> [String: Int] {
         var abilities = card.abilities
         
         if actor.abilities["playBangAsMissed"] != nil,
@@ -205,8 +205,8 @@ private extension AbilityMatcher {
         return abilities
     }
     
-    func isCard(_ card: CardProtocol, targetableTo target: PlayerProtocol) -> Bool {
-        if target.abilities["silentJail"] != nil, 
+    func isPlayer(_ player: PlayerProtocol, targetableBy card: CardProtocol) -> Bool {
+        if player.abilities["silentJail"] != nil,
            card.name == "jail" {
             return false
         }

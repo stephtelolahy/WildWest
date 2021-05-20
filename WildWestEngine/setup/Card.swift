@@ -27,3 +27,23 @@ public enum CardType: String {
     case blue
     case figure
 }
+
+extension Card: Decodable {
+    
+    private enum CodingKeys: String, CodingKey {
+        case name
+        case desc
+        case type
+        case abilities
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        name = try values.decode(String.self, forKey: .name)
+        desc = try values.decode(String.self, forKey: .desc)
+        type = try values.decode(CardType.self, forKey: .type)
+        abilities = try values.decodeIfPresent([String: Int].self, forKey: .abilities) ?? [:]
+    }
+}
+
+extension CardType: Decodable {}

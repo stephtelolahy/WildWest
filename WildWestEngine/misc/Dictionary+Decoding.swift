@@ -8,17 +8,17 @@
 // Define DynamicCodingKeys type needed for creating
 // decoding container from JSONDecoder
 struct DynamicCodingKeys: CodingKey {
-
+    
     // Use for string-keyed dictionary
     var stringValue: String
-
+    
     init?(stringValue: String) {
         self.stringValue = stringValue
     }
-
+    
     // Use for integer-keyed dictionary
     var intValue: Int?
-
+    
     init?(intValue: Int) {
         // We are not using this, thus just return nil
         return nil
@@ -26,24 +26,24 @@ struct DynamicCodingKeys: CodingKey {
 }
 
 extension KeyedDecodingContainer {
-
+    
     func decode(_ type: [String: Any].Type, forKey key: K) throws -> [String: Any] {
         let container = try self.nestedContainer(keyedBy: DynamicCodingKeys.self, forKey: key)
         return try container.decode(type)
     }
-
+    
     func decodeIfPresent(_ type: [String: Any].Type, forKey key: K) throws -> [String: Any]? {
         guard contains(key) else {
             return nil
         }
         return try decode(type, forKey: key)
     }
-
+    
     func decode(_ type: [[String: Any]].Type, forKey key: K) throws -> [[String: Any]] {
         var container = try self.nestedUnkeyedContainer(forKey: key)
         return try container.decode(type)
     }
-
+    
     func decode(_ type: [String: Any].Type) throws -> [String: Any] {
         var dictionary: [String: Any] = [:]
         for key in allKeys {
@@ -68,7 +68,7 @@ extension KeyedDecodingContainer {
 }
 
 extension UnkeyedDecodingContainer {
-
+    
     mutating func decode(_ type: [[String: Any]].Type) throws -> [[String: Any]] {
         var array: [[String: Any]] = []
         while isAtEnd == false {
@@ -80,7 +80,7 @@ extension UnkeyedDecodingContainer {
         }
         return array
     }
-
+    
     mutating func decode(_ type: [String: Any].Type) throws -> [String: Any] {
         let nestedContainer = try self.nestedContainer(keyedBy: DynamicCodingKeys.self)
         return try nestedContainer.decode(type)

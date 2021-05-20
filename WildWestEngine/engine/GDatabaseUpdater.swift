@@ -33,7 +33,6 @@ public extension GEvent {
 }
 
 private typealias EventFunc = (GEvent, GState) -> Void
-private typealias MatchingFunc = (GEvent) -> Bool
 
 private struct EventDesc {
     let id: String
