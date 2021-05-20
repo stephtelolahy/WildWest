@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol GameCollectionViewLayoutDelegate: class {
+protocol GameCollectionViewLayoutDelegate: AnyObject {
     func numberOfItemsForGameCollectionViewLayout( layout: GameCollectionViewLayout) -> Int
 }
 
@@ -36,8 +36,8 @@ class GameCollectionViewLayout: UICollectionViewLayout {
     override func prepare() {
         // We begin measuring the location of items only if the cache is empty
         guard cache.isEmpty,
-            let numberOfItems = delegate?.numberOfItemsForGameCollectionViewLayout(layout: self) else {
-                return
+              let numberOfItems = delegate?.numberOfItemsForGameCollectionViewLayout(layout: self) else {
+            return
         }
         
         let cellFrames = GameLayoutBuilder().buildLayout(for: numberOfItems,

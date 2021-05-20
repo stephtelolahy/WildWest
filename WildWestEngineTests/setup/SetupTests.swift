@@ -70,12 +70,13 @@ class SetupTests: XCTestCase {
         let roles: [Role] = [.sheriff, .outlaw, .deputy, .renegade]
         let brown: [Card] = Array(1...80).map { Card(name: "c\($0)", type: .brown) }
         let figure: [Card] = Array(1...16).map { Card(name: "f\($0)", type: .figure, abilities: ["bullets": 4]) }
-        let cards: [Card] = brown + figure
+        let defaults: [Card] = [Card(name: "player", type: .default, abilities: ["a1": 0, "a2": 0]),
+                                Card(name: "sheriff", type: .default, abilities: ["a3": 0])]
+        let cards: [Card] = brown + figure + defaults
         let cardSet: [DeckCard] = Array(1...80).map { DeckCard(name: "c\($0)", value: "v\($0)", suit: "s\($0)") }
-        let defaults = DefaultAbilities(common: ["a1": 0, "a2": 0], sheriff: ["a3": 0])
         
         // When
-        let state = sut.setupGame(roles: roles, cards: cards, cardSet: cardSet, defaults: defaults, preferredRole: nil, preferredFigure: nil)
+        let state = sut.setupGame(roles: roles, cards: cards, cardSet: cardSet, preferredRole: nil, preferredFigure: nil)
         
         // Assert
         
@@ -118,12 +119,13 @@ class SetupTests: XCTestCase {
         let roles: [Role] = [.sheriff, .outlaw, .deputy, .renegade]
         let brown: [Card] = Array(1...80).map { Card(name: "c\($0)", type: .brown) }
         let figure: [Card] = Array(1...16).map { Card(name: "f\($0)", type: .figure, abilities: ["bullets": 4]) }
-        let cards: [Card] = brown + figure
+        let defaults: [Card] = [Card(name: "player", type: .default, abilities: ["a1": 0, "a2": 0]),
+                                Card(name: "sheriff", type: .default, abilities: ["a3": 0])]
+        let cards: [Card] = brown + figure + defaults
         let cardSet: [DeckCard] = Array(1...80).map { DeckCard(name: "c\($0)", value: "v\($0)", suit: "s\($0)") }
-        let defaults = DefaultAbilities(common: ["a1": 0, "a2": 0], sheriff: ["a3": 0])
         
         // When
-        let state = sut.setupGame(roles: roles, cards: cards, cardSet: cardSet, defaults: defaults, preferredRole: .deputy, preferredFigure: "f12")
+        let state = sut.setupGame(roles: roles, cards: cards, cardSet: cardSet, preferredRole: .deputy, preferredFigure: "f12")
         
         // Assert
         let firstPlayer = try XCTUnwrap(state.players[state.playOrder[0]])
@@ -136,12 +138,13 @@ class SetupTests: XCTestCase {
         let roles: [Role] = [.sheriff, .outlaw, .deputy, .renegade]
         let brown: [Card] = Array(1...80).map { Card(name: "c\($0)", type: .brown) }
         let figure: [Card] = Array(1...16).map { Card(name: "f\($0)", type: .figure, abilities: ["bullets": 4]) }
-        let cards: [Card] = brown + figure
+        let defaults: [Card] = [Card(name: "player", type: .default, abilities: ["a1": 0, "a2": 0]),
+                                Card(name: "sheriff", type: .default, abilities: ["a3": 0])]
+        let cards: [Card] = brown + figure + defaults
         let cardSet: [DeckCard] = Array(1...80).map { DeckCard(name: "c\($0)", value: "v\($0)", suit: "s\($0)") }
-        let defaults = DefaultAbilities(common: [:], sheriff: [:])
         
         // When
-        let state = sut.setupGame(roles: roles, cards: cards, cardSet: cardSet, defaults: defaults, preferredRole: nil, preferredFigure: nil)
+        let state = sut.setupGame(roles: roles, cards: cards, cardSet: cardSet, preferredRole: nil, preferredFigure: nil)
         
         // Assert
         let player1 = try XCTUnwrap(state.players[state.playOrder[0]])

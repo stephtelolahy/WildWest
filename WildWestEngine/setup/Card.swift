@@ -26,6 +26,7 @@ public enum CardType: String {
     case brown
     case blue
     case figure
+    case `default`
 }
 
 extension Card: Decodable {

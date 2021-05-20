@@ -72,7 +72,6 @@ class SimulationTests: XCTestCase {
         let resourcesLoader = ResourcesLoader(jsonReader: jsonReader)
         let cards = resourcesLoader.loadCards()
         let cardSet = resourcesLoader.loadDeck()
-        let defaults = resourcesLoader.loadDefaults()
         let abilities = resourcesLoader.loadAbilities()
         
         let setup = GSetup()
@@ -80,7 +79,6 @@ class SimulationTests: XCTestCase {
         let state = setup.setupGame(roles: roles,
                                     cards: cards,
                                     cardSet: cardSet,
-                                    defaults: defaults,
                                     preferredRole: nil,
                                     preferredFigure: nil)
         let databaseUpdater = GDatabaseUpdater()

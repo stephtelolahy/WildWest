@@ -25,8 +25,12 @@ class ResourcesTests: XCTestCase {
         // When
         let cards = sut.loadCards()
         
+        let brownCards = cards.filter { $0.type == .brown }
+        let blueCards = cards.filter { $0.type == .blue }
+        let figureCards = cards.filter { $0.type == .figure }
+        
         // Assert
-        cards.forEach {
+        (brownCards + blueCards + figureCards).forEach {
             XCTAssertNotNil(UIImage(named: $0.name, in: bundle, compatibleWith: nil), "Misssing asset for \($0.name)")
         }
     }

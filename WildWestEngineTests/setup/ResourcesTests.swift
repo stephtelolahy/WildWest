@@ -73,7 +73,8 @@ class ResourcesTests: XCTestCase {
                                 "bangsPerTurn",
                                 "playBangAsMissed",
                                 "playMissedAsBang",
-                                "silentStartTurnOnPhase1"]
+                                "silentStartTurnOnPhase1",
+                                "silentJail"]
         let activeAbilities = sut.loadAbilities().map { $0.name }
         let allAbilities = passiveAbilities + activeAbilities
         
@@ -88,34 +89,25 @@ class ResourcesTests: XCTestCase {
         }
     }
     
-    func test_Defaults_AreValidAbilities() throws {
-        // Given
-        let abilities = sut.loadAbilities().map { $0.name }
-        
-        // When
-        let defaults = sut.loadDefaults()
-        
-        // Assert
-        defaults.common.keys.forEach { 
-            XCTAssertTrue(abilities.contains($0), "Invalid ability \($0) in defaults")
-        }
-    }
-    
     func test_DefaultAbilities() throws {
         // Given
         // When
-        let abilities = sut.loadDefaults()
+        let cards = sut.loadCards()
+        
+        let playerCard = cards.first { $0.type == .default && $0.name == "player" }!
+        let sheriffCard = cards.first { $0.type == .default && $0.name == "sheriff" }!
         
         // Assert
-        XCTAssertNotNil(abilities.common["endTurn"])
-        XCTAssertNotNil(abilities.common["startTurnOnPhase1"])
-        XCTAssertNotNil(abilities.common["nextTurnOnPhase3"])
-        XCTAssertNotNil(abilities.common["nextTurnOnEliminated"])
-        XCTAssertNotNil(abilities.common["discardExcessCardsOnPhase3"])
-        XCTAssertNotNil(abilities.common["discardAllCardsOnEliminated"])
-        XCTAssertNotNil(abilities.common["gainRewardOnEliminatingOutlaw"])
-        XCTAssertNotNil(abilities.sheriff["penalizeOnEliminatingDeputy"])
-        XCTAssertNotNil(abilities.sheriff["silentJail"])
+        XCTAssertNotNil(playerCard.abilities["endTurn"])
+        XCTAssertNotNil(playerCard.abilities["startTurnOnPhase1"])
+        XCTAssertNotNil(playerCard.abilities["nextTurnOnPhase3"])
+        XCTAssertNotNil(playerCard.abilities["nextTurnOnEliminated"])
+        XCTAssertNotNil(playerCard.abilities["discardExcessCardsOnPhase3"])
+        XCTAssertNotNil(playerCard.abilities["discardAllCardsOnEliminated"])
+        XCTAssertNotNil(playerCard.abilities["gainRewardOnEliminatingOutlaw"])
+        
+        XCTAssertNotNil(sheriffCard.abilities["penalizeOnEliminatingDeputy"])
+        XCTAssertNotNil(sheriffCard.abilities["silentJail"])
     }
     
     func test_BangCards() throws {

@@ -6,10 +6,9 @@
 //
 
 public protocol ResourcesLoaderProtocol {
-    func loadAbilities() -> [Ability]
     func loadCards() -> [Card]
     func loadDeck() -> [DeckCard]
-    func loadDefaults() -> DefaultAbilities
+    func loadAbilities() -> [Ability]
 }
 
 public class ResourcesLoader: ResourcesLoaderProtocol {
@@ -20,10 +19,6 @@ public class ResourcesLoader: ResourcesLoaderProtocol {
         self.jsonReader = jsonReader
     }
     
-    public func loadAbilities() -> [Ability] {
-        jsonReader.load("abilities")
-    }
-    
     public func loadCards() -> [Card] {
         jsonReader.load("cards")
     }
@@ -32,7 +27,7 @@ public class ResourcesLoader: ResourcesLoaderProtocol {
         jsonReader.load("deck")
     }
     
-    public func loadDefaults() -> DefaultAbilities {
-        jsonReader.load("defaults")
+    public func loadAbilities() -> [Ability] {
+        jsonReader.load("abilities")
     }
 }

@@ -12,7 +12,6 @@
 		3300B0A8264E4236002F4776 /* ParameterMatcherExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3300B0A7264E4236002F4776 /* ParameterMatcherExtension.swift */; };
 		3300EF29256FE3C1006075F6 /* MediaEventMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3300EF28256FE3C1006075F6 /* MediaEventMatcherTests.swift */; };
 		3300EF2E256FE4FE006075F6 /* media.json in Resources */ = {isa = PBXBuildFile; fileRef = 3300EF2D256FE4FE006075F6 /* media.json */; };
-		3300EFDB256FEE5E006075F6 /* MediaEventMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33626FB9256FE31B00128C0A /* MediaEventMatcher.swift */; };
 		33031E0F24555D5F00528158 /* OptionalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33031E0E24555D5F00528158 /* OptionalExtension.swift */; };
 		3306682E245588B9003B2263 /* FirebaseMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3306682D245588B9003B2263 /* FirebaseMapper.swift */; };
 		33113A0C263DD3ED00289989 /* UIView+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33113A0B263DD3ED00289989 /* UIView+Border.swift */; };
@@ -66,7 +65,6 @@
 		3358333925BC2585001BE4D8 /* Ability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358330A25BC2584001BE4D8 /* Ability.swift */; };
 		3358333A25BC2585001BE4D8 /* JsonReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358330B25BC2585001BE4D8 /* JsonReader.swift */; };
 		3358333B25BC2585001BE4D8 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358330C25BC2585001BE4D8 /* Card.swift */; };
-		3358333C25BC2585001BE4D8 /* DefaultAbilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358330D25BC2585001BE4D8 /* DefaultAbilities.swift */; };
 		3358333D25BC2585001BE4D8 /* Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358330E25BC2585001BE4D8 /* Setup.swift */; };
 		3358333E25BC2585001BE4D8 /* AbilityMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358331025BC2585001BE4D8 /* AbilityMatcher.swift */; };
 		3358333F25BC2585001BE4D8 /* EffectMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358331125BC2585001BE4D8 /* EffectMatcher.swift */; };
@@ -87,7 +85,6 @@
 		3358334E25BC2585001BE4D8 /* GLoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358332325BC2585001BE4D8 /* GLoop.swift */; };
 		3358334F25BC2585001BE4D8 /* GTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358332425BC2585001BE4D8 /* GTimer.swift */; };
 		3358335025BC2585001BE4D8 /* GEventQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358332525BC2585001BE4D8 /* GEventQueue.swift */; };
-		3358335125BC2585001BE4D8 /* defaults.json in Resources */ = {isa = PBXBuildFile; fileRef = 3358332725BC2585001BE4D8 /* defaults.json */; };
 		3358335225BC2585001BE4D8 /* deck.json in Resources */ = {isa = PBXBuildFile; fileRef = 3358332825BC2585001BE4D8 /* deck.json */; };
 		3358335425BC2585001BE4D8 /* cards.json in Resources */ = {isa = PBXBuildFile; fileRef = 3358332A25BC2585001BE4D8 /* cards.json */; };
 		3358335525BC2585001BE4D8 /* abilities.json in Resources */ = {isa = PBXBuildFile; fileRef = 3358332B25BC2585001BE4D8 /* abilities.json */; };
@@ -201,6 +198,7 @@
 		339C7CA126566D48001CBCAC /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339C7CA026566D48001CBCAC /* GameManager.swift */; };
 		339C7CA326566D6E001CBCAC /* SimulationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339C7CA226566D6E001CBCAC /* SimulationTests.swift */; };
 		33A6330024545B060023A2D2 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A632FF24545B060023A2D2 /* AnalyticsManager.swift */; };
+		33A76F8D2656AD7000FE9DCE /* MediaEventMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33626FB9256FE31B00128C0A /* MediaEventMatcher.swift */; };
 		33AFA25323DC201A00425BEB /* ClassNameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */; };
 		33B0E85B263D5901004B5806 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0E85A263D5901004B5806 /* Router.swift */; };
 		33B0E85C263D5901004B5806 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0E85A263D5901004B5806 /* Router.swift */; };
@@ -341,7 +339,6 @@
 		3358330A25BC2584001BE4D8 /* Ability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ability.swift; sourceTree = "<group>"; };
 		3358330B25BC2585001BE4D8 /* JsonReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonReader.swift; sourceTree = "<group>"; };
 		3358330C25BC2585001BE4D8 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
-		3358330D25BC2585001BE4D8 /* DefaultAbilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAbilities.swift; sourceTree = "<group>"; };
 		3358330E25BC2585001BE4D8 /* Setup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setup.swift; sourceTree = "<group>"; };
 		3358331025BC2585001BE4D8 /* AbilityMatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbilityMatcher.swift; sourceTree = "<group>"; };
 		3358331125BC2585001BE4D8 /* EffectMatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectMatcher.swift; sourceTree = "<group>"; };
@@ -362,7 +359,6 @@
 		3358332325BC2585001BE4D8 /* GLoop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLoop.swift; sourceTree = "<group>"; };
 		3358332425BC2585001BE4D8 /* GTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTimer.swift; sourceTree = "<group>"; };
 		3358332525BC2585001BE4D8 /* GEventQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GEventQueue.swift; sourceTree = "<group>"; };
-		3358332725BC2585001BE4D8 /* defaults.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = defaults.json; sourceTree = "<group>"; };
 		3358332825BC2585001BE4D8 /* deck.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = deck.json; sourceTree = "<group>"; };
 		3358332A25BC2585001BE4D8 /* cards.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cards.json; sourceTree = "<group>"; };
 		3358332B25BC2585001BE4D8 /* abilities.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = abilities.json; sourceTree = "<group>"; };
@@ -586,18 +582,10 @@
 			path = json;
 			sourceTree = "<group>";
 		};
-		33112E71244503F1009C706E /* animation */ = {
-			isa = PBXGroup;
-			children = (
-				33315302256ED0EB0088D281 /* AnimationEventMatcher.swift */,
-				3314A020256C586300E54AF6 /* AnimationRenderer.swift */,
-			);
-			path = animation;
-			sourceTree = "<group>";
-		};
 		331BFCF525BD67AC004183F1 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				335BED682429334F009184A3 /* SoundPlayer.swift */,
 				334673E72436314E00FFBB82 /* UserDefaultsStored.swift */,
 			);
 			path = utils;
@@ -703,13 +691,12 @@
 		3358330725BC2584001BE4D8 /* setup */ = {
 			isa = PBXGroup;
 			children = (
+				3358330E25BC2585001BE4D8 /* Setup.swift */,
 				3358330925BC2584001BE4D8 /* ResourcesLoader.swift */,
-				3358330A25BC2584001BE4D8 /* Ability.swift */,
 				3358330B25BC2585001BE4D8 /* JsonReader.swift */,
 				3358330C25BC2585001BE4D8 /* Card.swift */,
 				3358330825BC2584001BE4D8 /* DeckCard.swift */,
-				3358330D25BC2585001BE4D8 /* DefaultAbilities.swift */,
-				3358330E25BC2585001BE4D8 /* Setup.swift */,
+				3358330A25BC2584001BE4D8 /* Ability.swift */,
 			);
 			path = setup;
 			sourceTree = "<group>";
@@ -764,9 +751,8 @@
 		3358332625BC2585001BE4D8 /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				3358332725BC2585001BE4D8 /* defaults.json */,
-				3358332825BC2585001BE4D8 /* deck.json */,
 				3358332A25BC2585001BE4D8 /* cards.json */,
+				3358332825BC2585001BE4D8 /* deck.json */,
 				3358332B25BC2585001BE4D8 /* abilities.json */,
 			);
 			path = resources;
@@ -838,15 +824,6 @@
 			path = dto;
 			sourceTree = "<group>";
 		};
-		337C0985256DA8B7009E88CE /* sfx */ = {
-			isa = PBXGroup;
-			children = (
-				33626FB9256FE31B00128C0A /* MediaEventMatcher.swift */,
-				335BED682429334F009184A3 /* SoundPlayer.swift */,
-			);
-			path = sfx;
-			sourceTree = "<group>";
-		};
 		3385A1F423F9352800CD9660 /* game */ = {
 			isa = PBXGroup;
 			children = (
@@ -855,11 +832,12 @@
 				33D869D8263DEBB3009FDEC3 /* GameRolesWidget.swift */,
 				33BFAAED263DFD8400BDF51D /* GamePlayerWidget.swift */,
 				3346116F263E1F170043F14D /* GameMoveSelectorWidget.swift */,
+				33315302256ED0EB0088D281 /* AnimationEventMatcher.swift */,
+				3314A020256C586300E54AF6 /* AnimationRenderer.swift */,
+				33626FB9256FE31B00128C0A /* MediaEventMatcher.swift */,
 				333DB7C924D55008002A5692 /* player */,
 				333DB7C724D54FF4002A5692 /* hand */,
 				33E4411724077CA000B2848E /* message */,
-				33112E71244503F1009C706E /* animation */,
-				337C0985256DA8B7009E88CE /* sfx */,
 			);
 			path = game;
 			sourceTree = "<group>";
@@ -1423,7 +1401,6 @@
 			files = (
 				3358335225BC2585001BE4D8 /* deck.json in Resources */,
 				3358335525BC2585001BE4D8 /* abilities.json in Resources */,
-				3358335125BC2585001BE4D8 /* defaults.json in Resources */,
 				3358335425BC2585001BE4D8 /* cards.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1737,7 +1714,6 @@
 				3358333025BC2585001BE4D8 /* GEvent.swift in Sources */,
 				3358334825BC2585001BE4D8 /* RoleStrategy.swift in Sources */,
 				3358332F25BC2585001BE4D8 /* State.swift in Sources */,
-				3358333C25BC2585001BE4D8 /* DefaultAbilities.swift in Sources */,
 				3358333125BC2585001BE4D8 /* GHit.swift in Sources */,
 				3358334925BC2585001BE4D8 /* GDatabase.swift in Sources */,
 				3358333525BC2585001BE4D8 /* GState.swift in Sources */,
@@ -1896,12 +1872,12 @@
 				33CA01FA264C5EA000D21999 /* RemoteGameDatabaseUpdaterTests.swift in Sources */,
 				335157FE245D88BE00C46888 /* OptionalExtension.swift in Sources */,
 				33CA01FE264C5EC400D21999 /* RemoteGameDatabaseUpdater.swift in Sources */,
+				33A76F8D2656AD7000FE9DCE /* MediaEventMatcher.swift in Sources */,
 				3346F33524CB280500FB0418 /* DtoEncoder+State.swift in Sources */,
 				33B896C524384A770005FF21 /* GameLayoutBuilder.swift in Sources */,
 				3300B0A8264E4236002F4776 /* ParameterMatcherExtension.swift in Sources */,
 				3342DF9C263EF71C000BDC57 /* UserInfo.swift in Sources */,
 				33732A84264BB984007A9EA7 /* EventDto.swift in Sources */,
-				3300EFDB256FEE5E006075F6 /* MediaEventMatcher.swift in Sources */,
 				333DB7CB24D55028002A5692 /* HandCollectionViewLayout.swift in Sources */,
 				3300B02A264E3C48002F4776 /* GeneratedMocks.swift in Sources */,
 				334F7C05264DA1C4002ACC40 /* DatabaseReferenceProtocol.swift in Sources */,

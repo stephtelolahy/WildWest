@@ -4,15 +4,13 @@
 //
 //  Created by Hugues Stéphano TELOLAHY on 11/1/20.
 //
-// swiftlint:disable function_parameter_count
 
 public protocol SetupProtocol {
     func roles(for playersCount: Int) -> [Role]
     func setupDeck(cardSet: [DeckCard], cards: [Card]) -> [CardProtocol]
     func setupGame(roles: [Role], 
                    cards: [Card], 
-                   cardSet: [DeckCard], 
-                   defaults: DefaultAbilities, 
+                   cardSet: [DeckCard],
                    preferredRole: Role?,
                    preferredFigure: String?) -> StateProtocol
 }
@@ -48,12 +46,12 @@ public class GSetup: SetupProtocol {
     public func setupGame(roles: [Role], 
                           cards: [Card],
                           cardSet: [DeckCard],
-                          defaults: DefaultAbilities,
                           preferredRole: Role?, 
                           preferredFigure: String?) -> StateProtocol {
         var deck = setupDeck(cardSet: cardSet.shuffled(), cards: cards)
         let roles = roles.shuffled().starting(with: preferredRole)
         let figures = cards.filter { $0.type == .figure }.shuffled().starting(with: { $0.name == preferredFigure })
+        let defaults = cards.filter { $0.type == .default }
         let players = setupPlayers(roles: roles, figures: figures, defaults: defaults, deck: &deck)
         guard let sheriff = players.first(where: { $0.role == .sheriff }) else {
             fatalError("Sheriff not found")
@@ -75,19 +73,28 @@ private extension GSetup {
     
     func setupPlayers(roles: [Role],
                       figures: [Card],
-                      defaults: DefaultAbilities,
+                      defaults: [Card],
                       deck: inout [CardProtocol]) -> [PlayerProtocol] {
         roles.enumerated().map { index, role in
             let figure = figures[index]
             guard var health = figure.abilities["bullets"] else {
                 fatalError("Bullets for \(figure.name) not found")
             }
+            
             var abilities = figure.abilities
-            abilities.merge(defaults.common) { $1 }
+            
+            if let playerCard = defaults.first(where: { $0.name == "player" }) {
+                abilities.merge(playerCard.abilities) { $1 }
+            }
+            
             if role == .sheriff {
                 health += 1
-                abilities.merge(defaults.sheriff) { $1 }
+                
+                if let sheriffCard = defaults.first(where: { $0.name == "sheriff" }) {
+                    abilities.merge(sheriffCard.abilities) { $1 }
+                }
             }
+            
             let hand: [CardProtocol] = Array(1...health).map { _ in deck.removeFirst() }
             return GPlayer(identifier: figure.name,
                            name: figure.name,

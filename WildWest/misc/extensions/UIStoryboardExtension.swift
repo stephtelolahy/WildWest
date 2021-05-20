@@ -19,12 +19,12 @@ extension UIStoryboard {
         if let viewController = storyboard.instantiateInitialViewController() as? T {
             return viewController
         }
-
+        
         let storyboardId: String = storyboardId ?? T.className
         if let viewController = storyboard.instantiateViewController(withIdentifier: storyboardId) as? T {
             return viewController
         }
-
+        
         fatalError("Could not instantiate \(T.className) identified by \(storyboardId) in \(storyboardName)")
     }
 }
@@ -34,7 +34,7 @@ private extension String {
         guard hasSuffix(suffix) else {
             return self
         }
-
+        
         return String(dropLast(suffix.count))
     }
 }
