@@ -731,12 +731,11 @@
       {
         "action": "drawDeck",
         "player": "actor",
-        "amount": 2
+        "amount": 1
       },
       {
-        "action": "revealHandIf",
+        "action": "drawDeckFlippingIf",
         "player": "actor",
-        "card": "deck[1]",
         "regex": "(♥️)|(♦️)",
         "then": [
           {

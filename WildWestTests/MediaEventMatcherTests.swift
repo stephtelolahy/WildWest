@@ -60,7 +60,7 @@ class MediaEventMatcherTests: XCTestCase {
     
     func test_RevealCard() {
         XCTAssertEqual(sut.emoji(on: .revealDeck), "🌟")
-        XCTAssertEqual(sut.emoji(on: .revealHand(player: "p1", card: "c1")), "🌟")
+        XCTAssertEqual(sut.emoji(on: .drawDeckFlipping(player: "p1")), "🌟")
     }
     
     func test_DiscardCard() {

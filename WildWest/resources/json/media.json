@@ -65,7 +65,7 @@
     "desc": "reveal card",
     "emoji": "🌟",
     "sfx": "Metal Clang-SoundBible.com-19572601",
-    "playReqs": [{ "event": "revealDeck" }, { "event": "revealHand" }]
+    "playReqs": [{ "event": "revealDeck" }, { "event": "drawDeckFlipping" }]
   },
   {
     "desc": "discard card",

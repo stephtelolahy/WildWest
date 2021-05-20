@@ -95,7 +95,7 @@ private extension EffectMatcher {
         
         // <LOGIC>
         revealDeckIf(),
-        revealHandIf(),
+        drawDeckFlippingIf(),
         loop()
         // </LOGIC>
     ].toDictionary { $0.id }
@@ -207,17 +207,16 @@ private extension EffectMatcher {
                })
     }
     
-    static func revealHandIf() -> Effect {
-        Effect(id: "revealHandIf",
-               desc: "Show a hand card, then apply effects according to suits and values.",
+    static func drawDeckFlippingIf() -> Effect {
+        Effect(id: "drawDeckFlippingIf",
+               desc: "Draw top card from deck then reveal",
                matchingFunc: { params, ctx in
                 let player = params.players(forKey: "player", ctx: ctx).first!
-                let card = params.cards(forKey: "card", player: player, ctx: ctx).first!
                 let regex = params.string(forKey: "regex")
-                var events: [GEvent] = [.revealHand(player: player, card: card)]
+                var events: [GEvent] = [.drawDeckFlipping(player: player)]
                 
-                // <HACK: consider revealed card comes from deck>
-                let cardObject = ctx.state.deck.first(where: { $0.identifier == card })!
+                // <HACK: consider revealed card comes from deck[1]>
+                let cardObject = ctx.state.deck[1]
                 // </HACK>
                 
                 let success = cardObject.matches(regex: regex)
@@ -507,9 +506,6 @@ private extension Dictionary where Key == String {
             
         case "allInPlay":
             return ctx.state.players[player]!.inPlay.map { $0.identifier }
-            
-        case "deck[1]":
-            return [ctx.state.deck[1].identifier]
             
         case "unrequiredStore":
             return ctx.state.store

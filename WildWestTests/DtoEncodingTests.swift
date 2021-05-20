@@ -129,7 +129,7 @@ class DtoEncodingTests: XCTestCase {
             .deckToStore,
             .storeToDeck(card: "c1"),
             .revealDeck,
-            .revealHand(player: "p1", card: "c1"),
+            .drawDeckFlipping(player: "p1"),
             .addHit(player: "p1", name: "h1", abilities: ["a1", "a2"], cancelable: 1, offender: "p2"),
             .removeHit(player: "p1"),
             .cancelHit(player: "p1"),

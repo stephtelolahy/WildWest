@@ -198,6 +198,26 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         wait(for: [expectation], timeout: 0.5)
     }
     
+    func test_MoveCardFromDeckToHand_IfDrawingDeckFlipping() {
+        // Given
+        let event = GEvent.drawDeckFlipping(player: "p1")
+        let expectation = XCTestExpectation(description: #function)
+        mockDatabaseReference.stubObserveSingleEvent("state/deck", value: ["key2": "c2", "key1": "c1", "key3": "c3"])
+        stub(mockDatabaseReference) { mock in
+            when(mock).childByAutoIdKey().thenReturn("keyX")
+        }
+        
+        // When
+        // Assert
+        sut.execute(event).subscribe(onCompleted: {
+            verify(self.mockDatabaseReference).setValue("state/deck/key1", value: isNil(), withCompletionBlock: any())
+            verify(self.mockDatabaseReference).setValue("state/players/p1/hand/keyX", value: any(equalTo: "c1"), withCompletionBlock: any())
+            expectation.fulfill()
+        }).disposed(by: disposeBag)
+        
+        wait(for: [expectation], timeout: 0.5)
+    }
+    
     func test_ResetDeck_IfDrawingLastDeckCard() {
         // Given
         let event = GEvent.drawDeck(player: "p1")
@@ -483,21 +503,6 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         sut.execute(event).subscribe(onCompleted: {
             verify(self.mockDatabaseReference).setValue("state/deck/key1", value: isNil(), withCompletionBlock: any())
             verify(self.mockDatabaseReference).setValue("state/discard/keyX", value: any(equalTo: "c1"), withCompletionBlock: any())
-            expectation.fulfill()
-        }).disposed(by: disposeBag)
-        
-        wait(for: [expectation], timeout: 0.5)
-    }
-    
-    func test_DoNothing_IfRevealHand() {
-        // Given
-        let event = GEvent.revealHand(player: "p1", card: "c1")
-        let expectation = XCTestExpectation(description: #function)
-        
-        // When
-        // Assert
-        sut.execute(event).subscribe(onCompleted: {
-            verifyNoMoreInteractions(self.mockDatabaseReference)
             expectation.fulfill()
         }).disposed(by: disposeBag)
         

@@ -195,6 +195,30 @@ class GDatabaseUpdaterTests: XCTestCase {
         XCTAssertEqual(state.deck.map { $0.identifier }, ["c3"])
     }
     
+    func test_AddCardToHand_IfDrawingDeckFlipping() {
+        // Given
+        let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
+        let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
+        let mockCard3 = MockCardProtocol().withDefault().identified(by: "c3")
+        let mockPlayer1 = MockPlayerProtocol()
+            .withDefault()
+            .identified(by: "p1")
+            .holding(mockCard1)
+        let mockState = MockStateProtocol()
+            .withDefault()
+            .players(are: mockPlayer1)
+            .deck(are: mockCard2, mockCard3)
+        let state = GState(mockState)
+        let event = GEvent.drawDeckFlipping(player: "p1")
+        
+        // When
+        sut.execute(event, in: state)
+        
+        // Assert
+        XCTAssertEqual(state.players["p1"]!.hand.map { $0.identifier }, ["c1", "c2"])
+        XCTAssertEqual(state.deck.map { $0.identifier }, ["c3"])
+    }
+    
     func test_ResetDeck_IfDrawingLastDeckCard() {
         // Given
         let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
@@ -553,26 +577,6 @@ class GDatabaseUpdaterTests: XCTestCase {
         // Assert
         XCTAssertEqual(state.discard.map { $0.identifier }, ["c1", "c3"])
         XCTAssertEqual(state.deck.map { $0.identifier }, ["c2"])
-    }
-    
-    func test_DoNothing_IfRevealHand() {
-        // Given
-        let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
-        let mockPlayer1 = MockPlayerProtocol()
-            .withDefault()
-            .identified(by: "p1")
-            .holding(mockCard1)
-        let mockState = MockStateProtocol()
-            .withDefault()
-            .players(are: mockPlayer1)
-        let state = GState(mockState)
-        let event = GEvent.revealHand(player: "p1", card: "c1")
-        
-        // When
-        sut.execute(event, in: state)
-        
-        // Assert
-        XCTAssertEqual(state.players["p1"]!.hand.map { $0.identifier }, ["c1"])
     }
     
     // MARK: - Hit

@@ -75,8 +75,8 @@ extension DtoEncoder {
         case let .discardHand(player, card):
             return EventDto(discardHand: PlayerCardDto(player: player, card: card))
             
-        case let .revealHand(player, card):
-            return EventDto(revealHand: PlayerCardDto(player: player, card: card))
+        case let .drawDeckFlipping(player):
+            return EventDto(drawDeckFlipping: player)
             
         case let .discardInPlay(player, card):
             return EventDto(discardInPlay: PlayerCardDto(player: player, card: card))
@@ -190,9 +190,8 @@ extension DtoEncoder {
                                 card: try dto.card.unwrap())
         }
         
-        if let dto = event.revealHand {
-            return .revealHand(player: try dto.player.unwrap(),
-                               card: try dto.card.unwrap())
+        if let player = event.drawDeckFlipping {
+            return .drawDeckFlipping(player: player)
         }
         
         if let dto = event.discardInPlay {

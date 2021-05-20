@@ -17,6 +17,7 @@ struct EventDto: Codable {
     var setTurn: String?
     var gainHealth: String?
     var drawDeck: String?
+    var drawDeckFlipping: String?
     var drawDiscard: String?
     var storeToDeck: String?
     var removeHit: String?
@@ -30,7 +31,6 @@ struct EventDto: Codable {
     var drawStore: PlayerCardDto?
     var discardHand: PlayerCardDto?
     var discardInPlay: PlayerCardDto?
-    var revealHand: PlayerCardDto?
     var looseHealth: PlayerOffenderDto?
     var eliminate: PlayerOffenderDto?
     var handicap: PlayerOtherCardDto?

@@ -54,6 +54,7 @@ private extension RemoteGameDatabaseUpdater {
         looseHealth(),
         eliminate(),
         drawDeck(),
+        drawDeckFlipping(),
         drawHand(),
         drawInPlay(),
         drawStore(),
@@ -67,7 +68,6 @@ private extension RemoteGameDatabaseUpdater {
         deckToStore(),
         storeToDeck(),
         revealDeck(),
-        revealHand(),
         addHit(),
         removeHit(),
         cancelHit(),
@@ -183,6 +183,25 @@ private extension RemoteGameDatabaseUpdater {
     static func drawDeck() -> EventDesc {
         EventDesc(id: "drawDeck", desc: "Draw top card from deck") { event, gameRef in
             guard case let .drawDeck(player) = event else {
+                fatalError("Invalid event")
+            }
+            
+            return resetDeckIfNeeded(gameRef)
+                .andThen(gameRef.rxObserveSingleEvent("state/deck", decoding: { snapshot -> [String: String] in
+                    try (snapshot.value as? [String: String]).unwrap()
+                }).flatMapCompletable({ cards in
+                    let deckKey = cards.keys.sorted().min()!
+                    let removeDeckCompletable = gameRef.rxSetValue("state/deck/\(deckKey)") { nil }
+                    let cardId = cards[deckKey]
+                    let addHandCompletable = gameRef.rxSetValue("state/players/\(player)/hand/\(gameRef.childByAutoIdKey())") { cardId }
+                    return Completable.concat(removeDeckCompletable, addHandCompletable)
+                }))
+        }
+    }
+    
+    static func drawDeckFlipping() -> EventDesc {
+        EventDesc(id: "drawDeckFlipping", desc: "Draw top card from deck then reveal") { event, gameRef in
+            guard case let .drawDeckFlipping(player) = event else {
                 fatalError("Invalid event")
             }
             
@@ -408,17 +427,6 @@ private extension RemoteGameDatabaseUpdater {
                     return gameRef.rxSetValue("state/deck/\(cardKey)", encoding: { nil })
                         .andThen(gameRef.rxSetValue("state/discard/\(gameRef.childByAutoIdKey())", encoding: { card }))
                 }))
-        }
-    }
-    
-    static func revealHand() -> EventDesc {
-        EventDesc(id: "revealHand", desc: "Reveal a specific hand card,") { event, _ in
-            guard case .revealHand = event else {
-                fatalError("Invalid event")
-            }
-            
-            // do nothing
-            return Completable.empty()
         }
     }
     

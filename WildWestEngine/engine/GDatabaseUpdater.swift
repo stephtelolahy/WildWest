@@ -52,6 +52,7 @@ private extension GDatabaseUpdater {
         looseHealth(),
         eliminate(),
         drawDeck(),
+        drawDeckFlipping(),
         drawHand(),
         drawInPlay(),
         drawDiscard(),
@@ -65,7 +66,6 @@ private extension GDatabaseUpdater {
         deckToStore(),
         storeToDeck(),
         revealDeck(),
-        revealHand(),
         addHit(),
         removeHit(),
         cancelHit(),
@@ -333,16 +333,14 @@ private extension GDatabaseUpdater {
         }
     }
     
-    static func revealHand() -> EventDesc {
-        EventDesc(id: "revealHand", desc: "Reveal a specific hand card,") { event, state in
-            guard case let .revealHand(player, card) = event else {
+    static func drawDeckFlipping() -> EventDesc {
+        EventDesc(id: "drawDeckFlipping", desc: "Draw top card from deck then reveal") { event, state in
+            guard case let .drawDeckFlipping(player) = event else {
                 fatalError("Invalid event")
             }
-            let playerObject = state.mutablePlayer(player)
-            guard playerObject.hand.contains(where: { $0.identifier == card }) else {
-                fatalError("Card \(card) not found")
-            }
-            // nothing to change on state
+            state.resetDeckIfNeeded()
+            let cardObject = state.deck.removeFirst()
+            state.mutablePlayer(player).hand.append(cardObject)
         }
     }
     

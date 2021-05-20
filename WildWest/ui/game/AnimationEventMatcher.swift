@@ -79,11 +79,11 @@ private extension AnimationEventMatcher {
         eliminate(),
         addHit(),
         drawDeck(),
+        drawDeckFlipping(),
         drawDiscard(),
         discardHand(),
         play(),
         equip(),
-        revealHand(),
         discardInPlay(),
         drawHand(),
         drawInPlay(),
@@ -142,6 +142,17 @@ private extension AnimationEventMatcher {
         }
     }
     
+    static func drawDeckFlipping() -> EventDesc {
+        EventDesc(id: "drawDeckFlipping") { event in
+            guard case let .drawDeckFlipping(player) = event else {
+                fatalError("Invalid event")
+            }
+            
+            #warning("TODO: find card")
+            return .reveal(card: nil, source: .deck, target: .hand(player))
+        }
+    }
+    
     static func drawDiscard() -> EventDesc {
         EventDesc(id: "drawDiscard") { event in
             guard case let .drawDiscard(player) = event else {
@@ -175,15 +186,6 @@ private extension AnimationEventMatcher {
                 fatalError("Invalid event")
             }
             return .move(card: card, source: .hand(player), target: .inPlay(player))
-        }
-    }
-    
-    static func revealHand() -> EventDesc {
-        EventDesc(id: "revealHand") { event in
-            guard case let .revealHand(player, card) = event else {
-                fatalError("Invalid event")
-            }
-            return .reveal(card: card, source: .hand(player), target: .hand(player))
         }
     }
     

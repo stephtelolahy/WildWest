@@ -64,7 +64,7 @@ class JailTests: XCTestCase {
             .playOrder(is: "p1", "p2")
             .turn(is: "p1")
             .phase(is: 0)
-            .deck(are: MockCardProtocol().value(is: "9").suit(is: "diamonds"))
+            .deck(are: MockCardProtocol().value(is: "9").suit(is: "♦️"))
         let event = GEvent.setPhase(value: 1)
 
         // When
