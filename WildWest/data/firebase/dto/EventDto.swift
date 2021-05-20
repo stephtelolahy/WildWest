@@ -11,7 +11,7 @@ import Foundation
 struct EventDto: Codable {
     var timestamp: String = "\(Date().timeIntervalSince1970)"
     var emptyQueue: Bool?
-    var revealDeck: Bool?
+    var flipDeck: Bool?
     var deckToStore: Bool?
     var setPhase: Int?
     var setTurn: String?

@@ -89,7 +89,7 @@ private extension AnimationEventMatcher {
         drawInPlay(),
         handicap(),
         passInPlay(),
-        revealDeck(),
+        flipDeck(),
         deckToStore(),
         storeToDeck(),
         drawStore()
@@ -234,9 +234,9 @@ private extension AnimationEventMatcher {
         }
     }
     
-    static func revealDeck() -> EventDesc {
-        EventDesc(id: "revealDeck") { event in
-            guard case .revealDeck = event else {
+    static func flipDeck() -> EventDesc {
+        EventDesc(id: "flipDeck") { event in
+            guard case .flipDeck = event else {
                 fatalError("Invalid event")
             }
             return .reveal(card: StateCard.deck, source: .deck, target: .discard)

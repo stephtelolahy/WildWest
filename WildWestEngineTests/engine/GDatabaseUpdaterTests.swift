@@ -559,7 +559,7 @@ class GDatabaseUpdaterTests: XCTestCase {
     
     // MARK: - Reveal
     
-    func test_revealDeck() {
+    func test_flipDeck() {
         // Given
         let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
         let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
@@ -569,7 +569,7 @@ class GDatabaseUpdaterTests: XCTestCase {
             .deck(are: mockCard1, mockCard2)
             .discard(are: mockCard3)
         let state = GState(mockState)
-        let event = GEvent.revealDeck
+        let event = GEvent.flipDeck
         
         // When
         sut.execute(event, in: state)

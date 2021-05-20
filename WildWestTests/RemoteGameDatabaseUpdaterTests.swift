@@ -491,7 +491,7 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
     
     func test_MoveCardFromDeckToDiscard_IfRevealDeck() {
         // Given
-        let event = GEvent.revealDeck
+        let event = GEvent.flipDeck
         let expectation = XCTestExpectation(description: #function)
         mockDatabaseReference.stubObserveSingleEvent("state/deck", value: ["key2": "c2", "key1": "c1", "key3": "c3"])
         stub(mockDatabaseReference) { mock in

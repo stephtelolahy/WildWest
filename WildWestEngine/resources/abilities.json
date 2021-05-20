@@ -388,7 +388,7 @@
     },
     "onPlay": [
       {
-        "action": "revealDeckIf",
+        "action": "flipDeckIf",
         "regex": "♥️",
         "then": [
           {
@@ -409,7 +409,7 @@
     },
     "onPlay": [
       {
-        "action": "revealDeckIf",
+        "action": "flipDeckIf",
         "regex": "♥️",
         "then": [],
         "else": [
@@ -440,7 +440,7 @@
     },
     "onPlay": [
       {
-        "action": "revealDeckIf",
+        "action": "flipDeckIf",
         "regex": "(♥️)|(♦️)|(♣️)|([10|J|Q|K|A]♠️)",
         "then": [
           {

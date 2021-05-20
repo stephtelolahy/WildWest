@@ -40,7 +40,7 @@ class JailTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(moves, [GMove("jail", actor: "p1", card: .inPlay("c1"))])
-        XCTAssertEqual(events, [.revealDeck,
+        XCTAssertEqual(events, [.flipDeck,
                                 .discardInPlay(player: "p1", card: "c1")])
     }
 
@@ -73,7 +73,7 @@ class JailTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(moves, [GMove("jail", actor: "p1", card: .inPlay("c1"))])
-        XCTAssertEqual(events, [.revealDeck,
+        XCTAssertEqual(events, [.flipDeck,
                                 .setTurn(player: "p2"),
                                 .setPhase(value: 1),
                                 .discardInPlay(player: "p1", card: "c1")])
@@ -106,8 +106,8 @@ class JailTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(moves, [GMove("jail", actor: "p1", card: .inPlay("c1"))])
-        XCTAssertEqual(events, [.revealDeck,
-                                .revealDeck,
+        XCTAssertEqual(events, [.flipDeck,
+                                .flipDeck,
                                 .discardInPlay(player: "p1", card: "c1")])
     }
 }

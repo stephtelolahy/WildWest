@@ -94,7 +94,7 @@ private extension EffectMatcher {
         reverseHit(),
         
         // <LOGIC>
-        revealDeckIf(),
+        flipDeckIf(),
         drawDeckFlippingIf(),
         loop()
         // </LOGIC>
@@ -354,13 +354,13 @@ private extension EffectMatcher {
                })
     }
     
-    static func revealDeckIf() -> Effect {
-        Effect(id: "revealDeckIf",
+    static func flipDeckIf() -> Effect {
+        Effect(id: "flipDeckIf",
                desc: "Flip over the top card of the deck, then apply effects according to suits and values",
                matchingFunc: { params, ctx in
                 let regex = params.string(forKey: "regex")
                 let amount = ctx.actor.flippedCards
-                var events: [GEvent] = Array(0..<amount).map { _ in .revealDeck }
+                var events: [GEvent] = Array(0..<amount).map { _ in .flipDeck }
                 let cards = ctx.state.deck.prefix(amount)
                 let success = cards.contains(where: { $0.matches(regex: regex) })
                 if success {

@@ -44,7 +44,7 @@ class BarrelTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(moves, [GMove("barrel", actor: "p1", card: .inPlay("c1"))])
-        XCTAssertEqual(events, [.revealDeck,
+        XCTAssertEqual(events, [.flipDeck,
                                 .removeHit(player: "p1")])
     }
 
@@ -77,7 +77,7 @@ class BarrelTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(moves, [GMove("barrel", actor: "p1", card: .inPlay("c1"))])
-        XCTAssertEqual(events, [.revealDeck])
+        XCTAssertEqual(events, [.flipDeck])
     }
 
     func test_ResolveBarrelTwice_IfHavingAbility_AndInPlayCard() throws {
@@ -137,8 +137,8 @@ class BarrelTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(moves, [GMove("barrel", actor: "p1")])
-        XCTAssertEqual(events, [.revealDeck,
-                                .revealDeck])
+        XCTAssertEqual(events, [.flipDeck,
+                                .flipDeck])
     }
 
     func test_CancelShoot_IfFirstFlipCardIsHeart() throws {
@@ -167,8 +167,8 @@ class BarrelTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(moves, [GMove("barrel", actor: "p1")])
-        XCTAssertEqual(events, [.revealDeck,
-                                .revealDeck,
+        XCTAssertEqual(events, [.flipDeck,
+                                .flipDeck,
                                 .removeHit(player: "p1")])
     }
 
@@ -198,8 +198,8 @@ class BarrelTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(moves, [GMove("barrel", actor: "p1")])
-        XCTAssertEqual(events, [.revealDeck,
-                                .revealDeck,
+        XCTAssertEqual(events, [.flipDeck,
+                                .flipDeck,
                                 .removeHit(player: "p1")])
     }
 }

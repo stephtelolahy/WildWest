@@ -18,8 +18,8 @@ extension DtoEncoder {
         case .emptyQueue:
             return EventDto(emptyQueue: true)
             
-        case .revealDeck:
-            return EventDto(revealDeck: true)
+        case .flipDeck:
+            return EventDto(flipDeck: true)
             
         case .deckToStore:
             return EventDto(deckToStore: true)
@@ -106,8 +106,8 @@ extension DtoEncoder {
             return .emptyQueue
         }
         
-        if event.revealDeck != nil {
-            return .revealDeck
+        if event.flipDeck != nil {
+            return .flipDeck
         }
         
         if event.deckToStore != nil {

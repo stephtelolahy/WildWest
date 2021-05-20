@@ -154,7 +154,7 @@ class GLoopTests: XCTestCase {
     
     func test_ApplyEvent_IfRunning() {
         // Given
-        let event: GEvent = .revealDeck 
+        let event: GEvent = .flipDeck 
         stub(mockQueue) { mock in
             when(mock.pop()).thenReturn(event)
         }

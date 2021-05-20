@@ -67,7 +67,7 @@ private extension RemoteGameDatabaseUpdater {
         discardInPlay(),
         deckToStore(),
         storeToDeck(),
-        revealDeck(),
+        flipDeck(),
         addHit(),
         removeHit(),
         cancelHit(),
@@ -411,10 +411,10 @@ private extension RemoteGameDatabaseUpdater {
         }
     }
     
-    static func revealDeck() -> EventDesc {
-        EventDesc(id: "revealDeck",
+    static func flipDeck() -> EventDesc {
+        EventDesc(id: "flipDeck",
                   desc: "Flip over the top card of the deck, and discard immediately") { event, gameRef in
-            guard case .revealDeck = event else {
+            guard case .flipDeck = event else {
                 fatalError("Invalid event")
             }
             
