@@ -5,6 +5,8 @@
 //  Created by Hugues Stéphano TELOLAHY on 01/05/2021.
 //  Copyright © 2021 creativeGames. All rights reserved.
 //
+// swiftlint:disable function_body_length
+// swiftlint:disable force_cast
 
 import UIKit
 import WildWestEngine
@@ -14,16 +16,13 @@ import Firebase
 // The central unit of all injections.
 // Instantiates and supplies the dependencies of all object
 
-final class DIContainer {
-}
-
-extension DIContainer: RouterDependenciesProtocol {
+extension Resolver: RouterDependenciesProtocol {
     
     func provideMainViewController() -> UIViewController {
         let viewController = UIStoryboard.instantiate(MainViewController.self, in: "Main")
         viewController.userManager = Resolver.optional()
         viewController.gameManager = Resolver.optional()
-        viewController.router = provideRouter(viewController)
+        viewController.router = Resolver.optional(args: viewController)
         return viewController
     }
     
@@ -37,7 +36,7 @@ extension DIContainer: RouterDependenciesProtocol {
     
     func provideMenuViewController() -> UIViewController {
         let viewController = UIStoryboard.instantiate(MenuViewController.self, in: "Main")
-        viewController.router = provideRouter(viewController)
+        viewController.router = Resolver.optional(args: viewController)
         viewController.preferences = Resolver.optional()
         viewController.soundPlayer = Resolver.optional()
         viewController.userManager = Resolver.optional()
@@ -49,7 +48,7 @@ extension DIContainer: RouterDependenciesProtocol {
     func provideGameViewController(_ environment: GameEnvironment) -> UIViewController {
         let viewController = UIStoryboard.instantiate(GameViewController.self, in: "Main")
         viewController.environment = environment
-        viewController.router = provideRouter(viewController)
+        viewController.router = Resolver.optional(args: viewController)
         viewController.userManager = Resolver.optional()
         viewController.analyticsManager = Resolver.optional()
         viewController.animationMatcher = Resolver.optional()
@@ -74,14 +73,10 @@ extension DIContainer: RouterDependenciesProtocol {
     
     func provideWaitingRoomViewController() -> UIViewController {
         let viewController = UIStoryboard.instantiate(WaitingRoomViewController.self, in: "Main")
-        viewController.router = provideRouter(viewController)
+        viewController.router = Resolver.optional(args: viewController)
         viewController.userManager = Resolver.optional()
         viewController.gameManager = Resolver.optional()
         return viewController
-    }
-    
-    private func provideRouter(_ viewController: UIViewController) -> RouterProtocol {
-        Router(viewController: viewController, dependencies: Resolver.resolve())
     }
 }
 
@@ -89,7 +84,15 @@ extension Resolver: ResolverRegistering {
     
     public static func registerAllServices() {
         
-        register { DIContainer() as RouterDependenciesProtocol }.scope(application)
+        // MARK: - UI
+        
+        register { Resolver.main as RouterDependenciesProtocol }.scope(application)
+        
+        register { _, args in
+            Router(viewController: args as! UIViewController, dependencies: resolve()) as RouterProtocol
+        }
+        
+        // MARK: - Data
         
         register { AnalyticsManager() }.scope(application)
         
@@ -103,11 +106,22 @@ extension Resolver: ResolverRegistering {
         register { DictionaryEncoder() }
         
         register { AnimationEventMatcher(preferences: resolve()) as AnimationEventMatcherProtocol }.scope(application)
+        
         register { AnimationEventMatcher(preferences: resolve()) as DurationMatcherProtocol }.scope(application)
         
-        register { provideMediaMatcher() as MediaEventMatcherProtocol }.scope(application)
+        register(MediaEventMatcherProtocol.self) {
+            let jsonReader = JsonReader(bundle: Bundle.main)
+            let mediaArray: [EventMedia] = jsonReader.load("media")
+            return MediaEventMatcher(mediaArray: mediaArray)
+        }
         
-        register { DtoEncoder(databaseRef: Database.database().reference(), allCards: provideDeckCards()) }
+        register(DtoEncoder.self) {
+            let resourcesLoader: ResourcesLoaderProtocol = resolve()
+            let cards = resourcesLoader.loadCards()
+            let cardSet = resourcesLoader.loadDeck()
+            let deck = GSetup().setupDeck(cardSet: cardSet, cards: cards)
+            return DtoEncoder(databaseRef: Database.database().reference(), allCards: deck)
+        }
         
         register { FirebaseMapper(dtoEncoder: resolve(),
                                   dictionaryEncoder: resolve()) as FirebaseMapperProtocol
@@ -132,19 +146,5 @@ extension Resolver: ResolverRegistering {
                                database: resolve(),
                                gameBuilder: resolve()) as GameManagerProtocol
         }.scope(application)
-    }
-    
-    private static func provideMediaMatcher() -> MediaEventMatcherProtocol {
-        let jsonReader = JsonReader(bundle: Bundle.main)
-        let mediaArray: [EventMedia] = jsonReader.load("media")
-        return MediaEventMatcher(mediaArray: mediaArray)
-    }
-    
-    private static func provideDeckCards() -> [CardProtocol] {
-        let resourcesLoader: ResourcesLoaderProtocol = resolve()
-        let cards = resourcesLoader.loadCards()
-        let cardSet = resourcesLoader.loadDeck()
-        let deck = GSetup().setupDeck(cardSet: cardSet, cards: cards)
-        return deck
     }
 }
