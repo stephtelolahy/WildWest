@@ -64,7 +64,7 @@
   {
     "desc": "reveal card",
     "emoji": "🌟",
-    "sfx": "Metal Clang-SoundBible.com-19572601",
+    "sfx": "Slide Closed-SoundBible.com-1521580537",
     "playReqs": [{ "event": "flipDeck" }, { "event": "drawDeckFlipping" }]
   },
   {

@@ -45,8 +45,7 @@ class MediaEventMatcher: MediaEventMatcherProtocol {
 private extension MediaEventMatcher {
     
     func media(matching event: GEvent) -> EventMedia? {
-        let destructed = destructuring(event)
-        
+        let destructed = event.destructuring()
         var matchedMedia: EventMedia?
         var matchedCriteria = 0
         
@@ -61,24 +60,6 @@ private extension MediaEventMatcher {
         }
         
         return matchedMedia
-    }
-}
-
-private extension MediaEventMatcher {
-    
-    func destructuring(_ event: GEvent) -> [String: String] {
-        switch event {
-        case let .run(move):
-            return ["event": event.hashValue, 
-                    "ability": move.ability]
-            
-        case let .addHit(_, name, _, _, _):
-            return ["event": event.hashValue, 
-                    "ability": name]
-            
-        default:
-            return ["event": event.hashValue]
-        }
     }
 }
 

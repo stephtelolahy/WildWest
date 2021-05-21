@@ -25,7 +25,7 @@ class RemoteGameDatabaseUpdater: RemoteGameDatabaseUpdaterProtocol {
     }
     
     func execute(_ event: GEvent) -> Completable {
-        guard let eventDesc = Self.all[event.hashValue] else {
+        guard let eventDesc = Self.all[event.name] else {
             fatalError("No database transaction matching \(event)")
         }
         

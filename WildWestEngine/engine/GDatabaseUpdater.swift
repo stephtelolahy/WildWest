@@ -15,20 +15,10 @@ public class GDatabaseUpdater: GDatabaseUpdaterProtocol {
     }
     
     public func execute(_ event: GEvent, in state: GState) {
-        guard let eventDesc = Self.all[event.hashValue] else {
+        guard let eventDesc = Self.all[event.name] else {
             fatalError("No event description matching \(event)")
         }
         eventDesc.updateFunc(event, state)
-    }
-}
-
-public extension GEvent {
-    var hashValue: String {
-        var string = String(describing: self)
-        if let eventName = string.components(separatedBy: "(").first {
-            string = eventName
-        }
-        return string
     }
 }
 

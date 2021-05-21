@@ -194,6 +194,7 @@
 		3395558D2644365E0006FBB0 /* RemoteGameDatabaseUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3395558C2644365E0006FBB0 /* RemoteGameDatabaseUpdater.swift */; };
 		33955595264439200006FBB0 /* EventDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33955594264439200006FBB0 /* EventDto.swift */; };
 		3395559A2644394F0006FBB0 /* DtoEncoder+Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339555992644394F0006FBB0 /* DtoEncoder+Event.swift */; };
+		33969B2226577A9900E58908 /* GEvent+Destructuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33969B2126577A9900E58908 /* GEvent+Destructuring.swift */; };
 		339B4EFC2434A7D700E32965 /* 342229_christopherderp_hurt-1-male (online-audio-converter.com).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 339B4EFB2434A7D700E32965 /* 342229_christopherderp_hurt-1-male (online-audio-converter.com).mp3 */; };
 		339C7CA126566D48001CBCAC /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339C7CA026566D48001CBCAC /* GameManager.swift */; };
 		339C7CA326566D6E001CBCAC /* SimulationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339C7CA226566D6E001CBCAC /* SimulationTests.swift */; };
@@ -462,6 +463,7 @@
 		3395558C2644365E0006FBB0 /* RemoteGameDatabaseUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteGameDatabaseUpdater.swift; sourceTree = "<group>"; };
 		33955594264439200006FBB0 /* EventDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDto.swift; sourceTree = "<group>"; };
 		339555992644394F0006FBB0 /* DtoEncoder+Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DtoEncoder+Event.swift"; sourceTree = "<group>"; };
+		33969B2126577A9900E58908 /* GEvent+Destructuring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GEvent+Destructuring.swift"; sourceTree = "<group>"; };
 		339B4EFB2434A7D700E32965 /* 342229_christopherderp_hurt-1-male (online-audio-converter.com).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "342229_christopherderp_hurt-1-male (online-audio-converter.com).mp3"; sourceTree = "<group>"; };
 		339C7CA026566D48001CBCAC /* GameManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		339C7CA226566D6E001CBCAC /* SimulationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimulationTests.swift; sourceTree = "<group>"; };
@@ -670,6 +672,7 @@
 				335832FB25BC2584001BE4D8 /* Card+Regex.swift */,
 				335832FC25BC2584001BE4D8 /* Array+FilterOrNil.swift */,
 				335832FD25BC2584001BE4D8 /* Dictionary+Decoding.swift */,
+				33969B2126577A9900E58908 /* GEvent+Destructuring.swift */,
 			);
 			path = misc;
 			sourceTree = "<group>";
@@ -1708,6 +1711,7 @@
 				3358333825BC2585001BE4D8 /* ResourcesLoader.swift in Sources */,
 				3358333F25BC2585001BE4D8 /* EffectMatcher.swift in Sources */,
 				3358333325BC2585001BE4D8 /* GMove.swift in Sources */,
+				33969B2226577A9900E58908 /* GEvent+Destructuring.swift in Sources */,
 				3358334625BC2585001BE4D8 /* RoleEstimator.swift in Sources */,
 				3358334225BC2585001BE4D8 /* MoveSelector.swift in Sources */,
 				3358334725BC2585001BE4D8 /* AI.swift in Sources */,

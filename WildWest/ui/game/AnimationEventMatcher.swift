@@ -53,7 +53,7 @@ class AnimationEventMatcher: AnimationEventMatcherProtocol {
     }
     
     func animation(on event: GEvent) -> EventAnimation? {
-        guard let eventDesc = Self.all[event.hashValue] else {
+        guard let eventDesc = Self.all[event.name] else {
             return nil
         }
         
@@ -148,8 +148,7 @@ private extension AnimationEventMatcher {
                 fatalError("Invalid event")
             }
             
-            #warning("TODO: find card")
-            return .reveal(card: nil, source: .deck, target: .hand(player))
+            return .reveal(card: StateCard.deck, source: .deck, target: .hand(player))
         }
     }
     
