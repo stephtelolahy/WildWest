@@ -44,8 +44,6 @@ class GeneralStoreTests: XCTestCase {
                                 .deckToStore,
                                 .deckToStore,
                                 .deckToStore,
-                                .addHit(player: "p1", name: "generalstore", abilities: ["drawStore"], cancelable: 0, offender: "p1"),
-                                .addHit(player: "p2", name: "generalstore", abilities: ["drawStore"], cancelable: 0, offender: "p1"),
-                                .addHit(player: "p3", name: "generalstore", abilities: ["drawStore"], cancelable: 0, offender: "p1")])
+                                .addHit(players: ["p1", "p2", "p3"], name: "generalstore", abilities: ["drawStore"], cancelable: 0, offender: "p1")])
     }
 }

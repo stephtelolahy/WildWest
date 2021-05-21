@@ -273,8 +273,8 @@ private extension PlayReqMatcher {
         PlayReq(id: "onHitCancelable",
                 desc: "When you are target of hit that is cancelable with 'missed' card",
                 matchingFunc: { _, ctx, _ -> Bool in
-                    guard case let .addHit(player, _, _, cancelable, _) = ctx.event,
-                          player == ctx.actor.identifier,
+                    guard case let .addHit(players, _, _, cancelable, _) = ctx.event,
+                          players.contains(ctx.actor.identifier),
                           cancelable > 0 else {
                         return false
                     }

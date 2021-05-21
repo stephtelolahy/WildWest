@@ -41,7 +41,6 @@ class GatlingTests: XCTestCase {
         // Assert
         XCTAssertEqual(moves, [GMove("gatling", actor: "p1", card: .hand("c1"))])
         XCTAssertEqual(events, [.play(player: "p1", card: "c1"),
-                                .addHit(player: "p2", name: "gatling", abilities: ["looseHealth"], cancelable: 1, offender: "p1"),
-                                .addHit(player: "p3", name: "gatling", abilities: ["looseHealth"], cancelable: 1, offender: "p1")])
+                                .addHit(players: ["p2", "p3"], name: "gatling", abilities: ["looseHealth"], cancelable: 1, offender: "p1")])
     }
 }

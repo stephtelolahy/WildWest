@@ -37,7 +37,7 @@ public enum GEvent: Equatable {
     
     case flipDeck
     
-    case addHit(player: String, name: String, abilities: [String], cancelable: Int, offender: String)
+    case addHit(players: [String], name: String, abilities: [String], cancelable: Int, offender: String)
     case removeHit(player: String)
     case cancelHit(player: String)
     

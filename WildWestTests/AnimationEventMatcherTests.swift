@@ -50,7 +50,7 @@ class AnimationEventMatcherTests: XCTestCase {
                        EventAnimation(type: .dummy, duration: 1.0))
         XCTAssertEqual(sut.animation(on: .eliminate(player: "p1", offender: "p2")),
                        EventAnimation(type: .dummy, duration: 1.0))
-        XCTAssertEqual(sut.animation(on: .addHit(player: "p1", name: "h1", abilities: ["a1", "a2"], cancelable: 1, offender: "p2")),
+        XCTAssertEqual(sut.animation(on: .addHit(players: ["p1", "p2"], name: "h1", abilities: ["a1", "a2"], cancelable: 1, offender: "p2")),
                        EventAnimation(type: .dummy, duration: 1.0))
         
         // Move card

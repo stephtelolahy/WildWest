@@ -58,9 +58,8 @@ extension DtoEncoder {
             let movesDto = moves.map { encode(move: $0) }
             return EventDto(activate: movesDto)
             
-        case let .addHit(player, name, abilities, cancelable, offender):
-            let hit = GHit(player: player, name: name, abilities: abilities, cancelable: cancelable, offender: offender)
-            let dto = encode(hit: hit)
+        case let .addHit(players, name, abilities, cancelable, offender):
+            let dto = EventHitDto(players: players, name: name, abilities: abilities, cancelable: cancelable, offender: offender)
             return EventDto(addHit: dto)
             
         case let .play(player, card):
@@ -162,12 +161,11 @@ extension DtoEncoder {
         }
         
         if let dto = event.addHit {
-            let hit = try decode(hit: dto)
-            return .addHit(player: hit.player,
-                           name: hit.name,
-                           abilities: hit.abilities,
-                           cancelable: hit.cancelable,
-                           offender: hit.offender)
+            return .addHit(players: try dto.players.unwrap(),
+                           name: try dto.name.unwrap(),
+                           abilities: try dto.abilities.unwrap(),
+                           cancelable: try dto.cancelable.unwrap(),
+                           offender: try dto.offender.unwrap())
         }
         
         if let dto = event.play {

@@ -452,16 +452,11 @@
         ],
         "else": [
           {
-            "action": "loop",
+            "action": "addHit",
             "times": 3,
-            "then": [
-              {
-                "action": "addHit",
-                "player": "actor",
-                "abilities": ["looseHealth"],
-                "cancelable": 0
-              }
-            ]
+            "player": "actor",
+            "abilities": ["looseHealth"],
+            "cancelable": 0
           },
           {
             "action": "discardInPlay",
@@ -563,16 +558,11 @@
     },
     "onPlay": [
       {
-        "action": "loop",
+        "action": "addHit",
+        "player": "actor",
         "times": "excessHand",
-        "then": [
-          {
-            "action": "addHit",
-            "player": "actor",
-            "abilities": ["discardSelfHand"],
-            "cancelable": 0
-          }
-        ]
+        "abilities": ["discardSelfHand"],
+        "cancelable": 0
       }
     ]
   },

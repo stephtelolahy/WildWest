@@ -96,7 +96,6 @@ private extension EffectMatcher {
         // <LOGIC>
         flipDeckIf(),
         drawDeckFlippingIf(),
-        loop()
         // </LOGIC>
     ].toDictionary { $0.id }
     
@@ -276,7 +275,14 @@ private extension EffectMatcher {
                 let players = params.players(forKey: "player", ctx: ctx)
                 let abilities = params.strings(forKey: "abilities")
                 let cancelable = params.number(forKey: "cancelable", ctx: ctx)
-                return players.map { .addHit(player: $0, name: ctx.ability, abilities: abilities, cancelable: cancelable, offender: ctx.actor.identifier) }
+                
+                var targets: [String] = []
+                let times = params.number(forKey: "times", ctx: ctx)
+                for _ in (0..<times) {
+                    targets.append(contentsOf: players)
+                }
+                
+                return [.addHit(players: targets, name: ctx.ability, abilities: abilities, cancelable: cancelable, offender: ctx.actor.identifier)]
                })
     }
     
@@ -331,7 +337,7 @@ private extension EffectMatcher {
                     fatalError("Invalid hit")
                 }
                 return [.removeHit(player: player),
-                        .addHit(player: hit.offender, name: hit.name, abilities: hit.abilities, cancelable: hit.cancelable, offender: player)]
+                        .addHit(players: [hit.offender], name: hit.name, abilities: hit.abilities, cancelable: hit.cancelable, offender: player)]
                })
     }
     
@@ -389,20 +395,6 @@ private extension EffectMatcher {
                matchingFunc: { params, ctx in
                 let player = params.players(forKey: "player", ctx: ctx).first!
                 return [.setTurn(player: player)]
-               })
-    }
-    
-    static func loop() -> Effect {
-        Effect(id: "loop",
-               desc: "Repeat effects",
-               matchingFunc: { params, ctx in
-                let times = params.number(forKey: "times", ctx: ctx)
-                let effects = params.effects(forKey: "then", ctx: ctx)
-                var events: [GEvent] = []
-                for _ in (0..<times) {
-                    events.append(contentsOf: effects)
-                }
-                return events
                })
     }
     
@@ -530,12 +522,12 @@ private extension Dictionary where Key == String {
                 return Swift.max(ctx.actor.hand.count - ctx.actor.handLimit, 0)
                 
             default:
-                fatalError("Invalid parameter \(key)")
+                return 1//fatalError("Invalid parameter \(key)")
             }
         }
         
         guard let value = self[key] as? Int else {
-            fatalError("Missing parameter \(key)")
+            return 1//fatalError("Missing parameter \(key)")
         }
         
         return value

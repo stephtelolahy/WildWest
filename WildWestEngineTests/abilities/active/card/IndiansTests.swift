@@ -41,7 +41,6 @@ class IndiansTests: XCTestCase {
         // Assert
         XCTAssertEqual(moves, [GMove("indians", actor: "p1", card: .hand("c1"))])
         XCTAssertEqual(events, [.play(player: "p1", card: "c1"),
-                                .addHit(player: "p2", name: "indians", abilities: ["looseHealth"], cancelable: 0, offender: "p1"),
-                                .addHit(player: "p3", name: "indians", abilities: ["looseHealth"], cancelable: 0, offender: "p1")])
+                                .addHit(players: ["p2", "p3"], name: "indians", abilities: ["looseHealth"], cancelable: 0, offender: "p1")])
     }
 }

@@ -432,16 +432,20 @@ private extension RemoteGameDatabaseUpdater {
     
     static func addHit() -> EventDesc {
         EventDesc(id: "addHit", desc: "Add blocking hit") { event, gameRef in
-            guard case let .addHit(player, name, abilities, cancelable, offender) = event else {
+            guard case let .addHit(players, name, abilities, cancelable, offender) = event else {
                 fatalError("Invalid event")
             }
             
-            let dto = HitDto(player: player,
-                             name: name,
-                             abilities: abilities,
-                             cancelable: cancelable,
-                             offender: offender)
-            return gameRef.rxSetValue("state/hits/\(gameRef.childByAutoIdKey())", encoding: { try DictionaryEncoder().encode(dto) })
+            let completables: [Completable] = players.map {
+                let dto = HitDto(player: $0,
+                                 name: name,
+                                 abilities: abilities,
+                                 cancelable: cancelable,
+                                 offender: offender)
+                return gameRef.rxSetValue("state/hits/\(gameRef.childByAutoIdKey())", encoding: { try DictionaryEncoder().encode(dto) })
+            }
+            
+            return Completable.concat(completables)
         }
     }
     

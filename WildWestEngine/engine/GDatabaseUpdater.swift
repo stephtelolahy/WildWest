@@ -336,15 +336,18 @@ private extension GDatabaseUpdater {
     
     static func addHit() -> EventDesc {
         EventDesc(id: "addHit", desc: "Add blocking hit") { event, state in
-            guard case let .addHit(player, name, abilities, cancelable, offender) = event else {
+            guard case let .addHit(players, name, abilities, cancelable, offender) = event else {
                 fatalError("Invalid event")
             }
-            let hitObject = GHit(player: player,
-                                 name: name,
-                                 abilities: abilities,
-                                 cancelable: cancelable,
-                                 offender: offender)
-            state.hits.append(hitObject)
+            
+            players.forEach {
+                let hitObject = GHit(player: $0,
+                                     name: name,
+                                     abilities: abilities,
+                                     cancelable: cancelable,
+                                     offender: offender)
+                state.hits.append(hitObject)
+            }
         }
     }
     

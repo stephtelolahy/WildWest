@@ -34,7 +34,8 @@ class StartTurnDrawingFirstCardFromPlayerTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(moves, [GMove("startTurnDrawingFirstCardFromPlayer", actor: "p1")])
-        XCTAssertEqual(events, [.addHit(player: "p1", name: "startTurnDrawingFirstCardFromPlayer", 
+        XCTAssertEqual(events, [.addHit(players: ["p1"],
+                                        name: "startTurnDrawingFirstCardFromPlayer", 
                                         abilities: ["startTurnDrawingPlayer", "startTurnDrawingDeck"], 
                                         cancelable: 0, 
                                         offender: "p1")])

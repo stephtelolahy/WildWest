@@ -28,7 +28,7 @@ class ResourcesTests: XCTestCase {
         XCTAssertEqual(cards.filter { $0.type == .brown || $0.type == .blue }.count, 22)
         XCTAssertEqual(abilities.count, 47)
         XCTAssertEqual(PlayReqMatcher().playReqIds.count, 25)
-        XCTAssertEqual(EffectMatcher().effectIds.count, 23)
+        XCTAssertEqual(EffectMatcher().effectIds.count, 22)
     }
     
     func test_Abilities_HaveValidRequirements() throws {

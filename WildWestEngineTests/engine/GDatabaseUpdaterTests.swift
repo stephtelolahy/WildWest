@@ -590,7 +590,7 @@ class GDatabaseUpdaterTests: XCTestCase {
             .withDefault()
             .hits(are: mockHit1)
         let state = GState(mockState)
-        let event = GEvent.addHit(player: "p2", name: "n1", abilities: ["looseHealth"], cancelable: 1, offender: "p1")
+        let event = GEvent.addHit(players: ["p2"], name: "n1", abilities: ["looseHealth"], cancelable: 1, offender: "p1")
         
         // When
         sut.execute(event, in: state)
@@ -602,6 +602,25 @@ class GDatabaseUpdaterTests: XCTestCase {
         XCTAssertEqual(state.hits[1].abilities, ["looseHealth"])
         XCTAssertEqual(state.hits[1].cancelable, 1)
         XCTAssertEqual(state.hits[1].offender, "p1")
+    }
+    
+    func test_addHitToMultiplePlayers() throws {
+        // Given
+        let mockState = MockStateProtocol()
+            .withDefault()
+        let state = GState(mockState)
+        let event = GEvent.addHit(players: ["p2", "p3"], name: "n1", abilities: ["indians"], cancelable: 1, offender: "p1")
+        
+        // When
+        sut.execute(event, in: state)
+        
+        // Assert
+        XCTAssertEqual(state.hits.count, 2)
+        XCTAssertEqual(state.hits[0].player, "p2")
+        XCTAssertEqual(state.hits[1].player, "p3")
+        XCTAssertEqual(state.hits[0].abilities, ["indians"])
+        XCTAssertEqual(state.hits[0].cancelable, 1)
+        XCTAssertEqual(state.hits[0].offender, "p1")
     }
     
     func test_removeHit() {
