@@ -199,6 +199,10 @@
 		339C7CA126566D48001CBCAC /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339C7CA026566D48001CBCAC /* GameManager.swift */; };
 		339C7CA326566D6E001CBCAC /* SimulationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339C7CA226566D6E001CBCAC /* SimulationTests.swift */; };
 		33A6330024545B060023A2D2 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A632FF24545B060023A2D2 /* AnalyticsManager.swift */; };
+		33A698B32657800700C52B57 /* AnimationEventMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A698B22657800700C52B57 /* AnimationEventMatcherTests.swift */; };
+		33A698B42657806900C52B57 /* AnimationEventMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33315302256ED0EB0088D281 /* AnimationEventMatcher.swift */; };
+		33A698B52657820100C52B57 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334673EA2436328000FFBB82 /* UserPreferences.swift */; };
+		33A698B62657820900C52B57 /* UserDefaultsStored.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334673E72436314E00FFBB82 /* UserDefaultsStored.swift */; };
 		33A76F8D2656AD7000FE9DCE /* MediaEventMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33626FB9256FE31B00128C0A /* MediaEventMatcher.swift */; };
 		33AFA25323DC201A00425BEB /* ClassNameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */; };
 		33B0E85B263D5901004B5806 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0E85A263D5901004B5806 /* Router.swift */; };
@@ -468,6 +472,7 @@
 		339C7CA026566D48001CBCAC /* GameManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		339C7CA226566D6E001CBCAC /* SimulationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimulationTests.swift; sourceTree = "<group>"; };
 		33A632FF24545B060023A2D2 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
+		33A698B22657800700C52B57 /* AnimationEventMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationEventMatcherTests.swift; sourceTree = "<group>"; };
 		33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameProtocol.swift; sourceTree = "<group>"; };
 		33B0E85A263D5901004B5806 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		33B0E863263D5A05004B5806 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
@@ -1234,6 +1239,7 @@
 				33B896C624384B180005FF21 /* GameLayoutBuilderTests.swift */,
 				3300EF28256FE3C1006075F6 /* MediaEventMatcherTests.swift */,
 				33CA01F9264C5EA000D21999 /* RemoteGameDatabaseUpdaterTests.swift */,
+				33A698B22657800700C52B57 /* AnimationEventMatcherTests.swift */,
 				ADB7D304239EE03900653905 /* Info.plist */,
 			);
 			path = WildWestTests;
@@ -1490,7 +1496,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/WildWestTests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/WildWest\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"WildWest\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/data/firebase/DatabaseReferenceProtocol.swift\"\n";
+			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/WildWestTests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/WildWest\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"WildWest\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/data/firebase/DatabaseReferenceProtocol.swift\" \\\n\"${INPUT_DIR}/data/user/UserPreferences.swift\"\n";
 		};
 		33516CCB2450AA78003C99E2 /* Run FirebaseCrashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1873,6 +1879,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33A698B42657806900C52B57 /* AnimationEventMatcher.swift in Sources */,
 				33CA01FA264C5EA000D21999 /* RemoteGameDatabaseUpdaterTests.swift in Sources */,
 				335157FE245D88BE00C46888 /* OptionalExtension.swift in Sources */,
 				33CA01FE264C5EC400D21999 /* RemoteGameDatabaseUpdater.swift in Sources */,
@@ -1885,17 +1892,20 @@
 				333DB7CB24D55028002A5692 /* HandCollectionViewLayout.swift in Sources */,
 				3300B02A264E3C48002F4776 /* GeneratedMocks.swift in Sources */,
 				334F7C05264DA1C4002ACC40 /* DatabaseReferenceProtocol.swift in Sources */,
+				33A698B32657800700C52B57 /* AnimationEventMatcherTests.swift in Sources */,
 				33646989264099C400550209 /* GameEnvironment.swift in Sources */,
 				3300EF29256FE3C1006075F6 /* MediaEventMatcherTests.swift in Sources */,
 				333DB7C824D54FFF002A5692 /* HandCell.swift in Sources */,
 				33B0E85C263D5901004B5806 /* Router.swift in Sources */,
 				3346F32924CB1D7800FB0418 /* DtoEncoder+User.swift in Sources */,
 				335447622568825800D7B02C /* ResourcesTests.swift in Sources */,
+				33A698B62657820900C52B57 /* UserDefaultsStored.swift in Sources */,
 				335157FA245D888F00C46888 /* StateDto.swift in Sources */,
 				33F419C9264E4ADF0051EF31 /* MockDatabaseReferenceProtocol+Stub.swift in Sources */,
 				335157F9245D860600C46888 /* DtoEncodingTests.swift in Sources */,
 				3369CEB12654FC330014ED15 /* DictionaryEncoder.swift in Sources */,
 				33732A80264BB5C9007A9EA7 /* DtoEncoder+Event.swift in Sources */,
+				33A698B52657820100C52B57 /* UserPreferences.swift in Sources */,
 				33DC6E4E24CA9F5100072B51 /* UserInfoDto.swift in Sources */,
 				3342DFA0263EF733000BDC57 /* UserStatus.swift in Sources */,
 				335157F6245D855E00C46888 /* DtoEncoder.swift in Sources */,

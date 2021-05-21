@@ -12,18 +12,18 @@ protocol AnimationEventMatcherProtocol: DurationMatcherProtocol {
     func animation(on event: GEvent) -> EventAnimation?
 }
 
-struct EventAnimation {
+struct EventAnimation: Equatable {
     let type: EventAnimationType
     let duration: TimeInterval
 }
 
-enum EventAnimationType {
+enum EventAnimationType: Equatable {
     case move(card: String?, source: CardArea, target: CardArea)
     case reveal(card: String?, source: CardArea, target: CardArea)
     case dummy
 }
 
-enum CardArea: Hashable {
+enum CardArea: Hashable, Equatable {
     case deck
     case discard
     case store
@@ -91,7 +91,6 @@ private extension AnimationEventMatcher {
         passInPlay(),
         flipDeck(),
         deckToStore(),
-        storeToDeck(),
         drawStore()
     ]
     .toDictionary(with: { $0.id })
@@ -248,15 +247,6 @@ private extension AnimationEventMatcher {
                 fatalError("Invalid event")
             }
             return .reveal(card: StateCard.deck, source: .deck, target: .store)
-        }
-    }
-    
-    static func storeToDeck() -> EventDesc {
-        EventDesc(id: "storeToDeck") { event in
-            guard case let .storeToDeck(card) = event else {
-                fatalError("Invalid event")
-            }
-            return .move(card: card, source: .store, target: .deck)
         }
     }
     
