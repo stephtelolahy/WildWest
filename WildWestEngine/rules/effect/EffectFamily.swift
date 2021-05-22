@@ -12,6 +12,7 @@ enum EffectFamily: String, DecodableClassFamily {
     case drawDeck
     case gainHealth
     case equip
+    case handicap
     
     static var discriminator: Discriminator { .action }
     
@@ -20,6 +21,7 @@ enum EffectFamily: String, DecodableClassFamily {
         case .drawDeck: return DrawDeck.self
         case .gainHealth: return GainHealth.self
         case .equip: return Equip.self
+        case .handicap: return Handicap.self
         }
     }
 }

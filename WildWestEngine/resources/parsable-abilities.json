@@ -14,6 +14,22 @@
     ]
   },
   {
+    "name": "handicap",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireTargetAny": 0
+    },
+    "onPlay": [
+      {
+        "action": "handicap",
+        "card": "played",
+        "other": "target"
+      }
+    ]
+  },
+  {
     "name": "beer",
     "type": "active",
     "canPlay": {
