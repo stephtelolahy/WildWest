@@ -1,0 +1,16 @@
+[
+  {
+    "name": "stagecoach",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2
+    },
+    "onPlay": [
+      {
+        "action": "drawDeck",
+        "amount": 2
+      }
+    ]
+  }
+]

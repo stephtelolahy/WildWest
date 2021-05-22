@@ -245,4 +245,21 @@ class ResourcesTests: XCTestCase {
         XCTAssertTrue(cards.filter { $0.name == "stagecoach" }.count == 2)
         XCTAssertTrue(cards.contains { $0.name == "wellsFargo" && $0.value == "3" && $0.suit == "♥️" })
     }
+    
+    func test_ParseAbilities() throws {
+        // Given
+        // When
+        let abilities = sut.loadGAbilities()
+        
+        // Assert
+        XCTAssertNotNil(abilities)
+        
+        let stagecoach = try XCTUnwrap(abilities.first { $0.name == "stagecoach" })
+        XCTAssertEqual(stagecoach.onPlay.count, 1)
+        XCTAssertTrue(stagecoach.onPlay[0] is DrawDeck)
+        
+        XCTAssertEqual(stagecoach.canPlay.count, 2)
+        XCTAssertTrue(stagecoach.canPlay[0] is IsYourTurn)
+        XCTAssertTrue(stagecoach.canPlay[1] is IsPhase)
+    }
 }

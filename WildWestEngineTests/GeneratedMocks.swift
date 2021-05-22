@@ -4826,6 +4826,21 @@ public class MockResourcesLoaderProtocol: ResourcesLoaderProtocol, Cuckoo.Protoc
         
     }
     
+    
+    
+    public func loadGAbilities() -> [GAbility] {
+        
+    return cuckoo_manager.call("loadGAbilities() -> [GAbility]",
+            parameters: (),
+            escapingParameters: (),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.loadGAbilities())
+        
+    }
+    
 
 	public struct __StubbingProxy_ResourcesLoaderProtocol: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
@@ -4848,6 +4863,11 @@ public class MockResourcesLoaderProtocol: ResourcesLoaderProtocol, Cuckoo.Protoc
 	    func loadAbilities() -> Cuckoo.ProtocolStubFunction<(), [Ability]> {
 	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
 	        return .init(stub: cuckoo_manager.createStub(for: MockResourcesLoaderProtocol.self, method: "loadAbilities() -> [Ability]", parameterMatchers: matchers))
+	    }
+	    
+	    func loadGAbilities() -> Cuckoo.ProtocolStubFunction<(), [GAbility]> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return .init(stub: cuckoo_manager.createStub(for: MockResourcesLoaderProtocol.self, method: "loadGAbilities() -> [GAbility]", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -4884,6 +4904,12 @@ public class MockResourcesLoaderProtocol: ResourcesLoaderProtocol, Cuckoo.Protoc
 	        return cuckoo_manager.verify("loadAbilities() -> [Ability]", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
+	    @discardableResult
+	    func loadGAbilities() -> Cuckoo.__DoNotUse<(), [GAbility]> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return cuckoo_manager.verify("loadGAbilities() -> [GAbility]", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
 	}
 }
 
@@ -4903,6 +4929,10 @@ public class ResourcesLoaderProtocolStub: ResourcesLoaderProtocol {
     
     public func loadAbilities() -> [Ability]  {
         return DefaultValueRegistry.defaultValue(for: ([Ability]).self)
+    }
+    
+    public func loadGAbilities() -> [GAbility]  {
+        return DefaultValueRegistry.defaultValue(for: ([GAbility]).self)
     }
     
 }

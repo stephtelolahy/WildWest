@@ -16,15 +16,19 @@ extension Resolver: ResolverRegistering {
         register { JsonReader(bundle: Bundle.resourcesBundle) }.scope(application)
 
         register { ResourcesLoader(jsonReader: resolve()) as ResourcesLoaderProtocol }.scope(application)
-
-        register { createAbilityMatcher() as AbilityMatcherProtocol }.scope(application)
-    }
-
-    private static func createAbilityMatcher() -> AbilityMatcherProtocol {
-        let resourcesLoader: ResourcesLoaderProtocol = resolve()
-        let abilities = resourcesLoader.loadAbilities()
-        return AbilityMatcher(abilities: abilities, 
-                              effectMatcher: EffectMatcher(), 
-                              playReqMatcher: PlayReqMatcher())
+        
+        register(AbilityMatcherProtocol.self) {
+            let resourcesLoader: ResourcesLoaderProtocol = resolve()
+            let abilities = resourcesLoader.loadAbilities()
+            return AbilityMatcher(abilities: abilities,
+                                  effectMatcher: EffectMatcher(),
+                                  playReqMatcher: PlayReqMatcher())
+        }.scope(application)
+        
+        register(GAbilityMatcher.self) {
+            let resourcesLoader: ResourcesLoaderProtocol = resolve()
+            let abilities = resourcesLoader.loadGAbilities()
+            return GAbilityMatcher(abilities)
+        }.scope(application)
     }
 }

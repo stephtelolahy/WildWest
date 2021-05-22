@@ -472,9 +472,9 @@
     "type": "triggered",
     "canPlay": {
       "onQueueEmpty": 0,
-      "isHitsEmpty": 0,
       "isYourTurn": 0,
-      "isPhase": 1
+      "isPhase": 1,
+      "isHitsEmpty": 0
     },
     "onPlay": [
       {
@@ -514,9 +514,9 @@
     "type": "triggered",
     "canPlay": {
       "onQueueEmpty": 0,
-      "isHitsEmpty": 0,
       "isYourTurn": 0,
-      "isPhase": 3
+      "isPhase": 3,
+      "isHitsEmpty": 0
     },
     "onPlay": [
       {
@@ -713,9 +713,9 @@
     "type": "triggered",
     "canPlay": {
       "onQueueEmpty": 0,
-      "isHitsEmpty": 0,
       "isYourTurn": 0,
-      "isPhase": 1
+      "isPhase": 1,
+      "isHitsEmpty": 0
     },
     "onPlay": [
       {
@@ -747,9 +747,9 @@
     "type": "triggered",
     "canPlay": {
       "onQueueEmpty": 0,
-      "isHitsEmpty": 0,
       "isYourTurn": 0,
-      "isPhase": 1
+      "isPhase": 1,
+      "isHitsEmpty": 0
     },
     "onPlay": [
       {
@@ -787,9 +787,9 @@
     "type": "triggered",
     "canPlay": {
       "onQueueEmpty": 0,
-      "isHitsEmpty": 0,
       "isYourTurn": 0,
-      "isPhase": 1
+      "isPhase": 1,
+      "isHitsEmpty": 0
     },
     "onPlay": [
       {
@@ -852,9 +852,9 @@
     "type": "triggered",
     "canPlay": {
       "onQueueEmpty": 0,
-      "isHitsEmpty": 0,
       "isYourTurn": 0,
-      "isPhase": 1
+      "isPhase": 1,
+      "isHitsEmpty": 0
     },
     "onPlay": [
       {
