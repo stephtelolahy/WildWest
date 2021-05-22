@@ -31,9 +31,10 @@ class UserPreferences: UserPreferencesProtocol {
     @UserDefaultsStored("update_delay", defaultValue: 0.4)
     var updateDelay: Double
     
-    @UserDefaultsStored("assisted_mode", defaultValue: false)
-    var assistedMode: Bool
-    
     @UserDefaultsStored("enable_sound", defaultValue: true)
     var enableSound: Bool
+    
+    @UserDefaultsStored("assisted_mode", defaultValue: true)
+    var assistedMode: Bool
+    
 }

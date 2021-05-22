@@ -36,6 +36,7 @@ class GameViewController: UIViewController {
     var soundPlayer: SoundPlayerProtocol!
     var moveSegmenter: MoveSegmenterProtocol!
     var moveSelector: GameMoveSelectorWidget!
+    var preferences: UserPreferencesProtocol!
     
     private lazy var animationRenderer: AnimationRendererProtocol = {
         AnimationRenderer(viewController: self,
@@ -52,6 +53,15 @@ class GameViewController: UIViewController {
     private var segmentedMoves: [String: [GMove]] = [:]
     private var messages: [String] = []
     private let disposeBag = DisposeBag()
+    
+    private lazy var assistantAI: AIProtocol = {
+        let sheriff = state.players.values.first(where: { $0.role == .sheriff })!.identifier
+        let abilityEvaluator = AbilityEvaluator()
+        let roleEstimator = RoleEstimator(sheriff: sheriff, abilityEvaluator: abilityEvaluator)
+        let roleStrategy = RoleStrategy()
+        let moveEvaluator = MoveEvaluator(abilityEvaluator: abilityEvaluator, roleEstimator: roleEstimator, roleStrategy: roleStrategy)
+        return GAI(moveEvaluator: moveEvaluator)
+    }()
     
     // MARK: Lifecycle
     
@@ -170,8 +180,13 @@ private extension GameViewController {
         // <RULE> Force select reaction moves
         if !moves.isEmpty,
            let hit = state.hits.first {
-            moveSelector.selectMove(among: moves, context: hit.name, cancelable: false) { [weak self] move in
-                self?.environment.engine.execute(move)
+            if preferences.assistedMode {
+                let move = assistantAI.bestMove(among: moves, in: state)
+                environment.engine.execute(move)
+            } else {
+                moveSelector.selectMove(among: moves, context: hit.name, cancelable: false) { [weak self] move in
+                    self?.environment.engine.execute(move)
+                }
             }
         }
         // </RULE>

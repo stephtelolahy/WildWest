@@ -16,77 +16,13 @@ import Firebase
 // The central unit of all injections.
 // Instantiates and supplies the dependencies of all object
 
-extension Resolver: RouterDependenciesProtocol {
-    
-    func provideMainViewController() -> UIViewController {
-        let viewController = UIStoryboard.instantiate(MainViewController.self, in: "Main")
-        viewController.userManager = Resolver.optional()
-        viewController.gameManager = Resolver.optional()
-        viewController.router = Resolver.optional(args: viewController)
-        return viewController
-    }
-    
-    func provideFigureSelectorWidget(_ completion: @escaping (String?) -> Void) -> UIViewController {
-        FigureSelectorWidget(gameResources: Resolver.resolve(), completion: completion)
-    }
-    
-    func provideRoleSelectorWidget(_ completion: @escaping (Role?) -> Void) -> UIViewController {
-        RoleSelectorWidget(completion)
-    }
-    
-    func provideMenuViewController() -> UIViewController {
-        let viewController = UIStoryboard.instantiate(MenuViewController.self, in: "Main")
-        viewController.router = Resolver.optional(args: viewController)
-        viewController.preferences = Resolver.optional()
-        viewController.soundPlayer = Resolver.optional()
-        viewController.userManager = Resolver.optional()
-        viewController.gameManager = Resolver.optional()
-        viewController.signInWidget = SignInWidget(viewController: viewController, userManager: Resolver.resolve())
-        return viewController
-    }
-    
-    func provideGameViewController(_ environment: GameEnvironment) -> UIViewController {
-        let viewController = UIStoryboard.instantiate(GameViewController.self, in: "Main")
-        viewController.environment = environment
-        viewController.router = Resolver.optional(args: viewController)
-        viewController.userManager = Resolver.optional()
-        viewController.analyticsManager = Resolver.optional()
-        viewController.animationMatcher = Resolver.optional()
-        viewController.mediaMatcher = Resolver.optional()
-        viewController.soundPlayer = Resolver.optional()
-        viewController.moveSelector = GameMoveSelectorWidget(selector: MoveSelector(), viewController: viewController)
-        viewController.moveSegmenter = MoveSegmenter()
-        return viewController
-    }
-    
-    func provideGameOverWidget(winner: Role, completion: @escaping () -> Void) -> UIViewController {
-        GameOverWidget(winner: winner, completion: completion)
-    }
-    
-    func provideGameRolesWidget(_ playersCount: Int) -> UIViewController {
-        GameRolesWidget(playersCount: playersCount)
-    }
-    
-    func provideGamePlayerWidget(_ player: PlayerProtocol) -> UIViewController {
-        GamePlayerWidget(player: player)
-    }
-    
-    func provideWaitingRoomViewController() -> UIViewController {
-        let viewController = UIStoryboard.instantiate(WaitingRoomViewController.self, in: "Main")
-        viewController.router = Resolver.optional(args: viewController)
-        viewController.userManager = Resolver.optional()
-        viewController.gameManager = Resolver.optional()
-        return viewController
-    }
-}
-
 extension Resolver: ResolverRegistering {
     
     public static func registerAllServices() {
         
         // MARK: - UI
         
-        register { Resolver.main as RouterDependenciesProtocol }.scope(application)
+        register { main as RouterDependenciesProtocol }.scope(application)
         
         register { _, args in
             Router(viewController: args as! UIViewController, dependencies: resolve()) as RouterProtocol
@@ -146,5 +82,70 @@ extension Resolver: ResolverRegistering {
                                database: resolve(),
                                gameBuilder: resolve()) as GameManagerProtocol
         }.scope(application)
+    }
+}
+
+extension Resolver: RouterDependenciesProtocol {
+    
+    func provideMainViewController() -> UIViewController {
+        let viewController = UIStoryboard.instantiate(MainViewController.self, in: "Main")
+        viewController.userManager = optional()
+        viewController.gameManager = optional()
+        viewController.router = optional(args: viewController)
+        return viewController
+    }
+    
+    func provideFigureSelectorWidget(_ completion: @escaping (String?) -> Void) -> UIViewController {
+        FigureSelectorWidget(gameResources: resolve(), completion: completion)
+    }
+    
+    func provideRoleSelectorWidget(_ completion: @escaping (Role?) -> Void) -> UIViewController {
+        RoleSelectorWidget(completion)
+    }
+    
+    func provideMenuViewController() -> UIViewController {
+        let viewController = UIStoryboard.instantiate(MenuViewController.self, in: "Main")
+        viewController.router = optional(args: viewController)
+        viewController.preferences = optional()
+        viewController.soundPlayer = optional()
+        viewController.userManager = optional()
+        viewController.gameManager = optional()
+        viewController.signInWidget = SignInWidget(viewController: viewController, userManager: resolve())
+        return viewController
+    }
+    
+    func provideGameViewController(_ environment: GameEnvironment) -> UIViewController {
+        let viewController = UIStoryboard.instantiate(GameViewController.self, in: "Main")
+        viewController.environment = environment
+        viewController.router = optional(args: viewController)
+        viewController.userManager = optional()
+        viewController.analyticsManager = optional()
+        viewController.animationMatcher = optional()
+        viewController.mediaMatcher = optional()
+        viewController.soundPlayer = optional()
+        viewController.moveSelector = GameMoveSelectorWidget(selector: MoveSelector(), viewController: viewController)
+        viewController.moveSegmenter = MoveSegmenter()
+        viewController.preferences = optional()
+        return viewController
+    }
+    
+    func provideGameOverWidget(winner: Role, completion: @escaping () -> Void) -> UIViewController {
+        GameOverWidget(winner: winner, completion: completion)
+    }
+    
+    func provideGameRolesWidget(_ playersCount: Int) -> UIViewController {
+        GameRolesWidget(playersCount: playersCount)
+    }
+    
+    func provideGamePlayerWidget(_ player: PlayerProtocol) -> UIViewController {
+        GamePlayerWidget(player: player)
+    }
+    
+    func provideWaitingRoomViewController() -> UIViewController {
+        let viewController = UIStoryboard.instantiate(WaitingRoomViewController.self, in: "Main")
+        viewController.router = optional(args: viewController)
+        viewController.userManager = optional()
+        viewController.gameManager = optional()
+        return viewController
     }
 }

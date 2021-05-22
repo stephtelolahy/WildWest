@@ -85,7 +85,7 @@ private extension PlayReqMatcher {
         onEliminated(),
         onEliminatingRole(),
         onHandEmpty(),
-        onEventsEmpty()
+        onQueueEmpty()
     ].toDictionary { $0.id }
     
     static func isYourTurn() -> PlayReq {
@@ -398,8 +398,8 @@ private extension PlayReqMatcher {
                 })
     }
     
-    static func onEventsEmpty() -> PlayReq {
-        PlayReq(id: "onEventsEmpty",
+    static func onQueueEmpty() -> PlayReq {
+        PlayReq(id: "onQueueEmpty",
                 desc: "When events queue is empty",
                 matchingFunc: { _, ctx, _ -> Bool in
                     guard case .emptyQueue = ctx.event else {
