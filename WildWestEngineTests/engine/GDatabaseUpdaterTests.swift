@@ -195,6 +195,30 @@ class GDatabaseUpdaterTests: XCTestCase {
         XCTAssertEqual(state.deck.map { $0.identifier }, ["c3"])
     }
     
+    func test_AddCardToHand_IfDrawingDeckChoosing() {
+        // Given
+        let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
+        let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
+        let mockCard3 = MockCardProtocol().withDefault().identified(by: "c3")
+        let mockPlayer1 = MockPlayerProtocol()
+            .withDefault()
+            .identified(by: "p1")
+            .holding(mockCard1)
+        let mockState = MockStateProtocol()
+            .withDefault()
+            .players(are: mockPlayer1)
+            .deck(are: mockCard2, mockCard3)
+        let state = GState(mockState)
+        let event = GEvent.drawDeckChoosing(player: "p1", card: "c3")
+        
+        // When
+        sut.execute(event, in: state)
+        
+        // Assert
+        XCTAssertEqual(state.players["p1"]!.hand.map { $0.identifier }, ["c1", "c3"])
+        XCTAssertEqual(state.deck.map { $0.identifier }, ["c2"])
+    }
+    
     func test_AddCardToHand_IfDrawingDeckFlipping() {
         // Given
         let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
@@ -536,25 +560,6 @@ class GDatabaseUpdaterTests: XCTestCase {
         // Assert
         XCTAssertEqual(state.store.map { $0.identifier }, ["c1"])
         XCTAssertEqual(state.deck.map { $0.identifier }, ["c2"])
-    }
-    
-    func test_storeToDeck() {
-        // Given
-        let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
-        let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
-        let mockState = MockStateProtocol()
-            .withDefault()
-            .deck(are: mockCard1)
-            .store(are: mockCard2)
-        let state = GState(mockState)
-        let event = GEvent.storeToDeck(card: "c2")
-        
-        // When
-        sut.execute(event, in: state)
-        
-        // Assert
-        XCTAssertEqual(state.store.map { $0.identifier }, [])
-        XCTAssertEqual(state.deck.map { $0.identifier }, ["c2", "c1"])
     }
     
     // MARK: - Reveal

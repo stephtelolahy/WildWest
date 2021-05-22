@@ -73,6 +73,7 @@ private extension EffectMatcher {
         looseHealth(),
         
         drawDeck(),
+        drawDeckChoosing(),
         drawHand(),
         drawInPlay(),
         drawStore(),
@@ -86,7 +87,6 @@ private extension EffectMatcher {
         discardInPlay(),
         
         deckToStore(),
-        storeToDeck(),
         
         addHit(),
         removeHit(),
@@ -190,6 +190,17 @@ private extension EffectMatcher {
                 return players.flatMap { player in
                     Array(0..<amount).map { _ in .drawDeck(player: player) }
                 }
+               })
+    }
+    
+    
+    static func drawDeckChoosing() -> Effect {
+        Effect(id: "drawDeckChoosing",
+               desc: "Draw cards from deck",
+               matchingFunc: { params, ctx in
+                let player = params.players(forKey: "player", ctx: ctx).first!
+                let cards = params.cards(forKey: "card", player: "", ctx: ctx)
+                return cards.map { .drawDeckChoosing(player: player, card: $0) }
                })
     }
     
@@ -397,15 +408,6 @@ private extension EffectMatcher {
                 return [.setTurn(player: player)]
                })
     }
-    
-    static func storeToDeck() -> Effect {
-        Effect(id: "storeToDeck",
-               desc: "Discard cards from store to top deck",
-               matchingFunc: { params, ctx in
-                let cards = params.cards(forKey: "card", player: "", ctx: ctx)
-                return cards.map { .storeToDeck(card: $0) }
-               })
-    }
 }
 
 private extension Dictionary where Key == String {
@@ -480,6 +482,9 @@ private extension Dictionary where Key == String {
             
         case "requiredStore":
             return ctx.args[.requiredStore]!
+            
+        case "requiredDeck":
+            return ctx.args[.requiredDeck]!
             
         case "played":
             switch ctx.card {

@@ -79,6 +79,7 @@ private extension AnimationEventMatcher {
         eliminate(),
         addHit(),
         drawDeck(),
+        drawDeckChoosing(),
         drawDeckFlipping(),
         drawDiscard(),
         discardHand(),
@@ -134,6 +135,16 @@ private extension AnimationEventMatcher {
     static func drawDeck() -> EventDesc {
         EventDesc(id: "drawDeck") { event in
             guard case let .drawDeck(player) = event else {
+                fatalError("Invalid event")
+            }
+            
+            return .move(card: nil, source: .deck, target: .hand(player))
+        }
+    }
+    
+    static func drawDeckChoosing() -> EventDesc {
+        EventDesc(id: "drawDeckChoosing") { event in
+            guard case let .drawDeckChoosing(player, _) = event else {
                 fatalError("Invalid event")
             }
             

@@ -467,11 +467,11 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         wait(for: [expectation], timeout: 0.5)
     }
     
-    func test_MoveCardFromStoreToDeck_IfStoreToDeck() {
+    func test_MoveCardFromDeckToHand_IfDrawDeckChoosing() {
         // Given
-        let event = GEvent.storeToDeck(card: "c2")
+        let event = GEvent.drawDeckChoosing(player: "p1", card: "c2")
         let expectation = XCTestExpectation(description: #function)
-        mockDatabaseReference.stubObserveSingleEvent("state/store", value: ["key1": "c1", "key2": "c2"])
+        mockDatabaseReference.stubObserveSingleEvent("state/deck", value: ["key1": "c1", "key2": "c2", "key3": "c3"])
         stub(mockDatabaseReference) { mock in
             when(mock).childByAutoIdKey().thenReturn("keyX")
         }
@@ -479,8 +479,8 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         // When
         // Assert
         sut.execute(event).subscribe(onCompleted: {
-            verify(self.mockDatabaseReference).setValue("state/store/key2", value: isNil(), withCompletionBlock: any())
-            verify(self.mockDatabaseReference).setValue("state/deck/keyX", value: any(equalTo: "c2"), withCompletionBlock: any())
+            verify(self.mockDatabaseReference).setValue("state/deck/key2", value: isNil(), withCompletionBlock: any())
+            verify(self.mockDatabaseReference).setValue("state/players/p1/hand/keyX", value: any(equalTo: "c2"), withCompletionBlock: any())
             expectation.fulfill()
         }).disposed(by: disposeBag)
         
@@ -523,17 +523,17 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         // Assert
         sut.execute(event).subscribe(onCompleted: {
             let hit1: [String: Any] = ["player": "p2",
-                                      "name": "n1",
-                                      "abilities": ["a1", "a2"],
-                                      "cancelable": 1,
-                                      "offender": "p1"]
+                                       "name": "n1",
+                                       "abilities": ["a1", "a2"],
+                                       "cancelable": 1,
+                                       "offender": "p1"]
             verify(self.mockDatabaseReference).setValue("state/hits/keyX", value: any(equalToDictionary: hit1), withCompletionBlock: any())
             
             let hit2: [String: Any] = ["player": "p3",
-                                      "name": "n1",
-                                      "abilities": ["a1", "a2"],
-                                      "cancelable": 1,
-                                      "offender": "p1"]
+                                       "name": "n1",
+                                       "abilities": ["a1", "a2"],
+                                       "cancelable": 1,
+                                       "offender": "p1"]
             verify(self.mockDatabaseReference).setValue("state/hits/keyY", value: any(equalToDictionary: hit2), withCompletionBlock: any())
             
             expectation.fulfill()

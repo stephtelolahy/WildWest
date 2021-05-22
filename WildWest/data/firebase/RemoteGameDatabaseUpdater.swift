@@ -54,6 +54,7 @@ private extension RemoteGameDatabaseUpdater {
         looseHealth(),
         eliminate(),
         drawDeck(),
+        drawDeckChoosing(),
         drawDeckFlipping(),
         drawHand(),
         drawInPlay(),
@@ -66,7 +67,6 @@ private extension RemoteGameDatabaseUpdater {
         play(),
         discardInPlay(),
         deckToStore(),
-        storeToDeck(),
         flipDeck(),
         addHit(),
         removeHit(),
@@ -192,8 +192,26 @@ private extension RemoteGameDatabaseUpdater {
                 }).flatMapCompletable({ cards in
                     let deckKey = cards.keys.sorted().min()!
                     let removeDeckCompletable = gameRef.rxSetValue("state/deck/\(deckKey)") { nil }
-                    let cardId = cards[deckKey]
-                    let addHandCompletable = gameRef.rxSetValue("state/players/\(player)/hand/\(gameRef.childByAutoIdKey())") { cardId }
+                    let card = cards[deckKey]
+                    let addHandCompletable = gameRef.rxSetValue("state/players/\(player)/hand/\(gameRef.childByAutoIdKey())") { card }
+                    return Completable.concat(removeDeckCompletable, addHandCompletable)
+                }))
+        }
+    }
+    
+    static func drawDeckChoosing() -> EventDesc {
+        EventDesc(id: "drawDeckChoosing", desc: "Draw specific card from deck") { event, gameRef in
+            guard case let .drawDeckChoosing(player, card) = event else {
+                fatalError("Invalid event")
+            }
+            
+            return resetDeckIfNeeded(gameRef)
+                .andThen(gameRef.rxObserveSingleEvent("state/deck", decoding: { snapshot -> [String: String] in
+                    try (snapshot.value as? [String: String]).unwrap()
+                }).flatMapCompletable({ cards in
+                    let deckKey = cards.first(where: { $0.value == card })!.key
+                    let removeDeckCompletable = gameRef.rxSetValue("state/deck/\(deckKey)") { nil }
+                    let addHandCompletable = gameRef.rxSetValue("state/players/\(player)/hand/\(gameRef.childByAutoIdKey())") { card }
                     return Completable.concat(removeDeckCompletable, addHandCompletable)
                 }))
         }
@@ -211,8 +229,8 @@ private extension RemoteGameDatabaseUpdater {
                 }).flatMapCompletable({ cards in
                     let deckKey = cards.keys.sorted().min()!
                     let removeDeckCompletable = gameRef.rxSetValue("state/deck/\(deckKey)") { nil }
-                    let cardId = cards[deckKey]
-                    let addHandCompletable = gameRef.rxSetValue("state/players/\(player)/hand/\(gameRef.childByAutoIdKey())") { cardId }
+                    let card = cards[deckKey]
+                    let addHandCompletable = gameRef.rxSetValue("state/players/\(player)/hand/\(gameRef.childByAutoIdKey())") { card }
                     return Completable.concat(removeDeckCompletable, addHandCompletable)
                 }))
         }
@@ -392,22 +410,6 @@ private extension RemoteGameDatabaseUpdater {
                     return gameRef.rxSetValue("state/deck/\(cardKey)", encoding: { nil })
                         .andThen(gameRef.rxSetValue("state/store/\(gameRef.childByAutoIdKey())", encoding: { card }))
                 }))
-        }
-    }
-    
-    static func storeToDeck() -> EventDesc {
-        EventDesc(id: "storeToDeck", desc: "Draw top card from deck to store") { event, gameRef in
-            guard case let .storeToDeck(card) = event else {
-                fatalError("Invalid event")
-            }
-            
-            return gameRef.rxObserveSingleEvent("state/store", decoding: { snapshot -> [String: String] in
-                try (snapshot.value as? [String: String]).unwrap()
-            }).flatMapCompletable { cards in
-                let cardKey = cards.first(where: { $0.value == card })!.key
-                return gameRef.rxSetValue("state/store/\(cardKey)", encoding: { nil })
-                    .andThen(gameRef.rxSetValue("state/deck/\(gameRef.childByAutoIdKey())", encoding: { card }))
-            }
         }
     }
     

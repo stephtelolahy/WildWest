@@ -19,7 +19,6 @@ struct EventDto: Codable {
     var drawDeck: String?
     var drawDeckFlipping: String?
     var drawDiscard: String?
-    var storeToDeck: String?
     var removeHit: String?
     var cancelHit: String?
     var gameover: String?
@@ -29,6 +28,7 @@ struct EventDto: Codable {
     var play: PlayerCardDto?
     var equip: PlayerCardDto?
     var drawStore: PlayerCardDto?
+    var drawDeckChoosing: PlayerCardDto?
     var discardHand: PlayerCardDto?
     var discardInPlay: PlayerCardDto?
     var looseHealth: PlayerOffenderDto?

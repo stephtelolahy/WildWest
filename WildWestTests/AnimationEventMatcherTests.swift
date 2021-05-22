@@ -16,7 +16,7 @@ class AnimationEventMatcherTests: XCTestCase {
     
     private var sut: AnimationEventMatcherProtocol!
     private var mockUserPreferences: MockUserPreferencesProtocol!
-
+    
     override func setUp() {
         mockUserPreferences = MockUserPreferencesProtocol()
         stub(mockUserPreferences) { mock in
@@ -37,7 +37,6 @@ class AnimationEventMatcherTests: XCTestCase {
         XCTAssertNil(sut.animation(on: .cancelHit(player: "p1")))
         XCTAssertNil(sut.animation(on: .gameover(winner: .renegade)))
         XCTAssertNil(sut.animation(on: .emptyQueue))
-        XCTAssertNil(sut.animation(on: .storeToDeck(card: "c1")))
         
         // Dummy
         XCTAssertEqual(sut.animation(on: .setTurn(player: "p1")),
@@ -62,6 +61,8 @@ class AnimationEventMatcherTests: XCTestCase {
                        EventAnimation(type: .move(card: "c1", source: .hand("p1"), target: .inPlay("p2")), duration: 1.0))
         
         XCTAssertEqual(sut.animation(on: .drawDeck(player: "p1")),
+                       EventAnimation(type: .move(card: nil, source: .deck, target: .hand("p1")), duration: 1.0))
+        XCTAssertEqual(sut.animation(on: .drawDeckChoosing(player: "p1", card: "c1")),
                        EventAnimation(type: .move(card: nil, source: .deck, target: .hand("p1")), duration: 1.0))
         XCTAssertEqual(sut.animation(on: .drawHand(player: "p1", other: "p2", card: "c2")),
                        EventAnimation(type: .move(card: nil, source: .hand("p2"), target: .hand("p1")), duration: 1.0))

@@ -54,6 +54,7 @@ class MediaEventMatcherTests: XCTestCase {
     
     func test_DrawCard() {
         XCTAssertEqual(sut.emoji(on: .drawDeck(player: "p1")), "💰")
+        XCTAssertEqual(sut.emoji(on: .drawDeckChoosing(player: "p1", card: "c1")), "💰")
         XCTAssertEqual(sut.emoji(on: .drawDiscard(player: "p1")), "💰")
         XCTAssertEqual(sut.emoji(on: .drawStore(player: "p1", card: "c1")), "💰")
     }
@@ -87,7 +88,6 @@ class MediaEventMatcherTests: XCTestCase {
     
     func test_Store() {
         XCTAssertEqual(sut.emoji(on: .deckToStore), "🎁")
-        XCTAssertEqual(sut.emoji(on: .storeToDeck(card: "c1")), "🎁")
     }
     
     func test_GainHealth() {

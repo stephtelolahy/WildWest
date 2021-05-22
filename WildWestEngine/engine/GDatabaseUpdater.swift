@@ -42,6 +42,7 @@ private extension GDatabaseUpdater {
         looseHealth(),
         eliminate(),
         drawDeck(),
+        drawDeckChoosing(),
         drawDeckFlipping(),
         drawHand(),
         drawInPlay(),
@@ -54,7 +55,6 @@ private extension GDatabaseUpdater {
         play(),
         discardInPlay(),
         deckToStore(),
-        storeToDeck(),
         flipDeck(),
         addHit(),
         removeHit(),
@@ -148,6 +148,19 @@ private extension GDatabaseUpdater {
             }
             state.resetDeckIfNeeded()
             let cardObject = state.deck.removeFirst()
+            state.mutablePlayer(player).hand.append(cardObject)
+        }
+    }
+    
+    static func drawDeckChoosing() -> EventDesc {
+        EventDesc(id: "drawDeckChoosing", desc: "Draw specific card from deck") { event, state in
+            guard case let .drawDeckChoosing(player, card) = event else {
+                fatalError("Invalid event")
+            }
+            guard let index = state.deck.firstIndex(where: { $0.identifier == card }) else {
+                fatalError("Card \(card) not found")
+            }
+            let cardObject = state.deck.remove(at: index)
             state.mutablePlayer(player).hand.append(cardObject)
         }
     }
@@ -295,19 +308,6 @@ private extension GDatabaseUpdater {
             state.resetDeckIfNeeded()
             let cardObject = state.deck.removeFirst()
             state.store.append(cardObject)
-        }
-    }
-    
-    static func storeToDeck() -> EventDesc {
-        EventDesc(id: "storeToDeck", desc: "Draw top card from deck to store") { event, state in
-            guard case let .storeToDeck(card) = event else {
-                fatalError("Invalid event")
-            }
-            guard let index = state.store.firstIndex(where: { $0.identifier == card }) else {
-                fatalError("Card \(card) not found")
-            }
-            let cardObject = state.store.remove(at: index)
-            state.deck.insert(cardObject, at: 0)
         }
     }
     

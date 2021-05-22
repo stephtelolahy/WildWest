@@ -58,7 +58,8 @@
     "playReqs": [
       { "event": "drawDeck" },
       { "event": "drawDiscard" },
-      { "event": "drawStore" }
+      { "event": "drawStore" },
+      { "event": "drawDeckChoosing" }
     ]
   },
   {
@@ -107,7 +108,7 @@
     "desc": "store",
     "emoji": "🎁",
     "sfx": "Slide Closed-SoundBible.com-1521580537",
-    "playReqs": [{ "event": "deckToStore" }, { "event": "storeToDeck" }]
+    "playReqs": [{ "event": "deckToStore" }]
   },
   {
     "desc": "gain health",

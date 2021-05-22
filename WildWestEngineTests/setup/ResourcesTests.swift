@@ -27,7 +27,7 @@ class ResourcesTests: XCTestCase {
         XCTAssertEqual(cards.filter { $0.type == .figure }.count, 16)
         XCTAssertEqual(cards.filter { $0.type == .brown || $0.type == .blue }.count, 22)
         XCTAssertEqual(abilities.count, 47)
-        XCTAssertEqual(PlayReqMatcher().playReqIds.count, 25)
+        XCTAssertEqual(PlayReqMatcher().playReqIds.count, 26)
         XCTAssertEqual(EffectMatcher().effectIds.count, 22)
     }
     

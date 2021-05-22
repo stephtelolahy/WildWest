@@ -753,33 +753,24 @@
     },
     "onPlay": [
       {
-        "action": "deckToStore",
-        "hidden": true,
-        "amount": 3
-      },
-      {
         "action": "addHit",
         "player": "actor",
-        "abilities": ["startTurnDrawingStore"],
+        "abilities": ["startTurnDrawDeckChoosing2"],
         "cancelable": 0
       }
     ]
   },
   {
-    "name": "startTurnDrawingStore",
+    "name": "startTurnDrawDeckChoosing2",
     "type": "active",
     "canPlay": {
-      "requireStoreCards": 2
+      "requireDeckCards": 2
     },
     "onPlay": [
       {
-        "action": "drawStore",
+        "action": "drawDeckChoosing",
         "player": "actor",
-        "card": "requiredStore"
-      },
-      {
-        "action": "storeToDeck",
-        "card": "unrequiredStore"
+        "card": "requiredDeck"
       },
       {
         "action": "removeHit",

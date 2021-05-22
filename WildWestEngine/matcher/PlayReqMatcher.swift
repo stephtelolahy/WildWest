@@ -77,6 +77,7 @@ private extension PlayReqMatcher {
         requireInPlayCard(),
         requireHandCards(),
         requireStoreCards(),
+        requireDeckCards(),
         
         onHitCancelable(),
         onPhase(),
@@ -266,6 +267,17 @@ private extension PlayReqMatcher {
                     let cards = ctx.state.store
                         .map { $0.identifier }
                     return playArgs.appending(values: cards, by: amount, forArg: .requiredStore)
+                })
+    }
+    
+    static func requireDeckCards() -> PlayReq {
+        PlayReq(id: "requireDeckCards",
+                desc: "Must choose choose X cards from deck among (X + 1).",
+                matchingFunc: { param, ctx, playArgs -> Bool in
+                    let amount = Parser.number(param)
+                    let cards = ctx.state.deck.prefix(amount + 1)
+                        .map { $0.identifier }
+                    return playArgs.appending(values: cards, by: amount, forArg: .requiredDeck)
                 })
     }
     

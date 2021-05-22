@@ -88,6 +88,20 @@ class MoveSelectorTests: XCTestCase {
                                              MoveNode(name: "c2, c3", value: .move(move2))]))
     }
     
+    func test_SelectMoveWithRequiredDeck() throws {
+        // Given
+        let move1 = GMove("drawDeckChoosing2", actor: "pX", args: [.requiredDeck: ["c1", "c3"]])
+        let move2 = GMove("drawDeckChoosing2", actor: "pX", args: [.requiredDeck: ["c2", "c3"]])
+        
+        // When
+        let root = sut.select([move1, move2])
+        
+        // Assert
+        XCTAssertEqual(root.name, "drawDeckChoosing2")
+        XCTAssertEqual(root.value, .options([MoveNode(name: "c1, c3", value: .move(move1)),
+                                             MoveNode(name: "c2, c3", value: .move(move2))]))
+    }
+    
     func test_SelectMoveWithRequiredHand() throws {
         // Given
         let move1 = GMove("discardSelfHand", actor: "pX", args: [.requiredHand: ["remington-9-♠️"]])

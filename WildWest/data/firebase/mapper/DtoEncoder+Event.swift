@@ -39,8 +39,8 @@ extension DtoEncoder {
         case let .drawDiscard(player):
             return EventDto(drawDiscard: player)
             
-        case let .storeToDeck(card):
-            return EventDto(storeToDeck: card)
+        case let .drawDeckChoosing(player, card):
+            return EventDto(drawDeckChoosing: PlayerCardDto(player: player, card: card))
             
         case let .removeHit(player):
             return EventDto(removeHit: player)
@@ -133,8 +133,9 @@ extension DtoEncoder {
             return .drawDiscard(player: player)
         }
         
-        if let card = event.storeToDeck {
-            return .storeToDeck(card: card)
+        if let dto = event.drawDeckChoosing {
+            return .drawDeckChoosing(player: try dto.player.unwrap(),
+                                     card: try dto.card.unwrap())
         }
         
         if let player = event.removeHit {
