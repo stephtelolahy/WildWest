@@ -58,14 +58,15 @@
     "playReqs": [
       { "event": "drawDeck" },
       { "event": "drawDiscard" },
-      { "event": "drawStore" }
+      { "event": "drawStore" },
+      { "event": "drawDeckChoosing" }
     ]
   },
   {
     "desc": "reveal card",
     "emoji": "🌟",
-    "sfx": "Metal Clang-SoundBible.com-19572601",
-    "playReqs": [{ "event": "revealDeck" }, { "event": "revealHand" }]
+    "sfx": "Slide Closed-SoundBible.com-1521580537",
+    "playReqs": [{ "event": "flipDeck" }, { "event": "drawDeckFlipping" }]
   },
   {
     "desc": "discard card",
@@ -107,7 +108,7 @@
     "desc": "store",
     "emoji": "🎁",
     "sfx": "Slide Closed-SoundBible.com-1521580537",
-    "playReqs": [{ "event": "deckToStore" }, { "event": "storeToDeck" }]
+    "playReqs": [{ "event": "deckToStore" }]
   },
   {
     "desc": "gain health",

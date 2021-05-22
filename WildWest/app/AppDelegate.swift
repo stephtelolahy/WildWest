@@ -15,12 +15,12 @@ import Resolver
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-
+    
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
-        let dependencies: RouterDependenciesProtocol = Resolver.resolve()
+        let dependencies = Resolver.resolve(RouterDependenciesProtocol.self)
         let mainVC = dependencies.provideMainViewController()
         window?.rootViewController = mainVC
         window?.makeKeyAndVisible()
@@ -32,8 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      open url: URL,
                      options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         if let sourceApplication = options[.sourceApplication] as? String,
-            FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
-          return true
+           FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
+            return true
         }
         
         // other URL handling goes here.

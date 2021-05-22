@@ -29,4 +29,5 @@ public enum PlayArg: String, Equatable {
     case requiredInPlay
     case requiredStore
     case requiredHand
+    case requiredDeck
 }

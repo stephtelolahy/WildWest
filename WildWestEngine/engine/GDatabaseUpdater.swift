@@ -15,25 +15,14 @@ public class GDatabaseUpdater: GDatabaseUpdaterProtocol {
     }
     
     public func execute(_ event: GEvent, in state: GState) {
-        guard let eventDesc = Self.all[event.hashValue] else {
+        guard let eventDesc = Self.all[event.name] else {
             fatalError("No event description matching \(event)")
         }
         eventDesc.updateFunc(event, state)
     }
 }
 
-public extension GEvent {
-    var hashValue: String {
-        var string = String(describing: self)
-        if let eventName = string.components(separatedBy: "(").first {
-            string = eventName
-        }
-        return string
-    }
-}
-
 private typealias EventFunc = (GEvent, GState) -> Void
-private typealias MatchingFunc = (GEvent) -> Bool
 
 private struct EventDesc {
     let id: String
@@ -53,6 +42,8 @@ private extension GDatabaseUpdater {
         looseHealth(),
         eliminate(),
         drawDeck(),
+        drawDeckChoosing(),
+        drawDeckFlipping(),
         drawHand(),
         drawInPlay(),
         drawDiscard(),
@@ -64,9 +55,7 @@ private extension GDatabaseUpdater {
         play(),
         discardInPlay(),
         deckToStore(),
-        storeToDeck(),
-        revealDeck(),
-        revealHand(),
+        flipDeck(),
         addHit(),
         removeHit(),
         cancelHit(),
@@ -159,6 +148,19 @@ private extension GDatabaseUpdater {
             }
             state.resetDeckIfNeeded()
             let cardObject = state.deck.removeFirst()
+            state.mutablePlayer(player).hand.append(cardObject)
+        }
+    }
+    
+    static func drawDeckChoosing() -> EventDesc {
+        EventDesc(id: "drawDeckChoosing", desc: "Draw specific card from deck") { event, state in
+            guard case let .drawDeckChoosing(player, card) = event else {
+                fatalError("Invalid event")
+            }
+            guard let index = state.deck.firstIndex(where: { $0.identifier == card }) else {
+                fatalError("Card \(card) not found")
+            }
+            let cardObject = state.deck.remove(at: index)
             state.mutablePlayer(player).hand.append(cardObject)
         }
     }
@@ -309,23 +311,10 @@ private extension GDatabaseUpdater {
         }
     }
     
-    static func storeToDeck() -> EventDesc {
-        EventDesc(id: "storeToDeck", desc: "Draw top card from deck to store") { event, state in
-            guard case let .storeToDeck(card) = event else {
-                fatalError("Invalid event")
-            }
-            guard let index = state.store.firstIndex(where: { $0.identifier == card }) else {
-                fatalError("Card \(card) not found")
-            }
-            let cardObject = state.store.remove(at: index)
-            state.deck.insert(cardObject, at: 0)
-        }
-    }
-    
-    static func revealDeck() -> EventDesc {
-        EventDesc(id: "revealDeck", 
+    static func flipDeck() -> EventDesc {
+        EventDesc(id: "flipDeck", 
                   desc: "Flip over the top card of the deck, and discard immediately") { event, state in
-            guard case .revealDeck = event else {
+            guard case .flipDeck = event else {
                 fatalError("Invalid event")
             }
             state.resetDeckIfNeeded()
@@ -334,30 +323,31 @@ private extension GDatabaseUpdater {
         }
     }
     
-    static func revealHand() -> EventDesc {
-        EventDesc(id: "revealHand", desc: "Reveal a specific hand card,") { event, state in
-            guard case let .revealHand(player, card) = event else {
+    static func drawDeckFlipping() -> EventDesc {
+        EventDesc(id: "drawDeckFlipping", desc: "Draw top card from deck then reveal") { event, state in
+            guard case let .drawDeckFlipping(player) = event else {
                 fatalError("Invalid event")
             }
-            let playerObject = state.mutablePlayer(player)
-            guard playerObject.hand.contains(where: { $0.identifier == card }) else {
-                fatalError("Card \(card) not found")
-            }
-            // nothing to change on state
+            state.resetDeckIfNeeded()
+            let cardObject = state.deck.removeFirst()
+            state.mutablePlayer(player).hand.append(cardObject)
         }
     }
     
     static func addHit() -> EventDesc {
         EventDesc(id: "addHit", desc: "Add blocking hit") { event, state in
-            guard case let .addHit(player, name, abilities, cancelable, offender) = event else {
+            guard case let .addHit(players, name, abilities, cancelable, offender) = event else {
                 fatalError("Invalid event")
             }
-            let hitObject = GHit(player: player,
-                                 name: name,
-                                 abilities: abilities,
-                                 cancelable: cancelable,
-                                 offender: offender)
-            state.hits.append(hitObject)
+            
+            players.forEach {
+                let hitObject = GHit(player: $0,
+                                     name: name,
+                                     abilities: abilities,
+                                     cancelable: cancelable,
+                                     offender: offender)
+                state.hits.append(hitObject)
+            }
         }
     }
     

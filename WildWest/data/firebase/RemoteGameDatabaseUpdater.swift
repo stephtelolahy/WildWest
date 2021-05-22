@@ -25,7 +25,7 @@ class RemoteGameDatabaseUpdater: RemoteGameDatabaseUpdaterProtocol {
     }
     
     func execute(_ event: GEvent) -> Completable {
-        guard let eventDesc = Self.all[event.hashValue] else {
+        guard let eventDesc = Self.all[event.name] else {
             fatalError("No database transaction matching \(event)")
         }
         
@@ -54,6 +54,8 @@ private extension RemoteGameDatabaseUpdater {
         looseHealth(),
         eliminate(),
         drawDeck(),
+        drawDeckChoosing(),
+        drawDeckFlipping(),
         drawHand(),
         drawInPlay(),
         drawStore(),
@@ -65,9 +67,7 @@ private extension RemoteGameDatabaseUpdater {
         play(),
         discardInPlay(),
         deckToStore(),
-        storeToDeck(),
-        revealDeck(),
-        revealHand(),
+        flipDeck(),
         addHit(),
         removeHit(),
         cancelHit(),
@@ -192,8 +192,45 @@ private extension RemoteGameDatabaseUpdater {
                 }).flatMapCompletable({ cards in
                     let deckKey = cards.keys.sorted().min()!
                     let removeDeckCompletable = gameRef.rxSetValue("state/deck/\(deckKey)") { nil }
-                    let cardId = cards[deckKey]
-                    let addHandCompletable = gameRef.rxSetValue("state/players/\(player)/hand/\(gameRef.childByAutoIdKey())") { cardId }
+                    let card = cards[deckKey]
+                    let addHandCompletable = gameRef.rxSetValue("state/players/\(player)/hand/\(gameRef.childByAutoIdKey())") { card }
+                    return Completable.concat(removeDeckCompletable, addHandCompletable)
+                }))
+        }
+    }
+    
+    static func drawDeckChoosing() -> EventDesc {
+        EventDesc(id: "drawDeckChoosing", desc: "Draw specific card from deck") { event, gameRef in
+            guard case let .drawDeckChoosing(player, card) = event else {
+                fatalError("Invalid event")
+            }
+            
+            return resetDeckIfNeeded(gameRef)
+                .andThen(gameRef.rxObserveSingleEvent("state/deck", decoding: { snapshot -> [String: String] in
+                    try (snapshot.value as? [String: String]).unwrap()
+                }).flatMapCompletable({ cards in
+                    let deckKey = cards.first(where: { $0.value == card })!.key
+                    let removeDeckCompletable = gameRef.rxSetValue("state/deck/\(deckKey)") { nil }
+                    let addHandCompletable = gameRef.rxSetValue("state/players/\(player)/hand/\(gameRef.childByAutoIdKey())") { card }
+                    return Completable.concat(removeDeckCompletable, addHandCompletable)
+                }))
+        }
+    }
+    
+    static func drawDeckFlipping() -> EventDesc {
+        EventDesc(id: "drawDeckFlipping", desc: "Draw top card from deck then reveal") { event, gameRef in
+            guard case let .drawDeckFlipping(player) = event else {
+                fatalError("Invalid event")
+            }
+            
+            return resetDeckIfNeeded(gameRef)
+                .andThen(gameRef.rxObserveSingleEvent("state/deck", decoding: { snapshot -> [String: String] in
+                    try (snapshot.value as? [String: String]).unwrap()
+                }).flatMapCompletable({ cards in
+                    let deckKey = cards.keys.sorted().min()!
+                    let removeDeckCompletable = gameRef.rxSetValue("state/deck/\(deckKey)") { nil }
+                    let card = cards[deckKey]
+                    let addHandCompletable = gameRef.rxSetValue("state/players/\(player)/hand/\(gameRef.childByAutoIdKey())") { card }
                     return Completable.concat(removeDeckCompletable, addHandCompletable)
                 }))
         }
@@ -376,26 +413,10 @@ private extension RemoteGameDatabaseUpdater {
         }
     }
     
-    static func storeToDeck() -> EventDesc {
-        EventDesc(id: "storeToDeck", desc: "Draw top card from deck to store") { event, gameRef in
-            guard case let .storeToDeck(card) = event else {
-                fatalError("Invalid event")
-            }
-            
-            return gameRef.rxObserveSingleEvent("state/store", decoding: { snapshot -> [String: String] in
-                try (snapshot.value as? [String: String]).unwrap()
-            }).flatMapCompletable { cards in
-                let cardKey = cards.first(where: { $0.value == card })!.key
-                return gameRef.rxSetValue("state/store/\(cardKey)", encoding: { nil })
-                    .andThen(gameRef.rxSetValue("state/deck/\(gameRef.childByAutoIdKey())", encoding: { card }))
-            }
-        }
-    }
-    
-    static func revealDeck() -> EventDesc {
-        EventDesc(id: "revealDeck",
+    static func flipDeck() -> EventDesc {
+        EventDesc(id: "flipDeck",
                   desc: "Flip over the top card of the deck, and discard immediately") { event, gameRef in
-            guard case .revealDeck = event else {
+            guard case .flipDeck = event else {
                 fatalError("Invalid event")
             }
             
@@ -411,29 +432,22 @@ private extension RemoteGameDatabaseUpdater {
         }
     }
     
-    static func revealHand() -> EventDesc {
-        EventDesc(id: "revealHand", desc: "Reveal a specific hand card,") { event, _ in
-            guard case .revealHand = event else {
-                fatalError("Invalid event")
-            }
-            
-            // do nothing
-            return Completable.empty()
-        }
-    }
-    
     static func addHit() -> EventDesc {
         EventDesc(id: "addHit", desc: "Add blocking hit") { event, gameRef in
-            guard case let .addHit(player, name, abilities, cancelable, offender) = event else {
+            guard case let .addHit(players, name, abilities, cancelable, offender) = event else {
                 fatalError("Invalid event")
             }
             
-            let dto = HitDto(player: player,
-                             name: name,
-                             abilities: abilities,
-                             cancelable: cancelable,
-                             offender: offender)
-            return gameRef.rxSetValue("state/hits/\(gameRef.childByAutoIdKey())", encoding: { try DictionaryEncoder().encode(dto) })
+            let completables: [Completable] = players.map {
+                let dto = HitDto(player: $0,
+                                 name: name,
+                                 abilities: abilities,
+                                 cancelable: cancelable,
+                                 offender: offender)
+                return gameRef.rxSetValue("state/hits/\(gameRef.childByAutoIdKey())", encoding: { try DictionaryEncoder().encode(dto) })
+            }
+            
+            return Completable.concat(completables)
         }
     }
     

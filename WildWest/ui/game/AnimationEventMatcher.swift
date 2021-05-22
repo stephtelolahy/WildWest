@@ -12,18 +12,18 @@ protocol AnimationEventMatcherProtocol: DurationMatcherProtocol {
     func animation(on event: GEvent) -> EventAnimation?
 }
 
-struct EventAnimation {
+struct EventAnimation: Equatable {
     let type: EventAnimationType
     let duration: TimeInterval
 }
 
-enum EventAnimationType {
+enum EventAnimationType: Equatable {
     case move(card: String?, source: CardArea, target: CardArea)
     case reveal(card: String?, source: CardArea, target: CardArea)
     case dummy
 }
 
-enum CardArea: Hashable {
+enum CardArea: Hashable, Equatable {
     case deck
     case discard
     case store
@@ -53,7 +53,7 @@ class AnimationEventMatcher: AnimationEventMatcherProtocol {
     }
     
     func animation(on event: GEvent) -> EventAnimation? {
-        guard let eventDesc = Self.all[event.hashValue] else {
+        guard let eventDesc = Self.all[event.name] else {
             return nil
         }
         
@@ -79,19 +79,19 @@ private extension AnimationEventMatcher {
         eliminate(),
         addHit(),
         drawDeck(),
+        drawDeckChoosing(),
+        drawDeckFlipping(),
         drawDiscard(),
         discardHand(),
         play(),
         equip(),
-        revealHand(),
         discardInPlay(),
         drawHand(),
         drawInPlay(),
         handicap(),
         passInPlay(),
-        revealDeck(),
+        flipDeck(),
         deckToStore(),
-        storeToDeck(),
         drawStore()
     ]
     .toDictionary(with: { $0.id })
@@ -142,6 +142,26 @@ private extension AnimationEventMatcher {
         }
     }
     
+    static func drawDeckChoosing() -> EventDesc {
+        EventDesc(id: "drawDeckChoosing") { event in
+            guard case let .drawDeckChoosing(player, _) = event else {
+                fatalError("Invalid event")
+            }
+            
+            return .move(card: nil, source: .deck, target: .hand(player))
+        }
+    }
+    
+    static func drawDeckFlipping() -> EventDesc {
+        EventDesc(id: "drawDeckFlipping") { event in
+            guard case let .drawDeckFlipping(player) = event else {
+                fatalError("Invalid event")
+            }
+            
+            return .reveal(card: StateCard.deck, source: .deck, target: .hand(player))
+        }
+    }
+    
     static func drawDiscard() -> EventDesc {
         EventDesc(id: "drawDiscard") { event in
             guard case let .drawDiscard(player) = event else {
@@ -175,15 +195,6 @@ private extension AnimationEventMatcher {
                 fatalError("Invalid event")
             }
             return .move(card: card, source: .hand(player), target: .inPlay(player))
-        }
-    }
-    
-    static func revealHand() -> EventDesc {
-        EventDesc(id: "revealHand") { event in
-            guard case let .revealHand(player, card) = event else {
-                fatalError("Invalid event")
-            }
-            return .reveal(card: card, source: .hand(player), target: .hand(player))
         }
     }
     
@@ -232,9 +243,9 @@ private extension AnimationEventMatcher {
         }
     }
     
-    static func revealDeck() -> EventDesc {
-        EventDesc(id: "revealDeck") { event in
-            guard case .revealDeck = event else {
+    static func flipDeck() -> EventDesc {
+        EventDesc(id: "flipDeck") { event in
+            guard case .flipDeck = event else {
                 fatalError("Invalid event")
             }
             return .reveal(card: StateCard.deck, source: .deck, target: .discard)
@@ -247,15 +258,6 @@ private extension AnimationEventMatcher {
                 fatalError("Invalid event")
             }
             return .reveal(card: StateCard.deck, source: .deck, target: .store)
-        }
-    }
-    
-    static func storeToDeck() -> EventDesc {
-        EventDesc(id: "storeToDeck") { event in
-            guard case let .storeToDeck(card) = event else {
-                fatalError("Invalid event")
-            }
-            return .move(card: card, source: .store, target: .deck)
         }
     }
     

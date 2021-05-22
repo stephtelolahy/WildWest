@@ -38,8 +38,7 @@ class startTurnDrawing1ExtraCardIfRedSuitTests: XCTestCase {
         // Assert
         XCTAssertEqual(moves, [GMove("startTurnDrawing1ExtraCardIfRedSuit", actor: "p1")])
         XCTAssertEqual(events, [.drawDeck(player: "p1"),
-                                .drawDeck(player: "p1"),
-                                .revealHand(player: "p1", card: "c2"),
+                                .drawDeckFlipping(player: "p1"),
                                 .drawDeck(player: "p1"),
                                 .setPhase(value: 2)])
     }
@@ -56,7 +55,7 @@ class startTurnDrawing1ExtraCardIfRedSuitTests: XCTestCase {
             .phase(is: 1)
             .players(are: mockPlayer1)
             .playOrder(is: "p1")
-            .deck(are: MockCardProtocol().withDefault().identified(by: "c1").suit(is: "diamonds"),
+            .deck(are: MockCardProtocol().withDefault().identified(by: "c1").suit(is: "♦️"),
                   MockCardProtocol().withDefault().identified(by: "c2").suit(is: "♠️"))
         let event: GEvent = .emptyQueue
         
@@ -67,8 +66,7 @@ class startTurnDrawing1ExtraCardIfRedSuitTests: XCTestCase {
         // Assert
         XCTAssertEqual(moves, [GMove("startTurnDrawing1ExtraCardIfRedSuit", actor: "p1")])
         XCTAssertEqual(events, [.drawDeck(player: "p1"),
-                                .drawDeck(player: "p1"),
-                                .revealHand(player: "p1", card: "c2"),
+                                .drawDeckFlipping(player: "p1"),
                                 .setPhase(value: 2)])
     }
 }

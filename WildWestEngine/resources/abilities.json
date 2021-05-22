@@ -388,7 +388,7 @@
     },
     "onPlay": [
       {
-        "action": "revealDeckIf",
+        "action": "flipDeckIf",
         "regex": "♥️",
         "then": [
           {
@@ -409,7 +409,7 @@
     },
     "onPlay": [
       {
-        "action": "revealDeckIf",
+        "action": "flipDeckIf",
         "regex": "♥️",
         "then": [],
         "else": [
@@ -440,7 +440,7 @@
     },
     "onPlay": [
       {
-        "action": "revealDeckIf",
+        "action": "flipDeckIf",
         "regex": "(♥️)|(♦️)|(♣️)|([10|J|Q|K|A]♠️)",
         "then": [
           {
@@ -452,16 +452,11 @@
         ],
         "else": [
           {
-            "action": "loop",
+            "action": "addHit",
             "times": 3,
-            "then": [
-              {
-                "action": "addHit",
-                "player": "actor",
-                "abilities": ["looseHealth"],
-                "cancelable": 0
-              }
-            ]
+            "player": "actor",
+            "abilities": ["looseHealth"],
+            "cancelable": 0
           },
           {
             "action": "discardInPlay",
@@ -563,16 +558,11 @@
     },
     "onPlay": [
       {
-        "action": "loop",
+        "action": "addHit",
+        "player": "actor",
         "times": "excessHand",
-        "then": [
-          {
-            "action": "addHit",
-            "player": "actor",
-            "abilities": ["discardSelfHand"],
-            "cancelable": 0
-          }
-        ]
+        "abilities": ["discardSelfHand"],
+        "cancelable": 0
       }
     ]
   },
@@ -731,12 +721,11 @@
       {
         "action": "drawDeck",
         "player": "actor",
-        "amount": 2
+        "amount": 1
       },
       {
-        "action": "revealHandIf",
+        "action": "drawDeckFlippingIf",
         "player": "actor",
-        "card": "deck[1]",
         "regex": "(♥️)|(♦️)",
         "then": [
           {
@@ -764,33 +753,24 @@
     },
     "onPlay": [
       {
-        "action": "deckToStore",
-        "hidden": true,
-        "amount": 3
-      },
-      {
         "action": "addHit",
         "player": "actor",
-        "abilities": ["startTurnDrawingStore"],
+        "abilities": ["startTurnDrawDeckChoosing2"],
         "cancelable": 0
       }
     ]
   },
   {
-    "name": "startTurnDrawingStore",
+    "name": "startTurnDrawDeckChoosing2",
     "type": "active",
     "canPlay": {
-      "requireStoreCards": 2
+      "requireDeckCards": 2
     },
     "onPlay": [
       {
-        "action": "drawStore",
+        "action": "drawDeckChoosing",
         "player": "actor",
-        "card": "requiredStore"
-      },
-      {
-        "action": "storeToDeck",
-        "card": "unrequiredStore"
+        "card": "requiredDeck"
       },
       {
         "action": "removeHit",

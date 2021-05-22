@@ -54,13 +54,14 @@ class MediaEventMatcherTests: XCTestCase {
     
     func test_DrawCard() {
         XCTAssertEqual(sut.emoji(on: .drawDeck(player: "p1")), "💰")
+        XCTAssertEqual(sut.emoji(on: .drawDeckChoosing(player: "p1", card: "c1")), "💰")
         XCTAssertEqual(sut.emoji(on: .drawDiscard(player: "p1")), "💰")
         XCTAssertEqual(sut.emoji(on: .drawStore(player: "p1", card: "c1")), "💰")
     }
     
     func test_RevealCard() {
-        XCTAssertEqual(sut.emoji(on: .revealDeck), "🌟")
-        XCTAssertEqual(sut.emoji(on: .revealHand(player: "p1", card: "c1")), "🌟")
+        XCTAssertEqual(sut.emoji(on: .flipDeck), "🌟")
+        XCTAssertEqual(sut.emoji(on: .drawDeckFlipping(player: "p1")), "🌟")
     }
     
     func test_DiscardCard() {
@@ -87,7 +88,6 @@ class MediaEventMatcherTests: XCTestCase {
     
     func test_Store() {
         XCTAssertEqual(sut.emoji(on: .deckToStore), "🎁")
-        XCTAssertEqual(sut.emoji(on: .storeToDeck(card: "c1")), "🎁")
     }
     
     func test_GainHealth() {
@@ -115,8 +115,8 @@ class MediaEventMatcherTests: XCTestCase {
     }
     
     func test_DynamiteExploded() {
-        XCTAssertEqual(sut.emoji(on: .addHit(player: "p1", name: "dynamite", abilities: [], cancelable: 0, offender: "p1")), "😰")
-        XCTAssertNil(sut.emoji(on: .addHit(player: "p1", name: "any", abilities: [], cancelable: 0, offender: "p1")))
+        XCTAssertEqual(sut.emoji(on: .addHit(players: ["p1"], name: "dynamite", abilities: [], cancelable: 0, offender: "p1")), "😰")
+        XCTAssertNil(sut.emoji(on: .addHit(players: ["p1"], name: "any", abilities: [], cancelable: 0, offender: "p1")))
     }
     
     // MARK: - Engine events

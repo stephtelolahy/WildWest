@@ -77,6 +77,7 @@ private extension PlayReqMatcher {
         requireInPlayCard(),
         requireHandCards(),
         requireStoreCards(),
+        requireDeckCards(),
         
         onHitCancelable(),
         onPhase(),
@@ -269,12 +270,23 @@ private extension PlayReqMatcher {
                 })
     }
     
+    static func requireDeckCards() -> PlayReq {
+        PlayReq(id: "requireDeckCards",
+                desc: "Must choose choose X cards from deck among (X + 1).",
+                matchingFunc: { param, ctx, playArgs -> Bool in
+                    let amount = Parser.number(param)
+                    let cards = ctx.state.deck.prefix(amount + 1)
+                        .map { $0.identifier }
+                    return playArgs.appending(values: cards, by: amount, forArg: .requiredDeck)
+                })
+    }
+    
     static func onHitCancelable() -> PlayReq {
         PlayReq(id: "onHitCancelable",
                 desc: "When you are target of hit that is cancelable with 'missed' card",
                 matchingFunc: { _, ctx, _ -> Bool in
-                    guard case let .addHit(player, _, _, cancelable, _) = ctx.event,
-                          player == ctx.actor.identifier,
+                    guard case let .addHit(players, _, _, cancelable, _) = ctx.event,
+                          players.contains(ctx.actor.identifier),
                           cancelable > 0 else {
                         return false
                     }

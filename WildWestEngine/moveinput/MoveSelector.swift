@@ -97,7 +97,7 @@ private extension Array where Element == GMove {
 }
 
 private extension GMove {
-    func argsString(_ playArgs: [PlayArg] = [.target, .requiredInPlay, .requiredHand, .requiredStore]) -> String {
+    func argsString(_ playArgs: [PlayArg] = [.target, .requiredInPlay, .requiredHand, .requiredStore, .requiredDeck]) -> String {
         playArgs.compactMap { args[$0] }.flatMap { $0 }.joined(separator: ", ")
     }
 }

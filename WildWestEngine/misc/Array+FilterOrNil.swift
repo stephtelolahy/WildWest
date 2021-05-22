@@ -35,33 +35,33 @@ public extension Array where Element: Equatable {
     
     func starting(with element: Element?) -> [Element] {
         guard let element = element,
-            let elementIndex = firstIndex(of: element) else {
-                return self
+              let elementIndex = firstIndex(of: element) else {
+            return self
         }
         
         return (0..<count).map { self[($0 + elementIndex) % count] }
     }
-
+    
     func combine(by size: Int) -> [[Element]] {
         if size > self.count {
             return []
         }
-
+        
         if size == self.count {
             return [self]
         }
-
+        
         guard size > 1 else {
             return self.map { [$0] }
         }
-
+        
         var result: [[Element]] = []
         for array in self.combine(by: size - 1) {
             for element in self.filter({ !array.contains($0) }) {
                 if let elementIndex = self.firstIndex(of: element),
-                    let lastArrayElement = array.last,
-                    let lastArrayIndex = self.firstIndex(of: lastArrayElement),
-                    elementIndex > lastArrayIndex {
+                   let lastArrayElement = array.last,
+                   let lastArrayIndex = self.firstIndex(of: lastArrayElement),
+                   elementIndex > lastArrayIndex {
                     result.append(array + [element])
                 }
             }

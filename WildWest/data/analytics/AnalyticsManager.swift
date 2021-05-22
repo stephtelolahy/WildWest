@@ -7,6 +7,7 @@
 //
 
 import Firebase
+import FirebaseAnalytics
 import WildWestEngine
 
 class AnalyticsManager {

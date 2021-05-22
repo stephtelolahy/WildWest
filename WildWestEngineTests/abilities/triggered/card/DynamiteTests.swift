@@ -40,10 +40,8 @@ class DynamiteTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(moves, [GMove("dynamite", actor: "p1", card: .inPlay("c1"))])
-        XCTAssertEqual(events, [.revealDeck,
-                                .addHit(player: "p1", name: "dynamite", abilities: ["looseHealth"], cancelable: 0, offender: "p1"),
-                                .addHit(player: "p1", name: "dynamite", abilities: ["looseHealth"], cancelable: 0, offender: "p1"),
-                                .addHit(player: "p1", name: "dynamite", abilities: ["looseHealth"], cancelable: 0, offender: "p1"),
+        XCTAssertEqual(events, [.flipDeck,
+                                .addHit(players: ["p1", "p1", "p1"], name: "dynamite", abilities: ["looseHealth"], cancelable: 0, offender: "p1"),
                                 .discardInPlay(player: "p1", card: "c1")])
     }
     
@@ -76,7 +74,7 @@ class DynamiteTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(moves, [GMove("dynamite", actor: "p1", card: .inPlay("c1"))])
-        XCTAssertEqual(events, [.revealDeck,
+        XCTAssertEqual(events, [.flipDeck,
                                 .passInPlay(player: "p1", card: "c1", other: "p2")])
     }
     
@@ -110,8 +108,8 @@ class DynamiteTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(moves, [GMove("dynamite", actor: "p1", card: .inPlay("c1"))])
-        XCTAssertEqual(events, [.revealDeck,
-                                .revealDeck,
+        XCTAssertEqual(events, [.flipDeck,
+                                .flipDeck,
                                 .passInPlay(player: "p1", card: "c1", other: "p2")])
     }
 }

@@ -22,6 +22,8 @@ public enum GEvent: Equatable {
     case eliminate(player: String, offender: String)
     
     case drawDeck(player: String)
+    case drawDeckFlipping(player: String)
+    case drawDeckChoosing(player: String, card: String)
     case drawHand(player: String, other: String, card: String)
     case drawInPlay(player: String, other: String, card: String)
     case drawStore(player: String, card: String)
@@ -32,12 +34,9 @@ public enum GEvent: Equatable {
     case passInPlay(player: String, card: String, other: String)
     
     case deckToStore
-    case storeToDeck(card: String)
+    case flipDeck
     
-    case revealDeck
-    case revealHand(player: String, card: String)
-    
-    case addHit(player: String, name: String, abilities: [String], cancelable: Int, offender: String)
+    case addHit(players: [String], name: String, abilities: [String], cancelable: Int, offender: String)
     case removeHit(player: String)
     case cancelHit(player: String)
     

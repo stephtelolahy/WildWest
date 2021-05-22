@@ -20,36 +20,36 @@ public struct EffectContext {
 }
 
 public class EffectMatcher: EffectMatcherProtocol {
-
+    
     public init() {
     }
-
+    
     public func map(_ effects: [[String: Any]], ctx: EffectContext) -> [GEvent] {
         var events: [GEvent] = []
-
+        
         for effect in effects {
-
+            
             guard let action = effect["action"] as? String else {
                 fatalError("Missing action")
             }
-
+            
             guard let effectFunc = Self.all[action]?.matchingFunc else {
                 fatalError("Effect \(action) not found")
             }
-
+            
             let effectEvents = effectFunc(effect, ctx)
-
+            
             if effectEvents.isEmpty,
                effect["optional"] == nil {
                 return []
             }
-
+            
             events.append(contentsOf: effectEvents)
         }
-
+        
         return events
     }
-
+    
     public var effectIds: [String] {
         Array(Self.all.keys)
     }
@@ -68,38 +68,37 @@ private extension EffectMatcher {
     static let all: [String: Effect] = [
         setTurn(),
         setPhase(),
-
+        
         gainHealth(),
         looseHealth(),
-
+        
         drawDeck(),
+        drawDeckChoosing(),
         drawHand(),
         drawInPlay(),
         drawStore(),
         drawDiscard(),
-
+        
         equip(),
         handicap(),
         passInPlay(),
-
+        
         discardHand(),
         discardInPlay(),
-
+        
         deckToStore(),
-        storeToDeck(),
-
+        
         addHit(),
         removeHit(),
         cancelHit(),
         reverseHit(),
-
+        
         // <LOGIC>
-        revealDeckIf(),
-        revealHandIf(),
-        loop()
+        flipDeckIf(),
+        drawDeckFlippingIf(),
         // </LOGIC>
     ].toDictionary { $0.id }
-
+    
     static func equip() -> Effect {
         Effect(id: "equip",
                desc: "Put a hand card in self inPlay.",
@@ -108,7 +107,7 @@ private extension EffectMatcher {
                 guard let card = params.cards(forKey: "card", player: player, ctx: ctx).first else {
                     return []
                 }
-
+                
                 var events: [GEvent] = [.equip(player: player, card: card)]
                 
                 // <RULE> cannot have two copies of the same card in play
@@ -118,7 +117,7 @@ private extension EffectMatcher {
                     return []
                 }
                 // </RULE>
-
+                
                 // <RULE> discard previous weapon if playing new one
                 if cardObject.isWeapon,
                    let previousWeapon = playerObject.inPlay.first(where: { $0.isWeapon }) {
@@ -166,9 +165,9 @@ private extension EffectMatcher {
                desc: "Gain life point respecting health limit",
                matchingFunc: { params, ctx in
                 let players = params.players(forKey: "player", ctx: ctx)
-
+                
                 return players.compactMap { player -> [GEvent]? in
-
+                    
                     // <RULE> cannot have more health than maxHealth
                     let playerObject = ctx.state.players[player]!
                     guard playerObject.health < playerObject.maxHealth else {
@@ -193,7 +192,18 @@ private extension EffectMatcher {
                 }
                })
     }
-
+    
+    
+    static func drawDeckChoosing() -> Effect {
+        Effect(id: "drawDeckChoosing",
+               desc: "Draw cards from deck",
+               matchingFunc: { params, ctx in
+                let player = params.players(forKey: "player", ctx: ctx).first!
+                let cards = params.cards(forKey: "card", player: "", ctx: ctx)
+                return cards.map { .drawDeckChoosing(player: player, card: $0) }
+               })
+    }
+    
     static func drawDiscard() -> Effect {
         Effect(id: "drawDiscard",
                desc: "Draw top card from discard pile.",
@@ -206,20 +216,19 @@ private extension EffectMatcher {
                 return [.drawDiscard(player: player)]
                })
     }
-
-    static func revealHandIf() -> Effect {
-        Effect(id: "revealHandIf",
-               desc: "Show a hand card, then apply effects according to suits and values.",
+    
+    static func drawDeckFlippingIf() -> Effect {
+        Effect(id: "drawDeckFlippingIf",
+               desc: "Draw top card from deck then reveal",
                matchingFunc: { params, ctx in
                 let player = params.players(forKey: "player", ctx: ctx).first!
-                let card = params.cards(forKey: "card", player: player, ctx: ctx).first!
                 let regex = params.string(forKey: "regex")
-                var events: [GEvent] = [.revealHand(player: player, card: card)]
-
-                // <HACK: consider revealed card comes from deck>
-                let cardObject = ctx.state.deck.first(where: { $0.identifier == card })!
+                var events: [GEvent] = [.drawDeckFlipping(player: player)]
+                
+                // <HACK: consider revealed card comes from deck[1]>
+                let cardObject = ctx.state.deck[1]
                 // </HACK>
-
+                
                 let success = cardObject.matches(regex: regex)
                 if success {
                     events.append(contentsOf: params.effects(forKey: "then", ctx: ctx))
@@ -227,7 +236,7 @@ private extension EffectMatcher {
                 return events
                })
     }
-
+    
     static func discardHand() -> Effect {
         Effect(id: "discardHand",
                desc: "Discard hand card to discard pile.",
@@ -277,7 +286,14 @@ private extension EffectMatcher {
                 let players = params.players(forKey: "player", ctx: ctx)
                 let abilities = params.strings(forKey: "abilities")
                 let cancelable = params.number(forKey: "cancelable", ctx: ctx)
-                return players.map { .addHit(player: $0, name: ctx.ability, abilities: abilities, cancelable: cancelable, offender: ctx.actor.identifier) }
+                
+                var targets: [String] = []
+                let times = params.number(forKey: "times", ctx: ctx)
+                for _ in (0..<times) {
+                    targets.append(contentsOf: players)
+                }
+                
+                return [.addHit(players: targets, name: ctx.ability, abilities: abilities, cancelable: cancelable, offender: ctx.actor.identifier)]
                })
     }
     
@@ -332,7 +348,7 @@ private extension EffectMatcher {
                     fatalError("Invalid hit")
                 }
                 return [.removeHit(player: player),
-                        .addHit(player: hit.offender, name: hit.name, abilities: hit.abilities, cancelable: hit.cancelable, offender: player)]
+                        .addHit(players: [hit.offender], name: hit.name, abilities: hit.abilities, cancelable: hit.cancelable, offender: player)]
                })
     }
     
@@ -355,13 +371,13 @@ private extension EffectMatcher {
                })
     }
     
-    static func revealDeckIf() -> Effect {
-        Effect(id: "revealDeckIf",
+    static func flipDeckIf() -> Effect {
+        Effect(id: "flipDeckIf",
                desc: "Flip over the top card of the deck, then apply effects according to suits and values",
                matchingFunc: { params, ctx in
                 let regex = params.string(forKey: "regex")
                 let amount = ctx.actor.flippedCards
-                var events: [GEvent] = Array(0..<amount).map { _ in .revealDeck }
+                var events: [GEvent] = Array(0..<amount).map { _ in .flipDeck }
                 let cards = ctx.state.deck.prefix(amount)
                 let success = cards.contains(where: { $0.matches(regex: regex) })
                 if success {
@@ -372,7 +388,7 @@ private extension EffectMatcher {
                 return events
                })
     }
-
+    
     static func passInPlay() -> Effect {
         Effect(id: "passInPlay",
                desc: "Pass InPlay card to other player",
@@ -383,36 +399,13 @@ private extension EffectMatcher {
                 return [.passInPlay(player: player, card: card, other: other)]
                })
     }
-
+    
     static func setTurn() -> Effect {
         Effect(id: "setTurn",
                desc: "Set current turn player to: ",
                matchingFunc: { params, ctx in
                 let player = params.players(forKey: "player", ctx: ctx).first!
                 return [.setTurn(player: player)]
-               })
-    }
-
-    static func loop() -> Effect {
-        Effect(id: "loop",
-               desc: "Repeat effects",
-               matchingFunc: { params, ctx in
-                let times = params.number(forKey: "times", ctx: ctx)
-                let effects = params.effects(forKey: "then", ctx: ctx)
-                var events: [GEvent] = []
-                for _ in (0..<times) {
-                    events.append(contentsOf: effects)
-                }
-                return events
-               })
-    }
-
-    static func storeToDeck() -> Effect {
-        Effect(id: "storeToDeck",
-               desc: "Discard cards from store to top deck",
-               matchingFunc: { params, ctx in
-                let cards = params.cards(forKey: "card", player: "", ctx: ctx)
-                return cards.map { .storeToDeck(card: $0) }
                })
     }
 }
@@ -440,7 +433,7 @@ private extension Dictionary where Key == String {
             let all = ctx.state.playOrder
                 .starting(with: ctx.actor.identifier)
             return Array(all.dropFirst())
-
+            
         case "next":
             let playing = ctx.state.playOrder
             if playing.contains(ctx.actor.identifier) {
@@ -455,7 +448,7 @@ private extension Dictionary where Key == String {
                 fatalError("No next player found after \(ctx.actor.identifier)")
             }
             return [next]
-
+            
         case "hitOffender":
             if let hit = ctx.state.hits.first(where: { $0.player == ctx.actor.identifier }) {
                 return [hit.offender]
@@ -467,7 +460,7 @@ private extension Dictionary where Key == String {
             fatalError("Unsupported players \(player)")
         }
     }
-
+    
     func cards(forKey key: String, player: String, ctx: EffectContext) -> [String] {
         guard let card = self[key] as? String else {
             fatalError("Missing parameter \(key)")
@@ -489,28 +482,28 @@ private extension Dictionary where Key == String {
             
         case "requiredStore":
             return ctx.args[.requiredStore]!
-
+            
+        case "requiredDeck":
+            return ctx.args[.requiredDeck]!
+            
         case "played":
             switch ctx.card {
             case let .hand(handCard):
                 return [handCard]
-
+                
             case let .inPlay(inPlayCard):
                 return [inPlayCard]
-
+                
             default:
                 fatalError("Missing played card")
             }
-
+            
         case "allHand":
             return ctx.state.players[player]!.hand.map { $0.identifier }
-
+            
         case "allInPlay":
             return ctx.state.players[player]!.inPlay.map { $0.identifier }
-
-        case "deck[1]":
-            return [ctx.state.deck[1].identifier]
-
+            
         case "unrequiredStore":
             return ctx.state.store
                 .map { $0.identifier }
@@ -526,20 +519,20 @@ private extension Dictionary where Key == String {
             switch stringValue {
             case "bangsCancelable":
                 return ctx.actor.bangsCancelable
-
+                
             case "inPlayPlayers":
                 return ctx.state.playOrder.count
-
+                
             case "excessHand":
                 return Swift.max(ctx.actor.hand.count - ctx.actor.handLimit, 0)
-
+                
             default:
-                fatalError("Invalid parameter \(key)")
+                return 1//fatalError("Invalid parameter \(key)")
             }
         }
         
         guard let value = self[key] as? Int else {
-            fatalError("Missing parameter \(key)")
+            return 1//fatalError("Missing parameter \(key)")
         }
         
         return value
@@ -565,7 +558,7 @@ private extension Dictionary where Key == String {
         guard let effects = self[key] as? [[String: Any]] else {
             fatalError("Missing parameter \(key)")
         }
-
+        
         return EffectMatcher().map(effects, ctx: ctx)
     }
 }

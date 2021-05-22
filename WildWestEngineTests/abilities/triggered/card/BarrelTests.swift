@@ -36,7 +36,7 @@ class BarrelTests: XCTestCase {
             .players(are: mockPlayer1)
             .playOrder(is: "p1")
             .deck(are: MockCardProtocol().value(is: "7").suit(is: "♥️"))
-        let event = GEvent.addHit(player: "p1", name: "n1", abilities: [], cancelable: 1, offender: "")
+        let event = GEvent.addHit(players: ["p1"], name: "n1", abilities: [], cancelable: 1, offender: "")
 
         // When
         let moves = sut.triggered(on: event, in: mockState)
@@ -44,7 +44,7 @@ class BarrelTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(moves, [GMove("barrel", actor: "p1", card: .inPlay("c1"))])
-        XCTAssertEqual(events, [.revealDeck,
+        XCTAssertEqual(events, [.flipDeck,
                                 .removeHit(player: "p1")])
     }
 
@@ -69,7 +69,7 @@ class BarrelTests: XCTestCase {
             .players(are: mockPlayer1)
             .playOrder(is: "p1")
             .deck(are: MockCardProtocol().value(is: "A").suit(is: "♠️"))
-        let event = GEvent.addHit(player: "p1", name: "n1", abilities: [], cancelable: 1, offender: "")
+        let event = GEvent.addHit(players: ["p1"], name: "n1", abilities: [], cancelable: 1, offender: "")
 
         // When
         let moves = sut.triggered(on: event, in: mockState)
@@ -77,7 +77,7 @@ class BarrelTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(moves, [GMove("barrel", actor: "p1", card: .inPlay("c1"))])
-        XCTAssertEqual(events, [.revealDeck])
+        XCTAssertEqual(events, [.flipDeck])
     }
 
     func test_ResolveBarrelTwice_IfHavingAbility_AndInPlayCard() throws {
@@ -101,7 +101,7 @@ class BarrelTests: XCTestCase {
             .hits(are: mockHit1)
             .players(are: mockPlayer1)
             .playOrder(is: "p1")
-        let event = GEvent.addHit(player: "p1", name: "n1", abilities: [], cancelable: 1, offender: "")
+        let event = GEvent.addHit(players: ["p1"], name: "n1", abilities: [], cancelable: 1, offender: "")
 
         // When
         let moves = sut.triggered(on: event, in: mockState)
@@ -129,7 +129,7 @@ class BarrelTests: XCTestCase {
             .hits(are: mockHit1)
             .deck(are: MockCardProtocol().value(is: "4").suit(is: "♣️"),
                   MockCardProtocol().value(is: "9").suit(is: "♠️"))
-        let event = GEvent.addHit(player: "p1", name: "n1", abilities: [], cancelable: 1, offender: "")
+        let event = GEvent.addHit(players: ["p1"], name: "n1", abilities: [], cancelable: 1, offender: "")
 
         // When
         let moves = sut.triggered(on: event, in: mockState)
@@ -137,8 +137,8 @@ class BarrelTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(moves, [GMove("barrel", actor: "p1")])
-        XCTAssertEqual(events, [.revealDeck,
-                                .revealDeck])
+        XCTAssertEqual(events, [.flipDeck,
+                                .flipDeck])
     }
 
     func test_CancelShoot_IfFirstFlipCardIsHeart() throws {
@@ -159,7 +159,7 @@ class BarrelTests: XCTestCase {
             .hits(are: mockHit1)
             .deck(are: MockCardProtocol().value(is: "10").suit(is: "♥️"),
                   MockCardProtocol().value(is: "Q").suit(is: "♠️"))
-        let event = GEvent.addHit(player: "p1", name: "n1", abilities: [], cancelable: 1, offender: "")
+        let event = GEvent.addHit(players: ["p1"], name: "n1", abilities: [], cancelable: 1, offender: "")
 
         // When
         let moves = sut.triggered(on: event, in: mockState)
@@ -167,8 +167,8 @@ class BarrelTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(moves, [GMove("barrel", actor: "p1")])
-        XCTAssertEqual(events, [.revealDeck,
-                                .revealDeck,
+        XCTAssertEqual(events, [.flipDeck,
+                                .flipDeck,
                                 .removeHit(player: "p1")])
     }
 
@@ -190,7 +190,7 @@ class BarrelTests: XCTestCase {
             .hits(are: mockHit1)
             .deck(are: MockCardProtocol().value(is: "6").suit(is: "♣️"),
                   MockCardProtocol().value(is: "K").suit(is: "♥️"))
-        let event = GEvent.addHit(player: "p1", name: "n1", abilities: [], cancelable: 1, offender: "")
+        let event = GEvent.addHit(players: ["p1"], name: "n1", abilities: [], cancelable: 1, offender: "")
 
         // When
         let moves = sut.triggered(on: event, in: mockState)
@@ -198,8 +198,8 @@ class BarrelTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(moves, [GMove("barrel", actor: "p1")])
-        XCTAssertEqual(events, [.revealDeck,
-                                .revealDeck,
+        XCTAssertEqual(events, [.flipDeck,
+                                .flipDeck,
                                 .removeHit(player: "p1")])
     }
 }

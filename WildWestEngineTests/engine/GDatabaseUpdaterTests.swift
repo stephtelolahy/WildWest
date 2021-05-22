@@ -195,6 +195,54 @@ class GDatabaseUpdaterTests: XCTestCase {
         XCTAssertEqual(state.deck.map { $0.identifier }, ["c3"])
     }
     
+    func test_AddCardToHand_IfDrawingDeckChoosing() {
+        // Given
+        let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
+        let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
+        let mockCard3 = MockCardProtocol().withDefault().identified(by: "c3")
+        let mockPlayer1 = MockPlayerProtocol()
+            .withDefault()
+            .identified(by: "p1")
+            .holding(mockCard1)
+        let mockState = MockStateProtocol()
+            .withDefault()
+            .players(are: mockPlayer1)
+            .deck(are: mockCard2, mockCard3)
+        let state = GState(mockState)
+        let event = GEvent.drawDeckChoosing(player: "p1", card: "c3")
+        
+        // When
+        sut.execute(event, in: state)
+        
+        // Assert
+        XCTAssertEqual(state.players["p1"]!.hand.map { $0.identifier }, ["c1", "c3"])
+        XCTAssertEqual(state.deck.map { $0.identifier }, ["c2"])
+    }
+    
+    func test_AddCardToHand_IfDrawingDeckFlipping() {
+        // Given
+        let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
+        let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
+        let mockCard3 = MockCardProtocol().withDefault().identified(by: "c3")
+        let mockPlayer1 = MockPlayerProtocol()
+            .withDefault()
+            .identified(by: "p1")
+            .holding(mockCard1)
+        let mockState = MockStateProtocol()
+            .withDefault()
+            .players(are: mockPlayer1)
+            .deck(are: mockCard2, mockCard3)
+        let state = GState(mockState)
+        let event = GEvent.drawDeckFlipping(player: "p1")
+        
+        // When
+        sut.execute(event, in: state)
+        
+        // Assert
+        XCTAssertEqual(state.players["p1"]!.hand.map { $0.identifier }, ["c1", "c2"])
+        XCTAssertEqual(state.deck.map { $0.identifier }, ["c3"])
+    }
+    
     func test_ResetDeck_IfDrawingLastDeckCard() {
         // Given
         let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
@@ -514,28 +562,9 @@ class GDatabaseUpdaterTests: XCTestCase {
         XCTAssertEqual(state.deck.map { $0.identifier }, ["c2"])
     }
     
-    func test_storeToDeck() {
-        // Given
-        let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
-        let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
-        let mockState = MockStateProtocol()
-            .withDefault()
-            .deck(are: mockCard1)
-            .store(are: mockCard2)
-        let state = GState(mockState)
-        let event = GEvent.storeToDeck(card: "c2")
-        
-        // When
-        sut.execute(event, in: state)
-        
-        // Assert
-        XCTAssertEqual(state.store.map { $0.identifier }, [])
-        XCTAssertEqual(state.deck.map { $0.identifier }, ["c2", "c1"])
-    }
-    
     // MARK: - Reveal
     
-    func test_revealDeck() {
+    func test_flipDeck() {
         // Given
         let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
         let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
@@ -545,7 +574,7 @@ class GDatabaseUpdaterTests: XCTestCase {
             .deck(are: mockCard1, mockCard2)
             .discard(are: mockCard3)
         let state = GState(mockState)
-        let event = GEvent.revealDeck
+        let event = GEvent.flipDeck
         
         // When
         sut.execute(event, in: state)
@@ -553,26 +582,6 @@ class GDatabaseUpdaterTests: XCTestCase {
         // Assert
         XCTAssertEqual(state.discard.map { $0.identifier }, ["c1", "c3"])
         XCTAssertEqual(state.deck.map { $0.identifier }, ["c2"])
-    }
-    
-    func test_DoNothing_IfRevealHand() {
-        // Given
-        let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
-        let mockPlayer1 = MockPlayerProtocol()
-            .withDefault()
-            .identified(by: "p1")
-            .holding(mockCard1)
-        let mockState = MockStateProtocol()
-            .withDefault()
-            .players(are: mockPlayer1)
-        let state = GState(mockState)
-        let event = GEvent.revealHand(player: "p1", card: "c1")
-        
-        // When
-        sut.execute(event, in: state)
-        
-        // Assert
-        XCTAssertEqual(state.players["p1"]!.hand.map { $0.identifier }, ["c1"])
     }
     
     // MARK: - Hit
@@ -586,7 +595,7 @@ class GDatabaseUpdaterTests: XCTestCase {
             .withDefault()
             .hits(are: mockHit1)
         let state = GState(mockState)
-        let event = GEvent.addHit(player: "p2", name: "n1", abilities: ["looseHealth"], cancelable: 1, offender: "p1")
+        let event = GEvent.addHit(players: ["p2"], name: "n1", abilities: ["looseHealth"], cancelable: 1, offender: "p1")
         
         // When
         sut.execute(event, in: state)
@@ -598,6 +607,25 @@ class GDatabaseUpdaterTests: XCTestCase {
         XCTAssertEqual(state.hits[1].abilities, ["looseHealth"])
         XCTAssertEqual(state.hits[1].cancelable, 1)
         XCTAssertEqual(state.hits[1].offender, "p1")
+    }
+    
+    func test_addHitToMultiplePlayers() throws {
+        // Given
+        let mockState = MockStateProtocol()
+            .withDefault()
+        let state = GState(mockState)
+        let event = GEvent.addHit(players: ["p2", "p3"], name: "n1", abilities: ["indians"], cancelable: 1, offender: "p1")
+        
+        // When
+        sut.execute(event, in: state)
+        
+        // Assert
+        XCTAssertEqual(state.hits.count, 2)
+        XCTAssertEqual(state.hits[0].player, "p2")
+        XCTAssertEqual(state.hits[1].player, "p3")
+        XCTAssertEqual(state.hits[0].abilities, ["indians"])
+        XCTAssertEqual(state.hits[0].cancelable, 1)
+        XCTAssertEqual(state.hits[0].offender, "p1")
     }
     
     func test_removeHit() {
