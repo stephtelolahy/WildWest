@@ -56,6 +56,7 @@ extension Resolver: RouterDependenciesProtocol {
         viewController.soundPlayer = Resolver.optional()
         viewController.moveSelector = GameMoveSelectorWidget(selector: MoveSelector(), viewController: viewController)
         viewController.moveSegmenter = MoveSegmenter()
+        viewController.preferences = Resolver.optional()
         return viewController
     }
     
