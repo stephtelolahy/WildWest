@@ -471,7 +471,7 @@
     "name": "startTurnOnPhase1",
     "type": "triggered",
     "canPlay": {
-      "onEventsEmpty": 0,
+      "onQueueEmpty": 0,
       "isHitsEmpty": 0,
       "isYourTurn": 0,
       "isPhase": 1
@@ -513,7 +513,7 @@
     "name": "nextTurnOnPhase3",
     "type": "triggered",
     "canPlay": {
-      "onEventsEmpty": 0,
+      "onQueueEmpty": 0,
       "isHitsEmpty": 0,
       "isYourTurn": 0,
       "isPhase": 3
@@ -712,7 +712,7 @@
     "name": "startTurnDrawing1ExtraCardIfRedSuit",
     "type": "triggered",
     "canPlay": {
-      "onEventsEmpty": 0,
+      "onQueueEmpty": 0,
       "isHitsEmpty": 0,
       "isYourTurn": 0,
       "isPhase": 1
@@ -746,7 +746,7 @@
     "name": "startTurnDrawing3CardsAndKeep2",
     "type": "triggered",
     "canPlay": {
-      "onEventsEmpty": 0,
+      "onQueueEmpty": 0,
       "isHitsEmpty": 0,
       "isYourTurn": 0,
       "isPhase": 1
@@ -786,7 +786,7 @@
     "name": "startTurnDrawingFirstCardFromPlayer",
     "type": "triggered",
     "canPlay": {
-      "onEventsEmpty": 0,
+      "onQueueEmpty": 0,
       "isHitsEmpty": 0,
       "isYourTurn": 0,
       "isPhase": 1
@@ -851,7 +851,7 @@
     "name": "startTurnDrawingFirstCardFromDiscard",
     "type": "triggered",
     "canPlay": {
-      "onEventsEmpty": 0,
+      "onQueueEmpty": 0,
       "isHitsEmpty": 0,
       "isYourTurn": 0,
       "isPhase": 1
