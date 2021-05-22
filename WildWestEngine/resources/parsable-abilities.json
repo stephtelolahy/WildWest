@@ -30,6 +30,20 @@
     ]
   },
   {
+    "name": "endTurn",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2
+    },
+    "onPlay": [
+      {
+        "action": "setPhase",
+        "value": 3
+      }
+    ]
+  },
+  {
     "name": "beer",
     "type": "active",
     "canPlay": {

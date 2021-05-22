@@ -224,6 +224,7 @@
 		33AAE02726597AA700A067E3 /* CardArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE02626597AA700A067E3 /* CardArgument.swift */; };
 		33AAE02926597CF100A067E3 /* Handicap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE02826597CF100A067E3 /* Handicap.swift */; };
 		33AAE02B2659811900A067E3 /* RequireTargetAny.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE02A2659811900A067E3 /* RequireTargetAny.swift */; };
+		33AAE02D2659827D00A067E3 /* SetPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE02C2659827D00A067E3 /* SetPhase.swift */; };
 		33AFA25323DC201A00425BEB /* ClassNameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */; };
 		33B0E85B263D5901004B5806 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0E85A263D5901004B5806 /* Router.swift */; };
 		33B0E85C263D5901004B5806 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0E85A263D5901004B5806 /* Router.swift */; };
@@ -513,6 +514,7 @@
 		33AAE02626597AA700A067E3 /* CardArgument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardArgument.swift; sourceTree = "<group>"; };
 		33AAE02826597CF100A067E3 /* Handicap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Handicap.swift; sourceTree = "<group>"; };
 		33AAE02A2659811900A067E3 /* RequireTargetAny.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireTargetAny.swift; sourceTree = "<group>"; };
+		33AAE02C2659827D00A067E3 /* SetPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPhase.swift; sourceTree = "<group>"; };
 		33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameProtocol.swift; sourceTree = "<group>"; };
 		33B0E85A263D5901004B5806 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		33B0E863263D5A05004B5806 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
@@ -682,6 +684,7 @@
 				33AAE0222659771D00A067E3 /* GainHealth.swift */,
 				33AAE024265979BF00A067E3 /* Equip.swift */,
 				33AAE02826597CF100A067E3 /* Handicap.swift */,
+				33AAE02C2659827D00A067E3 /* SetPhase.swift */,
 			);
 			path = effect;
 			sourceTree = "<group>";
@@ -1808,6 +1811,7 @@
 				3358334B25BC2585001BE4D8 /* Engine.swift in Sources */,
 				3358333825BC2585001BE4D8 /* ResourcesLoader.swift in Sources */,
 				3358333F25BC2585001BE4D8 /* EffectMatcher.swift in Sources */,
+				33AAE02D2659827D00A067E3 /* SetPhase.swift in Sources */,
 				33AAE02B2659811900A067E3 /* RequireTargetAny.swift in Sources */,
 				33176D3C265962CF000A6FBF /* PlayerArgument.swift in Sources */,
 				3358333325BC2585001BE4D8 /* GMove.swift in Sources */,
