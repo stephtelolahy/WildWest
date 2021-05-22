@@ -1,5 +1,19 @@
 [
   {
+    "name": "equip",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2
+    },
+    "onPlay": [
+      {
+        "action": "equip",
+        "card": "played"
+      }
+    ]
+  },
+  {
     "name": "beer",
     "type": "active",
     "canPlay": {

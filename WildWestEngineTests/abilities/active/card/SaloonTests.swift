@@ -12,7 +12,7 @@ import Resolver
 
 class SaloonTests: XCTestCase {
     
-    private let sut: AbilityMatcherProtocol = Resolver.resolve(GAbilityMatcher.self)
+    private let sut: AbilityMatcherProtocol = Resolver.resolve()
     
     func test_CanPlaySaloon_IfSomePlayerDamaged() throws {
         // Given

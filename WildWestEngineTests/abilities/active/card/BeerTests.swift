@@ -12,7 +12,7 @@ import Resolver
 
 class BeerTests: XCTestCase {
     
-    private let sut: AbilityMatcherProtocol = Resolver.resolve(GAbilityMatcher.self)
+    private let sut: AbilityMatcherProtocol = Resolver.resolve()
     
     func test_CanPlayBeer_IfDamaged() throws {
         // Given

@@ -8,6 +8,7 @@
 
 /**
  Gain life point respecting health limit
+ - RULE: cannot have more health than maxHealth
  */
 public class GainHealth: GEffect {
     

@@ -19,14 +19,6 @@ extension Resolver: ResolverRegistering {
         
         register(AbilityMatcherProtocol.self) {
             let resourcesLoader: ResourcesLoaderProtocol = resolve()
-            let abilities = resourcesLoader.loadAbilities()
-            return AbilityMatcher(abilities: abilities,
-                                  effectMatcher: EffectMatcher(),
-                                  playReqMatcher: PlayReqMatcher())
-        }.scope(application)
-        
-        register(GAbilityMatcher.self) {
-            let resourcesLoader: ResourcesLoaderProtocol = resolve()
             let abilities = resourcesLoader.loadGAbilities()
             return GAbilityMatcher(abilities)
         }.scope(application)

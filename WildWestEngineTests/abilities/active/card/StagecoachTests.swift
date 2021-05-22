@@ -12,7 +12,7 @@ import Resolver
 
 class StagecoachTests: XCTestCase {
     
-    private let sut: AbilityMatcherProtocol = Resolver.resolve(GAbilityMatcher.self)
+    private let sut: AbilityMatcherProtocol = Resolver.resolve()
     
     func test_CanPlayStagecoach_IfHoldingCard() throws {
         // Given
