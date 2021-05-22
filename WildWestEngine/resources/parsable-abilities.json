@@ -177,5 +177,22 @@
         "card": "randomHand"
       }
     ]
+  },
+  {
+    "name": "drawOtherInPlayAt1",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireTargetAt": 1,
+      "requireInPlayCard": 0
+    },
+    "onPlay": [
+      {
+        "action": "drawInPlay",
+        "other": "target",
+        "card": "requiredInPlay"
+      }
+    ]
   }
 ]

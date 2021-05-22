@@ -234,6 +234,7 @@
 		33AAE03B26598B8B00A067E3 /* RequireTargetSelf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE03A26598B8B00A067E3 /* RequireTargetSelf.swift */; };
 		33AAE03D26598D0200A067E3 /* RequireTargetAt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE03C26598D0200A067E3 /* RequireTargetAt.swift */; };
 		33AAE03F26598D7700A067E3 /* DrawHand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE03E26598D7700A067E3 /* DrawHand.swift */; };
+		33AAE04126598EAF00A067E3 /* DrawInPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE04026598EAF00A067E3 /* DrawInPlay.swift */; };
 		33AFA25323DC201A00425BEB /* ClassNameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */; };
 		33B0E85B263D5901004B5806 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0E85A263D5901004B5806 /* Router.swift */; };
 		33B0E85C263D5901004B5806 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0E85A263D5901004B5806 /* Router.swift */; };
@@ -533,6 +534,7 @@
 		33AAE03A26598B8B00A067E3 /* RequireTargetSelf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireTargetSelf.swift; sourceTree = "<group>"; };
 		33AAE03C26598D0200A067E3 /* RequireTargetAt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireTargetAt.swift; sourceTree = "<group>"; };
 		33AAE03E26598D7700A067E3 /* DrawHand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawHand.swift; sourceTree = "<group>"; };
+		33AAE04026598EAF00A067E3 /* DrawInPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawInPlay.swift; sourceTree = "<group>"; };
 		33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameProtocol.swift; sourceTree = "<group>"; };
 		33B0E85A263D5901004B5806 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		33B0E863263D5A05004B5806 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
@@ -712,6 +714,7 @@
 				33AAE0322659887700A067E3 /* DiscardHand.swift */,
 				33AAE03826598A4800A067E3 /* DiscardInPlay.swift */,
 				33AAE03E26598D7700A067E3 /* DrawHand.swift */,
+				33AAE04026598EAF00A067E3 /* DrawInPlay.swift */,
 			);
 			path = effect;
 			sourceTree = "<group>";
@@ -1818,6 +1821,7 @@
 				33272F7926592741005C9246 /* EffectFamily.swift in Sources */,
 				3358334E25BC2585001BE4D8 /* GLoop.swift in Sources */,
 				3358334525BC2585001BE4D8 /* AbilityEvaluator.swift in Sources */,
+				33AAE04126598EAF00A067E3 /* DrawInPlay.swift in Sources */,
 				3358334325BC2585001BE4D8 /* MoveEvaluator.swift in Sources */,
 				3358333225BC2585001BE4D8 /* GCard.swift in Sources */,
 				3358333E25BC2585001BE4D8 /* AbilityMatcher.swift in Sources */,

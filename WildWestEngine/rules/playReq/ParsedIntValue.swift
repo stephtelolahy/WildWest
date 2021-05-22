@@ -8,21 +8,13 @@
 
 @propertyWrapper class ParsedIntValue {
     
-    private var parsedValue: Int = 0
-    
-    var wrappedValue: Int {
-        get {
-            parsedValue
-        }
-        set {
-        }
-    }
+    var wrappedValue: Int = 0
     
     func parse(_ data: Any) throws {
         guard let value = data as? Int else {
             throw DecodingError.typeMismatch(Int.self, DecodingError.Context(codingPath: [], debugDescription: ""))
         }
         
-        parsedValue = value
+        wrappedValue = value
     }
 }
