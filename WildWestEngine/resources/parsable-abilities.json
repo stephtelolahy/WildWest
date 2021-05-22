@@ -144,5 +144,38 @@
         "card": "requiredInPlay"
       }
     ]
+  },
+  {
+    "name": "discardSelfInPlay",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireTargetSelf": 0,
+      "requireInPlayCard": 0
+    },
+    "onPlay": [
+      {
+        "action": "discardInPlay",
+        "player": "target",
+        "card": "requiredInPlay"
+      }
+    ]
+  },
+  {
+    "name": "drawOtherHandAt1",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireTargetAt": 1
+    },
+    "onPlay": [
+      {
+        "action": "drawHand",
+        "other": "target",
+        "card": "randomHand"
+      }
+    ]
   }
 ]
