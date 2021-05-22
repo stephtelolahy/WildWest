@@ -1,5 +1,5 @@
 //
-//  RequireTargetAny.swift
+//  RequireInPlayCard.swift
 //  WildWestEngine
 //
 //  Created by Hugues Stéphano TELOLAHY on 22/05/2021.
@@ -7,16 +7,14 @@
 //
 
 /**
- Must target any other player
+ Must choose any card in play of targeted
  */
-public class RequireTargetAny: GPlayReq {
+public class RequireInPlayCard: GPlayReq {
     
     @ParsedIntValue()
     var minPlayersCount: Int
     
     public override func match(_ ctx: PlayReqContext, args: inout [[PlayArg : [String]]]) -> Bool {
-        let others = ctx.state.playOrder
-            .filter { $0 != ctx.actor.identifier }
-        return args.appending(values: others, forArg: .target)
+        args.appendingRequiredInPlay(state: ctx.state)
     }
 }

@@ -16,6 +16,7 @@ enum EffectFamily: String, DecodableClassFamily {
     case setPhase
     case removeHit
     case discardHand
+    case discardInPlay
     
     static var discriminator: Discriminator { .action }
     
@@ -28,6 +29,7 @@ enum EffectFamily: String, DecodableClassFamily {
         case .setPhase: return SetPhase.self
         case .removeHit: return RemoveHit.self
         case .discardHand: return DiscardHand.self
+        case .discardInPlay: return DiscardInPlay.self
         }
     }
 }

@@ -228,6 +228,9 @@
 		33AAE02F2659846000A067E3 /* IsHitEliminate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE02E2659846000A067E3 /* IsHitEliminate.swift */; };
 		33AAE0312659854A00A067E3 /* RemoveHit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE0302659854A00A067E3 /* RemoveHit.swift */; };
 		33AAE0332659887700A067E3 /* DiscardHand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE0322659887700A067E3 /* DiscardHand.swift */; };
+		33AAE0352659898000A067E3 /* RequireInPlayCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE0342659898000A067E3 /* RequireInPlayCard.swift */; };
+		33AAE037265989FB00A067E3 /* PlayArg+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE036265989FB00A067E3 /* PlayArg+Extension.swift */; };
+		33AAE03926598A4800A067E3 /* DiscardInPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE03826598A4800A067E3 /* DiscardInPlay.swift */; };
 		33AFA25323DC201A00425BEB /* ClassNameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */; };
 		33B0E85B263D5901004B5806 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0E85A263D5901004B5806 /* Router.swift */; };
 		33B0E85C263D5901004B5806 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0E85A263D5901004B5806 /* Router.swift */; };
@@ -521,6 +524,9 @@
 		33AAE02E2659846000A067E3 /* IsHitEliminate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsHitEliminate.swift; sourceTree = "<group>"; };
 		33AAE0302659854A00A067E3 /* RemoveHit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveHit.swift; sourceTree = "<group>"; };
 		33AAE0322659887700A067E3 /* DiscardHand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardHand.swift; sourceTree = "<group>"; };
+		33AAE0342659898000A067E3 /* RequireInPlayCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireInPlayCard.swift; sourceTree = "<group>"; };
+		33AAE036265989FB00A067E3 /* PlayArg+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayArg+Extension.swift"; sourceTree = "<group>"; };
+		33AAE03826598A4800A067E3 /* DiscardInPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardInPlay.swift; sourceTree = "<group>"; };
 		33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameProtocol.swift; sourceTree = "<group>"; };
 		33B0E85A263D5901004B5806 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		33B0E863263D5A05004B5806 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
@@ -643,11 +649,13 @@
 				33176D3126594362000A6FBF /* GPlayReq.swift */,
 				33176D2D26593D4A000A6FBF /* PlayReqFamily.swift */,
 				33176D3926595FDE000A6FBF /* ParsedIntValue.swift */,
+				33AAE036265989FB00A067E3 /* PlayArg+Extension.swift */,
 				33176D2F26593DBA000A6FBF /* IsYourTurn.swift */,
 				33176D35265947BA000A6FBF /* IsPhase.swift */,
 				331239E32659766C006C1EC1 /* IsPlayersCountMin.swift */,
 				33AAE02E2659846000A067E3 /* IsHitEliminate.swift */,
 				33AAE02A2659811900A067E3 /* RequireTargetAny.swift */,
+				33AAE0342659898000A067E3 /* RequireInPlayCard.swift */,
 			);
 			path = playReq;
 			sourceTree = "<group>";
@@ -694,6 +702,7 @@
 				33AAE02C2659827D00A067E3 /* SetPhase.swift */,
 				33AAE0302659854A00A067E3 /* RemoveHit.swift */,
 				33AAE0322659887700A067E3 /* DiscardHand.swift */,
+				33AAE03826598A4800A067E3 /* DiscardInPlay.swift */,
 			);
 			path = effect;
 			sourceTree = "<group>";
@@ -1810,12 +1819,15 @@
 				33176D3026593DBA000A6FBF /* IsYourTurn.swift in Sources */,
 				33272F702659212A005C9246 /* Argument.swift in Sources */,
 				33272F6A265920A1005C9246 /* GAbility.swift in Sources */,
+				33AAE037265989FB00A067E3 /* PlayArg+Extension.swift in Sources */,
+				33AAE03926598A4800A067E3 /* DiscardInPlay.swift in Sources */,
 				33AAE0232659771D00A067E3 /* GainHealth.swift in Sources */,
 				3358334D25BC2585001BE4D8 /* Database.swift in Sources */,
 				3358334425BC2585001BE4D8 /* AIAgent.swift in Sources */,
 				3358333725BC2585001BE4D8 /* DeckCard.swift in Sources */,
 				3358332C25BC2585001BE4D8 /* Card+Regex.swift in Sources */,
 				3358334125BC2585001BE4D8 /* MoveSegmenter.swift in Sources */,
+				33AAE0352659898000A067E3 /* RequireInPlayCard.swift in Sources */,
 				3358335025BC2585001BE4D8 /* GEventQueue.swift in Sources */,
 				3358333B25BC2585001BE4D8 /* Card.swift in Sources */,
 				3358334B25BC2585001BE4D8 /* Engine.swift in Sources */,

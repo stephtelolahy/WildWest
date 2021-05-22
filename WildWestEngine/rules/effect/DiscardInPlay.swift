@@ -1,5 +1,5 @@
 //
-//  DiscardHand.swift
+//  DiscardInPlay.swift
 //  WildWestEngine
 //
 //  Created by Hugues Stéphano TELOLAHY on 22/05/2021.
@@ -7,9 +7,9 @@
 //
 
 /**
- Discard hand card to discard pile
+ Discard inPlay card to discard pile
  */
-public class DiscardHand: GEffect {
+public class DiscardInPlay: GEffect {
     
     @Argument(name: "player", defaultValue: .actor)
     var player: PlayerArgument
@@ -23,6 +23,6 @@ public class DiscardHand: GEffect {
         }
         
         let cards = ctx.cards(matching: card, player: player)
-        return cards.map { .discardHand(player: player, card: $0) }
+        return cards.map { .discardInPlay(player: player, card: $0) }
     }
 }

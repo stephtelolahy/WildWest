@@ -127,5 +127,22 @@
         "card": "randomHand"
       }
     ]
+  },
+  {
+    "name": "discardOtherInPlay",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireTargetAny": 0,
+      "requireInPlayCard": 0
+    },
+    "onPlay": [
+      {
+        "action": "discardInPlay",
+        "player": "target",
+        "card": "requiredInPlay"
+      }
+    ]
   }
 ]
