@@ -225,6 +225,9 @@
 		33AAE02926597CF100A067E3 /* Handicap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE02826597CF100A067E3 /* Handicap.swift */; };
 		33AAE02B2659811900A067E3 /* RequireTargetAny.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE02A2659811900A067E3 /* RequireTargetAny.swift */; };
 		33AAE02D2659827D00A067E3 /* SetPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE02C2659827D00A067E3 /* SetPhase.swift */; };
+		33AAE02F2659846000A067E3 /* IsHitEliminate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE02E2659846000A067E3 /* IsHitEliminate.swift */; };
+		33AAE0312659854A00A067E3 /* RemoveHit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE0302659854A00A067E3 /* RemoveHit.swift */; };
+		33AAE0332659887700A067E3 /* DiscardHand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE0322659887700A067E3 /* DiscardHand.swift */; };
 		33AFA25323DC201A00425BEB /* ClassNameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */; };
 		33B0E85B263D5901004B5806 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0E85A263D5901004B5806 /* Router.swift */; };
 		33B0E85C263D5901004B5806 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0E85A263D5901004B5806 /* Router.swift */; };
@@ -515,6 +518,9 @@
 		33AAE02826597CF100A067E3 /* Handicap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Handicap.swift; sourceTree = "<group>"; };
 		33AAE02A2659811900A067E3 /* RequireTargetAny.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireTargetAny.swift; sourceTree = "<group>"; };
 		33AAE02C2659827D00A067E3 /* SetPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPhase.swift; sourceTree = "<group>"; };
+		33AAE02E2659846000A067E3 /* IsHitEliminate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsHitEliminate.swift; sourceTree = "<group>"; };
+		33AAE0302659854A00A067E3 /* RemoveHit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveHit.swift; sourceTree = "<group>"; };
+		33AAE0322659887700A067E3 /* DiscardHand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardHand.swift; sourceTree = "<group>"; };
 		33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameProtocol.swift; sourceTree = "<group>"; };
 		33B0E85A263D5901004B5806 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		33B0E863263D5A05004B5806 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
@@ -640,6 +646,7 @@
 				33176D2F26593DBA000A6FBF /* IsYourTurn.swift */,
 				33176D35265947BA000A6FBF /* IsPhase.swift */,
 				331239E32659766C006C1EC1 /* IsPlayersCountMin.swift */,
+				33AAE02E2659846000A067E3 /* IsHitEliminate.swift */,
 				33AAE02A2659811900A067E3 /* RequireTargetAny.swift */,
 			);
 			path = playReq;
@@ -685,6 +692,8 @@
 				33AAE024265979BF00A067E3 /* Equip.swift */,
 				33AAE02826597CF100A067E3 /* Handicap.swift */,
 				33AAE02C2659827D00A067E3 /* SetPhase.swift */,
+				33AAE0302659854A00A067E3 /* RemoveHit.swift */,
+				33AAE0322659887700A067E3 /* DiscardHand.swift */,
 			);
 			path = effect;
 			sourceTree = "<group>";
@@ -1793,6 +1802,7 @@
 				3358334325BC2585001BE4D8 /* MoveEvaluator.swift in Sources */,
 				3358333225BC2585001BE4D8 /* GCard.swift in Sources */,
 				3358333E25BC2585001BE4D8 /* AbilityMatcher.swift in Sources */,
+				33AAE0332659887700A067E3 /* DiscardHand.swift in Sources */,
 				3358333D25BC2585001BE4D8 /* Setup.swift in Sources */,
 				3358332D25BC2585001BE4D8 /* Array+FilterOrNil.swift in Sources */,
 				3358332E25BC2585001BE4D8 /* Dictionary+Decoding.swift in Sources */,
@@ -1810,6 +1820,7 @@
 				3358333B25BC2585001BE4D8 /* Card.swift in Sources */,
 				3358334B25BC2585001BE4D8 /* Engine.swift in Sources */,
 				3358333825BC2585001BE4D8 /* ResourcesLoader.swift in Sources */,
+				33AAE0312659854A00A067E3 /* RemoveHit.swift in Sources */,
 				3358333F25BC2585001BE4D8 /* EffectMatcher.swift in Sources */,
 				33AAE02D2659827D00A067E3 /* SetPhase.swift in Sources */,
 				33AAE02B2659811900A067E3 /* RequireTargetAny.swift in Sources */,
@@ -1832,6 +1843,7 @@
 				331239E42659766C006C1EC1 /* IsPlayersCountMin.swift in Sources */,
 				3358334925BC2585001BE4D8 /* GDatabase.swift in Sources */,
 				3358333525BC2585001BE4D8 /* GState.swift in Sources */,
+				33AAE02F2659846000A067E3 /* IsHitEliminate.swift in Sources */,
 				3358333925BC2585001BE4D8 /* Ability.swift in Sources */,
 				33176D342659438C000A6FBF /* GEffect.swift in Sources */,
 				3358334F25BC2585001BE4D8 /* GTimer.swift in Sources */,

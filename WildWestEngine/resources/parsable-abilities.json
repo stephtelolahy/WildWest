@@ -58,6 +58,19 @@
     ]
   },
   {
+    "name": "discardBeer",
+    "type": "active",
+    "canPlay": {
+      "isHitEliminate": 0,
+      "isPlayersCountMin": 3
+    },
+    "onPlay": [
+      {
+        "action": "removeHit"
+      }
+    ]
+  },
+  {
     "name": "saloon",
     "type": "active",
     "canPlay": {
@@ -96,6 +109,22 @@
       {
         "action": "drawDeck",
         "amount": 3
+      }
+    ]
+  },
+  {
+    "name": "discardOtherHand",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireTargetAny": 0
+    },
+    "onPlay": [
+      {
+        "action": "discardHand",
+        "player": "target",
+        "card": "randomHand"
       }
     ]
   }

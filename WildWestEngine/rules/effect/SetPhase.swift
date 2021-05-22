@@ -18,4 +18,3 @@ public class SetPhase: GEffect {
         [.setPhase(value: value)]
     }
 }
-
