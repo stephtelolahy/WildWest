@@ -1,5 +1,33 @@
 [
   {
+    "name": "beer",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "isPlayersCountMin": 3
+    },
+    "onPlay": [
+      {
+        "action": "gainHealth"
+      }
+    ]
+  },
+  {
+    "name": "saloon",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2
+    },
+    "onPlay": [
+      {
+        "action": "gainHealth",
+        "player": "all"
+      }
+    ]
+  },
+  {
     "name": "stagecoach",
     "type": "active",
     "canPlay": {
@@ -10,6 +38,20 @@
       {
         "action": "drawDeck",
         "amount": 2
+      }
+    ]
+  },
+  {
+    "name": "wellsFargo",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2
+    },
+    "onPlay": [
+      {
+        "action": "drawDeck",
+        "amount": 3
       }
     ]
   }

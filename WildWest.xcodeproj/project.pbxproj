@@ -15,6 +15,7 @@
 		33031E0F24555D5F00528158 /* OptionalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33031E0E24555D5F00528158 /* OptionalExtension.swift */; };
 		3306682E245588B9003B2263 /* FirebaseMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3306682D245588B9003B2263 /* FirebaseMapper.swift */; };
 		33113A0C263DD3ED00289989 /* UIView+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33113A0B263DD3ED00289989 /* UIView+Border.swift */; };
+		331239E42659766C006C1EC1 /* IsPlayersCountMin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331239E32659766C006C1EC1 /* IsPlayersCountMin.swift */; };
 		3314A021256C586300E54AF6 /* AnimationRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3314A020256C586300E54AF6 /* AnimationRenderer.swift */; };
 		33176D2E26593D4A000A6FBF /* PlayReqFamily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33176D2D26593D4A000A6FBF /* PlayReqFamily.swift */; };
 		33176D3026593DBA000A6FBF /* IsYourTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33176D2F26593DBA000A6FBF /* IsYourTurn.swift */; };
@@ -218,6 +219,7 @@
 		33A698B52657820100C52B57 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334673EA2436328000FFBB82 /* UserPreferences.swift */; };
 		33A698B62657820900C52B57 /* UserDefaultsStored.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334673E72436314E00FFBB82 /* UserDefaultsStored.swift */; };
 		33A76F8D2656AD7000FE9DCE /* MediaEventMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33626FB9256FE31B00128C0A /* MediaEventMatcher.swift */; };
+		33AAE0232659771D00A067E3 /* GainHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE0222659771D00A067E3 /* GainHealth.swift */; };
 		33AFA25323DC201A00425BEB /* ClassNameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */; };
 		33B0E85B263D5901004B5806 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0E85A263D5901004B5806 /* Router.swift */; };
 		33B0E85C263D5901004B5806 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0E85A263D5901004B5806 /* Router.swift */; };
@@ -316,6 +318,7 @@
 		33031E0E24555D5F00528158 /* OptionalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalExtension.swift; sourceTree = "<group>"; };
 		3306682D245588B9003B2263 /* FirebaseMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseMapper.swift; sourceTree = "<group>"; };
 		33113A0B263DD3ED00289989 /* UIView+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Border.swift"; sourceTree = "<group>"; };
+		331239E32659766C006C1EC1 /* IsPlayersCountMin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsPlayersCountMin.swift; sourceTree = "<group>"; };
 		3314A020256C586300E54AF6 /* AnimationRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationRenderer.swift; sourceTree = "<group>"; };
 		33176D2D26593D4A000A6FBF /* PlayReqFamily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayReqFamily.swift; sourceTree = "<group>"; };
 		33176D2F26593DBA000A6FBF /* IsYourTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsYourTurn.swift; sourceTree = "<group>"; };
@@ -501,6 +504,7 @@
 		339C7CA226566D6E001CBCAC /* SimulationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimulationTests.swift; sourceTree = "<group>"; };
 		33A632FF24545B060023A2D2 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		33A698B22657800700C52B57 /* AnimationEventMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationEventMatcherTests.swift; sourceTree = "<group>"; };
+		33AAE0222659771D00A067E3 /* GainHealth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainHealth.swift; sourceTree = "<group>"; };
 		33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameProtocol.swift; sourceTree = "<group>"; };
 		33B0E85A263D5901004B5806 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		33B0E863263D5A05004B5806 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
@@ -625,6 +629,7 @@
 				33176D3926595FDE000A6FBF /* ParsedIntValue.swift */,
 				33176D2F26593DBA000A6FBF /* IsYourTurn.swift */,
 				33176D35265947BA000A6FBF /* IsPhase.swift */,
+				331239E32659766C006C1EC1 /* IsPlayersCountMin.swift */,
 			);
 			path = playReq;
 			sourceTree = "<group>";
@@ -664,6 +669,7 @@
 				33272F7826592741005C9246 /* EffectFamily.swift */,
 				33176D3B265962CF000A6FBF /* PlayerArgument.swift */,
 				33272F7C26592793005C9246 /* DrawDeck.swift */,
+				33AAE0222659771D00A067E3 /* GainHealth.swift */,
 			);
 			path = effect;
 			sourceTree = "<group>";
@@ -1779,6 +1785,7 @@
 				33176D3026593DBA000A6FBF /* IsYourTurn.swift in Sources */,
 				33272F702659212A005C9246 /* Argument.swift in Sources */,
 				33272F6A265920A1005C9246 /* GAbility.swift in Sources */,
+				33AAE0232659771D00A067E3 /* GainHealth.swift in Sources */,
 				3358334D25BC2585001BE4D8 /* Database.swift in Sources */,
 				3358334425BC2585001BE4D8 /* AIAgent.swift in Sources */,
 				3358333725BC2585001BE4D8 /* DeckCard.swift in Sources */,
@@ -1803,6 +1810,7 @@
 				3358334825BC2585001BE4D8 /* RoleStrategy.swift in Sources */,
 				3358332F25BC2585001BE4D8 /* State.swift in Sources */,
 				3358333125BC2585001BE4D8 /* GHit.swift in Sources */,
+				331239E42659766C006C1EC1 /* IsPlayersCountMin.swift in Sources */,
 				3358334925BC2585001BE4D8 /* GDatabase.swift in Sources */,
 				3358333525BC2585001BE4D8 /* GState.swift in Sources */,
 				3358333925BC2585001BE4D8 /* Ability.swift in Sources */,

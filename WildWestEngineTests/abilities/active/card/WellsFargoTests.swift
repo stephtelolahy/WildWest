@@ -12,7 +12,7 @@ import Resolver
 
 class WellsFargoTests: XCTestCase {
     
-    private let sut: AbilityMatcherProtocol = Resolver.resolve()
+    private let sut: AbilityMatcherProtocol = Resolver.resolve(GAbilityMatcher.self)
     
     func test_CanPlayWellsFargo_IfHoldingCard() throws {
         // Given

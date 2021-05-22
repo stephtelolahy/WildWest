@@ -22,7 +22,7 @@ import Foundation
     
     var wrappedValue: Value {
         get {
-            parsedValue!
+            parsedValue ?? defaultValue!
         }
         set {
             parsedValue = newValue

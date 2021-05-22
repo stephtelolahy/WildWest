@@ -10,11 +10,13 @@ enum PlayReqFamily: String, CaseIterable {
     
     case isYourTurn
     case isPhase
+    case isPlayersCountMin
     
     func getType() -> GPlayReq.Type {
         switch self {
         case .isYourTurn: return IsYourTurn.self
         case .isPhase: return IsPhase.self
+        case .isPlayersCountMin: return IsPlayersCountMin.self
         }
     }
 }

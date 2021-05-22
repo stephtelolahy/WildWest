@@ -10,12 +10,14 @@ enum EffectFamily: String, DecodableClassFamily {
     typealias BaseType = GEffect
     
     case drawDeck
+    case gainHealth
     
     static var discriminator: Discriminator { .action }
     
     func getType() -> GEffect.Type {
         switch self {
         case .drawDeck: return DrawDeck.self
+        case .gainHealth: return GainHealth.self
         }
     }
 }
