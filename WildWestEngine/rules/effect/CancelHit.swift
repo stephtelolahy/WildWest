@@ -18,6 +18,15 @@ class CancelHit: GEffect {
         guard let player = ctx.players(matching: player).first else {
             return nil
         }
-        return [.cancelHit(player: player)]
+        guard let hit = ctx.state.hits.first(where: { $0.player == player }),
+              hit.cancelable > 0 else {
+            return []
+        }
+        let remainingCancelable = hit.cancelable - 1
+        if remainingCancelable > 0 {
+            return [.cancelHit(player: player)]
+        } else {
+            return [.removeHit(player: player)]
+        }
     }
 }

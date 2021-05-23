@@ -8,6 +8,7 @@
 
 enum TimesValue: String, Decodable {
     case never
+    case once
     case bangsPerTurn
     case bangsCancelable
     case inPlayPlayers
@@ -34,6 +35,9 @@ extension PlayReqContext {
         case .never:
             return 0
             
+        case .once:
+            return 1
+            
         case .bangsPerTurn:
             return actor.bangsPerTurn
             
@@ -49,11 +53,15 @@ extension PlayReqContext {
     }
 }
 
+// TODO: Fix Duplicate
 extension EffectContext {
     func number(matching arg: TimesValue) -> Int {
         switch arg {
         case .never:
             return 0
+            
+        case .once:
+            return 1
             
         case .bangsPerTurn:
             return actor.bangsPerTurn

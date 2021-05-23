@@ -236,5 +236,21 @@
         "action": "cancelHit"
       }
     ]
+  },
+  {
+    "name": "gatling",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2
+    },
+    "onPlay": [
+      {
+        "action": "addHit",
+        "player": "others",
+        "abilities": ["looseHealth"],
+        "cancelable": "once"
+      }
+    ]
   }
 ]
