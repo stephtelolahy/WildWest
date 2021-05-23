@@ -648,5 +648,35 @@
         "action": "gainHealth"
       }
     ]
+  },
+  {
+    "name": "startTurnDrawing1ExtraCardIfRedSuit",
+    "type": "triggered",
+    "canPlay": {
+      "onQueueEmpty": 0,
+      "isYourTurn": 0,
+      "isPhase": 1
+    },
+    "onPlay": [
+      {
+        "action": "drawDeck",
+        "amount": 1
+      },
+      {
+        "action": "drawDeckFlippingIf",
+        "player": "actor",
+        "regex": "(♥️)|(♦️)",
+        "then": [
+          {
+            "action": "drawDeck",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "action": "setPhase",
+        "value": 2
+      }
+    ]
   }
 ]

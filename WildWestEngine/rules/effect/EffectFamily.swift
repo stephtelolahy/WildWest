@@ -30,6 +30,7 @@ enum EffectFamily: String, DecodableClassFamily {
     case drawStore
     case flipDeckIf
     case passInPlay
+    case drawDeckFlippingIf
     
     static var discriminator: Discriminator { .action }
     
@@ -54,6 +55,7 @@ enum EffectFamily: String, DecodableClassFamily {
         case .drawStore: return DrawStore.self
         case .flipDeckIf: return FlipDeckIf.self
         case .passInPlay: return PassInPlay.self
+        case .drawDeckFlippingIf: return DrawDeckFlippingIf.self
         }
     }
 }
