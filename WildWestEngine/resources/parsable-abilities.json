@@ -249,7 +249,7 @@
         "action": "addHit",
         "player": "others",
         "abilities": ["looseHealth"],
-        "cancelable": "once"
+        "cancelable": "1"
       }
     ]
   },
@@ -386,6 +386,39 @@
           {
             "action": "setPhase",
             "value": 1
+          },
+          {
+            "action": "discardInPlay",
+            "card": "played"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "dynamite",
+    "type": "triggered",
+    "priority": 0,
+    "canPlay": {
+      "onPhase": 1,
+      "isYourTurn": 0
+    },
+    "onPlay": [
+      {
+        "action": "flipDeckIf",
+        "regex": "(♥️)|(♦️)|(♣️)|([10|J|Q|K|A]♠️)",
+        "then": [
+          {
+            "action": "passInPlay",
+            "card": "played",
+            "other": "next"
+          }
+        ],
+        "else": [
+          {
+            "action": "addHit",
+            "times": 3,
+            "abilities": ["looseHealth"]
           },
           {
             "action": "discardInPlay",

@@ -1,14 +1,14 @@
 //
-//  TimesArgument.swift
+//  NumberArgument.swift
 //  WildWestEngine
 //
 //  Created by Hugues Stéphano TELOLAHY on 23/05/2021.
 //  Copyright © 2021 creativeGames. All rights reserved.
 //
 
-enum TimesArgument: String, Decodable {
-    case never
-    case once
+enum NumberArgument: String, Decodable {
+    case zero
+    case one = "1"
     case bangsPerTurn
     case bangsCancelable
     case inPlayPlayers
@@ -16,12 +16,12 @@ enum TimesArgument: String, Decodable {
 }
 
 extension PlayReqContext {
-    func number(matching arg: TimesArgument) -> Int {
+    func number(matching arg: NumberArgument) -> Int {
         switch arg {
-        case .never:
+        case .zero:
             return 0
             
-        case .once:
+        case .one:
             return 1
             
         case .bangsPerTurn:
@@ -41,12 +41,12 @@ extension PlayReqContext {
 
 // TODO: Fix Duplicate
 extension EffectContext {
-    func number(matching arg: TimesArgument) -> Int {
+    func number(matching arg: NumberArgument) -> Int {
         switch arg {
-        case .never:
+        case .zero:
             return 0
             
-        case .once:
+        case .one:
             return 1
             
         case .bangsPerTurn:

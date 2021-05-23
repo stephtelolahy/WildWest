@@ -12,7 +12,7 @@
 class IsTimesPerTurnMax: GPlayReq {
     
     @ParsedValue
-    var maxTimes: TimesArgument
+    var maxTimes: NumberArgument
     
     override func match(_ ctx: PlayReqContext, args: inout [[PlayArg : [String]]]) -> Bool {
         let times = ctx.number(matching: maxTimes)

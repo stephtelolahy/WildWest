@@ -16,10 +16,10 @@
     
     func parse(_ data: Any) throws {
         
-        // Parse TimesArgument
-        if (T.self == TimesArgument.self) {
+        // Parse Enum
+        if (T.self == NumberArgument.self) {
             guard let rawValue = data as? String,
-                  let value = TimesArgument(rawValue: rawValue) else {
+                  let value = NumberArgument(rawValue: rawValue) else {
                 throw DecodingError.typeMismatch(String.self, DecodingError.Context(codingPath: [], debugDescription: ""))
             }
             
