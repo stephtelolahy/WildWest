@@ -286,6 +286,8 @@
 		33FBF8FC265B10CE00D7C6AD /* IsHandExceedLimit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF8FB265B10CE00D7C6AD /* IsHandExceedLimit.swift */; };
 		33FBF8FE265B117200D7C6AD /* RequireHandCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF8FD265B117200D7C6AD /* RequireHandCards.swift */; };
 		33FBF900265B122400D7C6AD /* OnEliminatingRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF8FF265B122400D7C6AD /* OnEliminatingRole.swift */; };
+		33FBF902265B137A00D7C6AD /* OnLooseHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF901265B137A00D7C6AD /* OnLooseHealth.swift */; };
+		33FBF904265B153800D7C6AD /* RequireTargetOffender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF903265B153800D7C6AD /* RequireTargetOffender.swift */; };
 		33FDD70C240BFB4B00BC3E14 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */; };
 		794C0D33B230E521EBEBBD1E /* Pods_WildWestEngineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F82ECCD5B58B11617E188DB8 /* Pods_WildWestEngineTests.framework */; };
 		ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D2EB239EE03800653905 /* AppDelegate.swift */; };
@@ -605,6 +607,8 @@
 		33FBF8FB265B10CE00D7C6AD /* IsHandExceedLimit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsHandExceedLimit.swift; sourceTree = "<group>"; };
 		33FBF8FD265B117200D7C6AD /* RequireHandCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireHandCards.swift; sourceTree = "<group>"; };
 		33FBF8FF265B122400D7C6AD /* OnEliminatingRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnEliminatingRole.swift; sourceTree = "<group>"; };
+		33FBF901265B137A00D7C6AD /* OnLooseHealth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnLooseHealth.swift; sourceTree = "<group>"; };
+		33FBF903265B153800D7C6AD /* RequireTargetOffender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireTargetOffender.swift; sourceTree = "<group>"; };
 		33FD5E1F25BC3AD500F18AF3 /* ENGINE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = ENGINE.md; sourceTree = "<group>"; };
 		33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		7076E7B55735D7880ABED367 /* Pods-WildWestEngine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestEngine.debug.xcconfig"; path = "Target Support Files/Pods-WildWestEngine/Pods-WildWestEngine.debug.xcconfig"; sourceTree = "<group>"; };
@@ -722,6 +726,8 @@
 				33FBF8FB265B10CE00D7C6AD /* IsHandExceedLimit.swift */,
 				33FBF8FD265B117200D7C6AD /* RequireHandCards.swift */,
 				33FBF8FF265B122400D7C6AD /* OnEliminatingRole.swift */,
+				33FBF901265B137A00D7C6AD /* OnLooseHealth.swift */,
+				33FBF903265B153800D7C6AD /* RequireTargetOffender.swift */,
 			);
 			path = playReq;
 			sourceTree = "<group>";
@@ -1924,6 +1930,7 @@
 				3358333825BC2585001BE4D8 /* ResourcesLoader.swift in Sources */,
 				33AAE0312659854A00A067E3 /* RemoveHit.swift in Sources */,
 				3358333F25BC2585001BE4D8 /* EffectMatcher.swift in Sources */,
+				33FBF904265B153800D7C6AD /* RequireTargetOffender.swift in Sources */,
 				33AAE02D2659827D00A067E3 /* SetPhase.swift in Sources */,
 				33FBF8FA265AE69F00D7C6AD /* OnEliminated.swift in Sources */,
 				33AAE02B2659811900A067E3 /* RequireTargetAny.swift in Sources */,
@@ -1952,6 +1959,7 @@
 				3358334825BC2585001BE4D8 /* RoleStrategy.swift in Sources */,
 				3358332F25BC2585001BE4D8 /* State.swift in Sources */,
 				3358333125BC2585001BE4D8 /* GHit.swift in Sources */,
+				33FBF902265B137A00D7C6AD /* OnLooseHealth.swift in Sources */,
 				331239E42659766C006C1EC1 /* IsPlayersCountMin.swift in Sources */,
 				3358334925BC2585001BE4D8 /* GDatabase.swift in Sources */,
 				33AAE03F26598D7700A067E3 /* DrawHand.swift in Sources */,

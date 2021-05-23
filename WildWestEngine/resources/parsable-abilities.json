@@ -567,5 +567,33 @@
         "optional": true
       }
     ]
+  },
+  {
+    "name": "drawsCardOnLoseHealth",
+    "type": "triggered",
+    "canPlay": {
+      "onLooseHealth": 0
+    },
+    "onPlay": [
+      {
+        "action": "drawDeck",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "name": "drawsCardFromOffenderOnLoseHealth",
+    "type": "triggered",
+    "canPlay": {
+      "onLooseHealth": 0,
+      "requireTargetOffender": 0
+    },
+    "onPlay": [
+      {
+        "action": "drawHand",
+        "other": "target",
+        "card": "randomHand"
+      }
+    ]
   }
 ]
