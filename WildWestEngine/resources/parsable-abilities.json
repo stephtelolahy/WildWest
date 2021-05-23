@@ -595,5 +595,18 @@
         "card": "randomHand"
       }
     ]
+  },
+  {
+    "name": "drawsCardOnHandEmpty",
+    "type": "triggered",
+    "canPlay": {
+      "onHandEmpty": 0
+    },
+    "onPlay": [
+      {
+        "action": "drawDeck",
+        "amount": 1
+      }
+    ]
   }
 ]
