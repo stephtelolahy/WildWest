@@ -10,7 +10,6 @@ enum PlayerArgument: String, Decodable {
     case actor
     case target
     case all
-    case offender // TODO: remove
     case next
     case others
 }
@@ -49,13 +48,6 @@ extension EffectContext {
                 fatalError("No next player found after \(actor.identifier)")
             }
             return [next]
-            
-        case .offender:
-            if let hit = state.hits.first(where: { $0.player == actor.identifier }) {
-                return [hit.offender]
-            } else {
-                fatalError("No matching hit found")
-            }
         }
     }
 }

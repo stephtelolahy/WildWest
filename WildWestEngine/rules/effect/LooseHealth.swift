@@ -8,6 +8,7 @@
 
 /**
  Loose life point
+ - Set offender as hit offender
  */
 class LooseHealth: GEffect {
     
@@ -16,15 +17,15 @@ class LooseHealth: GEffect {
     
     override func apply(_ ctx: EffectContext) -> [GEvent]? {
         guard let player = ctx.players(matching: player).first,
-              let offender = ctx.players(matching: .offender).first else {
+              let hit = ctx.state.hits.first(where: { $0.player == player }) else {
             return nil
         }
         
         let playerObject = ctx.state.players[player]!
         if playerObject.health == 1 {
-            return [.eliminate(player: player, offender: offender)]
+            return [.eliminate(player: player, offender: hit.offender)]
         } else {
-            return [.looseHealth(player: player, offender: offender)]
+            return [.looseHealth(player: player, offender: hit.offender)]
         }
     }
 }

@@ -21,7 +21,7 @@ class AddHit: GEffect {
     var times: Int
     
     @Argument(name: "cancelable", defaultValue: .never)
-    var cancelable: TimesValue
+    var cancelable: TimesArgument
     
     override func apply(_ ctx: EffectContext) -> [GEvent]? {
         let players = ctx.players(matching: player)

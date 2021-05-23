@@ -11,7 +11,7 @@
  */
 public class RequireTargetAt: GPlayReq {
     
-    @ParsedIntValue
+    @ParsedValue
     var distance: Int
     
     public override func match(_ ctx: PlayReqContext, args: inout [[PlayArg : [String]]]) -> Bool {

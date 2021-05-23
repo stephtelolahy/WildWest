@@ -11,7 +11,7 @@
  */
 class RequireStoreCards: GPlayReq {
     
-    @ParsedIntValue
+    @ParsedValue
     var amount: Int
     
     override func match(_ ctx: PlayReqContext, args: inout [[PlayArg : [String]]]) -> Bool {

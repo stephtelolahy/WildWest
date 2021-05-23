@@ -11,7 +11,7 @@
  */
 public class IsPlayersCountMin: GPlayReq {
     
-    @ParsedIntValue
+    @ParsedValue
     var minPlayersCount: Int
     
     public override func match(_ ctx: PlayReqContext, args: inout [[PlayArg : [String]]]) -> Bool {

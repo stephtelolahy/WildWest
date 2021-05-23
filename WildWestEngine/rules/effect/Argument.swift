@@ -8,24 +8,22 @@
 
 import Foundation
 
-@propertyWrapper class Argument<Value> {
+@propertyWrapper class Argument<T> {
     
-    let name: String
-    let defaultValue: Value?
+    private let name: String
+    private let defaultValue: T?
+    private var parsedValue: T?
     
-    private var parsedValue: Value?
-    
-    init(name: String, defaultValue: Value? = nil) {
+    init(name: String, defaultValue: T? = nil) {
         self.name = name
         self.defaultValue = defaultValue
     }
     
-    var wrappedValue: Value {
+    var wrappedValue: T {
         get {
             parsedValue ?? defaultValue!
         }
         set {
-            parsedValue = newValue
         }
     }
 }
@@ -53,15 +51,15 @@ protocol DecodableArgument {
     func decodeValue(from container: Container) throws
 }
 
-extension Argument: DecodableArgument where Value: Decodable {
+extension Argument: DecodableArgument where T: Decodable {
     
     internal func decodeValue(from container: Container) throws {
         let key = ArgumentCodingKey(name: name)
         
-        // Decode array of Effect
-        if (Value.self == [GEffect].self) {
+        // Decode [Effect]
+        if (T.self == [GEffect].self) {
             if container.contains(key) {
-                parsedValue = try container.decode(family: EffectFamily.self, forKey: key) as? Value
+                parsedValue = try container.decode(family: EffectFamily.self, forKey: key) as? T
             }
             return
         }
@@ -69,10 +67,10 @@ extension Argument: DecodableArgument where Value: Decodable {
         // We only want to attempt to decode a value if it's present,
         // to enable our app to fall back to its default value
         // in case the flag is missing from our backend data:
-        if let value = try container.decodeIfPresent(Value.self, forKey: key) {
-            wrappedValue = value
+        if let value = try container.decodeIfPresent(T.self, forKey: key) {
+            parsedValue = value
         } else if let defaultValue = defaultValue {
-            wrappedValue = defaultValue
+            parsedValue = defaultValue
         } else {
             throw DecodingError.keyNotFound(key, DecodingError.Context(codingPath: [], debugDescription: "Missing \(name)"))
         }

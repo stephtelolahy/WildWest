@@ -1,12 +1,12 @@
 //
-//  ParsedTimesValue.swift
+//  TimesArgument.swift
 //  WildWestEngine
 //
 //  Created by Hugues Stéphano TELOLAHY on 23/05/2021.
 //  Copyright © 2021 creativeGames. All rights reserved.
 //
 
-enum TimesValue: String, Decodable {
+enum TimesArgument: String, Decodable {
     case never
     case once
     case bangsPerTurn
@@ -15,22 +15,8 @@ enum TimesValue: String, Decodable {
     case excessHand
 }
 
-@propertyWrapper class ParsedTimesValue: ParsableValue {
-    
-    var wrappedValue: TimesValue = .never
-    
-    func parse(_ data: Any) throws {
-        guard let rawValue = data as? String,
-              let value = TimesValue(rawValue: rawValue) else {
-            throw DecodingError.typeMismatch(String.self, DecodingError.Context(codingPath: [], debugDescription: ""))
-        }
-        
-        wrappedValue = value
-    }
-}
-
 extension PlayReqContext {
-    func number(matching arg: TimesValue) -> Int {
+    func number(matching arg: TimesArgument) -> Int {
         switch arg {
         case .never:
             return 0
@@ -55,7 +41,7 @@ extension PlayReqContext {
 
 // TODO: Fix Duplicate
 extension EffectContext {
-    func number(matching arg: TimesValue) -> Int {
+    func number(matching arg: TimesArgument) -> Int {
         switch arg {
         case .never:
             return 0
@@ -77,4 +63,5 @@ extension EffectContext {
         }
     }
 }
+
 

@@ -11,8 +11,8 @@
  */
 class DeckToStore: GEffect {
     
-    @Argument(name: "amount", defaultValue: .never)
-    var amount: TimesValue
+    @Argument(name: "amount")
+    var amount: TimesArgument
     
     override func apply(_ ctx: EffectContext) -> [GEvent]? {
         let amount = ctx.number(matching: amount)

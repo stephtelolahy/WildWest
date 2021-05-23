@@ -11,7 +11,7 @@
  */
 class IsHitName: GPlayReq {
     
-    @ParsedStringValue
+    @ParsedValue
     var hitName: String
     
     override func match(_ ctx: PlayReqContext, args: inout [[PlayArg : [String]]]) -> Bool {
