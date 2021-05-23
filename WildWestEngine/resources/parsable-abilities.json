@@ -446,5 +446,24 @@
         "value": 2
       }
     ]
+  },
+  {
+    "name": "discardAllCardsOnEliminated",
+    "type": "triggered",
+    "canPlay": {
+      "onEliminated": 0
+    },
+    "onPlay": [
+      {
+        "action": "discardHand",
+        "card": "allHand",
+        "optional": true
+      },
+      {
+        "action": "discardInPlay",
+        "card": "allInPlay",
+        "optional": true
+      }
+    ]
   }
 ]

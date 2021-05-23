@@ -282,6 +282,7 @@
 		33EAD12624D499910052A97C /* RoleSelectorWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EAD12524D499910052A97C /* RoleSelectorWidget.swift */; };
 		33EAD12824D4A4080052A97C /* UIStoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EAD12724D4A4080052A97C /* UIStoryboardExtension.swift */; };
 		33F419C9264E4ADF0051EF31 /* MockDatabaseReferenceProtocol+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F419C8264E4ADF0051EF31 /* MockDatabaseReferenceProtocol+Stub.swift */; };
+		33FBF8FA265AE69F00D7C6AD /* OnEliminated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF8F9265AE69F00D7C6AD /* OnEliminated.swift */; };
 		33FDD70C240BFB4B00BC3E14 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */; };
 		794C0D33B230E521EBEBBD1E /* Pods_WildWestEngineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F82ECCD5B58B11617E188DB8 /* Pods_WildWestEngineTests.framework */; };
 		ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D2EB239EE03800653905 /* AppDelegate.swift */; };
@@ -597,6 +598,7 @@
 		33EAD12524D499910052A97C /* RoleSelectorWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleSelectorWidget.swift; sourceTree = "<group>"; };
 		33EAD12724D4A4080052A97C /* UIStoryboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtension.swift; sourceTree = "<group>"; };
 		33F419C8264E4ADF0051EF31 /* MockDatabaseReferenceProtocol+Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockDatabaseReferenceProtocol+Stub.swift"; sourceTree = "<group>"; };
+		33FBF8F9265AE69F00D7C6AD /* OnEliminated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnEliminated.swift; sourceTree = "<group>"; };
 		33FD5E1F25BC3AD500F18AF3 /* ENGINE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = ENGINE.md; sourceTree = "<group>"; };
 		33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		7076E7B55735D7880ABED367 /* Pods-WildWestEngine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestEngine.debug.xcconfig"; path = "Target Support Files/Pods-WildWestEngine/Pods-WildWestEngine.debug.xcconfig"; sourceTree = "<group>"; };
@@ -710,6 +712,7 @@
 				33AAE05C265A9D8600A067E3 /* OnHitCancelable.swift */,
 				33AAE067265ABCD800A067E3 /* OnPhase.swift */,
 				33AAE06D265AE52200A067E3 /* OnQueueEmpty.swift */,
+				33FBF8F9265AE69F00D7C6AD /* OnEliminated.swift */,
 			);
 			path = playReq;
 			sourceTree = "<group>";
@@ -1912,6 +1915,7 @@
 				33AAE0312659854A00A067E3 /* RemoveHit.swift in Sources */,
 				3358333F25BC2585001BE4D8 /* EffectMatcher.swift in Sources */,
 				33AAE02D2659827D00A067E3 /* SetPhase.swift in Sources */,
+				33FBF8FA265AE69F00D7C6AD /* OnEliminated.swift in Sources */,
 				33AAE02B2659811900A067E3 /* RequireTargetAny.swift in Sources */,
 				33AAE057265A44CA00A067E3 /* DeckToStore.swift in Sources */,
 				33AAE059265A457900A067E3 /* RequireStoreCards.swift in Sources */,

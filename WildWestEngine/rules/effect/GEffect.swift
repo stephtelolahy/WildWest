@@ -13,7 +13,15 @@ public class GEffect: Decodable {
     
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: ArgumentCodingKey.self)
+        
         for child in Mirror(reflecting: self).children {
+            guard let argument = child.value as? DecodableArgument else {
+                continue
+            }
+            try argument.decodeValue(from: container)
+        }
+        
+        for child in Mirror(reflecting: self).superclassMirror!.children {
             guard let argument = child.value as? DecodableArgument else {
                 continue
             }
