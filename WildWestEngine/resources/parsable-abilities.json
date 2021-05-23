@@ -279,5 +279,33 @@
         "action": "removeHit"
       }
     ]
+  },
+  {
+    "name": "duel",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireTargetAny": 0
+    },
+    "onPlay": [
+      {
+        "action": "addHit",
+        "player": "target",
+        "abilities": ["looseHealth"]
+      }
+    ]
+  },
+  {
+    "name": "discardBangOnDuel",
+    "type": "active",
+    "canPlay": {
+      "isHitName": "duel"
+    },
+    "onPlay": [
+      {
+        "action": "reverseHit"
+      }
+    ]
   }
 ]
