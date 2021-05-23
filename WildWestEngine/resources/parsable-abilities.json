@@ -224,5 +224,17 @@
         "action": "removeHit"
       }
     ]
+  },
+  {
+    "name": "missed",
+    "type": "active",
+    "canPlay": {
+      "isHitCancelable": 0
+    },
+    "onPlay": [
+      {
+        "action": "cancelHit"
+      }
+    ]
   }
 ]

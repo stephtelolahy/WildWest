@@ -13,6 +13,8 @@ enum PlayReqFamily: String, CaseIterable {
     case isPlayersCountMin
     case isHitEliminate
     case isTimesPerTurnMax
+    case isHitCancelable
+    
     case requireTargetAny
     case requireTargetSelf
     case requireTargetAt
@@ -31,6 +33,7 @@ enum PlayReqFamily: String, CaseIterable {
         case .requireTargetAt: return RequireTargetAt.self
         case .requireTargetReachable: return RequireTargetReachable.self
         case .isTimesPerTurnMax: return IsTimesPerTurnMax.self
+        case .isHitCancelable: return IsHitCancelable.self
         }
     }
 }

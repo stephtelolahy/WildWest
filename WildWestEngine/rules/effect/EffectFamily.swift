@@ -21,6 +21,7 @@ enum EffectFamily: String, DecodableClassFamily {
     case drawInPlay
     case addHit
     case looseHealth
+    case cancelHit
     
     static var discriminator: Discriminator { .action }
     
@@ -38,6 +39,7 @@ enum EffectFamily: String, DecodableClassFamily {
         case .drawInPlay: return DrawInPlay.self
         case .addHit: return AddHit.self
         case .looseHealth: return LooseHealth.self
+        case .cancelHit: return CancelHit.self
         }
     }
 }
