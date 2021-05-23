@@ -12,9 +12,11 @@ enum PlayReqFamily: String, CaseIterable {
     case isPhase
     case isPlayersCountMin
     case isHitEliminate
+    case isTimesPerTurnMax
     case requireTargetAny
     case requireTargetSelf
     case requireTargetAt
+    case requireTargetReachable
     case requireInPlayCard
     
     func getType() -> GPlayReq.Type {
@@ -27,6 +29,8 @@ enum PlayReqFamily: String, CaseIterable {
         case .requireInPlayCard: return RequireInPlayCard.self
         case .requireTargetSelf: return RequireTargetSelf.self
         case .requireTargetAt: return RequireTargetAt.self
+        case .requireTargetReachable: return RequireTargetReachable.self
+        case .isTimesPerTurnMax: return IsTimesPerTurnMax.self
         }
     }
 }

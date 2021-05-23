@@ -194,5 +194,23 @@
         "card": "requiredInPlay"
       }
     ]
+  },
+  {
+    "name": "bang",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireTargetReachable": 0,
+      "isTimesPerTurnMax": "bangsPerTurn"
+    },
+    "onPlay": [
+      {
+        "action": "addHit",
+        "player": "target",
+        "abilities": ["looseHealth"],
+        "cancelable": "bangsCancelable"
+      }
+    ]
   }
 ]

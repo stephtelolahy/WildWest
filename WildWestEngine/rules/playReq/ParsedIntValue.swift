@@ -6,7 +6,7 @@
 //  Copyright © 2021 creativeGames. All rights reserved.
 //
 
-@propertyWrapper class ParsedIntValue {
+@propertyWrapper class ParsedIntValue: ParsableValue {
     
     var wrappedValue: Int = 0
     
