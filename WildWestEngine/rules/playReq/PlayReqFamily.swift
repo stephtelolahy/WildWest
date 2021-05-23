@@ -21,6 +21,7 @@ enum PlayReqFamily: String, CaseIterable {
     case onPhase
     case onQueueEmpty
     case onEliminated
+    case onEliminatingRole
     
     case requireTargetAny
     case requireTargetSelf
@@ -28,6 +29,7 @@ enum PlayReqFamily: String, CaseIterable {
     case requireTargetReachable
     case requireInPlayCard
     case requireStoreCards
+    case requireHandCards
     
     func getType() -> GPlayReq.Type {
         switch self {
@@ -49,6 +51,8 @@ enum PlayReqFamily: String, CaseIterable {
         case .onQueueEmpty: return OnQueueEmpty.self
         case .onEliminated: return OnEliminated.self
         case .isHandExceedLimit: return IsHandExceedLimit.self
+        case .requireHandCards: return RequireHandCards.self
+        case .onEliminatingRole: return OnEliminatingRole.self
         }
     }
 }

@@ -284,6 +284,8 @@
 		33F419C9264E4ADF0051EF31 /* MockDatabaseReferenceProtocol+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F419C8264E4ADF0051EF31 /* MockDatabaseReferenceProtocol+Stub.swift */; };
 		33FBF8FA265AE69F00D7C6AD /* OnEliminated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF8F9265AE69F00D7C6AD /* OnEliminated.swift */; };
 		33FBF8FC265B10CE00D7C6AD /* IsHandExceedLimit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF8FB265B10CE00D7C6AD /* IsHandExceedLimit.swift */; };
+		33FBF8FE265B117200D7C6AD /* RequireHandCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF8FD265B117200D7C6AD /* RequireHandCards.swift */; };
+		33FBF900265B122400D7C6AD /* OnEliminatingRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF8FF265B122400D7C6AD /* OnEliminatingRole.swift */; };
 		33FDD70C240BFB4B00BC3E14 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */; };
 		794C0D33B230E521EBEBBD1E /* Pods_WildWestEngineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F82ECCD5B58B11617E188DB8 /* Pods_WildWestEngineTests.framework */; };
 		ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D2EB239EE03800653905 /* AppDelegate.swift */; };
@@ -601,6 +603,8 @@
 		33F419C8264E4ADF0051EF31 /* MockDatabaseReferenceProtocol+Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockDatabaseReferenceProtocol+Stub.swift"; sourceTree = "<group>"; };
 		33FBF8F9265AE69F00D7C6AD /* OnEliminated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnEliminated.swift; sourceTree = "<group>"; };
 		33FBF8FB265B10CE00D7C6AD /* IsHandExceedLimit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsHandExceedLimit.swift; sourceTree = "<group>"; };
+		33FBF8FD265B117200D7C6AD /* RequireHandCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireHandCards.swift; sourceTree = "<group>"; };
+		33FBF8FF265B122400D7C6AD /* OnEliminatingRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnEliminatingRole.swift; sourceTree = "<group>"; };
 		33FD5E1F25BC3AD500F18AF3 /* ENGINE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = ENGINE.md; sourceTree = "<group>"; };
 		33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		7076E7B55735D7880ABED367 /* Pods-WildWestEngine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestEngine.debug.xcconfig"; path = "Target Support Files/Pods-WildWestEngine/Pods-WildWestEngine.debug.xcconfig"; sourceTree = "<group>"; };
@@ -716,6 +720,8 @@
 				33AAE06D265AE52200A067E3 /* OnQueueEmpty.swift */,
 				33FBF8F9265AE69F00D7C6AD /* OnEliminated.swift */,
 				33FBF8FB265B10CE00D7C6AD /* IsHandExceedLimit.swift */,
+				33FBF8FD265B117200D7C6AD /* RequireHandCards.swift */,
+				33FBF8FF265B122400D7C6AD /* OnEliminatingRole.swift */,
 			);
 			path = playReq;
 			sourceTree = "<group>";
@@ -1873,6 +1879,7 @@
 			files = (
 				3358333A25BC2585001BE4D8 /* JsonReader.swift in Sources */,
 				33176D3226594362000A6FBF /* GPlayReq.swift in Sources */,
+				33FBF900265B122400D7C6AD /* OnEliminatingRole.swift in Sources */,
 				3358334A25BC2585001BE4D8 /* GEngine.swift in Sources */,
 				33AAE04D265A2CD900A067E3 /* IsHitCancelable.swift in Sources */,
 				3358334C25BC2585001BE4D8 /* GDatabaseUpdater.swift in Sources */,
@@ -1952,6 +1959,7 @@
 				3358333525BC2585001BE4D8 /* GState.swift in Sources */,
 				33AAE06A265ABD7400A067E3 /* SetTurn.swift in Sources */,
 				33AAE02F2659846000A067E3 /* IsHitEliminate.swift in Sources */,
+				33FBF8FE265B117200D7C6AD /* RequireHandCards.swift in Sources */,
 				3358333925BC2585001BE4D8 /* Ability.swift in Sources */,
 				33176D342659438C000A6FBF /* GEffect.swift in Sources */,
 				3358334F25BC2585001BE4D8 /* GTimer.swift in Sources */,

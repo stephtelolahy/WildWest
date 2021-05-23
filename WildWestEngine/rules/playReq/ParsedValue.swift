@@ -17,10 +17,20 @@
     func parse(_ data: Any) throws {
         
         // Parse Enum
-        if (T.self == NumberArgument.self) {
+        if T.self == NumberArgument.self {
             guard let rawValue = data as? String,
                   let value = NumberArgument(rawValue: rawValue) else {
-                throw DecodingError.typeMismatch(String.self, DecodingError.Context(codingPath: [], debugDescription: ""))
+                throw DecodingError.typeMismatch(NumberArgument.self, DecodingError.Context(codingPath: [], debugDescription: ""))
+            }
+            
+            parsedValue = value as? T
+            return
+        }
+        
+        if T.self == Role.self {
+            guard let rawValue = data as? String,
+                  let value = Role(rawValue: rawValue) else {
+                throw DecodingError.typeMismatch(Role.self, DecodingError.Context(codingPath: [], debugDescription: ""))
             }
             
             parsedValue = value as? T

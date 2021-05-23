@@ -519,5 +519,53 @@
         "abilities": ["discardSelfHand"]
       }
     ]
+  },
+  {
+    "name": "discardSelfHand",
+    "type": "active",
+    "canPlay": {
+      "requireHandCards": 1
+    },
+    "onPlay": [
+      {
+        "action": "discardHand",
+        "card": "requiredHand"
+      },
+      {
+        "action": "removeHit"
+      }
+    ]
+  },
+  {
+    "name": "gainRewardOnEliminatingOutlaw",
+    "type": "triggered",
+    "canPlay": {
+      "onEliminatingRole": "outlaw"
+    },
+    "onPlay": [
+      {
+        "action": "drawDeck",
+        "amount": 3
+      }
+    ]
+  },
+  {
+    "name": "penalizeOnEliminatingDeputy",
+    "type": "triggered",
+    "canPlay": {
+      "onEliminatingRole": "deputy"
+    },
+    "onPlay": [
+      {
+        "action": "discardHand",
+        "card": "allHand",
+        "optional": true
+      },
+      {
+        "action": "discardInPlay",
+        "card": "allInPlay",
+        "optional": true
+      }
+    ]
   }
 ]
