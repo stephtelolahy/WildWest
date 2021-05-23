@@ -608,5 +608,27 @@
         "amount": 1
       }
     ]
+  },
+  {
+    "name": "drawsAllCardsFromEliminatedPlayer",
+    "type": "triggered",
+    "priority": 0,
+    "canPlay": {
+      "requireTargetEliminated": 0
+    },
+    "onPlay": [
+      {
+        "action": "drawHand",
+        "other": "target",
+        "card": "allHand",
+        "optional": true
+      },
+      {
+        "action": "drawInPlay",
+        "other": "target",
+        "card": "allInPlay",
+        "optional": true
+      }
+    ]
   }
 ]

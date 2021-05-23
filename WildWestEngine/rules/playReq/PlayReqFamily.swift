@@ -30,6 +30,7 @@ enum PlayReqFamily: String, CaseIterable {
     case requireTargetAt
     case requireTargetReachable
     case requireTargetOffender
+    case requireTargetEliminated
     case requireInPlayCard
     case requireStoreCards
     case requireHandCards
@@ -59,6 +60,7 @@ enum PlayReqFamily: String, CaseIterable {
         case .onLooseHealth: return OnLooseHealth.self
         case .requireTargetOffender: return RequireTargetOffender.self
         case .onHandEmpty: return OnHandEmpty.self
+        case .requireTargetEliminated: return RequireTargetEliminated.self
         }
     }
 }

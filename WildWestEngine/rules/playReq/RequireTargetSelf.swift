@@ -7,7 +7,7 @@
 //
 
 /**
- Must be yourself as the target
+ Set yourself as the target
  */
 public class RequireTargetSelf: GPlayReq {
     
