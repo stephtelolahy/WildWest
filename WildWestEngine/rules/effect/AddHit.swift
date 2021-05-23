@@ -17,14 +17,15 @@ class AddHit: GEffect {
     @Argument(name: "abilities")
     var abilities: [String]
     
-    @Argument(name: "times", defaultValue: 1)
-    var times: Int
+    @Argument(name: "times", defaultValue: .one)
+    var times: NumberArgument
     
     @Argument(name: "cancelable", defaultValue: .zero)
     var cancelable: NumberArgument
     
     override func apply(_ ctx: EffectContext) -> [GEvent]? {
         let players = ctx.players(matching: player)
+        let times = ctx.number(matching: times)
         let cancelable = ctx.number(matching: cancelable)
         var targets: [String] = []
         for _ in (0..<times) {

@@ -417,7 +417,7 @@
         "else": [
           {
             "action": "addHit",
-            "times": 3,
+            "times": "3",
             "abilities": ["looseHealth"]
           },
           {
@@ -463,6 +463,60 @@
         "action": "discardInPlay",
         "card": "allInPlay",
         "optional": true
+      }
+    ]
+  },
+  {
+    "name": "nextTurnOnPhase3",
+    "type": "triggered",
+    "canPlay": {
+      "onQueueEmpty": 0,
+      "isYourTurn": 0,
+      "isPhase": 3
+    },
+    "onPlay": [
+      {
+        "action": "setTurn",
+        "player": "next"
+      },
+      {
+        "action": "setPhase",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "name": "nextTurnOnEliminated",
+    "type": "triggered",
+    "priority": 2,
+    "canPlay": {
+      "onEliminated": 0,
+      "isYourTurn": 0
+    },
+    "onPlay": [
+      {
+        "action": "setTurn",
+        "player": "next"
+      },
+      {
+        "action": "setPhase",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "name": "discardExcessCardsOnPhase3",
+    "type": "triggered",
+    "canPlay": {
+      "onPhase": 3,
+      "isYourTurn": 0,
+      "isHandExceedLimit": 0
+    },
+    "onPlay": [
+      {
+        "action": "addHit",
+        "times": "excessHand",
+        "abilities": ["discardSelfHand"]
       }
     ]
   }

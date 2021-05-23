@@ -9,6 +9,7 @@
 enum NumberArgument: String, Decodable {
     case zero
     case one = "1"
+    case three = "3"
     case bangsPerTurn
     case bangsCancelable
     case inPlayPlayers
@@ -23,6 +24,9 @@ extension PlayReqContext {
             
         case .one:
             return 1
+            
+        case .three:
+            return 3
             
         case .bangsPerTurn:
             return actor.bangsPerTurn
@@ -48,6 +52,9 @@ extension EffectContext {
             
         case .one:
             return 1
+            
+        case .three:
+            return 3
             
         case .bangsPerTurn:
             return actor.bangsPerTurn

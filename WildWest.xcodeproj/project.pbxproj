@@ -283,6 +283,7 @@
 		33EAD12824D4A4080052A97C /* UIStoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EAD12724D4A4080052A97C /* UIStoryboardExtension.swift */; };
 		33F419C9264E4ADF0051EF31 /* MockDatabaseReferenceProtocol+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F419C8264E4ADF0051EF31 /* MockDatabaseReferenceProtocol+Stub.swift */; };
 		33FBF8FA265AE69F00D7C6AD /* OnEliminated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF8F9265AE69F00D7C6AD /* OnEliminated.swift */; };
+		33FBF8FC265B10CE00D7C6AD /* IsHandExceedLimit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF8FB265B10CE00D7C6AD /* IsHandExceedLimit.swift */; };
 		33FDD70C240BFB4B00BC3E14 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */; };
 		794C0D33B230E521EBEBBD1E /* Pods_WildWestEngineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F82ECCD5B58B11617E188DB8 /* Pods_WildWestEngineTests.framework */; };
 		ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D2EB239EE03800653905 /* AppDelegate.swift */; };
@@ -599,6 +600,7 @@
 		33EAD12724D4A4080052A97C /* UIStoryboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtension.swift; sourceTree = "<group>"; };
 		33F419C8264E4ADF0051EF31 /* MockDatabaseReferenceProtocol+Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockDatabaseReferenceProtocol+Stub.swift"; sourceTree = "<group>"; };
 		33FBF8F9265AE69F00D7C6AD /* OnEliminated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnEliminated.swift; sourceTree = "<group>"; };
+		33FBF8FB265B10CE00D7C6AD /* IsHandExceedLimit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsHandExceedLimit.swift; sourceTree = "<group>"; };
 		33FD5E1F25BC3AD500F18AF3 /* ENGINE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = ENGINE.md; sourceTree = "<group>"; };
 		33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		7076E7B55735D7880ABED367 /* Pods-WildWestEngine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestEngine.debug.xcconfig"; path = "Target Support Files/Pods-WildWestEngine/Pods-WildWestEngine.debug.xcconfig"; sourceTree = "<group>"; };
@@ -713,6 +715,7 @@
 				33AAE067265ABCD800A067E3 /* OnPhase.swift */,
 				33AAE06D265AE52200A067E3 /* OnQueueEmpty.swift */,
 				33FBF8F9265AE69F00D7C6AD /* OnEliminated.swift */,
+				33FBF8FB265B10CE00D7C6AD /* IsHandExceedLimit.swift */,
 			);
 			path = playReq;
 			sourceTree = "<group>";
@@ -1930,6 +1933,7 @@
 				33969B2226577A9900E58908 /* GEvent+Destructuring.swift in Sources */,
 				3358334625BC2585001BE4D8 /* RoleEstimator.swift in Sources */,
 				33AAE055265A312C00A067E3 /* ReverseHit.swift in Sources */,
+				33FBF8FC265B10CE00D7C6AD /* IsHandExceedLimit.swift in Sources */,
 				33AAE02926597CF100A067E3 /* Handicap.swift in Sources */,
 				3358334225BC2585001BE4D8 /* MoveSelector.swift in Sources */,
 				33272F7D26592793005C9246 /* DrawDeck.swift in Sources */,
