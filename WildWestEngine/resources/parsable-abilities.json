@@ -212,5 +212,17 @@
         "cancelable": "bangsCancelable"
       }
     ]
+  },
+  {
+    "name": "looseHealth",
+    "type": "active",
+    "onPlay": [
+      {
+        "action": "looseHealth"
+      },
+      {
+        "action": "removeHit"
+      }
+    ]
   }
 ]

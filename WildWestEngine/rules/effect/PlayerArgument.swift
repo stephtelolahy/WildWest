@@ -10,7 +10,7 @@ enum PlayerArgument: String, Decodable {
     case actor
     case target
     case all
-    case offender
+    case offender // TODO: remove
     case next
     case others
 }
