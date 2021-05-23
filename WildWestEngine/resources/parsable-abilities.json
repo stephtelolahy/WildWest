@@ -429,7 +429,7 @@
     ]
   },
   {
-    "name": "startTurnOnPhase1",
+    "name": "startTurn",
     "type": "triggered",
     "canPlay": {
       "onQueueEmpty": 0,
@@ -628,6 +628,24 @@
         "other": "target",
         "card": "allInPlay",
         "optional": true
+      }
+    ]
+  },
+  {
+    "name": "discard2CardsFor1Health",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireHandCards": 2
+    },
+    "onPlay": [
+      {
+        "action": "discardHand",
+        "card": "requiredHand"
+      },
+      {
+        "action": "gainHealth"
       }
     ]
   }

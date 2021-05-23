@@ -40,15 +40,11 @@ extension KeyedDecodingContainer {
         while !container.isAtEnd {
             
             let typeContainer = try container.nestedContainer(keyedBy: Discriminator.self)
-            do {
-                let family = try typeContainer.decode(F.self, forKey: F.discriminator)
-                let type = family.getType()
-                // decode type
-                let item = try containerCopy.decode(type)
-                items.append(item)
-            } catch let e as DecodingError {
-                throw e
-            }
+            let family = try typeContainer.decode(F.self, forKey: F.discriminator)
+            let type = family.getType()
+            // decode type
+            let item = try containerCopy.decode(type)
+            items.append(item)
         }
         return items
     }

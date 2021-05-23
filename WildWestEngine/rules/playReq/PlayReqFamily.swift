@@ -5,6 +5,8 @@
 //  Created by Hugues Stéphano TELOLAHY on 22/05/2021.
 //  Copyright © 2021 creativeGames. All rights reserved.
 //
+// swiftlint:disable cyclomatic_complexity
+// swiftlint:disable switch_case_on_newline
 
 enum PlayReqFamily: String, CaseIterable {
     
