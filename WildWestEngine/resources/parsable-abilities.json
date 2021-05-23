@@ -360,5 +360,39 @@
         ]
       }
     ]
+  },
+  {
+    "name": "jail",
+    "type": "triggered",
+    "canPlay": {
+      "onPhase": 1,
+      "isYourTurn": 0
+    },
+    "onPlay": [
+      {
+        "action": "flipDeckIf",
+        "regex": "♥️",
+        "then": [
+          {
+            "action": "discardInPlay",
+            "card": "played"
+          }
+        ],
+        "else": [
+          {
+            "action": "setTurn",
+            "player": "next"
+          },
+          {
+            "action": "setPhase",
+            "value": 1
+          },
+          {
+            "action": "discardInPlay",
+            "card": "played"
+          }
+        ]
+      }
+    ]
   }
 ]

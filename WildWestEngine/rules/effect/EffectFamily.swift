@@ -14,6 +14,7 @@ enum EffectFamily: String, DecodableClassFamily {
     case equip
     case handicap
     case setPhase
+    case setTurn
     case removeHit
     case discardHand
     case discardInPlay
@@ -36,6 +37,7 @@ enum EffectFamily: String, DecodableClassFamily {
         case .equip: return Equip.self
         case .handicap: return Handicap.self
         case .setPhase: return SetPhase.self
+        case .setTurn: return SetTurn.self
         case .removeHit: return RemoveHit.self
         case .discardHand: return DiscardHand.self
         case .discardInPlay: return DiscardInPlay.self
