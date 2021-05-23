@@ -252,6 +252,7 @@
 		33AAE068265ABCD800A067E3 /* OnPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE067265ABCD800A067E3 /* OnPhase.swift */; };
 		33AAE06A265ABD7400A067E3 /* SetTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE069265ABD7400A067E3 /* SetTurn.swift */; };
 		33AAE06C265ADBF800A067E3 /* PassInPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE06B265ADBF800A067E3 /* PassInPlay.swift */; };
+		33AAE06E265AE52200A067E3 /* OnQueueEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE06D265AE52200A067E3 /* OnQueueEmpty.swift */; };
 		33AFA25323DC201A00425BEB /* ClassNameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */; };
 		33B0E85B263D5901004B5806 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0E85A263D5901004B5806 /* Router.swift */; };
 		33B0E85C263D5901004B5806 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0E85A263D5901004B5806 /* Router.swift */; };
@@ -569,6 +570,7 @@
 		33AAE067265ABCD800A067E3 /* OnPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnPhase.swift; sourceTree = "<group>"; };
 		33AAE069265ABD7400A067E3 /* SetTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTurn.swift; sourceTree = "<group>"; };
 		33AAE06B265ADBF800A067E3 /* PassInPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassInPlay.swift; sourceTree = "<group>"; };
+		33AAE06D265AE52200A067E3 /* OnQueueEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnQueueEmpty.swift; sourceTree = "<group>"; };
 		33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameProtocol.swift; sourceTree = "<group>"; };
 		33B0E85A263D5901004B5806 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		33B0E863263D5A05004B5806 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
@@ -707,6 +709,7 @@
 				33AAE058265A457900A067E3 /* RequireStoreCards.swift */,
 				33AAE05C265A9D8600A067E3 /* OnHitCancelable.swift */,
 				33AAE067265ABCD800A067E3 /* OnPhase.swift */,
+				33AAE06D265AE52200A067E3 /* OnQueueEmpty.swift */,
 			);
 			path = playReq;
 			sourceTree = "<group>";
@@ -1904,6 +1907,7 @@
 				3358335025BC2585001BE4D8 /* GEventQueue.swift in Sources */,
 				3358333B25BC2585001BE4D8 /* Card.swift in Sources */,
 				3358334B25BC2585001BE4D8 /* Engine.swift in Sources */,
+				33AAE06E265AE52200A067E3 /* OnQueueEmpty.swift in Sources */,
 				3358333825BC2585001BE4D8 /* ResourcesLoader.swift in Sources */,
 				33AAE0312659854A00A067E3 /* RemoveHit.swift in Sources */,
 				3358333F25BC2585001BE4D8 /* EffectMatcher.swift in Sources */,

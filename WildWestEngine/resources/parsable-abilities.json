@@ -427,5 +427,24 @@
         ]
       }
     ]
+  },
+  {
+    "name": "startTurnOnPhase1",
+    "type": "triggered",
+    "canPlay": {
+      "onQueueEmpty": 0,
+      "isYourTurn": 0,
+      "isPhase": 1
+    },
+    "onPlay": [
+      {
+        "action": "drawDeck",
+        "amount": 2
+      },
+      {
+        "action": "setPhase",
+        "value": 2
+      }
+    ]
   }
 ]
