@@ -252,5 +252,32 @@
         "cancelable": "once"
       }
     ]
+  },
+  {
+    "name": "indians",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2
+    },
+    "onPlay": [
+      {
+        "action": "addHit",
+        "player": "others",
+        "abilities": ["looseHealth"]
+      }
+    ]
+  },
+  {
+    "name": "discardBangOnIndians",
+    "type": "active",
+    "canPlay": {
+      "isHitName": "indians"
+    },
+    "onPlay": [
+      {
+        "action": "removeHit"
+      }
+    ]
   }
 ]
