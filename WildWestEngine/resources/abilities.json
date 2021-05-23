@@ -468,7 +468,7 @@
     ]
   },
   {
-    "name": "startTurn",
+    "name": "startTurnOnPhase1",
     "type": "triggered",
     "canPlay": {
       "onQueueEmpty": 0,

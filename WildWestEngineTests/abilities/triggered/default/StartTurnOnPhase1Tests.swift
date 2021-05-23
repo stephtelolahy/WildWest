@@ -19,7 +19,7 @@ class StartTurnOnPhase1Tests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p1")
-            .abilities(are: "startTurn")
+            .abilities(are: "startTurnOnPhase1")
         let mockState = MockStateProtocol()
             .withDefault()
             .turn(is: "p1")
@@ -33,7 +33,7 @@ class StartTurnOnPhase1Tests: XCTestCase {
         let events = sut.effects(on: try XCTUnwrap(moves?.first), in: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GMove("startTurn", actor: "p1")])
+        XCTAssertEqual(moves, [GMove("startTurnOnPhase1", actor: "p1")])
         XCTAssertEqual(events, [.drawDeck(player: "p1"),
                                 .drawDeck(player: "p1"),
                                 .setPhase(value: 2)])
@@ -44,7 +44,7 @@ class StartTurnOnPhase1Tests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p1")
-            .abilities(are: "startTurn", "silentStartTurn")
+            .abilities(are: "startTurnOnPhase1", "silentStartTurnOnPhase1")
         let mockState = MockStateProtocol()
             .withDefault()
             .turn(is: "p1")
@@ -64,7 +64,7 @@ class StartTurnOnPhase1Tests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p1")
-            .abilities(are: "startTurn")
+            .abilities(are: "startTurnOnPhase1")
         let mockState = MockStateProtocol()
             .withDefault()
             .turn(is: "p1")

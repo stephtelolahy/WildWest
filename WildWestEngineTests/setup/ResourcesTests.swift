@@ -73,7 +73,7 @@ class ResourcesTests: XCTestCase {
                                 "bangsPerTurn",
                                 "playBangAsMissed",
                                 "playMissedAsBang",
-                                "silentStartTurn",
+                                "silentStartTurnOnPhase1",
                                 "silentJail"]
         let activeAbilities = sut.loadAbilities().map { $0.name }
         let allAbilities = passiveAbilities + activeAbilities
@@ -99,7 +99,7 @@ class ResourcesTests: XCTestCase {
         
         // Assert
         XCTAssertNotNil(playerCard.abilities["endTurn"])
-        XCTAssertNotNil(playerCard.abilities["startTurn"])
+        XCTAssertNotNil(playerCard.abilities["startTurnOnPhase1"])
         XCTAssertNotNil(playerCard.abilities["nextTurnOnPhase3"])
         XCTAssertNotNil(playerCard.abilities["nextTurnOnEliminated"])
         XCTAssertNotNil(playerCard.abilities["discardExcessCardsOnPhase3"])

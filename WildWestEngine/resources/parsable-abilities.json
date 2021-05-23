@@ -429,7 +429,7 @@
     ]
   },
   {
-    "name": "startTurn",
+    "name": "startTurnOnPhase1",
     "type": "triggered",
     "canPlay": {
       "onQueueEmpty": 0,
@@ -672,6 +672,81 @@
             "amount": 1
           }
         ]
+      },
+      {
+        "action": "setPhase",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "name": "startTurnDrawing3CardsAndKeep2",
+    "type": "triggered",
+    "canPlay": {
+      "onQueueEmpty": 0,
+      "isYourTurn": 0,
+      "isPhase": 1
+    },
+    "onPlay": [
+      {
+        "action": "addHit",
+        "abilities": ["startTurnDrawDeckChoosing2"]
+      }
+    ]
+  },
+  {
+    "name": "startTurnDrawDeckChoosing2",
+    "type": "active",
+    "canPlay": {
+      "requireDeckCards": 2
+    },
+    "onPlay": [
+      {
+        "action": "drawDeckChoosing",
+        "card": "requiredDeck"
+      },
+      {
+        "action": "removeHit"
+      },
+      {
+        "action": "setPhase",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "name": "startTurnDrawingFirstCardFromPlayer",
+    "type": "triggered",
+    "canPlay": {
+      "onQueueEmpty": 0,
+      "isYourTurn": 0,
+      "isPhase": 1
+    },
+    "onPlay": [
+      {
+        "action": "addHit",
+        "abilities": ["startTurnDrawingPlayer", "startTurnDrawingDeck"]
+      }
+    ]
+  },
+  {
+    "name": "startTurnDrawingPlayer",
+    "type": "active",
+    "canPlay": {
+      "requireTargetAny": 0
+    },
+    "onPlay": [
+      {
+        "action": "drawHand",
+        "other": "target",
+        "card": "randomHand"
+      },
+      {
+        "action": "drawDeck",
+        "amount": 1
+      },
+      {
+        "action": "removeHit"
       },
       {
         "action": "setPhase",
