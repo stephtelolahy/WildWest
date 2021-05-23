@@ -753,5 +753,57 @@
         "value": 2
       }
     ]
+  },
+  {
+    "name": "startTurnDrawingDeck",
+    "type": "active",
+    "onPlay": [
+      {
+        "action": "drawDeck",
+        "amount": 2
+      },
+      {
+        "action": "removeHit"
+      },
+      {
+        "action": "setPhase",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "name": "startTurnDrawingFirstCardFromDiscard",
+    "type": "triggered",
+    "canPlay": {
+      "onQueueEmpty": 0,
+      "isYourTurn": 0,
+      "isPhase": 1
+    },
+    "onPlay": [
+      {
+        "action": "addHit",
+        "abilities": ["startTurnDrawingDiscard", "startTurnDrawingDeck"]
+      }
+    ]
+  },
+  {
+    "name": "startTurnDrawingDiscard",
+    "type": "active",
+    "onPlay": [
+      {
+        "action": "drawDiscard"
+      },
+      {
+        "action": "drawDeck",
+        "amount": 1
+      },
+      {
+        "action": "removeHit"
+      },
+      {
+        "action": "setPhase",
+        "value": 2
+      }
+    ]
   }
 ]

@@ -293,6 +293,7 @@
 		33FBF90A265B1BE700D7C6AD /* DrawDeckFlippingIf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF909265B1BE700D7C6AD /* DrawDeckFlippingIf.swift */; };
 		33FBF90C265B1D5100D7C6AD /* DrawDeckChoosing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF90B265B1D5100D7C6AD /* DrawDeckChoosing.swift */; };
 		33FBF90E265B1E1600D7C6AD /* RequireDeckCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF90D265B1E1600D7C6AD /* RequireDeckCards.swift */; };
+		33FBF910265B21EE00D7C6AD /* DrawDiscard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF90F265B21EE00D7C6AD /* DrawDiscard.swift */; };
 		33FDD70C240BFB4B00BC3E14 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */; };
 		794C0D33B230E521EBEBBD1E /* Pods_WildWestEngineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F82ECCD5B58B11617E188DB8 /* Pods_WildWestEngineTests.framework */; };
 		ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D2EB239EE03800653905 /* AppDelegate.swift */; };
@@ -619,6 +620,7 @@
 		33FBF909265B1BE700D7C6AD /* DrawDeckFlippingIf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawDeckFlippingIf.swift; sourceTree = "<group>"; };
 		33FBF90B265B1D5100D7C6AD /* DrawDeckChoosing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawDeckChoosing.swift; sourceTree = "<group>"; };
 		33FBF90D265B1E1600D7C6AD /* RequireDeckCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireDeckCards.swift; sourceTree = "<group>"; };
+		33FBF90F265B21EE00D7C6AD /* DrawDiscard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawDiscard.swift; sourceTree = "<group>"; };
 		33FD5E1F25BC3AD500F18AF3 /* ENGINE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = ENGINE.md; sourceTree = "<group>"; };
 		33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		7076E7B55735D7880ABED367 /* Pods-WildWestEngine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestEngine.debug.xcconfig"; path = "Target Support Files/Pods-WildWestEngine/Pods-WildWestEngine.debug.xcconfig"; sourceTree = "<group>"; };
@@ -802,6 +804,7 @@
 				33AAE06B265ADBF800A067E3 /* PassInPlay.swift */,
 				33FBF909265B1BE700D7C6AD /* DrawDeckFlippingIf.swift */,
 				33FBF90B265B1D5100D7C6AD /* DrawDeckChoosing.swift */,
+				33FBF90F265B21EE00D7C6AD /* DrawDiscard.swift */,
 			);
 			path = effect;
 			sourceTree = "<group>";
@@ -1950,6 +1953,7 @@
 				33FBF904265B153800D7C6AD /* RequireTargetOffender.swift in Sources */,
 				33AAE02D2659827D00A067E3 /* SetPhase.swift in Sources */,
 				33FBF8FA265AE69F00D7C6AD /* OnEliminated.swift in Sources */,
+				33FBF910265B21EE00D7C6AD /* DrawDiscard.swift in Sources */,
 				33AAE02B2659811900A067E3 /* RequireTargetAny.swift in Sources */,
 				33AAE057265A44CA00A067E3 /* DeckToStore.swift in Sources */,
 				33AAE059265A457900A067E3 /* RequireStoreCards.swift in Sources */,
