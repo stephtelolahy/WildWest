@@ -245,6 +245,9 @@
 		33AAE051265A2FCF00A067E3 /* IsHitName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE050265A2FCF00A067E3 /* IsHitName.swift */; };
 		33AAE053265A300D00A067E3 /* ParsedStringValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE052265A300D00A067E3 /* ParsedStringValue.swift */; };
 		33AAE055265A312C00A067E3 /* ReverseHit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE054265A312C00A067E3 /* ReverseHit.swift */; };
+		33AAE057265A44CA00A067E3 /* DeckToStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE056265A44CA00A067E3 /* DeckToStore.swift */; };
+		33AAE059265A457900A067E3 /* RequireStoreCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE058265A457900A067E3 /* RequireStoreCards.swift */; };
+		33AAE05B265A9C6000A067E3 /* DrawStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE05A265A9C6000A067E3 /* DrawStore.swift */; };
 		33AFA25323DC201A00425BEB /* ClassNameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */; };
 		33B0E85B263D5901004B5806 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0E85A263D5901004B5806 /* Router.swift */; };
 		33B0E85C263D5901004B5806 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0E85A263D5901004B5806 /* Router.swift */; };
@@ -555,6 +558,9 @@
 		33AAE050265A2FCF00A067E3 /* IsHitName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsHitName.swift; sourceTree = "<group>"; };
 		33AAE052265A300D00A067E3 /* ParsedStringValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedStringValue.swift; sourceTree = "<group>"; };
 		33AAE054265A312C00A067E3 /* ReverseHit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseHit.swift; sourceTree = "<group>"; };
+		33AAE056265A44CA00A067E3 /* DeckToStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckToStore.swift; sourceTree = "<group>"; };
+		33AAE058265A457900A067E3 /* RequireStoreCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireStoreCards.swift; sourceTree = "<group>"; };
+		33AAE05A265A9C6000A067E3 /* DrawStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawStore.swift; sourceTree = "<group>"; };
 		33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameProtocol.swift; sourceTree = "<group>"; };
 		33B0E85A263D5901004B5806 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		33B0E863263D5A05004B5806 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
@@ -692,6 +698,7 @@
 				33AAE0442659A5E500A067E3 /* IsTimesPerTurnMax.swift */,
 				33AAE04C265A2CD900A067E3 /* IsHitCancelable.swift */,
 				33AAE050265A2FCF00A067E3 /* IsHitName.swift */,
+				33AAE058265A457900A067E3 /* RequireStoreCards.swift */,
 			);
 			path = playReq;
 			sourceTree = "<group>";
@@ -745,6 +752,8 @@
 				33AAE0462659A73900A067E3 /* AddHit.swift */,
 				33AAE04A265A2ADE00A067E3 /* LooseHealth.swift */,
 				33AAE054265A312C00A067E3 /* ReverseHit.swift */,
+				33AAE056265A44CA00A067E3 /* DeckToStore.swift */,
+				33AAE05A265A9C6000A067E3 /* DrawStore.swift */,
 			);
 			path = effect;
 			sourceTree = "<group>";
@@ -1876,6 +1885,7 @@
 				3358332C25BC2585001BE4D8 /* Card+Regex.swift in Sources */,
 				3358334125BC2585001BE4D8 /* MoveSegmenter.swift in Sources */,
 				33AAE0352659898000A067E3 /* RequireInPlayCard.swift in Sources */,
+				33AAE05B265A9C6000A067E3 /* DrawStore.swift in Sources */,
 				3358335025BC2585001BE4D8 /* GEventQueue.swift in Sources */,
 				3358333B25BC2585001BE4D8 /* Card.swift in Sources */,
 				3358334B25BC2585001BE4D8 /* Engine.swift in Sources */,
@@ -1885,6 +1895,8 @@
 				33AAE02D2659827D00A067E3 /* SetPhase.swift in Sources */,
 				33AAE049265A21F500A067E3 /* ParsedTimesValue.swift in Sources */,
 				33AAE02B2659811900A067E3 /* RequireTargetAny.swift in Sources */,
+				33AAE057265A44CA00A067E3 /* DeckToStore.swift in Sources */,
+				33AAE059265A457900A067E3 /* RequireStoreCards.swift in Sources */,
 				33176D3C265962CF000A6FBF /* PlayerArgument.swift in Sources */,
 				33AAE053265A300D00A067E3 /* ParsedStringValue.swift in Sources */,
 				3358333325BC2585001BE4D8 /* GMove.swift in Sources */,

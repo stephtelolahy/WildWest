@@ -307,5 +307,40 @@
         "action": "reverseHit"
       }
     ]
+  },
+  {
+    "name": "generalstore",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2
+    },
+    "onPlay": [
+      {
+        "action": "deckToStore",
+        "amount": "inPlayPlayers"
+      },
+      {
+        "action": "addHit",
+        "player": "all",
+        "abilities": ["drawStore"]
+      }
+    ]
+  },
+  {
+    "name": "drawStore",
+    "type": "active",
+    "canPlay": {
+      "requireStoreCards": 1
+    },
+    "onPlay": [
+      {
+        "action": "drawStore",
+        "card": "requiredStore"
+      },
+      {
+        "action": "removeHit"
+      }
+    ]
   }
 ]
