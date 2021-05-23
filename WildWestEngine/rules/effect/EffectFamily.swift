@@ -25,6 +25,7 @@ enum EffectFamily: String, DecodableClassFamily {
     case reverseHit
     case deckToStore
     case drawStore
+    case flipDeckIf
     
     static var discriminator: Discriminator { .action }
     
@@ -46,6 +47,7 @@ enum EffectFamily: String, DecodableClassFamily {
         case .reverseHit: return ReverseHit.self
         case .deckToStore: return DeckToStore.self
         case .drawStore: return DrawStore.self
+        case .flipDeckIf: return FlipDeckIf.self
         }
     }
 }

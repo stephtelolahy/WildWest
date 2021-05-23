@@ -58,6 +58,14 @@ extension Argument: DecodableArgument where Value: Decodable {
     internal func decodeValue(from container: Container) throws {
         let key = ArgumentCodingKey(name: name)
         
+        // Decode array of Effect
+        if (Value.self == [GEffect].self) {
+            if container.contains(key) {
+                parsedValue = try container.decode(family: EffectFamily.self, forKey: key) as? Value
+            }
+            return
+        }
+        
         // We only want to attempt to decode a value if it's present,
         // to enable our app to fall back to its default value
         // in case the flag is missing from our backend data:

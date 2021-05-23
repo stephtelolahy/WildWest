@@ -16,6 +16,8 @@ enum PlayReqFamily: String, CaseIterable {
     case isHitCancelable
     case isHitName
     
+    case onHitCancelable
+    
     case requireTargetAny
     case requireTargetSelf
     case requireTargetAt
@@ -38,6 +40,7 @@ enum PlayReqFamily: String, CaseIterable {
         case .isHitCancelable: return IsHitCancelable.self
         case .isHitName: return IsHitName.self
         case .requireStoreCards: return RequireStoreCards.self
+        case .onHitCancelable: return OnHitCancelable.self
         }
     }
 }

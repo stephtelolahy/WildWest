@@ -342,5 +342,23 @@
         "action": "removeHit"
       }
     ]
+  },
+  {
+    "name": "barrel",
+    "type": "triggered",
+    "canPlay": {
+      "onHitCancelable": 0
+    },
+    "onPlay": [
+      {
+        "action": "flipDeckIf",
+        "regex": "♥️",
+        "then": [
+          {
+            "action": "cancelHit"
+          }
+        ]
+      }
+    ]
   }
 ]

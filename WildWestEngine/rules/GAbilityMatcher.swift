@@ -20,7 +20,17 @@ public class GAbilityMatcher: AbilityMatcherProtocol {
     }
     
     public func triggered(on event: GEvent, in state: StateProtocol) -> [GMove]? {
-        nil
+        // <RULE>: trigger moves from just eliminated player
+        var actors = state.playOrder
+        if case let .eliminate(player, _) = event {
+            actors.append(player)
+        }
+        // </RULE>
+        
+        return actors.compactMap { triggered(on: event, actor: $0, in: state) }
+            .flatMap { $0 }
+            .sorted(by: { abilities[$0.ability]!.priority < abilities[$1.ability]!.priority })
+            .notEmptyOrNil()
     }
     
     public func effects(on move: GMove, in state: StateProtocol) -> [GEvent]? {
