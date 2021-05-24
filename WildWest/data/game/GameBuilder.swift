@@ -27,15 +27,18 @@ class GameBuilder: GameBuilderProtocol {
     private let resourcesLoader: ResourcesLoaderProtocol
     private let durationMatcher: DurationMatcherProtocol
     private let database: UserDatabaseProtocol
+    private let abilityMatcher: AbilityMatcherProtocol
     
     init(preferences: UserPreferencesProtocol,
          resourcesLoader: ResourcesLoaderProtocol,
          durationMatcher: DurationMatcherProtocol,
-         database: UserDatabaseProtocol) {
+         database: UserDatabaseProtocol,
+         abilityMatcher: AbilityMatcherProtocol) {
         self.preferences = preferences
         self.resourcesLoader = resourcesLoader
         self.durationMatcher = durationMatcher
         self.database = database
+        self.abilityMatcher = abilityMatcher
     }
     
     func createGame(for playersCount: Int) -> StateProtocol {
@@ -57,10 +60,6 @@ class GameBuilder: GameBuilderProtocol {
         let databaseUpdater = GDatabaseUpdater()
         let database = GDatabase(state, updater: databaseUpdater)
         
-        let playReqMatcher = PlayReqMatcher()
-        let effectMatcher = EffectMatcher()
-        let abilities = resourcesLoader.loadAbilities()
-        let abilityMatcher = AbilityMatcher(abilities: abilities, effectMatcher: effectMatcher, playReqMatcher: playReqMatcher)
         let eventsQueue = GEventQueue()
         let timer = GTimer(matcher: durationMatcher)
         let loop = GLoop(eventsQueue: eventsQueue, database: database, matcher: abilityMatcher, timer: timer)
@@ -90,10 +89,6 @@ class GameBuilder: GameBuilderProtocol {
                                      users: [String: UserInfo]) -> GameEnvironment {
         let gameDatabase = database.createGameDatabase(gameId, state: state)
         
-        let playReqMatcher = PlayReqMatcher()
-        let effectMatcher = EffectMatcher()
-        let abilities = resourcesLoader.loadAbilities()
-        let abilityMatcher = AbilityMatcher(abilities: abilities, effectMatcher: effectMatcher, playReqMatcher: playReqMatcher)
         let eventsQueue = GEventQueue()
         let timer = GTimer(matcher: durationMatcher)
         let loop = GLoop(eventsQueue: eventsQueue, database: gameDatabase, matcher: abilityMatcher, timer: timer)

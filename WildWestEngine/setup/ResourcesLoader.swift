@@ -9,7 +9,6 @@ public protocol ResourcesLoaderProtocol {
     func loadCards() -> [Card]
     func loadDeck() -> [DeckCard]
     func loadAbilities() -> [Ability]
-    func loadGAbilities() -> [GAbility]
 }
 
 public class ResourcesLoader: ResourcesLoaderProtocol {
@@ -30,9 +29,5 @@ public class ResourcesLoader: ResourcesLoaderProtocol {
     
     public func loadAbilities() -> [Ability] {
         jsonReader.load("abilities")
-    }
-    
-    public func loadGAbilities() -> [GAbility] {
-        jsonReader.load("parsable-abilities")
     }
 }

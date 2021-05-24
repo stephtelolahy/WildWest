@@ -1,8 +1,9 @@
 //
 //  AbilityMatcher.swift
-//  CardGameEngine
+//  WildWestEngine
 //
-//  Created by Hugues Stephano Telolahy on 26/09/2020.
+//  Created by Hugues Stéphano TELOLAHY on 22/05/2021.
+//  Copyright © 2021 creativeGames. All rights reserved.
 //
 
 public protocol AbilityMatcherProtocol {
@@ -14,15 +15,9 @@ public protocol AbilityMatcherProtocol {
 public class AbilityMatcher: AbilityMatcherProtocol {
     
     private let abilities: [String: Ability]
-    private let effectMatcher: EffectMatcherProtocol
-    private let playReqMatcher: PlayReqMatcherProtocol
     
-    public init(abilities: [Ability],
-                effectMatcher: EffectMatcherProtocol,
-                playReqMatcher: PlayReqMatcherProtocol) {
-        self.abilities = abilities.toDictionary { $0.name }
-        self.effectMatcher = effectMatcher
-        self.playReqMatcher = playReqMatcher
+    public init(_ abilities: [Ability]) {
+        self.abilities = abilities.toDictionary(with: { $0.name })
     }
     
     public func active(in state: StateProtocol) -> [GMove]? {
@@ -52,8 +47,8 @@ public class AbilityMatcher: AbilityMatcherProtocol {
         }
         
         // <RULE> discard immediately played hand card
-        if case let .hand(card) = move.card, 
-           let cardObject = actor.hand.first(where: { $0.identifier == card }), 
+        if case let .hand(card) = move.card,
+           let cardObject = actor.hand.first(where: { $0.identifier == card }),
            cardObject.type == .brown {
             events.insert(.play(player: move.actor, card: card), at: 0)
         }
@@ -142,7 +137,7 @@ private extension AbilityMatcher {
                                  actor: actor,
                                  state: state,
                                  event: event)
-        guard let playArgs = playReqMatcher.match(canPlay: abilityObject.canPlay, ctx: ctx) else {
+        guard let playArgs = match(abilityObject.canPlay, ctx: ctx) else {
             return nil
         }
         
@@ -172,8 +167,29 @@ private extension AbilityMatcher {
                                 args: move.args,
                                 state: state)
         
-        return effectMatcher.map(ability.onPlay, ctx: ctx)
+        return apply(ability.onPlay, ctx: ctx)?
             .notEmptyOrNil()
+    }
+    
+    func match(_ playReqs: [GPlayReq], ctx: PlayReqContext) -> [[PlayArg: [String]]]? {
+        var playArgs: [[PlayArg: [String]]] = []
+        guard playReqs.allSatisfy({ $0.match(ctx, args: &playArgs) }) else {
+            return nil
+        }
+        return playArgs
+    }
+    
+    func apply(_ effects: [GEffect], ctx: EffectContext) -> [GEvent]? {
+        var result: [GEvent] = []
+        for effect in effects {
+            guard let events = effect.apply(ctx),
+                  !events.isEmpty || effect.optional else {
+                return nil
+            }
+            
+            result.append(contentsOf: events)
+        }
+        return result
     }
 }
 

@@ -18,9 +18,9 @@ extension Resolver: ResolverRegistering {
         register { ResourcesLoader(jsonReader: resolve()) as ResourcesLoaderProtocol }.scope(application)
         
         register(AbilityMatcherProtocol.self) {
-            let resourcesLoader: ResourcesLoaderProtocol = resolve()
-            let abilities = resourcesLoader.loadGAbilities()
-            return GAbilityMatcher(abilities)
+            let resourcesLoader = resolve(ResourcesLoaderProtocol.self)
+            let abilities = resourcesLoader.loadAbilities()
+            return AbilityMatcher(abilities)
         }.scope(application)
     }
 }

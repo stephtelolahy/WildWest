@@ -27,42 +27,9 @@ class ResourcesTests: XCTestCase {
         XCTAssertEqual(cards.filter { $0.type == .figure }.count, 16)
         XCTAssertEqual(cards.filter { $0.type == .brown || $0.type == .blue }.count, 22)
         XCTAssertEqual(abilities.count, 47)
-        XCTAssertEqual(PlayReqMatcher().playReqIds.count, 26)
-        XCTAssertEqual(EffectMatcher().effectIds.count, 22)
     }
     
-    func test_Abilities_HaveValidRequirements() throws {
-        // Given
-        let playReqs = PlayReqMatcher().playReqIds
-        
-        // When
-        let abilities = sut.loadAbilities()
-        
-        // Assert
-        abilities.forEach { ability in
-            ability.canPlay.forEach {
-                XCTAssertTrue(playReqs.contains($0.key), "PlayRequirement \($0.key) not found")
-            }
-        }
-    }
-    
-    func test_Abilities_HaveValidEffects() throws {
-        // Given
-        let effects = EffectMatcher().effectIds
-        
-        // When
-        let abilities = sut.loadAbilities()
-        
-        // Assert
-        abilities.forEach { ability in
-            ability.onPlay.forEach {
-                let action = $0["action"] as! String
-                XCTAssertTrue(effects.contains(action), "Effect \(action) not found")
-            }
-        }
-    }
-    
-    func test_Cards_HaveValidAbilities() throws {
+    func test_CardsHaveValidAbilities() throws {
         // Given
         let passiveAbilities = ["bullets",
                                 "mustang",
@@ -110,7 +77,7 @@ class ResourcesTests: XCTestCase {
         XCTAssertNotNil(sheriffCard.abilities["silentJail"])
     }
     
-    func test_BangCards() throws {
+    func test_BangUniqueCards() throws {
         // Given
         // When
         let cards = sut.loadCards()
@@ -158,7 +125,7 @@ class ResourcesTests: XCTestCase {
         XCTAssertTrue(cards.contains { $0.name == "willyTheKid" })
     }
     
-    func test_BangCardsList() throws {
+    func test_BangCardSets() throws {
         // Given
         // When
         let cards = sut.loadDeck()
@@ -249,7 +216,7 @@ class ResourcesTests: XCTestCase {
     func test_ParseAbilities() throws {
         // Given
         // When
-        let abilities = sut.loadGAbilities()
+        let abilities = sut.loadAbilities()
         
         // Assert
         XCTAssertNotNil(abilities)

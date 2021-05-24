@@ -26,3 +26,10 @@ public class GPlayReq {
 protocol ParsableValue {
     func parse(_ data: Any) throws
 }
+
+public struct PlayReqContext {
+    let ability: String
+    let actor: PlayerProtocol
+    let state: StateProtocol
+    let event: GEvent?
+}

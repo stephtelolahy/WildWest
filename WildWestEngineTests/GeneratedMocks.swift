@@ -4570,194 +4570,6 @@ import Cuckoo
 @testable import WildWestEngine
 
 
-public class MockEffectMatcherProtocol: EffectMatcherProtocol, Cuckoo.ProtocolMock {
-    
-    public typealias MocksType = EffectMatcherProtocol
-    
-    public typealias Stubbing = __StubbingProxy_EffectMatcherProtocol
-    public typealias Verification = __VerificationProxy_EffectMatcherProtocol
-
-    public let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
-
-    
-    private var __defaultImplStub: EffectMatcherProtocol?
-
-    public func enableDefaultImplementation(_ stub: EffectMatcherProtocol) {
-        __defaultImplStub = stub
-        cuckoo_manager.enableDefaultStubImplementation()
-    }
-    
-
-    
-
-    
-
-    
-    
-    
-    public func map(_ effects: [[String: Any]], ctx: EffectContext) -> [GEvent] {
-        
-    return cuckoo_manager.call("map(_: [[String: Any]], ctx: EffectContext) -> [GEvent]",
-            parameters: (effects, ctx),
-            escapingParameters: (effects, ctx),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.map(effects, ctx: ctx))
-        
-    }
-    
-
-	public struct __StubbingProxy_EffectMatcherProtocol: Cuckoo.StubbingProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	
-	    public init(manager: Cuckoo.MockManager) {
-	        self.cuckoo_manager = manager
-	    }
-	    
-	    
-	    func map<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ effects: M1, ctx: M2) -> Cuckoo.ProtocolStubFunction<([[String: Any]], EffectContext), [GEvent]> where M1.MatchedType == [[String: Any]], M2.MatchedType == EffectContext {
-	        let matchers: [Cuckoo.ParameterMatcher<([[String: Any]], EffectContext)>] = [wrap(matchable: effects) { $0.0 }, wrap(matchable: ctx) { $0.1 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockEffectMatcherProtocol.self, method: "map(_: [[String: Any]], ctx: EffectContext) -> [GEvent]", parameterMatchers: matchers))
-	    }
-	    
-	}
-
-	public struct __VerificationProxy_EffectMatcherProtocol: Cuckoo.VerificationProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	    private let callMatcher: Cuckoo.CallMatcher
-	    private let sourceLocation: Cuckoo.SourceLocation
-	
-	    public init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
-	        self.cuckoo_manager = manager
-	        self.callMatcher = callMatcher
-	        self.sourceLocation = sourceLocation
-	    }
-	
-	    
-	
-	    
-	    @discardableResult
-	    func map<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ effects: M1, ctx: M2) -> Cuckoo.__DoNotUse<([[String: Any]], EffectContext), [GEvent]> where M1.MatchedType == [[String: Any]], M2.MatchedType == EffectContext {
-	        let matchers: [Cuckoo.ParameterMatcher<([[String: Any]], EffectContext)>] = [wrap(matchable: effects) { $0.0 }, wrap(matchable: ctx) { $0.1 }]
-	        return cuckoo_manager.verify("map(_: [[String: Any]], ctx: EffectContext) -> [GEvent]", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	}
-}
-
-public class EffectMatcherProtocolStub: EffectMatcherProtocol {
-    
-
-    
-
-    
-    public func map(_ effects: [[String: Any]], ctx: EffectContext) -> [GEvent]  {
-        return DefaultValueRegistry.defaultValue(for: ([GEvent]).self)
-    }
-    
-}
-
-
-import Cuckoo
-@testable import WildWestEngine
-
-
-public class MockPlayReqMatcherProtocol: PlayReqMatcherProtocol, Cuckoo.ProtocolMock {
-    
-    public typealias MocksType = PlayReqMatcherProtocol
-    
-    public typealias Stubbing = __StubbingProxy_PlayReqMatcherProtocol
-    public typealias Verification = __VerificationProxy_PlayReqMatcherProtocol
-
-    public let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
-
-    
-    private var __defaultImplStub: PlayReqMatcherProtocol?
-
-    public func enableDefaultImplementation(_ stub: PlayReqMatcherProtocol) {
-        __defaultImplStub = stub
-        cuckoo_manager.enableDefaultStubImplementation()
-    }
-    
-
-    
-
-    
-
-    
-    
-    
-    public func match(canPlay: [String: Any], ctx: PlayReqContext) -> [[PlayArg: [String]]]? {
-        
-    return cuckoo_manager.call("match(canPlay: [String: Any], ctx: PlayReqContext) -> [[PlayArg: [String]]]?",
-            parameters: (canPlay, ctx),
-            escapingParameters: (canPlay, ctx),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.match(canPlay: canPlay, ctx: ctx))
-        
-    }
-    
-
-	public struct __StubbingProxy_PlayReqMatcherProtocol: Cuckoo.StubbingProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	
-	    public init(manager: Cuckoo.MockManager) {
-	        self.cuckoo_manager = manager
-	    }
-	    
-	    
-	    func match<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(canPlay: M1, ctx: M2) -> Cuckoo.ProtocolStubFunction<([String: Any], PlayReqContext), [[PlayArg: [String]]]?> where M1.MatchedType == [String: Any], M2.MatchedType == PlayReqContext {
-	        let matchers: [Cuckoo.ParameterMatcher<([String: Any], PlayReqContext)>] = [wrap(matchable: canPlay) { $0.0 }, wrap(matchable: ctx) { $0.1 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockPlayReqMatcherProtocol.self, method: "match(canPlay: [String: Any], ctx: PlayReqContext) -> [[PlayArg: [String]]]?", parameterMatchers: matchers))
-	    }
-	    
-	}
-
-	public struct __VerificationProxy_PlayReqMatcherProtocol: Cuckoo.VerificationProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	    private let callMatcher: Cuckoo.CallMatcher
-	    private let sourceLocation: Cuckoo.SourceLocation
-	
-	    public init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
-	        self.cuckoo_manager = manager
-	        self.callMatcher = callMatcher
-	        self.sourceLocation = sourceLocation
-	    }
-	
-	    
-	
-	    
-	    @discardableResult
-	    func match<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(canPlay: M1, ctx: M2) -> Cuckoo.__DoNotUse<([String: Any], PlayReqContext), [[PlayArg: [String]]]?> where M1.MatchedType == [String: Any], M2.MatchedType == PlayReqContext {
-	        let matchers: [Cuckoo.ParameterMatcher<([String: Any], PlayReqContext)>] = [wrap(matchable: canPlay) { $0.0 }, wrap(matchable: ctx) { $0.1 }]
-	        return cuckoo_manager.verify("match(canPlay: [String: Any], ctx: PlayReqContext) -> [[PlayArg: [String]]]?", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	}
-}
-
-public class PlayReqMatcherProtocolStub: PlayReqMatcherProtocol {
-    
-
-    
-
-    
-    public func match(canPlay: [String: Any], ctx: PlayReqContext) -> [[PlayArg: [String]]]?  {
-        return DefaultValueRegistry.defaultValue(for: ([[PlayArg: [String]]]?).self)
-    }
-    
-}
-
-
-import Cuckoo
-@testable import WildWestEngine
-
-
 public class MockResourcesLoaderProtocol: ResourcesLoaderProtocol, Cuckoo.ProtocolMock {
     
     public typealias MocksType = ResourcesLoaderProtocol
@@ -4826,21 +4638,6 @@ public class MockResourcesLoaderProtocol: ResourcesLoaderProtocol, Cuckoo.Protoc
         
     }
     
-    
-    
-    public func loadGAbilities() -> [GAbility] {
-        
-    return cuckoo_manager.call("loadGAbilities() -> [GAbility]",
-            parameters: (),
-            escapingParameters: (),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.loadGAbilities())
-        
-    }
-    
 
 	public struct __StubbingProxy_ResourcesLoaderProtocol: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
@@ -4863,11 +4660,6 @@ public class MockResourcesLoaderProtocol: ResourcesLoaderProtocol, Cuckoo.Protoc
 	    func loadAbilities() -> Cuckoo.ProtocolStubFunction<(), [Ability]> {
 	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
 	        return .init(stub: cuckoo_manager.createStub(for: MockResourcesLoaderProtocol.self, method: "loadAbilities() -> [Ability]", parameterMatchers: matchers))
-	    }
-	    
-	    func loadGAbilities() -> Cuckoo.ProtocolStubFunction<(), [GAbility]> {
-	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return .init(stub: cuckoo_manager.createStub(for: MockResourcesLoaderProtocol.self, method: "loadGAbilities() -> [GAbility]", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -4904,12 +4696,6 @@ public class MockResourcesLoaderProtocol: ResourcesLoaderProtocol, Cuckoo.Protoc
 	        return cuckoo_manager.verify("loadAbilities() -> [Ability]", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
-	    @discardableResult
-	    func loadGAbilities() -> Cuckoo.__DoNotUse<(), [GAbility]> {
-	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return cuckoo_manager.verify("loadGAbilities() -> [GAbility]", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
 	}
 }
 
@@ -4929,10 +4715,6 @@ public class ResourcesLoaderProtocolStub: ResourcesLoaderProtocol {
     
     public func loadAbilities() -> [Ability]  {
         return DefaultValueRegistry.defaultValue(for: ([Ability]).self)
-    }
-    
-    public func loadGAbilities() -> [GAbility]  {
-        return DefaultValueRegistry.defaultValue(for: ([GAbility]).self)
     }
     
 }

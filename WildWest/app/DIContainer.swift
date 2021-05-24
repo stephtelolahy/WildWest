@@ -69,7 +69,8 @@ extension Resolver: ResolverRegistering {
         register { GameBuilder(preferences: resolve(),
                                resourcesLoader: resolve(),
                                durationMatcher: resolve(),
-                               database: resolve()) as GameBuilderProtocol
+                               database: resolve(),
+                               abilityMatcher: resolve()) as GameBuilderProtocol
         }.scope(application)
         
         register { AuthProvider() as AuthProviderProtocol }.scope(application)
@@ -81,6 +82,12 @@ extension Resolver: ResolverRegistering {
         register { GameManager(preferences: resolve(),
                                database: resolve(),
                                gameBuilder: resolve()) as GameManagerProtocol
+        }.scope(application)
+        
+        register(AbilityMatcherProtocol.self) {
+            let resourcesLoader = resolve(ResourcesLoaderProtocol.self)
+            let abilities = resourcesLoader.loadAbilities()
+            return AbilityMatcher(abilities)
         }.scope(application)
     }
 }
