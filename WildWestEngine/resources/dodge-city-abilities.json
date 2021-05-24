@@ -1,1 +1,19 @@
-[]
+[
+  {
+    "name": "punch",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireTargetAt": 1
+    },
+    "onPlay": [
+      {
+        "action": "addHit",
+        "player": "target",
+        "abilities": ["looseHealth"],
+        "cancelable": "1"
+      }
+    ]
+  }
+]

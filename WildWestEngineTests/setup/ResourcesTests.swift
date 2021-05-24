@@ -23,8 +23,6 @@ class ResourcesTests: XCTestCase {
         let scripted = sut.loadAbilities().count
         
         // Assert
-        XCTAssertEqual(hardcoded, 47)
-        XCTAssertEqual(scripted, 47)
         XCTAssertTrue(scripted >= hardcoded)
     }
     
@@ -82,8 +80,6 @@ class ResourcesTests: XCTestCase {
         let cards = sut.loadCards()
         
         // Assert
-        
-        XCTAssertEqual(cards.filter { $0.type == .brown || $0.type == .blue }.count, 22)
         XCTAssertTrue(cards.contains { $0.name == "barrel" })
         XCTAssertTrue(cards.contains { $0.name == "dynamite" })
         XCTAssertTrue(cards.contains { $0.name == "jail" })
@@ -107,7 +103,6 @@ class ResourcesTests: XCTestCase {
         XCTAssertTrue(cards.contains { $0.name == "stagecoach" })
         XCTAssertTrue(cards.contains { $0.name == "wellsFargo" })
         
-        XCTAssertEqual(cards.filter { $0.type == .figure }.count, 16)
         XCTAssertTrue(cards.contains { $0.name == "bartCassidy" })
         XCTAssertTrue(cards.contains { $0.name == "blackJack" })
         XCTAssertTrue(cards.contains { $0.name == "calamityJanet" })
@@ -229,5 +224,24 @@ class ResourcesTests: XCTestCase {
         XCTAssertEqual(stagecoach.canPlay.count, 2)
         XCTAssertTrue(stagecoach.canPlay[0] is IsYourTurn)
         XCTAssertTrue(stagecoach.canPlay[1] is IsPhase)
+    }
+    
+    func test_DodgeCityUniqueCards() throws {
+        // Given
+        // When
+        let cards = sut.loadCards()
+        
+        // Assert
+        XCTAssertTrue(cards.contains { $0.name == "punch" })
+        
+    }
+    
+    func test_DodgeCityCardSets() throws {
+        // Given
+        // When
+        let cards = sut.loadDeck()
+        
+        // Assert
+        XCTAssertTrue(cards.contains { $0.name == "punch" && $0.value == "10" && $0.suit == "♠️" })
     }
 }
