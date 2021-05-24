@@ -50,10 +50,19 @@ public class MoveSelector: MoveSelectorProtocol {
                 return MoveNode(name: name, value: .options(moves.mapNodes(named: { $0.argsString() })))
                 
             } else if moves.allSatisfy({ $0.args[.target] != nil && $0.args[.requiredInPlay] != nil }) {
+                #warning("TODO: manage 2 args combination")
                 // 2 args {target, requiredInPlay}
                 let nodes: [MoveNode] = moves.uniqueTargets().map { target in
                     let relatedMoves = moves.filter { $0.args[.target] == [target] } 
                     return MoveNode(name: target, value: .options(relatedMoves.mapNodes(named: { $0.args[.requiredInPlay]![0] })))
+                }
+                return MoveNode(name: name, value: .options(nodes))
+                
+            } else if moves.allSatisfy({ $0.args[.target] != nil && $0.args[.requiredHand] != nil }) {
+                // 2 args {target, requiredHand}
+                let nodes: [MoveNode] = moves.uniqueTargets().map { target in
+                    let relatedMoves = moves.filter { $0.args[.target] == [target] }
+                    return MoveNode(name: target, value: .options(relatedMoves.mapNodes(named: { $0.args[.requiredHand]![0] })))
                 }
                 return MoveNode(name: name, value: .options(nodes))
                 

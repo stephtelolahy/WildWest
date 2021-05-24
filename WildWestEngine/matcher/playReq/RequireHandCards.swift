@@ -15,8 +15,13 @@ class RequireHandCards: PlayReq {
     var amount: Int
     
     override func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
+        var playedCard: String?
+        if case let .hand(card) = ctx.card {
+            playedCard = card
+        }
         let cards = ctx.actor.hand
             .map { $0.identifier }
+            .filter { $0 != playedCard }
         return args.appending(values: cards, by: amount, forArg: .requiredHand)
     }
 }

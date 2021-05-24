@@ -1,5 +1,5 @@
 //
-//  PunchTests.swift
+//  SpringfieldTests.swift
 //  WildWestEngineTests
 //
 //  Created by Hugues Stéphano TELOLAHY on 24/05/2021.
@@ -10,22 +10,24 @@ import XCTest
 import WildWestEngine
 import Resolver
 
-class PunchTests: XCTestCase {
+class SpringfieldTests: XCTestCase {
     
     private let sut: AbilityMatcherProtocol = Resolver.resolve()
     
-    func test_CanPlayPunch_IfOtherIsAtDistanceOf1() throws {
+    func test_CanPlaySpringfield_IfOtherIsAtAnyDistance() throws {
         // Given
         let mockCard1 = MockCardProtocol()
             .withDefault()
             .identified(by: "c1")
             .type(is: .brown)
-            .abilities(are: "punch")
+            .abilities(are: "springfield")
+        let mockCard2 = MockCardProtocol()
+            .withDefault()
+            .identified(by: "c2")
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p1")
-            .holding(mockCard1)
-            .weapon(is: 1)
+            .holding(mockCard1, mockCard2)
         let mockPlayer2 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p2")
@@ -38,16 +40,16 @@ class PunchTests: XCTestCase {
             .phase(is: 2)
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
             .playOrder(is: "p1", "p2", "p3")
-            .distance(from: "p1", to: "p2", is: 1)
-            .distance(from: "p1", to: "p3", is: 3)
         
         // When
         let moves = sut.active(in: mockState)
         let events = sut.effects(on: try XCTUnwrap(moves?.first), in: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GMove("punch", actor: "p1", card: .hand("c1"), args: [.target: ["p2"]])])
+        XCTAssertEqual(moves, [GMove("springfield", actor: "p1", card: .hand("c1"), args: [.requiredHand: ["c2"], .target: ["p2"]]),
+                               GMove("springfield", actor: "p1", card: .hand("c1"), args: [.requiredHand: ["c2"], .target: ["p3"]])])
         XCTAssertEqual(events, [.play(player: "p1", card: "c1"),
-                                .addHit(players: ["p2"], name: "punch", abilities: ["looseHealth"], cancelable: 1, offender: "p1")])
+                                .discardHand(player: "p1", card: "c2"),
+                                .addHit(players: ["p2"], name: "springfield", abilities: ["looseHealth"], cancelable: 1, offender: "p1")])
     }
 }

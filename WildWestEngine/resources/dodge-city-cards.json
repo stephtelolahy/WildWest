@@ -14,5 +14,13 @@
     "abilities": {
       "dodge": 0
     }
+  },
+  {
+    "name": "springfield",
+    "desc": "The player must discard one additional card, and then the card acts as a Bang! with unlimited range.",
+    "type": "brown",
+    "abilities": {
+      "springfield": 0
+    }
   }
 ]

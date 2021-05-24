@@ -30,6 +30,8 @@ protocol ParsableValue {
 public struct PlayReqContext {
     let ability: String
     let actor: PlayerProtocol
+    let card: PlayCard?
     let state: StateProtocol
     let event: GEvent?
+    var args: [PlayArg: [String]] = [:]
 }

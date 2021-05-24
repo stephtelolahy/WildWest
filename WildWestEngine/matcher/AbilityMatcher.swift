@@ -135,6 +135,7 @@ private extension AbilityMatcher {
         // verify requirements
         let ctx = PlayReqContext(ability: ability,
                                  actor: actor,
+                                 card: card,
                                  state: state,
                                  event: event)
         guard let playArgs = match(abilityObject.canPlay, ctx: ctx) else {
