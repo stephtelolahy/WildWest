@@ -6,5 +6,13 @@
     "abilities": {
       "punch": 0
     }
+  },
+  {
+    "name": "dodge",
+    "desc": "Acts as a Missed!, but allows the player to draw a card.",
+    "type": "brown",
+    "abilities": {
+      "dodge": 0
+    }
   }
 ]

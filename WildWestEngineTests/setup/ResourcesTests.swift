@@ -243,5 +243,7 @@ class ResourcesTests: XCTestCase {
         
         // Assert
         XCTAssertTrue(cards.contains { $0.name == "punch" && $0.value == "10" && $0.suit == "♠️" })
+        XCTAssertTrue(cards.contains { $0.name == "dodge" && $0.value == "7" && $0.suit == "♦️" })
+        XCTAssertTrue(cards.contains { $0.name == "dodge" && $0.value == "K" && $0.suit == "♥️" })
     }
 }

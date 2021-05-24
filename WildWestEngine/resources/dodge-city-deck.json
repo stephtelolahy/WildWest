@@ -3,5 +3,15 @@
     "name": "punch",
     "value": "10",
     "suit": "♠️"
+  },
+  {
+    "name": "dodge",
+    "value": "7",
+    "suit": "♦️"
+  },
+  {
+    "name": "dodge",
+    "value": "K",
+    "suit": "♥️"
   }
 ]

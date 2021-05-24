@@ -15,5 +15,20 @@
         "cancelable": "1"
       }
     ]
+  },
+  {
+    "name": "dodge",
+    "type": "active",
+    "canPlay": {
+      "isHitCancelable": 0
+    },
+    "onPlay": [
+      {
+        "action": "cancelHit"
+      },
+      {
+        "action": "drawDeck"
+      }
+    ]
   }
 ]
