@@ -16,19 +16,19 @@ class ResourcesTests: XCTestCase {
     
     private let sut: ResourcesLoaderProtocol = Resolver.resolve()
     
-    func test_ResourcesCount() throws {
+    func test_SciptedRulesAreMoreThanHardCodedRules() throws {
         // Given
         // When
-        let cards = sut.loadCards()
-        let abilities = sut.loadAbilities()
+        let hardcoded = EffectFamily.allCases.count + PlayReqFamily.allCases.count
+        let scripted = sut.loadAbilities().count
         
         // Assert
-        XCTAssertEqual(cards.filter { $0.type == .figure }.count, 16)
-        XCTAssertEqual(cards.filter { $0.type == .brown || $0.type == .blue }.count, 22)
-        XCTAssertEqual(abilities.count, 47)
+        XCTAssertEqual(hardcoded, 47)
+        XCTAssertEqual(scripted, 47)
+        XCTAssertTrue(scripted >= hardcoded)
     }
     
-    func test_CardsHaveValidAbilities() throws {
+    func test_AllCardsHaveValidAbilities() throws {
         // Given
         let passiveAbilities = ["bullets",
                                 "mustang",
@@ -83,6 +83,7 @@ class ResourcesTests: XCTestCase {
         
         // Assert
         
+        XCTAssertEqual(cards.filter { $0.type == .brown || $0.type == .blue }.count, 22)
         XCTAssertTrue(cards.contains { $0.name == "barrel" })
         XCTAssertTrue(cards.contains { $0.name == "dynamite" })
         XCTAssertTrue(cards.contains { $0.name == "jail" })
@@ -106,6 +107,7 @@ class ResourcesTests: XCTestCase {
         XCTAssertTrue(cards.contains { $0.name == "stagecoach" })
         XCTAssertTrue(cards.contains { $0.name == "wellsFargo" })
         
+        XCTAssertEqual(cards.filter { $0.type == .figure }.count, 16)
         XCTAssertTrue(cards.contains { $0.name == "bartCassidy" })
         XCTAssertTrue(cards.contains { $0.name == "blackJack" })
         XCTAssertTrue(cards.contains { $0.name == "calamityJanet" })

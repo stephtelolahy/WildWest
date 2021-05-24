@@ -11,7 +11,7 @@ import Foundation
 // https://nsscreencast.com/episodes/395-decoding-heterogeneous-arrays
 
 /// To support a new class family, create an enum that conforms to this protocol and contains the different types.
-protocol DecodableClassFamily: Decodable {
+public protocol DecodableClassFamily: Decodable {
     associatedtype BaseType: Decodable
     
     /// The discriminator key.
@@ -22,7 +22,7 @@ protocol DecodableClassFamily: Decodable {
 }
 
 /// Discriminator key enum used to retrieve discriminator fields in JSON payloads.
-enum Discriminator: String, CodingKey {
+public enum Discriminator: String, CodingKey {
     case action
 }
 

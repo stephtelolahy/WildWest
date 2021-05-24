@@ -8,7 +8,7 @@
 // swiftlint:disable cyclomatic_complexity
 // swiftlint:disable switch_case_on_newline
 
-enum PlayReqFamily: String, CaseIterable {
+public enum PlayReqFamily: String, CaseIterable {
     
     case isYourTurn
     case isPhase

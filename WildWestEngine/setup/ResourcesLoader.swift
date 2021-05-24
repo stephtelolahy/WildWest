@@ -20,14 +20,14 @@ public class ResourcesLoader: ResourcesLoaderProtocol {
     }
     
     public func loadCards() -> [Card] {
-        jsonReader.load("cards")
+        jsonReader.load("bang-cards") + jsonReader.load("dodge-city-cards")
     }
     
     public func loadDeck() -> [DeckCard] {
-        jsonReader.load("deck")
+        jsonReader.load("bang-deck") + jsonReader.load("dodge-city-deck")
     }
     
     public func loadAbilities() -> [Ability] {
-        jsonReader.load("abilities")
+        jsonReader.load("bang-abilities") + jsonReader.load("dodge-city-abilities")
     }
 }
