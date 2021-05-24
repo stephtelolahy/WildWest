@@ -112,7 +112,7 @@ class SimulationTests: XCTestCase {
         
         database.event.subscribe(onNext: { event in
             eventId += 1
-//            print("[E\(eventId)/\(playersCount)]: \(event)")
+            print("[E\(eventId)/\(playersCount)]: \(event)")
             if case .gameover = event {
                 completed()
             }
@@ -132,7 +132,7 @@ class SimulationTests: XCTestCase {
         .disposed(by: disposeBag)
         
         database.state.subscribe(onNext: { state in
-//            print("[S]: \(state)")
+            print("[S]: \(state)")
         })
         .disposed(by: disposeBag)
         

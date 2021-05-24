@@ -1,12 +1,12 @@
 //
-//  GPlayReq.swift
+//  PlayReq.swift
 //  WildWestEngine
 //
 //  Created by Hugues Stéphano TELOLAHY on 22/05/2021.
 //  Copyright © 2021 creativeGames. All rights reserved.
 //
 
-public class GPlayReq {
+public class PlayReq {
     
     public required init(_ data: Any) throws {
         for child in Mirror(reflecting: self).children {

@@ -62,7 +62,11 @@ class DiscardExcessCardsOnPhase3Tests: XCTestCase {
 
         // Assert
         XCTAssertEqual(moves, [GMove("discardExcessCardsOnPhase3", actor: "p1")])
-        XCTAssertEqual(events, [.addHit(players: ["p1", "p1"], name: "discardExcessCardsOnPhase3", abilities: ["discardSelfHand"], cancelable: 0, offender: "p1")])
+        XCTAssertEqual(events, [.addHit(players: ["p1", "p1"],
+                                        name: "discardExcessCardsOnPhase3",
+                                        abilities: ["discardSelfHand"],
+                                        cancelable: 0,
+                                        offender: "p1")])
     }
 
     func test_DoNothing_IfOnPhase3WithoutExcessCards() {

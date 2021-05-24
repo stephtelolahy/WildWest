@@ -18,35 +18,19 @@ enum NumberArgument: String, Decodable {
 
 extension PlayReqContext {
     func number(matching arg: NumberArgument) -> Int {
-        switch arg {
-        case .zero:
-            return 0
-            
-        case .one:
-            return 1
-            
-        case .three:
-            return 3
-            
-        case .bangsPerTurn:
-            return actor.bangsPerTurn
-            
-        case .bangsCancelable:
-            return actor.bangsCancelable
-            
-        case .inPlayPlayers:
-            return state.playOrder.count
-            
-        case .excessHand:
-            return Swift.max(actor.hand.count - actor.handLimit, 0)
-        }
+        arg.intValue(actor: actor, state: state)
     }
 }
 
-#warning("Fix Duplicate")
 extension EffectContext {
     func number(matching arg: NumberArgument) -> Int {
-        switch arg {
+        arg.intValue(actor: actor, state: state)
+    }
+}
+
+private extension NumberArgument {
+    func intValue(actor: PlayerProtocol, state: StateProtocol) -> Int {
+        switch self {
         case .zero:
             return 0
             
@@ -70,5 +54,3 @@ extension EffectContext {
         }
     }
 }
-
-

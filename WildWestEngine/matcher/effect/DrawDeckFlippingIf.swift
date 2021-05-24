@@ -9,7 +9,7 @@
 /**
  Draw top card from deck then reveal
  */
-class DrawDeckFlippingIf: GEffect {
+class DrawDeckFlippingIf: Effect {
     
     @Argument(name: "player", defaultValue: .actor)
     var player: PlayerArgument
@@ -18,10 +18,10 @@ class DrawDeckFlippingIf: GEffect {
     var regex: String
     
     @Argument(name: "then")
-    var thenEffects: [GEffect]
+    var thenEffects: [Effect]
     
     @Argument(name: "else", defaultValue: [])
-    var elseEffects: [GEffect]
+    var elseEffects: [Effect]
     
     override func apply(_ ctx: EffectContext) -> [GEvent]? {
         guard let player = ctx.players(matching: player).first else {

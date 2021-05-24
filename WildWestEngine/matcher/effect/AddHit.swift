@@ -9,7 +9,7 @@
 /**
  Add hit
  */
-class AddHit: GEffect {
+class AddHit: Effect {
     
     @Argument(name: "player", defaultValue: .actor)
     var player: PlayerArgument

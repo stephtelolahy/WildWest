@@ -9,7 +9,7 @@
 /**
  Pass InPlay card to other player
  */
-class PassInPlay: GEffect {
+class PassInPlay: Effect {
     
     @Argument(name: "player", defaultValue: .actor)
     var player: PlayerArgument

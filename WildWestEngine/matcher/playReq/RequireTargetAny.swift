@@ -9,12 +9,12 @@
 /**
  Must target any other player
  */
-public class RequireTargetAny: GPlayReq {
+public class RequireTargetAny: PlayReq {
     
     @ParsedValue
     var minPlayersCount: Int
     
-    public override func match(_ ctx: PlayReqContext, args: inout [[PlayArg : [String]]]) -> Bool {
+    public override func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
         let others = ctx.state.playOrder
             .filter { $0 != ctx.actor.identifier }
         return args.appending(values: others, forArg: .target)

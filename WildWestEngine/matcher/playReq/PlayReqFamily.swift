@@ -38,7 +38,7 @@ enum PlayReqFamily: String, CaseIterable {
     case requireStoreCards
     case requireDeckCards
     
-    func getType() -> GPlayReq.Type {
+    func getType() -> PlayReq.Type {
         switch self {
         case .isYourTurn: return IsYourTurn.self
         case .isPhase: return IsPhase.self
@@ -71,7 +71,7 @@ enum PlayReqFamily: String, CaseIterable {
 
 extension KeyedDecodingContainer {
     
-    func decodePlayReqs(forKey key: K) throws -> [GPlayReq] {
+    func decodePlayReqs(forKey key: K) throws -> [PlayReq] {
         guard let dictionary: [String: Any] = try decodeIfPresent([String: Any].self, forKey: key) else {
             return []
         }
@@ -97,5 +97,5 @@ extension KeyedDecodingContainer {
 
 private struct IndexedPlayReq {
     let index: Int
-    let req: GPlayReq
+    let req: PlayReq
 }

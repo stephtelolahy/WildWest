@@ -9,9 +9,9 @@
 /**
  When having more cards than hand limit
  */
-class IsHandExceedLimit: GPlayReq {
+class IsHandExceedLimit: PlayReq {
     
-    override func match(_ ctx: PlayReqContext, args: inout [[PlayArg : [String]]]) -> Bool {
+    override func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
         ctx.actor.hand.count > ctx.actor.handLimit
     }
 }

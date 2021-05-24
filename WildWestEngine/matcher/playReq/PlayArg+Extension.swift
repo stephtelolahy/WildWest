@@ -6,7 +6,6 @@
 //  Copyright © 2021 creativeGames. All rights reserved.
 //
 
-
 extension Array where Element == [PlayArg: [String]] {
     
     mutating func appending(values: [String], by count: Int = 1, forArg arg: PlayArg) -> Bool {
@@ -59,4 +58,3 @@ extension Array where Element == [PlayArg: [String]] {
         return !self.isEmpty
     }
 }
-

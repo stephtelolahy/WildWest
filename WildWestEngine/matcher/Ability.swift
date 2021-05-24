@@ -9,8 +9,8 @@
 public struct Ability {
     public let name: String
     public let type: AbilityType
-    public let canPlay: [GPlayReq]
-    public let onPlay: [GEffect]
+    public let canPlay: [PlayReq]
+    public let onPlay: [Effect]
     public let priority: Int
 }
 

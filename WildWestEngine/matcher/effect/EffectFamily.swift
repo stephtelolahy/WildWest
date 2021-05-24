@@ -9,7 +9,7 @@
 // swiftlint:disable switch_case_on_newline
 
 enum EffectFamily: String, DecodableClassFamily {
-    typealias BaseType = GEffect
+    typealias BaseType = Effect
     
     case drawDeck
     case gainHealth
@@ -36,7 +36,7 @@ enum EffectFamily: String, DecodableClassFamily {
     
     static var discriminator: Discriminator { .action }
     
-    func getType() -> GEffect.Type {
+    func getType() -> Effect.Type {
         switch self {
         case .drawDeck: return DrawDeck.self
         case .gainHealth: return GainHealth.self

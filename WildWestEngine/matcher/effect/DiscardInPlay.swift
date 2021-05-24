@@ -9,7 +9,7 @@
 /**
  Discard inPlay card to discard pile
  */
-public class DiscardInPlay: GEffect {
+public class DiscardInPlay: Effect {
     
     @Argument(name: "player", defaultValue: .actor)
     var player: PlayerArgument

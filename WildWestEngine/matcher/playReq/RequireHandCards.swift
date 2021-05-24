@@ -9,12 +9,12 @@
 /**
  Must choose X cards from your hand
  */
-class RequireHandCards: GPlayReq {
+class RequireHandCards: PlayReq {
     
     @ParsedValue
     var amount: Int
     
-    override func match(_ ctx: PlayReqContext, args: inout [[PlayArg : [String]]]) -> Bool {
+    override func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
         let cards = ctx.actor.hand
             .map { $0.identifier }
         return args.appending(values: cards, by: amount, forArg: .requiredHand)

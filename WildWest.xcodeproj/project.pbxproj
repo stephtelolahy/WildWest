@@ -19,8 +19,8 @@
 		3314A021256C586300E54AF6 /* AnimationRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3314A020256C586300E54AF6 /* AnimationRenderer.swift */; };
 		33176D2E26593D4A000A6FBF /* PlayReqFamily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33176D2D26593D4A000A6FBF /* PlayReqFamily.swift */; };
 		33176D3026593DBA000A6FBF /* IsYourTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33176D2F26593DBA000A6FBF /* IsYourTurn.swift */; };
-		33176D3226594362000A6FBF /* GPlayReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33176D3126594362000A6FBF /* GPlayReq.swift */; };
-		33176D342659438C000A6FBF /* GEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33176D332659438C000A6FBF /* GEffect.swift */; };
+		33176D3226594362000A6FBF /* PlayReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33176D3126594362000A6FBF /* PlayReq.swift */; };
+		33176D342659438C000A6FBF /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33176D332659438C000A6FBF /* Effect.swift */; };
 		33176D36265947BA000A6FBF /* IsPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33176D35265947BA000A6FBF /* IsPhase.swift */; };
 		33176D3C265962CF000A6FBF /* PlayerArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33176D3B265962CF000A6FBF /* PlayerArgument.swift */; };
 		3322C4B3245236D500D7B297 /* RemoteGameDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4B2245236D500D7B297 /* RemoteGameDatabase.swift */; };
@@ -362,8 +362,8 @@
 		3314A020256C586300E54AF6 /* AnimationRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationRenderer.swift; sourceTree = "<group>"; };
 		33176D2D26593D4A000A6FBF /* PlayReqFamily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayReqFamily.swift; sourceTree = "<group>"; };
 		33176D2F26593DBA000A6FBF /* IsYourTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsYourTurn.swift; sourceTree = "<group>"; };
-		33176D3126594362000A6FBF /* GPlayReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPlayReq.swift; sourceTree = "<group>"; };
-		33176D332659438C000A6FBF /* GEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GEffect.swift; sourceTree = "<group>"; };
+		33176D3126594362000A6FBF /* PlayReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayReq.swift; sourceTree = "<group>"; };
+		33176D332659438C000A6FBF /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
 		33176D35265947BA000A6FBF /* IsPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsPhase.swift; sourceTree = "<group>"; };
 		33176D3B265962CF000A6FBF /* PlayerArgument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerArgument.swift; sourceTree = "<group>"; };
 		3318C08326558DB1005C6F49 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
@@ -704,7 +704,7 @@
 		33176D2C26593D24000A6FBF /* playReq */ = {
 			isa = PBXGroup;
 			children = (
-				33176D3126594362000A6FBF /* GPlayReq.swift */,
+				33176D3126594362000A6FBF /* PlayReq.swift */,
 				33176D2D26593D4A000A6FBF /* PlayReqFamily.swift */,
 				33AAE062265AAA5F00A067E3 /* ParsedValue.swift */,
 				33AAE036265989FB00A067E3 /* PlayArg+Extension.swift */,
@@ -766,7 +766,7 @@
 		33272F7A2659276C005C9246 /* effect */ = {
 			isa = PBXGroup;
 			children = (
-				33176D332659438C000A6FBF /* GEffect.swift */,
+				33176D332659438C000A6FBF /* Effect.swift */,
 				33272F7826592741005C9246 /* EffectFamily.swift */,
 				33272F6F2659212A005C9246 /* Argument.swift */,
 				33272F742659228E005C9246 /* DecodableClassFamily.swift */,
@@ -1878,7 +1878,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3358333A25BC2585001BE4D8 /* JsonReader.swift in Sources */,
-				33176D3226594362000A6FBF /* GPlayReq.swift in Sources */,
+				33176D3226594362000A6FBF /* PlayReq.swift in Sources */,
 				33FBF900265B122400D7C6AD /* OnEliminatingRole.swift in Sources */,
 				3358334A25BC2585001BE4D8 /* GEngine.swift in Sources */,
 				33AAE04D265A2CD900A067E3 /* IsHitCancelable.swift in Sources */,
@@ -1965,7 +1965,7 @@
 				33AAE06A265ABD7400A067E3 /* SetTurn.swift in Sources */,
 				33AAE02F2659846000A067E3 /* IsHitEliminate.swift in Sources */,
 				33FBF8FE265B117200D7C6AD /* RequireHandCards.swift in Sources */,
-				33176D342659438C000A6FBF /* GEffect.swift in Sources */,
+				33176D342659438C000A6FBF /* Effect.swift in Sources */,
 				3358334F25BC2585001BE4D8 /* GTimer.swift in Sources */,
 				33AAE025265979BF00A067E3 /* Equip.swift in Sources */,
 				33176D36265947BA000A6FBF /* IsPhase.swift in Sources */,

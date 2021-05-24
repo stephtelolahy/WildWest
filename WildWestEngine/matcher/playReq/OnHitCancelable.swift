@@ -9,9 +9,9 @@
 /**
  When you are target of hit that is cancelable with a 'missed' card
  */
-class OnHitCancelable: GPlayReq {
+class OnHitCancelable: PlayReq {
     
-    override func match(_ ctx: PlayReqContext, args: inout [[PlayArg : [String]]]) -> Bool {
+    override func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
         guard case let .addHit(players, _, _, cancelable, _) = ctx.event,
               players.contains(ctx.actor.identifier),
               cancelable > 0 else {

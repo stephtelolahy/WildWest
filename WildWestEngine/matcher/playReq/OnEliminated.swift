@@ -9,9 +9,9 @@
 /**
  When you loose your last health
  */
-class OnEliminated: GPlayReq {
+class OnEliminated: PlayReq {
     
-    override func match(_ ctx: PlayReqContext, args: inout [[PlayArg : [String]]]) -> Bool {
+    override func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
         guard case let .eliminate(player, _) = ctx.event,
               player == ctx.actor.identifier else {
             return false

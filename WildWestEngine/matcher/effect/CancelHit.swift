@@ -9,7 +9,7 @@
 /**
  Cancel hit
  */
-class CancelHit: GEffect {
+class CancelHit: Effect {
     
     @Argument(name: "player", defaultValue: .actor)
     var player: PlayerArgument

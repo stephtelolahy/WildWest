@@ -5,7 +5,6 @@
 //  Created by Hugues Stephano Telolahy on 03/10/2020.
 //  Copyright © 2020 CocoaPods. All rights reserved.
 //
-// swiftlint:disable force_cast
 // swiftlint:disable function_body_length
 // swiftlint:disable type_body_length
 

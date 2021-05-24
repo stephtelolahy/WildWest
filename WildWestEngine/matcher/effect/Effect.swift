@@ -1,12 +1,12 @@
 //
-//  GEffect.swift
+//  Effect.swift
 //  WildWestEngine
 //
 //  Created by Hugues Stéphano TELOLAHY on 22/05/2021.
 //  Copyright © 2021 creativeGames. All rights reserved.
 //
 
-public class GEffect: Decodable {
+public class Effect: Decodable {
     
     @Argument(name: "optional", defaultValue: false)
     var optional: Bool

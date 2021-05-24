@@ -9,7 +9,7 @@
 /**
  Draw specific cards from deck
  */
-class DrawDeckChoosing: GEffect {
+class DrawDeckChoosing: Effect {
     
     @Argument(name: "player", defaultValue: .actor)
     var player: PlayerArgument

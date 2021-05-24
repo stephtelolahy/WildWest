@@ -9,16 +9,16 @@
 /**
  Flip over the top card of the deck, then apply effects according to suits and values
  */
-class FlipDeckIf: GEffect {
+class FlipDeckIf: Effect {
     
     @Argument(name: "regex")
     var regex: String
     
     @Argument(name: "then")
-    var thenEffects: [GEffect]
+    var thenEffects: [Effect]
     
     @Argument(name: "else", defaultValue: [])
-    var elseEffects: [GEffect]
+    var elseEffects: [Effect]
     
     override func apply(_ ctx: EffectContext) -> [GEvent]? {
         let amount = ctx.actor.flippedCards

@@ -9,7 +9,7 @@
 /**
  Permute hit player and offender
  */
-class ReverseHit: GEffect {
+class ReverseHit: Effect {
     
     @Argument(name: "player", defaultValue: .actor)
     var player: PlayerArgument

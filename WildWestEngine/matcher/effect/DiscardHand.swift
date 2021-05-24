@@ -9,7 +9,7 @@
 /**
  Discard hand card to discard pile
  */
-public class DiscardHand: GEffect {
+public class DiscardHand: Effect {
     
     @Argument(name: "player", defaultValue: .actor)
     var player: PlayerArgument

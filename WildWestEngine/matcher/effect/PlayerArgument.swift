@@ -16,7 +16,7 @@ enum PlayerArgument: String, Decodable {
 
 extension EffectContext {
     
-    func players(matching arg: PlayerArgument) -> [String]  {
+    func players(matching arg: PlayerArgument) -> [String] {
         switch arg {
         case .actor:
             return [actor.identifier]

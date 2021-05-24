@@ -9,7 +9,7 @@
 /**
  Set phase X
  */
-public class SetPhase: GEffect {
+public class SetPhase: Effect {
     
     @Argument(name: "value")
     var value: Int

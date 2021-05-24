@@ -20,11 +20,7 @@ import Foundation
     }
     
     var wrappedValue: T {
-        get {
-            parsedValue ?? defaultValue!
-        }
-        set {
-        }
+        parsedValue ?? defaultValue!
     }
 }
 
@@ -57,7 +53,7 @@ extension Argument: DecodableArgument where T: Decodable {
         let key = ArgumentCodingKey(name: name)
         
         // Decode [Effect]
-        if (T.self == [GEffect].self) {
+        if T.self == [Effect].self {
             if container.contains(key) {
                 parsedValue = try container.decode(family: EffectFamily.self, forKey: key) as? T
             }
@@ -76,4 +72,3 @@ extension Argument: DecodableArgument where T: Decodable {
         }
     }
 }
-

@@ -9,9 +9,9 @@
 /**
  Must be your turn
  */
-public class IsYourTurn: GPlayReq {
+public class IsYourTurn: PlayReq {
     
-    public override func match(_ ctx: PlayReqContext, args: inout [[PlayArg : [String]]]) -> Bool {
+    public override func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
         ctx.state.turn == ctx.actor.identifier
     }
 }

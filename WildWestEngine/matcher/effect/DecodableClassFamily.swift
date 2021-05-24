@@ -12,7 +12,7 @@ import Foundation
 
 /// To support a new class family, create an enum that conforms to this protocol and contains the different types.
 protocol DecodableClassFamily: Decodable {
-    associatedtype BaseType : Decodable
+    associatedtype BaseType: Decodable
     
     /// The discriminator key.
     static var discriminator: Discriminator { get }
@@ -32,7 +32,7 @@ extension KeyedDecodingContainer {
     ///     - family: The ClassFamily enum for the type family.
     ///     - key: The CodingKey to look up the list in the current container.
     /// - Returns: The resulting list of heterogeneousType elements.
-    func decode<F : DecodableClassFamily>(family: F.Type, forKey key: K) throws -> [F.BaseType] {
+    func decode<F: DecodableClassFamily>(family: F.Type, forKey key: K) throws -> [F.BaseType] {
         
         var container = try nestedUnkeyedContainer(forKey: key)
         var containerCopy = container
