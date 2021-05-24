@@ -15,11 +15,23 @@
 		33031E0F24555D5F00528158 /* OptionalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33031E0E24555D5F00528158 /* OptionalExtension.swift */; };
 		3306682E245588B9003B2263 /* FirebaseMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3306682D245588B9003B2263 /* FirebaseMapper.swift */; };
 		33113A0C263DD3ED00289989 /* UIView+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33113A0B263DD3ED00289989 /* UIView+Border.swift */; };
+		331239E42659766C006C1EC1 /* IsPlayersCountMin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331239E32659766C006C1EC1 /* IsPlayersCountMin.swift */; };
 		3314A021256C586300E54AF6 /* AnimationRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3314A020256C586300E54AF6 /* AnimationRenderer.swift */; };
+		33176D2E26593D4A000A6FBF /* PlayReqFamily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33176D2D26593D4A000A6FBF /* PlayReqFamily.swift */; };
+		33176D3026593DBA000A6FBF /* IsYourTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33176D2F26593DBA000A6FBF /* IsYourTurn.swift */; };
+		33176D3226594362000A6FBF /* GPlayReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33176D3126594362000A6FBF /* GPlayReq.swift */; };
+		33176D342659438C000A6FBF /* GEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33176D332659438C000A6FBF /* GEffect.swift */; };
+		33176D36265947BA000A6FBF /* IsPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33176D35265947BA000A6FBF /* IsPhase.swift */; };
+		33176D3C265962CF000A6FBF /* PlayerArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33176D3B265962CF000A6FBF /* PlayerArgument.swift */; };
 		3322C4B3245236D500D7B297 /* RemoteGameDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4B2245236D500D7B297 /* RemoteGameDatabase.swift */; };
 		3322C4B62452379700D7B297 /* StateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4B52452379700D7B297 /* StateDto.swift */; };
 		3324018E23DBA6C800B92439 /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */; };
 		332499B323DB9F650082EF09 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332499B223DB9F650082EF09 /* GameViewController.swift */; };
+		33272F6A265920A1005C9246 /* Ability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33272F69265920A1005C9246 /* Ability.swift */; };
+		33272F702659212A005C9246 /* Argument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33272F6F2659212A005C9246 /* Argument.swift */; };
+		33272F752659228E005C9246 /* DecodableClassFamily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33272F742659228E005C9246 /* DecodableClassFamily.swift */; };
+		33272F7926592741005C9246 /* EffectFamily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33272F7826592741005C9246 /* EffectFamily.swift */; };
+		33272F7D26592793005C9246 /* DrawDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33272F7C26592793005C9246 /* DrawDeck.swift */; };
 		3328DEB524CEF0B900D09117 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3328DEB424CEF0B900D09117 /* UserCell.swift */; };
 		332F0497244716AA00BE2E4A /* UIImage+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332F0496244716AA00BE2E4A /* UIImage+Color.swift */; };
 		332F0499244716C100BE2E4A /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332F0498244716C100BE2E4A /* UIColor+Hex.swift */; };
@@ -62,13 +74,9 @@
 		3358333525BC2585001BE4D8 /* GState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358330525BC2584001BE4D8 /* GState.swift */; };
 		3358333725BC2585001BE4D8 /* DeckCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358330825BC2584001BE4D8 /* DeckCard.swift */; };
 		3358333825BC2585001BE4D8 /* ResourcesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358330925BC2584001BE4D8 /* ResourcesLoader.swift */; };
-		3358333925BC2585001BE4D8 /* Ability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358330A25BC2584001BE4D8 /* Ability.swift */; };
 		3358333A25BC2585001BE4D8 /* JsonReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358330B25BC2585001BE4D8 /* JsonReader.swift */; };
 		3358333B25BC2585001BE4D8 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358330C25BC2585001BE4D8 /* Card.swift */; };
 		3358333D25BC2585001BE4D8 /* Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358330E25BC2585001BE4D8 /* Setup.swift */; };
-		3358333E25BC2585001BE4D8 /* AbilityMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358331025BC2585001BE4D8 /* AbilityMatcher.swift */; };
-		3358333F25BC2585001BE4D8 /* EffectMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358331125BC2585001BE4D8 /* EffectMatcher.swift */; };
-		3358334025BC2585001BE4D8 /* PlayReqMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358331225BC2585001BE4D8 /* PlayReqMatcher.swift */; };
 		3358334125BC2585001BE4D8 /* MoveSegmenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358331425BC2585001BE4D8 /* MoveSegmenter.swift */; };
 		3358334225BC2585001BE4D8 /* MoveSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358331525BC2585001BE4D8 /* MoveSelector.swift */; };
 		3358334325BC2585001BE4D8 /* MoveEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358331725BC2585001BE4D8 /* MoveEvaluator.swift */; };
@@ -121,6 +129,7 @@
 		3383CFD0242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3383CFCF242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 */; };
 		338A5FC0242BC8CE00766541 /* flyby-Conor-1500306612.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 338A5FBF242BC8CE00766541 /* flyby-Conor-1500306612.mp3 */; };
 		338A5FC2242BC9AA00766541 /* shotgun-old_school-RA_The_Sun_God-1129942741.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 338A5FC1242BC9A900766541 /* shotgun-old_school-RA_The_Sun_God-1129942741.mp3 */; };
+		338F7A572659682E00731FB9 /* AbilityMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7A562659682E00731FB9 /* AbilityMatcher.swift */; };
 		3392B1B925BC377100214393 /* MoveSegmenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3392B16125BC376E00214393 /* MoveSegmenterTests.swift */; };
 		3392B1BA25BC377100214393 /* MoveSelectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3392B16225BC376E00214393 /* MoveSelectorTests.swift */; };
 		3392B1BB25BC377100214393 /* TestModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3392B16325BC376F00214393 /* TestModules.swift */; };
@@ -204,6 +213,41 @@
 		33A698B52657820100C52B57 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334673EA2436328000FFBB82 /* UserPreferences.swift */; };
 		33A698B62657820900C52B57 /* UserDefaultsStored.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334673E72436314E00FFBB82 /* UserDefaultsStored.swift */; };
 		33A76F8D2656AD7000FE9DCE /* MediaEventMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33626FB9256FE31B00128C0A /* MediaEventMatcher.swift */; };
+		33AAE0232659771D00A067E3 /* GainHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE0222659771D00A067E3 /* GainHealth.swift */; };
+		33AAE025265979BF00A067E3 /* Equip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE024265979BF00A067E3 /* Equip.swift */; };
+		33AAE02726597AA700A067E3 /* CardArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE02626597AA700A067E3 /* CardArgument.swift */; };
+		33AAE02926597CF100A067E3 /* Handicap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE02826597CF100A067E3 /* Handicap.swift */; };
+		33AAE02B2659811900A067E3 /* RequireTargetAny.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE02A2659811900A067E3 /* RequireTargetAny.swift */; };
+		33AAE02D2659827D00A067E3 /* SetPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE02C2659827D00A067E3 /* SetPhase.swift */; };
+		33AAE02F2659846000A067E3 /* IsHitEliminate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE02E2659846000A067E3 /* IsHitEliminate.swift */; };
+		33AAE0312659854A00A067E3 /* RemoveHit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE0302659854A00A067E3 /* RemoveHit.swift */; };
+		33AAE0332659887700A067E3 /* DiscardHand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE0322659887700A067E3 /* DiscardHand.swift */; };
+		33AAE0352659898000A067E3 /* RequireInPlayCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE0342659898000A067E3 /* RequireInPlayCard.swift */; };
+		33AAE037265989FB00A067E3 /* PlayArg+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE036265989FB00A067E3 /* PlayArg+Extension.swift */; };
+		33AAE03926598A4800A067E3 /* DiscardInPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE03826598A4800A067E3 /* DiscardInPlay.swift */; };
+		33AAE03B26598B8B00A067E3 /* RequireTargetSelf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE03A26598B8B00A067E3 /* RequireTargetSelf.swift */; };
+		33AAE03D26598D0200A067E3 /* RequireTargetAt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE03C26598D0200A067E3 /* RequireTargetAt.swift */; };
+		33AAE03F26598D7700A067E3 /* DrawHand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE03E26598D7700A067E3 /* DrawHand.swift */; };
+		33AAE04126598EAF00A067E3 /* DrawInPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE04026598EAF00A067E3 /* DrawInPlay.swift */; };
+		33AAE0432659A4E500A067E3 /* RequireTargetReachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE0422659A4E500A067E3 /* RequireTargetReachable.swift */; };
+		33AAE0452659A5E500A067E3 /* IsTimesPerTurnMax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE0442659A5E500A067E3 /* IsTimesPerTurnMax.swift */; };
+		33AAE0472659A73900A067E3 /* AddHit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE0462659A73900A067E3 /* AddHit.swift */; };
+		33AAE04B265A2ADE00A067E3 /* LooseHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE04A265A2ADE00A067E3 /* LooseHealth.swift */; };
+		33AAE04D265A2CD900A067E3 /* IsHitCancelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE04C265A2CD900A067E3 /* IsHitCancelable.swift */; };
+		33AAE04F265A2D2F00A067E3 /* CancelHit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE04E265A2D2F00A067E3 /* CancelHit.swift */; };
+		33AAE051265A2FCF00A067E3 /* IsHitName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE050265A2FCF00A067E3 /* IsHitName.swift */; };
+		33AAE055265A312C00A067E3 /* ReverseHit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE054265A312C00A067E3 /* ReverseHit.swift */; };
+		33AAE057265A44CA00A067E3 /* DeckToStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE056265A44CA00A067E3 /* DeckToStore.swift */; };
+		33AAE059265A457900A067E3 /* RequireStoreCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE058265A457900A067E3 /* RequireStoreCards.swift */; };
+		33AAE05B265A9C6000A067E3 /* DrawStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE05A265A9C6000A067E3 /* DrawStore.swift */; };
+		33AAE05D265A9D8600A067E3 /* OnHitCancelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE05C265A9D8600A067E3 /* OnHitCancelable.swift */; };
+		33AAE05F265A9E0200A067E3 /* FlipDeckIf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE05E265A9E0200A067E3 /* FlipDeckIf.swift */; };
+		33AAE063265AAA5F00A067E3 /* ParsedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE062265AAA5F00A067E3 /* ParsedValue.swift */; };
+		33AAE066265AACE500A067E3 /* NumberArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE065265AACE500A067E3 /* NumberArgument.swift */; };
+		33AAE068265ABCD800A067E3 /* OnPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE067265ABCD800A067E3 /* OnPhase.swift */; };
+		33AAE06A265ABD7400A067E3 /* SetTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE069265ABD7400A067E3 /* SetTurn.swift */; };
+		33AAE06C265ADBF800A067E3 /* PassInPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE06B265ADBF800A067E3 /* PassInPlay.swift */; };
+		33AAE06E265AE52200A067E3 /* OnQueueEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE06D265AE52200A067E3 /* OnQueueEmpty.swift */; };
 		33AFA25323DC201A00425BEB /* ClassNameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */; };
 		33B0E85B263D5901004B5806 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0E85A263D5901004B5806 /* Router.swift */; };
 		33B0E85C263D5901004B5806 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0E85A263D5901004B5806 /* Router.swift */; };
@@ -233,6 +277,18 @@
 		33EAD12624D499910052A97C /* RoleSelectorWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EAD12524D499910052A97C /* RoleSelectorWidget.swift */; };
 		33EAD12824D4A4080052A97C /* UIStoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EAD12724D4A4080052A97C /* UIStoryboardExtension.swift */; };
 		33F419C9264E4ADF0051EF31 /* MockDatabaseReferenceProtocol+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F419C8264E4ADF0051EF31 /* MockDatabaseReferenceProtocol+Stub.swift */; };
+		33FBF8FA265AE69F00D7C6AD /* OnEliminated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF8F9265AE69F00D7C6AD /* OnEliminated.swift */; };
+		33FBF8FC265B10CE00D7C6AD /* IsHandExceedLimit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF8FB265B10CE00D7C6AD /* IsHandExceedLimit.swift */; };
+		33FBF8FE265B117200D7C6AD /* RequireHandCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF8FD265B117200D7C6AD /* RequireHandCards.swift */; };
+		33FBF900265B122400D7C6AD /* OnEliminatingRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF8FF265B122400D7C6AD /* OnEliminatingRole.swift */; };
+		33FBF902265B137A00D7C6AD /* OnLooseHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF901265B137A00D7C6AD /* OnLooseHealth.swift */; };
+		33FBF904265B153800D7C6AD /* RequireTargetOffender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF903265B153800D7C6AD /* RequireTargetOffender.swift */; };
+		33FBF906265B15C600D7C6AD /* OnHandEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF905265B15C600D7C6AD /* OnHandEmpty.swift */; };
+		33FBF908265B167C00D7C6AD /* RequireTargetEliminated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF907265B167C00D7C6AD /* RequireTargetEliminated.swift */; };
+		33FBF90A265B1BE700D7C6AD /* DrawDeckFlippingIf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF909265B1BE700D7C6AD /* DrawDeckFlippingIf.swift */; };
+		33FBF90C265B1D5100D7C6AD /* DrawDeckChoosing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF90B265B1D5100D7C6AD /* DrawDeckChoosing.swift */; };
+		33FBF90E265B1E1600D7C6AD /* RequireDeckCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF90D265B1E1600D7C6AD /* RequireDeckCards.swift */; };
+		33FBF910265B21EE00D7C6AD /* DrawDiscard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF90F265B21EE00D7C6AD /* DrawDiscard.swift */; };
 		33FDD70C240BFB4B00BC3E14 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */; };
 		794C0D33B230E521EBEBBD1E /* Pods_WildWestEngineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F82ECCD5B58B11617E188DB8 /* Pods_WildWestEngineTests.framework */; };
 		ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D2EB239EE03800653905 /* AppDelegate.swift */; };
@@ -302,12 +358,24 @@
 		33031E0E24555D5F00528158 /* OptionalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalExtension.swift; sourceTree = "<group>"; };
 		3306682D245588B9003B2263 /* FirebaseMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseMapper.swift; sourceTree = "<group>"; };
 		33113A0B263DD3ED00289989 /* UIView+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Border.swift"; sourceTree = "<group>"; };
+		331239E32659766C006C1EC1 /* IsPlayersCountMin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsPlayersCountMin.swift; sourceTree = "<group>"; };
 		3314A020256C586300E54AF6 /* AnimationRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationRenderer.swift; sourceTree = "<group>"; };
+		33176D2D26593D4A000A6FBF /* PlayReqFamily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayReqFamily.swift; sourceTree = "<group>"; };
+		33176D2F26593DBA000A6FBF /* IsYourTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsYourTurn.swift; sourceTree = "<group>"; };
+		33176D3126594362000A6FBF /* GPlayReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPlayReq.swift; sourceTree = "<group>"; };
+		33176D332659438C000A6FBF /* GEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GEffect.swift; sourceTree = "<group>"; };
+		33176D35265947BA000A6FBF /* IsPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsPhase.swift; sourceTree = "<group>"; };
+		33176D3B265962CF000A6FBF /* PlayerArgument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerArgument.swift; sourceTree = "<group>"; };
 		3318C08326558DB1005C6F49 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		3322C4B2245236D500D7B297 /* RemoteGameDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteGameDatabase.swift; sourceTree = "<group>"; };
 		3322C4B52452379700D7B297 /* StateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateDto.swift; sourceTree = "<group>"; };
 		3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		332499B223DB9F650082EF09 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		33272F69265920A1005C9246 /* Ability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ability.swift; sourceTree = "<group>"; };
+		33272F6F2659212A005C9246 /* Argument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Argument.swift; sourceTree = "<group>"; };
+		33272F742659228E005C9246 /* DecodableClassFamily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableClassFamily.swift; sourceTree = "<group>"; };
+		33272F7826592741005C9246 /* EffectFamily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectFamily.swift; sourceTree = "<group>"; };
+		33272F7C26592793005C9246 /* DrawDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawDeck.swift; sourceTree = "<group>"; };
 		3328DEB424CEF0B900D09117 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		332F0496244716AA00BE2E4A /* UIImage+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Color.swift"; sourceTree = "<group>"; };
 		332F0498244716C100BE2E4A /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
@@ -341,13 +409,9 @@
 		3358330525BC2584001BE4D8 /* GState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GState.swift; sourceTree = "<group>"; };
 		3358330825BC2584001BE4D8 /* DeckCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckCard.swift; sourceTree = "<group>"; };
 		3358330925BC2584001BE4D8 /* ResourcesLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesLoader.swift; sourceTree = "<group>"; };
-		3358330A25BC2584001BE4D8 /* Ability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ability.swift; sourceTree = "<group>"; };
 		3358330B25BC2585001BE4D8 /* JsonReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonReader.swift; sourceTree = "<group>"; };
 		3358330C25BC2585001BE4D8 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		3358330E25BC2585001BE4D8 /* Setup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setup.swift; sourceTree = "<group>"; };
-		3358331025BC2585001BE4D8 /* AbilityMatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbilityMatcher.swift; sourceTree = "<group>"; };
-		3358331125BC2585001BE4D8 /* EffectMatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectMatcher.swift; sourceTree = "<group>"; };
-		3358331225BC2585001BE4D8 /* PlayReqMatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayReqMatcher.swift; sourceTree = "<group>"; };
 		3358331425BC2585001BE4D8 /* MoveSegmenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveSegmenter.swift; sourceTree = "<group>"; };
 		3358331525BC2585001BE4D8 /* MoveSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveSelector.swift; sourceTree = "<group>"; };
 		3358331725BC2585001BE4D8 /* MoveEvaluator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveEvaluator.swift; sourceTree = "<group>"; };
@@ -394,6 +458,7 @@
 		3383CFCF242D4BA400777E61 /* Ta Da-SoundBible.com-1884170640.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Ta Da-SoundBible.com-1884170640.mp3"; sourceTree = "<group>"; };
 		338A5FBF242BC8CE00766541 /* flyby-Conor-1500306612.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "flyby-Conor-1500306612.mp3"; sourceTree = "<group>"; };
 		338A5FC1242BC9A900766541 /* shotgun-old_school-RA_The_Sun_God-1129942741.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "shotgun-old_school-RA_The_Sun_God-1129942741.mp3"; sourceTree = "<group>"; };
+		338F7A562659682E00731FB9 /* AbilityMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityMatcher.swift; sourceTree = "<group>"; };
 		3392B16125BC376E00214393 /* MoveSegmenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveSegmenterTests.swift; sourceTree = "<group>"; };
 		3392B16225BC376E00214393 /* MoveSelectorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveSelectorTests.swift; sourceTree = "<group>"; };
 		3392B16325BC376F00214393 /* TestModules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestModules.swift; sourceTree = "<group>"; };
@@ -473,6 +538,41 @@
 		339C7CA226566D6E001CBCAC /* SimulationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimulationTests.swift; sourceTree = "<group>"; };
 		33A632FF24545B060023A2D2 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		33A698B22657800700C52B57 /* AnimationEventMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationEventMatcherTests.swift; sourceTree = "<group>"; };
+		33AAE0222659771D00A067E3 /* GainHealth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainHealth.swift; sourceTree = "<group>"; };
+		33AAE024265979BF00A067E3 /* Equip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equip.swift; sourceTree = "<group>"; };
+		33AAE02626597AA700A067E3 /* CardArgument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardArgument.swift; sourceTree = "<group>"; };
+		33AAE02826597CF100A067E3 /* Handicap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Handicap.swift; sourceTree = "<group>"; };
+		33AAE02A2659811900A067E3 /* RequireTargetAny.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireTargetAny.swift; sourceTree = "<group>"; };
+		33AAE02C2659827D00A067E3 /* SetPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPhase.swift; sourceTree = "<group>"; };
+		33AAE02E2659846000A067E3 /* IsHitEliminate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsHitEliminate.swift; sourceTree = "<group>"; };
+		33AAE0302659854A00A067E3 /* RemoveHit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveHit.swift; sourceTree = "<group>"; };
+		33AAE0322659887700A067E3 /* DiscardHand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardHand.swift; sourceTree = "<group>"; };
+		33AAE0342659898000A067E3 /* RequireInPlayCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireInPlayCard.swift; sourceTree = "<group>"; };
+		33AAE036265989FB00A067E3 /* PlayArg+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayArg+Extension.swift"; sourceTree = "<group>"; };
+		33AAE03826598A4800A067E3 /* DiscardInPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardInPlay.swift; sourceTree = "<group>"; };
+		33AAE03A26598B8B00A067E3 /* RequireTargetSelf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireTargetSelf.swift; sourceTree = "<group>"; };
+		33AAE03C26598D0200A067E3 /* RequireTargetAt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireTargetAt.swift; sourceTree = "<group>"; };
+		33AAE03E26598D7700A067E3 /* DrawHand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawHand.swift; sourceTree = "<group>"; };
+		33AAE04026598EAF00A067E3 /* DrawInPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawInPlay.swift; sourceTree = "<group>"; };
+		33AAE0422659A4E500A067E3 /* RequireTargetReachable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireTargetReachable.swift; sourceTree = "<group>"; };
+		33AAE0442659A5E500A067E3 /* IsTimesPerTurnMax.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsTimesPerTurnMax.swift; sourceTree = "<group>"; };
+		33AAE0462659A73900A067E3 /* AddHit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHit.swift; sourceTree = "<group>"; };
+		33AAE04A265A2ADE00A067E3 /* LooseHealth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LooseHealth.swift; sourceTree = "<group>"; };
+		33AAE04C265A2CD900A067E3 /* IsHitCancelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsHitCancelable.swift; sourceTree = "<group>"; };
+		33AAE04E265A2D2F00A067E3 /* CancelHit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelHit.swift; sourceTree = "<group>"; };
+		33AAE050265A2FCF00A067E3 /* IsHitName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsHitName.swift; sourceTree = "<group>"; };
+		33AAE054265A312C00A067E3 /* ReverseHit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseHit.swift; sourceTree = "<group>"; };
+		33AAE056265A44CA00A067E3 /* DeckToStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckToStore.swift; sourceTree = "<group>"; };
+		33AAE058265A457900A067E3 /* RequireStoreCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireStoreCards.swift; sourceTree = "<group>"; };
+		33AAE05A265A9C6000A067E3 /* DrawStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawStore.swift; sourceTree = "<group>"; };
+		33AAE05C265A9D8600A067E3 /* OnHitCancelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnHitCancelable.swift; sourceTree = "<group>"; };
+		33AAE05E265A9E0200A067E3 /* FlipDeckIf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipDeckIf.swift; sourceTree = "<group>"; };
+		33AAE062265AAA5F00A067E3 /* ParsedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedValue.swift; sourceTree = "<group>"; };
+		33AAE065265AACE500A067E3 /* NumberArgument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberArgument.swift; sourceTree = "<group>"; };
+		33AAE067265ABCD800A067E3 /* OnPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnPhase.swift; sourceTree = "<group>"; };
+		33AAE069265ABD7400A067E3 /* SetTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTurn.swift; sourceTree = "<group>"; };
+		33AAE06B265ADBF800A067E3 /* PassInPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassInPlay.swift; sourceTree = "<group>"; };
+		33AAE06D265AE52200A067E3 /* OnQueueEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnQueueEmpty.swift; sourceTree = "<group>"; };
 		33AFA25223DC201A00425BEB /* ClassNameProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameProtocol.swift; sourceTree = "<group>"; };
 		33B0E85A263D5901004B5806 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		33B0E863263D5A05004B5806 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
@@ -499,6 +599,18 @@
 		33EAD12524D499910052A97C /* RoleSelectorWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleSelectorWidget.swift; sourceTree = "<group>"; };
 		33EAD12724D4A4080052A97C /* UIStoryboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtension.swift; sourceTree = "<group>"; };
 		33F419C8264E4ADF0051EF31 /* MockDatabaseReferenceProtocol+Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockDatabaseReferenceProtocol+Stub.swift"; sourceTree = "<group>"; };
+		33FBF8F9265AE69F00D7C6AD /* OnEliminated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnEliminated.swift; sourceTree = "<group>"; };
+		33FBF8FB265B10CE00D7C6AD /* IsHandExceedLimit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsHandExceedLimit.swift; sourceTree = "<group>"; };
+		33FBF8FD265B117200D7C6AD /* RequireHandCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireHandCards.swift; sourceTree = "<group>"; };
+		33FBF8FF265B122400D7C6AD /* OnEliminatingRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnEliminatingRole.swift; sourceTree = "<group>"; };
+		33FBF901265B137A00D7C6AD /* OnLooseHealth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnLooseHealth.swift; sourceTree = "<group>"; };
+		33FBF903265B153800D7C6AD /* RequireTargetOffender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireTargetOffender.swift; sourceTree = "<group>"; };
+		33FBF905265B15C600D7C6AD /* OnHandEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnHandEmpty.swift; sourceTree = "<group>"; };
+		33FBF907265B167C00D7C6AD /* RequireTargetEliminated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireTargetEliminated.swift; sourceTree = "<group>"; };
+		33FBF909265B1BE700D7C6AD /* DrawDeckFlippingIf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawDeckFlippingIf.swift; sourceTree = "<group>"; };
+		33FBF90B265B1D5100D7C6AD /* DrawDeckChoosing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawDeckChoosing.swift; sourceTree = "<group>"; };
+		33FBF90D265B1E1600D7C6AD /* RequireDeckCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireDeckCards.swift; sourceTree = "<group>"; };
+		33FBF90F265B21EE00D7C6AD /* DrawDiscard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawDiscard.swift; sourceTree = "<group>"; };
 		33FD5E1F25BC3AD500F18AF3 /* ENGINE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = ENGINE.md; sourceTree = "<group>"; };
 		33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		7076E7B55735D7880ABED367 /* Pods-WildWestEngine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestEngine.debug.xcconfig"; path = "Target Support Files/Pods-WildWestEngine/Pods-WildWestEngine.debug.xcconfig"; sourceTree = "<group>"; };
@@ -589,6 +701,42 @@
 			path = json;
 			sourceTree = "<group>";
 		};
+		33176D2C26593D24000A6FBF /* playReq */ = {
+			isa = PBXGroup;
+			children = (
+				33176D3126594362000A6FBF /* GPlayReq.swift */,
+				33176D2D26593D4A000A6FBF /* PlayReqFamily.swift */,
+				33AAE062265AAA5F00A067E3 /* ParsedValue.swift */,
+				33AAE036265989FB00A067E3 /* PlayArg+Extension.swift */,
+				33176D2F26593DBA000A6FBF /* IsYourTurn.swift */,
+				33176D35265947BA000A6FBF /* IsPhase.swift */,
+				331239E32659766C006C1EC1 /* IsPlayersCountMin.swift */,
+				33AAE02E2659846000A067E3 /* IsHitEliminate.swift */,
+				33AAE0442659A5E500A067E3 /* IsTimesPerTurnMax.swift */,
+				33AAE04C265A2CD900A067E3 /* IsHitCancelable.swift */,
+				33AAE050265A2FCF00A067E3 /* IsHitName.swift */,
+				33AAE02A2659811900A067E3 /* RequireTargetAny.swift */,
+				33AAE0342659898000A067E3 /* RequireInPlayCard.swift */,
+				33AAE03A26598B8B00A067E3 /* RequireTargetSelf.swift */,
+				33AAE03C26598D0200A067E3 /* RequireTargetAt.swift */,
+				33AAE0422659A4E500A067E3 /* RequireTargetReachable.swift */,
+				33AAE058265A457900A067E3 /* RequireStoreCards.swift */,
+				33AAE05C265A9D8600A067E3 /* OnHitCancelable.swift */,
+				33AAE067265ABCD800A067E3 /* OnPhase.swift */,
+				33AAE06D265AE52200A067E3 /* OnQueueEmpty.swift */,
+				33FBF8F9265AE69F00D7C6AD /* OnEliminated.swift */,
+				33FBF8FB265B10CE00D7C6AD /* IsHandExceedLimit.swift */,
+				33FBF8FD265B117200D7C6AD /* RequireHandCards.swift */,
+				33FBF8FF265B122400D7C6AD /* OnEliminatingRole.swift */,
+				33FBF901265B137A00D7C6AD /* OnLooseHealth.swift */,
+				33FBF903265B153800D7C6AD /* RequireTargetOffender.swift */,
+				33FBF905265B15C600D7C6AD /* OnHandEmpty.swift */,
+				33FBF907265B167C00D7C6AD /* RequireTargetEliminated.swift */,
+				33FBF90D265B1E1600D7C6AD /* RequireDeckCards.swift */,
+			);
+			path = playReq;
+			sourceTree = "<group>";
+		};
 		331BFCF525BD67AC004183F1 /* utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -613,6 +761,42 @@
 				33113A0B263DD3ED00289989 /* UIView+Border.swift */,
 			);
 			path = extensions;
+			sourceTree = "<group>";
+		};
+		33272F7A2659276C005C9246 /* effect */ = {
+			isa = PBXGroup;
+			children = (
+				33176D332659438C000A6FBF /* GEffect.swift */,
+				33272F7826592741005C9246 /* EffectFamily.swift */,
+				33272F6F2659212A005C9246 /* Argument.swift */,
+				33272F742659228E005C9246 /* DecodableClassFamily.swift */,
+				33176D3B265962CF000A6FBF /* PlayerArgument.swift */,
+				33AAE02626597AA700A067E3 /* CardArgument.swift */,
+				33AAE065265AACE500A067E3 /* NumberArgument.swift */,
+				33272F7C26592793005C9246 /* DrawDeck.swift */,
+				33AAE0222659771D00A067E3 /* GainHealth.swift */,
+				33AAE024265979BF00A067E3 /* Equip.swift */,
+				33AAE02826597CF100A067E3 /* Handicap.swift */,
+				33AAE02C2659827D00A067E3 /* SetPhase.swift */,
+				33AAE0302659854A00A067E3 /* RemoveHit.swift */,
+				33AAE04E265A2D2F00A067E3 /* CancelHit.swift */,
+				33AAE0322659887700A067E3 /* DiscardHand.swift */,
+				33AAE03826598A4800A067E3 /* DiscardInPlay.swift */,
+				33AAE03E26598D7700A067E3 /* DrawHand.swift */,
+				33AAE04026598EAF00A067E3 /* DrawInPlay.swift */,
+				33AAE0462659A73900A067E3 /* AddHit.swift */,
+				33AAE04A265A2ADE00A067E3 /* LooseHealth.swift */,
+				33AAE054265A312C00A067E3 /* ReverseHit.swift */,
+				33AAE056265A44CA00A067E3 /* DeckToStore.swift */,
+				33AAE05A265A9C6000A067E3 /* DrawStore.swift */,
+				33AAE05E265A9E0200A067E3 /* FlipDeckIf.swift */,
+				33AAE069265ABD7400A067E3 /* SetTurn.swift */,
+				33AAE06B265ADBF800A067E3 /* PassInPlay.swift */,
+				33FBF909265B1BE700D7C6AD /* DrawDeckFlippingIf.swift */,
+				33FBF90B265B1D5100D7C6AD /* DrawDeckChoosing.swift */,
+				33FBF90F265B21EE00D7C6AD /* DrawDiscard.swift */,
+			);
+			path = effect;
 			sourceTree = "<group>";
 		};
 		333DB7C724D54FF4002A5692 /* hand */ = {
@@ -642,7 +826,7 @@
 				335832FE25BC2584001BE4D8 /* core */,
 				3358331D25BC2585001BE4D8 /* engine */,
 				3358330725BC2584001BE4D8 /* setup */,
-				3358330F25BC2585001BE4D8 /* matcher */,
+				338F7A55265967C000731FB9 /* matcher */,
 				3358331325BC2585001BE4D8 /* moveinput */,
 				3358331625BC2585001BE4D8 /* ai */,
 				335832FA25BC2584001BE4D8 /* misc */,
@@ -704,19 +888,8 @@
 				3358330B25BC2585001BE4D8 /* JsonReader.swift */,
 				3358330C25BC2585001BE4D8 /* Card.swift */,
 				3358330825BC2584001BE4D8 /* DeckCard.swift */,
-				3358330A25BC2584001BE4D8 /* Ability.swift */,
 			);
 			path = setup;
-			sourceTree = "<group>";
-		};
-		3358330F25BC2585001BE4D8 /* matcher */ = {
-			isa = PBXGroup;
-			children = (
-				3358331025BC2585001BE4D8 /* AbilityMatcher.swift */,
-				3358331125BC2585001BE4D8 /* EffectMatcher.swift */,
-				3358331225BC2585001BE4D8 /* PlayReqMatcher.swift */,
-			);
-			path = matcher;
 			sourceTree = "<group>";
 		};
 		3358331325BC2585001BE4D8 /* moveinput */ = {
@@ -848,6 +1021,17 @@
 				33E4411724077CA000B2848E /* message */,
 			);
 			path = game;
+			sourceTree = "<group>";
+		};
+		338F7A55265967C000731FB9 /* matcher */ = {
+			isa = PBXGroup;
+			children = (
+				338F7A562659682E00731FB9 /* AbilityMatcher.swift */,
+				33272F69265920A1005C9246 /* Ability.swift */,
+				33176D2C26593D24000A6FBF /* playReq */,
+				33272F7A2659276C005C9246 /* effect */,
+			);
+			path = matcher;
 			sourceTree = "<group>";
 		};
 		3392B16025BC376E00214393 /* moveinput */ = {
@@ -1532,7 +1716,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/WildWestEngineTests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/WildWestEngine\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"WildWestEngine\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/core/State.swift\" \\\n\"${INPUT_DIR}/engine/Database.swift\" \\\n\"${INPUT_DIR}/engine/GDatabaseUpdater.swift\" \\\n\"${INPUT_DIR}/engine/Engine.swift\" \\\n\"${INPUT_DIR}/engine/GLoop.swift\" \\\n\"${INPUT_DIR}/engine/GEventQueue.swift\" \\\n\"${INPUT_DIR}/engine/GTimer.swift\" \\\n\"${INPUT_DIR}/matcher/AbilityMatcher.swift\" \\\n\"${INPUT_DIR}/matcher/PlayReqMatcher.swift\" \\\n\"${INPUT_DIR}/matcher/EffectMatcher.swift\" \\\n\"${INPUT_DIR}/setup/Setup.swift\" \\\n\"${INPUT_DIR}/setup/ResourcesLoader.swift\" \\\n\"${INPUT_DIR}/ai/AIAgent.swift\" \\\n\"${INPUT_DIR}/ai/AI.swift\" \\\n\"${INPUT_DIR}/ai/MoveEvaluator.swift\" \\\n\"${INPUT_DIR}/ai/RoleEstimator.swift\" \\\n\"${INPUT_DIR}/ai/RoleStrategy.swift\" \\\n\"${INPUT_DIR}/ai/AbilityEvaluator.swift\"\n";
+			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/WildWestEngineTests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/WildWestEngine\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"WildWestEngine\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/core/State.swift\" \\\n\"${INPUT_DIR}/engine/Database.swift\" \\\n\"${INPUT_DIR}/engine/GDatabaseUpdater.swift\" \\\n\"${INPUT_DIR}/engine/Engine.swift\" \\\n\"${INPUT_DIR}/engine/GLoop.swift\" \\\n\"${INPUT_DIR}/engine/GEventQueue.swift\" \\\n\"${INPUT_DIR}/engine/GTimer.swift\" \\\n\"${INPUT_DIR}/matcher/AbilityMatcher.swift\" \\\n\"${INPUT_DIR}/setup/Setup.swift\" \\\n\"${INPUT_DIR}/setup/ResourcesLoader.swift\" \\\n\"${INPUT_DIR}/ai/AIAgent.swift\" \\\n\"${INPUT_DIR}/ai/AI.swift\" \\\n\"${INPUT_DIR}/ai/MoveEvaluator.swift\" \\\n\"${INPUT_DIR}/ai/RoleEstimator.swift\" \\\n\"${INPUT_DIR}/ai/RoleStrategy.swift\" \\\n\"${INPUT_DIR}/ai/AbilityEvaluator.swift\"\n";
 		};
 		3DE5D489E0D81C17891F4FD5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1694,41 +1878,97 @@
 			buildActionMask = 2147483647;
 			files = (
 				3358333A25BC2585001BE4D8 /* JsonReader.swift in Sources */,
+				33176D3226594362000A6FBF /* GPlayReq.swift in Sources */,
+				33FBF900265B122400D7C6AD /* OnEliminatingRole.swift in Sources */,
 				3358334A25BC2585001BE4D8 /* GEngine.swift in Sources */,
+				33AAE04D265A2CD900A067E3 /* IsHitCancelable.swift in Sources */,
 				3358334C25BC2585001BE4D8 /* GDatabaseUpdater.swift in Sources */,
-				3358334025BC2585001BE4D8 /* PlayReqMatcher.swift in Sources */,
 				3358333425BC2585001BE4D8 /* GPlayer.swift in Sources */,
+				33FBF90C265B1D5100D7C6AD /* DrawDeckChoosing.swift in Sources */,
+				33AAE03B26598B8B00A067E3 /* RequireTargetSelf.swift in Sources */,
+				33272F7926592741005C9246 /* EffectFamily.swift in Sources */,
+				33AAE068265ABCD800A067E3 /* OnPhase.swift in Sources */,
 				3358334E25BC2585001BE4D8 /* GLoop.swift in Sources */,
+				33FBF908265B167C00D7C6AD /* RequireTargetEliminated.swift in Sources */,
 				3358334525BC2585001BE4D8 /* AbilityEvaluator.swift in Sources */,
+				33AAE04126598EAF00A067E3 /* DrawInPlay.swift in Sources */,
 				3358334325BC2585001BE4D8 /* MoveEvaluator.swift in Sources */,
 				3358333225BC2585001BE4D8 /* GCard.swift in Sources */,
-				3358333E25BC2585001BE4D8 /* AbilityMatcher.swift in Sources */,
+				33AAE0332659887700A067E3 /* DiscardHand.swift in Sources */,
 				3358333D25BC2585001BE4D8 /* Setup.swift in Sources */,
 				3358332D25BC2585001BE4D8 /* Array+FilterOrNil.swift in Sources */,
 				3358332E25BC2585001BE4D8 /* Dictionary+Decoding.swift in Sources */,
+				33AAE0452659A5E500A067E3 /* IsTimesPerTurnMax.swift in Sources */,
+				33272F752659228E005C9246 /* DecodableClassFamily.swift in Sources */,
+				33176D3026593DBA000A6FBF /* IsYourTurn.swift in Sources */,
+				33AAE0472659A73900A067E3 /* AddHit.swift in Sources */,
+				33272F702659212A005C9246 /* Argument.swift in Sources */,
+				33272F6A265920A1005C9246 /* Ability.swift in Sources */,
+				33AAE037265989FB00A067E3 /* PlayArg+Extension.swift in Sources */,
+				33AAE03926598A4800A067E3 /* DiscardInPlay.swift in Sources */,
+				33AAE0432659A4E500A067E3 /* RequireTargetReachable.swift in Sources */,
+				33AAE05D265A9D8600A067E3 /* OnHitCancelable.swift in Sources */,
+				33AAE0232659771D00A067E3 /* GainHealth.swift in Sources */,
 				3358334D25BC2585001BE4D8 /* Database.swift in Sources */,
 				3358334425BC2585001BE4D8 /* AIAgent.swift in Sources */,
 				3358333725BC2585001BE4D8 /* DeckCard.swift in Sources */,
 				3358332C25BC2585001BE4D8 /* Card+Regex.swift in Sources */,
 				3358334125BC2585001BE4D8 /* MoveSegmenter.swift in Sources */,
+				33AAE0352659898000A067E3 /* RequireInPlayCard.swift in Sources */,
+				33AAE05F265A9E0200A067E3 /* FlipDeckIf.swift in Sources */,
+				33AAE05B265A9C6000A067E3 /* DrawStore.swift in Sources */,
 				3358335025BC2585001BE4D8 /* GEventQueue.swift in Sources */,
 				3358333B25BC2585001BE4D8 /* Card.swift in Sources */,
 				3358334B25BC2585001BE4D8 /* Engine.swift in Sources */,
+				33AAE06E265AE52200A067E3 /* OnQueueEmpty.swift in Sources */,
 				3358333825BC2585001BE4D8 /* ResourcesLoader.swift in Sources */,
-				3358333F25BC2585001BE4D8 /* EffectMatcher.swift in Sources */,
+				33AAE0312659854A00A067E3 /* RemoveHit.swift in Sources */,
+				33FBF904265B153800D7C6AD /* RequireTargetOffender.swift in Sources */,
+				33AAE02D2659827D00A067E3 /* SetPhase.swift in Sources */,
+				33FBF8FA265AE69F00D7C6AD /* OnEliminated.swift in Sources */,
+				33FBF910265B21EE00D7C6AD /* DrawDiscard.swift in Sources */,
+				33AAE02B2659811900A067E3 /* RequireTargetAny.swift in Sources */,
+				33AAE057265A44CA00A067E3 /* DeckToStore.swift in Sources */,
+				33AAE059265A457900A067E3 /* RequireStoreCards.swift in Sources */,
+				33176D3C265962CF000A6FBF /* PlayerArgument.swift in Sources */,
+				33AAE066265AACE500A067E3 /* NumberArgument.swift in Sources */,
+				33AAE06C265ADBF800A067E3 /* PassInPlay.swift in Sources */,
 				3358333325BC2585001BE4D8 /* GMove.swift in Sources */,
+				338F7A572659682E00731FB9 /* AbilityMatcher.swift in Sources */,
+				33AAE04F265A2D2F00A067E3 /* CancelHit.swift in Sources */,
+				33FBF90A265B1BE700D7C6AD /* DrawDeckFlippingIf.swift in Sources */,
+				33AAE063265AAA5F00A067E3 /* ParsedValue.swift in Sources */,
+				33FBF90E265B1E1600D7C6AD /* RequireDeckCards.swift in Sources */,
+				33AAE03D26598D0200A067E3 /* RequireTargetAt.swift in Sources */,
 				33969B2226577A9900E58908 /* GEvent+Destructuring.swift in Sources */,
 				3358334625BC2585001BE4D8 /* RoleEstimator.swift in Sources */,
+				33AAE055265A312C00A067E3 /* ReverseHit.swift in Sources */,
+				33FBF906265B15C600D7C6AD /* OnHandEmpty.swift in Sources */,
+				33FBF8FC265B10CE00D7C6AD /* IsHandExceedLimit.swift in Sources */,
+				33AAE02926597CF100A067E3 /* Handicap.swift in Sources */,
 				3358334225BC2585001BE4D8 /* MoveSelector.swift in Sources */,
+				33272F7D26592793005C9246 /* DrawDeck.swift in Sources */,
+				33AAE02726597AA700A067E3 /* CardArgument.swift in Sources */,
+				33176D2E26593D4A000A6FBF /* PlayReqFamily.swift in Sources */,
 				3358334725BC2585001BE4D8 /* AI.swift in Sources */,
+				33AAE051265A2FCF00A067E3 /* IsHitName.swift in Sources */,
 				3358333025BC2585001BE4D8 /* GEvent.swift in Sources */,
 				3358334825BC2585001BE4D8 /* RoleStrategy.swift in Sources */,
 				3358332F25BC2585001BE4D8 /* State.swift in Sources */,
 				3358333125BC2585001BE4D8 /* GHit.swift in Sources */,
+				33FBF902265B137A00D7C6AD /* OnLooseHealth.swift in Sources */,
+				331239E42659766C006C1EC1 /* IsPlayersCountMin.swift in Sources */,
 				3358334925BC2585001BE4D8 /* GDatabase.swift in Sources */,
+				33AAE03F26598D7700A067E3 /* DrawHand.swift in Sources */,
+				33AAE04B265A2ADE00A067E3 /* LooseHealth.swift in Sources */,
 				3358333525BC2585001BE4D8 /* GState.swift in Sources */,
-				3358333925BC2585001BE4D8 /* Ability.swift in Sources */,
+				33AAE06A265ABD7400A067E3 /* SetTurn.swift in Sources */,
+				33AAE02F2659846000A067E3 /* IsHitEliminate.swift in Sources */,
+				33FBF8FE265B117200D7C6AD /* RequireHandCards.swift in Sources */,
+				33176D342659438C000A6FBF /* GEffect.swift in Sources */,
 				3358334F25BC2585001BE4D8 /* GTimer.swift in Sources */,
+				33AAE025265979BF00A067E3 /* Equip.swift in Sources */,
+				33176D36265947BA000A6FBF /* IsPhase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

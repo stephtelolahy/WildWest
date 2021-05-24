@@ -4,13 +4,11 @@
     "type": "active",
     "canPlay": {
       "isYourTurn": 0,
-      "isPhase": 2,
-      "isHitsEmpty": 0
+      "isPhase": 2
     },
     "onPlay": [
       {
         "action": "equip",
-        "player": "actor",
         "card": "played"
       }
     ]
@@ -21,13 +19,11 @@
     "canPlay": {
       "isYourTurn": 0,
       "isPhase": 2,
-      "isHitsEmpty": 0,
       "requireTargetAny": 0
     },
     "onPlay": [
       {
         "action": "handicap",
-        "player": "actor",
         "card": "played",
         "other": "target"
       }
@@ -38,8 +34,7 @@
     "type": "active",
     "canPlay": {
       "isYourTurn": 0,
-      "isPhase": 2,
-      "isHitsEmpty": 0
+      "isPhase": 2
     },
     "onPlay": [
       {
@@ -54,13 +49,11 @@
     "canPlay": {
       "isYourTurn": 0,
       "isPhase": 2,
-      "isHitsEmpty": 0,
       "isPlayersCountMin": 3
     },
     "onPlay": [
       {
-        "action": "gainHealth",
-        "player": "actor"
+        "action": "gainHealth"
       }
     ]
   },
@@ -73,8 +66,7 @@
     },
     "onPlay": [
       {
-        "action": "removeHit",
-        "player": "actor"
+        "action": "removeHit"
       }
     ]
   },
@@ -83,8 +75,7 @@
     "type": "active",
     "canPlay": {
       "isYourTurn": 0,
-      "isPhase": 2,
-      "isHitsEmpty": 0
+      "isPhase": 2
     },
     "onPlay": [
       {
@@ -98,13 +89,11 @@
     "type": "active",
     "canPlay": {
       "isYourTurn": 0,
-      "isPhase": 2,
-      "isHitsEmpty": 0
+      "isPhase": 2
     },
     "onPlay": [
       {
         "action": "drawDeck",
-        "player": "actor",
         "amount": 2
       }
     ]
@@ -114,13 +103,11 @@
     "type": "active",
     "canPlay": {
       "isYourTurn": 0,
-      "isPhase": 2,
-      "isHitsEmpty": 0
+      "isPhase": 2
     },
     "onPlay": [
       {
         "action": "drawDeck",
-        "player": "actor",
         "amount": 3
       }
     ]
@@ -131,7 +118,6 @@
     "canPlay": {
       "isYourTurn": 0,
       "isPhase": 2,
-      "isHitsEmpty": 0,
       "requireTargetAny": 0
     },
     "onPlay": [
@@ -148,7 +134,6 @@
     "canPlay": {
       "isYourTurn": 0,
       "isPhase": 2,
-      "isHitsEmpty": 0,
       "requireTargetAny": 0,
       "requireInPlayCard": 0
     },
@@ -166,7 +151,6 @@
     "canPlay": {
       "isYourTurn": 0,
       "isPhase": 2,
-      "isHitsEmpty": 0,
       "requireTargetSelf": 0,
       "requireInPlayCard": 0
     },
@@ -184,13 +168,11 @@
     "canPlay": {
       "isYourTurn": 0,
       "isPhase": 2,
-      "isHitsEmpty": 0,
       "requireTargetAt": 1
     },
     "onPlay": [
       {
         "action": "drawHand",
-        "player": "actor",
         "other": "target",
         "card": "randomHand"
       }
@@ -202,14 +184,12 @@
     "canPlay": {
       "isYourTurn": 0,
       "isPhase": 2,
-      "isHitsEmpty": 0,
       "requireTargetAt": 1,
       "requireInPlayCard": 0
     },
     "onPlay": [
       {
         "action": "drawInPlay",
-        "player": "actor",
         "other": "target",
         "card": "requiredInPlay"
       }
@@ -221,7 +201,6 @@
     "canPlay": {
       "isYourTurn": 0,
       "isPhase": 2,
-      "isHitsEmpty": 0,
       "requireTargetReachable": 0,
       "isTimesPerTurnMax": "bangsPerTurn"
     },
@@ -239,13 +218,10 @@
     "type": "active",
     "onPlay": [
       {
-        "action": "looseHealth",
-        "player": "actor",
-        "offender": "hitOffender"
+        "action": "looseHealth"
       },
       {
-        "action": "removeHit",
-        "player": "actor"
+        "action": "removeHit"
       }
     ]
   },
@@ -257,8 +233,7 @@
     },
     "onPlay": [
       {
-        "action": "cancelHit",
-        "player": "actor"
+        "action": "cancelHit"
       }
     ]
   },
@@ -267,15 +242,14 @@
     "type": "active",
     "canPlay": {
       "isYourTurn": 0,
-      "isPhase": 2,
-      "isHitsEmpty": 0
+      "isPhase": 2
     },
     "onPlay": [
       {
         "action": "addHit",
         "player": "others",
         "abilities": ["looseHealth"],
-        "cancelable": 1
+        "cancelable": "1"
       }
     ]
   },
@@ -284,15 +258,13 @@
     "type": "active",
     "canPlay": {
       "isYourTurn": 0,
-      "isPhase": 2,
-      "isHitsEmpty": 0
+      "isPhase": 2
     },
     "onPlay": [
       {
         "action": "addHit",
         "player": "others",
-        "abilities": ["looseHealth"],
-        "cancelable": 0
+        "abilities": ["looseHealth"]
       }
     ]
   },
@@ -304,8 +276,7 @@
     },
     "onPlay": [
       {
-        "action": "removeHit",
-        "player": "actor"
+        "action": "removeHit"
       }
     ]
   },
@@ -315,15 +286,13 @@
     "canPlay": {
       "isYourTurn": 0,
       "isPhase": 2,
-      "isHitsEmpty": 0,
       "requireTargetAny": 0
     },
     "onPlay": [
       {
         "action": "addHit",
         "player": "target",
-        "abilities": ["looseHealth"],
-        "cancelable": 0
+        "abilities": ["looseHealth"]
       }
     ]
   },
@@ -335,8 +304,7 @@
     },
     "onPlay": [
       {
-        "action": "reverseHit",
-        "player": "actor"
+        "action": "reverseHit"
       }
     ]
   },
@@ -345,20 +313,17 @@
     "type": "active",
     "canPlay": {
       "isYourTurn": 0,
-      "isPhase": 2,
-      "isHitsEmpty": 0
+      "isPhase": 2
     },
     "onPlay": [
       {
         "action": "deckToStore",
-        "hidden": false,
         "amount": "inPlayPlayers"
       },
       {
         "action": "addHit",
         "player": "all",
-        "abilities": ["drawStore"],
-        "cancelable": 0
+        "abilities": ["drawStore"]
       }
     ]
   },
@@ -371,12 +336,10 @@
     "onPlay": [
       {
         "action": "drawStore",
-        "player": "actor",
         "card": "requiredStore"
       },
       {
-        "action": "removeHit",
-        "player": "actor"
+        "action": "removeHit"
       }
     ]
   },
@@ -392,11 +355,9 @@
         "regex": "♥️",
         "then": [
           {
-            "action": "cancelHit",
-            "player": "actor"
+            "action": "cancelHit"
           }
-        ],
-        "else": []
+        ]
       }
     ]
   },
@@ -411,7 +372,12 @@
       {
         "action": "flipDeckIf",
         "regex": "♥️",
-        "then": [],
+        "then": [
+          {
+            "action": "discardInPlay",
+            "card": "played"
+          }
+        ],
         "else": [
           {
             "action": "setTurn",
@@ -420,13 +386,12 @@
           {
             "action": "setPhase",
             "value": 1
+          },
+          {
+            "action": "discardInPlay",
+            "card": "played"
           }
         ]
-      },
-      {
-        "action": "discardInPlay",
-        "player": "actor",
-        "card": "played"
       }
     ]
   },
@@ -445,7 +410,6 @@
         "then": [
           {
             "action": "passInPlay",
-            "player": "actor",
             "card": "played",
             "other": "next"
           }
@@ -453,14 +417,11 @@
         "else": [
           {
             "action": "addHit",
-            "times": 3,
-            "player": "actor",
-            "abilities": ["looseHealth"],
-            "cancelable": 0
+            "times": "3",
+            "abilities": ["looseHealth"]
           },
           {
             "action": "discardInPlay",
-            "player": "actor",
             "card": "played"
           }
         ]
@@ -472,14 +433,12 @@
     "type": "triggered",
     "canPlay": {
       "onQueueEmpty": 0,
-      "isHitsEmpty": 0,
       "isYourTurn": 0,
       "isPhase": 1
     },
     "onPlay": [
       {
         "action": "drawDeck",
-        "player": "actor",
         "amount": 2
       },
       {
@@ -497,15 +456,13 @@
     "onPlay": [
       {
         "action": "discardHand",
-        "player": "actor",
         "card": "allHand",
-        "optional": 0
+        "optional": true
       },
       {
         "action": "discardInPlay",
-        "player": "actor",
         "card": "allInPlay",
-        "optional": 0
+        "optional": true
       }
     ]
   },
@@ -514,7 +471,6 @@
     "type": "triggered",
     "canPlay": {
       "onQueueEmpty": 0,
-      "isHitsEmpty": 0,
       "isYourTurn": 0,
       "isPhase": 3
     },
@@ -559,10 +515,8 @@
     "onPlay": [
       {
         "action": "addHit",
-        "player": "actor",
         "times": "excessHand",
-        "abilities": ["discardSelfHand"],
-        "cancelable": 0
+        "abilities": ["discardSelfHand"]
       }
     ]
   },
@@ -575,12 +529,10 @@
     "onPlay": [
       {
         "action": "discardHand",
-        "player": "actor",
         "card": "requiredHand"
       },
       {
-        "action": "removeHit",
-        "player": "actor"
+        "action": "removeHit"
       }
     ]
   },
@@ -593,7 +545,6 @@
     "onPlay": [
       {
         "action": "drawDeck",
-        "player": "actor",
         "amount": 3
       }
     ]
@@ -607,15 +558,13 @@
     "onPlay": [
       {
         "action": "discardHand",
-        "player": "actor",
         "card": "allHand",
-        "optional": 0
+        "optional": true
       },
       {
         "action": "discardInPlay",
-        "player": "actor",
         "card": "allInPlay",
-        "optional": 0
+        "optional": true
       }
     ]
   },
@@ -628,7 +577,6 @@
     "onPlay": [
       {
         "action": "drawDeck",
-        "player": "actor",
         "amount": 1
       }
     ]
@@ -643,7 +591,6 @@
     "onPlay": [
       {
         "action": "drawHand",
-        "player": "actor",
         "other": "target",
         "card": "randomHand"
       }
@@ -658,7 +605,6 @@
     "onPlay": [
       {
         "action": "drawDeck",
-        "player": "actor",
         "amount": 1
       }
     ]
@@ -673,17 +619,15 @@
     "onPlay": [
       {
         "action": "drawHand",
-        "player": "actor",
         "other": "target",
         "card": "allHand",
-        "optional": 0
+        "optional": true
       },
       {
         "action": "drawInPlay",
-        "player": "actor",
         "other": "target",
         "card": "allInPlay",
-        "optional": 0
+        "optional": true
       }
     ]
   },
@@ -693,18 +637,15 @@
     "canPlay": {
       "isYourTurn": 0,
       "isPhase": 2,
-      "isHitsEmpty": 0,
       "requireHandCards": 2
     },
     "onPlay": [
       {
         "action": "discardHand",
-        "player": "actor",
         "card": "requiredHand"
       },
       {
-        "action": "gainHealth",
-        "player": "actor"
+        "action": "gainHealth"
       }
     ]
   },
@@ -713,14 +654,12 @@
     "type": "triggered",
     "canPlay": {
       "onQueueEmpty": 0,
-      "isHitsEmpty": 0,
       "isYourTurn": 0,
       "isPhase": 1
     },
     "onPlay": [
       {
         "action": "drawDeck",
-        "player": "actor",
         "amount": 1
       },
       {
@@ -730,11 +669,9 @@
         "then": [
           {
             "action": "drawDeck",
-            "player": "actor",
             "amount": 1
           }
-        ],
-        "else": []
+        ]
       },
       {
         "action": "setPhase",
@@ -747,16 +684,13 @@
     "type": "triggered",
     "canPlay": {
       "onQueueEmpty": 0,
-      "isHitsEmpty": 0,
       "isYourTurn": 0,
       "isPhase": 1
     },
     "onPlay": [
       {
         "action": "addHit",
-        "player": "actor",
-        "abilities": ["startTurnDrawDeckChoosing2"],
-        "cancelable": 0
+        "abilities": ["startTurnDrawDeckChoosing2"]
       }
     ]
   },
@@ -769,12 +703,10 @@
     "onPlay": [
       {
         "action": "drawDeckChoosing",
-        "player": "actor",
         "card": "requiredDeck"
       },
       {
-        "action": "removeHit",
-        "player": "actor"
+        "action": "removeHit"
       },
       {
         "action": "setPhase",
@@ -787,16 +719,13 @@
     "type": "triggered",
     "canPlay": {
       "onQueueEmpty": 0,
-      "isHitsEmpty": 0,
       "isYourTurn": 0,
       "isPhase": 1
     },
     "onPlay": [
       {
         "action": "addHit",
-        "player": "actor",
-        "abilities": ["startTurnDrawingPlayer", "startTurnDrawingDeck"],
-        "cancelable": 0
+        "abilities": ["startTurnDrawingPlayer", "startTurnDrawingDeck"]
       }
     ]
   },
@@ -809,18 +738,15 @@
     "onPlay": [
       {
         "action": "drawHand",
-        "player": "actor",
         "other": "target",
         "card": "randomHand"
       },
       {
         "action": "drawDeck",
-        "player": "actor",
         "amount": 1
       },
       {
-        "action": "removeHit",
-        "player": "actor"
+        "action": "removeHit"
       },
       {
         "action": "setPhase",
@@ -834,12 +760,10 @@
     "onPlay": [
       {
         "action": "drawDeck",
-        "player": "actor",
         "amount": 2
       },
       {
-        "action": "removeHit",
-        "player": "actor"
+        "action": "removeHit"
       },
       {
         "action": "setPhase",
@@ -852,16 +776,13 @@
     "type": "triggered",
     "canPlay": {
       "onQueueEmpty": 0,
-      "isHitsEmpty": 0,
       "isYourTurn": 0,
       "isPhase": 1
     },
     "onPlay": [
       {
         "action": "addHit",
-        "player": "actor",
-        "abilities": ["startTurnDrawingDiscard", "startTurnDrawingDeck"],
-        "cancelable": 0
+        "abilities": ["startTurnDrawingDiscard", "startTurnDrawingDeck"]
       }
     ]
   },
@@ -870,17 +791,14 @@
     "type": "active",
     "onPlay": [
       {
-        "action": "drawDiscard",
-        "player": "actor"
+        "action": "drawDiscard"
       },
       {
         "action": "drawDeck",
-        "player": "actor",
         "amount": 1
       },
       {
-        "action": "removeHit",
-        "player": "actor"
+        "action": "removeHit"
       },
       {
         "action": "setPhase",

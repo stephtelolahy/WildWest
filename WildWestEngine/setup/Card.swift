@@ -22,7 +22,7 @@ public struct Card {
     }
 }
 
-public enum CardType: String {
+public enum CardType: String, Decodable {
     case brown
     case blue
     case figure
@@ -46,5 +46,3 @@ extension Card: Decodable {
         abilities = try values.decodeIfPresent([String: Int].self, forKey: .abilities) ?? [:]
     }
 }
-
-extension CardType: Decodable {}
