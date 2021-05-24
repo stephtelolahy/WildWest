@@ -18,5 +18,10 @@
     "name": "springfield",
     "value": "K",
     "suit": "♠️"
+  },
+  {
+    "name": "hideout",
+    "value": "K",
+    "suit": "♦️"
   }
 ]

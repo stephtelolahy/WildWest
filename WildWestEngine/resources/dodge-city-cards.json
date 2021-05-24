@@ -22,5 +22,14 @@
     "abilities": {
       "springfield": 0
     }
+  },
+  {
+    "name": "hideout",
+    "desc": "Others view you at distance +1",
+    "type": "blue",
+    "abilities": {
+      "mustang": 0,
+      "equip": 0
+    }
   }
 ]
