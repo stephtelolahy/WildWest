@@ -98,5 +98,15 @@
     "name": "dynamite",
     "value": "10",
     "suit": "♣️"
+  },
+  {
+    "name": "mustang",
+    "value": "5",
+    "suit": "♥️"
+  },
+  {
+    "name": "barrel",
+    "value": "A",
+    "suit": "♣️"
   }
 ]
