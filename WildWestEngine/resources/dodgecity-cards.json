@@ -65,5 +65,13 @@
       "DrawOtherHandRequire1Card": 0,
       "DrawOtherInPlayRequire1Card": 0
     }
+  },
+  {
+    "name": "brawl",
+    "desc": "The player must discard one additional card to cause all other players to discard one card.",
+    "type": "brown",
+    "abilities": {
+      "brawl": 0
+    }
   }
 ]

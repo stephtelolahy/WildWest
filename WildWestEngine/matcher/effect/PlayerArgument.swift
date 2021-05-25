@@ -12,6 +12,8 @@ enum PlayerArgument: String, Decodable {
     case all
     case next
     case others
+    case nobody
+    case othersWithCard
 }
 
 extension EffectContext {
@@ -48,6 +50,15 @@ extension EffectContext {
                 fatalError("No next player found after \(actor.identifier)")
             }
             return [next]
+            
+        case .nobody:
+            return []
+            
+        case .othersWithCard:
+            let all = state.playOrder
+                .starting(with: actor.identifier)
+            let others = Array(all.dropFirst())
+            return others.filter { !state.players[$0]!.hand.isEmpty || !state.players[$0]!.inPlay.isEmpty }
         }
     }
 }

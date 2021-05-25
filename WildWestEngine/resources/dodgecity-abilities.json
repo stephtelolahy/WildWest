@@ -136,5 +136,25 @@
         "card": "requiredInPlay"
       }
     ]
+  },
+  {
+    "name": "brawl",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireHandCards": 1
+    },
+    "onPlay": [
+      {
+        "action": "discardHand",
+        "card": "requiredHand"
+      },
+      {
+        "action": "addHit",
+        "abilities": ["looseHealth"],
+        "target": "othersWithCard"
+      }
+    ]
   }
 ]

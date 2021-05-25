@@ -123,5 +123,10 @@
     "name": "ragTime",
     "value": "9",
     "suit": "♥️"
+  },
+  {
+    "name": "brawl",
+    "value": "J",
+    "suit": "♠️"
   }
 ]

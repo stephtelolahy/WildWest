@@ -23,14 +23,14 @@ class AddHit: Effect {
     @Argument(name: "cancelable", defaultValue: .zero)
     var cancelable: NumberArgument
     
+    @Argument(name: "target", defaultValue: .nobody)
+    var target: PlayerArgument
+    
     override func apply(_ ctx: EffectContext) -> [GEvent]? {
         let players = ctx.players(matching: player)
         let times = ctx.number(matching: times)
         let cancelable = ctx.number(matching: cancelable)
-        var targets: [String] = []
-        for _ in (0..<times) {
-            targets.append(contentsOf: players)
-        }
-        return [.addHit(players: targets, name: ctx.ability, abilities: abilities, cancelable: cancelable, offender: ctx.actor.identifier)]
+        let loopPlayers = (0..<times).flatMap { _ in players }
+        return [.addHit(players: loopPlayers, name: ctx.ability, abilities: abilities, cancelable: cancelable, offender: ctx.actor.identifier)]
     }
 }
