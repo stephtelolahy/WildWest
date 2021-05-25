@@ -93,5 +93,10 @@
     "name": "revCarabine",
     "value": "5",
     "suit": "♠️"
+  },
+  {
+    "name": "dynamite",
+    "value": "10",
+    "suit": "♣️"
   }
 ]

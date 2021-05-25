@@ -272,5 +272,6 @@ class ResourcesTests: XCTestCase {
         XCTAssertTrue(cards.contains { $0.name == "remington" && $0.value == "6" && $0.suit == "♦️" })
         XCTAssertTrue(cards.contains { $0.name == "binocular" && $0.value == "10" && $0.suit == "♦️" })
         XCTAssertTrue(cards.contains { $0.name == "revCarabine" && $0.value == "5" && $0.suit == "♠️" })
+        XCTAssertTrue(cards.contains { $0.name == "dynamite" && $0.value == "10" && $0.suit == "♣️" })
     }
 }
