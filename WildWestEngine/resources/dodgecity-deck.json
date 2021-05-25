@@ -88,5 +88,10 @@
     "name": "binocular",
     "value": "10",
     "suit": "♦️"
+  },
+  {
+    "name": "revCarabine",
+    "value": "5",
+    "suit": "♠️"
   }
 ]
