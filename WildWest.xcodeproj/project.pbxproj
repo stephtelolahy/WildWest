@@ -270,9 +270,9 @@
 		33D221D7263E3446003CCDCA /* SignInWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D221D6263E3446003CCDCA /* SignInWidget.swift */; };
 		33D869D1263DE032009FDEC3 /* GameOverWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D869D0263DE032009FDEC3 /* GameOverWidget.swift */; };
 		33D869D9263DEBB3009FDEC3 /* GameRolesWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D869D8263DEBB3009FDEC3 /* GameRolesWidget.swift */; };
-		33DA1587265C12F000915E5B /* dodge-city-cards.json in Resources */ = {isa = PBXBuildFile; fileRef = 33DA1586265C12F000915E5B /* dodge-city-cards.json */; };
-		33DA1589265C130000915E5B /* dodge-city-deck.json in Resources */ = {isa = PBXBuildFile; fileRef = 33DA1588265C130000915E5B /* dodge-city-deck.json */; };
-		33DA158B265C131200915E5B /* dodge-city-abilities.json in Resources */ = {isa = PBXBuildFile; fileRef = 33DA158A265C131200915E5B /* dodge-city-abilities.json */; };
+		33DA1587265C12F000915E5B /* dodgecity-cards.json in Resources */ = {isa = PBXBuildFile; fileRef = 33DA1586265C12F000915E5B /* dodgecity-cards.json */; };
+		33DA1589265C130000915E5B /* dodgecity-deck.json in Resources */ = {isa = PBXBuildFile; fileRef = 33DA1588265C130000915E5B /* dodgecity-deck.json */; };
+		33DA158B265C131200915E5B /* dodgecity-abilities.json in Resources */ = {isa = PBXBuildFile; fileRef = 33DA158A265C131200915E5B /* dodgecity-abilities.json */; };
 		33DA1591265C179300915E5B /* PunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DA1590265C179300915E5B /* PunchTests.swift */; };
 		33DB41BC2438841A00B94E8A /* HandCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DB41BB2438841A00B94E8A /* HandCollectionViewLayout.swift */; };
 		33DC6E4E24CA9F5100072B51 /* UserInfoDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C922E724CA986300956151 /* UserInfoDto.swift */; };
@@ -599,9 +599,9 @@
 		33D3C3B224C9E24E00120D9A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		33D869D0263DE032009FDEC3 /* GameOverWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverWidget.swift; sourceTree = "<group>"; };
 		33D869D8263DEBB3009FDEC3 /* GameRolesWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRolesWidget.swift; sourceTree = "<group>"; };
-		33DA1586265C12F000915E5B /* dodge-city-cards.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "dodge-city-cards.json"; sourceTree = "<group>"; };
-		33DA1588265C130000915E5B /* dodge-city-deck.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "dodge-city-deck.json"; sourceTree = "<group>"; };
-		33DA158A265C131200915E5B /* dodge-city-abilities.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "dodge-city-abilities.json"; sourceTree = "<group>"; };
+		33DA1586265C12F000915E5B /* dodgecity-cards.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "dodgecity-cards.json"; sourceTree = "<group>"; };
+		33DA1588265C130000915E5B /* dodgecity-deck.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "dodgecity-deck.json"; sourceTree = "<group>"; };
+		33DA158A265C131200915E5B /* dodgecity-abilities.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "dodgecity-abilities.json"; sourceTree = "<group>"; };
 		33DA1590265C179300915E5B /* PunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchTests.swift; sourceTree = "<group>"; };
 		33DB41BB2438841A00B94E8A /* HandCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandCollectionViewLayout.swift; sourceTree = "<group>"; };
 		33E4411824077CA000B2848E /* HandCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandCell.swift; sourceTree = "<group>"; };
@@ -947,9 +947,9 @@
 				3358332A25BC2585001BE4D8 /* bang-cards.json */,
 				3358332825BC2585001BE4D8 /* bang-deck.json */,
 				3358332B25BC2585001BE4D8 /* bang-abilities.json */,
-				33DA1586265C12F000915E5B /* dodge-city-cards.json */,
-				33DA1588265C130000915E5B /* dodge-city-deck.json */,
-				33DA158A265C131200915E5B /* dodge-city-abilities.json */,
+				33DA1586265C12F000915E5B /* dodgecity-cards.json */,
+				33DA1588265C130000915E5B /* dodgecity-deck.json */,
+				33DA158A265C131200915E5B /* dodgecity-abilities.json */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -1642,12 +1642,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33DA1587265C12F000915E5B /* dodge-city-cards.json in Resources */,
+				33DA1587265C12F000915E5B /* dodgecity-cards.json in Resources */,
 				3358335225BC2585001BE4D8 /* bang-deck.json in Resources */,
-				33DA1589265C130000915E5B /* dodge-city-deck.json in Resources */,
+				33DA1589265C130000915E5B /* dodgecity-deck.json in Resources */,
 				3358335525BC2585001BE4D8 /* bang-abilities.json in Resources */,
 				3358335425BC2585001BE4D8 /* bang-cards.json in Resources */,
-				33DA158B265C131200915E5B /* dodge-city-abilities.json in Resources */,
+				33DA158B265C131200915E5B /* dodgecity-abilities.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

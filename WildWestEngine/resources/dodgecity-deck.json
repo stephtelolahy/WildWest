@@ -30,6 +30,11 @@
     "suit": "♠️"
   },
   {
+    "name": "indians",
+    "value": "5",
+    "suit": "♦️"
+  },
+  {
     "name": "punch",
     "value": "10",
     "suit": "♠️"
