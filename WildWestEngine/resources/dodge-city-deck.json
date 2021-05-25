@@ -20,6 +20,16 @@
     "suit": "♣️"
   },
   {
+    "name": "beer",
+    "value": "6",
+    "suit": "♥️"
+  },
+  {
+    "name": "beer",
+    "value": "6",
+    "suit": "♠️"
+  },
+  {
     "name": "punch",
     "value": "10",
     "suit": "♠️"
