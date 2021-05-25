@@ -67,6 +67,18 @@ class SimulationTests: XCTestCase {
         wait(for: [expectation], timeout: 10.0)
     }
     
+    func test_Simulate8PlayersGame() {
+        // Given
+        // When
+        let expectation = XCTestExpectation(description: "Game should complete")
+        runSimulation(playersCount: 8) {
+            expectation.fulfill()
+        }
+        
+        // Assert
+        wait(for: [expectation], timeout: 10.0)
+    }
+    
     private func runSimulation(playersCount: Int, completed: @escaping () -> Void) {
         let jsonReader = JsonReader(bundle: Bundle.resourcesBundle)
         let resourcesLoader = ResourcesLoader(jsonReader: jsonReader)

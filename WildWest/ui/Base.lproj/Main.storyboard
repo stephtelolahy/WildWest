@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="23D-M1-wqa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="23D-M1-wqa">
     <device id="retina6_1" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -93,7 +93,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="7" minimumValue="4" maximumValue="7" translatesAutoresizingMaskIntoConstraints="NO" id="dkh-y9-bbs">
+                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minimumValue="4" maximumValue="7" translatesAutoresizingMaskIntoConstraints="NO" id="dkh-y9-bbs">
                                                 <rect key="frame" x="110" y="0.0" width="94" height="32"/>
                                                 <connections>
                                                     <action selector="stepperValueChanged:" destination="8GX-Wa-ifS" eventType="valueChanged" id="v0n-ag-ZtQ"/>
@@ -430,7 +430,7 @@
                                 <color key="backgroundColor" red="0.75559097529999997" green="0.67946600909999999" blue="0.55683469770000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MessageCell" id="Z7O-3O-qgz" customClass="MessageCell" customModule="WildWest" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="304.5" height="38"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="304.5" height="38"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Z7O-3O-qgz" id="cZM-3E-i9i">
                                             <rect key="frame" x="0.0" y="0.0" width="304.5" height="38"/>

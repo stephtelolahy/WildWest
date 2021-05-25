@@ -21,7 +21,7 @@ public class GSetup: SetupProtocol {
     }
     
     public func roles(for playersCount: Int) -> [Role] {
-        let order: [Role] = [.sheriff, .outlaw, .outlaw, .renegade, .deputy, .outlaw, .deputy]
+        let order: [Role] = [.sheriff, .outlaw, .outlaw, .renegade, .deputy, .outlaw, .deputy, .renegade]
         guard playersCount <= order.count else {
             return []
         }
