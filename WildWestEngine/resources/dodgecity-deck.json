@@ -63,5 +63,10 @@
     "name": "generalstore",
     "value": "A",
     "suit": "♠️"
+  },
+  {
+    "name": "catBalou",
+    "value": "8",
+    "suit": "♣️"
   }
 ]
