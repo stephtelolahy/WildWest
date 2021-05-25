@@ -40,5 +40,13 @@
       "scope": 0,
       "equip": 0
     }
+  },
+  {
+    "name": "whisky",
+    "desc": "The player must discard one additional card, to heal two health.",
+    "type": "brown",
+    "abilities": {
+      "whisky": 0
+    }
   }
 ]

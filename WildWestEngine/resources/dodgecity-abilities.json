@@ -52,5 +52,26 @@
         "cancelable": "1"
       }
     ]
+  },
+  {
+    "name": "whisky",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireHandCards": 1
+    },
+    "onPlay": [
+      {
+        "action": "discardHand",
+        "card": "requiredHand"
+      },
+      {
+        "action": "gainHealth"
+      },
+      {
+        "action": "gainHealth"
+      }
+    ]
   }
 ]

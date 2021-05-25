@@ -42,7 +42,7 @@ class SimulationTests: XCTestCase {
         // Assert
         wait(for: [expectation], timeout: 10.0)
     }
-    
+    /*
     func test_Simulate6PlayersGame() {
         // Given
         // When
@@ -78,7 +78,7 @@ class SimulationTests: XCTestCase {
         // Assert
         wait(for: [expectation], timeout: 10.0)
     }
-    
+    */
     private func runSimulation(playersCount: Int, completed: @escaping () -> Void) {
         let jsonReader = JsonReader(bundle: Bundle.resourcesBundle)
         let resourcesLoader = ResourcesLoader(jsonReader: jsonReader)
