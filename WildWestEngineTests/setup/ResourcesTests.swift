@@ -243,6 +243,7 @@ class ResourcesTests: XCTestCase {
         XCTAssertTrue(cards.contains { $0.name == "hideout" })
         XCTAssertTrue(cards.contains { $0.name == "binocular" })
         XCTAssertTrue(cards.contains { $0.name == "whisky" })
+        XCTAssertTrue(cards.contains { $0.name == "tequila" })
     }
     
     func test_DodgeCityCardSets() throws {
@@ -269,6 +270,7 @@ class ResourcesTests: XCTestCase {
         XCTAssertTrue(cards.contains { $0.name == "punch" && $0.value == "10" && $0.suit == "♠️" })
         XCTAssertTrue(cards.contains { $0.name == "springfield" && $0.value == "K" && $0.suit == "♠️" })
         XCTAssertTrue(cards.contains { $0.name == "whisky" && $0.value == "Q" && $0.suit == "♦️" })
+        XCTAssertTrue(cards.contains { $0.name == "tequila" && $0.value == "9" && $0.suit == "♣️" })
         
         XCTAssertTrue(cards.contains { $0.name == "hideout" && $0.value == "K" && $0.suit == "♦️" })
         XCTAssertTrue(cards.contains { $0.name == "remington" && $0.value == "6" && $0.suit == "♦️" })

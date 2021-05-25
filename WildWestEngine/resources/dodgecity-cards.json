@@ -48,5 +48,13 @@
     "abilities": {
       "whisky": 0
     }
+  },
+  {
+    "name": "tequila",
+    "desc": "The player must discard one additional card, to heal any player one health",
+    "type": "brown",
+    "abilities": {
+      "tequila": 0
+    }
   }
 ]

@@ -113,5 +113,10 @@
     "name": "whisky",
     "value": "Q",
     "suit": "♦️"
+  },
+  {
+    "name": "tequila",
+    "value": "9",
+    "suit": "♣️"
   }
 ]
