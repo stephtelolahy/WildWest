@@ -262,6 +262,7 @@ class ResourcesTests: XCTestCase {
         XCTAssertTrue(cards.contains { $0.name == "indians" && $0.value == "5" && $0.suit == "♦️" })
         XCTAssertTrue(cards.contains { $0.name == "generalstore" && $0.value == "A" && $0.suit == "♠️" })
         XCTAssertTrue(cards.contains { $0.name == "catBalou" && $0.value == "8" && $0.suit == "♣️" })
+        XCTAssertTrue(cards.contains { $0.name == "panic" && $0.value == "J" && $0.suit == "♥️" })
         
         XCTAssertTrue(cards.contains { $0.name == "punch" && $0.value == "10" && $0.suit == "♠️" })
         

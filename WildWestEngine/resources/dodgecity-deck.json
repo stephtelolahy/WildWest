@@ -68,5 +68,10 @@
     "name": "catBalou",
     "value": "8",
     "suit": "♣️"
+  },
+  {
+    "name": "panic",
+    "value": "J",
+    "suit": "♥️"
   }
 ]
