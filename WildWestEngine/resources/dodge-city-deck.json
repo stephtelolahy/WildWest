@@ -1,5 +1,25 @@
 [
   {
+    "name": "bang",
+    "value": "8",
+    "suit": "♠️"
+  },
+  {
+    "name": "bang",
+    "value": "5",
+    "suit": "♣️"
+  },
+  {
+    "name": "bang",
+    "value": "6",
+    "suit": "♣️"
+  },
+  {
+    "name": "bang",
+    "value": "K",
+    "suit": "♣️"
+  },
+  {
     "name": "punch",
     "value": "10",
     "suit": "♠️"
