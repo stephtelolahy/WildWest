@@ -83,5 +83,10 @@
     "name": "remington",
     "value": "6",
     "suit": "♦️"
+  },
+  {
+    "name": "binocular",
+    "value": "10",
+    "suit": "♦️"
   }
 ]

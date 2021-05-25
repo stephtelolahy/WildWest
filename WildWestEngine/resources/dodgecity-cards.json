@@ -31,5 +31,14 @@
       "mustang": 0,
       "equip": 0
     }
+  },
+  {
+    "name": "binocular",
+    "desc": "you view others at distance -1",
+    "type": "blue",
+    "abilities": {
+      "scope": 0,
+      "equip": 0
+    }
   }
 ]
