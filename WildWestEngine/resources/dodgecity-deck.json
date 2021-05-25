@@ -73,5 +73,15 @@
     "name": "panic",
     "value": "J",
     "suit": "♥️"
+  },
+  {
+    "name": "missed",
+    "value": "8",
+    "suit": "♦️"
+  },
+  {
+    "name": "remington",
+    "value": "6",
+    "suit": "♦️"
   }
 ]
