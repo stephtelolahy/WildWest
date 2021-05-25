@@ -118,5 +118,10 @@
     "name": "tequila",
     "value": "9",
     "suit": "♣️"
+  },
+  {
+    "name": "ragTime",
+    "value": "9",
+    "suit": "♥️"
   }
 ]

@@ -93,5 +93,48 @@
         "player": "target"
       }
     ]
+  },
+  {
+    "name": "DrawOtherHandRequire1Card",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireTargetAny": 0,
+      "requireHandCards": 1
+    },
+    "onPlay": [
+      {
+        "action": "discardHand",
+        "card": "requiredHand"
+      },
+      {
+        "action": "drawHand",
+        "other": "target",
+        "card": "randomHand"
+      }
+    ]
+  },
+  {
+    "name": "DrawOtherInPlayRequire1Card",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireTargetAny": 0,
+      "requireInPlayCard": 0,
+      "requireHandCards": 1
+    },
+    "onPlay": [
+      {
+        "action": "discardHand",
+        "card": "requiredHand"
+      },
+      {
+        "action": "drawInPlay",
+        "other": "target",
+        "card": "requiredInPlay"
+      }
+    ]
   }
 ]

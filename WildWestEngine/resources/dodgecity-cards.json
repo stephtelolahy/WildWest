@@ -51,10 +51,19 @@
   },
   {
     "name": "tequila",
-    "desc": "The player must discard one additional card, to heal any player one health",
+    "desc": "The player must discard one additional card, to heal any player one health.",
     "type": "brown",
     "abilities": {
       "tequila": 0
+    }
+  },
+  {
+    "name": "ragTime",
+    "desc": "The player must discard one additional card to steal a card from any other player.",
+    "type": "brown",
+    "abilities": {
+      "DrawOtherHandRequire1Card": 0,
+      "DrawOtherInPlayRequire1Card": 0
     }
   }
 ]
