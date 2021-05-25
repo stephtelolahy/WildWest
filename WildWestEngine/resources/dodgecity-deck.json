@@ -58,5 +58,10 @@
     "name": "hideout",
     "value": "K",
     "suit": "♦️"
+  },
+  {
+    "name": "generalstore",
+    "value": "A",
+    "suit": "♠️"
   }
 ]
