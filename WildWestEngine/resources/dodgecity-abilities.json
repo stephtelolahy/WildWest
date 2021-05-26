@@ -95,7 +95,7 @@
     ]
   },
   {
-    "name": "DrawOtherHandRequire1Card",
+    "name": "drawOtherHandRequire1Card",
     "type": "active",
     "canPlay": {
       "isYourTurn": 0,
@@ -116,7 +116,7 @@
     ]
   },
   {
-    "name": "DrawOtherInPlayRequire1Card",
+    "name": "drawOtherInPlayRequire1Card",
     "type": "active",
     "canPlay": {
       "isYourTurn": 0,

@@ -62,8 +62,8 @@
     "desc": "The player must discard one additional card to steal a card from any other player.",
     "type": "brown",
     "abilities": {
-      "DrawOtherHandRequire1Card": 0,
-      "DrawOtherInPlayRequire1Card": 0
+      "drawOtherHandRequire1Card": 0,
+      "drawOtherInPlayRequire1Card": 0
     }
   },
   {

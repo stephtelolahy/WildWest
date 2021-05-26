@@ -26,6 +26,8 @@ class MediaEventMatcherTests: XCTestCase {
         XCTAssertEqual(sut.emoji(on: .run(move: GMove("bang", actor: "p1"))), "🔫")
         XCTAssertEqual(sut.emoji(on: .run(move: GMove("discardBangOnDuel", actor: "p1"))), "🔫")
         XCTAssertEqual(sut.emoji(on: .run(move: GMove("discardBangOnIndians", actor: "p1"))), "🔫")
+        XCTAssertEqual(sut.emoji(on: .run(move: GMove("punch", actor: "p1"))), "🔫")
+        XCTAssertEqual(sut.emoji(on: .run(move: GMove("springfield", actor: "p1"))), "🔫")
     }
     
     func test_PlayDuel() {
@@ -34,6 +36,7 @@ class MediaEventMatcherTests: XCTestCase {
     
     func test_PlayMissed() {
         XCTAssertEqual(sut.emoji(on: .run(move: GMove("missed", actor: "p1"))), "😝")
+        XCTAssertEqual(sut.emoji(on: .run(move: GMove("dodge", actor: "p1"))), "😝")
     }
     
     func test_PlayDrawCard() {
@@ -44,6 +47,7 @@ class MediaEventMatcherTests: XCTestCase {
     func test_PlayMassiveShoot() {
         XCTAssertEqual(sut.emoji(on: .run(move: GMove("gatling", actor: "p1"))), "💢")
         XCTAssertEqual(sut.emoji(on: .run(move: GMove("indians", actor: "p1"))), "💢")
+        XCTAssertEqual(sut.emoji(on: .run(move: GMove("brawl", actor: "p1"))), "💢")
     }
     
     func test_PlayCommon() {

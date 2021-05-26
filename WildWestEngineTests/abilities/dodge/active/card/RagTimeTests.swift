@@ -19,7 +19,7 @@ class RagTimeTests: XCTestCase {
         let mockCard1 = MockCardProtocol()
             .withDefault()
             .identified(by: "c1")
-            .abilities(are: "DrawOtherHandRequire1Card")
+            .abilities(are: "drawOtherHandRequire1Card")
             .type(is: .brown)
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
@@ -41,7 +41,7 @@ class RagTimeTests: XCTestCase {
         let events = sut.effects(on: try XCTUnwrap(moves?.first), in: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GMove("DrawOtherHandRequire1Card", actor: "p1", card: .hand("c1"), args: [.target: ["p2"], .requiredHand: ["c3"]])])
+        XCTAssertEqual(moves, [GMove("drawOtherHandRequire1Card", actor: "p1", card: .hand("c1"), args: [.target: ["p2"], .requiredHand: ["c3"]])])
         XCTAssertEqual(events, [.play(player: "p1", card: "c1"),
                                 .discardHand(player: "p1", card: "c3"),
                                 .drawHand(player: "p1", other: "p2", card: "c2")])
@@ -54,7 +54,7 @@ class RagTimeTests: XCTestCase {
             .withDefault()
             .identified(by: "c1")
             .type(is: .brown)
-            .abilities(are: "DrawOtherInPlayRequire1Card")
+            .abilities(are: "drawOtherInPlayRequire1Card")
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p1")
@@ -75,7 +75,7 @@ class RagTimeTests: XCTestCase {
         let events = sut.effects(on: try XCTUnwrap(moves?.first), in: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GMove("DrawOtherInPlayRequire1Card",
+        XCTAssertEqual(moves, [GMove("drawOtherInPlayRequire1Card",
                                      actor: "p1",
                                      card: .hand("c1"),
                                      args: [.target: ["p2"], .requiredInPlay: ["c2"], .requiredHand: ["c3"]])])
