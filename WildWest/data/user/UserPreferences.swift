@@ -28,7 +28,7 @@ class UserPreferences: UserPreferencesProtocol {
     @OptionalUserDefaultsStored("preferred_figure")
     var preferredFigure: String?
     
-    @UserDefaultsStored("update_delay", defaultValue: 0.4)
+    @UserDefaultsStored("update_delay", defaultValue: 0.6)
     var updateDelay: Double
     
     @UserDefaultsStored("enable_sound", defaultValue: true)

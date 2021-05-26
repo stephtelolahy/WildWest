@@ -213,6 +213,7 @@
 		339B4EFC2434A7D700E32965 /* 342229_christopherderp_hurt-1-male (online-audio-converter.com).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 339B4EFB2434A7D700E32965 /* 342229_christopherderp_hurt-1-male (online-audio-converter.com).mp3 */; };
 		339C7CA126566D48001CBCAC /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339C7CA026566D48001CBCAC /* GameManager.swift */; };
 		339C7CA326566D6E001CBCAC /* SimulationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339C7CA226566D6E001CBCAC /* SimulationTests.swift */; };
+		339CC9A1265E91220070D77B /* RequireTargetHit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339CC9A0265E91220070D77B /* RequireTargetHit.swift */; };
 		33A6330024545B060023A2D2 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A632FF24545B060023A2D2 /* AnalyticsManager.swift */; };
 		33A698B32657800700C52B57 /* AnimationEventMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A698B22657800700C52B57 /* AnimationEventMatcherTests.swift */; };
 		33A698B42657806900C52B57 /* AnimationEventMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33315302256ED0EB0088D281 /* AnimationEventMatcher.swift */; };
@@ -552,6 +553,7 @@
 		339B4EFB2434A7D700E32965 /* 342229_christopherderp_hurt-1-male (online-audio-converter.com).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "342229_christopherderp_hurt-1-male (online-audio-converter.com).mp3"; sourceTree = "<group>"; };
 		339C7CA026566D48001CBCAC /* GameManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		339C7CA226566D6E001CBCAC /* SimulationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimulationTests.swift; sourceTree = "<group>"; };
+		339CC9A0265E91220070D77B /* RequireTargetHit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireTargetHit.swift; sourceTree = "<group>"; };
 		33A632FF24545B060023A2D2 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		33A698B22657800700C52B57 /* AnimationEventMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationEventMatcherTests.swift; sourceTree = "<group>"; };
 		33AAE0222659771D00A067E3 /* GainHealth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainHealth.swift; sourceTree = "<group>"; };
@@ -740,6 +742,7 @@
 				33AAE03A26598B8B00A067E3 /* RequireTargetSelf.swift */,
 				33AAE03C26598D0200A067E3 /* RequireTargetAt.swift */,
 				33AAE0422659A4E500A067E3 /* RequireTargetReachable.swift */,
+				339CC9A0265E91220070D77B /* RequireTargetHit.swift */,
 				33AAE058265A457900A067E3 /* RequireStoreCards.swift */,
 				33AAE05C265A9D8600A067E3 /* OnHitCancelable.swift */,
 				33AAE067265ABCD800A067E3 /* OnPhase.swift */,
@@ -1952,6 +1955,7 @@
 				33FBF90C265B1D5100D7C6AD /* DrawDeckChoosing.swift in Sources */,
 				33AAE03B26598B8B00A067E3 /* RequireTargetSelf.swift in Sources */,
 				33272F7926592741005C9246 /* EffectFamily.swift in Sources */,
+				339CC9A1265E91220070D77B /* RequireTargetHit.swift in Sources */,
 				33AAE068265ABCD800A067E3 /* OnPhase.swift in Sources */,
 				3358334E25BC2585001BE4D8 /* GLoop.swift in Sources */,
 				33FBF908265B167C00D7C6AD /* RequireTargetEliminated.swift in Sources */,

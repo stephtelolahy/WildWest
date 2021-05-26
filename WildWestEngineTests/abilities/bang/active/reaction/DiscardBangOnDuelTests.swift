@@ -47,6 +47,6 @@ class DiscardBangOnDuelTests: XCTestCase {
                                GMove("looseHealth", actor: "p1")])
         XCTAssertEqual(events, [.play(player: "p1", card: "c1"),
                                 .removeHit(player: "p1"),
-                                .addHit(players: ["p2"], name: "duel", abilities: ["looseHealth"], cancelable: 0, offender: "p1")])
+                                .addHit(hits: [GHit(player: "p2", name: "duel", abilities: ["looseHealth"], offender: "p1")])])
     }
 }

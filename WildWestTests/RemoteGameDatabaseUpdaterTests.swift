@@ -160,8 +160,8 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
     func test_removeAssociatedHits_IfEliminate() {
         // Given
         let event = GEvent.eliminate(player: "p1", offender: "p2")
-        let hit1 = HitDto(player: "p1", name: nil, abilities: nil, cancelable: nil, offender: nil)
-        let hit2 = HitDto(player: "p2", name: nil, abilities: nil, cancelable: nil, offender: nil)
+        let hit1 = HitDto(player: "p1", name: nil, abilities: nil, cancelable: nil, offender: nil, target: nil)
+        let hit2 = HitDto(player: "p2", name: nil, abilities: nil, cancelable: nil, offender: nil, target: nil)
         let hits = ["key1": hit1, "key2": hit2]
         mockDatabaseReference.stubObserveSingleEvent("state/hits", value: hits)
         let expectation = XCTestExpectation(description: #function)
@@ -513,7 +513,8 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
     
     func test_AddHit() throws {
         // Given
-        let event = GEvent.addHit(players: ["p2", "p3"], name: "n1", abilities: ["a1", "a2"], cancelable: 1, offender: "p1")
+        let event = GEvent.addHit(hits: [GHit(player: "p2", name: "n1", abilities: ["a1", "a2"], offender: "p1"),
+                                         GHit(player: "p3", name: "n1", abilities: ["a1", "a2"], offender: "p1", cancelable: 1, target: "pX")])
         let expectation = XCTestExpectation(description: #function)
         stub(mockDatabaseReference) { mock in
             when(mock).childByAutoIdKey().thenReturn("keyX", "keyY")
@@ -525,15 +526,16 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
             let hit1: [String: Any] = ["player": "p2",
                                        "name": "n1",
                                        "abilities": ["a1", "a2"],
-                                       "cancelable": 1,
-                                       "offender": "p1"]
+                                       "offender": "p1",
+                                       "cancelable": 0]
             verify(self.mockDatabaseReference).setValue("state/hits/keyX", value: any(equalToDictionary: hit1), withCompletionBlock: any())
             
             let hit2: [String: Any] = ["player": "p3",
                                        "name": "n1",
                                        "abilities": ["a1", "a2"],
+                                       "offender": "p1",
                                        "cancelable": 1,
-                                       "offender": "p1"]
+                                       "target": "pX"]
             verify(self.mockDatabaseReference).setValue("state/hits/keyY", value: any(equalToDictionary: hit2), withCompletionBlock: any())
             
             expectation.fulfill()

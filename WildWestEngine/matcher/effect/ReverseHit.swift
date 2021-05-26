@@ -20,8 +20,14 @@ class ReverseHit: Effect {
             fatalError("Invalid hit")
         }
         
+        let reversedHit = GHit(player: hit.offender,
+                               name: hit.name,
+                               abilities: hit.abilities,
+                               offender: player,
+                               cancelable: hit.cancelable,
+                               target: hit.target)
         return [.removeHit(player: player),
-                .addHit(players: [hit.offender], name: hit.name, abilities: hit.abilities, cancelable: hit.cancelable, offender: player)]
+                .addHit(hits: [reversedHit])]
         
     }
 }

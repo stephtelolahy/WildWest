@@ -11,9 +11,9 @@ import WildWestEngine
 import Resolver
 
 class DiscardExcessCardsOnPhase3Tests: XCTestCase {
-
+    
     private let sut: AbilityMatcherProtocol = Resolver.resolve()
-
+    
     func test_ShouldDiscard1ExcessCard_IfAnyOnTurnPhase3() throws {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
@@ -29,16 +29,16 @@ class DiscardExcessCardsOnPhase3Tests: XCTestCase {
             .playOrder(is: "p1")
             .turn(is: "p1")
         let event = GEvent.setPhase(value: 3)
-
+        
         // When
         let moves = sut.triggered(on: event, in: mockState)
         let events = sut.effects(on: try XCTUnwrap(moves?.first), in: mockState)
-
+        
         // Assert
         XCTAssertEqual(moves, [GMove("discardExcessCardsOnPhase3", actor: "p1")])
-        XCTAssertEqual(events, [.addHit(players: ["p1"], name: "discardExcessCardsOnPhase3", abilities: ["discardSelfHand"], cancelable: 0, offender: "p1")])
+        XCTAssertEqual(events, [.addHit(hits: [GHit(player: "p1", name: "discardExcessCardsOnPhase3", abilities: ["discardSelfHand"], offender: "p1")])])
     }
-
+    
     func test_ShouldDiscardMultipleExcessCard_IfAnyOnTurnPhase3() throws {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
@@ -55,20 +55,17 @@ class DiscardExcessCardsOnPhase3Tests: XCTestCase {
             .playOrder(is: "p1")
             .turn(is: "p1")
         let event = GEvent.setPhase(value: 3)
-
+        
         // When
         let moves = sut.triggered(on: event, in: mockState)
         let events = sut.effects(on: try XCTUnwrap(moves?.first), in: mockState)
-
+        
         // Assert
         XCTAssertEqual(moves, [GMove("discardExcessCardsOnPhase3", actor: "p1")])
-        XCTAssertEqual(events, [.addHit(players: ["p1", "p1"],
-                                        name: "discardExcessCardsOnPhase3",
-                                        abilities: ["discardSelfHand"],
-                                        cancelable: 0,
-                                        offender: "p1")])
+        XCTAssertEqual(events, [.addHit(hits: [GHit(player: "p1", name: "discardExcessCardsOnPhase3", abilities: ["discardSelfHand"], offender: "p1"),
+                                               GHit(player: "p1", name: "discardExcessCardsOnPhase3", abilities: ["discardSelfHand"], offender: "p1")])])
     }
-
+    
     func test_DoNothing_IfOnPhase3WithoutExcessCards() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
@@ -84,10 +81,10 @@ class DiscardExcessCardsOnPhase3Tests: XCTestCase {
             .playOrder(is: "p1")
             .turn(is: "p1")
         let event = GEvent.setPhase(value: 3)
-
+        
         // When
         let moves = sut.triggered(on: event, in: mockState)
-
+        
         // Assert
         XCTAssertNil(moves)
     }

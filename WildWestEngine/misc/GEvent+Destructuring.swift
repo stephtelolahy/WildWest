@@ -24,9 +24,9 @@ public extension GEvent {
             return ["event": name,
                     "ability": move.ability]
             
-        case let .addHit(_, ability, _, _, _):
+        case let .addHit(hits):
             return ["event": name,
-                    "ability": ability]
+                    "ability": hits[0].name]
             
         default:
             return ["event": name]

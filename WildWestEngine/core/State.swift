@@ -33,6 +33,7 @@ public protocol HitProtocol {
     var abilities: [String] { get }
     var offender: String { get }
     var cancelable: Int { get }
+    var target: String? { get }
 }
 
 public protocol BaseCardProtocol {

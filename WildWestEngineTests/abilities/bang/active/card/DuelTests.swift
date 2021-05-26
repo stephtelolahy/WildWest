@@ -40,6 +40,6 @@ class DuelTests: XCTestCase {
         // Assert
         XCTAssertEqual(moves, [GMove("duel", actor: "p1", card: .hand("c1"), args: [.target: ["p2"]])])
         XCTAssertEqual(events, [.play(player: "p1", card: "c1"),
-                                .addHit(players: ["p2"], name: "duel", abilities: ["looseHealth"], cancelable: 0, offender: "p1")])
+                                .addHit(hits: [GHit(player: "p2", name: "duel", abilities: ["looseHealth"], offender: "p1")])])
     }
 }

@@ -152,8 +152,43 @@
       },
       {
         "action": "addHit",
-        "abilities": ["looseHealth"],
-        "target": "othersWithCard"
+        "target": "othersWithCard",
+        "abilities": ["discardTargetHitHand", "discardTargetHitInPlay"]
+      }
+    ]
+  },
+  {
+    "name": "discardTargetHitHand",
+    "type": "active",
+    "canPlay": {
+      "requireTargetHit": 0
+    },
+    "onPlay": [
+      {
+        "action": "discardHand",
+        "player": "target",
+        "card": "randomHand"
+      },
+      {
+        "action": "removeHit"
+      }
+    ]
+  },
+  {
+    "name": "discardTargetHitInPlay",
+    "type": "active",
+    "canPlay": {
+      "requireTargetHit": 0,
+      "requireInPlayCard": 0
+    },
+    "onPlay": [
+      {
+        "action": "discardInPlay",
+        "player": "target",
+        "card": "requiredInPlay"
+      },
+      {
+        "action": "removeHit"
       }
     ]
   }

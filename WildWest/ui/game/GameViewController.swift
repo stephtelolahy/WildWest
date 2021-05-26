@@ -324,7 +324,9 @@ private extension StateProtocol {
     }
     
     func instruction(for controlledPlayerId: String?) -> String {
-        if controlledPlayerId == nil {
+        if let hit = hits.first {
+            return hit.name
+        } else if controlledPlayerId == nil {
             return "viewing game"
         } else if controlledPlayerId != turn {
             return "waiting others to play"

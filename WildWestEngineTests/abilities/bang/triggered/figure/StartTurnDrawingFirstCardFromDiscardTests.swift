@@ -35,11 +35,10 @@ class StartTurnDrawingFirstCardFromDiscardTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(moves, [GMove("startTurnDrawingFirstCardFromDiscard", actor: "p1")])
-        XCTAssertEqual(events, [.addHit(players: ["p1"],
-                                        name: "startTurnDrawingFirstCardFromDiscard", 
-                                        abilities: ["startTurnDrawingDiscard", "startTurnDrawingDeck"], 
-                                        cancelable: 0, 
-                                        offender: "p1")])
+        XCTAssertEqual(events, [.addHit(hits: [GHit(player: "p1",
+                                                    name: "startTurnDrawingFirstCardFromDiscard",
+                                                    abilities: ["startTurnDrawingDiscard", "startTurnDrawingDeck"],
+                                                    offender: "p1")])])
     }
     
     func test_CanStartTurnDrawingDiscard() throws {

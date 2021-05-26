@@ -25,6 +25,7 @@ struct HitDto: Codable, Equatable {
     let abilities: [String]?
     let cancelable: Int?
     let offender: String?
+    let target: String?
 }
 
 struct PlayerDto: Codable {
