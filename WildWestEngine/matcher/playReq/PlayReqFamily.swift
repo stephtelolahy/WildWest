@@ -8,7 +8,7 @@
 // swiftlint:disable cyclomatic_complexity
 // swiftlint:disable switch_case_on_newline
 
-enum PlayReqFamily: String, CaseIterable {
+public enum PlayReqFamily: String, CaseIterable {
     
     case isYourTurn
     case isPhase
@@ -33,12 +33,13 @@ enum PlayReqFamily: String, CaseIterable {
     case requireTargetReachable
     case requireTargetOffender
     case requireTargetEliminated
+    case requireTargetHit
     case requireInPlayCard
     case requireHandCards
     case requireStoreCards
     case requireDeckCards
     
-    func getType() -> GPlayReq.Type {
+    func getType() -> PlayReq.Type {
         switch self {
         case .isYourTurn: return IsYourTurn.self
         case .isPhase: return IsPhase.self
@@ -65,13 +66,14 @@ enum PlayReqFamily: String, CaseIterable {
         case .onHandEmpty: return OnHandEmpty.self
         case .requireTargetEliminated: return RequireTargetEliminated.self
         case .requireDeckCards: return RequireDeckCards.self
+        case .requireTargetHit: return RequireTargetHit.self
         }
     }
 }
 
 extension KeyedDecodingContainer {
     
-    func decodePlayReqs(forKey key: K) throws -> [GPlayReq] {
+    func decodePlayReqs(forKey key: K) throws -> [PlayReq] {
         guard let dictionary: [String: Any] = try decodeIfPresent([String: Any].self, forKey: key) else {
             return []
         }
@@ -97,5 +99,5 @@ extension KeyedDecodingContainer {
 
 private struct IndexedPlayReq {
     let index: Int
-    let req: GPlayReq
+    let req: PlayReq
 }

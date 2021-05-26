@@ -5,6 +5,7 @@
 //  Created by Hugues Stéphano TELOLAHY on 22/05/2021.
 //  Copyright © 2021 creativeGames. All rights reserved.
 //
+// swiftlint:disable cyclomatic_complexity
 
 enum CardArgument: String, Decodable {
     case requiredHand
@@ -19,7 +20,7 @@ enum CardArgument: String, Decodable {
 
 extension EffectContext {
     
-    func cards(matching arg: CardArgument, player: String) -> [String]  {
+    func cards(matching arg: CardArgument, player: String) -> [String] {
         switch arg {
         case .requiredHand:
             return args[.requiredHand]!

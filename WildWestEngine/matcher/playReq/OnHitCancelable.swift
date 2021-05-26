@@ -9,12 +9,12 @@
 /**
  When you are target of hit that is cancelable with a 'missed' card
  */
-class OnHitCancelable: GPlayReq {
+class OnHitCancelable: PlayReq {
     
-    override func match(_ ctx: PlayReqContext, args: inout [[PlayArg : [String]]]) -> Bool {
-        guard case let .addHit(players, _, _, cancelable, _) = ctx.event,
-              players.contains(ctx.actor.identifier),
-              cancelable > 0 else {
+    override func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
+        guard case let .addHit(hits) = ctx.event,
+              let hit = hits.first(where: { $0.player == ctx.actor.identifier }),
+              hit.cancelable > 0 else {
             return false
         }
         return true

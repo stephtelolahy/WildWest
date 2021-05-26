@@ -9,7 +9,7 @@
 /**
  Remove player from hit
  */
-public class RemoveHit: GEffect {
+public class RemoveHit: Effect {
     
     @Argument(name: "player", defaultValue: .actor)
     var player: PlayerArgument
@@ -21,5 +21,3 @@ public class RemoveHit: GEffect {
         return [.removeHit(player: player)]
     }
 }
-
-

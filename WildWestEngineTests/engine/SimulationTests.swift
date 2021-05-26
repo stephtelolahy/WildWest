@@ -42,7 +42,7 @@ class SimulationTests: XCTestCase {
         // Assert
         wait(for: [expectation], timeout: 10.0)
     }
-    
+    /*
     func test_Simulate6PlayersGame() {
         // Given
         // When
@@ -67,6 +67,18 @@ class SimulationTests: XCTestCase {
         wait(for: [expectation], timeout: 10.0)
     }
     
+    func test_Simulate8PlayersGame() {
+        // Given
+        // When
+        let expectation = XCTestExpectation(description: "Game should complete")
+        runSimulation(playersCount: 8) {
+            expectation.fulfill()
+        }
+        
+        // Assert
+        wait(for: [expectation], timeout: 10.0)
+    }
+    */
     private func runSimulation(playersCount: Int, completed: @escaping () -> Void) {
         let jsonReader = JsonReader(bundle: Bundle.resourcesBundle)
         let resourcesLoader = ResourcesLoader(jsonReader: jsonReader)
@@ -112,7 +124,7 @@ class SimulationTests: XCTestCase {
         
         database.event.subscribe(onNext: { event in
             eventId += 1
-//            print("[E\(eventId)/\(playersCount)]: \(event)")
+            print("[E\(eventId)/\(playersCount)]: \(event)")
             if case .gameover = event {
                 completed()
             }
@@ -132,7 +144,7 @@ class SimulationTests: XCTestCase {
         .disposed(by: disposeBag)
         
         database.state.subscribe(onNext: { state in
-//            print("[S]: \(state)")
+            print("[S]: \(state)")
         })
         .disposed(by: disposeBag)
         

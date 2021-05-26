@@ -9,9 +9,9 @@
 /**
  Must be target of hit that is cancelable
  */
-class IsHitCancelable: GPlayReq {
+class IsHitCancelable: PlayReq {
     
-    override func match(_ ctx: PlayReqContext, args: inout [[PlayArg : [String]]]) -> Bool {
+    override func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
         guard let hit = ctx.state.hits.first,
               hit.player == ctx.actor.identifier,
               hit.cancelable > 0 else {

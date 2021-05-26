@@ -1,0 +1,77 @@
+[
+  {
+    "name": "punch",
+    "desc": "Acts as a Bang! with a range of one.",
+    "type": "brown",
+    "abilities": {
+      "punch": 0
+    }
+  },
+  {
+    "name": "dodge",
+    "desc": "Acts as a Missed!, but allows the player to draw a card.",
+    "type": "brown",
+    "abilities": {
+      "dodge": 0
+    }
+  },
+  {
+    "name": "springfield",
+    "desc": "The player must discard one additional card, and then the card acts as a Bang! with unlimited range.",
+    "type": "brown",
+    "abilities": {
+      "springfield": 0
+    }
+  },
+  {
+    "name": "hideout",
+    "desc": "Others view you at distance +1",
+    "type": "blue",
+    "abilities": {
+      "mustang": 0,
+      "equip": 0
+    }
+  },
+  {
+    "name": "binocular",
+    "desc": "you view others at distance -1",
+    "type": "blue",
+    "abilities": {
+      "scope": 0,
+      "equip": 0
+    }
+  },
+  {
+    "name": "whisky",
+    "desc": "The player must discard one additional card, to heal two health.",
+    "type": "brown",
+    "abilities": {
+      "whisky": 0
+    }
+  },
+  {
+    "name": "tequila",
+    "desc": "The player must discard one additional card, to heal any player one health.",
+    "type": "brown",
+    "abilities": {
+      "tequila": 0
+    }
+  },
+  {
+    "name": "ragTime",
+    "desc": "The player must discard one additional card to steal a card from any other player.",
+    "type": "brown",
+    "abilities": {
+      "drawOtherHandRequire1Card": 0,
+      "drawOtherInPlayRequire1Card": 0
+    }
+  },
+  {
+    "name": "brawl",
+    "desc": "The player must discard one additional card to cause all other players to discard one card.",
+    "type": "brown",
+    "abilities": {
+      "brawl": 0
+    }
+  }
+]

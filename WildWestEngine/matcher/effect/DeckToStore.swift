@@ -9,7 +9,7 @@
 /**
  Draw X cards from deck to store
  */
-class DeckToStore: GEffect {
+class DeckToStore: Effect {
     
     @Argument(name: "amount")
     var amount: NumberArgument

@@ -9,7 +9,7 @@
 /**
  Draw a card from store
  */
-class DrawStore: GEffect {
+class DrawStore: Effect {
     
     @Argument(name: "player", defaultValue: .actor)
     var player: PlayerArgument
@@ -26,4 +26,3 @@ class DrawStore: GEffect {
         return cards.map { .drawStore(player: player, card: $0) }
     }
 }
-

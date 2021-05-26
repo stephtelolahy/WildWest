@@ -24,7 +24,7 @@ struct EventDto: Codable {
     var gameover: String?
     var run: MoveDto?
     var activate: [MoveDto]?
-    var addHit: EventHitDto?
+    var addHit: [HitDto]?
     var play: PlayerCardDto?
     var equip: PlayerCardDto?
     var drawStore: PlayerCardDto?
@@ -65,12 +65,4 @@ struct PlayerOtherCardDto: Codable {
     var player: String?
     var other: String?
     var card: String?
-}
-
-struct EventHitDto: Codable {
-    let players: [String]?
-    let name: String?
-    let abilities: [String]?
-    let cancelable: Int?
-    let offender: String?
 }

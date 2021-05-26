@@ -10,7 +10,7 @@
  Put a hand card in other's inPlay
  - RULE: cannot have two copies of the same card in play
  */
-public class Handicap: GEffect {
+public class Handicap: Effect {
     
     @Argument(name: "player", defaultValue: .actor)
     var player: PlayerArgument

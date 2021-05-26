@@ -36,7 +36,7 @@ public enum GEvent: Equatable {
     case deckToStore
     case flipDeck
     
-    case addHit(players: [String], name: String, abilities: [String], cancelable: Int, offender: String)
+    case addHit(hits: [GHit])
     case removeHit(player: String)
     case cancelHit(player: String)
     

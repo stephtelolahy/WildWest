@@ -9,7 +9,7 @@
 /**
  Add hit
  */
-class AddHit: GEffect {
+class AddHit: Effect {
     
     @Argument(name: "player", defaultValue: .actor)
     var player: PlayerArgument
@@ -23,14 +23,37 @@ class AddHit: GEffect {
     @Argument(name: "cancelable", defaultValue: .zero)
     var cancelable: NumberArgument
     
+    @Argument(name: "target", defaultValue: .nobody)
+    var target: PlayerArgument
+    
     override func apply(_ ctx: EffectContext) -> [GEvent]? {
         let players = ctx.players(matching: player)
         let times = ctx.number(matching: times)
         let cancelable = ctx.number(matching: cancelable)
-        var targets: [String] = []
-        for _ in (0..<times) {
-            targets.append(contentsOf: players)
+        let loopPlayers = (0..<times).flatMap { _ in players }
+        let targets = ctx.players(matching: target)
+        var hits: [GHit] = []
+        loopPlayers.forEach { player in
+            
+            if targets.isEmpty {
+                hits.append(GHit(player: player,
+                                 name: ctx.ability,
+                                 abilities: abilities,
+                                 offender: ctx.actor.identifier,
+                                 cancelable: cancelable,
+                                 target: nil))
+            } else {
+                targets.forEach { target in
+                    hits.append(GHit(player: player,
+                                     name: ctx.ability,
+                                     abilities: abilities,
+                                     offender: ctx.actor.identifier,
+                                     cancelable: cancelable,
+                                     target: target))
+                }
+            }
         }
-        return [.addHit(players: targets, name: ctx.ability, abilities: abilities, cancelable: cancelable, offender: ctx.actor.identifier)]
+        
+        return [.addHit(hits: hits)]
     }
 }

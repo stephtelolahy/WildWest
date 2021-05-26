@@ -1,0 +1,195 @@
+[
+  {
+    "name": "punch",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireTargetAt": 1
+    },
+    "onPlay": [
+      {
+        "action": "addHit",
+        "player": "target",
+        "abilities": ["looseHealth"],
+        "cancelable": "1"
+      }
+    ]
+  },
+  {
+    "name": "dodge",
+    "type": "active",
+    "canPlay": {
+      "isHitCancelable": 0
+    },
+    "onPlay": [
+      {
+        "action": "cancelHit"
+      },
+      {
+        "action": "drawDeck"
+      }
+    ]
+  },
+  {
+    "name": "springfield",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireTargetAny": 0,
+      "requireHandCards": 1
+    },
+    "onPlay": [
+      {
+        "action": "discardHand",
+        "card": "requiredHand"
+      },
+      {
+        "action": "addHit",
+        "player": "target",
+        "abilities": ["looseHealth"],
+        "cancelable": "1"
+      }
+    ]
+  },
+  {
+    "name": "whisky",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireHandCards": 1
+    },
+    "onPlay": [
+      {
+        "action": "discardHand",
+        "card": "requiredHand"
+      },
+      {
+        "action": "gainHealth"
+      },
+      {
+        "action": "gainHealth"
+      }
+    ]
+  },
+  {
+    "name": "tequila",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireTargetAny": 0,
+      "requireHandCards": 1
+    },
+    "onPlay": [
+      {
+        "action": "discardHand",
+        "card": "requiredHand"
+      },
+      {
+        "action": "gainHealth",
+        "player": "target"
+      }
+    ]
+  },
+  {
+    "name": "drawOtherHandRequire1Card",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireTargetAny": 0,
+      "requireHandCards": 1
+    },
+    "onPlay": [
+      {
+        "action": "discardHand",
+        "card": "requiredHand"
+      },
+      {
+        "action": "drawHand",
+        "other": "target",
+        "card": "randomHand"
+      }
+    ]
+  },
+  {
+    "name": "drawOtherInPlayRequire1Card",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireTargetAny": 0,
+      "requireInPlayCard": 0,
+      "requireHandCards": 1
+    },
+    "onPlay": [
+      {
+        "action": "discardHand",
+        "card": "requiredHand"
+      },
+      {
+        "action": "drawInPlay",
+        "other": "target",
+        "card": "requiredInPlay"
+      }
+    ]
+  },
+  {
+    "name": "brawl",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireHandCards": 1
+    },
+    "onPlay": [
+      {
+        "action": "discardHand",
+        "card": "requiredHand"
+      },
+      {
+        "action": "addHit",
+        "target": "othersWithCard",
+        "abilities": ["discardTargetHitHand", "discardTargetHitInPlay"]
+      }
+    ]
+  },
+  {
+    "name": "discardTargetHitHand",
+    "type": "active",
+    "canPlay": {
+      "requireTargetHit": 0
+    },
+    "onPlay": [
+      {
+        "action": "discardHand",
+        "player": "target",
+        "card": "randomHand"
+      },
+      {
+        "action": "removeHit"
+      }
+    ]
+  },
+  {
+    "name": "discardTargetHitInPlay",
+    "type": "active",
+    "canPlay": {
+      "requireTargetHit": 0,
+      "requireInPlayCard": 0
+    },
+    "onPlay": [
+      {
+        "action": "discardInPlay",
+        "player": "target",
+        "card": "requiredInPlay"
+      },
+      {
+        "action": "removeHit"
+      }
+    ]
+  }
+]

@@ -36,7 +36,7 @@
             parsedValue = value as? T
             return
         }
-                
+        
         guard let value = data as? T else {
             throw DecodingError.typeMismatch(T.self, DecodingError.Context(codingPath: [], debugDescription: ""))
         }

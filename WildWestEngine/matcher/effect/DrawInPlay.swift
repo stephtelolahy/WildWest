@@ -9,7 +9,7 @@
 /**
  Draw a card from other player's inPlay
  */
-public class DrawInPlay: GEffect {
+public class DrawInPlay: Effect {
     
     @Argument(name: "player", defaultValue: .actor)
     var player: PlayerArgument
@@ -29,4 +29,3 @@ public class DrawInPlay: GEffect {
         return cards.map { .drawInPlay(player: player, other: other, card: $0) }
     }
 }
-

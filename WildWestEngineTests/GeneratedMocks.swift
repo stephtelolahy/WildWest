@@ -1664,6 +1664,20 @@ public class MockHitProtocol: HitProtocol, Cuckoo.ProtocolMock {
         
     }
     
+    
+    
+    public var target: String? {
+        get {
+            return cuckoo_manager.getter("target",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.target)
+        }
+        
+    }
+    
 
     
 
@@ -1699,6 +1713,11 @@ public class MockHitProtocol: HitProtocol, Cuckoo.ProtocolMock {
 	    
 	    var cancelable: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockHitProtocol, Int> {
 	        return .init(manager: cuckoo_manager, name: "cancelable")
+	    }
+	    
+	    
+	    var target: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockHitProtocol, String?> {
+	        return .init(manager: cuckoo_manager, name: "target")
 	    }
 	    
 	    
@@ -1739,6 +1758,11 @@ public class MockHitProtocol: HitProtocol, Cuckoo.ProtocolMock {
 	    
 	    var cancelable: Cuckoo.VerifyReadOnlyProperty<Int> {
 	        return .init(manager: cuckoo_manager, name: "cancelable", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var target: Cuckoo.VerifyReadOnlyProperty<String?> {
+	        return .init(manager: cuckoo_manager, name: "target", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	
@@ -1784,6 +1808,14 @@ public class HitProtocolStub: HitProtocol {
     public var cancelable: Int {
         get {
             return DefaultValueRegistry.defaultValue(for: (Int).self)
+        }
+        
+    }
+    
+    
+    public var target: String? {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (String?).self)
         }
         
     }

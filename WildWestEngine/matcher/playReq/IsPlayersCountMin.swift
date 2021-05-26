@@ -9,12 +9,12 @@
 /**
  The minimum number of players inPlay is X
  */
-public class IsPlayersCountMin: GPlayReq {
+public class IsPlayersCountMin: PlayReq {
     
     @ParsedValue
     var minPlayersCount: Int
     
-    public override func match(_ ctx: PlayReqContext, args: inout [[PlayArg : [String]]]) -> Bool {
+    public override func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
         ctx.state.playOrder.count >= minPlayersCount
     }
 }

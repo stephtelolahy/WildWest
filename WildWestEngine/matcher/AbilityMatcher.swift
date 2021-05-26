@@ -135,6 +135,7 @@ private extension AbilityMatcher {
         // verify requirements
         let ctx = PlayReqContext(ability: ability,
                                  actor: actor,
+                                 card: card,
                                  state: state,
                                  event: event)
         guard let playArgs = match(abilityObject.canPlay, ctx: ctx) else {
@@ -171,7 +172,7 @@ private extension AbilityMatcher {
             .notEmptyOrNil()
     }
     
-    func match(_ playReqs: [GPlayReq], ctx: PlayReqContext) -> [[PlayArg: [String]]]? {
+    func match(_ playReqs: [PlayReq], ctx: PlayReqContext) -> [[PlayArg: [String]]]? {
         var playArgs: [[PlayArg: [String]]] = []
         guard playReqs.allSatisfy({ $0.match(ctx, args: &playArgs) }) else {
             return nil
@@ -179,7 +180,7 @@ private extension AbilityMatcher {
         return playArgs
     }
     
-    func apply(_ effects: [GEffect], ctx: EffectContext) -> [GEvent]? {
+    func apply(_ effects: [Effect], ctx: EffectContext) -> [GEvent]? {
         var result: [GEvent] = []
         for effect in effects {
             guard let events = effect.apply(ctx),

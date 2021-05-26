@@ -9,7 +9,7 @@
 /**
  Draw top card from discard pile
  */
-class DrawDiscard: GEffect {
+class DrawDiscard: Effect {
     
     @Argument(name: "player", defaultValue: .actor)
     var player: PlayerArgument

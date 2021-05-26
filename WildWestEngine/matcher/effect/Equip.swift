@@ -11,7 +11,7 @@
  - RULE: cannot have two copies of the same card in play
  - RULE: discard previous weapon if playing new one
  */
-public class Equip: GEffect {
+public class Equip: Effect {
     
     @Argument(name: "player", defaultValue: .actor)
     var player: PlayerArgument

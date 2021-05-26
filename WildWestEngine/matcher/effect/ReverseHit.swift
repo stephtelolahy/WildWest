@@ -9,7 +9,7 @@
 /**
  Permute hit player and offender
  */
-class ReverseHit: GEffect {
+class ReverseHit: Effect {
     
     @Argument(name: "player", defaultValue: .actor)
     var player: PlayerArgument
@@ -20,8 +20,14 @@ class ReverseHit: GEffect {
             fatalError("Invalid hit")
         }
         
+        let reversedHit = GHit(player: hit.offender,
+                               name: hit.name,
+                               abilities: hit.abilities,
+                               offender: player,
+                               cancelable: hit.cancelable,
+                               target: hit.target)
         return [.removeHit(player: player),
-                .addHit(players: [hit.offender], name: hit.name, abilities: hit.abilities, cancelable: hit.cancelable, offender: player)]
+                .addHit(hits: [reversedHit])]
         
     }
 }

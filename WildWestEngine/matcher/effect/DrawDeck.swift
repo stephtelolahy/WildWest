@@ -9,7 +9,7 @@
 /**
  Draw X cards from top deck
  */
-public class DrawDeck: GEffect {
+public class DrawDeck: Effect {
     
     @Argument(name: "player", defaultValue: .actor)
     var player: PlayerArgument
@@ -24,4 +24,3 @@ public class DrawDeck: GEffect {
             }
     }
 }
-

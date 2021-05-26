@@ -6,6 +6,7 @@
 //  Copyright © 2020 CocoaPods. All rights reserved.
 //
 // swiftlint:disable implicitly_unwrapped_optional
+// swiftlint:disable type_body_length
 
 import XCTest
 import WildWestEngine
@@ -62,6 +63,18 @@ class SetupTests: XCTestCase {
         XCTAssertEqual(roles.filter { $0 == .sheriff }.count, 1)
         XCTAssertEqual(roles.filter { $0 == .outlaw }.count, 3)
         XCTAssertEqual(roles.filter { $0 == .renegade }.count, 1)
+        XCTAssertEqual(roles.filter { $0 == .deputy }.count, 2)
+    }
+    
+    func test_Roles_For8Players() {
+        // Given
+        // When
+        let roles = sut.roles(for: 8)
+        
+        // Assert
+        XCTAssertEqual(roles.filter { $0 == .sheriff }.count, 1)
+        XCTAssertEqual(roles.filter { $0 == .outlaw }.count, 3)
+        XCTAssertEqual(roles.filter { $0 == .renegade }.count, 2)
         XCTAssertEqual(roles.filter { $0 == .deputy }.count, 2)
     }
     

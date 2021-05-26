@@ -9,13 +9,12 @@
 /**
  Set yourself as the target
  */
-public class RequireTargetSelf: GPlayReq {
+public class RequireTargetSelf: PlayReq {
     
     @ParsedValue
     var minPlayersCount: Int
     
-    public override func match(_ ctx: PlayReqContext, args: inout [[PlayArg : [String]]]) -> Bool {
+    public override func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
         args.appending(values: [ctx.actor.identifier], forArg: .target)
     }
 }
-

@@ -11,7 +11,9 @@
     "playReqs": [
       { "event": "run", "ability": "bang" },
       { "event": "run", "ability": "discardBangOnDuel" },
-      { "event": "run", "ability": "discardBangOnIndians" }
+      { "event": "run", "ability": "discardBangOnIndians" },
+      { "event": "run", "ability": "punch" },
+      { "event": "run", "ability": "springfield" }
     ]
   },
   {
@@ -40,6 +42,12 @@
     "emoji": "💢",
     "sfx": "Peacock-SoundBible.com-1698361099",
     "playReqs": [{ "event": "run", "ability": "indians" }]
+  },
+  {
+    "desc": "attack all other players",
+    "emoji": "💢",
+    "sfx": "Peacock-SoundBible.com-1698361099",
+    "playReqs": [{ "event": "run", "ability": "brawl" }]
   },
   {
     "desc": "activate",
@@ -78,7 +86,10 @@
     "desc": "play missed",
     "emoji": "😝",
     "sfx": "Western Ricochet-SoundBible.com-1725886901",
-    "playReqs": [{ "event": "run", "ability": "missed" }]
+    "playReqs": [
+      { "event": "run", "ability": "missed" },
+      { "event": "run", "ability": "dodge" }
+    ]
   },
   {
     "desc": "draw from player",

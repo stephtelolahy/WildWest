@@ -9,7 +9,7 @@
 /**
  Draw a card from other player's hand
  */
-public class DrawHand: GEffect {
+public class DrawHand: Effect {
     
     @Argument(name: "player", defaultValue: .actor)
     var player: PlayerArgument
@@ -29,4 +29,3 @@ public class DrawHand: GEffect {
         return cards.map { .drawHand(player: player, other: other, card: $0) }
     }
 }
-

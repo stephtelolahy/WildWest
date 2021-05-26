@@ -5,7 +5,6 @@
 //  Created by Hugues Stephano Telolahy on 03/10/2020.
 //  Copyright © 2020 CocoaPods. All rights reserved.
 //
-// swiftlint:disable force_cast
 // swiftlint:disable function_body_length
 // swiftlint:disable type_body_length
 
@@ -17,19 +16,34 @@ class ResourcesTests: XCTestCase {
     
     private let sut: ResourcesLoaderProtocol = Resolver.resolve()
     
-    func test_ResourcesCount() throws {
+    func test_SciptedRulesAreMoreThanHardCodedRules() throws {
         // Given
         // When
-        let cards = sut.loadCards()
+        let hardcoded = EffectFamily.allCases.count + PlayReqFamily.allCases.count
+        let scripted = sut.loadAbilities().count
+        
+        // Assert
+        XCTAssertTrue(scripted >= hardcoded)
+    }
+    
+    func test_ParseAbilities() throws {
+        // Given
+        // When
         let abilities = sut.loadAbilities()
         
         // Assert
-        XCTAssertEqual(cards.filter { $0.type == .figure }.count, 16)
-        XCTAssertEqual(cards.filter { $0.type == .brown || $0.type == .blue }.count, 22)
-        XCTAssertEqual(abilities.count, 47)
+        XCTAssertNotNil(abilities)
+        
+        let stagecoach = try XCTUnwrap(abilities.first { $0.name == "stagecoach" })
+        XCTAssertEqual(stagecoach.onPlay.count, 1)
+        XCTAssertTrue(stagecoach.onPlay[0] is DrawDeck)
+        
+        XCTAssertEqual(stagecoach.canPlay.count, 2)
+        XCTAssertTrue(stagecoach.canPlay[0] is IsYourTurn)
+        XCTAssertTrue(stagecoach.canPlay[1] is IsPhase)
     }
     
-    func test_CardsHaveValidAbilities() throws {
+    func test_AllCardsHaveValidAbilities() throws {
         // Given
         let passiveAbilities = ["bullets",
                                 "mustang",
@@ -79,11 +93,12 @@ class ResourcesTests: XCTestCase {
     
     func test_BangUniqueCards() throws {
         // Given
+        let sut: ResourcesLoaderProtocol = Resolver.resolve(args: CardCollection.bang)
+        
         // When
         let cards = sut.loadCards()
         
         // Assert
-        
         XCTAssertTrue(cards.contains { $0.name == "barrel" })
         XCTAssertTrue(cards.contains { $0.name == "dynamite" })
         XCTAssertTrue(cards.contains { $0.name == "jail" })
@@ -127,6 +142,8 @@ class ResourcesTests: XCTestCase {
     
     func test_BangCardSets() throws {
         // Given
+        let sut: ResourcesLoaderProtocol = Resolver.resolve(args: CardCollection.bang)
+        
         // When
         let cards = sut.loadDeck()
         
@@ -208,25 +225,63 @@ class ResourcesTests: XCTestCase {
         XCTAssertTrue(cards.contains { $0.name == "panic" && $0.value == "A" && $0.suit == "♥️" })
         XCTAssertTrue(cards.contains { $0.name == "panic" && $0.value == "8" && $0.suit == "♦️" })
         XCTAssertTrue(cards.contains { $0.name == "saloon" && $0.value == "5" && $0.suit == "♥️" })
-        XCTAssertTrue(cards.contains { $0.name == "stagecoach" && $0.value == "9" && $0.suit == "♠️" })
-        XCTAssertTrue(cards.filter { $0.name == "stagecoach" }.count == 2)
+        XCTAssertTrue(cards.filter { $0.name == "stagecoach" && $0.value == "9" && $0.suit == "♠️" }.count == 2)
         XCTAssertTrue(cards.contains { $0.name == "wellsFargo" && $0.value == "3" && $0.suit == "♥️" })
     }
     
-    func test_ParseAbilities() throws {
+    func test_DodgeCityUniqueCards() throws {
         // Given
+        let sut: ResourcesLoaderProtocol = Resolver.resolve(args: CardCollection.dodgecity)
+        
         // When
-        let abilities = sut.loadAbilities()
+        let cards = sut.loadCards()
         
         // Assert
-        XCTAssertNotNil(abilities)
+        XCTAssertTrue(cards.contains { $0.name == "punch" })
+        XCTAssertTrue(cards.contains { $0.name == "dodge" })
+        XCTAssertTrue(cards.contains { $0.name == "springfield" })
+        XCTAssertTrue(cards.contains { $0.name == "hideout" })
+        XCTAssertTrue(cards.contains { $0.name == "binocular" })
+        XCTAssertTrue(cards.contains { $0.name == "whisky" })
+        XCTAssertTrue(cards.contains { $0.name == "tequila" })
+        XCTAssertTrue(cards.contains { $0.name == "ragTime" })
+        XCTAssertTrue(cards.contains { $0.name == "brawl" })
+    }
+    
+    func test_DodgeCityCardSets() throws {
+        // Given
+        let sut: ResourcesLoaderProtocol = Resolver.resolve(args: CardCollection.dodgecity)
         
-        let stagecoach = try XCTUnwrap(abilities.first { $0.name == "stagecoach" })
-        XCTAssertEqual(stagecoach.onPlay.count, 1)
-        XCTAssertTrue(stagecoach.onPlay[0] is DrawDeck)
+        // When
+        let cards = sut.loadDeck()
         
-        XCTAssertEqual(stagecoach.canPlay.count, 2)
-        XCTAssertTrue(stagecoach.canPlay[0] is IsYourTurn)
-        XCTAssertTrue(stagecoach.canPlay[1] is IsPhase)
+        // Assert
+        XCTAssertTrue(cards.contains { $0.name == "bang" && $0.value == "8" && $0.suit == "♠️" })
+        XCTAssertTrue(cards.contains { $0.name == "bang" && $0.value == "5" && $0.suit == "♣️" })
+        XCTAssertTrue(cards.contains { $0.name == "bang" && $0.value == "6" && $0.suit == "♣️" })
+        XCTAssertTrue(cards.contains { $0.name == "bang" && $0.value == "K" && $0.suit == "♣️" })
+        XCTAssertTrue(cards.contains { $0.name == "dodge" && $0.value == "7" && $0.suit == "♦️" })
+        XCTAssertTrue(cards.contains { $0.name == "dodge" && $0.value == "K" && $0.suit == "♥️" })
+        XCTAssertTrue(cards.contains { $0.name == "beer" && $0.value == "6" && $0.suit == "♥️" })
+        XCTAssertTrue(cards.contains { $0.name == "beer" && $0.value == "6" && $0.suit == "♠️" })
+        XCTAssertTrue(cards.contains { $0.name == "indians" && $0.value == "5" && $0.suit == "♦️" })
+        XCTAssertTrue(cards.contains { $0.name == "generalstore" && $0.value == "A" && $0.suit == "♠️" })
+        XCTAssertTrue(cards.contains { $0.name == "catBalou" && $0.value == "8" && $0.suit == "♣️" })
+        XCTAssertTrue(cards.contains { $0.name == "panic" && $0.value == "J" && $0.suit == "♥️" })
+        XCTAssertTrue(cards.contains { $0.name == "missed" && $0.value == "8" && $0.suit == "♦️" })
+        XCTAssertTrue(cards.contains { $0.name == "punch" && $0.value == "10" && $0.suit == "♠️" })
+        XCTAssertTrue(cards.contains { $0.name == "springfield" && $0.value == "K" && $0.suit == "♠️" })
+        XCTAssertTrue(cards.contains { $0.name == "whisky" && $0.value == "Q" && $0.suit == "♦️" })
+        XCTAssertTrue(cards.contains { $0.name == "tequila" && $0.value == "9" && $0.suit == "♣️" })
+        XCTAssertTrue(cards.contains { $0.name == "ragTime" && $0.value == "9" && $0.suit == "♥️" })
+        
+        XCTAssertTrue(cards.contains { $0.name == "hideout" && $0.value == "K" && $0.suit == "♦️" })
+        XCTAssertTrue(cards.contains { $0.name == "remington" && $0.value == "6" && $0.suit == "♦️" })
+        XCTAssertTrue(cards.contains { $0.name == "binocular" && $0.value == "10" && $0.suit == "♦️" })
+        XCTAssertTrue(cards.contains { $0.name == "revCarabine" && $0.value == "5" && $0.suit == "♠️" })
+        XCTAssertTrue(cards.contains { $0.name == "dynamite" && $0.value == "10" && $0.suit == "♣️" })
+        XCTAssertTrue(cards.contains { $0.name == "mustang" && $0.value == "5" && $0.suit == "♥️" })
+        XCTAssertTrue(cards.contains { $0.name == "barrel" && $0.value == "A" && $0.suit == "♣️" })
+        XCTAssertTrue(cards.contains { $0.name == "brawl" && $0.value == "J" && $0.suit == "♠️" })
     }
 }

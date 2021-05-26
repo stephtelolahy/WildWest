@@ -10,7 +10,7 @@
  Loose life point
  - Set offender as hit offender
  */
-class LooseHealth: GEffect {
+class LooseHealth: Effect {
     
     @Argument(name: "player", defaultValue: .actor)
     var player: PlayerArgument

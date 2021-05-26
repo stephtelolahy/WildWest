@@ -9,9 +9,9 @@
 /**
  When events queue is empty
  */
-class OnQueueEmpty: GPlayReq {
+class OnQueueEmpty: PlayReq {
     
-    override func match(_ ctx: PlayReqContext, args: inout [[PlayArg : [String]]]) -> Bool {
+    override func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
         guard case .emptyQueue = ctx.event else {
             return false
         }

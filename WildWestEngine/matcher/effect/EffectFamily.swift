@@ -8,8 +8,8 @@
 // swiftlint:disable cyclomatic_complexity
 // swiftlint:disable switch_case_on_newline
 
-enum EffectFamily: String, DecodableClassFamily {
-    typealias BaseType = GEffect
+public enum EffectFamily: String, DecodableClassFamily, CaseIterable {
+    public typealias BaseType = Effect
     
     case drawDeck
     case gainHealth
@@ -34,9 +34,9 @@ enum EffectFamily: String, DecodableClassFamily {
     case drawDeckChoosing
     case drawDiscard
     
-    static var discriminator: Discriminator { .action }
+    public static var discriminator: Discriminator { .action }
     
-    func getType() -> GEffect.Type {
+    public func getType() -> Effect.Type {
         switch self {
         case .drawDeck: return DrawDeck.self
         case .gainHealth: return GainHealth.self

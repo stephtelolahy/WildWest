@@ -47,8 +47,8 @@ class DtoEncodingTests: XCTestCase {
         let hit1 = GHit(player: "p1",
                         name: "hit1",
                         abilities: ["ab1"],
-                        cancelable: 1,
-                        offender: "p2")
+                        offender: "p2",
+                        cancelable: 1)
         let state = GState(players: ["p1": player1],
                            initialOrder: ["p1", "p2"],
                            playOrder: ["p2", "p1"],
@@ -130,7 +130,8 @@ class DtoEncodingTests: XCTestCase {
             .deckToStore,
             .flipDeck,
             .drawDeckFlipping(player: "p1"),
-            .addHit(players: ["p1", "p2"], name: "h1", abilities: ["a1", "a2"], cancelable: 1, offender: "p2"),
+            .addHit(hits: [GHit(player: "p1", name: "h1", abilities: ["a1", "a2"], offender: "p2"),
+                           GHit(player: "p1", name: "h1", abilities: ["a1", "a2"], offender: "p2", cancelable: 1, target: "p3")]),
             .removeHit(player: "p1"),
             .cancelHit(player: "p1"),
             .gameover(winner: .renegade),

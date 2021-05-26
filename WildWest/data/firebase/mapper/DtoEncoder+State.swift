@@ -41,15 +41,17 @@ extension DtoEncoder {
                name: hit.name,
                abilities: hit.abilities,
                cancelable: hit.cancelable,
-               offender: hit.offender)
+               offender: hit.offender,
+               target: hit.target)
     }
     
     func decode(hit: HitDto) throws -> HitProtocol {
         try GHit(player: hit.player.unwrap(),
                  name: hit.name.unwrap(),
                  abilities: hit.abilities.unwrap(),
+                 offender: hit.offender.unwrap(),
                  cancelable: hit.cancelable.unwrap(),
-                 offender: hit.offender.unwrap())
+                 target: hit.target)
     }
 }
 

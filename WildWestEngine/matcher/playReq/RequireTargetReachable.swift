@@ -9,9 +9,9 @@
 /**
  Must target a player at reachable distance
  */
-class RequireTargetReachable: GPlayReq {
+class RequireTargetReachable: PlayReq {
     
-    override func match(_ ctx: PlayReqContext, args: inout [[PlayArg : [String]]]) -> Bool {
+    override func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
         let distance = ctx.actor.weapon
         let others = ctx.state.playOrder
             .filter { $0 != ctx.actor.identifier }

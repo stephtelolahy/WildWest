@@ -10,7 +10,7 @@
  Gain life point respecting health limit
  - RULE: cannot have more health than maxHealth
  */
-public class GainHealth: GEffect {
+public class GainHealth: Effect {
     
     @Argument(name: "player", defaultValue: .actor)
     var player: PlayerArgument

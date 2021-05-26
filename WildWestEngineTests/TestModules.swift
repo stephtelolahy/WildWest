@@ -15,7 +15,9 @@ extension Resolver: ResolverRegistering {
 
         register { JsonReader(bundle: Bundle.resourcesBundle) }.scope(application)
 
-        register { ResourcesLoader(jsonReader: resolve()) as ResourcesLoaderProtocol }.scope(application)
+        register(ResourcesLoaderProtocol.self) { _, arg in
+            ResourcesLoader(jsonReader: resolve(), collection: arg as? CardCollection)
+        }
         
         register(AbilityMatcherProtocol.self) {
             let resourcesLoader = resolve(ResourcesLoaderProtocol.self)

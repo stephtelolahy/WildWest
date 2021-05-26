@@ -29,7 +29,7 @@ class MoveEvaluatorTests: XCTestCase {
     
     func test_Return0_IfAbilityScoreIs0() {
         // Given
-        let move = GMove("x", actor: "p1", args: [.target: ["p2"]])
+        let move = GMove("a1", actor: "p1", args: [.target: ["p2"]])
         stub(mockAbilityEvaluator) { mock in
             when(mock.evaluate(equal(to: move))).thenReturn(0)
         }

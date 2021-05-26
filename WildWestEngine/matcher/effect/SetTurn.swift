@@ -9,7 +9,7 @@
 /**
  Set current turn player to X
  */
-class SetTurn: GEffect {
+class SetTurn: Effect {
     
     @Argument(name: "player")
     var player: PlayerArgument
