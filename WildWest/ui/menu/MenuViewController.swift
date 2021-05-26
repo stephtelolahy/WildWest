@@ -88,7 +88,7 @@ class MenuViewController: UIViewController {
     }
     
     @IBAction private func figureButtonTapped(_ sender: Any) {
-        router.toFigureSelector { [weak self] figure in
+        router.toFigureSelector(initialFigure: preferences.preferredFigure) { [weak self] figure in
             self?.preferences.preferredFigure = figure
             self?.setFigure(figure)
         }

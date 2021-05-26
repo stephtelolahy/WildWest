@@ -127,7 +127,7 @@ class ResourcesTests: XCTestCase {
         XCTAssertTrue(cards.contains { $0.name == "calamityJanet" })
         XCTAssertTrue(cards.contains { $0.name == "elGringo" })
         XCTAssertTrue(cards.contains { $0.name == "jesseJones" })
-        XCTAssertTrue(cards.contains { $0.name == "joudonais" })
+        XCTAssertTrue(cards.contains { $0.name == "jourdonnais" })
         XCTAssertTrue(cards.contains { $0.name == "kitCarlson" })
         XCTAssertTrue(cards.contains { $0.name == "luckyDuke" })
         XCTAssertTrue(cards.contains { $0.name == "paulRegret" })

@@ -102,8 +102,8 @@ extension Resolver: RouterDependenciesProtocol {
         return viewController
     }
     
-    func provideFigureSelectorWidget(_ completion: @escaping (String?) -> Void) -> UIViewController {
-        FigureSelectorWidget(gameResources: resolve(), completion: completion)
+    func provideFigureSelectorWidget(initialFigure: String?, completion: @escaping (String?) -> Void) -> UIViewController {
+        FigureSelectorWidget(gameResources: resolve(), initialFigure: initialFigure, completion: completion)
     }
     
     func provideRoleSelectorWidget(_ completion: @escaping (Role?) -> Void) -> UIViewController {

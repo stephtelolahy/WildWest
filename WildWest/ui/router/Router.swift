@@ -13,7 +13,7 @@ import WildWestEngine
 // Present screens or widgets
 protocol RouterProtocol {
     func toMenu()
-    func toFigureSelector(completion: @escaping (String?) -> Void)
+    func toFigureSelector(initialFigure: String?, completion: @escaping (String?) -> Void)
     func toRoleSelector(_ completion: @escaping (Role?) -> Void)
     func toContactUs()
     func toRules()
@@ -26,7 +26,7 @@ protocol RouterProtocol {
 
 protocol RouterDependenciesProtocol {
     func provideMainViewController() -> UIViewController
-    func provideFigureSelectorWidget(_ completion: @escaping (String?) -> Void) -> UIViewController
+    func provideFigureSelectorWidget(initialFigure: String?, completion: @escaping (String?) -> Void) -> UIViewController
     func provideRoleSelectorWidget(_ completion: @escaping (Role?) -> Void) -> UIViewController
     func provideGameViewController(_ environment: GameEnvironment) -> UIViewController
     func provideMenuViewController() -> UIViewController
@@ -50,8 +50,8 @@ class Router: RouterProtocol {
         navController?.fade(to: dependencies.provideMenuViewController())
     }
     
-    func toFigureSelector(completion: @escaping (String?) -> Void) {
-        viewController?.present(dependencies.provideFigureSelectorWidget(completion), animated: true)
+    func toFigureSelector(initialFigure: String?, completion: @escaping (String?) -> Void) {
+        viewController?.present(dependencies.provideFigureSelectorWidget(initialFigure: initialFigure, completion: completion), animated: true)
     }
     
     func toRoleSelector(_ completion: @escaping (Role?) -> Void) {
