@@ -95,7 +95,7 @@ class MenuViewController: UIViewController {
     }
     
     @IBAction private func roleButtonTapped(_ sender: Any) {
-        router.toRoleSelector { [weak self] role in
+        router.toRoleSelector(initialRole: preferences.preferredRole) { [weak self] role in
             self?.preferences.preferredRole = role
             self?.setRole(role)
         }
