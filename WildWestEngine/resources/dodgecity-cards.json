@@ -120,5 +120,14 @@
       "silentStartTurnDrawing2Cards": 0,
       "startTurnDrawing1CardPlusWound": 0
     }
+  },
+  {
+    "name": "gregDigger",
+    "desc": "Each time another player is eliminated, he regains 2 life points.",
+    "type": "figure",
+    "abilities": {
+      "bullets": 4,
+      "gain2HealthOnOtherEliminated": 0
+    }
   }
 ]

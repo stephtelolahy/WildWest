@@ -26,6 +26,8 @@
 		3322C4B3245236D500D7B297 /* RemoteGameDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4B2245236D500D7B297 /* RemoteGameDatabase.swift */; };
 		3322C4B62452379700D7B297 /* StateDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322C4B52452379700D7B297 /* StateDto.swift */; };
 		3324018E23DBA6C800B92439 /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */; };
+		33245E6626602C980019E8F0 /* Gain2HealthOnOtherEliminatedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33245E6526602C980019E8F0 /* Gain2HealthOnOtherEliminatedTests.swift */; };
+		33245E6826602F4D0019E8F0 /* OnOtherEliminated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33245E6726602F4D0019E8F0 /* OnOtherEliminated.swift */; };
 		332499B323DB9F650082EF09 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332499B223DB9F650082EF09 /* GameViewController.swift */; };
 		33272F6A265920A1005C9246 /* Ability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33272F69265920A1005C9246 /* Ability.swift */; };
 		33272F702659212A005C9246 /* Argument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33272F6F2659212A005C9246 /* Argument.swift */; };
@@ -387,6 +389,8 @@
 		3322C4B2245236D500D7B297 /* RemoteGameDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteGameDatabase.swift; sourceTree = "<group>"; };
 		3322C4B52452379700D7B297 /* StateDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateDto.swift; sourceTree = "<group>"; };
 		3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
+		33245E6526602C980019E8F0 /* Gain2HealthOnOtherEliminatedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gain2HealthOnOtherEliminatedTests.swift; sourceTree = "<group>"; };
+		33245E6726602F4D0019E8F0 /* OnOtherEliminated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnOtherEliminated.swift; sourceTree = "<group>"; };
 		332499B223DB9F650082EF09 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		33272F69265920A1005C9246 /* Ability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ability.swift; sourceTree = "<group>"; };
 		33272F6F2659212A005C9246 /* Argument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Argument.swift; sourceTree = "<group>"; };
@@ -765,6 +769,7 @@
 				33AAE067265ABCD800A067E3 /* OnPhase.swift */,
 				33AAE06D265AE52200A067E3 /* OnQueueEmpty.swift */,
 				33FBF8F9265AE69F00D7C6AD /* OnEliminated.swift */,
+				33245E6726602F4D0019E8F0 /* OnOtherEliminated.swift */,
 				33FBF8FF265B122400D7C6AD /* OnEliminatingRole.swift */,
 				33FBF901265B137A00D7C6AD /* OnLooseHealth.swift */,
 				33FBF905265B15C600D7C6AD /* OnHandEmpty.swift */,
@@ -1027,6 +1032,7 @@
 				33695191265FD1E300B05D56 /* Gain2HealthOnPlayBeerTests.swift */,
 				33F40401265FDC25004E4FBF /* StartTurnDrawing3CardsTests.swift */,
 				33F40403265FE9A2004E4FBF /* StartTurnDrawing1CardPlusWoundTests.swift */,
+				33245E6526602C980019E8F0 /* Gain2HealthOnOtherEliminatedTests.swift */,
 			);
 			path = figure;
 			sourceTree = "<group>";
@@ -1976,6 +1982,7 @@
 				33AAE068265ABCD800A067E3 /* OnPhase.swift in Sources */,
 				3358334E25BC2585001BE4D8 /* GLoop.swift in Sources */,
 				33FBF908265B167C00D7C6AD /* RequireTargetEliminated.swift in Sources */,
+				33245E6826602F4D0019E8F0 /* OnOtherEliminated.swift in Sources */,
 				3358334525BC2585001BE4D8 /* AbilityEvaluator.swift in Sources */,
 				33AAE04126598EAF00A067E3 /* DrawInPlay.swift in Sources */,
 				3358334325BC2585001BE4D8 /* MoveEvaluator.swift in Sources */,
@@ -2071,6 +2078,7 @@
 				3392B1FA25BC377100214393 /* MockHitProtocol+Stub.swift in Sources */,
 				3392B1BF25BC377100214393 /* PlayBangAsMissedTests.swift in Sources */,
 				33636561265C1DB100B55C4E /* SpringfieldTests.swift in Sources */,
+				33245E6626602C980019E8F0 /* Gain2HealthOnOtherEliminatedTests.swift in Sources */,
 				3392B1EB25BC377100214393 /* Discard2CardsFor1HealthTests.swift in Sources */,
 				3392B1E925BC377100214393 /* PanicTests.swift in Sources */,
 				3392B1ED25BC377100214393 /* HandicapTests.swift in Sources */,
