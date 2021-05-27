@@ -54,7 +54,7 @@ class ResourcesTests: XCTestCase {
                                 "bangsPerTurn",
                                 "playBangAsMissed",
                                 "playMissedAsBang",
-                                "silentStartTurnOnPhase1",
+                                "silentStartTurnDrawing2Cards",
                                 "silentJail",
                                 "playAnyCardAsMissed",
                                 "handLimit"]
@@ -82,7 +82,7 @@ class ResourcesTests: XCTestCase {
         
         // Assert
         XCTAssertNotNil(playerCard.abilities["endTurn"])
-        XCTAssertNotNil(playerCard.abilities["startTurnOnPhase1"])
+        XCTAssertNotNil(playerCard.abilities["startTurnDrawing2Cards"])
         XCTAssertNotNil(playerCard.abilities["nextTurnOnPhase3"])
         XCTAssertNotNil(playerCard.abilities["nextTurnOnEliminated"])
         XCTAssertNotNil(playerCard.abilities["discardExcessCardsOnPhase3"])

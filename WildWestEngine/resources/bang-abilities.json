@@ -412,7 +412,7 @@
     ]
   },
   {
-    "name": "startTurnOnPhase1",
+    "name": "startTurnDrawing2Cards",
     "type": "triggered",
     "canPlay": {
       "onQueueEmpty": 0,
@@ -663,7 +663,7 @@
     ]
   },
   {
-    "name": "startTurnDrawing3CardsAndKeep2",
+    "name": "startTurnChoosing2CardsFromDeck",
     "type": "triggered",
     "canPlay": {
       "onQueueEmpty": 0,
@@ -673,12 +673,12 @@
     "onPlay": [
       {
         "action": "addHit",
-        "abilities": ["startTurnDrawDeckChoosing2"]
+        "abilities": ["startTurnDrawingDeckChoosing"]
       }
     ]
   },
   {
-    "name": "startTurnDrawDeckChoosing2",
+    "name": "startTurnDrawingDeckChoosing",
     "type": "active",
     "canPlay": {
       "requireDeckCards": 2
@@ -698,7 +698,7 @@
     ]
   },
   {
-    "name": "startTurnDrawingFirstCardFromPlayer",
+    "name": "startTurnChoosingDrawPlayer",
     "type": "triggered",
     "canPlay": {
       "onQueueEmpty": 0,
@@ -755,7 +755,7 @@
     ]
   },
   {
-    "name": "startTurnDrawingFirstCardFromDiscard",
+    "name": "startTurnChoosingDrawDiscard",
     "type": "triggered",
     "canPlay": {
       "onQueueEmpty": 0,

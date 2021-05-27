@@ -5,7 +5,7 @@
     "type": "default",
     "abilities": {
       "endTurn": 0,
-      "startTurnOnPhase1": 0,
+      "startTurnDrawing2Cards": 0,
       "nextTurnOnPhase3": 0,
       "nextTurnOnEliminated": 0,
       "discardExcessCardsOnPhase3": 0,
@@ -329,7 +329,7 @@
     "type": "figure",
     "abilities": {
       "bullets": 4,
-      "silentStartTurnOnPhase1": 0,
+      "silentStartTurnDrawing2Cards": 0,
       "startTurnDrawing1ExtraCardIfRedSuit": 0
     }
   },
@@ -339,8 +339,8 @@
     "type": "figure",
     "abilities": {
       "bullets": 4,
-      "silentStartTurnOnPhase1": 0,
-      "startTurnDrawing3CardsAndKeep2": 0
+      "silentStartTurnDrawing2Cards": 0,
+      "startTurnChoosing2CardsFromDeck": 0
     }
   },
   {
@@ -349,8 +349,8 @@
     "type": "figure",
     "abilities": {
       "bullets": 4,
-      "silentStartTurnOnPhase1": 0,
-      "startTurnDrawingFirstCardFromPlayer": 0
+      "silentStartTurnDrawing2Cards": 0,
+      "startTurnChoosingDrawPlayer": 0
     }
   },
   {
@@ -359,8 +359,8 @@
     "type": "figure",
     "abilities": {
       "bullets": 4,
-      "silentStartTurnOnPhase1": 0,
-      "startTurnDrawingFirstCardFromDiscard": 0
+      "silentStartTurnDrawing2Cards": 0,
+      "startTurnChoosingDrawDiscard": 0
     }
   }
 ]

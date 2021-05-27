@@ -107,7 +107,7 @@
     "type": "figure",
     "abilities": {
       "bullets": 3,
-      "silentStartTurnOnPhase1": 0,
+      "silentStartTurnDrawing2Cards": 0,
       "startTurnDrawing3Cards": 0
     }
   }

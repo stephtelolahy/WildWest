@@ -1,5 +1,5 @@
 //
-//  StartTurnDrawing3CardsAndKeep2Tests.swift
+//  StartTurnChoosing2CardsFromDeckTests.swift
 //  CardGameEngine_Tests
 //
 //  Created by Hugues Stephano Telolahy on 14/10/2020.
@@ -11,16 +11,16 @@ import XCTest
 import WildWestEngine
 import Resolver
 
-class StartTurnDrawing3CardsAndKeep2Tests: XCTestCase {
+class StartTurnChoosing2CardsFromDeckTests: XCTestCase {
     
     private let sut: AbilityMatcherProtocol = Resolver.resolve()
     
-    func test_startTurnDrawing3CardsAndKeep2() throws {
+    func test_startTurnChoosing2CardsFromDeck() throws {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p1")
-            .abilities(are: "startTurnDrawing3CardsAndKeep2")
+            .abilities(are: "startTurnChoosing2CardsFromDeck")
         let mockState = MockStateProtocol()
             .withDefault()
             .turn(is: "p1")
@@ -34,11 +34,11 @@ class StartTurnDrawing3CardsAndKeep2Tests: XCTestCase {
         let events = sut.effects(on: try XCTUnwrap(moves?.first), in: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GMove("startTurnDrawing3CardsAndKeep2", actor: "p1")])
-        XCTAssertEqual(events, [.addHit(hits: [GHit(player: "p1", name: "startTurnDrawing3CardsAndKeep2", abilities: ["startTurnDrawDeckChoosing2"], offender: "p1")])])
+        XCTAssertEqual(moves, [GMove("startTurnChoosing2CardsFromDeck", actor: "p1")])
+        XCTAssertEqual(events, [.addHit(hits: [GHit(player: "p1", name: "startTurnChoosing2CardsFromDeck", abilities: ["startTurnDrawingDeckChoosing"], offender: "p1")])])
     }
     
-    func test_StartTurnDrawDeckChoosing2() throws {
+    func test_StartTurnDrawingDeckChoosing() throws {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
@@ -46,7 +46,7 @@ class StartTurnDrawing3CardsAndKeep2Tests: XCTestCase {
         let mockHit1 = MockHitProtocol()
             .withDefault()
             .player(is: "p1")
-            .abilities(are: "startTurnDrawDeckChoosing2")
+            .abilities(are: "startTurnDrawingDeckChoosing")
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1)
@@ -60,9 +60,9 @@ class StartTurnDrawing3CardsAndKeep2Tests: XCTestCase {
         let events = sut.effects(on: try XCTUnwrap(moves?.first), in: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GMove("startTurnDrawDeckChoosing2", actor: "p1", args: [.requiredDeck: ["c1", "c2"]]),
-                               GMove("startTurnDrawDeckChoosing2", actor: "p1", args: [.requiredDeck: ["c1", "c3"]]),
-                               GMove("startTurnDrawDeckChoosing2", actor: "p1", args: [.requiredDeck: ["c2", "c3"]])])
+        XCTAssertEqual(moves, [GMove("startTurnDrawingDeckChoosing", actor: "p1", args: [.requiredDeck: ["c1", "c2"]]),
+                               GMove("startTurnDrawingDeckChoosing", actor: "p1", args: [.requiredDeck: ["c1", "c3"]]),
+                               GMove("startTurnDrawingDeckChoosing", actor: "p1", args: [.requiredDeck: ["c2", "c3"]])])
         XCTAssertEqual(events, [.drawDeckChoosing(player: "p1", card: "c1"),
                                 .drawDeckChoosing(player: "p1", card: "c2"),
                                 .removeHit(player: "p1"), 

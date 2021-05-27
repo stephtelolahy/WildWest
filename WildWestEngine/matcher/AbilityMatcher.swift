@@ -199,8 +199,8 @@ private extension AbilityMatcher {
     func abilities(applicableTo actor: PlayerProtocol) -> [String: Int] {
         var abilities = actor.abilities
         
-        if actor.abilities["silentStartTurnOnPhase1"] != nil {
-            abilities.removeValue(forKey: "startTurnOnPhase1")
+        if actor.abilities["silentStartTurnDrawing2Cards"] != nil {
+            abilities.removeValue(forKey: "startTurnDrawing2Cards")
         }
         
         return abilities
