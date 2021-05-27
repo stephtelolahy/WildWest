@@ -82,5 +82,14 @@
       "bullets": 3,
       "playAnyCardAsMissed": 0
     }
+  },
+  {
+    "name": "seanMallory",
+    "desc": "He may hold in his hand up to 10 cards.",
+    "type": "figure",
+    "abilities": {
+      "bullets": 3,
+      "handLimit": 10
+    }
   }
 ]

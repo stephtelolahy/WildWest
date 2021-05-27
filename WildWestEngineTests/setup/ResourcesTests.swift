@@ -56,7 +56,8 @@ class ResourcesTests: XCTestCase {
                                 "playMissedAsBang",
                                 "silentStartTurnOnPhase1",
                                 "silentJail",
-                                "playAnyCardAsMissed"]
+                                "playAnyCardAsMissed",
+                                "handLimit"]
         let activeAbilities = sut.loadAbilities().map { $0.name }
         let allAbilities = passiveAbilities + activeAbilities
         
@@ -249,6 +250,7 @@ class ResourcesTests: XCTestCase {
         XCTAssertTrue(cards.contains { $0.name == "brawl" })
         
         XCTAssertTrue(cards.contains { $0.name == "elenaFuente" })
+        XCTAssertTrue(cards.contains { $0.name == "seanMallory" })
     }
     
     func test_DodgeCityCardSets() throws {
