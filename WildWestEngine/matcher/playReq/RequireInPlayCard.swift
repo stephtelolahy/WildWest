@@ -11,9 +11,6 @@
  */
 public class RequireInPlayCard: PlayReq {
     
-    @ParsedValue
-    var minPlayersCount: Int
-    
     public override func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
         args.appendingRequiredInPlay(state: ctx.state)
     }

@@ -19,9 +19,6 @@ public class AbilityEvaluator: AbilityEvaluatorProtocol {
         case "endTurn",
              "looseHealth": 
             return  -1
-        
-        case "discardSelfInPlay":
-            return -1
             
         case "bang", 
              "duel",
@@ -31,14 +28,15 @@ public class AbilityEvaluator: AbilityEvaluatorProtocol {
             
         case "handicap",
              "discardOtherHand",
-             "drawOtherHandAt1", 
-             "startTurnDrawingPlayer",
+             "drawOtherHandAt1",
              "drawOtherHandRequire1Card",
-             "drawOtherInPlayRequire1Card":
+             "startTurnDrawingPlayer":
             return 1
             
-        case "discardOtherInPlay",
-             "drawOtherInPlayAt1":
+        case
+            "discardAnyInPlay",
+            "drawOtherInPlayAt1",
+            "drawOtherInPlayRequire1Card":
             if let inPlayCard = move.args[.requiredInPlay]?.first, 
                inPlayCard.contains("jail") {
                 return -1

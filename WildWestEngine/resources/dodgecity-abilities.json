@@ -37,7 +37,7 @@
     "canPlay": {
       "isYourTurn": 0,
       "isPhase": 2,
-      "requireTargetAny": 0,
+      "requireTargetOther": 0,
       "requireHandCards": 1
     },
     "onPlay": [
@@ -98,7 +98,7 @@
     "canPlay": {
       "isYourTurn": 0,
       "isPhase": 2,
-      "requireTargetAny": 0,
+      "requireTargetOther": 0,
       "requireHandCards": 1
     },
     "onPlay": [
@@ -119,7 +119,7 @@
     "canPlay": {
       "isYourTurn": 0,
       "isPhase": 2,
-      "requireTargetAny": 0,
+      "requireTargetOther": 0,
       "requireInPlayCard": 0,
       "requireHandCards": 1
     },

@@ -1,5 +1,5 @@
 //
-//  RequireTargetSelf.swift
+//  RequireTargetOther.swift
 //  WildWestEngine
 //
 //  Created by Hugues Stéphano TELOLAHY on 22/05/2021.
@@ -7,14 +7,13 @@
 //
 
 /**
- Set yourself as the target
+ Must target any other player
  */
-public class RequireTargetSelf: PlayReq {
-    
-    @ParsedValue
-    var minPlayersCount: Int
+public class RequireTargetOther: PlayReq {
     
     public override func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
-        args.appending(values: [ctx.actor.identifier], forArg: .target)
+        let others = ctx.state.playOrder
+            .filter { $0 != ctx.actor.identifier }
+        return args.appending(values: others, forArg: .target)
     }
 }

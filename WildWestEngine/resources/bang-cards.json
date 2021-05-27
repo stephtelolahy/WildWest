@@ -125,8 +125,7 @@
     "type": "brown",
     "abilities": {
       "discardOtherHand": 0,
-      "discardOtherInPlay": 0,
-      "discardSelfInPlay": 0
+      "discardAnyInPlay": 0
     }
   },
   {

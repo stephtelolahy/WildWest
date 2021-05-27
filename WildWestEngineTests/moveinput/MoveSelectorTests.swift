@@ -120,16 +120,16 @@ class MoveSelectorTests: XCTestCase {
     
     func test_SelectMoveWithRequiredInPlay() throws {
         // Given
-        let move11 = GMove("discardOtherInPlay", actor: "pX", args: [.target: ["p1"], .requiredInPlay: ["c11"]])
-        let move12 = GMove("discardOtherInPlay", actor: "pX", args: [.target: ["p1"], .requiredInPlay: ["c12"]])
-        let move21 = GMove("discardOtherInPlay", actor: "pX", args: [.target: ["p2"], .requiredInPlay: ["c21"]])
-        let move22 = GMove("discardOtherInPlay", actor: "pX", args: [.target: ["p2"], .requiredInPlay: ["c22"]])
+        let move11 = GMove("discardAnyInPlay", actor: "pX", args: [.target: ["p1"], .requiredInPlay: ["c11"]])
+        let move12 = GMove("discardAnyInPlay", actor: "pX", args: [.target: ["p1"], .requiredInPlay: ["c12"]])
+        let move21 = GMove("discardAnyInPlay", actor: "pX", args: [.target: ["p2"], .requiredInPlay: ["c21"]])
+        let move22 = GMove("discardAnyInPlay", actor: "pX", args: [.target: ["p2"], .requiredInPlay: ["c22"]])
         
         // When
         let root = sut.select([move11, move12, move21, move22])
         
         // Assert
-        XCTAssertEqual(root.name, "discardOtherInPlay")
+        XCTAssertEqual(root.name, "discardAnyInPlay")
         guard case let .options(nodes) = root.value else {
             XCTFail("Invalid options")
             return

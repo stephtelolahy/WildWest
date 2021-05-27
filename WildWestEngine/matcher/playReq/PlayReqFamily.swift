@@ -27,8 +27,8 @@ public enum PlayReqFamily: String, CaseIterable {
     case onLooseHealth
     case onHandEmpty
     
+    case requireTargetOther
     case requireTargetAny
-    case requireTargetSelf
     case requireTargetAt
     case requireTargetReachable
     case requireTargetOffender
@@ -45,9 +45,9 @@ public enum PlayReqFamily: String, CaseIterable {
         case .isPhase: return IsPhase.self
         case .isPlayersCountMin: return IsPlayersCountMin.self
         case .isHitEliminate: return IsHitEliminate.self
+        case .requireTargetOther: return RequireTargetOther.self
         case .requireTargetAny: return RequireTargetAny.self
         case .requireInPlayCard: return RequireInPlayCard.self
-        case .requireTargetSelf: return RequireTargetSelf.self
         case .requireTargetAt: return RequireTargetAt.self
         case .requireTargetReachable: return RequireTargetReachable.self
         case .isTimesPerTurnMax: return IsTimesPerTurnMax.self

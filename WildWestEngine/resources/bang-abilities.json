@@ -19,7 +19,7 @@
     "canPlay": {
       "isYourTurn": 0,
       "isPhase": 2,
-      "requireTargetAny": 0
+      "requireTargetOther": 0
     },
     "onPlay": [
       {
@@ -118,7 +118,7 @@
     "canPlay": {
       "isYourTurn": 0,
       "isPhase": 2,
-      "requireTargetAny": 0
+      "requireTargetOther": 0
     },
     "onPlay": [
       {
@@ -129,29 +129,12 @@
     ]
   },
   {
-    "name": "discardOtherInPlay",
+    "name": "discardAnyInPlay",
     "type": "active",
     "canPlay": {
       "isYourTurn": 0,
       "isPhase": 2,
       "requireTargetAny": 0,
-      "requireInPlayCard": 0
-    },
-    "onPlay": [
-      {
-        "action": "discardInPlay",
-        "player": "target",
-        "card": "requiredInPlay"
-      }
-    ]
-  },
-  {
-    "name": "discardSelfInPlay",
-    "type": "active",
-    "canPlay": {
-      "isYourTurn": 0,
-      "isPhase": 2,
-      "requireTargetSelf": 0,
       "requireInPlayCard": 0
     },
     "onPlay": [
@@ -286,7 +269,7 @@
     "canPlay": {
       "isYourTurn": 0,
       "isPhase": 2,
-      "requireTargetAny": 0
+      "requireTargetOther": 0
     },
     "onPlay": [
       {
@@ -733,7 +716,7 @@
     "name": "startTurnDrawingPlayer",
     "type": "active",
     "canPlay": {
-      "requireTargetAny": 0
+      "requireTargetOther": 0
     },
     "onPlay": [
       {
