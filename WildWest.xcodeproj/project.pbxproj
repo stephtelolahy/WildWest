@@ -28,6 +28,7 @@
 		3324018E23DBA6C800B92439 /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */; };
 		33245E6626602C980019E8F0 /* Gain2HealthOnOtherEliminatedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33245E6526602C980019E8F0 /* Gain2HealthOnOtherEliminatedTests.swift */; };
 		33245E6826602F4D0019E8F0 /* OnOtherEliminated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33245E6726602F4D0019E8F0 /* OnOtherEliminated.swift */; };
+		33245E6A266033340019E8F0 /* Draw2CardsOnOtherEliminatedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33245E69266033340019E8F0 /* Draw2CardsOnOtherEliminatedTests.swift */; };
 		332499B323DB9F650082EF09 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332499B223DB9F650082EF09 /* GameViewController.swift */; };
 		33272F6A265920A1005C9246 /* Ability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33272F69265920A1005C9246 /* Ability.swift */; };
 		33272F702659212A005C9246 /* Argument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33272F6F2659212A005C9246 /* Argument.swift */; };
@@ -391,6 +392,7 @@
 		3324018D23DBA6C800B92439 /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		33245E6526602C980019E8F0 /* Gain2HealthOnOtherEliminatedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gain2HealthOnOtherEliminatedTests.swift; sourceTree = "<group>"; };
 		33245E6726602F4D0019E8F0 /* OnOtherEliminated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnOtherEliminated.swift; sourceTree = "<group>"; };
+		33245E69266033340019E8F0 /* Draw2CardsOnOtherEliminatedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Draw2CardsOnOtherEliminatedTests.swift; sourceTree = "<group>"; };
 		332499B223DB9F650082EF09 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		33272F69265920A1005C9246 /* Ability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ability.swift; sourceTree = "<group>"; };
 		33272F6F2659212A005C9246 /* Argument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Argument.swift; sourceTree = "<group>"; };
@@ -1033,6 +1035,7 @@
 				33F40401265FDC25004E4FBF /* StartTurnDrawing3CardsTests.swift */,
 				33F40403265FE9A2004E4FBF /* StartTurnDrawing1CardPlusWoundTests.swift */,
 				33245E6526602C980019E8F0 /* Gain2HealthOnOtherEliminatedTests.swift */,
+				33245E69266033340019E8F0 /* Draw2CardsOnOtherEliminatedTests.swift */,
 			);
 			path = figure;
 			sourceTree = "<group>";
@@ -2076,6 +2079,7 @@
 				3392B1CB25BC377100214393 /* StartTurnDrawing3CardsAndKeep2Tests.swift in Sources */,
 				3392B1F325BC377100214393 /* RoleStrategyTests.swift in Sources */,
 				3392B1FA25BC377100214393 /* MockHitProtocol+Stub.swift in Sources */,
+				33245E6A266033340019E8F0 /* Draw2CardsOnOtherEliminatedTests.swift in Sources */,
 				3392B1BF25BC377100214393 /* PlayBangAsMissedTests.swift in Sources */,
 				33636561265C1DB100B55C4E /* SpringfieldTests.swift in Sources */,
 				33245E6626602C980019E8F0 /* Gain2HealthOnOtherEliminatedTests.swift in Sources */,

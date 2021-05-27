@@ -284,7 +284,7 @@
     "type": "figure",
     "abilities": {
       "bullets": 4,
-      "drawsCardOnLoseHealth": 0
+      "drawCardOnLoseHealth": 0
     }
   },
   {
@@ -293,7 +293,7 @@
     "type": "figure",
     "abilities": {
       "bullets": 3,
-      "drawsCardFromOffenderOnLoseHealth": 0
+      "drawCardFromOffenderOnLoseHealth": 0
     }
   },
   {
@@ -302,7 +302,7 @@
     "type": "figure",
     "abilities": {
       "bullets": 4,
-      "drawsCardOnHandEmpty": 0
+      "drawCardOnHandEmpty": 0
     }
   },
   {
@@ -311,7 +311,7 @@
     "type": "figure",
     "abilities": {
       "bullets": 4,
-      "drawsAllCardsFromEliminatedPlayer": 0
+      "drawAllCardsFromEliminatedPlayer": 0
     }
   },
   {

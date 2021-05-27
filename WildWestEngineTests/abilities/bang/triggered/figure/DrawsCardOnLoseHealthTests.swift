@@ -1,5 +1,5 @@
 //
-//  DrawsCardOnLoseHealthTests.swift
+//  DrawCardOnLoseHealthTests.swift
 //  CardGameEngine_Tests
 //
 //  Created by Hugues Stephano Telolahy on 11/10/2020.
@@ -10,7 +10,7 @@ import XCTest
 import WildWestEngine
 import Resolver
 
-class DrawsCardOnLoseHealthTests: XCTestCase {
+class DrawCardOnLoseHealthTests: XCTestCase {
     
     private let sut: AbilityMatcherProtocol = Resolver.resolve()
     
@@ -20,7 +20,7 @@ class DrawsCardOnLoseHealthTests: XCTestCase {
             .withDefault()
             .identified(by: "p1")
             .health(is: 1)
-            .abilities(are: "drawsCardOnLoseHealth")
+            .abilities(are: "drawCardOnLoseHealth")
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1)
@@ -32,7 +32,7 @@ class DrawsCardOnLoseHealthTests: XCTestCase {
         let events = sut.effects(on: try XCTUnwrap(moves?.first), in: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GMove("drawsCardOnLoseHealth", actor: "p1")])
+        XCTAssertEqual(moves, [GMove("drawCardOnLoseHealth", actor: "p1")])
         XCTAssertEqual(events, [.drawDeck(player: "p1")])
     }
 }

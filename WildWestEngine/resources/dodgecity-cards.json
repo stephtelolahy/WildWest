@@ -129,5 +129,14 @@
       "bullets": 4,
       "gain2HealthOnOtherEliminated": 0
     }
+  },
+  {
+    "name": "herbHunter",
+    "desc": "Each time another player is eliminated, he draws 2 extra cards.",
+    "type": "figure",
+    "abilities": {
+      "bullets": 4,
+      "draw2CardsOnOtherEliminated": 0
+    }
   }
 ]

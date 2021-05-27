@@ -1,5 +1,5 @@
 //
-//  DrawsCardFromOffenderOnLoseHealthTests.swift
+//  DrawCardFromOffenderOnLoseHealthTests.swift
 //  CardGameEngine_Tests
 //
 //  Created by Hugues Stephano Telolahy on 11/10/2020.
@@ -10,7 +10,7 @@ import XCTest
 import WildWestEngine
 import Resolver
 
-class DrawsCardFromOffenderOnLoseHealthTests: XCTestCase {
+class DrawCardFromOffenderOnLoseHealthTests: XCTestCase {
     
     private let sut: AbilityMatcherProtocol = Resolver.resolve()
     
@@ -19,7 +19,7 @@ class DrawsCardFromOffenderOnLoseHealthTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p1")
-            .abilities(are: "drawsCardFromOffenderOnLoseHealth")
+            .abilities(are: "drawCardFromOffenderOnLoseHealth")
             .health(is: 1)
         let mockPlayer2 = MockPlayerProtocol()
             .withDefault()
@@ -36,7 +36,7 @@ class DrawsCardFromOffenderOnLoseHealthTests: XCTestCase {
         let events = sut.effects(on: try XCTUnwrap(moves?.first), in: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GMove("drawsCardFromOffenderOnLoseHealth", actor: "p1", args: [.target: ["p2"]])])
+        XCTAssertEqual(moves, [GMove("drawCardFromOffenderOnLoseHealth", actor: "p1", args: [.target: ["p2"]])])
         XCTAssertEqual(events, [.drawHand(player: "p1", other: "p2", card: "c2")])
     }
     
@@ -45,7 +45,7 @@ class DrawsCardFromOffenderOnLoseHealthTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p1")
-            .abilities(are: "drawsCardFromOffenderOnLoseHealth")
+            .abilities(are: "drawCardFromOffenderOnLoseHealth")
             .health(is: 1)
         let mockPlayer2 = MockPlayerProtocol()
             .withDefault()
@@ -68,7 +68,7 @@ class DrawsCardFromOffenderOnLoseHealthTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p1")
-            .abilities(are: "drawsCardFromOffenderOnLoseHealth")
+            .abilities(are: "drawCardFromOffenderOnLoseHealth")
             .health(is: 1)
             .holding(MockCardProtocol().identified(by: "c1"))
         let mockState = MockStateProtocol()

@@ -256,5 +256,18 @@
         "amount": 2
       }
     ]
+  },
+  {
+    "name": "draw2CardsOnOtherEliminated",
+    "type": "triggered",
+    "canPlay": {
+      "onOtherEliminated": 0
+    },
+    "onPlay": [
+      {
+        "action": "drawDeck",
+        "amount": "2"
+      }
+    ]
   }
 ]
