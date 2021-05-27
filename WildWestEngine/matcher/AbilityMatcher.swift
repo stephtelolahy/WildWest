@@ -219,6 +219,10 @@ private extension AbilityMatcher {
             abilities["bang"] = 0
         }
         
+        if actor.abilities["playAnyCardAsMissed"] != nil {
+            abilities["missed"] = 0
+        }
+        
         return abilities
     }
     

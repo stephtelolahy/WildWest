@@ -73,5 +73,14 @@
     "abilities": {
       "brawl": 0
     }
+  },
+  {
+    "name": "elenaFuente",
+    "desc": "She may use any card in hand as Missed!.",
+    "type": "figure",
+    "abilities": {
+      "bullets": 3,
+      "playAnyCardAsMissed": 0
+    }
   }
 ]

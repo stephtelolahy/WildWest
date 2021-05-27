@@ -34,7 +34,7 @@ class UserPreferences: UserPreferencesProtocol {
     @UserDefaultsStored("enable_sound", defaultValue: true)
     var enableSound: Bool
     
-    @UserDefaultsStored("assisted_mode", defaultValue: true)
+    @UserDefaultsStored("assisted_mode", defaultValue: false)
     var assistedMode: Bool
     
 }
