@@ -100,5 +100,15 @@
       "bullets": 4,
       "gain2HealthOnPlayBeer": 0
     }
+  },
+  {
+    "name": "pixiePete",
+    "desc": "During phase 1 of his turn, he draws 3 cards instead of 2.",
+    "type": "figure",
+    "abilities": {
+      "bullets": 3,
+      "silentStartTurnOnPhase1": 0,
+      "startTurnDrawing3Cards": 0
+    }
   }
 ]

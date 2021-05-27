@@ -46,5 +46,18 @@ class AssetsTests: XCTestCase {
             XCTAssertNotNil(UIImage(named: "01_\($0.name.lowercased())", in: bundle, compatibleWith: nil), "Misssing fulla image for \($0.name)")
         }
     }
+    
+    func test_AllRolesHaveFullImage() {
+        // Given
+        let bundle = Bundle(for: type(of: self))
+        
+        // When
+        let roles = Role.allCases
+        
+        roles.forEach {
+            XCTAssertNotNil(UIImage(named: $0.rawValue, in: bundle, compatibleWith: nil), "Misssing asset for \($0)")
+            XCTAssertNotNil(UIImage(named: "01_\($0.rawValue.lowercased())", in: bundle, compatibleWith: nil), "Misssing fulla image for \($0)")
+        }
+    }
 
 }

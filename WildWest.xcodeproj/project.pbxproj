@@ -290,6 +290,7 @@
 		33E4412424077DAB00B2848E /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E4412324077DAB00B2848E /* UITableViewExtension.swift */; };
 		33EAD12624D499910052A97C /* RoleSelectorWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EAD12524D499910052A97C /* RoleSelectorWidget.swift */; };
 		33EAD12824D4A4080052A97C /* UIStoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EAD12724D4A4080052A97C /* UIStoryboardExtension.swift */; };
+		33F40402265FDC25004E4FBF /* StartTurnDrawing3CardsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F40401265FDC25004E4FBF /* StartTurnDrawing3CardsTests.swift */; };
 		33F419C9264E4ADF0051EF31 /* MockDatabaseReferenceProtocol+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F419C8264E4ADF0051EF31 /* MockDatabaseReferenceProtocol+Stub.swift */; };
 		33FBF8FA265AE69F00D7C6AD /* OnEliminated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF8F9265AE69F00D7C6AD /* OnEliminated.swift */; };
 		33FBF8FC265B10CE00D7C6AD /* IsHandExceedLimit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF8FB265B10CE00D7C6AD /* IsHandExceedLimit.swift */; };
@@ -626,6 +627,7 @@
 		33E4412324077DAB00B2848E /* UITableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
 		33EAD12524D499910052A97C /* RoleSelectorWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleSelectorWidget.swift; sourceTree = "<group>"; };
 		33EAD12724D4A4080052A97C /* UIStoryboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtension.swift; sourceTree = "<group>"; };
+		33F40401265FDC25004E4FBF /* StartTurnDrawing3CardsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTurnDrawing3CardsTests.swift; sourceTree = "<group>"; };
 		33F419C8264E4ADF0051EF31 /* MockDatabaseReferenceProtocol+Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockDatabaseReferenceProtocol+Stub.swift"; sourceTree = "<group>"; };
 		33FBF8F9265AE69F00D7C6AD /* OnEliminated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnEliminated.swift; sourceTree = "<group>"; };
 		33FBF8FB265B10CE00D7C6AD /* IsHandExceedLimit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsHandExceedLimit.swift; sourceTree = "<group>"; };
@@ -1019,6 +1021,7 @@
 			children = (
 				3369518F265FCB2300B05D56 /* PlayanyCardAsMissedTests.swift */,
 				33695191265FD1E300B05D56 /* Gain2HealthOnPlayBeerTests.swift */,
+				33F40401265FDC25004E4FBF /* StartTurnDrawing3CardsTests.swift */,
 			);
 			path = figure;
 			sourceTree = "<group>";
@@ -1118,8 +1121,8 @@
 		3392B17325BC377000214393 /* abilities */ = {
 			isa = PBXGroup;
 			children = (
-				33DA158D265C171600915E5B /* dodge */,
 				33DA158C265C170800915E5B /* bang */,
+				33DA158D265C171600915E5B /* dodge */,
 			);
 			path = abilities;
 			sourceTree = "<group>";
@@ -2099,6 +2102,7 @@
 				3392B1DB25BC377100214393 /* LooseHealthTests.swift in Sources */,
 				3392B1F825BC377100214393 /* MatcherExtension.swift in Sources */,
 				3392B1F625BC377100214393 /* MoveEvaluatorTests.swift in Sources */,
+				33F40402265FDC25004E4FBF /* StartTurnDrawing3CardsTests.swift in Sources */,
 				3392B1EF25BC377100214393 /* RegexTests.swift in Sources */,
 				3392B1C325BC377100214393 /* DatabaseTests.swift in Sources */,
 				3392B1F125BC377100214393 /* AIAgentTests.swift in Sources */,

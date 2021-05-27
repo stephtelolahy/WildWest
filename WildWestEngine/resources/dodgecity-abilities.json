@@ -201,5 +201,24 @@
         "action": "gainHealth"
       }
     ]
+  },
+  {
+    "name": "startTurnDrawing3Cards",
+    "type": "triggered",
+    "canPlay": {
+      "onQueueEmpty": 0,
+      "isYourTurn": 0,
+      "isPhase": 1
+    },
+    "onPlay": [
+      {
+        "action": "drawDeck",
+        "amount": 3
+      },
+      {
+        "action": "setPhase",
+        "value": 2
+      }
+    ]
   }
 ]
