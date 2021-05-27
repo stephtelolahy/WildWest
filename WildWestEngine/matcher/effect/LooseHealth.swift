@@ -17,15 +17,15 @@ class LooseHealth: Effect {
     
     override func apply(_ ctx: EffectContext) -> [GEvent]? {
         guard let player = ctx.players(matching: player).first,
-              let hit = ctx.state.hits.first(where: { $0.player == player }) else {
+              let offender = ctx.state.hits.first(where: { $0.player == player })?.offender else {
             return nil
         }
         
         let playerObject = ctx.state.players[player]!
         if playerObject.health == 1 {
-            return [.eliminate(player: player, offender: hit.offender)]
+            return [.eliminate(player: player, offender: offender)]
         } else {
-            return [.looseHealth(player: player, offender: hit.offender)]
+            return [.looseHealth(player: player, offender: offender)]
         }
     }
 }

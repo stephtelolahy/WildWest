@@ -69,7 +69,7 @@ class BarrelTests: XCTestCase {
             .players(are: mockPlayer1)
             .playOrder(is: "p1")
             .deck(are: MockCardProtocol().value(is: "A").suit(is: "♠️"))
-        let event = GEvent.addHit(hits: [GHit(player:"p1", name: "n1", abilities: [], offender: "", cancelable: 1)])
+        let event = GEvent.addHit(hits: [GHit(player: "p1", name: "n1", abilities: [], offender: "", cancelable: 1)])
         
         // When
         let moves = sut.triggered(on: event, in: mockState)

@@ -25,9 +25,6 @@ public class MoveEvaluator: MoveEvaluatorProtocol {
     
     public func evaluate(_ move: GMove, in state: StateProtocol) -> Int {
         let score = abilityEvaluator.evaluate(move)
-        guard score != 0 else {
-            return 0
-        }
         
         guard let target = move.args[.target]?.first else {
             return score
@@ -40,7 +37,7 @@ public class MoveEvaluator: MoveEvaluatorProtocol {
             return 0
         }
         
-        let factor = roleStrategy.relationship(of: actorRole, to: targetRole, in: state)
-        return score * factor
+        let strategy = roleStrategy.relationship(of: actorRole, to: targetRole, in: state)
+        return score * strategy
     }
 }
