@@ -1,5 +1,5 @@
 //
-//  ResourcesTests.swift
+//  AssetsTests.swift
 //  WildWestTests
 //
 //  Created by Hugues Stephano Telolahy on 21/11/2020.
@@ -10,7 +10,7 @@
 import XCTest
 import WildWestEngine
 
-class ResourcesTests: XCTestCase {
+class AssetsTests: XCTestCase {
     
     private var sut: ResourcesLoaderProtocol!
     
@@ -18,20 +18,32 @@ class ResourcesTests: XCTestCase {
         sut = ResourcesLoader(jsonReader: JsonReader(bundle: Bundle.resourcesBundle))
     }
 
-    func test_AllCardsHaveImage() {
+    func test_AllPlayCardsHaveImage() {
         // Given
         let bundle = Bundle(for: type(of: self))
         
         // When
         let cards = sut.loadCards()
-        
         let brownCards = cards.filter { $0.type == .brown }
         let blueCards = cards.filter { $0.type == .blue }
-        let figureCards = cards.filter { $0.type == .figure }
         
         // Assert
-        (brownCards + blueCards + figureCards).forEach {
+        (brownCards + blueCards).forEach {
             XCTAssertNotNil(UIImage(named: $0.name, in: bundle, compatibleWith: nil), "Misssing asset for \($0.name)")
+        }
+    }
+    
+    func test_AllFiguresHaveFullImage() {
+        // Given
+        let bundle = Bundle(for: type(of: self))
+        
+        // When
+        let cards = sut.loadCards()
+        let figureCards = cards.filter { $0.type == .figure }
+        
+        figureCards.forEach {
+            XCTAssertNotNil(UIImage(named: $0.name, in: bundle, compatibleWith: nil), "Misssing asset for \($0.name)")
+            XCTAssertNotNil(UIImage(named: "01_\($0.name.lowercased())", in: bundle, compatibleWith: nil), "Misssing fulla image for \($0.name)")
         }
     }
 

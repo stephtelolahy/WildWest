@@ -33,7 +33,8 @@ public class GSetup: SetupProtocol {
             guard let card = cards.first(where: { $0.name == deckCard.name }) else {
                 fatalError("Card \(deckCard.name) not found")
             }
-            return GCard(identifier: deckCard.identifier,
+            let identifier = "\(deckCard.name)-\(deckCard.value)\(deckCard.suit)"
+            return GCard(identifier: identifier,
                          name: card.name,
                          type: card.type,
                          desc: card.desc,

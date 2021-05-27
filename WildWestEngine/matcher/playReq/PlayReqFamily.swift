@@ -26,6 +26,7 @@ public enum PlayReqFamily: String, CaseIterable {
     case onEliminatingRole
     case onLooseHealth
     case onHandEmpty
+    case onPlayCard
     
     case requireTargetOther
     case requireTargetAny
@@ -58,6 +59,7 @@ public enum PlayReqFamily: String, CaseIterable {
         case .onPhase: return OnPhase.self
         case .onQueueEmpty: return OnQueueEmpty.self
         case .onEliminated: return OnEliminated.self
+        case .onPlayCard: return OnPlayCard.self
         case .isHandExceedLimit: return IsHandExceedLimit.self
         case .requireHandCards: return RequireHandCards.self
         case .onEliminatingRole: return OnEliminatingRole.self

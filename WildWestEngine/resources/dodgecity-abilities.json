@@ -189,5 +189,17 @@
         "action": "removeHit"
       }
     ]
+  },
+  {
+    "name": "gain2HealthOnPlayBeer",
+    "type": "triggered",
+    "canPlay": {
+      "onPlayCard": "beer"
+    },
+    "onPlay": [
+      {
+        "action": "gainHealth"
+      }
+    ]
   }
 ]

@@ -251,6 +251,8 @@ class ResourcesTests: XCTestCase {
         
         XCTAssertTrue(cards.contains { $0.name == "elenaFuente" })
         XCTAssertTrue(cards.contains { $0.name == "seanMallory" })
+        XCTAssertTrue(cards.contains { $0.name == "tequilaJoe" })
+        
     }
     
     func test_DodgeCityCardSets() throws {

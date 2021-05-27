@@ -122,7 +122,7 @@ class SetupTests: XCTestCase {
         XCTAssertTrue(state.hits.isEmpty) // No hits
         XCTAssertTrue(state.played.isEmpty) // Played abilities are empty
         let distributedCards: [String] = players.map { $0.hand }.flatMap { $0 }.map { $0.identifier }
-        let expectedDeck: [String] = cardSet.map { $0.identifier }.filter { !distributedCards.contains($0) }
+        let expectedDeck: [String] = cardSet.map { "\($0.name)-\($0.value)\($0.suit)" }.filter { !distributedCards.contains($0) }
         XCTAssertTrue(state.deck.map { $0.identifier }.contains(sameElementsAs: expectedDeck)) // Shuffle cards to deck
         // </STATE>
     }
@@ -176,13 +176,13 @@ class SetupTests: XCTestCase {
         // Assert
         XCTAssertEqual(playCards.count, 2)
         
-        XCTAssertEqual(playCards[0].identifier, "c1-v1-s1")
+        XCTAssertEqual(playCards[0].identifier, "c1-v1s1")
         XCTAssertEqual(playCards[0].name, "c1")
         XCTAssertEqual(playCards[0].type, .brown)
         XCTAssertEqual(playCards[0].value, "v1")
         XCTAssertEqual(playCards[0].suit, "s1")
         
-        XCTAssertEqual(playCards[1].identifier, "c2-v2-s2")
+        XCTAssertEqual(playCards[1].identifier, "c2-v2s2")
         XCTAssertEqual(playCards[1].name, "c2")
         XCTAssertEqual(playCards[1].type, .blue)
         XCTAssertEqual(playCards[1].value, "v2")

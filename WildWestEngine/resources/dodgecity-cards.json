@@ -91,5 +91,14 @@
       "bullets": 3,
       "handLimit": 10
     }
+  },
+  {
+    "name": "tequilaJoe",
+    "desc": "Each time he plays a Beer, he regains 2 life points instead of 1.",
+    "type": "figure",
+    "abilities": {
+      "bullets": 4,
+      "gain2HealthOnPlayBeer": 0
+    }
   }
 ]
