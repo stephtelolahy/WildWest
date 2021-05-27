@@ -20,7 +20,7 @@ class FlipDeckIf: Effect {
     @Argument(name: "else", defaultValue: [])
     var elseEffects: [Effect]
     
-    override func apply(_ ctx: EffectContext) -> [GEvent]? {
+    override func apply(_ ctx: MoveContext) -> [GEvent]? {
         let amount = ctx.actor.flippedCards
         var events: [GEvent] = Array(0..<amount).map { _ in .flipDeck }
         let cards = ctx.state.deck.prefix(amount)

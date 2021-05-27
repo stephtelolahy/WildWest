@@ -29,15 +29,7 @@ public class Effect: Decodable {
         }
     }
     
-    func apply(_ ctx: EffectContext) -> [GEvent]? {
+    func apply(_ ctx: MoveContext) -> [GEvent]? {
         fatalError("Should be implemented in child class")
     }
-}
-
-struct EffectContext {
-    let ability: String
-    let actor: PlayerProtocol
-    let card: PlayCard?
-    let args: [PlayArg: [String]]
-    let state: StateProtocol
 }

@@ -133,11 +133,11 @@ private extension AbilityMatcher {
         }
         
         // verify requirements
-        let ctx = PlayReqContext(ability: ability,
-                                 actor: actor,
-                                 card: card,
-                                 state: state,
-                                 event: event)
+        let ctx = MoveContext(ability: ability,
+                              actor: actor,
+                              card: card,
+                              state: state,
+                              event: event)
         guard let playArgs = match(abilityObject.canPlay, ctx: ctx) else {
             return nil
         }
@@ -162,17 +162,18 @@ private extension AbilityMatcher {
             fatalError("Ability \(move.ability) not found")
         }
         
-        let ctx = EffectContext(ability: move.ability,
-                                actor: actor,
-                                card: move.card,
-                                args: move.args,
-                                state: state)
+        let ctx = MoveContext(ability: move.ability,
+                              actor: actor,
+                              card: move.card,
+                              state: state,
+                              event: nil,
+                              args: move.args)
         
         return apply(ability.onPlay, ctx: ctx)?
             .notEmptyOrNil()
     }
     
-    func match(_ playReqs: [PlayReq], ctx: PlayReqContext) -> [[PlayArg: [String]]]? {
+    func match(_ playReqs: [PlayReq], ctx: MoveContext) -> [[PlayArg: [String]]]? {
         var playArgs: [[PlayArg: [String]]] = []
         guard playReqs.allSatisfy({ $0.match(ctx, args: &playArgs) }) else {
             return nil
@@ -180,7 +181,7 @@ private extension AbilityMatcher {
         return playArgs
     }
     
-    func apply(_ effects: [Effect], ctx: EffectContext) -> [GEvent]? {
+    func apply(_ effects: [Effect], ctx: MoveContext) -> [GEvent]? {
         var result: [GEvent] = []
         for effect in effects {
             guard let events = effect.apply(ctx),

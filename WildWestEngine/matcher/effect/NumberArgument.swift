@@ -6,39 +6,58 @@
 //  Copyright © 2021 creativeGames. All rights reserved.
 //
 
-enum NumberArgument: String, Decodable {
-    case zero
-    case one = "1"
-    case three = "3"
+enum NumberArgument: Decodable {
+    case number(Int)
     case bangsPerTurn
     case bangsCancelable
     case inPlayPlayers
     case excessHand
-}
-
-extension PlayReqContext {
-    func number(matching arg: NumberArgument) -> Int {
-        arg.intValue(actor: actor, state: state)
+    case damage
+    
+    init(from decoder: Decoder) throws {
+        let string = try decoder.singleValueContainer().decode(String.self)
+        self = try Self.create(from: string)
+    }
+    
+    init(from data: Any) throws {
+        guard let string = data as? String else {
+            throw DecodingError.typeMismatch(String.self, DecodingError.Context(codingPath: [], debugDescription: ""))
+        }
+        self = try Self.create(from: string)
+    }
+    
+    static func create(from string: String) throws -> NumberArgument {
+        switch string {
+        case "bangsPerTurn":
+            return .bangsPerTurn
+            
+        case "bangsCancelable":
+            return .bangsCancelable
+            
+        case "inPlayPlayers":
+            return .inPlayPlayers
+            
+        case "excessHand":
+            return .excessHand
+            
+        case "damage":
+            return .damage
+            
+        default:
+            guard let intValue = Int(string) else {
+                throw DecodingError.typeMismatch(Int.self, DecodingError.Context(codingPath: [], debugDescription: "Invalid int"))
+            }
+            
+            return .number(intValue)
+        }
     }
 }
 
-extension EffectContext {
+extension MoveContext {
     func number(matching arg: NumberArgument) -> Int {
-        arg.intValue(actor: actor, state: state)
-    }
-}
-
-private extension NumberArgument {
-    func intValue(actor: PlayerProtocol, state: StateProtocol) -> Int {
-        switch self {
-        case .zero:
-            return 0
-            
-        case .one:
-            return 1
-            
-        case .three:
-            return 3
+        switch arg {
+        case let .number(value):
+            return value
             
         case .bangsPerTurn:
             return actor.bangsPerTurn
@@ -51,6 +70,9 @@ private extension NumberArgument {
             
         case .excessHand:
             return Swift.max(actor.hand.count - actor.handLimit, 0)
+            
+        case .damage:
+            return actor.maxHealth - actor.health
         }
     }
 }

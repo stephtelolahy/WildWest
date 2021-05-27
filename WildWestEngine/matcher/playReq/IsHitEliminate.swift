@@ -11,7 +11,7 @@
  */
 public class IsHitEliminate: PlayReq {
     
-    public override func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
+    public override func match(_ ctx: MoveContext, args: inout [[PlayArg: [String]]]) -> Bool {
         guard let hit = ctx.state.hits.first,
               hit.player == ctx.actor.identifier,
               hit.abilities.contains("looseHealth"),

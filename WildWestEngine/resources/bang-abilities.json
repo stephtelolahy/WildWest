@@ -94,7 +94,7 @@
     "onPlay": [
       {
         "action": "drawDeck",
-        "amount": 2
+        "amount": "2"
       }
     ]
   },
@@ -108,7 +108,7 @@
     "onPlay": [
       {
         "action": "drawDeck",
-        "amount": 3
+        "amount": "3"
       }
     ]
   },
@@ -422,7 +422,7 @@
     "onPlay": [
       {
         "action": "drawDeck",
-        "amount": 2
+        "amount": "2"
       },
       {
         "action": "setPhase",
@@ -528,7 +528,7 @@
     "onPlay": [
       {
         "action": "drawDeck",
-        "amount": 3
+        "amount": "3"
       }
     ]
   },
@@ -559,8 +559,7 @@
     },
     "onPlay": [
       {
-        "action": "drawDeck",
-        "amount": 1
+        "action": "drawDeck"
       }
     ]
   },
@@ -587,8 +586,7 @@
     },
     "onPlay": [
       {
-        "action": "drawDeck",
-        "amount": 1
+        "action": "drawDeck"
       }
     ]
   },
@@ -642,8 +640,7 @@
     },
     "onPlay": [
       {
-        "action": "drawDeck",
-        "amount": 1
+        "action": "drawDeck"
       },
       {
         "action": "drawDeckFlippingIf",
@@ -651,8 +648,7 @@
         "regex": "(♥️)|(♦️)",
         "then": [
           {
-            "action": "drawDeck",
-            "amount": 1
+            "action": "drawDeck"
           }
         ]
       },
@@ -725,8 +721,7 @@
         "card": "randomHand"
       },
       {
-        "action": "drawDeck",
-        "amount": 1
+        "action": "drawDeck"
       },
       {
         "action": "removeHit"
@@ -743,7 +738,7 @@
     "onPlay": [
       {
         "action": "drawDeck",
-        "amount": 2
+        "amount": "2"
       },
       {
         "action": "removeHit"
@@ -777,8 +772,7 @@
         "action": "drawDiscard"
       },
       {
-        "action": "drawDeck",
-        "amount": 1
+        "action": "drawDeck"
       },
       {
         "action": "removeHit"

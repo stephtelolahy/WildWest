@@ -11,7 +11,7 @@
  */
 public class RequireTargetAny: PlayReq {
     
-    public override func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
+    public override func match(_ ctx: MoveContext, args: inout [[PlayArg: [String]]]) -> Bool {
         let players = ctx.state.playOrder
         return args.appending(values: players, forArg: .target)
     }

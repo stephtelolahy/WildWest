@@ -18,20 +18,11 @@ public class PlayReq {
         }
     }
     
-    public func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
+    public func match(_ ctx: MoveContext, args: inout [[PlayArg: [String]]]) -> Bool {
         fatalError("Should be implemented in child class")
     }
 }
 
 protocol ParsableValue {
     func parse(_ data: Any) throws
-}
-
-public struct PlayReqContext {
-    let ability: String
-    let actor: PlayerProtocol
-    let card: PlayCard?
-    let state: StateProtocol
-    let event: GEvent?
-    var args: [PlayArg: [String]] = [:]
 }

@@ -18,7 +18,7 @@ public class GainHealth: Effect {
     @Argument(name: "amount", defaultValue: 1)
     var amount: Int
     
-    override func apply(_ ctx: EffectContext) -> [GEvent]? {
+    override func apply(_ ctx: MoveContext) -> [GEvent]? {
         ctx.players(matching: player)
             .compactMap { player -> [GEvent]? in
                 // <RULE> cannot have more health than maxHealth

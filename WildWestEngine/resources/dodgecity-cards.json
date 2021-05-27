@@ -110,5 +110,15 @@
       "silentStartTurnDrawing2Cards": 0,
       "startTurnDrawing3Cards": 0
     }
+  },
+  {
+    "name": "billNoface",
+    "desc": "He draws 1 card, plus 1 card for each wound he has.",
+    "type": "figure",
+    "abilities": {
+      "bullets": 4,
+      "silentStartTurnDrawing2Cards": 0,
+      "startTurnDrawing1CardPlusWound": 0
+    }
   }
 ]

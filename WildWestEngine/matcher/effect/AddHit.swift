@@ -17,16 +17,16 @@ class AddHit: Effect {
     @Argument(name: "abilities")
     var abilities: [String]
     
-    @Argument(name: "times", defaultValue: .one)
+    @Argument(name: "times", defaultValue: .number(1))
     var times: NumberArgument
     
-    @Argument(name: "cancelable", defaultValue: .zero)
+    @Argument(name: "cancelable", defaultValue: .number(0))
     var cancelable: NumberArgument
     
     @Argument(name: "target", defaultValue: .nobody)
     var target: PlayerArgument
     
-    override func apply(_ ctx: EffectContext) -> [GEvent]? {
+    override func apply(_ ctx: MoveContext) -> [GEvent]? {
         let players = ctx.players(matching: player)
         let times = ctx.number(matching: times)
         let cancelable = ctx.number(matching: cancelable)

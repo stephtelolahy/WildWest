@@ -18,11 +18,7 @@
         
         // Parse Enum
         if T.self == NumberArgument.self {
-            guard let rawValue = data as? String,
-                  let value = NumberArgument(rawValue: rawValue) else {
-                throw DecodingError.typeMismatch(NumberArgument.self, DecodingError.Context(codingPath: [], debugDescription: ""))
-            }
-            
+            let value = try NumberArgument(from: data)
             parsedValue = value as? T
             return
         }

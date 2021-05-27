@@ -23,7 +23,7 @@ class DrawDeckFlippingIf: Effect {
     @Argument(name: "else", defaultValue: [])
     var elseEffects: [Effect]
     
-    override func apply(_ ctx: EffectContext) -> [GEvent]? {
+    override func apply(_ ctx: MoveContext) -> [GEvent]? {
         guard let player = ctx.players(matching: player).first else {
             return nil
         }

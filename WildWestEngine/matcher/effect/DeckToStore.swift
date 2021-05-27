@@ -14,7 +14,7 @@ class DeckToStore: Effect {
     @Argument(name: "amount")
     var amount: NumberArgument
     
-    override func apply(_ ctx: EffectContext) -> [GEvent]? {
+    override func apply(_ ctx: MoveContext) -> [GEvent]? {
         let amount = ctx.number(matching: amount)
         return  Array(0..<amount).map { _ in .deckToStore }
     }

@@ -11,7 +11,7 @@
  */
 class OnHandEmpty: PlayReq {
     
-    override func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
+    override func match(_ ctx: MoveContext, args: inout [[PlayArg: [String]]]) -> Bool {
         switch ctx.event {
         case let .play(player, _):
             return player == ctx.actor.identifier && ctx.actor.hand.isEmpty

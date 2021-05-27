@@ -291,6 +291,8 @@
 		33EAD12624D499910052A97C /* RoleSelectorWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EAD12524D499910052A97C /* RoleSelectorWidget.swift */; };
 		33EAD12824D4A4080052A97C /* UIStoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EAD12724D4A4080052A97C /* UIStoryboardExtension.swift */; };
 		33F40402265FDC25004E4FBF /* StartTurnDrawing3CardsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F40401265FDC25004E4FBF /* StartTurnDrawing3CardsTests.swift */; };
+		33F40404265FE9A2004E4FBF /* StartTurnDrawing1CardPlusWoundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F40403265FE9A2004E4FBF /* StartTurnDrawing1CardPlusWoundTests.swift */; };
+		33F40406265FFE30004E4FBF /* MoveContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F40405265FFE30004E4FBF /* MoveContext.swift */; };
 		33F419C9264E4ADF0051EF31 /* MockDatabaseReferenceProtocol+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F419C8264E4ADF0051EF31 /* MockDatabaseReferenceProtocol+Stub.swift */; };
 		33FBF8FA265AE69F00D7C6AD /* OnEliminated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF8F9265AE69F00D7C6AD /* OnEliminated.swift */; };
 		33FBF8FC265B10CE00D7C6AD /* IsHandExceedLimit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF8FB265B10CE00D7C6AD /* IsHandExceedLimit.swift */; };
@@ -628,6 +630,8 @@
 		33EAD12524D499910052A97C /* RoleSelectorWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleSelectorWidget.swift; sourceTree = "<group>"; };
 		33EAD12724D4A4080052A97C /* UIStoryboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtension.swift; sourceTree = "<group>"; };
 		33F40401265FDC25004E4FBF /* StartTurnDrawing3CardsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTurnDrawing3CardsTests.swift; sourceTree = "<group>"; };
+		33F40403265FE9A2004E4FBF /* StartTurnDrawing1CardPlusWoundTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTurnDrawing1CardPlusWoundTests.swift; sourceTree = "<group>"; };
+		33F40405265FFE30004E4FBF /* MoveContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveContext.swift; sourceTree = "<group>"; };
 		33F419C8264E4ADF0051EF31 /* MockDatabaseReferenceProtocol+Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockDatabaseReferenceProtocol+Stub.swift"; sourceTree = "<group>"; };
 		33FBF8F9265AE69F00D7C6AD /* OnEliminated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnEliminated.swift; sourceTree = "<group>"; };
 		33FBF8FB265B10CE00D7C6AD /* IsHandExceedLimit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsHandExceedLimit.swift; sourceTree = "<group>"; };
@@ -1022,6 +1026,7 @@
 				3369518F265FCB2300B05D56 /* PlayanyCardAsMissedTests.swift */,
 				33695191265FD1E300B05D56 /* Gain2HealthOnPlayBeerTests.swift */,
 				33F40401265FDC25004E4FBF /* StartTurnDrawing3CardsTests.swift */,
+				33F40403265FE9A2004E4FBF /* StartTurnDrawing1CardPlusWoundTests.swift */,
 			);
 			path = figure;
 			sourceTree = "<group>";
@@ -1072,6 +1077,7 @@
 			children = (
 				338F7A562659682E00731FB9 /* AbilityMatcher.swift */,
 				33272F69265920A1005C9246 /* Ability.swift */,
+				33F40405265FFE30004E4FBF /* MoveContext.swift */,
 				33176D2C26593D24000A6FBF /* playReq */,
 				33272F7A2659276C005C9246 /* effect */,
 			);
@@ -1976,6 +1982,7 @@
 				3358333225BC2585001BE4D8 /* GCard.swift in Sources */,
 				33AAE0332659887700A067E3 /* DiscardHand.swift in Sources */,
 				3358333D25BC2585001BE4D8 /* Setup.swift in Sources */,
+				33F40406265FFE30004E4FBF /* MoveContext.swift in Sources */,
 				3358332D25BC2585001BE4D8 /* Array+FilterOrNil.swift in Sources */,
 				3358332E25BC2585001BE4D8 /* Dictionary+Decoding.swift in Sources */,
 				33AAE0452659A5E500A067E3 /* IsTimesPerTurnMax.swift in Sources */,
@@ -2106,6 +2113,7 @@
 				3392B1EF25BC377100214393 /* RegexTests.swift in Sources */,
 				3392B1C325BC377100214393 /* DatabaseTests.swift in Sources */,
 				3392B1F125BC377100214393 /* AIAgentTests.swift in Sources */,
+				33F40404265FE9A2004E4FBF /* StartTurnDrawing1CardPlusWoundTests.swift in Sources */,
 				3392B1BB25BC377100214393 /* TestModules.swift in Sources */,
 				3392B1D125BC377100214393 /* StartTurnDrawingFirstCardFromDiscardTests.swift in Sources */,
 				3392B1DF25BC377100214393 /* BeerTests.swift in Sources */,

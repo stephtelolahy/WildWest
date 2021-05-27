@@ -18,7 +18,7 @@ enum CardArgument: String, Decodable {
     case allInPlay
 }
 
-extension EffectContext {
+extension MoveContext {
     
     func cards(matching arg: CardArgument, player: String) -> [String] {
         switch arg {

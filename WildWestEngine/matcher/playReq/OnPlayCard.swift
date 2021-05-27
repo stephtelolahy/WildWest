@@ -14,7 +14,7 @@ class OnPlayCard: PlayReq {
     @ParsedValue
     var regex: String
     
-    override func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
+    override func match(_ ctx: MoveContext, args: inout [[PlayArg: [String]]]) -> Bool {
         guard case let .play(player, card) = ctx.event,
               player == ctx.actor.identifier,
               card.matches(regex: regex) else {
