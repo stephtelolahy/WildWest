@@ -140,8 +140,8 @@ extension Resolver: RouterDependenciesProtocol {
         GameOverWidget(winner: winner, completion: completion)
     }
     
-    func provideGameRolesWidget(_ playersCount: Int) -> UIViewController {
-        GameRolesWidget(playersCount: playersCount)
+    func provideGameRolesWidget(_ playersCount: Int, completion: @escaping () -> Void) -> UIViewController {
+        GameRolesWidget(playersCount: playersCount, completion: completion)
     }
     
     func provideGamePlayerWidget(_ player: PlayerProtocol) -> UIViewController {

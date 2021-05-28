@@ -84,7 +84,9 @@ class GameViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        router.toGameRoles(state.players.count)
+        router.toGameRoles(state.players.count) { [weak self] in
+            self?.environment.engine.refresh()
+        }
     }
     
     // MARK: - IBAction
@@ -327,7 +329,7 @@ private extension StateProtocol {
         if let hit = hits.first {
             return hit.name
         } else if controlledPlayerId == turn {
-            return "play any card"
+            return "your turn"
         } else {
             return "..."
         }
@@ -337,7 +339,8 @@ private extension StateProtocol {
         initialOrder.map { player in
             PlayerItem(player: players[player]!,
                        isTurn: player == turn,
-                       isHit: hits.contains(where: { $0.player == player }),
+                       isHitLooseHealth: hits.contains(where: { $0.player == player && $0.abilities.contains("looseHealth") }),
+                       isHitSomeAction: hits.contains(where: { $0.player == player && !$0.abilities.contains("looseHealth") }),
                        user: users?[player])
         }
     }

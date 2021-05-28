@@ -18,7 +18,7 @@ protocol RouterProtocol {
     func toContactUs()
     func toRules()
     func toGame(_ environment: GameEnvironment)
-    func toGameRoles(_ playersCount: Int)
+    func toGameRoles(_ playersCount: Int, completion: @escaping () -> Void)
     func toGameOver(_ winner: Role)
     func toGamePlayer(_ player: PlayerProtocol)
     func toWaitingRoom()
@@ -30,7 +30,7 @@ protocol RouterDependenciesProtocol {
     func provideRoleSelectorWidget(initialRole: Role?, completion: @escaping (Role?) -> Void) -> UIViewController
     func provideGameViewController(_ environment: GameEnvironment) -> UIViewController
     func provideMenuViewController() -> UIViewController
-    func provideGameRolesWidget(_ playersCount: Int) -> UIViewController
+    func provideGameRolesWidget(_ playersCount: Int, completion: @escaping () -> Void) -> UIViewController
     func provideGameOverWidget(winner: Role, completion: @escaping () -> Void) -> UIViewController
     func provideGamePlayerWidget(_ player: PlayerProtocol) -> UIViewController
     func provideWaitingRoomViewController() -> UIViewController
@@ -83,8 +83,8 @@ class Router: RouterProtocol {
         navController?.fade(to: dependencies.provideGameViewController(environment))
     }
     
-    func toGameRoles(_ playersCount: Int) {
-        viewController?.present(dependencies.provideGameRolesWidget(playersCount), animated: true)
+    func toGameRoles(_ playersCount: Int, completion: @escaping () -> Void) {
+        viewController?.present(dependencies.provideGameRolesWidget(playersCount, completion: completion), animated: true)
     }
     
     func toGameOver(_ winner: Role) {
