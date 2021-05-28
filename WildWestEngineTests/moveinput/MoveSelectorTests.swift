@@ -6,6 +6,7 @@
 //  Copyright © 2020 CocoaPods. All rights reserved.
 //
 // swiftlint:disable implicitly_unwrapped_optional
+// swiftlint:disable type_body_length
 
 import XCTest
 import WildWestEngine
@@ -213,7 +214,7 @@ class MoveSelectorTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(root.value, .options([MoveNode(name: "startTurnDrawingDeck", value: .move(move1)),
-                                             MoveNode(name: "startTurnDrawingPlayer p2", value: .move(move2)),
-                                             MoveNode(name: "startTurnDrawingPlayer p3", value: .move(move3))]))
+                                             MoveNode(name: "p2", value: .move(move2)),
+                                             MoveNode(name: "p3", value: .move(move3))]))
     }
 }

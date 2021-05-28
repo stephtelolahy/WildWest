@@ -338,6 +338,16 @@ import WildWestEngine
                 defaultCall: __defaultImplStub!.assistedMode)
         }
         
+        set {
+            cuckoo_manager.setter("assistedMode",
+                value: newValue,
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.assistedMode = newValue)
+        }
+        
     }
     
     
@@ -387,7 +397,7 @@ import WildWestEngine
 	    }
 	    
 	    
-	    var assistedMode: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockUserPreferencesProtocol, Bool> {
+	    var assistedMode: Cuckoo.ProtocolToBeStubbedProperty<MockUserPreferencesProtocol, Bool> {
 	        return .init(manager: cuckoo_manager, name: "assistedMode")
 	    }
 	    
@@ -432,7 +442,7 @@ import WildWestEngine
 	    }
 	    
 	    
-	    var assistedMode: Cuckoo.VerifyReadOnlyProperty<Bool> {
+	    var assistedMode: Cuckoo.VerifyProperty<Bool> {
 	        return .init(manager: cuckoo_manager, name: "assistedMode", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
@@ -491,6 +501,8 @@ import WildWestEngine
         get {
             return DefaultValueRegistry.defaultValue(for: (Bool).self)
         }
+        
+        set { }
         
     }
     

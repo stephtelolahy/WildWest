@@ -72,7 +72,7 @@ public class MoveSelector: MoveSelectorProtocol {
             // different abilities
             let nodes = moves.mapNodes(named: { move in
                 if !move.args.isEmpty {
-                    return "\(move.ability) \(move.argsString())"
+                    return move.argsString()
                 } else if case let .hand(card) = move.card {
                     return card  
                 } else {

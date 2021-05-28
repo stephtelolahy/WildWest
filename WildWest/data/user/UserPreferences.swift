@@ -13,7 +13,7 @@ protocol UserPreferencesProtocol {
     var preferredRole: Role? { get set }
     var preferredFigure: String? { get set }
     var updateDelay: Double { get }
-    var assistedMode: Bool { get }
+    var assistedMode: Bool { get set }
     var enableSound: Bool { get }
 }
 
