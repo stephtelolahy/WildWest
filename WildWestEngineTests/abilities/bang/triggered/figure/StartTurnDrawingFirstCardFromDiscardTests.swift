@@ -5,7 +5,6 @@
 //  Created by Hugues Stephano Telolahy on 16/10/2020.
 //  Copyright © 2020 CocoaPods. All rights reserved.
 //
-// swiftlint:disable type_name
 
 import XCTest
 import WildWestEngine

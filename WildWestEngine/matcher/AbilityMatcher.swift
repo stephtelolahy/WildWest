@@ -26,8 +26,9 @@ public class AbilityMatcher: AbilityMatcherProtocol {
     }
     
     public func triggered(on event: GEvent, in state: StateProtocol) -> [GMove]? {
-        // <RULE>: trigger moves from just eliminated player
         var actors = state.playOrder
+        
+        // <RULE>: trigger moves from just eliminated player
         if case let .eliminate(player, _) = event {
             actors.append(player)
         }
@@ -60,11 +61,10 @@ public class AbilityMatcher: AbilityMatcherProtocol {
 
 private extension AbilityMatcher {
     
-    func active(actor identifier: String,
-                in state: StateProtocol) -> [GMove]? {
+    func active(actor identifier: String, in state: StateProtocol) -> [GMove]? {
         let actor = state.players[identifier]!
-        let innerAbilities = abilities(applicableTo: actor)
-        let innerMoves: [GMove] = innerAbilities.keys
+        
+        let innerMoves: [GMove] = abilities(applicableTo: actor).keys
             .compactMap { self.moves(ofType: .active, ability: $0, card: nil, actor: actor, in: state) }
             .flatMap { $0 }
         
@@ -98,12 +98,10 @@ private extension AbilityMatcher {
         return (innerMoves + playHandMoves + reactionMoves).notEmptyOrNil()
     }
     
-    func triggered(on event: GEvent,
-                   actor identifier: String,
-                   in state: StateProtocol) -> [GMove]? {
+    func triggered(on event: GEvent, actor identifier: String, in state: StateProtocol) -> [GMove]? {
         let actor = state.players[identifier]!
-        let innerAbilities = abilities(applicableTo: actor)
-        let innerMoves: [GMove] = innerAbilities.keys
+        
+        let innerMoves: [GMove] = abilities(applicableTo: actor).keys
             .compactMap { self.moves(ofType: .triggered, ability: $0, card: nil, actor: actor, in: state, event: event) }
             .flatMap { $0 }
         
@@ -138,7 +136,8 @@ private extension AbilityMatcher {
                               card: card,
                               state: state,
                               event: event)
-        guard let playArgs = match(abilityObject.canPlay, ctx: ctx) else {
+        var playArgs: [[PlayArg: [String]]] = []
+        guard abilityObject.canPlay.allSatisfy({ $0.match(ctx, args: &playArgs) }) else {
             return nil
         }
         
@@ -151,9 +150,10 @@ private extension AbilityMatcher {
         }
         
         // <RULE> A move is applicable when it has effects>
-        let effectiveMoves = moves.filter { effects(on: $0, actor: actor, in: state) != nil }
+        let applicableMoves = moves.filter { effects(on: $0, actor: actor, in: state) != nil }
         // </RULE>
-        return effectiveMoves
+        
+        return applicableMoves
     }
     
     func effects(on move: GMove, actor: PlayerProtocol, in state: StateProtocol) -> [GEvent]? {
@@ -168,22 +168,9 @@ private extension AbilityMatcher {
                               state: state,
                               event: nil,
                               args: move.args)
-        
-        return apply(ability.onPlay, ctx: ctx)?
-            .notEmptyOrNil()
-    }
-    
-    func match(_ playReqs: [PlayReq], ctx: MoveContext) -> [[PlayArg: [String]]]? {
-        var playArgs: [[PlayArg: [String]]] = []
-        guard playReqs.allSatisfy({ $0.match(ctx, args: &playArgs) }) else {
-            return nil
-        }
-        return playArgs
-    }
-    
-    func apply(_ effects: [Effect], ctx: MoveContext) -> [GEvent]? {
+        // build events
         var result: [GEvent] = []
-        for effect in effects {
+        for effect in ability.onPlay {
             guard let events = effect.apply(ctx),
                   !events.isEmpty || effect.optional else {
                 return nil
@@ -191,9 +178,12 @@ private extension AbilityMatcher {
             
             result.append(contentsOf: events)
         }
-        return result
+        
+        return result.notEmptyOrNil()
     }
 }
+
+// MARK: - Passive ability matcher
 
 private extension AbilityMatcher {
     

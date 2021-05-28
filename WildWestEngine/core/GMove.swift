@@ -24,10 +24,10 @@ public enum PlayCard: Equatable {
     case inPlay(String)
 }
 
-public enum PlayArg: String, Equatable {
+public enum PlayArg: String, Equatable, CaseIterable {
+    case requiredHand
     case target
     case requiredInPlay
     case requiredStore
-    case requiredHand
     case requiredDeck
 }
