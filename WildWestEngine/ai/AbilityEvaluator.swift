@@ -38,7 +38,7 @@ public class AbilityEvaluator: AbilityEvaluatorProtocol {
             "drawOtherInPlayAt1",
             "drawOtherInPlayRequire1Card":
             if let inPlayCard = move.args[.requiredInPlay]?.first, 
-               inPlayCard.contains("jail") {
+               (inPlayCard.contains("jail") || inPlayCard.contains("dynamite")) {
                 return -1
             } else {
                 return 1

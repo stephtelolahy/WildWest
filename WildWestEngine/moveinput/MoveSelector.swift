@@ -49,23 +49,19 @@ public class MoveSelector: MoveSelectorProtocol {
                 // single arg
                 return MoveNode(name: name, value: .options(moves.mapNodes(named: { $0.argsString() })))
                 
-            } else if moves.allSatisfy({ $0.args.keys.count == 2 }) {
-                // two args
+            } else {
+                // multiple args
                 let argKeys = refMove.args.keys.sorted(by: { $0 < $1 })
                 let key1 = argKeys[0]
-                let key2 = argKeys[1]
+                let keys2 = Array(argKeys.dropFirst())
                 
                 let nodes: [MoveNode] = moves.uniqueArgValues(for: key1).map { value1 in
                     let relatedMoves = moves.filter { $0.args[key1] == value1 }
                     return MoveNode(name: value1.joined(separator: ", "),
-                                    value: .options(relatedMoves.mapNodes(named: { $0.args[key2]!.joined(separator: ", ") })))
+                                    value: .options(relatedMoves.mapNodes(named: { $0.argsString(keys2) })))
                 }
                 
                 return MoveNode(name: name, value: .options(nodes))
-                
-            } else {
-                // other args combination
-                fatalError("Unsupported args combination")
             }
             
         } else {
@@ -103,7 +99,7 @@ private extension Array where Element == GMove {
 }
 
 private extension GMove {
-    func argsString(_ playArgs: [PlayArg] = [.target, .requiredInPlay, .requiredHand, .requiredStore, .requiredDeck]) -> String {
+    func argsString(_ playArgs: [PlayArg] = PlayArg.allCases) -> String {
         playArgs.compactMap { args[$0] }.flatMap { $0 }.joined(separator: ", ")
     }
 }
