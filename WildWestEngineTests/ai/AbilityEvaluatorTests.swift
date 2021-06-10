@@ -26,10 +26,6 @@ class AbilityEvaluatorTests: XCTestCase {
         XCTAssertEqual(sut.evaluate(GMove("looseHealth", actor: "p1")), -1)
     }
     
-    func test_DiscourageDiscardingSelfCard() {
-        XCTAssertEqual(sut.evaluate(GMove("discardSelfInPlay", actor: "p1")), -1)
-    }
-    
     func test_StrongAttack() {
         XCTAssertEqual(sut.evaluate(GMove("bang", actor: "p1")), 3)
         XCTAssertEqual(sut.evaluate(GMove("duel", actor: "p1")), 3)
@@ -40,7 +36,7 @@ class AbilityEvaluatorTests: XCTestCase {
     func test_WeakAttack() {
         XCTAssertEqual(sut.evaluate(GMove("handicap", actor: "p1")), 1)
         XCTAssertEqual(sut.evaluate(GMove("discardOtherHand", actor: "p1")), 1)
-        XCTAssertEqual(sut.evaluate(GMove("discardOtherInPlay", actor: "p1")), 1)
+        XCTAssertEqual(sut.evaluate(GMove("discardAnyInPlay", actor: "p1")), 1)
         XCTAssertEqual(sut.evaluate(GMove("drawOtherHandAt1", actor: "p1")), 1)
         XCTAssertEqual(sut.evaluate(GMove("drawOtherInPlayAt1", actor: "p1")), 1)
         XCTAssertEqual(sut.evaluate(GMove("drawOtherHandRequire1Card", actor: "p1")), 1)
@@ -48,7 +44,7 @@ class AbilityEvaluatorTests: XCTestCase {
     }
     
     func test_Help() {
-        XCTAssertEqual(sut.evaluate(GMove("discardOtherInPlay", actor: "p1", args: [.requiredInPlay: ["jail-9-♠️"]])), -1)
+        XCTAssertEqual(sut.evaluate(GMove("discardAnyInPlay", actor: "p1", args: [.requiredInPlay: ["jail-9-♠️"]])), -1)
         XCTAssertEqual(sut.evaluate(GMove("drawOtherInPlayAt1", actor: "p1", args: [.requiredInPlay: ["jail-10-♠️"]])), -1)
         XCTAssertEqual(sut.evaluate(GMove("tequila", actor: "p1")), -1)
     }

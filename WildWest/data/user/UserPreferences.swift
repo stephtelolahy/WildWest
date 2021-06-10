@@ -13,7 +13,7 @@ protocol UserPreferencesProtocol {
     var preferredRole: Role? { get set }
     var preferredFigure: String? { get set }
     var updateDelay: Double { get }
-    var assistedMode: Bool { get }
+    var assistedMode: Bool { get set }
     var enableSound: Bool { get }
 }
 
@@ -28,7 +28,7 @@ class UserPreferences: UserPreferencesProtocol {
     @OptionalUserDefaultsStored("preferred_figure")
     var preferredFigure: String?
     
-    @UserDefaultsStored("update_delay", defaultValue: 0.6)
+    @UserDefaultsStored("update_delay", defaultValue: 0.5)
     var updateDelay: Double
     
     @UserDefaultsStored("enable_sound", defaultValue: true)

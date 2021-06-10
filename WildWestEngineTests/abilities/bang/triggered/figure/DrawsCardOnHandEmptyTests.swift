@@ -1,5 +1,5 @@
 //
-//  DrawsCardOnHandEmptyTests.swift
+//  DrawCardOnHandEmptyTests.swift
 //  CardGameEngine_Tests
 //
 //  Created by Hugues Stephano Telolahy on 11/10/2020.
@@ -10,7 +10,7 @@ import XCTest
 import WildWestEngine
 import Resolver
 
-class DrawsCardOnHandEmptyTests: XCTestCase {
+class DrawCardOnHandEmptyTests: XCTestCase {
     
     private let sut: AbilityMatcherProtocol = Resolver.resolve()
     
@@ -19,7 +19,7 @@ class DrawsCardOnHandEmptyTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p1")
-            .abilities(are: "drawsCardOnHandEmpty")
+            .abilities(are: "drawCardOnHandEmpty")
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1)
@@ -31,7 +31,7 @@ class DrawsCardOnHandEmptyTests: XCTestCase {
         let events = sut.effects(on: try XCTUnwrap(moves?.first), in: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GMove("drawsCardOnHandEmpty", actor: "p1")])
+        XCTAssertEqual(moves, [GMove("drawCardOnHandEmpty", actor: "p1")])
         XCTAssertEqual(events, [.drawDeck(player: "p1")])
     }
     
@@ -40,7 +40,7 @@ class DrawsCardOnHandEmptyTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p1")
-            .abilities(are: "drawsCardOnHandEmpty")
+            .abilities(are: "drawCardOnHandEmpty")
             .holding(MockCardProtocol())
         let mockState = MockStateProtocol()
             .withDefault()
@@ -60,7 +60,7 @@ class DrawsCardOnHandEmptyTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p1")
-            .abilities(are: "drawsCardOnHandEmpty")
+            .abilities(are: "drawCardOnHandEmpty")
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1)
@@ -71,7 +71,7 @@ class DrawsCardOnHandEmptyTests: XCTestCase {
         let moves = sut.triggered(on: event, in: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GMove("drawsCardOnHandEmpty", actor: "p1")])
+        XCTAssertEqual(moves, [GMove("drawCardOnHandEmpty", actor: "p1")])
     }
     
     func test_DrawsCard_OnhandicapThenEmptyHand() {
@@ -79,7 +79,7 @@ class DrawsCardOnHandEmptyTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p1")
-            .abilities(are: "drawsCardOnHandEmpty")
+            .abilities(are: "drawCardOnHandEmpty")
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1)
@@ -90,7 +90,7 @@ class DrawsCardOnHandEmptyTests: XCTestCase {
         let moves = sut.triggered(on: event, in: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GMove("drawsCardOnHandEmpty", actor: "p1")])
+        XCTAssertEqual(moves, [GMove("drawCardOnHandEmpty", actor: "p1")])
     }
     
     func test_DrawsCard_OnDrawHandThenEmptyHand() {
@@ -98,7 +98,7 @@ class DrawsCardOnHandEmptyTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p1")
-            .abilities(are: "drawsCardOnHandEmpty")
+            .abilities(are: "drawCardOnHandEmpty")
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1)
@@ -109,6 +109,6 @@ class DrawsCardOnHandEmptyTests: XCTestCase {
         let moves = sut.triggered(on: event, in: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GMove("drawsCardOnHandEmpty", actor: "p1")])
+        XCTAssertEqual(moves, [GMove("drawCardOnHandEmpty", actor: "p1")])
     }
 }

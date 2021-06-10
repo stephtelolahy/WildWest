@@ -14,7 +14,7 @@ public class IsPhase: PlayReq {
     @ParsedValue
     var phase: Int
     
-    public override func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
+    public override func match(_ ctx: MoveContext, args: inout [[PlayArg: [String]]]) -> Bool {
         ctx.state.phase == phase && ctx.state.hits.isEmpty
     }
 }

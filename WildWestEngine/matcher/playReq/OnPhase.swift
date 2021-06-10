@@ -14,7 +14,7 @@ class OnPhase: PlayReq {
     @ParsedValue
     var phase: Int
     
-    override func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
+    override func match(_ ctx: MoveContext, args: inout [[PlayArg: [String]]]) -> Bool {
         guard case let .setPhase(aPhase) = ctx.event,
               phase == aPhase else {
             return false

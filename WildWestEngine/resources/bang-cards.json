@@ -5,7 +5,7 @@
     "type": "default",
     "abilities": {
       "endTurn": 0,
-      "startTurnOnPhase1": 0,
+      "startTurnDrawing2Cards": 0,
       "nextTurnOnPhase3": 0,
       "nextTurnOnEliminated": 0,
       "discardExcessCardsOnPhase3": 0,
@@ -125,8 +125,7 @@
     "type": "brown",
     "abilities": {
       "discardOtherHand": 0,
-      "discardOtherInPlay": 0,
-      "discardSelfInPlay": 0
+      "discardAnyInPlay": 0
     }
   },
   {
@@ -243,7 +242,7 @@
     }
   },
   {
-    "name": "joudonais",
+    "name": "jourdonnais",
     "desc": "he is considered to have a Barrel card in play at all times; he can \"draw!\" when he is the target of a BANG!, and on a Heart he is missed. If he has another real Barrel card in play, he can count both of them, giving him two chances to cancel the BANG! before playing a Missed! card.",
     "type": "figure",
     "abilities": {
@@ -285,7 +284,7 @@
     "type": "figure",
     "abilities": {
       "bullets": 4,
-      "drawsCardOnLoseHealth": 0
+      "drawCardOnLoseHealth": 0
     }
   },
   {
@@ -294,7 +293,7 @@
     "type": "figure",
     "abilities": {
       "bullets": 3,
-      "drawsCardFromOffenderOnLoseHealth": 0
+      "drawCardFromOffenderOnLoseHealth": 0
     }
   },
   {
@@ -303,7 +302,7 @@
     "type": "figure",
     "abilities": {
       "bullets": 4,
-      "drawsCardOnHandEmpty": 0
+      "drawCardOnHandEmpty": 0
     }
   },
   {
@@ -312,7 +311,7 @@
     "type": "figure",
     "abilities": {
       "bullets": 4,
-      "drawsAllCardsFromEliminatedPlayer": 0
+      "drawAllCardsFromEliminatedPlayer": 0
     }
   },
   {
@@ -330,7 +329,7 @@
     "type": "figure",
     "abilities": {
       "bullets": 4,
-      "silentStartTurnOnPhase1": 0,
+      "silentStartTurnDrawing2Cards": 0,
       "startTurnDrawing1ExtraCardIfRedSuit": 0
     }
   },
@@ -340,8 +339,8 @@
     "type": "figure",
     "abilities": {
       "bullets": 4,
-      "silentStartTurnOnPhase1": 0,
-      "startTurnDrawing3CardsAndKeep2": 0
+      "silentStartTurnDrawing2Cards": 0,
+      "startTurnChoosing2CardsFromDeck": 0
     }
   },
   {
@@ -350,8 +349,8 @@
     "type": "figure",
     "abilities": {
       "bullets": 4,
-      "silentStartTurnOnPhase1": 0,
-      "startTurnDrawingFirstCardFromPlayer": 0
+      "silentStartTurnDrawing2Cards": 0,
+      "startTurnChoosingDrawPlayer": 0
     }
   },
   {
@@ -360,8 +359,8 @@
     "type": "figure",
     "abilities": {
       "bullets": 4,
-      "silentStartTurnOnPhase1": 0,
-      "startTurnDrawingFirstCardFromDiscard": 0
+      "silentStartTurnDrawing2Cards": 0,
+      "startTurnChoosingDrawDiscard": 0
     }
   }
 ]

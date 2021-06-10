@@ -1,5 +1,5 @@
 //
-//  StartTurnOnPhase1Tests.swift
+//  StartTurnDrawing2CardsTests.swift
 //  CardGameEngine_Tests
 //
 //  Created by Hugues Stephano Telolahy on 09/10/2020.
@@ -10,7 +10,7 @@ import XCTest
 import WildWestEngine
 import Resolver
 
-class StartTurnOnPhase1Tests: XCTestCase {
+class StartTurnDrawing2CardsTests: XCTestCase {
     
     private let sut: AbilityMatcherProtocol = Resolver.resolve()
     
@@ -19,7 +19,7 @@ class StartTurnOnPhase1Tests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p1")
-            .abilities(are: "startTurnOnPhase1")
+            .abilities(are: "startTurnDrawing2Cards")
         let mockState = MockStateProtocol()
             .withDefault()
             .turn(is: "p1")
@@ -33,7 +33,7 @@ class StartTurnOnPhase1Tests: XCTestCase {
         let events = sut.effects(on: try XCTUnwrap(moves?.first), in: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GMove("startTurnOnPhase1", actor: "p1")])
+        XCTAssertEqual(moves, [GMove("startTurnDrawing2Cards", actor: "p1")])
         XCTAssertEqual(events, [.drawDeck(player: "p1"),
                                 .drawDeck(player: "p1"),
                                 .setPhase(value: 2)])
@@ -44,7 +44,7 @@ class StartTurnOnPhase1Tests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p1")
-            .abilities(are: "startTurnOnPhase1", "silentStartTurnOnPhase1")
+            .abilities(are: "startTurnDrawing2Cards", "silentStartTurnDrawing2Cards")
         let mockState = MockStateProtocol()
             .withDefault()
             .turn(is: "p1")
@@ -64,7 +64,7 @@ class StartTurnOnPhase1Tests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p1")
-            .abilities(are: "startTurnOnPhase1")
+            .abilities(are: "startTurnDrawing2Cards")
         let mockState = MockStateProtocol()
             .withDefault()
             .turn(is: "p1")

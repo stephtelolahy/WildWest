@@ -19,7 +19,7 @@
     "canPlay": {
       "isYourTurn": 0,
       "isPhase": 2,
-      "requireTargetAny": 0
+      "requireTargetOther": 0
     },
     "onPlay": [
       {
@@ -94,7 +94,7 @@
     "onPlay": [
       {
         "action": "drawDeck",
-        "amount": 2
+        "amount": "2"
       }
     ]
   },
@@ -108,7 +108,7 @@
     "onPlay": [
       {
         "action": "drawDeck",
-        "amount": 3
+        "amount": "3"
       }
     ]
   },
@@ -118,7 +118,7 @@
     "canPlay": {
       "isYourTurn": 0,
       "isPhase": 2,
-      "requireTargetAny": 0
+      "requireTargetOther": 0
     },
     "onPlay": [
       {
@@ -129,29 +129,12 @@
     ]
   },
   {
-    "name": "discardOtherInPlay",
+    "name": "discardAnyInPlay",
     "type": "active",
     "canPlay": {
       "isYourTurn": 0,
       "isPhase": 2,
       "requireTargetAny": 0,
-      "requireInPlayCard": 0
-    },
-    "onPlay": [
-      {
-        "action": "discardInPlay",
-        "player": "target",
-        "card": "requiredInPlay"
-      }
-    ]
-  },
-  {
-    "name": "discardSelfInPlay",
-    "type": "active",
-    "canPlay": {
-      "isYourTurn": 0,
-      "isPhase": 2,
-      "requireTargetSelf": 0,
       "requireInPlayCard": 0
     },
     "onPlay": [
@@ -286,7 +269,7 @@
     "canPlay": {
       "isYourTurn": 0,
       "isPhase": 2,
-      "requireTargetAny": 0
+      "requireTargetOther": 0
     },
     "onPlay": [
       {
@@ -429,7 +412,7 @@
     ]
   },
   {
-    "name": "startTurnOnPhase1",
+    "name": "startTurnDrawing2Cards",
     "type": "triggered",
     "canPlay": {
       "onQueueEmpty": 0,
@@ -439,7 +422,7 @@
     "onPlay": [
       {
         "action": "drawDeck",
-        "amount": 2
+        "amount": "2"
       },
       {
         "action": "setPhase",
@@ -545,7 +528,7 @@
     "onPlay": [
       {
         "action": "drawDeck",
-        "amount": 3
+        "amount": "3"
       }
     ]
   },
@@ -569,20 +552,19 @@
     ]
   },
   {
-    "name": "drawsCardOnLoseHealth",
+    "name": "drawCardOnLoseHealth",
     "type": "triggered",
     "canPlay": {
       "onLooseHealth": 0
     },
     "onPlay": [
       {
-        "action": "drawDeck",
-        "amount": 1
+        "action": "drawDeck"
       }
     ]
   },
   {
-    "name": "drawsCardFromOffenderOnLoseHealth",
+    "name": "drawCardFromOffenderOnLoseHealth",
     "type": "triggered",
     "canPlay": {
       "onLooseHealth": 0,
@@ -597,20 +579,19 @@
     ]
   },
   {
-    "name": "drawsCardOnHandEmpty",
+    "name": "drawCardOnHandEmpty",
     "type": "triggered",
     "canPlay": {
       "onHandEmpty": 0
     },
     "onPlay": [
       {
-        "action": "drawDeck",
-        "amount": 1
+        "action": "drawDeck"
       }
     ]
   },
   {
-    "name": "drawsAllCardsFromEliminatedPlayer",
+    "name": "drawAllCardsFromEliminatedPlayer",
     "type": "triggered",
     "priority": 0,
     "canPlay": {
@@ -659,8 +640,7 @@
     },
     "onPlay": [
       {
-        "action": "drawDeck",
-        "amount": 1
+        "action": "drawDeck"
       },
       {
         "action": "drawDeckFlippingIf",
@@ -668,8 +648,7 @@
         "regex": "(♥️)|(♦️)",
         "then": [
           {
-            "action": "drawDeck",
-            "amount": 1
+            "action": "drawDeck"
           }
         ]
       },
@@ -680,7 +659,7 @@
     ]
   },
   {
-    "name": "startTurnDrawing3CardsAndKeep2",
+    "name": "startTurnChoosing2CardsFromDeck",
     "type": "triggered",
     "canPlay": {
       "onQueueEmpty": 0,
@@ -690,12 +669,12 @@
     "onPlay": [
       {
         "action": "addHit",
-        "abilities": ["startTurnDrawDeckChoosing2"]
+        "abilities": ["startTurnDrawingDeckChoosing"]
       }
     ]
   },
   {
-    "name": "startTurnDrawDeckChoosing2",
+    "name": "startTurnDrawingDeckChoosing",
     "type": "active",
     "canPlay": {
       "requireDeckCards": 2
@@ -715,7 +694,7 @@
     ]
   },
   {
-    "name": "startTurnDrawingFirstCardFromPlayer",
+    "name": "startTurnChoosingDrawPlayer",
     "type": "triggered",
     "canPlay": {
       "onQueueEmpty": 0,
@@ -733,7 +712,7 @@
     "name": "startTurnDrawingPlayer",
     "type": "active",
     "canPlay": {
-      "requireTargetAny": 0
+      "requireTargetOther": 0
     },
     "onPlay": [
       {
@@ -742,8 +721,7 @@
         "card": "randomHand"
       },
       {
-        "action": "drawDeck",
-        "amount": 1
+        "action": "drawDeck"
       },
       {
         "action": "removeHit"
@@ -760,7 +738,7 @@
     "onPlay": [
       {
         "action": "drawDeck",
-        "amount": 2
+        "amount": "2"
       },
       {
         "action": "removeHit"
@@ -772,7 +750,7 @@
     ]
   },
   {
-    "name": "startTurnDrawingFirstCardFromDiscard",
+    "name": "startTurnChoosingDrawDiscard",
     "type": "triggered",
     "canPlay": {
       "onQueueEmpty": 0,
@@ -794,8 +772,7 @@
         "action": "drawDiscard"
       },
       {
-        "action": "drawDeck",
-        "amount": 1
+        "action": "drawDeck"
       },
       {
         "action": "removeHit"

@@ -21,7 +21,7 @@ class MoveEvaluatorTests: XCTestCase {
     override func setUp() {
         mockRoleEstimator = MockRoleEstimatorProtocol()
         mockRoleStrategy = MockRoleStrategyProtocol()
-        mockAbilityEvaluator = MockAbilityEvaluatorProtocol()
+        mockAbilityEvaluator = MockAbilityEvaluatorProtocol().withEnabledDefaultImplementation(AbilityEvaluatorProtocolStub())
         sut = MoveEvaluator(abilityEvaluator: mockAbilityEvaluator, 
                             roleEstimator: mockRoleEstimator, 
                             roleStrategy: mockRoleStrategy)
@@ -35,7 +35,7 @@ class MoveEvaluatorTests: XCTestCase {
         }
         
         // When
-        let value = sut.evaluate(move, in: MockStateProtocol())
+        let value = sut.evaluate(move, in: MockStateProtocol().withDefault())
         
         // Assert
         XCTAssertEqual(value, 0)

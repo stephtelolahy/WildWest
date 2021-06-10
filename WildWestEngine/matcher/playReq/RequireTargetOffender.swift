@@ -11,7 +11,7 @@
  */
 class RequireTargetOffender: PlayReq {
     
-    override func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
+    override func match(_ ctx: MoveContext, args: inout [[PlayArg: [String]]]) -> Bool {
         guard case let .looseHealth(player, offender) = ctx.event,
               player == ctx.actor.identifier,
               offender != player,

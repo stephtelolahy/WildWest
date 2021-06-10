@@ -14,7 +14,7 @@ class OnEliminatingRole: PlayReq {
     @ParsedValue
     var role: Role
     
-    override func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
+    override func match(_ ctx: MoveContext, args: inout [[PlayArg: [String]]]) -> Bool {
         guard case let .eliminate(target, offender) = ctx.event,
               offender != target,
               offender == ctx.actor.identifier,

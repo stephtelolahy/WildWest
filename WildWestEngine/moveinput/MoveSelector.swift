@@ -49,26 +49,19 @@ public class MoveSelector: MoveSelectorProtocol {
                 // single arg
                 return MoveNode(name: name, value: .options(moves.mapNodes(named: { $0.argsString() })))
                 
-            } else if moves.allSatisfy({ $0.args[.target] != nil && $0.args[.requiredInPlay] != nil }) {
-                #warning("TODO: manage 2 args combination")
-                // 2 args {target, requiredInPlay}
-                let nodes: [MoveNode] = moves.uniqueTargets().map { target in
-                    let relatedMoves = moves.filter { $0.args[.target] == [target] } 
-                    return MoveNode(name: target, value: .options(relatedMoves.mapNodes(named: { $0.args[.requiredInPlay]![0] })))
-                }
-                return MoveNode(name: name, value: .options(nodes))
-                
-            } else if moves.allSatisfy({ $0.args[.target] != nil && $0.args[.requiredHand] != nil }) {
-                // 2 args {target, requiredHand}
-                let nodes: [MoveNode] = moves.uniqueTargets().map { target in
-                    let relatedMoves = moves.filter { $0.args[.target] == [target] }
-                    return MoveNode(name: target, value: .options(relatedMoves.mapNodes(named: { $0.args[.requiredHand]![0] })))
-                }
-                return MoveNode(name: name, value: .options(nodes))
-                
             } else {
-                // other args combination
-                fatalError("Unsupported")
+                // multiple args
+                let argKeys = refMove.args.keys.sorted(by: { $0 < $1 })
+                let key1 = argKeys[0]
+                let keys2 = Array(argKeys.dropFirst())
+                
+                let nodes: [MoveNode] = moves.uniqueArgValues(for: key1).map { value1 in
+                    let relatedMoves = moves.filter { $0.args[key1] == value1 }
+                    return MoveNode(name: value1.joined(separator: ", "),
+                                    value: .options(relatedMoves.mapNodes(named: { $0.argsString(keys2) })))
+                }
+                
+                return MoveNode(name: name, value: .options(nodes))
             }
             
         } else {
@@ -93,20 +86,27 @@ private extension Array where Element == GMove {
         map { MoveNode(name: transform($0), value: .move($0)) }
     }
     
-    func uniqueTargets() -> [String] {
-        var targets: [String] = []
+    func uniqueArgValues(for key: PlayArg) -> [[String]] {
+        var result: [[String]] = []
         for move in self {
-            let target = move.args[.target]![0]
-            if !targets.contains(target) {
-                targets.append(target)
+            if let value = move.args[key],
+               !result.contains(value) {
+                result.append(value)
             }
         }
-        return targets
+        return result
     }
 }
 
 private extension GMove {
-    func argsString(_ playArgs: [PlayArg] = [.target, .requiredInPlay, .requiredHand, .requiredStore, .requiredDeck]) -> String {
+    func argsString(_ playArgs: [PlayArg] = PlayArg.allCases) -> String {
         playArgs.compactMap { args[$0] }.flatMap { $0 }.joined(separator: ", ")
+    }
+}
+
+extension PlayArg: Comparable {
+    
+    public static func < (lhs: Self, rhs: Self) -> Bool {
+        allCases.firstIndex(of: lhs)! < allCases.firstIndex(of: rhs)!
     }
 }

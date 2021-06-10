@@ -8,24 +8,40 @@
 
 import UIKit
 import WildWestEngine
+import ImageSlideshow
 
-class FigureSelectorWidget: UIAlertController {
+class FigureSelectorWidget: FullScreenSlideshowViewController {
     
-    convenience init(gameResources: ResourcesLoaderProtocol, completion: @escaping (String?) -> Void) {
-        self.init(title: "Choose figure", message: nil, preferredStyle: .alert)
+    convenience init(gameResources: ResourcesLoaderProtocol,
+                     initialFigure: String?,
+                     completion: @escaping (String?) -> Void) {
+        self.init()
+        modalTransitionStyle = .crossDissolve
+        
         let figures = gameResources.loadCards().filter { $0.type == .figure }.map { $0.name }
-        figures.forEach { figure in
-            addAction(UIAlertAction(title: figure,
-                                    style: .default,
-                                    handler: { _ in
-                                        completion(figure)
-                                    }))
+        let imageNames = ["01_back"] + figures.map { "01_\($0.lowercased())" }
+        let images = imageNames.map { BundleImageSource(imageString: $0) }
+        let initialIndex: Int
+        if let initialfigure = initialFigure,
+           let index = figures.firstIndex(of: initialfigure) {
+            initialIndex = index + 1
+        } else {
+            initialIndex = 0
         }
         
-        addAction(UIAlertAction(title: "Random",
-                                style: .cancel,
-                                handler: { _ in
-                                    completion(nil)
-                                }))
+        inputs = images
+        initialPage = initialIndex
+        
+        pageSelected = { page in
+            
+            let selectedFigure: String?
+            if page == 0 {
+                selectedFigure = nil
+            } else {
+                selectedFigure = figures[page - 1]
+            }
+            
+            completion(selectedFigure)
+        }
     }
 }

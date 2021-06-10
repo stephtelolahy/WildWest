@@ -11,7 +11,7 @@
  */
 class RequireTargetEliminated: PlayReq {
     
-    override func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
+    override func match(_ ctx: MoveContext, args: inout [[PlayArg: [String]]]) -> Bool {
         guard case let .eliminate(target, _) = ctx.event,
               target != ctx.actor.identifier else {
             return false

@@ -18,9 +18,3 @@ public struct DeckCard: Decodable {
         self.suit = suit
     }
 }
-
-public extension DeckCard {
-    var identifier: String {
-        "\(name)-\(value)-\(suit)"
-    }
-}

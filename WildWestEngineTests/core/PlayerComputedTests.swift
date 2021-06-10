@@ -207,7 +207,7 @@ class PlayerComputedTests: XCTestCase {
         XCTAssertEqual(sut.handLimit, 4)
     }
 
-    func test_HAndLimit_IsAttribute() {
+    func test_HandLimit_IsAttribute() {
         // Given
         // Given
         let mockPlayer = MockPlayerProtocol()

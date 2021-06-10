@@ -102,12 +102,12 @@ extension Resolver: RouterDependenciesProtocol {
         return viewController
     }
     
-    func provideFigureSelectorWidget(_ completion: @escaping (String?) -> Void) -> UIViewController {
-        FigureSelectorWidget(gameResources: resolve(), completion: completion)
+    func provideFigureSelectorWidget(initialFigure: String?, completion: @escaping (String?) -> Void) -> UIViewController {
+        FigureSelectorWidget(gameResources: resolve(), initialFigure: initialFigure, completion: completion)
     }
     
-    func provideRoleSelectorWidget(_ completion: @escaping (Role?) -> Void) -> UIViewController {
-        RoleSelectorWidget(completion)
+    func provideRoleSelectorWidget(initialRole: Role?, completion: @escaping (Role?) -> Void) -> UIViewController {
+        RoleSelectorWidget(initialRole: initialRole, completion: completion)
     }
     
     func provideMenuViewController() -> UIViewController {
@@ -140,8 +140,8 @@ extension Resolver: RouterDependenciesProtocol {
         GameOverWidget(winner: winner, completion: completion)
     }
     
-    func provideGameRolesWidget(_ playersCount: Int) -> UIViewController {
-        GameRolesWidget(playersCount: playersCount)
+    func provideGameRolesWidget(_ playersCount: Int, completion: @escaping () -> Void) -> UIViewController {
+        GameRolesWidget(playersCount: playersCount, completion: completion)
     }
     
     func provideGamePlayerWidget(_ player: PlayerProtocol) -> UIViewController {

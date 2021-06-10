@@ -73,5 +73,70 @@
     "abilities": {
       "brawl": 0
     }
+  },
+  {
+    "name": "elenaFuente",
+    "desc": "She may use any card in hand as Missed!.",
+    "type": "figure",
+    "abilities": {
+      "bullets": 3,
+      "playAnyCardAsMissed": 0
+    }
+  },
+  {
+    "name": "seanMallory",
+    "desc": "He may hold in his hand up to 10 cards.",
+    "type": "figure",
+    "abilities": {
+      "bullets": 3,
+      "handLimit": 10
+    }
+  },
+  {
+    "name": "tequilaJoe",
+    "desc": "Each time he plays a Beer, he regains 2 life points instead of 1.",
+    "type": "figure",
+    "abilities": {
+      "bullets": 4,
+      "gain2HealthOnPlayBeer": 0
+    }
+  },
+  {
+    "name": "pixiePete",
+    "desc": "During phase 1 of his turn, he draws 3 cards instead of 2.",
+    "type": "figure",
+    "abilities": {
+      "bullets": 3,
+      "silentStartTurnDrawing2Cards": 0,
+      "startTurnDrawing3Cards": 0
+    }
+  },
+  {
+    "name": "billNoface",
+    "desc": "He draws 1 card, plus 1 card for each wound he has.",
+    "type": "figure",
+    "abilities": {
+      "bullets": 4,
+      "silentStartTurnDrawing2Cards": 0,
+      "startTurnDrawing1CardPlusWound": 0
+    }
+  },
+  {
+    "name": "gregDigger",
+    "desc": "Each time another player is eliminated, he regains 2 life points.",
+    "type": "figure",
+    "abilities": {
+      "bullets": 4,
+      "gain2HealthOnOtherEliminated": 0
+    }
+  },
+  {
+    "name": "herbHunter",
+    "desc": "Each time another player is eliminated, he draws 2 extra cards.",
+    "type": "figure",
+    "abilities": {
+      "bullets": 4,
+      "draw2CardsOnOtherEliminated": 0
+    }
   }
 ]

@@ -1,5 +1,5 @@
 //
-//  StartTurnDrawingFirstCardFromPlayerTests.swift
+//  StartTurnChoosingDrawPlayerTests.swift
 //  CardGameEngine_Tests
 //
 //  Created by Hugues Stephano Telolahy on 16/10/2020.
@@ -10,7 +10,7 @@ import XCTest
 import WildWestEngine
 import Resolver
 
-class StartTurnDrawingFirstCardFromPlayerTests: XCTestCase {
+class StartTurnChoosingDrawPlayerTests: XCTestCase {
     
     private let sut: AbilityMatcherProtocol = Resolver.resolve()
     
@@ -19,7 +19,7 @@ class StartTurnDrawingFirstCardFromPlayerTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p1")
-            .abilities(are: "startTurnDrawingFirstCardFromPlayer")
+            .abilities(are: "startTurnChoosingDrawPlayer")
         let mockState = MockStateProtocol()
             .withDefault()
             .turn(is: "p1")
@@ -33,9 +33,9 @@ class StartTurnDrawingFirstCardFromPlayerTests: XCTestCase {
         let events = sut.effects(on: try XCTUnwrap(moves?.first), in: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GMove("startTurnDrawingFirstCardFromPlayer", actor: "p1")])
+        XCTAssertEqual(moves, [GMove("startTurnChoosingDrawPlayer", actor: "p1")])
         XCTAssertEqual(events, [.addHit(hits: [GHit(player: "p1",
-                                                    name: "startTurnDrawingFirstCardFromPlayer",
+                                                    name: "startTurnChoosingDrawPlayer",
                                                     abilities: ["startTurnDrawingPlayer", "startTurnDrawingDeck"],
                                                     offender: "p1")])])
     }

@@ -1,5 +1,5 @@
 //
-//  DrawsAllCardsFromEliminatedPlayerTests.swift
+//  DrawAllCardsFromEliminatedPlayerTests.swift
 //  CardGameEngine_Tests
 //
 //  Created by Hugues Stephano Telolahy on 12/10/2020.
@@ -10,7 +10,7 @@ import XCTest
 import WildWestEngine
 import Resolver
 
-class DrawsAllCardsFromEliminatedPlayerTests: XCTestCase {
+class DrawAllCardsFromEliminatedPlayerTests: XCTestCase {
     
     private let sut: AbilityMatcherProtocol = Resolver.resolve()
     
@@ -19,7 +19,7 @@ class DrawsAllCardsFromEliminatedPlayerTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p1")
-            .abilities(are: "drawsAllCardsFromEliminatedPlayer")
+            .abilities(are: "drawAllCardsFromEliminatedPlayer")
         let mockPlayer2 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p2")
@@ -36,7 +36,7 @@ class DrawsAllCardsFromEliminatedPlayerTests: XCTestCase {
         let events = sut.effects(on: try XCTUnwrap(moves?.first), in: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GMove("drawsAllCardsFromEliminatedPlayer", actor: "p1", args: [.target: ["p2"]])])
+        XCTAssertEqual(moves, [GMove("drawAllCardsFromEliminatedPlayer", actor: "p1", args: [.target: ["p2"]])])
         XCTAssertEqual(events, [.drawHand(player: "p1", other: "p2", card: "c1"),
                                 .drawHand(player: "p1", other: "p2", card: "c2")])
     }
@@ -46,7 +46,7 @@ class DrawsAllCardsFromEliminatedPlayerTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p1")
-            .abilities(are: "drawsAllCardsFromEliminatedPlayer")
+            .abilities(are: "drawAllCardsFromEliminatedPlayer")
         let mockPlayer2 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p2")
@@ -63,7 +63,7 @@ class DrawsAllCardsFromEliminatedPlayerTests: XCTestCase {
         let events = sut.effects(on: try XCTUnwrap(moves?.first), in: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GMove("drawsAllCardsFromEliminatedPlayer", actor: "p1", args: [.target: ["p2"]])])
+        XCTAssertEqual(moves, [GMove("drawAllCardsFromEliminatedPlayer", actor: "p1", args: [.target: ["p2"]])])
         XCTAssertEqual(events, [.drawInPlay(player: "p1", other: "p2", card: "c3"),
                                 .drawInPlay(player: "p1", other: "p2", card: "c4")])
     }
@@ -73,7 +73,7 @@ class DrawsAllCardsFromEliminatedPlayerTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p1")
-            .abilities(are: "drawsAllCardsFromEliminatedPlayer")
+            .abilities(are: "drawAllCardsFromEliminatedPlayer")
             .holding(MockCardProtocol().withDefault().identified(by: "c1"))
             .playing(MockCardProtocol().withDefault().identified(by: "c2"))
         let mockState = MockStateProtocol()

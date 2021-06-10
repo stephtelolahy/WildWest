@@ -14,7 +14,7 @@ public class RequireTargetAt: PlayReq {
     @ParsedValue
     var distance: Int
     
-    public override func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
+    public override func match(_ ctx: MoveContext, args: inout [[PlayArg: [String]]]) -> Bool {
         let others = ctx.state.playOrder
             .filter { $0 != ctx.actor.identifier }
             .filter { ctx.state.distance(from: ctx.actor.identifier, to: $0) <= distance }

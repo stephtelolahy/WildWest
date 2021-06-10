@@ -37,8 +37,8 @@
     "canPlay": {
       "isYourTurn": 0,
       "isPhase": 2,
-      "requireTargetAny": 0,
-      "requireHandCards": 1
+      "requireHandCards": 1,
+      "requireTargetOther": 0
     },
     "onPlay": [
       {
@@ -67,10 +67,8 @@
         "card": "requiredHand"
       },
       {
-        "action": "gainHealth"
-      },
-      {
-        "action": "gainHealth"
+        "action": "gainHealth",
+        "amount": 2
       }
     ]
   },
@@ -80,8 +78,8 @@
     "canPlay": {
       "isYourTurn": 0,
       "isPhase": 2,
-      "requireTargetAny": 0,
-      "requireHandCards": 1
+      "requireHandCards": 1,
+      "requireTargetAny": 0
     },
     "onPlay": [
       {
@@ -100,8 +98,8 @@
     "canPlay": {
       "isYourTurn": 0,
       "isPhase": 2,
-      "requireTargetAny": 0,
-      "requireHandCards": 1
+      "requireHandCards": 1,
+      "requireTargetOther": 0
     },
     "onPlay": [
       {
@@ -121,9 +119,9 @@
     "canPlay": {
       "isYourTurn": 0,
       "isPhase": 2,
-      "requireTargetAny": 0,
-      "requireInPlayCard": 0,
-      "requireHandCards": 1
+      "requireHandCards": 1,
+      "requireTargetOther": 0,
+      "requireInPlayCard": 0
     },
     "onPlay": [
       {
@@ -189,6 +187,86 @@
       },
       {
         "action": "removeHit"
+      }
+    ]
+  },
+  {
+    "name": "gain2HealthOnPlayBeer",
+    "type": "triggered",
+    "canPlay": {
+      "onPlayCard": "beer"
+    },
+    "onPlay": [
+      {
+        "action": "gainHealth"
+      }
+    ]
+  },
+  {
+    "name": "startTurnDrawing3Cards",
+    "type": "triggered",
+    "canPlay": {
+      "onQueueEmpty": 0,
+      "isYourTurn": 0,
+      "isPhase": 1
+    },
+    "onPlay": [
+      {
+        "action": "drawDeck",
+        "amount": "3"
+      },
+      {
+        "action": "setPhase",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "name": "startTurnDrawing1CardPlusWound",
+    "type": "triggered",
+    "canPlay": {
+      "onQueueEmpty": 0,
+      "isYourTurn": 0,
+      "isPhase": 1
+    },
+    "onPlay": [
+      {
+        "action": "drawDeck"
+      },
+      {
+        "action": "drawDeck",
+        "amount": "damage",
+        "optional": true
+      },
+      {
+        "action": "setPhase",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "name": "gain2HealthOnOtherEliminated",
+    "type": "triggered",
+    "canPlay": {
+      "onOtherEliminated": 0
+    },
+    "onPlay": [
+      {
+        "action": "gainHealth",
+        "amount": 2
+      }
+    ]
+  },
+  {
+    "name": "draw2CardsOnOtherEliminated",
+    "type": "triggered",
+    "canPlay": {
+      "onOtherEliminated": 0
+    },
+    "onPlay": [
+      {
+        "action": "drawDeck",
+        "amount": "2"
       }
     ]
   }

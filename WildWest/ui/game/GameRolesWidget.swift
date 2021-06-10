@@ -11,7 +11,7 @@ import WildWestEngine
 
 class GameRolesWidget: UIAlertController {
     
-    convenience init(playersCount: Int) {
+    convenience init(playersCount: Int, completion: @escaping () -> Void) {
         let roles = GSetup().roles(for: playersCount)
         let rolesWithCount: [String] = Role.allCases.compactMap { role in
             guard let count = roles.filterOrNil({ $0 == role })?.count else {
@@ -20,6 +20,6 @@ class GameRolesWidget: UIAlertController {
             return "\(count) \(role.rawValue)"
         }
         let message = rolesWithCount.joined(separator: "\n")
-        self.init(title: "Roles", message: message, closeAction: "Close")
+        self.init(title: "Roles", message: message, closeAction: "Start", completion: completion)
     }
 }

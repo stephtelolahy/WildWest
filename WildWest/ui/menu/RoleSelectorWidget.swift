@@ -8,25 +8,39 @@
 
 import UIKit
 import WildWestEngine
+import ImageSlideshow
 
-class RoleSelectorWidget: UIAlertController {
+class RoleSelectorWidget: FullScreenSlideshowViewController {
     
-    convenience init(_ completion: @escaping (Role?) -> Void) {
-        self.init(title: "Choose role", message: nil, preferredStyle: .alert)
+    convenience init(initialRole: Role?,
+                     completion: @escaping (Role?) -> Void) {
+        self.init()
+        modalTransitionStyle = .crossDissolve
+        
         let roles = Role.allCases
-        roles.forEach { role in
-            addAction(UIAlertAction(title: role.rawValue,
-                                    style: .default,
-                                    handler: { _ in
-                                        completion(role)
-                                        
-                                    }))
+        let imageNames = ["01_back"] + roles.map { "01_\($0.rawValue.lowercased())" }
+        let images = imageNames.map { BundleImageSource(imageString: $0) }
+        let initialIndex: Int
+        if let initialRole = initialRole,
+           let index = roles.firstIndex(of: initialRole) {
+            initialIndex = index + 1
+        } else {
+            initialIndex = 0
         }
         
-        addAction(UIAlertAction(title: "Random",
-                                style: .cancel,
-                                handler: { _ in
-                                    completion(nil)
-                                }))
+        inputs = images
+        initialPage = initialIndex
+        
+        pageSelected = { page in
+            
+            let selectedRole: Role?
+            if page == 0 {
+                selectedRole = nil
+            } else {
+                selectedRole = roles[page - 1]
+            }
+            
+            completion(selectedRole)
+        }
     }
 }

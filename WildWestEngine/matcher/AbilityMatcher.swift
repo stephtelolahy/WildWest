@@ -26,8 +26,9 @@ public class AbilityMatcher: AbilityMatcherProtocol {
     }
     
     public func triggered(on event: GEvent, in state: StateProtocol) -> [GMove]? {
-        // <RULE>: trigger moves from just eliminated player
         var actors = state.playOrder
+        
+        // <RULE>: trigger moves from just eliminated player
         if case let .eliminate(player, _) = event {
             actors.append(player)
         }
@@ -60,11 +61,10 @@ public class AbilityMatcher: AbilityMatcherProtocol {
 
 private extension AbilityMatcher {
     
-    func active(actor identifier: String,
-                in state: StateProtocol) -> [GMove]? {
+    func active(actor identifier: String, in state: StateProtocol) -> [GMove]? {
         let actor = state.players[identifier]!
-        let innerAbilities = abilities(applicableTo: actor)
-        let innerMoves: [GMove] = innerAbilities.keys
+        
+        let innerMoves: [GMove] = abilities(applicableTo: actor).keys
             .compactMap { self.moves(ofType: .active, ability: $0, card: nil, actor: actor, in: state) }
             .flatMap { $0 }
         
@@ -98,12 +98,10 @@ private extension AbilityMatcher {
         return (innerMoves + playHandMoves + reactionMoves).notEmptyOrNil()
     }
     
-    func triggered(on event: GEvent,
-                   actor identifier: String,
-                   in state: StateProtocol) -> [GMove]? {
+    func triggered(on event: GEvent, actor identifier: String, in state: StateProtocol) -> [GMove]? {
         let actor = state.players[identifier]!
-        let innerAbilities = abilities(applicableTo: actor)
-        let innerMoves: [GMove] = innerAbilities.keys
+        
+        let innerMoves: [GMove] = abilities(applicableTo: actor).keys
             .compactMap { self.moves(ofType: .triggered, ability: $0, card: nil, actor: actor, in: state, event: event) }
             .flatMap { $0 }
         
@@ -133,12 +131,13 @@ private extension AbilityMatcher {
         }
         
         // verify requirements
-        let ctx = PlayReqContext(ability: ability,
-                                 actor: actor,
-                                 card: card,
-                                 state: state,
-                                 event: event)
-        guard let playArgs = match(abilityObject.canPlay, ctx: ctx) else {
+        let ctx = MoveContext(ability: ability,
+                              actor: actor,
+                              card: card,
+                              state: state,
+                              event: event)
+        var playArgs: [[PlayArg: [String]]] = []
+        guard abilityObject.canPlay.allSatisfy({ $0.match(ctx, args: &playArgs) }) else {
             return nil
         }
         
@@ -151,9 +150,10 @@ private extension AbilityMatcher {
         }
         
         // <RULE> A move is applicable when it has effects>
-        let effectiveMoves = moves.filter { effects(on: $0, actor: actor, in: state) != nil }
+        let applicableMoves = moves.filter { effects(on: $0, actor: actor, in: state) != nil }
         // </RULE>
-        return effectiveMoves
+        
+        return applicableMoves
     }
     
     func effects(on move: GMove, actor: PlayerProtocol, in state: StateProtocol) -> [GEvent]? {
@@ -162,27 +162,15 @@ private extension AbilityMatcher {
             fatalError("Ability \(move.ability) not found")
         }
         
-        let ctx = EffectContext(ability: move.ability,
-                                actor: actor,
-                                card: move.card,
-                                args: move.args,
-                                state: state)
-        
-        return apply(ability.onPlay, ctx: ctx)?
-            .notEmptyOrNil()
-    }
-    
-    func match(_ playReqs: [PlayReq], ctx: PlayReqContext) -> [[PlayArg: [String]]]? {
-        var playArgs: [[PlayArg: [String]]] = []
-        guard playReqs.allSatisfy({ $0.match(ctx, args: &playArgs) }) else {
-            return nil
-        }
-        return playArgs
-    }
-    
-    func apply(_ effects: [Effect], ctx: EffectContext) -> [GEvent]? {
+        let ctx = MoveContext(ability: move.ability,
+                              actor: actor,
+                              card: move.card,
+                              state: state,
+                              event: nil,
+                              args: move.args)
+        // build events
         var result: [GEvent] = []
-        for effect in effects {
+        for effect in ability.onPlay {
             guard let events = effect.apply(ctx),
                   !events.isEmpty || effect.optional else {
                 return nil
@@ -190,17 +178,20 @@ private extension AbilityMatcher {
             
             result.append(contentsOf: events)
         }
-        return result
+        
+        return result.notEmptyOrNil()
     }
 }
+
+// MARK: - Passive ability matcher
 
 private extension AbilityMatcher {
     
     func abilities(applicableTo actor: PlayerProtocol) -> [String: Int] {
         var abilities = actor.abilities
         
-        if actor.abilities["silentStartTurnOnPhase1"] != nil {
-            abilities.removeValue(forKey: "startTurnOnPhase1")
+        if actor.abilities["silentStartTurnDrawing2Cards"] != nil {
+            abilities.removeValue(forKey: "startTurnDrawing2Cards")
         }
         
         return abilities
@@ -217,6 +208,10 @@ private extension AbilityMatcher {
         if actor.abilities["playMissedAsBang"] != nil,
            card.name == "missed" {
             abilities["bang"] = 0
+        }
+        
+        if actor.abilities["playAnyCardAsMissed"] != nil {
+            abilities["missed"] = 0
         }
         
         return abilities

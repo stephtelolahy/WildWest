@@ -14,7 +14,7 @@ public class SetPhase: Effect {
     @Argument(name: "value")
     var value: Int
     
-    override func apply(_ ctx: EffectContext) -> [GEvent]? {
+    override func apply(_ ctx: MoveContext) -> [GEvent]? {
         [.setPhase(value: value)]
     }
 }

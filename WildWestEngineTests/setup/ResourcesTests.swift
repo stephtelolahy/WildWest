@@ -54,8 +54,10 @@ class ResourcesTests: XCTestCase {
                                 "bangsPerTurn",
                                 "playBangAsMissed",
                                 "playMissedAsBang",
-                                "silentStartTurnOnPhase1",
-                                "silentJail"]
+                                "silentStartTurnDrawing2Cards",
+                                "silentJail",
+                                "playAnyCardAsMissed",
+                                "handLimit"]
         let activeAbilities = sut.loadAbilities().map { $0.name }
         let allAbilities = passiveAbilities + activeAbilities
         
@@ -80,7 +82,7 @@ class ResourcesTests: XCTestCase {
         
         // Assert
         XCTAssertNotNil(playerCard.abilities["endTurn"])
-        XCTAssertNotNil(playerCard.abilities["startTurnOnPhase1"])
+        XCTAssertNotNil(playerCard.abilities["startTurnDrawing2Cards"])
         XCTAssertNotNil(playerCard.abilities["nextTurnOnPhase3"])
         XCTAssertNotNil(playerCard.abilities["nextTurnOnEliminated"])
         XCTAssertNotNil(playerCard.abilities["discardExcessCardsOnPhase3"])
@@ -127,7 +129,7 @@ class ResourcesTests: XCTestCase {
         XCTAssertTrue(cards.contains { $0.name == "calamityJanet" })
         XCTAssertTrue(cards.contains { $0.name == "elGringo" })
         XCTAssertTrue(cards.contains { $0.name == "jesseJones" })
-        XCTAssertTrue(cards.contains { $0.name == "joudonais" })
+        XCTAssertTrue(cards.contains { $0.name == "jourdonnais" })
         XCTAssertTrue(cards.contains { $0.name == "kitCarlson" })
         XCTAssertTrue(cards.contains { $0.name == "luckyDuke" })
         XCTAssertTrue(cards.contains { $0.name == "paulRegret" })
@@ -246,6 +248,14 @@ class ResourcesTests: XCTestCase {
         XCTAssertTrue(cards.contains { $0.name == "tequila" })
         XCTAssertTrue(cards.contains { $0.name == "ragTime" })
         XCTAssertTrue(cards.contains { $0.name == "brawl" })
+        
+        XCTAssertTrue(cards.contains { $0.name == "elenaFuente" })
+        XCTAssertTrue(cards.contains { $0.name == "seanMallory" })
+        XCTAssertTrue(cards.contains { $0.name == "tequilaJoe" })
+        XCTAssertTrue(cards.contains { $0.name == "pixiePete" })
+        XCTAssertTrue(cards.contains { $0.name == "billNoface" })
+        XCTAssertTrue(cards.contains { $0.name == "gregDigger" })
+        XCTAssertTrue(cards.contains { $0.name == "herbHunter" })
     }
     
     func test_DodgeCityCardSets() throws {

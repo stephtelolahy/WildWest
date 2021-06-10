@@ -14,7 +14,7 @@ class RequireHandCards: PlayReq {
     @ParsedValue
     var amount: Int
     
-    override func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
+    override func match(_ ctx: MoveContext, args: inout [[PlayArg: [String]]]) -> Bool {
         var playedCard: String?
         if case let .hand(card) = ctx.card {
             playedCard = card

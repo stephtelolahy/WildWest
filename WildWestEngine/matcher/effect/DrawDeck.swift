@@ -14,11 +14,12 @@ public class DrawDeck: Effect {
     @Argument(name: "player", defaultValue: .actor)
     var player: PlayerArgument
     
-    @Argument(name: "amount", defaultValue: 1)
-    var amount: Int
+    @Argument(name: "amount", defaultValue: .number(1))
+    var amount: NumberArgument
     
-    override func apply(_ ctx: EffectContext) -> [GEvent]? {
-        ctx.players(matching: player)
+    override func apply(_ ctx: MoveContext) -> [GEvent]? {
+        let amount = ctx.number(matching: amount)
+        return ctx.players(matching: player)
             .flatMap { player in
                 Array(0..<amount).map { _ in .drawDeck(player: player) }
             }

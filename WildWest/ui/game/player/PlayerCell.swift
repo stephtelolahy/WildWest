@@ -13,7 +13,8 @@ import Kingfisher
 struct PlayerItem {
     let player: PlayerProtocol
     let isTurn: Bool
-    let isHit: Bool
+    let isHitLooseHealth: Bool
+    let isHitSomeAction: Bool
     let user: UserInfo?
 }
 
@@ -61,8 +62,10 @@ class PlayerCell: UICollectionViewCell {
     private func updateBackground(_ item: PlayerItem) {
         if item.player.health == 0 {
             backgroundColor = .clear
-        } else if item.isHit {
+        } else if item.isHitLooseHealth {
             backgroundColor = UIColor.red
+        } else if item.isHitSomeAction {
+            backgroundColor = UIColor.blue.withAlphaComponent(0.4)
         } else if item.isTurn {
             backgroundColor = UIColor.orange
         } else {

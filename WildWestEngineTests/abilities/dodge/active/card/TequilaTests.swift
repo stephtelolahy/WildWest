@@ -56,4 +56,38 @@ class TequilaTests: XCTestCase {
                                 .discardHand(player: "p1", card: "c2"),
                                 .gainHealth(player: "p2")])
     }
+    
+    func test_CanPlayTequilaToHealSelf() throws {
+        // Given
+        let mockCard1 = MockCardProtocol()
+            .withDefault()
+            .identified(by: "c1")
+            .type(is: .brown)
+            .abilities(are: "tequila")
+        let mockCard2 = MockCardProtocol()
+            .withDefault()
+            .identified(by: "c2")
+        let mockPlayer1 = MockPlayerProtocol()
+            .withDefault()
+            .identified(by: "p1")
+            .holding(mockCard1, mockCard2)
+            .health(is: 1)
+            .maxHealth(is: 3)
+        let mockState = MockStateProtocol()
+            .withDefault()
+            .turn(is: "p1")
+            .phase(is: 2)
+            .players(are: mockPlayer1)
+            .playOrder(is: "p1")
+        
+        // When
+        let moves = sut.active(in: mockState)
+        let events = sut.effects(on: try XCTUnwrap(moves?.first), in: mockState)
+        
+        // Assert
+        XCTAssertEqual(moves, [GMove("tequila", actor: "p1", card: .hand("c1"), args: [.requiredHand: ["c2"], .target: ["p1"]])])
+        XCTAssertEqual(events, [.play(player: "p1", card: "c1"),
+                                .discardHand(player: "p1", card: "c2"),
+                                .gainHealth(player: "p1")])
+    }
 }

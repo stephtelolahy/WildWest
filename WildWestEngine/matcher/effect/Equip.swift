@@ -19,7 +19,7 @@ public class Equip: Effect {
     @Argument(name: "card")
     var card: CardArgument
     
-    override func apply(_ ctx: EffectContext) -> [GEvent]? {
+    override func apply(_ ctx: MoveContext) -> [GEvent]? {
         guard let player = ctx.players(matching: player).first,
               let card = ctx.cards(matching: card, player: player).first else {
             return nil

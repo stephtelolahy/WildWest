@@ -14,7 +14,7 @@ class IsTimesPerTurnMax: PlayReq {
     @ParsedValue
     var maxTimes: NumberArgument
     
-    override func match(_ ctx: PlayReqContext, args: inout [[PlayArg: [String]]]) -> Bool {
+    override func match(_ ctx: MoveContext, args: inout [[PlayArg: [String]]]) -> Bool {
         let times = ctx.number(matching: maxTimes)
         if times == 0 {
             return true

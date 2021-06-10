@@ -20,7 +20,7 @@ class PassInPlay: Effect {
     @Argument(name: "other")
     var other: PlayerArgument
     
-    override func apply(_ ctx: EffectContext) -> [GEvent]? {
+    override func apply(_ ctx: MoveContext) -> [GEvent]? {
         guard let player = ctx.players(matching: player).first,
               let card = ctx.cards(matching: card, player: player).first,
               let other = ctx.players(matching: other).first else {

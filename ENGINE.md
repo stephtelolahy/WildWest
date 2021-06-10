@@ -61,6 +61,21 @@ A is a period in the game that happens within a turn. A turn may be subdivided i
 - Active abilities are effects that apply if user chooses to play it
 - Triggered abilities are effects that activate in response to specific events.
 
+
+#### Ability naming
+
+| Pattern        | Example |  Type |
+| ------------- |:-------------| :--: |
+| [Attribute]      | handLimit      | Passive |
+| Silent[Ability] |   silentJail   | Passive |
+| Play[Card]As[Ability] |    playBangAsMissed  | Passive |
+| [Card]      | bang, barrel | Active/Triggered |
+| [Effect] | drawStore      | Active |
+| [Effect]On[Event] | gainRewardOnEliminatingOutlaw      | Triggered |
+| StartTurn[Effect] |  startTurnDrawing2Cards    | Active/Triggered |
+| StartTurnChoosing[Effect] |  startTurnChoosingDrawPlayer    | Triggered |
+
+
 ### Play Requirements
 
 - The playRequirements attribute contains an array of key: param values which determine various requirements which have to be met for the card to be played and what it can target.
