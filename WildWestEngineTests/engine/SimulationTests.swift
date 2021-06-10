@@ -138,7 +138,7 @@ class SimulationTests: XCTestCase {
                 
                 // Assert each segmented moves can be selected
                 segmenter.segment(moves).values
-                    .forEach { _ = selector.select($0) }
+                    .forEach { _ = selector.select($0, suggestedTitle: nil) }
             }
         })
         .disposed(by: disposeBag)

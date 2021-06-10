@@ -5,23 +5,8 @@
 //  Created by Hugues Stephano Telolahy on 15/11/2020.
 //
 
-public struct MoveNode: Equatable {
-    public let name: String
-    public let value: MoveNodeValue
-    
-    public init(name: String, value: MoveNodeValue) {
-        self.name = name
-        self.value = value
-    }
-    
-    public enum MoveNodeValue: Equatable {
-        case move(GMove)
-        case options([MoveNode])
-    }
-}
-
 public protocol MoveSelectorProtocol {
-    func select(_ moves: [GMove]) -> MoveNode
+    func select(_ moves: [GMove], suggestedTitle: String?) -> Node<GMove>
 }
 
 public class MoveSelector: MoveSelectorProtocol {
@@ -29,64 +14,71 @@ public class MoveSelector: MoveSelectorProtocol {
     public init() {
     }
     
-    public func select(_ moves: [GMove]) -> MoveNode {
+    public func select(_ moves: [GMove], suggestedTitle: String?) -> Node<GMove> {
         let refMove = moves[0]
         
-        if moves.allSatisfy({ $0.ability == refMove.ability && $0.card == refMove.card }) {
+        if moves.allSatisfy({ $0.ability == refMove.ability }) {
             // same ability
-            let name: String
-            if case let .hand(card) = refMove.card {
-                name = card
-            } else {
-                name = refMove.ability
-            }
-            
             if moves.allSatisfy({ $0.args.isEmpty }) {
-                // no args, assume unique
-                return MoveNode(name: name, value: .move(refMove))
-                
-            } else if moves.allSatisfy({ $0.args.keys.count == 1 }) {
-                // single arg
-                return MoveNode(name: name, value: .options(moves.mapNodes(named: { $0.argsString() })))
+                // no args
+                return Node(title: refMove.cardOrAbility, value: refMove)
                 
             } else {
                 // multiple args
                 let argKeys = refMove.args.keys.sorted(by: { $0 < $1 })
-                let key1 = argKeys[0]
-                let keys2 = Array(argKeys.dropFirst())
-                
-                let nodes: [MoveNode] = moves.uniqueArgValues(for: key1).map { value1 in
-                    let relatedMoves = moves.filter { $0.args[key1] == value1 }
-                    return MoveNode(name: value1.joined(separator: ", "),
-                                    value: .options(relatedMoves.mapNodes(named: { $0.argsString(keys2) })))
-                }
-                
-                return MoveNode(name: name, value: .options(nodes))
+                return moves.toNode(title: refMove.cardOrAbility, groupedBy: argKeys)
             }
             
         } else {
             // different abilities
-            let nodes = moves.mapNodes(named: { move in
-                if !move.args.isEmpty {
-                    return move.argsString()
-                } else if case let .hand(card) = move.card {
-                    return card  
-                } else {
-                    return move.ability
+            var title = suggestedTitle ?? ""
+            if moves.allSatisfy({ $0.cardOrAbility == refMove.cardOrAbility }) {
+                title = refMove.cardOrAbility
+            }
+            
+            if moves.allSatisfy({ $0.args.isEmpty }) {
+                // no args
+                let children = moves.map { Node(title: $0.cardOrAbility, value: $0) }
+                return Node(title: title, children: children)
+                
+            } else {
+                // split by ability
+                let children = moves.uniqueAbilities().map { ability -> Node<GMove> in
+                    let childMoves = moves.filter { $0.ability == ability }
+                    
+                    // no args
+                    if childMoves.count == 1,
+                       childMoves[0].args.isEmpty {
+                        return Node(title: ability, value: childMoves[0])
+                    } else {
+                        let argKeys = childMoves[0].args.keys.sorted(by: { $0 < $1 })
+                        return childMoves.toNode(title: ability, groupedBy: argKeys)
+                    }
                 }
-            })
-            return MoveNode(name: "Play", value: .options(nodes))
+                return Node(title: title, children: children)
+            }
         }
     }
 }
 
 private extension Array where Element == GMove {
     
-    func mapNodes(named transform: (Element) -> String) -> [MoveNode] {
-        map { MoveNode(name: transform($0), value: .move($0)) }
+    func toNode(title: String, groupedBy keys: [PlayArg]) -> Node<GMove> {
+        guard keys.count > 1 else {
+            let children = self.map { Node(title: $0.argsString(keys), value: $0) }
+            return Node(title: title, children: children)
+        }
+        
+        var remainingKeys = keys
+        let firstKey = remainingKeys.remove(at: 0)
+        let children: [Node<GMove>] = self.uniqueValues(for: firstKey).map { value in
+            let childMoves = self.filter { $0.args[firstKey] == value }
+            return childMoves.toNode(title: value.joined(separator: ", "), groupedBy: remainingKeys)
+        }
+        return Node(title: title, children: children)
     }
     
-    func uniqueArgValues(for key: PlayArg) -> [[String]] {
+    func uniqueValues(for key: PlayArg) -> [[String]] {
         var result: [[String]] = []
         for move in self {
             if let value = move.args[key],
@@ -96,9 +88,28 @@ private extension Array where Element == GMove {
         }
         return result
     }
+    
+    func uniqueAbilities() -> [String] {
+        var result: [String] = []
+        for move in self {
+            if !result.contains(move.ability) {
+                result.append(move.ability)
+            }
+        }
+        return result
+    }
 }
 
 private extension GMove {
+    
+    var cardOrAbility: String {
+        if case let .hand(card) = card {
+            return card
+        } else {
+            return ability
+        }
+    }
+    
     func argsString(_ playArgs: [PlayArg] = PlayArg.allCases) -> String {
         playArgs.compactMap { args[$0] }.flatMap { $0 }.joined(separator: ", ")
     }

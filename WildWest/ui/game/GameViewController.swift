@@ -105,7 +105,7 @@ class GameViewController: UIViewController {
             return
         }
         
-        moveSelector.selectMove(among: moves, context: nil, cancelable: true) { [weak self] move in
+        moveSelector.selectMove(among: moves, title: nil, cancelable: true) { [weak self] move in
             self?.environment.engine.execute(move)
         }
     }
@@ -115,7 +115,7 @@ class GameViewController: UIViewController {
             return
         }
         
-        moveSelector.selectMove(among: moves, context: nil, cancelable: true) { [weak self] move in
+        moveSelector.selectMove(among: moves, title: nil, cancelable: true) { [weak self] move in
             self?.environment.engine.execute(move)
         }
     }
@@ -186,7 +186,7 @@ private extension GameViewController {
                 let move = assistantAI.bestMove(among: moves, in: state)
                 environment.engine.execute(move)
             } else {
-                moveSelector.selectMove(among: moves, context: hit.name, cancelable: false) { [weak self] move in
+                moveSelector.selectMove(among: moves, title: hit.name, cancelable: false) { [weak self] move in
                     self?.environment.engine.execute(move)
                 }
             }
@@ -302,7 +302,7 @@ extension GameViewController: UICollectionViewDelegate {
             return
         }
         
-        moveSelector.selectMove(among: moves, context: nil, cancelable: true) { [weak self] move in
+        moveSelector.selectMove(among: moves, title: nil, cancelable: true) { [weak self] move in
             self?.environment.engine.execute(move)
         }
     }
