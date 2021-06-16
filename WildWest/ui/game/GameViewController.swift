@@ -152,12 +152,13 @@ private extension GameViewController {
             userManager.setStatusIdle()
             analyticsManager.tagEventGameOver(state)
             
+        case let .run(move):
+            messages.append("\(mediaMatcher.emoji(on: event) ?? "") \(move.ability)")
+            messageTableView.reloadDataScrollingAtBottom()
+            
         default:
             break
         }
-        
-        messages.append("\(mediaMatcher.emoji(on: event) ?? "") \(event)")
-        messageTableView.reloadDataScrollingAtBottom()
         
         #if DEBUG
         print("\(mediaMatcher.emoji(on: event) ?? "") \(event)")
