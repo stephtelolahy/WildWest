@@ -26,11 +26,11 @@ class MoveSelectorTests: XCTestCase {
         let move1 = GMove("endTurn", actor: "p1")
         
         // When
-        let root = sut.select([move1])
+        let root = sut.select([move1], suggestedTitle: nil)
         
         // Assert
-        XCTAssertEqual(root.name, "endTurn")
-        XCTAssertEqual(root.value, .move(move1))
+        let expected = Node(title: "endTurn", value: move1)
+        XCTAssertEqual(root, expected)
     }
     
     func test_SelectSinglePlayCardMove() throws {
@@ -38,11 +38,11 @@ class MoveSelectorTests: XCTestCase {
         let move1 = GMove("equip", actor: "p1", card: .hand("mustang-8-♥️"))
         
         // When
-        let root = sut.select([move1])
+        let root = sut.select([move1], suggestedTitle: nil)
         
         // Assert
-        XCTAssertEqual(root.name, "mustang-8-♥️")
-        XCTAssertEqual(root.value, .move(move1))
+        let expected = Node(title: "mustang-8-♥️", value: move1)
+        XCTAssertEqual(root, expected)
     }
     
     // MARK: - Same ability Single arg
@@ -53,12 +53,13 @@ class MoveSelectorTests: XCTestCase {
         let move2 = GMove("startTurnDrawingPlayer", actor: "pX", args: [.target: ["p2"]])
         
         // When
-        let root = sut.select([move1, move2])
+        let root = sut.select([move1, move2], suggestedTitle: nil)
         
         // Assert
-        XCTAssertEqual(root.name, "startTurnDrawingPlayer")
-        XCTAssertEqual(root.value, .options([MoveNode(name: "p1", value: .move(move1)),
-                                             MoveNode(name: "p2", value: .move(move2))]))
+        let expected = Node(title: "startTurnDrawingPlayer",
+                            children: [Node(title: "p1", value: move1),
+                                       Node(title: "p2", value: move2)])
+        XCTAssertEqual(root, expected)
     }
     
     func test_SelectPlayCardMoveWithTarget() throws {
@@ -67,12 +68,13 @@ class MoveSelectorTests: XCTestCase {
         let move2 = GMove("bang", actor: "pX", card: .hand("bang-10-♠️"), args: [.target: ["p2"]])
         
         // When
-        let root = sut.select([move1, move2])
+        let root = sut.select([move1, move2], suggestedTitle: nil)
         
         // Assert
-        XCTAssertEqual(root.name, "bang-10-♠️")
-        XCTAssertEqual(root.value, .options([MoveNode(name: "p1", value: .move(move1)),
-                                             MoveNode(name: "p2", value: .move(move2))]))
+        let expected = Node(title: "bang-10-♠️",
+                            children: [Node(title: "p1", value: move1),
+                                       Node(title: "p2", value: move2)])
+        XCTAssertEqual(root, expected)
     }
     
     func test_SelectMoveWithRequiredStore() throws {
@@ -81,12 +83,13 @@ class MoveSelectorTests: XCTestCase {
         let move2 = GMove("drawStore", actor: "pX", args: [.requiredStore: ["c2", "c3"]])
         
         // When
-        let root = sut.select([move1, move2])
+        let root = sut.select([move1, move2], suggestedTitle: nil)
         
         // Assert
-        XCTAssertEqual(root.name, "drawStore")
-        XCTAssertEqual(root.value, .options([MoveNode(name: "c1, c3", value: .move(move1)),
-                                             MoveNode(name: "c2, c3", value: .move(move2))]))
+        let expected = Node(title: "drawStore",
+                            children: [Node(title: "c1, c3", value: move1),
+                                       Node(title: "c2, c3", value: move2)])
+        XCTAssertEqual(root, expected)
     }
     
     func test_SelectMoveWithRequiredDeck() throws {
@@ -95,12 +98,13 @@ class MoveSelectorTests: XCTestCase {
         let move2 = GMove("drawDeckChoosing2", actor: "pX", args: [.requiredDeck: ["c2", "c3"]])
         
         // When
-        let root = sut.select([move1, move2])
+        let root = sut.select([move1, move2], suggestedTitle: nil)
         
         // Assert
-        XCTAssertEqual(root.name, "drawDeckChoosing2")
-        XCTAssertEqual(root.value, .options([MoveNode(name: "c1, c3", value: .move(move1)),
-                                             MoveNode(name: "c2, c3", value: .move(move2))]))
+        let expected = Node(title: "drawDeckChoosing2",
+                            children: [Node(title: "c1, c3", value: move1),
+                                       Node(title: "c2, c3", value: move2)])
+        XCTAssertEqual(root, expected)
     }
     
     func test_SelectMoveWithRequiredHand() throws {
@@ -109,12 +113,13 @@ class MoveSelectorTests: XCTestCase {
         let move2 = GMove("whisky", actor: "pX", args: [.requiredHand: ["volcanic-10-♠️"]])
         
         // When
-        let root = sut.select([move1, move2])
+        let root = sut.select([move1, move2], suggestedTitle: nil)
         
         // Assert
-        XCTAssertEqual(root.name, "whisky")
-        XCTAssertEqual(root.value, .options([MoveNode(name: "remington-9-♠️", value: .move(move1)),
-                                             MoveNode(name: "volcanic-10-♠️", value: .move(move2))]))
+        let expected = Node(title: "whisky",
+                            children: [Node(title: "remington-9-♠️", value: move1),
+                                       Node(title: "volcanic-10-♠️", value: move2)])
+        XCTAssertEqual(root, expected)
     }
     
     // MARK: - Same ability Multiple args
@@ -127,23 +132,23 @@ class MoveSelectorTests: XCTestCase {
         let move22 = GMove("discardAnyInPlay", actor: "pX", args: [.target: ["p2"], .requiredInPlay: ["c22"]])
         
         // When
-        let root = sut.select([move11, move12, move21, move22])
+        let root = sut.select([move11, move12, move21, move22], suggestedTitle: nil)
         
         // Assert
-        XCTAssertEqual(root.name, "discardAnyInPlay")
-        guard case let .options(nodes) = root.value else {
-            XCTFail("Invalid value")
-            return
-        }
-        XCTAssertEqual(nodes.count, 2)
-        
-        XCTAssertEqual(nodes[0].name, "p1")
-        XCTAssertEqual(nodes[0].value, .options([MoveNode(name: "c11", value: .move(move11)),
-                                                 MoveNode(name: "c12", value: .move(move12))]))
-        
-        XCTAssertEqual(nodes[1].name, "p2")
-        XCTAssertEqual(nodes[1].value, .options([MoveNode(name: "c21", value: .move(move21)),
-                                                 MoveNode(name: "c22", value: .move(move22))]))
+        let expected = Node(title: "discardAnyInPlay",
+                            children: [
+                                Node(title: "p1",
+                                     children: [
+                                        Node(title: "c11", value: move11),
+                                        Node(title: "c12", value: move12)
+                                     ]),
+                                Node(title: "p2",
+                                     children: [
+                                        Node(title: "c21", value: move21),
+                                        Node(title: "c22", value: move22)
+                                     ])
+                            ])
+        XCTAssertEqual(root, expected)
     }
     
     func test_SelectMoveWithRequiredHandThenTarget() throws {
@@ -154,23 +159,23 @@ class MoveSelectorTests: XCTestCase {
         let move22 = GMove("springfield", actor: "pX", args: [.requiredHand: ["c2"], .target: ["p2"]])
         
         // When
-        let root = sut.select([move11, move12, move21, move22])
+        let root = sut.select([move11, move12, move21, move22], suggestedTitle: nil)
         
         // Assert
-        XCTAssertEqual(root.name, "springfield")
-        guard case let .options(nodes) = root.value else {
-            XCTFail("Invalid value")
-            return
-        }
-        XCTAssertEqual(nodes.count, 2)
-        
-        XCTAssertEqual(nodes[0].name, "c1")
-        XCTAssertEqual(nodes[0].value, .options([MoveNode(name: "p1", value: .move(move11)),
-                                                 MoveNode(name: "p2", value: .move(move12))]))
-        
-        XCTAssertEqual(nodes[1].name, "c2")
-        XCTAssertEqual(nodes[1].value, .options([MoveNode(name: "p1", value: .move(move21)),
-                                                 MoveNode(name: "p2", value: .move(move22))]))
+        let expected = Node(title: "springfield",
+                            children: [
+                                Node(title: "c1",
+                                     children: [
+                                        Node(title: "p1", value: move11),
+                                        Node(title: "p2", value: move12)
+                                     ]),
+                                Node(title: "c2",
+                                     children: [
+                                        Node(title: "p1", value: move21),
+                                        Node(title: "p2", value: move22)
+                                     ])
+                            ])
+        XCTAssertEqual(root, expected)
     }
     
     func test_SelectMoveWithRequiredHandThenTargetThenInPlayCard() throws {
@@ -181,23 +186,27 @@ class MoveSelectorTests: XCTestCase {
         let move22 = GMove("drawOtherInPlayRequire1Card", actor: "pX", args: [.requiredHand: ["c2"], .target: ["p1"], .requiredInPlay: ["c4"]])
         
         // When
-        let root = sut.select([move11, move12, move21, move22])
+        let root = sut.select([move11, move12, move21, move22], suggestedTitle: nil)
         
         // Assert
-        XCTAssertEqual(root.name, "drawOtherInPlayRequire1Card")
-        guard case let .options(nodes) = root.value else {
-            XCTFail("Invalid value")
-            return
-        }
-        XCTAssertEqual(nodes.count, 2)
-        
-        XCTAssertEqual(nodes[0].name, "c1")
-        XCTAssertEqual(nodes[0].value, .options([MoveNode(name: "p1, c3", value: .move(move11)),
-                                                 MoveNode(name: "p1, c4", value: .move(move12))]))
-        
-        XCTAssertEqual(nodes[1].name, "c2")
-        XCTAssertEqual(nodes[1].value, .options([MoveNode(name: "p1, c3", value: .move(move21)),
-                                                 MoveNode(name: "p1, c4", value: .move(move22))]))
+        let expected = Node(title: "drawOtherInPlayRequire1Card",
+                            children: [
+                                Node(title: "c1",
+                                     children: [
+                                        Node(title: "p1", children: [
+                                            Node(title: "c3", value: move11),
+                                            Node(title: "c4", value: move12)
+                                        ])
+                                     ]),
+                                Node(title: "c2",
+                                     children: [
+                                        Node(title: "p1", children: [
+                                            Node(title: "c3", value: move21),
+                                            Node(title: "c4", value: move22)
+                                        ])
+                                     ])
+                            ])
+        XCTAssertEqual(root, expected)
     }
     
     // MARK: - Different abilities
@@ -208,40 +217,138 @@ class MoveSelectorTests: XCTestCase {
         let move2 = GMove("startTurnDrawingDeck", actor: "pX")
         
         // When
-        let root = sut.select([move1, move2])
+        let root = sut.select([move1, move2], suggestedTitle: "Play")
         
         // Assert
-        XCTAssertEqual(root.value, .options([MoveNode(name: "startTurnDrawingDiscard", value: .move(move1)),
-                                             MoveNode(name: "startTurnDrawingDeck", value: .move(move2))]))
+        let expected = Node(title: "Play",
+                            children: [Node(title: "startTurnDrawingDiscard", value: move1),
+                                       Node(title: "startTurnDrawingDeck", value: move2)])
+        XCTAssertEqual(root, expected)
     }
     
-    func test_SelectMoveAmongDifferentAbilitiesWithCard() throws {
+    func test_SelectMoveAmongDifferentAbilitiesNoArgs() throws {
         // Given
         let move1 = GMove("looseHealth", actor: "pX")
         let move2 = GMove("missed", actor: "pX", card: .hand("missed-10-♣️"))
         let move3 = GMove("missed", actor: "pX", card: .hand("missed-7-♠️"))
         
         // When
-        let root = sut.select([move1, move2, move3])
+        let root = sut.select([move1, move2, move3], suggestedTitle: "bang")
         
         // Assert
-        XCTAssertEqual(root.value, .options([MoveNode(name: "looseHealth", value: .move(move1)),
-                                             MoveNode(name: "missed-10-♣️", value: .move(move2)),
-                                             MoveNode(name: "missed-7-♠️", value: .move(move3))]))
+        let expected = Node(title: "bang",
+                            children: [Node(title: "looseHealth", value: move1),
+                                       Node(title: "missed-10-♣️", value: move2),
+                                       Node(title: "missed-7-♠️", value: move3)])
+        XCTAssertEqual(root, expected)
     }
     
-    func test_SelectMoveAmongDifferentAbilitiesWithArgs() throws {
+    func test_SelectMoveAmongDifferentAbilitiesWithTarget() throws {
         // Given
         let move1 = GMove("startTurnDrawingDeck", actor: "pX")
         let move2 = GMove("startTurnDrawingPlayer", actor: "pX", args: [.target: ["p2"]])
         let move3 = GMove("startTurnDrawingPlayer", actor: "pX", args: [.target: ["p3"]])
         
         // When
-        let root = sut.select([move1, move2, move3])
+        let root = sut.select([move1, move2, move3], suggestedTitle: "startTurn")
         
         // Assert
-        XCTAssertEqual(root.value, .options([MoveNode(name: "startTurnDrawingDeck", value: .move(move1)),
-                                             MoveNode(name: "p2", value: .move(move2)),
-                                             MoveNode(name: "p3", value: .move(move3))]))
+        let expected = Node(title: "startTurn",
+                            children: [
+                                Node(title: "startTurnDrawingDeck", value: move1),
+                                Node(title: "startTurnDrawingPlayer",
+                                     children: [
+                                        Node(title: "p2", value: move2),
+                                        Node(title: "p3", value: move3)
+                                     ])
+                            ])
+        XCTAssertEqual(root, expected)
+    }
+    
+    func test_SelectMoveAmongSameCardButDifferentAbilities() throws {
+        // Given
+        let move11 = GMove("drawOtherHandAt1", actor: "pX", card: .hand("panic-10-♠️"), args: [.target: ["p1"]])
+        let move12 = GMove("drawOtherHandAt1", actor: "pX", card: .hand("panic-10-♠️"), args: [.target: ["p2"]])
+        let move21 = GMove("drawOtherInPlayAt1", actor: "pX", card: .hand("panic-10-♠️"), args: [.target: ["p1"], .requiredInPlay: ["c1"]])
+        let move22 = GMove("drawOtherInPlayAt1", actor: "pX", card: .hand("panic-10-♠️"), args: [.target: ["p2"], .requiredInPlay: ["c2"]])
+        
+        // When
+        let root = sut.select([move11, move12, move21, move22], suggestedTitle: nil)
+        
+        // Assert
+        let expected = Node(title: "panic-10-♠️",
+                            children: [
+                                Node(title: "drawOtherHandAt1",
+                                     children: [
+                                        Node(title: "p1", value: move11),
+                                        Node(title: "p2", value: move12)
+                                     ]),
+                                Node(title: "drawOtherInPlayAt1",
+                                     children: [
+                                        Node(title: "p1", children: [
+                                            Node(title: "c1", value: move21)
+                                        ]),
+                                        Node(title: "p2", children: [
+                                            Node(title: "c2", value: move22)
+                                        ])
+                                     ])
+                            ])
+        XCTAssertEqual(root, expected)
+    }
+    
+    func test_SelectMoveAmongSameCardButDifferentAbilities2() throws {
+        // Given
+        let move11 = GMove("drawOtherHandAt1", actor: "pX", card: .hand("panic-10-♠️"), args: [.target: ["p1"]])
+        let move12 = GMove("drawOtherHandAt1", actor: "pX", card: .hand("panic-10-♠️"), args: [.target: ["p2"]])
+        let move21 = GMove("drawOtherInPlayAt1", actor: "pX", card: .hand("panic-10-♠️"), args: [.target: ["p1"], .requiredInPlay: ["c1"]])
+        
+        // When
+        let root = sut.select([move11, move12, move21], suggestedTitle: nil)
+        
+        // Assert
+        let expected = Node(title: "panic-10-♠️",
+                            children: [
+                                Node(title: "drawOtherHandAt1",
+                                     children: [
+                                        Node(title: "p1", value: move11),
+                                        Node(title: "p2", value: move12)
+                                     ]),
+                                Node(title: "drawOtherInPlayAt1",
+                                     children: [
+                                        Node(title: "p1", children: [
+                                            Node(title: "c1", value: move21)
+                                        ])
+                                     ])
+                            ])
+        XCTAssertEqual(root, expected)
+    }
+    
+    func test_SelectMoveAmongSameCardButDifferentAbilities3() throws {
+        // Given
+        let move11 = GMove("drawOtherHandAt1", actor: "pX", card: .hand("panic-10-♠️"), args: [.target: ["p1"]])
+        let move21 = GMove("drawOtherInPlayAt1", actor: "pX", card: .hand("panic-10-♠️"), args: [.target: ["p1"], .requiredInPlay: ["c1"]])
+        let move22 = GMove("drawOtherInPlayAt1", actor: "pX", card: .hand("panic-10-♠️"), args: [.target: ["p2"], .requiredInPlay: ["c2"]])
+        
+        // When
+        let root = sut.select([move11, move21, move22], suggestedTitle: nil)
+        
+        // Assert
+        let expected = Node(title: "panic-10-♠️",
+                            children: [
+                                Node(title: "drawOtherHandAt1",
+                                     children: [
+                                        Node(title: "p1", value: move11)
+                                     ]),
+                                Node(title: "drawOtherInPlayAt1",
+                                     children: [
+                                        Node(title: "p1", children: [
+                                            Node(title: "c1", value: move21)
+                                        ]),
+                                        Node(title: "p2", children: [
+                                            Node(title: "c2", value: move22)
+                                        ])
+                                     ])
+                            ])
+        XCTAssertEqual(root, expected)
     }
 }

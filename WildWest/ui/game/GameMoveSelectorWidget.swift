@@ -19,33 +19,24 @@ class GameMoveSelectorWidget {
         self.viewController = viewController
     }
     
-    func selectMove(among moves: [GMove], context: String?, cancelable: Bool, completion: @escaping (GMove) -> Void) {
-        var root = selector.select(moves)
-        
-        if let context = context {
-            switch root.value {
-            case let .options(nodes):
-                root = MoveNode(name: context, value: .options(nodes))
-                
-            case let .move(move):
-                root = MoveNode(name: context, value: .options([MoveNode(name: move.ability, value: .move(move))]))
-            }
-        }
-        
+    func selectMove(among moves: [GMove], title: String?, cancelable: Bool, completion: @escaping (GMove) -> Void) {
+        let root = selector.select(moves, suggestedTitle: title)
         select(root, cancelable: cancelable, completion: completion)
     }
 }
 
 private extension GameMoveSelectorWidget {
     
-    func select(_ node: MoveNode, cancelable: Bool, completion: @escaping (GMove) -> Void) {
-        switch node.value {
-        case let .move(move):
+    func select(_ node: Node<GMove>, cancelable: Bool, completion: @escaping (GMove) -> Void) {
+        
+        if let move = node.value {
             completion(move)
-            
-        case let .options(children):
-            let alert = UIAlertController(title: node.name,
-                                          options: children.map { $0.name },
+            return
+        }
+        
+        if let children = node.children {
+            let alert = UIAlertController(title: node.title,
+                                          options: children.map { $0.title },
                                           cancelable: cancelable) { [weak self] index in
                 self?.select(children[index], cancelable: cancelable, completion: completion)
             }
