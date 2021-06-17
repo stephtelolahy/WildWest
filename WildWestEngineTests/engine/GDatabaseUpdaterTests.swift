@@ -22,7 +22,7 @@ class GDatabaseUpdaterTests: XCTestCase {
     
     // MARK: - play, setTurn, setPhase
     
-    func test_Run() {
+    func test_AddPlayedAbility_IfRunningMove() {
         // Given
         let mockState = MockStateProtocol()
             .withDefault()
@@ -35,6 +35,21 @@ class GDatabaseUpdaterTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(state.played, ["a1", "a2"])
+    }
+    
+    func test_AddToMoveHistory_IfRunningMove() {
+        // Given
+        let mockState = MockStateProtocol()
+            .withDefault()
+        let state = GState(mockState)
+        let move = GMove("a1", actor: "p1")
+        let event = GEvent.run(move: move)
+        
+        // When
+        sut.execute(event, in: state)
+        
+        // Assert
+        XCTAssertEqual(state.moveHistory, [move])
     }
     
     func test_setTurn() {

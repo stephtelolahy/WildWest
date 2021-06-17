@@ -80,14 +80,16 @@ class MoveEvaluatorTests: XCTestCase {
         let mockPlayer2 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p2")
+        let moveHistory = GMove("a1", actor: "p1")
         let mockState = MockStateProtocol()
             .players(are: mockPlayer1, mockPlayer2)
+            .moveHistory(are: moveHistory)
         let move = GMove("a1", actor: "p1", args: [.target: ["p2"]])
         stub(mockAbilityEvaluator) { mock in
             when(mock.evaluate(equal(to: move))).thenReturn(3)
         }
         stub(mockRoleEstimator) { mock in
-            when(mock.estimatedRole(for: "p2")).thenReturn(.outlaw)
+            when(mock.estimatedRole(for: "p2", history: any())).thenReturn(.outlaw)
         }
         stub(mockRoleStrategy) { mock in
             when(mock).relationship(of: equal(to: .outlaw), to: equal(to: .outlaw), in: state(equalTo: mockState)).thenReturn(-1)
@@ -98,7 +100,7 @@ class MoveEvaluatorTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(value, -3)
-        verify(mockRoleEstimator).estimatedRole(for: "p2")
+        verify(mockRoleEstimator).estimatedRole(for: "p2", history: equal(to: [moveHistory]))
     }
     
     func test_EvaluateMoveTargetingNoRole() {
@@ -111,13 +113,14 @@ class MoveEvaluatorTests: XCTestCase {
             .withDefault()
             .identified(by: "p2")
         let mockState = MockStateProtocol()
+            .withDefault()
             .players(are: mockPlayer1, mockPlayer2)
         let move = GMove("a1", actor: "p1", args: [.target: ["p2"]])
         stub(mockAbilityEvaluator) { mock in
             when(mock.evaluate(equal(to: move))).thenReturn(3)
         }
         stub(mockRoleEstimator) { mock in
-            when(mock.estimatedRole(for: "p2")).thenReturn(nil)
+            when(mock.estimatedRole(for: "p2", history: any())).thenReturn(nil)
         }
         
         // When

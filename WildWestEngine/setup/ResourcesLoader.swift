@@ -27,36 +27,27 @@ public class ResourcesLoader: ResourcesLoaderProtocol {
     }
     
     public func loadCards() -> [Card] {
-        if let collection = self.collection {
-            return jsonReader.load("\(collection.rawValue)-cards")
-        } else {
-            return CardCollection.allCases
-                .map { collection -> [Card] in
-                    jsonReader.load("\(collection.rawValue)-cards")
-                }
-                .flatMap { $0 }
-        }
+        loadResourceArray(named: "cards")
     }
     
     public func loadDeck() -> [DeckCard] {
-        if let collection = self.collection {
-            return jsonReader.load("\(collection.rawValue)-deck")
-        } else {
-            return CardCollection.allCases
-                .map { collection -> [DeckCard] in
-                    jsonReader.load("\(collection.rawValue)-deck")
-                }
-                .flatMap { $0 }
-        }
+        loadResourceArray(named: "deck")
     }
     
     public func loadAbilities() -> [Ability] {
+        loadResourceArray(named: "abilities")
+    }
+}
+
+private extension ResourcesLoader {
+    
+    func loadResourceArray<T: Decodable>(named name: String) -> [T] {
         if let collection = self.collection {
-            return jsonReader.load("\(collection.rawValue)-abilities")
+            return jsonReader.load("\(collection.rawValue)-\(name)")
         } else {
             return CardCollection.allCases
-                .map { collection -> [Ability] in
-                    jsonReader.load("\(collection.rawValue)-abilities")
+                .map { collection -> [T] in
+                    jsonReader.load("\(collection.rawValue)-\(name)")
                 }
                 .flatMap { $0 }
         }

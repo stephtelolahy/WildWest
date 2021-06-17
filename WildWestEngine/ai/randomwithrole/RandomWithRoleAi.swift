@@ -1,15 +1,12 @@
 //
-//  AI.swift
-//  CardGameEngine
+//  RandomWithRoleAi.swift
+//  WildWestEngine
 //
-//  Created by Hugues Stephano Telolahy on 06/11/2020.
+//  Created by TELOLAHY Hugues Stéphano on 17/06/2021.
+//  Copyright © 2021 creativeGames. All rights reserved.
 //
 
-public protocol AIProtocol {
-    func bestMove(among moves: [GMove], in state: StateProtocol) -> GMove
-}
-
-public class GAI: AIProtocol {
+public class RandomWithRoleAi: AIProtocol {
     
     private let moveEvaluator: MoveEvaluatorProtocol
     

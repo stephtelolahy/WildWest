@@ -14,10 +14,10 @@ import Cuckoo
 class GTimerTests: XCTestCase {
 
     private var sut: GTimerProtocol!
-    private var mockMatcher: MockDurationMatcherProtocol!
+    private var mockMatcher: MockEventDurationProtocol!
     
     override func setUp() {
-        mockMatcher = MockDurationMatcherProtocol()
+        mockMatcher = MockEventDurationProtocol()
         sut = GTimer(matcher: mockMatcher)
     }
     

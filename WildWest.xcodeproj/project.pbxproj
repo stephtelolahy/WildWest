@@ -10,6 +10,7 @@
 		11A4260096983812EE5C92DA /* Pods_WildWest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C68CDDA530FC48B097AEAB55 /* Pods_WildWest.framework */; };
 		2622F2BB267A3CC400B75CA1 /* MCTS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2622F2BA267A3CC400B75CA1 /* MCTS.swift */; };
 		2622F2BD267A3CE800B75CA1 /* MCTSAi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2622F2BC267A3CE800B75CA1 /* MCTSAi.swift */; };
+		26CBA70E267BD3A600EA1227 /* RandomWithRoleAi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CBA70D267BD3A600EA1227 /* RandomWithRoleAi.swift */; };
 		26F88D872672B51700B82AF9 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F88D862672B51700B82AF9 /* Node.swift */; };
 		3300B02A264E3C48002F4776 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3300B029264E3C48002F4776 /* GeneratedMocks.swift */; };
 		3300B0A8264E4236002F4776 /* ParameterMatcherExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3300B0A7264E4236002F4776 /* ParameterMatcherExtension.swift */; };
@@ -89,7 +90,6 @@
 		3358334425BC2585001BE4D8 /* AIAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358331825BC2585001BE4D8 /* AIAgent.swift */; };
 		3358334525BC2585001BE4D8 /* AbilityEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358331925BC2585001BE4D8 /* AbilityEvaluator.swift */; };
 		3358334625BC2585001BE4D8 /* RoleEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358331A25BC2585001BE4D8 /* RoleEstimator.swift */; };
-		3358334725BC2585001BE4D8 /* AI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358331B25BC2585001BE4D8 /* AI.swift */; };
 		3358334825BC2585001BE4D8 /* RoleStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358331C25BC2585001BE4D8 /* RoleStrategy.swift */; };
 		3358334925BC2585001BE4D8 /* GDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358331E25BC2585001BE4D8 /* GDatabase.swift */; };
 		3358334A25BC2585001BE4D8 /* GEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358331F25BC2585001BE4D8 /* GEngine.swift */; };
@@ -206,7 +206,7 @@
 		3392B1F225BC377100214393 /* AbilityEvaluatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3392B1AA25BC377100214393 /* AbilityEvaluatorTests.swift */; };
 		3392B1F325BC377100214393 /* RoleStrategyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3392B1AB25BC377100214393 /* RoleStrategyTests.swift */; };
 		3392B1F425BC377100214393 /* RoleEstimatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3392B1AC25BC377100214393 /* RoleEstimatorTests.swift */; };
-		3392B1F525BC377100214393 /* AITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3392B1AD25BC377100214393 /* AITests.swift */; };
+		3392B1F525BC377100214393 /* RandomWithRoleAiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3392B1AD25BC377100214393 /* RandomWithRoleAiTests.swift */; };
 		3392B1F625BC377100214393 /* MoveEvaluatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3392B1AE25BC377100214393 /* MoveEvaluatorTests.swift */; };
 		3392B1F725BC377100214393 /* MockStateProtocol+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3392B1B025BC377100214393 /* MockStateProtocol+Stub.swift */; };
 		3392B1F825BC377100214393 /* MatcherExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3392B1B125BC377100214393 /* MatcherExtension.swift */; };
@@ -375,6 +375,7 @@
 		213EF09E4753EE8978B47280 /* Pods-WildWest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.release.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.release.xcconfig"; sourceTree = "<group>"; };
 		2622F2BA267A3CC400B75CA1 /* MCTS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCTS.swift; sourceTree = "<group>"; };
 		2622F2BC267A3CE800B75CA1 /* MCTSAi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCTSAi.swift; sourceTree = "<group>"; };
+		26CBA70D267BD3A600EA1227 /* RandomWithRoleAi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomWithRoleAi.swift; sourceTree = "<group>"; };
 		26F88D862672B51700B82AF9 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		302397755E696ECE7C3EE1C2 /* Pods-WildWest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.debug.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.debug.xcconfig"; sourceTree = "<group>"; };
 		3300B029264E3C48002F4776 /* GeneratedMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
@@ -447,7 +448,6 @@
 		3358331825BC2585001BE4D8 /* AIAgent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AIAgent.swift; sourceTree = "<group>"; };
 		3358331925BC2585001BE4D8 /* AbilityEvaluator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbilityEvaluator.swift; sourceTree = "<group>"; };
 		3358331A25BC2585001BE4D8 /* RoleEstimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoleEstimator.swift; sourceTree = "<group>"; };
-		3358331B25BC2585001BE4D8 /* AI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AI.swift; sourceTree = "<group>"; };
 		3358331C25BC2585001BE4D8 /* RoleStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoleStrategy.swift; sourceTree = "<group>"; };
 		3358331E25BC2585001BE4D8 /* GDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GDatabase.swift; sourceTree = "<group>"; };
 		3358331F25BC2585001BE4D8 /* GEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GEngine.swift; sourceTree = "<group>"; };
@@ -558,7 +558,7 @@
 		3392B1AA25BC377100214393 /* AbilityEvaluatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbilityEvaluatorTests.swift; sourceTree = "<group>"; };
 		3392B1AB25BC377100214393 /* RoleStrategyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoleStrategyTests.swift; sourceTree = "<group>"; };
 		3392B1AC25BC377100214393 /* RoleEstimatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoleEstimatorTests.swift; sourceTree = "<group>"; };
-		3392B1AD25BC377100214393 /* AITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AITests.swift; sourceTree = "<group>"; };
+		3392B1AD25BC377100214393 /* RandomWithRoleAiTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomWithRoleAiTests.swift; sourceTree = "<group>"; };
 		3392B1AE25BC377100214393 /* MoveEvaluatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveEvaluatorTests.swift; sourceTree = "<group>"; };
 		3392B1B025BC377100214393 /* MockStateProtocol+Stub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MockStateProtocol+Stub.swift"; sourceTree = "<group>"; };
 		3392B1B125BC377100214393 /* MatcherExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatcherExtension.swift; sourceTree = "<group>"; };
@@ -751,6 +751,7 @@
 		2622F2BE267A3EE600B75CA1 /* randomwithrole */ = {
 			isa = PBXGroup;
 			children = (
+				26CBA70D267BD3A600EA1227 /* RandomWithRoleAi.swift */,
 				3358331725BC2585001BE4D8 /* MoveEvaluator.swift */,
 				3358331925BC2585001BE4D8 /* AbilityEvaluator.swift */,
 				3358331A25BC2585001BE4D8 /* RoleEstimator.swift */,
@@ -974,7 +975,6 @@
 			isa = PBXGroup;
 			children = (
 				3358331825BC2585001BE4D8 /* AIAgent.swift */,
-				3358331B25BC2585001BE4D8 /* AI.swift */,
 				2622F2BE267A3EE600B75CA1 /* randomwithrole */,
 				2622F2B9267A3CA900B75CA1 /* mcts */,
 			);
@@ -1295,7 +1295,7 @@
 				3392B1AA25BC377100214393 /* AbilityEvaluatorTests.swift */,
 				3392B1AB25BC377100214393 /* RoleStrategyTests.swift */,
 				3392B1AC25BC377100214393 /* RoleEstimatorTests.swift */,
-				3392B1AD25BC377100214393 /* AITests.swift */,
+				3392B1AD25BC377100214393 /* RandomWithRoleAiTests.swift */,
 				3392B1AE25BC377100214393 /* MoveEvaluatorTests.swift */,
 			);
 			path = ai;
@@ -1836,7 +1836,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/WildWestEngineTests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/WildWestEngine\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"WildWestEngine\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/core/State.swift\" \\\n\"${INPUT_DIR}/engine/Database.swift\" \\\n\"${INPUT_DIR}/engine/GDatabaseUpdater.swift\" \\\n\"${INPUT_DIR}/engine/Engine.swift\" \\\n\"${INPUT_DIR}/engine/GLoop.swift\" \\\n\"${INPUT_DIR}/engine/GEventQueue.swift\" \\\n\"${INPUT_DIR}/engine/GTimer.swift\" \\\n\"${INPUT_DIR}/matcher/AbilityMatcher.swift\" \\\n\"${INPUT_DIR}/setup/Setup.swift\" \\\n\"${INPUT_DIR}/setup/ResourcesLoader.swift\" \\\n\"${INPUT_DIR}/ai/AI.swift\" \\\n\"${INPUT_DIR}/ai/AIAgent.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/MoveEvaluator.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/RoleEstimator.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/RoleStrategy.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/AbilityEvaluator.swift\"\n";
+			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/WildWestEngineTests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/WildWestEngine\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"WildWestEngine\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/core/State.swift\" \\\n\"${INPUT_DIR}/engine/Database.swift\" \\\n\"${INPUT_DIR}/engine/GDatabaseUpdater.swift\" \\\n\"${INPUT_DIR}/engine/Engine.swift\" \\\n\"${INPUT_DIR}/engine/GLoop.swift\" \\\n\"${INPUT_DIR}/engine/GEventQueue.swift\" \\\n\"${INPUT_DIR}/engine/GTimer.swift\" \\\n\"${INPUT_DIR}/matcher/AbilityMatcher.swift\" \\\n\"${INPUT_DIR}/setup/Setup.swift\" \\\n\"${INPUT_DIR}/setup/ResourcesLoader.swift\" \\\n\"${INPUT_DIR}/ai/AIAgent.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/RandomWithRoleAi.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/MoveEvaluator.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/RoleEstimator.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/RoleStrategy.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/AbilityEvaluator.swift\"\n";
 		};
 		3DE5D489E0D81C17891F4FD5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2076,13 +2076,13 @@
 				33272F7D26592793005C9246 /* DrawDeck.swift in Sources */,
 				33AAE02726597AA700A067E3 /* CardArgument.swift in Sources */,
 				33176D2E26593D4A000A6FBF /* PlayReqFamily.swift in Sources */,
-				3358334725BC2585001BE4D8 /* AI.swift in Sources */,
 				33AAE051265A2FCF00A067E3 /* IsHitName.swift in Sources */,
 				3358333025BC2585001BE4D8 /* GEvent.swift in Sources */,
 				3358334825BC2585001BE4D8 /* RoleStrategy.swift in Sources */,
 				3358332F25BC2585001BE4D8 /* State.swift in Sources */,
 				3358333125BC2585001BE4D8 /* GHit.swift in Sources */,
 				33FBF902265B137A00D7C6AD /* OnLooseHealth.swift in Sources */,
+				26CBA70E267BD3A600EA1227 /* RandomWithRoleAi.swift in Sources */,
 				331239E42659766C006C1EC1 /* IsPlayersCountMin.swift in Sources */,
 				3358334925BC2585001BE4D8 /* GDatabase.swift in Sources */,
 				33AAE03F26598D7700A067E3 /* DrawHand.swift in Sources */,
@@ -2161,7 +2161,7 @@
 				3392B1CA25BC377100214393 /* DrawsAllCardsFromEliminatedPlayerTests.swift in Sources */,
 				3392B1C625BC377100214393 /* GDatabaseUpdaterTests.swift in Sources */,
 				3392B1CD25BC377100214393 /* StartTurnDrawing1ExtraCardIfRedSuitTests.swift in Sources */,
-				3392B1F525BC377100214393 /* AITests.swift in Sources */,
+				3392B1F525BC377100214393 /* RandomWithRoleAiTests.swift in Sources */,
 				337FC41F265D6A0C00B2AF2A /* TequilaTests.swift in Sources */,
 				3392B1BA25BC377100214393 /* MoveSelectorTests.swift in Sources */,
 				3392B1BE25BC377100214393 /* PlayMissedAsBangTests.swift in Sources */,

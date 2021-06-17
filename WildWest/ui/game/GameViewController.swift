@@ -60,7 +60,7 @@ class GameViewController: UIViewController {
         let roleEstimator = RoleEstimator(sheriff: sheriff, abilityEvaluator: abilityEvaluator)
         let roleStrategy = RoleStrategy()
         let moveEvaluator = MoveEvaluator(abilityEvaluator: abilityEvaluator, roleEstimator: roleEstimator, roleStrategy: roleStrategy)
-        return GAI(moveEvaluator: moveEvaluator)
+        return RandomWithRoleAi(moveEvaluator: moveEvaluator)
     }()
     
     // MARK: Lifecycle

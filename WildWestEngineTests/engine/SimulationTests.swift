@@ -42,7 +42,7 @@ class SimulationTests: XCTestCase {
         // Assert
         wait(for: [expectation], timeout: 10.0)
     }
-    /*
+    
     func test_Simulate6PlayersGame() {
         // Given
         // When
@@ -78,7 +78,7 @@ class SimulationTests: XCTestCase {
         // Assert
         wait(for: [expectation], timeout: 10.0)
     }
-    */
+    
     private func runSimulation(playersCount: Int, completed: @escaping () -> Void) {
         let jsonReader = JsonReader(bundle: Bundle.resourcesBundle)
         let resourcesLoader = ResourcesLoader(jsonReader: jsonReader)
@@ -112,8 +112,8 @@ class SimulationTests: XCTestCase {
             let roleEstimator = RoleEstimator(sheriff: sheriff, abilityEvaluator: abilityEvaluator)
             let roleStrategy = RoleStrategy()
             let moveEvaluator = MoveEvaluator(abilityEvaluator: abilityEvaluator, roleEstimator: roleEstimator, roleStrategy: roleStrategy)
-            let ai = GAI(moveEvaluator: moveEvaluator)
-            return AIAgent(player: player, engine: engine, ai: ai, roleEstimator: roleEstimator)
+            let ai = RandomWithRoleAi(moveEvaluator: moveEvaluator)
+            return AIAgent(player: player, engine: engine, ai: ai)
         }
         
         let segmenter = MoveSegmenter()
@@ -158,7 +158,7 @@ class SimulationTests: XCTestCase {
     }
 }
 
-private class LinearDurationMatcher: DurationMatcherProtocol {
+private class LinearDurationMatcher: EventDurationProtocol {
     func waitDuration(_ event: GEvent) -> TimeInterval {
         0
     }

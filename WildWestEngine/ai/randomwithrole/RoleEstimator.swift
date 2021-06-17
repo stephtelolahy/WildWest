@@ -6,30 +6,21 @@
 //
 
 public protocol RoleEstimatorProtocol {
-    func score(for player: String) -> Int
-    func estimatedRole(for player: String) -> Role?
-    func update(on move: GMove)
+    func estimatedRole(for player: String, history: [GMove]) -> Role?
 }
 
 public class RoleEstimator: RoleEstimatorProtocol {
     
     private let sheriff: String
-    private var playerScores: [String: Int]
     private let abilityEvaluator: AbilityEvaluatorProtocol
     
-    public init(sheriff: String, 
-                playerScores: [String: Int] = [:],
-                abilityEvaluator: AbilityEvaluatorProtocol) {
+    public init(sheriff: String, abilityEvaluator: AbilityEvaluatorProtocol) {
         self.sheriff = sheriff
-        self.playerScores = playerScores
         self.abilityEvaluator = abilityEvaluator
     }
     
-    public func score(for player: String) -> Int {
-        playerScores[player] ?? 0
-    }
-    
-    public func estimatedRole(for player: String) -> Role? {
+    public func estimatedRole(for player: String, history: [GMove]) -> Role? {
+        let playerScores = buildScores(history: history)
         guard let score = playerScores[player] else {
             return nil
         }
@@ -41,16 +32,21 @@ public class RoleEstimator: RoleEstimatorProtocol {
         } else {
             return nil
         }
+        
     }
     
-    public func update(on move: GMove) {
-        guard let targets = move.args[.target],
-              targets.contains(sheriff) else {
-            return
+    private func buildScores(history: [GMove]) -> [String: Int] {
+        var playerScores: [String: Int] = [:]
+        for move in history {
+            guard let targets = move.args[.target],
+                  targets.contains(sheriff) else {
+                continue
+            }
+            
+            let score = abilityEvaluator.evaluate(move)
+            playerScores.append(score, forKey: move.actor)
         }
-        
-        let score = abilityEvaluator.evaluate(move)
-        playerScores.append(score, forKey: move.actor)
+        return playerScores
     }
 }
 

@@ -16,6 +16,7 @@ public protocol StateStoredProtocol {
     var store: [CardProtocol] { get }   // choosable cards collection, may be hidden to some players
     var hits: [HitProtocol] { get }     // blocking challenge to be resolved before continuing turn
     var played: [String] { get }        // played abilities during current turn
+    var moveHistory: [GMove] { get }    // move history
 }
 
 public protocol StateComputedProtocol {

@@ -8,7 +8,7 @@
 
 import WildWestEngine
 
-protocol AnimationEventMatcherProtocol: DurationMatcherProtocol {
+protocol AnimationEventMatcherProtocol: EventDurationProtocol {
     func animation(on event: GEvent) -> EventAnimation?
 }
 

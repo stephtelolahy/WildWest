@@ -1,100 +1,6 @@
 import Cuckoo
 @testable import WildWestEngine
 
-
-public class MockAIProtocol: AIProtocol, Cuckoo.ProtocolMock {
-    
-    public typealias MocksType = AIProtocol
-    
-    public typealias Stubbing = __StubbingProxy_AIProtocol
-    public typealias Verification = __VerificationProxy_AIProtocol
-
-    public let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
-
-    
-    private var __defaultImplStub: AIProtocol?
-
-    public func enableDefaultImplementation(_ stub: AIProtocol) {
-        __defaultImplStub = stub
-        cuckoo_manager.enableDefaultStubImplementation()
-    }
-    
-
-    
-
-    
-
-    
-    
-    
-    public func bestMove(among moves: [GMove], in state: StateProtocol) -> GMove {
-        
-    return cuckoo_manager.call("bestMove(among: [GMove], in: StateProtocol) -> GMove",
-            parameters: (moves, state),
-            escapingParameters: (moves, state),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.bestMove(among: moves, in: state))
-        
-    }
-    
-
-	public struct __StubbingProxy_AIProtocol: Cuckoo.StubbingProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	
-	    public init(manager: Cuckoo.MockManager) {
-	        self.cuckoo_manager = manager
-	    }
-	    
-	    
-	    func bestMove<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(among moves: M1, in state: M2) -> Cuckoo.ProtocolStubFunction<([GMove], StateProtocol), GMove> where M1.MatchedType == [GMove], M2.MatchedType == StateProtocol {
-	        let matchers: [Cuckoo.ParameterMatcher<([GMove], StateProtocol)>] = [wrap(matchable: moves) { $0.0 }, wrap(matchable: state) { $0.1 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockAIProtocol.self, method: "bestMove(among: [GMove], in: StateProtocol) -> GMove", parameterMatchers: matchers))
-	    }
-	    
-	}
-
-	public struct __VerificationProxy_AIProtocol: Cuckoo.VerificationProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	    private let callMatcher: Cuckoo.CallMatcher
-	    private let sourceLocation: Cuckoo.SourceLocation
-	
-	    public init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
-	        self.cuckoo_manager = manager
-	        self.callMatcher = callMatcher
-	        self.sourceLocation = sourceLocation
-	    }
-	
-	    
-	
-	    
-	    @discardableResult
-	    func bestMove<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(among moves: M1, in state: M2) -> Cuckoo.__DoNotUse<([GMove], StateProtocol), GMove> where M1.MatchedType == [GMove], M2.MatchedType == StateProtocol {
-	        let matchers: [Cuckoo.ParameterMatcher<([GMove], StateProtocol)>] = [wrap(matchable: moves) { $0.0 }, wrap(matchable: state) { $0.1 }]
-	        return cuckoo_manager.verify("bestMove(among: [GMove], in: StateProtocol) -> GMove", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	}
-}
-
-public class AIProtocolStub: AIProtocol {
-    
-
-    
-
-    
-    public func bestMove(among moves: [GMove], in state: StateProtocol) -> GMove  {
-        return DefaultValueRegistry.defaultValue(for: (GMove).self)
-    }
-    
-}
-
-
-import Cuckoo
-@testable import WildWestEngine
-
 import RxSwift
 
 
@@ -183,6 +89,97 @@ public class AIAgentProtocolStub: AIAgentProtocol {
     
     public func observe(_ database: RestrictedDatabaseProtocol)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+}
+
+
+
+public class MockAIProtocol: AIProtocol, Cuckoo.ProtocolMock {
+    
+    public typealias MocksType = AIProtocol
+    
+    public typealias Stubbing = __StubbingProxy_AIProtocol
+    public typealias Verification = __VerificationProxy_AIProtocol
+
+    public let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: AIProtocol?
+
+    public func enableDefaultImplementation(_ stub: AIProtocol) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+
+    
+
+    
+    
+    
+    public func bestMove(among moves: [GMove], in state: StateProtocol) -> GMove {
+        
+    return cuckoo_manager.call("bestMove(among: [GMove], in: StateProtocol) -> GMove",
+            parameters: (moves, state),
+            escapingParameters: (moves, state),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.bestMove(among: moves, in: state))
+        
+    }
+    
+
+	public struct __StubbingProxy_AIProtocol: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	    public init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    func bestMove<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(among moves: M1, in state: M2) -> Cuckoo.ProtocolStubFunction<([GMove], StateProtocol), GMove> where M1.MatchedType == [GMove], M2.MatchedType == StateProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<([GMove], StateProtocol)>] = [wrap(matchable: moves) { $0.0 }, wrap(matchable: state) { $0.1 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockAIProtocol.self, method: "bestMove(among: [GMove], in: StateProtocol) -> GMove", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	public struct __VerificationProxy_AIProtocol: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	    public init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	
+	    
+	    @discardableResult
+	    func bestMove<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(among moves: M1, in state: M2) -> Cuckoo.__DoNotUse<([GMove], StateProtocol), GMove> where M1.MatchedType == [GMove], M2.MatchedType == StateProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<([GMove], StateProtocol)>] = [wrap(matchable: moves) { $0.0 }, wrap(matchable: state) { $0.1 }]
+	        return cuckoo_manager.verify("bestMove(among: [GMove], in: StateProtocol) -> GMove", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+public class AIProtocolStub: AIProtocol {
+    
+
+    
+
+    
+    public func bestMove(among moves: [GMove], in state: StateProtocol) -> GMove  {
+        return DefaultValueRegistry.defaultValue(for: (GMove).self)
     }
     
 }
@@ -405,46 +402,16 @@ public class MockRoleEstimatorProtocol: RoleEstimatorProtocol, Cuckoo.ProtocolMo
     
     
     
-    public func score(for player: String) -> Int {
+    public func estimatedRole(for player: String, history: [GMove]) -> Role? {
         
-    return cuckoo_manager.call("score(for: String) -> Int",
-            parameters: (player),
-            escapingParameters: (player),
+    return cuckoo_manager.call("estimatedRole(for: String, history: [GMove]) -> Role?",
+            parameters: (player, history),
+            escapingParameters: (player, history),
             superclassCall:
                 
                 Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
-            defaultCall: __defaultImplStub!.score(for: player))
-        
-    }
-    
-    
-    
-    public func estimatedRole(for player: String) -> Role? {
-        
-    return cuckoo_manager.call("estimatedRole(for: String) -> Role?",
-            parameters: (player),
-            escapingParameters: (player),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.estimatedRole(for: player))
-        
-    }
-    
-    
-    
-    public func update(on move: GMove)  {
-        
-    return cuckoo_manager.call("update(on: GMove)",
-            parameters: (move),
-            escapingParameters: (move),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.update(on: move))
+            defaultCall: __defaultImplStub!.estimatedRole(for: player, history: history))
         
     }
     
@@ -457,19 +424,9 @@ public class MockRoleEstimatorProtocol: RoleEstimatorProtocol, Cuckoo.ProtocolMo
 	    }
 	    
 	    
-	    func score<M1: Cuckoo.Matchable>(for player: M1) -> Cuckoo.ProtocolStubFunction<(String), Int> where M1.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: player) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockRoleEstimatorProtocol.self, method: "score(for: String) -> Int", parameterMatchers: matchers))
-	    }
-	    
-	    func estimatedRole<M1: Cuckoo.Matchable>(for player: M1) -> Cuckoo.ProtocolStubFunction<(String), Role?> where M1.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: player) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockRoleEstimatorProtocol.self, method: "estimatedRole(for: String) -> Role?", parameterMatchers: matchers))
-	    }
-	    
-	    func update<M1: Cuckoo.Matchable>(on move: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(GMove)> where M1.MatchedType == GMove {
-	        let matchers: [Cuckoo.ParameterMatcher<(GMove)>] = [wrap(matchable: move) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockRoleEstimatorProtocol.self, method: "update(on: GMove)", parameterMatchers: matchers))
+	    func estimatedRole<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(for player: M1, history: M2) -> Cuckoo.ProtocolStubFunction<(String, [GMove]), Role?> where M1.MatchedType == String, M2.MatchedType == [GMove] {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, [GMove])>] = [wrap(matchable: player) { $0.0 }, wrap(matchable: history) { $0.1 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockRoleEstimatorProtocol.self, method: "estimatedRole(for: String, history: [GMove]) -> Role?", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -489,21 +446,9 @@ public class MockRoleEstimatorProtocol: RoleEstimatorProtocol, Cuckoo.ProtocolMo
 	
 	    
 	    @discardableResult
-	    func score<M1: Cuckoo.Matchable>(for player: M1) -> Cuckoo.__DoNotUse<(String), Int> where M1.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: player) { $0 }]
-	        return cuckoo_manager.verify("score(for: String) -> Int", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
-	    func estimatedRole<M1: Cuckoo.Matchable>(for player: M1) -> Cuckoo.__DoNotUse<(String), Role?> where M1.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: player) { $0 }]
-	        return cuckoo_manager.verify("estimatedRole(for: String) -> Role?", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
-	    func update<M1: Cuckoo.Matchable>(on move: M1) -> Cuckoo.__DoNotUse<(GMove), Void> where M1.MatchedType == GMove {
-	        let matchers: [Cuckoo.ParameterMatcher<(GMove)>] = [wrap(matchable: move) { $0 }]
-	        return cuckoo_manager.verify("update(on: GMove)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    func estimatedRole<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(for player: M1, history: M2) -> Cuckoo.__DoNotUse<(String, [GMove]), Role?> where M1.MatchedType == String, M2.MatchedType == [GMove] {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, [GMove])>] = [wrap(matchable: player) { $0.0 }, wrap(matchable: history) { $0.1 }]
+	        return cuckoo_manager.verify("estimatedRole(for: String, history: [GMove]) -> Role?", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -515,16 +460,8 @@ public class RoleEstimatorProtocolStub: RoleEstimatorProtocol {
     
 
     
-    public func score(for player: String) -> Int  {
-        return DefaultValueRegistry.defaultValue(for: (Int).self)
-    }
-    
-    public func estimatedRole(for player: String) -> Role?  {
+    public func estimatedRole(for player: String, history: [GMove]) -> Role?  {
         return DefaultValueRegistry.defaultValue(for: (Role?).self)
-    }
-    
-    public func update(on move: GMove)   {
-        return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
 }
@@ -787,6 +724,20 @@ public class MockStateStoredProtocol: StateStoredProtocol, Cuckoo.ProtocolMock {
         
     }
     
+    
+    
+    public var moveHistory: [GMove] {
+        get {
+            return cuckoo_manager.getter("moveHistory",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.moveHistory)
+        }
+        
+    }
+    
 
     
 
@@ -847,6 +798,11 @@ public class MockStateStoredProtocol: StateStoredProtocol, Cuckoo.ProtocolMock {
 	    
 	    var played: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockStateStoredProtocol, [String]> {
 	        return .init(manager: cuckoo_manager, name: "played")
+	    }
+	    
+	    
+	    var moveHistory: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockStateStoredProtocol, [GMove]> {
+	        return .init(manager: cuckoo_manager, name: "moveHistory")
 	    }
 	    
 	    
@@ -912,6 +868,11 @@ public class MockStateStoredProtocol: StateStoredProtocol, Cuckoo.ProtocolMock {
 	    
 	    var played: Cuckoo.VerifyReadOnlyProperty<[String]> {
 	        return .init(manager: cuckoo_manager, name: "played", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var moveHistory: Cuckoo.VerifyReadOnlyProperty<[GMove]> {
+	        return .init(manager: cuckoo_manager, name: "moveHistory", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	
@@ -997,6 +958,14 @@ public class StateStoredProtocolStub: StateStoredProtocol {
     public var played: [String] {
         get {
             return DefaultValueRegistry.defaultValue(for: ([String]).self)
+        }
+        
+    }
+    
+    
+    public var moveHistory: [GMove] {
+        get {
+            return DefaultValueRegistry.defaultValue(for: ([GMove]).self)
         }
         
     }
@@ -1293,6 +1262,20 @@ public class MockStateProtocol: StateProtocol, Cuckoo.ProtocolMock {
     
     
     
+    public var moveHistory: [GMove] {
+        get {
+            return cuckoo_manager.getter("moveHistory",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.moveHistory)
+        }
+        
+    }
+    
+    
+    
     public var winner: Role? {
         get {
             return cuckoo_manager.getter("winner",
@@ -1383,6 +1366,11 @@ public class MockStateProtocol: StateProtocol, Cuckoo.ProtocolMock {
 	    }
 	    
 	    
+	    var moveHistory: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockStateProtocol, [GMove]> {
+	        return .init(manager: cuckoo_manager, name: "moveHistory")
+	    }
+	    
+	    
 	    var winner: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockStateProtocol, Role?> {
 	        return .init(manager: cuckoo_manager, name: "winner")
 	    }
@@ -1455,6 +1443,11 @@ public class MockStateProtocol: StateProtocol, Cuckoo.ProtocolMock {
 	    
 	    var played: Cuckoo.VerifyReadOnlyProperty<[String]> {
 	        return .init(manager: cuckoo_manager, name: "played", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var moveHistory: Cuckoo.VerifyReadOnlyProperty<[GMove]> {
+	        return .init(manager: cuckoo_manager, name: "moveHistory", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	    
@@ -1551,6 +1544,14 @@ public class StateProtocolStub: StateProtocol {
     public var played: [String] {
         get {
             return DefaultValueRegistry.defaultValue(for: ([String]).self)
+        }
+        
+    }
+    
+    
+    public var moveHistory: [GMove] {
+        get {
+            return DefaultValueRegistry.defaultValue(for: ([GMove]).self)
         }
         
     }
@@ -4354,19 +4355,19 @@ public class GTimerProtocolStub: GTimerProtocol {
 
 
 
-public class MockDurationMatcherProtocol: DurationMatcherProtocol, Cuckoo.ProtocolMock {
+public class MockEventDurationProtocol: EventDurationProtocol, Cuckoo.ProtocolMock {
     
-    public typealias MocksType = DurationMatcherProtocol
+    public typealias MocksType = EventDurationProtocol
     
-    public typealias Stubbing = __StubbingProxy_DurationMatcherProtocol
-    public typealias Verification = __VerificationProxy_DurationMatcherProtocol
+    public typealias Stubbing = __StubbingProxy_EventDurationProtocol
+    public typealias Verification = __VerificationProxy_EventDurationProtocol
 
     public let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
 
     
-    private var __defaultImplStub: DurationMatcherProtocol?
+    private var __defaultImplStub: EventDurationProtocol?
 
-    public func enableDefaultImplementation(_ stub: DurationMatcherProtocol) {
+    public func enableDefaultImplementation(_ stub: EventDurationProtocol) {
         __defaultImplStub = stub
         cuckoo_manager.enableDefaultStubImplementation()
     }
@@ -4393,7 +4394,7 @@ public class MockDurationMatcherProtocol: DurationMatcherProtocol, Cuckoo.Protoc
     }
     
 
-	public struct __StubbingProxy_DurationMatcherProtocol: Cuckoo.StubbingProxy {
+	public struct __StubbingProxy_EventDurationProtocol: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
 	
 	    public init(manager: Cuckoo.MockManager) {
@@ -4403,12 +4404,12 @@ public class MockDurationMatcherProtocol: DurationMatcherProtocol, Cuckoo.Protoc
 	    
 	    func waitDuration<M1: Cuckoo.Matchable>(_ event: M1) -> Cuckoo.ProtocolStubFunction<(GEvent), TimeInterval> where M1.MatchedType == GEvent {
 	        let matchers: [Cuckoo.ParameterMatcher<(GEvent)>] = [wrap(matchable: event) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockDurationMatcherProtocol.self, method: "waitDuration(_: GEvent) -> TimeInterval", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockEventDurationProtocol.self, method: "waitDuration(_: GEvent) -> TimeInterval", parameterMatchers: matchers))
 	    }
 	    
 	}
 
-	public struct __VerificationProxy_DurationMatcherProtocol: Cuckoo.VerificationProxy {
+	public struct __VerificationProxy_EventDurationProtocol: Cuckoo.VerificationProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
 	    private let callMatcher: Cuckoo.CallMatcher
 	    private let sourceLocation: Cuckoo.SourceLocation
@@ -4431,7 +4432,7 @@ public class MockDurationMatcherProtocol: DurationMatcherProtocol, Cuckoo.Protoc
 	}
 }
 
-public class DurationMatcherProtocolStub: DurationMatcherProtocol {
+public class EventDurationProtocolStub: EventDurationProtocol {
     
 
     

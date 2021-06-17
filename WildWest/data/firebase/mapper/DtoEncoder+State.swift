@@ -33,7 +33,8 @@ extension DtoEncoder {
                discard: try decode(cards: state.discard).reversed(),
                store: try decode(cards: state.store),
                hits: try decode(hits: state.hits),
-               played: try decode(abilities: state.played))
+               played: try decode(abilities: state.played),
+               moveHistory: [])
     }
     
     func encode(hit: HitProtocol) -> HitDto {
