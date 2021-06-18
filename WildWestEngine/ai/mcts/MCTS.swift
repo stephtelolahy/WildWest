@@ -9,23 +9,23 @@
 import Foundation
 
 // Defining n player turn based game state
-protocol State {
-    associatedtype Move
+public protocol MCTSState {
+    associatedtype MCTSMove
     
-    var turn: Int { get }
+    var turnInt: Int { get }
     var status: Int { get }
-    var possibleMoves: [Move] { get }
+    var possibleMoves: [MCTSMove] { get }
     
-    func performMove(_ move: Move) -> Self
+    func performMove(_ move: MCTSMove) -> Self
 }
 
-struct MCTS {
+public struct MCTS {
     
     private static let defaultIterations = 1000
     
-    func findBestMove<T: State>(state: T, iterations: Int = defaultIterations) -> T.Move {
-        let rootNode = Node(state: state)
-        let player = state.turn
+    func findBestMove<T: MCTSState>(state: T, iterations: Int = defaultIterations) -> T.MCTSMove {
+        let rootNode = MCTSNode(state: state)
+        let player = state.turnInt
         
         for _ in 0..<iterations {
             // Phase 1 - Selection
@@ -51,7 +51,7 @@ struct MCTS {
 
 private extension MCTS {
     
-    func selectPromisingNode<T: State>(_ rootNode: Node<T>) -> Node<T> {
+    func selectPromisingNode<T: MCTSState>(_ rootNode: MCTSNode<T>) -> MCTSNode<T> {
         var node = rootNode
         while !node.children.isEmpty {
             node = node.children.max { $0.uctValue < $1.uctValue }!
@@ -59,15 +59,15 @@ private extension MCTS {
         return node
     }
     
-    func expandNode<T: State>(_ node: Node<T>) {
+    func expandNode<T: MCTSState>(_ node: MCTSNode<T>) {
         node.state.possibleMoves.forEach { move in
             let childState = node.state.performMove(move)
-            let childNode = Node(state: childState, parent: node, move: move)
+            let childNode = MCTSNode(state: childState, parent: node, move: move)
             node.children.append(childNode)
         }
     }
     
-    func simulateRandomPlayout<T: State>(_ nodeToExplore: Node<T>, player: Int) -> Int {
+    func simulateRandomPlayout<T: MCTSState>(_ nodeToExplore: MCTSNode<T>, player: Int) -> Int {
         
         var status = nodeToExplore.state.status
         // Opponent wins
@@ -96,7 +96,7 @@ private extension MCTS {
             let randomMove = node.state.possibleMoves.randomElement()!
             let childState = node.state.performMove(randomMove)
             status = childState.status
-            node = Node(state: childState)
+            node = MCTSNode(state: childState)
         }
         
         if status == player {
@@ -106,8 +106,8 @@ private extension MCTS {
         }
     }
     
-    func backPropogation<T: State>(_ nodeToExplore: Node<T>, result: Int) {
-        var node: Node<T>? = nodeToExplore
+    func backPropogation<T: MCTSState>(_ nodeToExplore: MCTSNode<T>, result: Int) {
+        var node: MCTSNode<T>? = nodeToExplore
         while node != nil {
             node?.visitCount += 1
             node?.winCount += result
@@ -116,25 +116,22 @@ private extension MCTS {
     }
 }
 
-extension MCTS {
-    class Node<T: State> {
-        let state: T
-        let parent: Node?
-        let move: T.Move?
-        var children: [Node] = []
-        var visitCount: Int = 0
-        var winCount: Int = 0
-        
-        init(state: T, parent: Node? = nil, move: T.Move? = nil) {
-            self.state = state
-            self.parent = parent
-            self.move = move
-        }
+class MCTSNode<T: MCTSState> {
+    let state: T
+    let parent: MCTSNode?
+    let move: T.MCTSMove?
+    var children: [MCTSNode] = []
+    var visitCount: Int = 0
+    var winCount: Int = 0
+    
+    init(state: T, parent: MCTSNode? = nil, move: T.MCTSMove? = nil) {
+        self.state = state
+        self.parent = parent
+        self.move = move
     }
 }
 
-private extension MCTS.Node {
-    
+private extension MCTSNode {
     var uctValue: Double {
         if visitCount == 0 {
             return Double(Int.max)
@@ -145,10 +142,10 @@ private extension MCTS.Node {
     }
 }
 
-extension MCTS {
+public extension MCTS {
     enum Status {
-        static let inProgress = -1
-        static let draw = 0
+        public static let inProgress = -1
+        public static let draw = 0
         // If status is equal to player then the he wins, otherwise he looses
     }
 }
