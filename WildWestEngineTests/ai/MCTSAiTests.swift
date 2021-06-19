@@ -18,7 +18,6 @@ class MCTSAiTests: XCTestCase {
     
     override func setUp() {
         sut = MCTSAi(matcher: abilityMatcher)
-        
         #warning("TODO: fix static reference")
         GState.matcher = abilityMatcher
     }
@@ -31,8 +30,8 @@ class MCTSAiTests: XCTestCase {
         
         var state: GState = GSetup().setupGame(roles: roles, cards: cards, cardSet: cardSet, preferredRole: nil, preferredFigure: nil) as! GState
         
-        let loop = SyncGameLoop(matcher: abilityMatcher, databaseUpdater: GDatabaseUpdater())
-        state = loop.performMove(nil, in: state) as! GState
+        let loop = GLoopSyncronous(matcher: abilityMatcher, databaseUpdater: GDatabaseUpdater())
+        state = loop.run(nil, in: state) as! GState
         
         while state.status == MCTS.Status.inProgress {
             let bestMove = sut.bestMove(among: [], in: state)

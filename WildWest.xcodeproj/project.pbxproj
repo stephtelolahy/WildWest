@@ -12,6 +12,7 @@
 		2622F2BD267A3CE800B75CA1 /* MCTSAi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2622F2BC267A3CE800B75CA1 /* MCTSAi.swift */; };
 		266B2107267D48C9008F21E0 /* MCTSAiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B2106267D48C9008F21E0 /* MCTSAiTests.swift */; };
 		26CBA70E267BD3A600EA1227 /* RandomWithRoleAi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CBA70D267BD3A600EA1227 /* RandomWithRoleAi.swift */; };
+		26E56473267DBE58008DDB58 /* GLoopSyncronous.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E56472267DBE58008DDB58 /* GLoopSyncronous.swift */; };
 		26F88D872672B51700B82AF9 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F88D862672B51700B82AF9 /* Node.swift */; };
 		3300B02A264E3C48002F4776 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3300B029264E3C48002F4776 /* GeneratedMocks.swift */; };
 		3300B0A8264E4236002F4776 /* ParameterMatcherExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3300B0A7264E4236002F4776 /* ParameterMatcherExtension.swift */; };
@@ -378,6 +379,7 @@
 		2622F2BC267A3CE800B75CA1 /* MCTSAi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCTSAi.swift; sourceTree = "<group>"; };
 		266B2106267D48C9008F21E0 /* MCTSAiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCTSAiTests.swift; sourceTree = "<group>"; };
 		26CBA70D267BD3A600EA1227 /* RandomWithRoleAi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomWithRoleAi.swift; sourceTree = "<group>"; };
+		26E56472267DBE58008DDB58 /* GLoopSyncronous.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLoopSyncronous.swift; sourceTree = "<group>"; };
 		26F88D862672B51700B82AF9 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		302397755E696ECE7C3EE1C2 /* Pods-WildWest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.debug.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.debug.xcconfig"; sourceTree = "<group>"; };
 		3300B029264E3C48002F4776 /* GeneratedMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
@@ -994,6 +996,7 @@
 				3358332325BC2585001BE4D8 /* GLoop.swift */,
 				3358332525BC2585001BE4D8 /* GEventQueue.swift */,
 				3358332425BC2585001BE4D8 /* GTimer.swift */,
+				26E56472267DBE58008DDB58 /* GLoopSyncronous.swift */,
 			);
 			path = engine;
 			sourceTree = "<group>";
@@ -2076,6 +2079,7 @@
 				33FBF8FC265B10CE00D7C6AD /* IsHandExceedLimit.swift in Sources */,
 				33AAE02926597CF100A067E3 /* Handicap.swift in Sources */,
 				3358334225BC2585001BE4D8 /* MoveSelector.swift in Sources */,
+				26E56473267DBE58008DDB58 /* GLoopSyncronous.swift in Sources */,
 				33272F7D26592793005C9246 /* DrawDeck.swift in Sources */,
 				33AAE02726597AA700A067E3 /* CardArgument.swift in Sources */,
 				33176D2E26593D4A000A6FBF /* PlayReqFamily.swift in Sources */,

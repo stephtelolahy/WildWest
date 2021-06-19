@@ -12,7 +12,7 @@ import Foundation
 public protocol MCTSState {
     associatedtype MCTSMove
     
-    var turnInt: Int { get }
+    var player: Int { get }
     var status: Int { get }
     var possibleMoves: [MCTSMove] { get }
     
@@ -25,7 +25,7 @@ public struct MCTS {
     
     func findBestMove<T: MCTSState>(state: T, iterations: Int = defaultIterations) -> T.MCTSMove {
         let rootNode = MCTSNode(state: state)
-        let player = state.turnInt
+        let player = state.player
         
         for _ in 0..<iterations {
             // Phase 1 - Selection

@@ -30,26 +30,31 @@ class AddHit: Effect {
         let players = ctx.players(matching: player)
         let times = ctx.number(matching: times)
         let cancelable = ctx.number(matching: cancelable)
-        let loopPlayers = (0..<times).flatMap { _ in players }
-        let targets = ctx.players(matching: target)
         var hits: [GHit] = []
-        loopPlayers.forEach { player in
-            
-            if targets.isEmpty {
-                hits.append(GHit(player: player,
-                                 name: ctx.ability,
-                                 abilities: abilities,
-                                 offender: ctx.actor.identifier,
-                                 cancelable: cancelable,
-                                 target: nil))
-            } else {
-                targets.forEach { target in
+        
+        for _ in (0..<times) {
+            for player in players {
+                if target == .nobody {
                     hits.append(GHit(player: player,
                                      name: ctx.ability,
                                      abilities: abilities,
                                      offender: ctx.actor.identifier,
                                      cancelable: cancelable,
-                                     target: target))
+                                     target: nil))
+                } else {
+                    let targets = ctx.players(matching: target)
+                    guard !targets.isEmpty else {
+                        return nil
+                    }
+                    
+                    targets.forEach { target in
+                        hits.append(GHit(player: player,
+                                         name: ctx.ability,
+                                         abilities: abilities,
+                                         offender: ctx.actor.identifier,
+                                         cancelable: cancelable,
+                                         target: target))
+                    }
                 }
             }
         }
