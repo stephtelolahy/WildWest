@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Resolver
 
 public class MCTSAi: AIProtocol {
     
@@ -24,7 +25,7 @@ public class MCTSAi: AIProtocol {
 extension GState: MCTSState {
     public typealias Move = GMove
     
-    public static var matcher: AbilityMatcherProtocol!
+    public static var matcher: AbilityMatcherProtocol = Resolver.resolve()
     
     public var status: Int {
         if let winner = self.winner {

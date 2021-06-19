@@ -5,6 +5,7 @@
 //  Created by TELOLAHY Hugues Stéphano on 18/06/2021.
 //  Copyright © 2021 creativeGames. All rights reserved.
 //
+// swiftlint:disable implicitly_unwrapped_optional
 
 import XCTest
 import WildWestEngine
@@ -18,8 +19,6 @@ class MCTSAiTests: XCTestCase {
     
     override func setUp() {
         sut = MCTSAi(matcher: abilityMatcher)
-        #warning("TODO: fix static reference")
-        GState.matcher = abilityMatcher
     }
 
     func test_GivenInitialGame_whenSimulateAIPlay_thenGameComplete() {
