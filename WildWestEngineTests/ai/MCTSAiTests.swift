@@ -6,6 +6,7 @@
 //  Copyright © 2021 creativeGames. All rights reserved.
 //
 // swiftlint:disable implicitly_unwrapped_optional
+// swiftlint:disable force_cast
 
 import XCTest
 import WildWestEngine
@@ -33,12 +34,20 @@ class MCTSAiTests: XCTestCase {
         state = loop.run(nil, in: state) as! GState
         
         while state.status == MCTS.Status.inProgress {
-            let bestMove = sut.bestMove(among: [], in: state)
-            state = state.performMove(bestMove)
-            print("[S]: \(state.players.map({ "\($0.value.name.prefix(5))|x\($0.value.health)|[]\($0.value.hand.count)" }).joined(separator: " - ")) : \(bestMove.ability)")
+            let move = sut.bestMove(among: [], in: state)
+            state = state.performMove(move)
+            print("[S]: \(state.debugDescription) : \(move.ability)")
         }
         
         XCTAssertEqual(state.status, 1)
     }
+}
 
+private extension StateProtocol {
+    
+    var debugDescription: String {
+        players
+            .map({ "\($0.value.name.prefix(5))|x\($0.value.health)|[]\($0.value.hand.count)" })
+            .joined(separator: " - ")
+    }
 }

@@ -5,6 +5,7 @@
 //  Created by TELOLAHY Hugues Stéphano on 16/06/2021.
 //  Copyright © 2021 creativeGames. All rights reserved.
 //
+// swiftlint:disable force_cast
 
 import Foundation
 import Resolver
@@ -18,7 +19,7 @@ public class MCTSAi: AIProtocol {
     }
     
     public func bestMove(among moves: [GMove], in state: StateProtocol) -> GMove {
-        MCTS().findBestMove(state: state as! GState, iterations: 50)
+        MCTS().findBestMove(state: state as! GState)
     }
 }
 
@@ -46,7 +47,15 @@ extension GState: MCTSState {
     }
     
     public var possibleMoves: [GMove] {
-        Self.matcher.active(in: self) ?? []
+        let moves = Self.matcher.active(in: self) ?? []
+        
+        // <HACK: avoid looseHealth and endTurn if possible>
+        let preferredMoves = moves.filter { $0.ability != "looseHealth" && $0.ability != "endTurn" }
+        if !preferredMoves.isEmpty {
+            return preferredMoves
+        } else {
+            return moves
+        }
     }
     
     public func performMove(_ move: GMove) -> Self {

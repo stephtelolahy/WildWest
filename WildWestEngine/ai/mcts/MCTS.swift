@@ -21,13 +21,12 @@ public protocol MCTSState {
 
 public struct MCTS {
     
-    private static let defaultIterations = 1000
-    
-    func findBestMove<T: MCTSState>(state: T, iterations: Int = defaultIterations) -> T.MCTSMove {
+    func findBestMove<T: MCTSState>(state: T, duration: TimeInterval = 1.0) -> T.MCTSMove {
         let rootNode = MCTSNode(state: state)
         let player = state.player
         
-        for _ in 0..<iterations {
+        let start = Date()
+        while true {
             // Phase 1 - Selection
             var nodeToExplore = selectPromisingNode(rootNode)
             
@@ -42,6 +41,13 @@ public struct MCTS {
             
             // Phase 4 - Update
             backPropogation(nodeToExplore, result: playoutResult)
+            
+            // check time elapsed
+            let end = Date()
+            let time = end.timeIntervalSince(start)
+            if time > duration {
+                break
+            }
         }
         
         let bestNode = rootNode.children.max { $0.visitCount < $1.visitCount }!
