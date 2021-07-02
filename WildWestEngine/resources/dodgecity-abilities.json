@@ -269,5 +269,17 @@
         "amount": "2"
       }
     ]
+  },
+  {
+    "name": "drawCardOnPlayHandOutOfTurn",
+    "type":"triggered",
+    "canPlay":{
+      "onPlayHandOutOfTurn": 0
+    },
+    "onPlay":[
+      {
+        "action": "drawDeck"
+      }
+    ]
   }
 ]

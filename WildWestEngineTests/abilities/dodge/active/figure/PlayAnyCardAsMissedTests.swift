@@ -1,5 +1,5 @@
 //
-//  PlayanyCardAsMissedTests.swift
+//  PlayAnyCardAsMissedTests.swift
 //  WildWestEngineTests
 //
 //  Created by Hugues Stéphano TELOLAHY on 27/05/2021.
@@ -10,7 +10,7 @@ import XCTest
 import WildWestEngine
 import Resolver
 
-class PlayanyCardAsMissedTests: XCTestCase {
+class PlayAnyCardAsMissedTests: XCTestCase {
 
     private let sut: AbilityMatcherProtocol = Resolver.resolve()
     

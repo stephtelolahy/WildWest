@@ -138,5 +138,14 @@
       "bullets": 4,
       "draw2CardsOnOtherEliminated": 0
     }
+  },
+  {
+    "name": "mollyStark",
+    "desc": "Each time she uses a card from her hand out of turn, she draw a card.",
+    "type": "figure",
+    "abilities": {
+      "bullets": 4,
+      "drawCardOnPlayHandOutOfTurn": 0
+    }
   }
 ]
