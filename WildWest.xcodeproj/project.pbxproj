@@ -10,7 +10,9 @@
 		11A4260096983812EE5C92DA /* Pods_WildWest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C68CDDA530FC48B097AEAB55 /* Pods_WildWest.framework */; };
 		2622F2BB267A3CC400B75CA1 /* MCTS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2622F2BA267A3CC400B75CA1 /* MCTS.swift */; };
 		2622F2BD267A3CE800B75CA1 /* MCTSAi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2622F2BC267A3CE800B75CA1 /* MCTSAi.swift */; };
-		264B7418268FA3C0009CE757 /* OnPlayHandOutOfTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B7417268FA3C0009CE757 /* OnPlayHandOutOfTurn.swift */; };
+		2643D9462693612F00012BBC /* Draw2CardsRequire1BlueCardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2643D9452693612F00012BBC /* Draw2CardsRequire1BlueCardTests.swift */; };
+		2643D948269363B700012BBC /* RequireHandCardsBlue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2643D947269363B700012BBC /* RequireHandCardsBlue.swift */; };
+		264B7418268FA3C0009CE757 /* OnPlayCardOutOfTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B7417268FA3C0009CE757 /* OnPlayCardOutOfTurn.swift */; };
 		264B741C268FA6CA009CE757 /* DrawCardOnPlayHandOutOfTurnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B741B268FA6CA009CE757 /* DrawCardOnPlayHandOutOfTurnTests.swift */; };
 		266B2107267D48C9008F21E0 /* MCTSAiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B2106267D48C9008F21E0 /* MCTSAiTests.swift */; };
 		26CBA70E267BD3A600EA1227 /* RandomWithRoleAi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CBA70D267BD3A600EA1227 /* RandomWithRoleAi.swift */; };
@@ -379,7 +381,9 @@
 		213EF09E4753EE8978B47280 /* Pods-WildWest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.release.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.release.xcconfig"; sourceTree = "<group>"; };
 		2622F2BA267A3CC400B75CA1 /* MCTS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCTS.swift; sourceTree = "<group>"; };
 		2622F2BC267A3CE800B75CA1 /* MCTSAi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCTSAi.swift; sourceTree = "<group>"; };
-		264B7417268FA3C0009CE757 /* OnPlayHandOutOfTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnPlayHandOutOfTurn.swift; sourceTree = "<group>"; };
+		2643D9452693612F00012BBC /* Draw2CardsRequire1BlueCardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Draw2CardsRequire1BlueCardTests.swift; sourceTree = "<group>"; };
+		2643D947269363B700012BBC /* RequireHandCardsBlue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireHandCardsBlue.swift; sourceTree = "<group>"; };
+		264B7417268FA3C0009CE757 /* OnPlayCardOutOfTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnPlayCardOutOfTurn.swift; sourceTree = "<group>"; };
 		264B741B268FA6CA009CE757 /* DrawCardOnPlayHandOutOfTurnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCardOnPlayHandOutOfTurnTests.swift; sourceTree = "<group>"; };
 		266B2106267D48C9008F21E0 /* MCTSAiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCTSAiTests.swift; sourceTree = "<group>"; };
 		26CBA70D267BD3A600EA1227 /* RandomWithRoleAi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomWithRoleAi.swift; sourceTree = "<group>"; };
@@ -818,6 +822,7 @@
 				339CC9A0265E91220070D77B /* RequireTargetHit.swift */,
 				33AAE058265A457900A067E3 /* RequireStoreCards.swift */,
 				33FBF8FD265B117200D7C6AD /* RequireHandCards.swift */,
+				2643D947269363B700012BBC /* RequireHandCardsBlue.swift */,
 				33FBF903265B153800D7C6AD /* RequireTargetOffender.swift */,
 				33FBF907265B167C00D7C6AD /* RequireTargetEliminated.swift */,
 				33FBF90D265B1E1600D7C6AD /* RequireDeckCards.swift */,
@@ -830,7 +835,7 @@
 				33FBF901265B137A00D7C6AD /* OnLooseHealth.swift */,
 				33FBF905265B15C600D7C6AD /* OnHandEmpty.swift */,
 				33695193265FD52B00B05D56 /* OnPlayCard.swift */,
-				264B7417268FA3C0009CE757 /* OnPlayHandOutOfTurn.swift */,
+				264B7417268FA3C0009CE757 /* OnPlayCardOutOfTurn.swift */,
 			);
 			path = playReq;
 			sourceTree = "<group>";
@@ -1087,6 +1092,7 @@
 				3369518F265FCB2300B05D56 /* PlayAnyCardAsMissedTests.swift */,
 				33F40401265FDC25004E4FBF /* StartTurnDrawing3CardsTests.swift */,
 				33F40403265FE9A2004E4FBF /* StartTurnDrawing1CardPlusWoundTests.swift */,
+				2643D9452693612F00012BBC /* Draw2CardsRequire1BlueCardTests.swift */,
 			);
 			path = figure;
 			sourceTree = "<group>";
@@ -2033,6 +2039,7 @@
 				3358334C25BC2585001BE4D8 /* GDatabaseUpdater.swift in Sources */,
 				3358333425BC2585001BE4D8 /* GPlayer.swift in Sources */,
 				33FBF90C265B1D5100D7C6AD /* DrawDeckChoosing.swift in Sources */,
+				2643D948269363B700012BBC /* RequireHandCardsBlue.swift in Sources */,
 				33272F7926592741005C9246 /* EffectFamily.swift in Sources */,
 				339CC9A1265E91220070D77B /* RequireTargetHit.swift in Sources */,
 				33AAE068265ABCD800A067E3 /* OnPhase.swift in Sources */,
@@ -2119,7 +2126,7 @@
 				3358333525BC2585001BE4D8 /* GState.swift in Sources */,
 				2622F2BB267A3CC400B75CA1 /* MCTS.swift in Sources */,
 				33AAE06A265ABD7400A067E3 /* SetTurn.swift in Sources */,
-				264B7418268FA3C0009CE757 /* OnPlayHandOutOfTurn.swift in Sources */,
+				264B7418268FA3C0009CE757 /* OnPlayCardOutOfTurn.swift in Sources */,
 				33AAE02F2659846000A067E3 /* IsHitEliminate.swift in Sources */,
 				33FBF8FE265B117200D7C6AD /* RequireHandCards.swift in Sources */,
 				33176D342659438C000A6FBF /* Effect.swift in Sources */,
@@ -2205,6 +2212,7 @@
 				3392B1F225BC377100214393 /* AbilityEvaluatorTests.swift in Sources */,
 				3392B1D025BC377100214393 /* DrawCardOnHandEmptyTests.swift in Sources */,
 				336463C2265E60AB008A2011 /* BrawlTests.swift in Sources */,
+				2643D9462693612F00012BBC /* Draw2CardsRequire1BlueCardTests.swift in Sources */,
 				3392B1E825BC377100214393 /* WellsFargoTests.swift in Sources */,
 				3392B1D325BC377100214393 /* StartTurnOnPhase1Tests.swift in Sources */,
 				3392B1F025BC377100214393 /* ArrayTests.swift in Sources */,

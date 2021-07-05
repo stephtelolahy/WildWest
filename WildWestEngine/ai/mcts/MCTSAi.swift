@@ -49,13 +49,14 @@ extension GState: MCTSState {
     public var possibleMoves: [GMove] {
         let moves = Self.matcher.active(in: self) ?? []
         
-        // <HACK: avoid looseHealth and endTurn if possible>
+        // <AI: avoid looseHealth and endTurn if possible>
         let preferredMoves = moves.filter { $0.ability != "looseHealth" && $0.ability != "endTurn" }
         if !preferredMoves.isEmpty {
             return preferredMoves
         } else {
             return moves
         }
+        // </AI>
     }
     
     public func performMove(_ move: GMove) -> Self {

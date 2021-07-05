@@ -15,7 +15,7 @@ class startTurnDrawing1ExtraCardIfRedSuitTests: XCTestCase {
     
     private let sut: AbilityMatcherProtocol = Resolver.resolve()
     
-    func test_DrawsAnotherCardIfSecondDrawIsRedSuit() throws {
+    func test_DrawsAnotherCard_IfSecondDrawIsRedSuit() throws {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
@@ -43,7 +43,7 @@ class startTurnDrawing1ExtraCardIfRedSuitTests: XCTestCase {
                                 .setPhase(value: 2)])
     }
     
-    func test_DoNotDrawsAnotherCardIfSecondDrawIsNotRedSuit() throws {
+    func test_DoNotDrawsAnotherCard_IfSecondDrawIsNotRedSuit() throws {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()

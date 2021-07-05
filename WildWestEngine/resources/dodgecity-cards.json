@@ -147,5 +147,14 @@
       "bullets": 4,
       "drawCardOnPlayHandOutOfTurn": 0
     }
+  },
+  {
+    "name": "joseDelgado",
+    "desc": "Twice in his turn, he may discard a blue card from the hand to draw 2 cards.",
+    "type": "figure",
+    "abilities": {
+      "bullets": 4,
+      "draw2CardsRequire1BlueCard": 0
+    }
   }
 ]

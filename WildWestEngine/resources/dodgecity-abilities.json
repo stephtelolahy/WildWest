@@ -272,13 +272,33 @@
   },
   {
     "name": "drawCardOnPlayHandOutOfTurn",
-    "type":"triggered",
-    "canPlay":{
-      "onPlayHandOutOfTurn": 0
+    "type": "triggered",
+    "canPlay": {
+      "onPlayCardOutOfTurn": 0
     },
-    "onPlay":[
+    "onPlay": [
       {
         "action": "drawDeck"
+      }
+    ]
+  },
+  {
+    "name": "draw2CardsRequire1BlueCard",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireHandCardsBlue": 1,
+      "isTimesPerTurnMax": "2"
+    },
+    "onPlay": [
+      {
+        "action": "discardHand",
+        "card": "requiredHand"
+      },
+      {
+        "action": "drawDeck",
+        "amount": "2"
       }
     ]
   }

@@ -1,5 +1,5 @@
 //
-//  OnPlayHandOutOfTurn.swift
+//  OnPlayCardOutOfTurn.swift
 //  WildWestEngine
 //
 //  Created by TELOLAHY Hugues Stéphano on 02/07/2021.
@@ -7,9 +7,9 @@
 //
 
 /**
- When you play a card out of your turn
+ When you play a hand card out of your turn
  */
-class OnPlayHandOutOfTurn: PlayReq {
+class OnPlayCardOutOfTurn: PlayReq {
     
     override func match(_ ctx: MoveContext, args: inout [[PlayArg: [String]]]) -> Bool {
         guard case let .play(player, _) = ctx.event,
