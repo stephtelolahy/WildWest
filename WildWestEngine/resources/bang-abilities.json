@@ -640,11 +640,9 @@
     },
     "onPlay": [
       {
-        "action": "drawDeck"
-      },
-      {
         "action": "drawDeckFlippingIf",
         "player": "actor",
+        "amount": 2,
         "regex": "(♥️)|(♦️)",
         "then": [
           {
