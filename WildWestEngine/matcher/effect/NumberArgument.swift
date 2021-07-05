@@ -15,18 +15,28 @@ enum NumberArgument: Decodable {
     case damage
     
     init(from decoder: Decoder) throws {
+        if let intValue = try? decoder.singleValueContainer().decode(Int.self) {
+            self = .number(intValue)
+            return
+        }
+        
         let string = try decoder.singleValueContainer().decode(String.self)
-        self = try Self.create(from: string)
+        self = try Self.parse(from: string)
     }
     
     init(from data: Any) throws {
+        if let intValue = data as? Int {
+            self = .number(intValue)
+            return
+        }
+        
         guard let string = data as? String else {
             throw DecodingError.typeMismatch(String.self, DecodingError.Context(codingPath: [], debugDescription: ""))
         }
-        self = try Self.create(from: string)
+        self = try Self.parse(from: string)
     }
     
-    static func create(from string: String) throws -> NumberArgument {
+    private static func parse(from string: String) throws -> NumberArgument {
         switch string {
         case "bangsPerTurn":
             return .bangsPerTurn
@@ -44,17 +54,13 @@ enum NumberArgument: Decodable {
             return .damage
             
         default:
-            guard let intValue = Int(string) else {
-                throw DecodingError.typeMismatch(Int.self, DecodingError.Context(codingPath: [], debugDescription: "Invalid int"))
-            }
-            
-            return .number(intValue)
+            throw DecodingError.typeMismatch(Int.self, DecodingError.Context(codingPath: [], debugDescription: "Invalid value"))
         }
     }
 }
 
 extension MoveContext {
-    func number(matching arg: NumberArgument) -> Int {
+    func get(_ arg: NumberArgument) -> Int {
         switch arg {
         case let .number(value):
             return value

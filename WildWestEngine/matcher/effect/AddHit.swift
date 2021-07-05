@@ -28,8 +28,8 @@ class AddHit: Effect {
     
     override func apply(_ ctx: MoveContext) -> [GEvent]? {
         let players = ctx.players(matching: player)
-        let times = ctx.number(matching: times)
-        let cancelable = ctx.number(matching: cancelable)
+        let times = ctx.get(times)
+        let cancelable = ctx.get(cancelable)
         var hits: [GHit] = []
         
         for _ in (0..<times) {
