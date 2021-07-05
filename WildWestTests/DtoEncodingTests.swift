@@ -59,7 +59,7 @@ class DtoEncodingTests: XCTestCase {
                            store: [],
                            hits: [hit1],
                            played: ["bang"],
-                           moveHistory: [])
+                           history: [])
         
         stub(mockDatabaseReference) { mock in
             when(mock.childByAutoIdKey()).thenReturn("key1", "key2", "key3", "key4")

@@ -33,7 +33,7 @@ public class MoveEvaluator: MoveEvaluatorProtocol {
         guard let actorObject = state.players[move.actor],
               let actorRole = actorObject.role,
               let targetObject = state.players[target], 
-              let targetRole = targetObject.role ?? roleEstimator.estimatedRole(for: target, history: state.moveHistory) else {
+              let targetRole = targetObject.role ?? roleEstimator.estimatedRole(for: target, history: state.history) else {
             return 0
         }
         

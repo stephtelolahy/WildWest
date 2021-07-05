@@ -42,7 +42,7 @@ private extension StateProtocol {
                       store: store,
                       hits: hits,
                       played: played,
-                      moveHistory: moveHistory)
+                      history: history)
     }
 }
 

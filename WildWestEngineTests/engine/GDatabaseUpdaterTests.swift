@@ -49,7 +49,7 @@ class GDatabaseUpdaterTests: XCTestCase {
         sut.execute(event, in: state)
         
         // Assert
-        XCTAssertEqual(state.moveHistory, [move])
+        XCTAssertEqual(state.history, [move])
     }
     
     func test_setTurn() {

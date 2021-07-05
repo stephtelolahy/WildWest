@@ -726,14 +726,14 @@ public class MockStateStoredProtocol: StateStoredProtocol, Cuckoo.ProtocolMock {
     
     
     
-    public var moveHistory: [GMove] {
+    public var history: [GMove] {
         get {
-            return cuckoo_manager.getter("moveHistory",
+            return cuckoo_manager.getter("history",
                 superclassCall:
                     
                     Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                     ,
-                defaultCall: __defaultImplStub!.moveHistory)
+                defaultCall: __defaultImplStub!.history)
         }
         
     }
@@ -801,8 +801,8 @@ public class MockStateStoredProtocol: StateStoredProtocol, Cuckoo.ProtocolMock {
 	    }
 	    
 	    
-	    var moveHistory: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockStateStoredProtocol, [GMove]> {
-	        return .init(manager: cuckoo_manager, name: "moveHistory")
+	    var history: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockStateStoredProtocol, [GMove]> {
+	        return .init(manager: cuckoo_manager, name: "history")
 	    }
 	    
 	    
@@ -871,8 +871,8 @@ public class MockStateStoredProtocol: StateStoredProtocol, Cuckoo.ProtocolMock {
 	    }
 	    
 	    
-	    var moveHistory: Cuckoo.VerifyReadOnlyProperty<[GMove]> {
-	        return .init(manager: cuckoo_manager, name: "moveHistory", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var history: Cuckoo.VerifyReadOnlyProperty<[GMove]> {
+	        return .init(manager: cuckoo_manager, name: "history", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	
@@ -963,7 +963,7 @@ public class StateStoredProtocolStub: StateStoredProtocol {
     }
     
     
-    public var moveHistory: [GMove] {
+    public var history: [GMove] {
         get {
             return DefaultValueRegistry.defaultValue(for: ([GMove]).self)
         }
@@ -1262,14 +1262,14 @@ public class MockStateProtocol: StateProtocol, Cuckoo.ProtocolMock {
     
     
     
-    public var moveHistory: [GMove] {
+    public var history: [GMove] {
         get {
-            return cuckoo_manager.getter("moveHistory",
+            return cuckoo_manager.getter("history",
                 superclassCall:
                     
                     Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                     ,
-                defaultCall: __defaultImplStub!.moveHistory)
+                defaultCall: __defaultImplStub!.history)
         }
         
     }
@@ -1366,8 +1366,8 @@ public class MockStateProtocol: StateProtocol, Cuckoo.ProtocolMock {
 	    }
 	    
 	    
-	    var moveHistory: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockStateProtocol, [GMove]> {
-	        return .init(manager: cuckoo_manager, name: "moveHistory")
+	    var history: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockStateProtocol, [GMove]> {
+	        return .init(manager: cuckoo_manager, name: "history")
 	    }
 	    
 	    
@@ -1446,8 +1446,8 @@ public class MockStateProtocol: StateProtocol, Cuckoo.ProtocolMock {
 	    }
 	    
 	    
-	    var moveHistory: Cuckoo.VerifyReadOnlyProperty<[GMove]> {
-	        return .init(manager: cuckoo_manager, name: "moveHistory", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var history: Cuckoo.VerifyReadOnlyProperty<[GMove]> {
+	        return .init(manager: cuckoo_manager, name: "history", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	    
@@ -1549,7 +1549,7 @@ public class StateProtocolStub: StateProtocol {
     }
     
     
-    public var moveHistory: [GMove] {
+    public var history: [GMove] {
         get {
             return DefaultValueRegistry.defaultValue(for: ([GMove]).self)
         }

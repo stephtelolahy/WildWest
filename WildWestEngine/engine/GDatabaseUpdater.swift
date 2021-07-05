@@ -69,7 +69,7 @@ private extension GDatabaseUpdater {
                 fatalError("Invalid event")
             }
             state.played.append(move.ability)
-            state.moveHistory.append(move)
+            state.history.append(move)
         }
     }
     

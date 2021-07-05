@@ -19,7 +19,7 @@ public class GState: StateProtocol {
     public var store: [CardProtocol]
     public var hits: [HitProtocol]
     public var played: [String]
-    public var moveHistory: [GMove]
+    public var history: [GMove]
     
     // MARK: Init
     
@@ -33,7 +33,7 @@ public class GState: StateProtocol {
                 store: [CardProtocol],
                 hits: [HitProtocol],
                 played: [String],
-                moveHistory: [GMove]) {
+                history: [GMove]) {
         self.players = players.mapValues { GPlayer($0) }
         self.initialOrder = initialOrder
         self.playOrder = playOrder
@@ -44,7 +44,7 @@ public class GState: StateProtocol {
         self.store = store
         self.hits = hits.map { GHit($0) }
         self.played = played
-        self.moveHistory = moveHistory
+        self.history = history
     }
     
     public convenience init(_ state: StateProtocol) {
@@ -58,7 +58,7 @@ public class GState: StateProtocol {
                   store: state.store,
                   hits: state.hits,
                   played: state.played,
-                  moveHistory: state.moveHistory)
+                  history: state.history)
     }
     
     // MARK: - StateComputedProtocol
