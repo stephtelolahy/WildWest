@@ -301,5 +301,23 @@
         "amount": 2
       }
     ]
+  },
+  {
+    "name": "draw2CardsRequire1Health",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "isHealthMin": 2
+    },
+    "onPlay": [
+      {
+        "action": "looseHealth"
+      },
+      {
+        "action": "drawDeck",
+        "amount": 2
+      }
+    ]
   }
 ]

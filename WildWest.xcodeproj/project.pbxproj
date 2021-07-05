@@ -12,6 +12,10 @@
 		2622F2BD267A3CE800B75CA1 /* MCTSAi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2622F2BC267A3CE800B75CA1 /* MCTSAi.swift */; };
 		2643D9462693612F00012BBC /* Draw2CardsRequire1BlueCardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2643D9452693612F00012BBC /* Draw2CardsRequire1BlueCardTests.swift */; };
 		2643D948269363B700012BBC /* RequireHandCardsBlue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2643D947269363B700012BBC /* RequireHandCardsBlue.swift */; };
+		2643D94A26938DCC00012BBC /* ResourcesBangTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2643D94926938DCC00012BBC /* ResourcesBangTests.swift */; };
+		2643D94C26938E0600012BBC /* ResourcesDodgeCityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2643D94B26938E0600012BBC /* ResourcesDodgeCityTests.swift */; };
+		2643D94E269391C200012BBC /* Draw2CardsRequire1HealthTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2643D94D269391C200012BBC /* Draw2CardsRequire1HealthTest.swift */; };
+		2643D9502693972F00012BBC /* IsHealthMin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2643D94F2693972F00012BBC /* IsHealthMin.swift */; };
 		264B7418268FA3C0009CE757 /* OnPlayCardOutOfTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B7417268FA3C0009CE757 /* OnPlayCardOutOfTurn.swift */; };
 		264B741C268FA6CA009CE757 /* DrawCardOnPlayHandOutOfTurnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B741B268FA6CA009CE757 /* DrawCardOnPlayHandOutOfTurnTests.swift */; };
 		266B2107267D48C9008F21E0 /* MCTSAiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B2106267D48C9008F21E0 /* MCTSAiTests.swift */; };
@@ -383,6 +387,10 @@
 		2622F2BC267A3CE800B75CA1 /* MCTSAi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCTSAi.swift; sourceTree = "<group>"; };
 		2643D9452693612F00012BBC /* Draw2CardsRequire1BlueCardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Draw2CardsRequire1BlueCardTests.swift; sourceTree = "<group>"; };
 		2643D947269363B700012BBC /* RequireHandCardsBlue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireHandCardsBlue.swift; sourceTree = "<group>"; };
+		2643D94926938DCC00012BBC /* ResourcesBangTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesBangTests.swift; sourceTree = "<group>"; };
+		2643D94B26938E0600012BBC /* ResourcesDodgeCityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesDodgeCityTests.swift; sourceTree = "<group>"; };
+		2643D94D269391C200012BBC /* Draw2CardsRequire1HealthTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Draw2CardsRequire1HealthTest.swift; sourceTree = "<group>"; };
+		2643D94F2693972F00012BBC /* IsHealthMin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsHealthMin.swift; sourceTree = "<group>"; };
 		264B7417268FA3C0009CE757 /* OnPlayCardOutOfTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnPlayCardOutOfTurn.swift; sourceTree = "<group>"; };
 		264B741B268FA6CA009CE757 /* DrawCardOnPlayHandOutOfTurnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCardOnPlayHandOutOfTurnTests.swift; sourceTree = "<group>"; };
 		266B2106267D48C9008F21E0 /* MCTSAiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCTSAiTests.swift; sourceTree = "<group>"; };
@@ -814,6 +822,7 @@
 				33AAE04C265A2CD900A067E3 /* IsHitCancelable.swift */,
 				33AAE050265A2FCF00A067E3 /* IsHitName.swift */,
 				33FBF8FB265B10CE00D7C6AD /* IsHandExceedLimit.swift */,
+				2643D94F2693972F00012BBC /* IsHealthMin.swift */,
 				33AAE02A2659811900A067E3 /* RequireTargetOther.swift */,
 				3369518C265FAF4C00B05D56 /* RequireTargetAny.swift */,
 				33AAE0342659898000A067E3 /* RequireInPlayCard.swift */,
@@ -1093,6 +1102,7 @@
 				33F40401265FDC25004E4FBF /* StartTurnDrawing3CardsTests.swift */,
 				33F40403265FE9A2004E4FBF /* StartTurnDrawing1CardPlusWoundTests.swift */,
 				2643D9452693612F00012BBC /* Draw2CardsRequire1BlueCardTests.swift */,
+				2643D94D269391C200012BBC /* Draw2CardsRequire1HealthTest.swift */,
 			);
 			path = figure;
 			sourceTree = "<group>";
@@ -1164,6 +1174,8 @@
 			children = (
 				3392B16525BC376F00214393 /* SetupTests.swift */,
 				3392B16625BC376F00214393 /* ResourcesTests.swift */,
+				2643D94926938DCC00012BBC /* ResourcesBangTests.swift */,
+				2643D94B26938E0600012BBC /* ResourcesDodgeCityTests.swift */,
 			);
 			path = setup;
 			sourceTree = "<group>";
@@ -2039,6 +2051,7 @@
 				3358334C25BC2585001BE4D8 /* GDatabaseUpdater.swift in Sources */,
 				3358333425BC2585001BE4D8 /* GPlayer.swift in Sources */,
 				33FBF90C265B1D5100D7C6AD /* DrawDeckChoosing.swift in Sources */,
+				2643D9502693972F00012BBC /* IsHealthMin.swift in Sources */,
 				2643D948269363B700012BBC /* RequireHandCardsBlue.swift in Sources */,
 				33272F7926592741005C9246 /* EffectFamily.swift in Sources */,
 				339CC9A1265E91220070D77B /* RequireTargetHit.swift in Sources */,
@@ -2146,6 +2159,7 @@
 				3392B1FA25BC377100214393 /* MockHitProtocol+Stub.swift in Sources */,
 				33245E6A266033340019E8F0 /* Draw2CardsOnOtherEliminatedTests.swift in Sources */,
 				3392B1BF25BC377100214393 /* PlayBangAsMissedTests.swift in Sources */,
+				2643D94C26938E0600012BBC /* ResourcesDodgeCityTests.swift in Sources */,
 				33636561265C1DB100B55C4E /* SpringfieldTests.swift in Sources */,
 				33245E6626602C980019E8F0 /* Gain2HealthOnOtherEliminatedTests.swift in Sources */,
 				3392B1EB25BC377100214393 /* Discard2CardsFor1HealthTests.swift in Sources */,
@@ -2189,11 +2203,13 @@
 				3392B1F625BC377100214393 /* MoveEvaluatorTests.swift in Sources */,
 				33F40402265FDC25004E4FBF /* StartTurnDrawing3CardsTests.swift in Sources */,
 				3392B1EF25BC377100214393 /* RegexTests.swift in Sources */,
+				2643D94A26938DCC00012BBC /* ResourcesBangTests.swift in Sources */,
 				3392B1C325BC377100214393 /* DatabaseTests.swift in Sources */,
 				3392B1F125BC377100214393 /* AIAgentTests.swift in Sources */,
 				33F40404265FE9A2004E4FBF /* StartTurnDrawing1CardPlusWoundTests.swift in Sources */,
 				3392B1BB25BC377100214393 /* TestModules.swift in Sources */,
 				3392B1D125BC377100214393 /* StartTurnDrawingFirstCardFromDiscardTests.swift in Sources */,
+				2643D94E269391C200012BBC /* Draw2CardsRequire1HealthTest.swift in Sources */,
 				3392B1DF25BC377100214393 /* BeerTests.swift in Sources */,
 				3392B1C525BC377100214393 /* GTimerTests.swift in Sources */,
 				3392B1CA25BC377100214393 /* DrawsAllCardsFromEliminatedPlayerTests.swift in Sources */,

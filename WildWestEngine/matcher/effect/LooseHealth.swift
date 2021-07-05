@@ -16,10 +16,12 @@ class LooseHealth: Effect {
     var player: PlayerArgument
     
     override func apply(_ ctx: MoveContext) -> [GEvent]? {
-        guard let player = ctx.players(matching: player).first,
-              let offender = ctx.state.hits.first(where: { $0.player == player })?.offender else {
+        guard let player = ctx.players(matching: player).first else {
             return nil
         }
+        
+        let hitOffender = ctx.state.hits.first(where: { $0.player == player })?.offender
+        let offender = hitOffender ?? ctx.actor.identifier
         
         let playerObject = ctx.state.players[player]!
         if playerObject.health == 1 {

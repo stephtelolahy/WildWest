@@ -156,5 +156,14 @@
       "bullets": 4,
       "draw2CardsRequire1BlueCard": 0
     }
+  },
+  {
+    "name": "chuckWengam",
+    "desc": "During his turn, he may choose to lose 1 life point to draw 2 cards. However, the last life point cannot be lost.",
+    "type": "figure",
+    "abilities": {
+      "bullets": 4,
+      "draw2CardsRequire1Health": 2
+    }
   }
 ]
