@@ -165,5 +165,15 @@
       "bullets": 4,
       "draw2CardsRequire1Health": 2
     }
+  },
+  {
+    "name": "docHolyday",
+    "desc": "Once during his turn, he may discard 2 cards from the hand to shoot a Bang!.",
+    "type": "figure",
+    "abilities": {
+      "bullets": 4,
+      "silentStartTurnDrawing2Cards": 0,
+      "startTurnChoosingDrawInPlay": 0
+    }
   }
 ]

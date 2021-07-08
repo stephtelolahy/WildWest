@@ -319,5 +319,42 @@
         "amount": 2
       }
     ]
+  },
+  {
+    "name": "startTurnChoosingDrawInPlay",
+    "type": "triggered",
+    "canPlay": {
+      "onQueueEmpty": 0,
+      "isYourTurn": 0,
+      "isPhase": 1
+    },
+    "onPlay": [
+      {
+        "action": "addHit",
+        "abilities": ["startTurnDrawingInPlay", "startTurnDrawingDeck"]
+      }
+    ]
+  },
+  {
+    "name": "startTurnDrawingInPlay",
+    "type": "active",
+    "canPlay": {
+      "requireTargetOther": 0,
+      "requireInPlayCard": 0
+    },
+    "onPlay": [
+      {
+        "action": "drawInPlay",
+        "other": "target",
+        "card": "requiredInPlay"
+      },
+      {
+        "action": "removeHit"
+      },
+      {
+        "action": "setPhase",
+        "value": 2
+      }
+    ]
   }
 ]

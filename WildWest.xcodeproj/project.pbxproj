@@ -18,6 +18,7 @@
 		2643D9502693972F00012BBC /* IsHealthMin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2643D94F2693972F00012BBC /* IsHealthMin.swift */; };
 		264B7418268FA3C0009CE757 /* OnPlayCardOutOfTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B7417268FA3C0009CE757 /* OnPlayCardOutOfTurn.swift */; };
 		264B741C268FA6CA009CE757 /* DrawCardOnPlayHandOutOfTurnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B741B268FA6CA009CE757 /* DrawCardOnPlayHandOutOfTurnTests.swift */; };
+		265CCFC72696CF550003641E /* StartTurnDrawingInPlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265CCFC62696CF550003641E /* StartTurnDrawingInPlayTests.swift */; };
 		266B2107267D48C9008F21E0 /* MCTSAiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B2106267D48C9008F21E0 /* MCTSAiTests.swift */; };
 		26CBA70E267BD3A600EA1227 /* RandomWithRoleAi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CBA70D267BD3A600EA1227 /* RandomWithRoleAi.swift */; };
 		26E56473267DBE58008DDB58 /* GLoopSyncronous.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E56472267DBE58008DDB58 /* GLoopSyncronous.swift */; };
@@ -393,6 +394,7 @@
 		2643D94F2693972F00012BBC /* IsHealthMin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsHealthMin.swift; sourceTree = "<group>"; };
 		264B7417268FA3C0009CE757 /* OnPlayCardOutOfTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnPlayCardOutOfTurn.swift; sourceTree = "<group>"; };
 		264B741B268FA6CA009CE757 /* DrawCardOnPlayHandOutOfTurnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCardOnPlayHandOutOfTurnTests.swift; sourceTree = "<group>"; };
+		265CCFC62696CF550003641E /* StartTurnDrawingInPlayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTurnDrawingInPlayTests.swift; sourceTree = "<group>"; };
 		266B2106267D48C9008F21E0 /* MCTSAiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCTSAiTests.swift; sourceTree = "<group>"; };
 		26CBA70D267BD3A600EA1227 /* RandomWithRoleAi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomWithRoleAi.swift; sourceTree = "<group>"; };
 		26E56472267DBE58008DDB58 /* GLoopSyncronous.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLoopSyncronous.swift; sourceTree = "<group>"; };
@@ -795,6 +797,7 @@
 				33245E6526602C980019E8F0 /* Gain2HealthOnOtherEliminatedTests.swift */,
 				33245E69266033340019E8F0 /* Draw2CardsOnOtherEliminatedTests.swift */,
 				264B741B268FA6CA009CE757 /* DrawCardOnPlayHandOutOfTurnTests.swift */,
+				265CCFC62696CF550003641E /* StartTurnDrawingInPlayTests.swift */,
 			);
 			path = figure;
 			sourceTree = "<group>";
@@ -2198,6 +2201,7 @@
 				3392B1BC25BC377100214393 /* SetupTests.swift in Sources */,
 				3392B1FC25BC377100214393 /* PlayerComputedTests.swift in Sources */,
 				3392B1EE25BC377100214393 /* EndTurnTests.swift in Sources */,
+				265CCFC72696CF550003641E /* StartTurnDrawingInPlayTests.swift in Sources */,
 				3392B1DB25BC377100214393 /* LooseHealthTests.swift in Sources */,
 				3392B1F825BC377100214393 /* MatcherExtension.swift in Sources */,
 				3392B1F625BC377100214393 /* MoveEvaluatorTests.swift in Sources */,
