@@ -94,7 +94,7 @@
     "onPlay": [
       {
         "action": "drawDeck",
-        "amount": "2"
+        "amount": 2
       }
     ]
   },
@@ -108,7 +108,7 @@
     "onPlay": [
       {
         "action": "drawDeck",
-        "amount": "3"
+        "amount": 3
       }
     ]
   },
@@ -232,7 +232,7 @@
         "action": "addHit",
         "player": "others",
         "abilities": ["looseHealth"],
-        "cancelable": "1"
+        "cancelable": 1
       }
     ]
   },
@@ -400,7 +400,7 @@
         "else": [
           {
             "action": "addHit",
-            "times": "3",
+            "times": 3,
             "abilities": ["looseHealth"]
           },
           {
@@ -422,7 +422,7 @@
     "onPlay": [
       {
         "action": "drawDeck",
-        "amount": "2"
+        "amount": 2
       },
       {
         "action": "setPhase",
@@ -528,7 +528,7 @@
     "onPlay": [
       {
         "action": "drawDeck",
-        "amount": "3"
+        "amount": 3
       }
     ]
   },
@@ -640,11 +640,9 @@
     },
     "onPlay": [
       {
-        "action": "drawDeck"
-      },
-      {
         "action": "drawDeckFlippingIf",
         "player": "actor",
+        "amount": 2,
         "regex": "(♥️)|(♦️)",
         "then": [
           {
@@ -738,7 +736,7 @@
     "onPlay": [
       {
         "action": "drawDeck",
-        "amount": "2"
+        "amount": 2
       },
       {
         "action": "removeHit"

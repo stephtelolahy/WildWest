@@ -25,13 +25,13 @@ class GameBuilder: GameBuilderProtocol {
     
     private let preferences: UserPreferencesProtocol
     private let resourcesLoader: ResourcesLoaderProtocol
-    private let durationMatcher: DurationMatcherProtocol
+    private let durationMatcher: EventDurationProtocol
     private let database: UserDatabaseProtocol
     private let abilityMatcher: AbilityMatcherProtocol
     
     init(preferences: UserPreferencesProtocol,
          resourcesLoader: ResourcesLoaderProtocol,
-         durationMatcher: DurationMatcherProtocol,
+         durationMatcher: EventDurationProtocol,
          database: UserDatabaseProtocol,
          abilityMatcher: AbilityMatcherProtocol) {
         self.preferences = preferences
@@ -71,8 +71,8 @@ class GameBuilder: GameBuilderProtocol {
             let roleEstimator = RoleEstimator(sheriff: sheriff, abilityEvaluator: abilityEvaluator)
             let roleStrategy = RoleStrategy()
             let moveEvaluator = MoveEvaluator(abilityEvaluator: abilityEvaluator, roleEstimator: roleEstimator, roleStrategy: roleStrategy)
-            let ai = GAI(moveEvaluator: moveEvaluator)
-            return AIAgent(player: player, engine: engine, ai: ai, roleEstimator: roleEstimator)
+            let ai = RandomWithRoleAi(moveEvaluator: moveEvaluator)
+            return AIAgent(player: player, engine: engine, ai: ai)
         }
         
         agents.forEach { $0.observe(database) }

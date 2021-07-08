@@ -91,4 +91,11 @@ extension MockStateProtocol {
         }
         return self
     }
+    
+    func history(are moves: GMove...) -> MockStateProtocol {
+        stub(self) { mock in
+            when(mock.history.get).thenReturn(moves)
+        }
+        return self
+    }
 }

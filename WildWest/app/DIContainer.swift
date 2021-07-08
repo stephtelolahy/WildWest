@@ -43,7 +43,7 @@ extension Resolver: ResolverRegistering {
         
         register { AnimationEventMatcher(preferences: resolve()) as AnimationEventMatcherProtocol }.scope(application)
         
-        register { AnimationEventMatcher(preferences: resolve()) as DurationMatcherProtocol }.scope(application)
+        register { AnimationEventMatcher(preferences: resolve()) as EventDurationProtocol }.scope(application)
         
         register(MediaEventMatcherProtocol.self) {
             let jsonReader = JsonReader(bundle: Bundle.main)

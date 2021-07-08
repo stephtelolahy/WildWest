@@ -66,7 +66,8 @@ public class GSetup: SetupProtocol {
                       discard: [],
                       store: [],
                       hits: [],
-                      played: [])
+                      played: [],
+                      history: [])
     }
 }
 

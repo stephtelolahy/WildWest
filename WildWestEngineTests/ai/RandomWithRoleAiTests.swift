@@ -1,5 +1,5 @@
 //
-//  AITests.swift
+//  RandomWithRoleAiTests.swift
 //  CardGameEngine_Tests
 //
 //  Created by Hugues Stephano Telolahy on 06/11/2020.
@@ -11,14 +11,14 @@ import XCTest
 import WildWestEngine
 import Cuckoo
 
-class AITests: XCTestCase {
+class RandomWithRoleAiTests: XCTestCase {
 
     private var sut: AIProtocol!
     private var mockMoveEvaluator: MockMoveEvaluatorProtocol!
     
     override func setUp() {
         mockMoveEvaluator = MockMoveEvaluatorProtocol()
-        sut = GAI(moveEvaluator: mockMoveEvaluator)
+        sut = RandomWithRoleAi(moveEvaluator: mockMoveEvaluator)
     }
 
     func test_BestMove_IfSingleMove() {

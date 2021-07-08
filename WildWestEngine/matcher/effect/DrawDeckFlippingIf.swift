@@ -14,6 +14,9 @@ class DrawDeckFlippingIf: Effect {
     @Argument(name: "player", defaultValue: .actor)
     var player: PlayerArgument
     
+    @Argument(name: "amount", defaultValue: 1)
+    var amount: Int
+    
     @Argument(name: "regex")
     var regex: String
     
@@ -27,11 +30,12 @@ class DrawDeckFlippingIf: Effect {
         guard let player = ctx.players(matching: player).first else {
             return nil
         }
-        var events: [GEvent] = [.drawDeckFlipping(player: player)]
         
-        // <HACK: consider revealed card is deck[1]>
-        let cardObject = ctx.state.deck[1]
-        // </HACK>
+        var events: [GEvent] = (0..<amount - 1).map { _ in .drawDeck(player: player) }
+        
+        events.append(.drawDeckFlipping(player: player))
+        
+        let cardObject = ctx.state.deck[amount - 1]
         
         let success = cardObject.matches(regex: regex)
         if success {

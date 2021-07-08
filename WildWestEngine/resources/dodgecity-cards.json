@@ -138,5 +138,51 @@
       "bullets": 4,
       "draw2CardsOnOtherEliminated": 0
     }
+  },
+  {
+    "name": "mollyStark",
+    "desc": "Each time she uses a card from her hand out of turn, she draw a card.",
+    "type": "figure",
+    "abilities": {
+      "bullets": 4,
+      "drawCardOnPlayHandOutOfTurn": 0
+    }
+  },
+  {
+    "name": "joseDelgado",
+    "desc": "Twice in his turn, he may discard a blue card from the hand to draw 2 cards.",
+    "type": "figure",
+    "abilities": {
+      "bullets": 4,
+      "draw2CardsRequire1BlueCard": 0
+    }
+  },
+  {
+    "name": "chuckWengam",
+    "desc": "During his turn, he may choose to lose 1 life point to draw 2 cards. However, the last life point cannot be lost.",
+    "type": "figure",
+    "abilities": {
+      "bullets": 4,
+      "draw2CardsRequire1Health": 2
+    }
+  },
+  {
+    "name": "docHolyday",
+    "desc": "Once during his turn, he may discard 2 cards from the hand to shoot a Bang!.",
+    "type": "figure",
+    "abilities": {
+      "bullets": 4,
+      "bangRequire2Cards": 0
+    }
+  },
+  {
+    "name": "patBrennan",
+    "desc": "Instead of drawing normally, he may draw only one card in play in front of any one player.",
+    "type": "figure",
+    "abilities": {
+      "bullets": 4,
+      "silentStartTurnDrawing2Cards": 0,
+      "startTurnChoosingDrawInPlay": 0
+    }
   }
 ]

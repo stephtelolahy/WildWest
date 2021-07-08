@@ -33,19 +33,7 @@ class AIAgentTests: XCTestCase {
         }
         mockAI = MockAIProtocol()
         mockRoleEstimator = MockRoleEstimatorProtocol().withEnabledDefaultImplementation(RoleEstimatorProtocolStub())
-        sut = AIAgent(player: "p1", engine: mockEngine, ai: mockAI, roleEstimator: mockRoleEstimator)
-    }
-    
-    func test_UpdateRoleEstimator_IfReceivingMove() {
-        // Given
-        let move = GMove("m1", actor: "p1")
-        sut.observe(mockDatabase)
-        
-        // When
-        eventSubject.onNext(.run(move: move))
-        
-        // Assert 
-        verify(mockRoleEstimator).update(on: equal(to: move))
+        sut = AIAgent(player: "p1", engine: mockEngine, ai: mockAI)
     }
     
     func test_ExecuteBestMove_IfReceivingAttributedActiveMoves() {

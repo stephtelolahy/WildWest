@@ -9,15 +9,15 @@ public protocol GTimerProtocol {
     func wait(_ event: GEvent, completion: @escaping () -> Void)
 }
 
-public protocol DurationMatcherProtocol {
+public protocol EventDurationProtocol {
     func waitDuration(_ event: GEvent) -> TimeInterval
 }
 
 public class GTimer: GTimerProtocol {
     
-    private let matcher: DurationMatcherProtocol
+    private let matcher: EventDurationProtocol
     
-    public init(matcher: DurationMatcherProtocol) {
+    public init(matcher: EventDurationProtocol) {
         self.matcher = matcher
     }
     

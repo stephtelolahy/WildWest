@@ -12,7 +12,7 @@
         "action": "addHit",
         "player": "target",
         "abilities": ["looseHealth"],
-        "cancelable": "1"
+        "cancelable": 1
       }
     ]
   },
@@ -49,7 +49,7 @@
         "action": "addHit",
         "player": "target",
         "abilities": ["looseHealth"],
-        "cancelable": "1"
+        "cancelable": 1
       }
     ]
   },
@@ -213,7 +213,7 @@
     "onPlay": [
       {
         "action": "drawDeck",
-        "amount": "3"
+        "amount": 3
       },
       {
         "action": "setPhase",
@@ -266,7 +266,117 @@
     "onPlay": [
       {
         "action": "drawDeck",
-        "amount": "2"
+        "amount": 2
+      }
+    ]
+  },
+  {
+    "name": "drawCardOnPlayHandOutOfTurn",
+    "type": "triggered",
+    "canPlay": {
+      "onPlayCardOutOfTurn": 0
+    },
+    "onPlay": [
+      {
+        "action": "drawDeck"
+      }
+    ]
+  },
+  {
+    "name": "draw2CardsRequire1BlueCard",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireHandCardsBlue": 1,
+      "isTimesPerTurnMax": 2
+    },
+    "onPlay": [
+      {
+        "action": "discardHand",
+        "card": "requiredHand"
+      },
+      {
+        "action": "drawDeck",
+        "amount": 2
+      }
+    ]
+  },
+  {
+    "name": "draw2CardsRequire1Health",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "isHealthMin": 2
+    },
+    "onPlay": [
+      {
+        "action": "looseHealth"
+      },
+      {
+        "action": "drawDeck",
+        "amount": 2
+      }
+    ]
+  },
+  {
+    "name": "startTurnChoosingDrawInPlay",
+    "type": "triggered",
+    "canPlay": {
+      "onQueueEmpty": 0,
+      "isYourTurn": 0,
+      "isPhase": 1
+    },
+    "onPlay": [
+      {
+        "action": "addHit",
+        "abilities": ["startTurnDrawingInPlay", "startTurnDrawingDeck"]
+      }
+    ]
+  },
+  {
+    "name": "startTurnDrawingInPlay",
+    "type": "active",
+    "canPlay": {
+      "requireTargetOther": 0,
+      "requireInPlayCard": 0
+    },
+    "onPlay": [
+      {
+        "action": "drawInPlay",
+        "other": "target",
+        "card": "requiredInPlay"
+      },
+      {
+        "action": "removeHit"
+      },
+      {
+        "action": "setPhase",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "name": "bangRequire2Cards",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireHandCards": 2,
+      "requireTargetOther": 0,
+      "isTimesPerTurnMax": 1
+    },
+    "onPlay": [
+      {
+        "action": "discardHand",
+        "card": "requiredHand"
+      },
+      {
+        "action": "addHit",
+        "player": "target",
+        "abilities": ["looseHealth"],
+        "cancelable": 1
       }
     ]
   }

@@ -60,7 +60,7 @@ class GameViewController: UIViewController {
         let roleEstimator = RoleEstimator(sheriff: sheriff, abilityEvaluator: abilityEvaluator)
         let roleStrategy = RoleStrategy()
         let moveEvaluator = MoveEvaluator(abilityEvaluator: abilityEvaluator, roleEstimator: roleEstimator, roleStrategy: roleStrategy)
-        return GAI(moveEvaluator: moveEvaluator)
+        return RandomWithRoleAi(moveEvaluator: moveEvaluator)
     }()
     
     // MARK: Lifecycle
@@ -152,12 +152,13 @@ private extension GameViewController {
             userManager.setStatusIdle()
             analyticsManager.tagEventGameOver(state)
             
+        case let .run(move):
+            messages.append("\(mediaMatcher.emoji(on: event) ?? "") \(move.ability)")
+            messageTableView.reloadDataScrollingAtBottom()
+            
         default:
             break
         }
-        
-        messages.append("\(mediaMatcher.emoji(on: event) ?? "") \(event)")
-        messageTableView.reloadDataScrollingAtBottom()
         
         #if DEBUG
         print("\(mediaMatcher.emoji(on: event) ?? "") \(event)")

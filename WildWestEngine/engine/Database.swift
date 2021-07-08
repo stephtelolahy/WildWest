@@ -41,7 +41,8 @@ private extension StateProtocol {
                       discard: discard,
                       store: store,
                       hits: hits,
-                      played: played)
+                      played: played,
+                      history: history)
     }
 }
 
