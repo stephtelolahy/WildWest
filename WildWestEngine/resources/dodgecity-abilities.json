@@ -356,5 +356,28 @@
         "value": 2
       }
     ]
+  },
+  {
+    "name": "bangRequire2Cards",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireHandCards": 2,
+      "requireTargetOther": 0,
+      "isTimesPerTurnMax": 1
+    },
+    "onPlay": [
+      {
+        "action": "discardHand",
+        "card": "requiredHand"
+      },
+      {
+        "action": "addHit",
+        "player": "target",
+        "abilities": ["looseHealth"],
+        "cancelable": 1
+      }
+    ]
   }
 ]

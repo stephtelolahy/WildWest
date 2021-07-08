@@ -172,6 +172,15 @@
     "type": "figure",
     "abilities": {
       "bullets": 4,
+      "bangRequire2Cards": 0
+    }
+  },
+  {
+    "name": "patBrennan",
+    "desc": "Instead of drawing normally, he may draw only one card in play in front of any one player.",
+    "type": "figure",
+    "abilities": {
+      "bullets": 4,
       "silentStartTurnDrawing2Cards": 0,
       "startTurnChoosingDrawInPlay": 0
     }
