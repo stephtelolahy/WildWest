@@ -184,5 +184,14 @@
       "silentStartTurnDrawing2Cards": 0,
       "startTurnChoosingDrawInPlay": 0
     }
+  },
+  {
+    "name": "apacheKid",
+    "desc": "Cards of Diamond played by other players do not affect him",
+    "type": "figure",
+    "abilities": {
+      "bullets": 3,
+      "silentDiamonds": 0
+    }
   }
 ]

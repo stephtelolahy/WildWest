@@ -18,6 +18,8 @@
 		2643D9502693972F00012BBC /* IsHealthMin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2643D94F2693972F00012BBC /* IsHealthMin.swift */; };
 		264B7418268FA3C0009CE757 /* OnPlayCardOutOfTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B7417268FA3C0009CE757 /* OnPlayCardOutOfTurn.swift */; };
 		264B741C268FA6CA009CE757 /* DrawCardOnPlayHandOutOfTurnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B741B268FA6CA009CE757 /* DrawCardOnPlayHandOutOfTurnTests.swift */; };
+		264CC4C026978B4B0046D996 /* SilentJailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264CC4BF26978B4B0046D996 /* SilentJailTests.swift */; };
+		264CC4C426978D0E0046D996 /* SilentDiamondsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264CC4C326978D0E0046D996 /* SilentDiamondsTests.swift */; };
 		265CCFC72696CF550003641E /* StartTurnDrawingInPlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265CCFC62696CF550003641E /* StartTurnDrawingInPlayTests.swift */; };
 		265CCFC92696D7860003641E /* BangRequire2CardsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265CCFC82696D7860003641E /* BangRequire2CardsTests.swift */; };
 		266B2107267D48C9008F21E0 /* MCTSAiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B2106267D48C9008F21E0 /* MCTSAiTests.swift */; };
@@ -395,6 +397,8 @@
 		2643D94F2693972F00012BBC /* IsHealthMin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsHealthMin.swift; sourceTree = "<group>"; };
 		264B7417268FA3C0009CE757 /* OnPlayCardOutOfTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnPlayCardOutOfTurn.swift; sourceTree = "<group>"; };
 		264B741B268FA6CA009CE757 /* DrawCardOnPlayHandOutOfTurnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawCardOnPlayHandOutOfTurnTests.swift; sourceTree = "<group>"; };
+		264CC4BF26978B4B0046D996 /* SilentJailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SilentJailTests.swift; sourceTree = "<group>"; };
+		264CC4C326978D0E0046D996 /* SilentDiamondsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SilentDiamondsTests.swift; sourceTree = "<group>"; };
 		265CCFC62696CF550003641E /* StartTurnDrawingInPlayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTurnDrawingInPlayTests.swift; sourceTree = "<group>"; };
 		265CCFC82696D7860003641E /* BangRequire2CardsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BangRequire2CardsTests.swift; sourceTree = "<group>"; };
 		266B2106267D48C9008F21E0 /* MCTSAiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCTSAiTests.swift; sourceTree = "<group>"; };
@@ -804,6 +808,22 @@
 				265CCFC62696CF550003641E /* StartTurnDrawingInPlayTests.swift */,
 			);
 			path = figure;
+			sourceTree = "<group>";
+		};
+		264CC4C126978B960046D996 /* passive */ = {
+			isa = PBXGroup;
+			children = (
+				264CC4BF26978B4B0046D996 /* SilentJailTests.swift */,
+			);
+			path = passive;
+			sourceTree = "<group>";
+		};
+		264CC4C226978BAF0046D996 /* passive */ = {
+			isa = PBXGroup;
+			children = (
+				264CC4C326978D0E0046D996 /* SilentDiamondsTests.swift */,
+			);
+			path = passive;
 			sourceTree = "<group>";
 		};
 		3300EF2C256FE4DE006075F6 /* json */ = {
@@ -1222,7 +1242,6 @@
 			children = (
 				3392B17525BC377000214393 /* card */,
 				3392B17925BC377000214393 /* figure */,
-				3392B18225BC377000214393 /* default */,
 			);
 			path = triggered;
 			sourceTree = "<group>";
@@ -1240,6 +1259,13 @@
 		3392B17925BC377000214393 /* figure */ = {
 			isa = PBXGroup;
 			children = (
+				3392B18325BC377000214393 /* DiscardExcessCardsOnPhase3Tests.swift */,
+				3392B18425BC377000214393 /* StartTurnOnPhase1Tests.swift */,
+				3392B18525BC377000214393 /* NextTurnOnPhase3Tests.swift */,
+				3392B18625BC377000214393 /* PenalizeSheriffOnEliminatingDeputyTests.swift */,
+				3392B18725BC377000214393 /* GainRewardOnEliminatingOutlawTests.swift */,
+				3392B18825BC377000214393 /* NextTurnOnEliminatedTests.swift */,
+				3392B18925BC377000214393 /* DiscardAllCardsOnEliminatedTests.swift */,
 				3392B17A25BC377000214393 /* DrawsAllCardsFromEliminatedPlayerTests.swift */,
 				3392B17B25BC377000214393 /* StartTurnDrawing3CardsAndKeep2Tests.swift */,
 				3392B17C25BC377000214393 /* StartTurnDrawingFirstCardFromPlayerTests.swift */,
@@ -1252,46 +1278,21 @@
 			path = figure;
 			sourceTree = "<group>";
 		};
-		3392B18225BC377000214393 /* default */ = {
-			isa = PBXGroup;
-			children = (
-				3392B18325BC377000214393 /* DiscardExcessCardsOnPhase3Tests.swift */,
-				3392B18425BC377000214393 /* StartTurnOnPhase1Tests.swift */,
-				3392B18525BC377000214393 /* NextTurnOnPhase3Tests.swift */,
-				3392B18625BC377000214393 /* PenalizeSheriffOnEliminatingDeputyTests.swift */,
-				3392B18725BC377000214393 /* GainRewardOnEliminatingOutlawTests.swift */,
-				3392B18825BC377000214393 /* NextTurnOnEliminatedTests.swift */,
-				3392B18925BC377000214393 /* DiscardAllCardsOnEliminatedTests.swift */,
-			);
-			path = default;
-			sourceTree = "<group>";
-		};
 		3392B18A25BC377000214393 /* active */ = {
 			isa = PBXGroup;
 			children = (
-				3392B18B25BC377000214393 /* reaction */,
 				3392B19125BC377000214393 /* card */,
 				3392B19F25BC377000214393 /* figure */,
-				3392B1A125BC377000214393 /* default */,
 			);
 			path = active;
-			sourceTree = "<group>";
-		};
-		3392B18B25BC377000214393 /* reaction */ = {
-			isa = PBXGroup;
-			children = (
-				3392B18C25BC377000214393 /* DiscardBangOnDuelTests.swift */,
-				3392B18D25BC377000214393 /* DiscardBangOnIndiansTests.swift */,
-				3392B18E25BC377000214393 /* LooseHealthTests.swift */,
-				3392B18F25BC377000214393 /* DiscardSelfHandTests.swift */,
-				3392B19025BC377000214393 /* DrawStoreTests.swift */,
-			);
-			path = reaction;
 			sourceTree = "<group>";
 		};
 		3392B19125BC377000214393 /* card */ = {
 			isa = PBXGroup;
 			children = (
+				3392B18E25BC377000214393 /* LooseHealthTests.swift */,
+				3392B18F25BC377000214393 /* DiscardSelfHandTests.swift */,
+				3392B19025BC377000214393 /* DrawStoreTests.swift */,
 				3392B19225BC377000214393 /* GeneralStoreTests.swift */,
 				3392B19325BC377000214393 /* BeerTests.swift */,
 				3392B19425BC377000214393 /* IndiansTests.swift */,
@@ -1302,6 +1303,8 @@
 				3392B19925BC377000214393 /* GatlingTests.swift */,
 				3392B19A25BC377000214393 /* CatBalouTests.swift */,
 				3392B19B25BC377000214393 /* BangTests.swift */,
+				3392B18C25BC377000214393 /* DiscardBangOnDuelTests.swift */,
+				3392B18D25BC377000214393 /* DiscardBangOnIndiansTests.swift */,
 				3392B19C25BC377000214393 /* WellsFargoTests.swift */,
 				3392B19D25BC377000214393 /* PanicTests.swift */,
 				3392B19E25BC377000214393 /* DiscardBeerTests.swift */,
@@ -1312,21 +1315,14 @@
 		3392B19F25BC377000214393 /* figure */ = {
 			isa = PBXGroup;
 			children = (
+				3392B1A225BC377000214393 /* EquipTests.swift */,
+				3392B1A325BC377000214393 /* HandicapTests.swift */,
+				3392B1A425BC377000214393 /* EndTurnTests.swift */,
 				3392B1A025BC377000214393 /* Discard2CardsFor1HealthTests.swift */,
 				3392B16825BC376F00214393 /* PlayMissedAsBangTests.swift */,
 				3392B16925BC376F00214393 /* PlayBangAsMissedTests.swift */,
 			);
 			path = figure;
-			sourceTree = "<group>";
-		};
-		3392B1A125BC377000214393 /* default */ = {
-			isa = PBXGroup;
-			children = (
-				3392B1A225BC377000214393 /* EquipTests.swift */,
-				3392B1A325BC377000214393 /* HandicapTests.swift */,
-				3392B1A425BC377000214393 /* EndTurnTests.swift */,
-			);
-			path = default;
 			sourceTree = "<group>";
 		};
 		3392B1A525BC377000214393 /* misc */ = {
@@ -1456,6 +1452,7 @@
 		33DA158C265C170800915E5B /* bang */ = {
 			isa = PBXGroup;
 			children = (
+				264CC4C126978B960046D996 /* passive */,
 				3392B18A25BC377000214393 /* active */,
 				3392B17425BC377000214393 /* triggered */,
 			);
@@ -1465,6 +1462,7 @@
 		33DA158D265C171600915E5B /* dodge */ = {
 			isa = PBXGroup;
 			children = (
+				264CC4C226978BAF0046D996 /* passive */,
 				33DA158E265C172100915E5B /* active */,
 				264B7419268FA503009CE757 /* triggered */,
 			);
@@ -2184,6 +2182,7 @@
 				3392B1FE25BC377100214393 /* GeneratedMocks.swift in Sources */,
 				3392B1C225BC377100214393 /* GLoopTests.swift in Sources */,
 				3392B1D625BC377100214393 /* GainRewardOnEliminatingOutlawTests.swift in Sources */,
+				264CC4C426978D0E0046D996 /* SilentDiamondsTests.swift in Sources */,
 				3392B1EA25BC377100214393 /* DiscardBeerTests.swift in Sources */,
 				266B2107267D48C9008F21E0 /* MCTSAiTests.swift in Sources */,
 				3392B1F425BC377100214393 /* RoleEstimatorTests.swift in Sources */,
@@ -2204,6 +2203,7 @@
 				3392B1BC25BC377100214393 /* SetupTests.swift in Sources */,
 				3392B1FC25BC377100214393 /* PlayerComputedTests.swift in Sources */,
 				3392B1EE25BC377100214393 /* EndTurnTests.swift in Sources */,
+				264CC4C026978B4B0046D996 /* SilentJailTests.swift in Sources */,
 				265CCFC72696CF550003641E /* StartTurnDrawingInPlayTests.swift in Sources */,
 				3392B1DB25BC377100214393 /* LooseHealthTests.swift in Sources */,
 				3392B1F825BC377100214393 /* MatcherExtension.swift in Sources */,
