@@ -83,10 +83,8 @@
     "desc": "She may use any card in hand as Missed!.",
     "type": "figure",
     "attributes": {
-      "bullets": 3
-    },
-    "abilities": {
-      "playAnyCardAsMissed": 0
+      "bullets": 3,
+      "playAs": { "": "missed" }
     }
   },
   {

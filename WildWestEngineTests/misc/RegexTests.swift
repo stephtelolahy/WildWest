@@ -18,6 +18,7 @@ class RegexTests: XCTestCase {
     private let passDynamite = "(♥️)|(♦️)|(♣️)|([10|J|Q|K|A]♠️)"
     private let isDiamonds = "♦️"
     private let isJail = "jail"
+    private let isAny = ""
 
     func test_EscapeFromJail() {
 
@@ -142,6 +143,10 @@ class RegexTests: XCTestCase {
     
     func test_IsJail() {
         XCTAssertTrue(MockCardProtocol().withDefault().named("jail").matches(regex: isJail))
+    }
+    
+    func test_IsAny() {
+        XCTAssertTrue(MockCardProtocol().withDefault().named("gatling").matches(regex: isAny))
     }
 
 }

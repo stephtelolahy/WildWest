@@ -38,11 +38,7 @@ class ResourcesTests: XCTestCase {
     
     func test_AllCardsHaveValidAbilities() throws {
         // Given
-        let passiveAbilities = ["playBangAsMissed",
-                                "playMissedAsBang",
-                                "playAnyCardAsMissed"]
-        let activeAbilities = sut.loadAbilities().map { $0.name }
-        let allAbilities = passiveAbilities + activeAbilities
+        let allAbilities = sut.loadAbilities().map { $0.name }
         
         // When
         let cards = sut.loadCards()

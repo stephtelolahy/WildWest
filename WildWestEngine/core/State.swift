@@ -55,6 +55,7 @@ public protocol CardAttributesProtocol {
     var handLimit: Int? { get }
     var silentCard: String? { get }
     var silentAbility: String? { get }
+    var playAs: [String: String]? { get }
 }
 
 public protocol PlayerStoredProtocol: BaseCardProtocol {

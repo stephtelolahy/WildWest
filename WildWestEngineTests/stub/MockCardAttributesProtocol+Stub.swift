@@ -83,4 +83,11 @@ extension MockCardAttributesProtocol {
         }
         return self
     }
+    
+    func playAs(is value: [String: String]) -> MockCardAttributesProtocol {
+        stub(self) { mock in
+            when(mock.playAs.get).thenReturn(value)
+        }
+        return self
+    }
 }

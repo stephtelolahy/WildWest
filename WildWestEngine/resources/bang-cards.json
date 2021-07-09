@@ -291,11 +291,11 @@
     "desc": "she can use BANG! cards as Missed! cards and vice versa. If she plays a Missed! card as a BANG!, she cannot play another BANG! card that turn (unless she has a Volcanic in play).",
     "type": "figure",
     "attributes": {
-      "bullets": 4
-    },
-    "abilities": {
-      "playBangAsMissed": 0,
-      "playMissedAsBang": 0
+      "bullets": 4,
+      "playAs": {
+        "bang": "missed",
+        "missed": "bang"
+      }
     }
   },
   {

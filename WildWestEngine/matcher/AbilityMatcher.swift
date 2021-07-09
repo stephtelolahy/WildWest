@@ -69,7 +69,7 @@ private extension AbilityMatcher {
             .flatMap { $0 }
         
         let playHandMoves: [GMove] = actor.hand.flatMap { card -> [GMove] in
-            abilities(applicableTo: card, actor: actor).keys
+            actor.abilities(applicableTo: card).keys
                 .compactMap { ability -> [GMove]? in
                     self.moves(ofType: .active, ability: ability, card: .hand(card.identifier), actor: actor, in: state)?
                         .filter { move -> Bool in
@@ -185,28 +185,6 @@ private extension AbilityMatcher {
 
 // MARK: - Passive ability matcher
 
-private extension AbilityMatcher {
-    func abilities(applicableTo card: CardProtocol, actor: PlayerProtocol) -> [String: Int] {
-        var abilities = card.abilities
-        
-        if actor.abilities["playBangAsMissed"] != nil,
-           card.name == "bang" {
-            abilities["missed"] = 0
-        }
-        
-        if actor.abilities["playMissedAsBang"] != nil,
-           card.name == "missed" {
-            abilities["bang"] = 0
-        }
-        
-        if actor.abilities["playAnyCardAsMissed"] != nil {
-            abilities["missed"] = 0
-        }
-        
-        return abilities
-    }
-}
-
 private extension PlayerProtocol {
     
     func isTargetableBy(_ card: CardProtocol) -> Bool {
@@ -222,6 +200,16 @@ private extension PlayerProtocol {
         var abilities = self.abilities
         if let silenced = attributes.silentAbility {
             abilities.removeValue(forKey: silenced)
+        }
+        return abilities
+    }
+    
+    func abilities(applicableTo card: CardProtocol) -> [String: Int] {
+        var abilities = card.abilities
+        for (key, value) in attributes.playAs ?? [:] {
+            if card.matches(regex: key) {
+                abilities[value] = 0
+            }
         }
         return abilities
     }
