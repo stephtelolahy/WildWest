@@ -78,8 +78,10 @@
     "name": "elenaFuente",
     "desc": "She may use any card in hand as Missed!.",
     "type": "figure",
+    "attributes": {
+      "bullets": 3
+    },
     "abilities": {
-      "bullets": 3,
       "playAnyCardAsMissed": 0
     }
   },
@@ -87,8 +89,10 @@
     "name": "seanMallory",
     "desc": "He may hold in his hand up to 10 cards.",
     "type": "figure",
+    "attributes": {
+      "bullets": 3
+    },
     "abilities": {
-      "bullets": 3,
       "handLimit": 10
     }
   },
@@ -96,8 +100,10 @@
     "name": "tequilaJoe",
     "desc": "Each time he plays a Beer, he regains 2 life points instead of 1.",
     "type": "figure",
+    "attributes": {
+      "bullets": 4
+    },
     "abilities": {
-      "bullets": 4,
       "gain2HealthOnPlayBeer": 0
     }
   },
@@ -105,8 +111,10 @@
     "name": "pixiePete",
     "desc": "During phase 1 of his turn, he draws 3 cards instead of 2.",
     "type": "figure",
+    "attributes": {
+      "bullets": 3
+    },
     "abilities": {
-      "bullets": 3,
       "silentStartTurnDrawing2Cards": 0,
       "startTurnDrawing3Cards": 0
     }
@@ -115,8 +123,10 @@
     "name": "billNoface",
     "desc": "He draws 1 card, plus 1 card for each wound he has.",
     "type": "figure",
+    "attributes": {
+      "bullets": 4
+    },
     "abilities": {
-      "bullets": 4,
       "silentStartTurnDrawing2Cards": 0,
       "startTurnDrawing1CardPlusWound": 0
     }
@@ -125,8 +135,10 @@
     "name": "gregDigger",
     "desc": "Each time another player is eliminated, he regains 2 life points.",
     "type": "figure",
+    "attributes": {
+      "bullets": 4
+    },
     "abilities": {
-      "bullets": 4,
       "gain2HealthOnOtherEliminated": 0
     }
   },
@@ -134,8 +146,10 @@
     "name": "herbHunter",
     "desc": "Each time another player is eliminated, he draws 2 extra cards.",
     "type": "figure",
+    "attributes": {
+      "bullets": 4
+    },
     "abilities": {
-      "bullets": 4,
       "draw2CardsOnOtherEliminated": 0
     }
   },
@@ -143,8 +157,10 @@
     "name": "mollyStark",
     "desc": "Each time she uses a card from her hand out of turn, she draw a card.",
     "type": "figure",
+    "attributes": {
+      "bullets": 4
+    },
     "abilities": {
-      "bullets": 4,
       "drawCardOnPlayHandOutOfTurn": 0
     }
   },
@@ -152,8 +168,10 @@
     "name": "joseDelgado",
     "desc": "Twice in his turn, he may discard a blue card from the hand to draw 2 cards.",
     "type": "figure",
+    "attributes": {
+      "bullets": 4
+    },
     "abilities": {
-      "bullets": 4,
       "draw2CardsRequire1BlueCard": 0
     }
   },
@@ -161,8 +179,10 @@
     "name": "chuckWengam",
     "desc": "During his turn, he may choose to lose 1 life point to draw 2 cards. However, the last life point cannot be lost.",
     "type": "figure",
+    "attributes": {
+      "bullets": 4
+    },
     "abilities": {
-      "bullets": 4,
       "draw2CardsRequire1Health": 2
     }
   },
@@ -170,8 +190,10 @@
     "name": "docHolyday",
     "desc": "Once during his turn, he may discard 2 cards from the hand to shoot a Bang!.",
     "type": "figure",
+    "attributes": {
+      "bullets": 4
+    },
     "abilities": {
-      "bullets": 4,
       "bangRequire2Cards": 0
     }
   },
@@ -179,8 +201,10 @@
     "name": "patBrennan",
     "desc": "Instead of drawing normally, he may draw only one card in play in front of any one player.",
     "type": "figure",
+    "attributes": {
+      "bullets": 4
+    },
     "abilities": {
-      "bullets": 4,
       "silentStartTurnDrawing2Cards": 0,
       "startTurnChoosingDrawInPlay": 0
     }
@@ -189,8 +213,10 @@
     "name": "apacheKid",
     "desc": "Cards of Diamond played by other players do not affect him",
     "type": "figure",
+    "attributes": {
+      "bullets": 3
+    },
     "abilities": {
-      "bullets": 3,
       "silentDiamonds": 0
     }
   }

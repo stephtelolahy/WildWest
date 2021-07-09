@@ -12,7 +12,11 @@ import Cuckoo
 extension MockPlayerProtocol {
     
     func withDefault() -> MockPlayerProtocol {
-        withEnabledDefaultImplementation(PlayerProtocolStub())
+        let result = withEnabledDefaultImplementation(PlayerProtocolStub())
+        Cuckoo.stub(result) { mock in
+            when(mock.attributes.get).thenReturn(Card.Attributes())
+        }
+        return result
     }
     
     func identified(by identifier: String) -> MockPlayerProtocol {

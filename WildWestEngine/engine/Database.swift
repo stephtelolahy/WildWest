@@ -57,6 +57,7 @@ private extension PlayerProtocol {
                        name: name,
                        desc: desc,
                        abilities: abilities,
+                       attributes: attributes,
                        role: role,
                        maxHealth: maxHealth,
                        health: health,

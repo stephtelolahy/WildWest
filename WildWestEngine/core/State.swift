@@ -41,6 +41,7 @@ public protocol BaseCardProtocol {
     var name: String { get }
     var desc: String { get }
     var abilities: [String: Int] { get }
+    var attributes: Card.Attributes { get }
 }
 
 public protocol PlayerStoredProtocol: BaseCardProtocol {

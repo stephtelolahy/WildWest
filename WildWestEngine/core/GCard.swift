@@ -14,6 +14,7 @@ public class GCard: CardProtocol {
     public let type: CardType
     public let desc: String
     public let abilities: [String: Int]
+    public let attributes: Card.Attributes
     public let suit: String
     public let value: String
     
@@ -24,6 +25,7 @@ public class GCard: CardProtocol {
                 type: CardType,
                 desc: String,
                 abilities: [String: Int],
+                attributes: Card.Attributes,
                 suit: String,
                 value: String) {
         self.identifier = identifier
@@ -31,6 +33,7 @@ public class GCard: CardProtocol {
         self.type = type
         self.desc = desc
         self.abilities = abilities
+        self.attributes = attributes
         self.suit = suit
         self.value = value
     }

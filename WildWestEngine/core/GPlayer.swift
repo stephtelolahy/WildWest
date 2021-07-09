@@ -13,6 +13,7 @@ public class GPlayer: PlayerProtocol {
     public let name: String
     public let desc: String
     public let abilities: [String: Int]
+    public let attributes: Card.Attributes
     public let role: Role?
     public let maxHealth: Int
     public var health: Int
@@ -25,6 +26,7 @@ public class GPlayer: PlayerProtocol {
                 name: String,
                 desc: String,
                 abilities: [String: Int],
+                attributes: Card.Attributes,
                 role: Role?,
                 maxHealth: Int,
                 health: Int,
@@ -34,6 +36,7 @@ public class GPlayer: PlayerProtocol {
         self.name = name
         self.desc = desc
         self.abilities = abilities
+        self.attributes = attributes
         self.role = role
         self.maxHealth = maxHealth
         self.health = health
@@ -46,6 +49,7 @@ public class GPlayer: PlayerProtocol {
                   name: player.name,
                   desc: player.desc,
                   abilities: player.abilities,
+                  attributes: player.attributes,
                   role: player.role,
                   maxHealth: player.maxHealth,
                   health: player.health,

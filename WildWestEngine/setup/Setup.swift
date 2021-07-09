@@ -39,6 +39,7 @@ public class GSetup: SetupProtocol {
                          type: card.type,
                          desc: card.desc,
                          abilities: card.abilities,
+                         attributes: card.attributes,
                          suit: deckCard.suit,
                          value: deckCard.value)
         }
@@ -79,7 +80,7 @@ private extension GSetup {
                       deck: inout [CardProtocol]) -> [PlayerProtocol] {
         roles.enumerated().map { index, role in
             let figure = figures[index]
-            guard var health = figure.abilities["bullets"] else {
+            guard var health = figure.attributes.bullets else {
                 fatalError("Bullets for \(figure.name) not found")
             }
             
@@ -102,6 +103,7 @@ private extension GSetup {
                            name: figure.name,
                            desc: figure.desc,
                            abilities: abilities,
+                           attributes: figure.attributes,
                            role: role,
                            maxHealth: health,
                            health: health,
