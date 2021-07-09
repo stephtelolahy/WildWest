@@ -25,7 +25,7 @@ class PlayBangAsMissedTests: XCTestCase {
             .withDefault()
             .identified(by: "p1")
             .holding(mockCard1)
-            .abilities(are: ["playBangAsMissed": 0])
+            .abilities(are: "playBangAsMissed")
         let mockHit1 = MockHitProtocol()
             .withDefault()
             .player(is: "p1")

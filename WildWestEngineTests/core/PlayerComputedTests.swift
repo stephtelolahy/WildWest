@@ -27,7 +27,7 @@ class PlayerComputedTests: XCTestCase {
         // Given
         let mockPlayer = MockPlayerProtocol()
             .withDefault()
-            .playing(MockCardProtocol().withDefault().abilities(are: ["weapon": 5]))
+            .playing(MockCardProtocol().withDefault().attributes(is: MockCardAttributesProtocol().weapon(is: 5)))
         let sut = GPlayer(mockPlayer)
 
         // When

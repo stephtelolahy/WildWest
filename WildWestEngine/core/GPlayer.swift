@@ -60,34 +60,34 @@ public class GPlayer: PlayerProtocol {
     // MARK: - PlayerComputedProtocol
     
     public var weapon: Int {
-        inPlayCards.compactMap { $0.abilities["weapon"] }.max() ?? 1
+        cards.compactMap { $0.attributes.weapon }.max() ?? 1
     }
     
     public var scope: Int {
-        inPlayCards.compactMap { $0.attributes.scope }.reduce(0, +)
+        cards.compactMap { $0.attributes.scope }.reduce(0, +)
     }
     
     public var mustang: Int {
-        inPlayCards.compactMap { $0.attributes.mustang }.reduce(0, +)
+        cards.compactMap { $0.attributes.mustang }.reduce(0, +)
     }
     
     public var bangsPerTurn: Int {
-        inPlayCards.compactMap { $0.abilities["bangsPerTurn"] }.max() ?? 1
+        cards.compactMap { $0.abilities["bangsPerTurn"] }.max() ?? 1
     }
     
     public var bangsCancelable: Int {
-        inPlayCards.compactMap { $0.abilities["bangsCancelable"] }.max() ?? 1
+        cards.compactMap { $0.abilities["bangsCancelable"] }.max() ?? 1
     }
     
     public var flippedCards: Int {
-        inPlayCards.compactMap { $0.abilities["flippedCards"] }.max() ?? 1
+        cards.compactMap { $0.abilities["flippedCards"] }.max() ?? 1
     }
     
     public var handLimit: Int {
-        inPlayCards.compactMap { $0.abilities["handLimit"] }.max() ?? health
+        cards.compactMap { $0.abilities["handLimit"] }.max() ?? health
     }
     
-    private var inPlayCards: [BaseCardProtocol] {
+    private var cards: [BaseCardProtocol] {
         [self] + inPlay
     }
 }

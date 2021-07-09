@@ -59,8 +59,10 @@
     "name": "schofield",
     "desc": "can hit targets at a distance of 2.",
     "type": "blue",
+    "attributes": {
+      "weapon": 2
+    },
     "abilities": {
-      "weapon": 2,
       "equip": 0
     }
   },
@@ -68,8 +70,10 @@
     "name": "remington",
     "desc": "can hit targets at a distance of 3.",
     "type": "blue",
+    "attributes": {
+      "weapon": 3
+    },
     "abilities": {
-      "weapon": 3,
       "equip": 0
     }
   },
@@ -77,8 +81,10 @@
     "name": "revCarabine",
     "desc": "can hit targets at a distance of 4.",
     "type": "blue",
+    "attributes": {
+      "weapon": 4
+    },
     "abilities": {
-      "weapon": 4,
       "equip": 0
     }
   },
@@ -86,8 +92,10 @@
     "name": "winchester",
     "desc": "can hit targets at a distance of 5.",
     "type": "blue",
+    "attributes": {
+      "weapon": 5
+    },
     "abilities": {
-      "weapon": 5,
       "equip": 0
     }
   },
@@ -95,8 +103,10 @@
     "name": "volcanic",
     "desc": "can play any number of BANG! cards during your turn but limited to a distance of 1",
     "type": "blue",
+    "attributes": {
+      "weapon": 1
+    },
     "abilities": {
-      "weapon": 1,
       "bangsPerTurn": 0,
       "equip": 0
     }

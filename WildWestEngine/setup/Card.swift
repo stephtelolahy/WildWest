@@ -36,13 +36,16 @@ public struct CardAttributes: CardAttributesProtocol {
     public let bullets: Int?
     public let mustang: Int?
     public let scope: Int?
+    public let weapon: Int?
     
     public init(bullets: Int? = nil,
                 mustang: Int? = nil,
-                scope: Int? = nil) {
+                scope: Int? = nil,
+                weapon: Int? = nil) {
         self.bullets = bullets
         self.mustang = mustang
         self.scope = scope
+        self.weapon = weapon
     }
 }
 
@@ -72,6 +75,7 @@ extension CardAttributes: Decodable {
         case bullets
         case mustang
         case scope
+        case weapon
     }
     
     public init(from decoder: Decoder) throws {
@@ -79,5 +83,6 @@ extension CardAttributes: Decodable {
         bullets = try values.decodeIfPresent(Int.self, forKey: .bullets)
         mustang = try values.decodeIfPresent(Int.self, forKey: .mustang)
         scope = try values.decodeIfPresent(Int.self, forKey: .scope)
+        weapon = try values.decodeIfPresent(Int.self, forKey: .weapon)
     }
 }

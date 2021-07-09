@@ -2079,6 +2079,20 @@ public class MockCardAttributesProtocol: CardAttributesProtocol, Cuckoo.Protocol
         
     }
     
+    
+    
+    public var weapon: Int? {
+        get {
+            return cuckoo_manager.getter("weapon",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.weapon)
+        }
+        
+    }
+    
 
     
 
@@ -2104,6 +2118,11 @@ public class MockCardAttributesProtocol: CardAttributesProtocol, Cuckoo.Protocol
 	    
 	    var scope: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardAttributesProtocol, Int?> {
 	        return .init(manager: cuckoo_manager, name: "scope")
+	    }
+	    
+	    
+	    var weapon: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardAttributesProtocol, Int?> {
+	        return .init(manager: cuckoo_manager, name: "weapon")
 	    }
 	    
 	    
@@ -2136,6 +2155,11 @@ public class MockCardAttributesProtocol: CardAttributesProtocol, Cuckoo.Protocol
 	        return .init(manager: cuckoo_manager, name: "scope", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
+	    
+	    var weapon: Cuckoo.VerifyReadOnlyProperty<Int?> {
+	        return .init(manager: cuckoo_manager, name: "weapon", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
 	
 	    
 	}
@@ -2161,6 +2185,14 @@ public class CardAttributesProtocolStub: CardAttributesProtocol {
     
     
     public var scope: Int? {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (Int?).self)
+        }
+        
+    }
+    
+    
+    public var weapon: Int? {
         get {
             return DefaultValueRegistry.defaultValue(for: (Int?).self)
         }

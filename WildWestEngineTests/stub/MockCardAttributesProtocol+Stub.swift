@@ -34,4 +34,11 @@ extension MockCardAttributesProtocol {
         }
         return self
     }
+    
+    func weapon(is value: Int) -> MockCardAttributesProtocol {
+        stub(self) { mock in
+            when(mock.weapon.get).thenReturn(value)
+        }
+        return self
+    }
 }

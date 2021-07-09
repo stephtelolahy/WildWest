@@ -38,8 +38,7 @@ class ResourcesTests: XCTestCase {
     
     func test_AllCardsHaveValidAbilities() throws {
         // Given
-        let passiveAbilities = ["weapon",
-                                "flippedCards",
+        let passiveAbilities = ["flippedCards",
                                 "bangsCancelable", 
                                 "bangsPerTurn",
                                 "handLimit",
