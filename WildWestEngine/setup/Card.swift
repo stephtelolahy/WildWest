@@ -37,15 +37,27 @@ public struct CardAttributes: CardAttributesProtocol {
     public let mustang: Int?
     public let scope: Int?
     public let weapon: Int?
+    public let flippedCards: Int?
+    public let bangsCancelable: Int?
+    public let bangsPerTurn: Int?
+    public let handLimit: Int?
     
     public init(bullets: Int? = nil,
                 mustang: Int? = nil,
                 scope: Int? = nil,
-                weapon: Int? = nil) {
+                weapon: Int? = nil,
+                flippedCards: Int? = nil,
+                bangsCancelable: Int? =  nil,
+                bangsPerTurn: Int? = nil,
+                handLimit: Int? = nil) {
         self.bullets = bullets
         self.mustang = mustang
         self.scope = scope
         self.weapon = weapon
+        self.flippedCards = flippedCards
+        self.bangsCancelable = bangsCancelable
+        self.bangsPerTurn = bangsPerTurn
+        self.handLimit = handLimit
     }
 }
 
@@ -76,6 +88,10 @@ extension CardAttributes: Decodable {
         case mustang
         case scope
         case weapon
+        case flippedCards
+        case bangsCancelable
+        case bangsPerTurn
+        case handLimit
     }
     
     public init(from decoder: Decoder) throws {
@@ -84,5 +100,9 @@ extension CardAttributes: Decodable {
         mustang = try values.decodeIfPresent(Int.self, forKey: .mustang)
         scope = try values.decodeIfPresent(Int.self, forKey: .scope)
         weapon = try values.decodeIfPresent(Int.self, forKey: .weapon)
+        flippedCards = try values.decodeIfPresent(Int.self, forKey: .flippedCards)
+        bangsCancelable = try values.decodeIfPresent(Int.self, forKey: .bangsCancelable)
+        bangsPerTurn = try values.decodeIfPresent(Int.self, forKey: .bangsPerTurn)
+        handLimit = try values.decodeIfPresent(Int.self, forKey: .handLimit)
     }
 }

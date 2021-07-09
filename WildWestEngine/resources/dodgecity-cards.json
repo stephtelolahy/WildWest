@@ -94,9 +94,7 @@
     "desc": "He may hold in his hand up to 10 cards.",
     "type": "figure",
     "attributes": {
-      "bullets": 3
-    },
-    "abilities": {
+      "bullets": 3,
       "handLimit": 10
     }
   },

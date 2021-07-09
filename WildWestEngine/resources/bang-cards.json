@@ -104,10 +104,10 @@
     "desc": "can play any number of BANG! cards during your turn but limited to a distance of 1",
     "type": "blue",
     "attributes": {
-      "weapon": 1
+      "weapon": 1,
+      "bangsPerTurn": 0
     },
     "abilities": {
-      "bangsPerTurn": 0,
       "equip": 0
     }
   },
@@ -233,9 +233,7 @@
     "desc": "he can play any number of BANG! cards during his turn.",
     "type": "figure",
     "attributes": {
-      "bullets": 4
-    },
-    "abilities": {
+      "bullets": 4,
       "bangsPerTurn": 0
     }
   },
@@ -273,9 +271,7 @@
     "desc": "players trying to cancel his BANG! cards need to play 2 Missed! cards. The Barrel effect, if successfully used, only counts as one Missed!.",
     "type": "figure",
     "attributes": {
-      "bullets": 4
-    },
-    "abilities": {
+      "bullets": 4,
       "bangsCancelable": 2
     }
   },
@@ -284,9 +280,7 @@
     "desc": "each time he is required to \"draw!\", he flips the top two cards from the deck, and chooses the result he prefers. Discard both cards afterwards.",
     "type": "figure",
     "attributes": {
-      "bullets": 4
-    },
-    "abilities": {
+      "bullets": 4,
       "flippedCards": 2
     }
   },

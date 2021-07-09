@@ -2093,6 +2093,62 @@ public class MockCardAttributesProtocol: CardAttributesProtocol, Cuckoo.Protocol
         
     }
     
+    
+    
+    public var flippedCards: Int? {
+        get {
+            return cuckoo_manager.getter("flippedCards",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.flippedCards)
+        }
+        
+    }
+    
+    
+    
+    public var bangsCancelable: Int? {
+        get {
+            return cuckoo_manager.getter("bangsCancelable",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.bangsCancelable)
+        }
+        
+    }
+    
+    
+    
+    public var bangsPerTurn: Int? {
+        get {
+            return cuckoo_manager.getter("bangsPerTurn",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.bangsPerTurn)
+        }
+        
+    }
+    
+    
+    
+    public var handLimit: Int? {
+        get {
+            return cuckoo_manager.getter("handLimit",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.handLimit)
+        }
+        
+    }
+    
 
     
 
@@ -2123,6 +2179,26 @@ public class MockCardAttributesProtocol: CardAttributesProtocol, Cuckoo.Protocol
 	    
 	    var weapon: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardAttributesProtocol, Int?> {
 	        return .init(manager: cuckoo_manager, name: "weapon")
+	    }
+	    
+	    
+	    var flippedCards: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardAttributesProtocol, Int?> {
+	        return .init(manager: cuckoo_manager, name: "flippedCards")
+	    }
+	    
+	    
+	    var bangsCancelable: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardAttributesProtocol, Int?> {
+	        return .init(manager: cuckoo_manager, name: "bangsCancelable")
+	    }
+	    
+	    
+	    var bangsPerTurn: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardAttributesProtocol, Int?> {
+	        return .init(manager: cuckoo_manager, name: "bangsPerTurn")
+	    }
+	    
+	    
+	    var handLimit: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardAttributesProtocol, Int?> {
+	        return .init(manager: cuckoo_manager, name: "handLimit")
 	    }
 	    
 	    
@@ -2160,6 +2236,26 @@ public class MockCardAttributesProtocol: CardAttributesProtocol, Cuckoo.Protocol
 	        return .init(manager: cuckoo_manager, name: "weapon", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
+	    
+	    var flippedCards: Cuckoo.VerifyReadOnlyProperty<Int?> {
+	        return .init(manager: cuckoo_manager, name: "flippedCards", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var bangsCancelable: Cuckoo.VerifyReadOnlyProperty<Int?> {
+	        return .init(manager: cuckoo_manager, name: "bangsCancelable", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var bangsPerTurn: Cuckoo.VerifyReadOnlyProperty<Int?> {
+	        return .init(manager: cuckoo_manager, name: "bangsPerTurn", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var handLimit: Cuckoo.VerifyReadOnlyProperty<Int?> {
+	        return .init(manager: cuckoo_manager, name: "handLimit", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
 	
 	    
 	}
@@ -2193,6 +2289,38 @@ public class CardAttributesProtocolStub: CardAttributesProtocol {
     
     
     public var weapon: Int? {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (Int?).self)
+        }
+        
+    }
+    
+    
+    public var flippedCards: Int? {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (Int?).self)
+        }
+        
+    }
+    
+    
+    public var bangsCancelable: Int? {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (Int?).self)
+        }
+        
+    }
+    
+    
+    public var bangsPerTurn: Int? {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (Int?).self)
+        }
+        
+    }
+    
+    
+    public var handLimit: Int? {
         get {
             return DefaultValueRegistry.defaultValue(for: (Int?).self)
         }

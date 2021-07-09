@@ -41,4 +41,32 @@ extension MockCardAttributesProtocol {
         }
         return self
     }
+    
+    func flippedCards(is value: Int) -> MockCardAttributesProtocol {
+        stub(self) { mock in
+            when(mock.flippedCards.get).thenReturn(value)
+        }
+        return self
+    }
+    
+    func bangsPerTurn(is value: Int) -> MockCardAttributesProtocol {
+        stub(self) { mock in
+            when(mock.bangsPerTurn.get).thenReturn(value)
+        }
+        return self
+    }
+    
+    func bangsCancelable(is value: Int) -> MockCardAttributesProtocol {
+        stub(self) { mock in
+            when(mock.bangsCancelable.get).thenReturn(value)
+        }
+        return self
+    }
+    
+    func handLimit(is value: Int) -> MockCardAttributesProtocol {
+        stub(self) { mock in
+            when(mock.handLimit.get).thenReturn(value)
+        }
+        return self
+    }
 }

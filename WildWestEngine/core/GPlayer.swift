@@ -72,19 +72,19 @@ public class GPlayer: PlayerProtocol {
     }
     
     public var bangsPerTurn: Int {
-        cards.compactMap { $0.abilities["bangsPerTurn"] }.max() ?? 1
+        cards.compactMap { $0.attributes.bangsPerTurn }.max() ?? 1
     }
     
     public var bangsCancelable: Int {
-        cards.compactMap { $0.abilities["bangsCancelable"] }.max() ?? 1
+        cards.compactMap { $0.attributes.bangsCancelable }.max() ?? 1
     }
     
     public var flippedCards: Int {
-        cards.compactMap { $0.abilities["flippedCards"] }.max() ?? 1
+        cards.compactMap { $0.attributes.flippedCards }.max() ?? 1
     }
     
     public var handLimit: Int {
-        cards.compactMap { $0.abilities["handLimit"] }.max() ?? health
+        cards.compactMap { $0.attributes.handLimit }.max() ?? health
     }
     
     private var cards: [BaseCardProtocol] {

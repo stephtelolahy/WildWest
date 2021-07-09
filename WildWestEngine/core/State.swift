@@ -49,6 +49,10 @@ public protocol CardAttributesProtocol {
     var mustang: Int? { get }
     var scope: Int? { get }
     var weapon: Int? { get }
+    var flippedCards: Int? { get }
+    var bangsCancelable: Int? { get }
+    var bangsPerTurn: Int? { get }
+    var handLimit: Int? { get }
 }
 
 public protocol PlayerStoredProtocol: BaseCardProtocol {
