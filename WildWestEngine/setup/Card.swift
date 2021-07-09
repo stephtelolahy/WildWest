@@ -10,26 +10,18 @@ public struct Card {
     public let desc: String
     public let type: CardType
     public let abilities: [String: Int]
-    public let attributes: Attributes
+    public let attributes: CardAttributes
     
     public init(name: String,
                 desc: String = "",
                 type: CardType,
                 abilities: [String: Int] = [:],
-                attributes: Attributes = Attributes()) {
+                attributes: CardAttributes = CardAttributes()) {
         self.name = name
         self.desc = desc
         self.type = type
         self.abilities = abilities
         self.attributes = attributes
-    }
-    
-    public struct Attributes {
-        public let bullets: Int?
-        
-        public init(bullets: Int? = nil) {
-            self.bullets = bullets
-        }
     }
 }
 
@@ -38,6 +30,17 @@ public enum CardType: String, Decodable {
     case blue
     case figure
     case `default`
+}
+
+public struct CardAttributes: CardAttributesProtocol {
+    public let bullets: Int?
+    public let mustang: Int?
+    
+    public init(bullets: Int? = nil,
+                mustang: Int? = nil) {
+        self.bullets = bullets
+        self.mustang = mustang
+    }
 }
 
 extension Card: Decodable {
@@ -56,18 +59,20 @@ extension Card: Decodable {
         desc = try values.decode(String.self, forKey: .desc)
         type = try values.decode(CardType.self, forKey: .type)
         abilities = try values.decodeIfPresent([String: Int].self, forKey: .abilities) ?? [:]
-        attributes = try values.decodeIfPresent(Attributes.self, forKey: .attributes) ?? Card.Attributes()
+        attributes = try values.decodeIfPresent(CardAttributes.self, forKey: .attributes) ?? CardAttributes()
     }
 }
 
-extension Card.Attributes: Decodable {
+extension CardAttributes: Decodable {
     
     private enum CodingKeys: String, CodingKey {
         case bullets
+        case mustang
     }
     
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         bullets = try values.decodeIfPresent(Int.self, forKey: .bullets)
+        mustang = try values.decodeIfPresent(Int.self, forKey: .mustang)
     }
 }

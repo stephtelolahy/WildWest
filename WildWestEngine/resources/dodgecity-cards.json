@@ -27,8 +27,10 @@
     "name": "hideout",
     "desc": "Others view you at distance +1",
     "type": "blue",
+    "attributes": {
+      "mustang": 1
+    },
     "abilities": {
-      "mustang": 0,
       "equip": 0
     }
   },

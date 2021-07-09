@@ -118,11 +118,11 @@ private extension DtoEncoder {
         return Array(abilities.values)
     }
     
-    private func encode(attributes: Card.Attributes) -> [String: Int] {
+    private func encode(attributes: CardAttributesProtocol) -> [String: Int] {
         [:]
     }
     
-    private func decode(attributes: [String: Int]?) throws -> Card.Attributes {
-        Card.Attributes()
+    private func decode(attributes: [String: Int]?) throws -> CardAttributesProtocol {
+        CardAttributes()
     }
 }

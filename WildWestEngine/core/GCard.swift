@@ -14,7 +14,7 @@ public class GCard: CardProtocol {
     public let type: CardType
     public let desc: String
     public let abilities: [String: Int]
-    public let attributes: Card.Attributes
+    public let attributes: CardAttributesProtocol
     public let suit: String
     public let value: String
     
@@ -25,7 +25,7 @@ public class GCard: CardProtocol {
                 type: CardType,
                 desc: String,
                 abilities: [String: Int],
-                attributes: Card.Attributes,
+                attributes: CardAttributesProtocol,
                 suit: String,
                 value: String) {
         self.identifier = identifier

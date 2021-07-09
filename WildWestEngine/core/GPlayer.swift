@@ -13,7 +13,7 @@ public class GPlayer: PlayerProtocol {
     public let name: String
     public let desc: String
     public let abilities: [String: Int]
-    public let attributes: Card.Attributes
+    public let attributes: CardAttributesProtocol
     public let role: Role?
     public let maxHealth: Int
     public var health: Int
@@ -26,7 +26,7 @@ public class GPlayer: PlayerProtocol {
                 name: String,
                 desc: String,
                 abilities: [String: Int],
-                attributes: Card.Attributes,
+                attributes: CardAttributesProtocol,
                 role: Role?,
                 maxHealth: Int,
                 health: Int,
@@ -68,7 +68,7 @@ public class GPlayer: PlayerProtocol {
     }
     
     public var mustang: Int {
-        inPlayCards.compactMap { $0.abilities["mustang"] }.count
+        inPlayCards.compactMap { $0.attributes.mustang }.reduce(0, +)
     }
     
     public var bangsPerTurn: Int {

@@ -105,8 +105,10 @@
     "name": "mustang",
     "desc": "the distance between other players and you is increased by 1",
     "type": "blue",
+    "attributes": {
+      "mustang": 1
+    },
     "abilities": {
-      "mustang": 0,
       "equip": 0
     }
   },
@@ -241,10 +243,8 @@
     "desc": "he is considered to have a Mustang card in play at all times; all other players must add 1 to the distance to him. If he has another real Mustang card in play, he can count both of them, increasing all distances to him by a total of 2).",
     "type": "figure",
     "attributes": {
-      "bullets": 3
-    },
-    "abilities": {
-      "mustang": 0
+      "bullets": 3,
+      "mustang": 1
     }
   },
   {

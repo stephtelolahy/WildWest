@@ -14,7 +14,8 @@ extension MockCardProtocol {
     func withDefault() -> MockCardProtocol {
         let result = withEnabledDefaultImplementation(CardProtocolStub())
         Cuckoo.stub(result) { mock in
-            when(mock.attributes.get).thenReturn(Card.Attributes())
+            let mockAttributes = MockCardAttributesProtocol().withEnabledDefaultImplementation(CardAttributesProtocolStub())
+            when(mock.attributes.get).thenReturn(mockAttributes)
         }
         return result
     }
@@ -69,6 +70,13 @@ extension MockCardProtocol {
     func value(is value: String) -> MockCardProtocol {
         stub(self) { mock in
             when(mock.value.get).thenReturn(value)
+        }
+        return self
+    }
+    
+    func attributes(is value: CardAttributesProtocol) -> MockCardProtocol {
+        stub(self) { mock in
+            when(mock.attributes.get).thenReturn(value)
         }
         return self
     }

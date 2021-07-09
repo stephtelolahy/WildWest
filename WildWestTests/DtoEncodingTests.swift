@@ -23,10 +23,10 @@ class DtoEncodingTests: XCTestCase {
     private var mockDatabaseReference: MockDatabaseReferenceProtocol!
     
     override func setUp() {
-        mockCard1 = GCard(identifier: "c1", name: "", type: .blue, desc: "", abilities: [:], attributes: Card.Attributes(), suit: "", value: "")
-        mockCard2 = GCard(identifier: "c2", name: "", type: .blue, desc: "", abilities: [:], attributes: Card.Attributes(), suit: "", value: "")
-        mockCard3 = GCard(identifier: "c3", name: "", type: .blue, desc: "", abilities: [:], attributes: Card.Attributes(), suit: "", value: "")
-        mockCard4 = GCard(identifier: "c4", name: "", type: .blue, desc: "", abilities: [:], attributes: Card.Attributes(), suit: "", value: "")
+        mockCard1 = GCard(identifier: "c1", name: "", type: .blue, desc: "", abilities: [:], attributes: CardAttributes(), suit: "", value: "")
+        mockCard2 = GCard(identifier: "c2", name: "", type: .blue, desc: "", abilities: [:], attributes: CardAttributes(), suit: "", value: "")
+        mockCard3 = GCard(identifier: "c3", name: "", type: .blue, desc: "", abilities: [:], attributes: CardAttributes(), suit: "", value: "")
+        mockCard4 = GCard(identifier: "c4", name: "", type: .blue, desc: "", abilities: [:], attributes: CardAttributes(), suit: "", value: "")
         mockDatabaseReference = MockDatabaseReferenceProtocol()
         sut = DtoEncoder(databaseRef: mockDatabaseReference, allCards: [mockCard1, mockCard2, mockCard3, mockCard4])
     }
@@ -39,7 +39,7 @@ class DtoEncodingTests: XCTestCase {
                               name: "name1",
                               desc: "desc1",
                               abilities: ["ab1": 0, "ab2": 1],
-                              attributes: Card.Attributes(),
+                              attributes: CardAttributes(),
                               role: .sheriff,
                               maxHealth: 4,
                               health: 2,

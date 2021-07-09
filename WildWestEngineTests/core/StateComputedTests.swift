@@ -103,7 +103,7 @@ class StateComputedTests: XCTestCase {
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p1")
-            .abilities(are: ["mustang": 1])
+            .attributes(is: MockCardAttributesProtocol().mustang(is: 1))
         let mockPlayer2 = MockPlayerProtocol().withDefault().identified(by: "p2")
         let mockPlayer3 = MockPlayerProtocol().withDefault().identified(by: "p3")
         let mockPlayer4 = MockPlayerProtocol().withDefault().identified(by: "p4")

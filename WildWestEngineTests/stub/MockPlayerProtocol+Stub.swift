@@ -14,7 +14,8 @@ extension MockPlayerProtocol {
     func withDefault() -> MockPlayerProtocol {
         let result = withEnabledDefaultImplementation(PlayerProtocolStub())
         Cuckoo.stub(result) { mock in
-            when(mock.attributes.get).thenReturn(Card.Attributes())
+            let mockAttributes = MockCardAttributesProtocol().withEnabledDefaultImplementation(CardAttributesProtocolStub())
+            when(mock.attributes.get).thenReturn(mockAttributes)
         }
         return result
     }
@@ -125,6 +126,13 @@ extension MockPlayerProtocol {
     func mustang(is value: Int) -> MockPlayerProtocol {
         stub(self) { mock in
             when(mock.mustang.get).thenReturn(value)
+        }
+        return self
+    }
+    
+    func attributes(is value: CardAttributesProtocol) -> MockPlayerProtocol {
+        stub(self) { mock in
+            when(mock.attributes.get).thenReturn(value)
         }
         return self
     }
