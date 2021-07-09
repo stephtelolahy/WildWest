@@ -42,9 +42,7 @@ class ResourcesTests: XCTestCase {
                                 "playMissedAsBang",
                                 "playAnyCardAsMissed",
                                 
-                                "silentStartTurnDrawing2Cards",
-                                "silentJail",
-                                "silentDiamonds"]
+                                "silentStartTurnDrawing2Cards"]
         let activeAbilities = sut.loadAbilities().map { $0.name }
         let allAbilities = passiveAbilities + activeAbilities
         
@@ -62,25 +60,25 @@ class ResourcesTests: XCTestCase {
     func test_DefaultPlayerAbilities() throws {
         // Given
         // When
-        let cards = sut.loadCards().first { $0.type == .default && $0.name == "player" }!
+        let card = sut.loadCards().first { $0.type == .default && $0.name == "player" }!
         
         // Assert
-        XCTAssertNotNil(cards.abilities["endTurn"])
-        XCTAssertNotNil(cards.abilities["startTurnDrawing2Cards"])
-        XCTAssertNotNil(cards.abilities["nextTurnOnPhase3"])
-        XCTAssertNotNil(cards.abilities["nextTurnOnEliminated"])
-        XCTAssertNotNil(cards.abilities["discardExcessCardsOnPhase3"])
-        XCTAssertNotNil(cards.abilities["discardAllCardsOnEliminated"])
-        XCTAssertNotNil(cards.abilities["gainRewardOnEliminatingOutlaw"])
+        XCTAssertNotNil(card.abilities["endTurn"])
+        XCTAssertNotNil(card.abilities["startTurnDrawing2Cards"])
+        XCTAssertNotNil(card.abilities["nextTurnOnPhase3"])
+        XCTAssertNotNil(card.abilities["nextTurnOnEliminated"])
+        XCTAssertNotNil(card.abilities["discardExcessCardsOnPhase3"])
+        XCTAssertNotNil(card.abilities["discardAllCardsOnEliminated"])
+        XCTAssertNotNil(card.abilities["gainRewardOnEliminatingOutlaw"])
     }
     
     func test_DefaultSheriffAbilities() throws {
         // Given
         // When
-        let cards = sut.loadCards().first { $0.type == .default && $0.name == "sheriff" }!
+        let card = sut.loadCards().first { $0.type == .default && $0.name == "sheriff" }!
         
         // Assert
-        XCTAssertNotNil(cards.abilities["penalizeOnEliminatingDeputy"])
-        XCTAssertNotNil(cards.abilities["silentJail"])
+        XCTAssertNotNil(card.abilities["penalizeOnEliminatingDeputy"])
+        XCTAssertTrue(card.attributes.silentCard == "jail")
     }
 }

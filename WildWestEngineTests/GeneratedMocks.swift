@@ -2149,6 +2149,20 @@ public class MockCardAttributesProtocol: CardAttributesProtocol, Cuckoo.Protocol
         
     }
     
+    
+    
+    public var silentCard: String? {
+        get {
+            return cuckoo_manager.getter("silentCard",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.silentCard)
+        }
+        
+    }
+    
 
     
 
@@ -2199,6 +2213,11 @@ public class MockCardAttributesProtocol: CardAttributesProtocol, Cuckoo.Protocol
 	    
 	    var handLimit: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardAttributesProtocol, Int?> {
 	        return .init(manager: cuckoo_manager, name: "handLimit")
+	    }
+	    
+	    
+	    var silentCard: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardAttributesProtocol, String?> {
+	        return .init(manager: cuckoo_manager, name: "silentCard")
 	    }
 	    
 	    
@@ -2254,6 +2273,11 @@ public class MockCardAttributesProtocol: CardAttributesProtocol, Cuckoo.Protocol
 	    
 	    var handLimit: Cuckoo.VerifyReadOnlyProperty<Int?> {
 	        return .init(manager: cuckoo_manager, name: "handLimit", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var silentCard: Cuckoo.VerifyReadOnlyProperty<String?> {
+	        return .init(manager: cuckoo_manager, name: "silentCard", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	
@@ -2323,6 +2347,14 @@ public class CardAttributesProtocolStub: CardAttributesProtocol {
     public var handLimit: Int? {
         get {
             return DefaultValueRegistry.defaultValue(for: (Int?).self)
+        }
+        
+    }
+    
+    
+    public var silentCard: String? {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (String?).self)
         }
         
     }

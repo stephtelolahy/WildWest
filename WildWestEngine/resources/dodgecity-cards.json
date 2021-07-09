@@ -216,10 +216,8 @@
     "desc": "Cards of Diamond played by other players do not affect him",
     "type": "figure",
     "attributes": {
-      "bullets": 3
-    },
-    "abilities": {
-      "silentDiamonds": 0
+      "bullets": 3,
+      "silentCard": "♦️"
     }
   }
 ]

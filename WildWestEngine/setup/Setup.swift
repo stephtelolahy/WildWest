@@ -85,17 +85,17 @@ private extension GSetup {
             }
             
             var abilities = figure.abilities
+            var attributes: CardAttributesProtocol = figure.attributes
             
             if let playerCard = defaults.first(where: { $0.name == "player" }) {
                 abilities.merge(playerCard.abilities) { $1 }
             }
             
-            if role == .sheriff {
+            if role == .sheriff,
+               let sheriffCard = defaults.first(where: { $0.name == "sheriff" }) {
                 health += 1
-                
-                if let sheriffCard = defaults.first(where: { $0.name == "sheriff" }) {
-                    abilities.merge(sheriffCard.abilities) { $1 }
-                }
+                abilities.merge(sheriffCard.abilities) { $1 }
+                attributes = attributes.merge(with: sheriffCard.attributes)
             }
             
             let hand: [CardProtocol] = Array(1...health).map { _ in deck.removeFirst() }
@@ -103,12 +103,27 @@ private extension GSetup {
                            name: figure.name,
                            desc: figure.desc,
                            abilities: abilities,
-                           attributes: figure.attributes,
+                           attributes: attributes,
                            role: role,
                            maxHealth: health,
                            health: health,
                            hand: hand,
                            inPlay: [])
         }
+    }
+}
+
+private extension CardAttributesProtocol {
+    
+    func merge(with other: CardAttributesProtocol) -> CardAttributesProtocol {
+        CardAttributes(bullets: bullets,
+                       mustang: mustang,
+                       scope: scope,
+                       weapon: weapon ?? other.weapon,
+                       flippedCards: flippedCards ?? other.flippedCards,
+                       bangsCancelable: bangsCancelable ?? other.bangsCancelable,
+                       bangsPerTurn: bangsPerTurn ?? other.bangsPerTurn,
+                       handLimit: handLimit ?? other.handLimit,
+                       silentCard: silentCard ?? other.silentCard)
     }
 }

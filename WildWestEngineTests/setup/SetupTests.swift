@@ -19,6 +19,8 @@ class SetupTests: XCTestCase {
         sut = GSetup()
     }
     
+    // MARK: - Roles
+    
     func test_Roles_For4Players() {
         // Given
         // When
@@ -78,13 +80,15 @@ class SetupTests: XCTestCase {
         XCTAssertEqual(roles.filter { $0 == .deputy }.count, 2)
     }
     
+    // MARK: - Setup Game
+    
     func test_ShuffleRole_WhenSetupGame() throws {
         // Given
         let roles: [Role] = [.sheriff, .outlaw, .deputy, .renegade]
         let brown: [Card] = Array(1...80).map { Card(name: "c\($0)", type: .brown) }
         let figure: [Card] = Array(1...16).map { Card(name: "f\($0)", type: .figure, attributes: CardAttributes(bullets: 4)) }
         let defaults: [Card] = [Card(name: "player", type: .default, abilities: ["a1": 0, "a2": 0]),
-                                Card(name: "sheriff", type: .default, abilities: ["a3": 0])]
+                                Card(name: "sheriff", type: .default, abilities: ["a3": 0], attributes: CardAttributes(silentCard: "jail"))]
         let cards: [Card] = brown + figure + defaults
         let cardSet: [DeckCard] = Array(1...80).map { DeckCard(name: "c\($0)", value: "v\($0)", suit: "s\($0)") }
         
@@ -96,11 +100,10 @@ class SetupTests: XCTestCase {
         // <PLAYERS>
         let players = state.players.values
         XCTAssertEqual(players.count, 4)
-        let sheriff = try XCTUnwrap(players.first { $0.role == .sheriff })
         XCTAssertTrue(players.map { $0.role }.contains(sameElementsAs: roles)) // Shuffle roles
+        
         XCTAssertTrue(players.map { $0.name }.allSatisfy { figure.map { $0.name }.contains($0) }) // Shuffle figures
         XCTAssertTrue(players.filter { $0.role != .sheriff }.allSatisfy { $0.maxHealth == 4 }) // Max health is number of bullets
-        XCTAssertEqual(sheriff.maxHealth, 5) // Sheriff has one additional health
         XCTAssertTrue(players.allSatisfy { $0.health == $0.maxHealth }) // Each player has maximal health
         XCTAssertTrue(players.allSatisfy { $0.inPlay.isEmpty }) // InPlay empty
         XCTAssertTrue(players.allSatisfy { $0.hand.count == $0.health }) // Hand cards equals health
@@ -108,6 +111,10 @@ class SetupTests: XCTestCase {
             XCTAssertNotNil($0.abilities["a1"])
             XCTAssertNotNil($0.abilities["a2"])
         }
+        
+        let sheriff = try XCTUnwrap(players.first { $0.role == .sheriff })
+        XCTAssertEqual(sheriff.maxHealth, 5) // Sheriff has one additional health
+        XCTAssertEqual(sheriff.attributes.silentCard, "jail")
         XCTAssertNotNil(sheriff.abilities["a3"])
         // </PLAYERS>
         

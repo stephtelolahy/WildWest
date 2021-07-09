@@ -29,7 +29,7 @@ class SilentJailTests: XCTestCase {
         let mockPlayer2 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p2")
-            .abilities(are: "silentJail")
+            .attributes(is: MockCardAttributesProtocol().silentCard(is: "jail"))
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1, mockPlayer2)

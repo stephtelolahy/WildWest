@@ -69,4 +69,11 @@ extension MockCardAttributesProtocol {
         }
         return self
     }
+    
+    func silentCard(is value: String) -> MockCardAttributesProtocol {
+        stub(self) { mock in
+            when(mock.silentCard.get).thenReturn(value)
+        }
+        return self
+    }
 }

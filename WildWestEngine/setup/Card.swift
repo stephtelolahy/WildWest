@@ -41,6 +41,7 @@ public struct CardAttributes: CardAttributesProtocol {
     public let bangsCancelable: Int?
     public let bangsPerTurn: Int?
     public let handLimit: Int?
+    public let silentCard: String?
     
     public init(bullets: Int? = nil,
                 mustang: Int? = nil,
@@ -49,7 +50,8 @@ public struct CardAttributes: CardAttributesProtocol {
                 flippedCards: Int? = nil,
                 bangsCancelable: Int? =  nil,
                 bangsPerTurn: Int? = nil,
-                handLimit: Int? = nil) {
+                handLimit: Int? = nil,
+                silentCard: String? = nil) {
         self.bullets = bullets
         self.mustang = mustang
         self.scope = scope
@@ -58,6 +60,7 @@ public struct CardAttributes: CardAttributesProtocol {
         self.bangsCancelable = bangsCancelable
         self.bangsPerTurn = bangsPerTurn
         self.handLimit = handLimit
+        self.silentCard = silentCard
     }
 }
 
@@ -92,6 +95,7 @@ extension CardAttributes: Decodable {
         case bangsCancelable
         case bangsPerTurn
         case handLimit
+        case silentCard
     }
     
     public init(from decoder: Decoder) throws {
@@ -104,5 +108,6 @@ extension CardAttributes: Decodable {
         bangsCancelable = try values.decodeIfPresent(Int.self, forKey: .bangsCancelable)
         bangsPerTurn = try values.decodeIfPresent(Int.self, forKey: .bangsPerTurn)
         handLimit = try values.decodeIfPresent(Int.self, forKey: .handLimit)
+        silentCard = try values.decodeIfPresent(String.self, forKey: .silentCard)
     }
 }

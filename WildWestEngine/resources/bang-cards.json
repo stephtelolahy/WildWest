@@ -17,9 +17,11 @@
     "name": "sheriff",
     "desc": "",
     "type": "default",
+    "attributes": {
+      "silentCard": "jail"
+    },
     "abilities": {
-      "penalizeOnEliminatingDeputy": 0,
-      "silentJail": 0
+      "penalizeOnEliminatingDeputy": 0
     }
   },
   {

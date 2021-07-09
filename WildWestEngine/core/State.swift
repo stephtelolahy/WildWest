@@ -53,6 +53,7 @@ public protocol CardAttributesProtocol {
     var bangsCancelable: Int? { get }
     var bangsPerTurn: Int? { get }
     var handLimit: Int? { get }
+    var silentCard: String? { get }
 }
 
 public protocol PlayerStoredProtocol: BaseCardProtocol {
