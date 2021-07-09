@@ -35,11 +35,14 @@ public enum CardType: String, Decodable {
 public struct CardAttributes: CardAttributesProtocol {
     public let bullets: Int?
     public let mustang: Int?
+    public let scope: Int?
     
     public init(bullets: Int? = nil,
-                mustang: Int? = nil) {
+                mustang: Int? = nil,
+                scope: Int? = nil) {
         self.bullets = bullets
         self.mustang = mustang
+        self.scope = scope
     }
 }
 
@@ -68,11 +71,13 @@ extension CardAttributes: Decodable {
     private enum CodingKeys: String, CodingKey {
         case bullets
         case mustang
+        case scope
     }
     
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         bullets = try values.decodeIfPresent(Int.self, forKey: .bullets)
         mustang = try values.decodeIfPresent(Int.self, forKey: .mustang)
+        scope = try values.decodeIfPresent(Int.self, forKey: .scope)
     }
 }

@@ -47,6 +47,7 @@ public protocol BaseCardProtocol {
 public protocol CardAttributesProtocol {
     var bullets: Int? { get }
     var mustang: Int? { get }
+    var scope: Int? { get }
 }
 
 public protocol PlayerStoredProtocol: BaseCardProtocol {

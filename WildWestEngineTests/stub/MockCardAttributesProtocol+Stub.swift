@@ -10,6 +10,10 @@ import Cuckoo
 
 extension MockCardAttributesProtocol {
     
+    func withDefault() -> MockCardAttributesProtocol {
+        withEnabledDefaultImplementation(CardAttributesProtocolStub())
+    }
+    
     func bullets(is value: Int) -> MockCardAttributesProtocol {
         stub(self) { mock in
             when(mock.bullets.get).thenReturn(value)
@@ -20,6 +24,13 @@ extension MockCardAttributesProtocol {
     func mustang(is value: Int) -> MockCardAttributesProtocol {
         stub(self) { mock in
             when(mock.mustang.get).thenReturn(value)
+        }
+        return self
+    }
+    
+    func scope(is value: Int) -> MockCardAttributesProtocol {
+        stub(self) { mock in
+            when(mock.scope.get).thenReturn(value)
         }
         return self
     }

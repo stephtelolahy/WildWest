@@ -38,8 +38,10 @@
     "name": "binocular",
     "desc": "you view others at distance -1",
     "type": "blue",
+    "attributes": {
+      "scope": 1
+    },
     "abilities": {
-      "scope": 0,
       "equip": 0
     }
   },

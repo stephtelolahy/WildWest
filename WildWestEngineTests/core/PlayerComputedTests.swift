@@ -124,7 +124,7 @@ class PlayerComputedTests: XCTestCase {
         // Given
         let mockPlayer = MockPlayerProtocol()
             .withDefault()
-            .abilities(are: ["scope": 0])
+            .attributes(is: MockCardAttributesProtocol().scope(is: 1))
         let sut = GPlayer(mockPlayer)
 
         // When
@@ -136,8 +136,8 @@ class PlayerComputedTests: XCTestCase {
         // Given
         let mockPlayer = MockPlayerProtocol()
             .withDefault()
-            .abilities(are: ["scope": 0])
-            .playing(MockCardProtocol().withDefault().abilities(are: ["scope": 0]))
+            .attributes(is: MockCardAttributesProtocol().scope(is: 1))
+            .playing(MockCardProtocol().withDefault().attributes(is: MockCardAttributesProtocol().scope(is: 1)))
         let sut = GPlayer(mockPlayer)
 
         // When

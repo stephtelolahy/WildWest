@@ -116,8 +116,10 @@
     "name": "scope",
     "desc": "you see all the other players at a distance decreased by 1",
     "type": "blue",
+    "attributes": {
+      "scope": 1
+    },
     "abilities": {
-      "scope": 0,
       "equip": 0
     }
   },
@@ -232,10 +234,8 @@
     "desc": "she is considered to have an Appaloosa card in play at all times; she sees the other players at a distance decreased by 1. If she has another real Appaloosa card in play, she can count both of them, reducing her distance to all other players by a total of 2.",
     "type": "figure",
     "attributes": {
-      "bullets": 4
-    },
-    "abilities": {
-      "scope": 0
+      "bullets": 4,
+      "scope": 1
     }
   },
   {

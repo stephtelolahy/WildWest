@@ -64,7 +64,7 @@ public class GPlayer: PlayerProtocol {
     }
     
     public var scope: Int {
-        inPlayCards.compactMap { $0.abilities["scope"] }.count
+        inPlayCards.compactMap { $0.attributes.scope }.reduce(0, +)
     }
     
     public var mustang: Int {
