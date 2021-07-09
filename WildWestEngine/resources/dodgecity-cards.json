@@ -114,10 +114,10 @@
     "desc": "During phase 1 of his turn, he draws 3 cards instead of 2.",
     "type": "figure",
     "attributes": {
-      "bullets": 3
+      "bullets": 3,
+      "silentAbility": "startTurnDrawing2Cards"
     },
     "abilities": {
-      "silentStartTurnDrawing2Cards": 0,
       "startTurnDrawing3Cards": 0
     }
   },
@@ -126,10 +126,10 @@
     "desc": "He draws 1 card, plus 1 card for each wound he has.",
     "type": "figure",
     "attributes": {
-      "bullets": 4
+      "bullets": 4,
+      "silentAbility": "startTurnDrawing2Cards"
     },
     "abilities": {
-      "silentStartTurnDrawing2Cards": 0,
       "startTurnDrawing1CardPlusWound": 0
     }
   },
@@ -204,10 +204,10 @@
     "desc": "Instead of drawing normally, he may draw only one card in play in front of any one player.",
     "type": "figure",
     "attributes": {
-      "bullets": 4
+      "bullets": 4,
+      "silentAbility": "startTurnDrawing2Cards"
     },
     "abilities": {
-      "silentStartTurnDrawing2Cards": 0,
       "startTurnChoosingDrawInPlay": 0
     }
   },

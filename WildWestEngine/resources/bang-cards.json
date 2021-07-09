@@ -358,10 +358,10 @@
     "desc": "during the phase 1 of his turn, he must show the second card he draws: if it's Heart or Diamonds (just like a \"draw!\", he draws one additional card (without revealing it).",
     "type": "figure",
     "attributes": {
-      "bullets": 4
+      "bullets": 4,
+      "silentAbility": "startTurnDrawing2Cards"
     },
     "abilities": {
-      "silentStartTurnDrawing2Cards": 0,
       "startTurnDrawing1ExtraCardIfRedSuit": 0
     }
   },
@@ -370,10 +370,10 @@
     "desc": "during the phase 1 of his turn, he looks at the top three cards of the deck: he chooses 2 to draw, and puts the other one back on the top of the deck, face down.",
     "type": "figure",
     "attributes": {
-      "bullets": 4
+      "bullets": 4,
+      "silentAbility": "startTurnDrawing2Cards"
     },
     "abilities": {
-      "silentStartTurnDrawing2Cards": 0,
       "startTurnChoosing2CardsFromDeck": 0
     }
   },
@@ -382,10 +382,10 @@
     "desc": "during phase 1 of his turn, he may choose to draw the first card from the deck, or randomly from the hand of any other player. Then he draws the second card from the deck.",
     "type": "figure",
     "attributes": {
-      "bullets": 4
+      "bullets": 4,
+      "silentAbility": "startTurnDrawing2Cards"
     },
     "abilities": {
-      "silentStartTurnDrawing2Cards": 0,
       "startTurnChoosingDrawPlayer": 0
     }
   },
@@ -394,10 +394,10 @@
     "desc": "during the phase 1 of his turn, he may choose to draw the first card from the top of the discard pile or from the deck. Then, he draws the second card from the deck.",
     "type": "figure",
     "attributes": {
-      "bullets": 4
+      "bullets": 4,
+      "silentAbility": "startTurnDrawing2Cards"
     },
     "abilities": {
-      "silentStartTurnDrawing2Cards": 0,
       "startTurnChoosingDrawDiscard": 0
     }
   }

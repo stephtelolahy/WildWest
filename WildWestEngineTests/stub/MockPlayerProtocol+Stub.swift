@@ -67,13 +67,6 @@ extension MockPlayerProtocol {
         return self
     }
     
-    func abilities(are abilities: [String: Int]) -> MockPlayerProtocol {
-        stub(self) { mock in
-            when(mock.abilities.get).thenReturn(abilities)
-        }
-        return self
-    }
-    
     func weapon(is weapon: Int) -> MockPlayerProtocol {
         stub(self) { mock in
             when(mock.weapon.get).thenReturn(weapon)

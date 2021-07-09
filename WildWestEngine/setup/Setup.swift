@@ -124,6 +124,7 @@ private extension CardAttributesProtocol {
                        bangsCancelable: bangsCancelable ?? other.bangsCancelable,
                        bangsPerTurn: bangsPerTurn ?? other.bangsPerTurn,
                        handLimit: handLimit ?? other.handLimit,
-                       silentCard: silentCard ?? other.silentCard)
+                       silentCard: silentCard ?? other.silentCard,
+                       silentAbility: silentAbility ?? other.silentAbility)
     }
 }

@@ -17,11 +17,11 @@ class ResourcesTests: XCTestCase {
     func test_SciptedRulesAreMoreThanHardCodedRules() throws {
         // Given
         // When
-        let hardcoded = EffectFamily.allCases.count + PlayReqFamily.allCases.count
+        let coded = EffectFamily.allCases.count + PlayReqFamily.allCases.count
         let scripted = sut.loadAbilities().count
         
         // Assert
-        XCTAssertTrue(scripted >= hardcoded)
+        XCTAssertTrue(scripted >= coded)
     }
     
     func test_AllAbilitiesHaveEffects() throws {
@@ -40,9 +40,7 @@ class ResourcesTests: XCTestCase {
         // Given
         let passiveAbilities = ["playBangAsMissed",
                                 "playMissedAsBang",
-                                "playAnyCardAsMissed",
-                                
-                                "silentStartTurnDrawing2Cards"]
+                                "playAnyCardAsMissed"]
         let activeAbilities = sut.loadAbilities().map { $0.name }
         let allAbilities = passiveAbilities + activeAbilities
         
@@ -63,8 +61,8 @@ class ResourcesTests: XCTestCase {
         let card = sut.loadCards().first { $0.type == .default && $0.name == "player" }!
         
         // Assert
-        XCTAssertNotNil(card.abilities["endTurn"])
         XCTAssertNotNil(card.abilities["startTurnDrawing2Cards"])
+        XCTAssertNotNil(card.abilities["endTurn"])
         XCTAssertNotNil(card.abilities["nextTurnOnPhase3"])
         XCTAssertNotNil(card.abilities["nextTurnOnEliminated"])
         XCTAssertNotNil(card.abilities["discardExcessCardsOnPhase3"])
