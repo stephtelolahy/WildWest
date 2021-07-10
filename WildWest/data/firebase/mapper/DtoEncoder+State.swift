@@ -80,7 +80,7 @@ private extension DtoEncoder {
         PlayerDto(identifier: player.identifier,
                   name: player.name,
                   desc: player.desc,
-                  abilities: player.abilities,
+                  abilities: Array(player.abilities),
                   attributes: encode(attributes: player.attributes),
                   role: player.role?.rawValue,
                   maxHealth: player.maxHealth,
@@ -93,7 +93,7 @@ private extension DtoEncoder {
         GPlayer(identifier: try player.identifier.unwrap(),
                 name: try player.name.unwrap(),
                 desc: try player.desc.unwrap(),
-                abilities: try player.abilities.unwrap(),
+                abilities: Set(try player.abilities.unwrap()),
                 attributes: try decode(attributes: player.attributes),
                 role: try Role(rawValue: try player.role.unwrap()).unwrap(),
                 maxHealth: try player.maxHealth.unwrap(),
@@ -118,11 +118,31 @@ private extension DtoEncoder {
         return Array(abilities.values)
     }
     
-    private func encode(attributes: CardAttributesProtocol) -> [String: Int] {
-        [:]
+    private func encode(attributes: CardAttributesProtocol) -> CardAttributesDto {
+        CardAttributesDto(bullets: attributes.bullets,
+                          mustang: attributes.mustang,
+                          scope: attributes.scope,
+                          weapon: attributes.weapon,
+                          flippedCards: attributes.flippedCards,
+                          bangsCancelable: attributes.bangsCancelable,
+                          bangsPerTurn: attributes.bangsPerTurn,
+                          handLimit: attributes.handLimit,
+                          silentCard: attributes.silentCard,
+                          silentAbility: attributes.silentAbility,
+                          playAs: attributes.playAs)
     }
     
-    private func decode(attributes: [String: Int]?) throws -> CardAttributesProtocol {
-        CardAttributes()
+    private func decode(attributes: CardAttributesDto?) throws -> CardAttributesProtocol {
+        CardAttributes(bullets: attributes?.bullets,
+                       mustang: attributes?.mustang,
+                       scope: attributes?.scope,
+                       weapon: attributes?.weapon,
+                       flippedCards: attributes?.flippedCards,
+                       bangsCancelable: attributes?.bangsCancelable,
+                       bangsPerTurn: attributes?.bangsPerTurn,
+                       handLimit: attributes?.handLimit,
+                       silentCard: attributes?.silentCard,
+                       silentAbility: attributes?.silentAbility,
+                       playAs: attributes?.playAs)
     }
 }

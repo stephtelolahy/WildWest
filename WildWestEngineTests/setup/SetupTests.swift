@@ -87,8 +87,8 @@ class SetupTests: XCTestCase {
         let roles: [Role] = [.sheriff, .outlaw, .deputy, .renegade]
         let brown: [Card] = Array(1...80).map { Card(name: "c\($0)", type: .brown) }
         let figure: [Card] = Array(1...16).map { Card(name: "f\($0)", type: .figure, attributes: CardAttributes(bullets: 4)) }
-        let defaults: [Card] = [Card(name: "player", type: .default, abilities: ["a1": 0, "a2": 0]),
-                                Card(name: "sheriff", type: .default, abilities: ["a3": 0], attributes: CardAttributes(silentCard: "jail"))]
+        let defaults: [Card] = [Card(name: "player", type: .default, abilities: ["a1", "a2"]),
+                                Card(name: "sheriff", type: .default, abilities: ["a3"], attributes: CardAttributes(silentCard: "jail"))]
         let cards: [Card] = brown + figure + defaults
         let cardSet: [DeckCard] = Array(1...80).map { DeckCard(name: "c\($0)", value: "v\($0)", suit: "s\($0)") }
         
@@ -108,14 +108,14 @@ class SetupTests: XCTestCase {
         XCTAssertTrue(players.allSatisfy { $0.inPlay.isEmpty }) // InPlay empty
         XCTAssertTrue(players.allSatisfy { $0.hand.count == $0.health }) // Hand cards equals health
         players.forEach {
-            XCTAssertNotNil($0.abilities["a1"])
-            XCTAssertNotNil($0.abilities["a2"])
+            XCTAssertTrue($0.abilities.contains("a1"))
+            XCTAssertTrue($0.abilities.contains("a2"))
         }
         
         let sheriff = try XCTUnwrap(players.first { $0.role == .sheriff })
         XCTAssertEqual(sheriff.maxHealth, 5) // Sheriff has one additional health
         XCTAssertEqual(sheriff.attributes.silentCard, "jail")
-        XCTAssertNotNil(sheriff.abilities["a3"])
+        XCTAssertTrue(sheriff.abilities.contains("a3"))
         // </PLAYERS>
         
         // <STATE>
@@ -139,8 +139,8 @@ class SetupTests: XCTestCase {
         let roles: [Role] = [.sheriff, .outlaw, .deputy, .renegade]
         let brown: [Card] = Array(1...80).map { Card(name: "c\($0)", type: .brown) }
         let figure: [Card] = Array(1...16).map { Card(name: "f\($0)", type: .figure, attributes: CardAttributes(bullets: 4)) }
-        let defaults: [Card] = [Card(name: "player", type: .default, abilities: ["a1": 0, "a2": 0]),
-                                Card(name: "sheriff", type: .default, abilities: ["a3": 0])]
+        let defaults: [Card] = [Card(name: "player", type: .default, abilities: ["a1", "a2"]),
+                                Card(name: "sheriff", type: .default, abilities: ["a3"], attributes: CardAttributes(silentCard: "jail"))]
         let cards: [Card] = brown + figure + defaults
         let cardSet: [DeckCard] = Array(1...80).map { DeckCard(name: "c\($0)", value: "v\($0)", suit: "s\($0)") }
         
@@ -158,8 +158,8 @@ class SetupTests: XCTestCase {
         let roles: [Role] = [.sheriff, .outlaw, .deputy, .renegade]
         let brown: [Card] = Array(1...80).map { Card(name: "c\($0)", type: .brown) }
         let figure: [Card] = Array(1...16).map { Card(name: "f\($0)", type: .figure, attributes: CardAttributes(bullets: 4)) }
-        let defaults: [Card] = [Card(name: "player", type: .default, abilities: ["a1": 0, "a2": 0]),
-                                Card(name: "sheriff", type: .default, abilities: ["a3": 0])]
+        let defaults: [Card] = [Card(name: "player", type: .default, abilities: ["a1", "a2"]),
+                                Card(name: "sheriff", type: .default, abilities: ["a3"], attributes: CardAttributes(silentCard: "jail"))]
         let cards: [Card] = brown + figure + defaults
         let cardSet: [DeckCard] = Array(1...80).map { DeckCard(name: "c\($0)", value: "v\($0)", suit: "s\($0)") }
         

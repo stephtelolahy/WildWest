@@ -32,11 +32,25 @@ struct PlayerDto: Codable {
     let identifier: String?
     let name: String?
     let desc: String?
-    let abilities: [String: Int]?
-    let attributes: [String: Int]?
+    let abilities: [String]?
+    let attributes: CardAttributesDto?
     let role: String?
     let maxHealth: Int?
     let health: Int?
     let hand: [String: String]?
     let inPlay: [String: String]?
+}
+
+struct CardAttributesDto: Codable {
+    let bullets: Int?
+    let mustang: Int?
+    let scope: Int?
+    let weapon: Int?
+    let flippedCards: Int?
+    let bangsCancelable: Int?
+    let bangsPerTurn: Int?
+    let handLimit: Int?
+    let silentCard: String?
+    let silentAbility: String?
+    let playAs: [String: String]?
 }

@@ -1878,7 +1878,7 @@ public class MockBaseCardProtocol: BaseCardProtocol, Cuckoo.ProtocolMock {
     
     
     
-    public var abilities: [String: Int] {
+    public var abilities: Set<String> {
         get {
             return cuckoo_manager.getter("abilities",
                 superclassCall:
@@ -1927,7 +1927,7 @@ public class MockBaseCardProtocol: BaseCardProtocol, Cuckoo.ProtocolMock {
 	    }
 	    
 	    
-	    var abilities: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockBaseCardProtocol, [String: Int]> {
+	    var abilities: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockBaseCardProtocol, Set<String>> {
 	        return .init(manager: cuckoo_manager, name: "abilities")
 	    }
 	    
@@ -1962,7 +1962,7 @@ public class MockBaseCardProtocol: BaseCardProtocol, Cuckoo.ProtocolMock {
 	    }
 	    
 	    
-	    var abilities: Cuckoo.VerifyReadOnlyProperty<[String: Int]> {
+	    var abilities: Cuckoo.VerifyReadOnlyProperty<Set<String>> {
 	        return .init(manager: cuckoo_manager, name: "abilities", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
@@ -1995,9 +1995,9 @@ public class BaseCardProtocolStub: BaseCardProtocol {
     }
     
     
-    public var abilities: [String: Int] {
+    public var abilities: Set<String> {
         get {
-            return DefaultValueRegistry.defaultValue(for: ([String: Int]).self)
+            return DefaultValueRegistry.defaultValue(for: (Set<String>).self)
         }
         
     }
@@ -2564,7 +2564,7 @@ public class MockPlayerStoredProtocol: PlayerStoredProtocol, Cuckoo.ProtocolMock
     
     
     
-    public var abilities: [String: Int] {
+    public var abilities: Set<String> {
         get {
             return cuckoo_manager.getter("abilities",
                 superclassCall:
@@ -2643,7 +2643,7 @@ public class MockPlayerStoredProtocol: PlayerStoredProtocol, Cuckoo.ProtocolMock
 	    }
 	    
 	    
-	    var abilities: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerStoredProtocol, [String: Int]> {
+	    var abilities: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerStoredProtocol, Set<String>> {
 	        return .init(manager: cuckoo_manager, name: "abilities")
 	    }
 	    
@@ -2708,7 +2708,7 @@ public class MockPlayerStoredProtocol: PlayerStoredProtocol, Cuckoo.ProtocolMock
 	    }
 	    
 	    
-	    var abilities: Cuckoo.VerifyReadOnlyProperty<[String: Int]> {
+	    var abilities: Cuckoo.VerifyReadOnlyProperty<Set<String>> {
 	        return .init(manager: cuckoo_manager, name: "abilities", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
@@ -2789,9 +2789,9 @@ public class PlayerStoredProtocolStub: PlayerStoredProtocol {
     }
     
     
-    public var abilities: [String: Int] {
+    public var abilities: Set<String> {
         get {
-            return DefaultValueRegistry.defaultValue(for: ([String: Int]).self)
+            return DefaultValueRegistry.defaultValue(for: (Set<String>).self)
         }
         
     }
@@ -3230,7 +3230,7 @@ public class MockPlayerProtocol: PlayerProtocol, Cuckoo.ProtocolMock {
     
     
     
-    public var abilities: [String: Int] {
+    public var abilities: Set<String> {
         get {
             return cuckoo_manager.getter("abilities",
                 superclassCall:
@@ -3407,7 +3407,7 @@ public class MockPlayerProtocol: PlayerProtocol, Cuckoo.ProtocolMock {
 	    }
 	    
 	    
-	    var abilities: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, [String: Int]> {
+	    var abilities: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, Set<String>> {
 	        return .init(manager: cuckoo_manager, name: "abilities")
 	    }
 	    
@@ -3507,7 +3507,7 @@ public class MockPlayerProtocol: PlayerProtocol, Cuckoo.ProtocolMock {
 	    }
 	    
 	    
-	    var abilities: Cuckoo.VerifyReadOnlyProperty<[String: Int]> {
+	    var abilities: Cuckoo.VerifyReadOnlyProperty<Set<String>> {
 	        return .init(manager: cuckoo_manager, name: "abilities", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
@@ -3623,9 +3623,9 @@ public class PlayerProtocolStub: PlayerProtocol {
     }
     
     
-    public var abilities: [String: Int] {
+    public var abilities: Set<String> {
         get {
-            return DefaultValueRegistry.defaultValue(for: ([String: Int]).self)
+            return DefaultValueRegistry.defaultValue(for: (Set<String>).self)
         }
         
     }
@@ -3807,7 +3807,7 @@ public class MockCardProtocol: CardProtocol, Cuckoo.ProtocolMock {
     
     
     
-    public var abilities: [String: Int] {
+    public var abilities: Set<String> {
         get {
             return cuckoo_manager.getter("abilities",
                 superclassCall:
@@ -3876,7 +3876,7 @@ public class MockCardProtocol: CardProtocol, Cuckoo.ProtocolMock {
 	    }
 	    
 	    
-	    var abilities: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardProtocol, [String: Int]> {
+	    var abilities: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardProtocol, Set<String>> {
 	        return .init(manager: cuckoo_manager, name: "abilities")
 	    }
 	    
@@ -3931,7 +3931,7 @@ public class MockCardProtocol: CardProtocol, Cuckoo.ProtocolMock {
 	    }
 	    
 	    
-	    var abilities: Cuckoo.VerifyReadOnlyProperty<[String: Int]> {
+	    var abilities: Cuckoo.VerifyReadOnlyProperty<Set<String>> {
 	        return .init(manager: cuckoo_manager, name: "abilities", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
@@ -3996,9 +3996,9 @@ public class CardProtocolStub: CardProtocol {
     }
     
     
-    public var abilities: [String: Int] {
+    public var abilities: Set<String> {
         get {
-            return DefaultValueRegistry.defaultValue(for: ([String: Int]).self)
+            return DefaultValueRegistry.defaultValue(for: (Set<String>).self)
         }
         
     }

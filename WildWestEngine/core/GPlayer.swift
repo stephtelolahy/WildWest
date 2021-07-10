@@ -12,7 +12,7 @@ public class GPlayer: PlayerProtocol {
     public let identifier: String
     public let name: String
     public let desc: String
-    public let abilities: [String: Int]
+    public let abilities: Set<String>
     public let attributes: CardAttributesProtocol
     public let role: Role?
     public let maxHealth: Int
@@ -25,7 +25,7 @@ public class GPlayer: PlayerProtocol {
     public init(identifier: String,
                 name: String,
                 desc: String,
-                abilities: [String: Int],
+                abilities: Set<String>,
                 attributes: CardAttributesProtocol,
                 role: Role?,
                 maxHealth: Int,

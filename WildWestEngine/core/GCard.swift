@@ -13,7 +13,7 @@ public class GCard: CardProtocol {
     public let name: String
     public let type: CardType
     public let desc: String
-    public let abilities: [String: Int]
+    public let abilities: Set<String>
     public let attributes: CardAttributesProtocol
     public let suit: String
     public let value: String
@@ -24,7 +24,7 @@ public class GCard: CardProtocol {
                 name: String,
                 type: CardType,
                 desc: String,
-                abilities: [String: Int],
+                abilities: Set<String>,
                 attributes: CardAttributesProtocol,
                 suit: String,
                 value: String) {

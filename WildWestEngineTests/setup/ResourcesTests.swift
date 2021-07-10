@@ -45,7 +45,7 @@ class ResourcesTests: XCTestCase {
         
         // Assert
         cards.forEach { card in
-            card.abilities.keys.forEach {
+            card.abilities.forEach {
                 XCTAssertTrue(allAbilities.contains($0), "Invalid ability \($0) in card \(card.name)")
             }
         }
@@ -57,13 +57,13 @@ class ResourcesTests: XCTestCase {
         let card = sut.loadCards().first { $0.type == .default && $0.name == "player" }!
         
         // Assert
-        XCTAssertNotNil(card.abilities["startTurnDrawing2Cards"])
-        XCTAssertNotNil(card.abilities["endTurn"])
-        XCTAssertNotNil(card.abilities["nextTurnOnPhase3"])
-        XCTAssertNotNil(card.abilities["nextTurnOnEliminated"])
-        XCTAssertNotNil(card.abilities["discardExcessCardsOnPhase3"])
-        XCTAssertNotNil(card.abilities["discardAllCardsOnEliminated"])
-        XCTAssertNotNil(card.abilities["gainRewardOnEliminatingOutlaw"])
+        XCTAssertTrue(card.abilities.contains("startTurnDrawing2Cards"))
+        XCTAssertTrue(card.abilities.contains("endTurn"))
+        XCTAssertTrue(card.abilities.contains("nextTurnOnPhase3"))
+        XCTAssertTrue(card.abilities.contains("nextTurnOnEliminated"))
+        XCTAssertTrue(card.abilities.contains("discardExcessCardsOnPhase3"))
+        XCTAssertTrue(card.abilities.contains("discardAllCardsOnEliminated"))
+        XCTAssertTrue(card.abilities.contains("gainRewardOnEliminatingOutlaw"))
     }
     
     func test_DefaultSheriffAbilities() throws {
@@ -72,7 +72,7 @@ class ResourcesTests: XCTestCase {
         let card = sut.loadCards().first { $0.type == .default && $0.name == "sheriff" }!
         
         // Assert
-        XCTAssertNotNil(card.abilities["penalizeOnEliminatingDeputy"])
+        XCTAssertTrue(card.abilities.contains("penalizeOnEliminatingDeputy"))
         XCTAssertTrue(card.attributes.silentCard == "jail")
     }
 }

@@ -55,14 +55,9 @@ extension MockPlayerProtocol {
         return self
     }
     
-    func abilities(are abilities: String...) -> MockPlayerProtocol {
+    func abilities(are values: String...) -> MockPlayerProtocol {
         stub(self) { mock in
-            let dict: [String: Int] = abilities.reduce([:]) { dict, ability in
-                var dict = dict
-                dict[ability] = 0
-                return dict
-            }
-            when(mock.abilities.get).thenReturn(dict)
+            when(mock.abilities.get).thenReturn(Set(values))
         }
         return self
     }

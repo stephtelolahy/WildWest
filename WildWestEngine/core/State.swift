@@ -40,7 +40,7 @@ public protocol HitProtocol {
 public protocol BaseCardProtocol {
     var name: String { get }
     var desc: String { get }
-    var abilities: [String: Int] { get }
+    var abilities: Set<String> { get }
     var attributes: CardAttributesProtocol { get }
 }
 

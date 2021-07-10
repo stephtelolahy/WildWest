@@ -88,14 +88,15 @@ private extension GSetup {
             var attributes: CardAttributesProtocol = figure.attributes
             
             if let playerCard = defaults.first(where: { $0.name == "player" }) {
-                abilities.merge(playerCard.abilities) { $1 }
+                attributes = attributes.union(playerCard.attributes)
+                abilities = abilities.union(playerCard.abilities)
             }
             
             if role == .sheriff,
                let sheriffCard = defaults.first(where: { $0.name == "sheriff" }) {
                 health += 1
-                abilities.merge(sheriffCard.abilities) { $1 }
-                attributes = attributes.merge(with: sheriffCard.attributes)
+                attributes = attributes.union(sheriffCard.attributes)
+                abilities = abilities.union(sheriffCard.abilities)
             }
             
             let hand: [CardProtocol] = Array(1...health).map { _ in deck.removeFirst() }
@@ -115,7 +116,7 @@ private extension GSetup {
 
 private extension CardAttributesProtocol {
     
-    func merge(with other: CardAttributesProtocol) -> CardAttributesProtocol {
+    func union(_ other: CardAttributesProtocol) -> CardAttributesProtocol {
         CardAttributes(bullets: bullets,
                        mustang: mustang,
                        scope: scope,

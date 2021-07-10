@@ -64,12 +64,12 @@ private extension AbilityMatcher {
     func active(actor identifier: String, in state: StateProtocol) -> [GMove]? {
         let actor = state.players[identifier]!
         
-        let innerMoves: [GMove] = actor.applicableAbilities().keys
+        let innerMoves: [GMove] = actor.applicableAbilities()
             .compactMap { self.moves(ofType: .active, ability: $0, card: nil, actor: actor, in: state) }
             .flatMap { $0 }
         
         let playHandMoves: [GMove] = actor.hand.flatMap { card -> [GMove] in
-            actor.abilities(applicableTo: card).keys
+            actor.applicableAbilitiesTo(card)
                 .compactMap { ability -> [GMove]? in
                     self.moves(ofType: .active, ability: ability, card: .hand(card.identifier), actor: actor, in: state)?
                         .filter { move -> Bool in
@@ -101,12 +101,12 @@ private extension AbilityMatcher {
     func triggered(on event: GEvent, actor identifier: String, in state: StateProtocol) -> [GMove]? {
         let actor = state.players[identifier]!
         
-        let innerMoves: [GMove] = actor.applicableAbilities().keys
+        let innerMoves: [GMove] = actor.applicableAbilities()
             .compactMap { self.moves(ofType: .triggered, ability: $0, card: nil, actor: actor, in: state, event: event) }
             .flatMap { $0 }
         
         let inPlayMoves: [GMove] = actor.inPlay.flatMap { card -> [GMove] in
-            card.abilities.keys
+            card.abilities
                 .compactMap { self.moves(ofType: .triggered, ability: $0, card: .inPlay(card.identifier), actor: actor, in: state, event: event) }
                 .flatMap { $0 }
         }
@@ -187,30 +187,30 @@ private extension AbilityMatcher {
 
 private extension PlayerProtocol {
     
-    func isTargetableBy(_ card: CardProtocol) -> Bool {
-        if let regex = attributes.silentCard,
-           card.matches(regex: regex) {
-           return false
-        }
-        
-        return true
-    }
-    
-    func applicableAbilities() -> [String: Int] {
+    func applicableAbilities() -> Set<String> {
         var abilities = self.abilities
         if let silenced = attributes.silentAbility {
-            abilities.removeValue(forKey: silenced)
+            abilities.remove(silenced)
         }
         return abilities
     }
     
-    func abilities(applicableTo card: CardProtocol) -> [String: Int] {
+    func applicableAbilitiesTo(_ card: CardProtocol) -> Set<String> {
         var abilities = card.abilities
         for (key, value) in attributes.playAs ?? [:] {
             if card.matches(regex: key) {
-                abilities[value] = 0
+                abilities.insert(value)
             }
         }
         return abilities
+    }
+    
+    func isTargetableBy(_ card: CardProtocol) -> Bool {
+        if let regex = attributes.silentCard,
+           card.matches(regex: regex) {
+            return false
+        }
+        
+        return true
     }
 }
