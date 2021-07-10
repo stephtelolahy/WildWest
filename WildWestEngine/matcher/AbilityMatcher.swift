@@ -217,9 +217,14 @@ private extension AbilityMatcher {
         return abilities
     }
     
-    func isPlayer(_ player: PlayerProtocol, targetableBy card: CardProtocol) -> Bool {
-        if player.abilities["silentJail"] != nil,
+    func isPlayer(_ target: PlayerProtocol, targetableBy card: CardProtocol) -> Bool {
+        if target.abilities["silentJail"] != nil,
            card.name == "jail" {
+            return false
+        }
+        
+        if target.abilities["silentDiamonds"] != nil,
+           card.suit == "♦️" {
             return false
         }
         

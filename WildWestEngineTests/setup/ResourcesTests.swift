@@ -52,7 +52,8 @@ class ResourcesTests: XCTestCase {
                                 "playAnyCardAsMissed",
                                 
                                 "silentStartTurnDrawing2Cards",
-                                "silentJail"]
+                                "silentJail",
+                                "silentDiamonds"]
         let activeAbilities = sut.loadAbilities().map { $0.name }
         let allAbilities = passiveAbilities + activeAbilities
         
