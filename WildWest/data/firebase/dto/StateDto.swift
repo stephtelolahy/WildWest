@@ -35,7 +35,6 @@ struct PlayerDto: Codable {
     let abilities: [String]?
     let attributes: CardAttributesDto?
     let role: String?
-    let maxHealth: Int?
     let health: Int?
     let hand: [String: String]?
     let inPlay: [String: String]?

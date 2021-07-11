@@ -80,9 +80,6 @@ private extension GSetup {
                       deck: inout [CardProtocol]) -> [PlayerProtocol] {
         roles.enumerated().map { index, role in
             let figure = figures[index]
-            guard var health = figure.attributes.bullets else {
-                fatalError("Bullets for \(figure.name) not found")
-            }
             
             var abilities = figure.abilities
             var attributes: CardAttributesProtocol = figure.attributes
@@ -94,9 +91,12 @@ private extension GSetup {
             
             if role == .sheriff,
                let sheriffCard = defaults.first(where: { $0.name == "sheriff" }) {
-                health += 1
                 attributes = attributes.union(sheriffCard.attributes)
                 abilities = abilities.union(sheriffCard.abilities)
+            }
+            
+            guard let health = attributes.bullets else {
+                fatalError("Bullets for \(figure.name) not found")
             }
             
             let hand: [CardProtocol] = Array(1...health).map { _ in deck.removeFirst() }
@@ -106,7 +106,6 @@ private extension GSetup {
                            abilities: abilities,
                            attributes: attributes,
                            role: role,
-                           maxHealth: health,
                            health: health,
                            hand: hand,
                            inPlay: [])
@@ -117,9 +116,9 @@ private extension GSetup {
 private extension CardAttributesProtocol {
     
     func union(_ other: CardAttributesProtocol) -> CardAttributesProtocol {
-        CardAttributes(bullets: bullets,
-                       mustang: mustang,
-                       scope: scope,
+        CardAttributes(bullets: [bullets, other.bullets].compactMap { $0 }.reduce(0, +),
+                       mustang: [mustang, other.mustang].compactMap { $0 }.reduce(0, +),
+                       scope: [scope, other.scope].compactMap { $0 }.reduce(0, +),
                        weapon: weapon ?? other.weapon,
                        flippedCards: flippedCards ?? other.flippedCards,
                        bangsCancelable: bangsCancelable ?? other.bangsCancelable,

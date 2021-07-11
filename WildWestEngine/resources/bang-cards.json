@@ -18,6 +18,7 @@
     "desc": "",
     "type": "default",
     "attributes": {
+      "bullets": 1,
       "silentCard": "jail"
     },
     "abilities": ["penalizeOnEliminatingDeputy"]

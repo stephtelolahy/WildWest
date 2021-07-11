@@ -15,7 +15,6 @@ public class GPlayer: PlayerProtocol {
     public let abilities: Set<String>
     public let attributes: CardAttributesProtocol
     public let role: Role?
-    public let maxHealth: Int
     public var health: Int
     public var hand: [CardProtocol]
     public var inPlay: [CardProtocol]
@@ -28,7 +27,6 @@ public class GPlayer: PlayerProtocol {
                 abilities: Set<String>,
                 attributes: CardAttributesProtocol,
                 role: Role?,
-                maxHealth: Int,
                 health: Int,
                 hand: [CardProtocol],
                 inPlay: [CardProtocol]) {
@@ -38,7 +36,6 @@ public class GPlayer: PlayerProtocol {
         self.abilities = abilities
         self.attributes = attributes
         self.role = role
-        self.maxHealth = maxHealth
         self.health = health
         self.hand = hand
         self.inPlay = inPlay
@@ -51,13 +48,16 @@ public class GPlayer: PlayerProtocol {
                   abilities: player.abilities,
                   attributes: player.attributes,
                   role: player.role,
-                  maxHealth: player.maxHealth,
                   health: player.health,
                   hand: player.hand,
                   inPlay: player.inPlay)
     }
     
     // MARK: - PlayerComputedProtocol
+    
+    public var maxHealth: Int {
+        attributes.bullets ?? 0
+    }
     
     public var weapon: Int {
         cards.compactMap { $0.attributes.weapon }.max() ?? 1

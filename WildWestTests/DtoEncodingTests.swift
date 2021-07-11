@@ -52,7 +52,6 @@ class DtoEncodingTests: XCTestCase {
                               abilities: ["ab1", "ab2"],
                               attributes: attributes1,
                               role: .sheriff,
-                              maxHealth: 4,
                               health: 2,
                               hand: [],
                               inPlay: [])
@@ -99,7 +98,6 @@ class DtoEncodingTests: XCTestCase {
         XCTAssertEqual(decodedPlayer1.desc, "desc1")
         XCTAssertEqual(decodedPlayer1.abilities, ["ab1", "ab2"])
         XCTAssertEqual(decodedPlayer1.role, .sheriff)
-        XCTAssertEqual(decodedPlayer1.maxHealth, 4)
         XCTAssertEqual(decodedPlayer1.health, 2)
         XCTAssertEqual(decodedPlayer1.hand.map { $0.identifier }, [])
         XCTAssertEqual(decodedPlayer1.inPlay.map { $0.identifier }, [])

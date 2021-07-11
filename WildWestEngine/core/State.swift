@@ -61,13 +61,13 @@ public protocol CardAttributesProtocol {
 public protocol PlayerStoredProtocol: BaseCardProtocol {
     var identifier: String { get }
     var role: Role? { get }
-    var maxHealth: Int { get }
     var health: Int { get }
     var hand: [CardProtocol] { get }
     var inPlay: [CardProtocol] { get }
 }
 
 public protocol PlayerComputedProtocol {
+    var maxHealth: Int { get }
     var weapon: Int { get }
     var scope: Int { get }
     var mustang: Int { get }

@@ -83,7 +83,6 @@ private extension DtoEncoder {
                   abilities: Array(player.abilities),
                   attributes: encode(attributes: player.attributes),
                   role: player.role?.rawValue,
-                  maxHealth: player.maxHealth,
                   health: player.health,
                   hand: encode(cards: player.hand),
                   inPlay: encode(cards: player.inPlay))
@@ -96,7 +95,6 @@ private extension DtoEncoder {
                 abilities: Set(try player.abilities.unwrap()),
                 attributes: try decode(attributes: player.attributes),
                 role: try Role(rawValue: try player.role.unwrap()).unwrap(),
-                maxHealth: try player.maxHealth.unwrap(),
                 health: try player.health.unwrap(),
                 hand: try decode(cards: player.hand),
                 inPlay: try decode(cards: player.inPlay))

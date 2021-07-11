@@ -2480,20 +2480,6 @@ public class MockPlayerStoredProtocol: PlayerStoredProtocol, Cuckoo.ProtocolMock
     
     
     
-    public var maxHealth: Int {
-        get {
-            return cuckoo_manager.getter("maxHealth",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.maxHealth)
-        }
-        
-    }
-    
-    
-    
     public var health: Int {
         get {
             return cuckoo_manager.getter("health",
@@ -2613,11 +2599,6 @@ public class MockPlayerStoredProtocol: PlayerStoredProtocol, Cuckoo.ProtocolMock
 	    }
 	    
 	    
-	    var maxHealth: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerStoredProtocol, Int> {
-	        return .init(manager: cuckoo_manager, name: "maxHealth")
-	    }
-	    
-	    
 	    var health: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerStoredProtocol, Int> {
 	        return .init(manager: cuckoo_manager, name: "health")
 	    }
@@ -2678,11 +2659,6 @@ public class MockPlayerStoredProtocol: PlayerStoredProtocol, Cuckoo.ProtocolMock
 	    }
 	    
 	    
-	    var maxHealth: Cuckoo.VerifyReadOnlyProperty<Int> {
-	        return .init(manager: cuckoo_manager, name: "maxHealth", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
 	    var health: Cuckoo.VerifyReadOnlyProperty<Int> {
 	        return .init(manager: cuckoo_manager, name: "health", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
@@ -2736,14 +2712,6 @@ public class PlayerStoredProtocolStub: PlayerStoredProtocol {
     public var role: Role? {
         get {
             return DefaultValueRegistry.defaultValue(for: (Role?).self)
-        }
-        
-    }
-    
-    
-    public var maxHealth: Int {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (Int).self)
         }
         
     }
@@ -2830,6 +2798,20 @@ public class MockPlayerComputedProtocol: PlayerComputedProtocol, Cuckoo.Protocol
     }
     
 
+    
+    
+    
+    public var maxHealth: Int {
+        get {
+            return cuckoo_manager.getter("maxHealth",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.maxHealth)
+        }
+        
+    }
     
     
     
@@ -2942,6 +2924,11 @@ public class MockPlayerComputedProtocol: PlayerComputedProtocol, Cuckoo.Protocol
 	    }
 	    
 	    
+	    var maxHealth: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerComputedProtocol, Int> {
+	        return .init(manager: cuckoo_manager, name: "maxHealth")
+	    }
+	    
+	    
 	    var weapon: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerComputedProtocol, Int> {
 	        return .init(manager: cuckoo_manager, name: "weapon")
 	    }
@@ -2992,6 +2979,11 @@ public class MockPlayerComputedProtocol: PlayerComputedProtocol, Cuckoo.Protocol
 	
 	    
 	    
+	    var maxHealth: Cuckoo.VerifyReadOnlyProperty<Int> {
+	        return .init(manager: cuckoo_manager, name: "maxHealth", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
 	    var weapon: Cuckoo.VerifyReadOnlyProperty<Int> {
 	        return .init(manager: cuckoo_manager, name: "weapon", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
@@ -3032,6 +3024,14 @@ public class MockPlayerComputedProtocol: PlayerComputedProtocol, Cuckoo.Protocol
 }
 
 public class PlayerComputedProtocolStub: PlayerComputedProtocol {
+    
+    
+    public var maxHealth: Int {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (Int).self)
+        }
+        
+    }
     
     
     public var weapon: Int {
@@ -3146,20 +3146,6 @@ public class MockPlayerProtocol: PlayerProtocol, Cuckoo.ProtocolMock {
     
     
     
-    public var maxHealth: Int {
-        get {
-            return cuckoo_manager.getter("maxHealth",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.maxHealth)
-        }
-        
-    }
-    
-    
-    
     public var health: Int {
         get {
             return cuckoo_manager.getter("health",
@@ -3252,6 +3238,20 @@ public class MockPlayerProtocol: PlayerProtocol, Cuckoo.ProtocolMock {
                     Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                     ,
                 defaultCall: __defaultImplStub!.attributes)
+        }
+        
+    }
+    
+    
+    
+    public var maxHealth: Int {
+        get {
+            return cuckoo_manager.getter("maxHealth",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.maxHealth)
         }
         
     }
@@ -3377,11 +3377,6 @@ public class MockPlayerProtocol: PlayerProtocol, Cuckoo.ProtocolMock {
 	    }
 	    
 	    
-	    var maxHealth: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, Int> {
-	        return .init(manager: cuckoo_manager, name: "maxHealth")
-	    }
-	    
-	    
 	    var health: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, Int> {
 	        return .init(manager: cuckoo_manager, name: "health")
 	    }
@@ -3414,6 +3409,11 @@ public class MockPlayerProtocol: PlayerProtocol, Cuckoo.ProtocolMock {
 	    
 	    var attributes: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, CardAttributesProtocol> {
 	        return .init(manager: cuckoo_manager, name: "attributes")
+	    }
+	    
+	    
+	    var maxHealth: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, Int> {
+	        return .init(manager: cuckoo_manager, name: "maxHealth")
 	    }
 	    
 	    
@@ -3477,11 +3477,6 @@ public class MockPlayerProtocol: PlayerProtocol, Cuckoo.ProtocolMock {
 	    }
 	    
 	    
-	    var maxHealth: Cuckoo.VerifyReadOnlyProperty<Int> {
-	        return .init(manager: cuckoo_manager, name: "maxHealth", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
 	    var health: Cuckoo.VerifyReadOnlyProperty<Int> {
 	        return .init(manager: cuckoo_manager, name: "health", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
@@ -3514,6 +3509,11 @@ public class MockPlayerProtocol: PlayerProtocol, Cuckoo.ProtocolMock {
 	    
 	    var attributes: Cuckoo.VerifyReadOnlyProperty<CardAttributesProtocol> {
 	        return .init(manager: cuckoo_manager, name: "attributes", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var maxHealth: Cuckoo.VerifyReadOnlyProperty<Int> {
+	        return .init(manager: cuckoo_manager, name: "maxHealth", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	    
@@ -3575,14 +3575,6 @@ public class PlayerProtocolStub: PlayerProtocol {
     }
     
     
-    public var maxHealth: Int {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (Int).self)
-        }
-        
-    }
-    
-    
     public var health: Int {
         get {
             return DefaultValueRegistry.defaultValue(for: (Int).self)
@@ -3634,6 +3626,14 @@ public class PlayerProtocolStub: PlayerProtocol {
     public var attributes: CardAttributesProtocol {
         get {
             return DefaultValueRegistry.defaultValue(for: (CardAttributesProtocol).self)
+        }
+        
+    }
+    
+    
+    public var maxHealth: Int {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (Int).self)
         }
         
     }
