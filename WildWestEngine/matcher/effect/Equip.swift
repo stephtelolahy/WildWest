@@ -48,6 +48,6 @@ public class Equip: Effect {
 
 private extension CardProtocol {
     var isWeapon: Bool {
-        attributes.weapon != nil
+        attributes[.weapon] != nil
     }
 }

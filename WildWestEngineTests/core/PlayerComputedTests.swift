@@ -17,7 +17,7 @@ class PlayerComputedTests: XCTestCase {
         // Given
         let mockPlayer = MockPlayerProtocol()
             .withDefault()
-            .attributes(is: MockCardAttributesProtocol().bullets(is: 3))
+            .attributes(are: [.bullets: 3])
         let sut = GPlayer(mockPlayer)
         
         // When
@@ -41,7 +41,7 @@ class PlayerComputedTests: XCTestCase {
         // Given
         let mockPlayer = MockPlayerProtocol()
             .withDefault()
-            .playing(MockCardProtocol().withDefault().attributes(is: MockCardAttributesProtocol().weapon(is: 5)))
+            .playing(MockCardProtocol().withDefault().attributes(are: [.weapon: 5]))
         let sut = GPlayer(mockPlayer)
         
         // When
@@ -65,7 +65,7 @@ class PlayerComputedTests: XCTestCase {
         // Given
         let mockPlayer = MockPlayerProtocol()
             .withDefault()
-            .attributes(is: MockCardAttributesProtocol().bangsPerTurn(is: 0))
+            .attributes(are: [.bangsPerTurn: 0])
         let sut = GPlayer(mockPlayer)
         
         // When
@@ -77,7 +77,7 @@ class PlayerComputedTests: XCTestCase {
         // Given
         let mockPlayer = MockPlayerProtocol()
             .withDefault()
-            .playing(MockCardProtocol().withDefault().attributes(is: MockCardAttributesProtocol().bangsPerTurn(is: 0)))
+            .playing(MockCardProtocol().withDefault().attributes(are: [.bangsPerTurn: 0]))
         let sut = GPlayer(mockPlayer)
         
         // When
@@ -101,7 +101,7 @@ class PlayerComputedTests: XCTestCase {
         // Given
         let mockPlayer = MockPlayerProtocol()
             .withDefault()
-            .attributes(is: MockCardAttributesProtocol().mustang(is: 1))
+            .attributes(are: [.mustang: 1])
         let sut = GPlayer(mockPlayer)
         
         // When
@@ -113,8 +113,8 @@ class PlayerComputedTests: XCTestCase {
         // Given
         let mockPlayer = MockPlayerProtocol()
             .withDefault()
-            .attributes(is: MockCardAttributesProtocol().mustang(is: 1))
-            .playing(MockCardProtocol().withDefault().attributes(is: MockCardAttributesProtocol().mustang(is: 1)))
+            .attributes(are: [.mustang: 1])
+            .playing(MockCardProtocol().withDefault().attributes(are: [.mustang: 1]))
         let sut = GPlayer(mockPlayer)
         
         // When
@@ -138,7 +138,7 @@ class PlayerComputedTests: XCTestCase {
         // Given
         let mockPlayer = MockPlayerProtocol()
             .withDefault()
-            .attributes(is: MockCardAttributesProtocol().scope(is: 1))
+            .attributes(are: [.scope: 1])
         let sut = GPlayer(mockPlayer)
         
         // When
@@ -150,8 +150,8 @@ class PlayerComputedTests: XCTestCase {
         // Given
         let mockPlayer = MockPlayerProtocol()
             .withDefault()
-            .attributes(is: MockCardAttributesProtocol().scope(is: 1))
-            .playing(MockCardProtocol().withDefault().attributes(is: MockCardAttributesProtocol().scope(is: 1)))
+            .attributes(are: [.scope: 1])
+            .playing(MockCardProtocol().withDefault().attributes(are: [.scope: 1]))
         let sut = GPlayer(mockPlayer)
         
         // When
@@ -175,7 +175,7 @@ class PlayerComputedTests: XCTestCase {
         // Given
         let mockPlayer = MockPlayerProtocol()
             .withDefault()
-            .attributes(is: MockCardAttributesProtocol().bangsCancelable(is: 2))
+            .attributes(are: [.bangsCancelable: 2])
         let sut = GPlayer(mockPlayer)
         
         // When
@@ -199,7 +199,7 @@ class PlayerComputedTests: XCTestCase {
         // Given
         let mockPlayer = MockPlayerProtocol()
             .withDefault()
-            .attributes(is: MockCardAttributesProtocol().flippedCards(is: 2))
+            .attributes(are: [.flippedCards: 2])
         let sut = GPlayer(mockPlayer)
         
         // When
@@ -227,7 +227,7 @@ class PlayerComputedTests: XCTestCase {
         let mockPlayer = MockPlayerProtocol()
             .withDefault()
             .health(is: 4)
-            .attributes(is: MockCardAttributesProtocol().handLimit(is: 10))
+            .attributes(are: [.handLimit: 10])
         let sut = GPlayer(mockPlayer)
         
         // When

@@ -12,12 +12,7 @@ import Cuckoo
 extension MockCardProtocol {
     
     func withDefault() -> MockCardProtocol {
-        let result = withEnabledDefaultImplementation(CardProtocolStub())
-        Cuckoo.stub(result) { mock in
-            let mockAttributes = MockCardAttributesProtocol().withEnabledDefaultImplementation(CardAttributesProtocolStub())
-            when(mock.attributes.get).thenReturn(mockAttributes)
-        }
-        return result
+        withEnabledDefaultImplementation(CardProtocolStub())
     }
     
     func identified(by identifier: String) -> MockCardProtocol {
@@ -62,7 +57,7 @@ extension MockCardProtocol {
         return self
     }
     
-    func attributes(is value: CardAttributesProtocol) -> MockCardProtocol {
+    func attributes(are value: [CardAttributeKey: Any]) -> MockCardProtocol {
         stub(self) { mock in
             when(mock.attributes.get).thenReturn(value)
         }

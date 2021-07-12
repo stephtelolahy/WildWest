@@ -80,8 +80,8 @@ private extension DtoEncoder {
         PlayerDto(identifier: player.identifier,
                   name: player.name,
                   desc: player.desc,
-                  abilities: Array(player.abilities),
                   attributes: encode(attributes: player.attributes),
+                  abilities: Array(player.abilities),
                   role: player.role?.rawValue,
                   health: player.health,
                   hand: encode(cards: player.hand),
@@ -92,8 +92,8 @@ private extension DtoEncoder {
         GPlayer(identifier: try player.identifier.unwrap(),
                 name: try player.name.unwrap(),
                 desc: try player.desc.unwrap(),
-                abilities: Set(try player.abilities.unwrap()),
                 attributes: try decode(attributes: player.attributes),
+                abilities: Set(try player.abilities.unwrap()),
                 role: try Role(rawValue: try player.role.unwrap()).unwrap(),
                 health: try player.health.unwrap(),
                 hand: try decode(cards: player.hand),
@@ -116,31 +116,24 @@ private extension DtoEncoder {
         return Array(abilities.values)
     }
     
-    private func encode(attributes: CardAttributesProtocol) -> CardAttributesDto {
-        CardAttributesDto(bullets: attributes.bullets,
-                          mustang: attributes.mustang,
-                          scope: attributes.scope,
-                          weapon: attributes.weapon,
-                          flippedCards: attributes.flippedCards,
-                          bangsCancelable: attributes.bangsCancelable,
-                          bangsPerTurn: attributes.bangsPerTurn,
-                          handLimit: attributes.handLimit,
-                          silentCard: attributes.silentCard,
-                          silentAbility: attributes.silentAbility,
-                          playAs: attributes.playAs)
+    func encode(attributes: [CardAttributeKey: Any]) -> String? {
+        let dict: [String: Any] = attributes.reduce(into: [:]) { result, element in
+            result[element.key.rawValue] = element.value
+        }
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: dict, options: []),
+              let jsonString = String(data: jsonData, encoding: String.Encoding.ascii) else {
+            return nil
+        }
+        return jsonString
     }
     
-    private func decode(attributes: CardAttributesDto?) throws -> CardAttributesProtocol {
-        CardAttributes(bullets: attributes?.bullets,
-                       mustang: attributes?.mustang,
-                       scope: attributes?.scope,
-                       weapon: attributes?.weapon,
-                       flippedCards: attributes?.flippedCards,
-                       bangsCancelable: attributes?.bangsCancelable,
-                       bangsPerTurn: attributes?.bangsPerTurn,
-                       handLimit: attributes?.handLimit,
-                       silentCard: attributes?.silentCard,
-                       silentAbility: attributes?.silentAbility,
-                       playAs: attributes?.playAs)
+    func decode(attributes: String?) throws -> [CardAttributeKey: Any] {
+        guard let data = attributes?.data(using: .utf8),
+              let dict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+            return [:]
+        }
+        return dict.reduce(into: [:]) { result, element in
+            result[CardAttributeKey(rawValue: element.key)!] = element.value
+        }
     }
 }

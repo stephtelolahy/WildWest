@@ -23,10 +23,10 @@ class DtoEncodingTests: XCTestCase {
     private var mockDatabaseReference: MockDatabaseReferenceProtocol!
     
     override func setUp() {
-        mockCard1 = GCard(identifier: "c1", name: "", type: .blue, desc: "", abilities: [], attributes: CardAttributes(), suit: "", value: "")
-        mockCard2 = GCard(identifier: "c2", name: "", type: .blue, desc: "", abilities: [], attributes: CardAttributes(), suit: "", value: "")
-        mockCard3 = GCard(identifier: "c3", name: "", type: .blue, desc: "", abilities: [], attributes: CardAttributes(), suit: "", value: "")
-        mockCard4 = GCard(identifier: "c4", name: "", type: .blue, desc: "", abilities: [], attributes: CardAttributes(), suit: "", value: "")
+        mockCard1 = GCard(identifier: "c1", name: "", type: .blue, desc: "", attributes: [:], abilities: [], suit: "", value: "")
+        mockCard2 = GCard(identifier: "c2", name: "", type: .blue, desc: "", attributes: [:], abilities: [], suit: "", value: "")
+        mockCard3 = GCard(identifier: "c3", name: "", type: .blue, desc: "", attributes: [:], abilities: [], suit: "", value: "")
+        mockCard4 = GCard(identifier: "c4", name: "", type: .blue, desc: "", attributes: [:], abilities: [], suit: "", value: "")
         mockDatabaseReference = MockDatabaseReferenceProtocol()
         sut = DtoEncoder(databaseRef: mockDatabaseReference, allCards: [mockCard1, mockCard2, mockCard3, mockCard4])
     }
@@ -35,22 +35,17 @@ class DtoEncodingTests: XCTestCase {
     
     func test_StateEncoding() throws {
         // Given
-        let attributes1 = CardAttributes(bullets: 4,
-                                         mustang: 1,
-                                         scope: 1,
-                                         weapon: 5,
-                                         flippedCards: 2,
-                                         bangsCancelable: 2,
-                                         bangsPerTurn: 0,
-                                         handLimit: 10,
-                                         silentCard: "jail",
-                                         silentAbility: "equip",
-                                         playAs: ["missed": "bang"])
+        let attributes1: [CardAttributeKey: Any] = [
+            .bullets: 4,
+            .silentAbility: "equip",
+            .playAs: ["missed": "bang"]
+        ]
+        
         let player1 = GPlayer(identifier: "p1",
                               name: "name1",
                               desc: "desc1",
-                              abilities: ["ab1", "ab2"],
                               attributes: attributes1,
+                              abilities: ["ab1", "ab2"],
                               role: .sheriff,
                               health: 2,
                               hand: [],
@@ -103,17 +98,9 @@ class DtoEncodingTests: XCTestCase {
         XCTAssertEqual(decodedPlayer1.inPlay.map { $0.identifier }, [])
         
         let decodedAttributes1 = decodedPlayer1.attributes
-        XCTAssertEqual(decodedAttributes1.bullets, 4)
-        XCTAssertEqual(decodedAttributes1.mustang, 1)
-        XCTAssertEqual(decodedAttributes1.scope, 1)
-        XCTAssertEqual(decodedAttributes1.weapon, 5)
-        XCTAssertEqual(decodedAttributes1.flippedCards, 2)
-        XCTAssertEqual(decodedAttributes1.bangsCancelable, 2)
-        XCTAssertEqual(decodedAttributes1.bangsPerTurn, 0)
-        XCTAssertEqual(decodedAttributes1.handLimit, 10)
-        XCTAssertEqual(decodedAttributes1.silentCard, "jail")
-        XCTAssertEqual(decodedAttributes1.silentAbility, "equip")
-        XCTAssertEqual(decodedAttributes1.playAs, ["missed": "bang"])
+        XCTAssertEqual(decodedAttributes1[.bullets] as? Int, 4)
+        XCTAssertEqual(decodedAttributes1[.silentAbility] as? String, "equip")
+        XCTAssertEqual(decodedAttributes1[.playAs] as? [String: String], ["missed": "bang"])
         
         let decodedHit1 = decoded.hits[0]
         XCTAssertEqual(decodedHit1.name, "hit1")

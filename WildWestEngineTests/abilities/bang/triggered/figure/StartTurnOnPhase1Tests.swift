@@ -45,7 +45,7 @@ class StartTurnDrawing2CardsTests: XCTestCase {
             .withDefault()
             .identified(by: "p1")
             .abilities(are: "startTurnDrawing2Cards")
-            .attributes(is: MockCardAttributesProtocol().silentAbility(is: "startTurnDrawing2Cards"))
+            .attributes(are: [.silentAbility: "startTurnDrawing2Cards"])
         let mockState = MockStateProtocol()
             .withDefault()
             .turn(is: "p1")

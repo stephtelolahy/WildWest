@@ -189,7 +189,7 @@ private extension PlayerProtocol {
     
     func applicableAbilities() -> Set<String> {
         var abilities = self.abilities
-        if let silenced = attributes.silentAbility {
+        if let silenced = attributes[.silentAbility] as? String {
             abilities.remove(silenced)
         }
         return abilities
@@ -197,16 +197,18 @@ private extension PlayerProtocol {
     
     func applicableAbilitiesTo(_ card: CardProtocol) -> Set<String> {
         var abilities = card.abilities
-        for (key, value) in attributes.playAs ?? [:] {
-            if card.matches(regex: key) {
-                abilities.insert(value)
+        if let playAs = attributes[.playAs] as? [String: String] {
+            for (key, value) in playAs {
+                if card.matches(regex: key) {
+                    abilities.insert(value)
+                }
             }
         }
         return abilities
     }
     
     func isTargetableBy(_ card: CardProtocol) -> Bool {
-        if let regex = attributes.silentCard,
+        if let regex = attributes[.silentCard] as? String,
            card.matches(regex: regex) {
             return false
         }

@@ -12,8 +12,8 @@ public class GPlayer: PlayerProtocol {
     public let identifier: String
     public let name: String
     public let desc: String
+    public let attributes: [CardAttributeKey: Any]
     public let abilities: Set<String>
-    public let attributes: CardAttributesProtocol
     public let role: Role?
     public var health: Int
     public var hand: [CardProtocol]
@@ -24,8 +24,8 @@ public class GPlayer: PlayerProtocol {
     public init(identifier: String,
                 name: String,
                 desc: String,
+                attributes: [CardAttributeKey: Any],
                 abilities: Set<String>,
-                attributes: CardAttributesProtocol,
                 role: Role?,
                 health: Int,
                 hand: [CardProtocol],
@@ -33,8 +33,8 @@ public class GPlayer: PlayerProtocol {
         self.identifier = identifier
         self.name = name
         self.desc = desc
-        self.abilities = abilities
         self.attributes = attributes
+        self.abilities = abilities
         self.role = role
         self.health = health
         self.hand = hand
@@ -45,8 +45,8 @@ public class GPlayer: PlayerProtocol {
         self.init(identifier: player.identifier,
                   name: player.name,
                   desc: player.desc,
-                  abilities: player.abilities,
                   attributes: player.attributes,
+                  abilities: player.abilities,
                   role: player.role,
                   health: player.health,
                   hand: player.hand,
@@ -56,35 +56,35 @@ public class GPlayer: PlayerProtocol {
     // MARK: - PlayerComputedProtocol
     
     public var maxHealth: Int {
-        attributes.bullets ?? 0
+        attributes[.bullets] as? Int ?? 0
     }
     
     public var weapon: Int {
-        cards.compactMap { $0.attributes.weapon }.max() ?? 1
+        cards.compactMap { $0.attributes[.weapon] as? Int }.max() ?? 1
     }
     
     public var scope: Int {
-        cards.compactMap { $0.attributes.scope }.reduce(0, +)
+        cards.compactMap { $0.attributes[.scope] as? Int }.reduce(0, +)
     }
     
     public var mustang: Int {
-        cards.compactMap { $0.attributes.mustang }.reduce(0, +)
+        cards.compactMap { $0.attributes[.mustang] as? Int }.reduce(0, +)
     }
     
     public var bangsPerTurn: Int {
-        cards.compactMap { $0.attributes.bangsPerTurn }.max() ?? 1
+        cards.compactMap { $0.attributes[.bangsPerTurn] as? Int }.max() ?? 1
     }
     
     public var bangsCancelable: Int {
-        cards.compactMap { $0.attributes.bangsCancelable }.max() ?? 1
+        cards.compactMap { $0.attributes[.bangsCancelable] as? Int }.max() ?? 1
     }
     
     public var flippedCards: Int {
-        cards.compactMap { $0.attributes.flippedCards }.max() ?? 1
+        cards.compactMap { $0.attributes[.flippedCards] as? Int }.max() ?? 1
     }
     
     public var handLimit: Int {
-        cards.compactMap { $0.attributes.handLimit }.max() ?? health
+        cards.compactMap { $0.attributes[.handLimit] as? Int }.max() ?? health
     }
     
     private var cards: [BaseCardProtocol] {

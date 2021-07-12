@@ -73,6 +73,6 @@ class ResourcesTests: XCTestCase {
         
         // Assert
         XCTAssertTrue(card.abilities.contains("penalizeOnEliminatingDeputy"))
-        XCTAssertTrue(card.attributes.silentCard == "jail")
+        XCTAssertEqual(card.attributes[.silentCard] as? String, "jail")
     }
 }

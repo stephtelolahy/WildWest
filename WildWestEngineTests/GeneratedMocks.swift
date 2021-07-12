@@ -1878,6 +1878,20 @@ public class MockBaseCardProtocol: BaseCardProtocol, Cuckoo.ProtocolMock {
     
     
     
+    public var attributes: [CardAttributeKey: Any] {
+        get {
+            return cuckoo_manager.getter("attributes",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.attributes)
+        }
+        
+    }
+    
+    
+    
     public var abilities: Set<String> {
         get {
             return cuckoo_manager.getter("abilities",
@@ -1886,20 +1900,6 @@ public class MockBaseCardProtocol: BaseCardProtocol, Cuckoo.ProtocolMock {
                     Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                     ,
                 defaultCall: __defaultImplStub!.abilities)
-        }
-        
-    }
-    
-    
-    
-    public var attributes: CardAttributesProtocol {
-        get {
-            return cuckoo_manager.getter("attributes",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.attributes)
         }
         
     }
@@ -1927,13 +1927,13 @@ public class MockBaseCardProtocol: BaseCardProtocol, Cuckoo.ProtocolMock {
 	    }
 	    
 	    
-	    var abilities: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockBaseCardProtocol, Set<String>> {
-	        return .init(manager: cuckoo_manager, name: "abilities")
+	    var attributes: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockBaseCardProtocol, [CardAttributeKey: Any]> {
+	        return .init(manager: cuckoo_manager, name: "attributes")
 	    }
 	    
 	    
-	    var attributes: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockBaseCardProtocol, CardAttributesProtocol> {
-	        return .init(manager: cuckoo_manager, name: "attributes")
+	    var abilities: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockBaseCardProtocol, Set<String>> {
+	        return .init(manager: cuckoo_manager, name: "abilities")
 	    }
 	    
 	    
@@ -1962,13 +1962,13 @@ public class MockBaseCardProtocol: BaseCardProtocol, Cuckoo.ProtocolMock {
 	    }
 	    
 	    
-	    var abilities: Cuckoo.VerifyReadOnlyProperty<Set<String>> {
-	        return .init(manager: cuckoo_manager, name: "abilities", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var attributes: Cuckoo.VerifyReadOnlyProperty<[CardAttributeKey: Any]> {
+	        return .init(manager: cuckoo_manager, name: "attributes", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	    
-	    var attributes: Cuckoo.VerifyReadOnlyProperty<CardAttributesProtocol> {
-	        return .init(manager: cuckoo_manager, name: "attributes", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var abilities: Cuckoo.VerifyReadOnlyProperty<Set<String>> {
+	        return .init(manager: cuckoo_manager, name: "abilities", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	
@@ -1995,430 +1995,17 @@ public class BaseCardProtocolStub: BaseCardProtocol {
     }
     
     
+    public var attributes: [CardAttributeKey: Any] {
+        get {
+            return DefaultValueRegistry.defaultValue(for: ([CardAttributeKey: Any]).self)
+        }
+        
+    }
+    
+    
     public var abilities: Set<String> {
         get {
             return DefaultValueRegistry.defaultValue(for: (Set<String>).self)
-        }
-        
-    }
-    
-    
-    public var attributes: CardAttributesProtocol {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (CardAttributesProtocol).self)
-        }
-        
-    }
-    
-
-    
-
-    
-}
-
-
-
-public class MockCardAttributesProtocol: CardAttributesProtocol, Cuckoo.ProtocolMock {
-    
-    public typealias MocksType = CardAttributesProtocol
-    
-    public typealias Stubbing = __StubbingProxy_CardAttributesProtocol
-    public typealias Verification = __VerificationProxy_CardAttributesProtocol
-
-    public let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
-
-    
-    private var __defaultImplStub: CardAttributesProtocol?
-
-    public func enableDefaultImplementation(_ stub: CardAttributesProtocol) {
-        __defaultImplStub = stub
-        cuckoo_manager.enableDefaultStubImplementation()
-    }
-    
-
-    
-    
-    
-    public var bullets: Int? {
-        get {
-            return cuckoo_manager.getter("bullets",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.bullets)
-        }
-        
-    }
-    
-    
-    
-    public var mustang: Int? {
-        get {
-            return cuckoo_manager.getter("mustang",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.mustang)
-        }
-        
-    }
-    
-    
-    
-    public var scope: Int? {
-        get {
-            return cuckoo_manager.getter("scope",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.scope)
-        }
-        
-    }
-    
-    
-    
-    public var weapon: Int? {
-        get {
-            return cuckoo_manager.getter("weapon",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.weapon)
-        }
-        
-    }
-    
-    
-    
-    public var flippedCards: Int? {
-        get {
-            return cuckoo_manager.getter("flippedCards",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.flippedCards)
-        }
-        
-    }
-    
-    
-    
-    public var bangsCancelable: Int? {
-        get {
-            return cuckoo_manager.getter("bangsCancelable",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.bangsCancelable)
-        }
-        
-    }
-    
-    
-    
-    public var bangsPerTurn: Int? {
-        get {
-            return cuckoo_manager.getter("bangsPerTurn",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.bangsPerTurn)
-        }
-        
-    }
-    
-    
-    
-    public var handLimit: Int? {
-        get {
-            return cuckoo_manager.getter("handLimit",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.handLimit)
-        }
-        
-    }
-    
-    
-    
-    public var silentCard: String? {
-        get {
-            return cuckoo_manager.getter("silentCard",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.silentCard)
-        }
-        
-    }
-    
-    
-    
-    public var silentAbility: String? {
-        get {
-            return cuckoo_manager.getter("silentAbility",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.silentAbility)
-        }
-        
-    }
-    
-    
-    
-    public var playAs: [String: String]? {
-        get {
-            return cuckoo_manager.getter("playAs",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.playAs)
-        }
-        
-    }
-    
-
-    
-
-    
-
-	public struct __StubbingProxy_CardAttributesProtocol: Cuckoo.StubbingProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	
-	    public init(manager: Cuckoo.MockManager) {
-	        self.cuckoo_manager = manager
-	    }
-	    
-	    
-	    var bullets: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardAttributesProtocol, Int?> {
-	        return .init(manager: cuckoo_manager, name: "bullets")
-	    }
-	    
-	    
-	    var mustang: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardAttributesProtocol, Int?> {
-	        return .init(manager: cuckoo_manager, name: "mustang")
-	    }
-	    
-	    
-	    var scope: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardAttributesProtocol, Int?> {
-	        return .init(manager: cuckoo_manager, name: "scope")
-	    }
-	    
-	    
-	    var weapon: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardAttributesProtocol, Int?> {
-	        return .init(manager: cuckoo_manager, name: "weapon")
-	    }
-	    
-	    
-	    var flippedCards: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardAttributesProtocol, Int?> {
-	        return .init(manager: cuckoo_manager, name: "flippedCards")
-	    }
-	    
-	    
-	    var bangsCancelable: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardAttributesProtocol, Int?> {
-	        return .init(manager: cuckoo_manager, name: "bangsCancelable")
-	    }
-	    
-	    
-	    var bangsPerTurn: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardAttributesProtocol, Int?> {
-	        return .init(manager: cuckoo_manager, name: "bangsPerTurn")
-	    }
-	    
-	    
-	    var handLimit: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardAttributesProtocol, Int?> {
-	        return .init(manager: cuckoo_manager, name: "handLimit")
-	    }
-	    
-	    
-	    var silentCard: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardAttributesProtocol, String?> {
-	        return .init(manager: cuckoo_manager, name: "silentCard")
-	    }
-	    
-	    
-	    var silentAbility: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardAttributesProtocol, String?> {
-	        return .init(manager: cuckoo_manager, name: "silentAbility")
-	    }
-	    
-	    
-	    var playAs: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardAttributesProtocol, [String: String]?> {
-	        return .init(manager: cuckoo_manager, name: "playAs")
-	    }
-	    
-	    
-	}
-
-	public struct __VerificationProxy_CardAttributesProtocol: Cuckoo.VerificationProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	    private let callMatcher: Cuckoo.CallMatcher
-	    private let sourceLocation: Cuckoo.SourceLocation
-	
-	    public init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
-	        self.cuckoo_manager = manager
-	        self.callMatcher = callMatcher
-	        self.sourceLocation = sourceLocation
-	    }
-	
-	    
-	    
-	    var bullets: Cuckoo.VerifyReadOnlyProperty<Int?> {
-	        return .init(manager: cuckoo_manager, name: "bullets", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
-	    var mustang: Cuckoo.VerifyReadOnlyProperty<Int?> {
-	        return .init(manager: cuckoo_manager, name: "mustang", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
-	    var scope: Cuckoo.VerifyReadOnlyProperty<Int?> {
-	        return .init(manager: cuckoo_manager, name: "scope", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
-	    var weapon: Cuckoo.VerifyReadOnlyProperty<Int?> {
-	        return .init(manager: cuckoo_manager, name: "weapon", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
-	    var flippedCards: Cuckoo.VerifyReadOnlyProperty<Int?> {
-	        return .init(manager: cuckoo_manager, name: "flippedCards", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
-	    var bangsCancelable: Cuckoo.VerifyReadOnlyProperty<Int?> {
-	        return .init(manager: cuckoo_manager, name: "bangsCancelable", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
-	    var bangsPerTurn: Cuckoo.VerifyReadOnlyProperty<Int?> {
-	        return .init(manager: cuckoo_manager, name: "bangsPerTurn", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
-	    var handLimit: Cuckoo.VerifyReadOnlyProperty<Int?> {
-	        return .init(manager: cuckoo_manager, name: "handLimit", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
-	    var silentCard: Cuckoo.VerifyReadOnlyProperty<String?> {
-	        return .init(manager: cuckoo_manager, name: "silentCard", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
-	    var silentAbility: Cuckoo.VerifyReadOnlyProperty<String?> {
-	        return .init(manager: cuckoo_manager, name: "silentAbility", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
-	    var playAs: Cuckoo.VerifyReadOnlyProperty<[String: String]?> {
-	        return .init(manager: cuckoo_manager, name: "playAs", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	
-	    
-	}
-}
-
-public class CardAttributesProtocolStub: CardAttributesProtocol {
-    
-    
-    public var bullets: Int? {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (Int?).self)
-        }
-        
-    }
-    
-    
-    public var mustang: Int? {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (Int?).self)
-        }
-        
-    }
-    
-    
-    public var scope: Int? {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (Int?).self)
-        }
-        
-    }
-    
-    
-    public var weapon: Int? {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (Int?).self)
-        }
-        
-    }
-    
-    
-    public var flippedCards: Int? {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (Int?).self)
-        }
-        
-    }
-    
-    
-    public var bangsCancelable: Int? {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (Int?).self)
-        }
-        
-    }
-    
-    
-    public var bangsPerTurn: Int? {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (Int?).self)
-        }
-        
-    }
-    
-    
-    public var handLimit: Int? {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (Int?).self)
-        }
-        
-    }
-    
-    
-    public var silentCard: String? {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (String?).self)
-        }
-        
-    }
-    
-    
-    public var silentAbility: String? {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (String?).self)
-        }
-        
-    }
-    
-    
-    public var playAs: [String: String]? {
-        get {
-            return DefaultValueRegistry.defaultValue(for: ([String: String]?).self)
         }
         
     }
@@ -2550,6 +2137,20 @@ public class MockPlayerStoredProtocol: PlayerStoredProtocol, Cuckoo.ProtocolMock
     
     
     
+    public var attributes: [CardAttributeKey: Any] {
+        get {
+            return cuckoo_manager.getter("attributes",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.attributes)
+        }
+        
+    }
+    
+    
+    
     public var abilities: Set<String> {
         get {
             return cuckoo_manager.getter("abilities",
@@ -2558,20 +2159,6 @@ public class MockPlayerStoredProtocol: PlayerStoredProtocol, Cuckoo.ProtocolMock
                     Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                     ,
                 defaultCall: __defaultImplStub!.abilities)
-        }
-        
-    }
-    
-    
-    
-    public var attributes: CardAttributesProtocol {
-        get {
-            return cuckoo_manager.getter("attributes",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.attributes)
         }
         
     }
@@ -2624,13 +2211,13 @@ public class MockPlayerStoredProtocol: PlayerStoredProtocol, Cuckoo.ProtocolMock
 	    }
 	    
 	    
-	    var abilities: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerStoredProtocol, Set<String>> {
-	        return .init(manager: cuckoo_manager, name: "abilities")
+	    var attributes: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerStoredProtocol, [CardAttributeKey: Any]> {
+	        return .init(manager: cuckoo_manager, name: "attributes")
 	    }
 	    
 	    
-	    var attributes: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerStoredProtocol, CardAttributesProtocol> {
-	        return .init(manager: cuckoo_manager, name: "attributes")
+	    var abilities: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerStoredProtocol, Set<String>> {
+	        return .init(manager: cuckoo_manager, name: "abilities")
 	    }
 	    
 	    
@@ -2684,13 +2271,13 @@ public class MockPlayerStoredProtocol: PlayerStoredProtocol, Cuckoo.ProtocolMock
 	    }
 	    
 	    
-	    var abilities: Cuckoo.VerifyReadOnlyProperty<Set<String>> {
-	        return .init(manager: cuckoo_manager, name: "abilities", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var attributes: Cuckoo.VerifyReadOnlyProperty<[CardAttributeKey: Any]> {
+	        return .init(manager: cuckoo_manager, name: "attributes", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	    
-	    var attributes: Cuckoo.VerifyReadOnlyProperty<CardAttributesProtocol> {
-	        return .init(manager: cuckoo_manager, name: "attributes", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var abilities: Cuckoo.VerifyReadOnlyProperty<Set<String>> {
+	        return .init(manager: cuckoo_manager, name: "abilities", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	
@@ -2757,17 +2344,17 @@ public class PlayerStoredProtocolStub: PlayerStoredProtocol {
     }
     
     
-    public var abilities: Set<String> {
+    public var attributes: [CardAttributeKey: Any] {
         get {
-            return DefaultValueRegistry.defaultValue(for: (Set<String>).self)
+            return DefaultValueRegistry.defaultValue(for: ([CardAttributeKey: Any]).self)
         }
         
     }
     
     
-    public var attributes: CardAttributesProtocol {
+    public var abilities: Set<String> {
         get {
-            return DefaultValueRegistry.defaultValue(for: (CardAttributesProtocol).self)
+            return DefaultValueRegistry.defaultValue(for: (Set<String>).self)
         }
         
     }
@@ -3216,6 +2803,20 @@ public class MockPlayerProtocol: PlayerProtocol, Cuckoo.ProtocolMock {
     
     
     
+    public var attributes: [CardAttributeKey: Any] {
+        get {
+            return cuckoo_manager.getter("attributes",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.attributes)
+        }
+        
+    }
+    
+    
+    
     public var abilities: Set<String> {
         get {
             return cuckoo_manager.getter("abilities",
@@ -3224,20 +2825,6 @@ public class MockPlayerProtocol: PlayerProtocol, Cuckoo.ProtocolMock {
                     Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                     ,
                 defaultCall: __defaultImplStub!.abilities)
-        }
-        
-    }
-    
-    
-    
-    public var attributes: CardAttributesProtocol {
-        get {
-            return cuckoo_manager.getter("attributes",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.attributes)
         }
         
     }
@@ -3402,13 +2989,13 @@ public class MockPlayerProtocol: PlayerProtocol, Cuckoo.ProtocolMock {
 	    }
 	    
 	    
-	    var abilities: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, Set<String>> {
-	        return .init(manager: cuckoo_manager, name: "abilities")
+	    var attributes: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, [CardAttributeKey: Any]> {
+	        return .init(manager: cuckoo_manager, name: "attributes")
 	    }
 	    
 	    
-	    var attributes: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, CardAttributesProtocol> {
-	        return .init(manager: cuckoo_manager, name: "attributes")
+	    var abilities: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, Set<String>> {
+	        return .init(manager: cuckoo_manager, name: "abilities")
 	    }
 	    
 	    
@@ -3502,13 +3089,13 @@ public class MockPlayerProtocol: PlayerProtocol, Cuckoo.ProtocolMock {
 	    }
 	    
 	    
-	    var abilities: Cuckoo.VerifyReadOnlyProperty<Set<String>> {
-	        return .init(manager: cuckoo_manager, name: "abilities", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var attributes: Cuckoo.VerifyReadOnlyProperty<[CardAttributeKey: Any]> {
+	        return .init(manager: cuckoo_manager, name: "attributes", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	    
-	    var attributes: Cuckoo.VerifyReadOnlyProperty<CardAttributesProtocol> {
-	        return .init(manager: cuckoo_manager, name: "attributes", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var abilities: Cuckoo.VerifyReadOnlyProperty<Set<String>> {
+	        return .init(manager: cuckoo_manager, name: "abilities", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	    
@@ -3615,17 +3202,17 @@ public class PlayerProtocolStub: PlayerProtocol {
     }
     
     
-    public var abilities: Set<String> {
+    public var attributes: [CardAttributeKey: Any] {
         get {
-            return DefaultValueRegistry.defaultValue(for: (Set<String>).self)
+            return DefaultValueRegistry.defaultValue(for: ([CardAttributeKey: Any]).self)
         }
         
     }
     
     
-    public var attributes: CardAttributesProtocol {
+    public var abilities: Set<String> {
         get {
-            return DefaultValueRegistry.defaultValue(for: (CardAttributesProtocol).self)
+            return DefaultValueRegistry.defaultValue(for: (Set<String>).self)
         }
         
     }
@@ -3807,6 +3394,20 @@ public class MockCardProtocol: CardProtocol, Cuckoo.ProtocolMock {
     
     
     
+    public var attributes: [CardAttributeKey: Any] {
+        get {
+            return cuckoo_manager.getter("attributes",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.attributes)
+        }
+        
+    }
+    
+    
+    
     public var abilities: Set<String> {
         get {
             return cuckoo_manager.getter("abilities",
@@ -3815,20 +3416,6 @@ public class MockCardProtocol: CardProtocol, Cuckoo.ProtocolMock {
                     Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                     ,
                 defaultCall: __defaultImplStub!.abilities)
-        }
-        
-    }
-    
-    
-    
-    public var attributes: CardAttributesProtocol {
-        get {
-            return cuckoo_manager.getter("attributes",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.attributes)
         }
         
     }
@@ -3876,13 +3463,13 @@ public class MockCardProtocol: CardProtocol, Cuckoo.ProtocolMock {
 	    }
 	    
 	    
-	    var abilities: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardProtocol, Set<String>> {
-	        return .init(manager: cuckoo_manager, name: "abilities")
+	    var attributes: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardProtocol, [CardAttributeKey: Any]> {
+	        return .init(manager: cuckoo_manager, name: "attributes")
 	    }
 	    
 	    
-	    var attributes: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardProtocol, CardAttributesProtocol> {
-	        return .init(manager: cuckoo_manager, name: "attributes")
+	    var abilities: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockCardProtocol, Set<String>> {
+	        return .init(manager: cuckoo_manager, name: "abilities")
 	    }
 	    
 	    
@@ -3931,13 +3518,13 @@ public class MockCardProtocol: CardProtocol, Cuckoo.ProtocolMock {
 	    }
 	    
 	    
-	    var abilities: Cuckoo.VerifyReadOnlyProperty<Set<String>> {
-	        return .init(manager: cuckoo_manager, name: "abilities", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var attributes: Cuckoo.VerifyReadOnlyProperty<[CardAttributeKey: Any]> {
+	        return .init(manager: cuckoo_manager, name: "attributes", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	    
-	    var attributes: Cuckoo.VerifyReadOnlyProperty<CardAttributesProtocol> {
-	        return .init(manager: cuckoo_manager, name: "attributes", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var abilities: Cuckoo.VerifyReadOnlyProperty<Set<String>> {
+	        return .init(manager: cuckoo_manager, name: "abilities", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	
@@ -3996,17 +3583,17 @@ public class CardProtocolStub: CardProtocol {
     }
     
     
-    public var abilities: Set<String> {
+    public var attributes: [CardAttributeKey: Any] {
         get {
-            return DefaultValueRegistry.defaultValue(for: (Set<String>).self)
+            return DefaultValueRegistry.defaultValue(for: ([CardAttributeKey: Any]).self)
         }
         
     }
     
     
-    public var attributes: CardAttributesProtocol {
+    public var abilities: Set<String> {
         get {
-            return DefaultValueRegistry.defaultValue(for: (CardAttributesProtocol).self)
+            return DefaultValueRegistry.defaultValue(for: (Set<String>).self)
         }
         
     }

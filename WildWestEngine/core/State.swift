@@ -40,22 +40,22 @@ public protocol HitProtocol {
 public protocol BaseCardProtocol {
     var name: String { get }
     var desc: String { get }
+    var attributes: [CardAttributeKey: Any] { get }
     var abilities: Set<String> { get }
-    var attributes: CardAttributesProtocol { get }
 }
 
-public protocol CardAttributesProtocol {
-    var bullets: Int? { get }
-    var mustang: Int? { get }
-    var scope: Int? { get }
-    var weapon: Int? { get }
-    var flippedCards: Int? { get }
-    var bangsCancelable: Int? { get }
-    var bangsPerTurn: Int? { get }
-    var handLimit: Int? { get }
-    var silentCard: String? { get }
-    var silentAbility: String? { get }
-    var playAs: [String: String]? { get }
+public enum CardAttributeKey: String {
+    case bullets
+    case mustang
+    case scope
+    case weapon
+    case flippedCards
+    case bangsCancelable
+    case bangsPerTurn
+    case handLimit
+    case silentCard
+    case silentAbility
+    case playAs
 }
 
 public protocol PlayerStoredProtocol: BaseCardProtocol {
