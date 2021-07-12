@@ -31,7 +31,7 @@ class DynamiteTests: XCTestCase {
             .playOrder(is: "p1")
             .turn(is: "p1")
             .phase(is: 0)
-            .deck(are: MockCardProtocol().value(is: "5").suit(is: "♠️"))
+            .deck(are: MockCardProtocol().withDefault().value(is: "5").suit(is: "♠️"))
         let event = GEvent.setPhase(value: 1)
         
         // When
@@ -67,7 +67,7 @@ class DynamiteTests: XCTestCase {
             .playOrder(is: "p1", "p2")
             .turn(is: "p1")
             .phase(is: 0)
-            .deck(are: MockCardProtocol().value(is: "K").suit(is: "♠️"))
+            .deck(are: MockCardProtocol().withDefault().value(is: "K").suit(is: "♠️"))
         let event = GEvent.setPhase(value: 1)
         
         // When
@@ -100,8 +100,8 @@ class DynamiteTests: XCTestCase {
             .playOrder(is: "p1", "p2")
             .turn(is: "p1")
             .phase(is: 0)
-            .deck(are: MockCardProtocol().value(is: "9").suit(is: "♠️"),
-                  MockCardProtocol().value(is: "4").suit(is: "♥️"))
+            .deck(are: MockCardProtocol().withDefault().value(is: "9").suit(is: "♠️"),
+                  MockCardProtocol().withDefault().value(is: "4").suit(is: "♥️"))
         let event = GEvent.setPhase(value: 1)
         
         // When

@@ -31,7 +31,7 @@ class JailTests: XCTestCase {
             .playOrder(is: "p1")
             .turn(is: "p1")
             .phase(is: 0)
-            .deck(are: MockCardProtocol().value(is: "7").suit(is: "♥️"))
+            .deck(are: MockCardProtocol().withDefault().value(is: "7").suit(is: "♥️"))
         let event = GEvent.setPhase(value: 1)
 
         // When
@@ -64,7 +64,7 @@ class JailTests: XCTestCase {
             .playOrder(is: "p1", "p2")
             .turn(is: "p1")
             .phase(is: 0)
-            .deck(are: MockCardProtocol().value(is: "9").suit(is: "♦️"))
+            .deck(are: MockCardProtocol().withDefault().value(is: "9").suit(is: "♦️"))
         let event = GEvent.setPhase(value: 1)
 
         // When
@@ -96,8 +96,8 @@ class JailTests: XCTestCase {
             .playOrder(is: "p1")
             .turn(is: "p1")
             .phase(is: 0)
-            .deck(are: MockCardProtocol().value(is: "4").suit(is: "♣️"),
-                  MockCardProtocol().value(is: "J").suit(is: "♥️"))
+            .deck(are: MockCardProtocol().withDefault().value(is: "4").suit(is: "♣️"),
+                  MockCardProtocol().withDefault().value(is: "J").suit(is: "♥️"))
         let event = GEvent.setPhase(value: 1)
 
         // When

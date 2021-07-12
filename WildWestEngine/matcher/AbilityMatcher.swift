@@ -64,18 +64,18 @@ private extension AbilityMatcher {
     func active(actor identifier: String, in state: StateProtocol) -> [GMove]? {
         let actor = state.players[identifier]!
         
-        let innerMoves: [GMove] = abilities(applicableTo: actor).keys
+        let innerMoves: [GMove] = actor.applicableAbilities()
             .compactMap { self.moves(ofType: .active, ability: $0, card: nil, actor: actor, in: state) }
             .flatMap { $0 }
         
         let playHandMoves: [GMove] = actor.hand.flatMap { card -> [GMove] in
-            abilities(applicableTo: card, actor: actor).keys
+            actor.applicableAbilitiesTo(card)
                 .compactMap { ability -> [GMove]? in
                     self.moves(ofType: .active, ability: ability, card: .hand(card.identifier), actor: actor, in: state)?
                         .filter { move -> Bool in
                             if let target = move.args[.target]?.first,
                                let targetObject = state.players[target],
-                               self.isPlayer(targetObject, targetableBy: card) == false {
+                               !targetObject.isTargetableBy(card) {
                                 return false
                             }
                             
@@ -101,12 +101,12 @@ private extension AbilityMatcher {
     func triggered(on event: GEvent, actor identifier: String, in state: StateProtocol) -> [GMove]? {
         let actor = state.players[identifier]!
         
-        let innerMoves: [GMove] = abilities(applicableTo: actor).keys
+        let innerMoves: [GMove] = actor.applicableAbilities()
             .compactMap { self.moves(ofType: .triggered, ability: $0, card: nil, actor: actor, in: state, event: event) }
             .flatMap { $0 }
         
         let inPlayMoves: [GMove] = actor.inPlay.flatMap { card -> [GMove] in
-            card.abilities.keys
+            card.abilities
                 .compactMap { self.moves(ofType: .triggered, ability: $0, card: .inPlay(card.identifier), actor: actor, in: state, event: event) }
                 .flatMap { $0 }
         }
@@ -185,46 +185,31 @@ private extension AbilityMatcher {
 
 // MARK: - Passive ability matcher
 
-private extension AbilityMatcher {
+private extension PlayerProtocol {
     
-    func abilities(applicableTo actor: PlayerProtocol) -> [String: Int] {
-        var abilities = actor.abilities
-        
-        if actor.abilities["silentStartTurnDrawing2Cards"] != nil {
-            abilities.removeValue(forKey: "startTurnDrawing2Cards")
+    func applicableAbilities() -> Set<String> {
+        var abilities = self.abilities
+        if let silenced = attributes[.silentAbility] as? String {
+            abilities.remove(silenced)
         }
-        
         return abilities
     }
     
-    func abilities(applicableTo card: CardProtocol, actor: PlayerProtocol) -> [String: Int] {
+    func applicableAbilitiesTo(_ card: CardProtocol) -> Set<String> {
         var abilities = card.abilities
-        
-        if actor.abilities["playBangAsMissed"] != nil,
-           card.name == "bang" {
-            abilities["missed"] = 0
+        if let playAs = attributes[.playAs] as? [String: String] {
+            for (key, value) in playAs {
+                if card.matches(regex: key) {
+                    abilities.insert(value)
+                }
+            }
         }
-        
-        if actor.abilities["playMissedAsBang"] != nil,
-           card.name == "missed" {
-            abilities["bang"] = 0
-        }
-        
-        if actor.abilities["playAnyCardAsMissed"] != nil {
-            abilities["missed"] = 0
-        }
-        
         return abilities
     }
     
-    func isPlayer(_ target: PlayerProtocol, targetableBy card: CardProtocol) -> Bool {
-        if target.abilities["silentJail"] != nil,
-           card.name == "jail" {
-            return false
-        }
-        
-        if target.abilities["silentDiamonds"] != nil,
-           card.suit == "♦️" {
+    func isTargetableBy(_ card: CardProtocol) -> Bool {
+        if let regex = attributes[.silentCard] as? String,
+           card.matches(regex: regex) {
             return false
         }
         

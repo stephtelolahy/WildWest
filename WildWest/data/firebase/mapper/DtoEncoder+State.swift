@@ -80,9 +80,9 @@ private extension DtoEncoder {
         PlayerDto(identifier: player.identifier,
                   name: player.name,
                   desc: player.desc,
-                  abilities: player.abilities,
+                  attributes: encode(attributes: player.attributes),
+                  abilities: Array(player.abilities),
                   role: player.role?.rawValue,
-                  maxHealth: player.maxHealth,
                   health: player.health,
                   hand: encode(cards: player.hand),
                   inPlay: encode(cards: player.inPlay))
@@ -92,9 +92,9 @@ private extension DtoEncoder {
         GPlayer(identifier: try player.identifier.unwrap(),
                 name: try player.name.unwrap(),
                 desc: try player.desc.unwrap(),
-                abilities: try player.abilities.unwrap(),
+                attributes: try decode(attributes: player.attributes),
+                abilities: Set(try player.abilities.unwrap()),
                 role: try Role(rawValue: try player.role.unwrap()).unwrap(),
-                maxHealth: try player.maxHealth.unwrap(),
                 health: try player.health.unwrap(),
                 hand: try decode(cards: player.hand),
                 inPlay: try decode(cards: player.inPlay))
@@ -114,5 +114,26 @@ private extension DtoEncoder {
         }
         
         return Array(abilities.values)
+    }
+    
+    func encode(attributes: [CardAttributeKey: Any]) -> String? {
+        let dict: [String: Any] = attributes.reduce(into: [:]) { result, element in
+            result[element.key.rawValue] = element.value
+        }
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: dict, options: []),
+              let jsonString = String(data: jsonData, encoding: String.Encoding.ascii) else {
+            return nil
+        }
+        return jsonString
+    }
+    
+    func decode(attributes: String?) throws -> [CardAttributeKey: Any] {
+        guard let data = attributes?.data(using: .utf8),
+              let dict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+            return [:]
+        }
+        return dict.reduce(into: [:]) { result, element in
+            result[CardAttributeKey(rawValue: element.key)!] = element.value
+        }
     }
 }

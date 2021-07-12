@@ -50,21 +50,9 @@ extension MockPlayerProtocol {
         return self
     }
     
-    func abilities(are abilities: String...) -> MockPlayerProtocol {
+    func abilities(are values: String...) -> MockPlayerProtocol {
         stub(self) { mock in
-            let dict: [String: Int] = abilities.reduce([:]) { dict, ability in
-                var dict = dict
-                dict[ability] = 0
-                return dict
-            }
-            when(mock.abilities.get).thenReturn(dict)
-        }
-        return self
-    }
-    
-    func abilities(are abilities: [String: Int]) -> MockPlayerProtocol {
-        stub(self) { mock in
-            when(mock.abilities.get).thenReturn(abilities)
+            when(mock.abilities.get).thenReturn(Set(values))
         }
         return self
     }
@@ -121,6 +109,13 @@ extension MockPlayerProtocol {
     func mustang(is value: Int) -> MockPlayerProtocol {
         stub(self) { mock in
             when(mock.mustang.get).thenReturn(value)
+        }
+        return self
+    }
+    
+    func attributes(are value: [CardAttributeKey: Any]) -> MockPlayerProtocol {
+        stub(self) { mock in
+            when(mock.attributes.get).thenReturn(value)
         }
         return self
     }

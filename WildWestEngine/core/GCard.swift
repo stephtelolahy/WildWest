@@ -13,7 +13,8 @@ public class GCard: CardProtocol {
     public let name: String
     public let type: CardType
     public let desc: String
-    public let abilities: [String: Int]
+    public let attributes: [CardAttributeKey: Any]
+    public let abilities: Set<String>
     public let suit: String
     public let value: String
     
@@ -23,13 +24,15 @@ public class GCard: CardProtocol {
                 name: String,
                 type: CardType,
                 desc: String,
-                abilities: [String: Int],
+                attributes: [CardAttributeKey: Any],
+                abilities: Set<String>,
                 suit: String,
                 value: String) {
         self.identifier = identifier
         self.name = name
         self.type = type
         self.desc = desc
+        self.attributes = attributes
         self.abilities = abilities
         self.suit = suit
         self.value = value

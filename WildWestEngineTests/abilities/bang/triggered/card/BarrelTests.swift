@@ -35,7 +35,7 @@ class BarrelTests: XCTestCase {
             .hits(are: mockHit1)
             .players(are: mockPlayer1)
             .playOrder(is: "p1")
-            .deck(are: MockCardProtocol().value(is: "7").suit(is: "♥️"))
+            .deck(are: MockCardProtocol().withDefault().value(is: "7").suit(is: "♥️"))
         let event = GEvent.addHit(hits: [GHit(player: "p1", name: "n1", abilities: [], offender: "", cancelable: 1)])
         
         // When
@@ -68,7 +68,7 @@ class BarrelTests: XCTestCase {
             .hits(are: mockHit1)
             .players(are: mockPlayer1)
             .playOrder(is: "p1")
-            .deck(are: MockCardProtocol().value(is: "A").suit(is: "♠️"))
+            .deck(are: MockCardProtocol().withDefault().value(is: "A").suit(is: "♠️"))
         let event = GEvent.addHit(hits: [GHit(player: "p1", name: "n1", abilities: [], offender: "", cancelable: 1)])
         
         // When
@@ -127,8 +127,8 @@ class BarrelTests: XCTestCase {
             .players(are: mockPlayer1)
             .playOrder(is: "p1")
             .hits(are: mockHit1)
-            .deck(are: MockCardProtocol().value(is: "4").suit(is: "♣️"),
-                  MockCardProtocol().value(is: "9").suit(is: "♠️"))
+            .deck(are: MockCardProtocol().withDefault().value(is: "4").suit(is: "♣️"),
+                  MockCardProtocol().withDefault().value(is: "9").suit(is: "♠️"))
         let event = GEvent.addHit(hits: [GHit(player: "p1", name: "n1", abilities: [], offender: "", cancelable: 1)])
         
         // When
@@ -157,8 +157,8 @@ class BarrelTests: XCTestCase {
             .players(are: mockPlayer1)
             .playOrder(is: "p1")
             .hits(are: mockHit1)
-            .deck(are: MockCardProtocol().value(is: "10").suit(is: "♥️"),
-                  MockCardProtocol().value(is: "Q").suit(is: "♠️"))
+            .deck(are: MockCardProtocol().withDefault().value(is: "10").suit(is: "♥️"),
+                  MockCardProtocol().withDefault().value(is: "Q").suit(is: "♠️"))
         let event = GEvent.addHit(hits: [GHit(player: "p1", name: "n1", abilities: [], offender: "", cancelable: 1)])
         
         // When
@@ -188,8 +188,8 @@ class BarrelTests: XCTestCase {
             .players(are: mockPlayer1)
             .playOrder(is: "p1")
             .hits(are: mockHit1)
-            .deck(are: MockCardProtocol().value(is: "6").suit(is: "♣️"),
-                  MockCardProtocol().value(is: "K").suit(is: "♥️"))
+            .deck(are: MockCardProtocol().withDefault().value(is: "6").suit(is: "♣️"),
+                  MockCardProtocol().withDefault().value(is: "K").suit(is: "♥️"))
         let event = GEvent.addHit(hits: [GHit(player: "p1", name: "n1", abilities: [], offender: "", cancelable: 1)])
         
         // When

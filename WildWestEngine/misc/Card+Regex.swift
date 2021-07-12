@@ -8,7 +8,7 @@
 public extension CardProtocol {
     
     func matches(regex pattern: String) -> Bool {
-        "\(value)\(suit)".matches(regex: pattern)
+        pattern.isEmpty || "\(name)\(value)\(suit)".matches(regex: pattern)
     }
 }
 

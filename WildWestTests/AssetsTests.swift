@@ -42,7 +42,7 @@ class AssetsTests: XCTestCase {
         let figureCards = cards.filter { $0.type == .figure }
         
         figureCards.forEach {
-            XCTAssertNotNil(UIImage(named: $0.name, in: bundle, compatibleWith: nil), "Misssing asset for \($0.name)")
+            XCTAssertNotNil(UIImage(named: $0.name, in: bundle, compatibleWith: nil), "Misssing thumb image for \($0.name)")
             XCTAssertNotNil(UIImage(named: "01_\($0.name.lowercased())", in: bundle, compatibleWith: nil), "Misssing full image for \($0.name)")
         }
     }

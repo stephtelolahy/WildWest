@@ -56,9 +56,9 @@ private extension PlayerProtocol {
         return GPlayer(identifier: identifier,
                        name: name,
                        desc: desc,
+                       attributes: attributes,
                        abilities: abilities,
                        role: role,
-                       maxHealth: maxHealth,
                        health: health,
                        hand: hand,
                        inPlay: inPlay)

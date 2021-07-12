@@ -38,6 +38,7 @@ public class GSetup: SetupProtocol {
                          name: card.name,
                          type: card.type,
                          desc: card.desc,
+                         attributes: card.attributes,
                          abilities: card.abilities,
                          suit: deckCard.suit,
                          value: deckCard.value)
@@ -79,34 +80,60 @@ private extension GSetup {
                       deck: inout [CardProtocol]) -> [PlayerProtocol] {
         roles.enumerated().map { index, role in
             let figure = figures[index]
-            guard var health = figure.abilities["bullets"] else {
-                fatalError("Bullets for \(figure.name) not found")
-            }
             
             var abilities = figure.abilities
+            var attributes = figure.attributes
             
             if let playerCard = defaults.first(where: { $0.name == "player" }) {
-                abilities.merge(playerCard.abilities) { $1 }
+                attributes.merge(with: playerCard.attributes)
+                abilities.formUnion(playerCard.abilities)
             }
             
-            if role == .sheriff {
-                health += 1
-                
-                if let sheriffCard = defaults.first(where: { $0.name == "sheriff" }) {
-                    abilities.merge(sheriffCard.abilities) { $1 }
-                }
+            if role == .sheriff,
+               let sheriffCard = defaults.first(where: { $0.name == "sheriff" }) {
+                attributes.merge(with: sheriffCard.attributes)
+                abilities.formUnion(sheriffCard.abilities)
+            }
+            
+            guard let health = attributes[.bullets] as? Int else {
+                fatalError("Bullets for \(figure.name) not found")
             }
             
             let hand: [CardProtocol] = Array(1...health).map { _ in deck.removeFirst() }
             return GPlayer(identifier: figure.name,
                            name: figure.name,
                            desc: figure.desc,
+                           attributes: attributes,
                            abilities: abilities,
                            role: role,
-                           maxHealth: health,
                            health: health,
                            hand: hand,
                            inPlay: [])
+        }
+    }
+}
+
+private extension Dictionary where Key == CardAttributeKey, Value == Any {
+    
+    mutating func merge(with other: Self) {
+        for (key, value) in other {
+            let values: [Any?] = [self[key], value]
+            switch key {
+            case .bullets,
+                 .mustang,
+                 .scope:
+                self[key] = values.compactMap { $0 as? Int }.reduce(0, +)
+                
+            case .weapon,
+                 .flippedCards,
+                 .bangsCancelable,
+                 .bangsPerTurn,
+                 .handLimit:
+                self[key] = values.compactMap { $0 as? Int }.max()
+                
+            default:
+                self[key] = value
+            }
         }
     }
 }

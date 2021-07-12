@@ -28,7 +28,7 @@ class SilentDiamondsTests: XCTestCase {
         let mockPlayer2 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p2")
-            .abilities(are: "silentDiamonds")
+            .attributes(are: [.silentCard: "♦️"])
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1, mockPlayer2)

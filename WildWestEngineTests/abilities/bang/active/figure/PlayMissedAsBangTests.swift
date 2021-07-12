@@ -28,7 +28,7 @@ class PlayMissedAsBangTests: XCTestCase {
             .weapon(is: 1)
             .bangsPerTurn(is: 1)
             .bangsCancelable(is: 1)
-            .abilities(are: ["playMissedAsBang": 0])
+            .attributes(are: [.playAs: ["missed": "bang"]])
         let mockPlayer2 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p2")
