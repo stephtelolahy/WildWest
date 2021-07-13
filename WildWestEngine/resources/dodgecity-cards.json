@@ -178,5 +178,14 @@
       "bullets": 3,
       "silentCard": "♦️"
     }
+  },
+  {
+    "name": "belleStar",
+    "desc": "During her turn, cards in play in front of other players have no effect. ",
+    "type": "figure",
+    "attributes": {
+      "bullets": 4,
+      "silentInPlay": true
+    }
   }
 ]
