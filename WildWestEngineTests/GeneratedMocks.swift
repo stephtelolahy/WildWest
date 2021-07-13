@@ -2416,34 +2416,6 @@ public class MockPlayerComputedProtocol: PlayerComputedProtocol, Cuckoo.Protocol
     
     
     
-    public var scope: Int {
-        get {
-            return cuckoo_manager.getter("scope",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.scope)
-        }
-        
-    }
-    
-    
-    
-    public var mustang: Int {
-        get {
-            return cuckoo_manager.getter("mustang",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.mustang)
-        }
-        
-    }
-    
-    
-    
     public var bangsPerTurn: Int {
         get {
             return cuckoo_manager.getter("bangsPerTurn",
@@ -2521,16 +2493,6 @@ public class MockPlayerComputedProtocol: PlayerComputedProtocol, Cuckoo.Protocol
 	    }
 	    
 	    
-	    var scope: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerComputedProtocol, Int> {
-	        return .init(manager: cuckoo_manager, name: "scope")
-	    }
-	    
-	    
-	    var mustang: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerComputedProtocol, Int> {
-	        return .init(manager: cuckoo_manager, name: "mustang")
-	    }
-	    
-	    
 	    var bangsPerTurn: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerComputedProtocol, Int> {
 	        return .init(manager: cuckoo_manager, name: "bangsPerTurn")
 	    }
@@ -2576,16 +2538,6 @@ public class MockPlayerComputedProtocol: PlayerComputedProtocol, Cuckoo.Protocol
 	    }
 	    
 	    
-	    var scope: Cuckoo.VerifyReadOnlyProperty<Int> {
-	        return .init(manager: cuckoo_manager, name: "scope", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
-	    var mustang: Cuckoo.VerifyReadOnlyProperty<Int> {
-	        return .init(manager: cuckoo_manager, name: "mustang", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
 	    var bangsPerTurn: Cuckoo.VerifyReadOnlyProperty<Int> {
 	        return .init(manager: cuckoo_manager, name: "bangsPerTurn", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
@@ -2622,22 +2574,6 @@ public class PlayerComputedProtocolStub: PlayerComputedProtocol {
     
     
     public var weapon: Int {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (Int).self)
-        }
-        
-    }
-    
-    
-    public var scope: Int {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (Int).self)
-        }
-        
-    }
-    
-    
-    public var mustang: Int {
         get {
             return DefaultValueRegistry.defaultValue(for: (Int).self)
         }
@@ -2859,34 +2795,6 @@ public class MockPlayerProtocol: PlayerProtocol, Cuckoo.ProtocolMock {
     
     
     
-    public var scope: Int {
-        get {
-            return cuckoo_manager.getter("scope",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.scope)
-        }
-        
-    }
-    
-    
-    
-    public var mustang: Int {
-        get {
-            return cuckoo_manager.getter("mustang",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.mustang)
-        }
-        
-    }
-    
-    
-    
     public var bangsPerTurn: Int {
         get {
             return cuckoo_manager.getter("bangsPerTurn",
@@ -3009,16 +2917,6 @@ public class MockPlayerProtocol: PlayerProtocol, Cuckoo.ProtocolMock {
 	    }
 	    
 	    
-	    var scope: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, Int> {
-	        return .init(manager: cuckoo_manager, name: "scope")
-	    }
-	    
-	    
-	    var mustang: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, Int> {
-	        return .init(manager: cuckoo_manager, name: "mustang")
-	    }
-	    
-	    
 	    var bangsPerTurn: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockPlayerProtocol, Int> {
 	        return .init(manager: cuckoo_manager, name: "bangsPerTurn")
 	    }
@@ -3106,16 +3004,6 @@ public class MockPlayerProtocol: PlayerProtocol, Cuckoo.ProtocolMock {
 	    
 	    var weapon: Cuckoo.VerifyReadOnlyProperty<Int> {
 	        return .init(manager: cuckoo_manager, name: "weapon", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
-	    var scope: Cuckoo.VerifyReadOnlyProperty<Int> {
-	        return .init(manager: cuckoo_manager, name: "scope", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
-	    var mustang: Cuckoo.VerifyReadOnlyProperty<Int> {
-	        return .init(manager: cuckoo_manager, name: "mustang", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	    
@@ -3227,22 +3115,6 @@ public class PlayerProtocolStub: PlayerProtocol {
     
     
     public var weapon: Int {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (Int).self)
-        }
-        
-    }
-    
-    
-    public var scope: Int {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (Int).self)
-        }
-        
-    }
-    
-    
-    public var mustang: Int {
         get {
             return DefaultValueRegistry.defaultValue(for: (Int).self)
         }

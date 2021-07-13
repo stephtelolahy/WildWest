@@ -96,10 +96,34 @@ public class GState: StateProtocol {
         let leftDistance = (pIndex > oIndex) ? (pIndex - oIndex) : (pIndex + count - oIndex)
         var distance = min(rightDistance, leftDistance)
         
-        distance -= players[player]!.scope
+        distance -= scope(for: player)
         
-        distance += players[other]!.mustang
+        distance += mustang(for: other)
         
         return distance
+    }
+}
+
+private extension StateProtocol {
+    
+    func scope(for player: String) -> Int {
+        activeInPlayCards(for: player).compactMap { $0.attributes[.scope] as? Int }.reduce(0, +)
+    }
+    
+    func mustang(for player: String) -> Int {
+        activeInPlayCards(for: player).compactMap { $0.attributes[.mustang] as? Int }.reduce(0, +)
+    }
+    
+    func activeInPlayCards(for player: String) -> [BaseCardProtocol] {
+        guard let playerObject = players[player] else {
+            return []
+        }
+        
+        if turn != player,
+           players[turn]?.attributes[.silentInPlay] != nil {
+            return [playerObject]
+        }
+        
+        return [playerObject] + playerObject.inPlay
     }
 }

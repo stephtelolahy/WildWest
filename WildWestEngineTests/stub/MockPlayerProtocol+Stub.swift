@@ -99,20 +99,6 @@ extension MockPlayerProtocol {
         return self
     }
     
-    func scope(is value: Int) -> MockPlayerProtocol {
-        stub(self) { mock in
-            when(mock.scope.get).thenReturn(value)
-        }
-        return self
-    }
-    
-    func mustang(is value: Int) -> MockPlayerProtocol {
-        stub(self) { mock in
-            when(mock.mustang.get).thenReturn(value)
-        }
-        return self
-    }
-    
     func attributes(are value: [CardAttributeKey: Any]) -> MockPlayerProtocol {
         stub(self) { mock in
             when(mock.attributes.get).thenReturn(value)

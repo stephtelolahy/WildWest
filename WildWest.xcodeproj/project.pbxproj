@@ -10,6 +10,7 @@
 		11A4260096983812EE5C92DA /* Pods_WildWest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C68CDDA530FC48B097AEAB55 /* Pods_WildWest.framework */; };
 		2622F2BB267A3CC400B75CA1 /* MCTS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2622F2BA267A3CC400B75CA1 /* MCTS.swift */; };
 		2622F2BD267A3CE800B75CA1 /* MCTSAi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2622F2BC267A3CE800B75CA1 /* MCTSAi.swift */; };
+		262A5675269DCB4C00847E71 /* SilentInPlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262A5674269DCB4C00847E71 /* SilentInPlayTests.swift */; };
 		2643D9462693612F00012BBC /* Draw2CardsRequire1BlueCardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2643D9452693612F00012BBC /* Draw2CardsRequire1BlueCardTests.swift */; };
 		2643D948269363B700012BBC /* RequireHandCardsBlue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2643D947269363B700012BBC /* RequireHandCardsBlue.swift */; };
 		2643D94A26938DCC00012BBC /* ResourcesBangTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2643D94926938DCC00012BBC /* ResourcesBangTests.swift */; };
@@ -389,6 +390,7 @@
 		213EF09E4753EE8978B47280 /* Pods-WildWest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.release.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.release.xcconfig"; sourceTree = "<group>"; };
 		2622F2BA267A3CC400B75CA1 /* MCTS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCTS.swift; sourceTree = "<group>"; };
 		2622F2BC267A3CE800B75CA1 /* MCTSAi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCTSAi.swift; sourceTree = "<group>"; };
+		262A5674269DCB4C00847E71 /* SilentInPlayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SilentInPlayTests.swift; sourceTree = "<group>"; };
 		2643D9452693612F00012BBC /* Draw2CardsRequire1BlueCardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Draw2CardsRequire1BlueCardTests.swift; sourceTree = "<group>"; };
 		2643D947269363B700012BBC /* RequireHandCardsBlue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireHandCardsBlue.swift; sourceTree = "<group>"; };
 		2643D94926938DCC00012BBC /* ResourcesBangTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesBangTests.swift; sourceTree = "<group>"; };
@@ -822,6 +824,7 @@
 			isa = PBXGroup;
 			children = (
 				264CC4C326978D0E0046D996 /* SilentDiamondsTests.swift */,
+				262A5674269DCB4C00847E71 /* SilentInPlayTests.swift */,
 			);
 			path = passive;
 			sourceTree = "<group>";
@@ -1351,8 +1354,8 @@
 		3392B1AF25BC377100214393 /* stub */ = {
 			isa = PBXGroup;
 			children = (
-				3392B1B025BC377100214393 /* MockStateProtocol+Stub.swift */,
 				3392B1B125BC377100214393 /* MatcherExtension.swift */,
+				3392B1B025BC377100214393 /* MockStateProtocol+Stub.swift */,
 				3392B1B225BC377100214393 /* MockPlayerProtocol+Stub.swift */,
 				3392B1B325BC377100214393 /* MockHitProtocol+Stub.swift */,
 				3392B1B425BC377100214393 /* MockCardProtocol+Stub.swift */,
@@ -2240,6 +2243,7 @@
 				3392B1E825BC377100214393 /* WellsFargoTests.swift in Sources */,
 				3392B1D325BC377100214393 /* StartTurnOnPhase1Tests.swift in Sources */,
 				3392B1F025BC377100214393 /* ArrayTests.swift in Sources */,
+				262A5675269DCB4C00847E71 /* SilentInPlayTests.swift in Sources */,
 				3363655F265C1BC600B55C4E /* DodgeTests.swift in Sources */,
 				3392B1EC25BC377100214393 /* EquipTests.swift in Sources */,
 				3392B1FD25BC377100214393 /* StateComputedTests.swift in Sources */,

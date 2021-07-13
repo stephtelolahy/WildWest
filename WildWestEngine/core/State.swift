@@ -53,9 +53,10 @@ public enum CardAttributeKey: String {
     case bangsCancelable
     case bangsPerTurn
     case handLimit
-    case silentCard
-    case silentAbility
-    case playAs
+    case silentCard     // prevent other players to play a card
+    case silentAbility  // disable self ability
+    case playAs         // can play card X with ability Y
+    case silentInPlay   // during your turn, cards in play in front of other players have no effect
 }
 
 public protocol PlayerStoredProtocol: BaseCardProtocol {
@@ -69,8 +70,6 @@ public protocol PlayerStoredProtocol: BaseCardProtocol {
 public protocol PlayerComputedProtocol {
     var maxHealth: Int { get }
     var weapon: Int { get }
-    var scope: Int { get }
-    var mustang: Int { get }
     var bangsPerTurn: Int { get }
     var bangsCancelable: Int { get }
     var flippedCards: Int { get }

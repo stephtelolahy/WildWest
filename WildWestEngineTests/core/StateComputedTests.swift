@@ -69,7 +69,7 @@ class StateComputedTests: XCTestCase {
         XCTAssertEqual(sut.distance(from: "p5", to: "p4"), 1)
     }
     
-    func test_DecrementRangeToOthers_IfHavingScope() {
+    func test_DecrementDistanceToOthers_IfHavingScope() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
@@ -98,7 +98,7 @@ class StateComputedTests: XCTestCase {
         XCTAssertEqual(sut.distance(from: "p5", to: "p1"), 1)
     }
     
-    func test_IncrementRangeFromOthers_IfHavingMustang() {
+    func test_IncrementDistanceFromOthers_IfHavingMustang() {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
@@ -121,6 +121,29 @@ class StateComputedTests: XCTestCase {
         XCTAssertEqual(sut.distance(from: "p4", to: "p1"), 3)
         XCTAssertEqual(sut.distance(from: "p5", to: "p1"), 2)
         
+        XCTAssertEqual(sut.distance(from: "p1", to: "p2"), 1)
+        XCTAssertEqual(sut.distance(from: "p1", to: "p3"), 2)
+        XCTAssertEqual(sut.distance(from: "p1", to: "p4"), 2)
+        XCTAssertEqual(sut.distance(from: "p1", to: "p5"), 1)
+    }
+    
+    func test_DisableOthersMustang_IfHavingAttributeSilentInPlayAndYourTurn() {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol().withDefault().identified(by: "p1").attributes(are: [.silentInPlay: true])
+        let mustang = MockCardProtocol().withDefault().attributes(are: [.mustang: 1])
+        let mockPlayer2 = MockPlayerProtocol().withDefault().identified(by: "p2").playing(mustang)
+        let mockPlayer3 = MockPlayerProtocol().withDefault().identified(by: "p3").playing(mustang)
+        let mockPlayer4 = MockPlayerProtocol().withDefault().identified(by: "p4").playing(mustang)
+        let mockPlayer5 = MockPlayerProtocol().withDefault().identified(by: "p5").playing(mustang)
+        let mockState = MockStateProtocol()
+            .withDefault()
+            .players(are: mockPlayer1, mockPlayer2, mockPlayer3, mockPlayer4, mockPlayer5)
+            .playOrder(is: "p1", "p2", "p3", "p4", "p5")
+            .turn(is: "p1")
+        let sut = GState(mockState)
+        
+        // When
+        // Assert
         XCTAssertEqual(sut.distance(from: "p1", to: "p2"), 1)
         XCTAssertEqual(sut.distance(from: "p1", to: "p3"), 2)
         XCTAssertEqual(sut.distance(from: "p1", to: "p4"), 2)

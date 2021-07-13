@@ -53,41 +53,35 @@ public class GPlayer: PlayerProtocol {
                   inPlay: player.inPlay)
     }
     
-    // MARK: - PlayerComputedProtocol
-    
-    public var maxHealth: Int {
-        attributes[.bullets] as? Int ?? 0
-    }
+    // MARK: - PlayerComputedProtocol f(InPlay)
     
     public var weapon: Int {
         cards.compactMap { $0.attributes[.weapon] as? Int }.max() ?? 1
-    }
-    
-    public var scope: Int {
-        cards.compactMap { $0.attributes[.scope] as? Int }.reduce(0, +)
-    }
-    
-    public var mustang: Int {
-        cards.compactMap { $0.attributes[.mustang] as? Int }.reduce(0, +)
     }
     
     public var bangsPerTurn: Int {
         cards.compactMap { $0.attributes[.bangsPerTurn] as? Int }.max() ?? 1
     }
     
+    private var cards: [BaseCardProtocol] {
+        [self] + inPlay
+    }
+    
+    // MARK: - PlayerComputedProtocol f(Attributes)
+    
+    public var maxHealth: Int {
+        attributes[.bullets] as? Int ?? 0
+    }
+    
     public var bangsCancelable: Int {
-        cards.compactMap { $0.attributes[.bangsCancelable] as? Int }.max() ?? 1
+        attributes[.bangsCancelable] as? Int ?? 1
     }
     
     public var flippedCards: Int {
-        cards.compactMap { $0.attributes[.flippedCards] as? Int }.max() ?? 1
+        attributes[.flippedCards] as? Int ?? 1
     }
     
     public var handLimit: Int {
-        cards.compactMap { $0.attributes[.handLimit] as? Int }.max() ?? health
-    }
-    
-    private var cards: [BaseCardProtocol] {
-        [self] + inPlay
+        attributes[.handLimit] as? Int ?? health
     }
 }
