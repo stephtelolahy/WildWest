@@ -114,7 +114,7 @@ private extension StateProtocol {
         activeInPlayCards(for: player).compactMap { $0.attributes[.mustang] as? Int }.reduce(0, +)
     }
     
-    func activeInPlayCards(for player: String) -> [BaseCardProtocol] {
+    func activeInPlayCards(for player: String) -> [CardProtocol] {
         guard let playerObject = players[player] else {
             return []
         }
@@ -125,5 +125,20 @@ private extension StateProtocol {
         }
         
         return [playerObject] + playerObject.inPlay
+    }
+}
+
+private extension GPlayer {
+    
+    convenience init(_ player: PlayerProtocol) {
+        self.init(identifier: player.identifier,
+                  name: player.name,
+                  desc: player.desc,
+                  attributes: player.attributes,
+                  abilities: player.abilities,
+                  role: player.role,
+                  health: player.health,
+                  hand: player.hand,
+                  inPlay: player.inPlay)
     }
 }

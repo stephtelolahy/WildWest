@@ -20,7 +20,7 @@ class DiscardExcessCardsOnPhase3Tests: XCTestCase {
             .withDefault()
             .identified(by: "p1")
             .abilities(are: "discardExcessCardsOnPhase3")
-            .handLimit(is: 1)
+            .health(is: 1)
             .holding(MockCardProtocol().identified(by: "c1"),
                      MockCardProtocol().identified(by: "c2"))
         let mockState = MockStateProtocol()
@@ -45,7 +45,7 @@ class DiscardExcessCardsOnPhase3Tests: XCTestCase {
             .withDefault()
             .identified(by: "p1")
             .abilities(are: "discardExcessCardsOnPhase3")
-            .handLimit(is: 1)
+            .attributes(are: [.handLimit: 1])
             .holding(MockCardProtocol().identified(by: "c1"),
                      MockCardProtocol().identified(by: "c2"),
                      MockCardProtocol().identified(by: "c3"))
@@ -72,7 +72,8 @@ class DiscardExcessCardsOnPhase3Tests: XCTestCase {
             .withDefault()
             .identified(by: "p1")
             .abilities(are: "discardExcessCardsOnPhase3")
-            .handLimit(is: 2)
+            .health(is: 1)
+            .attributes(are: [.handLimit: 10])
             .holding(MockCardProtocol().identified(by: "c1"),
                      MockCardProtocol().identified(by: "c2"))
         let mockState = MockStateProtocol()

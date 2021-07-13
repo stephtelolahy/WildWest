@@ -57,7 +57,6 @@ class SilentInPlayTests: XCTestCase {
             .withDefault()
             .identified(by: "p1")
             .playing(mockCard1)
-            .flippedCards(is: 1)
         let mockHit1 = MockHitProtocol()
             .withDefault()
             .player(is: "p1")

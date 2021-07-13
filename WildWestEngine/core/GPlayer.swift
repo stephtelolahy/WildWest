@@ -41,47 +41,11 @@ public class GPlayer: PlayerProtocol {
         self.inPlay = inPlay
     }
     
-    public convenience init(_ player: PlayerProtocol) {
-        self.init(identifier: player.identifier,
-                  name: player.name,
-                  desc: player.desc,
-                  attributes: player.attributes,
-                  abilities: player.abilities,
-                  role: player.role,
-                  health: player.health,
-                  hand: player.hand,
-                  inPlay: player.inPlay)
-    }
+    // MARK: - CardProtocol
     
-    // MARK: - PlayerComputedProtocol f(InPlay)
+    public var type: CardType { .figure }
     
-    public var weapon: Int {
-        cards.compactMap { $0.attributes[.weapon] as? Int }.max() ?? 1
-    }
+    public var suit: String { "" }
     
-    public var bangsPerTurn: Int {
-        cards.compactMap { $0.attributes[.bangsPerTurn] as? Int }.max() ?? 1
-    }
-    
-    private var cards: [BaseCardProtocol] {
-        [self] + inPlay
-    }
-    
-    // MARK: - PlayerComputedProtocol f(Attributes)
-    
-    public var maxHealth: Int {
-        attributes[.bullets] as? Int ?? 0
-    }
-    
-    public var bangsCancelable: Int {
-        attributes[.bangsCancelable] as? Int ?? 1
-    }
-    
-    public var flippedCards: Int {
-        attributes[.flippedCards] as? Int ?? 1
-    }
-    
-    public var handLimit: Int {
-        attributes[.handLimit] as? Int ?? health
-    }
+    public var value: String { " " }
 }

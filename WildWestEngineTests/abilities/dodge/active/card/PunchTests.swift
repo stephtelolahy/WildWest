@@ -25,7 +25,6 @@ class PunchTests: XCTestCase {
             .withDefault()
             .identified(by: "p1")
             .holding(mockCard1)
-            .weapon(is: 1)
         let mockPlayer2 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p2")

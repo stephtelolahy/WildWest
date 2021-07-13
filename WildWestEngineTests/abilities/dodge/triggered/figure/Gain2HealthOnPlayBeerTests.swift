@@ -20,7 +20,7 @@ class Gain2HealthOnPlayBeerTests: XCTestCase {
             .withDefault()
             .identified(by: "p1")
             .health(is: 1)
-            .maxHealth(is: 4)
+            .attributes(are: [.bullets: 4])
             .abilities(are: "gain2HealthOnPlayBeer")
         let mockState = MockStateProtocol()
             .withDefault()
