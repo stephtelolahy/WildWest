@@ -5,7 +5,7 @@
 //  Created by Hugues Stephano Telolahy on 26/09/2020.
 //
 
-public protocol StateStoredProtocol {
+public protocol StateProtocol {
     var players: [String: PlayerProtocol] { get }
     var initialOrder: [String] { get }  // initial players order
     var playOrder: [String] { get }     // active players order
@@ -17,15 +17,9 @@ public protocol StateStoredProtocol {
     var hits: [HitProtocol] { get }     // blocking challenge to be resolved before continuing turn
     var played: [String] { get }        // played abilities during current turn
     var history: [GMove] { get }        // move history
-}
-
-public protocol StateComputedProtocol {
-    var winner: Role? { get }
+    var winner: Role? { get }           // winner
     
     func distance(from player: String, to other: String) -> Int
-}
-
-public protocol StateProtocol: StateStoredProtocol, StateComputedProtocol {
 }
 
 public protocol HitProtocol {

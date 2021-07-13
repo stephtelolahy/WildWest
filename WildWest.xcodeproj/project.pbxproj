@@ -12,6 +12,7 @@
 		2622F2BD267A3CE800B75CA1 /* MCTSAi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2622F2BC267A3CE800B75CA1 /* MCTSAi.swift */; };
 		262A5675269DCB4C00847E71 /* SilentInPlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262A5674269DCB4C00847E71 /* SilentInPlayTests.swift */; };
 		262A5677269DFB8800847E71 /* PlayerProtocol+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262A5676269DFB8800847E71 /* PlayerProtocol+Extensions.swift */; };
+		262A5679269E088000847E71 /* WinnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262A5678269E088000847E71 /* WinnerTests.swift */; };
 		2643D9462693612F00012BBC /* Draw2CardsRequire1BlueCardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2643D9452693612F00012BBC /* Draw2CardsRequire1BlueCardTests.swift */; };
 		2643D948269363B700012BBC /* RequireHandCardsBlue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2643D947269363B700012BBC /* RequireHandCardsBlue.swift */; };
 		2643D94A26938DCC00012BBC /* ResourcesBangTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2643D94926938DCC00012BBC /* ResourcesBangTests.swift */; };
@@ -392,6 +393,7 @@
 		2622F2BC267A3CE800B75CA1 /* MCTSAi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCTSAi.swift; sourceTree = "<group>"; };
 		262A5674269DCB4C00847E71 /* SilentInPlayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SilentInPlayTests.swift; sourceTree = "<group>"; };
 		262A5676269DFB8800847E71 /* PlayerProtocol+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerProtocol+Extensions.swift"; sourceTree = "<group>"; };
+		262A5678269E088000847E71 /* WinnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnerTests.swift; sourceTree = "<group>"; };
 		2643D9452693612F00012BBC /* Draw2CardsRequire1BlueCardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Draw2CardsRequire1BlueCardTests.swift; sourceTree = "<group>"; };
 		2643D947269363B700012BBC /* RequireHandCardsBlue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireHandCardsBlue.swift; sourceTree = "<group>"; };
 		2643D94926938DCC00012BBC /* ResourcesBangTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesBangTests.swift; sourceTree = "<group>"; };
@@ -1214,6 +1216,7 @@
 			isa = PBXGroup;
 			children = (
 				3392B16B25BC376F00214393 /* AbilityMatcherTests.swift */,
+				262A5678269E088000847E71 /* WinnerTests.swift */,
 			);
 			path = matcher;
 			sourceTree = "<group>";
@@ -2164,6 +2167,7 @@
 				3392B1CC25BC377100214393 /* StartTurnDrawingFirstCardFromPlayerTests.swift in Sources */,
 				3392B1CB25BC377100214393 /* StartTurnDrawing3CardsAndKeep2Tests.swift in Sources */,
 				3392B1F325BC377100214393 /* RoleStrategyTests.swift in Sources */,
+				262A5679269E088000847E71 /* WinnerTests.swift in Sources */,
 				3392B1FA25BC377100214393 /* MockHitProtocol+Stub.swift in Sources */,
 				33245E6A266033340019E8F0 /* Draw2CardsOnOtherEliminatedTests.swift in Sources */,
 				3392B1BF25BC377100214393 /* PlayBangAsMissedTests.swift in Sources */,

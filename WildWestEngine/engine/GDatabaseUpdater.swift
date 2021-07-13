@@ -83,11 +83,11 @@ private extension GDatabaseUpdater {
     }
     
     static func gameover() -> EventDesc {
-        EventDesc(id: "gameover", desc: "game is over") { event, _ in
-            guard case .gameover = event else {
+        EventDesc(id: "gameover", desc: "game is over") { event, state in
+            guard case let .gameover(winner) = event else {
                 fatalError("Invalid event")
             }
-            // do nothing
+            state.winner = winner
         }
     }
     

@@ -31,13 +31,4 @@ public struct GHit: HitProtocol, Equatable {
         self.cancelable = cancelable
         self.target = target
     }
-    
-    init(_ hit: HitProtocol) {
-        self.init(player: hit.player,
-                  name: hit.name, 
-                  abilities: hit.abilities,
-                  offender: hit.offender,
-                  cancelable: hit.cancelable,
-                  target: hit.target)
-    }
 }

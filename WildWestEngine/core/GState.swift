@@ -20,6 +20,7 @@ public class GState: StateProtocol {
     public var hits: [HitProtocol]
     public var played: [String]
     public var history: [GMove]
+    public var winner: Role?
     
     // MARK: Init
     
@@ -33,7 +34,8 @@ public class GState: StateProtocol {
                 store: [CardProtocol],
                 hits: [HitProtocol],
                 played: [String],
-                history: [GMove]) {
+                history: [GMove],
+                winner: Role?) {
         self.players = players.mapValues { GPlayer($0) }
         self.initialOrder = initialOrder
         self.playOrder = playOrder
@@ -45,6 +47,7 @@ public class GState: StateProtocol {
         self.hits = hits.map { GHit($0) }
         self.played = played
         self.history = history
+        self.winner = winner
     }
     
     public convenience init(_ state: StateProtocol) {
@@ -58,31 +61,11 @@ public class GState: StateProtocol {
                   store: state.store,
                   hits: state.hits,
                   played: state.played,
-                  history: state.history)
+                  history: state.history,
+                  winner: state.winner)
     }
     
     // MARK: - StateComputedProtocol
-    
-    public var winner: Role? {
-        let remainingRoles = playOrder.map { players[$0]!.role }
-        
-        let noSheriff = !remainingRoles.contains(.sheriff)
-        if noSheriff {
-            let lastIsRenegade = remainingRoles.count == 1 && remainingRoles[0] == .renegade
-            if lastIsRenegade {
-                return .renegade
-            } else {
-                return .outlaw
-            }
-        }
-        
-        let noOutlawsAndRenegates = !remainingRoles.contains(where: { $0 == .outlaw || $0 == .renegade })
-        if noOutlawsAndRenegates {
-            return .sheriff
-        }
-        
-        return nil
-    }
     
     public func distance(from player: String, to other: String) -> Int {
         guard let pIndex = playOrder.firstIndex(of: player),
@@ -140,5 +123,17 @@ private extension GPlayer {
                   health: player.health,
                   hand: player.hand,
                   inPlay: player.inPlay)
+    }
+}
+
+private extension GHit {
+    
+    init(_ hit: HitProtocol) {
+        self.init(player: hit.player,
+                  name: hit.name,
+                  abilities: hit.abilities,
+                  offender: hit.offender,
+                  cancelable: hit.cancelable,
+                  target: hit.target)
     }
 }

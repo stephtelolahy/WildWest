@@ -42,7 +42,8 @@ private extension StateProtocol {
                       store: store,
                       hits: hits,
                       played: played,
-                      history: history)
+                      history: history,
+                      winner: winner)
     }
 }
 

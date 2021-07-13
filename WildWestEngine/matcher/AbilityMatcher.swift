@@ -10,6 +10,7 @@ public protocol AbilityMatcherProtocol {
     func active(in state: StateProtocol) -> [GMove]?
     func triggered(on event: GEvent, in state: StateProtocol) -> [GMove]?
     func effects(on move: GMove, in state: StateProtocol) -> [GEvent]?
+    func winner(in state: StateProtocol) -> Role?
 }
 
 public class AbilityMatcher: AbilityMatcherProtocol {
@@ -56,6 +57,27 @@ public class AbilityMatcher: AbilityMatcherProtocol {
         // </RULE>
         
         return events
+    }
+    
+    public func winner(in state: StateProtocol) -> Role? {
+        let remainingRoles = state.playOrder.map { state.players[$0]!.role }
+        
+        let noSheriff = !remainingRoles.contains(.sheriff)
+        if noSheriff {
+            let lastIsRenegade = remainingRoles.count == 1 && remainingRoles[0] == .renegade
+            if lastIsRenegade {
+                return .renegade
+            } else {
+                return .outlaw
+            }
+        }
+        
+        let noOutlawsAndRenegates = !remainingRoles.contains(where: { $0 == .outlaw || $0 == .renegade })
+        if noOutlawsAndRenegates {
+            return .sheriff
+        }
+        
+        return nil
     }
 }
 
