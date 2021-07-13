@@ -6,13 +6,18 @@
 //  Copyright © 2021 creativeGames. All rights reserved.
 //
 
-enum NumberArgument: Decodable {
-    case number(Int)
+enum StateAttribute: String {
     case bangsPerTurn
     case bangsCancelable
     case inPlayPlayers
     case excessHand
     case damage
+    case weapon
+}
+
+enum NumberArgument: Decodable {
+    case number(Int)
+    case attribute(StateAttribute)
     
     init(from decoder: Decoder) throws {
         if let intValue = try? decoder.singleValueContainer().decode(Int.self) {
@@ -37,25 +42,11 @@ enum NumberArgument: Decodable {
     }
     
     private static func parse(from string: String) throws -> NumberArgument {
-        switch string {
-        case "bangsPerTurn":
-            return .bangsPerTurn
-            
-        case "bangsCancelable":
-            return .bangsCancelable
-            
-        case "inPlayPlayers":
-            return .inPlayPlayers
-            
-        case "excessHand":
-            return .excessHand
-            
-        case "damage":
-            return .damage
-            
-        default:
+        guard let attribute = StateAttribute(rawValue: string) else {
             throw DecodingError.typeMismatch(Int.self, DecodingError.Context(codingPath: [], debugDescription: "Invalid value"))
         }
+        
+        return .attribute(attribute)
     }
 }
 
@@ -65,20 +56,26 @@ extension MoveContext {
         case let .number(value):
             return value
             
-        case .bangsPerTurn:
-            return actor.bangsPerTurn
-            
-        case .bangsCancelable:
-            return actor.bangsCancelable
-            
-        case .inPlayPlayers:
-            return state.playOrder.count
-            
-        case .excessHand:
-            return Swift.max(actor.hand.count - actor.handLimit, 0)
-            
-        case .damage:
-            return actor.maxHealth - actor.health
+        case let .attribute(attribute):
+            switch attribute {
+            case .bangsPerTurn:
+                return actor.bangsPerTurn
+                
+            case .bangsCancelable:
+                return actor.bangsCancelable
+                
+            case .inPlayPlayers:
+                return state.playOrder.count
+                
+            case .excessHand:
+                return Swift.max(actor.hand.count - actor.handLimit, 0)
+                
+            case .damage:
+                return actor.maxHealth - actor.health
+                
+            case .weapon:
+                return actor.weapon
+            }
         }
     }
 }

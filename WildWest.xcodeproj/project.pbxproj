@@ -261,7 +261,6 @@
 		33AAE03D26598D0200A067E3 /* RequireTargetAt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE03C26598D0200A067E3 /* RequireTargetAt.swift */; };
 		33AAE03F26598D7700A067E3 /* DrawHand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE03E26598D7700A067E3 /* DrawHand.swift */; };
 		33AAE04126598EAF00A067E3 /* DrawInPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE04026598EAF00A067E3 /* DrawInPlay.swift */; };
-		33AAE0432659A4E500A067E3 /* RequireTargetReachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE0422659A4E500A067E3 /* RequireTargetReachable.swift */; };
 		33AAE0452659A5E500A067E3 /* IsTimesPerTurnMax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE0442659A5E500A067E3 /* IsTimesPerTurnMax.swift */; };
 		33AAE0472659A73900A067E3 /* AddHit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE0462659A73900A067E3 /* AddHit.swift */; };
 		33AAE04B265A2ADE00A067E3 /* LooseHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE04A265A2ADE00A067E3 /* LooseHealth.swift */; };
@@ -625,7 +624,6 @@
 		33AAE03C26598D0200A067E3 /* RequireTargetAt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireTargetAt.swift; sourceTree = "<group>"; };
 		33AAE03E26598D7700A067E3 /* DrawHand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawHand.swift; sourceTree = "<group>"; };
 		33AAE04026598EAF00A067E3 /* DrawInPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawInPlay.swift; sourceTree = "<group>"; };
-		33AAE0422659A4E500A067E3 /* RequireTargetReachable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireTargetReachable.swift; sourceTree = "<group>"; };
 		33AAE0442659A5E500A067E3 /* IsTimesPerTurnMax.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsTimesPerTurnMax.swift; sourceTree = "<group>"; };
 		33AAE0462659A73900A067E3 /* AddHit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHit.swift; sourceTree = "<group>"; };
 		33AAE04A265A2ADE00A067E3 /* LooseHealth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LooseHealth.swift; sourceTree = "<group>"; };
@@ -859,7 +857,6 @@
 				3369518C265FAF4C00B05D56 /* RequireTargetAny.swift */,
 				33AAE0342659898000A067E3 /* RequireInPlayCard.swift */,
 				33AAE03C26598D0200A067E3 /* RequireTargetAt.swift */,
-				33AAE0422659A4E500A067E3 /* RequireTargetReachable.swift */,
 				339CC9A0265E91220070D77B /* RequireTargetHit.swift */,
 				33AAE058265A457900A067E3 /* RequireStoreCards.swift */,
 				33FBF8FD265B117200D7C6AD /* RequireHandCards.swift */,
@@ -2087,7 +2084,6 @@
 				33272F6A265920A1005C9246 /* Ability.swift in Sources */,
 				33AAE037265989FB00A067E3 /* PlayArg+Extension.swift in Sources */,
 				33AAE03926598A4800A067E3 /* DiscardInPlay.swift in Sources */,
-				33AAE0432659A4E500A067E3 /* RequireTargetReachable.swift in Sources */,
 				33AAE05D265A9D8600A067E3 /* OnHitCancelable.swift in Sources */,
 				33AAE0232659771D00A067E3 /* GainHealth.swift in Sources */,
 				3358334D25BC2585001BE4D8 /* Database.swift in Sources */,
