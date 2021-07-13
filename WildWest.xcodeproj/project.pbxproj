@@ -27,6 +27,9 @@
 		265CCFC92696D7860003641E /* BangRequire2CardsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265CCFC82696D7860003641E /* BangRequire2CardsTests.swift */; };
 		266B2107267D48C9008F21E0 /* MCTSAiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B2106267D48C9008F21E0 /* MCTSAiTests.swift */; };
 		26CBA70E267BD3A600EA1227 /* RandomWithRoleAi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CBA70D267BD3A600EA1227 /* RandomWithRoleAi.swift */; };
+		26D710BD269E56D700798FCD /* StateProtocol+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D710BC269E56D700798FCD /* StateProtocol+Extensions.swift */; };
+		26D710BF269E5A4C00798FCD /* DistanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D710BE269E5A4C00798FCD /* DistanceTests.swift */; };
+		26D710C1269E5E5600798FCD /* PlayerAttributesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D710C0269E5E5600798FCD /* PlayerAttributesTests.swift */; };
 		26E56473267DBE58008DDB58 /* GLoopSyncronous.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E56472267DBE58008DDB58 /* GLoopSyncronous.swift */; };
 		26F88D872672B51700B82AF9 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F88D862672B51700B82AF9 /* Node.swift */; };
 		3300B02A264E3C48002F4776 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3300B029264E3C48002F4776 /* GeneratedMocks.swift */; };
@@ -230,7 +233,6 @@
 		3392B1F925BC377100214393 /* MockPlayerProtocol+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3392B1B225BC377100214393 /* MockPlayerProtocol+Stub.swift */; };
 		3392B1FA25BC377100214393 /* MockHitProtocol+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3392B1B325BC377100214393 /* MockHitProtocol+Stub.swift */; };
 		3392B1FB25BC377100214393 /* MockCardProtocol+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3392B1B425BC377100214393 /* MockCardProtocol+Stub.swift */; };
-		3392B1FD25BC377100214393 /* StateComputedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3392B1B725BC377100214393 /* StateComputedTests.swift */; };
 		3392B1FE25BC377100214393 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3392B1B825BC377100214393 /* GeneratedMocks.swift */; };
 		3395558D2644365E0006FBB0 /* RemoteGameDatabaseUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3395558C2644365E0006FBB0 /* RemoteGameDatabaseUpdater.swift */; };
 		33955595264439200006FBB0 /* EventDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33955594264439200006FBB0 /* EventDto.swift */; };
@@ -407,6 +409,9 @@
 		265CCFC82696D7860003641E /* BangRequire2CardsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BangRequire2CardsTests.swift; sourceTree = "<group>"; };
 		266B2106267D48C9008F21E0 /* MCTSAiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCTSAiTests.swift; sourceTree = "<group>"; };
 		26CBA70D267BD3A600EA1227 /* RandomWithRoleAi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomWithRoleAi.swift; sourceTree = "<group>"; };
+		26D710BC269E56D700798FCD /* StateProtocol+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StateProtocol+Extensions.swift"; sourceTree = "<group>"; };
+		26D710BE269E5A4C00798FCD /* DistanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceTests.swift; sourceTree = "<group>"; };
+		26D710C0269E5E5600798FCD /* PlayerAttributesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerAttributesTests.swift; sourceTree = "<group>"; };
 		26E56472267DBE58008DDB58 /* GLoopSyncronous.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLoopSyncronous.swift; sourceTree = "<group>"; };
 		26F88D862672B51700B82AF9 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		302397755E696ECE7C3EE1C2 /* Pods-WildWest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.debug.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.debug.xcconfig"; sourceTree = "<group>"; };
@@ -597,7 +602,6 @@
 		3392B1B225BC377100214393 /* MockPlayerProtocol+Stub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MockPlayerProtocol+Stub.swift"; sourceTree = "<group>"; };
 		3392B1B325BC377100214393 /* MockHitProtocol+Stub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MockHitProtocol+Stub.swift"; sourceTree = "<group>"; };
 		3392B1B425BC377100214393 /* MockCardProtocol+Stub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MockCardProtocol+Stub.swift"; sourceTree = "<group>"; };
-		3392B1B725BC377100214393 /* StateComputedTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateComputedTests.swift; sourceTree = "<group>"; };
 		3392B1B825BC377100214393 /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
 		3395558C2644365E0006FBB0 /* RemoteGameDatabaseUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteGameDatabaseUpdater.swift; sourceTree = "<group>"; };
 		33955594264439200006FBB0 /* EventDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDto.swift; sourceTree = "<group>"; };
@@ -984,7 +988,6 @@
 				3392B16325BC376F00214393 /* TestModules.swift */,
 				3392B17325BC377000214393 /* abilities */,
 				3392B1A825BC377100214393 /* ai */,
-				3392B1B525BC377100214393 /* core */,
 				3392B16C25BC376F00214393 /* engine */,
 				3392B16A25BC376F00214393 /* matcher */,
 				3392B1A525BC377000214393 /* misc */,
@@ -1183,6 +1186,7 @@
 				338F7A562659682E00731FB9 /* AbilityMatcher.swift */,
 				33F40405265FFE30004E4FBF /* MoveContext.swift */,
 				262A5676269DFB8800847E71 /* PlayerProtocol+Extensions.swift */,
+				26D710BC269E56D700798FCD /* StateProtocol+Extensions.swift */,
 				33176D2C26593D24000A6FBF /* playReq */,
 				33272F7A2659276C005C9246 /* effect */,
 			);
@@ -1214,6 +1218,8 @@
 			children = (
 				3392B16B25BC376F00214393 /* AbilityMatcherTests.swift */,
 				262A5678269E088000847E71 /* WinnerTests.swift */,
+				26D710BE269E5A4C00798FCD /* DistanceTests.swift */,
+				26D710C0269E5E5600798FCD /* PlayerAttributesTests.swift */,
 			);
 			path = matcher;
 			sourceTree = "<group>";
@@ -1362,14 +1368,6 @@
 				3392B1B425BC377100214393 /* MockCardProtocol+Stub.swift */,
 			);
 			path = stub;
-			sourceTree = "<group>";
-		};
-		3392B1B525BC377100214393 /* core */ = {
-			isa = PBXGroup;
-			children = (
-				3392B1B725BC377100214393 /* StateComputedTests.swift */,
-			);
-			path = core;
 			sourceTree = "<group>";
 		};
 		33967B1B263D79A000D12DDB /* main */ = {
@@ -2129,6 +2127,7 @@
 				33AAE02926597CF100A067E3 /* Handicap.swift in Sources */,
 				3358334225BC2585001BE4D8 /* MoveSelector.swift in Sources */,
 				26E56473267DBE58008DDB58 /* GLoopSyncronous.swift in Sources */,
+				26D710BD269E56D700798FCD /* StateProtocol+Extensions.swift in Sources */,
 				33272F7D26592793005C9246 /* DrawDeck.swift in Sources */,
 				33AAE02726597AA700A067E3 /* CardArgument.swift in Sources */,
 				33176D2E26593D4A000A6FBF /* PlayReqFamily.swift in Sources */,
@@ -2189,6 +2188,7 @@
 				264CC4C426978D0E0046D996 /* SilentDiamondsTests.swift in Sources */,
 				3392B1EA25BC377100214393 /* DiscardBeerTests.swift in Sources */,
 				266B2107267D48C9008F21E0 /* MCTSAiTests.swift in Sources */,
+				26D710C1269E5E5600798FCD /* PlayerAttributesTests.swift in Sources */,
 				3392B1F425BC377100214393 /* RoleEstimatorTests.swift in Sources */,
 				3392B1DD25BC377100214393 /* DrawStoreTests.swift in Sources */,
 				337FC421265D809200B2AF2A /* RagTimeTests.swift in Sources */,
@@ -2236,6 +2236,7 @@
 				3392B1E625BC377100214393 /* CatBalouTests.swift in Sources */,
 				3392B1E125BC377100214393 /* DuelTests.swift in Sources */,
 				3392B1C725BC377100214393 /* JailTests.swift in Sources */,
+				26D710BF269E5A4C00798FCD /* DistanceTests.swift in Sources */,
 				3392B1F225BC377100214393 /* AbilityEvaluatorTests.swift in Sources */,
 				3392B1D025BC377100214393 /* DrawCardOnHandEmptyTests.swift in Sources */,
 				336463C2265E60AB008A2011 /* BrawlTests.swift in Sources */,
@@ -2246,7 +2247,6 @@
 				262A5675269DCB4C00847E71 /* SilentInPlayTests.swift in Sources */,
 				3363655F265C1BC600B55C4E /* DodgeTests.swift in Sources */,
 				3392B1EC25BC377100214393 /* EquipTests.swift in Sources */,
-				3392B1FD25BC377100214393 /* StateComputedTests.swift in Sources */,
 				3392B1C925BC377100214393 /* BarrelTests.swift in Sources */,
 				3392B1C025BC377100214393 /* AbilityMatcherTests.swift in Sources */,
 				33DA1591265C179300915E5B /* PunchTests.swift in Sources */,

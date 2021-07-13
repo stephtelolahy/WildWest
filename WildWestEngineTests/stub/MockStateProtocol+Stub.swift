@@ -50,13 +50,6 @@ extension MockStateProtocol {
         return self
     }
     
-    func distance(from player: String, to other: String, is distance: Int) -> MockStateProtocol {
-        stub(self) { mock in
-            when(mock.distance(from: player, to: other)).thenReturn(distance)
-        }
-        return self
-    }
-    
     func played(are abilities: String...) -> MockStateProtocol {
         stub(self) { mock in
             when(mock.played.get).thenReturn(abilities)

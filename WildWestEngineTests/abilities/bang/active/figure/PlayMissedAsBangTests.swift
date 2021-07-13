@@ -35,7 +35,6 @@ class PlayMissedAsBangTests: XCTestCase {
             .phase(is: 2)
             .players(are: mockPlayer1, mockPlayer2)
             .playOrder(is: "p1", "p2")
-            .distance(from: "p1", to: "p2", is: 1)
         
         // When
         let moves = sut.active(in: mockState)
