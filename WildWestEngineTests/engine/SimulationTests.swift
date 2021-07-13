@@ -28,7 +28,7 @@ class SimulationTests: XCTestCase {
         }
         
         // Assert
-        wait(for: [expectation], timeout: 10.0)
+        wait(for: [expectation], timeout: 5.0)
     }
     
     func test_Simulate5PlayersGame() {
@@ -40,7 +40,7 @@ class SimulationTests: XCTestCase {
         }
         
         // Assert
-        wait(for: [expectation], timeout: 10.0)
+        wait(for: [expectation], timeout: 5.0)
     }
     
     func test_Simulate6PlayersGame() {
@@ -52,7 +52,7 @@ class SimulationTests: XCTestCase {
         }
         
         // Assert
-        wait(for: [expectation], timeout: 10.0)
+        wait(for: [expectation], timeout: 5.0)
     }
     
     private func runSimulation(playersCount: Int, completed: @escaping () -> Void) {

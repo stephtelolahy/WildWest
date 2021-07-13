@@ -20,7 +20,8 @@ extension DtoEncoder {
                  discard: encode(cards: state.discard.reversed()),
                  store: encode(cards: state.store),
                  hits: encode(hits: state.hits),
-                 played: encode(abilities: state.played))
+                 played: encode(abilities: state.played),
+                 winner: encode(winner: state.winner))
     }
     
     func decode(state: StateDto) throws -> StateProtocol {
@@ -34,7 +35,8 @@ extension DtoEncoder {
                store: try decode(cards: state.store),
                hits: try decode(hits: state.hits),
                played: try decode(abilities: state.played),
-               history: [])
+               history: [],
+               winner:decode(winner: state.winner))
     }
     
     func encode(hit: HitProtocol) -> HitDto {
@@ -135,5 +137,17 @@ private extension DtoEncoder {
         return dict.reduce(into: [:]) { result, element in
             result[CardAttributeKey(rawValue: element.key)!] = element.value
         }
+    }
+    
+    func encode(winner: Role?) -> String? {
+        winner?.rawValue
+    }
+    
+    func decode(winner: String?) -> Role? {
+        guard let rawValue = winner else {
+            return nil
+        }
+        
+        return Role(rawValue: rawValue)
     }
 }

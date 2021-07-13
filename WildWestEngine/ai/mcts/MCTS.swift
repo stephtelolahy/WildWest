@@ -21,7 +21,7 @@ public protocol MCTSState {
 
 public struct MCTS {
     
-    func findBestMove<T: MCTSState>(state: T, duration: TimeInterval = 1.0) -> T.MCTSMove {
+    func findBestMove<T: MCTSState>(state: T, duration: TimeInterval = 0.1) -> T.MCTSMove {
         let rootNode = MCTSNode(state: state)
         let player = state.player
         

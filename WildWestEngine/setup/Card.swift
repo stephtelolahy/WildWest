@@ -9,19 +9,19 @@ public struct Card {
     public let name: String
     public let desc: String
     public let type: CardType
-    public let abilities: Set<String>
     public let attributes: [CardAttributeKey: Any]
+    public let abilities: Set<String>
     
     public init(name: String,
                 type: CardType,
-                desc: String = "",
-                abilities: Set<String> = [],
-                attributes: [CardAttributeKey: Any] = [:]) {
+                desc: String,
+                attributes: [CardAttributeKey: Any],
+                abilities: Set<String>) {
         self.name = name
         self.desc = desc
         self.type = type
-        self.abilities = abilities
         self.attributes = attributes
+        self.abilities = abilities
     }
 }
 
@@ -38,8 +38,8 @@ extension Card: Decodable {
         case name
         case desc
         case type
-        case abilities
         case attributes
+        case abilities
     }
     
     public init(from decoder: Decoder) throws {
@@ -47,11 +47,11 @@ extension Card: Decodable {
         name = try values.decode(String.self, forKey: .name)
         desc = try values.decode(String.self, forKey: .desc)
         type = try values.decode(CardType.self, forKey: .type)
-        abilities = Set(try values.decodeIfPresent([String].self, forKey: .abilities) ?? [])
         attributes = try values.decodeIfPresent([String: Any].self, forKey: .attributes)?
             .reduce(into: [:]) { result, element in
                 result[CardAttributeKey(rawValue: element.key)!] = element.value
             }
             ?? [:]
+        abilities = Set(try values.decodeIfPresent([String].self, forKey: .abilities) ?? [])
     }
 }

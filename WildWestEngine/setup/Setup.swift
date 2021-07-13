@@ -68,7 +68,8 @@ public class GSetup: SetupProtocol {
                       store: [],
                       hits: [],
                       played: [],
-                      history: [])
+                      history: [],
+                      winner: nil)
     }
 }
 

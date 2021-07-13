@@ -598,7 +598,7 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         wait(for: [expectation], timeout: 0.5)
     }
     
-    func test_DoNothing_IfGameOver() {
+    func test_SetWinner_IfGameOver() {
         // Given
         let event = GEvent.gameover(winner: .outlaw)
         let expectation = XCTestExpectation(description: #function)
@@ -606,7 +606,7 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         // When
         // Assert
         sut.execute(event).subscribe(onCompleted: {
-            verifyNoMoreInteractions(self.mockDatabaseReference)
+            verify(self.mockDatabaseReference).setValue("state/winner", value: any(equalTo: "outlaw"), withCompletionBlock: any())
             expectation.fulfill()
         }).disposed(by: disposeBag)
         

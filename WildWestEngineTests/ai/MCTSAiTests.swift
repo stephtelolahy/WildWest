@@ -21,7 +21,7 @@ class MCTSAiTests: XCTestCase {
     override func setUp() {
         sut = MCTSAi(matcher: abilityMatcher)
     }
-    /*
+    
     func test_GivenInitialGame_whenSimulateAIPlay_thenGameComplete() {
         let setup = GSetup()
         let roles = setup.roles(for: 2)
@@ -39,9 +39,8 @@ class MCTSAiTests: XCTestCase {
             print("[S]: \(state.debugDescription) : \(move.ability)")
         }
         
-        XCTAssertEqual(state.status, 1)
+        XCTAssertEqual(state.winner, .sheriff)
     }
-    */
 }
 
 private extension StateProtocol {

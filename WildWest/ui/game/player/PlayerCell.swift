@@ -46,8 +46,9 @@ class PlayerCell: UICollectionViewCell {
         } else {
             roleImageView.image = nil
         }
+        let maxHealth = player.attributes[.bullets] as? Int ?? 0
         healthLabel.text = ""
-            + Array(player.health..<player.maxHealth).map { _ in "░" }
+            + Array(player.health..<maxHealth).map { _ in "░" }
             + Array(0..<player.health).map { _ in "■" }.joined()
         handLabel.text = "[] \(player.hand.count)"
         figureImageView.image = UIImage(named: player.name)

@@ -5,7 +5,6 @@
 //  Created by Hugues Stephano Telolahy on 04/10/2020.
 //  Copyright © 2020 CocoaPods. All rights reserved.
 //
-// swiftlint:disable type_body_length
 
 import XCTest
 import WildWestEngine
@@ -26,9 +25,6 @@ class BangTests: XCTestCase {
             .withDefault()
             .identified(by: "p1")
             .holding(mockCard1)
-            .weapon(is: 1)
-            .bangsPerTurn(is: 1)
-            .bangsCancelable(is: 1)
         let mockPlayer2 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p2")
@@ -64,8 +60,6 @@ class BangTests: XCTestCase {
             .withDefault()
             .identified(by: "p1")
             .holding(mockCard1)
-            .weapon(is: 1)
-            .bangsPerTurn(is: 1)
         let mockPlayer2 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p2")
@@ -95,9 +89,6 @@ class BangTests: XCTestCase {
             .withDefault()
             .identified(by: "p1")
             .holding(mockCard1)
-            .weapon(is: 1)
-            .bangsPerTurn(is: 1)
-            .bangsCancelable(is: 1)
         let mockPlayer2 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p2")
@@ -127,9 +118,8 @@ class BangTests: XCTestCase {
             .withDefault()
             .identified(by: "p1")
             .holding(mockCard1)
-            .weapon(is: 2)
-            .bangsPerTurn(is: 1)
-            .bangsCancelable(is: 2)
+            .playing(MockCardProtocol().withDefault().attributes(are: [.weapon: 2]))
+            .attributes(are: [.bangsCancelable: 2])
         let mockPlayer2 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p2")
