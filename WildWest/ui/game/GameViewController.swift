@@ -36,6 +36,7 @@ class GameViewController: UIViewController {
     var soundPlayer: SoundPlayerProtocol!
     var moveSegmenter: MoveSegmenterProtocol!
     var moveSelector: GameMoveSelectorWidget!
+    var preferences: UserPreferencesProtocol!
     
     private lazy var animationRenderer: AnimationRendererProtocol = {
         AnimationRenderer(viewController: self,
@@ -52,6 +53,15 @@ class GameViewController: UIViewController {
     private var segmentedMoves: [String: [GMove]] = [:]
     private var messages: [String] = []
     private let disposeBag = DisposeBag()
+    
+    private lazy var assistantAI: AIProtocol = {
+        let sheriff = state.players.values.first(where: { $0.role == .sheriff })!.identifier
+        let abilityEvaluator = AbilityEvaluator()
+        let roleEstimator = RoleEstimator(sheriff: sheriff, abilityEvaluator: abilityEvaluator)
+        let roleStrategy = RoleStrategy()
+        let moveEvaluator = MoveEvaluator(abilityEvaluator: abilityEvaluator, roleEstimator: roleEstimator, roleStrategy: roleStrategy)
+        return RandomWithRoleAi(moveEvaluator: moveEvaluator)
+    }()
     
     // MARK: Lifecycle
     
@@ -74,7 +84,9 @@ class GameViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        router.toGameRoles(state.players.count)
+        router.toGameRoles(state.players.count) { [weak self] in
+            self?.environment.engine.refresh()
+        }
     }
     
     // MARK: - IBAction
@@ -93,7 +105,7 @@ class GameViewController: UIViewController {
             return
         }
         
-        moveSelector.selectMove(among: moves, context: nil, cancelable: true) { [weak self] move in
+        moveSelector.selectMove(among: moves, title: nil, cancelable: true) { [weak self] move in
             self?.environment.engine.execute(move)
         }
     }
@@ -103,7 +115,7 @@ class GameViewController: UIViewController {
             return
         }
         
-        moveSelector.selectMove(among: moves, context: nil, cancelable: true) { [weak self] move in
+        moveSelector.selectMove(among: moves, title: nil, cancelable: true) { [weak self] move in
             self?.environment.engine.execute(move)
         }
     }
@@ -140,12 +152,13 @@ private extension GameViewController {
             userManager.setStatusIdle()
             analyticsManager.tagEventGameOver(state)
             
+        case let .run(move):
+            messages.append("\(mediaMatcher.emoji(on: event) ?? "") \(move.ability)")
+            messageTableView.reloadDataScrollingAtBottom()
+            
         default:
             break
         }
-        
-        messages.append("\(mediaMatcher.emoji(on: event) ?? "") \(event)")
-        messageTableView.reloadDataScrollingAtBottom()
         
         #if DEBUG
         print("\(mediaMatcher.emoji(on: event) ?? "") \(event)")
@@ -170,8 +183,13 @@ private extension GameViewController {
         // <RULE> Force select reaction moves
         if !moves.isEmpty,
            let hit = state.hits.first {
-            moveSelector.selectMove(among: moves, context: hit.name, cancelable: false) { [weak self] move in
-                self?.environment.engine.execute(move)
+            if preferences.assistedMode {
+                let move = assistantAI.bestMove(among: moves, in: state)
+                environment.engine.execute(move)
+            } else {
+                moveSelector.selectMove(among: moves, title: hit.name, cancelable: false) { [weak self] move in
+                    self?.environment.engine.execute(move)
+                }
             }
         }
         // </RULE>
@@ -285,7 +303,7 @@ extension GameViewController: UICollectionViewDelegate {
             return
         }
         
-        moveSelector.selectMove(among: moves, context: nil, cancelable: true) { [weak self] move in
+        moveSelector.selectMove(among: moves, title: nil, cancelable: true) { [weak self] move in
             self?.environment.engine.execute(move)
         }
     }
@@ -309,12 +327,12 @@ private extension StateProtocol {
     }
     
     func instruction(for controlledPlayerId: String?) -> String {
-        if controlledPlayerId == nil {
-            return "viewing game"
-        } else if controlledPlayerId != turn {
-            return "waiting others to play"
+        if let hit = hits.first {
+            return hit.name
+        } else if controlledPlayerId == turn {
+            return "your turn"
         } else {
-            return "play any card"
+            return "..."
         }
     }
     
@@ -322,7 +340,8 @@ private extension StateProtocol {
         initialOrder.map { player in
             PlayerItem(player: players[player]!,
                        isTurn: player == turn,
-                       isHit: hits.contains(where: { $0.player == player }),
+                       isHitLooseHealth: hits.contains(where: { $0.player == player && $0.abilities.contains("looseHealth") }),
+                       isHitSomeAction: hits.contains(where: { $0.player == player && !$0.abilities.contains("looseHealth") }),
                        user: users?[player])
         }
     }

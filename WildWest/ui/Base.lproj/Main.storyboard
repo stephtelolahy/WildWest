@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="23D-M1-wqa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="23D-M1-wqa">
     <device id="retina6_1" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -19,10 +19,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1ml-If-Dys" userLabel="menuStackView">
-                                <rect key="frame" x="269" y="16" width="358" height="361"/>
+                                <rect key="frame" x="214" y="16" width="285.5" height="361"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="osg-8j-chw">
-                                        <rect key="frame" x="36.5" y="0.0" width="285.5" height="78.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="285.5" height="137"/>
                                         <subviews>
                                             <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The unofficial clone of the Western Card Game" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQg-zg-mUN">
                                                 <rect key="frame" x="0.0" y="0.0" width="285.5" height="20"/>
@@ -32,7 +32,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1y-7b-hgX" userLabel="logoButton">
-                                                <rect key="frame" x="0.0" y="20" width="285.5" height="58.5"/>
+                                                <rect key="frame" x="0.0" y="20" width="285.5" height="117"/>
                                                 <state key="normal" image="bg_splash"/>
                                                 <connections>
                                                     <action selector="logoButtonTapped:" destination="8GX-Wa-ifS" eventType="touchUpInside" id="WCH-V7-0Gi"/>
@@ -41,10 +41,10 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Hu9-Gc-CJ7">
-                                        <rect key="frame" x="129" y="132.5" width="100" height="120.5"/>
+                                        <rect key="frame" x="93" y="147.5" width="100" height="120"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s8o-qf-BAQ" userLabel="playButton">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="52.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="52"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="cJz-6l-Jdk"/>
                                                     <constraint firstAttribute="width" secondItem="s8o-qf-BAQ" secondAttribute="height" multiplier="557:291" id="d4G-rt-8LJ"/>
@@ -55,7 +55,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pxZ-Dy-ZSi" userLabel="onlineButton">
-                                                <rect key="frame" x="0.0" y="68.5" width="100" height="52"/>
+                                                <rect key="frame" x="0.0" y="68" width="100" height="52"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="6vK-ab-ZPj"/>
                                                     <constraint firstAttribute="width" secondItem="pxZ-Dy-ZSi" secondAttribute="height" multiplier="557:291" id="rX6-eT-lpQ"/>
@@ -71,7 +71,7 @@
                                         </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CXM-Fz-dnZ" userLabel="emailButton">
-                                        <rect key="frame" x="98" y="332" width="162" height="29"/>
+                                        <rect key="frame" x="62" y="332" width="162" height="29"/>
                                         <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="17"/>
                                         <state key="normal" title="stephano.telolahy@gmail.com"/>
                                         <connections>
@@ -81,20 +81,20 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="TgM-gl-AKs" userLabel="settingsStackView">
-                                <rect key="frame" x="567" y="125" width="269" height="164"/>
+                                <rect key="frame" x="385" y="107" width="269" height="200"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="y3J-eS-E6e">
-                                        <rect key="frame" x="65" y="0.0" width="204" height="32"/>
+                                        <rect key="frame" x="65" y="0.0" width="204" height="21"/>
                                         <subviews>
                                             <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X players" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W7q-8B-UEd">
-                                                <rect key="frame" x="0.0" y="0.0" width="94" height="32"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="94" height="21"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="7" minimumValue="4" maximumValue="7" translatesAutoresizingMaskIntoConstraints="NO" id="dkh-y9-bbs">
-                                                <rect key="frame" x="110" y="0.0" width="94" height="32"/>
+                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minimumValue="2" maximumValue="7" translatesAutoresizingMaskIntoConstraints="NO" id="dkh-y9-bbs">
+                                                <rect key="frame" x="110" y="0.0" width="94" height="21"/>
                                                 <connections>
                                                     <action selector="stepperValueChanged:" destination="8GX-Wa-ifS" eventType="valueChanged" id="v0n-ag-ZtQ"/>
                                                 </connections>
@@ -102,7 +102,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="QhL-NB-RAp">
-                                        <rect key="frame" x="9" y="48" width="260" height="50"/>
+                                        <rect key="frame" x="9" y="37" width="260" height="50"/>
                                         <subviews>
                                             <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Play as BartCassidy" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sPL-GZ-GWU">
                                                 <rect key="frame" x="0.0" y="0.0" width="122" height="50"/>
@@ -125,7 +125,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="dbv-g7-PwJ">
-                                        <rect key="frame" x="74" y="114" width="195" height="50"/>
+                                        <rect key="frame" x="74" y="103" width="195" height="50"/>
                                         <subviews>
                                             <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Play as Sheriff" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZBx-XG-ZKw">
                                                 <rect key="frame" x="0.0" y="0.0" width="89.5" height="50"/>
@@ -146,6 +146,26 @@
                                                 </connections>
                                             </button>
                                         </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="16" id="OnM-jO-nWy">
+                                        <rect key="frame" x="72" y="169" width="197" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Assisted mode" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yAq-qv-rN6">
+                                                <rect key="frame" x="0.0" y="0.0" width="90.5" height="31"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NvL-wc-dMx">
+                                                <rect key="frame" x="148" y="0.0" width="51" height="31"/>
+                                                <connections>
+                                                    <action selector="assistedModeValueChanged:" destination="8GX-Wa-ifS" eventType="valueChanged" id="8ry-kc-Qss"/>
+                                                </connections>
+                                            </switch>
+                                        </subviews>
+                                        <viewLayoutGuide key="safeArea" id="B72-O5-fwg"/>
                                     </stackView>
                                 </subviews>
                             </stackView>
@@ -185,6 +205,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="h6d-G1-qO8"/>
                     <connections>
+                        <outlet property="assistedModeSwitch" destination="NvL-wc-dMx" id="QwR-54-RSo"/>
                         <outlet property="avatarImageView" destination="AZZ-WG-XZt" id="5wV-b8-nWc"/>
                         <outlet property="figureButton" destination="xTm-YG-Cdb" id="lIm-LX-2HX"/>
                         <outlet property="figureLabel" destination="sPL-GZ-GWU" id="Zeu-fq-rBJ"/>
@@ -430,7 +451,7 @@
                                 <color key="backgroundColor" red="0.75559097529999997" green="0.67946600909999999" blue="0.55683469770000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MessageCell" id="Z7O-3O-qgz" customClass="MessageCell" customModule="WildWest" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="304.5" height="38"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="304.5" height="38"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Z7O-3O-qgz" id="cZM-3E-i9i">
                                             <rect key="frame" x="0.0" y="0.0" width="304.5" height="38"/>
@@ -699,10 +720,10 @@ name</string>
         </scene>
     </scenes>
     <resources>
-        <image name="01_back" width="160" height="247"/>
+        <image name="01_back" width="320" height="494"/>
         <image name="bang" width="250" height="389"/>
-        <image name="bartCassidy" width="81" height="90"/>
-        <image name="bg_splash" width="104" height="58.5"/>
+        <image name="bartCassidy" width="162" height="180"/>
+        <image name="bg_splash" width="208" height="117"/>
         <image name="duel" width="250" height="389"/>
         <image name="ic_close" width="48" height="48"/>
         <image name="ic_create" width="557" height="291"/>
@@ -711,7 +732,7 @@ name</string>
         <image name="ic_online" width="557" height="291"/>
         <image name="ic_play" width="557" height="291"/>
         <image name="ic_refresh" width="48" height="48"/>
-        <image name="sheriff" width="85" height="85"/>
+        <image name="sheriff" width="170" height="170"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -214,3 +214,309 @@ import RxSwift
     
 }
 
+
+import Cuckoo
+@testable import WildWest
+
+import WildWestEngine
+
+
+ class MockUserPreferencesProtocol: UserPreferencesProtocol, Cuckoo.ProtocolMock {
+    
+     typealias MocksType = UserPreferencesProtocol
+    
+     typealias Stubbing = __StubbingProxy_UserPreferencesProtocol
+     typealias Verification = __VerificationProxy_UserPreferencesProtocol
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: UserPreferencesProtocol?
+
+     func enableDefaultImplementation(_ stub: UserPreferencesProtocol) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+    
+    
+     var playersCount: Int {
+        get {
+            return cuckoo_manager.getter("playersCount",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.playersCount)
+        }
+        
+        set {
+            cuckoo_manager.setter("playersCount",
+                value: newValue,
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.playersCount = newValue)
+        }
+        
+    }
+    
+    
+    
+     var preferredRole: Role? {
+        get {
+            return cuckoo_manager.getter("preferredRole",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.preferredRole)
+        }
+        
+        set {
+            cuckoo_manager.setter("preferredRole",
+                value: newValue,
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.preferredRole = newValue)
+        }
+        
+    }
+    
+    
+    
+     var preferredFigure: String? {
+        get {
+            return cuckoo_manager.getter("preferredFigure",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.preferredFigure)
+        }
+        
+        set {
+            cuckoo_manager.setter("preferredFigure",
+                value: newValue,
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.preferredFigure = newValue)
+        }
+        
+    }
+    
+    
+    
+     var updateDelay: Double {
+        get {
+            return cuckoo_manager.getter("updateDelay",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.updateDelay)
+        }
+        
+    }
+    
+    
+    
+     var assistedMode: Bool {
+        get {
+            return cuckoo_manager.getter("assistedMode",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.assistedMode)
+        }
+        
+        set {
+            cuckoo_manager.setter("assistedMode",
+                value: newValue,
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.assistedMode = newValue)
+        }
+        
+    }
+    
+    
+    
+     var enableSound: Bool {
+        get {
+            return cuckoo_manager.getter("enableSound",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.enableSound)
+        }
+        
+    }
+    
+
+    
+
+    
+
+	 struct __StubbingProxy_UserPreferencesProtocol: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    var playersCount: Cuckoo.ProtocolToBeStubbedProperty<MockUserPreferencesProtocol, Int> {
+	        return .init(manager: cuckoo_manager, name: "playersCount")
+	    }
+	    
+	    
+	    var preferredRole: Cuckoo.ProtocolToBeStubbedOptionalProperty<MockUserPreferencesProtocol, Role> {
+	        return .init(manager: cuckoo_manager, name: "preferredRole")
+	    }
+	    
+	    
+	    var preferredFigure: Cuckoo.ProtocolToBeStubbedOptionalProperty<MockUserPreferencesProtocol, String> {
+	        return .init(manager: cuckoo_manager, name: "preferredFigure")
+	    }
+	    
+	    
+	    var updateDelay: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockUserPreferencesProtocol, Double> {
+	        return .init(manager: cuckoo_manager, name: "updateDelay")
+	    }
+	    
+	    
+	    var assistedMode: Cuckoo.ProtocolToBeStubbedProperty<MockUserPreferencesProtocol, Bool> {
+	        return .init(manager: cuckoo_manager, name: "assistedMode")
+	    }
+	    
+	    
+	    var enableSound: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockUserPreferencesProtocol, Bool> {
+	        return .init(manager: cuckoo_manager, name: "enableSound")
+	    }
+	    
+	    
+	}
+
+	 struct __VerificationProxy_UserPreferencesProtocol: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	    
+	    var playersCount: Cuckoo.VerifyProperty<Int> {
+	        return .init(manager: cuckoo_manager, name: "playersCount", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var preferredRole: Cuckoo.VerifyOptionalProperty<Role> {
+	        return .init(manager: cuckoo_manager, name: "preferredRole", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var preferredFigure: Cuckoo.VerifyOptionalProperty<String> {
+	        return .init(manager: cuckoo_manager, name: "preferredFigure", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var updateDelay: Cuckoo.VerifyReadOnlyProperty<Double> {
+	        return .init(manager: cuckoo_manager, name: "updateDelay", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var assistedMode: Cuckoo.VerifyProperty<Bool> {
+	        return .init(manager: cuckoo_manager, name: "assistedMode", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var enableSound: Cuckoo.VerifyReadOnlyProperty<Bool> {
+	        return .init(manager: cuckoo_manager, name: "enableSound", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	
+	    
+	}
+}
+
+ class UserPreferencesProtocolStub: UserPreferencesProtocol {
+    
+    
+     var playersCount: Int {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (Int).self)
+        }
+        
+        set { }
+        
+    }
+    
+    
+     var preferredRole: Role? {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (Role?).self)
+        }
+        
+        set { }
+        
+    }
+    
+    
+     var preferredFigure: String? {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (String?).self)
+        }
+        
+        set { }
+        
+    }
+    
+    
+     var updateDelay: Double {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (Double).self)
+        }
+        
+    }
+    
+    
+     var assistedMode: Bool {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (Bool).self)
+        }
+        
+        set { }
+        
+    }
+    
+    
+     var enableSound: Bool {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (Bool).self)
+        }
+        
+    }
+    
+
+    
+
+    
+}
+

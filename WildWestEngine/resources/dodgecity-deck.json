@@ -1,0 +1,132 @@
+[
+  {
+    "name": "bang",
+    "value": "8",
+    "suit": "♠️"
+  },
+  {
+    "name": "bang",
+    "value": "5",
+    "suit": "♣️"
+  },
+  {
+    "name": "bang",
+    "value": "6",
+    "suit": "♣️"
+  },
+  {
+    "name": "bang",
+    "value": "K",
+    "suit": "♣️"
+  },
+  {
+    "name": "beer",
+    "value": "6",
+    "suit": "♥️"
+  },
+  {
+    "name": "beer",
+    "value": "6",
+    "suit": "♠️"
+  },
+  {
+    "name": "indians",
+    "value": "5",
+    "suit": "♦️"
+  },
+  {
+    "name": "punch",
+    "value": "10",
+    "suit": "♠️"
+  },
+  {
+    "name": "dodge",
+    "value": "7",
+    "suit": "♦️"
+  },
+  {
+    "name": "dodge",
+    "value": "K",
+    "suit": "♥️"
+  },
+  {
+    "name": "springfield",
+    "value": "K",
+    "suit": "♠️"
+  },
+  {
+    "name": "hideout",
+    "value": "K",
+    "suit": "♦️"
+  },
+  {
+    "name": "generalstore",
+    "value": "A",
+    "suit": "♠️"
+  },
+  {
+    "name": "catBalou",
+    "value": "8",
+    "suit": "♣️"
+  },
+  {
+    "name": "panic",
+    "value": "J",
+    "suit": "♥️"
+  },
+  {
+    "name": "missed",
+    "value": "8",
+    "suit": "♦️"
+  },
+  {
+    "name": "remington",
+    "value": "6",
+    "suit": "♦️"
+  },
+  {
+    "name": "binocular",
+    "value": "10",
+    "suit": "♦️"
+  },
+  {
+    "name": "revCarabine",
+    "value": "5",
+    "suit": "♠️"
+  },
+  {
+    "name": "dynamite",
+    "value": "10",
+    "suit": "♣️"
+  },
+  {
+    "name": "mustang",
+    "value": "5",
+    "suit": "♥️"
+  },
+  {
+    "name": "barrel",
+    "value": "A",
+    "suit": "♣️"
+  },
+  {
+    "name": "whisky",
+    "value": "Q",
+    "suit": "♦️"
+  },
+  {
+    "name": "tequila",
+    "value": "9",
+    "suit": "♣️"
+  },
+  {
+    "name": "ragTime",
+    "value": "9",
+    "suit": "♥️"
+  },
+  {
+    "name": "brawl",
+    "value": "J",
+    "suit": "♠️"
+  }
+]

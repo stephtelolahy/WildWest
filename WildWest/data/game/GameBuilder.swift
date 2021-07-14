@@ -25,30 +25,31 @@ class GameBuilder: GameBuilderProtocol {
     
     private let preferences: UserPreferencesProtocol
     private let resourcesLoader: ResourcesLoaderProtocol
-    private let durationMatcher: DurationMatcherProtocol
+    private let durationMatcher: EventDurationProtocol
     private let database: UserDatabaseProtocol
+    private let abilityMatcher: AbilityMatcherProtocol
     
     init(preferences: UserPreferencesProtocol,
          resourcesLoader: ResourcesLoaderProtocol,
-         durationMatcher: DurationMatcherProtocol,
-         database: UserDatabaseProtocol) {
+         durationMatcher: EventDurationProtocol,
+         database: UserDatabaseProtocol,
+         abilityMatcher: AbilityMatcherProtocol) {
         self.preferences = preferences
         self.resourcesLoader = resourcesLoader
         self.durationMatcher = durationMatcher
         self.database = database
+        self.abilityMatcher = abilityMatcher
     }
     
     func createGame(for playersCount: Int) -> StateProtocol {
         let cards = resourcesLoader.loadCards()
         let cardSet = resourcesLoader.loadDeck()
-        let defaults = resourcesLoader.loadDefaults()
         
         let setup = GSetup()
         let roles = setup.roles(for: playersCount)
         return setup.setupGame(roles: roles,
                                cards: cards,
                                cardSet: cardSet,
-                               defaults: defaults,
                                preferredRole: preferences.preferredRole,
                                preferredFigure: preferences.preferredFigure)
     }
@@ -59,10 +60,6 @@ class GameBuilder: GameBuilderProtocol {
         let databaseUpdater = GDatabaseUpdater()
         let database = GDatabase(state, updater: databaseUpdater)
         
-        let playReqMatcher = PlayReqMatcher()
-        let effectMatcher = EffectMatcher()
-        let abilities = resourcesLoader.loadAbilities()
-        let abilityMatcher = AbilityMatcher(abilities: abilities, effectMatcher: effectMatcher, playReqMatcher: playReqMatcher)
         let eventsQueue = GEventQueue()
         let timer = GTimer(matcher: durationMatcher)
         let loop = GLoop(eventsQueue: eventsQueue, database: database, matcher: abilityMatcher, timer: timer)
@@ -74,8 +71,8 @@ class GameBuilder: GameBuilderProtocol {
             let roleEstimator = RoleEstimator(sheriff: sheriff, abilityEvaluator: abilityEvaluator)
             let roleStrategy = RoleStrategy()
             let moveEvaluator = MoveEvaluator(abilityEvaluator: abilityEvaluator, roleEstimator: roleEstimator, roleStrategy: roleStrategy)
-            let ai = GAI(moveEvaluator: moveEvaluator)
-            return AIAgent(player: player, engine: engine, ai: ai, roleEstimator: roleEstimator)
+            let ai = RandomWithRoleAi(moveEvaluator: moveEvaluator)
+            return AIAgent(player: player, engine: engine, ai: ai)
         }
         
         agents.forEach { $0.observe(database) }
@@ -92,10 +89,6 @@ class GameBuilder: GameBuilderProtocol {
                                      users: [String: UserInfo]) -> GameEnvironment {
         let gameDatabase = database.createGameDatabase(gameId, state: state)
         
-        let playReqMatcher = PlayReqMatcher()
-        let effectMatcher = EffectMatcher()
-        let abilities = resourcesLoader.loadAbilities()
-        let abilityMatcher = AbilityMatcher(abilities: abilities, effectMatcher: effectMatcher, playReqMatcher: playReqMatcher)
         let eventsQueue = GEventQueue()
         let timer = GTimer(matcher: durationMatcher)
         let loop = GLoop(eventsQueue: eventsQueue, database: gameDatabase, matcher: abilityMatcher, timer: timer)

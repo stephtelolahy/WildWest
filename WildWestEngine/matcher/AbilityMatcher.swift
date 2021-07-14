@@ -1,28 +1,24 @@
 //
 //  AbilityMatcher.swift
-//  CardGameEngine
+//  WildWestEngine
 //
-//  Created by Hugues Stephano Telolahy on 26/09/2020.
+//  Created by Hugues Stéphano TELOLAHY on 22/05/2021.
+//  Copyright © 2021 creativeGames. All rights reserved.
 //
 
 public protocol AbilityMatcherProtocol {
     func active(in state: StateProtocol) -> [GMove]?
     func triggered(on event: GEvent, in state: StateProtocol) -> [GMove]?
     func effects(on move: GMove, in state: StateProtocol) -> [GEvent]?
+    func winner(in state: StateProtocol) -> Role?
 }
 
 public class AbilityMatcher: AbilityMatcherProtocol {
     
     private let abilities: [String: Ability]
-    private let effectMatcher: EffectMatcherProtocol
-    private let playReqMatcher: PlayReqMatcherProtocol
     
-    public init(abilities: [Ability],
-                effectMatcher: EffectMatcherProtocol,
-                playReqMatcher: PlayReqMatcherProtocol) {
-        self.abilities = abilities.toDictionary { $0.name }
-        self.effectMatcher = effectMatcher
-        self.playReqMatcher = playReqMatcher
+    public init(_ abilities: [Ability]) {
+        self.abilities = abilities.toDictionary(with: { $0.name })
     }
     
     public func active(in state: StateProtocol) -> [GMove]? {
@@ -31,8 +27,9 @@ public class AbilityMatcher: AbilityMatcherProtocol {
     }
     
     public func triggered(on event: GEvent, in state: StateProtocol) -> [GMove]? {
-        // <RULE>: trigger moves from just eliminated player
         var actors = state.playOrder
+        
+        // <RULE>: trigger moves from just eliminated player
         if case let .eliminate(player, _) = event {
             actors.append(player)
         }
@@ -52,8 +49,8 @@ public class AbilityMatcher: AbilityMatcherProtocol {
         }
         
         // <RULE> discard immediately played hand card
-        if case let .hand(card) = move.card, 
-           let cardObject = actor.hand.first(where: { $0.identifier == card }), 
+        if case let .hand(card) = move.card,
+           let cardObject = actor.hand.first(where: { $0.identifier == card }),
            cardObject.type == .brown {
             events.insert(.play(player: move.actor, card: card), at: 0)
         }
@@ -61,26 +58,46 @@ public class AbilityMatcher: AbilityMatcherProtocol {
         
         return events
     }
+    
+    public func winner(in state: StateProtocol) -> Role? {
+        let remainingRoles = state.playOrder.map { state.players[$0]!.role }
+        
+        let noSheriff = !remainingRoles.contains(.sheriff)
+        if noSheriff {
+            let lastIsRenegade = remainingRoles.count == 1 && remainingRoles[0] == .renegade
+            if lastIsRenegade {
+                return .renegade
+            } else {
+                return .outlaw
+            }
+        }
+        
+        let noOutlawsAndRenegates = !remainingRoles.contains(where: { $0 == .outlaw || $0 == .renegade })
+        if noOutlawsAndRenegates {
+            return .sheriff
+        }
+        
+        return nil
+    }
 }
 
 private extension AbilityMatcher {
     
-    func active(actor identifier: String,
-                in state: StateProtocol) -> [GMove]? {
+    func active(actor identifier: String, in state: StateProtocol) -> [GMove]? {
         let actor = state.players[identifier]!
-        let innerAbilities = abilities(appliedTo: actor)
-        let innerMoves: [GMove] = innerAbilities.keys
+        
+        let innerMoves: [GMove] = state.abilities(applicableTo: actor)
             .compactMap { self.moves(ofType: .active, ability: $0, card: nil, actor: actor, in: state) }
             .flatMap { $0 }
         
         let playHandMoves: [GMove] = actor.hand.flatMap { card -> [GMove] in
-            abilities(appliedTo: card, actor: actor).keys
+            state.abilities(applicableToHand: card, of: actor)
                 .compactMap { ability -> [GMove]? in
                     self.moves(ofType: .active, ability: ability, card: .hand(card.identifier), actor: actor, in: state)?
                         .filter { move -> Bool in
                             if let target = move.args[.target]?.first,
                                let targetObject = state.players[target],
-                               self.isCard(card, targetableTo: targetObject) == false {
+                               !state.isPlayer(targetObject, targetableBy: card) {
                                 return false
                             }
                             
@@ -103,17 +120,15 @@ private extension AbilityMatcher {
         return (innerMoves + playHandMoves + reactionMoves).notEmptyOrNil()
     }
     
-    func triggered(on event: GEvent,
-                   actor identifier: String,
-                   in state: StateProtocol) -> [GMove]? {
+    func triggered(on event: GEvent, actor identifier: String, in state: StateProtocol) -> [GMove]? {
         let actor = state.players[identifier]!
-        let innerAbilities = abilities(appliedTo: actor)
-        let innerMoves: [GMove] = innerAbilities.keys
+        
+        let innerMoves: [GMove] = state.abilities(applicableTo: actor)
             .compactMap { self.moves(ofType: .triggered, ability: $0, card: nil, actor: actor, in: state, event: event) }
             .flatMap { $0 }
         
         let inPlayMoves: [GMove] = actor.inPlay.flatMap { card -> [GMove] in
-            card.abilities.keys
+            state.abilities(applicableToInPlay: card, of: actor)
                 .compactMap { self.moves(ofType: .triggered, ability: $0, card: .inPlay(card.identifier), actor: actor, in: state, event: event) }
                 .flatMap { $0 }
         }
@@ -138,11 +153,13 @@ private extension AbilityMatcher {
         }
         
         // verify requirements
-        let ctx = PlayReqContext(ability: ability,
-                                 actor: actor,
-                                 state: state,
-                                 event: event)
-        guard let playArgs = playReqMatcher.match(canPlay: abilityObject.canPlay, ctx: ctx) else {
+        let ctx = MoveContext(ability: ability,
+                              actor: actor,
+                              card: card,
+                              state: state,
+                              event: event)
+        var playArgs: [[PlayArg: [String]]] = []
+        guard abilityObject.canPlay.allSatisfy({ $0.match(ctx, args: &playArgs) }) else {
             return nil
         }
         
@@ -155,9 +172,10 @@ private extension AbilityMatcher {
         }
         
         // <RULE> A move is applicable when it has effects>
-        let effectiveMoves = moves.filter { effects(on: $0, actor: actor, in: state) != nil }
+        let applicableMoves = moves.filter { effects(on: $0, actor: actor, in: state) != nil }
         // </RULE>
-        return effectiveMoves
+        
+        return applicableMoves
     }
     
     func effects(on move: GMove, actor: PlayerProtocol, in state: StateProtocol) -> [GEvent]? {
@@ -166,51 +184,65 @@ private extension AbilityMatcher {
             fatalError("Ability \(move.ability) not found")
         }
         
-        let ctx = EffectContext(ability: move.ability,
-                                actor: actor,
-                                card: move.card,
-                                args: move.args,
-                                state: state)
+        let ctx = MoveContext(ability: move.ability,
+                              actor: actor,
+                              card: move.card,
+                              state: state,
+                              event: nil,
+                              args: move.args)
+        // build events
+        var result: [GEvent] = []
+        for effect in ability.onPlay {
+            guard let events = effect.apply(ctx),
+                  !events.isEmpty || effect.optional else {
+                return nil
+            }
+            
+            result.append(contentsOf: events)
+        }
         
-        return effectMatcher.map(ability.onPlay, ctx: ctx)
-            .notEmptyOrNil()
+        return result.notEmptyOrNil()
     }
 }
 
-private extension AbilityMatcher {
+// MARK: - Passive ability matcher
+
+private extension StateProtocol {
     
-    func abilities(appliedTo actor: PlayerProtocol) -> [String: Int] {
-        var abilities = actor.abilities
-        
-        if actor.abilities["silentStartTurnOnPhase1"] != nil {
-            abilities.removeValue(forKey: "startTurnOnPhase1")
+    func abilities(applicableTo player: PlayerProtocol) -> Set<String> {
+        var abilities = player.abilities
+        if let silenced = player.attributes[.silentAbility] as? String {
+            abilities.remove(silenced)
         }
-        
         return abilities
     }
     
-    func abilities(appliedTo card: CardProtocol, actor: PlayerProtocol) -> [String: Int] {
+    func abilities(applicableToHand card: CardProtocol, of player: PlayerProtocol) -> Set<String> {
         var abilities = card.abilities
-        
-        if actor.abilities["playBangAsMissed"] != nil,
-           card.name == "bang" {
-            abilities["missed"] = 0
+        if let playAs = player.attributes[.playAs] as? [String: String] {
+            for (key, value) in playAs {
+                if card.matches(regex: key) {
+                    abilities.insert(value)
+                }
+            }
         }
-        
-        if actor.abilities["playMissedAsBang"] != nil,
-           card.name == "missed" {
-            abilities["bang"] = 0
-        }
-        
         return abilities
     }
     
-    func isCard(_ card: CardProtocol, targetableTo target: PlayerProtocol) -> Bool {
-        if target.abilities["silentJail"] != nil, 
-           card.name == "jail" {
+    func abilities(applicableToInPlay card: CardProtocol, of player: PlayerProtocol) -> Set<String> {
+        if player.identifier != turn,
+           players[turn]?.attributes[.silentInPlay] != nil {
+           return []
+        }
+        
+        return card.abilities
+    }
+    
+    func isPlayer(_ player: PlayerProtocol, targetableBy card: CardProtocol) -> Bool {
+        if let silenced = player.attributes[.silentCard] as? String,
+           card.matches(regex: silenced) {
             return false
         }
-        
         return true
     }
 }

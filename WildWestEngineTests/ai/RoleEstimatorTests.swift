@@ -25,14 +25,7 @@ class RoleEstimatorTests: XCTestCase {
         // Given
         // When
         // Assert
-        XCTAssertNil(sut.estimatedRole(for: "p1"))
-    }
-    
-    func test_InitialScoreIsZero() {
-        // Given
-        // When
-        // Assert
-        XCTAssertEqual(sut.score(for: "p1"), 0)
+        XCTAssertNil(sut.estimatedRole(for: "p1", history: []))
     }
     
     func test_ConsiderOutlaw_IfAttackingSheriff() {
@@ -43,10 +36,8 @@ class RoleEstimatorTests: XCTestCase {
         }
         
         // When
-        sut.update(on: move)
-        
         // Assert
-        XCTAssertEqual(sut.estimatedRole(for: "p1"), .outlaw)
+        XCTAssertEqual(sut.estimatedRole(for: "p1", history: [move]), .outlaw)
     }
     
     func test_ConsiderDeputy_IfDefindingSheriff() {
@@ -57,32 +48,15 @@ class RoleEstimatorTests: XCTestCase {
         }
         
         // When
-        sut.update(on: move)
-        
         // Assert
-        XCTAssertEqual(sut.estimatedRole(for: "p1"), .deputy)
+        XCTAssertEqual(sut.estimatedRole(for: "p1", history: [move]), .deputy)
     }
     
     func test_ConsiderUnknown_IfNotTargetingSheriff() {
         // Given
+        let move = GMove("a1", actor: "p1", args: [.target: ["p2"]])
         // When
-        sut.update(on: GMove("a1", actor: "p1", args: [.target: ["p2"]]))
-        
         // Assert
-        XCTAssertNil(sut.estimatedRole(for: "p1"))
-    }
-    
-    func test_UpdateScore_IfTargetingSheriff() {
-        // Given
-        let move = GMove("a1", actor: "p1", args: [.target: ["sheriff"]])
-        stub(mockAbilityEvaluator) { mock in
-            when(mock.evaluate(equal(to: move))).thenReturn(1)
-        }
-        
-        // When
-        sut.update(on: move)
-        
-        // Assert
-        XCTAssertEqual(sut.score(for: "p1"), 1)
+        XCTAssertNil(sut.estimatedRole(for: "p1", history: [move]))
     }
 }

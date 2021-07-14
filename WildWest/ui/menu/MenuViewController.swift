@@ -24,6 +24,7 @@ class MenuViewController: UIViewController {
     @IBOutlet private weak var roleLabel: UILabel!
     @IBOutlet private weak var avatarImageView: UIImageView!
     @IBOutlet private weak var userNameLabel: UILabel!
+    @IBOutlet private weak var assistedModeSwitch: UISwitch!
     
     // MARK: - Dependencies
     
@@ -45,6 +46,7 @@ class MenuViewController: UIViewController {
         setPlayersCount(preferences.playersCount)
         setFigure(preferences.preferredFigure)
         setRole(preferences.preferredRole)
+        setAssistedMode(preferences.assistedMode)
         
         userManager.getUser().subscribe(onSuccess: { [weak self] user in
             self?.setUser(user)
@@ -88,14 +90,14 @@ class MenuViewController: UIViewController {
     }
     
     @IBAction private func figureButtonTapped(_ sender: Any) {
-        router.toFigureSelector { [weak self] figure in
+        router.toFigureSelector(initialFigure: preferences.preferredFigure) { [weak self] figure in
             self?.preferences.preferredFigure = figure
             self?.setFigure(figure)
         }
     }
     
     @IBAction private func roleButtonTapped(_ sender: Any) {
-        router.toRoleSelector { [weak self] role in
+        router.toRoleSelector(initialRole: preferences.preferredRole) { [weak self] role in
             self?.preferences.preferredRole = role
             self?.setRole(role)
         }
@@ -107,6 +109,10 @@ class MenuViewController: UIViewController {
     
     @IBAction private func logoButtonTapped(_ sender: Any) {
         router.toRules()
+    }
+    
+    @IBAction private func assistedModeValueChanged(_ sender: UISwitch) {
+        preferences.assistedMode = sender.isOn
     }
 }
 
@@ -126,6 +132,10 @@ private extension MenuViewController {
     func setRole(_ role: Role?) {
         roleButton.setImage(UIImage(named: role?.rawValue ?? ""), for: .normal)
         roleLabel.text = role?.rawValue ?? "random"
+    }
+    
+    func setAssistedMode(_ value: Bool) {
+        assistedModeSwitch.isOn = value
     }
     
     func setUser(_ user: UserInfo) {

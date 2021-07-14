@@ -49,4 +49,11 @@ extension MockHitProtocol {
         }
         return self
     }
+    
+    func target(is target: String) -> MockHitProtocol {
+        stub(self) { mock in
+            when(mock.target.get).thenReturn(target)
+        }
+        return self
+    }
 }

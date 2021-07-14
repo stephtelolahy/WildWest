@@ -26,7 +26,7 @@ class AbilityMatcherTests: XCTestCase {
         let mockPlayer2 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p2")
-            .abilities(are: "drawsAllCardsFromEliminatedPlayer")
+            .abilities(are: "drawAllCardsFromEliminatedPlayer")
             
         let mockState = MockStateProtocol()
             .withDefault()
@@ -41,7 +41,7 @@ class AbilityMatcherTests: XCTestCase {
         let moves = sut.triggered(on: event, in: mockState)
         
         // Assert
-        XCTAssertEqual(moves, [GMove("drawsAllCardsFromEliminatedPlayer", actor: "p2", args: [.target: ["p1"]]),
+        XCTAssertEqual(moves, [GMove("drawAllCardsFromEliminatedPlayer", actor: "p2", args: [.target: ["p1"]]),
                                GMove("discardAllCardsOnEliminated", actor: "p1"),
                                GMove("nextTurnOnEliminated", actor: "p1")])
     }

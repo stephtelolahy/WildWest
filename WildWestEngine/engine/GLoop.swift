@@ -57,9 +57,15 @@ public class GLoop: GLoopProtocol {
 private extension GLoop {
     
     func run(onCompleted: @escaping () -> Void, onError: @escaping (Error) -> Void) {
-        if let winner = database.currentState.winner {
-            database.update(event: .gameover(winner: winner)).subscribe().disposed(by: disposeBag)
+        if database.currentState.winner != nil {
             onCompleted()
+            return
+        }
+        
+        if let winner = matcher.winner(in: database.currentState) {
+            database.update(event: .gameover(winner: winner)).subscribe(onCompleted: { [weak self] in
+                self?.run(onCompleted: onCompleted, onError: onError)
+            }).disposed(by: disposeBag)
             return
         }
         

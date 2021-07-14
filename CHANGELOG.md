@@ -1,5 +1,17 @@
 #  Changelog
 
+## 1.0-4
+- [x] State as Pure Data
+- [x] DefaultAbilities.json => cards.json + 2 figures (player, sheriff)
+- [x] Dynamite, indians, gatling sfx trigger once
+- [x] Configure assisted mode
+- [x] Ability parser: Decoding heterogenous collection
+- [x] Dodge city extension
+- [x] UI: PlayerSelector using card image
+- [x] UI: RoleSelector using card image
+- [x] UI: MoveSelector: select args one by one
+
+
 ## 1.0-3
 
 - [x] GameEngine V7: Everything is Event

@@ -1,0 +1,784 @@
+[
+  {
+    "name": "equip",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2
+    },
+    "onPlay": [
+      {
+        "action": "equip",
+        "card": "played"
+      }
+    ]
+  },
+  {
+    "name": "handicap",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireTargetOther": 0
+    },
+    "onPlay": [
+      {
+        "action": "handicap",
+        "card": "played",
+        "other": "target"
+      }
+    ]
+  },
+  {
+    "name": "endTurn",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2
+    },
+    "onPlay": [
+      {
+        "action": "setPhase",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "name": "beer",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "isPlayersCountMin": 3
+    },
+    "onPlay": [
+      {
+        "action": "gainHealth"
+      }
+    ]
+  },
+  {
+    "name": "discardBeer",
+    "type": "active",
+    "canPlay": {
+      "isHitEliminate": 0,
+      "isPlayersCountMin": 3
+    },
+    "onPlay": [
+      {
+        "action": "removeHit"
+      }
+    ]
+  },
+  {
+    "name": "saloon",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2
+    },
+    "onPlay": [
+      {
+        "action": "gainHealth",
+        "player": "all"
+      }
+    ]
+  },
+  {
+    "name": "stagecoach",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2
+    },
+    "onPlay": [
+      {
+        "action": "drawDeck",
+        "amount": 2
+      }
+    ]
+  },
+  {
+    "name": "wellsFargo",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2
+    },
+    "onPlay": [
+      {
+        "action": "drawDeck",
+        "amount": 3
+      }
+    ]
+  },
+  {
+    "name": "discardOtherHand",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireTargetOther": 0
+    },
+    "onPlay": [
+      {
+        "action": "discardHand",
+        "player": "target",
+        "card": "randomHand"
+      }
+    ]
+  },
+  {
+    "name": "discardAnyInPlay",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireTargetAny": 0,
+      "requireInPlayCard": 0
+    },
+    "onPlay": [
+      {
+        "action": "discardInPlay",
+        "player": "target",
+        "card": "requiredInPlay"
+      }
+    ]
+  },
+  {
+    "name": "drawOtherHandAt1",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireTargetAt": 1
+    },
+    "onPlay": [
+      {
+        "action": "drawHand",
+        "other": "target",
+        "card": "randomHand"
+      }
+    ]
+  },
+  {
+    "name": "drawOtherInPlayAt1",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireTargetAt": 1,
+      "requireInPlayCard": 0
+    },
+    "onPlay": [
+      {
+        "action": "drawInPlay",
+        "other": "target",
+        "card": "requiredInPlay"
+      }
+    ]
+  },
+  {
+    "name": "bang",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireTargetAt": "weapon",
+      "isTimesPerTurnMax": "bangsPerTurn"
+    },
+    "onPlay": [
+      {
+        "action": "addHit",
+        "player": "target",
+        "abilities": ["looseHealth"],
+        "cancelable": "bangsCancelable"
+      }
+    ]
+  },
+  {
+    "name": "looseHealth",
+    "type": "active",
+    "onPlay": [
+      {
+        "action": "looseHealth"
+      },
+      {
+        "action": "removeHit"
+      }
+    ]
+  },
+  {
+    "name": "missed",
+    "type": "active",
+    "canPlay": {
+      "isHitCancelable": 0
+    },
+    "onPlay": [
+      {
+        "action": "cancelHit"
+      }
+    ]
+  },
+  {
+    "name": "gatling",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2
+    },
+    "onPlay": [
+      {
+        "action": "addHit",
+        "player": "others",
+        "abilities": ["looseHealth"],
+        "cancelable": 1
+      }
+    ]
+  },
+  {
+    "name": "indians",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2
+    },
+    "onPlay": [
+      {
+        "action": "addHit",
+        "player": "others",
+        "abilities": ["looseHealth"]
+      }
+    ]
+  },
+  {
+    "name": "discardBangOnIndians",
+    "type": "active",
+    "canPlay": {
+      "isHitName": "indians"
+    },
+    "onPlay": [
+      {
+        "action": "removeHit"
+      }
+    ]
+  },
+  {
+    "name": "duel",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireTargetOther": 0
+    },
+    "onPlay": [
+      {
+        "action": "addHit",
+        "player": "target",
+        "abilities": ["looseHealth"]
+      }
+    ]
+  },
+  {
+    "name": "discardBangOnDuel",
+    "type": "active",
+    "canPlay": {
+      "isHitName": "duel"
+    },
+    "onPlay": [
+      {
+        "action": "reverseHit"
+      }
+    ]
+  },
+  {
+    "name": "generalstore",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2
+    },
+    "onPlay": [
+      {
+        "action": "deckToStore",
+        "amount": "inPlayPlayers"
+      },
+      {
+        "action": "addHit",
+        "player": "all",
+        "abilities": ["drawStore"]
+      }
+    ]
+  },
+  {
+    "name": "drawStore",
+    "type": "active",
+    "canPlay": {
+      "requireStoreCards": 1
+    },
+    "onPlay": [
+      {
+        "action": "drawStore",
+        "card": "requiredStore"
+      },
+      {
+        "action": "removeHit"
+      }
+    ]
+  },
+  {
+    "name": "barrel",
+    "type": "triggered",
+    "canPlay": {
+      "onHitCancelable": 0
+    },
+    "onPlay": [
+      {
+        "action": "flipDeckIf",
+        "regex": "♥️",
+        "then": [
+          {
+            "action": "cancelHit"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "jail",
+    "type": "triggered",
+    "canPlay": {
+      "onPhase": 1,
+      "isYourTurn": 0
+    },
+    "onPlay": [
+      {
+        "action": "flipDeckIf",
+        "regex": "♥️",
+        "then": [
+          {
+            "action": "discardInPlay",
+            "card": "played"
+          }
+        ],
+        "else": [
+          {
+            "action": "setTurn",
+            "player": "next"
+          },
+          {
+            "action": "setPhase",
+            "value": 1
+          },
+          {
+            "action": "discardInPlay",
+            "card": "played"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "dynamite",
+    "type": "triggered",
+    "priority": 0,
+    "canPlay": {
+      "onPhase": 1,
+      "isYourTurn": 0
+    },
+    "onPlay": [
+      {
+        "action": "flipDeckIf",
+        "regex": "(♥️)|(♦️)|(♣️)|([10|J|Q|K|A]♠️)",
+        "then": [
+          {
+            "action": "passInPlay",
+            "card": "played",
+            "other": "next"
+          }
+        ],
+        "else": [
+          {
+            "action": "addHit",
+            "times": 3,
+            "abilities": ["looseHealth"]
+          },
+          {
+            "action": "discardInPlay",
+            "card": "played"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "startTurnDrawing2Cards",
+    "type": "triggered",
+    "canPlay": {
+      "onQueueEmpty": 0,
+      "isYourTurn": 0,
+      "isPhase": 1
+    },
+    "onPlay": [
+      {
+        "action": "drawDeck",
+        "amount": 2
+      },
+      {
+        "action": "setPhase",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "name": "discardAllCardsOnEliminated",
+    "type": "triggered",
+    "canPlay": {
+      "onEliminated": 0
+    },
+    "onPlay": [
+      {
+        "action": "discardHand",
+        "card": "allHand",
+        "optional": true
+      },
+      {
+        "action": "discardInPlay",
+        "card": "allInPlay",
+        "optional": true
+      }
+    ]
+  },
+  {
+    "name": "nextTurnOnPhase3",
+    "type": "triggered",
+    "canPlay": {
+      "onQueueEmpty": 0,
+      "isYourTurn": 0,
+      "isPhase": 3
+    },
+    "onPlay": [
+      {
+        "action": "setTurn",
+        "player": "next"
+      },
+      {
+        "action": "setPhase",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "name": "nextTurnOnEliminated",
+    "type": "triggered",
+    "priority": 2,
+    "canPlay": {
+      "onEliminated": 0,
+      "isYourTurn": 0
+    },
+    "onPlay": [
+      {
+        "action": "setTurn",
+        "player": "next"
+      },
+      {
+        "action": "setPhase",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "name": "discardExcessCardsOnPhase3",
+    "type": "triggered",
+    "canPlay": {
+      "onPhase": 3,
+      "isYourTurn": 0,
+      "isHandExceedLimit": 0
+    },
+    "onPlay": [
+      {
+        "action": "addHit",
+        "times": "excessHand",
+        "abilities": ["discardSelfHand"]
+      }
+    ]
+  },
+  {
+    "name": "discardSelfHand",
+    "type": "active",
+    "canPlay": {
+      "requireHandCards": 1
+    },
+    "onPlay": [
+      {
+        "action": "discardHand",
+        "card": "requiredHand"
+      },
+      {
+        "action": "removeHit"
+      }
+    ]
+  },
+  {
+    "name": "gainRewardOnEliminatingOutlaw",
+    "type": "triggered",
+    "canPlay": {
+      "onEliminatingRole": "outlaw"
+    },
+    "onPlay": [
+      {
+        "action": "drawDeck",
+        "amount": 3
+      }
+    ]
+  },
+  {
+    "name": "penalizeOnEliminatingDeputy",
+    "type": "triggered",
+    "canPlay": {
+      "onEliminatingRole": "deputy"
+    },
+    "onPlay": [
+      {
+        "action": "discardHand",
+        "card": "allHand",
+        "optional": true
+      },
+      {
+        "action": "discardInPlay",
+        "card": "allInPlay",
+        "optional": true
+      }
+    ]
+  },
+  {
+    "name": "drawCardOnLoseHealth",
+    "type": "triggered",
+    "canPlay": {
+      "onLooseHealth": 0
+    },
+    "onPlay": [
+      {
+        "action": "drawDeck"
+      }
+    ]
+  },
+  {
+    "name": "drawCardFromOffenderOnLoseHealth",
+    "type": "triggered",
+    "canPlay": {
+      "onLooseHealth": 0,
+      "requireTargetOffender": 0
+    },
+    "onPlay": [
+      {
+        "action": "drawHand",
+        "other": "target",
+        "card": "randomHand"
+      }
+    ]
+  },
+  {
+    "name": "drawCardOnHandEmpty",
+    "type": "triggered",
+    "canPlay": {
+      "onHandEmpty": 0
+    },
+    "onPlay": [
+      {
+        "action": "drawDeck"
+      }
+    ]
+  },
+  {
+    "name": "drawAllCardsFromEliminatedPlayer",
+    "type": "triggered",
+    "priority": 0,
+    "canPlay": {
+      "requireTargetEliminated": 0
+    },
+    "onPlay": [
+      {
+        "action": "drawHand",
+        "other": "target",
+        "card": "allHand",
+        "optional": true
+      },
+      {
+        "action": "drawInPlay",
+        "other": "target",
+        "card": "allInPlay",
+        "optional": true
+      }
+    ]
+  },
+  {
+    "name": "discard2CardsFor1Health",
+    "type": "active",
+    "canPlay": {
+      "isYourTurn": 0,
+      "isPhase": 2,
+      "requireHandCards": 2
+    },
+    "onPlay": [
+      {
+        "action": "discardHand",
+        "card": "requiredHand"
+      },
+      {
+        "action": "gainHealth"
+      }
+    ]
+  },
+  {
+    "name": "startTurnDrawing1ExtraCardIfRedSuit",
+    "type": "triggered",
+    "canPlay": {
+      "onQueueEmpty": 0,
+      "isYourTurn": 0,
+      "isPhase": 1
+    },
+    "onPlay": [
+      {
+        "action": "drawDeckFlippingIf",
+        "player": "actor",
+        "amount": 2,
+        "regex": "(♥️)|(♦️)",
+        "then": [
+          {
+            "action": "drawDeck"
+          }
+        ]
+      },
+      {
+        "action": "setPhase",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "name": "startTurnChoosing2CardsFromDeck",
+    "type": "triggered",
+    "canPlay": {
+      "onQueueEmpty": 0,
+      "isYourTurn": 0,
+      "isPhase": 1
+    },
+    "onPlay": [
+      {
+        "action": "addHit",
+        "abilities": ["startTurnDrawingDeckChoosing"]
+      }
+    ]
+  },
+  {
+    "name": "startTurnDrawingDeckChoosing",
+    "type": "active",
+    "canPlay": {
+      "requireDeckCards": 2
+    },
+    "onPlay": [
+      {
+        "action": "drawDeckChoosing",
+        "card": "requiredDeck"
+      },
+      {
+        "action": "removeHit"
+      },
+      {
+        "action": "setPhase",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "name": "startTurnChoosingDrawPlayer",
+    "type": "triggered",
+    "canPlay": {
+      "onQueueEmpty": 0,
+      "isYourTurn": 0,
+      "isPhase": 1
+    },
+    "onPlay": [
+      {
+        "action": "addHit",
+        "abilities": ["startTurnDrawingPlayer", "startTurnDrawingDeck"]
+      }
+    ]
+  },
+  {
+    "name": "startTurnDrawingPlayer",
+    "type": "active",
+    "canPlay": {
+      "requireTargetOther": 0
+    },
+    "onPlay": [
+      {
+        "action": "drawHand",
+        "other": "target",
+        "card": "randomHand"
+      },
+      {
+        "action": "drawDeck"
+      },
+      {
+        "action": "removeHit"
+      },
+      {
+        "action": "setPhase",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "name": "startTurnDrawingDeck",
+    "type": "active",
+    "onPlay": [
+      {
+        "action": "drawDeck",
+        "amount": 2
+      },
+      {
+        "action": "removeHit"
+      },
+      {
+        "action": "setPhase",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "name": "startTurnChoosingDrawDiscard",
+    "type": "triggered",
+    "canPlay": {
+      "onQueueEmpty": 0,
+      "isYourTurn": 0,
+      "isPhase": 1
+    },
+    "onPlay": [
+      {
+        "action": "addHit",
+        "abilities": ["startTurnDrawingDiscard", "startTurnDrawingDeck"]
+      }
+    ]
+  },
+  {
+    "name": "startTurnDrawingDiscard",
+    "type": "active",
+    "onPlay": [
+      {
+        "action": "drawDiscard"
+      },
+      {
+        "action": "drawDeck"
+      },
+      {
+        "action": "removeHit"
+      },
+      {
+        "action": "setPhase",
+        "value": 2
+      }
+    ]
+  }
+]

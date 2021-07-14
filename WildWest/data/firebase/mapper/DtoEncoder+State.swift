@@ -20,7 +20,8 @@ extension DtoEncoder {
                  discard: encode(cards: state.discard.reversed()),
                  store: encode(cards: state.store),
                  hits: encode(hits: state.hits),
-                 played: encode(abilities: state.played))
+                 played: encode(abilities: state.played),
+                 winner: encode(winner: state.winner))
     }
     
     func decode(state: StateDto) throws -> StateProtocol {
@@ -33,7 +34,9 @@ extension DtoEncoder {
                discard: try decode(cards: state.discard).reversed(),
                store: try decode(cards: state.store),
                hits: try decode(hits: state.hits),
-               played: try decode(abilities: state.played))
+               played: try decode(abilities: state.played),
+               history: [],
+               winner:decode(winner: state.winner))
     }
     
     func encode(hit: HitProtocol) -> HitDto {
@@ -41,15 +44,17 @@ extension DtoEncoder {
                name: hit.name,
                abilities: hit.abilities,
                cancelable: hit.cancelable,
-               offender: hit.offender)
+               offender: hit.offender,
+               target: hit.target)
     }
     
     func decode(hit: HitDto) throws -> HitProtocol {
         try GHit(player: hit.player.unwrap(),
                  name: hit.name.unwrap(),
                  abilities: hit.abilities.unwrap(),
+                 offender: hit.offender.unwrap(),
                  cancelable: hit.cancelable.unwrap(),
-                 offender: hit.offender.unwrap())
+                 target: hit.target)
     }
 }
 
@@ -77,9 +82,9 @@ private extension DtoEncoder {
         PlayerDto(identifier: player.identifier,
                   name: player.name,
                   desc: player.desc,
-                  abilities: player.abilities,
+                  attributes: encode(attributes: player.attributes),
+                  abilities: Array(player.abilities),
                   role: player.role?.rawValue,
-                  maxHealth: player.maxHealth,
                   health: player.health,
                   hand: encode(cards: player.hand),
                   inPlay: encode(cards: player.inPlay))
@@ -89,9 +94,9 @@ private extension DtoEncoder {
         GPlayer(identifier: try player.identifier.unwrap(),
                 name: try player.name.unwrap(),
                 desc: try player.desc.unwrap(),
-                abilities: try player.abilities.unwrap(),
+                attributes: try decode(attributes: player.attributes),
+                abilities: Set(try player.abilities.unwrap()),
                 role: try Role(rawValue: try player.role.unwrap()).unwrap(),
-                maxHealth: try player.maxHealth.unwrap(),
                 health: try player.health.unwrap(),
                 hand: try decode(cards: player.hand),
                 inPlay: try decode(cards: player.inPlay))
@@ -111,5 +116,38 @@ private extension DtoEncoder {
         }
         
         return Array(abilities.values)
+    }
+    
+    func encode(attributes: [CardAttributeKey: Any]) -> String? {
+        let dict: [String: Any] = attributes.reduce(into: [:]) { result, element in
+            result[element.key.rawValue] = element.value
+        }
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: dict, options: []),
+              let jsonString = String(data: jsonData, encoding: String.Encoding.ascii) else {
+            return nil
+        }
+        return jsonString
+    }
+    
+    func decode(attributes: String?) throws -> [CardAttributeKey: Any] {
+        guard let data = attributes?.data(using: .utf8),
+              let dict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+            return [:]
+        }
+        return dict.reduce(into: [:]) { result, element in
+            result[CardAttributeKey(rawValue: element.key)!] = element.value
+        }
+    }
+    
+    func encode(winner: Role?) -> String? {
+        winner?.rawValue
+    }
+    
+    func decode(winner: String?) -> Role? {
+        guard let rawValue = winner else {
+            return nil
+        }
+        
+        return Role(rawValue: rawValue)
     }
 }

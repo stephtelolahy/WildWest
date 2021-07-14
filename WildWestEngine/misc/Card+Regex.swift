@@ -6,14 +6,21 @@
 //
 
 public extension CardProtocol {
-
+    
     func matches(regex pattern: String) -> Bool {
-        let cardString = "\(value)\(suit)"
+        pattern.isEmpty || "\(name)\(value)\(suit)".matches(regex: pattern)
+    }
+}
+
+public extension String {
+    
+    func matches(regex pattern: String) -> Bool {
+        let string = self
         guard let regex = try? NSRegularExpression(pattern: pattern) else {
             return false
         }
-
-        let range = NSRange(location: 0, length: cardString.utf16.count)
-        return regex.firstMatch(in: cardString, options: [], range: range) != nil
+        
+        let range = NSRange(location: 0, length: string.utf16.count)
+        return regex.firstMatch(in: string, options: [], range: range) != nil
     }
 }

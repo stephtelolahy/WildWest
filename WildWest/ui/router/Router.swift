@@ -13,12 +13,12 @@ import WildWestEngine
 // Present screens or widgets
 protocol RouterProtocol {
     func toMenu()
-    func toFigureSelector(completion: @escaping (String?) -> Void)
-    func toRoleSelector(_ completion: @escaping (Role?) -> Void)
+    func toFigureSelector(initialFigure: String?, completion: @escaping (String?) -> Void)
+    func toRoleSelector(initialRole: Role?, completion: @escaping (Role?) -> Void)
     func toContactUs()
     func toRules()
     func toGame(_ environment: GameEnvironment)
-    func toGameRoles(_ playersCount: Int)
+    func toGameRoles(_ playersCount: Int, completion: @escaping () -> Void)
     func toGameOver(_ winner: Role)
     func toGamePlayer(_ player: PlayerProtocol)
     func toWaitingRoom()
@@ -26,11 +26,11 @@ protocol RouterProtocol {
 
 protocol RouterDependenciesProtocol {
     func provideMainViewController() -> UIViewController
-    func provideFigureSelectorWidget(_ completion: @escaping (String?) -> Void) -> UIViewController
-    func provideRoleSelectorWidget(_ completion: @escaping (Role?) -> Void) -> UIViewController
+    func provideFigureSelectorWidget(initialFigure: String?, completion: @escaping (String?) -> Void) -> UIViewController
+    func provideRoleSelectorWidget(initialRole: Role?, completion: @escaping (Role?) -> Void) -> UIViewController
     func provideGameViewController(_ environment: GameEnvironment) -> UIViewController
     func provideMenuViewController() -> UIViewController
-    func provideGameRolesWidget(_ playersCount: Int) -> UIViewController
+    func provideGameRolesWidget(_ playersCount: Int, completion: @escaping () -> Void) -> UIViewController
     func provideGameOverWidget(winner: Role, completion: @escaping () -> Void) -> UIViewController
     func provideGamePlayerWidget(_ player: PlayerProtocol) -> UIViewController
     func provideWaitingRoomViewController() -> UIViewController
@@ -50,12 +50,12 @@ class Router: RouterProtocol {
         navController?.fade(to: dependencies.provideMenuViewController())
     }
     
-    func toFigureSelector(completion: @escaping (String?) -> Void) {
-        viewController?.present(dependencies.provideFigureSelectorWidget(completion), animated: true)
+    func toFigureSelector(initialFigure: String?, completion: @escaping (String?) -> Void) {
+        viewController?.present(dependencies.provideFigureSelectorWidget(initialFigure: initialFigure, completion: completion), animated: true)
     }
     
-    func toRoleSelector(_ completion: @escaping (Role?) -> Void) {
-        viewController?.present(dependencies.provideRoleSelectorWidget(completion), animated: true)
+    func toRoleSelector(initialRole: Role?, completion: @escaping (Role?) -> Void) {
+        viewController?.present(dependencies.provideRoleSelectorWidget(initialRole: initialRole, completion: completion), animated: true)
     }
     
     func toContactUs() {
@@ -83,8 +83,8 @@ class Router: RouterProtocol {
         navController?.fade(to: dependencies.provideGameViewController(environment))
     }
     
-    func toGameRoles(_ playersCount: Int) {
-        viewController?.present(dependencies.provideGameRolesWidget(playersCount), animated: true)
+    func toGameRoles(_ playersCount: Int, completion: @escaping () -> Void) {
+        viewController?.present(dependencies.provideGameRolesWidget(playersCount, completion: completion), animated: true)
     }
     
     func toGameOver(_ winner: Role) {

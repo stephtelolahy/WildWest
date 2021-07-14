@@ -38,6 +38,13 @@
             BlueprintName = "WildWest"
             ReferencedContainer = "container:WildWest.xcodeproj">
          </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "335832D425BC24FD001BE4D8"
+            BuildableName = "WildWestEngine.framework"
+            BlueprintName = "WildWestEngine"
+            ReferencedContainer = "container:WildWest.xcodeproj">
+         </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
          <TestableReference
@@ -49,6 +56,18 @@
                BlueprintIdentifier = "ADB7D2FD239EE03900653905"
                BuildableName = "WildWestTests.xctest"
                BlueprintName = "WildWestTests"
+               ReferencedContainer = "container:WildWest.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES"
+            testExecutionOrdering = "random">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "335832DC25BC24FD001BE4D8"
+               BuildableName = "WildWestEngineTests.xctest"
+               BlueprintName = "WildWestEngineTests"
                ReferencedContainer = "container:WildWest.xcodeproj">
             </BuildableReference>
          </TestableReference>

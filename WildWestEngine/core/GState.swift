@@ -19,6 +19,8 @@ public class GState: StateProtocol {
     public var store: [CardProtocol]
     public var hits: [HitProtocol]
     public var played: [String]
+    public var history: [GMove]
+    public var winner: Role?
     
     // MARK: Init
     
@@ -31,8 +33,10 @@ public class GState: StateProtocol {
                 discard: [CardProtocol],
                 store: [CardProtocol],
                 hits: [HitProtocol],
-                played: [String]) {
-        self.players = players.mapValues { GPlayer($0) }
+                played: [String],
+                history: [GMove],
+                winner: Role?) {
+        self.players = players
         self.initialOrder = initialOrder
         self.playOrder = playOrder
         self.turn = turn
@@ -40,12 +44,18 @@ public class GState: StateProtocol {
         self.deck = deck
         self.discard = discard
         self.store = store
-        self.hits = hits.map { GHit($0) }
+        self.hits = hits
         self.played = played
+        self.history = history
+        self.winner = winner
     }
-    
-    public convenience init(_ state: StateProtocol) {
-        self.init(players: state.players,
+}
+
+// MARK: - Copy
+
+public extension GState {
+    convenience init(_ state: StateProtocol) {
+        self.init(players: state.players.mapValues { GPlayer($0) },
                   initialOrder: state.initialOrder,
                   playOrder: state.playOrder,
                   turn: state.turn,
@@ -53,49 +63,34 @@ public class GState: StateProtocol {
                   deck: state.deck,
                   discard: state.discard,
                   store: state.store,
-                  hits: state.hits,
-                  played: state.played)
+                  hits: state.hits.map { GHit($0) },
+                  played: state.played,
+                  history: state.history,
+                  winner: state.winner)
     }
-    
-    // MARK: - StateComputedProtocol
-    
-    public var winner: Role? {
-        let remainingRoles = playOrder.map { players[$0]!.role }
-        
-        let noSheriff = !remainingRoles.contains(.sheriff)
-        if noSheriff {
-            let lastIsRenegade = remainingRoles.count == 1 && remainingRoles[0] == .renegade
-            if lastIsRenegade {
-                return .renegade
-            } else {
-                return .outlaw
-            }
-        }
-        
-        let noOutlawsAndRenegates = !remainingRoles.contains(where: { $0 == .outlaw || $0 == .renegade })
-        if noOutlawsAndRenegates {
-            return .sheriff
-        }
-        
-        return nil
+}
+
+public extension GPlayer {
+    convenience init(_ player: PlayerProtocol) {
+        self.init(identifier: player.identifier,
+                  name: player.name,
+                  desc: player.desc,
+                  attributes: player.attributes,
+                  abilities: player.abilities,
+                  role: player.role,
+                  health: player.health,
+                  hand: player.hand,
+                  inPlay: player.inPlay)
     }
-    
-    public func distance(from player: String, to other: String) -> Int {
-        guard let pIndex = playOrder.firstIndex(of: player),
-              let oIndex = playOrder.firstIndex(of: other),
-              pIndex != oIndex else {
-            return 0
-        }
-        
-        let count = playOrder.count
-        let rightDistance = (oIndex > pIndex) ? (oIndex - pIndex) : (oIndex + count - pIndex)
-        let leftDistance = (pIndex > oIndex) ? (pIndex - oIndex) : (pIndex + count - oIndex)
-        var distance = min(rightDistance, leftDistance)
-        
-        distance -= players[player]!.scope
-        
-        distance += players[other]!.mustang
-        
-        return distance
+}
+
+private extension GHit {
+    init(_ hit: HitProtocol) {
+        self.init(player: hit.player,
+                  name: hit.name,
+                  abilities: hit.abilities,
+                  offender: hit.offender,
+                  cancelable: hit.cancelable,
+                  target: hit.target)
     }
 }

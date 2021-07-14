@@ -6,6 +6,7 @@
 //  Copyright © 2020 CocoaPods. All rights reserved.
 //
 // swiftlint:disable implicitly_unwrapped_optional
+// swiftlint:disable type_body_length
 
 import XCTest
 import WildWestEngine
@@ -17,6 +18,8 @@ class SetupTests: XCTestCase {
     override func setUp() {
         sut = GSetup()
     }
+    
+    // MARK: - Roles
     
     func test_Roles_For4Players() {
         // Given
@@ -65,36 +68,54 @@ class SetupTests: XCTestCase {
         XCTAssertEqual(roles.filter { $0 == .deputy }.count, 2)
     }
     
+    func test_Roles_For8Players() {
+        // Given
+        // When
+        let roles = sut.roles(for: 8)
+        
+        // Assert
+        XCTAssertEqual(roles.filter { $0 == .sheriff }.count, 1)
+        XCTAssertEqual(roles.filter { $0 == .outlaw }.count, 3)
+        XCTAssertEqual(roles.filter { $0 == .renegade }.count, 2)
+        XCTAssertEqual(roles.filter { $0 == .deputy }.count, 2)
+    }
+    
+    // MARK: - Setup Game
+    
     func test_ShuffleRole_WhenSetupGame() throws {
         // Given
         let roles: [Role] = [.sheriff, .outlaw, .deputy, .renegade]
         let brown: [Card] = Array(1...80).map { Card(name: "c\($0)", type: .brown) }
-        let figure: [Card] = Array(1...16).map { Card(name: "f\($0)", type: .figure, abilities: ["bullets": 4]) }
-        let cards: [Card] = brown + figure
+        let figure: [Card] = Array(1...16).map { Card(name: "f\($0)", type: .figure, attributes: [.bullets: 4]) }
+        let defaults: [Card] = [Card(name: "player", type: .default, abilities: ["a1", "a2"]),
+                                Card(name: "sheriff", type: .default, attributes: [.bullets: 1, .silentCard: "jail"], abilities: ["a3"])]
+        let cards: [Card] = brown + figure + defaults
         let cardSet: [DeckCard] = Array(1...80).map { DeckCard(name: "c\($0)", value: "v\($0)", suit: "s\($0)") }
-        let defaults = DefaultAbilities(common: ["a1": 0, "a2": 0], sheriff: ["a3": 0])
         
         // When
-        let state = sut.setupGame(roles: roles, cards: cards, cardSet: cardSet, defaults: defaults, preferredRole: nil, preferredFigure: nil)
+        let state = sut.setupGame(roles: roles, cards: cards, cardSet: cardSet, preferredRole: nil, preferredFigure: nil)
         
         // Assert
         
         // <PLAYERS>
         let players = state.players.values
         XCTAssertEqual(players.count, 4)
-        let sheriff = try XCTUnwrap(players.first { $0.role == .sheriff })
         XCTAssertTrue(players.map { $0.role }.contains(sameElementsAs: roles)) // Shuffle roles
+        
         XCTAssertTrue(players.map { $0.name }.allSatisfy { figure.map { $0.name }.contains($0) }) // Shuffle figures
-        XCTAssertTrue(players.filter { $0.role != .sheriff }.allSatisfy { $0.maxHealth == 4 }) // Max health is number of bullets
-        XCTAssertEqual(sheriff.maxHealth, 5) // Sheriff has one additional health
-        XCTAssertTrue(players.allSatisfy { $0.health == $0.maxHealth }) // Each player has maximal health
+        XCTAssertTrue(players.filter { $0.role != .sheriff }.allSatisfy { $0.attributes[.bullets] as? Int == 4 }) // Max health is number of bullets
+        XCTAssertTrue(players.allSatisfy { $0.health == $0.attributes[.bullets] as? Int }) // Each player has maximal health
         XCTAssertTrue(players.allSatisfy { $0.inPlay.isEmpty }) // InPlay empty
         XCTAssertTrue(players.allSatisfy { $0.hand.count == $0.health }) // Hand cards equals health
         players.forEach {
-            XCTAssertNotNil($0.abilities["a1"])
-            XCTAssertNotNil($0.abilities["a2"])
+            XCTAssertTrue($0.abilities.contains("a1"))
+            XCTAssertTrue($0.abilities.contains("a2"))
         }
-        XCTAssertNotNil(sheriff.abilities["a3"])
+        
+        let sheriff = try XCTUnwrap(players.first { $0.role == .sheriff })
+        XCTAssertEqual(sheriff.attributes[.bullets] as? Int, 5) // Sheriff has one additional health
+        XCTAssertEqual(sheriff.attributes[.silentCard] as? String, "jail")
+        XCTAssertTrue(sheriff.abilities.contains("a3"))
         // </PLAYERS>
         
         // <STATE>
@@ -108,7 +129,7 @@ class SetupTests: XCTestCase {
         XCTAssertTrue(state.hits.isEmpty) // No hits
         XCTAssertTrue(state.played.isEmpty) // Played abilities are empty
         let distributedCards: [String] = players.map { $0.hand }.flatMap { $0 }.map { $0.identifier }
-        let expectedDeck: [String] = cardSet.map { $0.identifier }.filter { !distributedCards.contains($0) }
+        let expectedDeck: [String] = cardSet.map { "\($0.name)-\($0.value)\($0.suit)" }.filter { !distributedCards.contains($0) }
         XCTAssertTrue(state.deck.map { $0.identifier }.contains(sameElementsAs: expectedDeck)) // Shuffle cards to deck
         // </STATE>
     }
@@ -117,13 +138,12 @@ class SetupTests: XCTestCase {
         // Given
         let roles: [Role] = [.sheriff, .outlaw, .deputy, .renegade]
         let brown: [Card] = Array(1...80).map { Card(name: "c\($0)", type: .brown) }
-        let figure: [Card] = Array(1...16).map { Card(name: "f\($0)", type: .figure, abilities: ["bullets": 4]) }
+        let figure: [Card] = Array(1...16).map { Card(name: "f\($0)", type: .figure, attributes: [.bullets: 4]) }
         let cards: [Card] = brown + figure
         let cardSet: [DeckCard] = Array(1...80).map { DeckCard(name: "c\($0)", value: "v\($0)", suit: "s\($0)") }
-        let defaults = DefaultAbilities(common: ["a1": 0, "a2": 0], sheriff: ["a3": 0])
         
         // When
-        let state = sut.setupGame(roles: roles, cards: cards, cardSet: cardSet, defaults: defaults, preferredRole: .deputy, preferredFigure: "f12")
+        let state = sut.setupGame(roles: roles, cards: cards, cardSet: cardSet, preferredRole: .deputy, preferredFigure: "f12")
         
         // Assert
         let firstPlayer = try XCTUnwrap(state.players[state.playOrder[0]])
@@ -135,13 +155,12 @@ class SetupTests: XCTestCase {
         // Given
         let roles: [Role] = [.sheriff, .outlaw, .deputy, .renegade]
         let brown: [Card] = Array(1...80).map { Card(name: "c\($0)", type: .brown) }
-        let figure: [Card] = Array(1...16).map { Card(name: "f\($0)", type: .figure, abilities: ["bullets": 4]) }
+        let figure: [Card] = Array(1...16).map { Card(name: "f\($0)", type: .figure, attributes: [.bullets: 4]) }
         let cards: [Card] = brown + figure
         let cardSet: [DeckCard] = Array(1...80).map { DeckCard(name: "c\($0)", value: "v\($0)", suit: "s\($0)") }
-        let defaults = DefaultAbilities(common: [:], sheriff: [:])
         
         // When
-        let state = sut.setupGame(roles: roles, cards: cards, cardSet: cardSet, defaults: defaults, preferredRole: nil, preferredFigure: nil)
+        let state = sut.setupGame(roles: roles, cards: cards, cardSet: cardSet, preferredRole: nil, preferredFigure: nil)
         
         // Assert
         let player1 = try XCTUnwrap(state.players[state.playOrder[0]])
@@ -160,13 +179,13 @@ class SetupTests: XCTestCase {
         // Assert
         XCTAssertEqual(playCards.count, 2)
         
-        XCTAssertEqual(playCards[0].identifier, "c1-v1-s1")
+        XCTAssertEqual(playCards[0].identifier, "c1-v1s1")
         XCTAssertEqual(playCards[0].name, "c1")
         XCTAssertEqual(playCards[0].type, .brown)
         XCTAssertEqual(playCards[0].value, "v1")
         XCTAssertEqual(playCards[0].suit, "s1")
         
-        XCTAssertEqual(playCards[1].identifier, "c2-v2-s2")
+        XCTAssertEqual(playCards[1].identifier, "c2-v2s2")
         XCTAssertEqual(playCards[1].name, "c2")
         XCTAssertEqual(playCards[1].type, .blue)
         XCTAssertEqual(playCards[1].value, "v2")
@@ -184,5 +203,11 @@ private extension Array where Element: Equatable {
         return self.allSatisfy { element in
             self.filter { $0 == element }.count == other.filter { $0 == element }.count
         }
+    }
+}
+
+private extension Card {
+    init(name: String, type: CardType, attributes: [CardAttributeKey: Any] = [:], abilities: Set<String> = []) {
+        self.init(name: name, type: type, desc: "", attributes: attributes, abilities: abilities)
     }
 }

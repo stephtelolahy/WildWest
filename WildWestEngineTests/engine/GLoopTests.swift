@@ -116,16 +116,16 @@ class GLoopTests: XCTestCase {
         wait(for: [expectation], timeout: 0.1)
     }
     
-    func test_EmitWinner_IfGameOver() {
+    func test_EmitWinner_IfGameIsOver() {
         // Given
-        stub(mockState) { mock in
-            when(mock.winner.get).thenReturn(.outlaw)
+        stub(mockMatcher) { mock in
+            when(mock.winner(in: state(equalTo: mockState))).thenReturn(.outlaw)
         }
         let expectation = XCTestExpectation(description: "emit game over")
         stub(mockDatabase) { mock in
             when(mock.update(event: equal(to: .gameover(winner: .outlaw)))).then { _ in
                 expectation.fulfill()
-                return Completable.empty()
+                return Completable.never()
             }
         }
         
@@ -154,7 +154,7 @@ class GLoopTests: XCTestCase {
     
     func test_ApplyEvent_IfRunning() {
         // Given
-        let event: GEvent = .revealDeck 
+        let event: GEvent = .flipDeck 
         stub(mockQueue) { mock in
             when(mock.pop()).thenReturn(event)
         }

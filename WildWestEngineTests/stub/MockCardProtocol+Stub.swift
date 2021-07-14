@@ -36,21 +36,9 @@ extension MockCardProtocol {
         return self
     }
     
-    func abilities(are abilities: String...) -> MockCardProtocol {
+    func abilities(are values: String...) -> MockCardProtocol {
         stub(self) { mock in
-            let dict: [String: Int] = abilities.reduce([:]) { dict, ability in
-                var dict = dict
-                dict[ability] = 0
-                return dict
-            }
-            when(mock.abilities.get).thenReturn(dict)
-        }
-        return self
-    }
-
-    func abilities(are abilities: [String: Int]) -> MockCardProtocol {
-        stub(self) { mock in
-            when(mock.abilities.get).thenReturn(abilities)
+            when(mock.abilities.get).thenReturn(Set(values))
         }
         return self
     }
@@ -65,6 +53,13 @@ extension MockCardProtocol {
     func value(is value: String) -> MockCardProtocol {
         stub(self) { mock in
             when(mock.value.get).thenReturn(value)
+        }
+        return self
+    }
+    
+    func attributes(are value: [CardAttributeKey: Any]) -> MockCardProtocol {
+        stub(self) { mock in
+            when(mock.attributes.get).thenReturn(value)
         }
         return self
     }

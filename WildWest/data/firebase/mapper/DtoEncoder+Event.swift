@@ -18,8 +18,8 @@ extension DtoEncoder {
         case .emptyQueue:
             return EventDto(emptyQueue: true)
             
-        case .revealDeck:
-            return EventDto(revealDeck: true)
+        case .flipDeck:
+            return EventDto(flipDeck: true)
             
         case .deckToStore:
             return EventDto(deckToStore: true)
@@ -39,8 +39,8 @@ extension DtoEncoder {
         case let .drawDiscard(player):
             return EventDto(drawDiscard: player)
             
-        case let .storeToDeck(card):
-            return EventDto(storeToDeck: card)
+        case let .drawDeckChoosing(player, card):
+            return EventDto(drawDeckChoosing: PlayerCardDto(player: player, card: card))
             
         case let .removeHit(player):
             return EventDto(removeHit: player)
@@ -58,9 +58,8 @@ extension DtoEncoder {
             let movesDto = moves.map { encode(move: $0) }
             return EventDto(activate: movesDto)
             
-        case let .addHit(player, name, abilities, cancelable, offender):
-            let hit = GHit(player: player, name: name, abilities: abilities, cancelable: cancelable, offender: offender)
-            let dto = encode(hit: hit)
+        case let .addHit(hits):
+            let dto = hits.map { encode(hit: $0) }
             return EventDto(addHit: dto)
             
         case let .play(player, card):
@@ -75,8 +74,8 @@ extension DtoEncoder {
         case let .discardHand(player, card):
             return EventDto(discardHand: PlayerCardDto(player: player, card: card))
             
-        case let .revealHand(player, card):
-            return EventDto(revealHand: PlayerCardDto(player: player, card: card))
+        case let .drawDeckFlipping(player):
+            return EventDto(drawDeckFlipping: player)
             
         case let .discardInPlay(player, card):
             return EventDto(discardInPlay: PlayerCardDto(player: player, card: card))
@@ -106,8 +105,8 @@ extension DtoEncoder {
             return .emptyQueue
         }
         
-        if event.revealDeck != nil {
-            return .revealDeck
+        if event.flipDeck != nil {
+            return .flipDeck
         }
         
         if event.deckToStore != nil {
@@ -134,8 +133,9 @@ extension DtoEncoder {
             return .drawDiscard(player: player)
         }
         
-        if let card = event.storeToDeck {
-            return .storeToDeck(card: card)
+        if let dto = event.drawDeckChoosing {
+            return .drawDeckChoosing(player: try dto.player.unwrap(),
+                                     card: try dto.card.unwrap())
         }
         
         if let player = event.removeHit {
@@ -162,12 +162,15 @@ extension DtoEncoder {
         }
         
         if let dto = event.addHit {
-            let hit = try decode(hit: dto)
-            return .addHit(player: hit.player,
-                           name: hit.name,
-                           abilities: hit.abilities,
-                           cancelable: hit.cancelable,
-                           offender: hit.offender)
+            let hits = try dto.map {
+                GHit(player: try $0.player.unwrap(),
+                     name: try $0.name.unwrap(),
+                     abilities: try $0.abilities.unwrap(),
+                     offender: try $0.offender.unwrap(),
+                     cancelable: try $0.cancelable.unwrap(),
+                     target: $0.target)
+            }
+            return .addHit(hits: hits)
         }
         
         if let dto = event.play {
@@ -190,9 +193,8 @@ extension DtoEncoder {
                                 card: try dto.card.unwrap())
         }
         
-        if let dto = event.revealHand {
-            return .revealHand(player: try dto.player.unwrap(),
-                               card: try dto.card.unwrap())
+        if let player = event.drawDeckFlipping {
+            return .drawDeckFlipping(player: player)
         }
         
         if let dto = event.discardInPlay {
