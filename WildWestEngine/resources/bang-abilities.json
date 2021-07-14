@@ -184,7 +184,7 @@
     "canPlay": {
       "isYourTurn": 0,
       "isPhase": 2,
-      "requireTargetReachable": 0,
+      "requireTargetAt": "weapon",
       "isTimesPerTurnMax": "bangsPerTurn"
     },
     "onPlay": [

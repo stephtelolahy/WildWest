@@ -18,8 +18,6 @@ public protocol StateProtocol {
     var played: [String] { get }        // played abilities during current turn
     var history: [GMove] { get }        // move history
     var winner: Role? { get }           // winner
-    
-    func distance(from player: String, to other: String) -> Int
 }
 
 public protocol HitProtocol {

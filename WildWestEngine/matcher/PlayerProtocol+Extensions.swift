@@ -6,18 +6,14 @@
 //  Copyright © 2021 creativeGames. All rights reserved.
 //
 
-extension PlayerProtocol {
+public extension PlayerProtocol {
     
     var weapon: Int {
-        cards.compactMap { $0.attributes[.weapon] as? Int }.max() ?? 1
+        inPlay.compactMap { $0.attributes[.weapon] as? Int }.max() ?? 1
     }
     
     var bangsPerTurn: Int {
-        cards.compactMap { $0.attributes[.bangsPerTurn] as? Int }.max() ?? 1
-    }
-    
-    private var cards: [CardProtocol] {
-        [self] + inPlay
+        ([self] + inPlay).compactMap { $0.attributes[.bangsPerTurn] as? Int }.max() ?? 1
     }
     
     var maxHealth: Int {

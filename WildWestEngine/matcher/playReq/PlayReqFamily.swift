@@ -34,7 +34,6 @@ public enum PlayReqFamily: String, CaseIterable {
     case requireTargetOther
     case requireTargetAny
     case requireTargetAt
-    case requireTargetReachable
     case requireTargetOffender
     case requireTargetEliminated
     case requireTargetHit
@@ -55,7 +54,6 @@ public enum PlayReqFamily: String, CaseIterable {
         case .requireTargetAny: return RequireTargetAny.self
         case .requireInPlayCard: return RequireInPlayCard.self
         case .requireTargetAt: return RequireTargetAt.self
-        case .requireTargetReachable: return RequireTargetReachable.self
         case .isTimesPerTurnMax: return IsTimesPerTurnMax.self
         case .isHitCancelable: return IsHitCancelable.self
         case .isHitName: return IsHitName.self

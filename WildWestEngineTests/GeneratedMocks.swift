@@ -756,21 +756,6 @@ public class MockStateProtocol: StateProtocol, Cuckoo.ProtocolMock {
     
 
     
-    
-    
-    public func distance(from player: String, to other: String) -> Int {
-        
-    return cuckoo_manager.call("distance(from: String, to: String) -> Int",
-            parameters: (player, other),
-            escapingParameters: (player, other),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.distance(from: player, to: other))
-        
-    }
-    
 
 	public struct __StubbingProxy_StateProtocol: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
@@ -839,11 +824,6 @@ public class MockStateProtocol: StateProtocol, Cuckoo.ProtocolMock {
 	        return .init(manager: cuckoo_manager, name: "winner")
 	    }
 	    
-	    
-	    func distance<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(from player: M1, to other: M2) -> Cuckoo.ProtocolStubFunction<(String, String), Int> where M1.MatchedType == String, M2.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: player) { $0.0 }, wrap(matchable: other) { $0.1 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockStateProtocol.self, method: "distance(from: String, to: String) -> Int", parameterMatchers: matchers))
-	    }
 	    
 	}
 
@@ -920,12 +900,6 @@ public class MockStateProtocol: StateProtocol, Cuckoo.ProtocolMock {
 	    }
 	    
 	
-	    
-	    @discardableResult
-	    func distance<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(from player: M1, to other: M2) -> Cuckoo.__DoNotUse<(String, String), Int> where M1.MatchedType == String, M2.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: player) { $0.0 }, wrap(matchable: other) { $0.1 }]
-	        return cuckoo_manager.verify("distance(from: String, to: String) -> Int", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
 	    
 	}
 }
@@ -1031,10 +1005,6 @@ public class StateProtocolStub: StateProtocol {
 
     
 
-    
-    public func distance(from player: String, to other: String) -> Int  {
-        return DefaultValueRegistry.defaultValue(for: (Int).self)
-    }
     
 }
 

@@ -31,14 +31,13 @@ class BangTests: XCTestCase {
         let mockPlayer3 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p3")
+            .attributes(are: [.mustang: 2])
         let mockState = MockStateProtocol()
             .withDefault()
             .turn(is: "p1")
             .phase(is: 2)
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
             .playOrder(is: "p1", "p2", "p3")
-            .distance(from: "p1", to: "p2", is: 1)
-            .distance(from: "p1", to: "p3", is: 3)
         
         // When
         let moves = sut.active(in: mockState)
@@ -69,7 +68,6 @@ class BangTests: XCTestCase {
             .phase(is: 2)
             .players(are: mockPlayer1, mockPlayer2)
             .playOrder(is: "p1", "p2")
-            .distance(from: "p1", to: "p2", is: 1)
             .played(are: "bang")
         
         // When
@@ -92,13 +90,13 @@ class BangTests: XCTestCase {
         let mockPlayer2 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p2")
+            .attributes(are: [.mustang: 1])
         let mockState = MockStateProtocol()
             .withDefault()
             .turn(is: "p1")
             .phase(is: 2)
             .players(are: mockPlayer1, mockPlayer2)
             .playOrder(is: "p1", "p2")
-            .distance(from: "p1", to: "p2", is: 2)
         
         // When
         let moves = sut.active(in: mockState)
@@ -123,13 +121,13 @@ class BangTests: XCTestCase {
         let mockPlayer2 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p2")
+            .attributes(are: [.mustang: 1])
         let mockState = MockStateProtocol()
             .withDefault()
             .turn(is: "p1")
             .phase(is: 2)
             .players(are: mockPlayer1, mockPlayer2)
             .playOrder(is: "p1", "p2")
-            .distance(from: "p1", to: "p2", is: 2)
         
         // When
         let moves = sut.active(in: mockState)

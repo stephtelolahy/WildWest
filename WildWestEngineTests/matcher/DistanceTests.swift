@@ -1,18 +1,15 @@
 //
-//  StateComputedTests.swift
-//  CardGameEngine_Tests
+//  DistanceTests.swift
+//  WildWestEngineTests
 //
-//  Created by Hugues Stéphano TELOLAHY on 10/25/20.
-//  Copyright © 2020 CocoaPods. All rights reserved.
+//  Created by TELOLAHY Hugues Stéphano on 14/07/2021.
+//  Copyright © 2021 creativeGames. All rights reserved.
 //
-// swiftlint:disable type_body_length
 
 import XCTest
 import WildWestEngine
 
-class StateComputedTests: XCTestCase {
-
-    // MARK: - Distance
+class DistanceTests: XCTestCase {
 
     func test_ReturnZero_IfCalculatingRangeToSelf() {
         // Given
