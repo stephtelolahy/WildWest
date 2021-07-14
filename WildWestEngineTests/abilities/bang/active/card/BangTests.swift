@@ -5,7 +5,6 @@
 //  Created by Hugues Stephano Telolahy on 04/10/2020.
 //  Copyright © 2020 CocoaPods. All rights reserved.
 //
-// swiftlint:disable type_body_length
 
 import XCTest
 import WildWestEngine
@@ -26,23 +25,19 @@ class BangTests: XCTestCase {
             .withDefault()
             .identified(by: "p1")
             .holding(mockCard1)
-            .weapon(is: 1)
-            .bangsPerTurn(is: 1)
-            .bangsCancelable(is: 1)
         let mockPlayer2 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p2")
         let mockPlayer3 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p3")
+            .attributes(are: [.mustang: 2])
         let mockState = MockStateProtocol()
             .withDefault()
             .turn(is: "p1")
             .phase(is: 2)
             .players(are: mockPlayer1, mockPlayer2, mockPlayer3)
             .playOrder(is: "p1", "p2", "p3")
-            .distance(from: "p1", to: "p2", is: 1)
-            .distance(from: "p1", to: "p3", is: 3)
         
         // When
         let moves = sut.active(in: mockState)
@@ -64,8 +59,6 @@ class BangTests: XCTestCase {
             .withDefault()
             .identified(by: "p1")
             .holding(mockCard1)
-            .weapon(is: 1)
-            .bangsPerTurn(is: 1)
         let mockPlayer2 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p2")
@@ -75,7 +68,6 @@ class BangTests: XCTestCase {
             .phase(is: 2)
             .players(are: mockPlayer1, mockPlayer2)
             .playOrder(is: "p1", "p2")
-            .distance(from: "p1", to: "p2", is: 1)
             .played(are: "bang")
         
         // When
@@ -95,19 +87,16 @@ class BangTests: XCTestCase {
             .withDefault()
             .identified(by: "p1")
             .holding(mockCard1)
-            .weapon(is: 1)
-            .bangsPerTurn(is: 1)
-            .bangsCancelable(is: 1)
         let mockPlayer2 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p2")
+            .attributes(are: [.mustang: 1])
         let mockState = MockStateProtocol()
             .withDefault()
             .turn(is: "p1")
             .phase(is: 2)
             .players(are: mockPlayer1, mockPlayer2)
             .playOrder(is: "p1", "p2")
-            .distance(from: "p1", to: "p2", is: 2)
         
         // When
         let moves = sut.active(in: mockState)
@@ -127,19 +116,18 @@ class BangTests: XCTestCase {
             .withDefault()
             .identified(by: "p1")
             .holding(mockCard1)
-            .weapon(is: 2)
-            .bangsPerTurn(is: 1)
-            .bangsCancelable(is: 2)
+            .playing(MockCardProtocol().withDefault().attributes(are: [.weapon: 2]))
+            .attributes(are: [.bangsCancelable: 2])
         let mockPlayer2 = MockPlayerProtocol()
             .withDefault()
             .identified(by: "p2")
+            .attributes(are: [.mustang: 1])
         let mockState = MockStateProtocol()
             .withDefault()
             .turn(is: "p1")
             .phase(is: 2)
             .players(are: mockPlayer1, mockPlayer2)
             .playOrder(is: "p1", "p2")
-            .distance(from: "p1", to: "p2", is: 2)
         
         // When
         let moves = sut.active(in: mockState)

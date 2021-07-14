@@ -710,7 +710,7 @@ class GDatabaseUpdaterTests: XCTestCase {
         XCTAssertNoThrow(sut.execute(event, in: state))
     }
     
-    func test_DoNothing_IfGameOver() {
+    func test_SetWinner_IfGameOver() {
         // Given
         let mockState = MockStateProtocol()
             .withDefault()
@@ -720,6 +720,7 @@ class GDatabaseUpdaterTests: XCTestCase {
         // When
         // Assert
         XCTAssertNoThrow(sut.execute(event, in: state))
+        XCTAssertEqual(state.winner, .outlaw)
     }
     
     func test_DoNothing_IfEmptyQueue() {

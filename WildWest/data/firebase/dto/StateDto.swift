@@ -17,6 +17,7 @@ struct StateDto: Codable {
     let store: [String: String]?
     let hits: [String: HitDto]?
     let played: [String: String]?
+    let winner: String?
 }
 
 struct HitDto: Codable, Equatable {

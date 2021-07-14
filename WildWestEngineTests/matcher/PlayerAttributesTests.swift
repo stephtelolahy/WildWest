@@ -1,15 +1,15 @@
 //
-//  PlayerComputedTests.swift
-//  CardGameEngine_Tests
+//  PlayerAttributesTests.swift
+//  WildWestEngineTests
 //
-//  Created by Hugues Stéphano TELOLAHY on 10/25/20.
-//  Copyright © 2020 CocoaPods. All rights reserved.
+//  Created by TELOLAHY Hugues Stéphano on 14/07/2021.
+//  Copyright © 2021 creativeGames. All rights reserved.
 //
 
 import XCTest
 import WildWestEngine
 
-class PlayerComputedTests: XCTestCase {
+class PlayerAttributesTests: XCTestCase {
     
     // MARK: - maxHealth
     
@@ -83,80 +83,6 @@ class PlayerComputedTests: XCTestCase {
         // When
         // Assert
         XCTAssertEqual(sut.bangsPerTurn, 0)
-    }
-    
-    // MARK: - mustang
-    
-    func test_DefaultMustangCount_Is0() {
-        // Given
-        let mockPlayer = MockPlayerProtocol().withDefault()
-        let sut = GPlayer(mockPlayer)
-        
-        // When
-        // Assert
-        XCTAssertEqual(sut.mustang, 0)
-    }
-    
-    func test_HasAMustangAtAllTimes_IfHavingAbility() {
-        // Given
-        let mockPlayer = MockPlayerProtocol()
-            .withDefault()
-            .attributes(are: [.mustang: 1])
-        let sut = GPlayer(mockPlayer)
-        
-        // When
-        // Assert
-        XCTAssertEqual(sut.mustang, 1)
-    }
-    
-    func test_HasDoubleMustang_IfPlayingMustangAndHavingAbility() {
-        // Given
-        let mockPlayer = MockPlayerProtocol()
-            .withDefault()
-            .attributes(are: [.mustang: 1])
-            .playing(MockCardProtocol().withDefault().attributes(are: [.mustang: 1]))
-        let sut = GPlayer(mockPlayer)
-        
-        // When
-        // Assert
-        XCTAssertEqual(sut.mustang, 2)
-    }
-    
-    // MARK: - scope
-    
-    func test_DefaultScopeCount_Is0() {
-        // Given
-        let mockPlayer = MockPlayerProtocol().withDefault()
-        let sut = GPlayer(mockPlayer)
-        
-        // When
-        // Assert
-        XCTAssertEqual(sut.scope, 0)
-    }
-    
-    func test_HasAScopeAtAllTimes_IfHavingAbility() {
-        // Given
-        let mockPlayer = MockPlayerProtocol()
-            .withDefault()
-            .attributes(are: [.scope: 1])
-        let sut = GPlayer(mockPlayer)
-        
-        // When
-        // Assert
-        XCTAssertEqual(sut.scope, 1)
-    }
-    
-    func test_HasDoubleScope_IfPlayingMustangAndHavingAbility() {
-        // Given
-        let mockPlayer = MockPlayerProtocol()
-            .withDefault()
-            .attributes(are: [.scope: 1])
-            .playing(MockCardProtocol().withDefault().attributes(are: [.scope: 1]))
-        let sut = GPlayer(mockPlayer)
-        
-        // When
-        // Assert
-        XCTAssertEqual(sut.scope, 2)
     }
     
     // MARK: - bangsCancelable
@@ -234,4 +160,5 @@ class PlayerComputedTests: XCTestCase {
         // Assert
         XCTAssertEqual(sut.handLimit, 10)
     }
+    
 }

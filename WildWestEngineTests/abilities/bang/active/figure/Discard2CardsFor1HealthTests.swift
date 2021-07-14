@@ -24,7 +24,7 @@ class Discard2CardsFor1HealthTests: XCTestCase {
                      MockCardProtocol().withDefault().identified(by: "c2"),
                      MockCardProtocol().withDefault().identified(by: "c3"))
             .health(is: 1)
-            .maxHealth(is: 4)
+            .attributes(are: [.bullets: 4])
         let mockState = MockStateProtocol()
             .withDefault()
             .turn(is: "p1")
@@ -52,7 +52,7 @@ class Discard2CardsFor1HealthTests: XCTestCase {
             .abilities(are: "discard2CardsFor1Health")
             .holding(MockCardProtocol().withDefault().identified(by: "c1"))
             .health(is: 1)
-            .maxHealth(is: 4)
+            .attributes(are: [.bullets: 4])
         let mockState = MockStateProtocol()
             .withDefault()
             .turn(is: "p1")

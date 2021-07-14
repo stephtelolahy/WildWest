@@ -95,12 +95,12 @@ private extension RemoteGameDatabaseUpdater {
     }
     
     static func gameover() -> EventDesc {
-        EventDesc(id: "gameover", desc: "game is over") { event, _ in
-            guard case .gameover = event else {
+        EventDesc(id: "gameover", desc: "game is over") { event, gameRef in
+            guard case let .gameover(winner) = event else {
                 fatalError("Invalid event")
             }
-            // do nothing
-            return Completable.empty()
+            
+            return gameRef.rxSetValue("state/winner", encoding: { winner.rawValue })
         }
     }
     

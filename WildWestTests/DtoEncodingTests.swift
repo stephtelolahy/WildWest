@@ -65,7 +65,8 @@ class DtoEncodingTests: XCTestCase {
                            store: [],
                            hits: [hit1],
                            played: ["bang"],
-                           history: [])
+                           history: [],
+                           winner: .sheriff)
         
         stub(mockDatabaseReference) { mock in
             when(mock.childByAutoIdKey()).thenReturn("key1", "key2", "key3", "key4")
@@ -86,6 +87,7 @@ class DtoEncodingTests: XCTestCase {
         XCTAssertEqual(decoded.store.map { $0.identifier }, [])
         XCTAssertEqual(decoded.hits.count, 1)
         XCTAssertEqual(decoded.played, ["bang"])
+        XCTAssertEqual(decoded.winner, .sheriff)
         
         let decodedPlayer1 = try XCTUnwrap(decoded.players["p1"])
         XCTAssertEqual(decodedPlayer1.identifier, "p1")

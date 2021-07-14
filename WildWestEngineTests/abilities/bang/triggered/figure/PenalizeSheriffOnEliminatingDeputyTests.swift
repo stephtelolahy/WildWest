@@ -55,6 +55,7 @@ class PenalizeSheriffOnEliminatingDeputyTests: XCTestCase {
             .identified(by: "p2")
             .role(is: .deputy)
         let mockState = MockStateProtocol()
+            .withDefault()
             .players(are: mockPlayer1, mockPlayer2)
             .playOrder(is: "p1")
         let event = GEvent.eliminate(player: "p2", offender: "p1")

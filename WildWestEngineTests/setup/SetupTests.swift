@@ -88,7 +88,7 @@ class SetupTests: XCTestCase {
         let brown: [Card] = Array(1...80).map { Card(name: "c\($0)", type: .brown) }
         let figure: [Card] = Array(1...16).map { Card(name: "f\($0)", type: .figure, attributes: [.bullets: 4]) }
         let defaults: [Card] = [Card(name: "player", type: .default, abilities: ["a1", "a2"]),
-                                Card(name: "sheriff", type: .default, abilities: ["a3"], attributes: [.bullets: 1, .silentCard: "jail"])]
+                                Card(name: "sheriff", type: .default, attributes: [.bullets: 1, .silentCard: "jail"], abilities: ["a3"])]
         let cards: [Card] = brown + figure + defaults
         let cardSet: [DeckCard] = Array(1...80).map { DeckCard(name: "c\($0)", value: "v\($0)", suit: "s\($0)") }
         
@@ -103,8 +103,8 @@ class SetupTests: XCTestCase {
         XCTAssertTrue(players.map { $0.role }.contains(sameElementsAs: roles)) // Shuffle roles
         
         XCTAssertTrue(players.map { $0.name }.allSatisfy { figure.map { $0.name }.contains($0) }) // Shuffle figures
-        XCTAssertTrue(players.filter { $0.role != .sheriff }.allSatisfy { $0.maxHealth == 4 }) // Max health is number of bullets
-        XCTAssertTrue(players.allSatisfy { $0.health == $0.maxHealth }) // Each player has maximal health
+        XCTAssertTrue(players.filter { $0.role != .sheriff }.allSatisfy { $0.attributes[.bullets] as? Int == 4 }) // Max health is number of bullets
+        XCTAssertTrue(players.allSatisfy { $0.health == $0.attributes[.bullets] as? Int }) // Each player has maximal health
         XCTAssertTrue(players.allSatisfy { $0.inPlay.isEmpty }) // InPlay empty
         XCTAssertTrue(players.allSatisfy { $0.hand.count == $0.health }) // Hand cards equals health
         players.forEach {
@@ -113,7 +113,7 @@ class SetupTests: XCTestCase {
         }
         
         let sheriff = try XCTUnwrap(players.first { $0.role == .sheriff })
-        XCTAssertEqual(sheriff.maxHealth, 5) // Sheriff has one additional health
+        XCTAssertEqual(sheriff.attributes[.bullets] as? Int, 5) // Sheriff has one additional health
         XCTAssertEqual(sheriff.attributes[.silentCard] as? String, "jail")
         XCTAssertTrue(sheriff.abilities.contains("a3"))
         // </PLAYERS>
@@ -203,5 +203,11 @@ private extension Array where Element: Equatable {
         return self.allSatisfy { element in
             self.filter { $0 == element }.count == other.filter { $0 == element }.count
         }
+    }
+}
+
+private extension Card {
+    init(name: String, type: CardType, attributes: [CardAttributeKey: Any] = [:], abilities: Set<String> = []) {
+        self.init(name: name, type: type, desc: "", attributes: attributes, abilities: abilities)
     }
 }

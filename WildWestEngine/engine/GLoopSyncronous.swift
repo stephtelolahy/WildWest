@@ -31,7 +31,8 @@ public class GLoopSyncronous: GLoopSyncronousProtocol {
         
         while true {
             
-            guard currentState.winner == nil else {
+            if let winner = matcher.winner(in: currentState) {
+                databaseUpdater.execute(.gameover(winner: winner), in: currentState)
                 break
             }
             
