@@ -12,10 +12,10 @@ import Resolver
 
 public class MCTSAi: AIProtocol {
     
-    private let matcher: AbilityMatcherProtocol
+    private let rules: GameRulesProtocol
     
-    public init(matcher: AbilityMatcherProtocol) {
-        self.matcher = matcher
+    public init(rules: GameRulesProtocol) {
+        self.rules = rules
     }
     
     public func bestMove(among moves: [GMove], in state: StateProtocol) -> GMove {
@@ -26,7 +26,7 @@ public class MCTSAi: AIProtocol {
 extension GState: MCTSState {
     public typealias Move = GMove
     
-    public static var matcher: AbilityMatcherProtocol = Resolver.resolve()
+    public static var rules: GameRulesProtocol = Resolver.resolve()
     
     public var status: Int {
         if let winner = self.winner {
@@ -37,7 +37,7 @@ extension GState: MCTSState {
     }
     
     public var player: Int {
-        guard let moves = Self.matcher.active(in: self),
+        guard let moves = Self.rules.active(in: self),
               let move = moves.first,
               let actor = players[move.actor],
               let role = actor.role else {
@@ -47,7 +47,7 @@ extension GState: MCTSState {
     }
     
     public var possibleMoves: [GMove] {
-        let moves = Self.matcher.active(in: self) ?? []
+        let moves = Self.rules.active(in: self) ?? []
         
         // <AI: avoid looseHealth and endTurn if possible>
         let preferredMoves = moves.filter { $0.ability != "looseHealth" && $0.ability != "endTurn" }
@@ -60,7 +60,7 @@ extension GState: MCTSState {
     }
     
     public func performMove(_ move: GMove) -> Self {
-        let loop = GLoopSyncronous(matcher: Self.matcher, databaseUpdater: GDatabaseUpdater())
+        let loop = GLoopSyncronous(rules: Self.rules, databaseUpdater: GDatabaseUpdater())
         return loop.run(move, in: self) as! Self
     }
 }

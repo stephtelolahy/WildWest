@@ -27,18 +27,18 @@ class GameBuilder: GameBuilderProtocol {
     private let resourcesLoader: ResourcesLoaderProtocol
     private let durationMatcher: EventDurationProtocol
     private let database: UserDatabaseProtocol
-    private let abilityMatcher: AbilityMatcherProtocol
+    private let rules: GameRulesProtocol
     
     init(preferences: UserPreferencesProtocol,
          resourcesLoader: ResourcesLoaderProtocol,
          durationMatcher: EventDurationProtocol,
          database: UserDatabaseProtocol,
-         abilityMatcher: AbilityMatcherProtocol) {
+         rules: GameRulesProtocol) {
         self.preferences = preferences
         self.resourcesLoader = resourcesLoader
         self.durationMatcher = durationMatcher
         self.database = database
-        self.abilityMatcher = abilityMatcher
+        self.rules = rules
     }
     
     func createGame(for playersCount: Int) -> StateProtocol {
@@ -62,7 +62,7 @@ class GameBuilder: GameBuilderProtocol {
         
         let eventsQueue = GEventQueue()
         let timer = GTimer(matcher: durationMatcher)
-        let loop = GLoop(eventsQueue: eventsQueue, database: database, matcher: abilityMatcher, timer: timer)
+        let loop = GLoop(eventsQueue: eventsQueue, database: database, rules: rules, timer: timer)
         let engine = GEngine(loop: loop)
         
         let sheriff = state.players.values.first(where: { $0.role == .sheriff })!.identifier
@@ -91,7 +91,7 @@ class GameBuilder: GameBuilderProtocol {
         
         let eventsQueue = GEventQueue()
         let timer = GTimer(matcher: durationMatcher)
-        let loop = GLoop(eventsQueue: eventsQueue, database: gameDatabase, matcher: abilityMatcher, timer: timer)
+        let loop = GLoop(eventsQueue: eventsQueue, database: gameDatabase, rules: rules, timer: timer)
         let engine = GEngine(loop: loop)
         
         return GameEnvironment(engine: engine,

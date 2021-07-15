@@ -18,7 +18,7 @@ class GLoopTests: XCTestCase {
     private var sut: GLoopProtocol!
     private var mockQueue: MockGEventQueueProtocol!
     private var mockDatabase: MockDatabaseProtocol!
-    private var mockMatcher: MockAbilityMatcherProtocol!
+    private var mockRules: MockGameRulesProtocol!
     private var mockTimer: MockGTimerProtocol!
     private var mockState: MockStateProtocol!
     private let disposeBag = DisposeBag()
@@ -27,11 +27,11 @@ class GLoopTests: XCTestCase {
         mockQueue = MockGEventQueueProtocol().withEnabledDefaultImplementation(GEventQueueProtocolStub())
         mockState = MockStateProtocol().withDefault()
         mockDatabase = MockDatabaseProtocol().withEnabledDefaultImplementation(DatabaseProtocolStub())
-        mockMatcher = MockAbilityMatcherProtocol().withEnabledDefaultImplementation(AbilityMatcherProtocolStub())
+        mockRules = MockGameRulesProtocol().withEnabledDefaultImplementation(GameRulesProtocolStub())
         mockTimer = MockGTimerProtocol().withEnabledDefaultImplementation(GTimerProtocolStub())
         sut = GLoop(eventsQueue: mockQueue, 
                     database: mockDatabase,
-                    matcher: mockMatcher,
+                    rules: mockRules,
                     timer: mockTimer)
         
         stub(mockDatabase) { mock in
@@ -43,7 +43,7 @@ class GLoopTests: XCTestCase {
     func test_EmitActiveMoves_IfLoopCompleted() {
         // Given
         let move1 = GMove("m1", actor: "p1")
-        stub(mockMatcher) { mock in
+        stub(mockRules) { mock in
             when(mock.active(in: state(equalTo: mockState))).thenReturn([move1])
         }
         let expectation = XCTestExpectation(description: "Emited active moves")
@@ -64,7 +64,7 @@ class GLoopTests: XCTestCase {
     func test_DoNotEmitActiveMoves_IfCompletedOnGameOver() {
         // Given
         let move1 = GMove("m1", actor: "p1")
-        stub(mockMatcher) { mock in
+        stub(mockRules) { mock in
             when(mock.active(in: state(equalTo: mockState))).thenReturn([move1])
         }
         stub(mockState) { mock in
@@ -75,7 +75,7 @@ class GLoopTests: XCTestCase {
         sut.run(nil).subscribe().disposed(by: disposeBag)
         
         // Assert
-        verifyNoMoreInteractions(mockMatcher)
+        verifyNoMoreInteractions(mockRules)
         verify(mockDatabase, never()).update(event: equal(to: .activate(moves: [move1])))
     }
     
@@ -118,7 +118,7 @@ class GLoopTests: XCTestCase {
     
     func test_EmitWinner_IfGameIsOver() {
         // Given
-        stub(mockMatcher) { mock in
+        stub(mockRules) { mock in
             when(mock.winner(in: state(equalTo: mockState))).thenReturn(.outlaw)
         }
         let expectation = XCTestExpectation(description: "emit game over")
@@ -221,7 +221,7 @@ class GLoopTests: XCTestCase {
         stub(mockQueue) { mock in
             when(mock.pop()).thenReturn(event, nil)
         }
-        stub(mockMatcher) { mock in
+        stub(mockRules) { mock in
             when(mock.effects(on: equal(to: move), in: state(equalTo: mockState))).thenReturn(nil)
         }
         
@@ -241,7 +241,7 @@ class GLoopTests: XCTestCase {
         }
         let effect1: GEvent = .drawDeck(player: "p1")
         let effect2: GEvent = .drawDeck(player: "p2")
-        stub(mockMatcher) { mock in
+        stub(mockRules) { mock in
             when(mock.effects(on: equal(to: move), in: state(equalTo: mockState)))
                 .thenReturn([effect1, effect2])
         }
@@ -271,7 +271,7 @@ class GLoopTests: XCTestCase {
         }
         let move1 = GMove("m1", actor: "p1")
         let move2 = GMove("m2", actor: "p2")
-        stub(mockMatcher) { mock in
+        stub(mockRules) { mock in
             when(mock.triggered(on: equal(to: event), in: state(equalTo: mockState)))
                 .thenReturn([move1, move2])
         }

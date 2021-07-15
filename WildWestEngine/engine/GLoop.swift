@@ -17,7 +17,7 @@ public class GLoop: GLoopProtocol {
     
     private let eventsQueue: GEventQueueProtocol
     private let database: DatabaseProtocol
-    private let matcher: AbilityMatcherProtocol
+    private let rules: GameRulesProtocol
     private let timer: GTimerProtocol
     
     // MARK: - Private
@@ -28,11 +28,11 @@ public class GLoop: GLoopProtocol {
     
     public init(eventsQueue: GEventQueueProtocol,
                 database: DatabaseProtocol,
-                matcher: AbilityMatcherProtocol,
+                rules: GameRulesProtocol,
                 timer: GTimerProtocol) {
         self.eventsQueue = eventsQueue
         self.database = database
-        self.matcher = matcher
+        self.rules = rules
         self.timer = timer
     }
     
@@ -62,7 +62,7 @@ private extension GLoop {
             return
         }
         
-        if let winner = matcher.winner(in: database.currentState) {
+        if let winner = rules.winner(in: database.currentState) {
             database.update(event: .gameover(winner: winner)).subscribe(onCompleted: { [weak self] in
                 self?.run(onCompleted: onCompleted, onError: onError)
             }).disposed(by: disposeBag)
@@ -92,7 +92,7 @@ private extension GLoop {
     func isApplicable(_ event: GEvent) -> Bool {
         // <RULE> A move is applicable when it has effects>
         if case let .run(move) = event {
-            return matcher.effects(on: move, in: database.currentState) != nil
+            return rules.effects(on: move, in: database.currentState) != nil
         }
         // </RULE>
         return true
@@ -100,7 +100,7 @@ private extension GLoop {
     
     func queueEffects(on event: GEvent) {
         if case let .run(move) = event,
-           let events = matcher.effects(on: move, in: database.currentState) {
+           let events = rules.effects(on: move, in: database.currentState) {
             events.reversed().forEach {
                 eventsQueue.push($0)
             }
@@ -108,7 +108,7 @@ private extension GLoop {
     }
     
     func queueTriggers(on event: GEvent) {
-        if let moves = matcher.triggered(on: event, in: database.currentState) {
+        if let moves = rules.triggered(on: event, in: database.currentState) {
             moves.forEach {
                 eventsQueue.queue(.run(move: $0))
             }
@@ -118,7 +118,7 @@ private extension GLoop {
     func emitActiveMoves() {
         let state = database.currentState
         if state.winner == nil,
-           let moves = matcher.active(in: state) {
+           let moves = rules.active(in: state) {
             database.update(event: .activate(moves: moves)).subscribe().disposed(by: disposeBag)
         }
     }

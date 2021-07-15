@@ -72,13 +72,13 @@ class SimulationTests: XCTestCase {
         let databaseUpdater = GDatabaseUpdater()
         let database = GDatabase(state, updater: databaseUpdater)
         
-        let abilityMatcher = AbilityMatcher(abilities)
+        let rules = GameRules(abilities)
         let eventsQueue = GEventQueue()
         let eventMatcher = LinearDurationMatcher()
         let timer = GTimer(matcher: eventMatcher)
         let loop = GLoop(eventsQueue: eventsQueue,
                          database: database,
-                         matcher: abilityMatcher,
+                         rules: rules,
                          timer: timer)
         let engine = GEngine(loop: loop)
         

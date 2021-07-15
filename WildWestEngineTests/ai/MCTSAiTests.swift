@@ -16,10 +16,10 @@ class MCTSAiTests: XCTestCase {
 
     private var sut: MCTSAi!
     private let resourcesLoader: ResourcesLoaderProtocol = Resolver.resolve()
-    private let abilityMatcher: AbilityMatcherProtocol = Resolver.resolve()
+    private let rules: GameRulesProtocol = Resolver.resolve()
     
     override func setUp() {
-        sut = MCTSAi(matcher: abilityMatcher)
+        sut = MCTSAi(rules: rules)
     }
     
     func test_GivenInitialGame_whenSimulateAIPlay_thenGameComplete() {
@@ -30,7 +30,7 @@ class MCTSAiTests: XCTestCase {
         
         var state: GState = GSetup().setupGame(roles: roles, cards: cards, cardSet: cardSet, preferredRole: nil, preferredFigure: nil) as! GState
         
-        let loop = GLoopSyncronous(matcher: abilityMatcher, databaseUpdater: GDatabaseUpdater())
+        let loop = GLoopSyncronous(rules: rules, databaseUpdater: GDatabaseUpdater())
         state = loop.run(nil, in: state) as! GState
         
         while state.status == MCTS.Status.inProgress {

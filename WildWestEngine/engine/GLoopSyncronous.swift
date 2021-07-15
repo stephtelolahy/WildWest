@@ -12,11 +12,11 @@ public protocol GLoopSyncronousProtocol {
 
 public class GLoopSyncronous: GLoopSyncronousProtocol {
     
-    private let matcher: AbilityMatcherProtocol
+    private let rules: GameRulesProtocol
     private let databaseUpdater: GDatabaseUpdaterProtocol
     
-    public init(matcher: AbilityMatcherProtocol, databaseUpdater: GDatabaseUpdaterProtocol) {
-        self.matcher = matcher
+    public init(rules: GameRulesProtocol, databaseUpdater: GDatabaseUpdaterProtocol) {
+        self.rules = rules
         self.databaseUpdater = databaseUpdater
     }
     
@@ -27,11 +27,11 @@ public class GLoopSyncronous: GLoopSyncronousProtocol {
             eventsQueue.queue(.run(move: move))
         }
         
-        let currentState = GState(state)
+        let currentState = GState.copy(state)
         
         while true {
             
-            if let winner = matcher.winner(in: currentState) {
+            if let winner = rules.winner(in: currentState) {
                 databaseUpdater.execute(.gameover(winner: winner), in: currentState)
                 break
             }
@@ -55,7 +55,7 @@ public class GLoopSyncronous: GLoopSyncronousProtocol {
     private func isApplicable(_ event: GEvent, in state: StateProtocol) -> Bool {
         // <RULE> A move is applicable when it has effects>
         if case let .run(move) = event {
-            return matcher.effects(on: move, in: state) != nil
+            return rules.effects(on: move, in: state) != nil
         }
         // </RULE>
         return true
@@ -63,7 +63,7 @@ public class GLoopSyncronous: GLoopSyncronousProtocol {
     
     private func queueEffects(on event: GEvent, in state: StateProtocol, eventsQueue: GEventQueueProtocol) {
         if case let .run(move) = event,
-           let events = matcher.effects(on: move, in: state) {
+           let events = rules.effects(on: move, in: state) {
             events.reversed().forEach {
                 eventsQueue.push($0)
             }
@@ -71,7 +71,7 @@ public class GLoopSyncronous: GLoopSyncronousProtocol {
     }
     
     private func queueTriggers(on event: GEvent, in state: StateProtocol, eventsQueue: GEventQueueProtocol) {
-        if let moves = matcher.triggered(on: event, in: state) {
+        if let moves = rules.triggered(on: event, in: state) {
             moves.forEach {
                 eventsQueue.queue(.run(move: $0))
             }

@@ -36,7 +36,7 @@ extension DtoEncoder {
                hits: try decode(hits: state.hits),
                played: try decode(abilities: state.played),
                history: [],
-               winner:decode(winner: state.winner))
+               winner: decode(winner: state.winner))
     }
     
     func encode(hit: HitProtocol) -> HitDto {

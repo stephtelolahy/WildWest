@@ -27,7 +27,7 @@ class GDatabaseUpdaterTests: XCTestCase {
         let mockState = MockStateProtocol()
             .withDefault()
             .played(are: "a1")
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.run(move: GMove("a2", actor: "p1"))
         
         // When
@@ -41,7 +41,7 @@ class GDatabaseUpdaterTests: XCTestCase {
         // Given
         let mockState = MockStateProtocol()
             .withDefault()
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let move = GMove("a1", actor: "p1")
         let event = GEvent.run(move: move)
         
@@ -58,7 +58,7 @@ class GDatabaseUpdaterTests: XCTestCase {
             .withDefault()
             .turn(is: "p1")
             .played(are: "a1")
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.setTurn(player: "p2")
         
         // When
@@ -74,7 +74,7 @@ class GDatabaseUpdaterTests: XCTestCase {
         let mockState = MockStateProtocol()
             .withDefault()
             .phase(is: 1)
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.setPhase(value: 2)
         
         // When
@@ -95,7 +95,7 @@ class GDatabaseUpdaterTests: XCTestCase {
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1)
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.gainHealth(player: "p1")
         
         // When
@@ -114,7 +114,7 @@ class GDatabaseUpdaterTests: XCTestCase {
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1)
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.looseHealth(player: "p1", offender: "pX")
         
         // When
@@ -134,7 +134,7 @@ class GDatabaseUpdaterTests: XCTestCase {
             .withDefault()
             .players(are: mockPlayer1)
             .playOrder(is: "p1", "p2", "p3")
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.eliminate(player: "p1", offender: "pX")
         
         // When
@@ -153,7 +153,7 @@ class GDatabaseUpdaterTests: XCTestCase {
             .withDefault()
             .players(are: mockPlayer1)
             .playOrder(is: "p1", "p2", "p3")
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.eliminate(player: "p1", offender: "p2")
         
         // When
@@ -173,7 +173,7 @@ class GDatabaseUpdaterTests: XCTestCase {
             .players(are: mockPlayer1)
             .playOrder(is: "p1", "p2", "p3")
             .hits(are: MockHitProtocol().withDefault().player(is: "p1"))
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.eliminate(player: "p1", offender: "p2")
         
         // When
@@ -199,7 +199,7 @@ class GDatabaseUpdaterTests: XCTestCase {
             .withDefault()
             .players(are: mockPlayer1)
             .deck(are: mockCard2, mockCard3)
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.drawDeck(player: "p1")
         
         // When
@@ -223,7 +223,7 @@ class GDatabaseUpdaterTests: XCTestCase {
             .withDefault()
             .players(are: mockPlayer1)
             .deck(are: mockCard2, mockCard3)
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.drawDeckChoosing(player: "p1", card: "c3")
         
         // When
@@ -247,7 +247,7 @@ class GDatabaseUpdaterTests: XCTestCase {
             .withDefault()
             .players(are: mockPlayer1)
             .deck(are: mockCard2, mockCard3)
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.drawDeckFlipping(player: "p1")
         
         // When
@@ -271,7 +271,7 @@ class GDatabaseUpdaterTests: XCTestCase {
             .players(are: mockPlayer1)
             .deck(are: mockCard1)
             .discard(are: mockCard2, mockCard3)
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.drawDeck(player: "p1")
         
         // When
@@ -297,7 +297,7 @@ class GDatabaseUpdaterTests: XCTestCase {
             .players(are: mockPlayer1)
             .deck(are: mockCard1, mockCard4)
             .discard(are: mockCard2, mockCard3)
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.drawDeck(player: "p1")
         
         // When
@@ -324,7 +324,7 @@ class GDatabaseUpdaterTests: XCTestCase {
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1, mockPlayer2)
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.drawHand(player: "p1", other: "p2", card: "c2")
         
         // When
@@ -351,7 +351,7 @@ class GDatabaseUpdaterTests: XCTestCase {
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1, mockPlayer2)
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.drawInPlay(player: "p1", other: "p2", card: "c2")
         
         // When
@@ -375,7 +375,7 @@ class GDatabaseUpdaterTests: XCTestCase {
             .withDefault()
             .players(are: mockPlayer1)
             .store(are: mockCard2, mockCard3)
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.drawStore(player: "p1", card: "c2")
         
         // When
@@ -399,7 +399,7 @@ class GDatabaseUpdaterTests: XCTestCase {
             .withDefault()
             .players(are: mockPlayer1)
             .discard(are: mockCard2, mockCard3)
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.drawDiscard(player: "p1")
         
         // When
@@ -423,7 +423,7 @@ class GDatabaseUpdaterTests: XCTestCase {
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1)
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.equip(player: "p1", card: "c1")
         
         // When
@@ -449,7 +449,7 @@ class GDatabaseUpdaterTests: XCTestCase {
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1, mockPlayer2)
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.handicap(player: "p1", card: "c1", other: "p2")
         
         // When
@@ -475,7 +475,7 @@ class GDatabaseUpdaterTests: XCTestCase {
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1, mockPlayer2)
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.passInPlay(player: "p1", card: "c1", other: "p2")
         
         // When
@@ -500,7 +500,7 @@ class GDatabaseUpdaterTests: XCTestCase {
             .withDefault()
             .players(are: mockPlayer1)
             .discard(are: mockCard2)
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.discardHand(player: "p1", card: "c1")
         
         // When
@@ -523,7 +523,7 @@ class GDatabaseUpdaterTests: XCTestCase {
             .withDefault()
             .players(are: mockPlayer1)
             .discard(are: mockCard2)
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.play(player: "p1", card: "c1")
         
         // When
@@ -546,7 +546,7 @@ class GDatabaseUpdaterTests: XCTestCase {
             .withDefault()
             .players(are: mockPlayer1)
             .discard(are: mockCard2)
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.discardInPlay(player: "p1", card: "c1")
         
         // When
@@ -566,7 +566,7 @@ class GDatabaseUpdaterTests: XCTestCase {
         let mockState = MockStateProtocol()
             .withDefault()
             .deck(are: mockCard1, mockCard2)
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.deckToStore
         
         // When
@@ -588,7 +588,7 @@ class GDatabaseUpdaterTests: XCTestCase {
             .withDefault()
             .deck(are: mockCard1, mockCard2)
             .discard(are: mockCard3)
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.flipDeck
         
         // When
@@ -609,7 +609,7 @@ class GDatabaseUpdaterTests: XCTestCase {
         let mockState = MockStateProtocol()
             .withDefault()
             .hits(are: mockHit1)
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.addHit(hits: [GHit(player: "p2", name: "n1", abilities: ["looseHealth"], offender: "p1", cancelable: 1)])
         
         // When
@@ -628,7 +628,7 @@ class GDatabaseUpdaterTests: XCTestCase {
         // Given
         let mockState = MockStateProtocol()
             .withDefault()
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.addHit(hits: [GHit(player: "p2", name: "n1", abilities: ["looseHealth"], offender: "p1", cancelable: 1),
                                          GHit(player: "p3", name: "n1", abilities: ["looseHealth"], offender: "p1", cancelable: 1)])
         
@@ -660,7 +660,7 @@ class GDatabaseUpdaterTests: XCTestCase {
         let mockState = MockStateProtocol()
             .withDefault()
             .hits(are: mockHit1, mockHit2)
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.removeHit(player: "p1")
         
         // When
@@ -683,7 +683,7 @@ class GDatabaseUpdaterTests: XCTestCase {
         let mockState = MockStateProtocol()
             .withDefault()
             .hits(are: mockHit1, mockHit2)
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.cancelHit(player: "p1")
         
         // When
@@ -702,7 +702,7 @@ class GDatabaseUpdaterTests: XCTestCase {
         // Given
         let mockState = MockStateProtocol()
             .withDefault()
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.activate(moves: [])
         
         // When
@@ -714,7 +714,7 @@ class GDatabaseUpdaterTests: XCTestCase {
         // Given
         let mockState = MockStateProtocol()
             .withDefault()
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.gameover(winner: .outlaw)
         
         // When
@@ -727,7 +727,7 @@ class GDatabaseUpdaterTests: XCTestCase {
         // Given
         let mockState = MockStateProtocol()
             .withDefault()
-        let state = GState(mockState)
+        let state = GState.copy(mockState)
         let event = GEvent.emptyQueue
         
         // When
