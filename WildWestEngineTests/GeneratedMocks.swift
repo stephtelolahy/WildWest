@@ -592,31 +592,16 @@ public class MockEngineProtocol: EngineProtocol, Cuckoo.ProtocolMock {
     
     
     
-    public func execute(_ move: GMove)  {
+    public func execute(_ move: GMove?, completion: ((Error?) -> Void)?)  {
         
-    return cuckoo_manager.call("execute(_: GMove)",
-            parameters: (move),
-            escapingParameters: (move),
+    return cuckoo_manager.call("execute(_: GMove?, completion: ((Error?) -> Void)?)",
+            parameters: (move, completion),
+            escapingParameters: (move, completion),
             superclassCall:
                 
                 Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
-            defaultCall: __defaultImplStub!.execute(move))
-        
-    }
-    
-    
-    
-    public func refresh()  {
-        
-    return cuckoo_manager.call("refresh()",
-            parameters: (),
-            escapingParameters: (),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.refresh())
+            defaultCall: __defaultImplStub!.execute(move, completion: completion))
         
     }
     
@@ -629,14 +614,9 @@ public class MockEngineProtocol: EngineProtocol, Cuckoo.ProtocolMock {
 	    }
 	    
 	    
-	    func execute<M1: Cuckoo.Matchable>(_ move: M1) -> Cuckoo.ProtocolStubNoReturnFunction<(GMove)> where M1.MatchedType == GMove {
-	        let matchers: [Cuckoo.ParameterMatcher<(GMove)>] = [wrap(matchable: move) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockEngineProtocol.self, method: "execute(_: GMove)", parameterMatchers: matchers))
-	    }
-	    
-	    func refresh() -> Cuckoo.ProtocolStubNoReturnFunction<()> {
-	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return .init(stub: cuckoo_manager.createStub(for: MockEngineProtocol.self, method: "refresh()", parameterMatchers: matchers))
+	    func execute<M1: Cuckoo.OptionalMatchable, M2: Cuckoo.OptionalMatchable>(_ move: M1, completion: M2) -> Cuckoo.ProtocolStubNoReturnFunction<(GMove?, ((Error?) -> Void)?)> where M1.OptionalMatchedType == GMove, M2.OptionalMatchedType == ((Error?) -> Void) {
+	        let matchers: [Cuckoo.ParameterMatcher<(GMove?, ((Error?) -> Void)?)>] = [wrap(matchable: move) { $0.0 }, wrap(matchable: completion) { $0.1 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockEngineProtocol.self, method: "execute(_: GMove?, completion: ((Error?) -> Void)?)", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -656,15 +636,9 @@ public class MockEngineProtocol: EngineProtocol, Cuckoo.ProtocolMock {
 	
 	    
 	    @discardableResult
-	    func execute<M1: Cuckoo.Matchable>(_ move: M1) -> Cuckoo.__DoNotUse<(GMove), Void> where M1.MatchedType == GMove {
-	        let matchers: [Cuckoo.ParameterMatcher<(GMove)>] = [wrap(matchable: move) { $0 }]
-	        return cuckoo_manager.verify("execute(_: GMove)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
-	    func refresh() -> Cuckoo.__DoNotUse<(), Void> {
-	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return cuckoo_manager.verify("refresh()", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    func execute<M1: Cuckoo.OptionalMatchable, M2: Cuckoo.OptionalMatchable>(_ move: M1, completion: M2) -> Cuckoo.__DoNotUse<(GMove?, ((Error?) -> Void)?), Void> where M1.OptionalMatchedType == GMove, M2.OptionalMatchedType == ((Error?) -> Void) {
+	        let matchers: [Cuckoo.ParameterMatcher<(GMove?, ((Error?) -> Void)?)>] = [wrap(matchable: move) { $0.0 }, wrap(matchable: completion) { $0.1 }]
+	        return cuckoo_manager.verify("execute(_: GMove?, completion: ((Error?) -> Void)?)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -676,11 +650,7 @@ public class EngineProtocolStub: EngineProtocol {
     
 
     
-    public func execute(_ move: GMove)   {
-        return DefaultValueRegistry.defaultValue(for: (Void).self)
-    }
-    
-    public func refresh()   {
+    public func execute(_ move: GMove?, completion: ((Error?) -> Void)?)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
@@ -836,102 +806,6 @@ public class GEventQueueProtocolStub: GEventQueueProtocol {
     
     public func pop() -> GEvent?  {
         return DefaultValueRegistry.defaultValue(for: (GEvent?).self)
-    }
-    
-}
-
-
-import Cuckoo
-@testable import WildWestEngine
-
-import RxSwift
-
-
-public class MockGLoopProtocol: GLoopProtocol, Cuckoo.ProtocolMock {
-    
-    public typealias MocksType = GLoopProtocol
-    
-    public typealias Stubbing = __StubbingProxy_GLoopProtocol
-    public typealias Verification = __VerificationProxy_GLoopProtocol
-
-    public let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
-
-    
-    private var __defaultImplStub: GLoopProtocol?
-
-    public func enableDefaultImplementation(_ stub: GLoopProtocol) {
-        __defaultImplStub = stub
-        cuckoo_manager.enableDefaultStubImplementation()
-    }
-    
-
-    
-
-    
-
-    
-    
-    
-    public func run(_ move: GMove?) -> Completable {
-        
-    return cuckoo_manager.call("run(_: GMove?) -> Completable",
-            parameters: (move),
-            escapingParameters: (move),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.run(move))
-        
-    }
-    
-
-	public struct __StubbingProxy_GLoopProtocol: Cuckoo.StubbingProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	
-	    public init(manager: Cuckoo.MockManager) {
-	        self.cuckoo_manager = manager
-	    }
-	    
-	    
-	    func run<M1: Cuckoo.OptionalMatchable>(_ move: M1) -> Cuckoo.ProtocolStubFunction<(GMove?), Completable> where M1.OptionalMatchedType == GMove {
-	        let matchers: [Cuckoo.ParameterMatcher<(GMove?)>] = [wrap(matchable: move) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGLoopProtocol.self, method: "run(_: GMove?) -> Completable", parameterMatchers: matchers))
-	    }
-	    
-	}
-
-	public struct __VerificationProxy_GLoopProtocol: Cuckoo.VerificationProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	    private let callMatcher: Cuckoo.CallMatcher
-	    private let sourceLocation: Cuckoo.SourceLocation
-	
-	    public init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
-	        self.cuckoo_manager = manager
-	        self.callMatcher = callMatcher
-	        self.sourceLocation = sourceLocation
-	    }
-	
-	    
-	
-	    
-	    @discardableResult
-	    func run<M1: Cuckoo.OptionalMatchable>(_ move: M1) -> Cuckoo.__DoNotUse<(GMove?), Completable> where M1.OptionalMatchedType == GMove {
-	        let matchers: [Cuckoo.ParameterMatcher<(GMove?)>] = [wrap(matchable: move) { $0 }]
-	        return cuckoo_manager.verify("run(_: GMove?) -> Completable", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	}
-}
-
-public class GLoopProtocolStub: GLoopProtocol {
-    
-
-    
-
-    
-    public func run(_ move: GMove?) -> Completable  {
-        return DefaultValueRegistry.defaultValue(for: (Completable).self)
     }
     
 }

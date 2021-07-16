@@ -8,6 +8,5 @@
 import RxSwift
 
 public protocol EngineProtocol {
-    func execute(_ move: GMove)
-    func refresh()
+    func execute(_ move: GMove?, completion: ((Error?) -> Void)?)
 }

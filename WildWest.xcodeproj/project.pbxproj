@@ -29,10 +29,11 @@
 		265CCFC92696D7860003641E /* BangRequire2CardsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265CCFC82696D7860003641E /* BangRequire2CardsTests.swift */; };
 		2666DA7326A0E2D900D0FC1A /* AttributeRulesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D710C0269E5E5600798FCD /* AttributeRulesTests.swift */; };
 		2666DA7826A0EDED00D0FC1A /* GameEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3337029024CB4879007E59A2 /* GameEnvironment.swift */; };
+		269690C626A1265F0099844D /* MCTSAiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B2106267D48C9008F21E0 /* MCTSAiTests.swift */; };
 		26A6D64626A0D7DC0060D7C1 /* DataBase+Restricted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A6D64526A0D7DC0060D7C1 /* DataBase+Restricted.swift */; };
 		26CBA70E267BD3A600EA1227 /* RandomWithRoleAi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CBA70D267BD3A600EA1227 /* RandomWithRoleAi.swift */; };
 		26D710BF269E5A4C00798FCD /* DistanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D710BE269E5A4C00798FCD /* DistanceTests.swift */; };
-		26E56473267DBE58008DDB58 /* GLoopSyncronous.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E56472267DBE58008DDB58 /* GLoopSyncronous.swift */; };
+		26E56473267DBE58008DDB58 /* GEngineSyncronous.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E56472267DBE58008DDB58 /* GEngineSyncronous.swift */; };
 		26F88D872672B51700B82AF9 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F88D862672B51700B82AF9 /* Node.swift */; };
 		3300B02A264E3C48002F4776 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3300B029264E3C48002F4776 /* GeneratedMocks.swift */; };
 		3300B0A8264E4236002F4776 /* ParameterMatcherExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3300B0A7264E4236002F4776 /* ParameterMatcherExtension.swift */; };
@@ -118,7 +119,6 @@
 		3358334B25BC2585001BE4D8 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358332025BC2585001BE4D8 /* Engine.swift */; };
 		3358334C25BC2585001BE4D8 /* GDatabaseUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358332125BC2585001BE4D8 /* GDatabaseUpdater.swift */; };
 		3358334D25BC2585001BE4D8 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358332225BC2585001BE4D8 /* Database.swift */; };
-		3358334E25BC2585001BE4D8 /* GLoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358332325BC2585001BE4D8 /* GLoop.swift */; };
 		3358334F25BC2585001BE4D8 /* GTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358332425BC2585001BE4D8 /* GTimer.swift */; };
 		3358335025BC2585001BE4D8 /* GEventQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3358332525BC2585001BE4D8 /* GEventQueue.swift */; };
 		3358335225BC2585001BE4D8 /* bang-deck.json in Resources */ = {isa = PBXBuildFile; fileRef = 3358332825BC2585001BE4D8 /* bang-deck.json */; };
@@ -176,7 +176,6 @@
 		3392B1BF25BC377100214393 /* PlayBangAsMissedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3392B16925BC376F00214393 /* PlayBangAsMissedTests.swift */; };
 		3392B1C025BC377100214393 /* GameRulesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3392B16B25BC376F00214393 /* GameRulesTests.swift */; };
 		3392B1C125BC377100214393 /* EngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3392B16D25BC376F00214393 /* EngineTests.swift */; };
-		3392B1C225BC377100214393 /* GLoopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3392B16E25BC376F00214393 /* GLoopTests.swift */; };
 		3392B1C325BC377100214393 /* DatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3392B16F25BC376F00214393 /* DatabaseTests.swift */; };
 		3392B1C425BC377100214393 /* GEventQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3392B17025BC376F00214393 /* GEventQueueTests.swift */; };
 		3392B1C525BC377100214393 /* GTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3392B17125BC376F00214393 /* GTimerTests.swift */; };
@@ -415,7 +414,7 @@
 		26CBA70D267BD3A600EA1227 /* RandomWithRoleAi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomWithRoleAi.swift; sourceTree = "<group>"; };
 		26D710BE269E5A4C00798FCD /* DistanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceTests.swift; sourceTree = "<group>"; };
 		26D710C0269E5E5600798FCD /* AttributeRulesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeRulesTests.swift; sourceTree = "<group>"; };
-		26E56472267DBE58008DDB58 /* GLoopSyncronous.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLoopSyncronous.swift; sourceTree = "<group>"; };
+		26E56472267DBE58008DDB58 /* GEngineSyncronous.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GEngineSyncronous.swift; sourceTree = "<group>"; };
 		26F88D862672B51700B82AF9 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		302397755E696ECE7C3EE1C2 /* Pods-WildWest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.debug.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.debug.xcconfig"; sourceTree = "<group>"; };
 		3300B029264E3C48002F4776 /* GeneratedMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
@@ -494,7 +493,6 @@
 		3358332025BC2585001BE4D8 /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		3358332125BC2585001BE4D8 /* GDatabaseUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GDatabaseUpdater.swift; sourceTree = "<group>"; };
 		3358332225BC2585001BE4D8 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
-		3358332325BC2585001BE4D8 /* GLoop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLoop.swift; sourceTree = "<group>"; };
 		3358332425BC2585001BE4D8 /* GTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTimer.swift; sourceTree = "<group>"; };
 		3358332525BC2585001BE4D8 /* GEventQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GEventQueue.swift; sourceTree = "<group>"; };
 		3358332825BC2585001BE4D8 /* bang-deck.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "bang-deck.json"; sourceTree = "<group>"; };
@@ -547,7 +545,6 @@
 		3392B16925BC376F00214393 /* PlayBangAsMissedTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayBangAsMissedTests.swift; sourceTree = "<group>"; };
 		3392B16B25BC376F00214393 /* GameRulesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameRulesTests.swift; sourceTree = "<group>"; };
 		3392B16D25BC376F00214393 /* EngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineTests.swift; sourceTree = "<group>"; };
-		3392B16E25BC376F00214393 /* GLoopTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLoopTests.swift; sourceTree = "<group>"; };
 		3392B16F25BC376F00214393 /* DatabaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseTests.swift; sourceTree = "<group>"; };
 		3392B17025BC376F00214393 /* GEventQueueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GEventQueueTests.swift; sourceTree = "<group>"; };
 		3392B17125BC376F00214393 /* GTimerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTimerTests.swift; sourceTree = "<group>"; };
@@ -1095,8 +1092,7 @@
 			children = (
 				3358332025BC2585001BE4D8 /* Engine.swift */,
 				3358331F25BC2585001BE4D8 /* GEngine.swift */,
-				3358332325BC2585001BE4D8 /* GLoop.swift */,
-				26E56472267DBE58008DDB58 /* GLoopSyncronous.swift */,
+				26E56472267DBE58008DDB58 /* GEngineSyncronous.swift */,
 				3358332525BC2585001BE4D8 /* GEventQueue.swift */,
 				3358332425BC2585001BE4D8 /* GTimer.swift */,
 			);
@@ -1244,7 +1240,6 @@
 			isa = PBXGroup;
 			children = (
 				3392B16D25BC376F00214393 /* EngineTests.swift */,
-				3392B16E25BC376F00214393 /* GLoopTests.swift */,
 				3392B16F25BC376F00214393 /* DatabaseTests.swift */,
 				3392B17025BC376F00214393 /* GEventQueueTests.swift */,
 				3392B17125BC376F00214393 /* GTimerTests.swift */,
@@ -1916,7 +1911,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/WildWestEngineTests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/WildWestEngine\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"WildWestEngine\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/state/State.swift\" \\\n\"${INPUT_DIR}/store/Database.swift\" \\\n\"${INPUT_DIR}/store/GDatabaseUpdater.swift\" \\\n\"${INPUT_DIR}/engine/Engine.swift\" \\\n\"${INPUT_DIR}/engine/GLoop.swift\" \\\n\"${INPUT_DIR}/engine/GEventQueue.swift\" \\\n\"${INPUT_DIR}/engine/GTimer.swift\" \\\n\"${INPUT_DIR}/rules/GameRules.swift\" \\\n\"${INPUT_DIR}/setup/Setup.swift\" \\\n\"${INPUT_DIR}/resources/ResourcesLoader.swift\" \\\n\"${INPUT_DIR}/ai/AIAgent.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/RandomWithRoleAi.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/MoveEvaluator.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/RoleEstimator.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/RoleStrategy.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/AbilityEvaluator.swift\"\n";
+			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/WildWestEngineTests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/WildWestEngine\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"WildWestEngine\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/state/State.swift\" \\\n\"${INPUT_DIR}/store/Database.swift\" \\\n\"${INPUT_DIR}/store/GDatabaseUpdater.swift\" \\\n\"${INPUT_DIR}/engine/Engine.swift\" \\\n\"${INPUT_DIR}/engine/GEventQueue.swift\" \\\n\"${INPUT_DIR}/engine/GTimer.swift\" \\\n\"${INPUT_DIR}/rules/GameRules.swift\" \\\n\"${INPUT_DIR}/setup/Setup.swift\" \\\n\"${INPUT_DIR}/resources/ResourcesLoader.swift\" \\\n\"${INPUT_DIR}/ai/AIAgent.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/RandomWithRoleAi.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/MoveEvaluator.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/RoleEstimator.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/RoleStrategy.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/AbilityEvaluator.swift\"\n";
 		};
 		3DE5D489E0D81C17891F4FD5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2090,7 +2085,6 @@
 				33272F7926592741005C9246 /* EffectFamily.swift in Sources */,
 				339CC9A1265E91220070D77B /* RequireTargetHit.swift in Sources */,
 				33AAE068265ABCD800A067E3 /* OnPhase.swift in Sources */,
-				3358334E25BC2585001BE4D8 /* GLoop.swift in Sources */,
 				33FBF908265B167C00D7C6AD /* RequireTargetEliminated.swift in Sources */,
 				33245E6826602F4D0019E8F0 /* OnOtherEliminated.swift in Sources */,
 				3358334525BC2585001BE4D8 /* AbilityEvaluator.swift in Sources */,
@@ -2158,7 +2152,7 @@
 				33AAE02926597CF100A067E3 /* Handicap.swift in Sources */,
 				261CBD8126A0DC8F00043494 /* GState+Copy.swift in Sources */,
 				3358334225BC2585001BE4D8 /* MoveSelector.swift in Sources */,
-				26E56473267DBE58008DDB58 /* GLoopSyncronous.swift in Sources */,
+				26E56473267DBE58008DDB58 /* GEngineSyncronous.swift in Sources */,
 				33272F7D26592793005C9246 /* DrawDeck.swift in Sources */,
 				33AAE02726597AA700A067E3 /* CardArgument.swift in Sources */,
 				33176D2E26593D4A000A6FBF /* PlayReqFamily.swift in Sources */,
@@ -2200,6 +2194,7 @@
 				2643D94C26938E0600012BBC /* ResourcesDodgeCityTests.swift in Sources */,
 				33636561265C1DB100B55C4E /* SpringfieldTests.swift in Sources */,
 				33245E6626602C980019E8F0 /* Gain2HealthOnOtherEliminatedTests.swift in Sources */,
+				269690C626A1265F0099844D /* MCTSAiTests.swift in Sources */,
 				3392B1EB25BC377100214393 /* Discard2CardsFor1HealthTests.swift in Sources */,
 				3392B1E925BC377100214393 /* PanicTests.swift in Sources */,
 				3392B1ED25BC377100214393 /* HandicapTests.swift in Sources */,
@@ -2214,7 +2209,6 @@
 				3392B1D525BC377100214393 /* PenalizeSheriffOnEliminatingDeputyTests.swift in Sources */,
 				3392B1E025BC377100214393 /* IndiansTests.swift in Sources */,
 				3392B1FE25BC377100214393 /* GeneratedMocks.swift in Sources */,
-				3392B1C225BC377100214393 /* GLoopTests.swift in Sources */,
 				3392B1D625BC377100214393 /* GainRewardOnEliminatingOutlawTests.swift in Sources */,
 				264CC4C426978D0E0046D996 /* SilentDiamondsTests.swift in Sources */,
 				3392B1EA25BC377100214393 /* DiscardBeerTests.swift in Sources */,

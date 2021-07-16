@@ -60,8 +60,8 @@ extension GState: MCTSState {
     }
     
     public func performMove(_ move: GMove) -> Self {
-        let loop = GLoopSyncronous(rules: Self.rules, databaseUpdater: GDatabaseUpdater())
-        return loop.run(move, in: self) as! Self
+        let engine = GEngineSyncronous(rules: Self.rules, databaseUpdater: GDatabaseUpdater())
+        return engine.run(move, in: self) as! Self
     }
 }
 
