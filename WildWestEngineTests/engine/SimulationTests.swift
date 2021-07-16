@@ -72,15 +72,14 @@ class SimulationTests: XCTestCase {
         let databaseUpdater = GDatabaseUpdater()
         let database = GDatabase(state, updater: databaseUpdater)
         
-        let abilityMatcher = AbilityMatcher(abilities)
+        let rules = GameRules(abilities)
         let eventsQueue = GEventQueue()
         let eventMatcher = LinearDurationMatcher()
         let timer = GTimer(matcher: eventMatcher)
-        let loop = GLoop(eventsQueue: eventsQueue,
-                         database: database,
-                         matcher: abilityMatcher,
-                         timer: timer)
-        let engine = GEngine(loop: loop)
+        let engine = GEngine(queue: eventsQueue,
+                             database: database,
+                             rules: rules,
+                             timer: timer)
         
         let sheriff = state.players.values.first(where: { $0.role == .sheriff })!.identifier
         let agents: [AIAgentProtocol] = state.playOrder.map { player in
@@ -125,7 +124,7 @@ class SimulationTests: XCTestCase {
         .disposed(by: disposeBag)
         
         agents.forEach { $0.observe(database) }
-        engine.refresh()
+        engine.execute(nil, completion: nil)
         
         self.disposeBag = disposeBag
         self.agents = agents

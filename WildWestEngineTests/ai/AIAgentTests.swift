@@ -51,7 +51,7 @@ class AIAgentTests: XCTestCase {
         eventSubject.onNext(.activate(moves: moves))
         
         // Assert
-        verify(mockEngine).execute(equal(to: move2))
+        verify(mockEngine).execute(equal(to: move2), completion: any())
     }
     
     func test_DoNothing_IfReceivingUnattributedActiveMoves() {

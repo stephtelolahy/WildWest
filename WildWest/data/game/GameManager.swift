@@ -61,16 +61,11 @@ class GameManager: GameManagerProtocol {
     }
     
     func joinRemoteGame(gameId: String, playerId: String) -> Single<GameEnvironment> {
-        database.getGame(gameId)
-            .flatMap { [self] state -> Single<GameEnvironment> in
-                database.getGameUsers(gameId)
-                    .map { users in
-                        gameBuilder.createRemoteGameEnvironment(state: state,
-                                                                playerId: playerId,
-                                                                gameId: gameId,
-                                                                users: users)
-                        
-                    }
-            }
+        Single.zip(database.getGame(gameId), database.getGameUsers(gameId), resultSelector: { [self] state, users in
+            gameBuilder.createRemoteGameEnvironment(state: state,
+                                                    playerId: playerId,
+                                                    gameId: gameId,
+                                                    users: users)
+        })
     }
 }

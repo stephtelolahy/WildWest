@@ -85,14 +85,14 @@ class GameViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         router.toGameRoles(state.players.count) { [weak self] in
-            self?.environment.engine.refresh()
+            self?.environment.engine.execute(nil, completion: nil)
         }
     }
     
     // MARK: - IBAction
     
     @IBAction private func refreshButtonTapped(_ sender: Any) {
-        environment.engine.refresh()
+        environment.engine.execute(nil, completion: nil)
     }
     
     @IBAction private func menuButtonTapped(_ sender: Any) {
@@ -106,7 +106,7 @@ class GameViewController: UIViewController {
         }
         
         moveSelector.selectMove(among: moves, title: nil, cancelable: true) { [weak self] move in
-            self?.environment.engine.execute(move)
+            self?.environment.engine.execute(move, completion: nil)
         }
     }
     
@@ -116,7 +116,7 @@ class GameViewController: UIViewController {
         }
         
         moveSelector.selectMove(among: moves, title: nil, cancelable: true) { [weak self] move in
-            self?.environment.engine.execute(move)
+            self?.environment.engine.execute(move, completion: nil)
         }
     }
 }
@@ -185,10 +185,10 @@ private extension GameViewController {
            let hit = state.hits.first {
             if preferences.assistedMode {
                 let move = assistantAI.bestMove(among: moves, in: state)
-                environment.engine.execute(move)
+                environment.engine.execute(move, completion: nil)
             } else {
                 moveSelector.selectMove(among: moves, title: hit.name, cancelable: false) { [weak self] move in
-                    self?.environment.engine.execute(move)
+                    self?.environment.engine.execute(move, completion: nil)
                 }
             }
         }
@@ -304,7 +304,7 @@ extension GameViewController: UICollectionViewDelegate {
         }
         
         moveSelector.selectMove(among: moves, title: nil, cancelable: true) { [weak self] move in
-            self?.environment.engine.execute(move)
+            self?.environment.engine.execute(move, completion: nil)
         }
     }
 }

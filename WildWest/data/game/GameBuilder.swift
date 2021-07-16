@@ -27,18 +27,18 @@ class GameBuilder: GameBuilderProtocol {
     private let resourcesLoader: ResourcesLoaderProtocol
     private let durationMatcher: EventDurationProtocol
     private let database: UserDatabaseProtocol
-    private let abilityMatcher: AbilityMatcherProtocol
+    private let rules: GameRulesProtocol
     
     init(preferences: UserPreferencesProtocol,
          resourcesLoader: ResourcesLoaderProtocol,
          durationMatcher: EventDurationProtocol,
          database: UserDatabaseProtocol,
-         abilityMatcher: AbilityMatcherProtocol) {
+         rules: GameRulesProtocol) {
         self.preferences = preferences
         self.resourcesLoader = resourcesLoader
         self.durationMatcher = durationMatcher
         self.database = database
-        self.abilityMatcher = abilityMatcher
+        self.rules = rules
     }
     
     func createGame(for playersCount: Int) -> StateProtocol {
@@ -57,13 +57,9 @@ class GameBuilder: GameBuilderProtocol {
     func createLocalGameEnvironment(state: StateProtocol,
                                     playerId: String?) -> GameEnvironment {
         
-        let databaseUpdater = GDatabaseUpdater()
-        let database = GDatabase(state, updater: databaseUpdater)
-        
-        let eventsQueue = GEventQueue()
+        let database = GDatabase(state, updater: GDatabaseUpdater())
         let timer = GTimer(matcher: durationMatcher)
-        let loop = GLoop(eventsQueue: eventsQueue, database: database, matcher: abilityMatcher, timer: timer)
-        let engine = GEngine(loop: loop)
+        let engine = GEngine(queue: GEventQueue(), database: database, rules: rules, timer: timer)
         
         let sheriff = state.players.values.first(where: { $0.role == .sheriff })!.identifier
         let agents: [AIAgentProtocol] = state.playOrder.filter { $0 != playerId }.map { player in
@@ -88,11 +84,8 @@ class GameBuilder: GameBuilderProtocol {
                                      gameId: String,
                                      users: [String: UserInfo]) -> GameEnvironment {
         let gameDatabase = database.createGameDatabase(gameId, state: state)
-        
-        let eventsQueue = GEventQueue()
         let timer = GTimer(matcher: durationMatcher)
-        let loop = GLoop(eventsQueue: eventsQueue, database: gameDatabase, matcher: abilityMatcher, timer: timer)
-        let engine = GEngine(loop: loop)
+        let engine = GEngine(queue: GEventQueue(), database: gameDatabase, rules: rules, timer: timer)
         
         return GameEnvironment(engine: engine,
                                database: gameDatabase,

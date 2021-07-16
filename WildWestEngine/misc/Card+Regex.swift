@@ -8,13 +8,17 @@
 public extension CardProtocol {
     
     func matches(regex pattern: String) -> Bool {
-        pattern.isEmpty || "\(name)\(value)\(suit)".matches(regex: pattern)
+        "\(name)\(value)\(suit)".matches(regex: pattern)
     }
 }
 
-public extension String {
+public  extension String {
     
     func matches(regex pattern: String) -> Bool {
+        if pattern.isEmpty {
+            return true
+        }
+        
         let string = self
         guard let regex = try? NSRegularExpression(pattern: pattern) else {
             return false

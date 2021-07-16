@@ -19,10 +19,10 @@ extension Resolver: ResolverRegistering {
             ResourcesLoader(jsonReader: resolve(), collection: arg as? CardCollection)
         }
         
-        register(AbilityMatcherProtocol.self) {
+        register(GameRulesProtocol.self) {
             let resourcesLoader = resolve(ResourcesLoaderProtocol.self)
             let abilities = resourcesLoader.loadAbilities()
-            return AbilityMatcher(abilities)
+            return GameRules(abilities)
         }.scope(application)
     }
 }
