@@ -27,6 +27,8 @@
 		265CCFC92696D7860003641E /* BangRequire2CardsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265CCFC82696D7860003641E /* BangRequire2CardsTests.swift */; };
 		2666DA7326A0E2D900D0FC1A /* AttributeRulesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D710C0269E5E5600798FCD /* AttributeRulesTests.swift */; };
 		2666DA7826A0EDED00D0FC1A /* GameEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3337029024CB4879007E59A2 /* GameEnvironment.swift */; };
+		2676CE1226CE329A006B96A6 /* IsHitEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2676CE1126CE329A006B96A6 /* IsHitEffect.swift */; };
+		2676CE1426CE32BF006B96A6 /* IsHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2676CE1326CE32BF006B96A6 /* IsHealth.swift */; };
 		26A6D64626A0D7DC0060D7C1 /* DataBase+Restricted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A6D64526A0D7DC0060D7C1 /* DataBase+Restricted.swift */; };
 		26CBA70E267BD3A600EA1227 /* RandomWithRoleAi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CBA70D267BD3A600EA1227 /* RandomWithRoleAi.swift */; };
 		26D710BF269E5A4C00798FCD /* DistanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D710BE269E5A4C00798FCD /* DistanceTests.swift */; };
@@ -250,7 +252,6 @@
 		33AAE02926597CF100A067E3 /* Handicap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE02826597CF100A067E3 /* Handicap.swift */; };
 		33AAE02B2659811900A067E3 /* RequireTargetOther.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE02A2659811900A067E3 /* RequireTargetOther.swift */; };
 		33AAE02D2659827D00A067E3 /* SetPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE02C2659827D00A067E3 /* SetPhase.swift */; };
-		33AAE02F2659846000A067E3 /* IsHitEliminate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE02E2659846000A067E3 /* IsHitEliminate.swift */; };
 		33AAE0312659854A00A067E3 /* RemoveHit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE0302659854A00A067E3 /* RemoveHit.swift */; };
 		33AAE0332659887700A067E3 /* DiscardHand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE0322659887700A067E3 /* DiscardHand.swift */; };
 		33AAE0352659898000A067E3 /* RequireInPlayCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AAE0342659898000A067E3 /* RequireInPlayCard.swift */; };
@@ -403,6 +404,8 @@
 		264CC4C326978D0E0046D996 /* SilentDiamondsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SilentDiamondsTests.swift; sourceTree = "<group>"; };
 		265CCFC62696CF550003641E /* StartTurnDrawingInPlayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTurnDrawingInPlayTests.swift; sourceTree = "<group>"; };
 		265CCFC82696D7860003641E /* BangRequire2CardsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BangRequire2CardsTests.swift; sourceTree = "<group>"; };
+		2676CE1126CE329A006B96A6 /* IsHitEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsHitEffect.swift; sourceTree = "<group>"; };
+		2676CE1326CE32BF006B96A6 /* IsHealth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsHealth.swift; sourceTree = "<group>"; };
 		26A6D64526A0D7DC0060D7C1 /* DataBase+Restricted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataBase+Restricted.swift"; sourceTree = "<group>"; };
 		26CBA70D267BD3A600EA1227 /* RandomWithRoleAi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomWithRoleAi.swift; sourceTree = "<group>"; };
 		26D710BE269E5A4C00798FCD /* DistanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceTests.swift; sourceTree = "<group>"; };
@@ -611,7 +614,6 @@
 		33AAE02826597CF100A067E3 /* Handicap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Handicap.swift; sourceTree = "<group>"; };
 		33AAE02A2659811900A067E3 /* RequireTargetOther.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireTargetOther.swift; sourceTree = "<group>"; };
 		33AAE02C2659827D00A067E3 /* SetPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPhase.swift; sourceTree = "<group>"; };
-		33AAE02E2659846000A067E3 /* IsHitEliminate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsHitEliminate.swift; sourceTree = "<group>"; };
 		33AAE0302659854A00A067E3 /* RemoveHit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveHit.swift; sourceTree = "<group>"; };
 		33AAE0322659887700A067E3 /* DiscardHand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardHand.swift; sourceTree = "<group>"; };
 		33AAE0342659898000A067E3 /* RequireInPlayCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireInPlayCard.swift; sourceTree = "<group>"; };
@@ -907,12 +909,13 @@
 				33176D2F26593DBA000A6FBF /* IsYourTurn.swift */,
 				33176D35265947BA000A6FBF /* IsPhase.swift */,
 				331239E32659766C006C1EC1 /* IsPlayersCountMin.swift */,
-				33AAE02E2659846000A067E3 /* IsHitEliminate.swift */,
 				33AAE0442659A5E500A067E3 /* IsTimesPerTurnMax.swift */,
 				33AAE04C265A2CD900A067E3 /* IsHitCancelable.swift */,
 				33AAE050265A2FCF00A067E3 /* IsHitName.swift */,
 				33FBF8FB265B10CE00D7C6AD /* IsHandExceedLimit.swift */,
 				2643D94F2693972F00012BBC /* IsHealthMin.swift */,
+				2676CE1126CE329A006B96A6 /* IsHitEffect.swift */,
+				2676CE1326CE32BF006B96A6 /* IsHealth.swift */,
 				33AAE02A2659811900A067E3 /* RequireTargetOther.swift */,
 				3369518C265FAF4C00B05D56 /* RequireTargetAny.swift */,
 				33AAE0342659898000A067E3 /* RequireInPlayCard.swift */,
@@ -2091,6 +2094,7 @@
 				33AAE0232659771D00A067E3 /* GainHealth.swift in Sources */,
 				3358334D25BC2585001BE4D8 /* Database.swift in Sources */,
 				3358334425BC2585001BE4D8 /* AIAgent.swift in Sources */,
+				2676CE1226CE329A006B96A6 /* IsHitEffect.swift in Sources */,
 				3358333725BC2585001BE4D8 /* DeckCard.swift in Sources */,
 				3358332C25BC2585001BE4D8 /* Card+Regex.swift in Sources */,
 				3358334125BC2585001BE4D8 /* MoveSegmenter.swift in Sources */,
@@ -2118,6 +2122,7 @@
 				3358333325BC2585001BE4D8 /* GMove.swift in Sources */,
 				338F7A572659682E00731FB9 /* GameRules.swift in Sources */,
 				261CBD8326A0DCC400043494 /* DistanceRules.swift in Sources */,
+				2676CE1426CE32BF006B96A6 /* IsHealth.swift in Sources */,
 				33AAE04F265A2D2F00A067E3 /* CancelHit.swift in Sources */,
 				33FBF90A265B1BE700D7C6AD /* DrawDeckFlippingIf.swift in Sources */,
 				33AAE063265AAA5F00A067E3 /* ParsedValue.swift in Sources */,
@@ -2148,7 +2153,6 @@
 				3358333525BC2585001BE4D8 /* GState.swift in Sources */,
 				33AAE06A265ABD7400A067E3 /* SetTurn.swift in Sources */,
 				264B7418268FA3C0009CE757 /* OnPlayCardOutOfTurn.swift in Sources */,
-				33AAE02F2659846000A067E3 /* IsHitEliminate.swift in Sources */,
 				33FBF8FE265B117200D7C6AD /* RequireHandCards.swift in Sources */,
 				33176D342659438C000A6FBF /* Effect.swift in Sources */,
 				3358334F25BC2585001BE4D8 /* GTimer.swift in Sources */,

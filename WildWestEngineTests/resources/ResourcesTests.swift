@@ -57,6 +57,7 @@ class ResourcesTests: XCTestCase {
         let card = sut.loadCards().first { $0.type == .default && $0.name == "player" }!
         
         // Assert
+        XCTAssertEqual(card.abilities.count, 7)
         XCTAssertTrue(card.abilities.contains("startTurnDrawing2Cards"))
         XCTAssertTrue(card.abilities.contains("endTurn"))
         XCTAssertTrue(card.abilities.contains("nextTurnOnPhase3"))
@@ -66,13 +67,37 @@ class ResourcesTests: XCTestCase {
         XCTAssertTrue(card.abilities.contains("gainRewardOnEliminatingOutlaw"))
     }
     
-    func test_DefaultSheriffAbilities() throws {
+    func test_SheriffAbilities() throws {
         // Given
         // When
         let card = sut.loadCards().first { $0.type == .default && $0.name == "sheriff" }!
         
         // Assert
+        XCTAssertEqual(card.abilities.count, 1)
         XCTAssertTrue(card.abilities.contains("penalizeOnEliminatingDeputy"))
         XCTAssertEqual(card.attributes[.silentCard] as? String, "jail")
+    }
+    
+    func test_ChoosableEffectsAbilities() throws {
+        // Given
+        let allAbilities = sut.loadAbilities().map { $0.name }
+        let cards = sut.loadCards()
+        
+        // When
+        let cardAbilities = Set(cards.map { $0.abilities }.flatMap { $0 })
+        let abilities = allAbilities.filter { !cardAbilities.contains($0) }
+        
+        // Assert
+        XCTAssertEqual(abilities.count, 10)
+        XCTAssertTrue(abilities.contains("looseHealth"))
+        XCTAssertTrue(abilities.contains("drawStore"))
+        XCTAssertTrue(abilities.contains("discardSelfHand"))
+        XCTAssertTrue(abilities.contains("discardTargetHitHand"))
+        XCTAssertTrue(abilities.contains("discardTargetHitInPlay"))
+        XCTAssertTrue(abilities.contains("startTurnDrawingDeck"))
+        XCTAssertTrue(abilities.contains("startTurnDrawingDeckChoosing"))
+        XCTAssertTrue(abilities.contains("startTurnDrawingPlayer"))
+        XCTAssertTrue(abilities.contains("startTurnDrawingDiscard"))
+        XCTAssertTrue(abilities.contains("startTurnDrawingInPlay"))
     }
 }

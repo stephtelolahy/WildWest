@@ -14,10 +14,11 @@ public enum PlayReqFamily: String, CaseIterable {
     case isPhase
     case isPlayersCountMin
     case isTimesPerTurnMax
-    case isHitEliminate
+    case isHitEffect
     case isHitCancelable
     case isHitName
     case isHandExceedLimit
+    case isHealth
     case isHealthMin
     
     case onHitCancelable
@@ -48,7 +49,8 @@ public enum PlayReqFamily: String, CaseIterable {
         case .isYourTurn: return IsYourTurn.self
         case .isPhase: return IsPhase.self
         case .isPlayersCountMin: return IsPlayersCountMin.self
-        case .isHitEliminate: return IsHitEliminate.self
+        case .isHitEffect: return IsHitEffect.self
+        case .isHealth: return IsHealth.self
         case .isHealthMin: return IsHealthMin.self
         case .requireTargetOther: return RequireTargetOther.self
         case .requireTargetAny: return RequireTargetAny.self
