@@ -567,6 +567,413 @@ import Cuckoo
 import RxSwift
 
 
+public class MockRestrictedDatabaseProtocol: RestrictedDatabaseProtocol, Cuckoo.ProtocolMock {
+    
+    public typealias MocksType = RestrictedDatabaseProtocol
+    
+    public typealias Stubbing = __StubbingProxy_RestrictedDatabaseProtocol
+    public typealias Verification = __VerificationProxy_RestrictedDatabaseProtocol
+
+    public let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: RestrictedDatabaseProtocol?
+
+    public func enableDefaultImplementation(_ stub: RestrictedDatabaseProtocol) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+    
+    
+    public var event: PublishSubject<GEvent> {
+        get {
+            return cuckoo_manager.getter("event",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.event)
+        }
+        
+    }
+    
+
+    
+
+    
+    
+    
+    public func state(observedBy actor: String?) -> Observable<StateProtocol> {
+        
+    return cuckoo_manager.call("state(observedBy: String?) -> Observable<StateProtocol>",
+            parameters: (actor),
+            escapingParameters: (actor),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.state(observedBy: actor))
+        
+    }
+    
+
+	public struct __StubbingProxy_RestrictedDatabaseProtocol: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	    public init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    var event: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockRestrictedDatabaseProtocol, PublishSubject<GEvent>> {
+	        return .init(manager: cuckoo_manager, name: "event")
+	    }
+	    
+	    
+	    func state<M1: Cuckoo.OptionalMatchable>(observedBy actor: M1) -> Cuckoo.ProtocolStubFunction<(String?), Observable<StateProtocol>> where M1.OptionalMatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String?)>] = [wrap(matchable: actor) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockRestrictedDatabaseProtocol.self, method: "state(observedBy: String?) -> Observable<StateProtocol>", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	public struct __VerificationProxy_RestrictedDatabaseProtocol: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	    public init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	    
+	    var event: Cuckoo.VerifyReadOnlyProperty<PublishSubject<GEvent>> {
+	        return .init(manager: cuckoo_manager, name: "event", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	
+	    
+	    @discardableResult
+	    func state<M1: Cuckoo.OptionalMatchable>(observedBy actor: M1) -> Cuckoo.__DoNotUse<(String?), Observable<StateProtocol>> where M1.OptionalMatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String?)>] = [wrap(matchable: actor) { $0 }]
+	        return cuckoo_manager.verify("state(observedBy: String?) -> Observable<StateProtocol>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+public class RestrictedDatabaseProtocolStub: RestrictedDatabaseProtocol {
+    
+    
+    public var event: PublishSubject<GEvent> {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (PublishSubject<GEvent>).self)
+        }
+        
+    }
+    
+
+    
+
+    
+    public func state(observedBy actor: String?) -> Observable<StateProtocol>  {
+        return DefaultValueRegistry.defaultValue(for: (Observable<StateProtocol>).self)
+    }
+    
+}
+
+
+
+public class MockDatabaseProtocol: DatabaseProtocol, Cuckoo.ProtocolMock {
+    
+    public typealias MocksType = DatabaseProtocol
+    
+    public typealias Stubbing = __StubbingProxy_DatabaseProtocol
+    public typealias Verification = __VerificationProxy_DatabaseProtocol
+
+    public let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: DatabaseProtocol?
+
+    public func enableDefaultImplementation(_ stub: DatabaseProtocol) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+    
+    
+    public var state: BehaviorSubject<StateProtocol> {
+        get {
+            return cuckoo_manager.getter("state",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.state)
+        }
+        
+    }
+    
+    
+    
+    public var event: PublishSubject<GEvent> {
+        get {
+            return cuckoo_manager.getter("event",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.event)
+        }
+        
+    }
+    
+
+    
+
+    
+    
+    
+    public func update(event: GEvent) -> Completable {
+        
+    return cuckoo_manager.call("update(event: GEvent) -> Completable",
+            parameters: (event),
+            escapingParameters: (event),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.update(event: event))
+        
+    }
+    
+    
+    
+    public func state(observedBy actor: String?) -> Observable<StateProtocol> {
+        
+    return cuckoo_manager.call("state(observedBy: String?) -> Observable<StateProtocol>",
+            parameters: (actor),
+            escapingParameters: (actor),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.state(observedBy: actor))
+        
+    }
+    
+
+	public struct __StubbingProxy_DatabaseProtocol: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	    public init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    var state: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockDatabaseProtocol, BehaviorSubject<StateProtocol>> {
+	        return .init(manager: cuckoo_manager, name: "state")
+	    }
+	    
+	    
+	    var event: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockDatabaseProtocol, PublishSubject<GEvent>> {
+	        return .init(manager: cuckoo_manager, name: "event")
+	    }
+	    
+	    
+	    func update<M1: Cuckoo.Matchable>(event: M1) -> Cuckoo.ProtocolStubFunction<(GEvent), Completable> where M1.MatchedType == GEvent {
+	        let matchers: [Cuckoo.ParameterMatcher<(GEvent)>] = [wrap(matchable: event) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockDatabaseProtocol.self, method: "update(event: GEvent) -> Completable", parameterMatchers: matchers))
+	    }
+	    
+	    func state<M1: Cuckoo.OptionalMatchable>(observedBy actor: M1) -> Cuckoo.ProtocolStubFunction<(String?), Observable<StateProtocol>> where M1.OptionalMatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String?)>] = [wrap(matchable: actor) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockDatabaseProtocol.self, method: "state(observedBy: String?) -> Observable<StateProtocol>", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	public struct __VerificationProxy_DatabaseProtocol: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	    public init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	    
+	    var state: Cuckoo.VerifyReadOnlyProperty<BehaviorSubject<StateProtocol>> {
+	        return .init(manager: cuckoo_manager, name: "state", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var event: Cuckoo.VerifyReadOnlyProperty<PublishSubject<GEvent>> {
+	        return .init(manager: cuckoo_manager, name: "event", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	
+	    
+	    @discardableResult
+	    func update<M1: Cuckoo.Matchable>(event: M1) -> Cuckoo.__DoNotUse<(GEvent), Completable> where M1.MatchedType == GEvent {
+	        let matchers: [Cuckoo.ParameterMatcher<(GEvent)>] = [wrap(matchable: event) { $0 }]
+	        return cuckoo_manager.verify("update(event: GEvent) -> Completable", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func state<M1: Cuckoo.OptionalMatchable>(observedBy actor: M1) -> Cuckoo.__DoNotUse<(String?), Observable<StateProtocol>> where M1.OptionalMatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String?)>] = [wrap(matchable: actor) { $0 }]
+	        return cuckoo_manager.verify("state(observedBy: String?) -> Observable<StateProtocol>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+public class DatabaseProtocolStub: DatabaseProtocol {
+    
+    
+    public var state: BehaviorSubject<StateProtocol> {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (BehaviorSubject<StateProtocol>).self)
+        }
+        
+    }
+    
+    
+    public var event: PublishSubject<GEvent> {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (PublishSubject<GEvent>).self)
+        }
+        
+    }
+    
+
+    
+
+    
+    public func update(event: GEvent) -> Completable  {
+        return DefaultValueRegistry.defaultValue(for: (Completable).self)
+    }
+    
+    public func state(observedBy actor: String?) -> Observable<StateProtocol>  {
+        return DefaultValueRegistry.defaultValue(for: (Observable<StateProtocol>).self)
+    }
+    
+}
+
+
+import Cuckoo
+@testable import WildWestEngine
+
+
+public class MockGDatabaseUpdaterProtocol: GDatabaseUpdaterProtocol, Cuckoo.ProtocolMock {
+    
+    public typealias MocksType = GDatabaseUpdaterProtocol
+    
+    public typealias Stubbing = __StubbingProxy_GDatabaseUpdaterProtocol
+    public typealias Verification = __VerificationProxy_GDatabaseUpdaterProtocol
+
+    public let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: GDatabaseUpdaterProtocol?
+
+    public func enableDefaultImplementation(_ stub: GDatabaseUpdaterProtocol) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+
+    
+
+    
+    
+    
+    public func execute(_ event: GEvent, in state: StateProtocol) -> StateProtocol? {
+        
+    return cuckoo_manager.call("execute(_: GEvent, in: StateProtocol) -> StateProtocol?",
+            parameters: (event, state),
+            escapingParameters: (event, state),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.execute(event, in: state))
+        
+    }
+    
+
+	public struct __StubbingProxy_GDatabaseUpdaterProtocol: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	    public init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    func execute<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ event: M1, in state: M2) -> Cuckoo.ProtocolStubFunction<(GEvent, StateProtocol), StateProtocol?> where M1.MatchedType == GEvent, M2.MatchedType == StateProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(GEvent, StateProtocol)>] = [wrap(matchable: event) { $0.0 }, wrap(matchable: state) { $0.1 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGDatabaseUpdaterProtocol.self, method: "execute(_: GEvent, in: StateProtocol) -> StateProtocol?", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	public struct __VerificationProxy_GDatabaseUpdaterProtocol: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	    public init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	
+	    
+	    @discardableResult
+	    func execute<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ event: M1, in state: M2) -> Cuckoo.__DoNotUse<(GEvent, StateProtocol), StateProtocol?> where M1.MatchedType == GEvent, M2.MatchedType == StateProtocol {
+	        let matchers: [Cuckoo.ParameterMatcher<(GEvent, StateProtocol)>] = [wrap(matchable: event) { $0.0 }, wrap(matchable: state) { $0.1 }]
+	        return cuckoo_manager.verify("execute(_: GEvent, in: StateProtocol) -> StateProtocol?", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+public class GDatabaseUpdaterProtocolStub: GDatabaseUpdaterProtocol {
+    
+
+    
+
+    
+    public func execute(_ event: GEvent, in state: StateProtocol) -> StateProtocol?  {
+        return DefaultValueRegistry.defaultValue(for: (StateProtocol?).self)
+    }
+    
+}
+
+
+import Cuckoo
+@testable import WildWestEngine
+
+import RxSwift
+
+
 public class MockEngineProtocol: EngineProtocol, Cuckoo.ProtocolMock {
     
     public typealias MocksType = EngineProtocol
@@ -2947,413 +3354,6 @@ public class HitProtocolStub: HitProtocol {
 
     
 
-    
-}
-
-
-import Cuckoo
-@testable import WildWestEngine
-
-import RxSwift
-
-
-public class MockRestrictedDatabaseProtocol: RestrictedDatabaseProtocol, Cuckoo.ProtocolMock {
-    
-    public typealias MocksType = RestrictedDatabaseProtocol
-    
-    public typealias Stubbing = __StubbingProxy_RestrictedDatabaseProtocol
-    public typealias Verification = __VerificationProxy_RestrictedDatabaseProtocol
-
-    public let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
-
-    
-    private var __defaultImplStub: RestrictedDatabaseProtocol?
-
-    public func enableDefaultImplementation(_ stub: RestrictedDatabaseProtocol) {
-        __defaultImplStub = stub
-        cuckoo_manager.enableDefaultStubImplementation()
-    }
-    
-
-    
-    
-    
-    public var event: PublishSubject<GEvent> {
-        get {
-            return cuckoo_manager.getter("event",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.event)
-        }
-        
-    }
-    
-
-    
-
-    
-    
-    
-    public func state(observedBy actor: String?) -> Observable<StateProtocol> {
-        
-    return cuckoo_manager.call("state(observedBy: String?) -> Observable<StateProtocol>",
-            parameters: (actor),
-            escapingParameters: (actor),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.state(observedBy: actor))
-        
-    }
-    
-
-	public struct __StubbingProxy_RestrictedDatabaseProtocol: Cuckoo.StubbingProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	
-	    public init(manager: Cuckoo.MockManager) {
-	        self.cuckoo_manager = manager
-	    }
-	    
-	    
-	    var event: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockRestrictedDatabaseProtocol, PublishSubject<GEvent>> {
-	        return .init(manager: cuckoo_manager, name: "event")
-	    }
-	    
-	    
-	    func state<M1: Cuckoo.OptionalMatchable>(observedBy actor: M1) -> Cuckoo.ProtocolStubFunction<(String?), Observable<StateProtocol>> where M1.OptionalMatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String?)>] = [wrap(matchable: actor) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockRestrictedDatabaseProtocol.self, method: "state(observedBy: String?) -> Observable<StateProtocol>", parameterMatchers: matchers))
-	    }
-	    
-	}
-
-	public struct __VerificationProxy_RestrictedDatabaseProtocol: Cuckoo.VerificationProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	    private let callMatcher: Cuckoo.CallMatcher
-	    private let sourceLocation: Cuckoo.SourceLocation
-	
-	    public init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
-	        self.cuckoo_manager = manager
-	        self.callMatcher = callMatcher
-	        self.sourceLocation = sourceLocation
-	    }
-	
-	    
-	    
-	    var event: Cuckoo.VerifyReadOnlyProperty<PublishSubject<GEvent>> {
-	        return .init(manager: cuckoo_manager, name: "event", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	
-	    
-	    @discardableResult
-	    func state<M1: Cuckoo.OptionalMatchable>(observedBy actor: M1) -> Cuckoo.__DoNotUse<(String?), Observable<StateProtocol>> where M1.OptionalMatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String?)>] = [wrap(matchable: actor) { $0 }]
-	        return cuckoo_manager.verify("state(observedBy: String?) -> Observable<StateProtocol>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	}
-}
-
-public class RestrictedDatabaseProtocolStub: RestrictedDatabaseProtocol {
-    
-    
-    public var event: PublishSubject<GEvent> {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (PublishSubject<GEvent>).self)
-        }
-        
-    }
-    
-
-    
-
-    
-    public func state(observedBy actor: String?) -> Observable<StateProtocol>  {
-        return DefaultValueRegistry.defaultValue(for: (Observable<StateProtocol>).self)
-    }
-    
-}
-
-
-
-public class MockDatabaseProtocol: DatabaseProtocol, Cuckoo.ProtocolMock {
-    
-    public typealias MocksType = DatabaseProtocol
-    
-    public typealias Stubbing = __StubbingProxy_DatabaseProtocol
-    public typealias Verification = __VerificationProxy_DatabaseProtocol
-
-    public let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
-
-    
-    private var __defaultImplStub: DatabaseProtocol?
-
-    public func enableDefaultImplementation(_ stub: DatabaseProtocol) {
-        __defaultImplStub = stub
-        cuckoo_manager.enableDefaultStubImplementation()
-    }
-    
-
-    
-    
-    
-    public var state: BehaviorSubject<StateProtocol> {
-        get {
-            return cuckoo_manager.getter("state",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.state)
-        }
-        
-    }
-    
-    
-    
-    public var event: PublishSubject<GEvent> {
-        get {
-            return cuckoo_manager.getter("event",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.event)
-        }
-        
-    }
-    
-
-    
-
-    
-    
-    
-    public func update(event: GEvent) -> Completable {
-        
-    return cuckoo_manager.call("update(event: GEvent) -> Completable",
-            parameters: (event),
-            escapingParameters: (event),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.update(event: event))
-        
-    }
-    
-    
-    
-    public func state(observedBy actor: String?) -> Observable<StateProtocol> {
-        
-    return cuckoo_manager.call("state(observedBy: String?) -> Observable<StateProtocol>",
-            parameters: (actor),
-            escapingParameters: (actor),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.state(observedBy: actor))
-        
-    }
-    
-
-	public struct __StubbingProxy_DatabaseProtocol: Cuckoo.StubbingProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	
-	    public init(manager: Cuckoo.MockManager) {
-	        self.cuckoo_manager = manager
-	    }
-	    
-	    
-	    var state: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockDatabaseProtocol, BehaviorSubject<StateProtocol>> {
-	        return .init(manager: cuckoo_manager, name: "state")
-	    }
-	    
-	    
-	    var event: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockDatabaseProtocol, PublishSubject<GEvent>> {
-	        return .init(manager: cuckoo_manager, name: "event")
-	    }
-	    
-	    
-	    func update<M1: Cuckoo.Matchable>(event: M1) -> Cuckoo.ProtocolStubFunction<(GEvent), Completable> where M1.MatchedType == GEvent {
-	        let matchers: [Cuckoo.ParameterMatcher<(GEvent)>] = [wrap(matchable: event) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockDatabaseProtocol.self, method: "update(event: GEvent) -> Completable", parameterMatchers: matchers))
-	    }
-	    
-	    func state<M1: Cuckoo.OptionalMatchable>(observedBy actor: M1) -> Cuckoo.ProtocolStubFunction<(String?), Observable<StateProtocol>> where M1.OptionalMatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String?)>] = [wrap(matchable: actor) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockDatabaseProtocol.self, method: "state(observedBy: String?) -> Observable<StateProtocol>", parameterMatchers: matchers))
-	    }
-	    
-	}
-
-	public struct __VerificationProxy_DatabaseProtocol: Cuckoo.VerificationProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	    private let callMatcher: Cuckoo.CallMatcher
-	    private let sourceLocation: Cuckoo.SourceLocation
-	
-	    public init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
-	        self.cuckoo_manager = manager
-	        self.callMatcher = callMatcher
-	        self.sourceLocation = sourceLocation
-	    }
-	
-	    
-	    
-	    var state: Cuckoo.VerifyReadOnlyProperty<BehaviorSubject<StateProtocol>> {
-	        return .init(manager: cuckoo_manager, name: "state", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
-	    var event: Cuckoo.VerifyReadOnlyProperty<PublishSubject<GEvent>> {
-	        return .init(manager: cuckoo_manager, name: "event", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	
-	    
-	    @discardableResult
-	    func update<M1: Cuckoo.Matchable>(event: M1) -> Cuckoo.__DoNotUse<(GEvent), Completable> where M1.MatchedType == GEvent {
-	        let matchers: [Cuckoo.ParameterMatcher<(GEvent)>] = [wrap(matchable: event) { $0 }]
-	        return cuckoo_manager.verify("update(event: GEvent) -> Completable", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
-	    func state<M1: Cuckoo.OptionalMatchable>(observedBy actor: M1) -> Cuckoo.__DoNotUse<(String?), Observable<StateProtocol>> where M1.OptionalMatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String?)>] = [wrap(matchable: actor) { $0 }]
-	        return cuckoo_manager.verify("state(observedBy: String?) -> Observable<StateProtocol>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	}
-}
-
-public class DatabaseProtocolStub: DatabaseProtocol {
-    
-    
-    public var state: BehaviorSubject<StateProtocol> {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (BehaviorSubject<StateProtocol>).self)
-        }
-        
-    }
-    
-    
-    public var event: PublishSubject<GEvent> {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (PublishSubject<GEvent>).self)
-        }
-        
-    }
-    
-
-    
-
-    
-    public func update(event: GEvent) -> Completable  {
-        return DefaultValueRegistry.defaultValue(for: (Completable).self)
-    }
-    
-    public func state(observedBy actor: String?) -> Observable<StateProtocol>  {
-        return DefaultValueRegistry.defaultValue(for: (Observable<StateProtocol>).self)
-    }
-    
-}
-
-
-import Cuckoo
-@testable import WildWestEngine
-
-
-public class MockGDatabaseUpdaterProtocol: GDatabaseUpdaterProtocol, Cuckoo.ProtocolMock {
-    
-    public typealias MocksType = GDatabaseUpdaterProtocol
-    
-    public typealias Stubbing = __StubbingProxy_GDatabaseUpdaterProtocol
-    public typealias Verification = __VerificationProxy_GDatabaseUpdaterProtocol
-
-    public let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
-
-    
-    private var __defaultImplStub: GDatabaseUpdaterProtocol?
-
-    public func enableDefaultImplementation(_ stub: GDatabaseUpdaterProtocol) {
-        __defaultImplStub = stub
-        cuckoo_manager.enableDefaultStubImplementation()
-    }
-    
-
-    
-
-    
-
-    
-    
-    
-    public func execute(_ event: GEvent, in state: GState)  {
-        
-    return cuckoo_manager.call("execute(_: GEvent, in: GState)",
-            parameters: (event, state),
-            escapingParameters: (event, state),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.execute(event, in: state))
-        
-    }
-    
-
-	public struct __StubbingProxy_GDatabaseUpdaterProtocol: Cuckoo.StubbingProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	
-	    public init(manager: Cuckoo.MockManager) {
-	        self.cuckoo_manager = manager
-	    }
-	    
-	    
-	    func execute<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ event: M1, in state: M2) -> Cuckoo.ProtocolStubNoReturnFunction<(GEvent, GState)> where M1.MatchedType == GEvent, M2.MatchedType == GState {
-	        let matchers: [Cuckoo.ParameterMatcher<(GEvent, GState)>] = [wrap(matchable: event) { $0.0 }, wrap(matchable: state) { $0.1 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockGDatabaseUpdaterProtocol.self, method: "execute(_: GEvent, in: GState)", parameterMatchers: matchers))
-	    }
-	    
-	}
-
-	public struct __VerificationProxy_GDatabaseUpdaterProtocol: Cuckoo.VerificationProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	    private let callMatcher: Cuckoo.CallMatcher
-	    private let sourceLocation: Cuckoo.SourceLocation
-	
-	    public init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
-	        self.cuckoo_manager = manager
-	        self.callMatcher = callMatcher
-	        self.sourceLocation = sourceLocation
-	    }
-	
-	    
-	
-	    
-	    @discardableResult
-	    func execute<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ event: M1, in state: M2) -> Cuckoo.__DoNotUse<(GEvent, GState), Void> where M1.MatchedType == GEvent, M2.MatchedType == GState {
-	        let matchers: [Cuckoo.ParameterMatcher<(GEvent, GState)>] = [wrap(matchable: event) { $0.0 }, wrap(matchable: state) { $0.1 }]
-	        return cuckoo_manager.verify("execute(_: GEvent, in: GState)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	}
-}
-
-public class GDatabaseUpdaterProtocolStub: GDatabaseUpdaterProtocol {
-    
-
-    
-
-    
-    public func execute(_ event: GEvent, in state: GState)   {
-        return DefaultValueRegistry.defaultValue(for: (Void).self)
-    }
     
 }
 

@@ -133,12 +133,3 @@ private extension GEngine {
         }
     }
 }
-
-private extension DatabaseProtocol {
-    var currentState: StateProtocol {
-        guard let result = try? state.value() else {
-            fatalError("Failed getting current state")
-        }
-        return result
-    }
-}

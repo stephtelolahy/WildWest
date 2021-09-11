@@ -5,8 +5,9 @@
 //  Created by Hugues Stéphano TELOLAHY on 06/05/2021.
 //  Copyright © 2021 creativeGames. All rights reserved.
 //
-// swiftlint:disable file_length
 // swiftlint:disable sorted_first_last
+// swiftlint:disable cyclomatic_complexity
+// swiftlint:disable function_body_length
 
 import RxSwift
 import Firebase
@@ -25,496 +26,382 @@ class RemoteGameDatabaseUpdater: RemoteGameDatabaseUpdaterProtocol {
     }
     
     func execute(_ event: GEvent) -> Completable {
-        guard let eventDesc = Self.all[event.name] else {
-            fatalError("No database transaction matching \(event)")
+        switch event {
+        case let .run(move):
+            return gameRef.run(move)
+            
+        case let .setTurn(player):
+            return gameRef.setTurn(player)
+            
+        case let .setPhase(value):
+            return gameRef.setPhase(value)
+            
+        case let .gainHealth(player):
+            return gameRef.gainHealth(player)
+            
+        case let .looseHealth(player, _):
+            return gameRef.looseHealth(player)
+            
+        case let .eliminate(player, _):
+            return gameRef.eliminate(player)
+            
+        case let .drawDeck(player):
+            return gameRef.drawDeck(player)
+            
+        case let .drawDeckChoosing(player, card):
+            return gameRef.drawDeckChoosing(player: player, card: card)
+            
+        case let .drawDeckFlipping(player):
+            return gameRef.drawDeckFlipping(player)
+            
+        case let .drawHand(player, other, card):
+            return gameRef.drawHand(player: player, other: other, card: card)
+            
+        case let .drawInPlay(player, other, card):
+            return gameRef.drawInPlay(player: player, other: other, card: card)
+            
+        case let .drawStore(player, card):
+            return gameRef.drawStore(player: player, card: card)
+            
+        case let .drawDiscard(player):
+            return gameRef.drawDiscard(player)
+            
+        case let .equip(player, card):
+            return gameRef.equip(player: player, card: card)
+            
+        case let .handicap(player, card, other):
+            return gameRef.handicap(player: player, card: card, other: other)
+            
+        case let .passInPlay(player, card, other):
+            return gameRef.passInPlay(player: player, card: card, other: other)
+            
+        case let .discardHand(player, card):
+            return gameRef.discardHand(player: player, card: card)
+            
+        case let .play(player, card):
+            return gameRef.play(player: player, card: card)
+            
+        case let .discardInPlay(player, card):
+            return gameRef.discardInPlay(player: player, card: card)
+            
+        case .deckToStore:
+            return gameRef.deckToStore()
+            
+        case .flipDeck:
+            return gameRef.flipDeck()
+            
+        case let .addHit(hits):
+            return gameRef.addHit(hits)
+            
+        case let .removeHit(player):
+            return gameRef.removeHit(player)
+            
+        case let .cancelHit(player):
+            return gameRef.cancelHit(player)
+            
+        case let .gameover(winner):
+            return gameRef.gameover(winner)
+        
+        default:
+            return Completable.empty()
+        }
+    }
+}
+
+private extension DatabaseReferenceProtocol {
+    
+    // MARK: - Flags
+    
+    func run(_ move: GMove) -> Completable {
+        rxSetValue("state/played/\(childByAutoIdKey())") { move.ability }
+    }
+    
+    func setTurn(_ player: String) -> Completable {
+        rxSetValue("state/turn", encoding: { player })
+            .andThen(rxSetValue("state/played", encoding: { nil }))
+    }
+    
+    func setPhase(_ phase: Int) -> Completable {
+        rxSetValue("state/phase") { phase }
+    }
+    
+    func gameover(_ winner: Role) -> Completable {
+        rxSetValue("state/winner", encoding: { winner.rawValue })
+    }
+    
+    // MARK: - Health
+    
+    func gainHealth(_ player: String) -> Completable {
+        rxObserveSingleEvent("state/players/\(player)/health", decoding: { snapshot -> Int in
+            try (snapshot.value as? Int).unwrap()
+        }).flatMapCompletable { health in
+            rxSetValue("state/players/\(player)/health") { health + 1 }
+        }
+    }
+    
+    func looseHealth(_ player: String) -> Completable {
+        rxObserveSingleEvent("state/players/\(player)/health", decoding: { snapshot -> Int in
+            try (snapshot.value as? Int).unwrap()
+        }).flatMapCompletable { health in
+            rxSetValue("state/players/\(player)/health") { health - 1 }
+        }
+    }
+    
+    func eliminate(_ player: String) -> Completable {
+        rxSetValue("state/players/\(player)/health", encoding: { 0 })
+            .andThen(rxObserveSingleEvent("state/playOrder", decoding: { snapshot -> [String]? in
+                snapshot.value as? [String]
+            }).flatMapCompletable({ playOrder in
+                var value = playOrder ?? []
+                if let index = value.firstIndex(of: player) {
+                    value.remove(at: index)
+                }
+                return rxSetValue("state/playOrder") { value }
+            }))
+            .andThen(rxObserveSingleEvent("state/hits", decoding: { snapshot -> [String: HitDto]? in
+                snapshot.value as? [String: HitDto]
+            }).flatMapCompletable({ hits in
+                let hits = hits ?? [:]
+                var keysToRemove: [String] = []
+                for (key, value) in hits where value.player == player {
+                    keysToRemove.append(key)
+                }
+                let completables: [Completable] = keysToRemove.map { rxSetValue("state/hits/\($0)", encoding: { nil }) }
+                return Completable.concat(completables)
+            }))
+    }
+    
+    // MARK: - Draw
+    
+    func drawDeck(_ player: String) -> Completable {
+        resetDeckIfNeeded()
+            .andThen(rxObserveSingleEvent("state/deck", decoding: { snapshot -> [String: String] in
+                try (snapshot.value as? [String: String]).unwrap()
+            }).flatMapCompletable({ cards in
+                let deckKey = cards.keys.sorted().min()!
+                let removeDeckCompletable = rxSetValue("state/deck/\(deckKey)") { nil }
+                let card = cards[deckKey]
+                let addHandCompletable = rxSetValue("state/players/\(player)/hand/\(childByAutoIdKey())") { card }
+                return Completable.concat(removeDeckCompletable, addHandCompletable)
+            }))
+    }
+    
+    func drawDeckChoosing(player: String, card: String) -> Completable {
+        resetDeckIfNeeded()
+            .andThen(rxObserveSingleEvent("state/deck", decoding: { snapshot -> [String: String] in
+                try (snapshot.value as? [String: String]).unwrap()
+            }).flatMapCompletable({ cards in
+                let deckKey = cards.first(where: { $0.value == card })!.key
+                let removeDeckCompletable = rxSetValue("state/deck/\(deckKey)") { nil }
+                let addHandCompletable = rxSetValue("state/players/\(player)/hand/\(childByAutoIdKey())") { card }
+                return Completable.concat(removeDeckCompletable, addHandCompletable)
+            }))
+    }
+    
+    func drawDeckFlipping(_ player: String) -> Completable {
+        resetDeckIfNeeded()
+            .andThen(rxObserveSingleEvent("state/deck", decoding: { snapshot -> [String: String] in
+                try (snapshot.value as? [String: String]).unwrap()
+            }).flatMapCompletable({ cards in
+                let deckKey = cards.keys.sorted().min()!
+                let removeDeckCompletable = rxSetValue("state/deck/\(deckKey)") { nil }
+                let card = cards[deckKey]
+                let addHandCompletable = rxSetValue("state/players/\(player)/hand/\(childByAutoIdKey())") { card }
+                return Completable.concat(removeDeckCompletable, addHandCompletable)
+            }))
+        
+    }
+    
+    func drawHand(player: String, other: String, card: String) -> Completable {
+        rxObserveSingleEvent("state/players/\(other)/hand", decoding: { snapshot -> [String: String] in
+            try (snapshot.value as? [String: String]).unwrap()
+        }).flatMapCompletable { cards in
+            let cardKey = cards.first(where: { $0.value == card })!.key
+            return rxSetValue("state/players/\(other)/hand/\(cardKey)", encoding: { nil })
+                .andThen(rxSetValue("state/players/\(player)/hand/\(childByAutoIdKey())", encoding: { card }))
+        }
+    }
+    
+    func drawInPlay(player: String, other: String, card: String) -> Completable {
+        rxObserveSingleEvent("state/players/\(other)/inPlay", decoding: { snapshot -> [String: String] in
+            try (snapshot.value as? [String: String]).unwrap()
+        }).flatMapCompletable { cards in
+            let cardKey = cards.first(where: { $0.value == card })!.key
+            return rxSetValue("state/players/\(other)/inPlay/\(cardKey)", encoding: { nil })
+                .andThen(rxSetValue("state/players/\(player)/hand/\(childByAutoIdKey())", encoding: { card }))
+        }
+    }
+    
+    func drawStore(player: String, card: String) -> Completable {
+        rxObserveSingleEvent("state/store", decoding: { snapshot -> [String: String] in
+            try (snapshot.value as? [String: String]).unwrap()
+        }).flatMapCompletable { cards in
+            let cardKey = cards.first(where: { $0.value == card })!.key
+            return rxSetValue("state/store/\(cardKey)", encoding: { nil })
+                .andThen(rxSetValue("state/players/\(player)/hand/\(childByAutoIdKey())", encoding: { card }))
+        }
+    }
+    
+    func drawDiscard(_ player: String) -> Completable {
+        rxObserveSingleEvent("state/discard", decoding: { snapshot -> [String: String] in
+           try (snapshot.value as? [String: String]).unwrap()
+       }).flatMapCompletable { cards in
+           let cardKey = cards.keys.sorted().max()!
+           let card = cards[cardKey]
+           return rxSetValue("state/discard/\(cardKey)", encoding: { nil })
+               .andThen(rxSetValue("state/players/\(player)/hand/\(childByAutoIdKey())", encoding: { card }))
+       }
+    }
+    
+    // MARK: - inPlay
+    
+    func equip(player: String, card: String) -> Completable {
+        rxObserveSingleEvent("state/players/\(player)/hand", decoding: { snapshot -> [String: String] in
+            try (snapshot.value as? [String: String]).unwrap()
+        }).flatMapCompletable { cards in
+            let cardKey = cards.first(where: { $0.value == card })!.key
+            return rxSetValue("state/players/\(player)/hand/\(cardKey)", encoding: { nil })
+                .andThen(rxSetValue("state/players/\(player)/inPlay/\(childByAutoIdKey())", encoding: { card }))
+        }
+    }
+    
+    func handicap(player: String, card: String, other: String) -> Completable {
+        rxObserveSingleEvent("state/players/\(player)/hand", decoding: { snapshot -> [String: String] in
+            try (snapshot.value as? [String: String]).unwrap()
+        }).flatMapCompletable { cards in
+            let cardKey = cards.first(where: { $0.value == card })!.key
+            return rxSetValue("state/players/\(player)/hand/\(cardKey)", encoding: { nil })
+                .andThen(rxSetValue("state/players/\(other)/inPlay/\(childByAutoIdKey())", encoding: { card }))
+        }
+    }
+    
+    func passInPlay(player: String, card: String, other: String) -> Completable {
+        rxObserveSingleEvent("state/players/\(player)/inPlay", decoding: { snapshot -> [String: String] in
+            try (snapshot.value as? [String: String]).unwrap()
+        }).flatMapCompletable { cards in
+            let cardKey = cards.first(where: { $0.value == card })!.key
+            return rxSetValue("state/players/\(player)/inPlay/\(cardKey)", encoding: { nil })
+                .andThen(rxSetValue("state/players/\(other)/inPlay/\(childByAutoIdKey())", encoding: { card }))
+        }
+    }
+    
+    // MARK: - Discard
+    
+    func discardHand(player: String, card: String) -> Completable {
+        rxObserveSingleEvent("state/players/\(player)/hand", decoding: { snapshot -> [String: String] in
+            try (snapshot.value as? [String: String]).unwrap()
+        }).flatMapCompletable { cards in
+            let cardKey = cards.first(where: { $0.value == card })!.key
+            return rxSetValue("state/players/\(player)/hand/\(cardKey)", encoding: { nil })
+                .andThen(rxSetValue("state/discard/\(childByAutoIdKey())", encoding: { card }))
+        }
+    }
+    
+    func play(player: String, card: String) -> Completable {
+        rxObserveSingleEvent("state/players/\(player)/hand", decoding: { snapshot -> [String: String] in
+            try (snapshot.value as? [String: String]).unwrap()
+        }).flatMapCompletable { cards in
+            let cardKey = cards.first(where: { $0.value == card })!.key
+            return rxSetValue("state/players/\(player)/hand/\(cardKey)", encoding: { nil })
+                .andThen(rxSetValue("state/discard/\(childByAutoIdKey())", encoding: { card }))
+        }
+    }
+    
+    func discardInPlay(player: String, card: String) -> Completable {
+        rxObserveSingleEvent("state/players/\(player)/inPlay", decoding: { snapshot -> [String: String] in
+            try (snapshot.value as? [String: String]).unwrap()
+        }).flatMapCompletable { cards in
+            let cardKey = cards.first(where: { $0.value == card })!.key
+            return rxSetValue("state/players/\(player)/inPlay/\(cardKey)", encoding: { nil })
+                .andThen(rxSetValue("state/discard/\(childByAutoIdKey())", encoding: { card }))
+        }
+    }
+    
+    // MARK: - Store
+    
+    func deckToStore() -> Completable {
+        resetDeckIfNeeded()
+            .andThen(rxObserveSingleEvent("state/deck", decoding: { snapshot -> [String: String] in
+                try (snapshot.value as? [String: String]).unwrap()
+            }).flatMapCompletable({ cards in
+                let cardKey = cards.keys.sorted().min()!
+                let card = cards[cardKey]
+                return rxSetValue("state/deck/\(cardKey)", encoding: { nil })
+                    .andThen(rxSetValue("state/store/\(childByAutoIdKey())", encoding: { card }))
+            }))
+    }
+    
+    // MARK: - Flip
+    
+    func flipDeck() -> Completable {
+        resetDeckIfNeeded()
+            .andThen(rxObserveSingleEvent("state/deck", decoding: { snapshot -> [String: String] in
+                try (snapshot.value as? [String: String]).unwrap()
+            }).flatMapCompletable({ cards in
+                let cardKey = cards.keys.sorted().min()!
+                let card = cards[cardKey]
+                return rxSetValue("state/deck/\(cardKey)", encoding: { nil })
+                    .andThen(rxSetValue("state/discard/\(childByAutoIdKey())", encoding: { card }))
+            }))
+    }
+    
+    // MARK: - Hit
+    
+    func addHit(_ hits: [GHit]) -> Completable {
+        let completables: [Completable] = hits.map {
+            let dto = HitDto(player: $0.player,
+                             name: $0.name,
+                             abilities: $0.abilities,
+                             cancelable: $0.cancelable,
+                             offender: $0.offender,
+                             target: $0.target)
+            return rxSetValue("state/hits/\(childByAutoIdKey())", encoding: { try DictionaryEncoder().encode(dto) })
         }
         
-        return eventDesc.updateFunc(event, gameRef)
-    }
-}
-
-private typealias EventFunc = (GEvent, DatabaseReferenceProtocol) -> Completable
-private typealias MatchingFunc = (GEvent) -> Bool
-
-private struct EventDesc {
-    let id: String
-    let desc: String
-    let updateFunc: EventFunc
-}
-
-private extension RemoteGameDatabaseUpdater {
-    
-    static let all: [String: EventDesc] = [
-        run(),
-        activate(),
-        gameover(),
-        setTurn(),
-        setPhase(),
-        gainHealth(),
-        looseHealth(),
-        eliminate(),
-        drawDeck(),
-        drawDeckChoosing(),
-        drawDeckFlipping(),
-        drawHand(),
-        drawInPlay(),
-        drawStore(),
-        drawDiscard(),
-        equip(),
-        handicap(),
-        passInPlay(),
-        discardHand(),
-        play(),
-        discardInPlay(),
-        deckToStore(),
-        flipDeck(),
-        addHit(),
-        removeHit(),
-        cancelHit(),
-        emptyQueue()
-    ]
-    .toDictionary(with: { $0.id })
-    
-    static func run() -> EventDesc {
-        EventDesc(id: "run", desc: "add played ability") { event, gameRef in
-            guard case let .run(move) = event else {
-                fatalError("Invalid event")
-            }
-            return gameRef.rxSetValue("state/played/\(gameRef.childByAutoIdKey())") { move.ability }
-        }
+        return Completable.concat(completables)
     }
     
-    static func activate() -> EventDesc {
-        EventDesc(id: "activate", desc: "activate moves") { event, _ in
-            guard case .activate = event else {
-                fatalError("Invalid event")
-            }
-            // do nothing
-            return Completable.empty()
-        }
-    }
-    
-    static func gameover() -> EventDesc {
-        EventDesc(id: "gameover", desc: "game is over") { event, gameRef in
-            guard case let .gameover(winner) = event else {
-                fatalError("Invalid event")
-            }
+    func removeHit(_ player: String) -> Completable {
+        rxObserveSingleEvent("state/hits", decoding: { snapshot -> [String: Any] in
+            try (snapshot.value as? [String: Any]).unwrap()
+        }).flatMapCompletable { hits in
+            let hitKey = hits.keys.sorted().first(where: { key in
+                if let hit = hits[key] as? [String: Any],
+                   let aPlayer = hit["player"] as? String,
+                   aPlayer == player {
+                    return true
+                }
+                return false
+            })!
             
-            return gameRef.rxSetValue("state/winner", encoding: { winner.rawValue })
+            return rxSetValue("state/hits/\(hitKey)", encoding: { nil })
         }
     }
     
-    static func setTurn() -> EventDesc {
-        EventDesc(id: "setTurn", desc: "set current turn, implicitly clear played abilities") { event, gameRef in
-            guard case let .setTurn(player) = event else {
-                fatalError("Invalid event")
-            }
-            
-            return gameRef.rxSetValue("state/turn", encoding: { player })
-                .andThen(gameRef.rxSetValue("state/played", encoding: { nil }))
-        }
-    }
-    
-    static func setPhase() -> EventDesc {
-        EventDesc(id: "setPhase", desc: "set phase") { event, gameRef in
-            guard case let .setPhase(value) = event else {
-                fatalError("Invalid event")
-            }
-            return gameRef.rxSetValue("state/phase") { value }
-        }
-    }
-    
-    static func gainHealth() -> EventDesc {
-        EventDesc(id: "gainHealth", desc: "Gain 1 life point") { event, gameRef in
-            guard case let .gainHealth(player) = event else {
-                fatalError("Invalid event")
-            }
-            
-            return gameRef.rxObserveSingleEvent("state/players/\(player)/health", decoding: { snapshot -> Int in
-                try (snapshot.value as? Int).unwrap()
-            }).flatMapCompletable { health in
-                gameRef.rxSetValue("state/players/\(player)/health") { health + 1 }
-            }
-        }
-    }
-    
-    static func looseHealth() -> EventDesc {
-        EventDesc(id: "looseHealth", desc: "Loose 1 life point") { event, gameRef in
-            guard case let .looseHealth(player, _) = event else {
-                fatalError("Invalid event")
-            }
-            return gameRef.rxObserveSingleEvent("state/players/\(player)/health", decoding: { snapshot -> Int in
-                try (snapshot.value as? Int).unwrap()
-            }).flatMapCompletable { health in
-                gameRef.rxSetValue("state/players/\(player)/health") { health - 1 }
-            }
-        }
-    }
-    
-    static func eliminate() -> EventDesc {
-        EventDesc(id: "eliminate", desc: "Remove from playOrder") { event, gameRef in
-            guard case let .eliminate(player, _) = event else {
-                fatalError("Invalid event")
-            }
-            return gameRef.rxSetValue("state/players/\(player)/health", encoding: { 0 })
-                .andThen(gameRef.rxObserveSingleEvent("state/playOrder", decoding: { snapshot -> [String]? in
-                    snapshot.value as? [String]
-                }).flatMapCompletable({ playOrder in
-                    var value = playOrder ?? []
-                    if let index = value.firstIndex(of: player) {
-                        value.remove(at: index)
-                    }
-                    return gameRef.rxSetValue("state/playOrder") { value }
-                }))
-                .andThen(gameRef.rxObserveSingleEvent("state/hits", decoding: { snapshot -> [String: HitDto]? in
-                    snapshot.value as? [String: HitDto]
-                }).flatMapCompletable({ hits in
-                    let hits = hits ?? [:]
-                    var keysToRemove: [String] = []
-                    for (key, value) in hits where value.player == player {
-                        keysToRemove.append(key)
-                    }
-                    let completables: [Completable] = keysToRemove.map { gameRef.rxSetValue("state/hits/\($0)", encoding: { nil }) }
-                    return Completable.concat(completables)
-                }))
-        }
-    }
-    
-    static func drawDeck() -> EventDesc {
-        EventDesc(id: "drawDeck", desc: "Draw top card from deck") { event, gameRef in
-            guard case let .drawDeck(player) = event else {
-                fatalError("Invalid event")
-            }
-            
-            return resetDeckIfNeeded(gameRef)
-                .andThen(gameRef.rxObserveSingleEvent("state/deck", decoding: { snapshot -> [String: String] in
-                    try (snapshot.value as? [String: String]).unwrap()
-                }).flatMapCompletable({ cards in
-                    let deckKey = cards.keys.sorted().min()!
-                    let removeDeckCompletable = gameRef.rxSetValue("state/deck/\(deckKey)") { nil }
-                    let card = cards[deckKey]
-                    let addHandCompletable = gameRef.rxSetValue("state/players/\(player)/hand/\(gameRef.childByAutoIdKey())") { card }
-                    return Completable.concat(removeDeckCompletable, addHandCompletable)
-                }))
-        }
-    }
-    
-    static func drawDeckChoosing() -> EventDesc {
-        EventDesc(id: "drawDeckChoosing", desc: "Draw specific card from deck") { event, gameRef in
-            guard case let .drawDeckChoosing(player, card) = event else {
-                fatalError("Invalid event")
-            }
-            
-            return resetDeckIfNeeded(gameRef)
-                .andThen(gameRef.rxObserveSingleEvent("state/deck", decoding: { snapshot -> [String: String] in
-                    try (snapshot.value as? [String: String]).unwrap()
-                }).flatMapCompletable({ cards in
-                    let deckKey = cards.first(where: { $0.value == card })!.key
-                    let removeDeckCompletable = gameRef.rxSetValue("state/deck/\(deckKey)") { nil }
-                    let addHandCompletable = gameRef.rxSetValue("state/players/\(player)/hand/\(gameRef.childByAutoIdKey())") { card }
-                    return Completable.concat(removeDeckCompletable, addHandCompletable)
-                }))
-        }
-    }
-    
-    static func drawDeckFlipping() -> EventDesc {
-        EventDesc(id: "drawDeckFlipping", desc: "Draw top card from deck then reveal") { event, gameRef in
-            guard case let .drawDeckFlipping(player) = event else {
-                fatalError("Invalid event")
-            }
-            
-            return resetDeckIfNeeded(gameRef)
-                .andThen(gameRef.rxObserveSingleEvent("state/deck", decoding: { snapshot -> [String: String] in
-                    try (snapshot.value as? [String: String]).unwrap()
-                }).flatMapCompletable({ cards in
-                    let deckKey = cards.keys.sorted().min()!
-                    let removeDeckCompletable = gameRef.rxSetValue("state/deck/\(deckKey)") { nil }
-                    let card = cards[deckKey]
-                    let addHandCompletable = gameRef.rxSetValue("state/players/\(player)/hand/\(gameRef.childByAutoIdKey())") { card }
-                    return Completable.concat(removeDeckCompletable, addHandCompletable)
-                }))
-        }
-    }
-    
-    static func drawHand() -> EventDesc {
-        EventDesc(id: "drawHand", desc: "Draw a specific card from other's hand") { event, gameRef in
-            guard case let .drawHand(player, other, card) = event else {
-                fatalError("Invalid event")
-            }
-            
-            return gameRef.rxObserveSingleEvent("state/players/\(other)/hand", decoding: { snapshot -> [String: String] in
-                try (snapshot.value as? [String: String]).unwrap()
-            }).flatMapCompletable { cards in
-                let cardKey = cards.first(where: { $0.value == card })!.key
-                return gameRef.rxSetValue("state/players/\(other)/hand/\(cardKey)", encoding: { nil })
-                    .andThen(gameRef.rxSetValue("state/players/\(player)/hand/\(gameRef.childByAutoIdKey())", encoding: { card }))
-            }
-        }
-    }
-    
-    static func drawInPlay() -> EventDesc {
-        EventDesc(id: "drawInPlay", desc: "Draw a specific card from other's inPlay") { event, gameRef in
-            guard case let .drawInPlay(player, other, card) = event else {
-                fatalError("Invalid event")
-            }
-            
-            return gameRef.rxObserveSingleEvent("state/players/\(other)/inPlay", decoding: { snapshot -> [String: String] in
-                try (snapshot.value as? [String: String]).unwrap()
-            }).flatMapCompletable { cards in
-                let cardKey = cards.first(where: { $0.value == card })!.key
-                return gameRef.rxSetValue("state/players/\(other)/inPlay/\(cardKey)", encoding: { nil })
-                    .andThen(gameRef.rxSetValue("state/players/\(player)/hand/\(gameRef.childByAutoIdKey())", encoding: { card }))
-            }
-        }
-    }
-    
-    static func drawStore() -> EventDesc {
-        EventDesc(id: "drawStore", desc: "Draw a specific card from store") { event, gameRef in
-            guard case let .drawStore(player, card) = event else {
-                fatalError("Invalid event")
-            }
-            return gameRef.rxObserveSingleEvent("state/store", decoding: { snapshot -> [String: String] in
-                try (snapshot.value as? [String: String]).unwrap()
-            }).flatMapCompletable { cards in
-                let cardKey = cards.first(where: { $0.value == card })!.key
-                return gameRef.rxSetValue("state/store/\(cardKey)", encoding: { nil })
-                    .andThen(gameRef.rxSetValue("state/players/\(player)/hand/\(gameRef.childByAutoIdKey())", encoding: { card }))
-            }
-        }
-    }
-    
-    static func drawDiscard() -> EventDesc {
-        EventDesc(id: "drawDiscard", desc: "Draw top card from discard") { event, gameRef in
-            guard case let .drawDiscard(player) = event else {
-                fatalError("Invalid event")
-            }
-            return gameRef.rxObserveSingleEvent("state/discard", decoding: { snapshot -> [String: String] in
-                try (snapshot.value as? [String: String]).unwrap()
-            }).flatMapCompletable { cards in
-                let cardKey = cards.keys.sorted().max()!
-                let card = cards[cardKey]
-                return gameRef.rxSetValue("state/discard/\(cardKey)", encoding: { nil })
-                    .andThen(gameRef.rxSetValue("state/players/\(player)/hand/\(gameRef.childByAutoIdKey())", encoding: { card }))
-            }
-        }
-    }
-    
-    static func equip() -> EventDesc {
-        EventDesc(id: "equip", desc: "Put a specific hand card in play") { event, gameRef in
-            guard case let .equip(player, card) = event else {
-                fatalError("Invalid event")
-            }
-            
-            return gameRef.rxObserveSingleEvent("state/players/\(player)/hand", decoding: { snapshot -> [String: String] in
-                try (snapshot.value as? [String: String]).unwrap()
-            }).flatMapCompletable { cards in
-                let cardKey = cards.first(where: { $0.value == card })!.key
-                return gameRef.rxSetValue("state/players/\(player)/hand/\(cardKey)", encoding: { nil })
-                    .andThen(gameRef.rxSetValue("state/players/\(player)/inPlay/\(gameRef.childByAutoIdKey())", encoding: { card }))
-            }
-        }
-    }
-    
-    static func handicap() -> EventDesc {
-        EventDesc(id: "handicap", desc: "Put a specific hand card in other's inPlay") { event, gameRef in
-            guard case let .handicap(player, card, other) = event else {
-                fatalError("Invalid event")
-            }
-            
-            return gameRef.rxObserveSingleEvent("state/players/\(player)/hand", decoding: { snapshot -> [String: String] in
-                try (snapshot.value as? [String: String]).unwrap()
-            }).flatMapCompletable { cards in
-                let cardKey = cards.first(where: { $0.value == card })!.key
-                return gameRef.rxSetValue("state/players/\(player)/hand/\(cardKey)", encoding: { nil })
-                    .andThen(gameRef.rxSetValue("state/players/\(other)/inPlay/\(gameRef.childByAutoIdKey())", encoding: { card }))
-            }
-        }
-    }
-    
-    static func passInPlay() -> EventDesc {
-        EventDesc(id: "passInPlay", desc: "Pass a specific inPlay card in other's inPlay") { event, gameRef in
-            guard case let .passInPlay(player, card, other) = event else {
-                fatalError("Invalid event")
-            }
-            
-            return gameRef.rxObserveSingleEvent("state/players/\(player)/inPlay", decoding: { snapshot -> [String: String] in
-                try (snapshot.value as? [String: String]).unwrap()
-            }).flatMapCompletable { cards in
-                let cardKey = cards.first(where: { $0.value == card })!.key
-                return gameRef.rxSetValue("state/players/\(player)/inPlay/\(cardKey)", encoding: { nil })
-                    .andThen(gameRef.rxSetValue("state/players/\(other)/inPlay/\(gameRef.childByAutoIdKey())", encoding: { card }))
-            }
-        }
-    }
-    
-    static func discardHand() -> EventDesc {
-        EventDesc(id: "discardHand", desc: "Discard a specific hand card to discard pile") { event, gameRef in
-            guard case let .discardHand(player, card) = event else {
-                fatalError("Invalid event")
-            }
-            
-            return gameRef.rxObserveSingleEvent("state/players/\(player)/hand", decoding: { snapshot -> [String: String] in
-                try (snapshot.value as? [String: String]).unwrap()
-            }).flatMapCompletable { cards in
-                let cardKey = cards.first(where: { $0.value == card })!.key
-                return gameRef.rxSetValue("state/players/\(player)/hand/\(cardKey)", encoding: { nil })
-                    .andThen(gameRef.rxSetValue("state/discard/\(gameRef.childByAutoIdKey())", encoding: { card }))
-            }
-        }
-    }
-    
-    static func play() -> EventDesc {
-        EventDesc(id: "play", desc: "Play hand card") { event, gameRef in
-            guard case let .play(player, card) = event else {
-                fatalError("Invalid event")
-            }
-            
-            return gameRef.rxObserveSingleEvent("state/players/\(player)/hand", decoding: { snapshot -> [String: String] in
-                try (snapshot.value as? [String: String]).unwrap()
-            }).flatMapCompletable { cards in
-                let cardKey = cards.first(where: { $0.value == card })!.key
-                return gameRef.rxSetValue("state/players/\(player)/hand/\(cardKey)", encoding: { nil })
-                    .andThen(gameRef.rxSetValue("state/discard/\(gameRef.childByAutoIdKey())", encoding: { card }))
-            }
-        }
-    }
-    
-    static func discardInPlay() -> EventDesc {
-        EventDesc(id: "discardInPlay", desc: "Discard a specific inPlay card to discard pile") { event, gameRef in
-            guard case let .discardInPlay(player, card) = event else {
-                fatalError("Invalid event")
-            }
-            
-            return gameRef.rxObserveSingleEvent("state/players/\(player)/inPlay", decoding: { snapshot -> [String: String] in
-                try (snapshot.value as? [String: String]).unwrap()
-            }).flatMapCompletable { cards in
-                let cardKey = cards.first(where: { $0.value == card })!.key
-                return gameRef.rxSetValue("state/players/\(player)/inPlay/\(cardKey)", encoding: { nil })
-                    .andThen(gameRef.rxSetValue("state/discard/\(gameRef.childByAutoIdKey())", encoding: { card }))
-            }
-        }
-    }
-    
-    static func deckToStore() -> EventDesc {
-        EventDesc(id: "deckToStore", desc: "Draw top card from deck to store") { event, gameRef in
-            guard case .deckToStore = event else {
-                fatalError("Invalid event")
-            }
-            
-            return resetDeckIfNeeded(gameRef)
-                .andThen(gameRef.rxObserveSingleEvent("state/deck", decoding: { snapshot -> [String: String] in
-                    try (snapshot.value as? [String: String]).unwrap()
-                }).flatMapCompletable({ cards in
-                    let cardKey = cards.keys.sorted().min()!
-                    let card = cards[cardKey]
-                    return gameRef.rxSetValue("state/deck/\(cardKey)", encoding: { nil })
-                        .andThen(gameRef.rxSetValue("state/store/\(gameRef.childByAutoIdKey())", encoding: { card }))
-                }))
-        }
-    }
-    
-    static func flipDeck() -> EventDesc {
-        EventDesc(id: "flipDeck",
-                  desc: "Flip over the top card of the deck, and discard immediately") { event, gameRef in
-            guard case .flipDeck = event else {
-                fatalError("Invalid event")
-            }
-            
-            return resetDeckIfNeeded(gameRef)
-                .andThen(gameRef.rxObserveSingleEvent("state/deck", decoding: { snapshot -> [String: String] in
-                    try (snapshot.value as? [String: String]).unwrap()
-                }).flatMapCompletable({ cards in
-                    let cardKey = cards.keys.sorted().min()!
-                    let card = cards[cardKey]
-                    return gameRef.rxSetValue("state/deck/\(cardKey)", encoding: { nil })
-                        .andThen(gameRef.rxSetValue("state/discard/\(gameRef.childByAutoIdKey())", encoding: { card }))
-                }))
-        }
-    }
-    
-    static func addHit() -> EventDesc {
-        EventDesc(id: "addHit", desc: "Add blocking hit") { event, gameRef in
-            guard case let .addHit(hits) = event else {
-                fatalError("Invalid event")
-            }
-            
-            let completables: [Completable] = hits.map {
-                let dto = HitDto(player: $0.player,
-                                 name: $0.name,
-                                 abilities: $0.abilities,
-                                 cancelable: $0.cancelable,
-                                 offender: $0.offender,
-                                 target: $0.target)
-                return gameRef.rxSetValue("state/hits/\(gameRef.childByAutoIdKey())", encoding: { try DictionaryEncoder().encode(dto) })
-            }
-            
-            return Completable.concat(completables)
-        }
-    }
-    
-    static func removeHit() -> EventDesc {
-        EventDesc(id: "removeHit", desc: "Remove hit by player") { event, gameRef in
-            guard case let .removeHit(player) = event else {
-                fatalError("Invalid event")
-            }
-            
-            return gameRef.rxObserveSingleEvent("state/hits", decoding: { snapshot -> [String: Any] in
-                try (snapshot.value as? [String: Any]).unwrap()
-            }).flatMapCompletable { hits in
-                let hitKey = hits.keys.sorted().first(where: { key in
-                    if let hit = hits[key] as? [String: Any],
-                       let aPlayer = hit["player"] as? String,
-                       aPlayer == player {
-                        return true
-                    }
-                    return false
-                })!
-                
-                return gameRef.rxSetValue("state/hits/\(hitKey)", encoding: { nil })
-            }
-        }
-    }
-    
-    static func cancelHit() -> EventDesc {
-        EventDesc(id: "cancelHit", desc: "Decrement hit cancelable") { event, gameRef in
-            guard case let .cancelHit(player) = event else {
-                fatalError("Invalid event")
-            }
-            
-            return gameRef.rxObserveSingleEvent("state/hits", decoding: { snapshot -> [String: Any] in
-                try (snapshot.value as? [String: Any]).unwrap()
-            }).flatMapCompletable { hits in
-                var cancelable: Int?
-                let hitKey = hits.keys.sorted().first(where: { key in
-                    if let hit = hits[key] as? [String: Any],
-                       let aPlayer = hit["player"] as? String,
-                       aPlayer == player {
-                        cancelable = hit["cancelable"] as? Int
-                        return true
-                    }
-                    return false
-                })!
-                return gameRef.rxSetValue("state/hits/\(hitKey)/cancelable", encoding: { (try cancelable.unwrap()) - 1 })
-            }
-        }
-    }
-    
-    static func emptyQueue() -> EventDesc {
-        EventDesc(id: "emptyQueue", desc: "EventQueue is empty") { event, _ in
-            guard case .emptyQueue = event else {
-                fatalError("Invalid event")
-            }
-            // do nothing
-            return Completable.empty()
+    func cancelHit(_ player: String) -> Completable {
+        rxObserveSingleEvent("state/hits", decoding: { snapshot -> [String: Any] in
+            try (snapshot.value as? [String: Any]).unwrap()
+        }).flatMapCompletable { hits in
+            var cancelable: Int?
+            let hitKey = hits.keys.sorted().first(where: { key in
+                if let hit = hits[key] as? [String: Any],
+                   let aPlayer = hit["player"] as? String,
+                   aPlayer == player {
+                    cancelable = hit["cancelable"] as? Int
+                    return true
+                }
+                return false
+            })!
+            return rxSetValue("state/hits/\(hitKey)/cancelable", encoding: { (try cancelable.unwrap()) - 1 })
         }
     }
 }
 
-private extension RemoteGameDatabaseUpdater {
+private extension DatabaseReferenceProtocol {
     
-    static func resetDeckIfNeeded(_ gameRef: DatabaseReferenceProtocol) -> Completable {
+    func resetDeckIfNeeded() -> Completable {
         let minDeck = 2
-        return gameRef.rxObserveSingleEvent("state/deck", decoding: { snapshot -> [String: String] in
+        return rxObserveSingleEvent("state/deck", decoding: { snapshot -> [String: String] in
             try (snapshot.value as? [String: String]).unwrap()
         }).flatMapCompletable { deck in
             if deck.count > minDeck {
@@ -524,7 +411,7 @@ private extension RemoteGameDatabaseUpdater {
             
             // Reset deck
             let minDiscard = 2
-            return gameRef.rxObserveSingleEvent("state/discard", decoding: { snapshot -> [String: String] in
+            return rxObserveSingleEvent("state/discard", decoding: { snapshot -> [String: String] in
                 try (snapshot.value as? [String: String]).unwrap()
             }).flatMapCompletable { discard in
                 if discard.count < minDiscard {
@@ -537,8 +424,8 @@ private extension RemoteGameDatabaseUpdater {
                 
                 var completables: [Completable] = []
                 for (key, value) in cards {
-                    completables.append(gameRef.rxSetValue("state/discard/\(key)", encoding: { nil }))
-                    completables.append(gameRef.rxSetValue("state/deck/\(gameRef.childByAutoIdKey())", encoding: { value }))
+                    completables.append(rxSetValue("state/discard/\(key)", encoding: { nil }))
+                    completables.append(rxSetValue("state/deck/\(childByAutoIdKey())", encoding: { value }))
                 }
                 return Completable.concat(completables)
             }

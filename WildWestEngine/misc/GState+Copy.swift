@@ -6,7 +6,7 @@
 //  Copyright © 2021 creativeGames. All rights reserved.
 //
 
-public extension GState {
+extension GState {
     static func copy(_ state: StateProtocol) -> GState {
         GState(players: state.players.mapValues { GPlayer.copy($0) },
                initialOrder: state.initialOrder,
@@ -23,7 +23,7 @@ public extension GState {
     }
 }
 
-private extension GPlayer {
+extension GPlayer {
     static func copy(_ player: PlayerProtocol) -> GPlayer {
         GPlayer(identifier: player.identifier,
                 name: player.name,
@@ -37,7 +37,7 @@ private extension GPlayer {
     }
 }
 
-private extension GHit {
+extension GHit {
     static func copy(_ hit: HitProtocol) -> GHit {
         GHit(player: hit.player,
              name: hit.name,

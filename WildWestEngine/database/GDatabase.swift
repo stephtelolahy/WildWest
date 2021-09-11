@@ -16,14 +16,12 @@ public class GDatabase: DatabaseProtocol {
     
     // MARK: - Dependencies
     
-    private let mutableState: GState
     private let updater: GDatabaseUpdaterProtocol
     
     // MARK: - Init
     
     public init(_ aState: StateProtocol,
                 updater: GDatabaseUpdaterProtocol) {
-        mutableState = GState.copy(aState)
         state = BehaviorSubject(value: aState)
         event = PublishSubject()
         self.updater = updater
@@ -34,10 +32,20 @@ public class GDatabase: DatabaseProtocol {
     public func update(event aEvent: GEvent) -> Completable {
         Completable.create { [self] completable in
             event.onNext(aEvent)
-            updater.execute(aEvent, in: mutableState)
-            state.onNext(mutableState)
+            if let newState = updater.execute(aEvent, in: currentState) {
+                state.onNext(newState)
+            }
             completable(.completed)
             return Disposables.create()
         }
+    }
+}
+
+extension DatabaseProtocol {
+    var currentState: StateProtocol {
+        guard let result = try? state.value() else {
+            fatalError("Failed getting current state")
+        }
+        return result
     }
 }

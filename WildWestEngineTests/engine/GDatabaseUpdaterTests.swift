@@ -20,73 +20,82 @@ class GDatabaseUpdaterTests: XCTestCase {
         sut = GDatabaseUpdater()
     }
     
-    // MARK: - play, setTurn, setPhase
+    // MARK: - Flags
     
-    func test_AddPlayedAbility_IfRunningMove() {
+    func test_AddPlayedAbility_IfRunningMove() throws {
         // Given
         let mockState = MockStateProtocol()
             .withDefault()
             .played(are: "a1")
-        let state = GState.copy(mockState)
         let event = GEvent.run(move: GMove("a2", actor: "p1"))
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.played, ["a1", "a2"])
     }
     
-    func test_AddToMoveHistory_IfRunningMove() {
+    func test_AddToMoveHistory_IfRunningMove() throws {
         // Given
         let mockState = MockStateProtocol()
             .withDefault()
-        let state = GState.copy(mockState)
         let move = GMove("a1", actor: "p1")
         let event = GEvent.run(move: move)
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.history, [move])
     }
     
-    func test_setTurn() {
+    func test_setTurn() throws {
         // Given
         let mockState = MockStateProtocol()
             .withDefault()
             .turn(is: "p1")
             .played(are: "a1")
-        let state = GState.copy(mockState)
         let event = GEvent.setTurn(player: "p2")
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.turn, "p2")
         XCTAssertEqual(state.played, [])
     }
     
-    func test_setPhase() {
+    func test_setPhase() throws {
         // Given
         let mockState = MockStateProtocol()
             .withDefault()
             .phase(is: 1)
-        let state = GState.copy(mockState)
         let event = GEvent.setPhase(value: 2)
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.phase, 2)
     }
     
+    func test_SetWinner_IfGameOver() throws {
+        // Given
+        let mockState = MockStateProtocol()
+            .withDefault()
+        let event = GEvent.gameover(winner: .outlaw)
+        
+        // When
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
+        
+        // Assert
+        XCTAssertEqual(state.winner, .outlaw)
+    }
+    
     // MARK: - Health
     
-    func test_IncrementHealth_IfGainHealth() {
+    func test_IncrementHealth_IfGainHealth() throws {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
@@ -95,17 +104,16 @@ class GDatabaseUpdaterTests: XCTestCase {
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1)
-        let state = GState.copy(mockState)
         let event = GEvent.gainHealth(player: "p1")
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.players["p1"]!.health, 3)
     }
     
-    func test_DecrementHealth_IfLooseHealth() {
+    func test_DecrementHealth_IfLooseHealth() throws {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
@@ -114,17 +122,16 @@ class GDatabaseUpdaterTests: XCTestCase {
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1)
-        let state = GState.copy(mockState)
         let event = GEvent.looseHealth(player: "p1", offender: "pX")
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.players["p1"]!.health, 1)
     }
     
-    func test_SetHealthZero_IfEliminate() {
+    func test_SetHealthZero_IfEliminate() throws {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
@@ -134,17 +141,16 @@ class GDatabaseUpdaterTests: XCTestCase {
             .withDefault()
             .players(are: mockPlayer1)
             .playOrder(is: "p1", "p2", "p3")
-        let state = GState.copy(mockState)
         let event = GEvent.eliminate(player: "p1", offender: "pX")
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.players["p1"]!.health, 0)
     }
     
-    func test_RemovePlayerFromPlayOrder_IfEliminate() {
+    func test_RemovePlayerFromPlayOrder_IfEliminate() throws {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
@@ -153,17 +159,16 @@ class GDatabaseUpdaterTests: XCTestCase {
             .withDefault()
             .players(are: mockPlayer1)
             .playOrder(is: "p1", "p2", "p3")
-        let state = GState.copy(mockState)
         let event = GEvent.eliminate(player: "p1", offender: "p2")
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.playOrder, ["p2", "p3"])
     }
     
-    func test_removeAssociatedHits_IfEliminate() {
+    func test_removeAssociatedHits_IfEliminate() throws {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
@@ -173,11 +178,10 @@ class GDatabaseUpdaterTests: XCTestCase {
             .players(are: mockPlayer1)
             .playOrder(is: "p1", "p2", "p3")
             .hits(are: MockHitProtocol().withDefault().player(is: "p1"))
-        let state = GState.copy(mockState)
         let event = GEvent.eliminate(player: "p1", offender: "p2")
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.playOrder, ["p2", "p3"])
@@ -186,7 +190,7 @@ class GDatabaseUpdaterTests: XCTestCase {
     
     // MARK: - Draw
     
-    func test_AddCardToHand_IfDrawingDeck() {
+    func test_AddCardToHand_IfDrawingDeck() throws {
         // Given
         let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
         let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
@@ -199,18 +203,17 @@ class GDatabaseUpdaterTests: XCTestCase {
             .withDefault()
             .players(are: mockPlayer1)
             .deck(are: mockCard2, mockCard3)
-        let state = GState.copy(mockState)
         let event = GEvent.drawDeck(player: "p1")
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.players["p1"]!.hand.map { $0.identifier }, ["c1", "c2"])
         XCTAssertEqual(state.deck.map { $0.identifier }, ["c3"])
     }
     
-    func test_AddCardToHand_IfDrawingDeckChoosing() {
+    func test_AddCardToHand_IfDrawingDeckChoosing() throws {
         // Given
         let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
         let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
@@ -223,18 +226,17 @@ class GDatabaseUpdaterTests: XCTestCase {
             .withDefault()
             .players(are: mockPlayer1)
             .deck(are: mockCard2, mockCard3)
-        let state = GState.copy(mockState)
         let event = GEvent.drawDeckChoosing(player: "p1", card: "c3")
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.players["p1"]!.hand.map { $0.identifier }, ["c1", "c3"])
         XCTAssertEqual(state.deck.map { $0.identifier }, ["c2"])
     }
     
-    func test_AddCardToHand_IfDrawingDeckFlipping() {
+    func test_AddCardToHand_IfDrawingDeckFlipping() throws {
         // Given
         let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
         let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
@@ -247,18 +249,17 @@ class GDatabaseUpdaterTests: XCTestCase {
             .withDefault()
             .players(are: mockPlayer1)
             .deck(are: mockCard2, mockCard3)
-        let state = GState.copy(mockState)
         let event = GEvent.drawDeckFlipping(player: "p1")
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.players["p1"]!.hand.map { $0.identifier }, ["c1", "c2"])
         XCTAssertEqual(state.deck.map { $0.identifier }, ["c3"])
     }
     
-    func test_ResetDeck_IfDrawingLastDeckCard() {
+    func test_ResetDeck_IfDrawingLastDeckCard() throws {
         // Given
         let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
         let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
@@ -271,11 +272,10 @@ class GDatabaseUpdaterTests: XCTestCase {
             .players(are: mockPlayer1)
             .deck(are: mockCard1)
             .discard(are: mockCard2, mockCard3)
-        let state = GState.copy(mockState)
         let event = GEvent.drawDeck(player: "p1")
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.players["p1"]!.hand.map { $0.identifier }, ["c1"])
@@ -283,7 +283,7 @@ class GDatabaseUpdaterTests: XCTestCase {
         XCTAssertEqual(state.discard.map { $0.identifier }, ["c2"])
     }
     
-    func test_ResetDeck_IfDrawingCardWhileDeckId2() {
+    func test_ResetDeck_IfDrawingCardWhileDeckId2() throws {
         // Given
         let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
         let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
@@ -297,11 +297,10 @@ class GDatabaseUpdaterTests: XCTestCase {
             .players(are: mockPlayer1)
             .deck(are: mockCard1, mockCard4)
             .discard(are: mockCard2, mockCard3)
-        let state = GState.copy(mockState)
         let event = GEvent.drawDeck(player: "p1")
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.players["p1"]!.hand.map { $0.identifier }, ["c1"])
@@ -309,7 +308,7 @@ class GDatabaseUpdaterTests: XCTestCase {
         XCTAssertEqual(state.discard.map { $0.identifier }, ["c2"])
     }
     
-    func test_drawHand() {
+    func test_drawHand() throws {
         // Given
         let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
         let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
@@ -324,18 +323,17 @@ class GDatabaseUpdaterTests: XCTestCase {
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1, mockPlayer2)
-        let state = GState.copy(mockState)
         let event = GEvent.drawHand(player: "p1", other: "p2", card: "c2")
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.players["p1"]!.hand.map { $0.identifier }, ["c1", "c2"])
         XCTAssertEqual(state.players["p2"]!.hand.map { $0.identifier }, [])
     }
     
-    func test_drawInPlay() {
+    func test_drawInPlay() throws {
         // Given
         let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
         let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
@@ -351,18 +349,17 @@ class GDatabaseUpdaterTests: XCTestCase {
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1, mockPlayer2)
-        let state = GState.copy(mockState)
         let event = GEvent.drawInPlay(player: "p1", other: "p2", card: "c2")
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.players["p1"]!.hand.map { $0.identifier }, ["c1", "c2"])
         XCTAssertEqual(state.players["p2"]!.inPlay.map { $0.identifier }, ["c3"])
     }
     
-    func test_drawStore() {
+    func test_drawStore() throws {
         // Given
         let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
         let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
@@ -375,18 +372,17 @@ class GDatabaseUpdaterTests: XCTestCase {
             .withDefault()
             .players(are: mockPlayer1)
             .store(are: mockCard2, mockCard3)
-        let state = GState.copy(mockState)
         let event = GEvent.drawStore(player: "p1", card: "c2")
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.players["p1"]!.hand.map { $0.identifier }, ["c1", "c2"])
         XCTAssertEqual(state.store.map { $0.identifier }, ["c3"])
     }
     
-    func test_drawDiscard() {
+    func test_drawDiscard() throws {
         // Given
         let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
         let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
@@ -399,20 +395,19 @@ class GDatabaseUpdaterTests: XCTestCase {
             .withDefault()
             .players(are: mockPlayer1)
             .discard(are: mockCard2, mockCard3)
-        let state = GState.copy(mockState)
         let event = GEvent.drawDiscard(player: "p1")
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.players["p1"]!.hand.map { $0.identifier }, ["c1", "c2"])
         XCTAssertEqual(state.discard.map { $0.identifier }, ["c3"])
     }
     
-    // MARK: - equip
+    // MARK: - inPlay
     
-    func test_equip() {
+    func test_equip() throws {
         // Given
         let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
         let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
@@ -423,18 +418,17 @@ class GDatabaseUpdaterTests: XCTestCase {
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1)
-        let state = GState.copy(mockState)
         let event = GEvent.equip(player: "p1", card: "c1")
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.players["p1"]!.inPlay.map { $0.identifier }, ["c1"])
         XCTAssertEqual(state.players["p1"]!.hand.map { $0.identifier }, ["c2"])
     }
     
-    func test_handicap() {
+    func test_handicap() throws {
         // Given
         let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
         let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
@@ -449,18 +443,17 @@ class GDatabaseUpdaterTests: XCTestCase {
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1, mockPlayer2)
-        let state = GState.copy(mockState)
         let event = GEvent.handicap(player: "p1", card: "c1", other: "p2")
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.players["p2"]!.inPlay.map { $0.identifier }, ["c2", "c1"])
         XCTAssertEqual(state.players["p1"]!.hand.map { $0.identifier }, [])
     }
     
-    func test_passInPlay() {
+    func test_passInPlay() throws {
         // Given
         let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
         let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
@@ -475,11 +468,10 @@ class GDatabaseUpdaterTests: XCTestCase {
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1, mockPlayer2)
-        let state = GState.copy(mockState)
         let event = GEvent.passInPlay(player: "p1", card: "c1", other: "p2")
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.players["p2"]!.inPlay.map { $0.identifier }, ["c2", "c1"])
@@ -488,7 +480,7 @@ class GDatabaseUpdaterTests: XCTestCase {
     
     // MARK: - Discard
     
-    func test_discardHand() {
+    func test_discardHand() throws {
         // Given
         let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
         let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
@@ -500,18 +492,17 @@ class GDatabaseUpdaterTests: XCTestCase {
             .withDefault()
             .players(are: mockPlayer1)
             .discard(are: mockCard2)
-        let state = GState.copy(mockState)
         let event = GEvent.discardHand(player: "p1", card: "c1")
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.players["p1"]!.hand.map { $0.identifier }, [])
         XCTAssertEqual(state.discard.map { $0.identifier }, ["c1", "c2"])
     }
     
-    func test_Play() {
+    func test_Play() throws {
         // Given
         let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
         let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
@@ -523,18 +514,17 @@ class GDatabaseUpdaterTests: XCTestCase {
             .withDefault()
             .players(are: mockPlayer1)
             .discard(are: mockCard2)
-        let state = GState.copy(mockState)
         let event = GEvent.play(player: "p1", card: "c1")
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.players["p1"]!.hand.map { $0.identifier }, [])
         XCTAssertEqual(state.discard.map { $0.identifier }, ["c1", "c2"])
     }
     
-    func test_discardInPlay() {
+    func test_discardInPlay() throws {
         // Given
         let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
         let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
@@ -546,11 +536,10 @@ class GDatabaseUpdaterTests: XCTestCase {
             .withDefault()
             .players(are: mockPlayer1)
             .discard(are: mockCard2)
-        let state = GState.copy(mockState)
         let event = GEvent.discardInPlay(player: "p1", card: "c1")
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.players["p1"]!.inPlay.map { $0.identifier }, [])
@@ -559,27 +548,26 @@ class GDatabaseUpdaterTests: XCTestCase {
     
     // MARK: - Store
     
-    func test_deckToStore() {
+    func test_deckToStore() throws {
         // Given
         let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
         let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
         let mockState = MockStateProtocol()
             .withDefault()
             .deck(are: mockCard1, mockCard2)
-        let state = GState.copy(mockState)
         let event = GEvent.deckToStore
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.store.map { $0.identifier }, ["c1"])
         XCTAssertEqual(state.deck.map { $0.identifier }, ["c2"])
     }
     
-    // MARK: - Reveal
+    // MARK: - Flip
     
-    func test_flipDeck() {
+    func test_flipDeck() throws {
         // Given
         let mockCard1 = MockCardProtocol().withDefault().identified(by: "c1")
         let mockCard2 = MockCardProtocol().withDefault().identified(by: "c2")
@@ -588,11 +576,10 @@ class GDatabaseUpdaterTests: XCTestCase {
             .withDefault()
             .deck(are: mockCard1, mockCard2)
             .discard(are: mockCard3)
-        let state = GState.copy(mockState)
         let event = GEvent.flipDeck
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.discard.map { $0.identifier }, ["c1", "c3"])
@@ -609,11 +596,10 @@ class GDatabaseUpdaterTests: XCTestCase {
         let mockState = MockStateProtocol()
             .withDefault()
             .hits(are: mockHit1)
-        let state = GState.copy(mockState)
         let event = GEvent.addHit(hits: [GHit(player: "p2", name: "n1", abilities: ["looseHealth"], offender: "p1", cancelable: 1)])
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.hits.count, 2)
@@ -628,12 +614,11 @@ class GDatabaseUpdaterTests: XCTestCase {
         // Given
         let mockState = MockStateProtocol()
             .withDefault()
-        let state = GState.copy(mockState)
         let event = GEvent.addHit(hits: [GHit(player: "p2", name: "n1", abilities: ["looseHealth"], offender: "p1", cancelable: 1),
                                          GHit(player: "p3", name: "n1", abilities: ["looseHealth"], offender: "p1", cancelable: 1)])
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.hits.count, 2)
@@ -649,7 +634,7 @@ class GDatabaseUpdaterTests: XCTestCase {
         XCTAssertEqual(state.hits[1].offender, "p1")
     }
     
-    func test_removeHit() {
+    func test_removeHit() throws {
         // Given
         let mockHit1 = MockHitProtocol()
             .withDefault()
@@ -660,18 +645,17 @@ class GDatabaseUpdaterTests: XCTestCase {
         let mockState = MockStateProtocol()
             .withDefault()
             .hits(are: mockHit1, mockHit2)
-        let state = GState.copy(mockState)
         let event = GEvent.removeHit(player: "p1")
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.hits.count, 1)
         XCTAssertEqual(state.hits[0].player, "p2")
     }
     
-    func test_editHit() {
+    func test_cancelHit() throws {
         // Given
         let mockHit1 = MockHitProtocol()
             .withDefault()
@@ -683,11 +667,10 @@ class GDatabaseUpdaterTests: XCTestCase {
         let mockState = MockStateProtocol()
             .withDefault()
             .hits(are: mockHit1, mockHit2)
-        let state = GState.copy(mockState)
         let event = GEvent.cancelHit(player: "p1")
         
         // When
-        sut.execute(event, in: state)
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
         XCTAssertEqual(state.hits.count, 2)
@@ -702,36 +685,21 @@ class GDatabaseUpdaterTests: XCTestCase {
         // Given
         let mockState = MockStateProtocol()
             .withDefault()
-        let state = GState.copy(mockState)
         let event = GEvent.activate(moves: [])
         
         // When
         // Assert
-        XCTAssertNoThrow(sut.execute(event, in: state))
-    }
-    
-    func test_SetWinner_IfGameOver() {
-        // Given
-        let mockState = MockStateProtocol()
-            .withDefault()
-        let state = GState.copy(mockState)
-        let event = GEvent.gameover(winner: .outlaw)
-        
-        // When
-        // Assert
-        XCTAssertNoThrow(sut.execute(event, in: state))
-        XCTAssertEqual(state.winner, .outlaw)
+        XCTAssertNil(sut.execute(event, in: mockState))
     }
     
     func test_DoNothing_IfEmptyQueue() {
         // Given
         let mockState = MockStateProtocol()
             .withDefault()
-        let state = GState.copy(mockState)
         let event = GEvent.emptyQueue
         
         // When
         // Assert
-        XCTAssertNoThrow(sut.execute(event, in: state))
+        XCTAssertNil(sut.execute(event, in: mockState))
     }
 }
