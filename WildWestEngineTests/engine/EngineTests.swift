@@ -191,12 +191,19 @@ class EngineTests: XCTestCase {
         stub(mockQueue) { mock in
             when(mock.pop()).thenReturn(event)
         }
+        let expectation = XCTestExpectation(description: "completed")
+        stub(mockDatabase) { mock in
+            when(mock.update(event: equal(to: event))).then { _ in
+                expectation.fulfill()
+                return Completable.empty()
+            }
+        }
         
         // When
-        sut.execute( nil, completion: nil)
+        sut.execute(nil, completion: nil)
         
         // Assert
-        verify(mockDatabase).update(event: equal(to: event))
+        wait(for: [expectation], timeout: 0.1)
     }
     
     func test_ThrowsError_IfFailedApplyingEvent() {
@@ -241,12 +248,12 @@ class EngineTests: XCTestCase {
         }
         
         // Assert
+        wait(for: [expectation], timeout: 0.5)
         verify(mockQueue, times(3)).pop()
         verify(mockDatabase).update(event: equal(to: event1))
         verify(mockTimer).wait(equal(to: event1), completion: any())
         verify(mockDatabase).update(event: equal(to: event2))
         verify(mockTimer).wait(equal(to: event2), completion: any())
-        wait(for: [expectation], timeout: 0.5)
     }
     
     func test_DoNotApplyMove_IfHasNoEffects() {

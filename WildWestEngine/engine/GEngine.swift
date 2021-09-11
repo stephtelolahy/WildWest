@@ -46,13 +46,15 @@ public class GEngine: EngineProtocol {
             queue.queue(.run(move: move))
         }
         
-        run(onCompleted: { [weak self] in
-            self?.running = false
-            self?.delayEmitActiveMoves()
-            completion?(nil)
-        }, onError: { error in
-            completion?(error)
-        })
+        DispatchQueue.main.async { [weak self] in
+                    self?.run(onCompleted: { [weak self] in
+                        self?.running = false
+                        self?.delayEmitActiveMoves()
+                        completion?(nil)
+                    }, onError: { error in
+                        completion?(error)
+                    })
+        }
     }
 }
 
@@ -118,7 +120,7 @@ private extension GEngine {
     }
     
     func delayEmitActiveMoves() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1)) { [weak self] in
+        DispatchQueue.main.async { [weak self] in
             self?.emitActiveMoves()
         }
     }

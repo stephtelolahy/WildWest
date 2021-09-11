@@ -236,6 +236,9 @@ private extension StateProtocol {
         return card.abilities
     }
     
+    // TODO:
+    // verify 'silentCard' when applying effect to target
+    // instead of when generating moves
     func isPlayer(_ player: PlayerProtocol, targetableBy card: CardProtocol) -> Bool {
         if let silenced = player.attributes[.silentCard] as? String,
            card.matches(regex: silenced) {

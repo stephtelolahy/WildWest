@@ -12,16 +12,16 @@ import WildWestEngine
 
 public class RemoteGameDatabase: DatabaseProtocol {
     
+    // MARK: - Subjects
+    
+    public let state: BehaviorSubject<StateProtocol>
+    public let event: PublishSubject<GEvent>
+    
     // MARK: - Dependencies
     
     private let gameRef: DatabaseReferenceProtocol
     private let mapper: FirebaseMapperProtocol
     private let updater: RemoteGameDatabaseUpdaterProtocol
-    
-    // MARK: - Subjects
-    
-    public let state: BehaviorSubject<StateProtocol>
-    public let event: PublishSubject<GEvent>
     
     // MARK: - Properties
     
@@ -31,12 +31,11 @@ public class RemoteGameDatabase: DatabaseProtocol {
          gameRef: DatabaseReferenceProtocol,
          mapper: FirebaseMapperProtocol,
          updater: RemoteGameDatabaseUpdaterProtocol) {
+        state = BehaviorSubject(value: aState)
+        event = PublishSubject()
         self.gameRef = gameRef
         self.mapper = mapper
         self.updater = updater
-        state = BehaviorSubject(value: aState)
-        event = PublishSubject()
-        
         observeStateChanges()
         observeEventChanges()
     }

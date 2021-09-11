@@ -14,7 +14,7 @@ class IndiansTests: XCTestCase {
     
     private let sut: GameRulesProtocol = Resolver.resolve()
     
-    func test_CanPlayGatling_IfOwnCard() throws {
+    func test_CanPlayIndians_IfOwnCard() throws {
         // Given
         let mockCard1 = MockCardProtocol()
             .withDefault()

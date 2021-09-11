@@ -6,7 +6,7 @@
 //  Copyright © 2021 creativeGames. All rights reserved.
 //
 
-enum StateAttribute: String {
+enum NumberAttribute: String {
     case bangsPerTurn
     case bangsCancelable
     case inPlayPlayers
@@ -17,7 +17,7 @@ enum StateAttribute: String {
 
 enum NumberArgument: Decodable {
     case number(Int)
-    case attribute(StateAttribute)
+    case attribute(NumberAttribute)
     
     init(from decoder: Decoder) throws {
         if let intValue = try? decoder.singleValueContainer().decode(Int.self) {
@@ -42,7 +42,7 @@ enum NumberArgument: Decodable {
     }
     
     private static func parse(from string: String) throws -> NumberArgument {
-        guard let attribute = StateAttribute(rawValue: string) else {
+        guard let attribute = NumberAttribute(rawValue: string) else {
             throw DecodingError.typeMismatch(Int.self, DecodingError.Context(codingPath: [], debugDescription: "Invalid value"))
         }
         

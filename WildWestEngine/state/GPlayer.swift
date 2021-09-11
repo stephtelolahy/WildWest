@@ -47,5 +47,5 @@ public class GPlayer: PlayerProtocol {
     
     public var suit: String { "" }
     
-    public var value: String { " " }
+    public var value: String { "" }
 }

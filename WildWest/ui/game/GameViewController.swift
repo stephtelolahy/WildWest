@@ -180,7 +180,7 @@ private extension GameViewController {
         endTurnButton.isEnabled = segmentedMoves["endTurn"] != nil
         otherMovesButton.isEnabled = segmentedMoves["*"] != nil
         
-        // <RULE> Force select reaction moves
+        // Select reaction moves
         if !moves.isEmpty,
            let hit = state.hits.first {
             if preferences.assistedMode {
@@ -192,7 +192,6 @@ private extension GameViewController {
                 }
             }
         }
-        // </RULE>
     }
     
     func buildCardPositions() -> [CardArea: CGPoint] {
