@@ -12,8 +12,8 @@
 class OnHitCancelable: PlayReq {
     
     override func match(_ ctx: PlayContext, args: inout [[PlayArg: [String]]]) -> Bool {
-        guard case let .addHit(hits) = ctx.event,
-              let hit = hits.first(where: { $0.player == ctx.actor.identifier }),
+        guard case let .addHit(hit) = ctx.event,
+              hit.players.contains(ctx.actor.identifier),
               hit.cancelable > 0 else {
             return false
         }

@@ -27,12 +27,12 @@ class MissedTests: XCTestCase {
             .holding(mockCard1)
         let mockHit1 = MockHitProtocol()
             .withDefault()
-            .player(is: "p1")
+            .players(are: "p1")
             .cancelable(is: 1)
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1)
-            .hits(are: mockHit1)
+            .hit(is: mockHit1)
         
         // When
         let moves = sut.active(in: mockState)
@@ -43,7 +43,7 @@ class MissedTests: XCTestCase {
         XCTAssertEqual(events, [.play(player: "p1", card: "c1"),
                                 .removeHit(player: "p1")])
     }
-
+    
     func test_CanPlayMissed_ToDecrementCancelable() throws {
         // Given
         let mockCard1 = MockCardProtocol()
@@ -57,21 +57,21 @@ class MissedTests: XCTestCase {
             .holding(mockCard1)
         let mockHit1 = MockHitProtocol()
             .withDefault()
-            .player(is: "p1")
+            .players(are: "p1")
             .cancelable(is: 2)
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1)
-            .hits(are: mockHit1)
-
+            .hit(is: mockHit1)
+        
         // When
         let moves = sut.active(in: mockState)
         let events = sut.effects(on: try XCTUnwrap(moves?.first), in: mockState)
-
+        
         // Assert
         XCTAssertEqual(moves, [GMove("missed", actor: "p1", card: .hand("c1"))])
         XCTAssertEqual(events, [.play(player: "p1", card: "c1"),
-                                .cancelHit(player: "p1")])
+                                .decrementHitCancelable])
     }
     
     func test_CannotPlayMissed_IfNotFirsToResolveHit() {
@@ -89,15 +89,12 @@ class MissedTests: XCTestCase {
             .identified(by: "p2")
         let mockHit1 = MockHitProtocol()
             .withDefault()
-            .player(is: "p1")
+            .players(are: "p2", "p1")
             .cancelable(is: 1)
-        let mockHit2 = MockHitProtocol()
-            .withDefault()
-            .player(is: "p2")
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1, mockPlayer2)
-            .hits(are: mockHit2, mockHit1)
+            .hit(is: mockHit1)
         
         // When
         let moves = sut.active(in: mockState)

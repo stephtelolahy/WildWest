@@ -20,11 +20,11 @@ struct EventDto: Codable {
     var drawDeckFlipping: String?
     var drawDiscard: String?
     var removeHit: String?
-    var cancelHit: String?
+    var decrementHitCancelable: Bool?
     var gameover: String?
     var run: MoveDto?
     var activate: [MoveDto]?
-    var addHit: [HitDto]?
+    var addHit: HitDto?
     var play: PlayerCardDto?
     var equip: PlayerCardDto?
     var drawStore: PlayerCardDto?

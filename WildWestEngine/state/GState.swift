@@ -17,7 +17,7 @@ public class GState: StateProtocol {
     public var deck: [CardProtocol]
     public var discard: [CardProtocol]
     public var store: [CardProtocol]
-    public var hits: [HitProtocol]
+    public var hit: HitProtocol?
     public var played: [String]
     public var history: [GMove]
     public var winner: Role?
@@ -32,7 +32,7 @@ public class GState: StateProtocol {
                 deck: [CardProtocol],
                 discard: [CardProtocol],
                 store: [CardProtocol],
-                hits: [HitProtocol],
+                hit: HitProtocol?,
                 played: [String],
                 history: [GMove],
                 winner: Role?) {
@@ -44,7 +44,7 @@ public class GState: StateProtocol {
         self.deck = deck
         self.discard = discard
         self.store = store
-        self.hits = hits
+        self.hit = hit
         self.played = played
         self.history = history
         self.winner = winner

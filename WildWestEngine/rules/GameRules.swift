@@ -22,7 +22,7 @@ public class GameRules: GameRulesProtocol {
     }
     
     public func active(in state: StateProtocol) -> [GMove]? {
-        let actor = state.hits.first?.player ?? state.turn
+        let actor = state.hit?.players.first ?? state.turn
         return active(actor: actor, in: state)
     }
     
@@ -108,8 +108,8 @@ private extension GameRules {
         }
         
         let reactionMoves: [GMove]
-        if let hit = state.hits.first,
-           hit.player == identifier {
+        if let hit = state.hit,
+           hit.players.first == identifier {
             reactionMoves = hit.abilities
                 .compactMap { self.moves(ofType: .active, ability: $0, card: nil, actor: actor, in: state) }
                 .flatMap { $0 }

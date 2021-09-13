@@ -44,8 +44,6 @@ class GeneralStoreTests: XCTestCase {
                                 .deckToStore,
                                 .deckToStore,
                                 .deckToStore,
-                                .addHit(hits: [GHit(player: "p1", name: "generalstore", abilities: ["drawStore"], offender: "p1"),
-                                               GHit(player: "p2", name: "generalstore", abilities: ["drawStore"], offender: "p1"),
-                                               GHit(player: "p3", name: "generalstore", abilities: ["drawStore"], offender: "p1")])])
+                                .addHit(hit: GHit(name: "generalstore", players: ["p1", "p2", "p3"], abilities: ["drawStore"]))])
     }
 }

@@ -50,10 +50,9 @@ class DtoEncodingTests: XCTestCase {
                               health: 2,
                               hand: [],
                               inPlay: [])
-        let hit1 = GHit(player: "p1",
-                        name: "hit1",
+        let hit1 = GHit(name: "hit1",
+                        players: ["p1", "p2"],
                         abilities: ["ab1"],
-                        offender: "p2",
                         cancelable: 1)
         let state = GState(players: ["p1": player1],
                            initialOrder: ["p1", "p2"],
@@ -63,7 +62,7 @@ class DtoEncodingTests: XCTestCase {
                            deck: [mockCard1, mockCard2],
                            discard: [mockCard3, mockCard4],
                            store: [],
-                           hits: [hit1],
+                           hit: hit1,
                            played: ["bang"],
                            history: [],
                            winner: .sheriff)
@@ -85,7 +84,6 @@ class DtoEncodingTests: XCTestCase {
         XCTAssertEqual(decoded.deck.map { $0.identifier }, ["c1", "c2"])
         XCTAssertEqual(decoded.discard.map { $0.identifier }, ["c3", "c4"])
         XCTAssertEqual(decoded.store.map { $0.identifier }, [])
-        XCTAssertEqual(decoded.hits.count, 1)
         XCTAssertEqual(decoded.played, ["bang"])
         XCTAssertEqual(decoded.winner, .sheriff)
         
@@ -104,12 +102,11 @@ class DtoEncodingTests: XCTestCase {
         XCTAssertEqual(decodedAttributes1[.silentAbility] as? String, "equip")
         XCTAssertEqual(decodedAttributes1[.playAs] as? [String: String], ["missed": "bang"])
         
-        let decodedHit1 = decoded.hits[0]
+        let decodedHit1 = try XCTUnwrap(decoded.hit)
         XCTAssertEqual(decodedHit1.name, "hit1")
-        XCTAssertEqual(decodedHit1.player, "p1")
+        XCTAssertEqual(decodedHit1.players, ["p1", "p2"])
         XCTAssertEqual(decodedHit1.abilities, ["ab1"])
         XCTAssertEqual(decodedHit1.cancelable, 1)
-        XCTAssertEqual(decodedHit1.offender, "p2")
     }
     
     // MARK: - Event
@@ -143,10 +140,9 @@ class DtoEncodingTests: XCTestCase {
             .deckToStore,
             .flipDeck,
             .drawDeckFlipping(player: "p1"),
-            .addHit(hits: [GHit(player: "p1", name: "h1", abilities: ["a1", "a2"], offender: "p2"),
-                           GHit(player: "p1", name: "h1", abilities: ["a1", "a2"], offender: "p2", cancelable: 1, target: "p3")]),
+            .addHit(hit: GHit(name: "h1", players: ["p1"], abilities: ["a1", "a2"])),
             .removeHit(player: "p1"),
-            .cancelHit(player: "p1"),
+            .decrementHitCancelable,
             .gameover(winner: .renegade),
             .emptyQueue
         ]

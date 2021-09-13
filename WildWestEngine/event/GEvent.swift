@@ -37,16 +37,15 @@ public enum GEvent: Equatable {
     case looseHealth(player: String, offender: String)
     case eliminate(player: String, offender: String)
     
+    case addHit(hit: GHit) // setHit
+    case removeHit(player: String)
+    case decrementHitCancelable
+    
     case gameover(winner: Role)
     
     // MARK: - Engine events
     
     case activate(moves: [GMove])
-    case run(move: GMove)   // play(move)
-    
-    case addHit(hits: [GHit])
-    case removeHit(player: String)
-    case cancelHit(player: String)
-    
+    case run(move: GMove)
     case emptyQueue // idle
 }

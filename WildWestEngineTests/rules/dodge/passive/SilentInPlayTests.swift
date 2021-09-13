@@ -11,7 +11,7 @@ import WildWestEngine
 import Resolver
 
 class SilentInPlayTests: XCTestCase {
-
+    
     private let sut: GameRulesProtocol = Resolver.resolve()
     
     func test_SilentOthersBarrel_IfHavingAttributeSilentInPlayAndYourTurn() {
@@ -26,7 +26,7 @@ class SilentInPlayTests: XCTestCase {
             .playing(mockCard1)
         let mockHit1 = MockHitProtocol()
             .withDefault()
-            .player(is: "p1")
+            .players(are: "p1")
             .cancelable(is: 1)
         let mockPlayer2 = MockPlayerProtocol()
             .withDefault()
@@ -34,11 +34,11 @@ class SilentInPlayTests: XCTestCase {
             .attributes(are: [.silentInPlay: true])
         let mockState = MockStateProtocol()
             .withDefault()
-            .hits(are: mockHit1)
+            .hit(is: mockHit1)
             .players(are: mockPlayer1, mockPlayer2)
             .playOrder(is: "p1", "p2")
             .turn(is: "p2")
-        let event = GEvent.addHit(hits: [GHit(player: "p1", name: "n1", abilities: [], offender: "p2", cancelable: 1)])
+        let event = GEvent.addHit(hit: GHit(name: "n1", players: ["p1"], abilities: [], cancelable: 1))
         
         // When
         let moves = sut.triggered(on: event, in: mockState)
@@ -59,7 +59,7 @@ class SilentInPlayTests: XCTestCase {
             .playing(mockCard1)
         let mockHit1 = MockHitProtocol()
             .withDefault()
-            .player(is: "p1")
+            .players(are: "p1")
             .cancelable(is: 1)
         let mockPlayer2 = MockPlayerProtocol()
             .withDefault()
@@ -67,11 +67,11 @@ class SilentInPlayTests: XCTestCase {
             .attributes(are: [.silentInPlay: true])
         let mockState = MockStateProtocol()
             .withDefault()
-            .hits(are: mockHit1)
+            .hit(is: mockHit1)
             .players(are: mockPlayer1, mockPlayer2)
             .playOrder(is: "p1", "p2")
             .turn(is: "pX")
-        let event = GEvent.addHit(hits: [GHit(player: "p1", name: "n1", abilities: [], offender: "p2", cancelable: 1)])
+        let event = GEvent.addHit(hit: GHit(name: "n1", players: ["p1"], abilities: [], cancelable: 1))
         
         // When
         let moves = sut.triggered(on: event, in: mockState)

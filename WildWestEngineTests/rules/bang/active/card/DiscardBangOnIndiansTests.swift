@@ -28,12 +28,12 @@ class DiscardBangOnIndiansTests: XCTestCase {
             .holding(mockCard1)
         let mockHit1 = MockHitProtocol()
             .withDefault()
-            .player(is: "p1")
+            .players(are: "p1")
             .named("indians")
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1)
-            .hits(are: mockHit1)
+            .hit(is: mockHit1)
         
         // When
         let moves = sut.active(in: mockState)

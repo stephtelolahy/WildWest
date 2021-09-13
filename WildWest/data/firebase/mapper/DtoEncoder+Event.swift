@@ -45,8 +45,8 @@ extension DtoEncoder {
         case let .removeHit(player):
             return EventDto(removeHit: player)
             
-        case let .cancelHit(player):
-            return EventDto(cancelHit: player)
+        case .decrementHitCancelable:
+            return EventDto(decrementHitCancelable: true)
             
         case let .gameover(role):
             return EventDto(gameover: role.rawValue)
@@ -58,8 +58,8 @@ extension DtoEncoder {
             let movesDto = moves.map { encode(move: $0) }
             return EventDto(activate: movesDto)
             
-        case let .addHit(hits):
-            let dto = hits.map { encode(hit: $0) }
+        case let .addHit(hit):
+            let dto = encode(hit: hit)
             return EventDto(addHit: dto)
             
         case let .play(player, card):
@@ -142,8 +142,8 @@ extension DtoEncoder {
             return .removeHit(player: player)
         }
         
-        if let player = event.cancelHit {
-            return .cancelHit(player: player)
+        if event.decrementHitCancelable != nil {
+            return .decrementHitCancelable
         }
         
         if let dto = event.gameover {
@@ -161,16 +161,9 @@ extension DtoEncoder {
             return .activate(moves: moves)
         }
         
-        if let dto = event.addHit {
-            let hits = try dto.map {
-                GHit(player: try $0.player.unwrap(),
-                     name: try $0.name.unwrap(),
-                     abilities: try $0.abilities.unwrap(),
-                     offender: try $0.offender.unwrap(),
-                     cancelable: try $0.cancelable.unwrap(),
-                     target: $0.target)
-            }
-            return .addHit(hits: hits)
+        if let dto = event.addHit,
+           let hit = try decode(hit: dto) {
+            return .addHit(hit: hit)
         }
         
         if let dto = event.play {

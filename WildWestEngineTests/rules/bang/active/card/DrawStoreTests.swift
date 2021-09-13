@@ -23,12 +23,12 @@ class DrawStoreTests: XCTestCase {
             .identified(by: "p1")
         let mockHit1 = MockHitProtocol()
             .withDefault()
-            .player(is: "p1")
+            .players(are: "p1")
             .abilities(are: "drawStore")
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1)
-            .hits(are: mockHit1)
+            .hit(is: mockHit1)
             .store(are: mockCard1, mockCard2)
         
         // When

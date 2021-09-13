@@ -2032,14 +2032,14 @@ public class MockStateProtocol: StateProtocol, Cuckoo.ProtocolMock {
     
     
     
-    public var hits: [HitProtocol] {
+    public var hit: HitProtocol? {
         get {
-            return cuckoo_manager.getter("hits",
+            return cuckoo_manager.getter("hit",
                 superclassCall:
                     
                     Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                     ,
-                defaultCall: __defaultImplStub!.hits)
+                defaultCall: __defaultImplStub!.hit)
         }
         
     }
@@ -2139,8 +2139,8 @@ public class MockStateProtocol: StateProtocol, Cuckoo.ProtocolMock {
 	    }
 	    
 	    
-	    var hits: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockStateProtocol, [HitProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "hits")
+	    var hit: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockStateProtocol, HitProtocol?> {
+	        return .init(manager: cuckoo_manager, name: "hit")
 	    }
 	    
 	    
@@ -2214,8 +2214,8 @@ public class MockStateProtocol: StateProtocol, Cuckoo.ProtocolMock {
 	    }
 	    
 	    
-	    var hits: Cuckoo.VerifyReadOnlyProperty<[HitProtocol]> {
-	        return .init(manager: cuckoo_manager, name: "hits", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var hit: Cuckoo.VerifyReadOnlyProperty<HitProtocol?> {
+	        return .init(manager: cuckoo_manager, name: "hit", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	    
@@ -2305,9 +2305,9 @@ public class StateProtocolStub: StateProtocol {
     }
     
     
-    public var hits: [HitProtocol] {
+    public var hit: HitProtocol? {
         get {
-            return DefaultValueRegistry.defaultValue(for: ([HitProtocol]).self)
+            return DefaultValueRegistry.defaultValue(for: (HitProtocol?).self)
         }
         
     }
@@ -2332,6 +2332,227 @@ public class StateProtocolStub: StateProtocol {
     public var winner: Role? {
         get {
             return DefaultValueRegistry.defaultValue(for: (Role?).self)
+        }
+        
+    }
+    
+
+    
+
+    
+}
+
+
+
+public class MockHitProtocol: HitProtocol, Cuckoo.ProtocolMock {
+    
+    public typealias MocksType = HitProtocol
+    
+    public typealias Stubbing = __StubbingProxy_HitProtocol
+    public typealias Verification = __VerificationProxy_HitProtocol
+
+    public let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: HitProtocol?
+
+    public func enableDefaultImplementation(_ stub: HitProtocol) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+    
+    
+    public var name: String {
+        get {
+            return cuckoo_manager.getter("name",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.name)
+        }
+        
+    }
+    
+    
+    
+    public var players: [String] {
+        get {
+            return cuckoo_manager.getter("players",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.players)
+        }
+        
+    }
+    
+    
+    
+    public var abilities: [String] {
+        get {
+            return cuckoo_manager.getter("abilities",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.abilities)
+        }
+        
+    }
+    
+    
+    
+    public var cancelable: Int {
+        get {
+            return cuckoo_manager.getter("cancelable",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.cancelable)
+        }
+        
+    }
+    
+    
+    
+    public var targets: [String] {
+        get {
+            return cuckoo_manager.getter("targets",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.targets)
+        }
+        
+    }
+    
+
+    
+
+    
+
+	public struct __StubbingProxy_HitProtocol: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	    public init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    var name: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockHitProtocol, String> {
+	        return .init(manager: cuckoo_manager, name: "name")
+	    }
+	    
+	    
+	    var players: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockHitProtocol, [String]> {
+	        return .init(manager: cuckoo_manager, name: "players")
+	    }
+	    
+	    
+	    var abilities: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockHitProtocol, [String]> {
+	        return .init(manager: cuckoo_manager, name: "abilities")
+	    }
+	    
+	    
+	    var cancelable: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockHitProtocol, Int> {
+	        return .init(manager: cuckoo_manager, name: "cancelable")
+	    }
+	    
+	    
+	    var targets: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockHitProtocol, [String]> {
+	        return .init(manager: cuckoo_manager, name: "targets")
+	    }
+	    
+	    
+	}
+
+	public struct __VerificationProxy_HitProtocol: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	    public init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	    
+	    var name: Cuckoo.VerifyReadOnlyProperty<String> {
+	        return .init(manager: cuckoo_manager, name: "name", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var players: Cuckoo.VerifyReadOnlyProperty<[String]> {
+	        return .init(manager: cuckoo_manager, name: "players", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var abilities: Cuckoo.VerifyReadOnlyProperty<[String]> {
+	        return .init(manager: cuckoo_manager, name: "abilities", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var cancelable: Cuckoo.VerifyReadOnlyProperty<Int> {
+	        return .init(manager: cuckoo_manager, name: "cancelable", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	    
+	    var targets: Cuckoo.VerifyReadOnlyProperty<[String]> {
+	        return .init(manager: cuckoo_manager, name: "targets", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	
+	    
+	}
+}
+
+public class HitProtocolStub: HitProtocol {
+    
+    
+    public var name: String {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (String).self)
+        }
+        
+    }
+    
+    
+    public var players: [String] {
+        get {
+            return DefaultValueRegistry.defaultValue(for: ([String]).self)
+        }
+        
+    }
+    
+    
+    public var abilities: [String] {
+        get {
+            return DefaultValueRegistry.defaultValue(for: ([String]).self)
+        }
+        
+    }
+    
+    
+    public var cancelable: Int {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (Int).self)
+        }
+        
+    }
+    
+    
+    public var targets: [String] {
+        get {
+            return DefaultValueRegistry.defaultValue(for: ([String]).self)
         }
         
     }
@@ -3094,259 +3315,6 @@ public class PlayerProtocolStub: PlayerProtocol {
     public var value: String {
         get {
             return DefaultValueRegistry.defaultValue(for: (String).self)
-        }
-        
-    }
-    
-
-    
-
-    
-}
-
-
-
-public class MockHitProtocol: HitProtocol, Cuckoo.ProtocolMock {
-    
-    public typealias MocksType = HitProtocol
-    
-    public typealias Stubbing = __StubbingProxy_HitProtocol
-    public typealias Verification = __VerificationProxy_HitProtocol
-
-    public let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
-
-    
-    private var __defaultImplStub: HitProtocol?
-
-    public func enableDefaultImplementation(_ stub: HitProtocol) {
-        __defaultImplStub = stub
-        cuckoo_manager.enableDefaultStubImplementation()
-    }
-    
-
-    
-    
-    
-    public var player: String {
-        get {
-            return cuckoo_manager.getter("player",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.player)
-        }
-        
-    }
-    
-    
-    
-    public var name: String {
-        get {
-            return cuckoo_manager.getter("name",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.name)
-        }
-        
-    }
-    
-    
-    
-    public var abilities: [String] {
-        get {
-            return cuckoo_manager.getter("abilities",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.abilities)
-        }
-        
-    }
-    
-    
-    
-    public var offender: String {
-        get {
-            return cuckoo_manager.getter("offender",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.offender)
-        }
-        
-    }
-    
-    
-    
-    public var cancelable: Int {
-        get {
-            return cuckoo_manager.getter("cancelable",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.cancelable)
-        }
-        
-    }
-    
-    
-    
-    public var target: String? {
-        get {
-            return cuckoo_manager.getter("target",
-                superclassCall:
-                    
-                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                    ,
-                defaultCall: __defaultImplStub!.target)
-        }
-        
-    }
-    
-
-    
-
-    
-
-	public struct __StubbingProxy_HitProtocol: Cuckoo.StubbingProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	
-	    public init(manager: Cuckoo.MockManager) {
-	        self.cuckoo_manager = manager
-	    }
-	    
-	    
-	    var player: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockHitProtocol, String> {
-	        return .init(manager: cuckoo_manager, name: "player")
-	    }
-	    
-	    
-	    var name: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockHitProtocol, String> {
-	        return .init(manager: cuckoo_manager, name: "name")
-	    }
-	    
-	    
-	    var abilities: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockHitProtocol, [String]> {
-	        return .init(manager: cuckoo_manager, name: "abilities")
-	    }
-	    
-	    
-	    var offender: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockHitProtocol, String> {
-	        return .init(manager: cuckoo_manager, name: "offender")
-	    }
-	    
-	    
-	    var cancelable: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockHitProtocol, Int> {
-	        return .init(manager: cuckoo_manager, name: "cancelable")
-	    }
-	    
-	    
-	    var target: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockHitProtocol, String?> {
-	        return .init(manager: cuckoo_manager, name: "target")
-	    }
-	    
-	    
-	}
-
-	public struct __VerificationProxy_HitProtocol: Cuckoo.VerificationProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	    private let callMatcher: Cuckoo.CallMatcher
-	    private let sourceLocation: Cuckoo.SourceLocation
-	
-	    public init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
-	        self.cuckoo_manager = manager
-	        self.callMatcher = callMatcher
-	        self.sourceLocation = sourceLocation
-	    }
-	
-	    
-	    
-	    var player: Cuckoo.VerifyReadOnlyProperty<String> {
-	        return .init(manager: cuckoo_manager, name: "player", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
-	    var name: Cuckoo.VerifyReadOnlyProperty<String> {
-	        return .init(manager: cuckoo_manager, name: "name", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
-	    var abilities: Cuckoo.VerifyReadOnlyProperty<[String]> {
-	        return .init(manager: cuckoo_manager, name: "abilities", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
-	    var offender: Cuckoo.VerifyReadOnlyProperty<String> {
-	        return .init(manager: cuckoo_manager, name: "offender", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
-	    var cancelable: Cuckoo.VerifyReadOnlyProperty<Int> {
-	        return .init(manager: cuckoo_manager, name: "cancelable", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	    
-	    var target: Cuckoo.VerifyReadOnlyProperty<String?> {
-	        return .init(manager: cuckoo_manager, name: "target", callMatcher: callMatcher, sourceLocation: sourceLocation)
-	    }
-	    
-	
-	    
-	}
-}
-
-public class HitProtocolStub: HitProtocol {
-    
-    
-    public var player: String {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (String).self)
-        }
-        
-    }
-    
-    
-    public var name: String {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (String).self)
-        }
-        
-    }
-    
-    
-    public var abilities: [String] {
-        get {
-            return DefaultValueRegistry.defaultValue(for: ([String]).self)
-        }
-        
-    }
-    
-    
-    public var offender: String {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (String).self)
-        }
-        
-    }
-    
-    
-    public var cancelable: Int {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (Int).self)
-        }
-        
-    }
-    
-    
-    public var target: String? {
-        get {
-            return DefaultValueRegistry.defaultValue(for: (String?).self)
         }
         
     }

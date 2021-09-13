@@ -11,9 +11,9 @@ import WildWestEngine
 import Resolver
 
 class BangRequire2CardsTests: XCTestCase {
-
+    
     private let sut: GameRulesProtocol = Resolver.resolve()
-
+    
     func test_CanBangRequire2Cards_IfHavingAbility() throws {
         // Given
         let mockCard1 = MockCardProtocol()
@@ -45,7 +45,7 @@ class BangRequire2CardsTests: XCTestCase {
         XCTAssertEqual(moves, [GMove("bangRequire2Cards", actor: "p1", args: [.requiredHand: ["c1", "c2"], .target: ["p2"]])])
         XCTAssertEqual(events, [.discardHand(player: "p1", card: "c1"),
                                 .discardHand(player: "p1", card: "c2"),
-                                .addHit(hits: [GHit(player: "p2", name: "bangRequire2Cards", abilities: ["looseHealth"], offender: "p1", cancelable: 1)])])
+                                .addHit(hit: GHit(name: "bangRequire2Cards", players: ["p2"], abilities: ["looseHealth"], cancelable: 1))])
     }
     
     func test_CannotBangRequire2Cards_IfAlreadyPlayedOnce() {
@@ -78,5 +78,5 @@ class BangRequire2CardsTests: XCTestCase {
         // Assert
         XCTAssertNil(moves)
     }
-
+    
 }

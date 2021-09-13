@@ -119,8 +119,8 @@ class MediaEventMatcherTests: XCTestCase {
     }
     
     func test_DynamiteExploded() {
-        XCTAssertEqual(sut.emoji(on: .addHit(hits: [GHit(player: "p1", name: "dynamite", abilities: [], offender: "p1")])), "😰")
-        XCTAssertNil(sut.emoji(on: .addHit(hits: [GHit(player: "p1", name: "any", abilities: [], offender: "p1")])))
+        XCTAssertEqual(sut.emoji(on: .addHit(hit: GHit(name: "dynamite", players: ["p1"], abilities: []))), "😰")
+        XCTAssertNil(sut.emoji(on: .addHit(hit: GHit(name: "any", players: ["p1"], abilities: []))))
     }
     
     // MARK: - Engine events

@@ -29,14 +29,14 @@ class DiscardBangOnDuelTests: XCTestCase {
         let mockHit1 = MockHitProtocol()
             .withDefault()
             .named("duel")
-            .player(is: "p1")
-            .offender(is: "p2")
+            .players(are: "p1")
+            .targets(are: "p2")
             .abilities(are: "looseHealth")
             .cancelable(is: 0)
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1)
-            .hits(are: mockHit1)
+            .hit(is: mockHit1)
         
         // When
         let moves = sut.active(in: mockState)
@@ -47,6 +47,6 @@ class DiscardBangOnDuelTests: XCTestCase {
                                GMove("looseHealth", actor: "p1")])
         XCTAssertEqual(events, [.play(player: "p1", card: "c1"),
                                 .removeHit(player: "p1"),
-                                .addHit(hits: [GHit(player: "p2", name: "duel", abilities: ["looseHealth"], offender: "p1")])])
-    }
+                                .addHit(hit: GHit(name: "duel", players: ["p2"], abilities: ["looseHealth"], targets: ["p1"]))])
+        }
 }

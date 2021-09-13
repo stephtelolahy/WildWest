@@ -157,19 +157,34 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         wait(for: [expectation], timeout: 0.5)
     }
     
-    func test_removeAssociatedHits_IfEliminate() {
+    func test_removeFromHit_IfEliminate() {
         // Given
-        let event = GEvent.eliminate(player: "p1", offender: "p2")
-        let hit1 = HitDto(player: "p1", name: nil, abilities: nil, cancelable: nil, offender: nil, target: nil)
-        let hit2 = HitDto(player: "p2", name: nil, abilities: nil, cancelable: nil, offender: nil, target: nil)
-        let hits = ["key1": hit1, "key2": hit2]
-        mockDatabaseReference.stubObserveSingleEvent("state/hits", value: hits)
+        let event = GEvent.eliminate(player: "p1", offender: "pX")
+        
+        mockDatabaseReference.stubObserveSingleEvent("state/hit/players", value: ["p1", "p2"])
         let expectation = XCTestExpectation(description: #function)
         
         // When
         // Assert
         sut.execute(event).subscribe(onCompleted: {
-            verify(self.mockDatabaseReference).setValue("state/hits/key1", value: isNil(), withCompletionBlock: any())
+            verify(self.mockDatabaseReference).setValue("state/hit/players", value: any(equalTo: ["p2"]), withCompletionBlock: any())
+            expectation.fulfill()
+        }).disposed(by: disposeBag)
+        
+        wait(for: [expectation], timeout: 0.5)
+    }
+    
+    func test_removeAssociatedHit_IfEliminate() {
+        // Given
+        let event = GEvent.eliminate(player: "p1", offender: "pX")
+        
+        mockDatabaseReference.stubObserveSingleEvent("state/hit/players", value: ["p1", "p1"])
+        let expectation = XCTestExpectation(description: #function)
+        
+        // When
+        // Assert
+        sut.execute(event).subscribe(onCompleted: {
+            verify(self.mockDatabaseReference).setValue("state/hit", value: isNil(), withCompletionBlock: any())
             expectation.fulfill()
         }).disposed(by: disposeBag)
         
@@ -513,8 +528,7 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
     
     func test_AddHit() throws {
         // Given
-        let event = GEvent.addHit(hits: [GHit(player: "p2", name: "n1", abilities: ["a1", "a2"], offender: "p1"),
-                                         GHit(player: "p3", name: "n1", abilities: ["a1", "a2"], offender: "p1", cancelable: 1, target: "pX")])
+        let event = GEvent.addHit(hit: GHit(name: "n1", players: ["p2"], abilities: ["a1", "a2"], targets: ["p1"]))
         let expectation = XCTestExpectation(description: #function)
         stub(mockDatabaseReference) { mock in
             when(mock).childByAutoIdKey().thenReturn("keyX", "keyY")
@@ -523,21 +537,46 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         // When
         // Assert
         sut.execute(event).subscribe(onCompleted: {
-            let hit1: [String: Any] = ["player": "p2",
-                                       "name": "n1",
+            let hit1: [String: Any] = ["name": "n1",
+                                       "players": ["p2"],
                                        "abilities": ["a1", "a2"],
-                                       "offender": "p1",
-                                       "cancelable": 0]
-            verify(self.mockDatabaseReference).setValue("state/hits/keyX", value: any(equalToDictionary: hit1), withCompletionBlock: any())
+                                       "cancelable": 0,
+                                       "targets": ["p1"]]
+            verify(self.mockDatabaseReference).setValue("state/hit", value: any(equalToDictionary: hit1), withCompletionBlock: any())
             
-            let hit2: [String: Any] = ["player": "p3",
-                                       "name": "n1",
-                                       "abilities": ["a1", "a2"],
-                                       "offender": "p1",
-                                       "cancelable": 1,
-                                       "target": "pX"]
-            verify(self.mockDatabaseReference).setValue("state/hits/keyY", value: any(equalToDictionary: hit2), withCompletionBlock: any())
-            
+            expectation.fulfill()
+        }).disposed(by: disposeBag)
+        
+        wait(for: [expectation], timeout: 0.5)
+    }
+    
+    func test_RemovePlayerFromHit() {
+        // Given
+        let event = GEvent.removeHit(player: "p1")
+        let expectation = XCTestExpectation(description: #function)
+        mockDatabaseReference.stubObserveSingleEvent("state/hit", value: ["players": ["p1", "p2"]])
+        
+        // When
+        // Assert
+        sut.execute(event).subscribe(onCompleted: {
+            verify(self.mockDatabaseReference).setValue("state/hit/players", value: any(equalTo: ["p2"]), withCompletionBlock: any())
+            expectation.fulfill()
+        }).disposed(by: disposeBag)
+        
+        wait(for: [expectation], timeout: 0.5)
+    }
+    
+    func test_removeBothTargetAndPlayerHit() throws {
+        // Given
+        let event = GEvent.removeHit(player: "p1")
+        let expectation = XCTestExpectation(description: #function)
+        mockDatabaseReference.stubObserveSingleEvent("state/hit", value: ["players": ["p1", "p1"], "targets": ["p2", "p3"]])
+        
+        // When
+        // Assert
+        sut.execute(event).subscribe(onCompleted: {
+            verify(self.mockDatabaseReference).setValue("state/hit/players", value: any(equalTo: ["p1"]), withCompletionBlock: any())
+            verify(self.mockDatabaseReference).setValue("state/hit/targets", value: any(equalTo: ["p3"]), withCompletionBlock: any())
             expectation.fulfill()
         }).disposed(by: disposeBag)
         
@@ -548,15 +587,12 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
         // Given
         let event = GEvent.removeHit(player: "p1")
         let expectation = XCTestExpectation(description: #function)
-        let hits: [String: Any] = ["key0": ["player": "p2", "name": "n1"],
-                                   "key2": ["player": "p1", "name": "n1"],
-                                   "key1": ["player": "p1", "name": "n1"]]
-        mockDatabaseReference.stubObserveSingleEvent("state/hits", value: hits)
+        mockDatabaseReference.stubObserveSingleEvent("state/hit", value: ["players": ["p1"]])
         
         // When
         // Assert
         sut.execute(event).subscribe(onCompleted: {
-            verify(self.mockDatabaseReference).setValue("state/hits/key1", value: isNil(), withCompletionBlock: any())
+            verify(self.mockDatabaseReference).setValue("state/hit", value: isNil(), withCompletionBlock: any())
             expectation.fulfill()
         }).disposed(by: disposeBag)
         
@@ -565,16 +601,14 @@ class RemoteGameDatabaseUpdaterTests: XCTestCase {
     
     func test_CancelHit() {
         // Given
-        let event = GEvent.cancelHit(player: "p1")
+        let event = GEvent.decrementHitCancelable
         let expectation = XCTestExpectation(description: #function)
-        let hits: [String: Any] = ["key2": ["player": "p2", "name": "n1", "cancelable": 1],
-                                   "key1": ["player": "p1", "name": "n1", "cancelable": 2]]
-        mockDatabaseReference.stubObserveSingleEvent("state/hits", value: hits)
+        mockDatabaseReference.stubObserveSingleEvent("state/hit/cancelable", value: 2)
         
         // When
         // Assert
         sut.execute(event).subscribe(onCompleted: {
-            verify(self.mockDatabaseReference).setValue("state/hits/key1/cancelable", value: any(equalTo: 1), withCompletionBlock: any())
+            verify(self.mockDatabaseReference).setValue("state/hit/cancelable", value: any(equalTo: 1), withCompletionBlock: any())
             expectation.fulfill()
         }).disposed(by: disposeBag)
         

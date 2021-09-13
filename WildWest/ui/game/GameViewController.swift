@@ -182,7 +182,7 @@ private extension GameViewController {
         
         // Select reaction moves
         if !moves.isEmpty,
-           let hit = state.hits.first {
+           let hit = state.hit {
             if preferences.assistedMode {
                 let move = assistantAI.bestMove(among: moves, in: state)
                 environment.engine.execute(move, completion: nil)
@@ -326,7 +326,7 @@ private extension StateProtocol {
     }
     
     func instruction(for controlledPlayerId: String?) -> String {
-        if let hit = hits.first {
+        if let hit = hit {
             return hit.name
         } else if controlledPlayerId == turn {
             return "your turn"
@@ -339,9 +339,29 @@ private extension StateProtocol {
         initialOrder.map { player in
             PlayerItem(player: players[player]!,
                        isTurn: player == turn,
-                       isHitLooseHealth: hits.contains(where: { $0.player == player && $0.abilities.contains("looseHealth") }),
-                       isHitSomeAction: hits.contains(where: { $0.player == player && !$0.abilities.contains("looseHealth") }),
+                       isHitLooseHealth: isHitLooseHealth(player),
+                       isHitSomeAction: isHitSomeAction(player),
                        user: users?[player])
+        }
+    }
+    
+    private func isHitLooseHealth(_ player: String) -> Bool {
+        if let hit = hit,
+           hit.abilities.contains("looseHealth"),
+           hit.players.contains(player) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    private func isHitSomeAction(_ player: String) -> Bool {
+        if let hit = hit,
+           !hit.abilities.contains("looseHealth"),
+           hit.players.contains(player) {
+            return true
+        } else {
+            return false
         }
     }
 }

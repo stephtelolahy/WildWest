@@ -8,7 +8,7 @@
 
 /**
  Loose life point
- - Set offender as hit offender
+ - Set offender as current turn's player
  */
 class LooseHealth: Effect {
     
@@ -20,9 +20,7 @@ class LooseHealth: Effect {
             return nil
         }
         
-        let hitOffender = ctx.state.hits.first(where: { $0.player == player })?.offender
-        let offender = hitOffender ?? ctx.actor.identifier
-        
+        let offender = ctx.state.turn
         let playerObject = ctx.state.players[player]!
         if playerObject.health == 1 {
             return [.eliminate(player: player, offender: offender)]
