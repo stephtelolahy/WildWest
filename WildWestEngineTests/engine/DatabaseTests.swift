@@ -58,7 +58,6 @@ class DatabaseTests: XCTestCase {
         sut.update(event: event).subscribe().disposed(by: disposeBag)
         
         // Assert
-        XCTAssertEqual(eventObserver.events.count, 1)
         let emitedEvent = try XCTUnwrap(eventObserver.events.last?.value.element)
         XCTAssertEqual(emitedEvent, event)
     }
@@ -71,7 +70,7 @@ class DatabaseTests: XCTestCase {
         sut.update(event: event).subscribe().disposed(by: disposeBag)
         
         // Assert
-        XCTAssertEqual(stateObserver.events.count, 2)
+        XCTAssertEqual(stateObserver.events.count, 1)
     }
     
     func test_ExecuteEventFunction_IfApplyingEvent() throws {

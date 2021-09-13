@@ -235,7 +235,6 @@
 		3395558D2644365E0006FBB0 /* RemoteGameDatabaseUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3395558C2644365E0006FBB0 /* RemoteGameDatabaseUpdater.swift */; };
 		33955595264439200006FBB0 /* EventDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33955594264439200006FBB0 /* EventDto.swift */; };
 		3395559A2644394F0006FBB0 /* DtoEncoder+Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339555992644394F0006FBB0 /* DtoEncoder+Event.swift */; };
-		33969B2226577A9900E58908 /* GEvent+Destructuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33969B2126577A9900E58908 /* GEvent+Destructuring.swift */; };
 		339B4EFC2434A7D700E32965 /* 342229_christopherderp_hurt-1-male (online-audio-converter.com).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 339B4EFB2434A7D700E32965 /* 342229_christopherderp_hurt-1-male (online-audio-converter.com).mp3 */; };
 		339C7CA126566D48001CBCAC /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339C7CA026566D48001CBCAC /* GameManager.swift */; };
 		339C7CA326566D6E001CBCAC /* SimulationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339C7CA226566D6E001CBCAC /* SimulationTests.swift */; };
@@ -601,7 +600,6 @@
 		3395558C2644365E0006FBB0 /* RemoteGameDatabaseUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteGameDatabaseUpdater.swift; sourceTree = "<group>"; };
 		33955594264439200006FBB0 /* EventDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDto.swift; sourceTree = "<group>"; };
 		339555992644394F0006FBB0 /* DtoEncoder+Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DtoEncoder+Event.swift"; sourceTree = "<group>"; };
-		33969B2126577A9900E58908 /* GEvent+Destructuring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GEvent+Destructuring.swift"; sourceTree = "<group>"; };
 		339B4EFB2434A7D700E32965 /* 342229_christopherderp_hurt-1-male (online-audio-converter.com).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "342229_christopherderp_hurt-1-male (online-audio-converter.com).mp3"; sourceTree = "<group>"; };
 		339C7CA026566D48001CBCAC /* GameManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		339C7CA226566D6E001CBCAC /* SimulationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimulationTests.swift; sourceTree = "<group>"; };
@@ -870,7 +868,7 @@
 			path = state;
 			sourceTree = "<group>";
 		};
-		26A6D64426A0D7800060D7C1 /* store */ = {
+		26A6D64426A0D7800060D7C1 /* database */ = {
 			isa = PBXGroup;
 			children = (
 				3358332225BC2585001BE4D8 /* Database.swift */,
@@ -878,7 +876,7 @@
 				3358331E25BC2585001BE4D8 /* GDatabase.swift */,
 				3358332125BC2585001BE4D8 /* GDatabaseUpdater.swift */,
 			);
-			path = store;
+			path = database;
 			sourceTree = "<group>";
 		};
 		26A6D64726A0D9740060D7C1 /* event */ = {
@@ -1003,7 +1001,7 @@
 				335832D825BC24FD001BE4D8 /* Info.plist */,
 				26A6D64326A0D6BC0060D7C1 /* state */,
 				26A6D64726A0D9740060D7C1 /* event */,
-				26A6D64426A0D7800060D7C1 /* store */,
+				26A6D64426A0D7800060D7C1 /* database */,
 				3358331D25BC2585001BE4D8 /* engine */,
 				338F7A55265967C000731FB9 /* rules */,
 				3358332625BC2585001BE4D8 /* resources */,
@@ -1039,7 +1037,6 @@
 				335832FB25BC2584001BE4D8 /* Card+Regex.swift */,
 				335832FC25BC2584001BE4D8 /* Array+FilterOrNil.swift */,
 				335832FD25BC2584001BE4D8 /* Dictionary+Decoding.swift */,
-				33969B2126577A9900E58908 /* GEvent+Destructuring.swift */,
 				261CBD8026A0DC8F00043494 /* GState+Copy.swift */,
 			);
 			path = misc;
@@ -1894,7 +1891,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/WildWestEngineTests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/WildWestEngine\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"WildWestEngine\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/state/State.swift\" \\\n\"${INPUT_DIR}/store/Database.swift\" \\\n\"${INPUT_DIR}/store/GDatabaseUpdater.swift\" \\\n\"${INPUT_DIR}/engine/Engine.swift\" \\\n\"${INPUT_DIR}/engine/GEventQueue.swift\" \\\n\"${INPUT_DIR}/engine/GTimer.swift\" \\\n\"${INPUT_DIR}/rules/GameRules.swift\" \\\n\"${INPUT_DIR}/setup/Setup.swift\" \\\n\"${INPUT_DIR}/resources/ResourcesLoader.swift\" \\\n\"${INPUT_DIR}/ai/AIAgent.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/RandomWithRoleAi.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/MoveEvaluator.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/RoleEstimator.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/RoleStrategy.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/AbilityEvaluator.swift\"\n";
+			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/WildWestEngineTests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/WildWestEngine\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"WildWestEngine\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/state/State.swift\" \\\n\"${INPUT_DIR}/database/Database.swift\" \\\n\"${INPUT_DIR}/database/GDatabaseUpdater.swift\" \\\n\"${INPUT_DIR}/engine/Engine.swift\" \\\n\"${INPUT_DIR}/engine/GEventQueue.swift\" \\\n\"${INPUT_DIR}/engine/GTimer.swift\" \\\n\"${INPUT_DIR}/rules/GameRules.swift\" \\\n\"${INPUT_DIR}/setup/Setup.swift\" \\\n\"${INPUT_DIR}/resources/ResourcesLoader.swift\" \\\n\"${INPUT_DIR}/ai/AIAgent.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/RandomWithRoleAi.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/MoveEvaluator.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/RoleEstimator.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/RoleStrategy.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/AbilityEvaluator.swift\"\n";
 		};
 		3DE5D489E0D81C17891F4FD5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2128,7 +2125,6 @@
 				33AAE063265AAA5F00A067E3 /* ParsedValue.swift in Sources */,
 				33FBF90E265B1E1600D7C6AD /* RequireDeckCards.swift in Sources */,
 				33AAE03D26598D0200A067E3 /* RequireTargetAt.swift in Sources */,
-				33969B2226577A9900E58908 /* GEvent+Destructuring.swift in Sources */,
 				3358334625BC2585001BE4D8 /* RoleEstimator.swift in Sources */,
 				33AAE055265A312C00A067E3 /* ReverseHit.swift in Sources */,
 				33FBF906265B15C600D7C6AD /* OnHandEmpty.swift in Sources */,
