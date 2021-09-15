@@ -19,7 +19,7 @@ extension DtoEncoder {
                  deck: encode(cards: state.deck),
                  discard: encode(cards: state.discard.reversed()),
                  store: encode(cards: state.store),
-                 hits: encode(hits: state.hits),
+                 hit: encode(hit: state.hit),
                  played: encode(abilities: state.played),
                  winner: encode(winner: state.winner))
     }
@@ -33,50 +33,38 @@ extension DtoEncoder {
                deck: try decode(cards: state.deck),
                discard: try decode(cards: state.discard).reversed(),
                store: try decode(cards: state.store),
-               hits: try decode(hits: state.hits),
+               hit: try decode(hit: state.hit),
                played: try decode(abilities: state.played),
                history: [],
                winner: decode(winner: state.winner))
     }
     
-    func encode(hit: HitProtocol) -> HitDto {
-        HitDto(player: hit.player,
-               name: hit.name,
-               abilities: hit.abilities,
-               cancelable: hit.cancelable,
-               offender: hit.offender,
-               target: hit.target)
+    func encode(hit: HitProtocol?) -> HitDto? {
+        guard let hit = hit else {
+            return nil
+        }
+        
+        return HitDto(name: hit.name,
+                      players: hit.players,
+                      abilities: hit.abilities,
+                      cancelable: hit.cancelable,
+                      targets: hit.targets)
     }
     
-    func decode(hit: HitDto) throws -> HitProtocol {
-        try GHit(player: hit.player.unwrap(),
-                 name: hit.name.unwrap(),
-                 abilities: hit.abilities.unwrap(),
-                 offender: hit.offender.unwrap(),
-                 cancelable: hit.cancelable.unwrap(),
-                 target: hit.target)
+    func decode(hit: HitDto?) throws -> GHit? {
+        guard let hit = hit else {
+            return nil
+        }
+        
+        return try GHit(name: hit.name.unwrap(),
+                        players: hit.players.unwrap(),
+                        abilities: hit.abilities.unwrap(),
+                        cancelable: hit.cancelable.unwrap(),
+                        targets: hit.targets ?? [])
     }
 }
 
 private extension DtoEncoder {
-    
-    func encode(hits: [HitProtocol]) -> [String: HitDto] {
-        hits.reduce([String: HitDto]()) { dict, hit in
-            var dict = dict
-            let key = self.databaseRef.childByAutoIdKey()
-            dict[key] = encode(hit: hit)
-            return dict
-        }
-    }
-    
-    func decode(hits: [String: HitDto]?) throws -> [HitProtocol] {
-        guard let hits = hits else {
-            return []
-        }
-        
-        let orderedKeys = hits.keys.sorted()
-        return try orderedKeys.map { try decode(hit: hits[$0].unwrap()) }
-    }
     
     func encode(player: PlayerProtocol) -> PlayerDto {
         PlayerDto(identifier: player.identifier,

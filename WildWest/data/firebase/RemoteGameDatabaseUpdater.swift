@@ -5,7 +5,6 @@
 //  Created by Hugues Stéphano TELOLAHY on 06/05/2021.
 //  Copyright © 2021 creativeGames. All rights reserved.
 //
-// swiftlint:disable sorted_first_last
 // swiftlint:disable cyclomatic_complexity
 // swiftlint:disable function_body_length
 
@@ -90,14 +89,14 @@ class RemoteGameDatabaseUpdater: RemoteGameDatabaseUpdaterProtocol {
         case .flipDeck:
             return gameRef.flipDeck()
             
-        case let .addHit(hits):
-            return gameRef.addHit(hits)
+        case let .addHit(hit):
+            return gameRef.addHit(hit)
             
         case let .removeHit(player):
             return gameRef.removeHit(player)
             
-        case let .cancelHit(player):
-            return gameRef.cancelHit(player)
+        case .decrementHitCancelable:
+            return gameRef.decrementHitCancelable()
             
         case let .gameover(winner):
             return gameRef.gameover(winner)
@@ -152,22 +151,27 @@ private extension DatabaseReferenceProtocol {
             .andThen(rxObserveSingleEvent("state/playOrder", decoding: { snapshot -> [String]? in
                 snapshot.value as? [String]
             }).flatMapCompletable({ playOrder in
-                var value = playOrder ?? []
-                if let index = value.firstIndex(of: player) {
-                    value.remove(at: index)
+                guard var playOrder = playOrder else {
+                    return Completable.empty()
                 }
-                return rxSetValue("state/playOrder") { value }
+                
+                playOrder.removeAll(where: { $0 == player })
+                return rxSetValue("state/playOrder") { playOrder }
             }))
-            .andThen(rxObserveSingleEvent("state/hits", decoding: { snapshot -> [String: HitDto]? in
-                snapshot.value as? [String: HitDto]
-            }).flatMapCompletable({ hits in
-                let hits = hits ?? [:]
-                var keysToRemove: [String] = []
-                for (key, value) in hits where value.player == player {
-                    keysToRemove.append(key)
+            .andThen(rxObserveSingleEvent("state/hit/players", decoding: { snapshot -> [String]? in
+                snapshot.value as? [String]
+            }).flatMapCompletable({ hitPlayers in
+                guard var hitPlayers = hitPlayers else {
+                    return Completable.empty()
                 }
-                let completables: [Completable] = keysToRemove.map { rxSetValue("state/hits/\($0)", encoding: { nil }) }
-                return Completable.concat(completables)
+                
+                hitPlayers.removeAll(where: { $0 == player })
+                
+                if hitPlayers.isEmpty {
+                    return rxSetValue("state/hit", encoding: { nil })
+                } else {
+                    return rxSetValue("state/hit/players", encoding: { hitPlayers })
+                }
             }))
     }
     
@@ -250,7 +254,7 @@ private extension DatabaseReferenceProtocol {
            let card = cards[cardKey]
            return rxSetValue("state/discard/\(cardKey)", encoding: { nil })
                .andThen(rxSetValue("state/players/\(player)/hand/\(childByAutoIdKey())", encoding: { card }))
-       }
+        }
     }
     
     // MARK: - inPlay
@@ -347,52 +351,50 @@ private extension DatabaseReferenceProtocol {
     
     // MARK: - Hit
     
-    func addHit(_ hits: [GHit]) -> Completable {
-        let completables: [Completable] = hits.map {
-            let dto = HitDto(player: $0.player,
-                             name: $0.name,
-                             abilities: $0.abilities,
-                             cancelable: $0.cancelable,
-                             offender: $0.offender,
-                             target: $0.target)
-            return rxSetValue("state/hits/\(childByAutoIdKey())", encoding: { try DictionaryEncoder().encode(dto) })
-        }
-        
-        return Completable.concat(completables)
+    func addHit(_ hit: GHit) -> Completable {
+        let dto = HitDto(name: hit.name,
+                         players: hit.players,
+                         abilities: hit.abilities,
+                         cancelable: hit.cancelable,
+                         targets: hit.targets)
+        return rxSetValue("state/hit", encoding: { try DictionaryEncoder().encode(dto) })
     }
     
     func removeHit(_ player: String) -> Completable {
-        rxObserveSingleEvent("state/hits", decoding: { snapshot -> [String: Any] in
-            try (snapshot.value as? [String: Any]).unwrap()
-        }).flatMapCompletable { hits in
-            let hitKey = hits.keys.sorted().first(where: { key in
-                if let hit = hits[key] as? [String: Any],
-                   let aPlayer = hit["player"] as? String,
-                   aPlayer == player {
-                    return true
-                }
-                return false
-            })!
+        rxObserveSingleEvent("state/hit", decoding: { snapshot -> [String: Any]? in
+            snapshot.value as? [String: Any]
+        }).flatMapCompletable { hit in
+            guard let hit = hit,
+                  var hitPlayers = hit["players"] as? [String],
+                  let index = hitPlayers.firstIndex(of: player) else {
+                return Completable.empty()
+            }
             
-            return rxSetValue("state/hits/\(hitKey)", encoding: { nil })
+            var completables: [Completable] = []
+            
+            hitPlayers.remove(at: index)
+            
+            if var hitTargets = hit["targets"] as? [String],
+               index < hitTargets.count {
+                hitTargets.remove(at: index)
+                completables.append(rxSetValue("state/hit/targets", encoding: { hitTargets }))
+            }
+            
+            if hitPlayers.isEmpty {
+                completables.append(rxSetValue("state/hit", encoding: { nil }))
+            } else {
+                completables.append(rxSetValue("state/hit/players", encoding: { hitPlayers }))
+            }
+            
+            return Completable.concat(completables)
         }
     }
     
-    func cancelHit(_ player: String) -> Completable {
-        rxObserveSingleEvent("state/hits", decoding: { snapshot -> [String: Any] in
-            try (snapshot.value as? [String: Any]).unwrap()
-        }).flatMapCompletable { hits in
-            var cancelable: Int?
-            let hitKey = hits.keys.sorted().first(where: { key in
-                if let hit = hits[key] as? [String: Any],
-                   let aPlayer = hit["player"] as? String,
-                   aPlayer == player {
-                    cancelable = hit["cancelable"] as? Int
-                    return true
-                }
-                return false
-            })!
-            return rxSetValue("state/hits/\(hitKey)/cancelable", encoding: { (try cancelable.unwrap()) - 1 })
+    func decrementHitCancelable() -> Completable {
+        rxObserveSingleEvent("state/hit/cancelable", decoding: { snapshot -> Int in
+            try (snapshot.value as? Int).unwrap()
+        }).flatMapCompletable { cancelable in
+            rxSetValue("state/hit/cancelable", encoding: { cancelable - 1 })
         }
     }
 }

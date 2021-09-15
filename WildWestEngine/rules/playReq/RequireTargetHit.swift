@@ -12,7 +12,8 @@
 class RequireTargetHit: PlayReq {
  
     override func match(_ ctx: PlayContext, args: inout [[PlayArg: [String]]]) -> Bool {
-        guard let target = ctx.state.hits.first?.target else {
+        guard let hit = ctx.state.hit,
+              let target = hit.targets.first else {
             return false
         }
         

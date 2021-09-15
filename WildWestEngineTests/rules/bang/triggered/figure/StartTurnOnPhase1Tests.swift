@@ -71,7 +71,7 @@ class StartTurnDrawing2CardsTests: XCTestCase {
             .turn(is: "p1")
             .phase(is: 1)
             .players(are: mockPlayer1)
-            .hits(are: MockHitProtocol().withDefault())
+            .hit(is: MockHitProtocol().withDefault())
         let event = GEvent.emptyQueue
         
         // When
@@ -90,12 +90,12 @@ class StartTurnDrawing2CardsTests: XCTestCase {
             .holding(MockCardProtocol().withDefault().identified(by: "c2"))
         let mockHit = MockHitProtocol()
             .withDefault()
-            .player(is: "p1")
+            .players(are: "p1")
             .abilities(are: "startTurnDrawingDeck")
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1)
-            .hits(are: mockHit)
+            .hit(is: mockHit)
         
         // When
         let moves = sut.active(in: mockState)

@@ -7,7 +7,7 @@
 //
 
 /**
- Permute hit player and offender
+ Permute hit player and target
  */
 class ReverseHit: Effect {
     
@@ -16,18 +16,16 @@ class ReverseHit: Effect {
     
     override func apply(_ ctx: PlayContext) -> [GEvent]? {
         guard let player = ctx.players(matching: player).first,
-              let hit = ctx.state.hits.first(where: { $0.player == player }) else {
+              let hit = ctx.state.hit else {
             fatalError("Invalid hit")
         }
         
-        let reversedHit = GHit(player: hit.offender,
-                               name: hit.name,
+        let reversedHit = GHit(name: hit.name,
+                               players: hit.targets,
                                abilities: hit.abilities,
-                               offender: player,
                                cancelable: hit.cancelable,
-                               target: hit.target)
+                               targets: hit.players)
         return [.removeHit(player: player),
-                .addHit(hits: [reversedHit])]
-        
+                .addHit(hit: reversedHit)]
     }
 }

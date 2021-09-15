@@ -7,7 +7,7 @@
 //
 
 /**
- Must be on phase X and hits is empty
+ Must be on phase X and no playing hit
  */
 public class IsPhase: PlayReq {
     
@@ -15,6 +15,6 @@ public class IsPhase: PlayReq {
     var phase: Int
     
     public override func match(_ ctx: PlayContext, args: inout [[PlayArg: [String]]]) -> Bool {
-        ctx.state.phase == phase && ctx.state.hits.isEmpty
+        ctx.state.phase == phase && ctx.state.hit == nil
     }
 }

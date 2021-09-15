@@ -18,13 +18,13 @@ class CancelHit: Effect {
         guard let player = ctx.players(matching: player).first else {
             return nil
         }
-        guard let hit = ctx.state.hits.first(where: { $0.player == player }),
+        guard let hit = ctx.state.hit,
               hit.cancelable > 0 else {
             return []
         }
         let remainingCancelable = hit.cancelable - 1
         if remainingCancelable > 0 {
-            return [.cancelHit(player: player)]
+            return [.decrementHitCancelable]
         } else {
             return [.removeHit(player: player)]
         }

@@ -5,7 +5,6 @@
 //  Created by Hugues Stephano Telolahy on 14/10/2020.
 //  Copyright © 2020 CocoaPods. All rights reserved.
 //
-// swiftlint:disable line_length
 
 import XCTest
 import WildWestEngine
@@ -35,7 +34,7 @@ class StartTurnChoosing2CardsFromDeckTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(moves, [GMove("startTurnChoosing2CardsFromDeck", actor: "p1")])
-        XCTAssertEqual(events, [.addHit(hits: [GHit(player: "p1", name: "startTurnChoosing2CardsFromDeck", abilities: ["startTurnDrawingDeckChoosing"], offender: "p1")])])
+        XCTAssertEqual(events, [.addHit(hit: GHit(name: "startTurnChoosing2CardsFromDeck", players: ["p1"], abilities: ["startTurnDrawingDeckChoosing"]))])
     }
     
     func test_StartTurnDrawingDeckChoosing() throws {
@@ -45,12 +44,12 @@ class StartTurnChoosing2CardsFromDeckTests: XCTestCase {
             .identified(by: "p1")
         let mockHit1 = MockHitProtocol()
             .withDefault()
-            .player(is: "p1")
+            .players(are: "p1")
             .abilities(are: "startTurnDrawingDeckChoosing")
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1)
-            .hits(are: mockHit1)
+            .hit(is: mockHit1)
             .deck(are: MockCardProtocol().identified(by: "c1"),
                   MockCardProtocol().identified(by: "c2"),
                   MockCardProtocol().identified(by: "c3"))

@@ -40,9 +40,7 @@ class DynamiteTests: XCTestCase {
         // Assert
         XCTAssertEqual(moves, [GMove("dynamite", actor: "p1", card: .inPlay("c1"))])
         XCTAssertEqual(events, [.flipDeck,
-                                .addHit(hits: [GHit(player: "p1", name: "dynamite", abilities: ["looseHealth"], offender: "p1"),
-                                               GHit(player: "p1", name: "dynamite", abilities: ["looseHealth"], offender: "p1"),
-                                               GHit(player: "p1", name: "dynamite", abilities: ["looseHealth"], offender: "p1")]),
+                                .addHit(hit: GHit(name: "dynamite", players: ["p1", "p1", "p1"], abilities: ["looseHealth"])),
                                 .discardInPlay(player: "p1", card: "c1")])
     }
     

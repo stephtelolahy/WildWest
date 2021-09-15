@@ -27,12 +27,12 @@ class PlayAnyCardAsMissedTests: XCTestCase {
             .attributes(are: [.playAs: ["": "missed"]])
         let mockHit1 = MockHitProtocol()
             .withDefault()
-            .player(is: "p1")
+            .players(are: "p1")
             .cancelable(is: 1)
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1)
-            .hits(are: mockHit1)
+            .hit(is: mockHit1)
         
         // When
         let moves = sut.active(in: mockState)

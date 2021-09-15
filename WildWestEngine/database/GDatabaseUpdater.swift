@@ -81,14 +81,14 @@ public class GDatabaseUpdater: GDatabaseUpdaterProtocol {
         case .flipDeck:
             return state.flipDeck()
             
-        case let .addHit(hits):
-            return state.addHit(hits)
+        case let .addHit(hit):
+            return state.addHit(hit)
             
         case let .removeHit(player):
             return state.removeHit(player)
             
-        case let .cancelHit(player):
-            return state.cancelHit(player)
+        case .decrementHitCancelable:
+            return state.decrementHitCancelable()
             
         case let .gameover(winner):
             return state.gameover(winner)
@@ -146,7 +146,9 @@ private extension StateProtocol {
     func eliminate(_ player: String) -> StateProtocol {
         let state = GState.copy(self)
         state.playOrder.removeAll(where: { $0 == player })
-        state.hits.removeAll(where: { $0.player == player })
+        if let hit = state.hit as? GHit {
+            state.hit = hit.removingAll(player)
+        }
         state.mutablePlayer(player).health = 0
         return state
     }
@@ -310,33 +312,36 @@ private extension StateProtocol {
     
     // MARK: - Hit
     
-    func addHit(_ hits: [GHit]) -> StateProtocol {
+    func addHit(_ hit: GHit) -> StateProtocol {
         let state = GState.copy(self)
-        state.hits.append(contentsOf: hits)
+        
+        guard state.hit == nil else {
+            return self
+        }
+        
+        state.hit = hit
         return state
     }
     
     func removeHit(_ player: String) -> StateProtocol? {
         let state = GState.copy(self)
-        guard let index = state.hits.firstIndex(where: { $0.player == player }) else {
-            return nil
+        
+        guard let hit = state.hit as? GHit else {
+            return self
         }
-        state.hits.remove(at: index)
+        
+        state.hit = hit.removing(player)
         return state
     }
     
-    func cancelHit(_ player: String) -> StateProtocol {
+    func decrementHitCancelable() -> StateProtocol {
         let state = GState.copy(self)
-        guard let index = state.hits.firstIndex(where: { $0.player == player }) else {
-            fatalError("Missing hit for \(player)")
+        
+        guard let hit = state.hit as? GHit else {
+            fatalError("hit not found")
         }
-        let hit = state.hits[index]
-        let canceledHit = GHit(player: hit.player,
-                               name: hit.name,
-                               abilities: hit.abilities,
-                               offender: hit.offender,
-                               cancelable: hit.cancelable - 1)
-        state.hits[index] = canceledHit
+        
+        state.hit = hit.decrementingCancelable()
         return state
     }
 }
@@ -361,5 +366,48 @@ private extension GState {
         let cards = discard
         deck.append(contentsOf: Array(cards[1..<cards.count]).shuffled())
         discard = Array(cards[0..<1])
+    }
+}
+
+private extension GHit {
+    
+    func removingAll(_ player: String) -> GHit? {
+        var hit = self
+        hit.players.removeAll(where: { $0 == player })
+        
+        if hit.players.isEmpty {
+            return nil
+        } else {
+            return hit
+        }
+    }
+    
+    func removing(_ player: String) -> GHit? {
+        var hit = self
+        guard let index = hit.players.firstIndex(of: player) else {
+            return self
+        }
+        
+        hit.players.remove(at: index)
+        
+        if index < hit.targets.count {
+            hit.targets.remove(at: index)
+        }
+        
+        if hit.players.isEmpty {
+            return nil
+        } else {
+            return hit
+        }
+    }
+    
+    func decrementingCancelable() -> GHit? {
+        var hit = self
+        hit.cancelable -= 1
+        if hit.cancelable == 0 {
+            return nil
+        } else {
+            return hit
+        }
     }
 }

@@ -50,6 +50,6 @@ class SpringfieldTests: XCTestCase {
                                GMove("springfield", actor: "p1", card: .hand("c1"), args: [.requiredHand: ["c2"], .target: ["p3"]])])
         XCTAssertEqual(events, [.play(player: "p1", card: "c1"),
                                 .discardHand(player: "p1", card: "c2"),
-                                .addHit(hits: [GHit(player: "p2", name: "springfield", abilities: ["looseHealth"], offender: "p1", cancelable: 1)])])
+                                .addHit(hit: GHit(name: "springfield", players: ["p2"], abilities: ["looseHealth"], cancelable: 1))])
     }
 }

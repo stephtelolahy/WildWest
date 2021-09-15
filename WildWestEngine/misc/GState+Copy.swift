@@ -8,18 +8,23 @@
 
 extension GState {
     static func copy(_ state: StateProtocol) -> GState {
-        GState(players: state.players.mapValues { GPlayer.copy($0) },
-               initialOrder: state.initialOrder,
-               playOrder: state.playOrder,
-               turn: state.turn,
-               phase: state.phase,
-               deck: state.deck,
-               discard: state.discard,
-               store: state.store,
-               hits: state.hits.map { GHit.copy($0) },
-               played: state.played,
-               history: state.history,
-               winner: state.winner)
+        var hitCopy: HitProtocol?
+        if let hit = state.hit {
+            hitCopy = GHit.copy(hit)
+        }
+        
+        return GState(players: state.players.mapValues { GPlayer.copy($0) },
+                      initialOrder: state.initialOrder,
+                      playOrder: state.playOrder,
+                      turn: state.turn,
+                      phase: state.phase,
+                      deck: state.deck,
+                      discard: state.discard,
+                      store: state.store,
+                      hit: hitCopy,
+                      played: state.played,
+                      history: state.history,
+                      winner: state.winner)
     }
 }
 
@@ -39,11 +44,10 @@ extension GPlayer {
 
 extension GHit {
     static func copy(_ hit: HitProtocol) -> GHit {
-        GHit(player: hit.player,
-             name: hit.name,
+        GHit(name: hit.name,
+             players: hit.players,
              abilities: hit.abilities,
-             offender: hit.offender,
              cancelable: hit.cancelable,
-             target: hit.target)
+             targets: hit.targets)
     }
 }

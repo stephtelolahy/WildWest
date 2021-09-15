@@ -14,10 +14,18 @@ public protocol StateProtocol {
     var deck: [CardProtocol] { get }    // stack of cards
     var discard: [CardProtocol] { get } // discard pile
     var store: [CardProtocol] { get }   // choosable cards
-    var hits: [HitProtocol] { get }     // blocking challenge to be resolved before continuing turn
+    var hit: HitProtocol? { get }       // playing ability to be resolved before continuing turn
     var played: [String] { get }        // played abilities during current turn
     var history: [GMove] { get }        // move history
     var winner: Role? { get }           // winner
+}
+
+public protocol HitProtocol {
+    var name: String { get }
+    var players: [String] { get }
+    var abilities: [String] { get }
+    var cancelable: Int { get }
+    var targets: [String] { get }
 }
 
 public protocol CardProtocol {
@@ -58,13 +66,4 @@ public enum CardAttributeKey: String {
     case silentAbility  // disable self ability matching given name
     case playAs         // can play card matching [regex] with ability [name]
     case silentInPlay   // during your turn, cards in play in front of other players have no effect
-}
-
-public protocol HitProtocol {
-    var player: String { get }
-    var name: String { get }
-    var abilities: [String] { get }
-    var offender: String { get }
-    var cancelable: Int { get }
-    var target: String? { get }
 }

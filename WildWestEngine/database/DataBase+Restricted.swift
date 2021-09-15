@@ -26,7 +26,7 @@ private extension StateProtocol {
                       deck: deck,
                       discard: discard,
                       store: store,
-                      hits: hits,
+                      hit: hit,
                       played: played,
                       history: history,
                       winner: winner)

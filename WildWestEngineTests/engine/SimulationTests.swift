@@ -118,11 +118,6 @@ class SimulationTests: XCTestCase {
         })
         .disposed(by: disposeBag)
         
-        database.state.subscribe(onNext: { state in
-            print("[S]: \(state)")
-        })
-        .disposed(by: disposeBag)
-        
         agents.forEach { $0.observe(database) }
         engine.execute(nil, completion: nil)
         

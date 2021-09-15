@@ -34,10 +34,9 @@ class StartTurnChoosingDrawPlayerTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(moves, [GMove("startTurnChoosingDrawPlayer", actor: "p1")])
-        XCTAssertEqual(events, [.addHit(hits: [GHit(player: "p1",
-                                                    name: "startTurnChoosingDrawPlayer",
-                                                    abilities: ["startTurnDrawingPlayer", "startTurnDrawingDeck"],
-                                                    offender: "p1")])])
+        XCTAssertEqual(events, [.addHit(hit: GHit(name: "startTurnChoosingDrawPlayer",
+                                                  players: ["p1"],
+                                                  abilities: ["startTurnDrawingPlayer", "startTurnDrawingDeck"]))])
     }
     
     func test_CanStartTurnDrawingFirstCardFromOtherPlayer() throws {
@@ -52,13 +51,13 @@ class StartTurnChoosingDrawPlayerTests: XCTestCase {
             .holding(MockCardProtocol().withDefault().identified(by: "c2"))
         let mockHit = MockHitProtocol()
             .withDefault()
-            .player(is: "p1")
+            .players(are: "p1")
             .abilities(are: "startTurnDrawingPlayer")
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1, mockPlayer2)
             .playOrder(is: "p1", "p2")
-            .hits(are: mockHit)
+            .hit(is: mockHit)
         
         // When
         let moves = sut.active(in: mockState)

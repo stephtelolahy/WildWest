@@ -36,7 +36,7 @@ class DiscardExcessCardsOnPhase3Tests: XCTestCase {
         
         // Assert
         XCTAssertEqual(moves, [GMove("discardExcessCardsOnPhase3", actor: "p1")])
-        XCTAssertEqual(events, [.addHit(hits: [GHit(player: "p1", name: "discardExcessCardsOnPhase3", abilities: ["discardSelfHand"], offender: "p1")])])
+        XCTAssertEqual(events, [.addHit(hit: GHit(name: "discardExcessCardsOnPhase3", players: ["p1"], abilities: ["discardSelfHand"]))])
     }
     
     func test_ShouldDiscardMultipleExcessCard_IfAnyOnTurnPhase3() throws {
@@ -62,8 +62,7 @@ class DiscardExcessCardsOnPhase3Tests: XCTestCase {
         
         // Assert
         XCTAssertEqual(moves, [GMove("discardExcessCardsOnPhase3", actor: "p1")])
-        XCTAssertEqual(events, [.addHit(hits: [GHit(player: "p1", name: "discardExcessCardsOnPhase3", abilities: ["discardSelfHand"], offender: "p1"),
-                                               GHit(player: "p1", name: "discardExcessCardsOnPhase3", abilities: ["discardSelfHand"], offender: "p1")])])
+        XCTAssertEqual(events, [.addHit(hit: GHit(name: "discardExcessCardsOnPhase3", players: ["p1", "p1"], abilities: ["discardSelfHand"]))])
     }
     
     func test_DoNothing_IfOnPhase3WithoutExcessCards() {

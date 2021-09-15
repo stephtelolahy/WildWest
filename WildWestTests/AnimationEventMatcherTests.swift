@@ -34,7 +34,7 @@ class AnimationEventMatcherTests: XCTestCase {
         XCTAssertNil(sut.animation(on: .activate(moves: [])))
         XCTAssertNil(sut.animation(on: .run(move: GMove("a1", actor: "p1"))))
         XCTAssertNil(sut.animation(on: .removeHit(player: "p1")))
-        XCTAssertNil(sut.animation(on: .cancelHit(player: "p1")))
+        XCTAssertNil(sut.animation(on: .decrementHitCancelable))
         XCTAssertNil(sut.animation(on: .gameover(winner: .renegade)))
         XCTAssertNil(sut.animation(on: .emptyQueue))
         
@@ -49,7 +49,7 @@ class AnimationEventMatcherTests: XCTestCase {
                        EventAnimation(type: .dummy, duration: 1.0))
         XCTAssertEqual(sut.animation(on: .eliminate(player: "p1", offender: "p2")),
                        EventAnimation(type: .dummy, duration: 1.0))
-        XCTAssertEqual(sut.animation(on: .addHit( hits: [GHit(player: "p2", name: "h1", abilities: ["a1", "a2"], offender: "p1", cancelable: 1)])),
+        XCTAssertEqual(sut.animation(on: .addHit(hit: GHit(name: "h1", players: ["p2"], abilities: ["a1", "a2"], cancelable: 1))),
                        EventAnimation(type: .dummy, duration: 1.0))
         
         // Move card

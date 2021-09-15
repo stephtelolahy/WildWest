@@ -276,7 +276,8 @@
       {
         "action": "addHit",
         "player": "target",
-        "abilities": ["looseHealth"]
+        "abilities": ["looseHealth"],
+        "target": "actor"
       }
     ]
   },

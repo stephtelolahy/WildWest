@@ -168,7 +168,7 @@ class GDatabaseUpdaterTests: XCTestCase {
         XCTAssertEqual(state.playOrder, ["p2", "p3"])
     }
     
-    func test_removeAssociatedHits_IfEliminate() throws {
+    func test_removeHit_IfEliminate() throws {
         // Given
         let mockPlayer1 = MockPlayerProtocol()
             .withDefault()
@@ -177,15 +177,33 @@ class GDatabaseUpdaterTests: XCTestCase {
             .withDefault()
             .players(are: mockPlayer1)
             .playOrder(is: "p1", "p2", "p3")
-            .hits(are: MockHitProtocol().withDefault().player(is: "p1"))
+            .hit(is: MockHitProtocol().withDefault().players(are: "p1", "p1"))
         let event = GEvent.eliminate(player: "p1", offender: "p2")
         
         // When
         let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
-        XCTAssertEqual(state.playOrder, ["p2", "p3"])
-        XCTAssertEqual(state.hits.count, 0)
+        XCTAssertNil(state.hit)
+    }
+    
+    func test_removePlayerHit_IfEliminate() throws {
+        // Given
+        let mockPlayer1 = MockPlayerProtocol()
+            .withDefault()
+            .identified(by: "p1")
+        let mockState = MockStateProtocol()
+            .withDefault()
+            .players(are: mockPlayer1)
+            .playOrder(is: "p1", "p2", "p3")
+            .hit(is: MockHitProtocol().withDefault().players(are: "p1", "p2", "p3"))
+        let event = GEvent.eliminate(player: "p1", offender: "p2")
+        
+        // When
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
+        
+        // Assert
+        XCTAssertEqual(state.hit?.players, ["p2", "p3"])
     }
     
     // MARK: - Draw
@@ -590,93 +608,112 @@ class GDatabaseUpdaterTests: XCTestCase {
     
     func test_addHit() throws {
         // Given
-        let mockHit1 = MockHitProtocol()
-            .withDefault()
-            .player(is: "p1")
         let mockState = MockStateProtocol()
             .withDefault()
-            .hits(are: mockHit1)
-        let event = GEvent.addHit(hits: [GHit(player: "p2", name: "n1", abilities: ["looseHealth"], offender: "p1", cancelable: 1)])
+        let event = GEvent.addHit(hit: GHit(name: "n1", players: ["p2"], abilities: ["looseHealth"], cancelable: 1))
         
         // When
         let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
-        XCTAssertEqual(state.hits.count, 2)
-        XCTAssertEqual(state.hits[0].player, "p1")
-        XCTAssertEqual(state.hits[1].player, "p2")
-        XCTAssertEqual(state.hits[1].abilities, ["looseHealth"])
-        XCTAssertEqual(state.hits[1].cancelable, 1)
-        XCTAssertEqual(state.hits[1].offender, "p1")
+        let hit = try XCTUnwrap(state.hit)
+        XCTAssertEqual(hit.name, "n1")
+        XCTAssertEqual(hit.players, ["p2"])
+        XCTAssertEqual(hit.abilities, ["looseHealth"])
+        XCTAssertEqual(hit.cancelable, 1)
     }
     
     func test_addHitToMultiplePlayers() throws {
         // Given
         let mockState = MockStateProtocol()
             .withDefault()
-        let event = GEvent.addHit(hits: [GHit(player: "p2", name: "n1", abilities: ["looseHealth"], offender: "p1", cancelable: 1),
-                                         GHit(player: "p3", name: "n1", abilities: ["looseHealth"], offender: "p1", cancelable: 1)])
+        let event = GEvent.addHit(hit: GHit(name: "n1", players: ["p2", "p3"], abilities: ["looseHealth"], cancelable: 1))
         
         // When
         let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
-        XCTAssertEqual(state.hits.count, 2)
-        
-        XCTAssertEqual(state.hits[0].player, "p2")
-        XCTAssertEqual(state.hits[0].abilities, ["looseHealth"])
-        XCTAssertEqual(state.hits[0].cancelable, 1)
-        XCTAssertEqual(state.hits[0].offender, "p1")
-        
-        XCTAssertEqual(state.hits[1].player, "p3")
-        XCTAssertEqual(state.hits[1].abilities, ["looseHealth"])
-        XCTAssertEqual(state.hits[1].cancelable, 1)
-        XCTAssertEqual(state.hits[1].offender, "p1")
+        let hit = try XCTUnwrap(state.hit)
+        XCTAssertEqual(hit.name, "n1")
+        XCTAssertEqual(hit.players, ["p2", "p3"])
+        XCTAssertEqual(hit.abilities, ["looseHealth"])
+        XCTAssertEqual(hit.cancelable, 1)
     }
     
     func test_removeHit() throws {
         // Given
         let mockHit1 = MockHitProtocol()
             .withDefault()
-            .player(is: "p1")
-        let mockHit2 = MockHitProtocol()
-            .withDefault()
-            .player(is: "p2")
+            .players(are: "p1", "p2")
         let mockState = MockStateProtocol()
             .withDefault()
-            .hits(are: mockHit1, mockHit2)
+            .hit(is: mockHit1)
         let event = GEvent.removeHit(player: "p1")
         
         // When
         let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
-        XCTAssertEqual(state.hits.count, 1)
-        XCTAssertEqual(state.hits[0].player, "p2")
+        let hit = try XCTUnwrap(state.hit)
+        XCTAssertEqual(hit.players, ["p2"])
+    }
+    
+    func test_removeBothTargetAndPlayerHit() throws {
+        // Given
+        let mockHit1 = MockHitProtocol()
+            .withDefault()
+            .players(are: "p1", "p1")
+            .targets(are: "p2", "p3")
+        let mockState = MockStateProtocol()
+            .withDefault()
+            .hit(is: mockHit1)
+        let event = GEvent.removeHit(player: "p1")
+        
+        // When
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
+        
+        // Assert
+        let hit = try XCTUnwrap(state.hit)
+        XCTAssertEqual(hit.players, ["p1"])
+        XCTAssertEqual(hit.targets, ["p3"])
+    }
+    
+    func test_removeHitFirstPlayer() throws {
+        // Given
+        let mockHit1 = MockHitProtocol()
+            .withDefault()
+            .players(are: "p1", "p1")
+        let mockState = MockStateProtocol()
+            .withDefault()
+            .hit(is: mockHit1)
+        let event = GEvent.removeHit(player: "p1")
+        
+        // When
+        let state = try XCTUnwrap(sut.execute(event, in: mockState))
+        
+        // Assert
+        let hit = try XCTUnwrap(state.hit)
+        XCTAssertEqual(hit.players, ["p1"])
     }
     
     func test_cancelHit() throws {
         // Given
         let mockHit1 = MockHitProtocol()
             .withDefault()
-            .player(is: "p1")
+            .players(are: "p1")
             .cancelable(is: 2)
-        let mockHit2 = MockHitProtocol()
-            .withDefault()
-            .player(is: "p2")
         let mockState = MockStateProtocol()
             .withDefault()
-            .hits(are: mockHit1, mockHit2)
-        let event = GEvent.cancelHit(player: "p1")
+            .hit(is: mockHit1)
+        let event = GEvent.decrementHitCancelable
         
         // When
         let state = try XCTUnwrap(sut.execute(event, in: mockState))
         
         // Assert
-        XCTAssertEqual(state.hits.count, 2)
-        XCTAssertEqual(state.hits[0].player, "p1")
-        XCTAssertEqual(state.hits[0].cancelable, 1)
-        XCTAssertEqual(state.hits[1].player, "p2")
+        let hit = try XCTUnwrap(state.hit)
+        XCTAssertEqual(hit.players, ["p1"])
+        XCTAssertEqual(hit.cancelable, 1)
     }
     
     // MARK: - Engine

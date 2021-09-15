@@ -126,7 +126,7 @@ class SetupTests: XCTestCase {
         XCTAssertEqual(state.phase, 1) // current phase is 1
         XCTAssertTrue(state.discard.isEmpty) // Discard pile is empty
         XCTAssertTrue(state.store.isEmpty) // Store is empty
-        XCTAssertTrue(state.hits.isEmpty) // No hits
+        XCTAssertNil(state.hit) // No hit
         XCTAssertTrue(state.played.isEmpty) // Played abilities are empty
         let distributedCards: [String] = players.map { $0.hand }.flatMap { $0 }.map { $0.identifier }
         let expectedDeck: [String] = cardSet.map { "\($0.name)-\($0.value)\($0.suit)" }.filter { !distributedCards.contains($0) }

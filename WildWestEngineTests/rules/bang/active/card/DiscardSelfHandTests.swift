@@ -24,12 +24,12 @@ class DiscardSelfHandTests: XCTestCase {
             .holding(mockCard1, mockCard2)
         let mockHit1 = MockHitProtocol()
             .withDefault()
-            .player(is: "p1")
+            .players(are: "p1")
             .abilities(are: "discardSelfHand")
         let mockState = MockStateProtocol()
             .withDefault()
             .players(are: mockPlayer1)
-            .hits(are: mockHit1)
+            .hit(is: mockHit1)
         
         // When
         let moves = sut.active(in: mockState)

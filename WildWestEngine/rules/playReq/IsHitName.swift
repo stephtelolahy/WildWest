@@ -15,8 +15,8 @@ class IsHitName: PlayReq {
     var hitName: String
     
     override func match(_ ctx: PlayContext, args: inout [[PlayArg: [String]]]) -> Bool {
-        guard let hit = ctx.state.hits.first,
-              hit.player == ctx.actor.identifier,
+        guard let hit = ctx.state.hit,
+              hit.players.first == ctx.actor.identifier,
               hit.name == hitName else {
             return false
         }

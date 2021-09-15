@@ -30,17 +30,14 @@ class AddHit: Effect {
         let players = ctx.players(matching: player)
         let times = ctx.get(times)
         let cancelable = ctx.get(cancelable)
-        var hits: [GHit] = []
+        
+        var playerArray: [String] = []
+        var targetArray: [String] = []
         
         for _ in (0..<times) {
             for player in players {
                 if target == .nobody {
-                    hits.append(GHit(player: player,
-                                     name: ctx.ability,
-                                     abilities: abilities,
-                                     offender: ctx.actor.identifier,
-                                     cancelable: cancelable,
-                                     target: nil))
+                    playerArray.append(player)
                 } else {
                     let targets = ctx.players(matching: target)
                     guard !targets.isEmpty else {
@@ -48,17 +45,18 @@ class AddHit: Effect {
                     }
                     
                     targets.forEach { target in
-                        hits.append(GHit(player: player,
-                                         name: ctx.ability,
-                                         abilities: abilities,
-                                         offender: ctx.actor.identifier,
-                                         cancelable: cancelable,
-                                         target: target))
+                        targetArray.append(target)
+                        playerArray.append(player)
                     }
                 }
             }
         }
         
-        return [.addHit(hits: hits)]
+        let hit = GHit(name: ctx.ability,
+                       players: playerArray,
+                       abilities: abilities,
+                       cancelable: cancelable,
+                       targets: targetArray)
+        return [.addHit(hit: hit)]
     }
 }

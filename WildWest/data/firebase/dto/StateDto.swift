@@ -15,18 +15,17 @@ struct StateDto: Codable {
     let deck: [String: String]?
     let discard: [String: String]?
     let store: [String: String]?
-    let hits: [String: HitDto]?
+    let hit: HitDto?
     let played: [String: String]?
     let winner: String?
 }
 
 struct HitDto: Codable, Equatable {
-    let player: String?
     let name: String?
+    let players: [String]?
     let abilities: [String]?
     let cancelable: Int?
-    let offender: String?
-    let target: String?
+    let targets: [String]?
 }
 
 struct PlayerDto: Codable {
