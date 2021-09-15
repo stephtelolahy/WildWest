@@ -21,7 +21,7 @@ public class GSetup: SetupProtocol {
     }
     
     public func roles(for playersCount: Int) -> [Role] {
-        let order: [Role] = [.sheriff, .outlaw, .outlaw, .renegade, .deputy, .outlaw, .deputy, .renegade]
+        let order: [Role] = [.sheriff, .outlaw, .outlaw, .outlaw, .outlaw, .outlaw, .outlaw, .outlaw]
         guard playersCount <= order.count else {
             return []
         }
@@ -94,6 +94,13 @@ private extension GSetup {
                let sheriffCard = defaults.first(where: { $0.name == "sheriff" }) {
                 attributes.merge(with: sheriffCard.attributes)
                 abilities.formUnion(sheriffCard.abilities)
+                #if DEBUG // super sheriff
+                figures.forEach { fig in
+                    attributes.merge(with: fig.attributes)
+                    abilities.formUnion(fig.abilities)
+                    attributes[.bullets] = 3
+                }
+                #endif
             }
             
             guard let health = attributes[.bullets] as? Int else {

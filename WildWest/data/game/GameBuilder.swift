@@ -83,13 +83,29 @@ class GameBuilder: GameBuilderProtocol {
                                      playerId: String?,
                                      gameId: String,
                                      users: [String: UserInfo]) -> GameEnvironment {
-        let gameDatabase = database.createGameDatabase(gameId, state: state)
+        let database = database.createGameDatabase(gameId, state: state)
         let timer = GTimer(matcher: durationMatcher)
-        let engine = GEngine(queue: GEventQueue(), database: gameDatabase, rules: rules, timer: timer)
+        let engine = GEngine(queue: GEventQueue(), database: database, rules: rules, timer: timer)
+        var agents: [AIAgentProtocol] = []
+        
+        #if DEBUG // AI controller for remote game
+        if let player = playerId {
+            let sheriff = state.players.values.first(where: { $0.role == .sheriff })!.identifier
+            let abilityEvaluator = AbilityEvaluator()
+            let roleEstimator = RoleEstimator(sheriff: sheriff, abilityEvaluator: abilityEvaluator)
+            let roleStrategy = RoleStrategy()
+            let moveEvaluator = MoveEvaluator(abilityEvaluator: abilityEvaluator, roleEstimator: roleEstimator, roleStrategy: roleStrategy)
+            let ai = RandomWithRoleAi(moveEvaluator: moveEvaluator)
+            let agent = AIAgent(player: player, engine: engine, ai: ai)
+            agent.observe(database)
+            agents = [agent]
+        }
+        #endif
         
         return GameEnvironment(engine: engine,
-                               database: gameDatabase,
+                               database: database,
                                controlledId: playerId,
+                               aiAgents: agents,
                                users: users)
     }
 }
