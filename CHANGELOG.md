@@ -1,5 +1,10 @@
 #  Changelog
 
+## 1.0-5
+- [x] Immutable state
+- [x] Unique hit
+
+
 ## 1.0-4
 - [x] State as Pure Data
 - [x] DefaultAbilities.json => cards.json + 2 figures (player, sheriff)
