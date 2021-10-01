@@ -22,16 +22,9 @@ extension MockHitProtocol {
         return self
     }
     
-    func player(is player: String) -> MockHitProtocol {
+    func players(are players: String...) -> MockHitProtocol {
         stub(self) { mock in
-            when(mock.player.get).thenReturn(player)
-        }
-        return self
-    }
-
-    func offender(is player: String) -> MockHitProtocol {
-        stub(self) { mock in
-            when(mock.offender.get).thenReturn(player)
+            when(mock.players.get).thenReturn(players)
         }
         return self
     }
@@ -50,9 +43,9 @@ extension MockHitProtocol {
         return self
     }
     
-    func target(is target: String) -> MockHitProtocol {
+    func targets(are targets: String...) -> MockHitProtocol {
         stub(self) { mock in
-            when(mock.target.get).thenReturn(target)
+            when(mock.targets.get).thenReturn(targets)
         }
         return self
     }

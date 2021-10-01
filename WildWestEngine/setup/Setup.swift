@@ -66,7 +66,7 @@ public class GSetup: SetupProtocol {
                       deck: deck,
                       discard: [],
                       store: [],
-                      hits: [],
+                      hit: nil,
                       played: [],
                       history: [],
                       winner: nil)

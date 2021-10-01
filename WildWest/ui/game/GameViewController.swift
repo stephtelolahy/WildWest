@@ -85,14 +85,14 @@ class GameViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         router.toGameRoles(state.players.count) { [weak self] in
-            self?.environment.engine.refresh()
+            self?.environment.engine.execute(nil, completion: nil)
         }
     }
     
     // MARK: - IBAction
     
     @IBAction private func refreshButtonTapped(_ sender: Any) {
-        environment.engine.refresh()
+        environment.engine.execute(nil, completion: nil)
     }
     
     @IBAction private func menuButtonTapped(_ sender: Any) {
@@ -106,7 +106,7 @@ class GameViewController: UIViewController {
         }
         
         moveSelector.selectMove(among: moves, title: nil, cancelable: true) { [weak self] move in
-            self?.environment.engine.execute(move)
+            self?.environment.engine.execute(move, completion: nil)
         }
     }
     
@@ -116,7 +116,7 @@ class GameViewController: UIViewController {
         }
         
         moveSelector.selectMove(among: moves, title: nil, cancelable: true) { [weak self] move in
-            self?.environment.engine.execute(move)
+            self?.environment.engine.execute(move, completion: nil)
         }
     }
 }
@@ -180,19 +180,18 @@ private extension GameViewController {
         endTurnButton.isEnabled = segmentedMoves["endTurn"] != nil
         otherMovesButton.isEnabled = segmentedMoves["*"] != nil
         
-        // <RULE> Force select reaction moves
+        // Select reaction moves
         if !moves.isEmpty,
-           let hit = state.hits.first {
+           let hit = state.hit {
             if preferences.assistedMode {
                 let move = assistantAI.bestMove(among: moves, in: state)
-                environment.engine.execute(move)
+                environment.engine.execute(move, completion: nil)
             } else {
                 moveSelector.selectMove(among: moves, title: hit.name, cancelable: false) { [weak self] move in
-                    self?.environment.engine.execute(move)
+                    self?.environment.engine.execute(move, completion: nil)
                 }
             }
         }
-        // </RULE>
     }
     
     func buildCardPositions() -> [CardArea: CGPoint] {
@@ -304,7 +303,7 @@ extension GameViewController: UICollectionViewDelegate {
         }
         
         moveSelector.selectMove(among: moves, title: nil, cancelable: true) { [weak self] move in
-            self?.environment.engine.execute(move)
+            self?.environment.engine.execute(move, completion: nil)
         }
     }
 }
@@ -327,7 +326,7 @@ private extension StateProtocol {
     }
     
     func instruction(for controlledPlayerId: String?) -> String {
-        if let hit = hits.first {
+        if let hit = hit {
             return hit.name
         } else if controlledPlayerId == turn {
             return "your turn"
@@ -340,9 +339,29 @@ private extension StateProtocol {
         initialOrder.map { player in
             PlayerItem(player: players[player]!,
                        isTurn: player == turn,
-                       isHitLooseHealth: hits.contains(where: { $0.player == player && $0.abilities.contains("looseHealth") }),
-                       isHitSomeAction: hits.contains(where: { $0.player == player && !$0.abilities.contains("looseHealth") }),
+                       isHitLooseHealth: isHitLooseHealth(player),
+                       isHitSomeAction: isHitSomeAction(player),
                        user: users?[player])
+        }
+    }
+    
+    private func isHitLooseHealth(_ player: String) -> Bool {
+        if let hit = hit,
+           hit.abilities.contains("looseHealth"),
+           hit.players.contains(player) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    private func isHitSomeAction(_ player: String) -> Bool {
+        if let hit = hit,
+           !hit.abilities.contains("looseHealth"),
+           hit.players.contains(player) {
+            return true
+        } else {
+            return false
         }
     }
 }

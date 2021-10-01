@@ -70,3 +70,29 @@ private extension Dictionary where Key == String, Value == String {
         }
     }
 } 
+
+private extension GEvent {
+    
+    var name: String {
+        var string = String(describing: self)
+        if let eventName = string.components(separatedBy: "(").first {
+            string = eventName
+        }
+        return string
+    }
+    
+    func destructuring() -> [String: String] {
+        switch self {
+        case let .run(move):
+            return ["event": name,
+                    "ability": move.ability]
+            
+        case let .addHit(hit):
+            return ["event": name,
+                    "ability": hit.name]
+            
+        default:
+            return ["event": name]
+        }
+    }
+}

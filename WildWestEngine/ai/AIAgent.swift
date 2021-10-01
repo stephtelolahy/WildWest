@@ -54,7 +54,7 @@ private extension AIAgent {
             }
             
             let bestMove = ai.bestMove(among: attributedMoves, in: state)
-            engine.execute(bestMove)
+            engine.execute(bestMove, completion: nil)
         }
     }
 }

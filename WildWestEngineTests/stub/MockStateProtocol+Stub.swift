@@ -57,9 +57,9 @@ extension MockStateProtocol {
         return self
     }
     
-    func hits(are hits: HitProtocol...) -> MockStateProtocol {
+    func hit(is hit: HitProtocol) -> MockStateProtocol {
         stub(self) { mock in
-            when(mock.hits.get).thenReturn(hits)
+            when(mock.hit.get).thenReturn(hit)
         }
         return self
     }
