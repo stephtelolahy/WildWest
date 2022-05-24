@@ -21,6 +21,10 @@ You wil need
 2. Run `$ pod install` in the project directory
 3. Open `WildWest.xcworkspace` and build
 
+## Architecture
+
+![](docs/simplified-architecture.png)
+
 ## Rights
 
 *Game idea, development, design, artwork, packaging, the BANG! name and logo are all 
@@ -32,7 +36,6 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Please make sure to update tests as appropriate.
 
 ## Additional Resouces
-- [Architecture](docs/ARCHITECTURE.md)
 - [Engine](./ENGINE.md)
 - [Changelog](./CHANGELOG.md)
 
