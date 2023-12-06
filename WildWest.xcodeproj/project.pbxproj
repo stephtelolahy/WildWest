@@ -2169,12 +2169,11 @@
 		335832ED25BC24FD001BE4D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = WC7W275DZZ;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -2188,6 +2187,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.WildWestEngine;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -2197,11 +2197,10 @@
 		335832EE25BC24FD001BE4D8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = WC7W275DZZ;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -2214,6 +2213,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.WildWestEngine;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -2223,7 +2223,6 @@
 		335832F125BC24FD001BE4D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = "";
@@ -2237,14 +2236,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.WildWestEngineTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 			};
 			name = Debug;
 		};
 		335832F225BC24FD001BE4D8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = WildWestEngineTests/Info.plist;
@@ -2256,7 +2253,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.WildWestEngineTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 			};
 			name = Release;
 		};
@@ -2382,10 +2378,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 5;
-				DEVELOPMENT_TEAM = WC7W275DZZ;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = MDE3YTL7P4;
 				INFOPLIST_FILE = WildWest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2394,7 +2388,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.wildwest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Provisionning Wildcard development iOS";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Generic AppID - Development";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2404,10 +2397,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 5;
-				DEVELOPMENT_TEAM = WC7W275DZZ;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = MDE3YTL7P4;
 				INFOPLIST_FILE = WildWest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2416,7 +2407,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.wildwest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Provisionning Wildcard development iOS";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Generic AppID - Development";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2436,7 +2426,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.WildWestTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 			};
 			name = Debug;
 		};
@@ -2454,7 +2443,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.WildWestTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 			};
 			name = Release;
 		};
@@ -2545,7 +2533,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
-				kind = upToNextMajorVersion;
+				kind = upToNextMinorVersion;
 				minimumVersion = 7.10.0;
 			};
 		};
