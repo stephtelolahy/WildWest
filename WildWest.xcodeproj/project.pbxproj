@@ -3,11 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		11A4260096983812EE5C92DA /* Pods_WildWest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C68CDDA530FC48B097AEAB55 /* Pods_WildWest.framework */; };
 		261CBD8126A0DC8F00043494 /* GState+Copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261CBD8026A0DC8F00043494 /* GState+Copy.swift */; };
 		261CBD8326A0DCC400043494 /* DistanceRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261CBD8226A0DCC400043494 /* DistanceRules.swift */; };
 		261CBD8526A0DDDB00043494 /* AttributeRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261CBD8426A0DDDB00043494 /* AttributeRules.swift */; };
@@ -19,6 +18,16 @@
 		2643D94C26938E0600012BBC /* ResourcesDodgeCityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2643D94B26938E0600012BBC /* ResourcesDodgeCityTests.swift */; };
 		2643D94E269391C200012BBC /* Draw2CardsRequire1HealthTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2643D94D269391C200012BBC /* Draw2CardsRequire1HealthTest.swift */; };
 		2643D9502693972F00012BBC /* IsHealthMin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2643D94F2693972F00012BBC /* IsHealthMin.swift */; };
+		2644099B2B20F52A00C03F42 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2644099A2B20F52A00C03F42 /* RxSwift */; };
+		2644099D2B20F52F00C03F42 /* Resolver in Frameworks */ = {isa = PBXBuildFile; productRef = 2644099C2B20F52F00C03F42 /* Resolver */; };
+		2644099F2B21023500C03F42 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 2644099E2B21023500C03F42 /* RxBlocking */; };
+		264409A22B2102DD00C03F42 /* Cuckoo in Frameworks */ = {isa = PBXBuildFile; productRef = 264409A12B2102DD00C03F42 /* Cuckoo */; };
+		264409A42B21039000C03F42 /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = 264409A32B21039000C03F42 /* RxTest */; };
+		264409A72B2104C700C03F42 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 264409A62B2104C700C03F42 /* FirebaseAnalytics */; };
+		264409A92B2104CE00C03F42 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 264409A82B2104CE00C03F42 /* FirebaseCrashlytics */; };
+		264409AB2B2104D900C03F42 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 264409AA2B2104D900C03F42 /* FirebaseDatabase */; };
+		264409AD2B2104F700C03F42 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 264409AC2B2104F700C03F42 /* FirebaseAuth */; };
+		264409B02B21105700C03F42 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 264409AF2B21105700C03F42 /* Kingfisher */; };
 		264B7418268FA3C0009CE757 /* OnPlayCardOutOfTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B7417268FA3C0009CE757 /* OnPlayCardOutOfTurn.swift */; };
 		264B741C268FA6CA009CE757 /* DrawCardOnPlayHandOutOfTurnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B741B268FA6CA009CE757 /* DrawCardOnPlayHandOutOfTurnTests.swift */; };
 		264CC4C026978B4B0046D996 /* SilentJailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264CC4BF26978B4B0046D996 /* SilentJailTests.swift */; };
@@ -326,13 +335,10 @@
 		33FBF90E265B1E1600D7C6AD /* RequireDeckCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF90D265B1E1600D7C6AD /* RequireDeckCards.swift */; };
 		33FBF910265B21EE00D7C6AD /* DrawDiscard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBF90F265B21EE00D7C6AD /* DrawDiscard.swift */; };
 		33FDD70C240BFB4B00BC3E14 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */; };
-		794C0D33B230E521EBEBBD1E /* Pods_WildWestEngineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F82ECCD5B58B11617E188DB8 /* Pods_WildWestEngineTests.framework */; };
 		ADB7D2EC239EE03800653905 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7D2EB239EE03800653905 /* AppDelegate.swift */; };
 		ADB7D2F3239EE03800653905 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F1239EE03800653905 /* Main.storyboard */; };
 		ADB7D2F5239EE03900653905 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F4239EE03900653905 /* Assets.xcassets */; };
 		ADB7D2F8239EE03900653905 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB7D2F6239EE03900653905 /* LaunchScreen.storyboard */; };
-		AF99FE0D34D30465397547D9 /* Pods_WildWestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F891B98938C35C6B2926FEA0 /* Pods_WildWestTests.framework */; };
-		BCFB056526CB843B6FDBD211 /* Pods_WildWestEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F00C868CE95BD6811AC82D20 /* Pods_WildWestEngine.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -381,11 +387,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		005E8ADD627DA931B976C778 /* Pods-WildWestEngine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestEngine.release.xcconfig"; path = "Target Support Files/Pods-WildWestEngine/Pods-WildWestEngine.release.xcconfig"; sourceTree = "<group>"; };
-		03D6E9DC5B088BA6E08BC06C /* Pods-WildWestEngineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestEngineTests.release.xcconfig"; path = "Target Support Files/Pods-WildWestEngineTests/Pods-WildWestEngineTests.release.xcconfig"; sourceTree = "<group>"; };
-		04F1F8D52B2DD750FEED02C0 /* Pods-WildWestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.debug.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.debug.xcconfig"; sourceTree = "<group>"; };
-		14AFD6F4EDB16A93DFD234C0 /* Pods-WildWestEngineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestEngineTests.debug.xcconfig"; path = "Target Support Files/Pods-WildWestEngineTests/Pods-WildWestEngineTests.debug.xcconfig"; sourceTree = "<group>"; };
-		213EF09E4753EE8978B47280 /* Pods-WildWest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.release.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.release.xcconfig"; sourceTree = "<group>"; };
 		261CBD8026A0DC8F00043494 /* GState+Copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GState+Copy.swift"; sourceTree = "<group>"; };
 		261CBD8226A0DCC400043494 /* DistanceRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceRules.swift; sourceTree = "<group>"; };
 		261CBD8426A0DDDB00043494 /* AttributeRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeRules.swift; sourceTree = "<group>"; };
@@ -410,7 +411,6 @@
 		26D710BE269E5A4C00798FCD /* DistanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceTests.swift; sourceTree = "<group>"; };
 		26D710C0269E5E5600798FCD /* AttributeRulesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeRulesTests.swift; sourceTree = "<group>"; };
 		26F88D862672B51700B82AF9 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
-		302397755E696ECE7C3EE1C2 /* Pods-WildWest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWest.debug.xcconfig"; path = "Target Support Files/Pods-WildWest/Pods-WildWest.debug.xcconfig"; sourceTree = "<group>"; };
 		3300B029264E3C48002F4776 /* GeneratedMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
 		3300B0A7264E4236002F4776 /* ParameterMatcherExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterMatcherExtension.swift; sourceTree = "<group>"; };
 		3300EF28256FE3C1006075F6 /* MediaEventMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaEventMatcherTests.swift; sourceTree = "<group>"; };
@@ -685,8 +685,6 @@
 		33FBF90F265B21EE00D7C6AD /* DrawDiscard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawDiscard.swift; sourceTree = "<group>"; };
 		33FD5E1F25BC3AD500F18AF3 /* ENGINE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = ENGINE.md; sourceTree = "<group>"; };
 		33FDD70B240BFB4B00BC3E14 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		7076E7B55735D7880ABED367 /* Pods-WildWestEngine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestEngine.debug.xcconfig"; path = "Target Support Files/Pods-WildWestEngine/Pods-WildWestEngine.debug.xcconfig"; sourceTree = "<group>"; };
-		75480CE9519C850DCF8399D2 /* Pods-WildWestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WildWestTests.release.xcconfig"; path = "Target Support Files/Pods-WildWestTests/Pods-WildWestTests.release.xcconfig"; sourceTree = "<group>"; };
 		ADB7D2E8239EE03800653905 /* WildWest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WildWest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB7D2EB239EE03800653905 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADB7D2F2239EE03800653905 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -695,10 +693,6 @@
 		ADB7D2F9239EE03900653905 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADB7D2FE239EE03900653905 /* WildWestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WildWestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB7D304239EE03900653905 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C68CDDA530FC48B097AEAB55 /* Pods_WildWest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F00C868CE95BD6811AC82D20 /* Pods_WildWestEngine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWestEngine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F82ECCD5B58B11617E188DB8 /* Pods_WildWestEngineTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWestEngineTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F891B98938C35C6B2926FEA0 /* Pods_WildWestTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WildWestTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -706,7 +700,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCFB056526CB843B6FDBD211 /* Pods_WildWestEngine.framework in Frameworks */,
+				2644099D2B20F52F00C03F42 /* Resolver in Frameworks */,
+				2644099B2B20F52A00C03F42 /* RxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -714,8 +709,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				264409A42B21039000C03F42 /* RxTest in Frameworks */,
 				335832DE25BC24FD001BE4D8 /* WildWestEngine.framework in Frameworks */,
-				794C0D33B230E521EBEBBD1E /* Pods_WildWestEngineTests.framework in Frameworks */,
+				2644099F2B21023500C03F42 /* RxBlocking in Frameworks */,
+				264409A22B2102DD00C03F42 /* Cuckoo in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -723,8 +720,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				264409B02B21105700C03F42 /* Kingfisher in Frameworks */,
+				264409A92B2104CE00C03F42 /* FirebaseCrashlytics in Frameworks */,
+				264409AD2B2104F700C03F42 /* FirebaseAuth in Frameworks */,
+				264409A72B2104C700C03F42 /* FirebaseAnalytics in Frameworks */,
+				264409AB2B2104D900C03F42 /* FirebaseDatabase in Frameworks */,
 				335832EA25BC24FD001BE4D8 /* WildWestEngine.framework in Frameworks */,
-				11A4260096983812EE5C92DA /* Pods_WildWest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -732,39 +733,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF99FE0D34D30465397547D9 /* Pods_WildWestTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0A8BE7FDF89C5BA7E7441A0E /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				C68CDDA530FC48B097AEAB55 /* Pods_WildWest.framework */,
-				F00C868CE95BD6811AC82D20 /* Pods_WildWestEngine.framework */,
-				F82ECCD5B58B11617E188DB8 /* Pods_WildWestEngineTests.framework */,
-				F891B98938C35C6B2926FEA0 /* Pods_WildWestTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		0B678BA1DAA05FDC7F98BA1E /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				302397755E696ECE7C3EE1C2 /* Pods-WildWest.debug.xcconfig */,
-				213EF09E4753EE8978B47280 /* Pods-WildWest.release.xcconfig */,
-				7076E7B55735D7880ABED367 /* Pods-WildWestEngine.debug.xcconfig */,
-				005E8ADD627DA931B976C778 /* Pods-WildWestEngine.release.xcconfig */,
-				14AFD6F4EDB16A93DFD234C0 /* Pods-WildWestEngineTests.debug.xcconfig */,
-				03D6E9DC5B088BA6E08BC06C /* Pods-WildWestEngineTests.release.xcconfig */,
-				04F1F8D52B2DD750FEED02C0 /* Pods-WildWestTests.debug.xcconfig */,
-				75480CE9519C850DCF8399D2 /* Pods-WildWestTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		2622F2BE267A3EE600B75CA1 /* randomwithrole */ = {
 			isa = PBXGroup;
 			children = (
@@ -775,6 +749,13 @@
 				3358331C25BC2585001BE4D8 /* RoleStrategy.swift */,
 			);
 			path = randomwithrole;
+			sourceTree = "<group>";
+		};
+		264409992B20F52500C03F42 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		264B7419268FA503009CE757 /* triggered */ = {
@@ -1554,8 +1535,7 @@
 				335832D625BC24FD001BE4D8 /* WildWestEngine */,
 				335832E325BC24FD001BE4D8 /* WildWestEngineTests */,
 				ADB7D2E9239EE03800653905 /* Products */,
-				0B678BA1DAA05FDC7F98BA1E /* Pods */,
-				0A8BE7FDF89C5BA7E7441A0E /* Frameworks */,
+				264409992B20F52500C03F42 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1633,7 +1613,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 335832EC25BC24FD001BE4D8 /* Build configuration list for PBXNativeTarget "WildWestEngine" */;
 			buildPhases = (
-				8B9DB4E1EC513A69ACCF8326 /* [CP] Check Pods Manifest.lock */,
 				335832D025BC24FD001BE4D8 /* Headers */,
 				335832D125BC24FD001BE4D8 /* Sources */,
 				335832D225BC24FD001BE4D8 /* Frameworks */,
@@ -1644,6 +1623,10 @@
 			dependencies = (
 			);
 			name = WildWestEngine;
+			packageProductDependencies = (
+				2644099A2B20F52A00C03F42 /* RxSwift */,
+				2644099C2B20F52F00C03F42 /* Resolver */,
+			);
 			productName = WildWestEngine;
 			productReference = 335832D525BC24FD001BE4D8 /* WildWestEngine.framework */;
 			productType = "com.apple.product-type.framework";
@@ -1652,11 +1635,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 335832F025BC24FD001BE4D8 /* Build configuration list for PBXNativeTarget "WildWestEngineTests" */;
 			buildPhases = (
-				C2F3FE7600BB1558287DD171 /* [CP] Check Pods Manifest.lock */,
-				3392B24225BC38D900214393 /* Run Cuckoo */,
 				335832D925BC24FD001BE4D8 /* Sources */,
 				335832DA25BC24FD001BE4D8 /* Frameworks */,
-				D81EE373CF066BA3601FAE9F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1664,6 +1644,11 @@
 				335832E025BC24FD001BE4D8 /* PBXTargetDependency */,
 			);
 			name = WildWestEngineTests;
+			packageProductDependencies = (
+				2644099E2B21023500C03F42 /* RxBlocking */,
+				264409A12B2102DD00C03F42 /* Cuckoo */,
+				264409A32B21039000C03F42 /* RxTest */,
+			);
 			productName = WildWestEngineTests;
 			productReference = 335832DD25BC24FD001BE4D8 /* WildWestEngineTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -1672,15 +1657,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ADB7D307239EE03900653905 /* Build configuration list for PBXNativeTarget "WildWest" */;
 			buildPhases = (
-				3DE5D489E0D81C17891F4FD5 /* [CP] Check Pods Manifest.lock */,
-				AD8540A223A4291100568FE9 /* Run Swiftlint */,
 				ADB7D2E4239EE03800653905 /* Sources */,
 				ADB7D2E5239EE03800653905 /* Frameworks */,
 				ADB7D2E6239EE03800653905 /* Resources */,
-				33516CCB2450AA78003C99E2 /* Run FirebaseCrashlytics */,
 				335832EF25BC24FD001BE4D8 /* Embed Frameworks */,
-				C748AB4D491E2EEEBFB3650A /* [CP] Embed Pods Frameworks */,
-				D8D753D846A99915651989CE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1688,6 +1668,13 @@
 				335832E925BC24FD001BE4D8 /* PBXTargetDependency */,
 			);
 			name = WildWest;
+			packageProductDependencies = (
+				264409A62B2104C700C03F42 /* FirebaseAnalytics */,
+				264409A82B2104CE00C03F42 /* FirebaseCrashlytics */,
+				264409AA2B2104D900C03F42 /* FirebaseDatabase */,
+				264409AC2B2104F700C03F42 /* FirebaseAuth */,
+				264409AF2B21105700C03F42 /* Kingfisher */,
+			);
 			productName = WildWest;
 			productReference = ADB7D2E8239EE03800653905 /* WildWest.app */;
 			productType = "com.apple.product-type.application";
@@ -1696,12 +1683,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ADB7D30A239EE03900653905 /* Build configuration list for PBXNativeTarget "WildWestTests" */;
 			buildPhases = (
-				2D78E27F4A4D72D0BC13C669 /* [CP] Check Pods Manifest.lock */,
-				3300B031264E3C75002F4776 /* Run Cuckoo */,
 				ADB7D2FA239EE03900653905 /* Sources */,
 				ADB7D2FB239EE03900653905 /* Frameworks */,
 				ADB7D2FC239EE03900653905 /* Resources */,
-				7B584E8CD97CA1B35863B60F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1747,6 +1731,13 @@
 				Base,
 			);
 			mainGroup = ADB7D2DF239EE03800653905;
+			packageReferences = (
+				264409972B20F4DF00C03F42 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				264409982B20F51000C03F42 /* XCRemoteSwiftPackageReference "Resolver" */,
+				264409A02B2102D100C03F42 /* XCRemoteSwiftPackageReference "Cuckoo" */,
+				264409A52B2104AB00C03F42 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				264409AE2B21102300C03F42 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = ADB7D2E9239EE03800653905 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1815,237 +1806,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		2D78E27F4A4D72D0BC13C669 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WildWestTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3300B031264E3C75002F4776 /* Run Cuckoo */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run Cuckoo";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/WildWestTests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/WildWest\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"WildWest\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/data/firebase/DatabaseReferenceProtocol.swift\" \\\n\"${INPUT_DIR}/data/prefs/UserPreferences.swift\"\n";
-		};
-		33516CCB2450AA78003C99E2 /* Run FirebaseCrashlytics */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run FirebaseCrashlytics";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
-		};
-		3392B24225BC38D900214393 /* Run Cuckoo */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run Cuckoo";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/WildWestEngineTests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/WildWestEngine\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"WildWestEngine\" \\\n--output \"${OUTPUT_FILE}\" \\\n--no-header \\\n--no-class-mocking \\\n\"${INPUT_DIR}/state/State.swift\" \\\n\"${INPUT_DIR}/database/Database.swift\" \\\n\"${INPUT_DIR}/database/GDatabaseUpdater.swift\" \\\n\"${INPUT_DIR}/engine/Engine.swift\" \\\n\"${INPUT_DIR}/engine/GEventQueue.swift\" \\\n\"${INPUT_DIR}/engine/GTimer.swift\" \\\n\"${INPUT_DIR}/rules/GameRules.swift\" \\\n\"${INPUT_DIR}/setup/Setup.swift\" \\\n\"${INPUT_DIR}/resources/ResourcesLoader.swift\" \\\n\"${INPUT_DIR}/ai/AIAgent.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/RandomWithRoleAi.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/MoveEvaluator.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/RoleEstimator.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/RoleStrategy.swift\" \\\n\"${INPUT_DIR}/ai/randomwithrole/AbilityEvaluator.swift\"\n";
-		};
-		3DE5D489E0D81C17891F4FD5 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WildWest-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7B584E8CD97CA1B35863B60F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WildWestTests/Pods-WildWestTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WildWestTests/Pods-WildWestTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WildWestTests/Pods-WildWestTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8B9DB4E1EC513A69ACCF8326 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WildWestEngine-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AD8540A223A4291100568FE9 /* Run Swiftlint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run Swiftlint";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "echo \"SWIFTLINT PATH\"\npwd\n\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
-		};
-		C2F3FE7600BB1558287DD171 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WildWestEngineTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C748AB4D491E2EEEBFB3650A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D81EE373CF066BA3601FAE9F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WildWestEngineTests/Pods-WildWestEngineTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WildWestEngineTests/Pods-WildWestEngineTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WildWestEngineTests/Pods-WildWestEngineTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D8D753D846A99915651989CE /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WildWest/Pods-WildWest-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		335832D125BC24FD001BE4D8 /* Sources */ = {
@@ -2408,7 +2168,6 @@
 /* Begin XCBuildConfiguration section */
 		335832ED25BC24FD001BE4D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7076E7B55735D7880ABED367 /* Pods-WildWestEngine.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -2437,7 +2196,6 @@
 		};
 		335832EE25BC24FD001BE4D8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 005E8ADD627DA931B976C778 /* Pods-WildWestEngine.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -2464,7 +2222,6 @@
 		};
 		335832F125BC24FD001BE4D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 14AFD6F4EDB16A93DFD234C0 /* Pods-WildWestEngineTests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
@@ -2486,7 +2243,6 @@
 		};
 		335832F225BC24FD001BE4D8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 03D6E9DC5B088BA6E08BC06C /* Pods-WildWestEngineTests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
@@ -2555,7 +2311,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2611,7 +2367,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -2624,13 +2380,13 @@
 		};
 		ADB7D308239EE03900653905 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 302397755E696ECE7C3EE1C2 /* Pods-WildWest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = WC7W275DZZ;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = MDE3YTL7P4;
 				INFOPLIST_FILE = WildWest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2639,19 +2395,20 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.wildwest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Provisionning Wildcard development iOS";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Generic AppID - Development";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		ADB7D309239EE03900653905 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 213EF09E4753EE8978B47280 /* Pods-WildWest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = WC7W275DZZ;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = MDE3YTL7P4;
 				INFOPLIST_FILE = WildWest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2660,13 +2417,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.wildwest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Provisionning Wildcard development iOS";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Generic AppID - Development";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
 		ADB7D30B239EE03900653905 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 04F1F8D52B2DD750FEED02C0 /* Pods-WildWestTests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
@@ -2685,7 +2442,6 @@
 		};
 		ADB7D30C239EE03900653905 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 75480CE9519C850DCF8399D2 /* Pods-WildWestTests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
@@ -2751,6 +2507,102 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		264409972B20F4DF00C03F42 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.6.0;
+			};
+		};
+		264409982B20F51000C03F42 /* XCRemoteSwiftPackageReference "Resolver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Resolver.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.0;
+			};
+		};
+		264409A02B2102D100C03F42 /* XCRemoteSwiftPackageReference "Cuckoo" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Brightify/Cuckoo.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.10.3;
+			};
+		};
+		264409A52B2104AB00C03F42 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.19.0;
+			};
+		};
+		264409AE2B21102300C03F42 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.10.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2644099A2B20F52A00C03F42 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 264409972B20F4DF00C03F42 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		2644099C2B20F52F00C03F42 /* Resolver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 264409982B20F51000C03F42 /* XCRemoteSwiftPackageReference "Resolver" */;
+			productName = Resolver;
+		};
+		2644099E2B21023500C03F42 /* RxBlocking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 264409972B20F4DF00C03F42 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxBlocking;
+		};
+		264409A12B2102DD00C03F42 /* Cuckoo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 264409A02B2102D100C03F42 /* XCRemoteSwiftPackageReference "Cuckoo" */;
+			productName = Cuckoo;
+		};
+		264409A32B21039000C03F42 /* RxTest */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 264409972B20F4DF00C03F42 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxTest;
+		};
+		264409A62B2104C700C03F42 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 264409A52B2104AB00C03F42 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		264409A82B2104CE00C03F42 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 264409A52B2104AB00C03F42 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		264409AA2B2104D900C03F42 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 264409A52B2104AB00C03F42 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		264409AC2B2104F700C03F42 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 264409A52B2104AB00C03F42 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		264409AF2B21105700C03F42 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 264409AE2B21102300C03F42 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = ADB7D2E0239EE03800653905 /* Project object */;
 }

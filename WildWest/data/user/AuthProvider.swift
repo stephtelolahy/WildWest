@@ -6,7 +6,7 @@
 //  Copyright © 2020 creativeGames. All rights reserved.
 //
 
-import FirebaseUI
+import FirebaseAuth
 
 protocol AuthProviderProtocol {
     var loggedInUserId: String? { get }

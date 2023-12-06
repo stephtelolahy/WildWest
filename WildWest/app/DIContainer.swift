@@ -22,28 +22,24 @@ extension Resolver: ResolverRegistering {
         
         // MARK: - UI
         
-        register { main as RouterDependenciesProtocol }.scope(application)
-        
-        register { _, args in
-            Router(viewController: args as! UIViewController, dependencies: resolve()) as RouterProtocol
-        }
+        register { main as RouterDependenciesProtocol }.scope(.application)
         
         // MARK: - Data
         
-        register { AnalyticsManager() }.scope(application)
+        register { AnalyticsManager() }.scope(.application)
         
-        register { UserPreferences() as UserPreferencesProtocol }.scope(application)
+        register { UserPreferences() as UserPreferencesProtocol }.scope(.application)
         
-        register { SoundPlayer(preferences: resolve()) as SoundPlayerProtocol }.scope(application)
+        register { SoundPlayer(preferences: resolve()) as SoundPlayerProtocol }.scope(.application)
         
-        register { JsonReader(bundle: Bundle.resourcesBundle) as JsonReader }.scope(application)
-        register { ResourcesLoader(jsonReader: resolve()) as ResourcesLoaderProtocol }.scope(application)
+        register { JsonReader(bundle: Bundle.resourcesBundle) as JsonReader }.scope(.application)
+        register { ResourcesLoader(jsonReader: resolve()) as ResourcesLoaderProtocol }.scope(.application)
         
         register { DictionaryEncoder() }
         
-        register { AnimationEventMatcher(preferences: resolve()) as AnimationEventMatcherProtocol }.scope(application)
+        register { AnimationEventMatcher(preferences: resolve()) as AnimationEventMatcherProtocol }.scope(.application)
         
-        register { AnimationEventMatcher(preferences: resolve()) as EventDurationProtocol }.scope(application)
+        register { AnimationEventMatcher(preferences: resolve()) as EventDurationProtocol }.scope(.application)
         
         register(MediaEventMatcherProtocol.self) {
             let jsonReader = JsonReader(bundle: Bundle.main)
@@ -61,34 +57,34 @@ extension Resolver: ResolverRegistering {
         
         register { FirebaseMapper(dtoEncoder: resolve(),
                                   dictionaryEncoder: resolve()) as FirebaseMapperProtocol
-        }.scope(application)
+        }.scope(.application)
         
         register { UserDatabase(rootRef: Database.database().reference(), mapper: resolve()) as UserDatabaseProtocol
-        }.scope(application)
+        }.scope(.application)
         
         register { GameBuilder(preferences: resolve(),
                                resourcesLoader: resolve(),
                                durationMatcher: resolve(),
                                database: resolve(),
                                rules: resolve()) as GameBuilderProtocol
-        }.scope(application)
+        }.scope(.application)
         
-        register { AuthProvider() as AuthProviderProtocol }.scope(application)
+        register { AuthProvider() as AuthProviderProtocol }.scope(.application)
         
         register { UserManager(authProvider: resolve(),
                                database: resolve()) as UserManagerProtocol
-        }.scope(application)
+        }.scope(.application)
         
         register { GameManager(preferences: resolve(),
                                database: resolve(),
                                gameBuilder: resolve()) as GameManagerProtocol
-        }.scope(application)
+        }.scope(.application)
         
         register(GameRulesProtocol.self) {
             let resourcesLoader = resolve(ResourcesLoaderProtocol.self)
             let abilities = resourcesLoader.loadAbilities()
             return GameRules(abilities)
-        }.scope(application)
+        }.scope(.application)
     }
 }
 
@@ -98,7 +94,7 @@ extension Resolver: RouterDependenciesProtocol {
         let viewController = UIStoryboard.instantiate(MainViewController.self, in: "Main")
         viewController.userManager = optional()
         viewController.gameManager = optional()
-        viewController.router = optional(args: viewController)
+        viewController.router = Router(viewController: viewController, dependencies: resolve())
         return viewController
     }
     
@@ -112,7 +108,7 @@ extension Resolver: RouterDependenciesProtocol {
     
     func provideMenuViewController() -> UIViewController {
         let viewController = UIStoryboard.instantiate(MenuViewController.self, in: "Main")
-        viewController.router = optional(args: viewController)
+        viewController.router = Router(viewController: viewController, dependencies: resolve())
         viewController.preferences = optional()
         viewController.soundPlayer = optional()
         viewController.userManager = optional()
@@ -124,7 +120,7 @@ extension Resolver: RouterDependenciesProtocol {
     func provideGameViewController(_ environment: GameEnvironment) -> UIViewController {
         let viewController = UIStoryboard.instantiate(GameViewController.self, in: "Main")
         viewController.environment = environment
-        viewController.router = optional(args: viewController)
+        viewController.router = Router(viewController: viewController, dependencies: resolve())
         viewController.userManager = optional()
         viewController.analyticsManager = optional()
         viewController.animationMatcher = optional()
@@ -150,7 +146,7 @@ extension Resolver: RouterDependenciesProtocol {
     
     func provideWaitingRoomViewController() -> UIViewController {
         let viewController = UIStoryboard.instantiate(WaitingRoomViewController.self, in: "Main")
-        viewController.router = optional(args: viewController)
+        viewController.router = Router(viewController: viewController, dependencies: resolve())
         viewController.userManager = optional()
         viewController.gameManager = optional()
         return viewController

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FirebaseUI
+import FirebaseAuth
 import RxSwift
 
 class SignInWidget: NSObject {

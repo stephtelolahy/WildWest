@@ -13,7 +13,7 @@ extension Resolver: ResolverRegistering {
 
     public static func registerAllServices() {
 
-        register { JsonReader(bundle: Bundle.resourcesBundle) }.scope(application)
+        register { JsonReader(bundle: Bundle.resourcesBundle) }.scope(.application)
 
         register(ResourcesLoaderProtocol.self) { _, arg in
             ResourcesLoader(jsonReader: resolve(), collection: arg as? CardCollection)
@@ -23,6 +23,6 @@ extension Resolver: ResolverRegistering {
             let resourcesLoader = resolve(ResourcesLoaderProtocol.self)
             let abilities = resourcesLoader.loadAbilities()
             return GameRules(abilities)
-        }.scope(application)
+        }.scope(.application)
     }
 }
